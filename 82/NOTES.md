@@ -1610,3 +1610,8 @@ source of growth beyond Ramsey.
   counterexample in `50` connected samples.  For `n=14`, `4 -> 8` had minimum
   at most `3` in `10` connected samples.  This supports the connected
   constant-part target, though it is still small finite evidence.
+- 2026-05-31: Pushed the connected `4 -> 8` sampling to `n=16`.  A direct
+  three-color connected-source run accepted `20` samples with no
+  counterexample, with `2` node-limited skips; a min-color run on `10`
+  connected samples had histogram `3:10`.  This continues to support the
+  conjectural connected constant-part coarse lift.

@@ -334,6 +334,8 @@ def sample_full_modular_partitions(
                 print(f"min_part_size={min_part_size}")
             if max_part_size is not None:
                 print(f"max_part_size={max_part_size}")
+            if connected_only:
+                print("connected_only=True")
             print(f"trials={trials}")
             print(f"attempts={attempts}")
             print(f"accepted_before_counterexample={accepted}")
@@ -349,6 +351,8 @@ def sample_full_modular_partitions(
         print(f"min_part_size={min_part_size}")
     if max_part_size is not None:
         print(f"max_part_size={max_part_size}")
+    if connected_only:
+        print("connected_only=True")
     print(f"trials={trials}")
     print(f"attempts={attempts}")
     print(f"accepted={accepted}")
