@@ -1851,6 +1851,39 @@ base-left overlaps and `1299` base-right overlaps, led by `L2` with `B8` and
 `R8` or `R7` with `B2`. This suggests a possible next local-overlap lemma, but
 it is still sampling evidence.
 
+The localized overlap pattern can be counted exactly without enumerating full
+shell triples. The diagnostic `gamma_2alpha_overlap_cover.py` precomputes only
+selected boundary-tile positions and counts valid endpoint/mixed shell triples
+covered by those local positive-area overlap tests. Using the sampled candidate
+pairs
+
+```text
+L2-B8, R6-B2, R5-B3, R8-B2, R7-B2, L2-B7, R7-B3, L3-B7, R6-B4,
+```
+
+the exact cover counts are:
+
+```text
+N=63:
+  mixed=6:  940,800 / 1,356,640
+  mixed=8:  20,855,200 / 24,237,920
+  mixed=10: 110,159,360 / 119,281,920
+  mixed=12: 144,600,320 / 150,990,080
+  total including mixed=4: 276,555,680 / 295,877,600.
+
+N=99:
+  mixed=6:  7,941,960 / 13,809,000
+  mixed=8:  281,725,280 / 418,281,000
+  mixed=10: 2,500,633,768 / 3,550,812,000
+  mixed=12: 5,222,535,768 / 7,139,652,000
+  total including mixed=4: 8,012,836,776 / 11,122,617,000.
+```
+
+The `mixed=4` row is already handled by the exact low-overhang census above,
+so this exact local-overlap cover removes most but not all of the higher-mixed
+boundary-word space. The remaining high-mixed shell counts after these local
+overlap tests are `19,310,880` for `N=63` and `3,109,717,224` for `N=99`.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`

@@ -126,6 +126,11 @@ Current components:
   outer-side pair, boundary-tile position, and oriented tile label. In a
   seed-`123`, `5000`-sample run, proper overlaps concentrate at base/equal-side
   pairs such as `L2` with `B8` and the symmetric right-base positions.
+- `gamma_2alpha_overlap_cover.py`: exact count-only version of the local
+  overlap-position diagnostic. For the sampled local pairs
+  `L2-B8,R6-B2,R5-B3,R8-B2,R7-B2,L2-B7,R7-B3,L3-B7,R6-B4`, it covers
+  `276555680/295877600` boundary shells for `N=63` and
+  `8012836776/11122617000` for `N=99` by local positive-area overlap tests.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

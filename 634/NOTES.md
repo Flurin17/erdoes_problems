@@ -289,8 +289,12 @@ Important distinction: "positive square class" and "smallest representative" are
    `5000`-attempt run that produced `5000` unique valid shells for each
    benchmark row. Exact overlap-cause sampling on the valid-weighted run shows
    proper overlaps concentrate at base/equal-side pairs, especially `L2` with
-   `B8` and the symmetric right-base positions. A stratified low-overhang run
-   with total mixed
+   `B8` and the symmetric right-base positions. Turning those sampled local
+   positions into exact count filters covers `276555680` of `295877600`
+   boundary shells for `63`, and `8012836776` of `11122617000` boundary shells
+   for `99`; after subtracting the already-closed mixed-`4` row, the remaining
+   high-mixed spaces are `19310880` and `3109717224` shells respectively.
+   A stratified low-overhang run with total mixed
    count at most `4` found `189` unique `63` shells and `143` unique `99`
    shells, again with no pass. The full low-overhang census is now exact: all `11040`
    shells for `63` are eliminated over `Q(sqrt(5))` (`6144` non-simple,

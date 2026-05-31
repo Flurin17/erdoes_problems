@@ -1394,6 +1394,74 @@ two-sum multiplicities comparable to the counting function along an
 unbounded sequence, while still supporting the private-color barriers from
 Proposition 8.4f.
 
+## Corollary 3.4d: Counterexamples force shifted representation spikes
+
+Assume that no infinite deletion from the order-\(k\) basis \(A\), with
+order-\(k\) threshold \(N_0\), remains an order-\((k+1)\) basis. Let
+\(E\subset A\) be finite. Then there are a constant \(\eta_E>0\),
+arbitrarily large integers \(n\), and elements
+\[
+x_n\in A\setminus E
+\]
+such that
+\[
+r_{k,A}(n-x_n)\ge \eta_E\, A(n), \tag{1}
+\]
+where \(r_{k,A}\) counts unordered \(k\)-term multiset representations.
+
+Proof. By Corollary 3.3, for this fixed \(E\) there is an integer \(M_E\)
+and arbitrarily large \(n\) for which the matching number of
+\(\mathcal H_E(n)\) is less than \(M_E\). Let
+\[
+C_k=\binom{2k+1}{k+1}.
+\]
+As in Corollary 3.4b, padding one chosen \(k\)-term representation of
+\(n-e\) by each
+\[
+e\in A\cap[1,n-N_0]\setminus E
+\]
+gives, after forgetting distinguished summands and multiplicities, at
+least
+\[
+\frac{|A\cap[1,n-N_0]|-|E|}{(k+1)C_k}
+\]
+edges in \(\mathcal H_E(n)\). For all sufficiently large \(n\), this is at
+least
+\[
+c_k A(n)
+\]
+for a constant \(c_k>0\), because \(E\) and \(N_0\) are fixed.
+
+The greedy matching lower bound used in Proposition 3.4 gives
+\[
+\operatorname{match}(\mathcal H_E(n))
+\ge \frac{|\mathcal H_E(n)|}{(k+1)\Delta_E(n)}.
+\]
+Since the matching number is less than \(M_E\), we have
+\[
+\Delta_E(n)\ge \frac{c_k}{(k+1)M_E}A(n). \tag{2}
+\]
+Choose a vertex \(x_n\in A\setminus E\) with this degree. Every edge
+containing \(x_n\) comes from some \((k+1)\)-term multiset representation
+of \(n\) using \(x_n\). Removing one occurrence of \(x_n\) gives a
+\(k\)-term multiset representation of \(n-x_n\), and different support
+edges give different resulting multisets. Hence
+\[
+r_{k,A}(n-x_n)\ge \deg_{\mathcal H_E(n)}(x_n).
+\]
+Combining this with (2) proves (1). \(\square\)
+
+Thus the representation-spike obstruction is not merely global. After any
+finite core is protected, a counterexample has arbitrarily large
+\((k+1)\)-targets \(n\) with some unprotected summand \(x_n\) such that the
+shifted target \(n-x_n\) has order-\(k\) representation multiplicity
+comparable to \(A(n)\). For \(k=2\), this means arbitrarily large reflected
+clusters
+\[
+A\cap(n-x_n-A)
+\]
+of size comparable to the whole counting function at the larger scale.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6476,6 +6544,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \(R_k(X)=o(A(X))\), where \(R_k(X)\) is the maximum \(k\)-term
   representation count up to \(X\). Thus a counterexample needs
   representation spikes comparable to its counting function.
+* Corollary 3.4d localizes those spikes: after any finite core is
+  protected, a counterexample has arbitrarily large targets \(n\) and an
+  unprotected summand \(x\) for which \(n-x\) has \(\gg A(n)\)
+  \(k\)-term representations.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

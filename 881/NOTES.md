@@ -456,6 +456,21 @@ with \(R_k(X)\) comparable to \(A(X)\) along an unbounded sequence. For
 density; it must combine near-critical density with large two-sum
 multiplicity spikes and the private-color barrier normal form.
 
+Corollary 3.4d localizes the spike requirement. In a counterexample, after
+any finite core \(E\) is protected, there are arbitrarily large
+\((k+1)\)-targets \(n\) and unprotected summands \(x\in A\setminus E\)
+such that
+\[
+r_{k,A}(n-x)\gg_E A(n).
+\]
+This follows because bounded matching number plus the padded lower bound
+for \(|\mathcal H_E(n)|\) forces a high-degree vertex, and each edge
+through that vertex gives a \(k\)-term representation of the shifted target.
+For \(k=2\), the large spikes are large reflected clusters
+\[
+A\cap(n-x-A).
+\]
+
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
 shifted targets \(n-c\), as \(c\) ranges through retained elements of \(A\).
