@@ -2084,3 +2084,13 @@ source of growth beyond Ramsey.
   two isolates, edge set `03,06,12,16,26,36`) has no `(0,2,2)` partition but
   does have a `(0,0,2,2)` partition.  Thus the two zero slots are genuinely
   needed in this clean even-source route.
+- 2026-05-31: Extended `universal_slots_fast.cpp` with `--degree-parity 0|1`
+  and completed the exact odd-degree `n=8` four-slot sweep.  The nine
+  surviving multisets are `(0,0,0,0)`, `(0,0,0,1)`, `(0,0,0,2)`,
+  `(0,0,1,1)`, `(0,0,1,2)`, `(0,0,2,2)`, `(0,0,2,3)`, `(0,1,1,1)`, and
+  `(0,1,1,2)`.  Thus `(0,0,2,2)` survives both parity source classes through
+  the exact `n=8` first-lift checks, even though the clean odd-source slots
+  `(0,1,2,3)` are killed.  Focused odd-degree random checks also found no
+  `(0,0,2,2)` counterexample in `50` samples on `18` vertices (`seed=2181`)
+  or `20` samples on `20` vertices (`seed=2201`).  The odd tree mask `9954`
+  that kills `(0,1,2,3)` has a two-part zero-residue `(0,0,2,2)` certificate.

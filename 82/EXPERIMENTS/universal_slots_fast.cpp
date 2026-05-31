@@ -1,10 +1,11 @@
-// Exact fixed-slot checks for small even graphs.
+// Exact fixed-slot checks for small fixed-parity graphs.
 //
 // This is a C++ version of universal_slots.py for the exhaustive n=8 range.
-// It enumerates labelled even graphs by choosing all edges not incident with
-// the last vertex and then adding the unique parity-correction edges to the
-// last vertex.  For each graph it checks whether each residue-slot multiset
-// admits an exact cover by induced 4-modular parts using those slots.
+// It enumerates labelled graphs whose degrees all have a prescribed parity by
+// choosing all edges not incident with the last vertex and then adding the
+// unique parity-correction edges to the last vertex.  For each graph it checks
+// whether each residue-slot multiset admits an exact cover by induced
+// 4-modular parts using those slots.
 
 #include <algorithm>
 #include <array>
@@ -199,7 +200,7 @@ class Checker {
     }
 };
 
-uint64_t even_graph_mask(int n, uint64_t bits) {
+uint64_t fixed_parity_graph_mask(int n, uint64_t bits, int degree_parity) {
     uint64_t graph_mask = 0;
     std::array<int, 10> parity{};
     int bit_index = 0;
@@ -215,7 +216,7 @@ uint64_t even_graph_mask(int n, uint64_t bits) {
         }
     }
     for (int i = 0; i < n - 1; ++i) {
-        if (parity[i]) {
+        if (parity[i] != degree_parity) {
             int idx = edge_index(n, i, n - 1);
             graph_mask |= (uint64_t{1} << idx);
             parity[n - 1] ^= 1;
@@ -229,6 +230,7 @@ uint64_t even_graph_mask(int n, uint64_t bits) {
 int main(int argc, char** argv) {
     int n = 8;
     int modulus = 4;
+    int degree_parity = 0;
     bool progress = false;
     std::string candidate_text;
     for (int i = 1; i < argc; ++i) {
@@ -239,16 +241,24 @@ int main(int argc, char** argv) {
             modulus = std::stoi(argv[++i]);
         } else if (arg == "--candidates" && i + 1 < argc) {
             candidate_text = argv[++i];
+        } else if (arg == "--degree-parity" && i + 1 < argc) {
+            degree_parity = std::stoi(argv[++i]) & 1;
         } else if (arg == "--progress") {
             progress = true;
         } else {
             std::cerr << "usage: universal_slots_fast [--n N] [--modulus 4]"
-                      << " [--candidates a,b,c,d;...] [--progress]\n";
+                      << " [--candidates a,b,c,d;...] [--degree-parity 0|1]"
+                      << " [--progress]\n";
             return 2;
         }
     }
     if (n < 1 || n > 10 || modulus != 4) {
         std::cerr << "supported range: 1 <= n <= 10 and modulus 4\n";
+        return 2;
+    }
+    if ((n * degree_parity) & 1) {
+        std::cerr << "no graphs have all degrees congruent to " << degree_parity
+                  << " mod 2 on " << n << " vertices\n";
         return 2;
     }
 
@@ -260,7 +270,7 @@ int main(int argc, char** argv) {
     int free_edges = (n - 1) * (n - 2) / 2;
     uint64_t total = uint64_t{1} << free_edges;
     for (uint64_t bits = 0; bits < total; ++bits) {
-        uint64_t graph_mask = even_graph_mask(n, bits);
+        uint64_t graph_mask = fixed_parity_graph_mask(n, bits, degree_parity);
         checker.compute_residues(graph_mask);
         for (size_t i = 0; i < candidates.size(); ++i) {
             if (!alive[i]) continue;
@@ -280,7 +290,8 @@ int main(int argc, char** argv) {
     int good_count = 0;
     std::cout << "n=" << n << "\n";
     std::cout << "modulus=" << modulus << "\n";
-    std::cout << "even_graphs=" << total << "\n";
+    std::cout << "degree_parity=" << degree_parity << "\n";
+    std::cout << "fixed_parity_graphs=" << total << "\n";
     for (size_t i = 0; i < candidates.size(); ++i) {
         std::cout << "slots=" << candidate_string(candidates[i]) << " "
                   << (alive[i] ? "ok" : ("bad=" + std::to_string(bad[i])))

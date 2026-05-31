@@ -3565,6 +3565,22 @@ residue-slot alignment strategies.  Any such theorem would still only be a
 first-lift alignment result unless it extends uniformly to higher dyadic
 moduli.
 
+The same fast checker also supports the fixed odd-degree source class.  On
+`8` vertices, the exact odd-degree sweep leaves exactly nine four-slot
+multisets:
+
+```text
+(0,0,0,0), (0,0,0,1), (0,0,0,2), (0,0,1,1),
+(0,0,1,2), (0,0,2,2), (0,0,2,3), (0,1,1,1),
+(0,1,1,2).
+```
+
+In particular, the simple slots `(0,0,2,2)` survive both source parities at
+the first lift through the exact `n=8` checks.  The odd tree that kills the
+clean source-residue slots `(0,1,2,3)` has an even stronger
+`(0,0,2,2)` certificate: its vertices split into the two zero-residue parts
+`{0,1,3}` and `{2,4,5,6,7}`.
+
 One tempting simplification of the surviving clean even-source candidate
 `R=(0,0,2,2)` is false: the two zero slots cannot be merged into one.
 

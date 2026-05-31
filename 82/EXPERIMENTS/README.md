@@ -129,8 +129,10 @@ Computational checks and generated data for Erdos Problem 82.
   that a list of source-residue graphs kills every fixed target residue-slot
   multiset with a prescribed slot count.
 - `universal_slots_fast.cpp`: C++ exhaustive checker for the same fixed-slot
-  question.  It is intended for the full labelled even-graph sweep on `n=8`,
-  where the Python exact-cover loop is too slow.
+  question.  It is intended for the full labelled fixed-degree-parity sweep
+  on `n=8`, where the Python exact-cover loop is too slow.  Use
+  `--degree-parity 0` for even graphs and `--degree-parity 1` for odd-degree
+  graphs.
 - `slot_local_search.py`: simulated-annealing heuristic for fixed residue-slot
   colorings.  It directly scores a coloring against prescribed residues and
   is useful for larger exploratory searches where exact slot DP is too slow;
