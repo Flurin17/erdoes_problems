@@ -898,6 +898,86 @@ not merely combinatorial: it creates either a genuine order-\(h\) failure or
 a delayed threshold, and in the genuine-failure case \(F\) is a vertex cover
 for many order-\(k\) representation hypergraphs.
 
+### Lemma 3.1c.1: Weak barriers give prefix-front supersets
+
+Let \(P\subset A\) be infinite, ordered increasingly, and let
+\[
+\mathcal B
+\]
+be a family of finite nonempty subsets of \(P\) such that every infinite
+\[
+X\subset P
+\]
+contains some member of \(\mathcal B\). Define \(\widehat{\mathcal B}\) to
+be the family of all finite sets
+\[
+S=\{x_1<\cdots<x_n\}\subset P
+\]
+with the following two properties:
+
+1. \(S\) contains some \(B\in\mathcal B\);
+2. the proper initial segment
+   \[
+   \{x_1,\ldots,x_{n-1}\}
+   \]
+   contains no member of \(\mathcal B\).
+
+Then every infinite
+\[
+X=\{x_1<x_2<\cdots\}\subset P
+\]
+has a unique initial segment in \(\widehat{\mathcal B}\). Thus
+\(\widehat{\mathcal B}\) is a prefix-front: no member can be a proper
+initial segment of another member, although two members need not be
+incomparable by ordinary inclusion.
+
+Moreover, if every member of \(\mathcal B\) is late-bad for order \(h\),
+then every member of \(\widehat{\mathcal B}\) is late-bad for order \(h\).
+If \(S\in\widehat{\mathcal B}\) contains \(B\in\mathcal B\) and
+\[
+w\notin h(A\setminus B),
+\]
+then also
+\[
+w\notin h(A\setminus S). \tag{1}
+\]
+
+Proof. Given infinite \(X=\{x_1<x_2<\cdots\}\), choose the least \(n\) such
+that
+\[
+\{x_1,\ldots,x_n\}
+\]
+contains a member of \(\mathcal B\). This \(n\) exists by the barrier
+hypothesis, and the corresponding prefix lies in
+\(\widehat{\mathcal B}\). Minimality of \(n\) gives uniqueness.
+
+Now let \(S=\{x_1<\cdots<x_n\}\in\widehat{\mathcal B}\). By definition,
+choose \(B\in\mathcal B\) with \(B\subset S\). Since the proper initial
+segment \(\{x_1,\ldots,x_{n-1}\}\) contains no member of \(\mathcal B\), we
+must have \(x_n\in B\). Hence
+\[
+\max B=\max S. \tag{2}
+\]
+Since \(B\subset S\),
+\[
+A\setminus S\subset A\setminus B.
+\]
+Thus any order-\(h\) hole for \(A\setminus B\) remains a hole after deleting
+\(S\), proving (1). In particular, if \(A\setminus B\) is not an
+order-\(h\) basis, then \(A\setminus S\) is not an order-\(h\) basis either.
+If \(A\setminus B\) is an order-\(h\) basis but every threshold for it is at
+least \(\max B\), then any threshold for \(A\setminus S\) is also a
+threshold for \(A\setminus B\). By (2) it is therefore at least
+\(\max S\). Hence \(S\) is late-bad in the delayed-threshold case as well.
+\(\square\)
+
+This gives a prefix-front formulation of Corollary 3.1c, but it does not
+solve the arithmetic problem. The front node \(S\) may be a strict superset
+of the inclusion-minimal hole \(B\), and the private-color and active-repair
+normal forms apply to the shrunk hole, not automatically to the whole
+prefix. The section-descent problem is precisely to keep enough of that
+normal form while passing from weak barriers to prefix-front supersets.
+
 ## Lemma 3.1d: Uniform finite-hole characterization of a good deletion
 
 Let \(h\ge1\), let \(A\subseteq\mathbb N\), and let \(X\subseteq A\) be
@@ -11743,6 +11823,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   prefixes.
 * Corollary 3.1c says the late-bad finite sets must form a barrier on \(A\)
   in any counterexample.
+* Lemma 3.1c.1 turns any weak late-bad barrier into a prefix-front of
+  late-bad supersets. The conversion preserves the maximal element and
+  genuine holes, but may lose inclusion-minimal private-incidence structure.
 * Lemma 3.1d gives an exact fixed-deletion test: \(A\setminus X\) is an
   order-\(h\) basis if and only if all finite deletions inside \(X\) have a
   common order-\(h\) threshold.
