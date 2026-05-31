@@ -158,7 +158,8 @@ disjoint two-sum representations of `e+f` avoiding `f`, for the matching
 capacity obstruction in Lemma 8.4d. The final block prints the
 Corollary 3.4g/3.4h star-gate data: retained repairs `w-d=a+b` for each
 deleted gate `d` and the full two-sum counts `r2(row+d)` for the bounded
-translate rows forced by those repairs.
+translate rows forced by those repairs. It labels each row as `unique` or
+as `overlap:f` according to the Corollary 3.4s branch.
 
 `low_count_star_scan.py` scans finite windows for the Corollary 3.4n
 normal form: triples with `d`, `a`, and `w-d-a` outside a protected core and

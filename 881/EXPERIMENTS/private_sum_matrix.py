@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Finite diagnostics for Lemma 8.4c and Corollary 3.4h.
+"""Finite diagnostics for Lemma 8.4c and Corollaries 3.4h/3.4s.
 
 For a finite window S, deleted set F, and hole w, print the retained
 padders e for which w-e is in the covered two-sum range and the deleted
 elements f such that e+f is private relative to C=S\\F.  Also print the
-star-gate repair rows and their full two-sum counts r2(row+d).
+star-gate repair rows, their full two-sum counts r2(row+d), and whether
+they are unique for the gate or overlap through another deleted element.
 """
 
 from __future__ import annotations
@@ -38,6 +39,21 @@ def rep_count(s: set[int], target: int) -> int:
             continue
         count += 1
     return count
+
+
+def row_branch(s: set[int], f_set: set[int], d: int, row: int) -> str:
+    target = row + d
+    overlaps = [
+        f
+        for f in sorted(f_set - {d})
+        if target - f in s
+    ]
+    count = rep_count(s, target)
+    if count == 1:
+        return "unique"
+    if overlaps:
+        return "overlap:" + ",".join(str(f) for f in overlaps)
+    return "other"
 
 
 def max_disjoint_reps(s: set[int], target: int, forbidden: int) -> int:
@@ -79,7 +95,7 @@ def analyze(name: str, s_list: list[int], f_list: list[int], w: int, threshold: 
             if w - e - f in c and e + f not in two_c
         ]
         print(f"{e:>3}: {w-e:>3} {' '.join(status) or '-':<16} ; {private}")
-    print("star gates d : retained repairs w-d=a+b ; rows row(r2(row+d))")
+    print("star gates d : retained repairs w-d=a+b ; rows row(r2,branch)")
     for d in sorted(f_set):
         repairs: list[tuple[int, int]] = []
         bounded_rows: dict[int, int] = {}
@@ -91,7 +107,10 @@ def analyze(name: str, s_list: list[int], f_list: list[int], w: int, threshold: 
             for row in {a, b}:
                 if row + d not in two_c:
                     bounded_rows[row] = rep_count(s, row + d)
-        rows = [f"{row}({bounded_rows[row]})" for row in sorted(bounded_rows)]
+        rows = [
+            f"{row}({bounded_rows[row]},{row_branch(s, f_set, d, row)})"
+            for row in sorted(bounded_rows)
+        ]
         print(f"{d:>3}: repairs={repairs} rows={rows}")
 
 
