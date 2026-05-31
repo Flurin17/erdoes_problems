@@ -29,6 +29,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
 
 - `n = 7` impossible.
 - `n = 11` impossible.
+- `n = 22` impossible in this workspace: the published Laczkovich/Beeson source
+  case split reduces the count to exact arithmetic branches, and each branch is
+  eliminated in `PROOF.md`.
 - Primes `p = 4r + 3` are explicitly not proved impossible in the source
   corpus. Beeson says this is a hope, not even labelled a conjecture in his
   slides. This workspace now records a derived proof of the prime obstruction,
@@ -72,6 +75,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 17 | positive | `1^2+4^2` |
 | 18 | positive | `2*3^2` |
 | 19 | negative in this workspace | source reductions plus boundary integrality in final BLZ `gamma=2pi/3` cases |
+| 20 | positive | `2^2+4^2` |
+| 21 | not classified here | exact `pi/3` equilateral candidate is eliminated by boundary-star; full source-row obstruction still incomplete |
+| 22 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 
 Important distinction: "positive square class" and "smallest representative" are different. A construction of `15m^2` for all large `m` proves positive infinitely many `n` with squarefree kernel `15`, but it does not prove `n=15`.
 
@@ -85,8 +91,9 @@ Important distinction: "positive square class" and "smallest representative" are
 6. Keep the `71` length-only side-matching and lattice-coloring diagnostics as
    sanity checks for future invariants, but the boundary-transition lemma is now
    the decisive isosceles `gamma=2pi/3` obstruction.
-7. With prime cases classified, shift effort back to composite values not
-   covered by the positive families, starting with `14` and `15`. The exact
+7. With prime cases classified and `22` promoted to a workspace negative
+   theorem, shift effort back to composite values not covered by the positive
+   families, starting with `14` and `15`. The exact
    equilateral boundary-length scan gives candidates:
    `14` from the `2pi/3` tile `(7,8,13)` in an equilateral side-`28` triangle,
    and `15` from `(3,5,7)` in an equilateral side-`15` triangle. The
@@ -101,7 +108,8 @@ Important distinction: "positive square class" and "smallest representative" are
    `pi/3` candidates for `21` and `30`, namely `(16,21,19)` in side `84` and
    `(8,15,13)` in side `60`, including their `a,b` swaps.
    The composite dashboard currently shows no surviving encoded candidates
-   through the unresolved values below `100` checked in `RESULTS.md`. The newer
+   through the unresolved values below `100` checked in `RESULTS.md`, with
+   `22` now upgraded from dashboard evidence to a proof entry. The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha
    outer shapes; `46` and `56` by triquadratic boundary-star checks; and

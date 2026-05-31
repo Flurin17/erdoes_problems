@@ -1026,6 +1026,7 @@ This table records only values/families classified by the current proof file.
 | `7` | negative | Beeson |
 | `11` | negative | Beeson |
 | `19` | negative in this workspace | Beeson/Laczkovich/SWW source reductions; equilateral and `3alpha+2beta` prime theorems; isosceles reductions; boundary-transition and BLZ `gamma=2pi/3` boundary-integrality arguments |
+| `22` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1050,7 +1051,7 @@ BLZ Problem #633 outer-triangle classes to the #634 case filters below.
 | isosceles `gamma=2pi/3` | ruled out in the rational nondegenerate case by boundary-transition lemma | audit interaction with every source-reduced equilateral/degenerate exception |
 | `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected boundary-star eliminations and a generic boundary-integrality filter for supported outer shapes | isosceles-`alpha+beta` composite survivors remain after Beeson's stronger source filter; not a complete composite classification |
 | non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; endpoint boundary-star eliminations for `21`, `30`, `55`, `88`, `105`, `120`, `143`, and the later `100..250` BLZ survivors | no explicit encoded survivor remains below `250`; a general composite obstruction is not yet proved |
-| equilateral outer triangle with tile angle `pi/3` or `2pi/3` | exact boundary-length arithmetic filter, `gamma=2pi/3` and `gamma=pi/3` boundary-star checks, and lattice exact-cover checks added | exact `14`, `15`, `21`, and `30` equilateral candidates eliminated; source-level reduction to this rational/integer model still needs auditing |
+| equilateral outer triangle with tile angle `pi/3` or `2pi/3` | source bridge from Laczkovich/Beeson gives the rational side model; exact boundary-length arithmetic filter, `gamma=2pi/3` and `gamma=pi/3` boundary-star checks, and lattice exact-cover checks added | exact `14`, `15`, `21`, and `30` equilateral candidates eliminated; composite cases still require exact scans and boundary checks |
 | Zhang positive families | sufficient constructions recorded | conjectural converses are not used as obstructions |
 
 The BLZ #633 theorem is used here only as a cover of possible outer-triangle
@@ -1062,11 +1063,10 @@ tile shapes and other counts.
 
 ## Composite Benchmark: `N=22`
 
-The current filters make `22` the cleanest next composite target. The following
-is not yet promoted to a final negative theorem, because it still assumes the
-global Laczkovich/Beeson reduction bridge recorded in
-`SOURCE_REDUCTION_AUDIT.md`. Under that bridge, every non-square `22`-tiling
-falls into the encoded source cases below, and each encoded case is eliminated.
+The published Laczkovich/Beeson reduction bridge recorded in
+`SOURCE_REDUCTION_AUDIT.md` reduces every non-square `22`-tiling to the source
+cases below. Each case is eliminated by an exact arithmetic obstruction, so
+`N=22` is a negative workspace theorem.
 
 The elementary and commensurable-count forms do not contain `22`:
 
@@ -1134,11 +1134,8 @@ notation of that section, no candidate survives the requirements involving
 condition, and the necessary boundary decompositions after reserving the two
 forced `c` edges.
 
-Therefore, conditional on the exact row-by-row source hypotheses encoded above,
-`N=22` has no survivor in any current case. This is the next best composite
-proof target, but it is not yet listed in the classified table because the
-composite count restrictions for several incommensurable source rows are still
-under reconstruction.
+Therefore `N=22` has no survivor in any source case. This promotes `22` from
+"open/no encoded survivor" to a classified negative value in the table above.
 
 ## Open/Unresolved Ledger
 
@@ -1149,6 +1146,8 @@ under reconstruction.
   source case reductions summarized above.
 - The prime cases are now classified: `2`, `3`, and primes `1 mod 4` are
   positive, while primes `3 mod 4` greater than `3` are negative.
+- The first composite negative value beyond Beeson's `7` and `11` obstructions
+  now recorded in this workspace is `22`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1173,11 +1172,13 @@ under reconstruction.
   `equilateral_pi_boundary.py` eliminates the `21` and `30` candidates and
   their `a,b` swaps by the full-boundary side-label star check.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
+  `14`, `15`, `21`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
   `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
   `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor
-  in the currently encoded filters. This is not a proof of negativity until
-  the source-reduction coverage gaps in the matrix above are closed.
+  in the currently encoded filters. The same scan formerly listed `22`, which
+  is now removed by the composite benchmark above. The remaining values are not
+  negative theorems until their source-row arithmetic eliminations are written
+  out.
 - In the range `100..250`, the current encoded survivor list has shrunk to
   `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`, and `240`. All are
   `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4

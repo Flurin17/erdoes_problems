@@ -248,16 +248,18 @@ Impact:
 ## Current Small-Value Status
 
 The following unresolved values below `100` have no survivor in the currently
-encoded filters:
+encoded filters. The value `22` formerly appeared in this list, but is now
+classified negative in `PROOF.md` after writing out the source-row arithmetic
+eliminations:
 
 ```text
-14, 15, 21, 22, 30, 33, 35, 38, 39, 42, 46, 51, 55, 56, 57,
+14, 15, 21, 30, 33, 35, 38, 39, 42, 46, 51, 55, 56, 57,
 60, 62, 63, 66, 69, 70, 76, 78, 86, 87, 88, 91, 92, 93, 94,
 95, 99
 ```
 
-They should remain recorded as "open/no encoded survivor" until the missing
-bridges above are proved or accepted as source theorems with exact hypotheses.
+The remaining values should remain recorded as "open/no encoded survivor" until
+their source-row arithmetic eliminations are written out at theorem level.
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`
@@ -310,14 +312,10 @@ the Type I side-label configuration and non-similar `gamma=2pi/3`,
    contradiction. If accepted, use the draft to replace the current
    source-reduction-dependent prime obstruction with a cleaner theorem-level
    prime classification. This does not close the composite classification gap.
-3. For a first theorem-level composite test case, target `N=22`. Among the
-   currently unresolved values below `100`, it has the cleanest local profile:
-   no exact equilateral candidates, no isosceles or non-isosceles
-   `gamma=2pi/3` candidates, and only four `3alpha+2beta=pi`
-   isosceles-`alpha+beta` raw candidates, all rejected by Beeson's stronger
-   Section 11.4 filter. This now needs the remaining row-by-row composite
-   count restrictions before it can be promoted from "no encoded survivor" to a
-   negative theorem.
+3. Use the `N=22` proof as the template for the next composite targets: promote
+   a value only after the global source split, equilateral integer model,
+   isosceles reductions, non-isosceles product formulas, and
+   `3alpha+2beta=pi` Section 11.4 filter have all been checked for that count.
 4. Build a corner-capped ordering/matching obstruction for the remaining
    `3alpha+2beta` isosceles-`alpha+beta` survivors, using `N=48` as the
    positive regression case.

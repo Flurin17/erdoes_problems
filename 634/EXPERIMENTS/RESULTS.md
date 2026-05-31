@@ -12,9 +12,11 @@ PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus
 ```
 
 The rerun agrees with the status already recorded below: elementary certificates
-pass, `14`, `15`, `21`, `22`, and `30` have no surviving encoded candidates, and
-the explicit encoded survivors in `100..250` remain the isosceles-`alpha+beta`
-`3alpha+2beta=pi` candidates at
+pass, `14`, `15`, `21`, `22`, and `30` have no surviving encoded candidates.
+The `N=22` certificate is now promoted in `PROOF.md`; the other listed
+small composites remain dashboard eliminations until their source-row
+arithmetic proofs are written out. The explicit encoded survivors in `100..250`
+remain the isosceles-`alpha+beta` `3alpha+2beta=pi` candidates at
 `132,156,175,189,198,204,224,228,240`.
 
 ## `N=22` Exact Filter Certificate
@@ -66,10 +68,11 @@ This returns a BLZ square-class witness `(3,5,7)` in the
 only by the boundary-integrality product upgrade to
 `N=(b+2a)(a+b)m^2`.
 
-Interpretation: under the row-by-row source hypotheses stated in `PROOF.md`,
-`N=22` has no encoded survivor. The theorem-level gap is now the exact
-composite count restriction for each incommensurable source row, not the
-existence of the finite source case split itself.
+Interpretation: the row-by-row arithmetic checks for `N=22` now match the
+published finite source split recorded in `PROOF.md`, so the proof file treats
+`22` as a classified negative value. This does not promote the neighboring
+composite dashboard values, whose source-row eliminations still need to be
+written out separately.
 
 ## Elementary Certificate Checks
 
@@ -190,7 +193,8 @@ Interpretation: the first composite obstruction gap has shifted to exact
 coverage of the equilateral outer-triangle reductions. The encoded
 `3alpha+2beta=pi`, isosceles `gamma=2pi/3`, non-isosceles `gamma=2pi/3`, and
 side-bounded equilateral boundary-star filters leave no survivors for
-`14`, `15`, `21`, `22`, or `30`.
+`14`, `15`, `21`, `22`, or `30`. The `22` row is now promoted by the
+row-by-row proof in `PROOF.md`; the others remain dashboard eliminations.
 
 ## Composite Gap Scan
 
@@ -200,7 +204,7 @@ Command:
 python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 51 55 56 57 60 62 63 66 69 70 76 78 86 87 88 91 92 93 94 95 99 --equilateral-side-bound 250
 ```
 
-Result summary:
+Historical result summary:
 
 ```text
 14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,
@@ -210,7 +214,8 @@ Result summary:
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
-the source reductions is still incomplete.
+the source reductions is still incomplete. After the later `N=22` source-row
+audit, the current open ledger removes `22` from this historical scanner list.
 
 ## Equilateral Boundary-Length Checks
 
