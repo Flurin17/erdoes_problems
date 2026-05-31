@@ -151,6 +151,10 @@ Lemma 10.3e adds the corresponding coverage burden: any genuine \(A\)-gap
 \(k(A\cap[1,G])\). Hence finite-core failure requires long gaps that are
 already filled by prefix sumsets, together with nearby finite barriers that
 block the shifted repairs.
+Lemma 10.3f sharpens this to a finite-prefix gadget: once the deleted set
+lies before the terminal gap, every active repair and every shifted
+representation dominated by the barrier uses only summands from the prefix
+before the gap. Later elements are irrelevant to that local obstruction.
 
 Proposition 3.1f proves both finite-core stability and the desired infinite
 deletion under a tail-syndetic subset hypothesis. This blocks all

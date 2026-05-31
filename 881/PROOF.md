@@ -7050,6 +7050,75 @@ finite deletion \(F\) still vertex-covers the shifted representation graphs
 that would otherwise repair the witness. This is the coverage-versus-barrier
 tension seen in the staged finite searches.
 
+## Lemma 10.3f: Genuine terminal barriers are prefix-local
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\), with
+threshold \(N_0\) and \(m_0=\min A\). Let \(h=k+1\), let \(F\subset A\) be
+finite and nonempty, put
+\[
+C=A\setminus F,
+\]
+and suppose
+\[
+w\notin hC. \tag{1}
+\]
+Assume that, with
+\[
+G=w-\min F-(k-1)m_0,
+\]
+one has
+\[
+F\subset A\cap[1,G],\qquad A\cap(G,w-N_0]=\varnothing. \tag{2}
+\]
+Then the obstruction is prefix-local in the following sense.
+
+1. If \(e\in C\cap[1,G]\) and \(w-e\ge N_0\), then every \(k\)-term
+   representation of \(w-e\) from \(A\) meets \(F\), and all of its
+   summands lie in \(A\cap[1,G]\).
+2. If \(F\) is inclusion-minimal for the witness \(w\), then for every
+   \(f\in F\) there is an active repair
+   \[
+   w=q_f f+c_{f,1}+\cdots+c_{f,h-q_f},
+   \]
+   with \(q_f\in\{1,\ldots,h\}\), whose retained summands all lie in
+   \[
+   A\cap[1,G].
+   \]
+
+Proof. For (1), Lemma 10.1 says every \(k\)-term representation of \(w-e\)
+meets \(F\). Let
+\[
+w-e=a_1+\cdots+a_k
+\]
+be such a representation, and choose one summand \(f\in F\). If \(a_i\notin
+F\), then
+\[
+a_i\le w-e-f-(k-2)m_0\le w-m_0-\min F-(k-2)m_0=G.
+\]
+If \(a_i\in F\), then \(a_i\le G\) by (2). Thus every summand lies in the
+prefix \(A\cap[1,G]\).
+
+For (2), inclusion-minimality gives, for each \(f\in F\), a representation
+\[
+w=q_f f+c_{f,1}+\cdots+c_{f,h-q_f}
+\]
+with \(q_f\ge1\) and \(c_{f,i}\in C\). For any retained summand \(c_{f,i}\),
+\[
+c_{f,i}\le w-q_f f-(h-q_f-1)m_0.
+\]
+Since \(h=k+1\), \(f\ge\min F\), and \(q_f\ge1\), the right side is at most
+\[
+w-\min F-(k-1)m_0=G.
+\]
+Thus every retained summand lies in \(A\cap[1,G]\). \(\square\)
+
+Consequently, the genuine-gap finite-core obstruction is a completely
+finite prefix gadget: the prefix \(A\cap[1,G]\) already covers the gap by
+\(k\)-sums, contains the deleted active set \(F\), supplies the restored
+repairs for each \(f\in F\), and supplies all shifted representations that
+are vertex-covered by \(F\). Later elements beyond the terminal gap play no
+role in the local obstruction.
+
 ## Warning 10.3c: Compactness and random deletion do not see additive structure
 
 The broad deletion theorem cannot be proved from finite-deletion robustness
@@ -9079,6 +9148,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 10.3e adds the prefix-coverage burden for such genuine gaps: the
   gap interval must already lie in the \(k\)-fold sumset of the prefix
   before the gap.
+* Lemma 10.3f sharpens this to prefix-locality: active repairs and shifted
+  representations dominated by the finite barrier use only prefix summands
+  before the genuine terminal gap.
 * Warning 10.3c gives an abstract Schreier-barrier representation model
   showing why compactness, Zorn, finite-prefix, and independent random
   deletion arguments need genuine additive input.
