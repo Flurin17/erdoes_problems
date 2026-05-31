@@ -3843,7 +3843,17 @@ four-slot families:
 
 The analogous eight-class searches also leave small survivor lists for source
 residues `2,3,4,5,6,7`; source residue `0` has many survivors and remains the
-broadest complete-multipartite fixed-slot case.  For source residue `3`, the
+broadest complete-multipartite fixed-slot case.  Targeted source-residue `0`
+checks through all `88` eight-class vectors show that at least the five
+families
+
+```text
+(0,0,0,8),   (0,0,8,8),   (0,0,4,8),
+(0,0,2,8),   (0,0,8,15)
+```
+
+survive this model, so source `0` is not close to being obstructed by these
+small complete multipartite tests.  For source residue `3`, the
 canonicalized checker completes the eight-class search and leaves exactly the
 following twelve four-slot families:
 

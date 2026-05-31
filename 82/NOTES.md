@@ -2049,3 +2049,8 @@ source of growth beyond Ramsey.
   `(0,0,3,11)`, `(0,1,3,8)`, `(0,2,3,8)`, `(0,3,6,8)`, `(0,3,7,8)`,
   `(0,3,8,10)`, and `(0,3,8,11)`.  Source residue `0` remains the broad
   case with many survivors.
+- 2026-05-31: Added `--candidates` to `source_slot_finder.py` for targeted
+  source-residue slot checks.  In source residue `0` for the `8 -> 16` lift,
+  the five candidate families `(0,0,0,8)`, `(0,0,8,8)`, `(0,0,4,8)`,
+  `(0,0,2,8)`, and `(0,0,8,15)` all survive all `88` complete multipartite
+  vectors through eight classes of size at most `16`.

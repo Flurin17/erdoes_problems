@@ -221,6 +221,10 @@ def main() -> None:
     parser.add_argument("--target-modulus", type=int, required=True)
     parser.add_argument("--source-residue", type=int, required=True)
     parser.add_argument("--slot-count", type=int, required=True)
+    parser.add_argument(
+        "--candidates",
+        help="semicolon-separated residue multisets, e.g. 0,0,0,8;0,0,8,8",
+    )
     parser.add_argument("--max-classes", type=int, default=5)
     parser.add_argument("--max-size", type=int, default=16)
     parser.add_argument("--max-vectors", type=int)
@@ -228,9 +232,16 @@ def main() -> None:
     parser.add_argument("--no-clique-filter", action="store_true")
     args = parser.parse_args()
 
-    candidates = list(
-        combinations_with_replacement(range(args.target_modulus), args.slot_count)
-    )
+    if args.candidates:
+        candidates = [
+            tuple(int(item) % args.target_modulus for item in block.split(",") if item)
+            for block in args.candidates.split(";")
+            if block
+        ]
+    else:
+        candidates = list(
+            combinations_with_replacement(range(args.target_modulus), args.slot_count)
+        )
     if not args.no_clique_filter:
         candidates = [
             slots
