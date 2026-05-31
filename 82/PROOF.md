@@ -3657,6 +3657,17 @@ triangle `{0,3,6}` as a residue-`2` part and putting
 `{1,2,4,5}` into a zero part.  Thus the first split in Lemma 4I.5B must be
 chosen using global structure, not just the total degree residues.
 
+Nor does the common first-lift pattern extend naively to higher dyadic
+moduli.  At the `4 -> 8` lift, the source-independent slots `(0,0,4,4)` are
+already killed by cliques: `K_3` has degree `2 mod 4`, but an `8`-modular
+clique part of residue `0` or `4` must have size `1 or 5 mod 8`, so two
+zero-residue slots and two residue-`4` slots cannot cover three vertices.
+Similarly `K_4` has degree `3 mod 4` and needs four singleton zero-residue
+parts.  A complete multipartite check also kills source residue `1` on class
+sizes `(3,3,3,3)`.  Thus even if the common `(0,0,2,2)` first-lift theorem is
+true, higher dyadic fixed-slot lifts must again depend on the source residue
+or use a more flexible family.
+
 A natural attempt to deduce the odd-degree source case from the even case by
 complementation is too strong.  If `G` is odd-degree on an even number of
 vertices, then `bar G` is even-degree.  A `(0,0,2,2)` partition of `bar G`

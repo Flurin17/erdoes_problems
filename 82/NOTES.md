@@ -2127,3 +2127,11 @@ source of growth beyond Ramsey.
   the residue-`2` side, but a valid certificate instead uses the triangle
   `{0,3,6}`.  Therefore the first split cannot be a pointwise function of
   degree modulo `4`.
+- 2026-05-31: The common first-lift slots do not generalize naively to
+  `(0,0,q,q)` at higher dyadic levels.  In the complete multipartite model,
+  `(0,0,4,4)` for the `4 -> 8` lift is killed by class sizes `(1,1,1)` in
+  source residue `2`, `(1,1,1,1)` in source residue `3`, and
+  `(3,3,3,3)` in source residue `1`; only source residue `0` survived the
+  bounded five-class size-`8` check.  This reinforces that higher lifts need
+  genuinely source-sensitive slots, even if `(0,0,2,2)` works for both
+  parity source classes at the first lift.
