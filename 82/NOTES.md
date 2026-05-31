@@ -938,3 +938,33 @@ source of growth beyond Ramsey.
   `(0,1,2,4)`, `(0,1,2,5)`, and `(0,1,2,6)`.  Conclusion: the first-lift
   fixed-slot theorem, even if true, cannot be iterated unchanged; any dyadic
   constant-part theorem needs modulus-dependent slots or more flexibility.
+- 2026-05-31: Re-audited the workspace against the current Problem 82 page and
+  the Dyson--McKay arXiv version.  The workspace already had the required
+  `NOTES.md`, `LITERATURE.md`, `PROOF.md`, `FORMAL/`, and `EXPERIMENTS/`
+  structure; I preserved it and added missing literature details.  The current
+  public page still marks the conjecture open, and `PROOF.md` still ends with
+  no complete proof.
+- 2026-05-31: Added the fixed-`K_r`-free reduction as Proposition 8A.  The
+  Ramsey bound `R(r,t) <= O_r(t^{r-1})` implies every fixed-`K_r`-free graph
+  has an independent set of polynomial order, hence a regular induced subgraph
+  of order `omega(log n)`.  The complement gives the fixed-independence-number
+  analogue.  This confirms the comment-thread observation in an elementary
+  form but only reduces the hard case to graphs with both clique number and
+  independence number tending to infinity.
+- 2026-05-31: Added the first-lift chromatic certificate and
+  `EXPERIMENTS/first_lift_chromatic.py`.  If `chi(G)<=4` or
+  `chi(complement(G))<=4`, then `G` has a four-part `4`-modular partition by
+  using independent sets or cliques.  Thus a direct counterexample to the
+  flexible first lift must have `chi(G),chi(complement(G))>=5`.  A random
+  even-graph check on `n=10` with `300` trials and seed `1510` found one
+  high-chromatic candidate, mask `5511811489229`, with
+  `chi=chi(complement)=5`; it still has a three-nonempty-part `4`-modular
+  partition with residues `(2,2,0)`.  No first-lift counterexample was found.
+- 2026-05-31: Improved the Steinitz trace bound in Lemma 17 from
+  `(4(k-1)^2+1)^{k-1}` to `(3k)^{k-1}` by applying Steinitz to the centered
+  trace vectors `v_b-T/|B|` instead of appending a single correction vector
+  `-T`.  This tightens the repeated-degree/bounded-spread bridge but remains
+  `2^{Theta(k log k)}`, so it still does not imply `G(k)<=2^{o(k)}`.
+  Also noted a caution for future trace searches: the host condition is really
+  a spread condition on the `k` coordinate sums, not just an `L_infty` bound
+  on the first `k-1` difference coordinates.

@@ -343,6 +343,62 @@ Equivalently,
 Combining this with the lower bound on `m_t` proves the claim after adjusting
 the constant.  For `B=4`, the exponent is `1/(1+2)=1/3`.  QED.
 
+## Lemma 3A: Complement Invariance Of Modular Partitions
+
+Let `M` be a positive integer and let `S` be a vertex set of size `s`.  If
+`G[S]` is `M`-modular with degree residue `r`, then
+`complement(G)[S]` is `M`-modular with degree residue
+
+```text
+s-1-r mod M.
+```
+
+Consequently, if `G` admits a partition into at most `B` induced `M`-modular
+parts, then so does its complement.
+
+Proof.  For every `v in S`,
+
+```text
+deg_{complement(G)[S]}(v) = s-1-deg_{G[S]}(v).
+```
+
+Thus congruent degrees modulo `M` in `G[S]` become congruent degrees modulo
+`M` in the complement, with the displayed residue.  Apply this to each part of
+the partition.  QED.
+
+## Lemma 3B: Chromatic Certificate For The First Dyadic Lift
+
+Let `G` be any graph.  If `chi(G)<=4` or `chi(complement(G))<=4`, then `V(G)`
+can be partitioned into at most four induced subgraphs whose degrees are
+constant modulo `4`.
+
+Proof.  If `chi(G)<=4`, take a proper four-coloring of `G`.  Each color class
+is independent, hence has all internal degrees equal to `0` modulo `4`.
+
+If `chi(complement(G))<=4`, then `V(G)` is the union of at most four cliques
+in `G`.  Every clique is regular, so each clique is `4`-modular.  Equivalently
+this follows from the first case and Lemma 3A.  QED.
+
+Therefore any counterexample to the flexible first-lift assertion
+
+```text
+every even graph has a partition into at most four 4-modular induced parts
+```
+
+must satisfy
+
+```text
+chi(G) >= 5
+and
+chi(complement(G)) >= 5.
+```
+
+By the Nordhaus--Gaddum inequality `chi(G)+chi(complement(G)) <= |V(G)|+1`,
+such a counterexample has at least `9` vertices.  The first balanced
+high-chromatic case is `chi(G)=chi(complement(G))=5`, which is the `n=10`
+finite search target recorded in the experiments.  This is only a pruning
+lemma for the first dyadic lift; it does not prove the lift.
+
 ## Lemma 4: Local Congruence Criterion For Dyadic Partitions
 
 Before using the local criterion, it is useful to dispose of a natural
@@ -1452,6 +1508,82 @@ large induced subgraphs with many distinct degrees.  These do not immediately
 imply regular induced subgraphs; they identify the hard core where a proof
 must exploit more than homogeneous-set Ramsey theory.
 
+## Proposition 8A: Fixed Clique Number Is Not The Hard Case
+
+For every fixed integer `r>=3`, there is a constant `c_r>0` such that every
+`K_r`-free graph on `n` vertices contains an independent set of order at least
+
+```text
+c_r n^{1/(r-1)}.
+```
+
+Consequently, for every fixed `r`, every `n`-vertex graph `G` with
+`omega(G)<r` satisfies
+
+```text
+reg(G) >= c_r n^{1/(r-1)} = omega(log n).
+```
+
+The same conclusion holds when `alpha(G)<r`, by applying the statement to the
+complement.
+
+Proof.  The standard Ramsey recurrence gives
+
+```text
+R(r,t) <= binom(r+t-2,r-1) <= C_r t^{r-1}
+```
+
+for a constant `C_r` depending only on `r`.  If
+`n >= C_r t^{r-1}`, then every `n`-vertex graph contains either a clique of
+order `r` or an independent set of order `t`.  A `K_r`-free graph therefore
+has an independent set of size at least `c_r n^{1/(r-1)}` after adjusting
+constants.  An independent set is a `0`-regular induced subgraph, proving the
+displayed lower bound for `reg(G)`.  The complement argument is identical,
+since cliques in `G` are independent sets in `complement(G)` and regularity is
+preserved under complementation.  QED.
+
+Thus a counterexample sequence to the conjecture with
+`reg(G_n)=O(log |G_n|)` must satisfy
+
+```text
+omega(G_n) -> infinity
+and
+alpha(G_n) -> infinity.
+```
+
+This is much weaker than the `C`-Ramsey reduction: it removes fixed-clique and
+fixed-independence-number classes, but it does not control graphs with
+`omega(G)` and `alpha(G)` growing slowly.
+
+## Lemma 8B: Fixed-Clique-Free Induced Pieces In Counterexamples
+
+Let `G` be a graph with `reg(G)<k`.  For every `2 <= r <= k`, every induced
+`K_r`-free subgraph of `G` has fewer than `R(r,k)` vertices.  Equivalently,
+every vertex set `U` with `|U| >= R(r,k)` contains a clique of order `r`.
+The complement statement also holds: every induced `K_r`-free subgraph of
+`complement(G)` has fewer than `R(r,k)` vertices.
+
+Proof.  Let `H=G[U]` be `K_r`-free.  If `|U| >= R(r,k)`, Ramsey's theorem
+gives either a clique of order `r` in `H` or an independent set of order `k`
+in `H`.  The clique is excluded, while the independent set is an induced
+`0`-regular subgraph of `G` on `k` vertices, contradicting `reg(G)<k`.
+
+For the complement statement, observe that
+`reg(complement(G))=reg(G)`, because the complement of a `d`-regular graph on
+`m` vertices is `(m-1-d)`-regular.  Apply the first part to the complement.
+QED.
+
+Using the fixed-`r` off-diagonal Ramsey estimate
+
+```text
+R(r,k) <= C_r k^{r-1}/(log k)^{r-2}
+```
+
+for `r>=3`, this says, for example, that a counterexample has no induced
+triangle-free or co-triangle-free subgraph on `C k^2/log k` vertices.  This is
+consistent with random-like extremal examples and does not by itself imply a
+subexponential upper bound for `G(k)`.
+
 ## Lemma 9: Hereditary Density Window For Counterexamples
 
 If `G` has no regular induced subgraph of order at least `k`, then for every
@@ -1700,7 +1832,7 @@ the `--require-graphical` filter, the maximum distinct admissible sizes are
 In the setting of Lemma 12,
 
 ```text
-|B| <= (4(k-1)^2+1)^{k-1}.
+|B| <= (3k)^{k-1}.
 ```
 
 Proof.  For every `b in B`, define the difference trace vector
@@ -1723,30 +1855,58 @@ T = sum_{b in B} v_b.
 
 By Lemma 15, `||T||_infty <= k-1`.  Put `d=k-1` and `m=|B|`.
 
+If `m<d^2`, then `m <= d^2 <= (3d+3)^d` for every `d>=1`, so assume
+`m>=d^2`.
+
 Use the standard Steinitz rearrangement lemma in this form: if vectors in
 `R^d` have infinity norm at most `R` and sum `0`, then they can be ordered so
 that every partial sum has infinity norm at most `dR`.  Apply it to the
-zero-sum sequence consisting of the `m` vectors `v_b` and the single vector
-`-T`.  All these vectors have infinity norm at most `d`, so there is a cyclic
-ordering whose partial sums have infinity norm at most `d^2`.  Rotate this
-cyclic order so that `-T` is last.  The partial sums of the preceding `m`
-original trace vectors then all have infinity norm at most `2d^2`.
+centered vectors
+
+```text
+u_b = v_b - T/m.
+```
+
+These vectors sum to `0` and have infinity norm at most `1+d/m`.  Hence there
+is an ordering for which the centered partial sums `Q_j` satisfy
+
+```text
+||Q_j||_infty <= d(1+d/m) <= d+1
+```
+
+for every `0<=j<=m`.  For the corresponding original partial sums
+
+```text
+P_j = sum_{i<=j} v_i,
+```
+
+we have
+
+```text
+P_j = Q_j + (j/m) T.
+```
+
+In each coordinate, `(j/m)T` lies in an interval of length at most `d`, while
+the correction `Q_j` lies in `[-d-1,d+1]`.  Therefore all values of a fixed
+coordinate of all `P_j` lie in an interval of length at most `3d+2`, and so
+in at most `3d+3` integer values.
 
 If two of these `m+1` partial sums were equal, the consecutive block between
 them would be a nonempty submultiset of the `v_b` with sum `0`, contradicting
-Lemma 12.  Hence the `m+1` partial sums are distinct lattice points in the box
+Lemma 12.  Hence the `m+1` partial sums are distinct lattice points in a box
+with at most
 
 ```text
-[-2d^2,2d^2]^d.
+(3d+3)^d
 ```
 
-This box contains `(4d^2+1)^d` lattice points, so
+points.  Thus
 
 ```text
-m+1 <= (4d^2+1)^d.
+m+1 <= (3d+3)^d.
 ```
 
-The displayed bound follows after replacing `d` by `k-1`.  QED.
+Since `3d+3=3k`, the displayed bound follows.  QED.
 
 This is still far too weak to prove `G(k)<=2^{o(k)}` by itself, because it is
 `2^{O(k log k)}`.  Its value is structural: any repeated-degree minimal host
@@ -1793,7 +1953,7 @@ an induced subgraph with at least `r` vertices of the same degree.  Let
 most `s`, of the largest order of a regular induced subgraph.  Put
 
 ```text
-S(r) = (4(r-1)^2+1)^{r-1}.
+S(r) = (3r)^{r-1}.
 ```
 
 Then for all `r`,
