@@ -4647,9 +4647,75 @@ have exactly one term from a chosen digit class. They always allow an
 additional term in that class, which is precisely the residue-level shadow
 of splitting the deleted digit component into two retained components.
 
-Thus the digital route currently gives no counterexample: the carry-free
-model satisfies the desired conclusion, while an exact additive embedding
-into \(\mathbb N\) is unavailable.
+The standard binary Raikov-Stöhr basis also supports the positive direction.
+Let
+\[
+A_0=\{n>0:\operatorname{supp}_2(n)\subseteq 2\mathbb N\},\qquad
+A_1=\{n>0:\operatorname{supp}_2(n)\subseteq 2\mathbb N+1\},
+\]
+and put
+\[
+A=A_0\cup A_1.
+\]
+With \(0\) allowed for padding this is an exact order-2 basis by splitting
+the binary support into even-position and odd-position parts; without \(0\),
+the usual one-bit carry-down handles all sufficiently large pure-class
+exceptions. Thus \(A\) is an asymptotic order-2 basis. Delete
+\[
+B=\{x\in A_0: |\operatorname{supp}_2(x)|\text{ is even}\}.
+\]
+Let \(C=A\setminus B\). Then \(C\) is an asymptotic basis of order \(3\).
+Indeed, split the binary support of \(n\) into even-position bits \(S\) and
+odd-position bits \(T\).
+
+If \(S,T\ne\varnothing\), then:
+
+* if \(|S|\) is even, split \(S\) into two nonempty odd parts and use
+  \(T\) as the third summand;
+* if \(|S|\) is odd and \(|T|\ge2\), use \(S\) as one retained \(A_0\)
+  summand and split \(T\) into two nonempty \(A_1\) summands;
+* if \(|S|\) is odd and \(T=\{t\}\), then
+  \[
+  2^t=2^{t-1}+2^{t-1},
+  \]
+  with \(t-1\) even, so the two new summands are retained \(A_0\)
+  singletons.
+
+If \(T=\varnothing\), then:
+
+* if \(|S|\ge3\) is odd, split \(S\) into three nonempty odd parts;
+* if \(|S|\) is even and \(S\) contains \(s\ge2\), use \(S\setminus\{s\}\)
+  as one odd retained \(A_0\) summand and split
+  \[
+  2^s=2^{s-1}+2^{s-1}
+  \]
+  into two retained \(A_1\) singletons;
+* if \(S=\{s\}\), then for \(s\ge2\),
+  \[
+  2^s=2^{s-1}+2^{s-2}+2^{s-2}.
+  \]
+
+If \(S=\varnothing\), then no \(A_1\) elements were deleted. If
+\(|T|\ge3\), split \(T\) into three nonempty parts. If
+\[
+T=\{t_1,t_2\},\qquad t_2\ge3,
+\]
+write
+\[
+2^{t_2}=2^{t_2-1}+2^{t_2-1},
+\]
+and use \(2^{t_1}\) as the third \(A_1\) summand. If \(T=\{t\}\) and
+\(t\ge3\), write
+\[
+2^t=2^{t-1}+2^{t-2}+2^{t-2}.
+\]
+The finitely many excluded small cases are \(1\) and \(2\). Thus all
+sufficiently large integers lie in \(3C\).
+
+Therefore the digital route currently gives no counterexample: the
+carry-free model and the natural binary critical-density model both satisfy
+the desired conclusion, while an exact additive embedding of the free
+monoid into \(\mathbb N\) is unavailable.
 
 ## Attempt 13: Staged protected-block counterexample
 
@@ -5979,8 +6045,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Example 11 gives a residue-padding family satisfying the desired
   conclusion for every \(k\ge2\).
 * Attempt 12 records that the clean direct-sum digital model satisfies the
-  desired conclusion, while a faithful carry-free embedding into
-  \(\mathbb N\) is impossible.
+  desired conclusion, and the standard binary Raikov-Stöhr basis has an
+  explicit even-support deletion leaving an order-3 basis; a faithful
+  carry-free embedding into \(\mathbb N\) is impossible.
 * Attempt 13 records the staged protected-block counterexample route and
   the coverage-versus-witness-efficiency gap.
 * Proposition 13.1 gives a precise finite-stage criterion that would produce

@@ -213,6 +213,12 @@ construction from Theorem 2.3 in the model \(A=\mathbb N\), and verifies
 for small parameters that every deleted multiset of size at most \(k\) has
 the required repair from the protected reservoir.
 
+`digital_binary_verify.py` checks the standard binary Raikov-Stöhr example
+from Attempt 12 after deleting the even-support elements of the even-position
+digit class. Up to the default cap `20000`, the remaining set misses only
+`1` and `2` at order `3`, matching the explicit support-splitting proof in
+`PROOF.md`.
+
 `adjacent_stage_search.py` tests a possible \(k=3\) disproof route:
 constructing an order-3 basis that is ordinary minimal as an order-4 basis.
 It searches finite stages where new elements extend three-sum coverage and
