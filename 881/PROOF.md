@@ -9790,6 +9790,40 @@ order-2 density scale. It cannot be implemented in a denser basis, and in
 the critical case it must create large mixed two-sum spikes between two
 recurrent Sidon-like tail colors.
 
+### Diagnostic 13.1l.4: Bipartite Sidon windows are locally compatible
+
+The script `EXPERIMENTS/bipartite_sidon_window_search.py` searches finite
+integer windows for exactly the local shape left by Corollary 13.1l.3: a
+partition
+\[
+A=C\cup D
+\]
+into two certificate-free colors, a long covered interval in \(2A\), and a
+mixed center with several representations from \(C+D\). With
+`--max-value 16 --size 6 --limit 10`, it finds many examples. The best
+window printed is
+\[
+C=\{11,15,16\},\qquad D=\{8,9,13\},
+\]
+for which
+\[
+2(C\cup D)
+\]
+contains the whole interval \([16,32]\), both colors are
+certificate-free relative to \(A\), and the mixed center
+\[
+24
+\]
+has three representations:
+\[
+24=11+13=15+9=16+8.
+\]
+
+Thus the bipartite recurrent-Sidon obstruction is not finitely
+inconsistent. A final contradiction must use the infinite quantitative
+requirements: cofinite order-2 coverage, recurrence at unbounded centers,
+the Schreier barrier links, or threshold control for infinite deletions.
+
 ### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
 
 Corollary 13.1l does not say that a finite first-prefix pair edge must be
@@ -10934,6 +10968,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
+* Diagnostic 13.1l.4 records finite integer windows with exactly this
+  bipartite certificate-free and mixed-spike shape, so this reduced
+  obstruction is locally compatible.
 * Diagnostic 13.1m shows that high-excess first-pair starts are locally
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.

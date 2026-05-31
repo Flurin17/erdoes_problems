@@ -284,6 +284,15 @@ The same mode now uses Lemma 13.1j-style lazy prefix-link pruning. With
 `--max-p6 55 --max-extra 2 --max-extra-value 95`, it checks `14912`
 coverage-passing candidates with up to two delayed fillers and still finds
 no arbitrary-order P6 extension.
+Run `bipartite_sidon_window_search.py --max-value 16 --size 6 --limit 10`
+for a finite analogue of the bipartite recurrent-Sidon obstruction from
+Corollary 13.1l.3. It finds many windows with two certificate-free colors,
+a long two-sum coverage interval, and a mixed reflection spike. One top
+example is `C={11,15,16}`, `D={8,9,13}`: `2(C∪D)` covers `[16,32]`, and
+the mixed center `24` has the three representations
+`11+13=15+9=16+8`. This shows the reduced obstruction is locally
+compatible; a contradiction must use infinite threshold or recurrence
+input.
 Run `schreier_stage_search.py --pair-edge-search --max-p6 40 --max-u 60
 --max-nodes 20000 --max-found 2` for the complementary high-excess
 first-pair diagnostic. It looks for pair-private dominated holes for

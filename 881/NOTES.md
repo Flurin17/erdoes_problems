@@ -1530,6 +1530,15 @@ the later tail after the first protected vertex must be a union of two
 recurrent Sidon-like colors. Since that tail is cofinite in \(A\), the
 construction is forced to the critical density scale \(A(X)=O(\sqrt X)\)
 and must have mixed two-sum spikes of size not \(o(A(X))\).
+The finite `bipartite_sidon_window_search.py` diagnostic shows this shape
+is still locally compatible: for example
+\[
+C=\{11,15,16\},\quad D=\{8,9,13\}
+\]
+are certificate-free colors, \(2(C\cup D)\) covers \([16,32]\), and
+\(24=11+13=15+9=16+8\) is a mixed spike. The remaining contradiction, if
+true, must use infinite recurrence, cofinite coverage, or threshold
+control.
 
 The new `--pair-edge-search` diagnostic confirms that high-excess first
 pair starts are locally possible but expensive. Starting from the P5 seed,
