@@ -3357,6 +3357,58 @@ representation graphs below the witness. Any proof that only selects an
 infinite deletion to avoid complete terminal windows is vulnerable to the
 local-isolation pattern in Warning 8.6e.
 
+## Warning 8.6f': Alternating deletions do not defeat collective holes
+
+A natural refinement of the sparse-deletion strategy is to choose an
+infinite \(B\subset A\) with no two consecutive elements in the \(A\)-order.
+If \(F\subset B\) creates a hole \(w\notin3(A\setminus F)\), Lemma 8.4a
+gives
+\[
+A\cap(w-\min F-m_0,\ w-N_0]\subset F.
+\]
+Since \(F\subset B\), the terminal interval then contains at most one
+element of \(A\). This is a genuine strengthening, but it is still not
+enough.
+
+The finite window
+\[
+S=\{1,2,3,6,7,8\}
+\]
+has
+\[
+[2,13]\subseteq2S.
+\]
+Let
+\[
+B=\{2,6,8\},\qquad F=\{6,8\},\qquad C=S\setminus F=\{1,2,3,7\}.
+\]
+The set \(B\) has no two consecutive elements in the \(S\)-order, but
+\[
+14\notin3C.
+\]
+With \(N_0=2\), \(m_0=1\), and \(f_0=\min F=6\), the terminal interval is
+\[
+(14-6-1,\ 14-2]=(7,12],
+\]
+and
+\[
+S\cap(7,12]=\{8\}\subset F.
+\]
+Thus alternating deletion has reduced the terminal window to one deleted
+point.
+
+The shifted vertex-cover condition still holds. For every retained
+\[
+e\in C,\qquad e\le12,
+\]
+all two-term representations of \(14-e\) from \(S\) use \(6\) or \(8\):
+\[
+13=6+7,\qquad 12=6+6,\qquad 11=3+8,\qquad 7=1+6.
+\]
+Therefore terminal-window sparsification alone cannot prove the theorem. A
+global argument would still be needed to rule out infinitely many
+singleton-terminal-window collective holes.
+
 ## Lemma 8.6g: Large-excess barriers force certificates unless large subsets are certificate-free
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with

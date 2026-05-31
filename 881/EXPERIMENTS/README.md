@@ -126,6 +126,11 @@ The same script also prints the finite prefix example
 `D={4,6}`, `d=6`, and `b=7` is minimal only as a triple-prefix hole; it
 does not descend to a pair hole after deleting `{6,7}`.
 
+The alternating-deletion warning in `PROOF.md` uses another small window,
+\(\{1,2,3,6,7,8\}\): deleting the non-consecutive pair `{6,8}` leaves a
+three-sum hole at `14`, with the terminal interval containing only the
+deleted point `8`, and the shifted two-sum domination still holds.
+
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
 \[
