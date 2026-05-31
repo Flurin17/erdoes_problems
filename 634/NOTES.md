@@ -175,8 +175,8 @@ The tile triangle is not required to be similar to the large triangle unless exp
   representatives per word, have no mixed-status word group, and the weighted
   totals match the full refined census (`207888`, `58224`, `149728`). For `99`
   mixed `6`, the same counter finds `418260` outside-cover word groups over
-  `5867040` shells; the first `50000` representative-classified word groups
-  cover cumulative weight `586920` with no mixed-status word group.
+  `5867040` shells; the first `100000` representative-classified word groups
+  cover cumulative weight `1623240` with no mixed-status word group.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
