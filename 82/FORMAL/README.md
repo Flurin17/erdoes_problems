@@ -18,6 +18,11 @@ Finite lemmas suitable for formalization:
 - Cycle and anticycle lemma: induced cycles and their complements are regular.
 - Modular terminal criterion: if `|S| <= q` and `QModularOn q G S`, then
   `RegularOn G S`.
+- `q+2` modular extraction: if `|S| <= q+2` and `QModularOn q G S`, then
+  either `G.induce S` is regular or, in the only nonregular cases, deleting
+  one exceptional vertex leaves a clique or an independent set on `q+1`
+  vertices.  A formal proof can split on the common degree residue `r`; only
+  residues `0` and `1` allow two degree values in `[0,q+1]`.
 - Deletion-face criterion: for `|S| >= 2`, `RegularOn G S` iff the edge counts
   of all one-vertex deletions `S \ {v}` are equal.
 - Induced matching exclusion: an induced matching of size `r` gives a
