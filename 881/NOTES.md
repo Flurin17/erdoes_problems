@@ -1494,6 +1494,22 @@ With lazy prefix-link pruning, the same search checks \(14912\) candidates
 for \(p_6\le55\) with up to two delayed fillers through \(95\), again
 finding no arbitrary-order P6 extension.
 
+Lemma 8.2c' closes one fixed-prefix loophole: if a fixed lower endpoint
+\(d\) has genuinely pair-private witnesses
+\[
+w\notin3(A\setminus\{d,b\}),\qquad b\le w\le b+D,
+\]
+with the finite-test uniformity needed to avoid arbitrary retained test
+sets, then \(w-d\) reflects the whole tail above \(\max\{D,d\}\). Indeed,
+for a test point \(t>D\), the moving endpoint \(b\) cannot occur in a
+two-sum representation of \(w-t\), so the fixed endpoint \(d\) must occur.
+Lemma 2.4 then gives a good deletion. Corollary 13.1k translates this to
+the enumerated Schreier route: the first prefix vertex cannot have
+uniformly low-top-excess pair links in a counterexample. Any viable
+Schreier lift must force unbounded top excess on a tail, fail this
+finite-test uniformity, or move into genuinely higher-rank prefix
+obstructions.
+
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining
 \(k=2\) counterexample must have, inside every infinite tail, an

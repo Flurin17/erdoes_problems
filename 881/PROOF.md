@@ -3755,21 +3755,90 @@ m=b+e
 satisfies \(m-T\subset A\) and \(m>L\). Lemma 2.4 gives the desired
 infinite deletion. \(\square\)
 
-More generally, if a fixed finite prefix \(D\) and infinitely many
-candidates \(b\) satisfy
+## Lemma 8.2c': Uniform low-excess fixed pair-stars force tail recurrence
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Fix \(d\in A\) and a constant \(D\ge0\). Put
 \[
-e+d+b\notin3(A\setminus(D\cup\{b\}))
+M=\max\{D,d\}.
 \]
-for some \(d\in D\), the same proof gives only fractional recurrence: for
+Suppose that for every finite nonempty
+\[
+T\subset A\cap(M,\infty)
+\]
+and every \(L\), there are
+\[
+b\in A\setminus(T\cup\{d\}),\qquad w\in\mathbb N,
+\]
+such that
+\[
+w-\max T\ge N_0,\qquad w-d>L,\qquad b\le w\le b+D, \tag{1}
+\]
+and
+\[
+w\notin3(A\setminus\{d,b\}). \tag{2}
+\]
+Then the tail \(A\cap(M,\infty)\) is reflection-recurrent. Consequently
+there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. It is enough to prove the recurrence assertion for nonempty \(T\);
+the empty test set is automatic. Fix finite nonempty
+\[
+T\subset A\cap(M,\infty)
+\]
+and \(L\), and choose \(b,w\) satisfying (1)--(2). Put
+\[
+m=w-d.
+\]
+Then \(m>L\). For each \(t\in T\), the integer \(w-t\) is at least
+\(N_0\), so choose a two-term representation
+\[
+w-t=a_t+a'_t,\qquad a_t,a'_t\in A.
+\]
+If some such representation avoided both \(d\) and \(b\), then, since
+\[
+t\notin\{d,b\},
+\]
+adding \(t\) would put \(w\) in \(3(A\setminus\{d,b\})\), contradicting
+(2). Hence every two-term representation of \(w-t\) uses \(d\) or \(b\).
+It cannot use \(b\), because the other summand would be
+\[
+w-t-b\le D-t<0,
+\]
+as \(t>D\). Therefore some representation uses \(d\), say
+\[
+w-t=d+c_t,\qquad c_t\in A.
+\]
+Thus
+\[
+m-t=w-d-t=c_t\in A
+\]
+for every \(t\in T\). Since \(L\) was arbitrary, \(A\cap(M,\infty)\) is
+reflection-recurrent. Lemma 2.4 gives the infinite deletion. \(\square\)
+
+This is the fixed-endpoint analogue of the bounded second-excess argument
+in Lemma 8.6a. It still does not close the finite-prefix star obstruction
+by itself: the hypothesis is uniform over finite test sets and requires
+genuine pair-private holes for \(\{d,b\}\). A prefix star may instead be
+repaired after deleting only \(\{d,b\}\) but fail after a larger old core is
+deleted, as in the finite example below.
+
+For the pure-star setting, more generally, if a fixed finite prefix
+\(\Delta\) and infinitely many candidates \(b\) satisfy
+\[
+e+d+b\notin3(A\setminus(\Delta\cup\{b\}))
+\]
+for some \(d\in \Delta\), the same proof gives only fractional recurrence: for
 each finite tail test set \(T\), the shifted representations of
 \[
 e+d+b-t
 \]
-must use one of the finitely many elements of \(D\), and pigeonholing gives
-a reflected subset of \(T\) of size at least \(|T|/|D|\). This falls back
-to the certificate-free recurrent-cluster obstruction after Lemma 8.6c,
-which is why the fixed-center greedy proof still does not close the
-remaining case.
+must use one of the finitely many elements of \(\Delta\), and
+pigeonholing gives a reflected subset of \(T\) of size at least
+\(|T|/|\Delta|\). This falls back to the certificate-free recurrent-cluster
+obstruction after Lemma 8.6c, which is why the fixed-center greedy proof
+still does not close the remaining case.
 
 ## Lemma 8.2d: Multi-center stars force certificates unless large subsets are certificate-free
 
@@ -9414,6 +9483,42 @@ condition has no solution. Thus the finite obstruction is not merely that
 one unlucky value order fails; the supported-subset hypergraph has no
 Schreier-compatible prefix links at all.
 
+## Corollary 13.1k: First-prefix low-excess links force a good deletion
+
+Work in the \(k=2\) case, and let \(A\) be an asymptotic basis of order
+\(2\), with threshold \(N_0\). Fix \(d\in A\) and \(D\ge0\), and put
+\[
+M=\max\{D,d\}.
+\]
+Suppose that for every finite nonempty
+\[
+T\subset A\cap(M,\infty)
+\]
+and every \(L\), there are
+\[
+p\in A\setminus(T\cup\{d\}),\qquad w\in\mathbb N,
+\]
+such that
+\[
+w-\max T\ge N_0,\qquad w-d>L,\qquad p\le w\le p+D,
+\]
+and
+\[
+w\notin3(A\setminus\{d,p\}).
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. This is Lemma 8.2c' with \(b=p\). \(\square\)
+
+Thus an enumerated Schreier counterexample cannot have a first prefix
+vertex \(d\) whose pair links to the later tail are uniformly
+low-top-excess in this finite-test sense. Lemma 13.1j says that the first
+enumeration vertex must support all later pair edges. Corollary 13.1k says
+that, in a genuine counterexample, those links must either have unbounded
+top excess on some tail, lose pair-private status when arbitrary finite
+test sets are avoided, or be replaced by a higher-rank prefix obstruction.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets
@@ -10239,6 +10344,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   forces tail reflection-recurrence; the unresolved greedy obstruction is
   the finite-prefix multi-center version, which gives only fractional
   recurrence.
+* Lemma 8.2c' gives the bounded pair-private analogue: a fixed lower
+  endpoint with uniformly low-top-excess pair witnesses over arbitrary
+  finite tail tests also forces tail reflection-recurrence.
 * Lemma 8.2d gives the matching certificate-forcing statement for
   multi-center fixed-prefix stars; persistent star obstructions must again
   live in the large certificate-free subset regime.
@@ -10489,6 +10597,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   finite enumerated Schreier stages: the first vertex needs complete good
   pair links, the second needs complete good triple links on the remaining
   tail, and so on.
+* Corollary 13.1k applies Lemma 8.2c' to those first-prefix pair links:
+  uniformly low-top-excess links in the finite-test sense would give a good
+  deletion, so a counterexample must use unbounded excess, non-uniform
+  links, or higher-rank prefix obstructions.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).
