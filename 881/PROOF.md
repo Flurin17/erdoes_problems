@@ -4448,11 +4448,12 @@ This is finite evidence only. It shows that the Schreier-stage target is
 not ruled out by the local active-hole and shifted-domination checks at the
 first stage; it says nothing about iterating the construction with
 unbounded witnesses and coverage buffers.
-With `--extend-first`, the same script tries to extend this seed by up to
-four new elements through \(35\), while checking all Schreier edges among
-the first five protected elements. It finds no second-stage extension under
-those bounds. This is again finite evidence only, but it locates the first
-iteration pressure point for the unbounded-rank route.
+With `--extend-first --max-new 5 --max-candidate 55`, the same script tries
+to extend this seed by up to five new elements through \(55\), while
+checking all Schreier edges among the first five protected elements. It
+finds no second-stage extension under those bounds. This is again finite
+evidence only, but it locates the first iteration pressure point for the
+unbounded-rank route.
 
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 

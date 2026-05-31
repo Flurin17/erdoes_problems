@@ -123,9 +123,10 @@ whose two-sums cover through \(12\), and whose first protected Schreier
 edges \(\{1,2\},\{1,3\},\{1,4\},\{2,3,4\}\) have minimal dominated
 three-fold holes at \(6,7,10,12\), respectively. This is only a local
 gadget and does not address iteration.
-With `--extend-first`, it tries to add up to four new elements through `35`
-and checks all Schreier edges among the first five protected elements; no
-second-stage extension is found in that bounded search.
+With `--extend-first --max-new 5 --max-candidate 55`, it tries to add up to
+five new elements through `55` and checks all Schreier edges among the first
+five protected elements; no second-stage extension is found in that bounded
+search.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short
