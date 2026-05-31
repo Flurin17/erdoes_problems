@@ -15,6 +15,7 @@ import random
 import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from functools import cmp_to_key
 from pathlib import Path
 
 
@@ -43,6 +44,8 @@ class ShellDiagnostic:
     non_full_atoms: int = 0
     wrong_full_label_atoms: int = 0
     parity_mismatches: str = ""
+    pinch_labels: CounterTuple = ()
+    pinch_cyclic_labels: CounterTuple = ()
     forced_corners: int = 0
     label_violations: int = 0
     forced_angles: CounterTuple = ()
@@ -80,6 +83,58 @@ def graph_profile(segments: list[exact.KSegment]) -> GraphProfile:
 
 def residual_label_profile(residual_labels: dict[exact.KSegment, str]) -> CounterTuple:
     return tuple(sorted(Counter(residual_labels.values()).items()))
+
+
+def pinch_label_profile(residual_labels: dict[exact.KSegment, str]) -> CounterTuple:
+    incidences: dict[exact.KPoint, list[str]] = defaultdict(list)
+    for (start, end), label in residual_labels.items():
+        incidences[start].append(label)
+        incidences[end].append(label)
+    profiles = Counter("".join(sorted(labels)) for labels in incidences.values() if len(labels) != 2)
+    return tuple(sorted(profiles.items()))
+
+
+def vector_half_plane(vector: exact.KPoint) -> int:
+    y_sign = exact.ksign(vector[1])
+    x_sign = exact.ksign(vector[0])
+    return 0 if y_sign > 0 or (y_sign == 0 and x_sign >= 0) else 1
+
+
+def compare_incident_half_edges(
+    left: tuple[str, exact.KPoint],
+    right: tuple[str, exact.KPoint],
+) -> int:
+    left_half = vector_half_plane(left[1])
+    right_half = vector_half_plane(right[1])
+    if left_half != right_half:
+        return left_half - right_half
+    cross = exact.ksign(exact.kcross(left[1], right[1]))
+    if cross != 0:
+        return -cross
+    return (left[0] > right[0]) - (left[0] < right[0])
+
+
+def canonical_cyclic_word(labels: tuple[str, ...]) -> str:
+    if not labels:
+        return ""
+    rotations = ["".join(labels[index:] + labels[:index]) for index in range(len(labels))]
+    reverse = tuple(reversed(labels))
+    rotations.extend("".join(reverse[index:] + reverse[:index]) for index in range(len(reverse)))
+    return min(rotations)
+
+
+def pinch_cyclic_label_profile(residual_labels: dict[exact.KSegment, str]) -> CounterTuple:
+    incidences: dict[exact.KPoint, list[tuple[str, exact.KPoint]]] = defaultdict(list)
+    for (start, end), label in residual_labels.items():
+        incidences[start].append((label, exact.kpsub(end, start)))
+        incidences[end].append((label, exact.kpsub(start, end)))
+    profiles = Counter()
+    for half_edges in incidences.values():
+        if len(half_edges) == 2:
+            continue
+        ordered = tuple(label for label, _vector in sorted(half_edges, key=cmp_to_key(compare_incident_half_edges)))
+        profiles[canonical_cyclic_word(ordered)] += 1
+    return tuple(sorted(profiles.items()))
 
 
 def segment_length(segment: exact.KSegment, scale: int):
@@ -136,6 +191,8 @@ def diagnose_shell(
     residual_segments = list(residual_labels)
     edges, vertices, components, degree_counts = graph_profile(residual_segments)
     label_profile = residual_label_profile(residual_labels)
+    pinch_profile = pinch_label_profile(residual_labels)
+    cyclic_pinch_profile = pinch_cyclic_label_profile(residual_labels)
     non_full_atoms, wrong_full_label_atoms = full_atom_failures(residual_labels, survivor.candidate.tile, scale)
     parity_bad = (
         parity_mismatches(label_profile, remaining_tiles)
@@ -155,6 +212,8 @@ def diagnose_shell(
             non_full_atoms=non_full_atoms,
             wrong_full_label_atoms=wrong_full_label_atoms,
             parity_mismatches=parity_bad,
+            pinch_labels=pinch_profile,
+            pinch_cyclic_labels=cyclic_pinch_profile,
         )
 
     if any(exact.kside_decomposable(segment, survivor.candidate.tile, scale) for segment in residual_labels):
@@ -169,6 +228,8 @@ def diagnose_shell(
             non_full_atoms=non_full_atoms,
             wrong_full_label_atoms=wrong_full_label_atoms,
             parity_mismatches=parity_bad,
+            pinch_labels=pinch_profile,
+            pinch_cyclic_labels=cyclic_pinch_profile,
         )
 
     forced_angles: Counter[str] = Counter()
@@ -200,6 +261,8 @@ def diagnose_shell(
         non_full_atoms=non_full_atoms,
         wrong_full_label_atoms=wrong_full_label_atoms,
         parity_mismatches=parity_bad,
+        pinch_labels=pinch_profile,
+        pinch_cyclic_labels=cyclic_pinch_profile,
         forced_corners=forced,
         label_violations=violations,
         forced_angles=tuple(sorted(forced_angles.items())),
@@ -266,6 +329,10 @@ def main() -> None:
             violations_per_shell: Counter[int] = Counter()
             atom_counts: Counter[int] = Counter()
             full_atom_profiles: Counter[tuple[int, int, str]] = Counter()
+            pinch_label_counts: Counter[str] = Counter()
+            pinch_shell_profiles: Counter[CounterTuple] = Counter()
+            cyclic_pinch_label_counts: Counter[str] = Counter()
+            cyclic_pinch_shell_profiles: Counter[CounterTuple] = Counter()
             examples: dict[str, tuple[BoundaryDemand, ShellDiagnostic]] = {}
             kept = 0
             covered = 0
@@ -298,6 +365,12 @@ def main() -> None:
                             detail.degree_profile,
                         )
                     ] += 1
+                    pinch_shell_profiles[detail.pinch_labels] += 1
+                    for labels, count in detail.pinch_labels:
+                        pinch_label_counts[labels] += count
+                    cyclic_pinch_shell_profiles[detail.pinch_cyclic_labels] += 1
+                    for labels, count in detail.pinch_cyclic_labels:
+                        cyclic_pinch_label_counts[labels] += count
                 if detail.status == "corner-label-violation":
                     forced_angle_profiles[detail.forced_angles] += 1
                     violations_per_shell[detail.label_violations] += 1
@@ -326,6 +399,18 @@ def main() -> None:
             print("  top non-simple graph profiles:")
             for profile, count in graph_profiles.most_common(args.top):
                 print(f"    {profile_text(profile)}: {count}")
+            print("  top non-simple pinch label profiles:")
+            for profile, count in pinch_shell_profiles.most_common(args.top):
+                print(f"    {counter_tuple_text(profile)}: {count}")
+            print("  top non-2-degree vertex incident labels:")
+            for labels, count in pinch_label_counts.most_common(args.top):
+                print(f"    {labels}: {count}")
+            print("  top non-simple cyclic pinch label profiles:")
+            for profile, count in cyclic_pinch_shell_profiles.most_common(args.top):
+                print(f"    {counter_tuple_text(profile)}: {count}")
+            print("  top non-2-degree vertex cyclic incident labels:")
+            for labels, count in cyclic_pinch_label_counts.most_common(args.top):
+                print(f"    {labels}: {count}")
             print("  top forced-angle profiles among corner violations:")
             for profile, count in forced_angle_profiles.most_common(args.top):
                 print(f"    {counter_tuple_text(profile)}: {count}")

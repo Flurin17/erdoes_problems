@@ -1924,6 +1924,14 @@ residual side-count parity test; it needs either a degree-4 pinch/star
 infeasibility lemma, a stronger residual graph topology lemma, or a finer
 forced-corner label invariant.
 
+After adding incident-label profiles at the non-2-degree vertices, the same
+sample shows only two degree-4 pinch types. For `N=63`, the non-simple residual
+graphs contain `1387` `accc` pinches and `303` `aabc` pinches. For `N=99`, the
+corresponding counts are `6988` and `1303`. Thus the degree-4 branch has a
+small finite local target: understand whether `accc` and `aabc` residual pinch
+stars can be completed by the remaining tiles without creating one of the
+already-detected corner-label violations.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`

@@ -81,7 +81,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   cover found only residual corner-label violations and connected non-simple
   residual graphs with one or more degree-4 pinch vertices. The all-full
   residual atom profiles in that sample have no side-parity mismatch, so a
-  parity-only residual invariant is not enough.
+  parity-only residual invariant is not enough. The non-2-degree residual
+  vertices in the same run have only two incident-label profiles, `accc` and
+  `aabc`, making those local pinch stars the next finite obstruction target.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

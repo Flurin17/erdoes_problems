@@ -142,7 +142,9 @@ Current components:
   corner-label violation types. In the seed-`20260602`, `50000`-attempt
   outside-cover run, every non-simple residual graph for `N=63` and `N=99` is
   a connected graph with degree-4 pinch vertices, while the all-full residual
-  atom profiles have no side-parity mismatch.
+  atom profiles have no side-parity mismatch. The non-2-degree vertex incident
+  and cyclic incident-label profiles are concentrated in only two profiles,
+  `accc` and `aabc`.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`
