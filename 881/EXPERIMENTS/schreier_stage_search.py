@@ -100,16 +100,20 @@ def witnesses_for_edges(
     return data
 
 
-def search_first(max_value: int, max_size: int) -> None:
+def search_protected(max_value: int, max_size: int, protected_count: int) -> None:
     for candidate_max in range(8, max_value + 1):
-        for size in range(5, min(candidate_max, max_size) + 1):
+        for size in range(protected_count + 1, min(candidate_max, max_size) + 1):
             for tuple_a in combinations(range(1, candidate_max + 1), size):
                 elements = set(tuple_a)
                 coverage = cover_end(elements, 2, 3 * candidate_max)
                 if coverage < candidate_max:
                     continue
-                protected = sorted(elements)[:4]
-                edges = first_schreier_edges(protected)
+                protected = sorted(elements)[:protected_count]
+                edges = (
+                    first_schreier_edges(protected)
+                    if protected_count == 4
+                    else schreier_edges(protected)
+                )
                 data = witnesses_for_edges(elements, edges, coverage)
                 if data is not None:
                     print("finite Schreier-stage gadget")
@@ -145,13 +149,14 @@ def main() -> None:
     parser.add_argument("--extend-first", action="store_true")
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
+    parser.add_argument("--protected-count", type=int, default=4)
     parser.add_argument("--max-new", type=int, default=4)
     parser.add_argument("--max-candidate", type=int, default=35)
     args = parser.parse_args()
     if args.extend_first:
         extend_first(args.max_new, args.max_candidate)
     else:
-        search_first(args.max_value, args.max_size)
+        search_protected(args.max_value, args.max_size, args.protected_count)
 
 
 if __name__ == "__main__":

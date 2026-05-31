@@ -127,6 +127,10 @@ With `--extend-first --max-new 5 --max-candidate 55`, it tries to add up to
 five new elements through `55` and checks all Schreier edges among the first
 five protected elements; no second-stage extension is found in that bounded
 search.
+The direct mode can also search for more protected points. With
+`--protected-count 6 --max-value 17 --max-size 9`, it finds
+\(\{1,2,4,5,6,8,14,16,17\}\), with all twelve Schreier edges among the
+first six protected points carrying minimal dominated holes.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

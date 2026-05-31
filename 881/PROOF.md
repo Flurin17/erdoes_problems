@@ -4454,6 +4454,16 @@ checking all Schreier edges among the first five protected elements. It
 finds no second-stage extension under those bounds. This is again finite
 evidence only, but it locates the first iteration pressure point for the
 unbounded-rank route.
+The direct search with
+`--protected-count 6 --max-value 17 --max-size 9` does find a larger local
+pattern:
+\[
+A_1=\{1,2,4,5,6,8,14,16,17\},
+\]
+with two-sum coverage through \(25\) and all twelve Schreier edges among
+the first six protected points carrying minimal dominated holes. Thus the
+failure to extend the first seed is not by itself a proof of local
+impossibility; early choices matter substantially.
 
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
