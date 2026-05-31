@@ -17,6 +17,59 @@ the explicit encoded survivors in `100..250` remain the isosceles-`alpha+beta`
 `3alpha+2beta=pi` candidates at
 `132,156,175,189,198,204,224,228,240`.
 
+## `N=22` Exact Filter Certificate
+
+The current composite benchmark was rerun separately with bytecode disabled:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 22
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_isosceles_filter.py 22
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_nonisosceles_exact.py 22
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_3alpha2beta_filter.py 22 --json
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py 22 --json
+```
+
+The first three exact filters return zero candidates:
+
+```text
+N=22: 0 exact equilateral boundary-length candidate(s), side-edge cap 22
+N=22: 0 candidate(s)
+N=22: 0 exact non-isosceles gamma=2pi/3 arithmetic candidate(s)
+```
+
+The generic `3alpha+2beta=pi` filter returns only four raw
+isosceles-`alpha+beta` necessary roots:
+
+```text
+M=1, s=21/23, sides=(483,88,529)
+M=2, s=9/13, sides=(117,88,169)
+M=3, s=13/31, sides=(403,792,961)
+M=4, s=3/19, sides=(57,352,361)
+```
+
+The stronger Beeson's Section 11.4 isosceles-`alpha+beta` filter returns:
+
+```json
+{
+  "22": []
+}
+```
+
+A cautionary non-isosceles check:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/blz_gamma_2pi3_nonisosceles_filter.py 22 --limit-side 5000
+```
+
+This returns a BLZ square-class witness `(3,5,7)` in the
+`(alpha,2beta,2alpha+beta)` template with coefficient `11/8`. It is eliminated
+only by the boundary-integrality product upgrade to
+`N=(b+2a)(a+b)m^2`.
+
+Interpretation: under the source-reduction bridge stated in `PROOF.md`,
+`N=22` has no encoded survivor. The theorem-level gap is still the global
+bridge from arbitrary tilings to these exact source cases.
+
 ## Elementary Certificate Checks
 
 Command:

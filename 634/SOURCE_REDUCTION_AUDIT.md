@@ -26,6 +26,38 @@ The workspace has independently strengthened several filters, especially:
 - exact equilateral boundary-length arithmetic for the first composite targets;
 - local boundary-star eliminations for many small composite candidates.
 
+## Published Laczkovich/Beeson Global Tables
+
+The commensurable-angle branch is source-closed. In Beeson's NoSevenTiling,
+Table 3 lists the possible `N` forms for congruent tilings whose tile angles
+are rational multiples of `pi`, and Theorem 3 states that every such tiling
+corresponds to one of the table lines. The resulting count forms are exactly:
+
+```text
+m^2,
+a^2+b^2,
+2m^2,
+3m^2,
+6m^2.
+```
+
+Beeson's Table 4 records the complementary Laczkovich finite list when not all
+tile angles are rational multiples of `pi`. The rows are:
+
+```text
+similar to the outer triangle,
+equilateral with alpha = pi/3,
+isosceles/right-tile gamma = pi/2,
+isosceles gamma = 2alpha,
+three rows with 3alpha+2beta = pi,
+five non-equilateral rows with gamma = 2pi/3,
+equilateral with gamma = 2pi/3.
+```
+
+This closes the previously vague commensurable-table item. It does not close
+the incommensurable rows: for those rows the workspace still has to match each
+source hypothesis exactly to the encoded arithmetic filters.
+
 ## BLZ #633 Row Map Into #634
 
 BLZ Theorem 1 is a useful global cover for #634 non-square cases: if an
@@ -60,7 +92,7 @@ elimination, not a complete classification of that source case.
 
 | source case | encoded count forms or constraints | status |
 |---|---|---|
-| Commensurable-angle table | `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | Recorded source-table summary; full Laczkovich table not locally reconstructed. |
+| Commensurable-angle table | `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | Complete for this branch by Beeson's NoSevenTiling Table 3 and Theorem 3. |
 | Similar/reptile | `m^2`, `a^2+b^2`, `3m^2` | Complete for this subcase by Snover-Waiveris-Williams. |
 | Equilateral `pi/3` tile model | Primitive integer sides `c^2=a^2-ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Exact arithmetic scan plus boundary-star eliminations for selected small candidates; source rationality bridge still open. |
 | Equilateral `2pi/3` tile model | Primitive integer sides `c^2=a^2+ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Exact arithmetic scan plus boundary-star eliminations for selected small candidates; source rationality bridge still open. |
@@ -84,6 +116,7 @@ once the relevant source-reduction hypotheses are accepted:
 |---|---|
 | Elementary positive families | coordinate/geometric constructions in `PROOF.md` |
 | Similar/reptile counts | source theorem quoted with exact arithmetic alternatives |
+| Commensurable-angle counts | closed by Beeson's NoSevenTiling Table 3 and Theorem 3 |
 | Prime obstruction for non-isosceles `gamma=2pi/3` | BLZ formulas plus local boundary-integrality product formulas |
 | Isosceles `gamma=2pi/3` obstruction | local boundary-transition lemma |
 | Exact equilateral boundary-length arithmetic | `equilateral_boundary_exact.py` finite rational-root enumeration |
@@ -114,26 +147,7 @@ Impact:
 - Without this bridge, small values with no encoded survivors are not yet
   negative.
 
-### 2. Commensurable-Angle Table Exactness
-
-Needed statement:
-
-> In the commensurable-angle case, the possible tile counts are exhausted by
-> the recorded arithmetic forms used in the dashboard, or by explicitly listed
-> exceptional rows that are separately encoded.
-
-Current evidence:
-
-- The dashboard uses recorded forms `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2`.
-- `LITERATURE.md` notes Laczkovich's table and congruent-tile refinements, but
-  the table itself is not reconstructed locally.
-
-Impact:
-
-- Composite values such as `14`, `15`, `21`, `22`, `30`, and later values cannot
-  be declared negative solely from the current table summary.
-
-### 3. Isosceles Composite Reductions
+### 2. Isosceles Composite Reductions
 
 Needed statement:
 
@@ -153,7 +167,7 @@ Impact:
 - The dashboard can remove isosceles candidates, but `PROOF.md` still marks the
   composite formulas as source-dependent.
 
-### 4. Equilateral Rational/Integer Side Model
+### 3. Equilateral Rational/Integer Side Model
 
 Needed statement:
 
@@ -177,7 +191,7 @@ Impact:
   eliminated locally, but the source rationality/angle bridge to that model
   remains to be formalized.
 
-### 5. Composite `3alpha+2beta=pi` Completeness
+### 4. Composite `3alpha+2beta=pi` Completeness
 
 Needed statement:
 
@@ -202,7 +216,7 @@ Impact:
   `100..250` scan are all in that branch. This is still conditional on the full
   `3alpha+2beta=pi` source setup.
 
-### 6. Composite Non-Isosceles `gamma=2pi/3` Completeness
+### 5. Composite Non-Isosceles `gamma=2pi/3` Completeness
 
 Needed statement:
 
@@ -215,6 +229,10 @@ Current evidence:
 - `gamma_2pi3_nonisosceles_exact.py` encodes the exact arithmetic formulas.
 - `gamma_2pi3_nonisosceles_boundary.py` now applies the endpoint-pair
   boundary-star obstruction to all four encoded BLZ templates.
+- For `N=22`, the older BLZ square-class-only diagnostic still sees a
+  `(3,5,7)` witness in the `(alpha,2beta,2alpha+beta)` template with
+  coefficient `11/8`; this witness disappears only after applying the local
+  boundary-integrality product upgrade to `N=(b+2a)(a+b)m^2`.
 
 Impact:
 
@@ -252,29 +270,53 @@ The `--counts` diagnostic in `beeson_isosceles_alpha_plus_beta_filter.py`
 records the remaining side-count structure. Most of these survivors are rigid
 at the count level, but this is not yet an ordering or matching obstruction.
 
+## Beeson IV Base-Corner Audit
+
+The external Turturean prime-count draft uses a witness-level version of
+Beeson's Triangle Tiling IV Lemma 12 at base corners of a residual isosceles
+triangle. A direct check of the cached Triangle Tiling IV text gives the
+following status:
+
+- Lemma 12 itself is a local unsplit-vertex statement: after choosing a vertex
+  `B` with exactly one `beta` tile, Beeson draws `B` at the top only as a
+  coordinate convention and permits relabeling the two incident sides so that
+  the corner tile is Type I.
+- The proof explicitly says that the initial sweep argument in Direction `C`
+  does not use the opposite side `AC`; only the final contradictions depend on
+  the sweep hitting the two sides adjacent to `B`.
+- Lemma 13 reuses the Lemma 12 technique inside a subtriangle with a new
+  vertical and modified Type I/II definitions, which supports reapplication of
+  the method when the same local hypotheses are restored.
+
+This reduces the audit burden but does not eliminate it. To promote the draft's
+argument to a theorem-level replacement for the workspace prime obstruction,
+one must still verify the draft's setup lemmas: each base corner where the
+lemma is used must be unsplit, have the required `beta` corner tile, and satisfy
+the Type I side-label configuration and non-similar `gamma=2pi/3`,
+`alpha != beta` hypotheses. Those facts are not consequences of Lemma 12 alone.
+
 ## Next Best Work
 
-1. Reconstruct the exact Laczkovich/Beeson global reduction theorem in
-   `PROOF.md`, beyond the BLZ outer-triangle row map.
-2. Reconstruct the commensurable-angle table rows used in Beeson's `7` and `11`
-   proofs.
-3. Audit Turturean's April 2026 prime-count draft against the local prime
-   proof. The main point to verify is its witness-level use of Beeson IV Lemma
-   12 at the residual isosceles base corners. If accepted, use the draft to
-   replace the current source-reduction-dependent prime obstruction with a
-   cleaner theorem-level prime classification. This does not close the
-   composite classification gap.
-4. For a first theorem-level composite test case, target `N=22`. Among the
+1. Reconstruct the exact incommensurable Laczkovich/Beeson reduction theorem in
+   `PROOF.md`, beyond the BLZ outer-triangle row map. The commensurable branch
+   is now closed by Beeson's Table 3/Theorem 3.
+2. Continue auditing Turturean's April 2026 prime-count draft against the local
+   prime proof. The Beeson IV locality check is provisionally favorable; the
+   remaining task is to verify the draft's base-corner setup lemmas and width
+   contradiction. If accepted, use the draft to replace the current
+   source-reduction-dependent prime obstruction with a cleaner theorem-level
+   prime classification. This does not close the composite classification gap.
+3. For a first theorem-level composite test case, target `N=22`. Among the
    currently unresolved values below `100`, it has the cleanest local profile:
    no exact equilateral candidates, no isosceles or non-isosceles
    `gamma=2pi/3` candidates, and only four `3alpha+2beta=pi`
    isosceles-`alpha+beta` raw candidates, all rejected by Beeson's stronger
    Section 11.4 filter. This still needs the global reduction bridge before it
    can be promoted from "no encoded survivor" to a negative theorem.
-5. Formalize the source rationality theorem feeding the equilateral
+4. Formalize the source rationality theorem feeding the equilateral
    rational/integer normalization lemma.
-6. Build a corner-capped ordering/matching obstruction for the remaining
+5. Build a corner-capped ordering/matching obstruction for the remaining
    `3alpha+2beta` isosceles-`alpha+beta` survivors, using `N=48` as the
    positive regression case.
-7. Continue extending local boundary/integrality eliminations to larger
+6. Continue extending local boundary/integrality eliminations to larger
    composite survivors as they appear.

@@ -966,7 +966,7 @@ BLZ Problem #633 outer-triangle classes to the #634 case filters below.
 | case/template | current status | remaining gap |
 |---|---|---|
 | similar/reptile | classified by Snover-Waiveris-Williams | none for this subcase |
-| commensurable-angle source table | recorded as arithmetic forms `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | exact independent reconstruction of the full Laczkovich table is not in this workspace |
+| commensurable-angle source table | closed by Beeson's NoSevenTiling Table 3 and Theorem 3, with forms `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | none for this branch |
 | right-tile isosceles | recorded arithmetic restrictions | source dependence remains |
 | isosceles `gamma=2alpha` | squarefree obstruction recorded | complete composite formula not reconstructed |
 | isosceles `gamma=2pi/3` | ruled out in the rational nondegenerate case by boundary-transition lemma | audit interaction with every source-reduced equilateral/degenerate exception |
@@ -1031,6 +1031,14 @@ any of the four BLZ templates:
 22 = 3(a+2b)(a+b)m^2.
 ```
 
+This step uses the stronger boundary-integrality product forms, not just the
+older BLZ square-class necessary conditions. The diagnostic
+`blz_gamma_2pi3_nonisosceles_filter.py 22 --limit-side 5000` finds a
+square-class witness with tile `(3,5,7)` in the
+`(alpha,2beta,2alpha+beta)` template and coefficient `11/8`; it is eliminated
+only after upgrading that template to the product form
+`N=(b+2a)(a+b)m^2`.
+
 It remains only to check the `3alpha+2beta=pi` template. Beeson's five final
 necessary equations leave four raw rational roots for `N=22`, all in the
 isosceles-`alpha+beta` branch:
@@ -1069,7 +1077,10 @@ encoded cases is still under reconstruction.
   it parametrizes the isosceles survivor and applies a witness-level form of
   Beeson's Triangle Tiling IV suspicious-edge lemma plus a width bound. This
   draft is useful corroborating context for the prime subproblem, but it is not
-  a complete classification of all composite `n`.
+  a complete classification of all composite `n`. A first Beeson IV audit
+  supports local reuse of Lemma 12's sweep technique at a non-apex corner, but
+  the draft still needs its corner-unsplitting, Type I side-label, and width
+  contradiction checked before it can replace the current proof ledger.
 - Small non-prime values not covered by the positive families above are not
   classified here. The exact equilateral boundary-length scan gives a
   `2pi/3` candidate for `14` with tile `(7,8,13)` and outer side `28`, and the

@@ -253,6 +253,34 @@ right-tile isosceles counts are squares, even sums of squares, or `6m^2`, and
 the `gamma=2alpha` isosceles template has non-squarefree `N`, hence no prime
 `N`.
 
+### TriangleTiling4
+
+Beeson's Triangle Tiling IV supplies the local "suspicious edge" machinery used
+in several `gamma=2pi/3` reductions. Lemma 12 is stated for a vertex `B` at
+which exactly one tile occurs and that tile has angle `beta`; under the
+non-similarity and non-isosceles hypotheses it forces an actual tiling edge
+relation
+
+```text
+jb = ua + vc,        j > 0, u >= 0, v >= 0.
+```
+
+Two points matter for later reuse. First, the lemma is not an apex-only
+statement: `B` is the chosen unsplit vertex, and the proof draws it "north" only
+for description. Second, Beeson explicitly says the sweep argument in Direction
+`C` does not use the opposite side `AC`; the only boundary-specific endgame is
+where the lowest sweep line hits `W=C` or the reflected line hits `S=A`. Lemma
+13 then reuses the same technique inside a subtriangle with a new angle
+bisector, which is textual evidence that the method is local once the same
+hypotheses are restored.
+
+This does not by itself justify every later application at an arbitrary base
+corner. A base-corner reuse still needs separate proof that the corner is
+unsplit, that the unique corner tile has the required `beta` angle, that after
+possibly relabeling the incident sides the corner tile is Type I, and that the
+residual triangle satisfies the same non-similar, `alpha != beta`,
+`gamma=2pi/3` hypotheses. Those setup lemmas are external to Beeson IV.
+
 ### TriangleTiling3
 
 Beeson's "Triangle tiling: the case `3alpha+2beta=pi`" studies all five possible
@@ -347,9 +375,10 @@ quadratic residue modulo `19`, which it is not. For all primes `p == 7 (mod
 witness-level form of Beeson's Triangle Tiling IV suspicious-edge lemma plus a
 width bound in the isosceles triangle to force an internal segment longer than
 can fit. The critical interpretive point is that the draft applies Beeson's
-Lemma 12 at base corners of the residual isosceles triangle; this extension
-needs to be checked directly against Beeson IV before being imported as a local
-theorem.
+Lemma 12 technique at base corners of the residual isosceles triangle. The
+source audit above supports the locality of the sweep argument, but the draft
+still has to supply the corner setup hypotheses before the application can be
+imported as a theorem.
 
 Workspace status: this draft should be treated as an external, unrefereed
 prime-only solution until independently checked. It does not attempt the
