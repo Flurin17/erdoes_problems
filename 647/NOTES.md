@@ -263,6 +263,24 @@ remaining cofactor.
   tuples and no candidate passing `k <= 500`.
 - The complete branch search over `21*10^9 < N <= 31*10^9` found 1892 prime
   tuples and no candidate passing `k <= 500`.
+- The 41 residue classes modulo `46189` from Scott Hughes's comment were
+  independently reconstructed with `residue_classes 50`:
+
+```text
+0, 858, 1287, 1716, 2431, 2574, 4862, 5291, 6149, 8151,
+9009, 9867, 10582, 12155, 12584, 13013, 13442, 16302,
+17017, 17160, 18733, 19877, 20306, 20735, 21164, 24310,
+24453, 25168, 27170, 28028, 28457, 29315, 29601, 31603,
+32032, 32461, 35321, 36608, 37752, 38896, 44187
+```
+
+  The key refinement beyond the original `tau(gcd)` filter is: if the
+  forced divisor contribution `T` at shift `k` satisfies `2T > k+2`, then
+  there can be no prime factor outside the forced set. The number
+  `2520N-k` would have to be composed only of the forced primes, and if the
+  smallest positive representative in the residue class is already larger
+  than every such forced-smooth number with at most `k+2` divisors, the
+  class is impossible.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a

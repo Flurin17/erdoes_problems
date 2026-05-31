@@ -283,6 +283,18 @@ static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, ui
     return 0;
 }
 
+struct AffineForm {
+    u64 a;
+    int64_t b;
+};
+
+static u64 eval_affine_u64(const AffineForm& form, u64 x) {
+    if (form.b >= 0) {
+        return (u64)((u128)form.a * x + (u64)form.b);
+    }
+    return (u64)((u128)form.a * x - (u64)(-form.b));
+}
+
 struct Args {
     u64 start = 1;
     u64 count = 1000000;
@@ -300,6 +312,7 @@ struct Args {
     u64 variable_mod = 1;
     u64 variable_rem = 0;
     std::vector<u64> extra_prime_coeffs;
+    std::vector<AffineForm> extra_prime_forms;
 };
 
 static u64 parse_u64(const std::string& s) {
@@ -339,6 +352,21 @@ static Args parse_args(int argc, char** argv) {
                 if (!part.empty()) a.extra_prime_coeffs.push_back(parse_u64(part));
             }
         }
+        else if (key == "--extra-prime-forms") {
+            std::stringstream ss(need());
+            std::string part;
+            while (std::getline(ss, part, ',')) {
+                if (part.empty()) continue;
+                size_t colon = part.find(':');
+                if (colon == std::string::npos) {
+                    std::cerr << "extra prime forms must be A:B pairs\n";
+                    std::exit(2);
+                }
+                u64 aa = parse_u64(part.substr(0, colon));
+                int64_t bb = std::stoll(part.substr(colon + 1));
+                a.extra_prime_forms.push_back({aa, bb});
+            }
+        }
         else {
             std::cerr << "unknown arg " << key << "\n";
             std::exit(2);
@@ -351,6 +379,14 @@ static bool check_extra_prime_coeffs(u64 N, const std::vector<u64>& coeffs) {
     for (u64 c : coeffs) {
         if (N > (std::numeric_limits<u64>::max() - 1) / c) return false;
         if (!is_prime64(c * N - 1)) return false;
+    }
+    return true;
+}
+
+static bool check_extra_prime_forms(u64 X, const std::vector<AffineForm>& forms) {
+    for (const auto& form : forms) {
+        u64 value = eval_affine_u64(form, X);
+        if (!is_prime64(value)) return false;
     }
     return true;
 }
@@ -379,11 +415,6 @@ static bool branch_b_prime_tuple(u64 N, const std::vector<u64>& extra_coeffs) {
     if (!check_extra_prime_coeffs(N, extra_coeffs)) return false;
     return true;
 }
-
-struct AffineForm {
-    u64 a;
-    int64_t b;
-};
 
 struct RootInfo {
     int p;
@@ -436,6 +467,9 @@ int main(int argc, char** argv) {
     for (u64 c : common_coeffs) {
         common_forms.push_back({c * args.variable_mod, (int64_t)(c * args.variable_rem) - 1});
     }
+    for (const auto& form : args.extra_prime_forms) {
+        common_forms.push_back(form);
+    }
     std::vector<AffineForm> branch_a_forms;
     for (u64 c : branch_a_coeffs) {
         branch_a_forms.push_back({c * args.variable_mod, (int64_t)(c * args.variable_rem) - 1});
@@ -477,6 +511,7 @@ int main(int argc, char** argv) {
             u64 X = base + i;
             u64 N = args.variable_mod * X + args.variable_rem;
             if (args.require_mod != 1 && N % args.require_mod != args.require_rem) continue;
+            if (!check_extra_prime_forms(X, args.extra_prime_forms)) continue;
             int branch = 0;
             if ((N & 1) == 0 && alive_a[i] && branch_a_prime_tuple(N, args.extra_prime_coeffs)) branch = 1;
             if (!branch && (N & 1) == 1 && alive_common[i] && branch_b_prime_tuple(N, args.extra_prime_coeffs)) branch = 2;

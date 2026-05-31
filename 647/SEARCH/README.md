@@ -33,6 +33,7 @@ Known expected facts:
 
 - `record_sieve 1000` lists solutions
   `1 2 3 4 5 6 8 10 12 24`.
+- `residue_classes 50` returns 41 residue classes for `N mod 46189`.
 - `n=24` passes.
 - `604517614941240` fails at `k=14`.
 
@@ -56,6 +57,19 @@ branch-specific `105N-1` prime condition for Branch A.
 Remove `--no-full` when a `QUICK_PASS` appears; the program will then compute
 the exact divisor-count bound `B` and verify the full finite certificate
 range.
+
+The `--variable-mod` and `--variable-rem` options restrict the search to
+values
+
+```text
+N = variable_mod * X + variable_rem.
+```
+
+This is used with the 41-class reduction modulo `46189`. The
+`--extra-prime-forms` option accepts comma-separated `A:B` affine forms and
+requires each `A*X+B` to be prime. This supports exact split-residue filters
+such as `(504N-1)/5`, `(280N-1)/3`, `(280N-1)/9`, and `(252N-1)/5` when the
+chosen variable modulus makes the division integral for all `X`.
 
 ## Restrictive Subsearch
 
