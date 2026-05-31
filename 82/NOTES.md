@@ -2061,3 +2061,10 @@ source of growth beyond Ramsey.
   checks through eight classes of size at most `8`.  This is now the simplest
   fixed-source dyadic slot family to try to prove or refute beyond the
   multipartite model.
+- 2026-05-31: Proved the clean source-residue slot pattern in the capped
+  complete-multipartite regime.  If all class sizes are at most `2q` and
+  congruent modulo `q`, one part takes the common residue layer from every
+  class and has residue `a` or `a+q`; the leftover `q`-layers have residue
+  `0` or `q`.  Thus the slots `(0,a,q,a+q)` always work in the exact regime
+  tested by the bounded complete-multipartite audits.  The unrestricted
+  class-size and arbitrary-graph versions remain open.
