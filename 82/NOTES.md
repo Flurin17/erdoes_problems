@@ -1088,3 +1088,10 @@ source of growth beyond Ramsey.
   set of order at least `(q+s)/(s+1)`.  This helps only when the excess over
   `q` is small, so it does not by itself fix dyadic partition losses of order
   `q`.
+- 2026-05-31: Sharpened the quantitative dyadic conditional.  A full
+  sublinear power bound `b(q)<=q^alpha` is not necessary: if every dyadic lift
+  `q -> 2q` can be done with at most `q/(log_2 q)^C` parts for some `C>2`,
+  the largest-part iteration stops at depth `Theta(sqrt(log n))` and the last
+  loss still leaves a regular witness of order `(log n)^{C/2-o(1)}`, which is
+  `omega(log n)`.  This makes a near-linear but polylog-saving partition
+  theorem a viable target.

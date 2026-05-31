@@ -418,6 +418,67 @@ needed, and any `q^alpha`-part theorem with fixed `alpha<1` would already
 settle the problem.  A partition bound of order `q^C` with fixed `C>=1` does
 not give this conclusion by the same argument.
 
+## Conditional Proposition: A Polylogarithmic Saving From `q` Would Suffice
+
+For powers of two `q>=2`, suppose every `q`-modular induced subgraph can be
+partitioned into at most `b(q)` induced `2q`-modular subgraphs.  If there are
+constants `C>2` and `q_0` such that, for all powers of two `q>=q_0`,
+
+```text
+b(q) <= q / (log_2 q)^C,
+```
+
+then `F(n)/log n -> infinity`.
+
+Proof.  Start with the `2`-modular set of order at least `n/2` from Lemma 3.
+Write `q_i=2^i`, and at the `q_i -> q_{i+1}` step keep a largest part.
+Finitely many small moduli only change constants, so ignore them in the
+asymptotic estimates.  Stop at the first `t` for which the retained
+`q_t`-modular set has size `m_t<=q_t`; then it is regular by Lemma 2.
+
+For large `t`,
+
+```text
+prod_{i<t} b(q_i)
+  <= O(1) prod_{i<t} 2^i / i^C
+  = O(1) 2^{t(t-1)/2} / ((t-1)!)^C.
+```
+
+Since stopping gives
+
+```text
+n / prod_{i<t} b(q_i) <= O(2^t),
+```
+
+we have
+
+```text
+log_2 n <= t(t-1)/2 + O(t) - C log_2((t-1)!).
+```
+
+In particular `t >= (1-o(1)) sqrt(2 log_2 n)`.
+
+The previous retained set had `m_{t-1}>q_{t-1}`.  Therefore the last retained
+part satisfies
+
+```text
+m_t >= m_{t-1}/b(q_{t-1})
+    > q_{t-1} / (q_{t-1}/(t-1)^C)
+    = (t-1)^C,
+```
+
+again up to harmless constant losses from small moduli.  Hence
+
+```text
+m_t >= (log n)^{C/2-o(1)}.
+```
+
+Since `C>2`, this is `omega(log n)`.  QED.
+
+Thus the dyadic partition target need not reach `q^alpha` parts for a fixed
+`alpha<1`; even a sufficiently strong polylogarithmic saving over the naive
+`q`-part scale would settle the problem.
+
 ## Conditional Corollary: Constant Dyadic Partitions Give Polynomial Growth
 
 For powers of two `q>=2`, suppose every `q`-modular induced subgraph can be
