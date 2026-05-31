@@ -7225,6 +7225,20 @@ one must either prove that such interval barriers cannot be coded into an
 unbounded barrier met by every infinite deletion while maintaining coverage
 between stages, or build exactly such a staged construction.
 
+It is important that disjoint interval gadgets alone would not give a
+counterexample. If a staged construction protected only one finite set
+\[
+F_s
+\]
+inside each stage, an infinite deletion could choose one element from each
+\(F_s\) and avoid containing any whole protected set \(F_s\). Such a
+deletion would not be forced to miss the corresponding witnesses. Therefore
+the interval half-deletion family is only a local component for a negative
+construction. A genuine counterexample would still need an unbounded
+barrier on the protected tail, for example a Schreier-type family, with
+frozen witnesses for every barrier edge and with all cross-edge poisoning
+controlled.
+
 ## Warning 10.3c: Compactness and random deletion do not see additive structure
 
 The broad deletion theorem cannot be proved from finite-deletion robustness

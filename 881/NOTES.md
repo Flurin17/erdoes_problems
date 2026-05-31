@@ -164,6 +164,10 @@ with \(F\) the lower half of \(J\) have two-sum coverage through the
 terminal gap, an inclusion-minimal three-sum hole, and an actual terminal
 gap of length growing with \(M\). Thus the remaining problem is not local
 existence of such barriers but cross-stage coding into an unbounded barrier.
+Disjoint copies of the interval gadget are insufficient: an infinite
+deletion can take one protected point from each block and avoid containing
+any whole block-level \(F\). A negative construction would still need a
+Schreier-type or comparable unbounded barrier on the protected tail.
 
 Proposition 3.1f proves both finite-core stability and the desired infinite
 deletion under a tail-syndetic subset hypothesis. This blocks all
