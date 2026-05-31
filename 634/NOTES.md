@@ -254,6 +254,9 @@ Important distinction: "positive square class" and "smallest representative" are
    no-overhang fan gap or another obstruction; the active `100..250` gamma
    survivor values are `132`, `135`, `156`, `171`, `175`, `176`, `189`, `198`,
    `204`, `207`, `224`, `228`, and `240`.
+   A recurring subfamily has consecutive Lemma 11.14 parameters
+   `(k,m)=(t,t+1)`, sides `(t^2,2t+1,t(t+1))`, relation `a+c=t b`, and
+   boundary-survivor count `N=9(2t+1)`.
 
 ## Current Diophantine Status for `n=19`
 

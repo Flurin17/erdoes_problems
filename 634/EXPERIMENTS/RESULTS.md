@@ -879,6 +879,13 @@ The first open rows with no currently encoded survivor remain
 `102`, `105`, `110`, `111`, `114`, `115`, `118`, `119`, `120`, `123`, and
 `124`.
 
+One recurring gamma survivor family has consecutive Lemma 11.14 parameters
+`(k,m)=(t,t+1)`, hence sides `(t^2,2t+1,t(t+1))`, relation `a+c=t b`, and
+boundary count `N=9(2t+1)`. It accounts for the benchmark survivors `63` and
+`99` (`t=3,5`) and later active rows such as `135`, `171`, `189`, and `207`;
+some other values in the same formula are already positive by elementary
+families.
+
 ## Zhang Constructive Families
 
 Command:

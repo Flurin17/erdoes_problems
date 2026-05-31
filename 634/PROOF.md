@@ -1724,6 +1724,21 @@ section is closed. Therefore `N=63` and `N=99` remain open in this workspace,
 with exactly the displayed `gamma=2alpha` boundary patterns as the current
 benchmark survivors.
 
+Both rows are instances of a broader boundary-survivor family in the Lemma 11.14
+parameterization. If `k=t` and `m=t+1`, then
+
+```text
+(a,b,c) = (t^2, 2t+1, t(t+1)),      a+c = t b,
+N = 9(2t+1),                         X = 3t b,
+Y = 3(t+1)b = 3a+3b+3c.
+```
+
+For `t=3` and `t=5` this gives `N=63` and `N=99`; the same family also explains
+later `gamma=2alpha` survivor rows such as `135`, `171`, `189`, and `207`.
+Values such as `117`, `153`, and `225` from the same formula are already
+positive by elementary families, so this is a boundary-survivor family rather
+than an obstruction or construction by itself.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,
