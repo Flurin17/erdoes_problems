@@ -1921,3 +1921,10 @@ source of growth beyond Ramsey.
   compensating side can hide arbitrary internal variation.  Verified
   spread-`1` examples from this template reached regular orders
   `5,6,8,9,10` on `n=12,14,16,18,20`.
+- 2026-05-31: Added `compensated_spread.py` to generate the compensated-double
+  spread-one template.  The bipartite degree sums require the base graph to
+  have about quarter density: the epsilon count is
+  `sum_i(m-1-d_i)-sum_i d_i`.  Quick random checks produced verified
+  spread-one masks with max regular order `7` on `n=14` and `9` on `n=18`,
+  matching the qualitative obstruction but not improving the previous
+  extremal examples.

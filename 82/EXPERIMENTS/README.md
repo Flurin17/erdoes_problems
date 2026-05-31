@@ -20,6 +20,10 @@ Computational checks and generated data for Erdos Problem 82.
 - `degree_spread.py`: filters or samples graphs with bounded degree spread or
   few degree values to test additive near-regularity as a bridge; also verifies
   recorded graph masks with `--mask`.
+- `compensated_spread.py`: generates the compensated-double spread-one
+  template from Lemma 11B, putting a random base graph on one side, its
+  complement on the other, and a bipartite graph with complementary degree
+  prescriptions between them.
 - `defect_set.py`: checks the one-defect sufficient condition for the
   `(0,0,1,2)` first-lift slot target, where a residue-`2` part leaves a
   zero-residue complement.
