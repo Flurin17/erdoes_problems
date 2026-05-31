@@ -2840,6 +2840,30 @@ experiments in `EXPERIMENTS/stage_buffer_search.py` and
 short-chain artefacts unless this shifted-domination requirement is weakened
 to collective barriers.
 
+Here is a direct finite obstruction to the lemma's interval-placement
+claim when \(k=2\). Take
+\[
+S=\{2\}\cup [R,2R],\qquad c=2,
+\]
+and prescribe the interval
+\[
+J=[2R+1,4R+1].
+\]
+For every \(p\in J\), one has
+\[
+p-1\in[2R,4R]\subset 2(S\setminus\{2\}).
+\]
+Therefore
+\[
+p\in 1+2(S\setminus\{2\})
+\subset 3((S'\setminus\{2\})\cup\{1\})
+\]
+for every later enlargement \(S'\supset S\). No choice of fresh variables
+inside this interval can make \(p\) private after deleting \(2\). In the
+linked staged construction, the old coverage block already supplies exactly
+this kind of shifted two-sum coverage for the interval where the next
+\(p_s\) is prescribed.
+
 ## Dependency Graph
 
 * Theorem 1 is independent and resolves \(k=1\).

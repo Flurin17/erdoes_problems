@@ -62,6 +62,18 @@ the deleted element. Avoiding finitely many formal affine equations in a
 fresh box does not by itself establish this shifted domination once the old
 set covers a tail.
 
+A sharper \(k=2\) obstruction to that local lemma is:
+\[
+S=\{2\}\cup[R,2R],\qquad c=2,\qquad J=[2R+1,4R+1].
+\]
+For every \(p\in J\), the shifted value \(p-1\) belongs to
+\([2R,4R]\subset2(S\setminus\{2\})\). Hence
+\[
+p\in1+2(S\setminus\{2\}),
+\]
+so \(p\) cannot be private after deleting \(2\), regardless of which later
+fresh elements are added.
+
 ## Working literature facts to verify later
 
 These are standard-looking background items that should be verified from
