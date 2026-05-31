@@ -975,6 +975,45 @@ partition theorem, and a connected `polylog(q)`-part theorem gives the
 `q polylog(q)` coarse lift allowed above.  The disjoint-union obstructions to
 fixed slots do not attack this connected formulation.
 
+The connected formulation still cannot demand too few parts.  The first
+dyadic lift already has a connected example requiring four flexible parts.
+
+**Example: Connected First-Lift Graph Requiring Four Parts.**  Let `G` have
+vertices `0,...,12` and edge set
+
+```text
+(0,1) (0,3) (0,9) (0,10)
+(1,3) (1,4) (1,7) (1,8) (1,10)
+(2,3) (2,4) (2,6) (2,9)
+(3,4) (3,6) (3,7) (3,8) (3,9) (3,10) (3,12)
+(4,5) (4,7) (4,8) (4,11) (4,12)
+(5,7) (5,8) (5,11)
+(6,9) (6,11)
+(7,8) (7,9) (7,11) (7,12)
+(8,9) (8,10) (8,11)
+(9,10) (9,11)
+(10,12).
+```
+
+Its degrees are
+
+```text
+(4,6,4,10,8,4,4,8,8,8,6,6,4),
+```
+
+so `G` is connected and `2`-modular.  An exact subset enumeration finds only
+`258` nonempty vertex sets whose induced degrees are congruent modulo `4`,
+and no three pairwise disjoint such sets cover `V(G)`.  Thus `G` has no
+partition into at most three induced `4`-modular subgraphs.  It does have a
+four-part partition:
+
+```text
+{0,2,11,12},      {1,7,9,10},      {3,4,8},      {5,6},
+```
+
+with residues respectively `0,2,2,0` modulo `4`.  Hence a connected
+first-lift theorem, if true, must allow at least four parts.
+
 There is also a compactness-style universal-slot reformulation for fixed part
 count.  Fix a source residue `a mod q` and an integer `B`.  If every
 `q`-modular graph with source residue `a` has some `B`-part `2q`-modular

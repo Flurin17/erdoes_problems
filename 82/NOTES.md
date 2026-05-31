@@ -1626,3 +1626,11 @@ source of growth beyond Ramsey.
   `4`-modular partition using at most three parts.  Thus the known cactus
   obstructions to self-labelled/fixed-slot strategies do not immediately
   refute the connected flexible three-part conjecture.
+- 2026-05-31: Refuted the connected three-part first-lift conjecture.  A
+  connected even graph on `13` vertices with edge mask
+  `92042955548604715393797` has no partition into three induced
+  `4`-modular parts; exact enumeration finds `258` nonempty mod-`4` subsets
+  and no covering triple.  It has a four-part partition
+  `{0,2,11,12}`, `{1,7,9,10}`, `{3,4,8}`, `{5,6}` with residues
+  `0,2,2,0`.  Therefore the connected first-lift theorem, if true, needs at
+  least four parts; the broader connected `O(1)` target remains plausible.
