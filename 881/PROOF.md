@@ -1679,6 +1679,77 @@ finite deletion that is eventually repaired, or a genuinely collective
 finite deletion failure. In particular, the remaining \(k=2\) case cannot
 be settled by considering one-point deletions alone.
 
+## Lemma 8.4b: Minimal collective-hole normal form
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+order-2 threshold \(N_0\), and put \(m_0=\min A\). Let \(w\) be large
+enough that \(w\in3A\). Suppose \(F\subset A\) is finite and
+\[
+w\notin3(A\setminus F).
+\]
+Choose \(F'\subseteq F\) inclusion-minimal with
+\[
+w\notin3(A\setminus F').
+\]
+Then:
+
+1. for every \(f\in F'\),
+   \[
+   f\le w-2m_0;
+   \]
+2. for every \(f\in F'\), there are \(c_f,d_f\in A\setminus F'\) such that
+   \[
+   w=f+c_f+d_f;
+   \]
+3. for every retained element \(e\in A\setminus F'\) with
+   \(w-e\ge N_0\), the set \(F'\) meets every two-term representation of
+   \(w-e\) from \(A\).
+
+Moreover, if every singleton deletion \(A\setminus\{f\}\), \(f\in F'\), is
+an order-3 basis with some threshold below \(f\), then \(|F'|\ge2\).
+
+Proof. Minimality gives
+\[
+w\in3(A\setminus(F'\setminus\{f\}))
+\]
+for every \(f\in F'\). Since \(w\notin3(A\setminus F')\), every such
+representation must use \(f\). Thus
+\[
+w=f+c_f+d_f,\qquad c_f,d_f\in A\setminus F',
+\]
+which proves (2). Since \(c_f,d_f\ge m_0\), (1) follows.
+
+For (3), let \(e\in A\setminus F'\) and \(w-e\ge N_0\). If
+\[
+w-e=x+y,\qquad x,y\in A,
+\]
+with \(x,y\notin F'\), then \(w=e+x+y\in3(A\setminus F')\), a
+contradiction. Hence every such two-term representation meets \(F'\).
+
+Finally suppose \(F'=\{f\}\). By (1), \(w\ge f\). If
+\(A\setminus\{f\}\) has an order-3 threshold \(N_f<f\), then
+\(w\ge f>N_f\) implies
+\[
+w\in3(A\setminus\{f\}),
+\]
+contrary to the choice of \(F'\). Hence, under the stated singleton
+threshold hypothesis, the minimal hole is genuinely collective:
+\(|F'|\ge2\). \(\square\)
+
+This normal form is now the default form for the remaining \(k=2\) case:
+after Corollary 8.3b and after choosing witnesses above the fixed order-3
+threshold of \(A\), any late-bad finite set can be shrunk to an
+inclusion-minimal collective hole whose every deleted element is actually
+used in a repair after the other deleted elements are restored. The false
+shortcut is to expect such a set to contain a bad pair. For example, in the
+finite set
+\[
+A_0=\{1,2,3,4,5\},\qquad F=\{1,2,3\},\qquad w=9,
+\]
+one has \(9\notin3(A_0\setminus F)\), but restoring any one element of
+\(F\) repairs the hole. Thus an inclusion-minimal collective hole need not
+have any bad two-element subhole.
+
 ## Lemma 8.4a: Collective holes force a retained gap
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -2013,6 +2084,160 @@ and if \(w\) is at least a threshold \(N_x<x\) for \(A\setminus\{x\}\), then
 necessarily \(w\ge y\). Indeed, if \(w<y\), then every three-term
 representation of \(w\) from \(A\setminus\{x\}\) automatically avoids
 \(y\), contradicting the displayed hole.
+
+## Lemma 8.6c: Fractional recurrence gives large recurrent clusters
+
+Let \(A\subseteq\mathbb N\), and suppose there is \(q\ge1\) such that for
+every finite \(T\subset A\) and every \(L\), there are \(m>L\) and
+\(U\subset T\) satisfying
+\[
+|U|\ge |T|/q,\qquad m-U\subset A. \tag{1}
+\]
+Then for every \(M\) there is a set
+\[
+S\subset A,\qquad |S|=M,
+\]
+such that for every \(L\) there is \(m>L\) with
+\[
+m-S\subset A. \tag{2}
+\]
+
+Proof. Choose a finite \(T\subset A\) with \(|T|\ge qM\). For each integer
+\(L=1,2,\ldots\), apply (1) and choose an \(M\)-element subset
+\[
+S_L\subset U_L.
+\]
+There are only finitely many \(M\)-element subsets of \(T\), so some
+\(S\) occurs as \(S_L\) for infinitely many, hence unbounded, values of
+\(L\). For any prescribed \(L_0\), choose such an occurrence with
+\(L>L_0\). Its reflecting center gives \(m>L_0\) and \(m-S\subset A\).
+\(\square\)
+
+Applied to Lemma 8.6, bounded-width large-excess barriers force
+arbitrarily large finite sets that are fully reflection-recurrent. This is
+stronger than the stated one-shot partial recurrence, but it still does not
+close the \(k=2\) problem.
+
+First, Lemma 8.6c cannot be diagonalized to an infinite set \(P\subset A\)
+whose every finite subset is reflection-recurrent. The obstruction is
+already combinatorial. Let the "good" finite subsets of \(\mathbb N\) be
+\[
+\mathcal G=\{S:\ S\text{ finite and } |S|\le \min S\}.
+\]
+This hereditary family has a \(1/2\)-fractional property: if
+\[
+T=\{t_1<\cdots<t_n\},
+\]
+then the upper half of \(T\) has size at least \(n/2\) and minimum at least
+its size, so it lies in \(\mathcal G\). But no infinite \(P\subset\mathbb N\)
+has all finite subsets in \(\mathcal G\): if \(p=\min P\), then any
+\((p+1)\)-element subset of \(P\) containing \(p\) has size larger than its
+minimum.
+
+Second, even an infinite \(P\) whose finite subsets reflect into \(A\) would
+not by itself run the protected-reservoir construction. Theorem 2.3 needs a
+recurrent finite set carrying the initial repair certificates: for \(k=2\),
+one needs recurrent entries \(e,y_1,y_2\) with
+\[
+y_1+y_2=e+x,\qquad x\in A,
+\]
+and with \(y_1,y_2\ne e\). After a deletion \(b=m-e\) is chosen, the
+construction also creates new mirrors and then needs recurrence for finite
+sets containing those generated elements. A fixed recurrent cluster does
+not guarantee that these adaptive mirrors remain recurrent. This is the
+current precise obstruction to turning fractional recurrence into a full
+positive proof.
+
+## Example 8.6d: Unbounded second-excess is locally compatible
+
+The bounded second-excess hypothesis in Lemma 8.6a is a genuine extra
+assumption; it is not forced by strong order-2 minimality, singleton
+order-3 stability, inclusion-minimality, or reflected-cover domination.
+
+Let
+\[
+A=\{1\}\cup2\mathbb N.
+\]
+This is an order-2 basis and is strongly minimal under infinite deletion at
+order \(2\): if \(1\) is deleted then no odd integer is represented, while
+if \(1\) is retained and infinitely many evens \(2d\) are deleted, then
+each corresponding odd integer
+\[
+2d+1
+\]
+has the unique order-2 representation \(1+2d\).
+
+All sufficiently large singleton even deletions are order-3-good with a
+threshold below the deleted element. If \(d\ge5\), then
+\[
+A\setminus\{2d\}
+\]
+represents every \(n\ge9\) as a sum of three elements: even \(n\) has
+\[
+n=1+1+(n-2),
+\]
+unless \(n-2=2d\), in which case
+\[
+n=2+2+(2d-2).
+\]
+For \(d\ge5\), all summands in these even representations are retained.
+Odd \(n\) has a representation
+\[
+n=1+2a+2b
+\]
+with \(a,b\ge1\) chosen so that neither even summand is \(2d\). For
+\(n\ge9\) this can always be done by moving one unit between \(a\) and
+\(b\) if necessary. Hence a threshold \(9<2d\) works for large \(d\).
+
+Now fix \(M\ge2\), put
+\[
+w_M=4M+3,
+\qquad
+F_M=\{2M+2,2M+4,\ldots,4M\}.
+\]
+Then
+\[
+w_M\notin3(A\setminus F_M).
+\]
+Indeed, \(w_M\) is odd, so any three-term representation from \(A\) uses
+one copy of \(1\) and two even summands whose sum is \(4M+2\). After
+removing \(F_M\), the retained evens below \(4M+2\) are at most \(2M\), so
+their pairwise sums are at most \(4M\), while any retained even above the
+gap is already too large.
+
+The hole is inclusion-minimal. If
+\[
+f=2M+2j\in F_M,\qquad 1\le j\le M,
+\]
+then
+\[
+w_M=1+f+(4M+2-f),
+\]
+and
+\[
+4M+2-f=2(M+1-j)
+\]
+is a retained even. Restoring any one deleted element therefore repairs the
+hole.
+
+The reflected-cover domination also holds. For retained \(e\) with
+\(w_M-e\ge2\), every two-term representation of \(w_M-e\) uses an element
+of \(F_M\). If \(e=1\), this says that every representation of
+\(4M+2\) as a sum of two evens uses an even in the removed interval. If
+\(e=2r\le2M\), then
+\[
+w_M-e=1+(4M+2-2r),
+\]
+and the even summand lies in \(F_M\). There are no other retained
+positive \(e\) with \(w_M-e\ge2\).
+
+However, writing \(F_M=\{f_1<\cdots<f_M\}\), the second-excess is
+\[
+w_M-f_2=(4M+3)-(2M+4)=2M-1\to\infty.
+\]
+Thus any proof that forces bounded second-excess subbarriers must use the
+global barrier hypothesis over every infinite \(X\), not only the local
+arithmetic of a single minimal collective hole.
 
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
@@ -3313,6 +3538,10 @@ domination for many old elements.
 * Lemma 8.4a strengthens the domination picture: any finite order-3 hole
   after deleting \(F\) creates a retained gap below the witness, from
   \(w-\min F-\min A\) up to \(w-N_0\).
+* Lemma 8.4b puts collective holes in inclusion-minimal normal form: every
+  surviving deleted element is used in a three-term repair after the other
+  deleted elements are restored. The finite example following it shows that
+  such a minimal collective hole need not contain a bad pair subhole.
 * Warning 8.5 records that bounded-width barriers do not automatically
   reduce to one fixed uniformity, and that abstract barriers need not have
   bounded width on any infinite tail.
@@ -3326,6 +3555,14 @@ domination for many old elements.
   reflection-recurrence and hence a good deletion.
 * Corollary 8.6b gives the pair-barrier consequence: bounded top-excess
   pair barriers cannot persist in a counterexample.
+* Lemma 8.6c sharpens partial recurrence to arbitrarily large finite
+  recurrent clusters, but also records two obstructions: fractional
+  recurrence does not compact to an infinite recurrent core, and fixed
+  recurrent clusters do not support the adaptive mirrors in Theorem 2.3.
+* Example 8.6d shows that unbounded second-excess minimal collective holes
+  are locally compatible with strong order-2 minimality and singleton
+  order-3 stability; any bounded-second-excess reduction must use the
+  global barrier hypothesis over every infinite deletion.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.

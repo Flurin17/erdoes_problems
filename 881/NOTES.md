@@ -680,6 +680,27 @@ the remaining elements must contain a late-bad finite subset of size at
 least two. The remaining obstruction is genuinely collective from its first
 possible finite prefix.
 
+Lemma 8.4b records the useful normal form for this collective case. Given
+a witness \(w\) and a finite deletion \(F\), shrink \(F\) inclusion-minimally
+while preserving \(w\notin3(A\setminus F)\). For every surviving
+\(f\in F\), one then has
+\[
+w=f+c_f+d_f,\qquad c_f,d_f\in A\setminus F,
+\]
+so every deleted element is genuinely used when the other deleted elements
+are restored. Also \(f\le w-2\min A\), and the reflected-cover domination
+from Lemma 8.4 still holds. After Corollary 8.3b this minimal hole has size
+at least two, once witnesses are chosen above the fixed low threshold.
+
+This normal form does not reduce the problem to pair barriers. The finite
+toy model
+\[
+A_0=\{1,2,3,4,5\},\quad F=\{1,2,3\},\quad w=9
+\]
+has \(9\notin3(A_0\setminus F)\), but restoring any single element of
+\(F\) repairs the hole. Thus a genuinely collective minimal hole may have
+no bad pair subhole.
+
 Lemma 8.4a strengthens the obstruction produced by a finite hole. If
 \(w\notin3(A\setminus F)\), \(f_0=\min F\), and \(m_0=\min A\), then
 \[
@@ -739,6 +760,31 @@ least a \(1/q\) fraction. For \(q=1\), this is full reflection-recurrence
 and Theorem 8.2 resolves the case. Therefore a remaining counterexample
 must either use barriers of growing size, or keep bounded-width witness
 excesses under control in a delayed-threshold fashion.
+
+Lemma 8.6c sharpens the large-excess conclusion: a uniform \(1/q\)
+fractional recurrence property implies that for every \(M\) there is an
+\(M\)-element set \(S\subset A\) with arbitrarily large centers
+\(m-S\subset A\). This cannot be compacted into an infinite fully recurrent
+core from combinatorics alone: the hereditary family
+\(\{S:|S|\le\min S\}\) has the same \(1/2\)-fractional property, but no
+infinite set all of whose finite subsets belong to it. The remaining gap is
+not just recurrence density but certificate compatibility. The deletion
+construction needs recurrent entries that also satisfy the finite affine
+repair identities, e.g. for \(k=2\), recurrent \(e,y_1,y_2\) with
+\(y_1+y_2=e+x\in e+A\), and it later needs recurrence for mirrors generated
+during the construction.
+
+Example 8.6d shows that the bounded second-excess hypothesis in Lemma 8.6a
+is not a local consequence of the other known constraints. In the benign
+strongly minimal basis \(A=\{1\}\cup2\mathbb N\), the sets
+\[
+F_M=\{2M+2,2M+4,\ldots,4M\}
+\]
+are inclusion-minimal order-3 holes for \(w_M=4M+3\), every deleted element
+is essential after the others are restored, and reflected-cover domination
+holds. But \(w_M-f_2=2M-1\to\infty\). Therefore the proof must use the
+global barrier requirement over every infinite \(X\), not just the local
+minimal-hole normal form.
 
 Lemma 8.6a closes a broader delayed-barrier branch. If every infinite tail
 contains finite barriers \(F=\{f_1<\cdots<f_r\}\) whose witness lies within
