@@ -3745,6 +3745,27 @@ explain why the residue-`1` corrections can always be chosen as an induced
 matching while the remaining residue errors are absorbed by the residue-`2`
 set and the residual mod-`4` cut equation.
 
+This matching-slot strengthening should not be expected to iterate literally.
+At the next dyadic step `4 -> 8`, source-residue tests show that forcing an
+exact `1`-regular residue-`1` slot fails in source residue `1 mod 4` on small
+random and multipartite examples.  Thus even if the first-lift matching
+candidate is true, the higher-dyadic route needs ordinary source-residue
+slots, a more flexible regular alternative, or a different witness-or-regular
+dichotomy.
+
+The current computational `4 -> 8` ordinary-slot candidates include the
+source-residue family
+
+```text
+R_0=(0,1,2,4),   R_1=(0,0,2,2),
+R_2=(0,0,1,2),   R_3=(0,0,1,3),
+```
+
+where `R_a` is meant for graphs whose total degree residue is `a mod 4`.
+This is only finite evidence for a source-residue four-part lift, not a
+proof.  It also illustrates why higher dyadic slots must depend on the source
+residue and cannot simply reuse `(0,0,1,2)`.
+
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
 

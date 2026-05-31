@@ -1886,3 +1886,15 @@ source of growth beyond Ramsey.
   classes of size at most `8`, again with no counterexample.  This upgrades
   the computational confidence in the matching-slot lemma, but it remains a
   first-lift statement only.
+- 2026-05-31: A second subagent audit tested whether the matching-slot idea
+  has a clean `4 -> 8` source-residue analogue.  The literal analogue is
+  implausible: source residue `1 mod 4` has no surviving four-slot family when
+  a residue-`1 mod 8` part is forced to be exactly `1`-regular; the small
+  multipartite survivors `(0,0,1,4)`, `(0,1,4,6)`, and `(0,1,5,6)` were all
+  killed by random source-`1` samples on `n=10`.  Requiring exact
+  `2`-regularity in residue-`2` slots also fails, with complete multipartite
+  sizes `(3,7,7,7)` killing `(0,0,2,2)`.  Ordinary source-residue slot lifts
+  remain plausible: a compact candidate family surviving the audit is
+  `R_0=(0,1,2,4)`, `R_1=(0,0,2,2)`, `R_2=(0,0,1,2)`,
+  `R_3=(0,0,1,3)`.  This supports the dyadic witness side but not a direct
+  higher-modulus regular-slot escape.
