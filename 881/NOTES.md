@@ -78,6 +78,18 @@ criterion above is a practical way to force such a uniform threshold by
 making the next deleted element outrun the threshold of the current finite
 prefix.
 
+The late finite-deletion reservoir criterion in `PROOF.md` is exact. A good
+infinite deletion with threshold \(T\) yields a reservoir
+\[
+R=B\cap(T,\infty)
+\]
+such that every finite \(F\subset R\) has arbitrarily late successors
+\(b\) for which \(A\setminus(F\cup\{b\})\) is a basis of the desired order
+with threshold \(<b\). Conversely, such a reservoir gives a good infinite
+deletion by the prefix interval argument. Therefore the remaining positive
+problem can be phrased as ruling out barriers of late-bad successors in
+every infinite tail.
+
 So a counterexample to the equivalent broader theorem must make finite
 late-bad sets unavoidable in every infinite subset of \(A\). By the
 terminal-gap lemmas below, genuine late-bad holes must delete all retained

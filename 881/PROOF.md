@@ -584,6 +584,41 @@ Thus \(A\setminus B\) is an order-\(h\) asymptotic basis. \(\square\)
 This lemma reduces a positive proof to finding infinitely many late
 finite-deletable elements at order \(k+1\). That has not yet been proved.
 
+In fact this criterion is exact, not merely sufficient. Let \(h\ge1\). For
+an arbitrary \(A\subseteq\mathbb N\), the following are equivalent:
+
+1. there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+   order-\(h\) asymptotic basis;
+2. there is an infinite \(R\subset A\) such that for every finite
+   \(F\subset R\) and every \(L\), some
+   \[
+   b\in R\setminus F,\qquad b>L,
+   \]
+   makes \(A\setminus(F\cup\{b\})\) an order-\(h\) basis with threshold
+   \(<b\).
+
+The implication (2) \(\Rightarrow\) (1) is Lemma 3. Conversely, if
+\(A\setminus B\) is an order-\(h\) basis with threshold \(T\), take
+\[
+R=B\cap(T,\infty).
+\]
+For finite \(F\subset R\), choose
+\[
+b\in R\setminus F,\qquad b>\max\{L,T\}.
+\]
+Since
+\[
+A\setminus(F\cup\{b\})\supseteq A\setminus B,
+\]
+the same threshold \(T<b\) works. Thus any positive proof must, in one form
+or another, rule out barriers of late-bad successors. Failure of the
+criterion is exactly the statement that every infinite \(X\subset A\)
+contains a finite \(F\subset X\) and a bound \(L\) such that no
+\[
+b\in X\setminus F,\qquad b>L,
+\]
+is late-good over \(F\).
+
 ## Warning 3.0: Finite-deletion independence is not enough by itself
 
 It is tempting to argue as follows: if there is an infinite \(B_0\subset A\)
@@ -608,6 +643,45 @@ This points to a delayed-gap counterexample pattern: finite deletions are
 eventually repaired, but only after thresholds beyond the deleted elements;
 infinitely many such delayed repairs could leave unbounded gaps. No rigorous
 construction of this type is currently known in this workspace.
+
+The benign basis
+\[
+A=\{1\}\cup2\mathbb N
+\]
+shows why arbitrary prefix thresholds are the wrong diagnostic. Prefixes
+\[
+F_M=\{2,4,\ldots,2M\}
+\]
+force the least order-3 threshold of \(A\setminus F_M\) to grow past
+\(\max F_M\), as in Example 3.0a below. Nevertheless a sparse reservoir has
+uniform thresholds. For instance, let
+\[
+R=10\mathbb N.
+\]
+If \(F\subset R\) is finite and \(C=A\setminus F\), then
+\[
+[13,\infty)\subseteq3C.
+\]
+For even \(n\ge14\), use
+\[
+n=1+1+(n-2)
+\]
+unless \(n-2\in F\); in that case \(n-8\notin F\), because \(F\subset
+10\mathbb N\), and
+\[
+n=4+4+(n-8).
+\]
+For odd \(n\ge13\), use
+\[
+n=1+2+(n-3)
+\]
+unless \(n-3\in F\); in that case \(n-5\notin F\), and
+\[
+n=1+4+(n-5).
+\]
+Thus every sufficiently large \(b\in R\) is late-good over every finite
+previous deletion. The delayed-threshold obstruction, if real, must defeat
+all such sparse reservoirs, not just consecutive prefixes.
 
 For \(k=2\), the delayed-gap pattern would still need a strong translate
 immunity condition. If an infinite deletion is \(D\) and a proposed gap is
@@ -5184,6 +5258,46 @@ second moves, but the tested branches still have no third extension. This
 keeps the robust-booster pair route open only as a genuinely large-block or
 new-design problem, not as a small non-greedy search miss.
 
+## Attempt 17: Finite accelerators are not a shortcut
+
+One tempting higher-order negative route is to begin with a strongly
+minimal order-\((k+1)\) basis \(M\), add a finite accelerator \(F\), and
+hope that
+\[
+A=M\cup F
+\]
+is an order-\(k\) basis while every infinite deletion from \(M\) still
+destroys order \(k+1\). This does not follow from minimality of \(M\).
+
+If \(B\subset M\), then
+\[
+(k+1)((M\setminus B)\cup F)
+=\bigcup_{r=0}^{k+1}\bigl(rF+(k+1-r)(M\setminus B)\bigr). \tag{1}
+\]
+Thus a witness \(w\notin(k+1)(M\setminus B)\) supplied by the minimality of
+\(M\) survives in \(A\setminus B\) only if, for every \(r\)-term accelerator
+sum \(\sigma\in rF\),
+\[
+w-\sigma\notin(k+1-r)(M\setminus B). \tag{2}
+\]
+Condition (2) is much stronger than ordinary infinite-deletion minimality
+of \(M\); it is the same shifted-hole requirement that appears in Lemma
+10.1 and in the staged barrier criteria.
+
+Example 7.2 shows that finite accelerators can lower the apparent order by
+an arbitrarily large amount, but that example is eventually periodic and is
+covered by Proposition 7.1. Lemmas 6 and 6.1 explain why a purely residue
+version of this shortcut also fails: residue accelerators create
+\((k+1)\)-term repairs involving the accelerator, while thick integer lifts
+replace a deleted representative by another representative except near
+block endpoints.
+
+Therefore a finite-accelerator counterexample would need an
+\(F\)-robust minimal basis \(M\): every infinite deletion would have to
+produce unbounded witnesses surviving all shifted repairs (2). That is not
+a separate shortcut; it is another form of the unresolved collective
+finite-barrier construction in Propositions 13.1b-general and 13.1e.
+
 ## Dependency Graph
 
 * Reduction 0 shows that the stated infinite-deletion minimality hypothesis
@@ -5223,6 +5337,9 @@ new-design problem, not as a small non-greedy search miss.
   Lemma 3.1d-style common threshold control.
 * Lemma 3 would imply the desired conclusion if an infinite late-deletable
   reservoir exists.
+* The paragraph after Lemma 3 records that this reservoir criterion is
+  equivalent to the existence of a good infinite deletion; failure is exactly
+  a barrier of late-bad successors.
 * Corollary 3.1 says any counterexample must eventually block all large
   late-deletable one-point removals at order \(k+1\).
 * Corollary 3.1b reformulates the threshold obstruction as late-bad finite
@@ -5421,4 +5538,9 @@ new-design problem, not as a small non-greedy search miss.
   finite barriers as the only viable negative mechanism.
 * Attempt 16 gives a robust cyclic booster pattern for \(k=3\), while
   isolating the remaining lift problem: private residue holes must be made
-  private for individual integers without losing three-term coverage.
+  private for individual integers without losing three-term coverage, and
+  robust against all shifted finite-accelerator repairs.
+* Attempt 17 records that adding a finite accelerator to a minimal
+  order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
+  must survive every accelerator shift, which is again the collective
+  barrier problem.
