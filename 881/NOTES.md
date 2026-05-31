@@ -828,6 +828,14 @@ hole for \(\{0,1\}\) is covered by the two reflected centers \(0\) and
 \(4\), neither of which covers all of \(S\). Thus even a complete finite
 pair-barrier graph can remain genuinely two-centered.
 
+Warning 8.7c gives a coherent infinite cover-level obstruction. In a model
+inside \(\mathbb Z\times\mathbb Z/8\mathbb Z\), every pair from an infinite
+tail supplies arbitrarily far two-center reflected covers of every finite
+test set, but a fixed four-point test set is never reflected by one center.
+So Ramsey coherence of the covers from Lemma 10.1 is still insufficient;
+the proof must exploit actual two-sum representation hypergraphs or genuine
+holes, not just set-cover data.
+
 Example 8.8 gives a second finite warning: even if every deleted singleton
 or pair pattern is repairable by one of finitely many retained centers, the
 repairs may be incoherent. Lemma 8.2a needs one fixed center compatible with

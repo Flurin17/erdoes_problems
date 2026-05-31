@@ -2371,6 +2371,96 @@ two-centered. As before, this is not an integer construction. It only shows
 that the infinite pair-barrier case needs an arithmetic coherence argument,
 not just Ramsey thinning to a tail where all pairs are bad.
 
+## Warning 8.7c: Coherent pair covers need not collapse to one center
+
+Even coherent infinite families of two-center reflected covers do not, at
+the cover level, force full reflection-recurrence. This warning isolates the
+extra input needed in the pair-barrier case: one must use the fact that the
+covers come from actual two-sum representation graphs and genuine
+three-fold holes, not just their set-cover shadow.
+
+Work in the ordered abelian group
+\[
+G=\mathbb Z\times\mathbb Z/8\mathbb Z
+\]
+and order elements by the first coordinate. Let
+\[
+H=\{0,1,3\}\subset\mathbb Z/8\mathbb Z,
+\qquad
+T_*=\{(0,2),(0,4),(0,5),(0,6)\}.
+\]
+The two residue facts are
+\[
+H+\{2,4,5,6\}=\mathbb Z/8\mathbb Z, \tag{1}
+\]
+and
+\[
+H\cap(H+4)=\varnothing. \tag{2}
+\]
+
+Choose a sparse infinite set \(P_0=\{p_1<p_2<\cdots\}\subset\mathbb Z\).
+Define a phase function
+\[
+\theta:\mathbb Z\to\mathbb Z/8\mathbb Z
+\]
+with \(\theta(0)=\theta(p_i)=0\), and with the following property: for
+every difference \(D=p_j-p_i\), \(i<j\), and every length \(R\), there are
+arbitrarily far intervals \(I\subset\mathbb Z\) of length \(R\) such that
+\[
+\theta(n+D)=\theta(n)+4\pmod 8\qquad(n\in I). \tag{3}
+\]
+This is obtained by assigning disjoint far intervals to the countably many
+requirements \((D,R)\), taking \(P_0\) sparse enough to avoid conflicts, and
+defining \(\theta\) arbitrarily elsewhere.
+
+Let the "holes" be
+\[
+C=\{(n,\theta(n)+h):h\in H\},
+\]
+and put
+\[
+A=G\setminus C,\qquad
+P=\{(p_i,2):i\ge1\}\subset A.
+\]
+The inclusion \(P\subset A\) follows from \(\theta(p_i)=0\) and
+\(2\notin H\); likewise \(T_*\subset A\).
+
+Take \(x=(p_i,2)<y=(p_j,2)\) in \(P\), and write
+\[
+\delta=y-x=(p_j-p_i,0).
+\]
+Given any finite \(T\subset A\), choose an interval \(I\) satisfying (3)
+for \(D=p_j-p_i\), long enough and far enough that the first coordinates of
+\(m-t\), \(t\in T\), all lie in \(I\). Then for every \(t\in T\), the two
+candidates
+\[
+m-t,\qquad m+\delta-t
+\]
+have hole fibers whose phase differs by \(4\). By (2), they cannot both be
+holes, so at least one lies in \(A\). Equivalently,
+\[
+T\subset(m-A)\cup(m+\delta-A). \tag{4}
+\]
+This is exactly the two-center reflected-cover pattern supplied by Lemma
+10.1 for a pair \(\{x,y\}\), with centers \(w-y=m\) and \(w-x=m+\delta\).
+
+However no single center reflects \(T_*\) into \(A\). For any
+\[
+c=(n,r)\in G,
+\]
+identity (1) gives some \(t\in T_*\) such that \(c-t\in C\). Hence
+\[
+c-T_*\nsubseteq A.
+\]
+Thus every cover in (4) is genuinely two-centered on the fixed test set
+\(T_*\), and this remains true coherently for all pairs in the infinite
+tail \(P\).
+
+This model is not an integer additive counterexample, and it does not
+construct the corresponding witnesses \(w\notin3(A\setminus\{x,y\})\). It
+does show that the missing positive step cannot be a Ramsey or coherence
+argument applied only to the reflected-cover inclusions from Lemma 10.1.
+
 ## Example 8.8: Finite-center repairs need coherence
 
 A naive finite-center replacement for Lemma 8.2a is false. It is not enough
