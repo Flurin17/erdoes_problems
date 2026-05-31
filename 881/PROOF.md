@@ -2515,6 +2515,29 @@ If every large reflected packet outside some finite core forced
 superlinear internal solutions of this equation for every fresh \(d\), then
 Corollary 3.4r would contradict the counterexample normal form.
 
+The moving-anchor bridge criterion in Lemma 8.2a' explains the relevance of
+this translated Schur equation. If one tries to delete
+\[
+b_j=t_j-d
+\]
+using a moving anchor \(e_j=s\in S\), then the bridge row
+\[
+t+b_j=e_j+q_j
+\]
+and the old-anchor rows
+\[
+e_j+b_i\in2C
+\]
+ask for two-sum representations of translated values of the form
+\[
+s+d
+\]
+or nearby old translates. Corollary 3.4r says that a counterexample can
+force these translated rows to have bounded full representation count on a
+large reflected packet. Thus the bridge route will need either many
+independent reflected packets, or a way to choose anchors that avoid the
+bounded-count translated-Schur bottleneck.
+
 ## Corollary 3.4s: Star rows are unique or create shifted overlaps
 
 Keep the hypotheses and notation of Corollary 3.4i. Thus
