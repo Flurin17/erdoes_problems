@@ -116,6 +116,10 @@ Computational checks and generated data for Erdos Problem 82.
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus
   residual-cut argument.  `--sample-even` profiles random even graphs.
+- `clean_slot_split.py`: tests fixed choices of the first split in the
+  two-cut formulation of the clean `(0,0,2,2)` slots.  The `--degree-rule`
+  mode puts a vertex in the residue-`2` side according to the high bit of its
+  total degree after subtracting the common source parity.
 - `universal_slots.py`: tests whether a fixed residue-slot multiset works for
   every even graph at the first lift, either exhaustively for small `n` or by
   random even-graph sampling at larger `n`.  Its exact-cover recursion indexes

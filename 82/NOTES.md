@@ -2117,3 +2117,13 @@ source of growth beyond Ramsey.
   a `(0,0,2,2)` partition, but a specified triangle vertex cannot be forced
   into a zero-residue part.  Thus cut-vertex induction for this clean slot
   target needs a richer boundary signature.
+- 2026-05-31: Added `clean_slot_split.py` to test fixed first-split rules in
+  the two-cut form.  The local degree-high-bit rule fails immediately.  For
+  odd source parity, `K_{1,7}` (mask `220336192`) puts only the center in the
+  residue-`2` side, impossible for a singleton, although the graph has a
+  two-zero-slot certificate.  For even source parity, the graph
+  `01,02,03,06,16,26,36` (mask `148519`) has degree sequence
+  `4,2,2,2,0,0,4`; the degree rule chooses the independent set `{1,2,3}` as
+  the residue-`2` side, but a valid certificate instead uses the triangle
+  `{0,3,6}`.  Therefore the first split cannot be a pointwise function of
+  degree modulo `4`.

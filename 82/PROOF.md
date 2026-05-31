@@ -3630,6 +3630,33 @@ with even same-side degree in any fixed `X` or `Y`.  The hard step is choosing
 `X` so that the upper bit can be made `0` on `X` and `1` on `Y` by the two
 sign equations.
 
+A purely local choice of this first split does not work.  Suppose all degrees
+of `G` are congruent to `p mod 2`.  One might try to put a vertex `v` into
+the residue-`2` side exactly when
+
+```text
+(deg_G(v)-p)/2 congruent 1 mod 2.
+```
+
+This degree-high-bit rule is false already for the odd star `K_{1,7}`.  Here
+`p=1`; the seven leaves have high bit `0`, while the center has high bit `1`.
+The center alone cannot be split into residue-`2` parts, since a singleton has
+internal degree `0`.  Nevertheless `K_{1,7}` has a `(0,0,2,2)` certificate:
+put the center in one zero slot and all leaves in the other zero slot.
+
+The same failure occurs in the even source class.  The graph with edge set
+
+```text
+01, 02, 03, 06, 16, 26, 36
+```
+
+has degree sequence `4,2,2,2,0,0,4`; the degree-high-bit rule chooses
+`Y={1,2,3}`, which is independent and hence cannot be split into
+residue-`2` parts.  But the graph has a `(0,0,2,2)` certificate by taking the
+triangle `{0,3,6}` as a residue-`2` part and putting
+`{1,2,4,5}` into a zero part.  Thus the first split in Lemma 4I.5B must be
+chosen using global structure, not just the total degree residues.
+
 A natural attempt to deduce the odd-degree source case from the even case by
 complementation is too strong.  If `G` is odd-degree on an even number of
 vertices, then `bar G` is even-degree.  A `(0,0,2,2)` partition of `bar G`
