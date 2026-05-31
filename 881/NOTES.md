@@ -470,6 +470,14 @@ For \(k=2\), the large spikes are large reflected clusters
 \[
 A\cap(n-x-A).
 \]
+Lemma 3.4f records the only direct recurrence consequence currently
+available from such spikes: if the reflected clusters \(U_n=A\cap(n-A)\)
+hit one finite certificate-dense test set \(T_0\) in more than
+\(\alpha_A(T_0)\) points for arbitrarily many \(n\), then one certificate
+triple in \(T_0\) recurs and Corollary 2.3c gives a good deletion. Without
+stable overlap, spikes can escape to fresh blocks: finite models with
+paired blocks \(P_j\) and \(n_j-P_j\) have huge reflected clusters at
+\(n_j\) but eventually miss every fixed finite test set.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all

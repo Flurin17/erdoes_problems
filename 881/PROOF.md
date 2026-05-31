@@ -1462,6 +1462,111 @@ A\cap(n-x_n-A)
 \]
 of size comparable to the whole counting function at the larger scale.
 
+## Warning 3.4e: Large spikes do not force fixed recurrence
+
+The shifted-spike condition in Corollary 3.4d is necessary for a
+counterexample, but it is far from sufficient to force the recurrent
+certificate machinery.
+
+Let
+\[
+A=\{1\}\cup2\mathbb N.
+\]
+Then \(A\) is an asymptotic basis of order \(2\). For even \(n=2M\), the
+two-term representations
+\[
+2M=2i+2(M-i),\qquad 1\le i\le M-1,
+\]
+give
+\[
+r_{2,A}(2M)\asymp M\asymp A(2M).
+\]
+Equivalently, the reflected cluster
+\[
+A\cap(2M-A)
+\]
+contains a positive proportion of \(A\cap[1,2M]\).
+
+Nevertheless \(A\) is not finitely reflection-recurrent. The two-point set
+\[
+T=\{1,2\}\subset A
+\]
+has no arbitrarily large reflecting centers: if \(m-1,m-2\in A\), then for
+\(m>3\) one of \(m-1,m-2\) is an odd integer larger than \(1\), hence is
+not in \(A\). Thus large moving reflected clusters do not by themselves
+produce even the two-point recurrence needed by Theorem 2.3.
+
+This example is eventually periodic and satisfies the desired conclusion by
+Proposition 7.1. Its role is only diagnostic: a proof cannot replace the
+remaining finite-barrier problem by the existence of large representation
+spikes. The spikes must interact with the bounded-transversal and
+private-color structure.
+
+## Lemma 3.4f: Stable overlap of spikes with one test set gives a good deletion
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). For
+\(n\in\mathbb N\), put
+\[
+U_n=A\cap(n-A).
+\]
+Suppose there is a finite set \(T_0\subset A\) such that, for arbitrarily
+large \(n\),
+\[
+|U_n\cap T_0|>\alpha_A(T_0),
+\]
+where \(\alpha_A(T_0)\) is the largest size of a certificate-free subset
+of \(T_0\), i.e. a subset containing no triple
+\[
+e,y_1,y_2,\qquad y_1\ne e,\quad y_2\ne e,\quad y_1+y_2-e\in A.
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(3\).
+
+Proof. For each such \(n\), the set \(U_n\cap T_0\) contains a certificate
+triple
+\[
+e,y_1,y_2\in U_n\cap T_0,\qquad y_1+y_2-e\in A.
+\]
+The finite set \(T_0\) contains only finitely many triples, so along an
+unbounded sequence of \(n\)'s the same triple \(e,y_1,y_2\) occurs. Since
+the triple lies in \(U_n\), we have
+\[
+n-e,\ n-y_1,\ n-y_2\in A.
+\]
+Thus \(\{e,y_1,y_2\}\) is reflection-recurrent in \(A\). Corollary 2.3c
+gives the desired infinite deletion. \(\square\)
+
+Every large reflected cluster contains many one-shot certificates, but
+Lemma 3.4f shows exactly what extra stability is needed. If
+\[
+U_n
+\]
+contains two distinct complementary pairs \(\{a,n-a\}\) and
+\(\{b,n-b\}\), then
+\[
+e=b,\qquad y_1=a,\qquad y_2=n-a
+\]
+satisfy
+\[
+y_1+y_2-e=n-b\in A.
+\]
+The problem is that these certificates may all move. A sparse escaping-block
+model illustrates the limitation: choose rapidly increasing centers \(n_j\)
+and finite blocks
+\[
+P_j\subset(n_j/4,n_j/3),\qquad Q_j=n_j-P_j,
+\]
+with \(|P_j|\) dominating all earlier block sizes, and let
+\[
+A_*=\bigcup_j(P_j\cup Q_j).
+\]
+Then \(P_j\cup Q_j\subset U_{n_j}\) and the spike at \(n_j\) can dominate
+\(A_*(n_j)\), but every fixed finite \(T\subset A_*\) is eventually
+disjoint from \(U_{n_j}\). This is not an asymptotic basis construction;
+it is a model showing that representation spikes alone do not imply a
+fixed recurrent certificate. A proof must prevent this mass escape using
+the basis, barrier, or private-color structure.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6548,6 +6653,15 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   protected, a counterexample has arbitrarily large targets \(n\) and an
   unprotected summand \(x\) for which \(n-x\) has \(\gg A(n)\)
   \(k\)-term representations.
+* Warning 3.4e shows that large moving representation spikes do not by
+  themselves imply finite reflection-recurrence; the benign basis
+  \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
+  center for \(\{1,2\}\).
+* Lemma 3.4f gives the usable form of spike recurrence: if the large
+  reflected clusters \(U_n=A\cap(n-A)\) repeatedly overlap one finite
+  certificate-dense test set, then a fixed recurrent certificate triple
+  appears and Corollary 2.3c gives a good deletion. The escaping-block
+  model after it explains why large spikes alone do not guarantee this.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
