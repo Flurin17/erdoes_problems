@@ -65,6 +65,7 @@ def census_survivor(
     min_total_mixed: int,
     max_total_mixed: int,
     reps_per_word: int,
+    skip_classified_words: int,
     max_classified_words: int,
     progress_every: int,
 ) -> dict:
@@ -242,7 +243,9 @@ def census_survivor(
     mixed_status_words = 0
     classified_words = 0
     classified_weight = 0
-    for signature, multiplicity in word_counts.items():
+    for word_index, (signature, multiplicity) in enumerate(word_counts.items(), start=1):
+        if word_index <= skip_classified_words:
+            continue
         if classified_words >= max_classified_words:
             break
         statuses = Counter(
@@ -274,7 +277,10 @@ def census_survivor(
         "outside_cover_shells": total_uncovered,
         "word_groups": len(word_counts),
         "reps_per_word": reps_per_word,
+        "skip_classified_words": skip_classified_words,
         "classified_words": classified_words,
+        "first_classified_word_index": skip_classified_words + 1 if classified_words else None,
+        "last_classified_word_index": skip_classified_words + classified_words if classified_words else None,
         "classified_weight": classified_weight,
         "mixed_status_words": mixed_status_words,
         "status_group_counts": dict(sorted(status_group_counts.items())),
@@ -293,6 +299,7 @@ def main() -> None:
     parser.add_argument("--min-total-mixed", type=int, default=6)
     parser.add_argument("--max-total-mixed", type=int, default=6)
     parser.add_argument("--reps-per-word", type=int, default=1)
+    parser.add_argument("--skip-classified-words", type=int, default=0)
     parser.add_argument("--max-classified-words", type=int, default=10000)
     parser.add_argument("--progress-every", type=int, default=0)
     parser.add_argument("--json-out", type=Path)
@@ -303,6 +310,8 @@ def main() -> None:
         raise SystemExit("--max-total-mixed must be at least --min-total-mixed")
     if args.reps_per_word <= 0:
         raise SystemExit("--reps-per-word must be positive")
+    if args.skip_classified_words < 0:
+        raise SystemExit("--skip-classified-words must be nonnegative")
     if args.max_classified_words <= 0:
         raise SystemExit("--max-classified-words must be positive")
 
@@ -316,6 +325,7 @@ def main() -> None:
                 min_total_mixed=args.min_total_mixed,
                 max_total_mixed=args.max_total_mixed,
                 reps_per_word=args.reps_per_word,
+                skip_classified_words=args.skip_classified_words,
                 max_classified_words=args.max_classified_words,
                 progress_every=args.progress_every,
             )

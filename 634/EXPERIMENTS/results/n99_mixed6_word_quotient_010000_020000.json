@@ -1,0 +1,39 @@
+{
+  "classified_weight": 141540,
+  "classified_words": 10000,
+  "elapsed_seconds": 188.058033,
+  "endpoint_groups": 20,
+  "first_classified_word_index": 10001,
+  "last_classified_word_index": 20000,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "radicand": 1,
+  "reps_per_word": 2,
+  "skip_classified_words": 10000,
+  "status_group_counts": {
+    "corner-label-violation": 2960,
+    "pinch-sector-obstruction": 1100,
+    "split-corner-label-obstruction": 5940
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 2}": 2960,
+    "{\"pinch-sector-obstruction\": 1}": 180,
+    "{\"pinch-sector-obstruction\": 2}": 920,
+    "{\"split-corner-label-obstruction\": 1}": 2100,
+    "{\"split-corner-label-obstruction\": 2}": 3840
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 59700,
+    "pinch-sector-obstruction": 9900,
+    "split-corner-label-obstruction": 71940
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_groups": 418260
+}
