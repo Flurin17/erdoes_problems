@@ -257,6 +257,9 @@ Important distinction: "positive square class" and "smallest representative" are
    A recurring subfamily has consecutive Lemma 11.14 parameters
    `(k,m)=(t,t+1)`, sides `(t^2,2t+1,t(t+1))`, relation `a+c=t b`, and
    boundary-survivor count `N=9(2t+1)`.
+   The current boundary DP finds that every active gamma survivor below `250`
+   needs only four outer-boundary `c`/non-`c` transitions, so any obstruction
+   must account for four overhang rays globally.
 
 ## Current Diophantine Status for `n=19`
 

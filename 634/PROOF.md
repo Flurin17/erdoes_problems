@@ -1739,6 +1739,20 @@ Values such as `117`, `153`, and `225` from the same formula are already
 positive by elementary families, so this is a boundary-survivor family rather
 than an obstruction or construction by itself.
 
+The boundary transition-demand program currently finds a common boundary shape
+for all active `gamma=2alpha` survivors below `250`: four `c`/non-`c`
+transitions suffice. In particular the benchmark rows have angle-compatible
+boundary side-label words
+
+```text
+N=63: L=baabccb,     R=abbbbbbc,       B=baaabbccc.
+N=99: L=baabbbccb,   R=abbbbbbbbbbc,   B=baaabbccc.
+```
+
+Each of the four mixed transitions must be supplied by an interior overhang ray.
+This again points away from a purely local boundary obstruction and toward a
+global side-matching or graph-embedding obstruction.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

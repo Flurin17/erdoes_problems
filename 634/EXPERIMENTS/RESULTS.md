@@ -886,6 +886,24 @@ boundary count `N=9(2t+1)`. It accounts for the benchmark survivors `63` and
 some other values in the same formula are already positive by elementary
 families.
 
+The boundary transition-demand dynamic program gives a sharper common shape:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary_transition_demand.py 63 99 132 135 156 171 175 176 189 198 204 207 224 228 240
+```
+
+Every active row in this list has an angle-compatible boundary witness with
+exactly four `c`/non-`c` transitions. For `63` and `99` the minimum witnesses
+use side-label words
+
+```text
+N=63: L=baabccb, R=abbbbbbc, B=baaabbccc.
+N=99: L=baabbbccb, R=abbbbbbbbbbc, B=baaabbccc.
+```
+
+Thus the remaining gamma obstruction has to be global: locally, four overhang
+rays suffice to support the boundary transitions.
+
 ## Zhang Constructive Families
 
 Command:

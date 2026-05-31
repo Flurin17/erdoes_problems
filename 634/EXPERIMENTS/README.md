@@ -83,6 +83,9 @@ Current components:
 - `gamma_2alpha_overhang_fan.py`: local overhang-aware boundary fan diagnostic;
   it shows that the primitive `a+c=kb` components can support the `c`/non-`c`
   transitions that the strict side-label fan automaton rejects.
+- `gamma_2alpha_boundary_transition_demand.py`: dynamic program minimizing the
+  number of outer-boundary `c`/non-`c` transitions required by a refined
+  `gamma=2alpha` boundary survivor.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation
