@@ -92,7 +92,8 @@ and every bound \(L\), there is an inclusion-minimal finite
 F\subset X
 \]
 and \(w>L\) with \(w\notin(k+1)(A\setminus F)\). Every \(f\in F\) is active
-in a repair after the other elements of \(F\) are restored, and
+with positive multiplicity in a repair after the other elements of \(F\) are
+restored, and
 \(A\setminus F\) has the terminal gap forced by Lemma 10.3. This is the
 current precise target for a negative construction.
 
@@ -115,6 +116,11 @@ but it would not by itself solve the problem, because Lemma 3.1d requires
 one common threshold for all finite \(F\subset X\) inside the eventual
 infinite deletion. The examples \(\{1\}\cup2\mathbb N\) and Warning 3.0
 show how finite deletions can be harmless while their thresholds drift.
+Lemma 3.1e records the resulting normal form: if finite-core stability
+holds but no infinite deletion works, then every infinite tail contains a
+finite delayed barrier \(F\) such that \(A\setminus F\) is eventually an
+order-\((k+1)\) basis, but every threshold is at least \(\max F\); the same
+terminal-gap and activity conclusions still hold for the delayed witness.
 
 ## Trivial and Boundary Cases
 
@@ -792,12 +798,13 @@ a witness \(w\) and a finite deletion \(F\), shrink \(F\) inclusion-minimally
 while preserving \(w\notin3(A\setminus F)\). For every surviving
 \(f\in F\), one then has
 \[
-w=f+c_f+d_f,\qquad c_f,d_f\in A\setminus F,
+w=q_f f+c_{f,1}+\cdots+c_{f,3-q_f},
+\qquad q_f\in\{1,2,3\},\quad c_{f,i}\in A\setminus F,
 \]
 so every deleted element is genuinely used when the other deleted elements
-are restored. Also \(f\le w-2\min A\), and the reflected-cover domination
-from Lemma 8.4 still holds. After Corollary 8.3b this minimal hole has size
-at least two, once witnesses are chosen above the fixed low threshold.
+are restored. Also \(f\le w\), and the reflected-cover domination from
+Lemma 8.4 still holds. After Corollary 8.3b this minimal hole has size at
+least two, once witnesses are chosen above the fixed low threshold.
 
 This normal form does not reduce the problem to pair barriers. The finite
 toy model

@@ -735,6 +735,93 @@ threshold in Lemma 3.1d. A counterexample must do more than create late
 finite holes along one enumeration: for every infinite \(X\subset A\), the
 finite deletions inside \(X\) must have no common eventual threshold.
 
+## Lemma 3.1e: Pure delayed barriers under finite-core stability
+
+Let \(h=k+1\), and suppose no infinite deletion from \(A\) leaves an
+order-\(h\) basis. Assume also that there is a finite core \(E_0\subset A\)
+such that for every finite
+\[
+F\subset A\setminus E_0
+\]
+the set \(A\setminus F\) is an order-\(h\) basis.
+
+Then for every finite \(E\subset A\), every infinite
+\[
+X\subset A\setminus(E\cup E_0),
+\]
+and every \(L\), there are a finite nonempty set \(F\subset X\) and an
+integer \(w>L\) such that:
+
+1. \(A\setminus F\) is an order-\(h\) basis;
+2. every order-\(h\) threshold for \(A\setminus F\) is at least \(\max F\);
+3. \(w\notin h(A\setminus F)\).
+
+If, in addition, \(A\) is an order-\(k\) basis with threshold \(N_0\) and
+\(m_0=\min A\), then \(F\) may be chosen inclusion-minimal for this fixed
+witness \(w\), and with \(f_0=\min F\) one has the terminal gap
+\[
+(A\setminus F)\cap
+\bigl(w-f_0-(k-1)m_0,\ w-N_0\bigr]=\varnothing. \tag{1}
+\]
+For such a minimal choice, every \(f\in F\) is active: there is a
+multiplicity \(q_f\in\{1,\ldots,h\}\) and elements
+\[
+c_{f,1},\ldots,c_{f,h-q_f}\in A\setminus F
+\]
+such that
+\[
+w=q_f f+c_{f,1}+\cdots+c_{f,h-q_f}. \tag{2}
+\]
+When \(q_f=h\), no \(c\)-terms appear.
+
+Proof. Replace \(X\) by its infinite tail
+\[
+X'=\{x\in X:x>L+1\}.
+\]
+By Corollary 3.1c, \(X'\) contains a finite late-bad set \(F_0\). Since
+\[
+F_0\subset A\setminus E_0,
+\]
+the finite-core stability hypothesis says that \(A\setminus F_0\) is an
+order-\(h\) basis. Therefore \(F_0\) is late-bad only because every
+threshold is at least
+\[
+M=\max F_0.
+\]
+Equivalently, no threshold \(<M\) works, so there is some
+\[
+w\ge M-1>L
+\]
+with
+\[
+w\notin h(A\setminus F_0).
+\]
+
+Shrink \(F_0\) inclusion-minimally while preserving this fixed
+nonrepresentation, and call the resulting set \(F\). Then \(F\subset X\),
+and finite-core stability gives that \(A\setminus F\) is an order-\(h\)
+basis. Since \(w\notin h(A\setminus F)\), every threshold for
+\(A\setminus F\) is \(>w\). If \(\max F<M\), then \(w\ge M-1\ge\max F\);
+if \(\max F=M\), then \(w\ge M-1\), so every threshold is at least
+\(M=\max F\). This proves the delayed-threshold assertions.
+
+When \(A\) is an order-\(k\) basis and \(h=k+1\), the terminal gap (1) is
+Lemma 10.3 applied to \(F\) and \(w\). Minimality gives
+\[
+w\in h(A\setminus(F\setminus\{f\}))
+\]
+for every \(f\in F\), while \(w\notin h(A\setminus F)\). Hence each such
+representation uses at least one copy of \(f\). Let \(q_f\) be the number
+of copies of \(f\) in one such representation. All remaining summands avoid
+\(F\), because the representation lies in \(A\setminus(F\setminus\{f\})\).
+This gives (2). \(\square\)
+
+Thus if finite-core finite-deletion stability is true, any counterexample
+must be a pure delayed-threshold counterexample: finite deletions outside
+the protected core are eventually repaired at order \(k+1\), but every
+infinite tail contains finite subdeletions whose repair threshold is forced
+to start at or beyond the deleted block itself.
+
 ## Lemma 3.2: Protected matching criterion
 
 Let \(A\) be an asymptotic basis of order \(k\). Suppose there is a finite
@@ -1924,12 +2011,15 @@ Then:
 
 1. for every \(f\in F'\),
    \[
-   f\le w-2m_0;
+   f\le w;
    \]
-2. for every \(f\in F'\), there are \(c_f,d_f\in A\setminus F'\) such that
+2. for every \(f\in F'\), there is a multiplicity
+   \(q_f\in\{1,2,3\}\) and elements
+   \(c_{f,1},\ldots,c_{f,3-q_f}\in A\setminus F'\) such that
    \[
-   w=f+c_f+d_f;
+   w=q_f f+c_{f,1}+\cdots+c_{f,3-q_f};
    \]
+   when \(q_f=3\), no \(c\)-terms appear;
 3. for every retained element \(e\in A\setminus F'\) with
    \(w-e\ge N_0\), the set \(F'\) meets every two-term representation of
    \(w-e\) from \(A\).
@@ -1942,11 +2032,13 @@ Proof. Minimality gives
 w\in3(A\setminus(F'\setminus\{f\}))
 \]
 for every \(f\in F'\). Since \(w\notin3(A\setminus F')\), every such
-representation must use \(f\). Thus
+representation must use \(f\). Let \(q_f\) be the number of copies of \(f\)
+in one such representation. The other summands avoid \(F'\), so
 \[
-w=f+c_f+d_f,\qquad c_f,d_f\in A\setminus F',
+w=q_f f+c_{f,1}+\cdots+c_{f,3-q_f},
+\qquad c_{f,i}\in A\setminus F',
 \]
-which proves (2). Since \(c_f,d_f\ge m_0\), (1) follows.
+which proves (2). Since \(q_f\ge1\), (1) follows.
 
 For (3), let \(e\in A\setminus F'\) and \(w-e\ge N_0\). If
 \[
@@ -3045,18 +3137,16 @@ and, writing \(f_0=\min F\),
 \]
 
 Moreover \(F\) may be chosen inclusion-minimal for the fixed witness \(w\).
-For such a minimal choice, every \(f\in F\) is active: there are
+For such a minimal choice, every \(f\in F\) is active: there is a
+multiplicity \(q_f\in\{1,\ldots,h\}\) and elements
 \[
-c_{f,1},\ldots,c_{f,k}\in A\setminus F
+c_{f,1},\ldots,c_{f,h-q_f}\in A\setminus F
 \]
 with
 \[
-w=f+c_{f,1}+\cdots+c_{f,k}, \tag{3}
+w=q_f f+c_{f,1}+\cdots+c_{f,h-q_f}. \tag{3}
 \]
-and hence
-\[
-f\le w-km_0. \tag{4}
-\]
+When \(q_f=h\), no \(c\)-terms appear.
 
 Proof. By Corollary 3.1c applied to the infinite set \(X\), there is a
 finite late-bad set \(F_0\subset X\). To ensure a large witness, first
@@ -3085,9 +3175,10 @@ For \(f\in F\), minimality gives
 w\in h(A\setminus(F\setminus\{f\})).
 \]
 Since \(w\notin h(A\setminus F)\), every such representation must use at
-least one copy of \(f\). Taking one copy of \(f\) from the representation
-gives (3), with the remaining \(k\) summands outside \(F\). Inequality (4)
-follows because each remaining summand is at least \(m_0\). \(\square\)
+least one copy of \(f\). Let \(q_f\) be the number of copies of \(f\) in
+one such representation. All other summands avoid \(F\), because the
+representation lies in \(A\setminus(F\setminus\{f\})\). This gives (3).
+\(\square\)
 
 Thus any counterexample to the broad deletion theorem must contain
 arbitrarily far, inside every infinite tail and away from every finite
@@ -4178,6 +4269,10 @@ new-design problem, not as a small non-greedy search miss.
 * Lemma 3.1d gives an exact fixed-deletion test: \(A\setminus X\) is an
   order-\(h\) basis if and only if all finite deletions inside \(X\) have a
   common order-\(h\) threshold.
+* Lemma 3.1e says that, under finite-core finite-deletion stability, any
+  remaining counterexample must be purely delayed: finite deletions are
+  eventually repaired, but every infinite tail contains finite subdeletions
+  whose thresholds start at or beyond the deleted block.
 * Lemma 3.2 proves the theorem under an arbitrarily-large protected matching
   hypothesis for \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded
