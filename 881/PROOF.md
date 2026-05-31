@@ -3493,6 +3493,36 @@ For pair barriers, this says every finite test set has a certificate-free
 half-subset. This is much stronger than the existence of the recurrent
 certificate-free clusters in Warning 8.6c'.
 
+It is useful to make the rank dependence explicit. For a finite
+\[
+T\subset A
+\]
+write
+\[
+\alpha_A(T)=\max\{|U|:U\subset T\text{ is certificate-free relative to }A\}
+\]
+and
+\[
+\Gamma_A(T)=\frac{|T|}{\alpha_A(T)}.
+\]
+The proof above only uses the inequality
+\[
+|F|<\Gamma_A(T_0) \tag{3}
+\]
+for one finite test set \(T_0\): coloring each \(t\in T_0\) by one
+deleted element of \(F\) used in a chosen representation of \(w-t\), some
+color class has size at least \(|T_0|/|F|>\alpha_A(T_0)\), and hence
+contains a certificate triple. Thus any variable-rank large-excess
+counterexample must have the following escape property:
+
+for every finite \(T\subset A\), all sufficiently late barriers that are
+forced outside \(T\) may have rank at least \(\Gamma_A(T)\).
+
+This is the precise rank-sensitive form of the certificate-free obstruction.
+Fixed-rank barriers fail as soon as \(\Gamma_A(T)\) is larger than that
+rank for some finite \(T\); Schreier-type barriers try to evade the
+argument by letting \(|F|\) grow beyond every finite certificate test.
+
 ## Lemma 8.6h: Progressions force certificate density
 
 Let \(A\subseteq\mathbb N\) and let
@@ -6000,7 +6030,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   shifted domination.
 * Lemma 8.6g uses that vertex-cover condition: fixed-rank large-excess
   barriers plus one finite test set with no large certificate-free subset
-  force a recurrent certificate triple and hence a good deletion.
+  force a recurrent certificate triple and hence a good deletion. The
+  rank-sensitive paragraph after it says variable-rank barriers can evade
+  this only by outrunning the certificate-density ratio of every finite test
+  set.
 * Lemma 8.6h supplies such finite test sets when \(A\) contains long
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of

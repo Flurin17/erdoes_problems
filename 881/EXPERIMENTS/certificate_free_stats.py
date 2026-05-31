@@ -47,9 +47,11 @@ def main() -> None:
     for name, ambient in examples:
         best = max_certificate_free(ambient)
         ratio = len(best) / len(ambient)
+        gamma = len(ambient) / len(best) if best else float("inf")
         print(
             f"{name}: |A|={len(ambient)} "
             f"alpha_cert={len(best)} ratio={ratio:.3f} "
+            f"gamma={gamma:.3f} "
             f"example={sorted(best)}"
         )
 
