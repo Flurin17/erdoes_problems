@@ -165,7 +165,10 @@ normal form: triples with `d`, `a`, and `w-d-a` outside a protected core and
 bounded full count `r2(a+d)`. It contrasts the pinned low-count stars in
 `\{1\}\cup2\mathbb N` before and after protecting `1`, and prints the same
 diagnostic on the P6 Schreier escape with and without its old core
-protected.
+protected. In the P6 pair-edge escape, the old-core-protected scan has no
+fresh `Q=2` star, matching the theoretical point that a viable next stage
+must create genuinely unpinned bounded-count rows, not only repairs through
+old elements.
 
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
