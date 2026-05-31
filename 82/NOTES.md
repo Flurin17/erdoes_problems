@@ -2181,3 +2181,10 @@ source of growth beyond Ramsey.
   half-edges.  The remaining support-`<=2` trace problem is therefore to
   bound colored graphs with half-edges, small red-blue degree imbalance at
   every coordinate, and no such alternating trail.
+- 2026-05-31: Closed the entire support-`<=2` trace layer with Corollary 15H.
+  Since a zero-sum-free trace multiset admits a real separating functional,
+  support-one/two inequalities reduce to signs and comparisons of coordinate
+  magnitudes.  The comparison graph is acyclic, so replacing magnitudes by
+  topological levels gives an integer separator `a` with `||a||_1<=d^2`.
+  Lemma 18 then gives `|B|<=d^3`.  Thus any superpolynomial trace obstruction
+  in the repeated-degree route must use trace supports of size at least `3`.
