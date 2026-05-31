@@ -1835,6 +1835,13 @@ regime computationally, but still leaves higher-mixed boundary orders and the
 need to replace floating shell predicates by exact arithmetic before promoting
 the census to a proof-level obstruction.
 
+For `N=99`, that exact-arithmetic replacement is partially in place. The outer
+triangle and boundary-adjacent shell coordinates are rational, and the rational
+classifier agrees with the floating classifier on all `8` endpoint-minimal
+shells and on the first `1000` total-mixed-`<=4` shells. The full `63000`-shell
+rational census remains to be optimized before it can replace the floating
+low-overhang census.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

@@ -117,6 +117,10 @@ Current components:
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`
   shells for `N=99`.
+- `gamma_2alpha_rational_shell_census.py`: exact-arithmetic shell classifier
+  for rational-coordinate `gamma=2alpha` survivors. It currently applies to
+  the `N=99` benchmark and is used to cross-check floating shell predicates on
+  endpoint-minimal and bounded low-mixed shell subsets.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

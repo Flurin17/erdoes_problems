@@ -1080,6 +1080,36 @@ current floating shell classifier. It is still not a full proof for `63` or
 would need exact-arithmetic replacement before the shell census can be promoted
 to a rigorous obstruction.
 
+For `N=99`, the outer triangle and boundary-adjacent tile placements have
+rational coordinates, so the shell predicates can be checked exactly in
+`QQ^2`. The rational classifier currently agrees with the floating classifier
+on all endpoint-minimal representatives:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_rational_shell_census.py 99 --endpoint-minimal --show-examples
+```
+
+```text
+N=99: rational endpoint-minimal shells: 8;
+      status counts={corner-label-violation: 6, not-simple-cycle: 2}.
+```
+
+It also agrees on a deterministic prefix of the low-mixed census:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_rational_shell_census.py 99 --max-total-mixed 4 --limit 1000 --show-examples
+```
+
+```text
+N=99: rational exact shells with total mixed <= 4: 1000 (first 1000);
+      status counts={corner-label-violation: 600, not-simple-cycle: 400}.
+```
+
+The full `63000`-shell rational census is not yet practical with the current
+unoptimized exact implementation, but the new script removes the main
+floating-predicate ambiguity for small exact subcensuses and gives a path toward
+a proof-level low-mixed certificate for `N=99`.
+
 ## Zhang Constructive Families
 
 Command:
