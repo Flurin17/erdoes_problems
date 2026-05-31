@@ -11,7 +11,6 @@ single-corner side-label mismatches.
 from __future__ import annotations
 
 import argparse
-import math
 import random
 import sys
 from collections import Counter, defaultdict
@@ -151,23 +150,6 @@ def pinch_cyclic_label_profile(residual_labels: dict[exact.KSegment, str]) -> Co
     return tuple(sorted(profiles.items()))
 
 
-def kquad_float(value: exact.KQuad) -> float:
-    return float(value[0]) + float(value[1]) * math.sqrt(exact.RADICAND)
-
-
-def kpoint_float(point: exact.KPoint) -> tuple[float, float]:
-    return kquad_float(point[0]), kquad_float(point[1])
-
-
-def angle_values(sides: tuple[int, int, int]) -> dict[str, float]:
-    a, b, c = sides
-    return {
-        "alpha": math.acos((b * b + c * c - a * a) / (2 * b * c)),
-        "beta": math.acos((a * a + c * c - b * b) / (2 * a * c)),
-        "gamma": math.acos((a * a + b * b - c * c) / (2 * a * b)),
-    }
-
-
 def angle_counter_text(counter: Counter[str]) -> str:
     parts: list[str] = []
     for name in ("alpha", "beta", "gamma"):
@@ -179,36 +161,8 @@ def angle_counter_text(counter: Counter[str]) -> str:
     return "+".join(parts) if parts else "0"
 
 
-def sector_angle_combos(value: float, sides: tuple[int, int, int]) -> tuple[Counter[str], ...]:
-    angles = angle_values(sides)
-    out: list[Counter[str]] = []
-    for alpha_count in range(7):
-        for beta_count in range(4):
-            for gamma_count in range(4):
-                if alpha_count + beta_count + gamma_count == 0:
-                    continue
-                total = (
-                    alpha_count * angles["alpha"]
-                    + beta_count * angles["beta"]
-                    + gamma_count * angles["gamma"]
-                )
-                if abs(total - value) < 1e-6:
-                    out.append(Counter({"alpha": alpha_count, "beta": beta_count, "gamma": gamma_count}))
-    return tuple(out)
-
-
 def sector_fillable(left_label: str, right_label: str, combos: tuple[Counter[str], ...]) -> bool:
     return any(trail_possible(combo, left_label, right_label) for combo in combos)
-
-
-def ccw_sector_angle(left_vector: exact.KPoint, right_vector: exact.KPoint) -> float:
-    left_x, left_y = kpoint_float(left_vector)
-    right_x, right_y = kpoint_float(right_vector)
-    left_angle = math.atan2(left_y, left_x)
-    right_angle = math.atan2(right_y, right_x)
-    if right_angle <= left_angle:
-        right_angle += 2 * math.pi
-    return right_angle - left_angle
 
 
 def kpoint_add(left: exact.KPoint, right: exact.KPoint) -> exact.KPoint:
@@ -261,6 +215,62 @@ def occupied_sector_indices(
     return occupied
 
 
+def kquad_mul_int(value: exact.KQuad, multiplier: int) -> exact.KQuad:
+    return value[0] * multiplier, value[1] * multiplier
+
+
+def kquad_square(value: exact.KQuad) -> exact.KQuad:
+    return exact.kmul(value, value)
+
+
+def cosine_matches(
+    left_vector: exact.KPoint,
+    right_vector: exact.KPoint,
+    *,
+    numerator: int,
+    denominator: int,
+) -> bool:
+    dot = exact.kdot(left_vector, right_vector)
+    if exact.ksign(dot) != (numerator > 0) - (numerator < 0):
+        return False
+    left_norm = exact.knorm_sq(left_vector)
+    right_norm = exact.knorm_sq(right_vector)
+    lhs = kquad_mul_int(kquad_square(dot), denominator * denominator)
+    rhs = kquad_mul_int(exact.kmul(left_norm, right_norm), numerator * numerator)
+    return lhs == rhs
+
+
+def sector_angle_combos_exact(
+    left_vector: exact.KPoint,
+    right_vector: exact.KPoint,
+    sides: tuple[int, int, int],
+) -> tuple[Counter[str], ...]:
+    cross = exact.kcross(left_vector, right_vector)
+    dot = exact.kdot(left_vector, right_vector)
+    if exact.kzero(cross):
+        if exact.ksign(dot) < 0:
+            return (
+                Counter({"alpha": 1, "beta": 1, "gamma": 1}),
+                Counter({"alpha": 3, "beta": 1}),
+            )
+        return ()
+    if exact.ksign(cross) < 0:
+        return ()
+
+    a, b, c = sides
+    combos: list[Counter[str]] = []
+    alpha_num = b * b + c * c - a * a
+    alpha_den = 2 * b * c
+    gamma_num = a * a + b * b - c * c
+    gamma_den = 2 * a * b
+    if cosine_matches(left_vector, right_vector, numerator=alpha_num, denominator=alpha_den):
+        combos.append(Counter({"alpha": 1}))
+    if cosine_matches(left_vector, right_vector, numerator=gamma_num, denominator=gamma_den):
+        combos.append(Counter({"gamma": 1}))
+        combos.append(Counter({"alpha": 2}))
+    return tuple(combos)
+
+
 def pinch_sector_profile(
     residual_labels: dict[exact.KSegment, str],
     unique: tuple[exact.IntegerQuadraticTile, ...],
@@ -283,8 +293,7 @@ def pinch_sector_profile(
             if index in occupied:
                 continue
             residual_sectors += 1
-            sector_angle = ccw_sector_angle(left_vector, right_vector)
-            combos = sector_angle_combos(sector_angle, sides)
+            combos = sector_angle_combos_exact(left_vector, right_vector, sides)
             fillable = sector_fillable(left_label, right_label, combos)
             if not fillable:
                 unfillable += 1

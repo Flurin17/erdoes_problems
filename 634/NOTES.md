@@ -84,9 +84,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
   parity-only residual invariant is not enough. The non-2-degree residual
   vertices in the same run have only two incident-label profiles, `accc` and
   `aabc`, making those local pinch stars the next finite obstruction target.
-  A diagnostic sector pass suggests every sampled `accc` pinch has locally
-  unfillable residual sectors, while pure `aabc` pinches are locally fillable
-  and need a stronger component/topology invariant. An exact split-cycle
+  The sector pass now marks shell-occupied sectors and classifies the
+  `alpha`/`gamma`/`pi` sector angles exactly; every sampled `accc` pinch has
+  locally unfillable residual sectors, while pure `aabc` pinches are locally
+  fillable and need a stronger component/topology invariant. An exact split-cycle
   component diagnostic now checks planar pairings, component areas, boundary
   side-count bounds, and side parity; a seed-`20260602`, `10000`-attempt
   outside-cover sample shows this coarse component invariant still permits the

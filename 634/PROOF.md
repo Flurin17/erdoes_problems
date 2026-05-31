@@ -1935,7 +1935,7 @@ already-detected corner-label violations.
 A diagnostic sector pass in the same script adds cyclic sector probes at the
 pinches. The current pass marks shell-occupied sectors exactly from the local
 wedges of the incident shell tiles, then labels the remaining sector angles by
-the finite angle-word matcher used for this diagnostic. In the same
+exact cosine tests for `alpha`, `gamma=2alpha`, and straight `pi`. In the same
 seed-`20260602` run, every sampled `accc` pinch contributes unfillable residual
 sectors of type
 `cc:alpha` and `ac/ca:gamma` under the endpoint-automaton trail test. Pure

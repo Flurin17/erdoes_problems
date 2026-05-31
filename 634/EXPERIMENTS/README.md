@@ -144,14 +144,16 @@ Current components:
   a connected graph with degree-4 pinch vertices, while the all-full residual
   atom profiles have no side-parity mismatch. The non-2-degree vertex incident
   and cyclic incident-label profiles are concentrated in only two profiles,
-  `accc` and `aabc`. A diagnostic sector pass marks shell-occupied sectors
-  exactly from the incident shell-tile wedges and finds that the `accc`
-  residual sectors are locally unfillable (`cc:alpha` and `ac/ca:gamma`) under
-  the endpoint automaton, while pure `aabc` pinches are locally fillable. The
-  exact split-cycle component diagnostic enumerates the two planar pairings at
-  each degree-4 pinch and checks component area, boundary-side upper bounds,
-  and side-label parity; in the seed-`20260602`, `10000`-attempt outside-cover
-  run, this exact component test does not remove the pure `aabc` branch.
+  `accc` and `aabc`. The sector pass marks shell-occupied sectors exactly from
+  the incident shell-tile wedges and classifies the residual sector angles by
+  exact cosine tests for `alpha`, `gamma=2alpha`, and straight `pi`. It finds
+  that the `accc` residual sectors are locally unfillable (`cc:alpha` and
+  `ac/ca:gamma`) under the endpoint automaton, while pure `aabc` pinches are
+  locally fillable. The exact split-cycle component diagnostic enumerates the
+  two planar pairings at each degree-4 pinch and checks component area,
+  boundary-side upper bounds, and side-label parity; in the seed-`20260602`,
+  `10000`-attempt outside-cover run, this exact component test does not remove
+  the pure `aabc` branch.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`
