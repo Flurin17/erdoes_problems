@@ -111,7 +111,8 @@ Current components:
   angle-compatible noncanonical boundary paths for a refined `gamma=2alpha`
   survivor. It applies the same shell filters and is useful for finding
   candidate extensions or stress-testing the endpoint-minimal census, but it is
-  not an impossibility proof.
+  not an impossibility proof. The `--max-total-mixed` option stratifies the
+  sampler into low-overhang boundary shells.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

@@ -1820,6 +1820,12 @@ produced `648` distinct shells, all eliminated by proper overlap, non-simple
 residual boundary, or residual corner-label violations. This is diagnostic
 evidence only and is not used as a proof-level elimination.
 
+A stratified low-overhang sample with total boundary mixed count at most `4`
+also found no survivor: with seed `12345` and `20000` attempts, it produced
+`189` distinct `N=63` shells, all with non-simple residual boundary, and `143`
+distinct `N=99` shells, all with non-simple residual boundary or residual
+corner-label violations.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

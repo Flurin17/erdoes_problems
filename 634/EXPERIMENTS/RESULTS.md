@@ -1041,6 +1041,24 @@ N=99: sampled unique boundary cycles=648;
 No sampled noncanonical shell passes the current filters. This is search
 evidence only: the sampler does not exhaust the full boundary-order space.
 
+The same sampler can target the low-overhang regime by capping the total number
+of `c`/non-`c` transitions:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_random_shell_search.py 63 99 --samples 20000 --seed 12345 --max-total-mixed 4
+```
+
+```text
+N=63: sampled unique boundary cycles=189 with total mixed <= 4;
+      status counts={not-simple-cycle: 189}.
+N=99: sampled unique boundary cycles=143 with total mixed <= 4;
+      status counts={corner-label-violation: 63, not-simple-cycle: 80}.
+```
+
+This suggests that the endpoint-minimal obstruction pattern is not just an
+artifact of selecting one representative per endpoint pair, although it remains
+non-exhaustive.
+
 ## Zhang Constructive Families
 
 Command:

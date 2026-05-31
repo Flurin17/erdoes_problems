@@ -283,6 +283,8 @@ Important distinction: "positive square class" and "smallest representative" are
    corner-label mismatch. A randomized noncanonical shell sampler found no
    survivor in fixed-seed `30000`-attempt runs (`795` unique shells for `63`,
    `648` for `99`), but this is evidence rather than an exhaustive certificate.
+   A stratified low-overhang run with total mixed count at most `4` found
+   `189` unique `63` shells and `143` unique `99` shells, again with no pass.
 
 ## Current Diophantine Status for `n=19`
 

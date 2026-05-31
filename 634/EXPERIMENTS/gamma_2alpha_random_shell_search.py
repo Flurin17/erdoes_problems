@@ -101,6 +101,13 @@ def by_first_last(paths: tuple[Path, ...]) -> dict[tuple[PlacedEdge, PlacedEdge]
     return {key: tuple(value) for key, value in out.items()}
 
 
+def by_mixed(paths: tuple[Path, ...]) -> dict[int, tuple[Path, ...]]:
+    out: dict[int, list[Path]] = defaultdict(list)
+    for path in paths:
+        out[mixed_transitions(path)].append(path)
+    return {key: tuple(value) for key, value in out.items()}
+
+
 def choose_from_weighted_groups(
     rng: random.Random,
     groups: tuple[tuple[Path, ...], ...],
@@ -121,6 +128,7 @@ def sampled_demands(
     *,
     rng: random.Random,
     samples: int,
+    max_total_mixed: int | None,
 ) -> tuple[BoundaryDemand, ...]:
     candidate = survivor.candidate
     bounded_reps = viable_x_representations(candidate)
@@ -134,11 +142,17 @@ def sampled_demands(
     }
     first_index = {rep: by_first(paths) for rep, paths in paths_by_rep.items()}
     endpoint_index = {rep: by_first_last(paths) for rep, paths in paths_by_rep.items()}
+    mixed_index = {rep: by_mixed(paths) for rep, paths in paths_by_rep.items()}
+    first_mixed_index = {
+        rep: {mixed: by_first(paths) for mixed, paths in by_mixed(paths_by_rep[rep]).items()}
+        for rep in paths_by_rep
+    }
+    endpoint_mixed_index = {
+        rep: {mixed: by_first_last(paths) for mixed, paths in by_mixed(paths_by_rep[rep]).items()}
+        for rep in paths_by_rep
+    }
 
-    for _ in range(samples):
-        left_rep = rng.choice(bounded_reps)
-        right_rep = rng.choice(free_reps)
-        base_rep = rng.choice(base_reps)
+    def choose_uncapped(left_rep: Triple, right_rep: Triple, base_rep: Triple) -> tuple[Path, Path, Path] | None:
         left_paths = paths_by_rep[left_rep]
         right_by_first = first_index[right_rep]
         base_by_endpoints = endpoint_index[base_rep]
@@ -151,7 +165,7 @@ def sampled_demands(
         )
         right = choose_from_weighted_groups(rng, right_groups)
         if right is None:
-            continue
+            return None
         base_groups = tuple(
             group
             for (first, last), group in base_by_endpoints.items()
@@ -159,9 +173,62 @@ def sampled_demands(
         )
         base = choose_from_weighted_groups(rng, base_groups)
         if base is None:
+            return None
+        return left, right, base
+
+    def choose_capped(left_rep: Triple, right_rep: Triple, base_rep: Triple, cap: int) -> tuple[Path, Path, Path] | None:
+        mixed_choices = [
+            (left_mixed, right_mixed, base_mixed)
+            for left_mixed in mixed_index[left_rep]
+            for right_mixed in mixed_index[right_rep]
+            for base_mixed in mixed_index[base_rep]
+            if left_mixed + right_mixed + base_mixed <= cap
+        ]
+        if not mixed_choices:
+            return None
+        left_mixed, right_mixed, base_mixed = rng.choice(mixed_choices)
+        left = rng.choice(mixed_index[left_rep][left_mixed])
+        right_by_first = first_mixed_index[right_rep][right_mixed]
+        right_groups = tuple(
+            group
+            for first, group in right_by_first.items()
+            if apex_corner(left[-1], first)
+        )
+        right = choose_from_weighted_groups(rng, right_groups)
+        if right is None:
+            return None
+        base_by_endpoints = endpoint_mixed_index[base_rep][base_mixed]
+        base_groups = tuple(
+            group
+            for (first, last), group in base_by_endpoints.items()
+            if alpha_corner(right[-1], first) and alpha_corner(last, left[0])
+        )
+        base = choose_from_weighted_groups(rng, base_groups)
+        if base is None:
+            return None
+        return left, right, base
+
+    for _ in range(samples):
+        left_rep = rng.choice(bounded_reps)
+        right_rep = rng.choice(free_reps)
+        base_rep = rng.choice(base_reps)
+        chosen = (
+            choose_uncapped(left_rep, right_rep, base_rep)
+            if max_total_mixed is None
+            else choose_capped(left_rep, right_rep, base_rep, max_total_mixed)
+        )
+        if chosen is None:
             continue
+        left, right, base = chosen
         key = (oriented_path_key(left), oriented_path_key(right), oriented_path_key(base))
         if key in seen:
+            continue
+        total_mixed = (
+            mixed_transitions(left)
+            + mixed_transitions(right)
+            + mixed_transitions(base)
+        )
+        if max_total_mixed is not None and total_mixed > max_total_mixed:
             continue
         seen.add(key)
         demands.append(
@@ -170,11 +237,7 @@ def sampled_demands(
                 left_rep=left_rep,
                 right_rep=right_rep,
                 base_rep=base_rep,
-                mixed_transitions=(
-                    mixed_transitions(left)
-                    + mixed_transitions(right)
-                    + mixed_transitions(base)
-                ),
+                mixed_transitions=total_mixed,
                 left_path=left,
                 right_path=right,
                 base_path=base,
@@ -199,6 +262,11 @@ def main() -> None:
     parser.add_argument("n", nargs="+", type=int)
     parser.add_argument("--samples", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=634)
+    parser.add_argument(
+        "--max-total-mixed",
+        type=int,
+        help="only keep sampled boundary cycles with at most this many c/non-c transitions",
+    )
     parser.add_argument("--stop-on-pass", action="store_true")
     parser.add_argument("--show-examples", action="store_true")
     args = parser.parse_args()
@@ -208,10 +276,18 @@ def main() -> None:
         survivors = refined_survivors_for_n(n)
         print(f"N={n}: {len(survivors)} refined gamma=2alpha survivor(s)")
         for survivor in survivors:
-            demands = sampled_demands(survivor, rng=rng, samples=args.samples)
+            demands = sampled_demands(
+                survivor,
+                rng=rng,
+                samples=args.samples,
+                max_total_mixed=args.max_total_mixed,
+            )
             counts: Counter[str] = Counter()
             examples: dict[str, tuple[BoundaryDemand, ShellResult]] = {}
-            print(f"  sampled unique boundary cycles={len(demands)} from {args.samples} attempts")
+            suffix = ""
+            if args.max_total_mixed is not None:
+                suffix = f" with total mixed <= {args.max_total_mixed}"
+            print(f"  sampled unique boundary cycles={len(demands)} from {args.samples} attempts{suffix}")
             for demand in demands:
                 result = classify_shell(survivor, demand)
                 counts[result.status] += 1
