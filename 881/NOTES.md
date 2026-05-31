@@ -1518,6 +1518,13 @@ vertices can occur in the shifted rows \(w-t\) for \(t>D\); the fixed
 vertex \(d\) reflects the whole tail. Hence every Schreier prefix level
 \(u_i\) must have divergent witness excess above the first later endpoint
 on every infinite later tail.
+For the first pair level, Corollary 13.1l.2 combines this with the
+endpoint-list lemma 8.6g': unless a good deletion already exists, every
+finite test set in the later tail can be split by the shifted endpoint
+lists into two certificate-free fibers. Compactness then gives a
+two-coloring of the tail into certificate-free sets that are separately
+reflection-recurrent in \(A\). This is now the canonical high-excess
+first-prefix obstruction.
 
 The new `--pair-edge-search` diagnostic confirms that high-excess first
 pair starts are locally possible but expensive. Starting from the P5 seed,

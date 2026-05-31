@@ -9661,6 +9661,87 @@ distance of their first later endpoint. Thus every prefix level in a
 Schreier lift must develop its own divergent first-tail excess, not merely
 the first pair level.
 
+## Corollary 13.1l.2: Fixed-prefix high-excess pair tails become list-colored
+
+Work in the \(k=2\) case, and suppose \(A\) is a counterexample to the
+desired order-3 deletion conclusion, with order-2 threshold \(N_0\). Fix
+\[
+d\in A
+\]
+and let \(Y\subset A\setminus\{d\}\) be infinite. Suppose that every
+\[
+p\in Y
+\]
+has at least one genuine pair witness
+\[
+w_p\notin3(A\setminus\{d,p\}). \tag{1}
+\]
+By Corollary 13.1l, for every \(D\) only finitely many \(p\in Y\) have any
+witness with \(w-p\le D\). In fact, the high-excess witnesses must be
+endpoint-list coherent: for every finite nonempty
+\[
+T\subset A\setminus\{d\}
+\]
+and every \(M\), there are \(p\in Y\setminus T\) and a witness \(w\) for
+\(\{d,p\}\) such that
+\[
+w-\max T\ge N_0,\qquad w-d>M,\qquad w-p>M, \tag{2}
+\]
+and the endpoint lists
+\[
+L_w(t)=\{z\in\{d,p\}:w-t-z\in A\}\qquad(t\in T)
+\]
+admit a choice function whose two fibers are certificate-free relative to
+\(A\).
+
+Consequently, suppose an infinite set \(R\subset A\setminus\{d\}\) has the
+following finite-test property: for every finite nonempty \(T\subset R\)
+and every \(M\), there are \(p\in A\setminus(T\cup\{d\})\) and a witness
+\(w\) satisfying (2) whose endpoint lists on \(T\) admit a certificate-free
+choice function. Then \(R\) has a two-coloring
+\[
+R=C_d\cup C_p
+\]
+such that both \(C_d\) and \(C_p\) are certificate-free relative to \(A\),
+and both are separately reflection-recurrent in \(A\).
+
+Proof. Fix finite nonempty \(T\subset A\setminus\{d\}\). If, for every
+\(M\), there were a witness satisfying (2) whose endpoint lists admitted no
+certificate-free choice function, Lemma 8.6g' with
+\[
+x_w=d,\qquad y_w=p
+\]
+would give an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis, contradiction.
+
+Now fix \(M_0\). The bounded-excess conclusion from Corollary 13.1l and
+the assumed witnesses (1) give witnesses satisfying (2) for every
+\(M\ge M_0\). If none of the witnesses satisfying (2) with \(M=M_0\) were
+list-colored, then choosing such a witness for each \(M\ge M_0\) would
+produce the forbidden no-list family above. Therefore a list-colored
+witness satisfying (2) exists for \(T\) and \(M_0\). Since \(M_0\) was
+arbitrary, the first assertion follows.
+
+For the final assertion, enumerate \(R=\{r_1,r_2,\ldots\}\) and put
+\[
+T_j=\{r_1,\ldots,r_j\}.
+\]
+Choose list-colored witnesses for \(T_j\) with \(M=j\). Color a point of
+\(T_j\) by \(d\) or by \(p_j\), according to the chosen endpoint list
+color. Passing to a subsequence, the color of every fixed \(r_i\)
+stabilizes. Let \(C_d\) and \(C_p\) be the resulting stable fibers.
+
+If one stable fiber contained a certificate triple
+\[
+e,y_1,y_2,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A,
+\]
+then that triple would eventually lie in one certificate-free finite fiber,
+impossible. Thus both stable fibers are certificate-free. If
+\(U\subset C_d\) is finite, then for all sufficiently large \(j\) the
+chosen center \(w_j-d\) reflects \(U\) into \(A\), and \(w_j-d\to\infty\).
+The same argument with centers \(w_j-p_j\) proves recurrence for finite
+\(U\subset C_p\). \(\square\)
+
 ### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
 
 Corollary 13.1l does not say that a finite first-prefix pair edge must be
@@ -10799,6 +10880,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.1 applies Lemma 8.2c'' to every fixed Schreier prefix
   level: witnesses must have unbounded excess over the first later endpoint
   on every infinite later tail.
+* Corollary 13.1l.2 adds the high-excess pair consequence: fixed-prefix
+  pair tails must be endpoint-list colorable on every finite test set, and
+  compactness yields two recurrent certificate-free tail colors.
 * Diagnostic 13.1m shows that high-excess first-pair starts are locally
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.
