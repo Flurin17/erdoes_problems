@@ -84,6 +84,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   parity-only residual invariant is not enough. The non-2-degree residual
   vertices in the same run have only two incident-label profiles, `accc` and
   `aabc`, making those local pinch stars the next finite obstruction target.
+  A diagnostic sector pass suggests every sampled `accc` pinch has locally
+  unfillable residual sectors, while pure `aabc` pinches are locally fillable
+  and need a stronger component/topology invariant.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

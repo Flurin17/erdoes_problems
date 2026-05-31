@@ -144,7 +144,10 @@ Current components:
   a connected graph with degree-4 pinch vertices, while the all-full residual
   atom profiles have no side-parity mismatch. The non-2-degree vertex incident
   and cyclic incident-label profiles are concentrated in only two profiles,
-  `accc` and `aabc`.
+  `accc` and `aabc`. A diagnostic sector pass, using exact shell coordinates
+  with floating probes for occupied sectors, finds that the `accc` residual
+  sectors are locally unfillable (`cc:alpha` and `ac/ca:gamma`) under the
+  endpoint automaton, while pure `aabc` pinches are locally fillable.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

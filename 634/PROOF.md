@@ -1932,6 +1932,18 @@ small finite local target: understand whether `accc` and `aabc` residual pinch
 stars can be completed by the remaining tiles without creating one of the
 already-detected corner-label violations.
 
+A diagnostic sector pass in the same script adds cyclic sector probes at the
+pinches. This pass uses the exact shell coordinates but floating midpoint
+tests to decide which sectors are already occupied by shell tiles, so it is not
+yet a proof-level exact predicate. In the same seed-`20260602` run, every
+sampled `accc` pinch contributes unfillable residual sectors of type
+`cc:alpha` and `ac/ca:gamma` under the endpoint-automaton trail test. Pure
+`aabc` pinches contribute locally fillable sectors:
+`aa:alpha+beta+gamma/3alpha+beta` and `bc` or `cb:alpha`. The non-simple
+shells with only `aabc` pinches therefore remain the important residual
+topology/component subcase after the local `accc` star obstruction is made
+exact.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`

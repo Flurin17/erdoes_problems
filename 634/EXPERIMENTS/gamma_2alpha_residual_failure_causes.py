@@ -11,10 +11,12 @@ single-corner side-label mismatches.
 from __future__ import annotations
 
 import argparse
+import math
 import random
 import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from fractions import Fraction
 from functools import cmp_to_key
 from pathlib import Path
 
@@ -23,6 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import gamma_2alpha_quadratic_shell_census as exact  # noqa: E402
 from gamma_2alpha_boundary import RefinedGamma2AlphaSurvivor, refined_survivors_for_n  # noqa: E402
 from gamma_2alpha_boundary_transition_demand import BoundaryDemand, path_labels  # noqa: E402
+from gamma_2alpha_endpoint_automaton import trail_possible  # noqa: E402
 from gamma_2alpha_overlap_causes import local_cover_overlap  # noqa: E402
 from gamma_2alpha_random_shell_search import mixed_transitions, weighted_valid_demands  # noqa: E402
 
@@ -46,6 +49,9 @@ class ShellDiagnostic:
     parity_mismatches: str = ""
     pinch_labels: CounterTuple = ()
     pinch_cyclic_labels: CounterTuple = ()
+    pinch_residual_sectors: int = 0
+    pinch_unfillable_sectors: int = 0
+    pinch_sector_signatures: CounterTuple = ()
     forced_corners: int = 0
     label_violations: int = 0
     forced_angles: CounterTuple = ()
@@ -137,11 +143,145 @@ def pinch_cyclic_label_profile(residual_labels: dict[exact.KSegment, str]) -> Co
     return tuple(sorted(profiles.items()))
 
 
+def kquad_float(value: exact.KQuad) -> float:
+    return float(value[0]) + float(value[1]) * math.sqrt(exact.RADICAND)
+
+
+def kpoint_float(point: exact.KPoint) -> tuple[float, float]:
+    return kquad_float(point[0]), kquad_float(point[1])
+
+
+def triangle_contains_point(point: tuple[float, float], polygon: list[tuple[float, float]]) -> bool:
+    signs = []
+    for index in range(3):
+        start = polygon[index]
+        end = polygon[(index + 1) % 3]
+        signs.append(
+            (end[0] - start[0]) * (point[1] - start[1])
+            - (end[1] - start[1]) * (point[0] - start[0])
+        )
+    eps = 1e-7
+    return all(value >= -eps for value in signs) or all(value <= eps for value in signs)
+
+
+def angle_values(sides: tuple[int, int, int]) -> dict[str, float]:
+    a, b, c = sides
+    return {
+        "alpha": math.acos((b * b + c * c - a * a) / (2 * b * c)),
+        "beta": math.acos((a * a + c * c - b * b) / (2 * a * c)),
+        "gamma": math.acos((a * a + b * b - c * c) / (2 * a * b)),
+    }
+
+
+def angle_counter_text(counter: Counter[str]) -> str:
+    parts: list[str] = []
+    for name in ("alpha", "beta", "gamma"):
+        count = counter[name]
+        if count == 1:
+            parts.append(name)
+        elif count > 1:
+            parts.append(f"{count}{name}")
+    return "+".join(parts) if parts else "0"
+
+
+def sector_angle_combos(value: float, sides: tuple[int, int, int]) -> tuple[Counter[str], ...]:
+    angles = angle_values(sides)
+    out: list[Counter[str]] = []
+    for alpha_count in range(7):
+        for beta_count in range(4):
+            for gamma_count in range(4):
+                if alpha_count + beta_count + gamma_count == 0:
+                    continue
+                total = (
+                    alpha_count * angles["alpha"]
+                    + beta_count * angles["beta"]
+                    + gamma_count * angles["gamma"]
+                )
+                if abs(total - value) < 1e-6:
+                    out.append(Counter({"alpha": alpha_count, "beta": beta_count, "gamma": gamma_count}))
+    return tuple(out)
+
+
+def sector_fillable(left_label: str, right_label: str, combos: tuple[Counter[str], ...]) -> bool:
+    return any(trail_possible(combo, left_label, right_label) for combo in combos)
+
+
+def sector_midpoint(
+    vertex: exact.KPoint,
+    left_vector: exact.KPoint,
+    right_vector: exact.KPoint,
+    radius: float,
+) -> tuple[float, float]:
+    vx, vy = kpoint_float(vertex)
+    left_x, left_y = kpoint_float(left_vector)
+    right_x, right_y = kpoint_float(right_vector)
+    left_angle = math.atan2(left_y, left_x)
+    right_angle = math.atan2(right_y, right_x)
+    if right_angle <= left_angle:
+        right_angle += 2 * math.pi
+    middle = (left_angle + right_angle) / 2
+    return vx + radius * math.cos(middle), vy + radius * math.sin(middle)
+
+
+def ccw_sector_angle(left_vector: exact.KPoint, right_vector: exact.KPoint) -> float:
+    left_x, left_y = kpoint_float(left_vector)
+    right_x, right_y = kpoint_float(right_vector)
+    left_angle = math.atan2(left_y, left_x)
+    right_angle = math.atan2(right_y, right_x)
+    if right_angle <= left_angle:
+        right_angle += 2 * math.pi
+    return right_angle - left_angle
+
+
+def min_segment_length(segments: list[exact.KSegment]) -> float:
+    lengths = []
+    for start, end in segments:
+        vector = exact.kpsub(end, start)
+        x_value, y_value = kpoint_float(vector)
+        lengths.append(math.hypot(x_value, y_value))
+    return min(lengths) if lengths else 1.0
+
+
+def pinch_sector_profile(
+    residual_labels: dict[exact.KSegment, str],
+    unique: tuple[exact.IntegerQuadraticTile, ...],
+    sides: tuple[int, int, int],
+) -> tuple[int, int, CounterTuple]:
+    incidences: dict[exact.KPoint, list[tuple[str, exact.KPoint]]] = defaultdict(list)
+    for (start, end), label in residual_labels.items():
+        incidences[start].append((label, exact.kpsub(end, start)))
+        incidences[end].append((label, exact.kpsub(start, end)))
+    float_polygons = [[kpoint_float(point) for point in tile.polygon] for tile in unique]
+    radius = min_segment_length(list(residual_labels)) * 1e-5
+    signatures: Counter[str] = Counter()
+    residual_sectors = 0
+    unfillable = 0
+    for vertex, half_edges in incidences.items():
+        if len(half_edges) == 2:
+            continue
+        ordered = tuple(sorted(half_edges, key=cmp_to_key(compare_incident_half_edges)))
+        for index, (left_label, left_vector) in enumerate(ordered):
+            right_label, right_vector = ordered[(index + 1) % len(ordered)]
+            midpoint = sector_midpoint(vertex, left_vector, right_vector, radius)
+            if any(triangle_contains_point(midpoint, polygon) for polygon in float_polygons):
+                continue
+            residual_sectors += 1
+            sector_angle = ccw_sector_angle(left_vector, right_vector)
+            combos = sector_angle_combos(sector_angle, sides)
+            fillable = sector_fillable(left_label, right_label, combos)
+            if not fillable:
+                unfillable += 1
+            combo_text = "/".join(angle_counter_text(combo) for combo in combos) if combos else "unclassified"
+            status = "ok" if fillable else "bad"
+            signatures[f"{left_label}{right_label}:{combo_text}:{status}"] += 1
+    return residual_sectors, unfillable, tuple(sorted(signatures.items()))
+
+
 def segment_length(segment: exact.KSegment, scale: int):
     length_sq = exact.knorm_sq(exact.kpsub(segment[1], segment[0]))
     if length_sq[1] != 0:
         return None
-    return exact.sqrt_fraction(exact.Fraction(length_sq[0], scale * scale))
+    return exact.sqrt_fraction(Fraction(length_sq[0], scale * scale))
 
 
 def full_atom_failures(
@@ -193,6 +333,11 @@ def diagnose_shell(
     label_profile = residual_label_profile(residual_labels)
     pinch_profile = pinch_label_profile(residual_labels)
     cyclic_pinch_profile = pinch_cyclic_label_profile(residual_labels)
+    residual_sector_count, unfillable_sector_count, sector_profile = pinch_sector_profile(
+        residual_labels,
+        unique,
+        survivor.candidate.tile,
+    )
     non_full_atoms, wrong_full_label_atoms = full_atom_failures(residual_labels, survivor.candidate.tile, scale)
     parity_bad = (
         parity_mismatches(label_profile, remaining_tiles)
@@ -214,6 +359,9 @@ def diagnose_shell(
             parity_mismatches=parity_bad,
             pinch_labels=pinch_profile,
             pinch_cyclic_labels=cyclic_pinch_profile,
+            pinch_residual_sectors=residual_sector_count,
+            pinch_unfillable_sectors=unfillable_sector_count,
+            pinch_sector_signatures=sector_profile,
         )
 
     if any(exact.kside_decomposable(segment, survivor.candidate.tile, scale) for segment in residual_labels):
@@ -230,6 +378,9 @@ def diagnose_shell(
             parity_mismatches=parity_bad,
             pinch_labels=pinch_profile,
             pinch_cyclic_labels=cyclic_pinch_profile,
+            pinch_residual_sectors=residual_sector_count,
+            pinch_unfillable_sectors=unfillable_sector_count,
+            pinch_sector_signatures=sector_profile,
         )
 
     forced_angles: Counter[str] = Counter()
@@ -263,6 +414,9 @@ def diagnose_shell(
         parity_mismatches=parity_bad,
         pinch_labels=pinch_profile,
         pinch_cyclic_labels=cyclic_pinch_profile,
+        pinch_residual_sectors=residual_sector_count,
+        pinch_unfillable_sectors=unfillable_sector_count,
+        pinch_sector_signatures=sector_profile,
         forced_corners=forced,
         label_violations=violations,
         forced_angles=tuple(sorted(forced_angles.items())),
@@ -333,6 +487,9 @@ def main() -> None:
             pinch_shell_profiles: Counter[CounterTuple] = Counter()
             cyclic_pinch_label_counts: Counter[str] = Counter()
             cyclic_pinch_shell_profiles: Counter[CounterTuple] = Counter()
+            pinch_sector_counts: Counter[str] = Counter()
+            pinch_sector_shell_profiles: Counter[CounterTuple] = Counter()
+            unfillable_sector_counts: Counter[tuple[int, int]] = Counter()
             examples: dict[str, tuple[BoundaryDemand, ShellDiagnostic]] = {}
             kept = 0
             covered = 0
@@ -371,6 +528,10 @@ def main() -> None:
                     cyclic_pinch_shell_profiles[detail.pinch_cyclic_labels] += 1
                     for labels, count in detail.pinch_cyclic_labels:
                         cyclic_pinch_label_counts[labels] += count
+                    pinch_sector_shell_profiles[detail.pinch_sector_signatures] += 1
+                    unfillable_sector_counts[(detail.pinch_residual_sectors, detail.pinch_unfillable_sectors)] += 1
+                    for signature, count in detail.pinch_sector_signatures:
+                        pinch_sector_counts[signature] += count
                 if detail.status == "corner-label-violation":
                     forced_angle_profiles[detail.forced_angles] += 1
                     violations_per_shell[detail.label_violations] += 1
@@ -411,6 +572,15 @@ def main() -> None:
             print("  top non-2-degree vertex cyclic incident labels:")
             for labels, count in cyclic_pinch_label_counts.most_common(args.top):
                 print(f"    {labels}: {count}")
+            print("  non-simple residual-sector fillability counts:")
+            for (sectors, bad), count in sorted(unfillable_sector_counts.items()):
+                print(f"    residual_sectors={sectors}, unfillable={bad}: {count}")
+            print("  top non-simple pinch sector profiles:")
+            for profile, count in pinch_sector_shell_profiles.most_common(args.top):
+                print(f"    {counter_tuple_text(profile)}: {count}")
+            print("  top non-simple pinch sector signatures:")
+            for signature, count in pinch_sector_counts.most_common(args.top):
+                print(f"    {signature}: {count}")
             print("  top forced-angle profiles among corner violations:")
             for profile, count in forced_angle_profiles.most_common(args.top):
                 print(f"    {counter_tuple_text(profile)}: {count}")
