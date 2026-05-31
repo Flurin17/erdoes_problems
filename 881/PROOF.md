@@ -2029,6 +2029,29 @@ way to vary the center coherently with the deleted pattern, or an argument
 turning persistent star-shaped failures into a genuine tail barrier. This
 is the same coherence problem illustrated by Example 8.8.
 
+The finite script `EXPERIMENTS/star_pair_search.py` shows that this is not
+only a logical possibility. It finds
+\[
+A_0=\{1,2,3,4,7,10\},
+\]
+whose two-sums cover through \(14\). With fixed center \(e=1\) and old
+deleted element \(d=3\), the later candidates
+\[
+b=4,7,10
+\]
+have minimal star holes
+\[
+e+d+b=8,11,14
+\]
+respectively:
+\[
+e+d+b\notin3(A_0\setminus\{d,b\}),
+\]
+while restoring either \(d\) or \(b\) repairs the displayed witness. This
+finite window does not construct an infinite obstruction, but it confirms
+that fixed-prefix star poisoning is compatible with genuine local two-sum
+coverage.
+
 ## Theorem 8.2: Reflection-recurrence gives a good deletion for \(k=2\)
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with

@@ -114,6 +114,14 @@ several finite integer-window examples. This is a diagnostic for Lemma
 8.6g: fixed-rank large-excess barriers can persist only if every finite
 test set has a large certificate-free subset.
 
+`star_pair_search.py` searches for the fixed-center star obstruction from
+Warning 8.2b. It finds the small window
+\(\{1,2,3,4,7,10\}\), with two-sum coverage through \(14\), where center
+`1` and old deleted element `3` make the spokes `4,7,10` fail the pair
+repair at witnesses `8,11,14`. Restoring either endpoint repairs each
+witness, so this is a genuine minimal pair-hole phenomenon for a fixed
+prefix.
+
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
 \[
