@@ -246,11 +246,12 @@ k=60: L=42N-1,   6(r+2) tau(C) <= 62 for L=5^r C.
 Here `r` is the valuation at the displayed shared prime and `C` is the
 remaining cofactor.
 
-The C++ tuple search now handles the exact low-budget cases for
-`k=7,14,15,16` without full factorization when possible. The helper
-`tau_leq_small(C,T)` is exact for `T <= 4`: it permits `C=1`, primes,
-prime squares, prime cubes, and semiprimes as allowed by the divisor
-budget, so it does not make the invalid "prime-only" simplification.
+The C++ tuple search now handles these exact low-budget shared-prime cases
+for `k=7,14,15,16,18,20,21,28,30,36,42,60` without full factorization when
+possible. The helper `tau_leq_small(C,T)` is exact for `T <= 5`: it permits
+`C=1`, primes, prime squares, prime cubes, fourth powers of primes, and
+semiprimes as allowed by the divisor budget, so it does not make the invalid
+"prime-only" simplification.
 
 ## Search Results So Far
 

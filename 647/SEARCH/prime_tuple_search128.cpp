@@ -347,6 +347,11 @@ static bool tau_leq_small(u128 n, uint32_t bound) {
 
     u128 cube = icbrt128(n);
     if (cube * cube * cube == n && is_prime128(cube)) return true;
+    if (bound == 5) {
+        u128 fourth = isqrt128(root);
+        if (fourth * fourth * fourth * fourth == n && is_prime128(fourth)) return true;
+    }
+    if (bound > 5) return tau128(n) <= bound;
 
     std::vector<u128> factors;
     factor_rec(n, factors);
@@ -508,6 +513,46 @@ static bool shift16_ok(u128 N) {
     return shared_prime_budget_ok(L, 2, 3, 1, 18);
 }
 
+static bool shift18_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(140, N, L) && shared_prime_budget_ok(L, 3, 2, 2, 20);
+}
+
+static bool shift20_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(126, N, L) && shared_prime_budget_ok(L, 5, 1, 3, 22);
+}
+
+static bool shift21_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(120, N, L) && shared_prime_budget_ok(L, 7, 1, 2, 23);
+}
+
+static bool shift28_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(90, N, L) && shared_prime_budget_ok(L, 7, 1, 3, 30);
+}
+
+static bool shift30_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(84, N, L) && shared_prime_budget_ok(L, 5, 1, 4, 32);
+}
+
+static bool shift36_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(70, N, L) && shared_prime_budget_ok(L, 3, 2, 3, 38);
+}
+
+static bool shift42_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(60, N, L) && shared_prime_budget_ok(L, 7, 1, 4, 44);
+}
+
+static bool shift60_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(42, N, L) && shared_prime_budget_ok(L, 5, 1, 6, 62);
+}
+
 static bool guaranteed_by_branch(uint32_t k, int branch) {
     if (k == 1 || k == 2 || k == 3 || k == 4 || k == 6 || k == 8 || k == 12) {
         return true;
@@ -552,6 +597,46 @@ static uint32_t first_failing_shift(u128 n, u128 N, int branch, uint32_t limit,
         }
         if (k == 16) {
             if (shift16_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 18) {
+            if (shift18_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 20) {
+            if (shift20_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 21) {
+            if (shift21_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 28) {
+            if (shift28_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 30) {
+            if (shift30_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 36) {
+            if (shift36_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 42) {
+            if (shift42_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 60) {
+            if (shift60_ok(N)) continue;
             if (tau_out) *tau_out = tau128(n - (u128)k);
             return k;
         }
