@@ -5900,6 +5900,57 @@ traces touching a coordinate with no singleton of the relevant global sign.
 This matches the small mixed-support searches: the first large examples use
 singleton compensators with incompatible signs.
 
+The general support-at-most-two case has the following exact graph model.
+
+**Lemma 15G: Mixed Singleton/Pair Traces Are Half-Edge Alternation
+Obstructions.**  In the setting of Lemma 12A, suppose every outside trace
+difference has support size at most `2`.  Build a colored multigraph with
+half-edges on the coordinate set `{1,...,d}` as follows:
+
+* `+e_i` is a red half-edge incident with `i`;
+* `-e_i` is a blue half-edge incident with `i`;
+* `+1_{i,j}` is a red ordinary edge `ij`;
+* `-1_{i,j}` is a blue ordinary edge `ij`.
+
+Then the minimality condition from Lemma 12 is equivalent to the assertion
+that this colored graph has neither
+
+1. an alternating closed trail consisting of ordinary edges, nor
+2. an alternating trail whose two end edges are half-edges and whose internal
+   edges are ordinary.
+
+Here "alternating" means that consecutive incidences at every coordinate have
+opposite colors.
+
+Proof.  A selected submultiset of trace vectors has sum zero exactly when, at
+every coordinate, the selected red incidences and blue incidences are equal.
+If an alternating closed trail of ordinary edges exists, or if an alternating
+trail begins and ends with half-edges, then selecting the vectors represented
+by the edges of that trail gives equal red and blue incidence at every
+coordinate on the trail and zero incidence elsewhere.  This is a balanced
+deletion, forbidden by Lemma 12.
+
+Conversely, suppose a nonempty selected subgraph has equal red and blue
+incidence at every coordinate.  If some component has no half-edge, then it
+is an ordinary two-colored multigraph with equal red and blue degree at every
+vertex; the maximal-trail argument from Lemma 15D gives an alternating closed
+trail.  Otherwise take a component containing a half-edge.  Start from a
+half-edge and extend an alternating trail through unused selected incidences.
+At an internal coordinate, the used red and blue incidences are paired, so if
+the trail enters by one color and has not stopped at a half-edge, the equality
+of selected red and blue incidences supplies an unused incidence of the other
+color.  Since the selected incidence set is finite, the process either reaches
+a second half-edge, giving an alternating half-edge-to-half-edge trail, or
+repeats a coordinate with the same next required color, giving an alternating
+closed trail.  Thus any balanced deletion contains one of the two displayed
+objects.  QED.
+
+This lemma is the precise mixed support-`<=2` residue of the trace route.
+Corollary 15E bounds the case with no half-edges, and Corollary 15F removes a
+one-signed covered half-edge case.  The remaining finite problem is to bound
+colored graphs with half-edges, small red-blue degree imbalance at every
+coordinate, and no alternating closed or half-edge-to-half-edge trail.
+
 One genuinely low-dimensional trace obstruction does collapse.
 
 ## Lemma 15A: Rank-One Trace Obstructions Are Small

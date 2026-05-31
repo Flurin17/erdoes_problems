@@ -2174,3 +2174,10 @@ source of growth beyond Ramsey.
   one sign, so Lemma 15B gives `|B|<=d^2`.  Thus a large support-`<=2`
   obstruction must use singleton traces of both signs or pair traces touching
   coordinates not covered by a singleton of the global sign.
+- 2026-05-31: Added Lemma 15G, the exact mixed support-`<=2` graph model.
+  Singleton traces are colored half-edges and pair traces are colored ordinary
+  edges.  A balanced deletion is equivalent to either an alternating closed
+  trail of ordinary edges or an alternating trail whose two ends are
+  half-edges.  The remaining support-`<=2` trace problem is therefore to
+  bound colored graphs with half-edges, small red-blue degree imbalance at
+  every coordinate, and no such alternating trail.
