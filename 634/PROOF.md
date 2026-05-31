@@ -1040,6 +1040,7 @@ This table records only values/families classified by the current proof file.
 | `55` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `56` | negative in this workspace | published source case split plus exact arithmetic and `gamma=2alpha` boundary-enumeration elimination in the composite benchmark below |
 | `57` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `60` | negative in this workspace | published source case split plus exact arithmetic and Beeson's post-Theorem 11.18 `gamma=2alpha` boundary-enumeration computation |
 | `62` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `66` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `69` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
@@ -1498,6 +1499,39 @@ N=56: 0 gamma=2alpha boundary candidate(s), 0 after boundary-count obstruction
 Therefore `N=56` has no survivor in any source case and is classified negative
 in this workspace.
 
+## Composite Benchmark: `N=60`
+
+The value `60` is not in the elementary positive forms, so the
+commensurable-angle, similar/reptile, and right-tile isosceles branches are
+removed. The exact equilateral scan leaves two `2pi/3` candidates,
+`(3,5,7)` and its swap in an equilateral triangle of side `30`; both have zero
+compatible full boundary cycles. The isosceles and non-isosceles
+`gamma=2pi/3` filters give no candidates.
+
+In the `3alpha+2beta=pi` branch, Beeson's necessary equations leave seven raw
+isosceles-`alpha+beta` roots, and all seven fail Beeson's stronger Section 11.4
+filter.
+
+The remaining branch is `gamma=2alpha`. The local Lemma 11.14 boundary
+enumeration leaves one arithmetic candidate:
+
+```text
+tile=(49,15,56), X=210=a+7b+c, Y=240
+Y representations: 16b, a+9b+c, 2a+2b+2c.
+```
+
+The two `Y` representations with one or two `c` edges are removed by Beeson
+Lemma 11.17. The zero-`c` representation `Y=16b` is not eliminated by the
+local scripts. Here the proof uses Beeson's improved finite boundary
+computation following Theorem 11.18: after adding Lemma 11.17 to the Lemma
+11.14 algorithm, the next boundary possibilities left open after `45` are
+`63`, `64`, and `72`. Thus no `N=60` `gamma=2alpha` tiling remains in that
+source computation.
+
+Therefore `N=60` has no survivor in any source case and is classified negative
+in this workspace, with the final `gamma=2alpha` step relying on Beeson's
+reported finite boundary enumeration.
+
 ## Composite Benchmark: `N=57` and `N=62`
 
 The next squarefree composite rows with no encoded survivor are `57` and `62`.
@@ -1607,8 +1641,8 @@ workspace.
 - The first composite negative values beyond Beeson's `7` and `11`
   obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
   `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`,
-  `57`, `62`, `66`, `69`, `70`, `78`, `86`, `87`, `88`, `91`, `93`, `94`, and
-  `95`.
+  `57`, `60`, `62`, `66`, `69`, `70`, `78`, `86`, `87`, `88`, `91`, `93`,
+  `94`, and `95`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1630,20 +1664,18 @@ workspace.
   obstruction with the other source filters to classify `21` and `30`
   negative.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `60` and `63` as open with `gamma=2alpha` boundary-arithmetic survivors, and
-  `76`, `92`, and `99` as open with gamma-branch survivors. The same scan
+  `63`, `76`, `92`, and `99` as open with `gamma=2alpha`
+  boundary-arithmetic survivors. The same scan
   formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
-  `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`, `57`, `62`, `66`, `69`,
-  `70`, `78`, `86`, `87`, `88`, `91`, `93`, `94`, and `95`, which are now
-  removed by the composite benchmarks above. The remaining values are not
+  `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`,
+  `69`, `70`, `78`, `86`, `87`, `88`, `91`, `93`, `94`, and `95`, which are
+  now removed by the composite benchmarks above. The remaining values are not
   negative theorems until their `gamma=2alpha` survivor eliminations are
   written out.
 - For the `gamma=2alpha` branch, Beeson records a finite boundary-enumeration
   algorithm and says that after the possible `N=45` boundary tiling the next
-  values left open are `63,64,72`. This appears to remove the last branch for
-  `60`, but this proof file still requires either a reproduced enumeration
-  certificate or an explicit decision to cite that computation as a black-box
-  source result before promoting that value.
+  values left open are `63,64,72`. The `N=60` benchmark above cites this
+  computation as the final source-backed obstruction for that value.
 - In the range `100..250`, the current encoded survivor list has shrunk to
   `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`, and `240`. All are
   `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4

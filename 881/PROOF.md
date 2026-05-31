@@ -3633,6 +3633,23 @@ private witnesses lie below the end of a longer covered buffer, or a
 weaker infinite construction in which only a cofinite protected subset of
 the added elements needs local witnesses.
 
+The high-rank version of the obstruction is visible in finite residue
+models. The script `EXPERIMENTS/finite_barrier_hypergraph.py` constructs
+the hypergraph of finite deletions \(F\subset S\) for which
+\((k+1)(S\setminus F)\) is not the whole residue group. In
+\(\mathbb Z/5\mathbb Z\), with
+\[
+S=\mathbb Z/5\mathbb Z,
+\]
+every singleton and pair deletion is harmless at order \(3\), but every
+triple deletion is bad: the complement has two residues, and a three-fold
+sumset of two residues has at most four elements. Thus the bad triples form
+a complete rank-3 finite barrier. This is only a residue model, since
+integer lifts can repair deleted residue representatives, but it confirms
+the barrier shape suggested by Reduction 0: a negative construction may
+need genuinely high-rank finite edges rather than singleton or pair
+private witnesses.
+
 ## Attempt 14: The affine finite-booster construction is not verified
 
 The 2026-05-03 comment on the problem page links a proposed negative

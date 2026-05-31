@@ -69,6 +69,15 @@ deletions create holes. This models the remaining \(k=2\) finitely-bad
 case, where any obstruction must be genuinely collective rather than
 one-point.
 
+`finite_barrier_hypergraph.py` builds the finite residue hypergraph of
+deletions \(F\subset S\) for which \((k+1)(S\setminus F)\) is not the whole
+group. The default run reports the minimal pair barrier
+\(\{0,2\},\{1,3\}\) on \(S=\mathbb Z/4\mathbb Z\). With `--rank3`, it
+finds the complete rank-3 barrier on \(S=\mathbb Z/5\mathbb Z\): singleton
+and pair deletions are harmless, but every triple deletion is bad. This is
+a finite residue model of the high-rank barrier obstruction isolated by
+Reduction 0.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole

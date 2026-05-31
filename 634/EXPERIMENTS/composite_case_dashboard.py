@@ -114,6 +114,8 @@ def right_tile_isosceles_status(n: int) -> str:
 def gamma_2alpha_status(n: int) -> str:
     if is_squarefree(n):
         return "ruled out because recorded counts are not squarefree"
+    if n == 60:
+        return "ruled out by Beeson's post-Theorem 11.18 finite boundary computation"
     candidates = gamma_2alpha_survivors(n)
     if not candidates:
         return "ruled out by Lemma 11.14 boundary-arithmetic enumeration"
@@ -152,6 +154,8 @@ def workspace_negative_reason(n: int) -> str | None:
         return "negative by the N=56 composite benchmark in PROOF.md"
     if n in {57, 62}:
         return "negative by the 57/62 composite benchmark in PROOF.md"
+    if n == 60:
+        return "negative by the N=60 source-backed gamma=2alpha benchmark in PROOF.md"
     if n in {66, 69, 70}:
         return "negative by the 66/69/70 composite benchmark in PROOF.md"
     if n in {78, 86, 87, 88, 91, 93, 94, 95}:
