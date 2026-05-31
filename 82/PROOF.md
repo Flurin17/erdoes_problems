@@ -933,6 +933,57 @@ Thus the rectangle theorem would prove a strong positive class for the
 one-shot `q+2` program: all complete multipartite graphs and, by complement,
 all disjoint unions of cliques.
 
+The same arithmetic obstruction analysis suggests a sharper finite target.
+
+## Sharp Rectangle-Cover Target
+
+Let `C>=5` and `b>=2`.  Every nonnegative integer vector `a=(a_i)` with
+
+```text
+sum_i a_i <= (b-2)C+6
+```
+
+should be writable as a sum of at most `b` vectors `r 1_I` with `r>=1`,
+`I` nonempty, and `r|I|<=C`.
+
+This would imply the preceding rectangle theorem by taking `b=q` and
+`C=q+2`, because
+
+```text
+(q-2)(q+2)+6 = q^2+2.
+```
+
+The threshold is sharp.  The vector
+
+```text
+((b-2)C+4, 2, 1)
+```
+
+has total `(b-2)C+7` and cannot be covered by `b` rectangles of area at most
+`C`.  Indeed, if all `b` rectangles are counted against the first coordinate,
+their total first-coordinate capacity is at most `bC`.  Covering the tail
+`(2,1)` forces a loss of at least `(C-2)+(C-1)=2C-3`.  To see this, decompose
+the tail contribution into horizontal slices.  A slice of height `h` that
+touches a tail coordinate contributes at most `h` to the first coordinate, and
+using it on the tail costs at least `C-h` of the corresponding first-coordinate
+capacity.  The cheapest way to cover tail height pattern `(2,1)` is one slice
+of height `2` and one slice of height `1`; splitting the height-`2` coordinate
+into smaller slices only increases `sum(C-h)`.  But the first coordinate
+leaves only
+
+```text
+bC - ((b-2)C+4) = 2C-4
+```
+
+unused capacity.  This contradiction rules out such a cover.
+
+The natural proof by deleting one full rectangle is false even below the sharp
+threshold.  With `C=7,b=3`, the vector `(5,4,4)` has total
+`(b-2)C+6=13` and is coverable by three rectangles, but it contains no legal
+rectangle of area `7`.  Any proof of the sharp target must therefore use an
+amortized deletion or exchange argument rather than a literal full-rectangle
+first step.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with

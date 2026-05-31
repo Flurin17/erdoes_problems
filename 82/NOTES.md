@@ -1308,3 +1308,11 @@ source of growth beyond Ramsey.
   `(6,6,6,6,5,4,3,2,2,2,1,1,1,1,1,1,1,1,1,1)`.  A direct fixed-vector check
   covers it in `8` rectangles:
   `6^1, 6^1, 6^1, 6^1, 5^1, 3^2, 1^10, 1^7`.
+- 2026-05-31: The rectangle-cover subagent did not prove or refute the
+  rectangle theorem, but identified a sharper likely finite target: for
+  `C>=5,b>=2`, total at most `(b-2)C+6` should be coverable by `b` rectangles
+  of area at most `C`.  This would imply the `q`-rectangle theorem by setting
+  `b=q,C=q+2`, and it is sharp because `((b-2)C+4,2,1)` of total
+  `(b-2)C+7` is not coverable.  The failed full-rectangle induction obstruction
+  persists at `(C,b)=(7,3)` with vector `(5,4,4)`, so the next proof attempt
+  should be an amortized exchange argument.
