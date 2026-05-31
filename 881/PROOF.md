@@ -1413,7 +1413,7 @@ Proof. By Corollary 3.3, for this fixed \(E\) there is an integer \(M_E\)
 and arbitrarily large \(n\) for which the matching number of
 \(\mathcal H_E(n)\) is less than \(M_E\). Let
 \[
-C_k=\binom{2k+1}{k+1}.
+C_{k,E}=\binom{|E|+2k+1}{k+1}.
 \]
 As in Corollary 3.4b, padding one chosen \(k\)-term representation of
 \(n-e\) by each
@@ -1423,14 +1423,17 @@ e\in A\cap[1,n-N_0]\setminus E
 gives, after forgetting distinguished summands and multiplicities, at
 least
 \[
-\frac{|A\cap[1,n-N_0]|-|E|}{(k+1)C_k}
+\frac{|A\cap[1,n-N_0]|-|E|}{(k+1)C_{k,E}}
 \]
-edges in \(\mathcal H_E(n)\). For all sufficiently large \(n\), this is at
-least
+edges in \(\mathcal H_E(n)\). Indeed, once an outside-\(E\) support edge is
+fixed, there are at most \(C_{k,E}\) possible \((k+1)\)-term multisets using
+that edge together with elements of the fixed finite core \(E\), and at most
+\(k+1\) choices for the distinguished padded occurrence. For all
+sufficiently large \(n\), this edge count is at least
 \[
-c_k A(n)
+c_{k,E} A(n)
 \]
-for a constant \(c_k>0\), because \(E\) and \(N_0\) are fixed.
+for a constant \(c_{k,E}>0\), because \(E\) and \(N_0\) are fixed.
 
 The greedy matching lower bound used in Proposition 3.4 gives
 \[
@@ -1439,7 +1442,7 @@ The greedy matching lower bound used in Proposition 3.4 gives
 \]
 Since the matching number is less than \(M_E\), we have
 \[
-\Delta_E(n)\ge \frac{c_k}{(k+1)M_E}A(n). \tag{2}
+\Delta_E(n)\ge \frac{c_{k,E}}{(k+1)M_E}A(n). \tag{2}
 \]
 Choose a vertex \(x_n\in A\setminus E\) with this degree. Every edge
 containing \(x_n\) comes from some \((k+1)\)-term multiset representation
