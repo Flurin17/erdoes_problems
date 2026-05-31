@@ -32,6 +32,14 @@ def flip_triangle(mask: int, triple: tuple[int, int, int]) -> int:
     return mask
 
 
+def score_label(value: int, max_colors: int) -> str:
+    if value == 0:
+        return "unknown"
+    if value <= max_colors:
+        return str(value)
+    return "none<=max"
+
+
 def score(
     mask: int,
     n: int,
@@ -42,6 +50,12 @@ def score(
     merge_restarts: int,
     rng: random.Random,
 ) -> int:
+    """Return a certified score, or 0 when the exact check hit node limits.
+
+    Values 1..max_colors are certified minimum color counts up to max_colors.
+    The value max_colors+1 means the exact search certified no partition with
+    at most max_colors colors.  The value 0 means unknown.
+    """
     if mask in cache:
         return cache[mask]
     try:
@@ -49,7 +63,6 @@ def score(
             n, mask, modulus, max_colors, None, 0, None, node_limit
         )
     except modular_partition.SearchLimitExceeded:
-        result = None
         if merge_restarts:
             pc = ri.precompute(n)
             merge_cache: dict[int, int | None] = {}
@@ -63,6 +76,8 @@ def score(
                 value = best
                 cache[mask] = value
                 return value
+        cache[mask] = 0
+        return 0
     value = max_colors + 1 if result is None else result[0]
     cache[mask] = value
     return value
@@ -85,19 +100,22 @@ def search(
     cache: dict[int, int] = {}
     best_score = -1
     best_mask = 0
+    unknown = 0
 
     for restart in range(restarts):
         mask = modular_partition.random_parity_mask(n, False, rng, pc, edge_index)
         if mask is None:
             continue
         current = score(mask, n, modulus, max_colors, cache, node_limit, merge_restarts, rng)
+        if current == 0:
+            unknown += 1
         for step in range(steps):
-            if current > best_score:
+            if current > 0 and current > best_score:
                 best_score = current
                 best_mask = mask
                 print(
                     f"restart={restart} step={step} "
-                    f"best_min_colors={best_score if best_score <= max_colors else 'NA'} "
+                    f"best_min_colors={score_label(best_score, max_colors)} "
                     f"mask={best_mask}",
                     flush=True,
                 )
@@ -115,6 +133,8 @@ def search(
                 merge_restarts,
                 rng,
             )
+            if candidate_score == 0:
+                unknown += 1
             if candidate_score >= current or rng.randrange(10) == 0:
                 mask = candidate
                 current = candidate_score
@@ -131,7 +151,11 @@ def search(
     if merge_restarts:
         print(f"merge_restarts={merge_restarts}")
     print(f"evaluated_masks={len(cache)}")
-    print(f"best_min_colors={best_score if best_score <= max_colors else 'NA'}")
+    print(f"unknown_evaluations={unknown}")
+    if best_score <= 0:
+        print("best_min_colors=unknown")
+    else:
+        print(f"best_min_colors={score_label(best_score, max_colors)}")
     print(f"best_mask={best_mask}")
 
 

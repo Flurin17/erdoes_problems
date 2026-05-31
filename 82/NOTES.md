@@ -999,3 +999,10 @@ source of growth beyond Ramsey.
   with `p=Theta(1/k)`, it needs `N >= k^{t+1}`.  Any DRC route requiring
   `Theta(k)` roots is therefore exponential or worse unless it carries extra
   internal degree control on the leaves.
+- 2026-05-31: Added a `--score-all` mode to `universal_slots.py` so the eight
+  decisive first-lift slot candidates can be scored on the same sampled even
+  graphs.  On `n=12`, `50` even samples with seed `412` were all partitionable
+  for every current candidate slot multiset.  Also fixed
+  `search_modular_partition.py` so node-limited exact searches are classified
+  as `unknown` rather than as no-partition certificates; this prevents false
+  counterexample signals in large local searches.

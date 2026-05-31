@@ -37,7 +37,8 @@ Computational checks and generated data for Erdos Problem 82.
   `4`-modular partition check.
 - `search_modular_partition.py`: local search over even graphs, using
   triangle flips to preserve parity, for examples with high first-lift modular
-  partition color number.
+  partition color number.  Node-limited exact searches are reported as
+  unknown rather than as counterexample certificates.
 - `color_modular_partition.py`: local search directly over fixed-color
   assignments, scoring residue disagreement inside color classes; includes a
   bounded Hamming repair step for near-miss colorings and a full-modular
@@ -64,7 +65,9 @@ Computational checks and generated data for Erdos Problem 82.
   random even-graph sampling at larger `n`.  Its exact-cover recursion indexes
   valid subsets by residue and pivot vertex for larger sampled checks.  It can
   also sample source-modular graphs for higher dyadic lifts, such as
-  `4 -> 8`, with `--sample-source-modular`.
+  `4 -> 8`, with `--sample-source-modular`.  Use `--score-all` with
+  `--sample-even` to score all supplied candidate slot multisets on the same
+  sampled graphs instead of discarding candidates after their first failure.
 - `universal_slots_fast.cpp`: C++ exhaustive checker for the same fixed-slot
   question.  It is intended for the full labelled even-graph sweep on `n=8`,
   where the Python exact-cover loop is too slow.
