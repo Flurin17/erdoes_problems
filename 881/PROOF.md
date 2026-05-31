@@ -2523,9 +2523,49 @@ f=d-h.
 \]
 Adjoining a cofinite tail \([W,\infty)\) with \(W>w\) makes a benign
 order-2 basis without changing these rows. Therefore the shifted-overlap
-branch, like the
-unique-gate branch in Warning 3.4p, requires global barrier input to rule
-out.
+branch, like the unique-gate branch in Warning 3.4p, requires global
+barrier input to rule out.
+
+## Corollary 3.4v: Fixed branch recurrence collapses
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Suppose
+there are a nonzero integer \(h\) and distinct elements \(e,y\in A\) such
+that
+\[
+e+h,\ y+h\in A
+\]
+and, for arbitrarily large \(t\),
+\[
+t-e,\quad t-y,\quad t-(e+h)\in A. \tag{1}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(3\).
+
+Proof. The triple
+\[
+R=\{e,y,e+h\}
+\]
+is reflection-recurrent by (1). It is a certificate triple in the sense of
+Corollary 2.3c, because
+\[
+y+(e+h)-e=y+h\in A.
+\]
+Corollary 2.3c gives the desired deletion. \(\square\)
+
+Thus a shifted-overlap obstruction can persist only if the difference
+\[
+h=d-f
+\]
+or the shifted rows themselves escape every finite test set. The analogous
+unique-gate statement is the same fixed-certificate test in disguise: if a
+fixed certificate triple
+\[
+e,y_1,y_2,\qquad y_1+y_2-e\in A,
+\]
+is contained in \(S\) or in \(t-S\) for reflected packets with arbitrarily
+large \(t\), then it is reflection-recurrent and Corollary 2.3c again gives
+a good deletion. Consequently both branches in Corollary 3.4t are now
+reduced to genuine mass escape rather than a fixed local pattern.
 
 ## Lemma 3.5: Transversals are shifted finite barriers
 
@@ -7665,6 +7705,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 3.4t turns this into the current two-branch normal form:
   remaining counterexamples must have either large unique-gate reflected
   packets or large shifted-overlap reflected packets.
+* Warning 3.4u shows that shifted-overlap packets are locally compatible,
+  so the shifted branch also needs global input.
+* Corollary 3.4v records the branch-specific recurrence collapse: fixed
+  shifted-overlap rows, or a fixed certificate triple inside either side of
+  the reflected packet, already give the desired deletion by Corollary 2.3c.
+  Thus the remaining obstruction is genuine mass escape.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
