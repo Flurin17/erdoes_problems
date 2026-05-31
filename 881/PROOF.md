@@ -1214,6 +1214,55 @@ order-\(k\) bases, or build a counterexample whose representation
 hypergraphs exhibit them. By Reduction 0, such a counterexample would
 automatically satisfy the Erdős infinite-deletion minimality hypothesis.
 
+## Lemma 3.3a: Random thinning is an anti-transversal criterion
+
+Fix a finite core \(E\subset A\), put \(h=k+1\), and let
+\[
+\mathcal T_E(n)
+\]
+be the family of inclusion-minimal transversals of \(\mathcal H_E(n)\).
+Suppose there are numbers
+\[
+0\le q_a\le1\qquad(a\in A\setminus E)
+\]
+such that
+\[
+\sum_{a\in A\setminus E}q_a=\infty \tag{1}
+\]
+and
+\[
+\sum_n\sum_{T\in\mathcal T_E(n)}\prod_{a\in T}q_a<\infty. \tag{2}
+\]
+Then there is an infinite \(B\subset A\setminus E\) such that
+\[
+A\setminus B
+\]
+is an asymptotic basis of order \(h\).
+
+Proof. Delete each \(a\in A\setminus E\) independently with probability
+\(q_a\). By (1), the deleted set \(B\) is infinite almost surely.
+
+For a fixed sufficiently large \(n\), the complement \(A\setminus B\) fails
+to represent \(n\) at order \(h\) if and only if \(B\) contains some
+transversal of \(\mathcal H_E(n)\), and hence contains an inclusion-minimal
+transversal. The probability of this event is at most
+\[
+\sum_{T\in\mathcal T_E(n)}\prod_{a\in T}q_a.
+\]
+By (2) and Borel-Cantelli, almost surely only finitely many \(n\) fail.
+For one outcome with \(B\) infinite and only finitely many failures,
+\(A\setminus B\) is an asymptotic basis of order \(h\). \(\square\)
+
+Thus a purely probabilistic proof would still need an additive theorem
+saying that the minimal transversals can be made summable while deleting
+infinitely many elements. Complete pair barriers or Schreier-type
+transversal barriers defeat this condition abstractly: every infinite
+deletion contains a bad pair or an initial Schreier edge, so no choice of
+probabilities with divergent sum can avoid all bad transversals. The
+remaining task is therefore arithmetic, not probabilistic: prove such
+collective transversal barriers cannot arise from actual representation
+hypergraphs, or construct one.
+
 ## Corollary 3.3b: Bounded terminal-gap holes outside any finite core
 
 Assume that no infinite \(B\subset A\) has \(A\setminus B\) an
@@ -7681,6 +7730,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   hypothesis for \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded
   moving transversals for representation hypergraphs.
+* Lemma 3.3a records the exact first-moment random-thinning criterion:
+  independent deletion works if minimal transversals are summable, but this
+  is precisely an anti-barrier condition and does not bypass complete-pair or
+  Schreier-type collective obstructions.
 * Corollary 3.3b turns those bounded transversals into bounded-size
   terminal-gap holes outside any prescribed finite protected core.
 * Proposition 3.4 proves the conclusion for bases with sufficiently
