@@ -2959,6 +2959,75 @@ force low-count rows to disappear. This is not relevant to the remaining
 sparse case after Proposition 3.1f, but it is a useful check on finite
 block constructions.
 
+## Proposition 8.4f: Private-color normal form for the remaining \(k=2\) obstruction
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+order-2 threshold \(N_0\). Suppose \(A\) is a counterexample to the desired
+order-3 deletion conclusion. Let \(E\subset A\) be the finite exceptional
+set from Corollary 8.3b, so that every singleton deletion
+\[
+A\setminus\{a\},\qquad a\in A\setminus E,
+\]
+is an order-3 basis with threshold below \(a\).
+
+Then for every finite \(T\subset A\), every infinite
+\[
+X\subset A\setminus(T\cup E),
+\]
+and every \(L\), there are a finite set
+\[
+F\subset X,\qquad |F|\ge2,
+\]
+and a witness \(w>L\) such that, after replacing \(F\) by an
+inclusion-minimal subhole for this \(w\), the following hold. Put
+\[
+C=A\setminus F,\qquad r=|F|.
+\]
+
+1. \(w\notin3C\), but restoring any one element of \(F\) repairs the hole:
+   \[
+   w\in3(A\setminus(F\setminus\{f\}))\qquad(f\in F).
+   \]
+2. Every \(f\in F\) is active with a multiplicity \(q_f\in\{1,2,3\}\) as
+   in Lemma 8.4b.
+3. The terminal retained gap holds:
+   \[
+   C\cap(w-\min F-\min A,\ w-N_0]=\varnothing.
+   \]
+4. For every \(t\in T\cap C\) with \(w-t\ge N_0\), either
+   \[
+   w-t\in F+F,
+   \]
+   or there is a color \(f=\chi(t)\in F\) such that
+   \[
+   w-t-f\in C,\qquad t+f\notin2C,\qquad \nu_f(t+f)<r. \tag{1}
+   \]
+
+Proof. Lemma 8.4 gives a finite late-bad \(F_0\subset X\) and a witness
+\(w>L\) with \(w\notin3(A\setminus F_0)\). Shrink \(F_0\)
+inclusion-minimally for this same witness and call the result \(F\). Since
+we have \(F\subset X\subset A\setminus E\), Corollary 8.3b gives
+\(|F|\ge2\). Lemma 8.4b gives the inclusion-minimal repair and active
+multiplicity statements, and Lemma 8.4a gives the terminal retained gap.
+
+Finally fix \(t\in T\cap C\) with \(w-t\ge N_0\). If \(w-t\notin F+F\),
+Lemma 8.4c gives a color \(f\in F\) with
+\[
+w-t-f\in C,\qquad t+f\notin2C.
+\]
+Lemma 8.4d then gives
+\[
+\nu_f(t+f)<r.
+\]
+This proves (4). \(\square\)
+
+Thus the still-open \(k=2\) case is exactly the possibility of such
+private-color barriers in every infinite tail, with ranks possibly growing
+fast enough to evade finite certificate tests and with low-count rows
+possibly living in sparse, non-syndetic parts of the basis. The proposition
+is not a new obstruction; it is the consolidated checklist any final proof
+or counterexample must now defeat.
+
 ## Lemma 8.4a: Collective holes force a retained gap
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -6376,6 +6445,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \(f\) in a prescribed finite set. Thus Lemma 8.4d is useful only when
   combined with non-sparse redundancy, dense intervals, or additional
   structure beyond order-2 coverage.
+* Proposition 8.4f consolidates the remaining \(k=2\) counterexample
+  normal form: every infinite tail must contain an inclusion-minimal
+  collective hole with a terminal gap and a private-color/low-count
+  incidence for every active finite test row, except for deleted-pair
+  exception rows.
 * Warning 8.5 records that bounded-width barriers do not automatically
   reduce to one fixed uniformity, and that abstract barriers need not have
   bounded width on any infinite tail.
