@@ -1559,6 +1559,16 @@ source of growth beyond Ramsey.
   rejection samples found best regular orders `7` on `n=16` (`11` checked) and
   `9` on `n=20` (`3` checked).  Acceptance is low and this is only a sanity
   check, but it supports the new terminal host target in small cases.
+- 2026-05-31: Added two more trace/level obstructions from the terminal-host
+  subagent.  First, two degree levels can still have arbitrary internal graphs:
+  if the cross-degree prescriptions `c-deg_X(a)` and `c+q-deg_Y(b)` are
+  bipartite-graphical, adding such a bipartite graph makes degrees exactly
+  `c` on one level and `c+q` on the other.  Thus even two-level structure does
+  not constrain internal level graphs.  Second, rank-one minimal trace
+  obstructions are small: in Lemma 12's setting, if all difference trace
+  vectors lie on one real line, minimality forbids zero vectors and opposite
+  signs, while Lemma 15's total imbalance bound gives `|B|<=k-1`.  Therefore
+  any large repeated-degree trace obstruction must be high-dimensional.
 - 2026-05-31: Added the basic sparse/co-sparse reduction for the `q`-modular
   host theorem.  By Caro--Wei, any graph on at least `q^2` vertices with
   average degree at most `q^2/L` contains an independent set of order

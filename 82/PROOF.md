@@ -864,6 +864,34 @@ internal structure.  Any proof of the `q`-modular host theorem must use global
 trace balance against the rest of the host, not only pigeonhole a large degree
 level or apply Ramsey theory inside one level.
 
+Even two degree levels can have essentially arbitrary internal graphs, as long
+as the cross-degree prescriptions are graphical.
+
+**Lemma: Two-Level Completion Obstruction.**  Let `A` and `B` be disjoint
+finite sets, let `X` be a graph on `A`, let `Y` be a graph on `B`, and fix an
+integer `c`.  Suppose the integers
+
+```text
+r_a = c - deg_X(a)          for a in A,
+s_b = c+q - deg_Y(b)        for b in B
+```
+
+are nonnegative, satisfy `r_a<=|B|` and `s_b<=|A|`, have equal total sum, and
+are bipartite-graphical as degree prescriptions between `A` and `B`.  Then
+there is a graph `H` on `A union B` such that `H[A]=X`, `H[B]=Y`, every
+vertex of `A` has degree `c`, and every vertex of `B` has degree `c+q`.
+In particular, `H` is `q`-modular and has exactly two degree levels modulo
+ordinary equality.
+
+Proof.  Add between `A` and `B` a bipartite graph with degrees `r_a` on the
+`A` side and `s_b` on the `B` side.  Then each `a in A` has total degree
+`deg_X(a)+r_a=c`, and each `b in B` has total degree
+`deg_Y(b)+s_b=c+q`.  QED.
+
+This rules out any proof that treats the internal graphs of one or two large
+degree levels as constrained by `q`-modularity alone.  The usable structure is
+the cross-level trace balance forced by the whole graph.
+
 There is also a basic density reduction for the `q`-modular host theorem.
 
 **Lemma: Sparse Or Co-Sparse Hosts Are Easy.**  Let `H` be any graph on
@@ -4071,6 +4099,39 @@ families of sizes `1,3,7,15` with no balanced subfamily and total imbalance at
 most `k-1`.  These examples show that even Lemma 15 does not immediately give
 a subexponential trace count; a proof would need still more input, such as
 multiplicity recursion or constraints from the internal graph on `A`.
+
+One genuinely low-dimensional trace obstruction does collapse.
+
+## Lemma 15A: Rank-One Trace Obstructions Are Small
+
+In the setting of Lemma 12, encode each `b in B` by the difference trace vector
+
+```text
+v_b = (1_{ba_1}-1_{ba_k}, ..., 1_{ba_{k-1}}-1_{ba_k})
+      in {-1,0,1}^{k-1}.
+```
+
+If all nonzero vectors `v_b` lie on one real line, then `|B|<=k-1`.
+
+Proof.  No vector `v_b` is zero: if one were zero, then deleting the single
+vertex `b` would subtract the same number of neighbors from every `a_i`,
+preserving equal degrees on `A` and contradicting the minimality in Lemma 12.
+
+Since the nonzero `v_b` lie on one line and have coordinates in
+`{-1,0,1}`, they are all equal to either `w` or `-w` for a fixed nonzero
+`w in {-1,0,1}^{k-1}` with `||w||_infty=1`.  If both signs occur, deleting
+one vertex of each sign gives total difference vector zero, so the deleted
+pair has equal trace count on every `a_i`, again contradicting Lemma 12.
+Hence all `v_b` have the same sign.
+
+The total difference vector `sum_{b in B} v_b` is just the trace-sum imbalance
+relative to `a_k`; by Lemma 15 its infinity norm is at most `k-1`.  Since each
+summand has the same sign and infinity norm `1`, there are at most `k-1`
+summands.  QED.
+
+Thus any large minimal repeated-degree obstruction must have genuinely
+high-dimensional trace variation.  One-directional imbalance cannot sustain
+the obstruction.
 
 ## Lemma 16: Graphical Compensation In A Repeated-Degree Host
 
