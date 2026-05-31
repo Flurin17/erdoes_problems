@@ -4480,6 +4480,21 @@ and minimal dominated holes
 \]
 So the local finite obstruction persists even when the protected Schreier
 points are separated from the small coverage core.
+The same script's `--tail-chain` mode records a one-step extension:
+\[
+\{1,2,4,5,8,10,15,18,19\}
+\]
+with protected \(\{10,15,18,19\}\) extends to
+\[
+\{1,2,4,5,8,10,15,18,19,30\}
+\]
+with protected \(\{10,15,18,19,30\}\) and coverage through \(38\). The
+bounded search then finds no sixth protected point \(p_6\le120\), even
+allowing up to three additional fillers through \(151\). The observed
+pressure is the same as in the stage arguments: the new pair
+\(\{10,p_6\}\) needs a terminal retained gap clearing the old protected
+point \(30\), but moving \(p_6\) far enough to create such a gap outruns the
+available two-sum coverage.
 
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 

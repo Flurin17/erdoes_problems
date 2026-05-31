@@ -136,6 +136,9 @@ the small coverage core. With
 `--protected-count 4 --min-protected 10 --max-value 30 --max-size 10`, the
 script finds \(\{1,2,4,5,8,10,15,18,19\}\), protected tail
 \(\{10,15,18,19\}\), and coverage through \(30\).
+The `--tail-chain` mode records the extension obtained by adding `30`,
+then checks all sixth protected points up to `120` with up to three extra
+fillers through `151`; it finds no P6 extension in that bounded search.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

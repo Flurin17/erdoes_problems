@@ -162,18 +162,56 @@ def extend_first(max_new: int, max_candidate: int) -> None:
     print("no second-stage extension found within searched bounds")
 
 
+def check_tail_chain(max_p6: int, max_extra: int, max_extra_value: int) -> None:
+    base = {1, 2, 4, 5, 8, 10, 15, 18, 19}
+    p5 = 30
+    first = base | {p5}
+    protected5 = [10, 15, 18, 19, 30]
+    coverage = cover_end(first, 2, 200)
+    data = witnesses_for_edges(first, schreier_edges(protected5), coverage)
+    print("tail P5 seed")
+    print("A=", sorted(first), "coverage_end=", coverage)
+    print("protected=", protected5)
+    print("edges=", data)
+
+    for p6 in range(p5 + 1, max_p6 + 1):
+        protected6 = [*protected5, p6]
+        edges = schreier_edges(protected6)
+        for extra_count in range(max_extra + 1):
+            for extras in combinations(range(p6 + 1, max_extra_value + 1), extra_count):
+                elements = first | {p6} | set(extras)
+                cap = 4 * max(elements) + 100
+                coverage = cover_end(elements, 2, cap)
+                if coverage < max(elements):
+                    continue
+                data = witnesses_for_edges(elements, edges, coverage)
+                if data is not None:
+                    print("tail P6 extension")
+                    print("A=", sorted(elements), "coverage_end=", coverage)
+                    print("protected=", protected6)
+                    print("edges=", data)
+                    return
+    print("no tail P6 extension found within searched bounds")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--extend-first", action="store_true")
+    parser.add_argument("--tail-chain", action="store_true")
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
     parser.add_argument("--protected-count", type=int, default=4)
     parser.add_argument("--min-protected", type=int)
     parser.add_argument("--max-new", type=int, default=4)
     parser.add_argument("--max-candidate", type=int, default=35)
+    parser.add_argument("--max-p6", type=int, default=120)
+    parser.add_argument("--max-extra", type=int, default=3)
+    parser.add_argument("--max-extra-value", type=int, default=151)
     args = parser.parse_args()
     if args.extend_first:
         extend_first(args.max_new, args.max_candidate)
+    elif args.tail_chain:
+        check_tail_chain(args.max_p6, args.max_extra, args.max_extra_value)
     else:
         search_protected(
             args.max_value,
