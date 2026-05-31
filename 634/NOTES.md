@@ -96,7 +96,13 @@ The tile triangle is not required to be similar to the large triangle unless exp
   side-count bounds, side parity, and split component corner labels. The same
   sample reclassifies all locally fillable non-simple residual graphs as
   split-corner-label obstructions, leaving only exact residual obstruction
-  statuses in the sampled outside-cover remainder.
+  statuses in the sampled outside-cover remainder. The deterministic capped
+  residual census now promotes the entire total-mixed-`<=4` exact shell space:
+  `63` has `4896` residual corner-label violations and `6144`
+  split-corner-label obstructions, while `99` has `20520` and `42480`.
+  The exact local-overlap cover removes `940800` of the `1356640` mixed-`6`
+  shells for `63` and `7941960` of the `13809000` mixed-`6` shells for `99`;
+  the outside-cover mixed-`6` remainders are still unclassified.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

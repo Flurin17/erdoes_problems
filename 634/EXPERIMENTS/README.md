@@ -159,6 +159,17 @@ Current components:
   run, all locally fillable non-simple samples are reclassified as
   `split-corner-label-obstruction`, leaving no sampled residual graph outside
   the three exact residual obstruction statuses.
+- `gamma_2alpha_residual_capped_census.py`: deterministic streaming census for
+  capped total-mixed boundary shells. It can discard the default local-overlap
+  cover with cached local-position polygons, runs the exact coarse shell
+  classifier, and refines non-simple residual graphs with the full
+  pinch/split-component diagnostics. For total mixed `<=4`, it reproduces the
+  exact shell counts and upgrades the old non-simple buckets to exact
+  split-corner-label obstructions: `N=63` has `4896`
+  corner-label violations and `6144` split-corner-label obstructions; `N=99`
+  has `20520` and `42480`. Cap `6` is not yet fully residual-classified; the
+  count-only local-overlap cover leaves `415840` mixed-`6` shells for `N=63`
+  and `5867040` mixed-`6` shells for `N=99` outside the current local cover.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

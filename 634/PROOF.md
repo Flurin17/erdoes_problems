@@ -2005,6 +2005,23 @@ are rational and the analogous integer classifier gives exactly `63000` shells:
 `42480` non-simple residual boundary graphs and `20520` residual corner-label
 violations.
 
+The deterministic capped residual census
+`EXPERIMENTS/gamma_2alpha_residual_capped_census.py` reruns the same cap-`4`
+shell space with the refined residual diagnostics above. In exact arithmetic,
+every cap-`4` non-simple residual graph is promoted to a split component
+forced-corner-label obstruction:
+
+```text
+N=63: corner-label-violation 4,896,
+      split-corner-label-obstruction 6,144.
+
+N=99: corner-label-violation 20,520,
+      split-corner-label-obstruction 42,480.
+```
+
+The default local-overlap cover has zero hits in this cap-`4` regime, as
+expected.
+
 Thus the low-overhang shell regime is now exact for both `N=63` and `N=99`.
 It still does not close the global problem, because higher-mixed boundary orders
 remain to be controlled.
@@ -2026,6 +2043,22 @@ N=99: cap 4 -> 63,000; cap 6 -> 13,872,000;
 Thus a complete treatment of these two boundary survivors needs a structural
 higher-mixed obstruction, an exact quotient/canonicalization much stronger than
 raw side-word enumeration, or a new construction.
+
+At the next cap, the exact local-overlap cover gives a deterministic first
+split of the cap-`6` space:
+
+```text
+N=63: mixed=6 covered 940,800 / 1,356,640,
+      mixed=6 outside cover 415,840.
+
+N=99: mixed=6 covered 7,941,960 / 13,809,000,
+      mixed=6 outside cover 5,867,040.
+```
+
+These outside-cover shells are not yet classified. The residual obstruction
+types are exact for any individual shell, but the cap-`6` remainder still needs
+either a grouped count or a symbolic proof that all outside-cover shells fall
+into the corner-label, pinch-sector, or split-corner-label obstruction classes.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
