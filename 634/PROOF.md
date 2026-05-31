@@ -2264,6 +2264,13 @@ obstructions. These are stored as
 For `N=99`, the analogous first mixed-`6` outside-cover slice has `782`
 corner-label violations and `218` split-corner-label obstructions, stored as
 `EXPERIMENTS/results/n99_mixed6_certificate_slice_0000000_limit1000.json`.
+A larger exact refined prefix of the first `100000` generated `N=99`
+mixed-`6` shells has `19668` local-cover hits and splits the `80332`
+outside-cover shells as `62456` corner-label violations and `17876`
+split-corner-label obstructions. It is stored as
+`EXPERIMENTS/results/n99_mixed6_refined_chunk_0000000_0100000.json`. The
+`647.8s` runtime for this prefix makes a full raw `N=99` mixed-`6` pass
+impractical without a quotient.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count

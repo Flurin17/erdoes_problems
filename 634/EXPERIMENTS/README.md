@@ -237,6 +237,12 @@ Current components:
   pinch-sector obstructions. The first `N=99` mixed-`6` outside-cover slice of
   `1000` diagnosed shells has `782` corner-label violations and `218`
   split-corner-label obstructions.
+- `results/n99_mixed6_refined_chunk_0000000_0100000.json`: first exact
+  refined `N=99` mixed-`6` generated-shell prefix. It processes `100000`
+  generated shells in `647.8s`, with `19668` local-cover hits and `80332`
+  outside-cover obstructions: `62456` corner-label violations and `17876`
+  split-corner-label obstructions. This calibrates direct chunking as too slow
+  for a full raw `N=99` mixed-`6` pass without a quotient.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

@@ -158,7 +158,12 @@ The tile triangle is not required to be similar to the large triangle unless exp
   split-corner-label obstructions; at mixed `10` and `12`, each first slice has
   `838` corner-label violations and `162` pinch-sector obstructions. The
   analogous first `99` mixed-`6` slice has `782` corner-label violations and
-  `218` split-corner-label obstructions.
+  `218` split-corner-label obstructions. A larger exact `99` refined prefix of
+  `100000` generated mixed-`6` shells took `647.8s`: `19668` were local-cover
+  hits, and the `80332` outside-cover shells split as `62456` corner-label
+  violations and `17876` split-corner-label obstructions. This supports the
+  obstruction vocabulary but makes full raw `99` mixed-`6` chunking
+  impractical without a quotient.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
