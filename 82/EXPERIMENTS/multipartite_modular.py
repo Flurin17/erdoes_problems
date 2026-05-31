@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dyadic modular partitions for complete multipartite graphs.
+"""Modular partitions for complete multipartite graphs.
 
 For a complete multipartite graph with class sizes s_i, an induced subgraph
 using c_i vertices from class i has internal degree |C|-c_i on class i.
@@ -7,7 +7,8 @@ It is M-modular iff all positive c_i are congruent modulo M; the one-class
 case is independent and therefore modular for every M.
 
 This script searches the resulting integer bin-packing model for lower-bound
-obstructions to constant dyadic modular partition theorems.
+obstructions to modular partition theorems, including dyadic lifts and
+terminal-size capped partitions.
 """
 
 from __future__ import annotations
@@ -48,9 +49,15 @@ def residue_group_partition(
     return parts
 
 
-def valid_bin(counts: tuple[int, ...], target_modulus: int) -> bool:
+def valid_bin(
+    counts: tuple[int, ...],
+    target_modulus: int,
+    max_bin_size: int | None,
+) -> bool:
     positives = [count for count in counts if count]
     if not positives:
+        return False
+    if max_bin_size is not None and sum(positives) > max_bin_size:
         return False
     if len(positives) == 1:
         return True
@@ -73,10 +80,18 @@ def bin_residue(counts: tuple[int, ...], target_modulus: int) -> int | None:
 
 
 def all_bins(sizes: tuple[int, ...], target_modulus: int) -> list[tuple[int, ...]]:
+    return all_bins_with_cap(sizes, target_modulus, None)
+
+
+def all_bins_with_cap(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    max_bin_size: int | None,
+) -> list[tuple[int, ...]]:
     ranges = [range(size + 1) for size in sizes]
     bins = []
     for counts in product(*ranges):
-        if valid_bin(counts, target_modulus):
+        if valid_bin(counts, target_modulus, max_bin_size):
             bins.append(counts)
     bins.sort(key=lambda item: (sum(item), item), reverse=True)
     return bins
@@ -102,8 +117,9 @@ def can_partition(
     sizes: tuple[int, ...],
     target_modulus: int,
     bins: int,
+    max_bin_size: int | None = None,
 ) -> bool:
-    choices = all_bins(sizes, target_modulus)
+    choices = all_bins_with_cap(sizes, target_modulus, max_bin_size)
 
     @lru_cache(maxsize=None)
     def rec(remaining: tuple[int, ...], left: int) -> bool:
@@ -161,9 +177,14 @@ def can_slot_partition(
     return rec(sizes, slots)
 
 
-def min_bins(sizes: tuple[int, ...], target_modulus: int, cap: int) -> int | None:
+def min_bins(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    cap: int,
+    max_bin_size: int | None,
+) -> int | None:
     for bins in range(1, cap + 1):
-        if can_partition(sizes, target_modulus, bins):
+        if can_partition(sizes, target_modulus, bins, max_bin_size):
             return bins
     return None
 
@@ -175,6 +196,8 @@ def search(
     max_size: int,
     cap: int,
     exact: bool,
+    max_bin_size: int | None,
+    max_total_size: int | None,
     max_checked: int | None,
 ) -> None:
     worst = -1
@@ -184,11 +207,13 @@ def search(
     truncated = False
     for classes in range(1, max_classes + 1):
         for sizes in combinations_with_replacement(range(1, max_size + 1), classes):
+            if max_total_size is not None and sum(sizes) > max_total_size:
+                continue
             if not full_is_modular(sizes, source_modulus):
                 continue
             checked += 1
             if exact:
-                value = min_bins(sizes, target_modulus, cap)
+                value = min_bins(sizes, target_modulus, cap, max_bin_size)
             else:
                 parts = residue_group_partition(sizes, source_modulus, target_modulus)
                 assert parts is not None
@@ -210,6 +235,10 @@ def search(
     print(f"max_classes={max_classes}")
     print(f"max_size={max_size}")
     print(f"cap={cap}")
+    if max_bin_size is not None:
+        print(f"max_bin_size={max_bin_size}")
+    if max_total_size is not None:
+        print(f"max_total_size={max_total_size}")
     print(f"mode={'exact_minimum' if exact else 'residue_certificate'}")
     print(f"checked={checked}")
     print(f"truncated={truncated}")
@@ -259,6 +288,21 @@ def search_slots(
         print("slot_counterexample=" + ",".join(map(str, bad)))
 
 
+def run_fixed_sizes(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    cap: int,
+    max_bin_size: int | None,
+) -> None:
+    value = min_bins(sizes, target_modulus, cap, max_bin_size)
+    print("sizes=" + ",".join(map(str, sizes)))
+    print(f"target_modulus={target_modulus}")
+    print(f"cap={cap}")
+    if max_bin_size is not None:
+        print(f"max_bin_size={max_bin_size}")
+    print(f"min_bins={value if value is not None else 'NA'}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-modulus", type=int, default=2)
@@ -266,6 +310,12 @@ def main() -> None:
     parser.add_argument("--max-classes", type=int, default=5)
     parser.add_argument("--max-size", type=int, default=8)
     parser.add_argument("--cap", type=int, default=4)
+    parser.add_argument("--max-bin-size", type=int)
+    parser.add_argument("--max-total-size", type=int)
+    parser.add_argument(
+        "--sizes",
+        help="comma-separated complete multipartite class sizes for a fixed check",
+    )
     parser.add_argument(
         "--exact",
         action="store_true",
@@ -281,6 +331,10 @@ def main() -> None:
         help="fixed target residues, e.g. 0,0,1,2; switches to slot mode",
     )
     args = parser.parse_args()
+    if args.sizes:
+        sizes = tuple(sorted(int(item) for item in args.sizes.split(",") if item))
+        run_fixed_sizes(sizes, args.target_modulus, args.cap, args.max_bin_size)
+        return
     if args.slots:
         slots = tuple(int(item) % args.target_modulus for item in args.slots.split(","))
         search_slots(
@@ -299,6 +353,8 @@ def main() -> None:
         args.max_size,
         args.cap,
         args.exact,
+        args.max_bin_size,
+        args.max_total_size,
         args.max_checked,
     )
 

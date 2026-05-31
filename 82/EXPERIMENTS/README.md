@@ -114,11 +114,15 @@ Computational checks and generated data for Erdos Problem 82.
   includes a parity-sampling mode for finding gaps between the two parameters.
 - `modular_spectrum.py`: checks which exact sizes occur as modular induced
   subgraphs and searches for gaps in the spectrum.
-- `multipartite_modular.py`: exact integer model for dyadic modular
+- `multipartite_modular.py`: exact integer model for modular
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts
   for small instances.  With `--slots`, it checks fixed target residue slots
   such as `(0,0,1,2)` using partial counts from multipartite classes.
+  `--max-bin-size` adds terminal-size caps, `--max-total-size` bounds the
+  generated search space by total graph order, and `--sizes` verifies a fixed
+  complete multipartite instance such as the `K_{22,2,1}` strict-terminal
+  obstruction.
 - `twin_blowup_modular.py`: exact weighted congruence model for graphs with a
   bounded number of twin classes, allowing each class to be a clique or an
   independent set and each pair of classes to be complete or empty.

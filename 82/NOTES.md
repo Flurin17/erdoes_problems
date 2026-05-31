@@ -1165,6 +1165,22 @@ source of growth beyond Ramsey.
   `--max-part-size` is active.  This made terminal-size searches more useful:
   `500` random `n=10,q=4,max_part_size=5` samples had no counterexample; local
   unrestricted searches found best minimum capped color count `4` for
-  `n=13`, `n=14`, and `n=15` with no unknowns in the completed runs.  No
-  terminal-size obstruction has appeared yet, but `n=16,q=4` remains too slow
-  for the current exact search.
+  `n=13`, `n=14`, and `n=15` with no unknowns in the completed runs.  At this
+  checkpoint no terminal-size obstruction had appeared, but `n=16,q=4`
+  remained too slow for the current exact search.
+- 2026-05-31: A subagent independently checked several small terminal-size
+  cases without websearch and without editing files.  It exhaustively verified
+  all graphs on `n=5,6` for `q=3,max_part_size=4`, rechecked the balanced
+  `n=9` counterexample mask `30931749293` and found a capped partition of
+  sizes `4,4,1`, verified two known hard `n=14,q=4` masks with cap `5`, and
+  sampled unrestricted random graphs through `n=14` plus complete
+  multipartite/twin-blowup count models through small total size.  These
+  checks found no obstruction below the later `n=25` multipartite example.
+- 2026-05-31: Refuted the strict terminal-size partition target.  The complete
+  multipartite graph `K_{22,2,1}` on `n=25`, with `q=ceil(sqrt 25)=5`, has no
+  partition into at most five induced `5`-modular parts of size at most
+  `q+1=6`.  The fixed checker confirms this via
+  `multipartite_modular.py --target-modulus 5 --cap 5 --max-bin-size 6
+  --sizes 1,2,22`, returning `min_bins=NA`; `PROOF.md` now contains a hand
+  proof.  Therefore any one-shot route must use the small-excess relaxation or
+  a different terminal extraction, not the exact `q+1` cap.
