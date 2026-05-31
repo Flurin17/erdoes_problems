@@ -1126,3 +1126,8 @@ source of growth beyond Ramsey.
   counterexample mask `30931749293` has a three-part mod-`3` partition with
   sizes `4,4,1`, and `200` random `n=10,q=3` samples with max part size `4`
   showed no counterexample.
+- 2026-05-31: Extended `search_modular_partition.py` with `--min-part-size`
+  and `--max-part-size` so local search can target terminal-size modular
+  partitions.  A quick even-graph search for `n=12,q=4,max_part_size=5`
+  evaluated `22` masks with no unknowns and found best minimum color count
+  `3`, not a counterexample to the four-part capped target.

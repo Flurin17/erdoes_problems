@@ -45,6 +45,8 @@ def score(
     n: int,
     modulus: int,
     max_colors: int,
+    min_part_size: int,
+    max_part_size: int | None,
     cache: dict[int, int],
     node_limit: int | None,
     merge_restarts: int,
@@ -60,10 +62,10 @@ def score(
         return cache[mask]
     try:
         result = modular_partition.find_min_colors(
-            n, mask, modulus, max_colors, None, 0, None, node_limit
+            n, mask, modulus, max_colors, None, min_part_size, max_part_size, node_limit
         )
     except modular_partition.SearchLimitExceeded:
-        if merge_restarts:
+        if merge_restarts and min_part_size == 0 and max_part_size is None:
             pc = ri.precompute(n)
             merge_cache: dict[int, int | None] = {}
             best = n + 1
@@ -87,6 +89,8 @@ def search(
     n: int,
     modulus: int,
     max_colors: int,
+    min_part_size: int,
+    max_part_size: int | None,
     steps: int,
     restarts: int,
     seed: int,
@@ -106,7 +110,18 @@ def search(
         mask = modular_partition.random_parity_mask(n, False, rng, pc, edge_index)
         if mask is None:
             continue
-        current = score(mask, n, modulus, max_colors, cache, node_limit, merge_restarts, rng)
+        current = score(
+            mask,
+            n,
+            modulus,
+            max_colors,
+            min_part_size,
+            max_part_size,
+            cache,
+            node_limit,
+            merge_restarts,
+            rng,
+        )
         if current == 0:
             unknown += 1
         for step in range(steps):
@@ -128,6 +143,8 @@ def search(
                 n,
                 modulus,
                 max_colors,
+                min_part_size,
+                max_part_size,
                 cache,
                 node_limit,
                 merge_restarts,
@@ -144,6 +161,10 @@ def search(
     print(f"n={n}")
     print(f"modulus={modulus}")
     print(f"max_colors={max_colors}")
+    if min_part_size:
+        print(f"min_part_size={min_part_size}")
+    if max_part_size is not None:
+        print(f"max_part_size={max_part_size}")
     print(f"steps={steps}")
     print(f"restarts={restarts}")
     if node_limit is not None:
@@ -169,11 +190,15 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--node-limit", type=int)
     parser.add_argument("--merge-restarts", type=int, default=0)
+    parser.add_argument("--min-part-size", type=int, default=0)
+    parser.add_argument("--max-part-size", type=int)
     args = parser.parse_args()
     search(
         args.n,
         args.modulus,
         args.max_colors,
+        args.min_part_size,
+        args.max_part_size,
         args.steps,
         args.restarts,
         args.seed,

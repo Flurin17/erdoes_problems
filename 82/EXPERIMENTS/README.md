@@ -38,7 +38,10 @@ Computational checks and generated data for Erdos Problem 82.
 - `search_modular_partition.py`: local search over even graphs, using
   triangle flips to preserve parity, for examples with high first-lift modular
   partition color number.  Node-limited exact searches are reported as
-  unknown rather than as counterexample certificates.
+  unknown rather than as counterexample certificates.  It also accepts
+  `--min-part-size` and `--max-part-size` to test size-controlled modular
+  partition targets; merge-restart fallback is only used when no size
+  constraint is active.
 - `color_modular_partition.py`: local search directly over fixed-color
   assignments, scoring residue disagreement inside color classes; includes a
   bounded Hamming repair step for near-miss colorings and a full-modular
