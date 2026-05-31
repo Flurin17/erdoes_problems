@@ -127,6 +127,13 @@ and pair deletions are harmless, but every triple deletion is bad. This is
 a finite residue model of the high-rank barrier obstruction isolated by
 Reduction 0.
 
+`front_barrier_diagnostics.py` checks finite shadows of the higher-front
+warnings in `PROOF.md`. It verifies on a finite prefix that the
+second-element front `m=x_2` has the expected initial-segment barrier
+property for long finite sequences, and that no tested tail contains the
+first-Schreier prefix-link family as a subbarrier. This is a combinatorial
+sanity check for Warning 8.5a.1 and Lemma 8.5a.2, not an additive model.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole
