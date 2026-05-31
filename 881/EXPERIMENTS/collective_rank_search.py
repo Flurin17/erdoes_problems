@@ -37,12 +37,24 @@ def first_tail(values: set[int], start: int, end: int) -> int | None:
     return None
 
 
+def cover_end(values: set[int], start: int, cap: int) -> int:
+    x = start
+    while x <= cap and x in values:
+        x += 1
+    return x - 1
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--rank", type=int, default=3)
     parser.add_argument("--max-value", type=int, default=22)
     parser.add_argument("--max-size", type=int, default=11)
     parser.add_argument("--window", type=int, default=12)
+    parser.add_argument(
+        "--allow-uncovered",
+        action="store_true",
+        help="allow the test window to extend beyond the two-sum coverage interval",
+    )
     args = parser.parse_args()
 
     rank = args.rank
@@ -51,18 +63,21 @@ def main() -> None:
         for size in range(rank + 2, min(max_value, args.max_size) + 1):
             for tuple_a in combinations(universe, size):
                 elements = set(tuple_a)
+                two_sums = hsum(elements, 2, 3 * max_value)
                 two_tail = first_tail(
-                    hsum(elements, 2, 2 * max_value),
+                    two_sums,
                     2,
                     2 * max_value,
                 )
                 if two_tail is None:
                     continue
+                two_end = cover_end(two_sums, two_tail, 3 * max_value)
 
                 cap = 3 * max_value
                 three_sums = hsum(elements, 3, cap)
-                for start in range(two_tail, cap - rank - 4):
-                    end = min(cap, start + args.window)
+                max_window_end = cap if args.allow_uncovered else two_end
+                for start in range(two_tail, max_window_end - rank - 4):
+                    end = min(max_window_end, start + args.window)
                     if not covers(three_sums, start, end):
                         continue
 
@@ -97,7 +112,7 @@ def main() -> None:
                         print(
                             "rank=", rank,
                             "A=", sorted(elements),
-                            "2-tail=", two_tail,
+                            "2-coverage=", (two_tail, two_end),
                             "window=", (start, end),
                         )
                         print("bad_deletions=", bad[:12])

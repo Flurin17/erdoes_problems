@@ -3768,12 +3768,13 @@ private witnesses.
 The script `EXPERIMENTS/collective_rank_search.py` gives an integer-window
 analogue. Its first rank-3 example is the interval
 \[
-A=\{1,2,\ldots,9\},
+A=\{1,2,3,4,5,6,8,9\},
 \]
-where every singleton and pair deletion still covers \([9,21]\) by
-three-fold sums, but several triple deletions create holes in that window.
-This is an endpoint artefact rather than a construction, but it supplies a
-finite test bed for any proposed high-rank barrier mechanism.
+whose two-sums cover \([2,18]\). Every singleton and pair deletion still
+covers \([9,18]\) by three-fold sums, but several triple deletions create
+holes in that window. This is not a construction, but it supplies a finite
+test bed for any proposed high-rank barrier mechanism without relying on
+holes beyond the finite two-sum coverage interval.
 
 ## Attempt 14: The affine finite-booster construction is not verified
 
