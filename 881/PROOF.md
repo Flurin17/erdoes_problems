@@ -726,6 +726,38 @@ from Lemma 2.1, but it is not formally contradicted by it: Lemma 2.1 says
 finite barriers must occur inside every infinite deletion, not that no
 single finite barrier can control many shifted targets.
 
+## Lemma 3.5a: Protected shifts are also dominated
+
+Let \(A\), \(E\), \(D\), and \(\mathcal H_E(n)\) be as in Lemma 3.5. Let
+\[
+c\in A\setminus D
+\]
+and suppose \(n-c\) is large enough to lie in the order-\(k\) asymptotic
+range of \(A\). If every \(k\)-term representation of \(n-c\) using only
+elements of \(E\) is impossible, then every \(k\)-term representation of
+\(n-c\) from \(A\) uses at least one element of \(D\).
+
+Proof. Suppose
+\[
+n-c=a_1+\cdots+a_k
+\]
+is a \(k\)-term representation from \(A\) avoiding \(D\). If every
+\(a_i\in E\), this contradicts the extra hypothesis. Otherwise
+\[
+n=c+a_1+\cdots+a_k
+\]
+is a \((k+1)\)-term representation of \(n\). Its outside-\(E\) summand set
+is nonempty, avoids \(D\), and therefore gives an edge of
+\(\mathcal H_E(n)\) missed by the transversal \(D\), contradiction.
+\(\square\)
+
+This allows the finite protected core \(E\) to contain test shifts
+\(c\). For large \(n\), a fixed finite \(E\) cannot by itself represent
+\(n-c\), so the same bounded transversal dominates all shifts by elements
+of \(E\) as well. The remaining gap is uniformity: the bound on \(D\) in
+Corollary 3.3 may depend on \(E\), so enlarging \(E\) to include a large
+test pattern does not force a single reflected center by pigeonhole.
+
 The following finite gadget shows why the protected-matching route cannot
 be forced from the order-\(k\) basis property alone. Fix a finite set
 \[
@@ -2244,9 +2276,9 @@ Indeed, for each retained \(e\le w-N_0\), every two-sum representation of
 
 ## Lemma 10.3: Finite holes force terminal retained gaps
 
-Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\), with
-threshold \(N_0\), and put \(m_0=\min A\). Let \(F\subset A\) be finite and
-nonempty, put \(C=A\setminus F\), and suppose
+Let \(k\ge2\), and let \(A\subseteq\mathbb N\) be an asymptotic basis of
+order \(k\), with threshold \(N_0\), and put \(m_0=\min A\). Let
+\(F\subset A\) be finite and nonempty, put \(C=A\setminus F\), and suppose
 \[
 w\notin(k+1)C.
 \]
@@ -2285,6 +2317,63 @@ A\cap[1,w_i-N_0]\subseteq
 \]
 so \(|A\cap[1,w_i-N_0]|\) is bounded, contradicting the fact that an
 asymptotic basis of finite order must have an unbounded counting function.
+
+## Lemma 10.4: Bounded higher-excess barriers force lower-sumset reflection
+
+Let \(k\ge2\), and let \(A\subseteq\mathbb N\) be an asymptotic basis of
+order \(k\), with threshold \(N_0\). Let
+\[
+F=\{f_1<\cdots<f_r\}\subset A
+\]
+be finite, put \(C=A\setminus F\), and suppose
+\[
+w\notin(k+1)C.
+\]
+Fix \(j\in\{2,\ldots,r\}\) and \(D\ge0\), and assume
+\[
+w\le f_j+D. \tag{1}
+\]
+Let \(T\subset C\) be finite and satisfy
+\[
+\min T>D,\qquad w-\max T\ge N_0.
+\]
+Then there are an index \(i<j\) and a subset
+\[
+U\subset T,\qquad |U|\ge \frac{|T|}{j-1},
+\]
+such that
+\[
+w-f_i-U\subseteq (k-1)A. \tag{2}
+\]
+
+Proof. For each \(t\in T\), the integer \(w-t\) is at least \(N_0\), so it
+has a \(k\)-term representation from \(A\). By Lemma 10.1, every such
+representation uses some element of \(F\).
+
+No representation of \(w-t\) can use any \(f_\ell\) with \(\ell\ge j\).
+Indeed, (1) gives
+\[
+w-t-f_\ell\le f_j+D-t-f_\ell\le D-t<0,
+\]
+whereas the remaining summands in a representation are positive integers.
+Hence every chosen representation of \(w-t\) uses one of
+\(f_1,\ldots,f_{j-1}\).
+
+Choose one representation for each \(t\). By the pigeonhole principle, some
+\(f_i\), \(i<j\), occurs for at least \(|T|/(j-1)\) values of \(t\); call
+that subset \(U\). Removing this \(f_i\) from the chosen representations
+gives
+\[
+w-t-f_i\in(k-1)A\qquad(t\in U),
+\]
+which is (2). \(\square\)
+
+For \(j=2\), all of \(T\) reflects through \(f_1\) into \((k-1)A\). When
+\(k=2\), this is genuine reflection-recurrence in \(A\), which is why
+Lemma 8.6a can close bounded second-excess barriers in the order-2 case.
+For \(k>2\), the reflected pattern lands only in a lower sumset
+\((k-1)A\); this is exactly the gap that remains in the robust \(k=3\)
+booster-pair attempts.
 
 ## Example 11: Residue-padding bases where the answer is yes
 
@@ -3177,6 +3266,9 @@ domination for many old elements.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
+* Lemma 3.5a shows that bounded transversals also dominate shifts by
+  protected elements, provided the shifted target is too large for the
+  finite protected core alone.
 * The counterexample reduction would disprove the problem for \(k\ge 2\) if
   a block construction supplies robust private witnesses for all but
   finitely many elements.
@@ -3252,6 +3344,9 @@ domination for many old elements.
 * Lemma 10.3 strengthens this for all orders: a finite
   order-\((k+1)\) hole after deleting \(F\) forces a terminal retained gap
   below the witness, starting at \(w-\min F-(k-1)\min A\).
+* Lemma 10.4 records the higher-order analogue of bounded second-excess
+  barriers: they force large reflected subpatterns into lower sumsets
+  \((k-1)A\), which becomes full recurrence only when \(k=2\).
 * Example 11 gives a residue-padding family satisfying the desired
   conclusion for every \(k\ge2\).
 * Attempt 12 records that the clean direct-sum digital model satisfies the

@@ -278,6 +278,14 @@ coverage alone: a local one-gate gadget realizes such a bounded
 transversal. What remains hard is embedding those moving gates into a global
 asymptotic basis with threshold control.
 
+Lemma 3.5a strengthens this slightly: the same domination also applies to
+protected shifts \(c\in E\), as long as \(n-c\) is too large to be represented
+entirely inside the finite protected core. Thus one may put a finite test
+pattern \(T\) into \(E\) and still conclude that every representation of
+\(n-t\), \(t\in T\), uses the moving transversal \(D\). The unresolved
+uniformity issue is that the allowed bound on \(D\) may grow with \(E=T\),
+so this does not force a single reflection center by pigeonhole.
+
 ## Counterexample Target
 
 A strong counterexample for \(k\ge 2\) would follow from a set \(A\) and
