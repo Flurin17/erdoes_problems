@@ -1425,3 +1425,11 @@ source of growth beyond Ramsey.
   branches, and found no counterexample.  This supports the next arithmetic
   subtarget: rectangle-only failures may require a coordinate larger than
   `2q+1`.
+- 2026-05-31: Added a conditional reduction showing that this bounded-height
+  rectangle subtarget is enough for the full complete-multipartite bin target.
+  Precisely, if every vector with total at most `(B-2)(q+2)+4` and largest
+  coordinate at most `2q+1` has a `B`-rectangle cover with cap `q+2`, then the
+  full multipartite target follows: use special bins to reduce every coordinate
+  above `2q+1`, then apply the bounded-height rectangle theorem to the
+  residual.  Small generalized checks for `(B,C)` equal to
+  `(4,7),(5,7),(4,8),(5,8),(6,8),(5,9),(6,9),(7,9)` all passed.

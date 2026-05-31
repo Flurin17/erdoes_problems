@@ -1319,6 +1319,93 @@ Consequently, any counterexample to the multipartite bin target must have
 largest coordinate greater than `q` and all other coordinates summing at least
 `q+1`.
 
+The remaining complete-multipartite arithmetic target would follow from a
+bounded-height version of the rectangle theorem.
+
+**Conditional Proposition: Bounded-Height Rectangles Imply The Multipartite
+Bin Target.**  Fix `q>=3`.  Suppose that, for every integer `B` with
+`0<=B<=q`, every nonnegative integer vector `b` satisfying
+
+```text
+sum_i b_i <= (B-2)(q+2)+4
+```
+
+and
+
+```text
+max_i b_i <= 2q+1
+```
+
+can be decomposed into at most `B` rectangle bins `r 1_I` with
+`r|I|<=q+2`.  Then every nonnegative integer vector of total at most `q^2`
+has a multipartite bin decomposition using at most `q` bins.
+
+Proof.  Let `a=(a_i)` be a nonnegative vector with `sum_i a_i<=q^2`, and put
+`C=q+2` and `H=2q+1`.  If `a` has only one positive coordinate, then it is
+covered by single-coordinate rectangles because
+
+```text
+ceil(q^2/(q+2)) = q-1.
+```
+
+If the sum of all coordinates except a largest one is at most `q`, the
+one-large-class repair applies.  We may therefore assume that the tail outside
+a largest coordinate has size at least `q+1`.
+
+For each coordinate define
+
+```text
+d_i = max(0, ceil((a_i-H)/(q+1))).
+```
+
+We will use `d_i` special bins with coordinate `i` as the large endpoint.  Let
+`S=sum_i d_i`, and let `P={i:d_i>0}`.  If `m=|P|`, then for `i in P`,
+
+```text
+d_i <= (a_i-(q+1))/(q+1),
+```
+
+because `ceil(y/(q+1)) <= (y+q)/(q+1)` and `H=2q+1`.  Hence
+
+```text
+S <= (sum_{i in P} a_i)/(q+1) - m
+  <= q^2/(q+1) - m
+  < q.
+```
+
+Thus `S<=q-1`.
+
+It remains only to justify that the singleton endpoints of these `S` special
+bins can be chosen without using the same coordinate as the large endpoint of
+that bin.  Consider the bipartite matching problem whose left side has `d_i`
+requests of type `i`, and whose right side has `a_j` donor units of coordinate
+`j`; a request of type `i` is adjacent to all donor units except those of
+coordinate `i`.  Hall's condition is immediate for any set of requests
+involving at least two types, because their combined neighborhood is the whole
+right side and has size `sum_j a_j>=S`.  For requests of a single type `i`,
+the available donor capacity is `sum_j a_j-a_i`.  This is at least `q+1` by
+the assumption on the tail outside a largest coordinate, and `d_i<=q-1` by the
+same estimate as above.  Hall's condition holds, so the donor units can be
+assigned.
+
+Subtract these `S` special bins.  The residual vector `b` has
+
+```text
+max_i b_i <= H = 2q+1
+```
+
+by the definition of `d_i`, and
+
+```text
+sum_i b_i = sum_i a_i - S(q+2)
+          <= q^2 - S(q+2)
+          = (q-S-2)(q+2)+4.
+```
+
+Apply the bounded-height rectangle hypothesis with `B=q-S` to cover `b` by at
+most `q-S` rectangle bins.  Together with the `S` special bins, this gives at
+most `q` legal multipartite bins for `a`.  QED.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with
