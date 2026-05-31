@@ -139,6 +139,16 @@ script finds \(\{1,2,4,5,8,10,15,18,19\}\), protected tail
 The `--tail-chain` mode records the extension obtained by adding `30`,
 then checks all sixth protected points up to `120` with up to three extra
 fillers through `151`; it finds no P6 extension in that bounded search.
+Lemma 13.1f in `PROOF.md` extracts a finite forbidden-window obstruction
+from these runs. For the P5 seed, a low-excess witness for the new pair
+edge `{10,p6}` must have `w-p6>=19`; enumerating the remaining low-excess
+range leaves one pair-edge escape, `(p6,w)=(38,58)`, realized after adding
+fillers `{40,43,44}`. That escape still fails the full P6 Schreier test
+because the new higher-rank edges involving `38` have no compatible
+witnesses. Thus the P6 stall is a simultaneous-closure obstruction, not
+just a single pair-edge obstruction.
+Run `schreier_stage_search.py --p6-pair-diagnostic` to reproduce this
+low-excess pair-edge calculation and the protected-filler failure.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

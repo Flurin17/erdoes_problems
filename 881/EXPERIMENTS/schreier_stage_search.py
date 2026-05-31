@@ -10,6 +10,7 @@ diagnostic for Proposition 13.1b-Schreier in PROOF.md.
 from __future__ import annotations
 
 import argparse
+from functools import lru_cache
 from itertools import combinations
 
 
@@ -194,10 +195,109 @@ def check_tail_chain(max_p6: int, max_extra: int, max_extra_value: int) -> None:
     print("no tail P6 extension found within searched bounds")
 
 
+def p6_pair_diagnostic() -> None:
+    """Diagnose the first new pair edge in the tail P5 seed."""
+    seed = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30}
+    retained_seed = seed - {10}
+
+    candidates: list[tuple[int, int]] = []
+    grouped: dict[int, list[int]] = {}
+    for p in range(31, 51):
+        for u in range(2, 31):
+            w = p + u
+            if u not in hsum(retained_seed, 2, u):
+                continue
+            if w in hsum(retained_seed, 3, w):
+                continue
+            if all(
+                not (u <= c) or (p + u - c - 10 in seed)
+                for c in retained_seed
+            ):
+                candidates.append((p, w))
+                grouped.setdefault(w, []).append(p)
+
+    print("necessary low-excess candidates for edge {10,p}:")
+    for w in sorted(grouped):
+        print(f"  w={w}: p={grouped[w]}")
+
+    def find_extension(p: int, w: int, max_nodes: int = 200_000) -> tuple[int, ...] | None:
+        base = seed | {p}
+        edge = (10, p)
+        filler_range = tuple(range(p + 1, w))
+        nodes = 0
+
+        @lru_cache(maxsize=None)
+        def dfs(frozen_fillers: tuple[int, ...]) -> tuple[int, ...] | None:
+            nonlocal nodes
+            nodes += 1
+            if nodes > max_nodes:
+                return None
+            fillers = set(frozen_fillers)
+            elements = base | fillers
+            if w in hsum(elements - set(edge), 3, w):
+                return None
+
+            coverage = cover_end(elements, 2, w)
+            if coverage >= w:
+                if minimal_hole(elements, edge, w) and dominates(elements, edge, w, 2):
+                    return tuple(sorted(fillers))
+                return None
+
+            target = coverage + 1
+            additions: set[tuple[int, ...]] = set()
+            for t in elements:
+                q = target - t
+                if p < q < w and q not in elements:
+                    additions.add((q,))
+            if target % 2 == 0:
+                q = target // 2
+                if p < q < w and q not in elements:
+                    additions.add((q,))
+            for q1 in filler_range:
+                q2 = target - q1
+                if q1 <= q2 and p < q2 < w and q1 not in elements and q2 not in elements:
+                    additions.add(tuple(sorted({q1, q2})))
+
+            for addition in sorted(additions, key=lambda item: (len(item), item)):
+                next_fillers = tuple(sorted(fillers | set(addition)))
+                result = dfs(next_fillers)
+                if result is not None:
+                    return result
+            return None
+
+        return dfs(tuple())
+
+    print("pair-edge extensions among those candidates:")
+    escapes: list[tuple[int, int, tuple[int, ...]]] = []
+    for p, w in candidates:
+        fillers = find_extension(p, w)
+        if fillers is not None:
+            escapes.append((p, w, fillers))
+            print(f"  p={p}, w={w}, fillers={list(fillers)}")
+    if not escapes:
+        print("  none")
+
+    if escapes:
+        p, _, fillers = escapes[0]
+        elements = seed | {p} | set(fillers)
+        protected = [x for x in sorted(elements) if x >= 10]
+        coverage = cover_end(elements, 2, 3 * max(elements))
+        failed_edges = [
+            edge
+            for edge in schreier_edges(protected)
+            if witnesses_for_edges(elements, [edge], coverage) is None
+        ]
+        print("treating fillers as protected:")
+        print("  protected=", protected, "coverage_end=", coverage)
+        print("  failed edge count=", len(failed_edges))
+        print("  first failed edges=", failed_edges[:12])
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--extend-first", action="store_true")
     parser.add_argument("--tail-chain", action="store_true")
+    parser.add_argument("--p6-pair-diagnostic", action="store_true")
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
     parser.add_argument("--protected-count", type=int, default=4)
@@ -212,6 +312,8 @@ def main() -> None:
         extend_first(args.max_new, args.max_candidate)
     elif args.tail_chain:
         check_tail_chain(args.max_p6, args.max_extra, args.max_extra_value)
+    elif args.p6_pair_diagnostic:
+        p6_pair_diagnostic()
     else:
         search_protected(
             args.max_value,

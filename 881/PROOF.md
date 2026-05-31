@@ -4496,6 +4496,136 @@ pressure is the same as in the stage arguments: the new pair
 point \(30\), but moving \(p_6\) far enough to create such a gap outruns the
 available two-sum coverage.
 
+## Lemma 13.1f: Finite forbidden windows for stage witnesses
+
+Let \(S\subset\mathbb N\) be finite, let
+\[
+m=\min S,
+\]
+and suppose
+\[
+[N,H]\subseteq2S.
+\]
+Let \(F\subset S\) be nonempty, put \(a=\min F\), and let \(w\le H\). If
+\[
+w\notin3(S\setminus F),
+\]
+then
+\[
+(S\setminus F)\cap(w-a-m,\ w-N]=\varnothing. \tag{1}
+\]
+Equivalently, every retained \(c\in S\setminus F\) forbids the whole witness
+window
+\[
+c+N\le w\le c+a+m-1. \tag{2}
+\]
+
+Proof. If
+\[
+c\in(S\setminus F)\cap(w-a-m,\ w-N],
+\]
+then \(w-c\in[N,H]\), so choose
+\[
+w-c=x+y,\qquad x,y\in S.
+\]
+If \(x,y\notin F\), then
+\[
+w=c+x+y\in3(S\setminus F),
+\]
+contrary to the hypothesis. Thus one of \(x,y\) lies in \(F\), and hence
+\[
+w-c=x+y\ge a+m.
+\]
+This contradicts \(c>w-a-m\). Therefore (1) holds, and (2) is just (1)
+rewritten with \(c\) fixed. \(\square\)
+
+Consequently, if a first-completed Schreier edge \(F\) with
+\[
+a=\min F,\qquad y=\max F
+\]
+has a stage witness \(w\), then activity gives \(w\ge y+2m\), while the
+stage ceiling gives \(w\le R_s\). No witness can exist if
+\[
+[y+2m,\ R_s]\subseteq
+\bigcup_{c\in A_s\setminus F}[c+N,\ c+a+m-1]. \tag{3}
+\]
+Thus a finite stage must place each witness in a gap left by the retained
+points' forbidden windows. The missing global obstruction is precisely to
+derive such a covering (3) for some newly completed Schreier edge from the
+two-sum coverage and buffer conditions alone.
+
+The P5-to-P6 stall in the finite search illustrates the same pressure in a
+more concrete form. Let
+\[
+S=\{1,2,4,5,8,10,15,18,19,30\},\qquad a=10,
+\]
+and try to add a sixth protected point \(p>30\). Suppose the pair edge
+\[
+F=\{10,p\}
+\]
+has a witness \(w=p+u<2p+1\) in a finite extension
+\[
+A=S\cup\{p\}\cup Q,\qquad \min Q>p,
+\]
+with two-sum coverage through \(w\). Since restoring \(p\) repairs the
+hole, the low-excess assumption forces
+\[
+u\in2(S\setminus\{10\}). \tag{4}
+\]
+Moreover, for every retained old point
+\[
+c\in S\setminus\{10\},\qquad u\le c,
+\]
+one must have
+\[
+p+u-c-10\in S. \tag{5}
+\]
+Indeed, \(w-c=p+u-c\le p\), so neither \(p\) nor any element of \(Q\) can
+occur in a positive two-term representation of \(w-c\). Since \(w-c\) is in
+the covered range and \(w\notin3(A\setminus F)\), every two-term
+representation of \(w-c\) from \(A\) must meet \(F\). It cannot use \(p\),
+so it must use \(10\), giving (5).
+
+If \(u\le18\), then (5) with \(c=18,19,30\) says that, for
+\[
+L=p+u-10,
+\]
+the three integers
+\[
+L-18,\qquad L-19,\qquad L-30
+\]
+all lie in \(S\). But \(L-19\) and \(L-18\) are consecutive elements of
+\(S\), and the only consecutive pairs in \(S\) are
+\[
+(1,2),\qquad(4,5),\qquad(18,19).
+\]
+In these three cases \(L-30\) is respectively \(-10,-7,7\), never an
+element of \(S\). Hence every such low-excess pair witness must satisfy
+\[
+w-p=u\ge19. \tag{6}
+\]
+
+A bounded enumeration of the remaining range \(19\le u\le30\), using
+(4), (5), and the three-sum hole condition, leaves only one pair-edge
+escape:
+\[
+p=38,\qquad w=58,
+\]
+which is realized by
+\[
+A=S\cup\{38,40,43,44\}.
+\]
+Thus the first new pair edge \(\{10,p\}\) alone does not prove the P6
+failure. In the actual Schreier P6 test, the extension with \(p=38\) fails
+because the new higher-rank edges
+\[
+\{15,18,38\},\quad \{15,19,38\},\quad
+\{15,30,38\},\quad \{18,19,30,38\}
+\]
+have no compatible witnesses. The surviving obstruction is therefore the
+simultaneous closure of many reflected terminal windows, not just a single
+pair-edge inequality.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets
@@ -5265,6 +5395,9 @@ new-design problem, not as a small non-greedy search miss.
   a Schreier barrier with frozen witnesses, coverage buffer,
   inclusion-minimal activity, and shifted two-sum domination would produce a
   \(k=2\) counterexample.
+* Lemma 13.1f extracts finite forbidden windows for stage witnesses. In the
+  P5 Schreier seed, the new pair edge has only one low-excess escape, and
+  the full P6 failure comes from simultaneous higher-rank edge closure.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).
