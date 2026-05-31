@@ -1963,6 +1963,72 @@ b+b'+e\in3P\qquad(b,b'\in B),
 then the hypotheses of Lemma 8.2a hold. Theorem 8.2 constructs such a
 protected reservoir recursively from finite reflection-recurrence.
 
+## Warning 8.2b: Fixed-center greedy absorption has star obstructions
+
+Lemma 8.2a suggests a direct greedy proof for \(k=2\): fix a retained
+center \(e\), choose deleted elements one at a time, and require each new
+choice to repair all deleted multisets of size at most two. For a finite
+deleted prefix \(D\), call a candidate \(b\in A\setminus(D\cup\{e\})\)
+\(e\)-good over \(D\) if, with
+\[
+C_b=A\setminus(D\cup\{b\}),
+\]
+one has
+\[
+e+b\in2C_b,\qquad e+2b\in3C_b, \tag{1}
+\]
+and
+\[
+e+d+b\in3C_b\qquad(d\in D). \tag{2}
+\]
+If every finite prefix \(D\) has arbitrarily large \(e\)-good extensions
+outside the finite set of already protected repair summands, then choosing
+such extensions recursively gives an infinite \(B\) for which
+\[
+A\setminus B
+\]
+is an order-3 basis by Lemma 8.2a.
+
+The missing extension lemma is not a consequence of the existing one-point
+and pair-barrier results. If all sufficiently large \(b\) fail to be
+\(e\)-good over a fixed finite \(D\), the failures can occur in three
+different ways.
+
+First, one can have a fixed-center two-sum failure
+\[
+e+b\notin2C_b. \tag{3}
+\]
+This is weaker than a one-point order-3 failure: it only says that the
+specific repair \(e+b\) has no two-term retained representation. The set
+\(A\setminus\{b\}\) may still be an order-3 basis with threshold below
+\(b\).
+
+Second, one can have a diagonal failure
+\[
+e+2b\notin3C_b. \tag{4}
+\]
+When \(D=\varnothing\), infinitely many such failures are singleton
+order-3 failures and are handled by Corollary 8.3. For nonempty \(D\), an
+inclusion-minimal bad set for the same witness may include old elements of
+\(D\), so this becomes a finite-prefix obstruction rather than a new
+singleton obstruction.
+
+Third, for some fixed old deleted element \(d\in D\), one can have the
+star-shaped old-new pair failure
+\[
+e+d+b\notin3C_b. \tag{5}
+\]
+For fixed \(d\), (5) is a bounded-top-excess family of pair holes for
+\(\{d,b\}\). Corollary 8.6b does not rule this out, because that corollary
+requires pair barriers inside every infinite tail. An infinite future
+deletion can simply avoid the already committed element \(d\), so a star
+around \(d\) is not a cofinite-tail barrier.
+
+Thus a fixed-center greedy absorption proof would need new input: either a
+way to vary the center coherently with the deleted pattern, or an argument
+turning persistent star-shaped failures into a genuine tail barrier. This
+is the same coherence problem illustrated by Example 8.8.
+
 ## Theorem 8.2: Reflection-recurrence gives a good deletion for \(k=2\)
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -5407,6 +5473,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   reflection-recurrence of \(A\).
 * Lemma 8.2a isolates the repair criterion used to turn a carefully chosen
   infinite deletion into an order-3 basis.
+* Warning 8.2b records why the most direct fixed-center greedy use of
+  Lemma 8.2a does not close the remaining \(k=2\) case: a finite prefix can
+  create fixed-center or star-shaped old-new obstructions not covered by
+  the singleton and cofinite-tail pair-barrier theorems.
 * Theorem 8.2 proves that finite reflection-recurrence gives an infinite
   deletion preserving order 3.
 * Corollary 8.3 therefore resolves the \(k=2\) problem whenever infinitely
