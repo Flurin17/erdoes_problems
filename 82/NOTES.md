@@ -1006,3 +1006,11 @@ source of growth beyond Ramsey.
   `search_modular_partition.py` so node-limited exact searches are classified
   as `unknown` rather than as no-partition certificates; this prevents false
   counterexample signals in large local searches.
+- 2026-05-31: Audited the attempted fixed dyadic universal-slot lemma.  The
+  disjoint-union proof is valid only inside a fixed source degree residue
+  class modulo `q`, since components with different source residues do not
+  form a `q`-modular disjoint union.  `PROOF.md` now states the corrected
+  residue-class lemma: a flexible `q -> M` theorem gives one universal slot
+  multiset for each source residue `a mod q`, not necessarily a single common
+  multiset for all source residues.  The first-lift even-graph lemma remains
+  unaffected because its source residue is fixed at `0 mod 2`.

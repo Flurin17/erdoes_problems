@@ -538,6 +538,60 @@ Thus to prove the flexible first lift it is enough, and in fact necessary, to
 prove one universal four-slot theorem.  The current experimental survivor
 list for such a universal `R` is recorded in `NOTES.md`.
 
+## Lemma 4E.2: Universal Slots Within A Fixed Source Residue
+
+Fix positive integers `q`, `M`, and `B` with `q` dividing `M`.  Say that a
+graph has source residue `a mod q` if every vertex degree is congruent to
+`a` modulo `q`.  Say that a residue multiset `R` of size `B` modulo `M` is
+universal for the lift `a mod q -> M` if every graph of source residue
+`a mod q` has a partition into at most `B` induced `M`-modular subgraphs
+whose residue signature is a submultiset of `R`.
+
+For fixed `q`, `M`, `B`, and `a`, the following are equivalent.
+
+1. Every graph of source residue `a mod q` has a partition into at most `B`
+   induced `M`-modular subgraphs.
+2. There is a residue multiset `R` of size `B` modulo `M` that is universal
+   for `a mod q -> M`.
+
+Proof.  The second statement implies the first.  Conversely, suppose the first
+statement holds and no universal `R` exists.  There are finitely many residue
+multisets of size `B` modulo `M`.  For each such `R`, choose a graph `G_R`
+of source residue `a mod q` with no `R`-slot partition.  The disjoint union
+
+```text
+G = disjoint union_R G_R
+```
+
+again has source residue `a mod q`, so by the first statement it has a
+`B`-part `M`-modular partition.  Pad the residue signature of this partition
+to a `B`-element residue multiset `R_0`.  Restricting the global partition to
+the component `G_{R_0}` gives an `R_0`-slot partition of `G_{R_0}`, a
+contradiction.  QED.
+
+Consequently a flexible `q -> M` theorem for all source residues gives a
+finite family of universal slot multisets, one for each residue `a mod q`.
+It does not by this argument give a single common `B`-slot multiset that
+works simultaneously for all source residues; the class of all `q`-modular
+graphs is not closed under disjoint unions of different source residues.
+
+Any universal slot multiset for source residue `a mod q` must pass the clique
+tests whose source residue is `a`.  Since the clique `K_m` has degree
+`m-1`, it belongs to the source class `a mod q` exactly when
+`m congruent a+1 mod q`.  Therefore a universal
+`R={r_1,...,r_B}` modulo `M` for `a mod q -> M` must have the property that
+every positive integer `m` with `m congruent a+1 mod q` can be written as
+
+```text
+m = s_1+...+s_j,  j<=B,
+s_i congruent r_i+1 mod M
+```
+
+using a submultiset of `R`.  Lemma 4I.8 is the all-cliques version of this
+necessary condition.  Thus fixed-slot candidates for higher dyadic lifts are
+already heavily constrained by elementary coin-representation conditions, but
+the constraint should be applied separately to the relevant source residues.
+
 ## Lemma 4F: Self-Labelled Modular Colorings
 
 Fix a positive integer `M`.  The following two statements are equivalent for
