@@ -63,6 +63,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   are eliminated locally, and the remaining `gamma=2alpha` candidate is removed
   by the local c-edge lower-bound/base endpoint refinement plus Beeson
   Lemma 11.17.
+- `n = 63` and `n = 99` impossible in this workspace: all other source rows
+  are eliminated locally, and the final `gamma=2alpha` boundary patterns are
+  removed by a boundary fan plus side-difference nonfit obstruction.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
@@ -161,7 +164,7 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 60 | negative in this workspace | source case split plus local `gamma=2alpha` c-edge/base endpoint/Lemma 11.17 obstruction |
 | 61 | positive | `5^2+6^2` |
 | 62 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
-| 63 | not classified here | final refined `gamma=2alpha` pattern `X=2a+3b+2c`, `Y=3a+3b+3c` remains |
+| 63 | negative in this workspace | source case split plus local `gamma=2alpha` boundary nonfit obstruction |
 | 64 | positive | square family |
 | 65 | positive | `1^2+8^2` |
 | 66 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
@@ -197,7 +200,7 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 96 | positive | `6*4^2` |
 | 97 | positive | `4^2+9^2` |
 | 98 | positive | `2*7^2` |
-| 99 | not classified here | final refined `gamma=2alpha` pattern `X=2a+5b+2c`, `Y=3a+3b+3c` remains |
+| 99 | negative in this workspace | source case split plus local `gamma=2alpha` boundary nonfit obstruction |
 | 100 | positive | square family |
 
 Important distinction: "positive square class" and "smallest representative" are different. A construction of `15m^2` for all large `m` proves positive infinitely many `n` with squarefree kernel `15`, but it does not prove `n=15`.
@@ -228,15 +231,13 @@ Important distinction: "positive square class" and "smallest representative" are
    `(8,15,13)` in side `60`, including their `a,b` swaps; combined with the
    source split and non-isosceles `gamma=2pi/3` endpoint checks, this now gives
    negative workspace proofs for both counts.
-   The composite dashboard currently shows no surviving encoded candidates for
-   most unresolved values below `100`, while `63` and `99` still have refined
-   `gamma=2alpha` boundary-arithmetic survivors. The remaining patterns are
-   `X=2a+3b+2c`, `Y=3a+3b+3c` for `63`, and `X=2a+5b+2c`,
-   `Y=3a+3b+3c` for `99`. Values
+   The composite dashboard currently shows no remaining open values below
+   `100` after the final `63` and `99` `gamma=2alpha` patterns are eliminated
+   by the boundary fan plus side-difference nonfit obstruction. Values
    `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-   `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
-   `88`, `91`, `92`, `93`, `94`, and `95` now upgraded from dashboard
-   evidence to proof entries.
+   `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
+   `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` are now upgraded from
+   dashboard evidence to proof entries.
    The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha

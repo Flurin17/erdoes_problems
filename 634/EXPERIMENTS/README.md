@@ -68,8 +68,9 @@ Current components:
   boundary `c`-parity, and Beeson Lemma 11.17.
 - `gamma_2alpha_endpoint_automaton.py`: diagnostic endpoint automaton for
   `gamma=2alpha`; its `angle` mode preserves the open boundary controls, while
-  the stricter `fan` mode is not used as a proof because non-strict tilings can
-  have shifted side contacts.
+  the stricter `fan` mode is only promoted when an additional side-difference
+  nonfit check rules out shifted side contacts, as in the local `N=63` and
+  `N=99` obstruction.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

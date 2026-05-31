@@ -1042,6 +1042,7 @@ This table records only values/families classified by the current proof file.
 | `57` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `60` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` c-edge/base endpoint/Lemma 11.17 obstruction |
 | `62` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `63` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` boundary nonfit obstruction |
 | `66` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `69` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `70` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
@@ -1055,6 +1056,7 @@ This table records only values/families classified by the current proof file.
 | `93` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `94` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `95` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
+| `99` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` boundary nonfit obstruction |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1662,6 +1664,59 @@ representations `20b` and `24b`.
 Therefore `N=76` and `N=92` have no survivor in any source case and are
 classified negative in this workspace.
 
+## Composite Benchmark: `N=63` and `N=99`
+
+The remaining below-`100` rows after the preceding refinements are `63` and
+`99`. Neither is in the elementary positive forms, so the commensurable-angle,
+similar/reptile, and right-tile isosceles branches are removed. The exact
+equilateral boundary-length scan, the isosceles `gamma=2pi/3` filter, and the
+exact non-isosceles `gamma=2pi/3` filters give no candidates. In the
+`3alpha+2beta=pi` branch, the stronger isosceles-`alpha+beta` filter and
+boundary-integrality checks remove all raw roots.
+
+The only remaining branch is `gamma=2alpha`. After the two-`c` boundary-edge
+lemma, the base endpoint lemma, boundary `c`-parity, and Beeson Lemma 11.17,
+the boundary arithmetic has exactly one pattern for each value:
+
+```text
+N=63: tile=(9,7,12),   X=2a+3b+2c on both equal sides, Y=3a+3b+3c.
+N=99: tile=(25,11,30), X=2a+5b+2c on both equal sides, Y=3a+3b+3c.
+```
+
+These patterns are eliminated by a boundary nonfit obstruction. At a straight
+boundary vertex in the `gamma=2alpha` branch, the angle star is either
+`alpha+beta+gamma` or `3alpha+beta`. If the local realization is edge-to-edge
+at that vertex, the possible oriented boundary-side transitions are:
+
+```text
+a:beta->gamma   -> a:beta->gamma
+a:gamma->beta   -> a:gamma->beta or b:alpha->gamma
+b:alpha->gamma  -> b:alpha->gamma
+b:gamma->alpha  -> a:beta->gamma or b:gamma->alpha
+c:alpha->beta   -> c:alpha->beta
+c:beta->alpha   -> c:beta->alpha
+```
+
+Thus a `c` boundary edge cannot be followed on the same outer side by an `a`-
+or `b`-edge in any edge-to-edge boundary fan. In a non-strict tiling, the only
+way to avoid this side-label fan is for two different side labels to overlap
+from the boundary vertex along the same ray, producing a remaining collinear
+segment whose length is one of `|a-b|`, `|a-c|`, or `|b-c|` and which must be a
+nonnegative integer sum of tile side lengths. For `(9,7,12)`, the differences
+are `2`, `3`, and `5`, all smaller than the least tile side `7`. For
+`(25,11,30)`, the differences are `14`, `5`, and `19`; none is a nonnegative
+integer sum of `25`, `11`, and `30` because each is below `2*11=22` and none
+equals `11`.
+Therefore the non-strict escape is also impossible for these two tiles.
+
+Every outer side in the displayed `N=63` and `N=99` patterns contains both
+`c` edges and non-`c` edges, so some straight boundary vertex on that side would
+have to transition between `c` and `a/b`. The preceding paragraph rules out
+that transition. Hence neither final boundary pattern can occur.
+
+Therefore `N=63` and `N=99` have no survivor in any source case and are
+classified negative in this workspace.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,
@@ -1706,8 +1761,8 @@ workspace.
 - The first composite negative values beyond Beeson's `7` and `11`
   obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
   `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`,
-  `57`, `60`, `62`, `66`, `69`, `70`, `76`, `78`, `86`, `87`, `88`, `91`,
-  `92`, `93`, `94`, and `95`.
+  `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`, `88`,
+  `91`, `92`, `93`, `94`, `95`, and `99`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1728,24 +1783,20 @@ workspace.
   the composite benchmark above now combines the equilateral boundary-star
   obstruction with the other source filters to classify `21` and `30`
   negative.
-- The current gap scan with primitive equilateral side bound `250` reports
-  `63` and `99` as open with `gamma=2alpha`
-  boundary-arithmetic survivors. The refined local filters reduce both to the
-  single remaining boundary pattern in which both equal sides use their two-`c`
-  representation and the base uses `Y=3a+3b+3c`; explicitly,
+- The current below-`100` gap scan with primitive equilateral side bound `250`
+  has no remaining open composite rows after the final `63` and `99`
+  `gamma=2alpha` patterns are eliminated by the boundary nonfit obstruction.
+  Those final patterns were:
 
   ```text
   N=63: X=2a+3b+2c, Y=3a+3b+3c for tile (9,7,12).
   N=99: X=2a+5b+2c, Y=3a+3b+3c for tile (25,11,30).
   ```
 
-  The same scan
-  formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
+  The same scan formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
   `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`,
   `69`, `70`, `76`, `78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, and
-  `95`, which are now removed by the composite benchmarks above. The remaining values are not
-  negative theorems until their `gamma=2alpha` survivor eliminations are
-  written out.
+  `95`; `63` and `99` were the last two rows in this below-`100` batch.
 - For the `gamma=2alpha` branch, Beeson records a finite boundary-enumeration
   algorithm and says that after the possible `N=45` boundary tiling the next
   values left open are `63,64,72`. The local base endpoint lemma above now

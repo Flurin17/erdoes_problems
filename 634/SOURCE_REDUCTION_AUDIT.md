@@ -167,8 +167,10 @@ Current evidence:
   remove the branch for `60` if accepted as a black-box computation. The local
   scripts now remove `60`, `76`, and `92` by the two-`c` boundary-edge lemma,
   base endpoint lemma, boundary `c`-parity, and Beeson Lemma 11.17. They also
-  reduce `63` and `99` to one final boundary pattern each, and reproduce the
-  stronger fact that `56` has no Lemma 11.14 boundary-arithmetic candidate.
+  reduce `63` and `99` to one final boundary pattern each, which is then
+  removed by the boundary fan plus side-difference nonfit obstruction, and
+  reproduce the stronger fact that `56` has no Lemma 11.14
+  boundary-arithmetic candidate.
 - `gamma=2pi/3` has a local boundary-transition obstruction.
 - The `gamma=2pi/3` arithmetic filter is encoded from Lemma 12.9 and Theorem
   12.10.
@@ -176,7 +178,8 @@ Current evidence:
 Impact:
 
 - The right-tile and `gamma=2alpha` rows are now source-backed enough for
-  small-value obstructions such as `N=22`, `N=56`, `N=60`, `N=76`, and `N=92`.
+  small-value obstructions such as `N=22`, `N=56`, `N=60`, `N=63`, `N=76`,
+  `N=92`, and `N=99`.
   The remaining isosceles gap includes exact composite completeness in the
   `gamma=2pi/3` and `3alpha+2beta=pi` rows.
 
@@ -256,28 +259,21 @@ Impact:
 
 ## Current Small-Value Status
 
-The following unresolved values below `100` remain after the currently encoded
-filters. The values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`,
-`42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `76`,
-`78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, and `95` formerly appeared in
-this list, but are now
-classified negative in `PROOF.md` after writing out the source-row arithmetic
-eliminations. The remaining values now have explicit `gamma=2alpha`
-boundary-arithmetic survivors:
-
-```text
-63, 99
-```
-
-The remaining values should remain recorded as open with encoded
-`gamma=2alpha` survivors until their survivor eliminations are written out at
-theorem level. After the latest local refinements, their only remaining
-patterns are:
+No unresolved values below `100` remain in the current workspace ledger. The
+values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
+`55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
+`88`, `91`, `92`, `93`, `94`, `95`, and `99` formerly appeared in the
+composite gap list, but are now classified negative in `PROOF.md` after
+writing out the source-row arithmetic eliminations. The last two were the
+`gamma=2alpha` boundary-arithmetic survivors:
 
 ```text
 63: tile=(9,7,12), X=2a+3b+2c, Y=3a+3b+3c.
 99: tile=(25,11,30), X=2a+5b+2c, Y=3a+3b+3c.
 ```
+
+They are removed by the local boundary fan plus side-difference nonfit
+obstruction recorded in `PROOF.md`.
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`

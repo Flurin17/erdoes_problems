@@ -155,6 +155,7 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
         57,
         60,
         62,
+        63,
         76,
         66,
         69,
@@ -168,6 +169,7 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
         93,
         94,
         95,
+        99,
     }:
         return "negative", ["workspace composite benchmark; exact source-row eliminations"]
     if n == 22:

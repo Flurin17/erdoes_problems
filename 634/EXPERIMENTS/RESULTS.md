@@ -15,8 +15,9 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=66`, `N=69`,
-`N=70`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
+`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`,
+`N=66`, `N=69`, `N=70`, `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`,
+`N=92`, `N=93`, `N=94`, `N=95`, and `N=99`
 certificates are now promoted in `PROOF.md`. The explicit encoded survivors in
 `100..250` remain the isosceles-`alpha+beta`
 `3alpha+2beta=pi` candidates at
@@ -287,8 +288,8 @@ PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 56
 
 The script reproduces Beeson Lemma 11.14's arithmetic enumeration. It returns
 zero `gamma=2alpha` candidates for `56`, `66`, `69`, and `70`; `60`, `63`,
-`64`, and `72` still have boundary-arithmetic candidates and remain separate
-work items.
+`64`, and `72` still have boundary-arithmetic candidates at this filter stage.
+The `60` and `63` candidates are closed by later local refinements below.
 
 The exact equilateral scans and boundary-star checks were also rerun:
 
@@ -376,8 +377,27 @@ N=63: tile=(9,7,12),   X=2a+3b+2c on both equal sides, Y=3a+3b+3c.
 N=99: tile=(25,11,30), X=2a+5b+2c on both equal sides, Y=3a+3b+3c.
 ```
 
-These are still open; the current filters do not provide an interior/global
-matching obstruction for that final pattern.
+The stricter endpoint fan automaton then gives no boundary witness for either
+final pattern:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_endpoint_automaton.py 63 99 --mode fan --limit 20
+```
+
+```text
+N=63: 1 boundary-arithmetic candidate(s)
+  tile=(9, 7, 12), X=63, Y=84: 0 endpoint witness(es) [fan]
+N=99: 1 boundary-arithmetic candidate(s)
+  tile=(25, 11, 30), X=165, Y=198: 0 endpoint witness(es) [fan]
+```
+
+This fan check is promoted only for these two rows because shifted non-strict
+contacts would leave a side-difference segment. For `(9,7,12)` the differences
+`2`, `3`, and `5` are all below the least tile side `7`; for `(25,11,30)` the
+differences `14`, `5`, and `19` are below `22=2*11` and none equals `11`.
+Thus no such difference is a nonnegative sum of tile sides, so the non-strict
+escape is impossible. Therefore `PROOF.md` treats `63` and `99` as classified
+negative.
 
 ## `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` Exact Filter Certificate
 
@@ -437,8 +457,9 @@ The script includes:
 
 - elementary positive families;
 - Beeson negatives `7` and `11`;
-- workspace composite obstructions through `70` recorded in `PROOF.md`,
-  with gaps such as `60` and `63` still explicitly unresolved;
+- workspace composite obstructions below `100` recorded in `PROOF.md`,
+  including the local `gamma=2alpha` closures for `60`, `63`, `76`, `92`, and
+  `99`;
 - workspace prime obstructions for primes `3 mod 4`;
 - recorded sufficient Beeson `3alpha+2beta=pi` constructions, including table
   entries `28,44,48,77,84` and the triquadratic sufficient values
@@ -548,19 +569,17 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,66,69,70,76,78,86,87,88,91,92,93,94,95:
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
   negative by workspace composite benchmarks
-
-63,99:
-  open with the final gamma=2alpha boundary pattern recorded above
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
 the source reductions is still incomplete. After the `N=14`, `N=15`, `N=21`,
 `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`,
-`N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`, `N=70`, `N=76`, `N=78`,
-`N=86`, `N=87`, `N=88`, `N=91`, `N=92`, `N=93`, `N=94`, and `N=95`
+`N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`, `N=66`, `N=69`, `N=70`,
+`N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=92`, `N=93`, `N=94`,
+`N=95`, and `N=99`
 source-row audits, the current open ledger removes those values from the
 scanner's unresolved list.
 
