@@ -1421,3 +1421,9 @@ source of growth beyond Ramsey.
   partitions of total at most `49` and skipped `264,483` larger-first
   partitions.  This supports the next arithmetic subtarget: rectangle-only
   failures may require a coordinate larger than `2q+1`.
+- 2026-05-31: A filtered `q=8,max_first=17=2q+1` rectangle sweep reached
+  `4,926,734` checked partitions before the operation limit, stopping at
+  `(6,6,6,6,5,2,1^30)`.  A direct check covers this vector in `8` rectangles:
+  `6^1, 6^1, 6^1, 5^2, 2^1, 1^10, 1^10, 1^10`.  The bounded-height
+  rectangle subtarget remains plausible, but q=8 needs better candidate
+  ordering or stronger pruning to finish exhaustively.
