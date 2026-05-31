@@ -62,5 +62,25 @@ def search(max_value: int = 22, max_size: int = 10, min_spokes: int = 3) -> None
     print("no fixed-center star obstruction found within searched bounds")
 
 
+def prefix_star_example() -> None:
+    elements = {1, 2, 3, 4, 5, 6, 7}
+    e = 1
+    deleted_prefix = {4, 6}
+    d = 6
+    b = 7
+    witness = e + d + b
+    retained = elements - deleted_prefix - {b}
+    print("finite prefix star not descending to a pair hole")
+    print("A=", sorted(elements), "e=", e, "D=", sorted(deleted_prefix))
+    print("d=", d, "b=", b, "w=", witness)
+    print("e+b in 2C:", e + b in hsum(retained, 2, witness))
+    print("e+2b in 3C:", e + 2 * b in hsum(retained, 3, e + 2 * b))
+    print("w in 3C:", witness in hsum(retained, 3, witness))
+    print("w in 3(A\\{d,b}):", witness in hsum(elements - {d, b}, 3, witness))
+    print("w in 3(A\\{4,b}):", witness in hsum(elements - {4, b}, 3, witness))
+    print("w in 3(A\\{4,d}):", witness in hsum(elements - {4, d}, 3, witness))
+
+
 if __name__ == "__main__":
     search()
+    prefix_star_example()

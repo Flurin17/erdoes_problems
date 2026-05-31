@@ -2214,6 +2214,41 @@ certificate-free regime as Lemma 8.6g: every finite test set in the relevant
 tail must contain a certificate-free subset of size at least
 \(|T|/|D|\).
 
+The important limitation is that a prefix star need not descend to a genuine
+pair hole. In the finite window
+\[
+A_0=\{1,2,3,4,5,6,7\},
+\]
+take
+\[
+e=1,\qquad D=\{4,6\},\qquad d=6,\qquad b=7,
+\]
+and
+\[
+C=A_0\setminus(D\cup\{b\})=\{1,2,3,5\}.
+\]
+The non-star repairs hold:
+\[
+e+b=8=3+5\in2C,\qquad e+2b=15=5+5+5\in3C.
+\]
+But the star repair fails:
+\[
+e+d+b=14\notin3C.
+\]
+This is not a pair-private hole for \(\{d,b\}\), because
+\[
+14=4+5+5\in3(A_0\setminus\{6,7\}).
+\]
+Indeed the obstruction is minimal for the triple \(\{4,6,7\}\):
+\[
+14=3+5+6\in3(A_0\setminus\{4,7\}),\qquad
+14=2+5+7\in3(A_0\setminus\{4,6\}).
+\]
+Thus persistent pair-private stars would create a genuine graph barrier on
+a tail, but persistent prefix stars can be irreducibly hypergraph-valued.
+This is why the fixed-center greedy route again leads back to
+Schreier-type finite barriers rather than to the pair-barrier results alone.
+
 ## Theorem 8.2: Reflection-recurrence gives a good deletion for \(k=2\)
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with

@@ -121,6 +121,10 @@ Warning 8.2b. It finds the small window
 repair at witnesses `8,11,14`. Restoring either endpoint repairs each
 witness, so this is a genuine minimal pair-hole phenomenon for a fixed
 prefix.
+The same script also prints the finite prefix example
+\(\{1,2,3,4,5,6,7\}\), where the star failure for
+`D={4,6}`, `d=6`, and `b=7` is minimal only as a triple-prefix hole; it
+does not descend to a pair hole after deleting `{6,7}`.
 
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
