@@ -2094,3 +2094,10 @@ source of growth beyond Ramsey.
   `(0,0,2,2)` counterexample in `50` samples on `18` vertices (`seed=2181`)
   or `20` samples on `20` vertices (`seed=2201`).  The odd tree mask `9954`
   that kills `(0,1,2,3)` has a two-part zero-residue `(0,0,2,2)` certificate.
+- 2026-05-31: Added `--odd-parts` to `universal_slots_fast.cpp` to test the
+  complement reduction from odd-degree graphs to even-degree graphs.  The
+  reduction is false: `K_{2,6}` (mask `220336191`, edge set
+  `01,02,03,04,05,06,17,27,37,47,57,67`) has a `(0,0,2,2)` partition but no
+  `(0,0,2,2)` partition with all nonempty parts odd.  In `K_{2,6}`, every
+  odd-order even-residue modular part is an independent zero-residue part,
+  leaving only two usable zero slots for two even-sized bipartition classes.

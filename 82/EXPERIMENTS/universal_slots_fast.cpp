@@ -118,9 +118,10 @@ int remove_count(int code, int residue) {
 
 class Checker {
   public:
-    explicit Checker(int n_value, int modulus_value)
+    explicit Checker(int n_value, int modulus_value, bool odd_parts_value)
         : n(n_value),
           modulus(modulus_value),
+          odd_parts(odd_parts_value),
           full((1 << n_value) - 1),
           incident(1 << n_value),
           submasks_with_pivot(1 << n_value) {
@@ -174,6 +175,7 @@ class Checker {
   private:
     int n;
     int modulus;
+    bool odd_parts;
     int full;
     std::vector<std::array<uint64_t, 8>> incident;
     std::vector<std::vector<int>> submasks_with_pivot;
@@ -189,6 +191,9 @@ class Checker {
             if (!has_count(code, r)) continue;
             int next_code = remove_count(code, r);
             for (int sub : submasks_with_pivot[remaining]) {
+                if (odd_parts && (__builtin_popcount(static_cast<unsigned>(sub)) % 2 == 0)) {
+                    continue;
+                }
                 if (residue[sub] == r && rec(remaining ^ sub, next_code)) {
                     saved = 1;
                     return true;
@@ -231,6 +236,7 @@ int main(int argc, char** argv) {
     int n = 8;
     int modulus = 4;
     int degree_parity = 0;
+    bool odd_parts = false;
     bool progress = false;
     std::string candidate_text;
     for (int i = 1; i < argc; ++i) {
@@ -243,12 +249,14 @@ int main(int argc, char** argv) {
             candidate_text = argv[++i];
         } else if (arg == "--degree-parity" && i + 1 < argc) {
             degree_parity = std::stoi(argv[++i]) & 1;
+        } else if (arg == "--odd-parts") {
+            odd_parts = true;
         } else if (arg == "--progress") {
             progress = true;
         } else {
             std::cerr << "usage: universal_slots_fast [--n N] [--modulus 4]"
                       << " [--candidates a,b,c,d;...] [--degree-parity 0|1]"
-                      << " [--progress]\n";
+                      << " [--odd-parts] [--progress]\n";
             return 2;
         }
     }
@@ -265,7 +273,7 @@ int main(int argc, char** argv) {
     std::vector<Candidate> candidates = parse_candidates(candidate_text, modulus);
     std::vector<int> alive(candidates.size(), 1);
     std::vector<uint64_t> bad(candidates.size(), 0);
-    Checker checker(n, modulus);
+    Checker checker(n, modulus, odd_parts);
 
     int free_edges = (n - 1) * (n - 2) / 2;
     uint64_t total = uint64_t{1} << free_edges;
@@ -291,6 +299,7 @@ int main(int argc, char** argv) {
     std::cout << "n=" << n << "\n";
     std::cout << "modulus=" << modulus << "\n";
     std::cout << "degree_parity=" << degree_parity << "\n";
+    std::cout << "odd_parts=" << (odd_parts ? 1 : 0) << "\n";
     std::cout << "fixed_parity_graphs=" << total << "\n";
     for (size_t i = 0; i < candidates.size(); ++i) {
         std::cout << "slots=" << candidate_string(candidates[i]) << " "

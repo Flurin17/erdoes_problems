@@ -3581,6 +3581,44 @@ clean source-residue slots `(0,1,2,3)` has an even stronger
 `(0,0,2,2)` certificate: its vertices split into the two zero-residue parts
 `{0,1,3}` and `{2,4,5,6,7}`.
 
+A natural attempt to deduce the odd-degree source case from the even case by
+complementation is too strong.  If `G` is odd-degree on an even number of
+vertices, then `bar G` is even-degree.  A `(0,0,2,2)` partition of `bar G`
+whose nonempty parts all have odd size would transform back into a
+`(0,0,2,2)` partition of `G`, because complementing a part of odd order sends
+an even residue to an even residue.  However such odd-sized certificates need
+not exist.
+
+**Example: Odd-Sized Complement Certificates Are Not Forced.**  The even
+graph `K_{2,6}` has a `(0,0,2,2)` partition, but no such partition in which
+every nonempty part has odd size.
+
+Proof.  The bipartition classes themselves give a two-part zero-residue
+certificate for `K_{2,6}`.  Now consider an induced subgraph using `a`
+vertices from the side of size `2` and `b` vertices from the side of size
+`6`.  If both `a,b` are positive, the two sides have internal degrees `b`
+and `a`, so an even-residue modular part requires
+
+```text
+a congruent b congruent 0 or 2 mod 4.
+```
+
+Such a mixed part has even order.  Hence every odd-order even-residue part is
+independent and lies wholly inside one bipartition side; it has residue `0`.
+The two residue-`2` slots therefore cannot be used, and the two zero slots
+cannot cover both bipartition classes by odd independent sets, since both
+classes have even size.  Thus no odd-sized `(0,0,2,2)` certificate exists.
+QED.
+
+The compiled checker finds this obstruction with
+
+```text
+/tmp/universal_slots_fast --n 8 --degree-parity 0 \
+  --candidates 0,0,2,2 --odd-parts
+```
+
+as mask `220336191`.
+
 One tempting simplification of the surviving clean even-source candidate
 `R=(0,0,2,2)` is false: the two zero slots cannot be merged into one.
 
