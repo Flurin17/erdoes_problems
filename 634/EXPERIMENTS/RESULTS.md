@@ -16,14 +16,14 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`,
+`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`,
 `N=66`, `N=69`, `N=70`, `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`,
-`N=92`, `N=93`, `N=94`, `N=95`, and `N=99`
+`N=92`, `N=93`, `N=94`, and `N=95`
 certificates are now promoted in `PROOF.md`. In the `100..250`
 `3alpha+2beta` isosceles-`alpha+beta` branch, the boundary-order/nonfit check
 removes the former Section 11.4 survivor records at `132`, `156`, `175`,
-`189`, `198`, `204`, `224`, and `228`; `240` remains for a separate overhang
-analysis.
+`189`, `198`, `204`, `224`, and `228`; a separate resonant overhang endpoint
+argument also removes `240` in that branch.
 
 ## `N=14` and `N=15` Exact Filter Certificate
 
@@ -291,7 +291,9 @@ PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 56
 The script reproduces Beeson Lemma 11.14's arithmetic enumeration. It returns
 zero `gamma=2alpha` candidates for `56`, `66`, `69`, and `70`; `60`, `63`,
 `64`, and `72` still have boundary-arithmetic candidates at this filter stage.
-The `60` and `63` candidates are closed by later local refinements below.
+The `60` candidate is closed by later local refinements below. The `63`
+candidate is isolated to one final boundary pattern, but remains open pending
+a clean-boundary promotion.
 
 The exact equilateral scans and boundary-star checks were also rerun:
 
@@ -393,13 +395,14 @@ N=99: 1 boundary-arithmetic candidate(s)
   tile=(25, 11, 30), X=165, Y=198: 0 endpoint witness(es) [fan]
 ```
 
-This fan check is promoted only for these two rows because shifted non-strict
-contacts would leave a side-difference segment. For `(9,7,12)` the differences
-`2`, `3`, and `5` are all below the least tile side `7`; for `(25,11,30)` the
-differences `14`, `5`, and `19` are below `22=2*11` and none equals `11`.
-Thus no such difference is a nonnegative sum of tile sides, so the non-strict
-escape is impossible. Therefore `PROOF.md` treats `63` and `99` as classified
-negative.
+This fan check is not yet promoted to a proof-quality obstruction. The
+side-difference calculation rules out the simplest shifted-overhang rescue:
+for `(9,7,12)` the differences `2`, `3`, and `5` are all below the least tile
+side `7`; for `(25,11,30)` the differences `14`, `5`, and `19` are below
+`22=2*11` and none equals `11`. What is still missing is a clean-boundary or
+overhang-equivalence lemma proving that every non-strict boundary realization
+must reduce to such a side-difference segment. Accordingly `PROOF.md` now
+treats `63` and `99` as open, with one isolated `gamma=2alpha` pattern each.
 
 ## `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` Exact Filter Certificate
 
@@ -460,8 +463,7 @@ The script includes:
 - elementary positive families;
 - Beeson negatives `7` and `11`;
 - workspace composite obstructions below `100` recorded in `PROOF.md`,
-  including the local `gamma=2alpha` closures for `60`, `63`, `76`, `92`, and
-  `99`;
+  including the local `gamma=2alpha` closures for `60`, `76`, and `92`;
 - workspace prime obstructions for primes `3 mod 4`;
 - recorded sufficient Beeson `3alpha+2beta=pi` constructions, including table
   entries `28,44,48,77,84` and the triquadratic sufficient values
@@ -571,19 +573,23 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,66,69,70,76,78,86,87,88,91,92,93,94,95:
   negative by workspace composite benchmarks
+63,99:
+  open with one gamma=2alpha boundary candidate each
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
 the source reductions is still incomplete. After the `N=14`, `N=15`, `N=21`,
 `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`,
-`N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`, `N=66`, `N=69`, `N=70`,
+`N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=66`, `N=69`, `N=70`,
 `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=92`, `N=93`, `N=94`,
-`N=95`, and `N=99`
+and `N=95`
 source-row audits, the current open ledger removes those values from the
-scanner's unresolved list.
+scanner's unresolved list. The same scan now keeps `63` and `99` visible
+because their isolated `gamma=2alpha` fan obstructions still need an
+arbitrary-boundary promotion.
 
 ## Equilateral Boundary-Length Checks
 
@@ -806,7 +812,8 @@ N=198: obstructed; diffs=(29,52,81); representable_diffs=()
 N=204: obstructed; diffs=(19,30,49); representable_diffs=()
 N=224: both survivor records obstructed
 N=228: obstructed; diffs=(31,33,64); representable_diffs=()
-N=240: survives; representable_diffs=(12,)
+N=240: obstructed; representable_diffs=(12,);
+       resonant_ac_overhang_endpoint_obstruction
 ```
 
 The proof idea is local. In the strict straight-boundary transition table for
@@ -818,11 +825,14 @@ except `48` and `240` has no representable side difference and every Beeson
 side-count triple mixes `a` with a non-`a` side, so those `3alpha+2beta`
 branch records are locally eliminated.
 
+For `N=240`, the only representable difference is `c-a=12=3a`; the separate
+overhang endpoint check still fails because the no-`b` base triples force a
+`b:gamma->alpha` equal-side endpoint, and that endpoint can only be preceded by
+another `b:gamma->alpha` edge. No equal-side triple is all `b`.
+
 This is a branch closure, not a whole-count classification. Many of these
 values still have `gamma=2alpha` boundary-arithmetic survivors in the current
-dashboard. The remaining `3alpha+2beta` isosceles-`alpha+beta` survivor in
-this batch is `N=240`, where `c-a=12=3a`; it needs a T-junction-aware overhang
-automaton.
+dashboard.
 
 ## Zhang Constructive Families
 

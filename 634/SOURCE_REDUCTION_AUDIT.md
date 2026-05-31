@@ -167,9 +167,10 @@ Current evidence:
   remove the branch for `60` if accepted as a black-box computation. The local
   scripts now remove `60`, `76`, and `92` by the two-`c` boundary-edge lemma,
   base endpoint lemma, boundary `c`-parity, and Beeson Lemma 11.17. They also
-  reduce `63` and `99` to one final boundary pattern each, which is then
-  removed by the boundary fan plus side-difference nonfit obstruction, and
-  reproduce the stronger fact that `56` has no Lemma 11.14
+  reduce `63` and `99` to one final boundary pattern each. A stricter fan
+  diagnostic kills those two patterns only after an unproved clean-boundary
+  promotion, so `63` and `99` are not treated as proof-quality closures here.
+  The scripts also reproduce the stronger fact that `56` has no Lemma 11.14
   boundary-arithmetic candidate.
 - `gamma=2pi/3` has a local boundary-transition obstruction.
 - The `gamma=2pi/3` arithmetic filter is encoded from Lemma 12.9 and Theorem
@@ -178,8 +179,9 @@ Current evidence:
 Impact:
 
 - The right-tile and `gamma=2alpha` rows are now source-backed enough for
-  small-value obstructions such as `N=22`, `N=56`, `N=60`, `N=63`, `N=76`,
-  `N=92`, and `N=99`.
+  small-value obstructions such as `N=22`, `N=56`, `N=60`, `N=76`, and `N=92`.
+  The remaining `N=63` and `N=99` gamma=2alpha patterns are isolated but not
+  closed by a proof-quality arbitrary-boundary argument.
   The remaining isosceles gap includes exact composite completeness in the
   `gamma=2pi/3` and `3alpha+2beta=pi` rows.
 
@@ -230,8 +232,9 @@ Impact:
   `3alpha+2beta=pi` branches below `250` except the isosceles-`alpha+beta`
   source-filter branch. The boundary-order/nonfit obstruction then removes the
   later Section 11.4 survivor records at `132`, `156`, `175`, `189`, `198`,
-  `204`, `224`, and `228`, leaving the resonant `240` record in this branch.
-  This is still conditional on the full `3alpha+2beta=pi` source setup.
+  `204`, `224`, and `228`; the resonant `240` record is removed by the
+  separate `a/c` overhang endpoint argument. This is still conditional on the
+  full `3alpha+2beta=pi` source setup.
 
 ### 4. Composite Non-Isosceles `gamma=2pi/3` Completeness
 
@@ -260,12 +263,12 @@ Impact:
 
 ## Current Small-Value Status
 
-No unresolved values below `100` remain in the current workspace ledger. The
+The current workspace ledger leaves `63` and `99` unresolved below `100`. The
 values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-`55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
-`88`, `91`, `92`, `93`, `94`, `95`, and `99` formerly appeared in the
+`55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
+`88`, `91`, `92`, `93`, `94`, and `95` formerly appeared in the
 composite gap list, but are now classified negative in `PROOF.md` after
-writing out the source-row arithmetic eliminations. The last two were the
+writing out the source-row arithmetic eliminations. The remaining two are the
 `gamma=2alpha` boundary-arithmetic survivors:
 
 ```text
@@ -273,8 +276,8 @@ writing out the source-row arithmetic eliminations. The last two were the
 99: tile=(25,11,30), X=2a+5b+2c, Y=3a+3b+3c.
 ```
 
-They are removed by the local boundary fan plus side-difference nonfit
-obstruction recorded in `PROOF.md`.
+They fail the strict local boundary fan automaton, but the promotion from that
+strict model to arbitrary non-edge-to-edge boundary tilings is still missing.
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`
@@ -287,8 +290,9 @@ endpoint-pair boundary-star filter, the formerly recorded
 
 The boundary-order/nonfit obstruction now removes that branch for `132`, `156`,
 `175`, `189`, `198`, `204`, `224`, and `228`. It preserves the known positive
-`48` regression case and leaves the resonant `240` branch survivor, where
-`c-a=12=3a`. Several values in this range remain open through `gamma=2alpha`
+`48` regression case. The resonant `240` branch survivor, where `c-a=12=3a`,
+is removed by a separate overhang endpoint argument. Several values in this
+range remain open through `gamma=2alpha`
 boundary-arithmetic survivors or through source-reduction completeness gaps;
 this branch refinement is not a whole-count classification.
 

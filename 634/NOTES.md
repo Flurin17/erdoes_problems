@@ -63,9 +63,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   are eliminated locally, and the remaining `gamma=2alpha` candidate is removed
   by the local c-edge lower-bound/base endpoint refinement plus Beeson
   Lemma 11.17.
-- `n = 63` and `n = 99` impossible in this workspace: all other source rows
-  are eliminated locally, and the final `gamma=2alpha` boundary patterns are
-  removed by a boundary fan plus side-difference nonfit obstruction.
+- `n = 63` and `n = 99` remain open in this workspace: all other source rows
+  are eliminated locally, and the `gamma=2alpha` branch is reduced to one
+  boundary pattern for each count. The strict boundary fan obstruction has zero
+  witnesses, but the needed clean-boundary promotion for arbitrary T-junctions
+  is not yet proved.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
@@ -164,7 +166,7 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 60 | negative in this workspace | source case split plus local `gamma=2alpha` c-edge/base endpoint/Lemma 11.17 obstruction |
 | 61 | positive | `5^2+6^2` |
 | 62 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
-| 63 | negative in this workspace | source case split plus local `gamma=2alpha` boundary nonfit obstruction |
+| 63 | open in this workspace | one `gamma=2alpha` boundary pattern remains after all proof-quality refinements |
 | 64 | positive | square family |
 | 65 | positive | `1^2+8^2` |
 | 66 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
@@ -200,7 +202,7 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 96 | positive | `6*4^2` |
 | 97 | positive | `4^2+9^2` |
 | 98 | positive | `2*7^2` |
-| 99 | negative in this workspace | source case split plus local `gamma=2alpha` boundary nonfit obstruction |
+| 99 | open in this workspace | one `gamma=2alpha` boundary pattern remains after all proof-quality refinements |
 | 100 | positive | square family |
 
 Important distinction: "positive square class" and "smallest representative" are different. A construction of `15m^2` for all large `m` proves positive infinitely many `n` with squarefree kernel `15`, but it does not prove `n=15`.
@@ -231,12 +233,11 @@ Important distinction: "positive square class" and "smallest representative" are
    `(8,15,13)` in side `60`, including their `a,b` swaps; combined with the
    source split and non-isosceles `gamma=2pi/3` endpoint checks, this now gives
    negative workspace proofs for both counts.
-   The composite dashboard currently shows no remaining open values below
-   `100` after the final `63` and `99` `gamma=2alpha` patterns are eliminated
-   by the boundary fan plus side-difference nonfit obstruction. Values
+   The composite dashboard currently leaves `63` and `99` open below `100`,
+   each through one `gamma=2alpha` boundary pattern. Values
    `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-   `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
-   `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` are now upgraded from
+   `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `76`, `78`, `86`,
+   `87`, `88`, `91`, `92`, `93`, `94`, and `95` are now upgraded from
    dashboard evidence to proof entries.
    The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
@@ -245,10 +246,10 @@ Important distinction: "positive square class" and "smallest representative" are
    `55`, `88`, `105`, `120`, and `143` by non-isosceles `gamma=2pi/3`
    endpoint boundary-star checks. In the range `100..250`, the former
    `3alpha+2beta` isosceles-`alpha+beta` survivor records at `132`, `156`,
-   `175`, `189`, `198`, `204`, `224`, and `228` are now removed by a boundary
-   order plus side-difference nonfit obstruction. The resonant `240` record
-   survives that test because `c-a=12=3a`, and several of these counts still
-   have separate `gamma=2alpha` survivors.
+   `175`, `189`, `198`, `204`, `224`, `228`, and `240` are now removed by a
+   boundary order plus side-difference nonfit obstruction, with `240` requiring
+   a separate resonant `a/c` overhang endpoint argument because `c-a=12=3a`.
+   Several of these counts still have separate `gamma=2alpha` survivors.
 
 ## Current Diophantine Status for `n=19`
 

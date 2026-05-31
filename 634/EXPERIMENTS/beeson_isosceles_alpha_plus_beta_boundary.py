@@ -68,6 +68,8 @@ def candidate_count_triples(candidate: Candidate) -> tuple[
 
 def boundary_order_obstructed(candidate: Candidate) -> bool:
     """Return whether the local boundary order/nonfit obstruction applies."""
+    if resonant_240_obstructed(candidate):
+        return True
     if not all_differences_nonfit(candidate.sides):
         return False
     equal, base = candidate_count_triples(candidate)
@@ -76,16 +78,39 @@ def boundary_order_obstructed(candidate: Candidate) -> bool:
     return all(mixes_a(triple) for triple in equal) and all(mixes_a(triple) for triple in base)
 
 
+def resonant_240_obstructed(candidate: Candidate) -> bool:
+    """Special overhang check for the `(4,15,16)` survivor.
+
+    Here the only representable side difference is `c-a=12=3a`.  Even if every
+    `a`/`c` straight transition is allowed as an overhang rescue, the two
+    `alpha+beta` base corners force an equal side endpoint of type
+    `b:gamma->alpha`.  That endpoint can only follow itself, so a side ending
+    there would have to be all `b` edges.  The allowed equal-side triples for
+    the survivor contain no such word.
+    """
+    if candidate.sides != (4, 15, 16):
+        return False
+    equal, base = candidate_count_triples(candidate)
+    if not equal or not base:
+        return False
+    if any(q > 0 for _p, q, _r in base):
+        return False
+    return all(not (p == 0 and r == 0) for p, _q, r in equal)
+
+
 def obstruction_summary(candidate: Candidate) -> str:
     equal, base = candidate_count_triples(candidate)
     a, b, c = candidate.sides
     diffs = tuple(sorted({abs(a - b), abs(a - c), abs(b - c)} - {0}))
     fit = tuple(diff for diff in diffs if representable(diff, candidate.sides))
     status = "obstructed" if boundary_order_obstructed(candidate) else "survives"
+    reason = ""
+    if resonant_240_obstructed(candidate):
+        reason = "; resonant_ac_overhang_endpoint_obstruction"
     return (
         f"M={candidate.M} sides={candidate.sides} X={candidate.equal_side} Y={candidate.base}: "
         f"{status}; diffs={diffs}; representable_diffs={fit}; "
-        f"equal_triples={equal}; base_triples={base}"
+        f"equal_triples={equal}; base_triples={base}{reason}"
     )
 
 

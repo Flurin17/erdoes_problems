@@ -52,7 +52,8 @@ Current components:
   obstruction for the `3alpha+2beta=pi` isosceles-`alpha+beta` survivors. It
   closes the Section 11.4 survivor records at `132`, `156`, `175`, `189`,
   `198`, `204`, `224`, and `228`, while preserving the resonant `48` positive
-  example and the unresolved `240` survivor.
+  example. It also closes the `240` survivor by a special `a/c` overhang
+  endpoint argument.
 - `prime_case_dashboard.py`: high-level report for prime `N`, combining the
   source arithmetic reductions with the `3alpha+2beta=pi` filter.
 - `gamma_2pi3_isosceles_filter.py`: exact arithmetic filter from Beeson's
@@ -73,9 +74,9 @@ Current components:
   boundary `c`-parity, and Beeson Lemma 11.17.
 - `gamma_2alpha_endpoint_automaton.py`: diagnostic endpoint automaton for
   `gamma=2alpha`; its `angle` mode preserves the open boundary controls, while
-  the stricter `fan` mode is only promoted when an additional side-difference
-  nonfit check rules out shifted side contacts, as in the local `N=63` and
-  `N=99` obstruction.
+  the stricter `fan` mode is a conditional clean-boundary diagnostic. It kills
+  the remaining `N=63` and `N=99` patterns, but that is not proof-quality until
+  a clean-boundary or overhang-equivalence lemma is proved.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation
