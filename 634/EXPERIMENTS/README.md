@@ -44,7 +44,10 @@ Current components:
   triquadratic raw candidate `(6,5,9)` in outer sides `(28,15,27)`, the `N=21`
   isosceles-alpha candidate, and triquadratic candidates for `N=46` and `N=56`.
 - `beeson_isosceles_alpha_plus_beta_filter.py`: stronger source filter for the
-  `3alpha+2beta=pi` isosceles-`alpha+beta` case.
+  `3alpha+2beta=pi` isosceles-`alpha+beta` case. The `--counts` option prints
+  the source side-count triples after the two reserved `c` edges on each outer
+  side; this is a safe diagnostic and accepts the known positive `N=48`
+  example.
 - `prime_case_dashboard.py`: high-level report for prime `N`, combining the
   source arithmetic reductions with the `3alpha+2beta=pi` filter.
 - `gamma_2pi3_isosceles_filter.py`: exact arithmetic filter from Beeson's

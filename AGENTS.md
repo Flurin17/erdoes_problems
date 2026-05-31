@@ -1,1 +1,1 @@
-Focus on solving the problem without websearch. Use subagents whenever it makes sense.
+Focus on solving the problem without websearch. Use subagents whenever it makes sense. Make sure to commit and push regurlarly

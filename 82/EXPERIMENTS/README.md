@@ -58,7 +58,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `universal_slots.py`: tests whether a fixed residue-slot multiset works for
   every even graph at the first lift, either exhaustively for small `n` or by
   random even-graph sampling at larger `n`.  Its exact-cover recursion indexes
-  valid subsets by residue and pivot vertex for larger sampled checks.
+  valid subsets by residue and pivot vertex for larger sampled checks.  It can
+  also sample source-modular graphs for higher dyadic lifts, such as
+  `4 -> 8`, with `--sample-source-modular`.
 - `universal_slots_fast.cpp`: C++ exhaustive checker for the same fixed-slot
   question.  It is intended for the full labelled even-graph sweep on `n=8`,
   where the Python exact-cover loop is too slow.

@@ -248,6 +248,9 @@ survivors are:
 
 The `3alpha+2beta` survivors among these are only the
 isosceles-`alpha+beta` branch that passes Beeson's Section 11.4 filter.
+The `--counts` diagnostic in `beeson_isosceles_alpha_plus_beta_filter.py`
+records the remaining side-count structure. Most of these survivors are rigid
+at the count level, but this is not yet an ordering or matching obstruction.
 
 ## Next Best Work
 
@@ -257,5 +260,8 @@ isosceles-`alpha+beta` branch that passes Beeson's Section 11.4 filter.
    proofs.
 3. Formalize the source rationality theorem feeding the equilateral
    rational/integer normalization lemma.
-4. Continue extending local boundary/integrality eliminations to larger
+4. Build a corner-capped ordering/matching obstruction for the remaining
+   `3alpha+2beta` isosceles-`alpha+beta` survivors, using `N=48` as the
+   positive regression case.
+5. Continue extending local boundary/integrality eliminations to larger
    composite survivors as they appear.

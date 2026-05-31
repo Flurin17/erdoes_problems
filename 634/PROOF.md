@@ -1015,6 +1015,13 @@ tile shapes and other counts.
   `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4
   filter; no non-isosceles `gamma=2pi/3` BLZ survivor remains in this range
   after the endpoint boundary-star check.
+- A safe count-level diagnostic for these remaining isosceles-`alpha+beta`
+  candidates is now recorded in
+  `EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py --counts`. It accepts
+  Beeson's positive `N=48` example. The survivors `132`, `156`, `175`, `198`,
+  `204`, `224`, and `228` have unique Beeson side-count triples on both the
+  equal side and base, while `189` and `240` still have multiple equal-side
+  count decompositions. This is structural data, not a nonexistence proof.
 - Zhang's conjectural exactness statements are not proved here.
 - For `19`, all source-reduced cases are now ruled out in this workspace:
   similar/reptile, commensurable-angle, equilateral-outer, all isosceles

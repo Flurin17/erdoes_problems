@@ -339,6 +339,47 @@ isosceles-`alpha+beta` candidates passing Beeson's Section 11.4 filter. The
 previous non-isosceles `gamma=2pi/3` survivors `143`, `154`, `168`, `210`, and
 `220` are now locally eliminated by the endpoint boundary-star check.
 
+For the remaining `3alpha+2beta=pi` isosceles-`alpha+beta` branch, the safe
+next diagnostic is count-level rather than endpoint-order-level. The command
+
+```sh
+python3 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py 48 132 156 175 189 198 204 224 228 240 --counts
+```
+
+keeps the known positive `N=48` example and shows that many later survivors are
+rigid at the side-count level:
+
+```text
+N=48: sides=(2,3,4), X=24, Y=12
+  equal-side count triples: five possibilities
+  base count triples: (0,0,3), (2,0,2)
+N=132: sides=(28,33,49), X=462, Y=264
+  equal-side count triple: (3,7,3)
+  base count triple: (3,1,3)
+N=156: sides=(40,39,64), X=624, Y=390
+  equal-side count triple: (3,8,3)
+  base count triple: (3,2,3)
+N=175: sides=(33,112,121), X=1540, Y=420
+  equal-side count triple: (2,11,2)
+  base count triple: (2,1,2)
+N=198: sides=(117,88,169), X=1716, Y=1188
+  equal-side count triple: (2,13,2)
+  base count triple: (2,7,2)
+N=204: sides=(70,51,100), X=1020, Y=714
+  equal-side count triple: (3,10,3)
+  base count triple: (3,4,3)
+N=224: two candidates with single count triples, (2,15,2)/(2,11,2)
+       and (4,9,4)/(4,1,4)
+N=228: sides=(88,57,121), X=1254, Y=912
+  equal-side count triple: (3,11,3)
+  base count triple: (3,5,3)
+```
+
+The less rigid survivors in this range are `N=189` and `N=240`, whose equal
+sides have multiple count decompositions. This count diagnostic is not an
+obstruction by itself; it is the input for a future corner-capped ordering or
+matching argument that must pass `N=48` as a positive regression case.
+
 ## Zhang Constructive Families
 
 Command:
@@ -809,6 +850,10 @@ Boundary-star command:
 ```sh
 python3 634/EXPERIMENTS/gamma_2pi3_nonisosceles_boundary.py
 ```
+
+The endpoint-pair check is corner-aware: it allows the two boundary sides at an
+outer corner to be sides of the same tile exactly when the whole corner is one
+tile angle, and otherwise checks the usual local side-label star.
 
 Result summary:
 

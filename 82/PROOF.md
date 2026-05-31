@@ -1000,6 +1000,33 @@ residue computation at the start of the proof verifies the claimed part
 residue.  The parts cover every vertex exactly once, proving the proposition.
 QED.
 
+## Lemma 4I.8: Clique Test For Fixed Slot Multisets
+
+Fix a modulus `M` and a residue multiset `R`.  The clique `K_m` has an
+`M`-modular partition whose residue signature is a submultiset of `R` if and
+only if there is a submultiset `{r_1,...,r_j}` of `R` and positive integers
+`s_1,...,s_j` such that
+
+```text
+s_i congruent r_i+1 mod M  for every i,
+s_1+...+s_j = m.
+```
+
+Proof.  Every part of a partition of a clique is itself a clique.  A part of
+size `s` has internal degree `s-1` at every vertex, hence has residue
+`s-1 mod M`.  Therefore a partition with residues `r_1,...,r_j` is exactly a
+decomposition of `m` into positive part sizes `s_i` satisfying the displayed
+congruences.  QED.
+
+This elementary test already shows that the first-lift candidate
+`(0,0,1,2)` cannot be iterated unchanged at the next dyadic step: `K_8` is
+`4`-modular, but modulo `8` the slots `(0,0,1,2)` allow clique part sizes
+congruent to `1,1,2,3`, whose positive representatives have total at most
+`7` when all four slots are used.  Thus `K_8` has no such four-slot
+`8`-modular partition.  Any uniform dyadic fixed-slot theorem must let the
+target slots depend on the current modulus, or use a larger/more flexible
+slot family.
+
 The most direct bootstrapping attempt from Lemma 4G to `M=4` is false.  One
 might try to choose a self-labelled mod-`2` split, then refine the even side
 into residues `{0,2}` modulo `4` and the odd side into residues `{1,3}`

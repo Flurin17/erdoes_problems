@@ -925,3 +925,16 @@ source of growth beyond Ramsey.
   `n=12` with seed `1202` failed it.  Thus the full cut-congruence form in
   Lemma 4I.6 is not an artifact; the residual graph really needs a nontrivial
   two-zero-slot cut in typical cases.
+- 2026-05-31: Extended `universal_slots.py` beyond the first lift: it can now
+  sample source-`q`-modular graphs and test fixed target slots for `q -> 2q`.
+  For `4 -> 8` with four target slots, `3` sampled `4`-modular graphs on
+  `n=8` reduced all `330` slot multisets to `33` survivors; `10` samples
+  reduced these to `26`; `50` samples reduced them to `18`.  A `K_m` clique
+  criterion then killed several deterministic nonstarters, including the
+  first-lift slot multiset `(0,0,1,2)` via `K_8`.  After clique tests through
+  `K_16` and `25` sampled `4`-modular graphs on `n=10`, the current
+  four-slot `4 -> 8` survivors are `(0,0,2,2)`, `(0,0,2,3)`,
+  `(0,0,2,4)`, `(0,1,1,2)`, `(0,1,2,2)`, `(0,1,2,3)`,
+  `(0,1,2,4)`, `(0,1,2,5)`, and `(0,1,2,6)`.  Conclusion: the first-lift
+  fixed-slot theorem, even if true, cannot be iterated unchanged; any dyadic
+  constant-part theorem needs modulus-dependent slots or more flexibility.
