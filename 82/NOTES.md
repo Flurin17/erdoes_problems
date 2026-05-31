@@ -1699,3 +1699,9 @@ source of growth beyond Ramsey.
   at the first terminal step Lemma 2 gives a regular graph of size at least
   `psi(q)=omega(log n)`.  Thus the current weakest target is a logarithmic
   saving over the natural `q`-scale loss, not a full polylogarithmic fraction.
+- 2026-05-31: Added `two_level_modular_sample.py` for dense two-degree
+  `q`-modular stress tests.  For connected graphs with `q=8` and degree levels
+  `5,13`, exact `16`-modular witness checks found best maxima `9/18` in three
+  samples and `8/20` in five samples after degree-preserving swaps.  These small
+  tests do not refute the logarithmic-saving target, but they show randomized
+  two-level hosts are a useful hard model for future larger heuristic searches.
