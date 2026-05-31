@@ -2054,3 +2054,10 @@ source of growth beyond Ramsey.
   the five candidate families `(0,0,0,8)`, `(0,0,8,8)`, `(0,0,4,8)`,
   `(0,0,2,8)`, and `(0,0,8,15)` all survive all `88` complete multipartite
   vectors through eight classes of size at most `16`.
+- 2026-05-31: Identified a clean source-residue slot pattern in the
+  complete-multipartite data.  For `8 -> 16`, every source residue `a mod 8`
+  passes all eight-class size-at-most-`16` checks with slots
+  `(0,a,8,a+8)`.  The analogous `(0,a,4,a+4)` pattern passes the `4 -> 8`
+  checks through eight classes of size at most `8`.  This is now the simplest
+  fixed-source dyadic slot family to try to prove or refute beyond the
+  multipartite model.

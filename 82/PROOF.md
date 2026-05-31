@@ -3864,6 +3864,20 @@ following twelve four-slot families:
 (0,3,7,8),    (0,3,8,10),   (0,3,8,11).
 ```
 
+Among these data there is a particularly simple pattern.  For the `8 -> 16`
+lift, every source residue `a mod 8` passes the complete-multipartite check
+through eight classes of size at most `16` with the four slots
+
+```text
+R_a = (0, a, 8, a+8)       modulo 16.
+```
+
+The analogous family `(0,a,4,a+4)` also passes the `4 -> 8`
+complete-multipartite check through eight classes of size at most `8`.  This
+does not prove a graph theorem, but it gives a much cleaner source-residue
+candidate than the ad hoc survivor lists and is consistent with the dyadic
+clique subset-sum test.
+
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
 
