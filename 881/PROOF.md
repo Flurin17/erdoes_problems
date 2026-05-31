@@ -3899,6 +3899,18 @@ holes in that window. This is not a construction, but it supplies a finite
 test bed for any proposed high-rank barrier mechanism without relying on
 holes beyond the finite two-sum coverage interval.
 
+The same script finds a rank-4 analogue under slightly larger bounds:
+\[
+A=\{1,2,3,4,5,6,8,9,10,11\},
+\]
+whose two-sums cover \([2,22]\). On the window \([12,22]\), every deletion
+of size \(<4\) still gives three-fold coverage, while several four-point
+deletions create holes. Thus finite collective barriers persist beyond the
+first triple examples. The unresolved issue is still global: an infinite
+counterexample would need these finite barriers to form an unbounded
+barrier met by every infinite deletion, with witnesses frozen below later
+stages.
+
 ## Attempt 14: The affine finite-booster construction is not verified
 
 The 2026-05-03 comment on the problem page links a proposed negative

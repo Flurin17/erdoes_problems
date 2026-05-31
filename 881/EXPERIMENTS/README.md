@@ -78,6 +78,14 @@ on the window \([9,18]\), which is inside the two-sum coverage interval:
 every singleton and pair deletion still covers the window at order \(3\),
 but several triple deletions create holes. The `--allow-uncovered` flag
 also reports endpoint artefacts beyond the two-sum coverage range.
+With `--rank 4 --max-value 14 --max-size 10 --window 12`, the first small
+example is
+\[
+A=\{1,2,3,4,5,6,8,9,10,11\}
+\]
+on the window \([12,22]\), again inside the two-sum coverage interval:
+all deletions of size \(<4\) preserve order-3 coverage on the test window,
+while several four-point deletions create holes.
 
 `finite_barrier_hypergraph.py` builds the finite residue hypergraph of
 deletions \(F\subset S\) for which \((k+1)(S\setminus F)\) is not the whole
