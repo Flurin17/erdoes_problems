@@ -1123,6 +1123,35 @@ is not ruled out by the fixed-rank lemmas, because edge sizes go to
 infinity on tails; the open burden is finite-gadget existence with coverage,
 frozen witnesses, unboundedness, and domination all at once.
 
+The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
+After the finite singleton-exceptional set is removed, every remaining
+\(k=2\) counterexample must have, inside every infinite tail, an
+inclusion-minimal collective hole \(w\notin3(A\setminus F)\) such that:
+
+* \(A\setminus F\) has the terminal retained gap below \(w\);
+* every deleted element of \(F\) is active in a repair after the other
+  elements are restored;
+* every finite test row \(t\) below the witness is either an exceptional
+  deleted-pair row \(w-t\in F+F\), or has a private color
+  \(f\in F\) with
+  \[
+  w-t-f\in A\setminus F,\qquad t+f\notin2(A\setminus F).
+  \]
+
+Lemma 8.4d further says that such a color can occur only when \(t+f\) has
+fewer than \(|F|\) two-sum representations avoiding \(f\). For two-term
+sums this is ordinary representation count, not a separate matching
+notion. Warning 8.4e shows the limitation: in the eventually periodic
+order-2 basis
+\[
+A=m\mathbb N\cup\{1,\ldots,m-1\},
+\]
+the low-count rows are cofinite in the infinite progression \(m\mathbb N\)
+simultaneously for any prescribed finite set of small colors. Thus no
+generic Sidon or energy bound on low-count rows follows from order-2
+basishood alone. The obstruction must use either non-sparse redundancy,
+certificate structure, or the recursive closure of private fillers.
+
 There is also a more local witness obstruction. If \(w=a+p\in2A\) is meant
 to remain outside \(3(A\setminus\{a\})\), then
 \[

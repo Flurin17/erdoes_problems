@@ -287,7 +287,10 @@ Important distinction: "positive square class" and "smallest representative" are
    an uncapped seed-`6342026`, `200000`-attempt run (`5247` unique `63` shells,
    `4270` unique `99` shells), or in a valid-weighted seed-`123`,
    `5000`-attempt run that produced `5000` unique valid shells for each
-   benchmark row. A stratified low-overhang run with total mixed
+   benchmark row. Exact overlap-cause sampling on the valid-weighted run shows
+   proper overlaps concentrate at base/equal-side pairs, especially `L2` with
+   `B8` and the symmetric right-base positions. A stratified low-overhang run
+   with total mixed
    count at most `4` found `189` unique `63` shells and `143` unique `99`
    shells, again with no pass. The full low-overhang census is now exact: all `11040`
    shells for `63` are eliminated over `Q(sqrt(5))` (`6144` non-simple,

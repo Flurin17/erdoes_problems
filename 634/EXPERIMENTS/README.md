@@ -121,6 +121,11 @@ Current components:
   status counts by total mixed-transition count. The `--valid-weighted` option
   samples directly from corner-compatible endpoint/mixed classes, weighted by
   the number of boundary shells they represent.
+- `gamma_2alpha_overlap_causes.py`: exact valid-weighted sampler focused on
+  proper shell overlaps. It records the first exact positive-area overlap by
+  outer-side pair, boundary-tile position, and oriented tile label. In a
+  seed-`123`, `5000`-sample run, proper overlaps concentrate at base/equal-side
+  pairs such as `L2` with `B8` and the symmetric right-base positions.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

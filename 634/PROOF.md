@@ -1842,6 +1842,15 @@ Again none passed: the `N=63` sample split as `169` corner-label violations,
 `150` non-simple residual graphs, and `4681` proper overlaps; the `N=99` sample
 split as `879`, `550`, and `3571` respectively.
 
+An exact overlap-cause pass on the same valid-weighted sample shows that the
+proper overlaps are highly localized. For `N=63`, `3639` of the `4681` proper
+overlaps are between the left equal side and the base, all first detected at
+`L2` with `B8`; another `1042` are between the right equal side and the base,
+almost all at `R6` with `B2`. For `N=99`, the analogous counts are `2272`
+base-left overlaps and `1299` base-right overlaps, led by `L2` with `B8` and
+`R8` or `R7` with `B2`. This suggests a possible next local-overlap lemma, but
+it is still sampling evidence.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`
