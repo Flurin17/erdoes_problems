@@ -2300,15 +2300,16 @@ split-corner-label-obstruction:  149,728
 ```
 
 For `N=99` mixed `6`, the same counter finds `418260` outside-cover word groups
-over `5867040` outside-cover shells. The first `150000` classified word groups
-cover cumulative weight `2281860` and again show no mixed-status word group.
+over `5867040` outside-cover shells. The first `200000` classified word groups
+cover cumulative weight `3094920` and again show no mixed-status word group.
 These results are recorded in
 `EXPERIMENTS/results/n63_mixed6_word_quotient_full.json`,
 `EXPERIMENTS/results/n99_mixed6_word_quotient_first10000.json`, and
 `EXPERIMENTS/results/n99_mixed6_word_quotient_010000_020000.json`, and
 `EXPERIMENTS/results/n99_mixed6_word_quotient_020000_050000.json`, and
 `EXPERIMENTS/results/n99_mixed6_word_quotient_050000_100000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_100000_150000.json`.
+`EXPERIMENTS/results/n99_mixed6_word_quotient_100000_150000.json`, and
+`EXPERIMENTS/results/n99_mixed6_word_quotient_150000_200000.json`.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
