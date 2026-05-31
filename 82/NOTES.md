@@ -1285,6 +1285,12 @@ source of growth beyond Ramsey.
   sweep was killed after several minutes without producing a counterexample
   or final output; progress reporting should be added before the next long
   sweep.
+- 2026-05-31: Added a formal conditional proposition: the rectangle covering
+  theorem implies the complete-multipartite `q+2` target.  A rectangle
+  `r 1_I` corresponds to one induced part taking `r` vertices from every
+  multipartite class in `I`; all positive class intersections are equal, so
+  the part is regular and has size `r|I|<=q+2`.  This also covers complements,
+  i.e. disjoint unions of cliques.
 - 2026-05-31: A read-only subagent proved that one-trace amplification over a
   homogeneous base is exhaustive.  For an independent base, adding vertices
   from both `T` and `A\T` to one regular trace-class witness cannot produce a

@@ -898,6 +898,41 @@ Any proof of the complete-multipartite theorem therefore needs an amortized
 rectangle-covering argument, not just threshold truncation or full-bin
 induction.
 
+## Conditional Proposition: Rectangle Covering Implies Complete Multipartite `q+2`
+
+Fix `q>=3`.  Suppose every nonnegative integer vector
+`a=(a_1,...,a_t)` with
+
+```text
+sum_i a_i <= q^2
+```
+
+can be written as a sum of at most `q` vectors of the form `r 1_I`, where
+`r>=1`, `I subset {1,...,t}` is nonempty, and
+
+```text
+r |I| <= q+2.
+```
+
+Then every complete multipartite graph on at most `q^2` vertices admits a
+partition into at most `q` induced `q`-modular subgraphs, each of order at
+most `q+2`.
+
+Proof.  Let the multipartite class sizes be `a_1,...,a_t`, and fix a rectangle
+decomposition as in the hypothesis.  For each rectangle `r 1_I`, form one
+vertex part by taking exactly `r` unused vertices from each multipartite class
+indexed by `I`.  The decomposition uses exactly `a_i` units in coordinate `i`,
+so this partitions all vertices.
+
+Each part has order `r|I|<=q+2`.  If `|I|=1`, the part is independent.  If
+`|I|>=2`, then every positive class intersection in that part has size `r`,
+so the induced complete multipartite graph has all internal degrees equal to
+`r(|I|-1)`.  In either case the part is regular, hence `q`-modular.  QED.
+
+Thus the rectangle theorem would prove a strong positive class for the
+one-shot `q+2` program: all complete multipartite graphs and, by complement,
+all disjoint unions of cliques.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with
