@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import argparse
 from functools import lru_cache
-from itertools import combinations_with_replacement
+from itertools import combinations, combinations_with_replacement
 
 
 def slot_weight(residue: int, modulus: int) -> int:
@@ -114,6 +114,8 @@ def can_slot_partition_fast(
     target_modulus: int,
     slots: tuple[int, ...],
 ) -> bool:
+    if max(sizes) <= target_modulus:
+        return can_slot_partition_canonical(sizes, target_modulus, slots)
     slots = tuple(sorted(slots))
     choices = legal_bins_by_residue(sizes, target_modulus, slots)
 
@@ -141,6 +143,76 @@ def can_slot_partition_fast(
         return False
 
     return rec(sizes, slots)
+
+
+def can_slot_partition_symmetric(
+    class_size: int,
+    classes: int,
+    target_modulus: int,
+    slots: tuple[int, ...],
+) -> bool:
+    return can_slot_partition_canonical(tuple([class_size] * classes), target_modulus, slots)
+
+
+def can_slot_partition_canonical(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    slots: tuple[int, ...],
+) -> bool:
+    """Check bounded-size multipartite vectors using class symmetry.
+
+    The general checker distinguishes labelled multipartite classes.  When all
+    class sizes are at most the target modulus, every multi-class legal bin
+    uses the same positive count in every class it meets.  Then only the sorted
+    vector of remaining class capacities matters, which avoids a large amount
+    of repeated work.
+    """
+    slots = tuple(sorted(slots))
+    initial = tuple(sorted(sizes, reverse=True))
+    max_count = max(sizes)
+
+    @lru_cache(maxsize=None)
+    def rec(remaining: tuple[int, ...], state: tuple[int, ...]) -> bool:
+        if all(value == 0 for value in remaining):
+            return True
+        if not state:
+            return False
+        positive_indices = [i for i, value in enumerate(remaining) if value > 0]
+        for index, residue in enumerate(state):
+            next_state = state[:index] + state[index + 1 :]
+
+            if residue == 0:
+                singleton_seen: set[tuple[int, ...]] = set()
+                for i in positive_indices:
+                    for count in range(1, remaining[i] + 1):
+                        nxt = list(remaining)
+                        nxt[i] -= count
+                        canonical = tuple(sorted(nxt, reverse=True))
+                        if canonical in singleton_seen:
+                            continue
+                        singleton_seen.add(canonical)
+                        if rec(canonical, next_state):
+                            return True
+
+            seen: set[tuple[int, ...]] = set()
+            for count in range(1, max_count + 1):
+                usable = [i for i, value in enumerate(remaining) if value >= count]
+                for take in range(2, len(usable) + 1):
+                    if ((take - 1) * count) % target_modulus != residue:
+                        continue
+                    for indices in combinations(usable, take):
+                        nxt = list(remaining)
+                        for i in indices:
+                            nxt[i] -= count
+                        canonical = tuple(sorted(nxt, reverse=True))
+                        if canonical in seen:
+                            continue
+                        seen.add(canonical)
+                        if rec(canonical, next_state):
+                            return True
+        return False
+
+    return rec(initial, slots)
 
 
 def main() -> None:

@@ -3842,8 +3842,17 @@ four-slot families:
 ```
 
 The analogous eight-class searches also leave small survivor lists for source
-residues `2,4,5,6,7`; source residue `0` has many survivors, and source
-residue `3` remained the slowest in this naive candidate loop.
+residues `2,3,4,5,6,7`; source residue `0` has many survivors and remains the
+broadest complete-multipartite fixed-slot case.  For source residue `3`, the
+canonicalized checker completes the eight-class search and leaves exactly the
+following twelve four-slot families:
+
+```text
+(0,0,3,5),    (0,0,3,6),    (0,0,3,7),
+(0,0,3,9),    (0,0,3,10),   (0,0,3,11),
+(0,1,3,8),    (0,2,3,8),    (0,3,6,8),
+(0,3,7,8),    (0,3,8,10),   (0,3,8,11).
+```
 
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.

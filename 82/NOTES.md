@@ -2039,3 +2039,13 @@ source of growth beyond Ramsey.
   `0` and `1` into zero slots is impossible.  Therefore any 2-vertex separator
   induction needs a richer boundary signature, not merely a two-root version
   of the cut-vertex rooted-zero candidate.
+- 2026-05-31: Improved `source_slot_finder.py` with a canonical sorted-state
+  checker for complete multipartite vectors whose class sizes are at most the
+  target modulus.  Random checks against the older labelled-class DP passed.
+  This completes the previously slow `8 -> 16` source-residue `3` audit
+  through eight classes of size at most `16`; exactly twelve four-slot
+  families survive:
+  `(0,0,3,5)`, `(0,0,3,6)`, `(0,0,3,7)`, `(0,0,3,9)`, `(0,0,3,10)`,
+  `(0,0,3,11)`, `(0,1,3,8)`, `(0,2,3,8)`, `(0,3,6,8)`, `(0,3,7,8)`,
+  `(0,3,8,10)`, and `(0,3,8,11)`.  Source residue `0` remains the broad
+  case with many survivors.
