@@ -1413,3 +1413,11 @@ source of growth beyond Ramsey.
   and use the leftover bins for the first class.  Therefore any
   complete-multipartite bin counterexample must have tail total at least
   `q+1` after removing its largest coordinate.
+- 2026-05-31: Added a `--max-first` filter to `rectangle_cover.py` so
+  rectangle-only sweeps can test bounded-largest-coordinate subproblems while
+  reusing the shared DP cache.  Filtered exhaustive checks found no
+  rectangle-cover counterexample for `q=6,max_first=13=2q+1` and
+  `q=7,max_first=15=2q+1`.  The `q=7` run checked `827,261` filtered
+  partitions of total at most `49` and skipped `264,483` larger-first
+  partitions.  This supports the next arithmetic subtarget: rectangle-only
+  failures may require a coordinate larger than `2q+1`.

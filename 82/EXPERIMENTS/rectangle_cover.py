@@ -120,6 +120,7 @@ def exhaustive(
     cap: int,
     node_limit: int | None,
     progress_every: int | None,
+    max_first: int | None,
 ) -> None:
     nodes = 0
     branches = 0
@@ -147,13 +148,20 @@ def exhaustive(
         return False
 
     checked = 0
+    skipped = 0
     for total in range(1, max_total + 1):
         for vector in integer_partitions(total):
+            if max_first is not None and vector and vector[0] > max_first:
+                skipped += 1
+                continue
             checked += 1
             try:
                 cover_exists = rec(normalize(vector), bins)
             except SearchLimitExceeded:
                 print(f"checked={checked}")
+                if max_first is not None:
+                    print(f"max_first={max_first}")
+                    print(f"skipped={skipped}")
                 print(f"unknown_vector={','.join(map(str, vector))}")
                 print("result=unknown_node_limit")
                 print(f"nodes={nodes}")
@@ -162,6 +170,9 @@ def exhaustive(
                 return
             if not cover_exists:
                 print(f"checked={checked}")
+                if max_first is not None:
+                    print(f"max_first={max_first}")
+                    print(f"skipped={skipped}")
                 print(f"counterexample={','.join(map(str, vector))}")
                 print(f"nodes={nodes}")
                 print(f"branches={branches}")
@@ -174,6 +185,9 @@ def exhaustive(
                     flush=True,
                 )
     print(f"checked={checked}")
+    if max_first is not None:
+        print(f"max_first={max_first}")
+        print(f"skipped={skipped}")
     print(f"nodes={nodes}")
     print(f"branches={branches}")
     print(f"cache_info={rec.cache_info()}")
@@ -186,6 +200,7 @@ def main() -> None:
     parser.add_argument("--bins", type=int, required=True)
     parser.add_argument("--cap", type=int, required=True)
     parser.add_argument("--max-total", type=int)
+    parser.add_argument("--max-first", type=int)
     parser.add_argument("--node-limit", type=int)
     parser.add_argument("--progress-every", type=int)
     args = parser.parse_args()
@@ -210,6 +225,7 @@ def main() -> None:
         args.cap,
         args.node_limit,
         args.progress_every,
+        args.max_first,
     )
 
 
