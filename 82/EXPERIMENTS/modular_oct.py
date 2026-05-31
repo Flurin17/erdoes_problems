@@ -44,6 +44,7 @@ def find_assignment(
     graph_mask: int,
     pc: ri.Precomp | None = None,
     forced_residual: set[int] | None = None,
+    exact_low_degree: bool = False,
 ) -> list[int] | None:
     if pc is None:
         pc = ri.precompute(n)
@@ -79,6 +80,8 @@ def find_assignment(
         if color in (0, 1):
             return same_assigned == 0
         target = 1 if color == 2 else 2
+        if exact_low_degree:
+            return same_assigned <= target <= same_assigned + unassigned_neighbors
         return any(
             same_assigned <= value <= same_assigned + unassigned_neighbors
             for value in range(target, same_assigned + unassigned_neighbors + 1, 4)
@@ -119,13 +122,23 @@ def print_certificate(n: int, assignment: list[int]) -> None:
         print(f"{name}=" + ",".join(map(str, vertices)))
 
 
-def check_mask(n: int, graph_mask: int, root: int | None, all_roots: bool) -> None:
+def check_mask(
+    n: int,
+    graph_mask: int,
+    root: int | None,
+    all_roots: bool,
+    exact_low_degree: bool,
+) -> None:
     forced = set() if root is None else {root}
-    assignment = find_assignment(n, graph_mask, forced_residual=forced)
+    assignment = find_assignment(
+        n, graph_mask, forced_residual=forced, exact_low_degree=exact_low_degree
+    )
     print(f"n={n}")
     print(f"mask={graph_mask}")
     if root is not None:
         print(f"root={root}")
+    if exact_low_degree:
+        print("exact_low_degree=True")
     if assignment is None:
         print("modular_oct=no")
         return
@@ -137,19 +150,19 @@ def check_mask(n: int, graph_mask: int, root: int | None, all_roots: bool) -> No
         bad = [
             vertex
             for vertex in range(n)
-            if find_assignment(n, graph_mask, pc, {vertex}) is None
+            if find_assignment(n, graph_mask, pc, {vertex}, exact_low_degree) is None
         ]
         print("all_roots_residual=" + ("yes" if not bad else "no"))
         if bad:
             print("bad_roots=" + ",".join(map(str, bad)))
 
 
-def exhaustive_even(n: int, limit: int | None) -> None:
+def exhaustive_even(n: int, limit: int | None, exact_low_degree: bool) -> None:
     pc = ri.precompute(n)
     checked = 0
     for graph_mask in modular_lift.parity_graphs(n, odd=False):
         checked += 1
-        if find_assignment(n, graph_mask, pc) is None:
+        if find_assignment(n, graph_mask, pc, exact_low_degree=exact_low_degree) is None:
             print(f"n={n}")
             print(f"checked_before_counterexample={checked}")
             print(f"counterexample_mask={graph_mask}")
@@ -157,11 +170,13 @@ def exhaustive_even(n: int, limit: int | None) -> None:
         if limit is not None and checked >= limit:
             break
     print(f"n={n}")
+    if exact_low_degree:
+        print("exact_low_degree=True")
     print(f"checked={checked}")
     print("no_counterexample_seen")
 
 
-def sample_even(n: int, trials: int, seed: int) -> None:
+def sample_even(n: int, trials: int, seed: int, exact_low_degree: bool) -> None:
     rng = random.Random(seed)
     pc = ri.precompute(n)
     edge_index = {edge: index for index, edge in enumerate(pc.edges)}
@@ -171,16 +186,20 @@ def sample_even(n: int, trials: int, seed: int) -> None:
         if graph_mask is None:
             continue
         checked += 1
-        if find_assignment(n, graph_mask, pc) is None:
+        if find_assignment(n, graph_mask, pc, exact_low_degree=exact_low_degree) is None:
             print(f"n={n}")
             print(f"sample_even={trials}")
             print(f"seed={seed}")
+            if exact_low_degree:
+                print("exact_low_degree=True")
             print(f"checked_before_counterexample={checked}")
             print(f"counterexample_mask={graph_mask}")
             return
     print(f"n={n}")
     print(f"sample_even={trials}")
     print(f"seed={seed}")
+    if exact_low_degree:
+        print("exact_low_degree=True")
     print(f"checked={checked}")
     print("no_counterexample_seen")
 
@@ -195,13 +214,18 @@ def main() -> None:
     parser.add_argument("--limit", type=int)
     parser.add_argument("--root", type=int)
     parser.add_argument("--all-roots", action="store_true")
+    parser.add_argument(
+        "--exact-low-degree",
+        action="store_true",
+        help="require C to be exactly 1-regular and D exactly 2-regular",
+    )
     args = parser.parse_args()
     if args.mask is not None:
-        check_mask(args.n, args.mask, args.root, args.all_roots)
+        check_mask(args.n, args.mask, args.root, args.all_roots, args.exact_low_degree)
     elif args.exhaustive_even:
-        exhaustive_even(args.n, args.limit)
+        exhaustive_even(args.n, args.limit, args.exact_low_degree)
     elif args.sample_even:
-        sample_even(args.n, args.sample_even, args.seed)
+        sample_even(args.n, args.sample_even, args.seed, args.exact_low_degree)
     else:
         raise SystemExit("use --mask, --exhaustive-even, or --sample-even")
 

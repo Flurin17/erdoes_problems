@@ -3713,6 +3713,14 @@ global root.  The exact checker finds the one-root strengthening for every
 root in all even graphs through `7` vertices and in the current hard masks,
 but this multi-root strengthening has not been proved.
 
+In fact, the naive two-root strengthening is false.  Take a triangle and add
+isolated vertices, and prescribe two adjacent triangle vertices to be
+residual.  The third triangle vertex cannot be placed alone in `C` or `D`,
+while placing it residual would leave a triangle in the residual.  Thus a
+rooted induction through cut vertices needs a richer rooted signature at the
+articulation vertex, not merely a demand that every specified vertex remain
+residual.
+
 Some minimal-counterexample reductions are immediate, but they leave the
 rooted-gluing issue as the real obstacle.
 

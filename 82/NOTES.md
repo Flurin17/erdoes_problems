@@ -1827,6 +1827,14 @@ source of growth beyond Ramsey.
   `n=7` and in the hard masks.  Degree-`2` suppression also fails in important
   cases, especially when the suppressed edge has both ends in `C` or lies on a
   residual cycle.
+- 2026-05-31: Tested two strengthenings of modular OCT.  The version with
+  `C` exactly `1`-regular and `D` exactly `2`-regular passes small even graphs
+  through `n=7` and the hard masks, but is false for `K_9`: the original
+  modular OCT uses a `7`-vertex clique as the residue-`2` set.  The naive
+  two-root residual strengthening is also false: a triangle plus isolated
+  vertices cannot keep two adjacent triangle vertices in the residual.  Thus
+  the likely induction object is a rooted signature at an articulation, not a
+  simple multi-root residual condition.
 - 2026-05-31: Refined the bounded-spread target after subagent review.  A
   fixed-spread linear theorem is probably too optimistic because dense random
   adjacent-degree graphs should locally resemble `G(k,1/2)` on induced
