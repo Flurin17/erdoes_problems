@@ -96,6 +96,29 @@ infinite deletion must contain, arbitrarily far out, a finite set \(F\)
 whose removal simultaneously blocks all shifted \(k\)-representations of a
 witness \(w\), while \(kA\) still covers the stage intervals.
 
+There is a related finite-core target that should not be confused with the
+full theorem. One might try to prove that there is a finite core
+\[
+E\subset A
+\]
+such that for every finite
+\[
+F\subset A\setminus E
+\]
+the set \(A\setminus F\) is an order-\((k+1)\) basis. No example in this
+workspace currently refutes that statement. But it would still be
+insufficient by itself: Lemma 3.1d says that a fixed infinite deletion is
+good exactly when all its finite subdeletions share one common eventual
+threshold. Warning 3.0 and Example 3.0a show that finite deletions may be
+eventually harmless while their thresholds drift past the deleted elements.
+
+If the finite-core target fails, then for every finite \(E\subset A\) there
+is a finite \(F\subset A\setminus E\) such that \(A\setminus F\) has
+arbitrarily large order-\((k+1)\) holes. Lemma 10.3 then forces terminal
+retained gaps outside every protected finite core. This is stronger than
+the delayed finite-prefix holes in \(\{1\}\cup2\mathbb N\), where finite
+deletions are still eventually order \(3\).
+
 ## Theorem 1: The answer is yes for \(k=1\)
 
 Let \(A\subseteq\mathbb N\) be an asymptotic additive basis of order \(1\).
@@ -4140,6 +4163,10 @@ new-design problem, not as a small non-greedy search miss.
 * Example 3.0a shows that strong order-2 minimality does not control
   order-3 thresholds for arbitrary finite prefixes, even in the benign
   basis \(\{1\}\cup2\mathbb N\).
+* The finite-core finite-deletion stability target in Reduction 0 separates
+  genuine finite fatal deletions from delayed finite-prefix holes. It is not
+  refuted by the current examples, and even if true would still require
+  Lemma 3.1d-style common threshold control.
 * Lemma 3 would imply the desired conclusion if an infinite late-deletable
   reservoir exists.
 * Corollary 3.1 says any counterexample must eventually block all large

@@ -105,6 +105,17 @@ missing step is to prove that such a representation model cannot be
 arithmetized inside a genuine asymptotic basis, or to realize it by a staged
 construction.
 
+Finite-core finite-deletion stability is a useful but insufficient target:
+there might be a finite \(E\subset A\) such that every finite
+\[
+F\subset A\setminus E
+\]
+leaves an order-\((k+1)\) basis. No current example refutes this statement,
+but it would not by itself solve the problem, because Lemma 3.1d requires
+one common threshold for all finite \(F\subset X\) inside the eventual
+infinite deletion. The examples \(\{1\}\cup2\mathbb N\) and Warning 3.0
+show how finite deletions can be harmless while their thresholds drift.
+
 ## Trivial and Boundary Cases
 
 ### \(k=1\)
