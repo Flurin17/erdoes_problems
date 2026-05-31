@@ -16,6 +16,8 @@ that a thick residue lift does not solve.
 
 from __future__ import annotations
 
+import random
+import sys
 from itertools import combinations
 
 
@@ -117,5 +119,69 @@ def main() -> None:
         endpoint = declared
 
 
+def extended_second_stage_check() -> None:
+    """Reproduce the bounded search after the first printed stage."""
+
+    random.seed(881)
+    C = {1, 3, 20, 21, 30, 31}
+    previous_endpoint = 38
+    base = 22
+    candidates = [
+        x
+        for x in range(previous_endpoint + 1, 181)
+        if x % MODULUS in RESIDUES and x not in C and x != BOOSTER
+    ]
+
+    def check(new_tuple: tuple[int, ...]) -> tuple[int, int, dict[int, list[int]]] | None:
+        new = set(new_tuple)
+        A = C | new | {BOOSTER}
+        cap = max(400, 6 * max(A) + 100)
+        newcov = cover_end(hsum(A, 3, cap), base, cap)
+        if newcov <= previous_endpoint or max(new) > newcov - 2:
+            return None
+        four_all = hsum(A, 4, cap)
+        withouts = {c: hsum(A - {c}, 4, cap) for c in new}
+        for declared in range(max(previous_endpoint + 1, max(new)), newcov - 1):
+            witnesses: dict[int, list[int]] = {}
+            for c in sorted(new):
+                found = [
+                    w
+                    for w in range(previous_endpoint + 1, declared + 1)
+                    if w in four_all and w not in withouts[c]
+                ]
+                if not found:
+                    break
+                witnesses[c] = found[:3]
+            else:
+                return declared, newcov, witnesses
+        return None
+
+    for limit in (80, 120):
+        bounded = [x for x in candidates if x <= limit]
+        for size in range(1, 6):
+            count = 0
+            for new_tuple in combinations(bounded, size):
+                count += 1
+                result = check(new_tuple)
+                if result is not None:
+                    print("found exhaustive", "limit=", limit, "new=", new_tuple, "result=", result)
+                    return
+            print("checked", "limit=", limit, "size=", size, "count=", count)
+
+    for size in range(6, 13):
+        for _ in range(5000):
+            new_tuple = tuple(sorted(random.sample(candidates, size)))
+            result = check(new_tuple)
+            if result is not None:
+                print("found random", "size=", size, "new=", new_tuple, "result=", result)
+                return
+        print("checked random", "size=", size, "trials=", 5000)
+
+    print("no second-stage extension found in extended bounded/random search")
+
+
 if __name__ == "__main__":
-    main()
+    if "--extend" in sys.argv:
+        extended_second_stage_check()
+    else:
+        main()

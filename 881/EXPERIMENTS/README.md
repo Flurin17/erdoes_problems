@@ -112,3 +112,6 @@ integer stages with fixed booster \(5\) and mutable elements in residues
 \(0,1,3\pmod {10}\). It finds one buffered stage
 \(\{1,3,20,21\}\to\{1,3,20,21,30,31\}\), with witnesses \(37\) and \(38\)
 after deleting \(30\) and \(31\), then stalls in the default greedy search.
+Run it with `--extend` to reproduce a bounded second-stage check through
+new elements up to `120` of size at most `5`, plus random larger increments;
+that extended check also finds no continuation.

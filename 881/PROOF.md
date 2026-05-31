@@ -2995,6 +2995,11 @@ The declared endpoint can be \(38\), leaving the two-point buffer required
 for an order-3 staged construction. The default greedy search then stalls
 at the next stage. Thus the residue pattern has nontrivial finite
 integer traction, but not yet an iterable construction.
+The script's `--extend` mode exhausts possible next increments of size at
+most \(5\) using elements up to \(120\), and tries random increments of
+sizes \(6,\ldots,12\); it still finds no continuation. This is heuristic
+evidence that the lift needs a more global block design or collective
+barriers, not a proof of impossibility.
 
 ## Dependency Graph
 
