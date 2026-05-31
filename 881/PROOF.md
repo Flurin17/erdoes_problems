@@ -2336,6 +2336,41 @@ It does show that any proof of the finitely-bad \(k=2\) case must rule out
 persistent multi-center reflected barriers, not merely invoke Lemma 10.1
 and pigeonhole.
 
+## Example 8.7b: Complete finite pair barriers can still be two-centered
+
+There is also no purely Ramsey-theoretic reason that a persistent pair
+barrier must contain many one-centered pairs. In
+\[
+G=\mathbb Z/5\mathbb Z,\qquad S=\{0,1,2,3\},
+\]
+one has
+\[
+2S=G,
+\]
+and every singleton deletion remains a three-fold basis:
+\[
+3(S\setminus\{s\})=G\qquad(s\in S).
+\]
+However, every pair deletion creates a three-fold hole. Indeed, after
+deleting two elements, only two residues remain, and the three-fold sumset
+of two residues has at most four elements.
+
+For example, deleting \(\{0,1\}\) leaves \(\{2,3\}\), and
+\[
+0\notin3\{2,3\}.
+\]
+The reflected-cover centers attached to this hole are \(0-0=0\) and
+\(0-1=4\). Neither center covers all of \(S\):
+\[
+0-S=\{0,2,3,4\},\qquad 4-S=\{1,2,3,4\}.
+\]
+Together they cover \(S\), but each misses one deleted endpoint.
+
+Thus even a complete finite graph of bad pairs can be intrinsically
+two-centered. As before, this is not an integer construction. It only shows
+that the infinite pair-barrier case needs an arithmetic coherence argument,
+not just Ramsey thinning to a tail where all pairs are bad.
+
 ## Example 8.8: Finite-center repairs need coherence
 
 A naive finite-center replacement for Lemma 8.2a is false. It is not enough

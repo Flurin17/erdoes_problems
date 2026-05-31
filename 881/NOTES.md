@@ -821,6 +821,13 @@ uses two centers and no single reflected copy covers \(S\). This is not an
 integer counterexample, but it identifies a real local obstruction that a
 proof of the finitely-bad case must overcome.
 
+Example 8.7b strengthens the finite warning. In
+\(\mathbb Z/5\mathbb Z\), \(S=\{0,1,2,3\}\) has \(2S=G\), every singleton
+deletion remains a 3-basis, and every pair deletion has a 3-sum hole. The
+hole for \(\{0,1\}\) is covered by the two reflected centers \(0\) and
+\(4\), neither of which covers all of \(S\). Thus even a complete finite
+pair-barrier graph can remain genuinely two-centered.
+
 Example 8.8 gives a second finite warning: even if every deleted singleton
 or pair pattern is repairable by one of finitely many retained centers, the
 repairs may be incoherent. Lemma 8.2a needs one fixed center compatible with
