@@ -160,6 +160,54 @@ Proof.  Every degree in `G[S]` lies in the interval `[0, |S|-1]`, whose length
 is at most `q-1`.  Two integers in this interval that are congruent modulo `q`
 are equal.  Hence all induced degrees are equal.  QED.
 
+## Lemma 2A: Near-Terminal Modular Extraction
+
+Let `q` be a positive integer, and let `H` be a `q`-modular graph on
+`m=q+s` vertices with `1<=s<q`.  Then `H` contains a clique or independent
+set, and hence a regular induced subgraph, on at least
+
+```text
+m/(s+1)
+```
+
+vertices.
+
+Proof.  Let the common degree residue be `a mod q`, with `0<=a<q`.  Since
+all degrees lie in `[0,q+s-1]`, every degree is either `a` or `a+q`.  If only
+one of these values occurs, then `H` itself is regular, so assume both occur.
+Let `L` be the vertices of degree `a` and `U` the vertices of degree `a+q`.
+The second value can occur only if `a+q<=q+s-1`, so `a<=s-1`.
+
+The induced graph `H[L]` has maximum degree at most `a`, hence by the greedy
+independence bound it contains an independent set of size at least
+`|L|/(a+1)`.
+
+For a vertex of `U`, the number of nonneighbors in all of `H` is
+
+```text
+(q+s-1) - (a+q) = s-1-a.
+```
+
+Therefore the complement of `H[U]` has maximum degree at most `s-1-a`, so
+`H[U]` contains a clique of size at least `|U|/(s-a)`.  Since
+
+```text
+(a+1) + (s-a) = s+1,
+```
+
+we have
+
+```text
+max( |L|/(a+1), |U|/(s-a) ) >= (|L|+|U|)/(s+1) = m/(s+1).
+```
+
+The corresponding independent set or clique is regular.  QED.
+
+This lemma gives useful information only when the excess `s=m-q` is small.
+It does not by itself repair a dyadic partition argument with loss comparable
+to `q`, because such an argument need not produce a `q`-modular witness with
+small excess over `q`.
+
 ## Lemma 3: Gallai Parity Witness
 
 Every graph on `n` vertices contains an induced subgraph on at least
