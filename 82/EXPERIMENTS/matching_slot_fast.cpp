@@ -189,15 +189,21 @@ uint64_t even_graph_mask(int n, uint64_t bits) {
 
 int main(int argc, char** argv) {
     int n = 8;
+    uint64_t start = 0;
     uint64_t limit = 0;
+    uint64_t progress_every = 262144;
     bool progress = false;
     std::optional<std::pair<int, int>> good_edge;
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
         if (arg == "--n" && i + 1 < argc) {
             n = std::stoi(argv[++i]);
+        } else if (arg == "--start" && i + 1 < argc) {
+            start = std::stoull(argv[++i]);
         } else if (arg == "--limit" && i + 1 < argc) {
             limit = std::stoull(argv[++i]);
+        } else if (arg == "--progress-every" && i + 1 < argc) {
+            progress_every = std::stoull(argv[++i]);
         } else if (arg == "--good-edge" && i + 1 < argc) {
             std::string text = argv[++i];
             size_t sep = text.find(':');
@@ -212,8 +218,9 @@ int main(int argc, char** argv) {
         } else if (arg == "--progress") {
             progress = true;
         } else {
-            std::cerr << "usage: matching_slot_fast [--n N] [--limit L]"
-                      << " [--good-edge u:v] [--progress]\n";
+            std::cerr << "usage: matching_slot_fast [--n N] [--start S]"
+                      << " [--limit L] [--good-edge u:v] [--progress]"
+                      << " [--progress-every P]\n";
             return 2;
         }
     }
@@ -236,12 +243,17 @@ int main(int argc, char** argv) {
     }
 
     int free_edges = (n - 1) * (n - 2) / 2;
-    uint64_t total = uint64_t{1} << free_edges;
-    if (limit && limit < total) total = limit;
+    uint64_t all_bits = uint64_t{1} << free_edges;
+    uint64_t stop = all_bits;
+    if (limit && limit < stop) stop = limit;
+    if (start > stop) {
+        std::cerr << "--start must be at most the exclusive stop bound\n";
+        return 2;
+    }
 
     Checker checker(n);
     uint64_t checked = 0;
-    for (uint64_t bits = 0; bits < total; ++bits) {
+    for (uint64_t bits = start; bits < stop; ++bits) {
         uint64_t graph_mask = even_graph_mask(n, bits);
         if (good_edge) {
             int idx = edge_index(n, good_edge->first, good_edge->second);
@@ -259,8 +271,14 @@ int main(int argc, char** argv) {
             std::cout << "counterexample_mask=" << graph_mask << "\n";
             return 0;
         }
-        if (progress && bits && bits % 262144 == 0) {
-            std::cerr << "checked=" << bits << "/" << total << "\n";
+        if (
+            progress
+            && progress_every
+            && bits > start
+            && (bits - start) % progress_every == 0
+        ) {
+            std::cerr << "bits=" << bits << "/" << stop
+                      << " checked=" << checked << "\n";
         }
     }
     std::cout << "n=" << n << "\n";
@@ -268,6 +286,8 @@ int main(int argc, char** argv) {
         std::cout << "good_edge=" << good_edge->first << ":"
                   << good_edge->second << "\n";
     }
+    std::cout << "bit_start=" << start << "\n";
+    std::cout << "bit_stop=" << stop << "\n";
     std::cout << "checked=" << checked << "\n";
     std::cout << "no_counterexample_seen\n";
     return 0;

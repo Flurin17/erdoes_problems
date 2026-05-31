@@ -2010,3 +2010,10 @@ source of growth beyond Ramsey.
   restrict multiset searches to this actual support.  Short capped runs show
   the restricted search still grows quickly at dimension `5`, so this is a
   structural refinement rather than a closed trace proof.
+- 2026-05-31: Made `matching_slot_fast.cpp` chunkable with `--start`,
+  `--limit`, and configurable progress output.  Rebuilt with `g++ -O3` and
+  verified that the old full edge-rooted `n=8` sweep decomposes into two
+  adjacent ranges: `0..1048576` and `1048576..2097152`, each checking
+  `524288` even graphs containing edge `0:1` and finding no counterexample.
+  A first `n=9` chunk `0..524288` checked `262144` edge-containing even graphs
+  and also found no edge-rooted matching-slot counterexample.

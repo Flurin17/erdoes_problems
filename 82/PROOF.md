@@ -3953,7 +3953,12 @@ edge-rooted candidate for every even graph on at most `7` vertices with edge
 `01` present; by relabelling this is the same as every rooted edge on at most
 `7` vertices.  The C++ checker `EXPERIMENTS/matching_slot_fast.cpp` verifies
 the same edge-rooted candidate for all `1048576` even labelled graphs on
-`8` vertices containing edge `01`.  No proof is currently known.
+`8` vertices containing edge `01`.  The checker is now range-chunkable; as a
+sanity check, the `n=8` edge-rooted sweep splits into two adjacent free-edge
+bit ranges, each checking `524288` edge-containing even graphs with no
+counterexample, and the first `n=9` chunk
+`0 <= bits < 524288` checks `262144` edge-containing even graphs with no
+counterexample.  No proof is currently known.
 
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
