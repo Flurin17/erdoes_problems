@@ -223,6 +223,13 @@ sequence preserves order \(k+1\). Hence any counterexample must make the
 late-bad finite sets form a barrier: every infinite increasing sequence in
 \(A\) has a late-bad initial segment.
 
+This finite-prefix strategy is equivalent to the original question. If an
+infinite deletion \(B\) leaves an order-\((k+1)\) basis with threshold
+\(N\), then any tail of \(B\) above \(N\), enumerated increasingly, has no
+late-bad prefix. Thus proving that some sparse sequence avoids late-bad
+prefixes is not a separate easier theorem; it is exactly the desired
+positive result in threshold language.
+
 Corollary 3.1c strengthens this from initial segments to arbitrary infinite
 subsets: in a counterexample, every infinite \(X\subset A\) contains some
 finite late-bad \(F\subset X\). Thus a no-answer construction must build a
@@ -785,6 +792,14 @@ is essential after the others are restored, and reflected-cover domination
 holds. But \(w_M-f_2=2M-1\to\infty\). Therefore the proof must use the
 global barrier requirement over every infinite \(X\), not just the local
 minimal-hole normal form.
+
+Warning 8.6e records a related failed sparse-gap route. Lemma 8.4a says a
+finite hole forces a terminal \(A\)-gap covered by the deleted set, but
+choosing \(B\) to avoid all such finite terminal gaps is an independent-set
+problem in interval hypergraphs. Order-2 basishood alone does not rule out
+long intervals of the relevant length whose \(A\)-content is a prescribed
+single far-tail point. So any proof using retained gaps needs an additional
+arithmetic thickness lemma, not just sparsity.
 
 Lemma 8.6a closes a broader delayed-barrier branch. If every infinite tail
 contains finite barriers \(F=\{f_1<\cdots<f_r\}\) whose witness lies within

@@ -549,6 +549,21 @@ Thus, in any counterexample, every infinite increasing sequence in \(A\)
 must have a late-bad finite prefix. This is the threshold-sensitive finite
 barrier form of the problem.
 
+The converse is also useful: the finite-prefix threshold strategy is not a
+weaker sufficient condition but exactly the desired conclusion. If
+\[
+B=\{b_1<b_2<\cdots\}\subset A
+\]
+and \(A\setminus B\) is an order-\(h\) basis with threshold \(N\), then
+discarding the finitely many \(b_i\le N\) gives a tail whose every finite
+prefix \(F_j\) satisfies
+\[
+A\setminus F_j\supseteq A\setminus B
+\]
+and hence is an order-\(h\) basis with the same threshold \(N<b_j\).
+Therefore proving the existence of an infinite sequence with no late-bad
+prefix is equivalent to proving the desired infinite deletion.
+
 ## Corollary 3.1c: Barrier formulation of a counterexample
 
 Let \(h=k+1\), and suppose no infinite deletion from \(A\) leaves an
@@ -2238,6 +2253,45 @@ w_M-f_2=(4M+3)-(2M+4)=2M-1\to\infty.
 Thus any proof that forces bounded second-excess subbarriers must use the
 global barrier hypothesis over every infinite \(X\), not only the local
 arithmetic of a single minimal collective hole.
+
+## Warning 8.6e: The retained-gap lemma alone cannot choose the deletion
+
+Lemma 8.4a suggests a sparse-deletion strategy: choose an infinite
+\(B\subset A\) so that no finite \(F\subset B\), \(f=\min F\), can contain
+all \(A\)-points in a terminal interval
+\[
+(w-f-m_0,\ w-N_0].
+\]
+Then no finite \(F\subset B\) could create a three-fold hole. This strategy
+does not follow from order-2 basishood alone.
+
+The obstruction is combinatorial. For a fixed \(f\in A\), Lemma 8.4a asks
+us to hit every finite set of the form
+\[
+A\cap(y,\ y+f+m_0-N_0]
+\]
+with a retained element, whenever this interval is the terminal gap of a
+candidate witness. Order-2 basishood gives global two-sum coverage, but it
+does not give a local lower bound for the number of \(A\)-points in such
+intervals. In particular, the known lemmas do not rule out an infinite tail
+\[
+C=\{c_1<c_2<\cdots\}\subset A
+\]
+with the following local isolation pattern: for every \(i<j\), there is an
+interval of length \(c_i+m_0-N_0\) whose intersection with \(A\) is exactly
+\[
+\{c_j\}.
+\]
+Then every infinite \(B\subset C\) contains \(c_i<c_j\), and the interval
+attached to \((i,j)\) has all its \(A\)-points inside \(B\). Thus the
+no-complete-terminal-gap selection problem has no infinite solution in this
+model.
+
+This is not an additive counterexample, because it does not construct the
+corresponding witnesses \(w\notin3(A\setminus F)\). It only shows that
+Lemma 8.4a by itself is insufficient. A sparse-gap proof would need an
+additional arithmetic thickness statement ruling out such locally isolated
+terminal windows in genuine order-2 bases.
 
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
