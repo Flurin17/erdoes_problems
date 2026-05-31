@@ -1268,3 +1268,10 @@ source of growth beyond Ramsey.
   equal to `(5,7,25)` after `9295` vectors and `(6,8,36)` after `99132`
   vectors.  The full `(7,9,49)` sweep is slower than the current Python
   recursion and was killed after about a minute without output.
+- 2026-05-31: Optimized `rectangle_cover.py` exhaustive sweeps with a shared
+  dynamic-programming cache across integer partitions.  The full
+  `(bins,cap,max_total)=(7,9,49)` rectangle-only sweep now completes:
+  `1091744` integer partitions checked, `1420692` cached states, and no
+  counterexample.  This is currently the strongest evidence that the
+  complete-multipartite `q+2` target may hold even without special `(q+1,1)`
+  bins.

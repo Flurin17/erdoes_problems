@@ -111,23 +111,48 @@ def integer_partitions(total: int, max_part: int | None = None):
 
 
 def exhaustive(max_total: int, bins: int, cap: int, node_limit: int | None) -> None:
+    nodes = 0
+
+    @lru_cache(maxsize=None)
+    def rec(state: tuple[int, ...], left: int) -> bool:
+        nonlocal nodes
+        nodes += 1
+        if node_limit is not None and nodes > node_limit:
+            raise SearchLimitExceeded
+        if not state:
+            return True
+        if left == 0:
+            return False
+        if sum(state) > left * cap:
+            return False
+
+        for indices, height in candidates(state, cap):
+            next_state = subtract_rectangle(state, indices, height)
+            if rec(next_state, left - 1):
+                return True
+        return False
+
     checked = 0
     for total in range(1, max_total + 1):
         for vector in integer_partitions(total):
             checked += 1
             try:
-                cover, nodes = find_cover(vector, bins, cap, node_limit)
+                cover_exists = rec(normalize(vector), bins)
             except SearchLimitExceeded:
                 print(f"checked={checked}")
                 print(f"unknown_vector={','.join(map(str, vector))}")
                 print("result=unknown_node_limit")
+                print(f"cache_info={rec.cache_info()}")
                 return
-            if cover is None:
+            if not cover_exists:
                 print(f"checked={checked}")
                 print(f"counterexample={','.join(map(str, vector))}")
                 print(f"nodes={nodes}")
+                print(f"cache_info={rec.cache_info()}")
                 return
     print(f"checked={checked}")
+    print(f"nodes={nodes}")
+    print(f"cache_info={rec.cache_info()}")
     print("counterexample=none")
 
 
