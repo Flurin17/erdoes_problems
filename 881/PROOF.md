@@ -5535,6 +5535,41 @@ translates sit inside the mixed support. This matches the almost-cross-color
 recurrence in Lemma 8.6g''': large reflected packets from one color into
 the other automatically generate large mixed difference packets.
 
+## Lemma 8.6j-5: Mixed support is not cofinite
+
+Let
+\[
+A=C\cup D
+\]
+be a two-coloring into certificate-free classes relative to \(A\). If
+\[
+C
+\]
+is infinite, then
+\[
+C+D
+\]
+is not cofinite. The same holds with \(C\) and \(D\) interchanged.
+
+Proof. Since \(C\) is infinite, the same-color sumset
+\[
+C+C
+\]
+contains arbitrarily large integers. By Lemma 8.6j',
+\[
+(C+C)\cap(C+D)=\varnothing.
+\]
+Thus \(C+D\) misses arbitrarily large integers, and hence is not cofinite.
+\(\square\)
+
+Therefore a two-color certificate-free order-2 basis cannot be covered
+eventually by mixed sums alone. Since \(2A\) is cofinite, the infinitely
+many holes in \(C+D\) must be supplied by same-color sums. The remaining
+pair obstruction is thus a genuine interleaving problem: same-color Sidon
+supports cover infinitely many tail points, while mixed reflected Sidon
+difference packets supply representation spikes on another unbounded set of
+scales.
+
 ## Corollary 8.6j-3: Certificate-free counterexamples need mixed spikes
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), and
@@ -8847,6 +8882,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   two same-color sumsets may still overlap.
 * Lemma 8.6j-4 identifies mixed representation spikes with reflected Sidon
   difference packets in the mixed support.
+* Lemma 8.6j-5 says the mixed support is not cofinite as soon as one
+  certificate-free color is infinite, because same-color sums are unbounded
+  and disjoint from mixed sums.
 * Corollary 8.6j-3 connects certificate-free colorings back to the
   representation-count criteria: if all mixed-color two-sum counts are
   sublinear relative to \(A(X)\), Corollary 3.4c gives a good deletion.

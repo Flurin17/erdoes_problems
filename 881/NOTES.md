@@ -1506,6 +1506,11 @@ m+(P_m-P_m)\subset C+D.
 \]
 Thus any surviving spike is a large Sidon packet with its difference set
 embedded in the mixed support.
+The mixed support cannot be cofinite when one color is infinite, because it
+is disjoint from that color's unbounded same-color sumset. Hence a
+certificate-free order-2 basis must interleave same-color Sidon supports
+with mixed reflected-difference spikes; it cannot rely on mixed sums alone
+for all sufficiently large integers.
 
 For large-excess pair barriers, the precise certificate obstruction is
 list-valued. Given a pair hole \(\{x,y\}\) at \(w\), with endpoint centers
