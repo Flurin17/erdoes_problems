@@ -1403,3 +1403,10 @@ source of growth beyond Ramsey.
   half-retention factor is sharp at `q=2`: `K_4 union K_{1,3}` is
   `2`-modular but has no `4`-modular induced subgraph on more than `4` of its
   `8` vertices, and disjoint copies preserve the ratio.
+- 2026-05-31: Tested the remaining one-large-class boundary.  For every
+  `3<=q<=10`, every vector `(x,tail)` with `sum(tail)=q` and
+  `x+sum(tail)<=q^2` was covered by the full multipartite bin checker.  This
+  suggests the one-large-class repair should extend from `sum(tail)<q` to
+  `sum(tail)<=q`; proving the boundary case would imply that any
+  complete-multipartite bin counterexample has at least two non-largest
+  classes totaling more than `q`, not merely at least `q`.
