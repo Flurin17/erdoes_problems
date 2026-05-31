@@ -234,6 +234,11 @@ basis \(S\) has bounded two-sum multiplicity, then there is an infinite
 \(T\subset S\) with \(2(S\setminus T)+S\) cofinite. Therefore the
 certificate-free two-color construction from Warning 8.6j'' would need
 large shifted representation spikes, not merely Sidon sparsity.
+Lemma 3.4b' is the general shifted version: bounded \(k\)-term
+representation multiplicity in an order-\(k\) basis \(S\) gives an infinite
+\(T\subset S\) with \(k(S\setminus T)+S\) cofinite. This is weaker than a
+full good deletion for \(S\) itself but useful when the last summand lives
+in a retained companion class.
 Lemma 8.6j-7 gives the one-color version: for a certificate-free color
 \(C\), either the graphs for \(C+C+A\) have unbounded matchings and one can
 delete an infinite \(T\subset C\) while keeping \(2(C\setminus T)+A\)

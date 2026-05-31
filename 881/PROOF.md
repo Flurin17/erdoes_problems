@@ -1499,6 +1499,101 @@ must have unbounded two-term representation function; it cannot be a
 purely near-unique Raikov-Stöhr-style basis with only bounded
 representation multiplicity.
 
+## Lemma 3.4b': Bounded multiplicity gives a shifted sparse deletion
+
+Let \(S\subseteq\mathbb N\) be an asymptotic basis of order \(k\), with
+threshold \(N_0\). Suppose there is a constant \(R\) such that every integer
+has at most \(R\) unordered \(k\)-term representations from \(S\), counted
+as multisets. Then there is an infinite
+\[
+T\subset S
+\]
+such that
+\[
+k(S\setminus T)+S
+\]
+is cofinite.
+
+Proof. For each large \(n\), form a hypergraph \(G_n\) on the vertex set
+\[
+S\cap[1,n].
+\]
+For every
+\[
+s\in S\cap[1,n-N_0],
+\]
+choose one \(k\)-term multiset representation
+\[
+n-s=a_{s,1}+\cdots+a_{s,k},\qquad a_{s,i}\in S,
+\]
+and add its support
+\[
+E_s=\{a_{s,1},\ldots,a_{s,k}\}
+\]
+as an edge of \(G_n\), ignoring repetitions. One support of size at most
+\(k\) carries at most
+\[
+C_k=\binom{2k-1}{k}
+\]
+different \(k\)-term multiplicity patterns. Since different values of
+\(s\) give different sums \(n-s\), the number of distinct support edges is
+at least
+\[
+|S\cap[1,n-N_0]|/C_k\to\infty. \tag{1}
+\]
+
+The maximum degree of \(G_n\) is bounded in terms of \(k\) and \(R\). Fix a
+vertex \(x\in S\). If an edge \(E_s\) contains \(x\), then the chosen
+multiset representation of \(n-s\), after deleting one occurrence of \(x\),
+together with the summand \(s\), gives a \(k\)-term representation of
+\[
+n-x.
+\]
+There are at most \(R\) such unordered \(k\)-term multisets, and each has
+at most \(k\) choices for which occurrence is the distinguished summand
+\(s\). Hence
+\[
+\Delta(G_n)\le kR. \tag{2}
+\]
+
+A greedy matching in a hypergraph of edge size at most \(k\) has size at
+least
+\[
+\frac{|E(G_n)|}{k\Delta(G_n)}.
+\]
+By (1) and (2), the matching numbers of \(G_n\) tend to infinity uniformly:
+for every \(q\), all sufficiently large \(n\) have a matching of size at
+least \(q\).
+
+Choose
+\[
+t_1<t_2<\cdots,\qquad t_i\in S,
+\]
+so fast that \(t_j\) is larger than a threshold after which every \(G_n\)
+has a matching of size at least \(j+2\). Put
+\[
+T=\{t_j:j\ge1\}.
+\]
+For large \(n\), choose \(j\) with
+\[
+t_j\le n<t_{j+1}.
+\]
+The graph \(G_n\) has \(j+2\) pairwise disjoint support edges. Future
+deleted elements are larger than \(n\), and hence cannot appear in a
+positive-summand representation of \(n\). The first \(j\) deleted elements
+meet at most \(j\) of the disjoint supports. Thus one edge \(E_s\) avoids
+\(T\), and
+\[
+n=a_{s,1}+\cdots+a_{s,k}+s
+\]
+with all \(a_{s,i}\in S\setminus T\) and \(s\in S\). Hence all sufficiently
+large \(n\) lie in \(k(S\setminus T)+S\). \(\square\)
+
+This lemma is weaker than Corollary 3.4b when applied to \(A\) itself,
+because the final summand \(s\) is not required to avoid \(T\). Its value is
+in quotient and color-copy arguments, where one summand may come from a
+different retained class.
+
 ## Corollary 3.4c: Sublinear representation multiplicity is enough
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\), and let
@@ -9555,6 +9650,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   are uniformly bounded has a good infinite deletion; in particular, a
   \(k=2\) counterexample cannot be a bounded-representation/Sidon-type thin
   basis.
+* Lemma 3.4b' gives the shifted version needed for quotient/copy
+  constructions: bounded order-\(k\) multiplicity gives an infinite
+  \(T\subset S\) with \(k(S\setminus T)+S\) cofinite.
 * Corollary 3.4c strengthens this from bounded multiplicity to
   \(R_k(X)=o(A(X))\), where \(R_k(X)\) is the maximum \(k\)-term
   representation count up to \(X\). Thus a counterexample needs
