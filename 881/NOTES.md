@@ -1365,6 +1365,20 @@ fraction is all of \(T\), giving the reflection-recurrence used in Theorem
 8.2. For \(k>2\), this is weaker than the finite reflection-recurrence
 needed by Theorem 2.3.
 
+For \(k=3\), the split is explicit: bad one-point deletions reflect a
+half-sized subset either into \(A\) or into \(2A\). The first case can feed
+Lemma 2.3b if the reflected half contains a fixed order-3 certificate tuple;
+the second case has mirrors that cost two retained summands each, so the
+existing balanced repair recursion overruns the order-4 budget. This is the
+specific gap behind the stalled adjacent-order minimality route. The finite
+booster window
+\[
+\{1,3,5,20,21,30,31\}
+\]
+shows the issue locally: for the one-point witness \(37\) after deleting
+\(30\), the shifts \(37-30-\{1,3,5\}=\{6,4,2\}\) lie in \(2A\) but not in
+\(A\).
+
 For finite deletions, Lemma 10.1 gives the collective analogue. If
 \(C=A\setminus F\) misses \(w\) at order \(k+1\), then for every retained
 padder \(e\) with \(w-e\) above the order-\(k\) threshold, the finite set

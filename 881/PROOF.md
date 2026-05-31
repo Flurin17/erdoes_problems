@@ -6162,6 +6162,74 @@ lower sumset \((k-r)A\), and only a fraction of the original finite pattern
 is controlled. This is why Theorem 2.3 does not by itself resolve the
 infinitely-bad case in higher order.
 
+## Warning 10.2a: The \(k=3\) one-point split
+
+For \(k=3\), Corollary 10.2 has two distinct alternatives. For every finite
+\[
+T\subset A
+\]
+one obtains a subset \(U\subset T\) with \(|U|\ge |T|/2\) and arbitrarily
+large centers of one of the following forms:
+\[
+m-U\subseteq2A, \tag{1}
+\]
+or
+\[
+m-U\subseteq A. \tag{2}
+\]
+Only (2) is directly compatible with the fixed-certificate deletion theorem.
+Indeed, if a finite set \(T_0\subset A\) has the property that every
+half-sized subset contains elements
+\[
+e,y_1,y_2,y_3
+\]
+with
+\[
+y_1+y_2-e\in A,\qquad y_1+y_2+y_3-2e\in A, \tag{3}
+\]
+and if the alternative (2) occurs for \(T_0\) with arbitrarily large
+centers, then one fixed tuple satisfying (3) is reflection-recurrent.
+Lemma 2.3b then gives an infinite deletion whose complement is an order-4
+basis.
+
+Alternative (1) is the obstruction: its mirrors live in \(2A\), not \(A\).
+Replacing a mirror \(m-y\) by two retained summands spends one extra
+summand in the repair identities, so the balanced certificate recursion
+from Theorem 2.3 no longer has the right order budget. Thus the
+one-point-failure route for \(k=3\) reduces either to a half-density
+certificate theorem together with repeated occurrence of (2), or to a new
+repair mechanism that can use reflected \(2A\)-mirrors without exceeding
+four retained summands.
+
+The obstruction is already visible in a finite window from the robust
+booster search. Let
+\[
+A_0=\{1,3,5,20,21,30,31\}.
+\]
+For \(a=30\), the witness
+\[
+w=37
+\]
+satisfies
+\[
+w\notin4(A_0\setminus\{30\}).
+\]
+With
+\[
+T=\{1,3,5\},\qquad d=w-a=7,
+\]
+the shifted mirrors are
+\[
+d-T=\{6,4,2\}\subset2A_0,
+\]
+via
+\[
+6=3+3,\qquad 4=1+3,\qquad 2=1+1,
+\]
+but none of \(2,4,6\) lies in \(A_0\). Thus the lower-sumset recurrence in
+the \(r=1\) branch is not a notational artefact; it can be genuinely
+\(2A\)-valued even in a small local model.
+
 ## Lemma 10.1: Finite deletion holes force vertex-cover domination
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\) with
