@@ -48,6 +48,20 @@ The problem page's status widget says there are no solutions, partial or
 complete, incorporated into the remarks. Therefore the comment is useful only
 as a source of possible ideas, not as evidence.
 
+The linked Overleaf project was downloaded locally on 2026-05-31 and checked
+against the \(k=2\) recurrence lemmas in `PROOF.md`. Its proposed negative
+construction would give an order-2 basis with infinitely many singleton
+order-3 private witnesses. Lemma 8, Corollary 8.1, and Theorem 8.2 in this
+workspace show that such a configuration instead forces an infinite deletion
+that remains an order-3 basis. Thus the linked construction cannot be used as
+written. The apparent local error is that its affine-avoidance witness lemma
+does not also prove compatibility with the already-built lower coverage:
+for a private witness \(p\), every retained padder \(e\) with \(p-e\) in the
+covered range must have all two-term representations of \(p-e\) pass through
+the deleted element. Avoiding finitely many formal affine equations in a
+fresh box does not by itself establish this shifted domination once the old
+set covers a tail.
+
 ## Working literature facts to verify later
 
 These are standard-looking background items that should be verified from

@@ -208,6 +208,13 @@ elements are considered: if \(n-c\in2(A\setminus D)\) for some retained
 gaps that are immune to all retained translates \(c+2(A\setminus D)\), not
 merely gaps for finite prefixes.
 
+Warning 3.0b gives a concrete check on this issue. The set
+\(\{1\}\cup h\mathbb N\) is an order-\(h\) basis with no infinite deletion
+remaining order \(h\), but no finite deletion gives a terminal minimal
+order-\(h\) subbasis. Thus a finite-deletion tree argument without the
+late-threshold condition is false. This example is not a counterexample to
+Problem 881 for \(h=k+1\), because it is not an order-\(k\) basis.
+
 Corollary 3.1b gives the exact finite-prefix language. A finite
 \(F\subset A\) is late-bad if \(A\setminus F\) is not order \(k+1\), or its
 order-\((k+1)\) threshold is at least \(\max F\). If some infinite
@@ -220,6 +227,16 @@ Corollary 3.1c strengthens this from initial segments to arbitrary infinite
 subsets: in a counterexample, every infinite \(X\subset A\) contains some
 finite late-bad \(F\subset X\). Thus a no-answer construction must build a
 finite-set barrier of delayed or genuine order-\((k+1)\) failures.
+
+The affine finite-booster construction linked from the 2026-05-03 page
+comment is currently classified as an unverified attempt, not a solution.
+Its local hyperplane-avoidance step does not prove the shifted domination
+forced by existing order-\(k\) coverage: if \(p\) is an order-\((k+1)\) hole
+after deleting \(c\), then every retained padder \(e\) with \(p-e\) in the
+covered range requires all \(k\)-representations of \(p-e\) to use \(c\).
+For \(k=2\), such singleton private witnesses for infinitely many elements
+would contradict Theorem 8.2, which constructs a good infinite deletion from
+the resulting reflection recurrence.
 
 ### Protected matching criterion
 

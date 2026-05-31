@@ -399,6 +399,37 @@ Thus delayed gaps for finite prefixes do not automatically survive in the
 infinite deletion; later retained elements can repair them by padding
 two-term representations.
 
+## Warning 3.0b: The finite-deletion tree has no terminal-node normal form
+
+The threshold issue in Warning 3.0 also invalidates a tempting
+finite-booster normal form. Let \(h\ge2\) and put
+\[
+A=\{1\}\cup h\mathbb N.
+\]
+Then \(A\) is an asymptotic basis of order \(h\). No infinite deletion
+\(B\subset A\) leaves an order-\(h\) basis: if \(1\in B\), only multiples
+of \(h\) remain, while if \(B\cap h\mathbb N\) is infinite, then for each
+deleted multiple \(b\) the integer
+\[
+b+h-1
+\]
+has every \(h\)-term representation from \(A\) forced to use exactly
+\(h-1\) copies of \(1\) and the single multiple \(b\).
+
+Nevertheless there is no finite \(F\subset A\) such that \(A\setminus F\)
+is an ordinary minimal order-\(h\) basis. If \(1\in F\), then
+\(A\setminus F\) is not an order-\(h\) basis. If \(1\notin F\), then
+\(F\) removes only finitely many multiples of \(h\), and deleting one more
+remaining multiple still leaves an order-\(h\) basis after a later
+threshold.
+
+Thus an infinite branch through the tree of finite order-\(h\)-deletions
+need not diagonalize to an infinite deletion preserving order \(h\). The
+least thresholds can run past the deleted elements. This example is not a
+counterexample to Erdős Problem #881 when \(h=k+1\), since
+\(\{1\}\cup h\mathbb N\) is not an order-\(h-1\) basis; it only rules out
+the proposed normal-form reduction.
+
 ## Example 3.0a: Minimality does not control finite-prefix delays
 
 The residue-padding basis
@@ -2773,6 +2804,42 @@ private witnesses lie below the end of a longer covered buffer, or a
 weaker infinite construction in which only a cofinite protected subset of
 the added elements needs local witnesses.
 
+## Attempt 14: The affine finite-booster construction is not verified
+
+The 2026-05-03 comment on the problem page links a proposed negative
+construction for every \(k\ge2\). Its local witness lemma has the following
+shape: after a finite set \(S\) and an element \(c\in S\) have been chosen,
+one adjoins fresh variables so that a number \(p\) has a
+\((k+1)\)-term representation using \(c\), but no \((k+1)\)-term
+representation after \(c\) is deleted. The proof avoids finitely many affine
+hyperplanes corresponding to forbidden formal representations.
+
+This is not enough for a staged asymptotic basis. Once the old set already
+covers a long interval at order \(k\), a genuine hole
+\[
+p\notin(k+1)(A\setminus\{c\})
+\]
+forces shifted domination: for every retained padder \(e\) with \(p-e\) in
+the covered range, every \(k\)-term representation of \(p-e\) from \(A\)
+must use \(c\). In the notation of Lemma 10.1, the singleton \(\{c\}\) must
+be a vertex cover for all the representation hypergraphs of these shifted
+targets.
+
+For \(k=2\), this obstruction is decisive. Lemma 8 and Theorem 8.2 prove
+that an order-2 basis with infinitely many one-point order-3 failures is
+finitely reflection-recurrent and therefore has an infinite deletion that
+remains an order-3 basis. Hence the linked construction, which claims
+one-point order-3 private witnesses for every element of an order-2 basis,
+cannot be correct as stated.
+
+The first unproved compatibility point is therefore not the purely local
+affine avoidance, but the simultaneous requirement that all shifted targets
+\(p-e\) remain covered only through representations using \(c\). Finite
+experiments in `EXPERIMENTS/stage_buffer_search.py` and
+`EXPERIMENTS/cross_stage_pair_search.py` continue to find only endpoint or
+short-chain artefacts unless this shifted-domination requirement is weakened
+to collective barriers.
+
 ## Dependency Graph
 
 * Theorem 1 is independent and resolves \(k=1\).
@@ -2901,3 +2968,7 @@ the added elements needs local witnesses.
 * Example 13.2 gives an isolated stage satisfying the local conditions, but
   explains why endpoint witnesses do not provide the buffer needed for an
   iteration.
+* Attempt 14 records why the commented affine finite-booster construction is
+  not a verified counterexample: local affine avoidance does not prove the
+  shifted domination forced by existing order-\(k\) coverage, and for
+  \(k=2\) the claimed singleton-private pattern contradicts Theorem 8.2.
