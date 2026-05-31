@@ -1829,6 +1829,17 @@ set \(T\), Lemma 8.6g''''.2 gives \(|T|\le q^2\). Hence ranks
 \(q\approx |T|\) can keep splitting the active prefix into singleton or
 bounded fibers and avoid any fixed recurrent color with many points. The
 next obstruction must force color reuse in such variable-rank barriers.
+Warning 8.6g.2 records the construction-side trap. For a hole
+\(w\notin3(A\setminus F)\), every active retained row \(e\) has its whole
+retained-complement coverage neighborhood
+\[
+N_e=\{f\in A:w-e-f\in A\setminus F\}
+\]
+inside \(F\). Deleting the union of these neighborhoods can make rank huge
+and fibers tiny, but then any proper subedge that leaves one neighborhood
+element retained repairs the witness. Such full neighborhood cuts are
+avoidable by an infinite selector unless additional cross-block coding
+turns them into a genuine barrier.
 The shape is still finite-quotient compatible:
 in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
 \(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the

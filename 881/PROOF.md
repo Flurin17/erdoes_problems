@@ -5997,6 +5997,53 @@ Schreier-scale barriers can evade this estimate by assigning singleton or
 bounded fibers to the active prefix, so a final argument must force color
 reuse rather than only finite colorability.
 
+### Warning 8.6g.2: Variable rank by coverage neighborhoods is selector-avoidable
+
+The most direct way to make the rank large is to delete every endpoint that
+covers the active shifted rows. This creates a different obstruction.
+
+Let
+\[
+F\subset A,\qquad C=A\setminus F,\qquad w\notin3C.
+\]
+For an active retained padder
+\[
+e\in C,\qquad w-e\ge N_0,
+\]
+define its retained-complement coverage neighborhood
+\[
+N_e=\{f\in A:\ w-e-f\in C\}. \tag{1}
+\]
+Then
+\[
+N_e\subset F. \tag{2}
+\]
+Indeed, if \(f\in N_e\cap C\), then
+\[
+w=e+f+(w-e-f)\in3C,
+\]
+contrary to the hole.
+
+Thus a variable-rank construction can make all endpoint fibers tiny by
+taking
+\[
+F\supseteq\bigcup_{e\in T}N_e
+\]
+for the finite active test set \(T\). But then the bad set is a full cut of
+coverage neighborhoods. If a proper subedge
+\[
+H\subsetneq F
+\]
+leaves some \(f\in N_e\setminus H\) retained, then
+\[
+w=e+f+(w-e-f)\in3(A\setminus H).
+\]
+So the witness is private for the whole neighborhood cut, not for arbitrary
+Schreier subedges. An infinite selector can avoid containing whole
+block-local cuts unless the construction supplies additional cross-block
+coding. This is the current concrete obstruction to using unbounded rank
+alone to evade Corollary 8.6g.1.
+
 ## Lemma 8.6h: Progressions force certificate density
 
 Let \(A\subseteq\mathbb N\) and let
@@ -11658,6 +11705,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   finite test could be split into endpoint-certificate-free fibers with
   unbounded endpoint centers, compactness would produce finitely many
   recurrent Sidon colors, contradicting Lemma 8.6g''''.2.
+* Warning 8.6g.2 explains why the obvious variable-rank escape is not
+  enough: deleting full shifted coverage neighborhoods makes fibers tiny,
+  but proper subedges are repaired by any retained member of the omitted
+  neighborhood, so the bad sets are selector-avoidable block cuts unless
+  additional cross-block coding is supplied.
 * Lemma 8.6g' sharpens the pair-barrier case from large certificate-free
   halfsets to endpoint list-colorings: pair holes force a recurrent
   certificate unless the shifted endpoint lists can split every finite test
