@@ -289,7 +289,11 @@ Important distinction: "positive square class" and "smallest representative" are
    shells for `63` are eliminated over `Q(sqrt(5))` (`6144` non-simple,
    `4896` corner-label violations), and all `63000` shells for `99` are
    eliminated over `Q` (`42480` non-simple, `20520` corner-label violations).
-   Higher-mixed boundary orders remain open.
+   Higher-mixed boundary orders remain open. A count-only mixed-growth
+   diagnostic shows the full boundary-order spaces plateau at `295877600`
+   shells for `63` and `11122617000` shells for `99`, so the remaining attack
+   needs a structural quotient or obstruction rather than raw exact shell
+   enumeration.
 
 ## Current Diophantine Status for `n=19`
 

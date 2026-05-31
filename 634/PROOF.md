@@ -1848,6 +1848,24 @@ Thus the low-overhang shell regime is now exact for both `N=63` and `N=99`.
 It still does not close the global problem, because higher-mixed boundary orders
 remain to be controlled.
 
+A count-only aggregation shows why the next step cannot be naive shell-by-shell
+classification. Grouping boundary words by endpoint pair and mixed-transition
+count gives the following cumulative shell counts:
+
+```text
+N=63: cap 4 -> 11,040; cap 6 -> 1,367,680;
+      cap 8 -> 25,605,600; cap 10 -> 144,887,520;
+      cap 12 and higher -> 295,877,600.
+
+N=99: cap 4 -> 63,000; cap 6 -> 13,872,000;
+      cap 8 -> 432,153,000; cap 10 -> 3,982,965,000;
+      cap 12 and higher -> 11,122,617,000.
+```
+
+Thus a complete treatment of these two boundary survivors needs a structural
+higher-mixed obstruction, an exact quotient/canonicalization much stronger than
+raw side-word enumeration, or a new construction.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

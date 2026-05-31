@@ -119,6 +119,10 @@ Current components:
   shells for `N=99`. Its geometry predicates are floating-point diagnostics;
   the exact low-mixed classifications are now supplied by the rational and
   quadratic scripts below.
+- `gamma_2alpha_mixed_growth.py`: count-only mixed-transition growth diagnostic
+  for the same boundary-shell spaces. Without materializing every shell, it
+  shows that the full boundary-order spaces plateau at `295877600` shells for
+  `N=63` and `11122617000` shells for `N=99`.
 - `gamma_2alpha_rational_shell_census.py`: exact-arithmetic shell classifier
   for rational-coordinate `gamma=2alpha` survivors. It currently applies to
   the `N=99` benchmark; after rational placement it clears denominators and
