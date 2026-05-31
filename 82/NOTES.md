@@ -1059,6 +1059,12 @@ source of growth beyond Ramsey.
   vertices of `A\T` gives an `r`-regular induced subgraph on `b+r+1`
   vertices.  Independent bases amplify low-degree witnesses; clique bases
   amplify high-degree witnesses.
+- 2026-05-31: Recorded the resulting trace-class degree-window restrictions
+  in counterexamples: over an independent base, any regular `b`-vertex
+  trace-class witness of degree `r` must have either `b-r>|T|` or
+  `2b-r<k`; over a clique base, it must have either `r+1>|A\T|` or
+  `b+r+1<k`.  These inequalities are now the target conditions for future
+  trace-class combination experiments.
 - 2026-05-31: Added `--exhaustive-source-modular` to `universal_slots.py` for
   exact small fixed-source-residue slot sweeps.  For `4 -> 8` with four slots
   on `n=7`, exact enumeration checks `592` source-`0` graphs and leaves `53`

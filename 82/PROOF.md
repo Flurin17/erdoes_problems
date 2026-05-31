@@ -2412,6 +2412,32 @@ internal degree in `B` is useful because `r+1` non-neighbors in the base can
 be added.  A trace proof that alternates between large independent and clique
 bases would need to exploit this complementary degree information.
 
+## Corollary 14A.3: Trace-Class Degree Restrictions In Counterexamples
+
+Let `G` have no regular induced subgraph of order at least `k`.
+
+1. If `A` is independent, `T subset A`, and `B subset C_T` induces an
+   `r`-regular graph on `b` vertices, then
+
+```text
+b-r > |T|       or       2b-r < k.
+```
+
+2. If `A` is a clique, `T subset A`, and `B subset C_T` induces an
+   `r`-regular graph on `b` vertices, then
+
+```text
+r+1 > |A\T|     or       b+r+1 < k.
+```
+
+Proof.  If the first alternative in (1) fails, Lemma 14A.1 gives a regular
+induced subgraph on `2b-r` vertices, so this order must be less than `k`.
+The proof of (2) is identical using Lemma 14A.2.  QED.
+
+These inequalities are weak for one trace class in isolation, but they give a
+checkable degree-window obstruction for any attempt to combine many trace
+classes over a large homogeneous set.
+
 ## Lemma 14B: Maximal Independent Trace Ramsey Bound
 
 Let `G` be a graph with no regular induced subgraph of order at least `k`,
