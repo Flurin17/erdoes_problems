@@ -2690,6 +2690,64 @@ not guarantee that these adaptive mirrors remain recurrent. This is the
 current precise obstruction to turning fractional recurrence into a full
 positive proof.
 
+## Warning 8.6c': Large recurrent clusters can be certificate-free
+
+The certificate obstruction after Lemma 8.6c is not an artefact of an
+abstract combinatorial model. It can occur inside a benign order-2 basis.
+
+Let
+\[
+U=\{n\in\mathbb N:n\equiv0\text{ or }1\pmod3\}.
+\]
+Since \(\{0,1\}+\{0,1\}=\mathbb Z/3\mathbb Z\), the set \(U\) is an
+asymptotic basis of order \(2\). We may enlarge \(U\) by a very sparse
+set of elements congruent to \(2\pmod3\) without destroying this property.
+
+By a standard sparse induction one can choose finite sets
+\[
+S_M\subset 2+3\mathbb N,\qquad |S_M|=M\quad(M=1,2,\ldots),
+\]
+and, for each \(M\), arbitrarily large centers \(m_{M,q}\) such that:
+
+1. all reflected packets
+   \[
+   m_{M,q}-S_M
+   \]
+   are positive, pairwise disjoint, and disjoint from \(U\);
+2. no element added in any packet or in any \(S_N\) lies in
+   \[
+   S_M+S_M-S_M
+   \]
+   except for the trivial forced elements of \(S_M\) themselves.
+
+At each finite stage only finitely many affine equalities are forbidden, so
+the next \(S_M\) and the next centers can be placed far enough out in the
+residue class \(2\pmod3\) to avoid them. Put
+\[
+A=U\cup\bigcup_M S_M\cup\bigcup_{M,q}(m_{M,q}-S_M).
+\]
+Then \(A\) is still an order-2 basis because \(U\subset A\). Each \(S_M\)
+is reflection-recurrent in \(A\), since
+\[
+m_{M,q}-S_M\subset A
+\]
+for arbitrarily large \(m_{M,q}\). However, by construction, for
+\[
+e,y_1,y_2\in S_M,\qquad y_1,y_2\ne e,
+\]
+the candidate certificate element
+\[
+y_1+y_2-e
+\]
+does not belong to \(A\). Its residue is \(2\pmod3\), so it is not in
+\(U\), and the sparse induction avoided all inserted elements.
+
+Thus arbitrarily large recurrent clusters in an order-2 basis do not, by
+themselves, force the fixed-triple hypothesis of Corollary 2.3c. Any
+positive use of Lemma 8.6c must exploit the fact that the recurrent clusters
+come from genuine finite-barrier witnesses, not merely from their existence
+inside an order-2 basis.
+
 ## Example 8.6d: Unbounded second-excess is locally compatible
 
 The bounded second-excess hypothesis in Lemma 8.6a is a genuine extra
@@ -4628,6 +4686,9 @@ new-design problem, not as a small non-greedy search miss.
   recurrent clusters, but also records two obstructions: fractional
   recurrence does not compact to an infinite recurrent core, and fixed
   recurrent clusters do not support the adaptive mirrors in Theorem 2.3.
+* Warning 8.6c' shows this certificate obstruction can occur inside a
+  harmless order-2 basis: one can add arbitrarily large recurrent clusters
+  that avoid all fixed-triple certificates \(y_1+y_2-e\in A\).
 * Example 8.6d shows that unbounded second-excess minimal collective holes
   are locally compatible with strong order-2 minimality and singleton
   order-3 stability; any bounded-second-excess reduction must use the

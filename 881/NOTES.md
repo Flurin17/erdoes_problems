@@ -930,6 +930,14 @@ construction needs recurrent entries that also satisfy the finite affine
 repair identities, e.g. for \(k=2\), recurrent \(e,y_1,y_2\) with
 \(y_1+y_2=e+x\in e+A\), and it later needs recurrence for mirrors generated
 during the construction.
+Warning 8.6c' shows that this gap is real even inside order-2 bases. Start
+with the thick residue basis \(U=\{n:n\equiv0,1\pmod3\}\), then insert very
+sparse finite clusters \(S_M\subset2+3\mathbb N\) and infinitely many
+reflected copies \(m_{M,q}-S_M\). A sparse affine-avoidance induction can
+make each \(S_M\) recurrent while ensuring no nontrivial
+\(y_1+y_2-e\), \(e,y_i\in S_M\), belongs to the enlarged set. The basis
+property comes from \(U\), so large recurrent clusters alone cannot force
+Corollary 2.3c.
 
 Example 8.6d shows that the bounded second-excess hypothesis in Lemma 8.6a
 is not a local consequence of the other known constraints. In the benign
