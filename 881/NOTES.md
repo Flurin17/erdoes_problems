@@ -1552,6 +1552,11 @@ control. The enhanced diagnostic also reports cross-residual matching
 minima, and the top interval examples have minimum \((0,0)\); mixed spikes
 alone are much weaker than the matching condition that would give a sparse
 deletion from one color.
+Sorting the same finite search by matching strength (`--sort matching`) on
+`--max-value 20 --size 8` still gives per-color minima \((0,0)\), though
+the best-color minimum is \(1\). Locally, coverage can alternate which
+color supplies a cross-residual edge, avoiding the one-color matching
+criterion.
 
 The new `--pair-edge-search` diagnostic confirms that high-excess first
 pair starts are locally possible but expensive. Starting from the P5 seed,

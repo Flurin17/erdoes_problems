@@ -114,7 +114,7 @@ def cross_matching_summary(
     return (c_min, d_min, both_min)
 
 
-def search(max_value: int, size: int, limit: int) -> None:
+def search(max_value: int, size: int, limit: int, sort_mode: str) -> None:
     found = 0
     best_rows: list[
         tuple[
@@ -163,7 +163,19 @@ def search(max_value: int, size: int, limit: int) -> None:
                 (lo, hi),
             )
             best_rows.append(row)
-            best_rows.sort(reverse=True)
+            if sort_mode == "matching":
+                best_rows.sort(
+                    key=lambda item: (
+                        item[2],
+                        min(item[3], item[4]),
+                        item[0],
+                        item[1],
+                        item[5],
+                    ),
+                    reverse=True,
+                )
+            else:
+                best_rows.sort(reverse=True)
             del best_rows[limit:]
             found += 1
 
@@ -171,6 +183,7 @@ def search(max_value: int, size: int, limit: int) -> None:
         "bipartite certificate-free windows",
         "max_value=", max_value,
         "size=", size,
+        "sort=", sort_mode,
         "found=", found,
     )
     for (
@@ -209,8 +222,9 @@ def main() -> None:
     parser.add_argument("--max-value", type=int, default=16)
     parser.add_argument("--size", type=int, default=6)
     parser.add_argument("--limit", type=int, default=10)
+    parser.add_argument("--sort", choices=("interval", "matching"), default="interval")
     args = parser.parse_args()
-    search(args.max_value, args.size, args.limit)
+    search(args.max_value, args.size, args.limit, args.sort)
 
 
 if __name__ == "__main__":

@@ -300,6 +300,12 @@ compatible. The enhanced output also reports the minimum greedy matching
 sizes for the cross-residual graphs `C+C+D` and `D+D+C` across the covered
 interval; the top interval examples have `(0,0)`, so they do not satisfy
 the stronger matching criterion from Lemma 8.6j-7a.
+With `--sort matching --max-value 20 --size 8`, the best windows still
+have per-color minima `(0,0)` but `best_color_min=1`: for each target in
+the covered interval at least one color has a cross-residual edge, yet no
+single color supplies edges for the whole interval. This matches the
+bounded-transversal/star obstruction rather than the sparse-deletion
+matching branch.
 Run `schreier_stage_search.py --pair-edge-search --max-p6 40 --max-u 60
 --max-nodes 20000 --max-found 2` for the complementary high-excess
 first-pair diagnostic. It looks for pair-private dominated holes for

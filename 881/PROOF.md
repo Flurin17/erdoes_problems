@@ -10079,6 +10079,11 @@ For the displayed top windows these minima are
 \]
 so the examples satisfy the mixed-spike condition but not the stronger
 cross-residual matching hypothesis from Lemma 8.6j-7a.
+Sorting by matching strength with
+`--sort matching --max-value 20 --size 8` still leaves the per-color minima
+at \((0,0)\), though the best-color minimum is \(1\): each target in the
+covered interval has a cross-residual edge from at least one color, but no
+single color supplies such edges throughout the interval.
 
 Thus the bipartite recurrent-Sidon obstruction is not finitely
 inconsistent. A final contradiction must use the infinite quantitative
