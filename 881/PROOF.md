@@ -13,6 +13,18 @@ of order \(k+1\).
 Complete for \(k=1\). Open in this workspace for \(k\ge 2\). No complete
 proof or counterexample has been verified yet.
 
+For \(k=2\), the current reductions rule out:
+
+* infinitely many singleton order-3 failures;
+* bounded-excess fixed-prefix pair barriers;
+* fixed-rank full list-color high-excess barriers;
+* cofinite recurrent finite-color Sidon tails;
+* the enumerated-Schreier counterexample route.
+
+The remaining \(k=2\) obstruction, if it exists, must be a genuinely
+variable-rank collective finite-barrier system that avoids compacting to a
+finite recurrent certificate-free coloring.
+
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
 If \(C\subseteq\mathbb N\) is an asymptotic basis of order \(h\), then it
