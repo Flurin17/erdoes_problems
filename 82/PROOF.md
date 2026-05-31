@@ -1406,6 +1406,54 @@ Apply the bounded-height rectangle hypothesis with `B=q-S` to cover `b` by at
 most `q-S` rectangle bins.  Together with the `S` special bins, this gives at
 most `q` legal multipartite bins for `a`.  QED.
 
+The hypothesis in the preceding conditional proposition is false as stated.
+The obstruction is not area, but the number of different coordinate heights
+that a small number of rectangles can generate.
+
+**Lemma: Distinct-Height Obstruction For Rectangle Covers.**  If a vector is a
+sum of at most `B` rectangle vectors, then it has at most `2^B-1` distinct
+positive coordinate values.
+
+Proof.  Write the rectangles as `r_j 1_{I_j}`, `1<=j<=B`, after padding with
+zero rectangles if necessary.  Each coordinate of their sum is
+
+```text
+sum_{j in J} r_j
+```
+
+for some subset `J subset {1,...,B}` depending on which rectangles contain
+that coordinate.  Thus the positive coordinate values all lie among the
+nonzero subset sums of `r_1,...,r_B`, of which there are at most `2^B-1`.
+QED.
+
+**Counterexample To The Bounded-Height Rectangle Hypothesis.**  Take `B=3`,
+`q>=30`, `C=q+2`, and
+
+```text
+b=(8,7,6,5,4,3,2,1).
+```
+
+Then
+
+```text
+sum_i b_i=36 <= q+6 = (B-2)(q+2)+4
+```
+
+and `max_i b_i=8<=2q+1`, so `b` satisfies the bounded-height hypotheses.
+However, by the distinct-height obstruction, three rectangles can produce at
+most `2^3-1=7` distinct positive coordinate values, while `b` has eight.
+Hence no three-rectangle cover exists, even without the area constraint.  More
+generally, for any fixed `B`, the staircase
+
+```text
+(2^B,2^B-1,...,2,1)
+```
+
+requires at least `B+1` rectangles and satisfies the displayed total and height
+inequalities for all sufficiently large `q`.  Therefore the conditional
+proposition remains formally valid, but its hypothesis cannot be the final
+multipartite arithmetic target.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with

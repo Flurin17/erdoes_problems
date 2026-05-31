@@ -129,11 +129,12 @@ def exhaustive(
     node_limit: int | None,
     progress_every: int | None,
     max_first: int | None,
+    cache_size: int | None,
 ) -> None:
     nodes = 0
     branches = 0
 
-    @lru_cache(maxsize=None)
+    @lru_cache(maxsize=cache_size)
     def rec(state: tuple[int, ...], left: int) -> bool:
         nonlocal nodes, branches
         nodes += 1
@@ -213,6 +214,7 @@ def main() -> None:
     parser.add_argument("--cap", type=int, required=True)
     parser.add_argument("--max-total", type=int)
     parser.add_argument("--max-first", type=int)
+    parser.add_argument("--cache-size", type=int)
     parser.add_argument("--node-limit", type=int)
     parser.add_argument("--progress-every", type=int)
     args = parser.parse_args()
@@ -238,6 +240,7 @@ def main() -> None:
         args.node_limit,
         args.progress_every,
         args.max_first,
+        args.cache_size,
     )
 
 

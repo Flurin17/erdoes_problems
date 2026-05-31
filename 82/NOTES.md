@@ -1433,3 +1433,26 @@ source of growth beyond Ramsey.
   above `2q+1`, then apply the bounded-height rectangle theorem to the
   residual.  Small generalized checks for `(B,C)` equal to
   `(4,7),(5,7),(4,8),(5,8),(6,8),(5,9),(6,9),(7,9)` all passed.
+- 2026-05-31: Refuted the bounded-height rectangle hypothesis used in the last
+  conditional reduction.  For `B=3` and every `q>=30`, the vector
+  `(8,7,6,5,4,3,2,1)` has total `36 <= q+6=(B-2)(q+2)+4` and maximum
+  coordinate `8 <= 2q+1`, but it cannot be covered by three rectangles: a
+  `B`-rectangle sum has at most `2^B-1` distinct positive coordinate values,
+  while this vector has eight.  Local checks with `cap=32` confirm no
+  three-rectangle cover and exhibit a four-rectangle cover
+  `8^1 4^4 2^4 1^4`.  More generally, `(2^B,2^B-1,...,1)` needs at least
+  `B+1` rectangles for all sufficiently large `q`.  Pivot: any replacement
+  for the bounded-height reduction must either preserve a distinct-height
+  bound in the residual or use special bins/multipartite structure after the
+  large-coordinate reduction, rather than asking for arbitrary bounded-height
+  rectangle covers.
+- 2026-05-31: Added a bounded `--cache-size` option to
+  `rectangle_cover.py`.  The `q=7` filtered regression
+  `--bins 7 --cap 9 --max-total 49 --max-first 15` still completed with no
+  counterexample.  A capped `q=9` diagonal filtered run with
+  `--cache-size 8000000` reached `33,000,000` checked partitions at total
+  `73`, with `41,382,449` recursive states and `55,691,963` candidate
+  branches, before the process was killed without a final verdict.  This is
+  only a memory/runtime limit; the diagonal bounded-largest case remains
+  unrefuted but is no longer the right standalone target after the
+  small-`B` staircase obstruction.
