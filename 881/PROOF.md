@@ -4371,6 +4371,51 @@ For late-bad sets with \(w\ge\max F-1\), this says that a bounded-size
 remaining obstruction cannot keep both its internal diameter and its
 witness excess bounded.
 
+## Warning 8.4a': Terminal gaps do not yield a sparse-prefix proof
+
+The terminal-gap condition alone cannot prove that a sufficiently sparse
+deletion sequence avoids all collective late-bad sets. The location of the
+gap is controlled by the witness, and in a sparse basis it may simply fall
+inside an ordinary gap of \(A\), or isolate a later deleted point.
+
+A finite model already shows the limitation. Let
+\[
+4\le f<g,\qquad g>2f,
+\]
+and put
+\[
+A_0=\{1,f-1,f,g-1,g\},\qquad F=\{f,g\},\qquad C=A_0\setminus F.
+\]
+For
+\[
+w=f+g
+\]
+we have
+\[
+w\notin3C.
+\]
+Indeed the only retained elements are \(1,f-1,g-1\), and a direct list of
+their three-fold sums gives
+\[
+3,\ f+1,\ g+1,\ 2f-1,\ f+g-1,\ 2g-1,\ 3f-3,\ 2f+g-3,\ f+2g-3,\ 3g-3,
+\]
+none of which is \(f+g\) under the displayed inequalities. Restoring either
+deleted point repairs the hole:
+\[
+w=f+1+(g-1)=g+1+(f-1).
+\]
+With \(m_0=1\) and \(N_0=2\), the terminal interval from Lemma 8.4a is
+\[
+(w-f-1,\ w-2]=(g-1,\ f+g-2],
+\]
+and its only point of \(A_0\) is the deleted point \(g\).
+
+Thus even a two-point active collective hole can satisfy the terminal
+retained gap by placing one deleted point in an otherwise empty terminal
+window. A final proof must use the stronger shifted two-sum vertex-cover
+and low-count row information from Lemma 10.1 and Corollary 3.4t, not only
+the terminal gap.
+
 ## Warning 8.5: Bounded-width barriers need not have one fixed size
 
 In the bounded-width version of Lemma 8.4, it is tempting to try to pass to

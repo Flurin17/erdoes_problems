@@ -1040,6 +1040,25 @@ So a bounded-size barrier sequence with \(\min F\to\infty\) must have
 \(w-\min F\to\infty\). In particular, bounded-size late-bad barriers cannot
 have both bounded internal diameter and bounded witness excess.
 
+Terminal gaps do not by themselves give a sparse-prefix proof. In the
+finite model
+\[
+A_0=\{1,f-1,f,g-1,g\},\qquad F=\{f,g\},\qquad w=f+g
+\]
+with \(4\le f<g\) and \(g>2f\), one has
+\[
+w\notin3(A_0\setminus F),
+\]
+but restoring either \(f\) or \(g\) repairs the hole:
+\[
+w=f+1+(g-1)=g+1+(f-1).
+\]
+The terminal interval from Lemma 8.4a contains only the later deleted point
+\(g\). Thus a rapidly growing candidate deletion can still have pair holes
+whose terminal gaps are just ordinary sparse gaps of \(A\). Any proof must
+use the shifted two-sum cover/private-color structure, not terminal gaps
+alone.
+
 Example 3.0a shows why the threshold issue is real. In the benign basis
 \[
 A=\{1\}\cup2\mathbb N,
