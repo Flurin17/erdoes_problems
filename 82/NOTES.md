@@ -1195,6 +1195,12 @@ source of growth beyond Ramsey.
   `q=7` through `5000` generated vectors with up to four classes, while the
   strict `q+1` cap fails again for `q=6` on `K_{32,2,1}`.  This supports, but
   does not prove, using small excess rather than terminal size.
+- 2026-05-31: Added an explicit `q+2` repair for the strict-terminal
+  obstruction family.  In `K_{q^2-q+2,2,1}`, take one part with `q+1`
+  vertices from the large class plus the singleton, one `(2,2)` part using the
+  two medium-class vertices, and split the remaining large-class vertices
+  into at most `q-2` independent chunks of size at most `q+2`.  This proves
+  that this obstruction only forces excess `2`, not growing excess.
 - 2026-05-31: Extended `color_modular_partition.py` with a size-excess
   penalty and replaced its scoring path by adjacency bitmasks instead of the
   `2^n` subset precomputation.  This makes capped modular coloring local

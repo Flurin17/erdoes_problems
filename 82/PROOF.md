@@ -726,6 +726,40 @@ python3 EXPERIMENTS/multipartite_modular.py --target-modulus 5 --cap 5 --max-bin
 
 and returns `min_bins=NA`.
 
+## Proposition: The Terminal Obstruction Has A `q+2` Repair
+
+For every `q>=5`, the graph `K_{q^2-q+2,2,1}` from the previous proposition
+can be partitioned into at most `q` induced `q`-modular subgraphs, each of
+order at most `q+2`.
+
+Proof.  Use the same multipartite classes `A,B,C`, with
+`|A|=q^2-q+2`, `|B|=2`, and `|C|=1`.
+
+First form one part using the vertex of `C` and `q+1` vertices of `A`.  Its
+positive class counts are `(q+1,1)`, which are congruent modulo `q`, and its
+order is `q+2`.
+
+Second form one part using the two vertices of `B` and two further vertices of
+`A`.  Its positive class counts are `(2,2)`, so it is `q`-modular and has
+order `4`.
+
+There remain
+
+```text
+(q^2-q+2) - (q+1) - 2 = q^2-2q-1
+```
+
+vertices of `A`.  Partition these remaining vertices into `A`-only chunks of
+size at most `q+2`.  Every such chunk is independent and hence `q`-modular.
+The number of these chunks is at most `q-2`, because
+
+```text
+q^2-2q-1 <= (q-2)(q+2).
+```
+
+Thus the total number of parts is at most `2+(q-2)=q`, and all parts have
+order at most `q+2`.  QED.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with
