@@ -159,19 +159,6 @@ def kpoint_float(point: exact.KPoint) -> tuple[float, float]:
     return kquad_float(point[0]), kquad_float(point[1])
 
 
-def triangle_contains_point(point: tuple[float, float], polygon: list[tuple[float, float]]) -> bool:
-    signs = []
-    for index in range(3):
-        start = polygon[index]
-        end = polygon[(index + 1) % 3]
-        signs.append(
-            (end[0] - start[0]) * (point[1] - start[1])
-            - (end[1] - start[1]) * (point[0] - start[0])
-        )
-    eps = 1e-7
-    return all(value >= -eps for value in signs) or all(value <= eps for value in signs)
-
-
 def angle_values(sides: tuple[int, int, int]) -> dict[str, float]:
     a, b, c = sides
     return {
@@ -214,23 +201,6 @@ def sector_fillable(left_label: str, right_label: str, combos: tuple[Counter[str
     return any(trail_possible(combo, left_label, right_label) for combo in combos)
 
 
-def sector_midpoint(
-    vertex: exact.KPoint,
-    left_vector: exact.KPoint,
-    right_vector: exact.KPoint,
-    radius: float,
-) -> tuple[float, float]:
-    vx, vy = kpoint_float(vertex)
-    left_x, left_y = kpoint_float(left_vector)
-    right_x, right_y = kpoint_float(right_vector)
-    left_angle = math.atan2(left_y, left_x)
-    right_angle = math.atan2(right_y, right_x)
-    if right_angle <= left_angle:
-        right_angle += 2 * math.pi
-    middle = (left_angle + right_angle) / 2
-    return vx + radius * math.cos(middle), vy + radius * math.sin(middle)
-
-
 def ccw_sector_angle(left_vector: exact.KPoint, right_vector: exact.KPoint) -> float:
     left_x, left_y = kpoint_float(left_vector)
     right_x, right_y = kpoint_float(right_vector)
@@ -241,13 +211,54 @@ def ccw_sector_angle(left_vector: exact.KPoint, right_vector: exact.KPoint) -> f
     return right_angle - left_angle
 
 
-def min_segment_length(segments: list[exact.KSegment]) -> float:
-    lengths = []
-    for start, end in segments:
-        vector = exact.kpsub(end, start)
-        x_value, y_value = kpoint_float(vector)
-        lengths.append(math.hypot(x_value, y_value))
-    return min(lengths) if lengths else 1.0
+def kpoint_add(left: exact.KPoint, right: exact.KPoint) -> exact.KPoint:
+    return exact.kadd(left[0], right[0]), exact.kadd(left[1], right[1])
+
+
+def direction_sector_index(
+    direction: exact.KPoint,
+    ordered_half_edges: tuple[tuple[str, exact.KPoint], ...],
+) -> int | None:
+    for index, (_left_label, left_vector) in enumerate(ordered_half_edges):
+        _right_label, right_vector = ordered_half_edges[(index + 1) % len(ordered_half_edges)]
+        left_cmp = compare_incident_half_edges(("", left_vector), ("", direction))
+        right_cmp = compare_incident_half_edges(("", direction), ("", right_vector))
+        if index + 1 < len(ordered_half_edges):
+            if left_cmp < 0 and right_cmp < 0:
+                return index
+        elif left_cmp < 0 or right_cmp < 0:
+            return index
+    return None
+
+
+def occupied_sector_indices(
+    vertex: exact.KPoint,
+    ordered_half_edges: tuple[tuple[str, exact.KPoint], ...],
+    unique: tuple[exact.IntegerQuadraticTile, ...],
+) -> set[int]:
+    occupied: set[int] = set()
+    for tile in unique:
+        polygon = tile.polygon
+        for index, point in enumerate(polygon):
+            if point == vertex:
+                previous_vector = exact.kpsub(polygon[index - 1], vertex)
+                next_vector = exact.kpsub(polygon[(index + 1) % 3], vertex)
+                interior_direction = kpoint_add(previous_vector, next_vector)
+                sector_index = direction_sector_index(interior_direction, ordered_half_edges)
+                if sector_index is not None:
+                    occupied.add(sector_index)
+        for index in range(3):
+            start = polygon[index]
+            end = polygon[(index + 1) % 3]
+            if vertex == start or vertex == end:
+                continue
+            if exact.kpoint_on_segment(vertex, start, end):
+                opposite = polygon[(index + 2) % 3]
+                interior_direction = exact.kpsub(opposite, vertex)
+                sector_index = direction_sector_index(interior_direction, ordered_half_edges)
+                if sector_index is not None:
+                    occupied.add(sector_index)
+    return occupied
 
 
 def pinch_sector_profile(
@@ -259,8 +270,6 @@ def pinch_sector_profile(
     for (start, end), label in residual_labels.items():
         incidences[start].append((label, exact.kpsub(end, start)))
         incidences[end].append((label, exact.kpsub(start, end)))
-    float_polygons = [[kpoint_float(point) for point in tile.polygon] for tile in unique]
-    radius = min_segment_length(list(residual_labels)) * 1e-5
     signatures: Counter[str] = Counter()
     residual_sectors = 0
     unfillable = 0
@@ -268,10 +277,10 @@ def pinch_sector_profile(
         if len(half_edges) == 2:
             continue
         ordered = tuple(sorted(half_edges, key=cmp_to_key(compare_incident_half_edges)))
+        occupied = occupied_sector_indices(vertex, ordered, unique)
         for index, (left_label, left_vector) in enumerate(ordered):
             right_label, right_vector = ordered[(index + 1) % len(ordered)]
-            midpoint = sector_midpoint(vertex, left_vector, right_vector, radius)
-            if any(triangle_contains_point(midpoint, polygon) for polygon in float_polygons):
+            if index in occupied:
                 continue
             residual_sectors += 1
             sector_angle = ccw_sector_angle(left_vector, right_vector)
