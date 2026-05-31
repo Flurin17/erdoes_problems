@@ -954,7 +954,7 @@ theorem with at most `q(log q)^C` flexible `2q`-modular parts, combined with
 the `q`-modular host theorem above, would also prove Problem 82.
 
 The disconnected case of such a partition theorem can be reduced to connected
-components at the cost of the unavoidable residue slots.
+components at the cost of residue slots.
 
 **Lemma: Connected Flexible Partitions Suffice For Coarse Lifts.**  Suppose
 that every connected `q`-modular graph can be partitioned into at most `B(q)`
@@ -975,122 +975,116 @@ partition theorem, and a connected `polylog(q)`-part theorem gives the
 `q polylog(q)` coarse lift allowed above.  The disjoint-union obstructions to
 fixed slots do not attack this connected formulation.
 
-In fact, the connected polylogarithmic theorem would by itself prove the full
-problem; the separate terminal host theorem is not needed if one uses the
-component bound available inside a counterexample.
+For flexible part count, a complement trick removes even this residue-slot
+loss.
 
-## Conditional Proposition: Connected Polylog Lifts Suffice
+**Lemma: Complement Reduction For Flexible Lifts.**  Fix moduli `q` and `M`.
+If every connected `q`-modular graph has a partition into at most `B` induced
+`M`-modular subgraphs, then every `q`-modular graph has such a partition.
+Likewise, if every connected `q`-modular graph on `N` vertices contains an
+induced `M`-modular subgraph on at least `N/B` vertices, then every
+`q`-modular graph has such a witness.
 
-Suppose there are constants `K,C` such that, for every dyadic `q=2^i`, every
-connected `q`-modular graph can be partitioned into at most
+Proof.  The assertions are trivial for connected graphs.  Let `G` be a
+disconnected `q`-modular graph on at least two vertices.  Then `complement(G)`
+is connected, and its degrees are
 
 ```text
-B(q) <= K (log_2(2q))^C
+|V(G)|-1-deg_G(v),
 ```
 
-induced `2q`-modular subgraphs.  Then
+so it is also `q`-modular.  Apply the connected hypothesis to
+`complement(G)`.  If `S` is an induced `M`-modular subgraph in the complement,
+then `G[S]` is also `M`-modular, since complementing an induced graph changes
+every internal degree from `d` to `|S|-1-d`.  The same argument transfers every
+part of an `M`-modular partition of `complement(G)` back to an `M`-modular part
+of `G`.  The one-vertex case is immediate.  QED.
+
+Thus a connected flexible theorem is equivalent to the corresponding theorem
+for all graphs.  This makes the large-witness version the cleanest remaining
+target.
+
+## Conditional Proposition: Connected Polylog Witnesses Suffice Strongly
+
+Suppose there are constants `K>=1` and `C` such that, for every dyadic
+`q=2^i`, every connected `q`-modular graph `H` contains an induced
+`2q`-modular subgraph on at least
 
 ```text
-F(n) >= (log_2 n) log_2 log_2 n
+|V(H)| / (K (log_2(2q))^C)
 ```
 
-for all sufficiently large `n`.  In particular, `F(n)/log n -> infinity`.
-
-Proof.  Put `L=log_2 n` and
+vertices.  Then there is a constant `c>0` such that, for all sufficiently large
+`n`,
 
 ```text
-R = floor(L log_2 L).
+F(n) >= 2^{c log_2 n / log_2 log_2 n}.
 ```
 
-Assume for contradiction that an `n`-vertex graph `G` has no regular induced
-subgraph of order at least `R`.  Then every induced subgraph of `G` has fewer
-than `R` connected components, because choosing one vertex from each component
-would give an independent set.
+In particular, `F(n)/log n -> infinity`.
 
-We construct connected dyadic-modular induced subgraphs `H_i` with moduli
-`q_i=2^i`.  Gallai's parity lemma gives a `2`-modular induced subgraph
-`W_1` on at least `n/2` vertices.  If `W_1` has at least `R` components, it
-contains an independent set of order `R`, contradiction.  Otherwise one
-component `H_1` has size
+Proof.  By the complement reduction, the same large-witness statement holds
+for every `q`-modular graph, connected or not.  Put `L=log_2 n`, and choose a
+constant `c>0` small enough in terms of `K,C`.  Starting from Gallai's
+`2`-modular induced subgraph on at least `n/2` vertices, recursively choose an
+induced `q_{i+1}`-modular subgraph of size at least
 
 ```text
-m_1=|H_1| >= n/(2R).
+m_i / (K(i+1)^C),       q_i=2^i.
 ```
 
-Since components of a modular disjoint union inherit the same degree residue,
-`H_1` is connected and `2`-modular.
-
-Inductively, suppose `H_i` is connected and `q_i`-modular, with size
-`m_i`.  If `m_i<=q_i+1`, then Lemma 2 makes `H_i` regular; whenever
-`m_i>=R` this contradicts the choice of `G`.  If `m_i>q_i+1`, apply the
-connected lift hypothesis to partition `H_i` into at most `B(q_i)` induced
-`q_{i+1}`-modular subgraphs.  Each of these subgraphs has fewer than `R`
-connected components, and each component is again `q_{i+1}`-modular.  Choosing
-the largest component among all these pieces gives a connected
-`q_{i+1}`-modular induced subgraph `H_{i+1}` with
+After `t` dyadic steps this gives
 
 ```text
-m_{i+1} >= m_i/(R B(q_i)).
+m_t >= n / (2 K^t ((t+1)!)^C).
 ```
 
 Let
 
 ```text
-s = ceil(4 log_2 R).
+T = floor(c L / log_2 L).
 ```
 
-For `i<s`, the product of the losses is
+By Stirling's estimate,
 
 ```text
-R^s prod_{i<s} B(q_i)
-  <= 2^{O((log R)^2)}.
+log_2(2 K^T ((T+1)!)^C) = O(T log_2 T) <= L/3
 ```
 
-Since `R=L log_2 L`, we have `(log R)^2=o(L)`.  Hence
+for `c` sufficiently small and all large `n`.  Hence
 
 ```text
-m_s >= n / 2^{O((log R)^2)} > R
+m_T >= 2^{2L/3},
 ```
 
-for all sufficiently large `n`, provided the construction reaches time `s`.
-If instead the construction enters the terminal case `m_i<=q_i+1` for some
-`i<s`, the analogous lower bound up to time `i` is even larger, so
-`m_i>R`; Lemma 2 then already gives the desired contradiction.  Thus, absent a
-contradiction, the construction reaches time `s` with `m_s>R`.
+while `q_T=2^T=2^{o(L)}`.  The same lower bound, with a smaller denominator,
+holds at every earlier index `i<=T`; hence `m_i>q_i+1` throughout this range.
+Therefore the process has not yet entered the terminal range `m_i<=q_i+1` by
+time `T`.
 
-Also, for every `i>=s`,
+Let `t>T` be the first index with `m_t<=q_t+1`; such an index exists because
+eventually `q_t>n`.  Then Lemma 2 makes the `q_t`-modular graph on `m_t`
+vertices regular.  Since `m_{t-1}>q_{t-1}+1`, the last lifting step also gives
 
 ```text
-q_i = 2^i > R^2 B(q_i)
+m_t >= q_{t-1} / (K(t+1)^C)
+    >= 2^T / (K(t+1)^C).
 ```
 
-once `n` is large.  Indeed this is true at `i=s`, where
-`q_s>=R^4` while `B(q_s)=O((log R)^C)`, and the ratio
-`2^i/(log_2(2q_i))^C` is increasing for all large `i`.
-
-We now prove by induction that, for every `i>=s` reached by the construction,
-`m_i>R` unless a contradiction has already occurred.  This holds at `i=s`.  If
-`m_i<=q_i+1`, then `H_i` is a regular induced subgraph of order at least `R`,
-contradiction.  Otherwise `m_i>q_i+1`, and the next step satisfies
+Here `t<=L+1` at the first terminal time, because `q_{L+1}>n`.  Thus
 
 ```text
-m_{i+1} >= m_i/(R B(q_i))
-        > q_i/(R B(q_i))
-        > R.
+m_t >= 2^{cL/log_2 L} / poly(L)
+     >= 2^{c' L/log_2 L}
 ```
 
-Thus the construction can never drop below size `R` after time `s` without
-first producing the forbidden regular induced subgraph.
+for a smaller positive constant `c'`.  This regular induced subgraph has the
+claimed order.  QED.
 
-Finally take `i> L`.  Then `q_i=2^i>n>=m_i`, so `m_i<=q_i+1`.  The preceding
-paragraph gives `m_i>R`, and Lemma 2 makes `H_i` regular, contradiction.
-Therefore no such graph `G` exists, and every sufficiently large `n`-vertex
-graph contains a regular induced subgraph of order at least
-`(log_2 n)log_2 log_2 n`.  QED.
-
-This proposition makes the connected lift theorem the cleanest remaining
-target.  The earlier terminal host theorem is still useful as a separate route,
-but a connected `polylog(q)`-part dyadic lift would already settle Problem 82.
+The partition form is a sufficient way to prove the witness hypothesis: if
+every connected `q`-modular graph has a `polylog(q)`-part induced
+`2q`-modular partition, then one part has the required size, and the
+conditional proposition applies.
 
 The connected formulation still cannot demand too few parts.  The first
 dyadic lift already has a connected example requiring four flexible parts.
@@ -2789,6 +2783,26 @@ QED.
 This obstruction is useful calibration: the dyadic route cannot hope for a
 three-part theorem even at the second lift.  It does not contradict the
 currently plausible four-part source-residue version of `4 -> 8`.
+
+By the complement reduction, this obstruction can be made connected.
+
+**Corollary: Connected Three-Part `4 -> 8` Lifts Are False.**  There is a
+connected `4`-modular graph that cannot be partitioned into three induced
+`8`-modular subgraphs.
+
+Proof.  Let `H` be the disconnected graph from Computational Proposition 4E.4,
+the disjoint union of the five listed `10`-vertex graphs.  It is `4`-modular
+with source residue `2 mod 4`, and has no three-part induced `8`-modular
+partition.  Its complement is connected and is again `4`-modular, with source
+residue
+
+```text
+49-2 congruent 3 mod 4,
+```
+
+because `H` has `50` vertices.  If `complement(H)` had a three-part
+`8`-modular partition, complementing each induced part would give a three-part
+`8`-modular partition of `H`, contradiction.  QED.
 
 ## Lemma 4F: Self-Labelled Modular Colorings
 

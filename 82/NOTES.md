@@ -1676,3 +1676,18 @@ source of growth beyond Ramsey.
   forbidden regular subgraph.  With `R=(log n)log log n`, the initial
   `O(log R)` setup losses are `2^{o(log n)}`, so the argument starts with
   component size still above `R`.
+- 2026-05-31: Improved the core reduction using complements.  If a flexible
+  partition or large-witness theorem holds for connected `q`-modular graphs,
+  it holds for all `q`-modular graphs: the complement of a disconnected graph
+  is connected, remains `q`-modular, and induced modularity transfers back
+  through complement.  Therefore the large-witness target alone would give the
+  stronger conditional bound
+  `F(n) >= 2^{c log_2 n / log_2 log_2 n}`.  The remaining central conjecture is:
+  every connected dyadic `q`-modular graph has an induced `2q`-modular
+  subgraph of size `|V|/polylog(q)`.  A polylog-part partition theorem is only
+  one sufficient way to prove this witness conjecture.
+- 2026-05-31: The existing disconnected three-part `4 -> 8` obstruction also
+  yields a connected obstruction by complementing the five-component
+  certificate from Proposition 4E.4.  Thus connected three-part `4 -> 8` is
+  false; four parts remain the calibrated constant target for low dyadic
+  lifts.
