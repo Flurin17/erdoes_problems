@@ -112,6 +112,13 @@ def analyze(name: str, s_list: list[int], f_list: list[int], w: int, threshold: 
             for row in sorted(bounded_rows)
         ]
         print(f"{d:>3}: repairs={repairs} rows={rows}")
+        unique = [row for row in bounded_rows if row_branch(s, f_set, d, row) == "unique"]
+        overlap_summary = {
+            f: sorted(row for row in bounded_rows if row + d - f in s)
+            for f in sorted(f_set - {d})
+        }
+        overlap_summary = {f: rows for f, rows in overlap_summary.items() if rows}
+        print(f"     branch unique={sorted(unique)} overlaps={overlap_summary}")
 
 
 def main() -> None:

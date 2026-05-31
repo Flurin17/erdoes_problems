@@ -2338,6 +2338,86 @@ must rule out both the unpinned unique-row case and the moving shifted-overlap
 case, or show that one of them forces the recurrent certificates from
 Corollary 2.3c.
 
+## Corollary 3.4t: The remaining star obstruction has two branches
+
+In the remaining \(k=2\) counterexample case, for every finite
+\[
+E\supset E_*
+\]
+there are constants \(q_E,\eta_E>0\) and arbitrarily large \(w\) for which
+one of the following alternatives holds.
+
+**Unique-gate branch.** There are
+\[
+d\in A\setminus E,\qquad t=w-d,
+\]
+and a set
+\[
+S\subset A\setminus E,\qquad |S|\ge\eta_E A(w),
+\]
+such that
+\[
+t-S\subset A\setminus E
+\]
+and
+\[
+r_{2,A}(s+d)=1\qquad(s\in S). \tag{1}
+\]
+
+**Shifted-overlap branch.** There are distinct
+\[
+d,f\in A\setminus E,\qquad t=w-d,
+\]
+and a set
+\[
+S\subset A\setminus E,\qquad |S|\ge\eta_E A(w),
+\]
+such that
+\[
+t-S\subset A\setminus E
+\]
+and
+\[
+S+d-f\subset A. \tag{2}
+\]
+Equivalently, \(S\) is simultaneously reflected at \(t\) and shifted by the
+moving difference \(d-f\) into \(A\).
+
+Proof. Apply Corollary 3.4i with protected core \(E\). We get a bounded
+minimal hole \(F\), \(|F|\le q_E'\), a gate \(d\in F\), and
+\[
+\gg_E A(w)
+\]
+retained star rows
+\[
+S_0=\{a\in A\setminus F:\ w-d-a\in A\setminus F\}.
+\]
+Discard the \(O_E(1)\) rows for which \(a\in E\) or \(w-d-a\in E\). For
+large \(w\), a positive proportion remains in \(A\setminus E\); call it
+\(S_1\).
+
+Corollary 3.4s applied to the rows in \(S_1\) gives two possibilities. If
+at least half of \(S_1\) is unique-private for the gate \(d\), take that
+subpacket as \(S\), giving (1). Otherwise, since
+\[
+|F\setminus\{d\}|\le q_E'-1,
+\]
+some \(f\in F\setminus\{d\}\) has
+\[
+a+d-f\in A
+\]
+for a positive proportion of rows \(a\in S_1\). Taking those rows as \(S\)
+gives (2). Adjusting the constants gives \(q_E,\eta_E\). \(\square\)
+
+The shifted-overlap branch is the first place where the star normal form
+produces a positive-density three-point pattern
+\[
+s,\quad s+(d-f),\quad t-s
+\]
+inside \(A\). The unique-gate branch is the opposite extreme: the reflected
+packet is large, but every row \(s+d\) is represented only by the intended
+gate pair.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -7473,6 +7553,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   packet \(S\) with only \(O(|S|)\) solutions to \(x+y=s+d\) inside \(S\).
 * Corollary 3.4s splits star rows into unique-private rows for the moving
   gate or shifted-overlap rows coming from another deleted vertex.
+* Corollary 3.4t turns this into the current two-branch normal form:
+  remaining counterexamples must have either large unique-gate reflected
+  packets or large shifted-overlap reflected packets.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

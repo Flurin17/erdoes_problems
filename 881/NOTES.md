@@ -584,6 +584,15 @@ a+d-f\in A.
 With bounded \(|F|\), a positive proportion of the rows fall into one of
 these two alternatives. This isolates the next branches: unpinned unique
 rows versus moving shifted-overlap packets.
+Corollary 3.4t packages this as an either-or normal form in every remaining
+counterexample. Outside every finite core, arbitrarily far out, either
+there is a large reflected packet \(S\) whose rows \(s+d\) are uniquely
+represented by \(\{s,d\}\), or there is a large packet with both
+\[
+t-S\subset A,\qquad S+(d-f)\subset A
+\]
+for two fresh deleted elements \(d\ne f\). The latter branch produces many
+three-point patterns \(s,s+d-f,t-s\) in \(A\).
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
