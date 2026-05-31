@@ -151,6 +151,33 @@ of an induced cycle of length `ell` is `(ell-3)`-regular.  Since regularity of
 an induced subgraph is preserved under graph complementation, either case
 gives a regular induced subgraph on `ell >= k` vertices, a contradiction.  QED.
 
+## Lemma 1A: Perfect Graphs Are Polynomially Easy
+
+If `G` is a perfect graph on `n` vertices, then
+
+```text
+reg(G) >= sqrt(n).
+```
+
+Consequently, a graph with no regular induced subgraph of order at least `k`
+and with `n>=k^2` is not perfect.
+
+Proof.  In a perfect graph, `chi(G)=omega(G)`.  Coloring `G` with
+`omega(G)` independent sets gives
+
+```text
+n <= alpha(G) omega(G).
+```
+
+Therefore `max(alpha(G),omega(G)) >= sqrt(n)`.  A clique or independent set
+of this order is a regular induced subgraph.  QED.
+
+Together with Lemma 1 and the strong perfect graph theorem, this says that a
+large counterexample must contain odd holes or odd antiholes, but all such
+holes and antiholes have length less than `k`.  The obstruction is therefore
+not imperfection itself, but controlling graphs whose imperfect witnesses are
+present only below the target scale.
+
 ## Lemma 2: Modular Terminal Criterion
 
 Let `q` be a positive integer and let `S` be a vertex set with `|S| <= q`.  If

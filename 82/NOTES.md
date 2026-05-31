@@ -1100,3 +1100,8 @@ source of growth beyond Ramsey.
   class sizes are congruent modulo `q`; grouping whole classes by their two
   possible residues modulo `2q` gives at most two induced `2q`-modular parts.
   Complements give the same conclusion for disjoint unions of cliques.
+- 2026-05-31: Added the perfect-graph reduction.  If `G` is perfect, then
+  `n<=alpha(G)omega(G)`, so `G` has a clique or independent set, hence a
+  regular induced subgraph, of order at least `sqrt(n)`.  Thus any
+  exponential-scale counterexample is non-perfect; by SPGT it has odd holes or
+  antiholes, but Lemma 1 already restricts all of them to length `<k`.
