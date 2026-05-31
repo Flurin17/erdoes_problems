@@ -251,7 +251,9 @@ Important distinction: "positive square class" and "smallest representative" are
    boundary order plus side-difference nonfit obstruction, with `240` requiring
    a separate resonant `a/c` overhang endpoint argument because `c-a=12=3a`.
    Separate `gamma=2alpha` survivors in this range still require the
-   no-overhang fan gap or another obstruction.
+   no-overhang fan gap or another obstruction; the active `100..250` gamma
+   survivor values are `132`, `135`, `156`, `171`, `175`, `176`, `189`, `198`,
+   `204`, `207`, `224`, `228`, and `240`.
 
 ## Current Diophantine Status for `n=19`
 

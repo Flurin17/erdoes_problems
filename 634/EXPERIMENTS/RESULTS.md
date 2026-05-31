@@ -868,6 +868,17 @@ This is a branch closure, not a whole-count classification. Separate
 `gamma=2alpha` boundary-arithmetic survivors remain in the dashboard until the
 no-overhang fan gap is closed or another obstruction is found.
 
+With the corrected, proof-safe `gamma=2alpha` filters, the `100..250` open scan
+has active encoded `gamma=2alpha` survivors at:
+
+```text
+132, 135, 156, 171, 175, 176, 189, 198, 204, 207, 224, 228, 240.
+```
+
+The first open rows with no currently encoded survivor remain
+`102`, `105`, `110`, `111`, `114`, `115`, `118`, `119`, `120`, `123`, and
+`124`.
+
 ## Zhang Constructive Families
 
 Command:

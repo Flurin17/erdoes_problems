@@ -296,8 +296,11 @@ The boundary-order/nonfit obstruction now removes that branch for `132`, `156`,
 `48` regression case. The resonant `240` branch survivor, where `c-a=12=3a`,
 is removed by a separate overhang endpoint argument. Several values in this
 range remain open through exact equilateral/source-reduction completeness gaps
-and separate `gamma=2alpha` boundary-arithmetic survivors; this branch
-refinement is not a whole-count classification.
+and separate `gamma=2alpha` boundary-arithmetic survivors. After the
+proof-safe gamma filters, the active `gamma=2alpha` survivor values in
+`100..250` are `132`, `135`, `156`, `171`, `175`, `176`, `189`, `198`, `204`,
+`207`, `224`, `228`, and `240`. This branch refinement is not a whole-count
+classification.
 
 ## Beeson IV Base-Corner Audit
 
