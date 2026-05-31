@@ -868,3 +868,15 @@ privacy, not single-integer privacy. The unresolved lifting problem is to
 force an individual representative of residue \(0,1\), or \(3\) to be used
 in a witness while preserving order-3 coverage with the booster and the
 positive-summand buffer from Lemma 13.1d.
+
+The stage search has one nontrivial finite lift:
+\[
+C_0=\{1,3,20,21\},\quad f=5,\quad C_1=C_0\cup\{30,31\}.
+\]
+For \(A_1=C_1\cup\{5\}\), three-sums cover through \(47\), and
+\[
+37\notin4(A_1\setminus\{30\}),\qquad
+38\notin4(A_1\setminus\{31\}).
+\]
+The search then stalls on the next greedy stage, so this is evidence of
+local traction rather than an infinite construction.

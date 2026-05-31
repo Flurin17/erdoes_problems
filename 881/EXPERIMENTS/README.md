@@ -106,3 +106,9 @@ booster retained. It finds the \(k=3\) pattern
 leaves a four-sum residue hole even with \(f\) available. This is only a
 residue seed; an integer lift must still force single-integer, not
 whole-residue-class, privacy.
+
+`robust_booster_stage_search.py` tries to lift that residue seed to finite
+integer stages with fixed booster \(5\) and mutable elements in residues
+\(0,1,3\pmod {10}\). It finds one buffered stage
+\(\{1,3,20,21\}\to\{1,3,20,21,30,31\}\), with witnesses \(37\) and \(38\)
+after deleting \(30\) and \(31\), then stalls in the default greedy search.

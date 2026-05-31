@@ -2974,6 +2974,28 @@ The script `EXPERIMENTS/robust_booster_residue.py` records this search. It
 is a better finite seed than the invalid affine booster attempt, but the
 integer lifting problem remains open in this workspace.
 
+The companion script `EXPERIMENTS/robust_booster_stage_search.py` searches
+for finite integer stages using this residue pattern. It finds the local
+buffered extension
+\[
+C_0=\{1,3,20,21\},\quad f=5,\quad
+C_1=C_0\cup\{30,31\}.
+\]
+With
+\[
+A_1=C_1\cup\{5\},
+\]
+three-fold sums cover through \(47\), and the new elements have robust
+four-fold witnesses
+\[
+37\notin4(A_1\setminus\{30\}),\qquad
+38\notin4(A_1\setminus\{31\}).
+\]
+The declared endpoint can be \(38\), leaving the two-point buffer required
+for an order-3 staged construction. The default greedy search then stalls
+at the next stage. Thus the residue pattern has nontrivial finite
+integer traction, but not yet an iterable construction.
+
 ## Dependency Graph
 
 * Theorem 1 is independent and resolves \(k=1\).
