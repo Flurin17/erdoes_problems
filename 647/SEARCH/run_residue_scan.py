@@ -147,7 +147,11 @@ def parse_summary(path: Path) -> dict[str, object]:
             fails = result["fails"]
             assert isinstance(fails, collections.Counter)
             for part in line.split()[1:]:
-                k, value = part.split(":")
+                if ":" not in part:
+                    continue
+                k, value = part.split(":", 1)
+                if not k or not value:
+                    continue
                 fails[int(k)] += int(value)
     return result
 
