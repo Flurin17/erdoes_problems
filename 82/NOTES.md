@@ -1046,3 +1046,10 @@ source of growth beyond Ramsey.
   for `q=3`, mask `133782443`, with no three-part partition into induced
   `0 mod 3` subgraphs.  Thus a one-shot zero-residue modular partition theorem
   is also false; residue flexibility remains essential.
+- 2026-05-31: Strengthened the homogeneous trace amplification certificate.
+  If `A` is independent, all vertices of `B` have the same trace `T subset A`,
+  and `G[B]` is `r`-regular on `b` vertices with `b-r<=|T|`, then adjoining
+  `b-r` vertices of `T` gives a `b`-regular induced subgraph on `2b-r`
+  vertices.  This can amplify dense or medium-density recursive witnesses, but
+  high-degree witnesses only add a few vertices; the trace route still needs
+  degree control, not just order control, inside trace classes.

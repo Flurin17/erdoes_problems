@@ -2033,6 +2033,48 @@ Ramsey's theorem supplies only `Theta(log n)` vertices in the inverse regime
 `n=2^{o(k)}`.  A trace-amplification proof would therefore need to combine
 many trace classes, not just one large class.
 
+## Lemma 14A.1: Regular Trace-Class Amplification
+
+Let `A` be an independent set in `G`, let `T subset A`, and let
+
+```text
+C_T = {v in V(G)\A : N_G(v) cap A = T}.
+```
+
+Suppose `B subset C_T` induces an `r`-regular graph on `b` vertices.  If
+
+```text
+b-r <= |T|,
+```
+
+then `G` contains a regular induced subgraph on `2b-r` vertices.
+
+Proof.  Choose `X subset T` with `|X|=b-r`.  The set `X` is independent,
+because `A` is independent, and every vertex of `B` is adjacent to every
+vertex of `X` by the definition of `C_T`.  Therefore every vertex of `B` has
+degree
+
+```text
+r + |X| = r + b-r = b
+```
+
+inside `G[B union X]`, while every vertex of `X` has degree `b`, all of it
+going to `B`.  Thus `G[B union X]` is `b`-regular on
+
+```text
+b+|X| = 2b-r
+```
+
+vertices.  QED.
+
+Lemma 14A is the special case `r=0`, with either `X subset T` giving a
+complete bipartite graph or `X subset A\T` giving an independent set.  The
+new form shows what extra information a trace recursion would need: a large
+regular witness inside a trace class is useful when its internal degree is
+not too close to its order.  A high-degree witness only adds a few vertices
+from `T`, so this lemma still does not close the trace route without degree
+control for the regular witnesses found recursively.
+
 ## Lemma 14B: Maximal Independent Trace Ramsey Bound
 
 Let `G` be a graph with no regular induced subgraph of order at least `k`,
