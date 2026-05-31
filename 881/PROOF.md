@@ -10373,6 +10373,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   inside those interval blocks: they are threshold cuts of size at least
   half the high block, so the interval gadget cannot by itself supply
   fixed-rank or Schreier-type coding.
+* Warning 10.3i adds that interval threshold cuts are not deletion barriers
+  by themselves: disjoint block cuts can be avoided by an infinite selector,
+  so a counterexample must still code a genuine cross-block finite-set
+  barrier on individual elements.
 * Warning 10.3c gives an abstract Schreier-barrier representation model
   showing why compactness, Zorn, finite-prefix, and independent random
   deletion arguments need genuine additive input.
@@ -10396,6 +10400,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   a Schreier barrier with frozen witnesses, coverage buffer,
   inclusion-minimal activity, and shifted two-sum domination would produce a
   \(k=2\) counterexample.
+* Variant 13.1b-enum notes that the Schreier barrier may use an arbitrary
+  enumeration of a cofinite protected set, not necessarily the numerical
+  order; this leaves delayed promotion of fillers as a possible but still
+  arithmetically constrained route.
 * Lemma 13.1f extracts finite forbidden windows for stage witnesses. In the
   P5 Schreier seed, the new pair edge has only one low-excess escape, and
   the full P6 failure comes from simultaneous higher-rank edge closure. The
@@ -10405,9 +10413,16 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   finite stage holes.
 * Lemma 13.1h records the retained-endpoint poison interval that kills
   whole ranges of pair-edge witness candidates.
+* Corollary 13.1h.1 gives the pointwise promoted-filler version: a witness
+  for a pair edge \(\{a,q\}\) must avoid \(p+2C\) for every retained old
+  endpoint \(p\). The P6 protected-filler diagnostic verifies this closure
+  cost in the first pair-edge escape.
 * Lemma 13.1i records the low-excess private-mirror closure: pair holes
   force active rows to choose endpoint colors, and the lower endpoint can
   generate new retained mirrors above the moving endpoint.
+* The P6 enumeration-order diagnostic shows that delaying only the fillers
+  \(40,43,44\) does not rescue the finite P6 escape: all orders of
+  \(\{10,15,18,19,30,38\}\) still have failed edges involving \(38\).
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).
@@ -10433,6 +10448,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   isolating the remaining lift problem: private residue holes must be made
   private for individual integers without losing three-term coverage, and
   robust against all shifted finite-accelerator repairs.
+* Diagnostic 16.1 records that the robust-booster pair-stage lift stalls at
+  the third stage because singleton candidates \(41,43\) extend coverage but
+  fail simultaneous pair witnesses against many old elements; the obstruction
+  is domination, not coverage alone.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
