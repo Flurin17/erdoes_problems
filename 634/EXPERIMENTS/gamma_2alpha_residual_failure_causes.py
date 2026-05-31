@@ -517,8 +517,9 @@ def diagnose_shell(
     )
     cycle = exact.ksimple_cycle(residual_segments)
     if cycle is None:
+        status = "pinch-sector-obstruction" if unfillable_sector_count else "not-simple-cycle"
         return ShellDiagnostic(
-            "not-simple-cycle",
+            status,
             remaining_tiles=remaining_tiles,
             residual_edges=edges,
             residual_vertices=vertices,
@@ -695,7 +696,7 @@ def main() -> None:
                 ] += 1
                 examples.setdefault(detail.status, (demand, detail))
 
-                if detail.status == "not-simple-cycle":
+                if detail.status in ("not-simple-cycle", "pinch-sector-obstruction"):
                     graph_profiles[
                         (
                             detail.residual_edges,

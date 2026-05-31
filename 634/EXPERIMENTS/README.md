@@ -149,11 +149,14 @@ Current components:
   exact cosine tests for `alpha`, `gamma=2alpha`, and straight `pi`. It finds
   that the `accc` residual sectors are locally unfillable (`cc:alpha` and
   `ac/ca:gamma`) under the endpoint automaton, while pure `aabc` pinches are
-  locally fillable. The exact split-cycle component diagnostic enumerates the
-  two planar pairings at each degree-4 pinch and checks component area,
-  boundary-side upper bounds, and side-label parity; in the seed-`20260602`,
-  `10000`-attempt outside-cover run, this exact component test does not remove
-  the pure `aabc` branch.
+  locally fillable. The script now reports these as `pinch-sector-obstruction`,
+  separating them from the locally fillable `not-simple-cycle` remainder; in
+  the seed-`20260602`, `10000`-attempt outside-cover run the split is
+  `250/43` for `N=63` and `895/218` for `N=99`. The exact split-cycle component
+  diagnostic enumerates the two planar pairings at each degree-4 pinch and
+  checks component area, boundary-side upper bounds, and side-label parity; in
+  the same run, this exact component test does not remove the pure `aabc`
+  branch.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

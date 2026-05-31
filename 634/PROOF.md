@@ -1945,6 +1945,14 @@ shells with only `aabc` pinches therefore remain the important residual
 topology/component subcase after the local `accc` star obstruction is made
 exact.
 
+The diagnostic status now separates these two cases. In a seed-`20260602`,
+`10000`-attempt outside-cover run, the former non-simple bucket splits as
+
+```text
+N=63:  250 pinch-sector-obstruction,  43 locally fillable not-simple-cycle.
+N=99:  895 pinch-sector-obstruction, 218 locally fillable not-simple-cycle.
+```
+
 The same diagnostic now includes an exact split-cycle component check. At each
 degree-4 residual vertex it enumerates the two planar pairings of consecutive
 half-edges, traces the induced boundary cycles exactly, divides each component

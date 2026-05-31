@@ -87,7 +87,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   The sector pass now marks shell-occupied sectors and classifies the
   `alpha`/`gamma`/`pi` sector angles exactly; every sampled `accc` pinch has
   locally unfillable residual sectors, while pure `aabc` pinches are locally
-  fillable and need a stronger component/topology invariant. An exact split-cycle
+  fillable and need a stronger component/topology invariant. In a
+  seed-`20260602`, `10000`-attempt outside-cover sample, this refines the former
+  non-simple bucket into `250` local pinch-sector obstructions and `43`
+  locally fillable non-simple graphs for `63`, and `895` plus `218` for `99`.
+  An exact split-cycle
   component diagnostic now checks planar pairings, component areas, boundary
   side-count bounds, and side parity; a seed-`20260602`, `10000`-attempt
   outside-cover sample shows this coarse component invariant still permits the
