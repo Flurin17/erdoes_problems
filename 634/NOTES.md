@@ -156,7 +156,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   within the same obstruction vocabulary: among the first `1000` diagnosed
   shells at mixed `8`, `904` are corner-label violations and `96` are
   split-corner-label obstructions; at mixed `10` and `12`, each first slice has
-  `838` corner-label violations and `162` pinch-sector obstructions.
+  `838` corner-label violations and `162` pinch-sector obstructions. The
+  analogous first `99` mixed-`6` slice has `782` corner-label violations and
+  `218` split-corner-label obstructions.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

@@ -2261,6 +2261,9 @@ obstructions. These are stored as
 `EXPERIMENTS/results/n63_mixed8_certificate_slice_0000000_limit1000.json`,
 `EXPERIMENTS/results/n63_mixed10_certificate_slice_0000000_limit1000.json`, and
 `EXPERIMENTS/results/n63_mixed12_certificate_slice_0000000_limit1000.json`.
+For `N=99`, the analogous first mixed-`6` outside-cover slice has `782`
+corner-label violations and `218` split-corner-label obstructions, stored as
+`EXPERIMENTS/results/n99_mixed6_certificate_slice_0000000_limit1000.json`.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
