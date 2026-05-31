@@ -844,6 +844,60 @@ one-shot target, by taking `B=q`.  The remaining complete-multipartite
 packing problem is to combine this unit-layer lemma with single-class chunks
 from classes that are larger than the number of bins left.
 
+## Remark: Complete Multipartite Packing As Ferrers Rectangles
+
+For a complete multipartite graph with class-size vector `a=(a_1,...,a_t)`,
+a `q`-modular bin of size at most `q+2` is, except for the special type
+`(q+1,1)`, exactly a rectangle subtraction
+
+```text
+a_i -> a_i-r      for i in I,
+```
+
+where `r>=1`, `I` is nonempty, and `r|I|<=q+2`.  Thus a rectangle-only proof
+of the complete-multipartite `q+2` target would show that every integer
+partition of total size at most `q^2` can be decomposed into at most `q`
+Ferrers rectangles, each of area at most `q+2`.
+
+The two easiest rectangle strategies are insufficient.
+
+First, truncating all columns at a threshold `M` and paying for the excess by
+single-column chunks need not work.  For `q=4`, `q+2=6`, and
+
+```text
+(5,4,3,2,1),
+```
+
+there is no `M` for which the excess above `M` fits in `q-M` chunks while the
+truncation to height `M` fits in `M` unit-layer bins.  Nevertheless the vector
+has the rectangle decomposition
+
+```text
+(2,2,2,0,0),   (2,2,0,2,0),   (1,0,1,0,1).
+```
+
+Thus equal chunks of height larger than `1` are essential.
+
+Second, induction by repeatedly removing a full-area rectangle also fails.  For
+`q=5`, `q+2=7`, the vector
+
+```text
+(5,4,4,4,4)
+```
+
+has total `21=3(q+2)` but no legal rectangle of area `7`: height `7` and
+width `1` is too tall, height `1` and width `7` is too wide, and no other
+factorization of `7` is available.  It still decomposes into four legal
+rectangles:
+
+```text
+(1,1,1,1,1),   (0,3,3,0,0),   (0,0,0,3,3),   (4,0,0,0,0).
+```
+
+Any proof of the complete-multipartite theorem therefore needs an amortized
+rectangle-covering argument, not just threshold truncation or full-bin
+induction.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with

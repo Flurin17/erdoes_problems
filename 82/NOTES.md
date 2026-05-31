@@ -1254,3 +1254,11 @@ source of growth beyond Ramsey.
   repeated `(q+1,1)` special bins between the large class and small classes,
   for example at `q=5` the partition is `(1,0,0,6)`, `(0,1,0,6)`,
   `(0,1,0,6)`, `(0,0,3,0)`.
+- 2026-05-31: The second read-only subagent reduced the complete-multipartite
+  `q+2` target to a Ferrers rectangle covering problem and identified two
+  failed easy strategies.  Threshold truncation fails already for
+  `(5,4,3,2,1)` at `q=4`, although it has a three-rectangle cover using
+  height-`2` chunks.  Full-bin induction fails for `(5,4,4,4,4)` at `q=5`,
+  whose total is `3(q+2)` but which has no legal rectangle of full area
+  `q+2=7`; it still packs in four rectangles.  `PROOF.md` now records these
+  as warnings for the multipartite arithmetic theorem.
