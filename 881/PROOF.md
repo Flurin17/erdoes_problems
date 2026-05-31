@@ -978,6 +978,76 @@ normal forms apply to the shrunk hole, not automatically to the whole
 prefix. The section-descent problem is precisely to keep enough of that
 normal form while passing from weak barriers to prefix-front supersets.
 
+### Lemma 3.1c.2: First-prefix holes keep their last point active
+
+Let \(A\) be an order-\(k\) basis, let \(h=k+1\), and suppose no infinite
+deletion from \(A\) leaves an order-\(h\) basis. Let \(N_h\) be an
+order-\(h\) threshold for \(A\), and let \(\mathcal P_h\) be the
+prefix-front obtained from the late-bad family \(\mathcal L_h\) by Lemma
+3.1c.1. Fix
+\[
+S=\{x_1<\cdots<x_n\}\in\mathcal P_h.
+\]
+Assume \(\max S>N_h\). Then there is a witness
+\[
+w\ge \max S-1
+\]
+with
+\[
+w\notin h(A\setminus S).
+\]
+Moreover, if \(F\subset S\) is inclusion-minimal for this fixed
+nonrepresentation,
+\[
+w\notin h(A\setminus F),
+\]
+then
+\[
+\max S=x_n\in F. \tag{1}
+\]
+
+Consequently, every sufficiently late first-prefix front edge has an
+inclusion-minimal terminal-gap subhole whose last front point is active:
+there are \(q\in\{1,\ldots,h\}\) and elements
+\[
+c_1,\ldots,c_{h-q}\in A\setminus F
+\]
+such that
+\[
+w=qx_n+c_1+\cdots+c_{h-q}. \tag{2}
+\]
+
+Proof. Since \(S\in\mathcal P_h\), Lemma 3.1c.1 says that \(S\) is
+late-bad. If \(A\setminus S\) is not an order-\(h\) basis, choose a hole
+\[
+w\ge\max S-1
+\]
+outside \(h(A\setminus S)\). If \(A\setminus S\) is an order-\(h\) basis
+but late-bad, then no threshold below \(\max S\) works, so there is some
+\[
+w\ge\max S-1
+\]
+outside \(h(A\setminus S)\).
+
+Because \(w\ge\max S-1\ge N_h\), the order-\(h\) basishood of \(A\) gives
+\(w\in hA\). Thus the inclusion-minimal shrink below is nonempty. Now
+shrink \(S\) inclusion-minimally while preserving this fixed
+nonrepresentation, and call the result \(F\). Suppose, for contradiction,
+that \(x_n\notin F\). Then \(F\subset\{x_1,\ldots,x_{n-1}\}\). Since
+\[
+w\ge x_n-1\ge\max F,
+\]
+the set \(F\) is late-bad: if \(A\setminus F\) is not an order-\(h\) basis
+this is immediate, while if it is an order-\(h\) basis, every threshold for
+it must exceed the missing value \(w\), and hence is at least \(\max F\).
+This contradicts the defining property of \(S\in\mathcal P_h\), whose
+proper initial segment contains no member of \(\mathcal L_h\). Therefore
+\(x_n\in F\).
+
+Finally, if \(A\) is an order-\(k\) basis, Lemma 10.3b applies to the
+inclusion-minimal hole \(F,w\). Its active-repair conclusion for
+\(f=x_n\) gives (2). \(\square\)
+
 ## Lemma 3.1d: Uniform finite-hole characterization of a good deletion
 
 Let \(h\ge1\), let \(A\subseteq\mathbb N\), and let \(X\subseteq A\) be
@@ -11826,6 +11896,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 3.1c.1 turns any weak late-bad barrier into a prefix-front of
   late-bad supersets. The conversion preserves the maximal element and
   genuine holes, but may lose inclusion-minimal private-incidence structure.
+* Lemma 3.1c.2 recovers the most important part of that structure: for a
+  first-prefix front edge, any sufficiently late inclusion-minimal shrink
+  must keep the last front point, so that point is active in the terminal
+  gap normal form.
 * Lemma 3.1d gives an exact fixed-deletion test: \(A\setminus X\) is an
   order-\(h\) basis if and only if all finite deletions inside \(X\) have a
   common order-\(h\) threshold.
