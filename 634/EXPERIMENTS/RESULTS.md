@@ -15,7 +15,7 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=66`, `N=69`,
+`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`,
 `N=70`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 certificates are now promoted in `PROOF.md`. The explicit encoded survivors in
 `100..250` remain the isosceles-`alpha+beta`
@@ -323,19 +323,8 @@ return zero candidates for all four promoted values, and the `3alpha+2beta`
 survivors are empty after the strong isosceles-`alpha+beta`, boundary-star, and
 boundary-integrality filters.
 Therefore `PROOF.md` treats `56`, `66`, `69`, and `70` as classified negative
-values by local certificates.
-
-The local script leaves one `N=60` `gamma=2alpha` candidate:
-
-```text
-tile=(49,15,56), X=210=a+7b+c, Y=240.
-```
-
-The `Y=a+9b+c` and `Y=2a+2b+2c` representations are eliminated by Beeson
-Lemma 11.17, while the zero-`c` `Y=16b` representation is not eliminated by the
-local script. `PROOF.md` now classifies `60` negative by citing Beeson's
-post-Theorem 11.18 finite computation: after `45`, the next boundary
-possibilities left open are `63,64,72`.
+values, while `60` remains open because of its surviving `gamma=2alpha`
+boundary-arithmetic candidate.
 
 ## `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` Exact Filter Certificate
 
@@ -506,10 +495,13 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,66,69,70,78,86,87,88,91,93,94,95:
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,62,66,69,70,78,86,87,88,91,93,94,95:
   negative by workspace composite benchmarks
 
-63,76,92,99:
+60,63:
+  open with a gamma=2alpha boundary-arithmetic survivor
+
+76,92,99:
   open with a gamma=2alpha boundary-arithmetic survivor
 ```
 

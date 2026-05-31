@@ -258,15 +258,14 @@ Impact:
 
 The following unresolved values below `100` remain after the currently encoded
 filters. The values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`,
-`42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `78`,
-`86`, `87`, `88`, `91`, `93`, `94`, and `95` formerly appeared in this list,
-but are now
+`42`, `46`, `51`, `55`, `56`, `57`, `62`, `66`, `69`, `70`, `78`, `86`, `87`,
+`88`, `91`, `93`, `94`, and `95` formerly appeared in this list, but are now
 classified negative in `PROOF.md` after writing out the source-row arithmetic
-eliminations. The remaining values now have explicit `gamma=2alpha`
-boundary-arithmetic survivors:
+eliminations. The values `60` and `63` now have explicit `gamma=2alpha`
+boundary-arithmetic survivors; the rest have no encoded survivor:
 
 ```text
-63, 76, 92, 99
+60, 63, 76, 92, 99
 ```
 
 The remaining values should remain recorded as "open/no encoded survivor" until

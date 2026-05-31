@@ -151,7 +151,6 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
         55,
         56,
         57,
-        60,
         62,
         66,
         69,
