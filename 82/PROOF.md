@@ -3670,6 +3670,87 @@ deleted cycles change the internal degrees inside their union.  Any proof of
 the candidate lemma needs an absorption or switching step that controls these
 cross-edge contributions.
 
+A rooted strengthening would give a useful structural reduction.
+
+**Rooted Modular OCT Candidate.**  For every even graph `G` and every vertex
+`r`, there is a modular odd-cycle-transversal certificate as above in which
+`r` lies in the bipartite residual.
+
+The rooted candidate gives the following rigorous cut-vertex reduction for
+the unrooted modular OCT candidate.
+
+**Lemma: Cut-Vertex Reduction From Rooted Lobes.**  Suppose the rooted
+candidate holds for every even graph with fewer vertices than `G`.  If `G` is
+a connected even graph with a cut vertex, then `G` satisfies the unrooted
+modular OCT candidate.
+
+Proof.  Let `v` be a cut vertex.  For each component `K` of `G-v`, let
+
+```text
+G_K = G[K union {v}].
+```
+
+Every `G_K` is even.  Indeed, all vertices of `K` have in `G_K` the same
+degree they have in `G`, hence even.  Also the number of edges from `v` into
+`K` is even, because
+
+```text
+sum_{x in K} deg_G(x) = 2e(G[K]) + e_G(v,K)
+```
+
+has even left-hand side.
+
+Apply the rooted candidate to each `G_K`, rooting at `v`.  Taking the union of
+the certificates over all lobes and identifying the common vertex `v` gives a
+global certificate: the `C`-parts and `D`-parts have the same internal
+residues because different lobes meet only at the residual vertex `v`, and the
+residual bipartitions combine by placing every copy of `v` on the same side.
+QED.
+
+For the rooted candidate itself, the same reduction would require a two-root
+or prescribed-independent-set strengthening in the lobe that contains the
+global root.  The exact checker finds the one-root strengthening for every
+root in all even graphs through `7` vertices and in the current hard masks,
+but this multi-root strengthening has not been proved.
+
+Some minimal-counterexample reductions are immediate, but they leave the
+rooted-gluing issue as the real obstacle.
+
+**Lemma: Basic Reductions For Modular OCT Counterexamples.**  A minimal
+counterexample to the modular OCT candidate is connected, has no isolated
+vertices, is not a cycle, and is not a complete graph.
+
+Proof.  Disconnected graphs reduce componentwise: an even graph's components
+are even, and the union of component certificates is a certificate for the
+disjoint union.  Isolated vertices may be left in the bipartite residual, so a
+minimal nontrivial counterexample has none.
+
+If `G=C_n` is a cycle, then for even `n` the whole graph is bipartite and may
+be the residual, while for odd `n` taking `D=V(G)` works because every vertex
+has degree `2`, hence residue `2 mod 4`.
+
+If `G=K_n` is even, then `n` is odd.  For `n=1`, leave the vertex residual.
+For `n congruent 3 mod 4`, take `D=V(G)`.  For
+`n congruent 1 mod 4` and `n>1`, take `D` to be any `n-2` vertices and leave
+the remaining two vertices residual; `K_{n-2}` has degree
+`n-3 congruent 2 mod 4`, and two residual vertices induce a bipartite graph.
+QED.
+
+The standard next reductions are not currently valid.  If `v` is a cut
+vertex, ordinary lobe certificates do not necessarily glue: they must place
+`v` in compatible statuses, and if `v` lies in `C` or `D`, the local
+same-class degree contributions have to sum to `1` or `2 mod 4` respectively.
+This is why the rooted residual version appears naturally.
+
+Degree-`2` suppression has similar edge-rooted defects.  If `v` has
+nonadjacent neighbors `x,y`, then `G-v+xy` is even, but a certificate in the
+suppressed graph need not lift.  The direct lift fails when `x,y` both lie in
+`C`, since replacing the edge `xy` by the path `xvy` changes their `C`-degrees
+and gives `v` two `C`-neighbors if placed in `C`.  It can also fail when `x,y`
+are residual and the edge `xy` lies on a residual cycle, because subdividing
+one edge flips the parity of that cycle.  Thus a minimal counterexample cannot
+yet be assumed to have minimum degree at least `4`.
+
 ## Lemma 4I.6A: One-Defect Sufficient Condition
 
 Let `G` be an even graph.  Suppose there is a vertex set `D` such that

@@ -45,7 +45,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `modular_oct.py`: checks the modular odd-cycle-transversal candidate for
   even graphs: colors `A,B` must be independent, color `C` must have internal
   degree `1 mod 4`, and color `D` internal degree `2 mod 4`.  This stronger
-  certificate implies the `(0,0,1,2)` first-lift slot target.
+  certificate implies the `(0,0,1,2)` first-lift slot target.  `--root` or
+  `--all-roots` tests the rooted variant where specified vertices must remain
+  in the bipartite residual.
 - `first_lift_chromatic.py`: tests the chromatic pruning lemma for the first
   dyadic lift by sampling or enumerating even graphs, filtering for
   `chi(G),chi(complement(G)) >= 5`, and then running the exact four-part

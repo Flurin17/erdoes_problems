@@ -39,11 +39,22 @@ def verify_assignment(adj: list[int], assignment: list[int]) -> bool:
     return True
 
 
-def find_assignment(n: int, graph_mask: int, pc: ri.Precomp | None = None) -> list[int] | None:
+def find_assignment(
+    n: int,
+    graph_mask: int,
+    pc: ri.Precomp | None = None,
+    forced_residual: set[int] | None = None,
+) -> list[int] | None:
     if pc is None:
         pc = ri.precompute(n)
+    if forced_residual is None:
+        forced_residual = set()
     adj = adjacency(n, graph_mask, pc)
-    order = sorted(range(n), key=lambda vertex: adj[vertex].bit_count(), reverse=True)
+    order = list(forced_residual) + [
+        vertex
+        for vertex in sorted(range(n), key=lambda item: adj[item].bit_count(), reverse=True)
+        if vertex not in forced_residual
+    ]
     assignment = [-1] * n
     color_masks = [0, 0, 0, 0]
 
@@ -77,7 +88,8 @@ def find_assignment(n: int, graph_mask: int, pc: ri.Precomp | None = None) -> li
         if position == n:
             return verify_assignment(adj, assignment)
         vertex = order[position]
-        for color in range(4):
+        colors = (0, 1) if vertex in forced_residual else range(4)
+        for color in colors:
             if not can_place(vertex, color):
                 continue
             assignment[vertex] = color
@@ -107,16 +119,29 @@ def print_certificate(n: int, assignment: list[int]) -> None:
         print(f"{name}=" + ",".join(map(str, vertices)))
 
 
-def check_mask(n: int, graph_mask: int) -> None:
-    assignment = find_assignment(n, graph_mask)
+def check_mask(n: int, graph_mask: int, root: int | None, all_roots: bool) -> None:
+    forced = set() if root is None else {root}
+    assignment = find_assignment(n, graph_mask, forced_residual=forced)
     print(f"n={n}")
     print(f"mask={graph_mask}")
+    if root is not None:
+        print(f"root={root}")
     if assignment is None:
         print("modular_oct=no")
         return
     print("modular_oct=yes")
     print("assignment=" + ",".join(map(str, assignment)))
     print_certificate(n, assignment)
+    if all_roots:
+        pc = ri.precompute(n)
+        bad = [
+            vertex
+            for vertex in range(n)
+            if find_assignment(n, graph_mask, pc, {vertex}) is None
+        ]
+        print("all_roots_residual=" + ("yes" if not bad else "no"))
+        if bad:
+            print("bad_roots=" + ",".join(map(str, bad)))
 
 
 def exhaustive_even(n: int, limit: int | None) -> None:
@@ -168,9 +193,11 @@ def main() -> None:
     parser.add_argument("--sample-even", type=int, default=0)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--root", type=int)
+    parser.add_argument("--all-roots", action="store_true")
     args = parser.parse_args()
     if args.mask is not None:
-        check_mask(args.n, args.mask)
+        check_mask(args.n, args.mask, args.root, args.all_roots)
     elif args.exhaustive_even:
         exhaustive_even(args.n, args.limit)
     elif args.sample_even:

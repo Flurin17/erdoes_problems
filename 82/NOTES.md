@@ -1817,6 +1817,16 @@ source of growth beyond Ramsey.
   The full `n=8` sweep was still too slow and was stopped.  Greedy odd-cycle
   deletion is not a proof because cross-edges among deleted cycles alter the
   internal residues inside their union.
+- 2026-05-31: Audited minimal-counterexample reductions for modular OCT.
+  Disconnected components, isolated vertices, whole cycles, and whole complete
+  graphs reduce cleanly.  Cut vertices do not reduce from ordinary witnesses:
+  lobe certificates must put the cut vertex in compatible statuses, or the
+  same-class degree contributions at the cut vertex add to the wrong residue.
+  A rooted residual version would make cut-vertex gluing work for the unrooted
+  theorem; exact checks find this rooted version for every root through
+  `n=7` and in the hard masks.  Degree-`2` suppression also fails in important
+  cases, especially when the suppressed edge has both ends in `C` or lies on a
+  residual cycle.
 - 2026-05-31: Refined the bounded-spread target after subagent review.  A
   fixed-spread linear theorem is probably too optimistic because dense random
   adjacent-degree graphs should locally resemble `G(k,1/2)` on induced
