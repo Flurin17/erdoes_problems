@@ -64,16 +64,16 @@ elimination, not a complete classification of that source case.
 | Similar/reptile | `m^2`, `a^2+b^2`, `3m^2` | Complete for this subcase by Snover-Waiveris-Williams. |
 | Equilateral `pi/3` tile model | Primitive integer sides `c^2=a^2-ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Exact arithmetic scan plus boundary-star eliminations for selected small candidates; source rationality bridge still open. |
 | Equilateral `2pi/3` tile model | Primitive integer sides `c^2=a^2+ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Exact arithmetic scan plus boundary-star eliminations for selected small candidates; source rationality bridge still open. |
-| Beeson `3alpha+2beta=pi`: triquadratic | `N/M^2=2/s^2-1`, with sufficient subfamily `N=2K^2-M^2` when `s=M/K` and `K|M^2`. | Necessary filter plus one sufficient family; composites not complete. |
+| Beeson `3alpha+2beta=pi`: triquadratic | `N/M^2=2/s^2-1`, with sufficient subfamily `N=2K^2-M^2` when `s=M/K` and `K|M^2`. | Necessary filter plus one sufficient family; generic boundary-integrality filter for candidates with irrational or nonintegral area-normalized outer sides; composites not complete. |
 | Beeson `3alpha+2beta=pi`: `(2alpha,alpha,2beta)` | `N/M^2=(2-s^2)(3-s^2)/((1-s)^2(2+s)^2)`, sufficient when reconstructed sides satisfy `c|a^2`. | Necessary filter plus one sufficient criterion; composites not complete. |
-| Beeson `3alpha+2beta=pi`: isosceles-beta | `N/M^2=(3-s^2)/(1+s)^2`. | Necessary diagnostic only, except listed source examples. |
+| Beeson `3alpha+2beta=pi`: isosceles-beta | `N/M^2=(3-s^2)/(1+s)^2`. | Necessary diagnostic plus generic boundary-integrality filter, except listed source examples. |
 | Beeson `3alpha+2beta=pi`: isosceles-`alpha+beta` | `N/M^2=(1+s)/(1-s)`, with a stronger source filter encoded separately. | Necessary diagnostic plus selected local eliminations. |
-| Beeson `3alpha+2beta=pi`: isosceles-alpha | `N/M^2=(1+s)(2-s^2)/((1-s)(2+s)^2)`. | Necessary diagnostic only, except listed source examples. |
+| Beeson `3alpha+2beta=pi`: isosceles-alpha | `N/M^2=(1+s)(2-s^2)/((1-s)(2+s)^2)`. | Necessary diagnostic plus generic boundary-integrality filter, except listed source examples. |
 | Isosceles `gamma=2pi/3` | Primitive sides `c^2=a^2+ab+b^2`, divisibility `2b+a | N`, and `Nb/(2b+a)` square. | Arithmetic candidates are removed by the local boundary-transition lemma in the rational nondegenerate case; source exceptional cases still need auditing. |
-| Non-isosceles `gamma=2pi/3`: `(alpha,alpha+beta,alpha+2beta)` | `N=((a+b)/b)m^2`, with `c^2=a^2+ab+b^2`. | Exact formula; primes obstructed; composites only filtered. |
-| Non-isosceles `gamma=2pi/3`: `(2alpha,2beta,alpha+beta)` | `N=(a+2b)(b+2a)m^2`, with `c^2=a^2+ab+b^2`. | Exact formula; primes obstructed; composites only filtered. |
-| Non-isosceles `gamma=2pi/3`: `(alpha,2beta,2alpha+beta)` | Boundary-integrality upgrades BLZ's square class to `N=(b+2a)(a+b)m^2`. | Prime obstruction proved; selected composite boundary checks only. |
-| Non-isosceles `gamma=2pi/3`: `(alpha,2alpha,3beta)` | Boundary-integrality upgrades BLZ's square class to `N=3(a+2b)(a+b)m^2`. | Prime obstruction proved; selected composite boundary checks only. |
+| Non-isosceles `gamma=2pi/3`: `(alpha,alpha+beta,alpha+2beta)` | `N=((a+b)/b)m^2`, with `c^2=a^2+ab+b^2`. | Exact formula; primes obstructed; endpoint boundary-star filter applied to composites. |
+| Non-isosceles `gamma=2pi/3`: `(2alpha,2beta,alpha+beta)` | `N=(a+2b)(b+2a)m^2`, with `c^2=a^2+ab+b^2`. | Exact formula; primes obstructed; endpoint boundary-star filter applied to composites. |
+| Non-isosceles `gamma=2pi/3`: `(alpha,2beta,2alpha+beta)` | Boundary-integrality upgrades BLZ's square class to `N=(b+2a)(a+b)m^2`. | Prime obstruction proved; endpoint boundary-star filter applied to composites. |
+| Non-isosceles `gamma=2pi/3`: `(alpha,2alpha,3beta)` | Boundary-integrality upgrades BLZ's square class to `N=3(a+2b)(a+b)m^2`. | Prime obstruction proved; endpoint boundary-star filter applied to composites. |
 
 ## What Is Theorem-Level Locally
 
@@ -88,7 +88,7 @@ once the relevant source-reduction hypotheses are accepted:
 | Isosceles `gamma=2pi/3` obstruction | local boundary-transition lemma |
 | Exact equilateral boundary-length arithmetic | `equilateral_boundary_exact.py` finite rational-root enumeration |
 | Equilateral `pi/3` and `2pi/3` local boundary checks | `equilateral_pi_boundary.py`, `equilateral_gamma_boundary.py` |
-| Selected `3alpha+2beta=pi` boundary/integrality eliminations | `beeson_3alpha2beta_boundary.py` |
+| `3alpha+2beta=pi` boundary/integrality eliminations | `beeson_3alpha2beta_boundary.py` |
 | Selected non-isosceles `gamma=2pi/3` boundary eliminations | `gamma_2pi3_nonisosceles_boundary.py` |
 
 ## Missing Bridges
@@ -190,13 +190,17 @@ Current evidence:
 - `beeson_3alpha2beta_filter.py` encodes the five final equations.
 - `beeson_isosceles_alpha_plus_beta_filter.py` encodes the stronger
   isosceles-alpha+beta source filter.
-- `beeson_3alpha2beta_boundary.py` removes selected survivors.
+- `beeson_3alpha2beta_boundary.py` removes selected boundary-star survivors
+  and now applies the generic boundary-integrality obstruction to every
+  supported `3alpha+2beta=pi` outer shape.
 
 Impact:
 
-- Values such as `39`, `46`, `56`, `62`, `63`, `66`, `70`, `92`, `94`, `99`,
-  `111`, `119`, and `124` now have no local survivors, but this is still
-  conditional on the full `3alpha+2beta=pi` source setup.
+- The generic boundary-integrality obstruction now removes all supported
+  `3alpha+2beta=pi` survivors below `250`; the remaining `3alpha+2beta`
+  survivors in the `100..250` scan are all in the isosceles-`alpha+beta`
+  source-filter branch. This is still conditional on the full
+  `3alpha+2beta=pi` source setup.
 
 ### 6. Composite Non-Isosceles `gamma=2pi/3` Completeness
 
@@ -209,12 +213,15 @@ Needed statement:
 Current evidence:
 
 - `gamma_2pi3_nonisosceles_exact.py` encodes the exact arithmetic formulas.
-- `gamma_2pi3_nonisosceles_boundary.py` removes selected small survivors.
+- `gamma_2pi3_nonisosceles_boundary.py` now applies the endpoint-pair
+  boundary-star obstruction to all four encoded BLZ templates.
 
 Impact:
 
-- `21`, `30`, `55`, `88`, `105`, and `120` are eliminated locally in this
-  template, but larger composite survivors remain to be studied.
+- `21`, `30`, `55`, `88`, `105`, `120`, and `143` are eliminated locally.
+- In the `100..250` diagnostic range the endpoint-pair check also removes the
+  later BLZ survivors `154`, `168`, `210`, and `220`; no explicit
+  non-isosceles `gamma=2pi/3` survivor remains in that range.
 
 ## Current Small-Value Status
 
@@ -229,6 +236,18 @@ encoded filters:
 
 They should remain recorded as "open/no encoded survivor" until the missing
 bridges above are proved or accepted as source theorems with exact hypotheses.
+
+In the range `100..250`, after the generic `3alpha+2beta`
+boundary-integrality filter and the non-isosceles `gamma=2pi/3`
+endpoint-pair boundary-star filter, the remaining values with explicit encoded
+survivors are:
+
+```text
+132, 156, 175, 189, 198, 204, 224, 228, 240
+```
+
+The `3alpha+2beta` survivors among these are only the
+isosceles-`alpha+beta` branch that passes Beeson's Section 11.4 filter.
 
 ## Next Best Work
 

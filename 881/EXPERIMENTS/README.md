@@ -72,7 +72,10 @@ one-point.
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole
-whose reflected-cover obstruction genuinely needs two centers.
+whose reflected-cover obstruction genuinely needs two centers. It also
+checks the \(\mathbb Z/5\mathbb Z\) finite-center incoherence example from
+Example 8.8, where every deleted pattern is repairable by some retained
+center but no single center works coherently.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

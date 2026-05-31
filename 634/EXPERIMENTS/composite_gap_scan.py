@@ -33,8 +33,7 @@ from equilateral_boundary_exact import candidates_for_n as equilateral_exact_can
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
-from gamma_2pi3_nonisosceles_boundary import feasible_alpha_2beta_2alpha_beta
-from gamma_2pi3_nonisosceles_boundary import feasible_alpha_alpha_beta_alpha_2beta
+from gamma_2pi3_nonisosceles_boundary import boundary_star_obstructed as gamma_boundary_obstructed
 from gamma_2pi3_nonisosceles_exact import Candidate as GammaCandidate
 from gamma_2pi3_nonisosceles_exact import candidates_for_n as gamma_nonisosceles_candidates
 from zhang_constructive_families import constructed_counts as zhang_counts
@@ -179,57 +178,9 @@ def three_alpha_survivors(n: int) -> tuple[list[ThreeAlphaCandidate], list[Three
 
 def gamma_survivors(n: int) -> tuple[list[GammaCandidate], list[GammaCandidate]]:
     raw = gamma_nonisosceles_candidates(n)
-    n21_obstructed = n == 21 and not feasible_alpha_alpha_beta_alpha_2beta((5, 16, 19), 4)
-    n30_obstructed = n == 30 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 4)
-    n55_obstructed = n == 55 and not feasible_alpha_alpha_beta_alpha_2beta((39, 16, 49), 4)
-    n105_first_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((8, 7, 13), 7)
-    n105_second_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((16, 5, 19), 5)
-    n120_obstructed = n == 120 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 8)
-    n88_obstructed = n == 88 and not feasible_alpha_2beta_2alpha_beta((3, 5, 7), 1)
-
     survivors: list[GammaCandidate] = []
     for candidate in raw:
-        if (
-            n21_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (5, 16, 19)
-        ):
-            continue
-        if (
-            n30_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (7, 8, 13)
-        ):
-            continue
-        if (
-            n55_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (39, 16, 49)
-        ):
-            continue
-        if (
-            n105_first_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (8, 7, 13)
-        ):
-            continue
-        if (
-            n105_second_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (16, 5, 19)
-        ):
-            continue
-        if (
-            n120_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (7, 8, 13)
-        ):
-            continue
-        if (
-            n88_obstructed
-            and candidate.template == "alpha,2beta,2alpha+beta"
-            and candidate.sides == (3, 5, 7)
-        ):
+        if gamma_boundary_obstructed(candidate.template, candidate.sides, candidate.square_parameter):
             continue
         survivors.append(candidate)
     return raw, survivors

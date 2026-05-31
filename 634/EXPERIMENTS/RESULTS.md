@@ -312,6 +312,33 @@ feasible full boundary cycles: 0
 boundary-star obstruction: candidate cannot be a tiling
 ```
 
+The boundary-integrality calculation is now applied generically to all
+supported `3alpha+2beta=pi` candidates, namely the triquadratic,
+isosceles-beta, and isosceles-alpha outer shapes for which
+`beeson_3alpha2beta_boundary.py` has a primitive sine-law outer side ratio.
+It eliminates the previously hard-coded examples such as `39`, `62`, `63`,
+`66`, `70`, `92`, `94`, `99`, `111`, `119`, and `124` whenever the
+area-normalized outer side scale is irrational or gives nonintegral boundary
+lengths.
+
+After this generic filter and the non-isosceles `gamma=2pi/3` endpoint
+boundary-star filter, the scan
+
+```sh
+python3 634/EXPERIMENTS/composite_gap_scan.py --lo 100 --limit 250 --only-open --equilateral-side-bound 250
+```
+
+has explicit encoded survivors only at
+
+```text
+132, 156, 175, 189, 198, 204, 224, 228, 240
+```
+
+The `3alpha+2beta=pi` survivors in this list are exactly the
+isosceles-`alpha+beta` candidates passing Beeson's Section 11.4 filter. The
+previous non-isosceles `gamma=2pi/3` survivors `143`, `154`, `168`, `210`, and
+`220` are now locally eliminated by the endpoint boundary-star check.
+
 ## Zhang Constructive Families
 
 Command:
@@ -786,27 +813,36 @@ python3 634/EXPERIMENTS/gamma_2pi3_nonisosceles_boundary.py
 Result summary:
 
 ```text
-N=21 with tile (5,16,19), scale 4, outer sides (84,20,76):
-  feasible full boundary cycles: 0
-N=30 with tile (7,8,13), scale 4, outer sides (60,28,52):
-  feasible full boundary cycles: 0
-N=55 with tile (39,16,49), scale 4, outer sides (220,156,196):
-  feasible full boundary cycles: 0
-N=88 with tile (3,5,7), scale 1, outer sides (21,55,56):
+N=21 with tile (5,16,19), scale 4, opposite outer sides (20,76,84):
+  feasible full boundary endpoint cycles: 0
+N=30 with tile (7,8,13), scale 4, opposite outer sides (28,52,60):
+  feasible full boundary endpoint cycles: 0
+N=55 with tile (39,16,49), scale 4, opposite outer sides (156,196,220):
+  feasible full boundary endpoint cycles: 0
+N=88 with tile (3,5,7), scale 1, opposite outer sides (21,55,56):
   outer angles (alpha,2beta,2alpha+beta)
-  feasible full boundary cycles: 0
-N=105 with tile (8,7,13), scale 7, outer sides (105,56,91):
-  feasible full boundary cycles: 0
-N=105 with tile (16,5,19), scale 5, outer sides (105,80,95):
-  feasible full boundary cycles: 0
-N=120 with tile (7,8,13), scale 8, outer sides (120,56,104):
-  feasible full boundary cycles: 0
+  feasible full boundary endpoint cycles: 0
+N=105 with tile (8,7,13), scale 7, opposite outer sides (56,91,105):
+  feasible full boundary endpoint cycles: 0
+N=105 with tile (16,5,19), scale 5, opposite outer sides (80,95,105):
+  feasible full boundary endpoint cycles: 0
+N=120 with tile (7,8,13), scale 8, opposite outer sides (56,104,120):
+  feasible full boundary endpoint cycles: 0
+N=143 with tile (3,5,7), scale 1, opposite outer sides (39,55,49):
+  outer angles (2alpha,2beta,alpha+beta)
+  feasible full boundary endpoint cycles: 0
+N=143 with tile (5,3,7), scale 1, opposite outer sides (55,39,49):
+  outer angles (2alpha,2beta,alpha+beta)
+  feasible full boundary endpoint cycles: 0
 ```
 
 Interpretation: the exact arithmetic candidates for `N=21`, `N=30`, `N=55`,
-`N=105`, and `N=120` in the `(alpha,alpha+beta,alpha+2beta)` template, and the
-exact `N=88` candidate in the `(alpha,2beta,2alpha+beta)` template, fail the
-local boundary-star check.
+`N=105`, and `N=120` in the `(alpha,alpha+beta,alpha+2beta)` template, the
+exact `N=88` candidate in the `(alpha,2beta,2alpha+beta)` template, and both
+`N=143` swaps in the `(2alpha,2beta,alpha+beta)` template fail the local
+boundary-star check. The same endpoint-pair checker is used by the composite
+dashboard for every encoded BLZ candidate; it removes the remaining BLZ
+survivors below `250`, namely `154`, `168`, `210`, and `220`.
 
 Command:
 

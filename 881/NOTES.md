@@ -694,6 +694,19 @@ Thus a proof in the finitely-bad case must either use arithmetic structure
 beyond abstract barrier combinatorics or handle mixed-size finite barriers
 directly.
 
+Warning 8.5 also records a Schreier-type example showing that a barrier
+need not have bounded width on any infinite tail. So a proof cannot first
+thin the problem to pair barriers or bounded-size barriers by combinatorics
+alone; any such reduction must use the additive gap and reflected-cover
+constraints.
+
+There is a positive Ramsey reduction once bounded width is supplied by
+arithmetic. Lemma 8.5a says that if every infinite subset contains a
+late-bad set of size between \(2\) and a fixed \(q\), then after passing to
+an infinite tail and a fixed \(r\le q\), all sufficiently far \(r\)-subsets
+are late-bad with arbitrarily large witnesses. Thus bounded-width
+collective barriers may be studied one uniformity at a time.
+
 Lemma 8.6 adds a second distinction. If such bounded-width barriers can be
 chosen with witness excess \(w-\max F\) arbitrarily large, then every finite
 pattern in \(A\) has arbitrarily large reflected subpatterns of size at
@@ -702,13 +715,14 @@ and Theorem 8.2 resolves the case. Therefore a remaining counterexample
 must either use barriers of growing size, or keep bounded-width witness
 excesses under control in a delayed-threshold fashion.
 
-Lemma 8.6a closes one delayed pair-barrier branch. If every infinite tail
-contains pair barriers \(\{x<y\}\) with witnesses in a bounded interval
-\([y,y+D]\), then all test elements above \(D\) are forced to reflect
-through the lower element \(x\). This gives tail reflection-recurrence, and
-Lemma 2.4 upgrades tail recurrence to the usual protected-reservoir
-deletion. Thus persistent pair barriers must either have unbounded top
-excess \(w-y\), or give way to barriers of size at least three.
+Lemma 8.6a closes a broader delayed-barrier branch. If every infinite tail
+contains finite barriers \(F=\{f_1<\cdots<f_r\}\) whose witness lies within
+a bounded distance of the second-smallest element \(f_2\), then all test
+elements above that bound are forced to reflect through \(f_1\). This gives
+tail reflection-recurrence, and Lemma 2.4 upgrades tail recurrence to the
+usual protected-reservoir deletion. Corollary 8.6b is the pair case:
+persistent pair barriers must have unbounded top excess \(w-y\), or give
+way to barriers of size at least three.
 
 Example 8.7 warns that even pair barriers cannot be collapsed to one-center
 recurrence by pigeonhole alone. The residue set
@@ -720,6 +734,12 @@ has \(2S=G\), all singleton deletions remain 3-bases, but deleting
 uses two centers and no single reflected copy covers \(S\). This is not an
 integer counterexample, but it identifies a real local obstruction that a
 proof of the finitely-bad case must overcome.
+
+Example 8.8 gives a second finite warning: even if every deleted singleton
+or pair pattern is repairable by one of finitely many retained centers, the
+repairs may be incoherent. Lemma 8.2a needs one fixed center compatible with
+the representation of \(n-e\); covering different deleted patterns by
+different centers does not imply an order-3 basis after deletion.
 
 Proposition 13.1c gives a concrete counterexample target for this
 obstruction: build finite stages where every old-new pair has a local
@@ -737,6 +757,14 @@ for witnesses below \(N_s\); however, if a witness lies below \(b\in P_s\),
 then deleting \(b\) is irrelevant to that witness, so the pair condition
 collapses to singleton privacy for the old element. Thus the script is
 testing the genuinely pair-dependent version of the criterion.
+
+The older singleton stage criterion, Proposition 13.1, is now only a
+diagnostic. Corollary 8.3 rules it out for \(k=2\): infinitely many robust
+one-point order-3 witnesses would force reflection-recurrence and hence a
+good deletion. For pair-stage systems, Corollary 8.6b says bounded top-excess
+witnesses \(w-b\) are also impossible in a genuine counterexample; any
+surviving pair construction must place its witnesses far above the larger
+deleted element.
 
 There is also a more local witness obstruction. If \(w=a+p\in2A\) is meant
 to remain outside \(3(A\setminus\{a\})\), then

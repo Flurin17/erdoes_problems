@@ -97,10 +97,14 @@ Important distinction: "positive square class" and "smallest representative" are
    `(8,15,13)` in side `60`, including their `a,b` swaps.
    The composite dashboard currently shows no surviving encoded candidates
    through the unresolved values below `100` checked in `RESULTS.md`. The newer
-   eliminations beyond `30` include: `39`, `62`, `63`, `66`, `70`, `92`, `94`,
-   `99`, `111`, `119`, and `124` by `3alpha+2beta` boundary integrality;
-   `46` and `56` by triquadratic boundary-star checks; and `55`, `88`, `105`, and `120` by
-   non-isosceles `gamma=2pi/3` boundary-star checks.
+   eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
+   filter for supported triquadratic, isosceles-beta, and isosceles-alpha
+   outer shapes; `46` and `56` by triquadratic boundary-star checks; and
+   `55`, `88`, `105`, `120`, and `143` by non-isosceles `gamma=2pi/3`
+   endpoint boundary-star checks. In the range `100..250`, explicit encoded
+   survivors remain only at `132`, `156`, `175`, `189`, `198`, `204`, `224`,
+   `228`, and `240`; all are `3alpha+2beta` isosceles-`alpha+beta`
+   survivors.
 
 ## Current Diophantine Status for `n=19`
 

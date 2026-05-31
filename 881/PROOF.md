@@ -1474,7 +1474,7 @@ n>\max\{N_0,\ 2D\}
 \]
 with
 \[
-n<b+d_b-N_0+m_0.
+n<\min\{b+m_0,\ b+d_b-N_0+m_0\}.
 \]
 This is possible for all sufficiently large \(b\), since \(d_b\ge-1\).
 The integer \(n\) cannot be represented as a sum of two elements of \(A\).
@@ -1706,6 +1706,84 @@ sizes. Any proof of the finitely-bad \(k=2\) case must either use more
 arithmetic structure than the abstract barrier property, or handle such
 mixed-size barriers directly.
 
+There is also no purely combinatorial reduction to bounded width. On an
+infinite ordered set \(P=\{p_1<p_2<\cdots\}\), the Schreier-type family
+\[
+\mathcal S=\{F\subset P:\ |F|=\operatorname{index}(\min F)+1\}
+\]
+is a barrier: every infinite \(X=\{x_1<x_2<\cdots\}\subset P\) contains the
+set consisting of its first \(\operatorname{index}(x_1)+1\) elements. But
+on every infinite tail of \(P\), the sizes of the sets in \(\mathcal S\)
+are unbounded. Hence even after thinning to an infinite subset, the
+late-bad barrier in a counterexample need not have bounded size for
+combinatorial reasons alone.
+
+## Lemma 8.5a: Bounded-width barriers can be made uniform on a tail
+
+Let \(P\subseteq\mathbb N\) be an infinite set, let \(q\ge2\), and suppose
+that for every infinite \(X\subset P\) and every \(L\), there is a finite set
+\[
+F\subset X,\qquad 2\le |F|\le q,
+\]
+with a witness \(w_F>L\) for some property \(\mathcal P(F,w_F)\). Then
+there are an integer
+\[
+r\in\{2,\ldots,q\}
+\]
+and an infinite set
+\[
+M=\{m_1<m_2<\cdots\}\subset P
+\]
+such that for every \(L\) there is \(J(L)\) with the following property:
+every
+\[
+F\in[\{m_j:j\ge J(L)\}]^r
+\]
+has some witness \(w_F>L\) satisfying \(\mathcal P(F,w_F)\).
+
+Proof. For fixed \(L\) and \(2\le s\le q\), let
+\[
+\mathcal H_{s,L}
+=\{F\in[P]^s:\text{ there is }w>L\text{ with }\mathcal P(F,w)\}.
+\]
+The hypothesis says that
+\[
+\bigcup_{s=2}^q\mathcal H_{s,L}
+\]
+has no infinite independent set.
+
+We claim that for each fixed \(L\), there are \(s(L)\in\{2,\ldots,q\}\)
+and an infinite \(P_L\subset P\) such that
+\[
+[P_L]^{s(L)}\subseteq\mathcal H_{s(L),L}. \tag{1}
+\]
+This follows by induction on \(q\). For \(q=2\), it is exactly infinite
+Ramsey's theorem applied to pairs, since there is no infinite independent
+set. For the induction step, apply Ramsey's theorem to the \(q\)-subsets
+and \(\mathcal H_{q,L}\). If there is an infinite clique, (1) holds with
+\(s(L)=q\). Otherwise pass to an infinite set independent for
+\(\mathcal H_{q,L}\); the lower-uniformity union still has no infinite
+independent subset, so the induction hypothesis applies.
+
+Apply the claim successively for \(L=1,2,3,\ldots\), producing nested
+infinite sets
+\[
+P=P_0\supset P_1\supset P_2\supset\cdots
+\]
+and values \(s(L)\). Since only finitely many values occur, choose an
+infinite sequence \(L_1<L_2<\cdots\) on which \(s(L_i)=r\) is constant.
+Choose
+\[
+m_i\in P_{L_i}
+\]
+recursively increasing. For fixed \(L\), choose \(i\) with \(L_i\ge L\).
+The tail \(\{m_j:j\ge i\}\) lies in \(P_{L_i}\), so every \(r\)-subset of
+that tail has a witness \(>L_i\ge L\). \(\square\)
+
+This lemma is useful only after an arithmetic argument supplies a bounded
+width \(q\). The Schreier example above shows that no such \(q\) follows
+from the abstract barrier property alone.
+
 ## Lemma 8.6: Large-excess collective barriers force partial recurrence
 
 Keep the hypotheses of Lemma 8.4. Suppose that for some \(q\), the sets
@@ -1776,7 +1854,65 @@ reflected mirrors needed in the repair construction of Theorem 8.2. If the
 only available barriers have bounded excess, then this recurrence argument
 does not apply; this is exactly the delayed-threshold obstruction.
 
-## Lemma 8.6a: Bounded top-excess pair barriers force a good deletion
+## Lemma 8.6a: Bounded second-excess finite barriers force a good deletion
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Suppose there are a finite set \(E\subset A\) and a
+constant \(D\) such that for every infinite \(X\subset A\setminus E\) and
+every \(L\), there are a finite set
+\[
+F=\{f_1<\cdots<f_r\}\subset X,\qquad r\ge2,
+\]
+and a witness \(w\) satisfying
+\[
+w>L,\qquad w\ge\max F-1,\qquad w\le f_2+D,
+\]
+and
+\[
+w\notin3(A\setminus F).
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. We prove tail finite reflection-recurrence and apply Lemma 2.4.
+Let
+\[
+T\subset A\cap(D,\infty)
+\]
+be finite, and let \(L_0\) be arbitrary. Choose an infinite
+\[
+X\subset A\setminus(E\cup T)
+\]
+whose pairwise gaps exceed \(L_0+1\). Apply the hypothesis with
+\[
+L>\max T+N_0.
+\]
+Then for every \(t\in T\), \(w-t\ge N_0\), so by Lemma 10.1 the set \(F\)
+meets every two-term representation of \(w-t\) from \(A\).
+
+No such representation can use any \(f_i\) with \(i\ge2\), because
+\[
+w-t-f_i\le f_2+D-t-f_i\le D-t<0.
+\]
+Therefore every two-term representation of \(w-t\) uses \(f_1\). Since
+\(w-t\in2A\), there is \(c_t\in A\) with
+\[
+w-t=f_1+c_t.
+\]
+Put \(m=w-f_1\). Then
+\[
+m-t=c_t\in A\qquad(t\in T).
+\]
+Moreover,
+\[
+m=w-f_1\ge f_2-f_1-1>L_0
+\]
+because \(w\ge\max F-1\ge f_2-1\) and the elements of \(X\) have pairwise
+gaps greater than \(L_0+1\). Thus the reflection centers can be made
+arbitrarily large for every finite \(T\subset A\cap(D,\infty)\). Lemma 2.4
+gives the desired infinite deletion. \(\square\)
+
+## Corollary 8.6b: Bounded top-excess pair barriers force a good deletion
 
 Work in the remaining \(k=2\) case after Corollary 8.3b. Thus there is a
 finite set \(E\subset A\) such that every \(a\in G=A\setminus E\) has
@@ -1795,50 +1931,15 @@ y\le w\le y+D,\qquad w\notin3(A\setminus\{x,y\}).
 Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
 order-3 basis.
 
-Proof. We prove tail finite reflection-recurrence and then apply Lemma 2.4
-with \(k=2\). Let \(N_0\) be an order-2 threshold for \(A\). Fix a finite
+Proof. Apply Lemma 8.6a with the same exceptional set \(E\) and with
 \[
-T\subset A\cap(D,\infty)
+F=\{x,y\}.
 \]
-and a bound \(L_0\). Choose an infinite
+The hypotheses \(y\le w\le y+D\) are exactly
 \[
-X\subset G\setminus T
+w\ge\max F-1,\qquad w\le f_2+D.
 \]
-whose pairwise gaps exceed \(L_0\). Apply the hypothesis with
-\[
-L>\max T+N_0.
-\]
-We get \(x<y\) in \(X\) and \(w>L\) with \(y\le w\le y+D\) and
-\[
-w\notin3(A\setminus\{x,y\}).
-\]
-
-For every \(t\in T\), we have \(t\notin\{x,y\}\) and \(w-t\ge N_0\). By
-Lemma 10.1, the pair \(\{x,y\}\) meets every two-term representation of
-\(w-t\) from \(A\). But no such representation can use \(y\), since
-\[
-w-t-y\le D-t<0.
-\]
-Therefore every two-term representation of \(w-t\) uses \(x\). Since
-\(w-t\in2A\), there is \(c_t\in A\) with
-\[
-w-t=x+c_t.
-\]
-Putting
-\[
-m=w-x
-\]
-gives
-\[
-m-t=c_t\in A\qquad(t\in T).
-\]
-Also
-\[
-m=w-x\ge y-x>L_0
-\]
-by the pairwise-gap choice. Since \(L_0\) was arbitrary, the required
-reflection centers are arbitrarily large. Lemma 2.4 now gives the desired
-infinite deletion. \(\square\)
+\(\square\)
 
 In the same remaining case, genuine pair witnesses below the larger deleted
 element are only low-threshold artefacts. If \(x<y\) lie in \(G\), if
@@ -1892,6 +1993,59 @@ only a residue-level obstruction, not an integer counterexample. By Lemma
 It does show that any proof of the finitely-bad \(k=2\) case must rule out
 persistent multi-center reflected barriers, not merely invoke Lemma 10.1
 and pigeonhole.
+
+## Example 8.8: Finite-center repairs need coherence
+
+A naive finite-center replacement for Lemma 8.2a is false. It is not enough
+that each deleted pattern be repairable with some retained center; the same
+center must be compatible with the representation being repaired.
+
+Work in the finite group \(G=\mathbb Z/5\mathbb Z\). Let
+\[
+S=\{0,1,2,3\},\qquad D=\{0,3\},\qquad C=S\setminus D=\{1,2\}.
+\]
+Then
+\[
+2S=G,
+\]
+and both singleton deletions remain three-fold bases:
+\[
+3(S\setminus\{0\})=G,\qquad 3(S\setminus\{3\})=G.
+\]
+But the pair deletion has a hole:
+\[
+3C=\{0,1,3,4\},\qquad 2\notin3C.
+\]
+
+The two retained residues \(1,2\) repair all singleton and pair deleted
+patterns if the center is allowed to depend on the pattern:
+\[
+0+2\in2C,\qquad 3+1\in2C,
+\]
+and
+\[
+0+0+1,\ 0+3+1,\ 0+3+2,\ 3+3+2\in3C.
+\]
+However, no single center works. With \(e=1\), the repairs for \(0+e\) and
+\(3+3+e\) fail; with \(e=2\), the repairs for \(3+e\) and \(0+0+e\) fail.
+
+The hole \(2\) diagonalizes against the centers. For \(e=1\),
+\[
+2-e=1=0+1=3+3,
+\]
+and the deleted patterns \(\{0\}\) and \(\{3,3\}\) are exactly the ones not
+repairable with center \(1\). For \(e=2\),
+\[
+2-e=0=0+0=2+3,
+\]
+and the deleted patterns \(\{0,0\}\) and \(\{3\}\) are exactly the ones not
+repairable with center \(2\).
+
+Thus a finite-center repair theorem would need a coherence hypothesis: for
+each large \(n\), at least one retained center \(e\) must have a
+representation of \(n-e\) whose deleted subpattern is repairable with that
+same \(e\). Covering the possible deleted patterns by different centers is
+algebraically insufficient.
 
 ## Lemma 9: Robust two-sum witnesses force domination gaps
 
@@ -2417,6 +2571,14 @@ order-3 basis. A fortiori it is not an order-2 basis. \(\square\)
 This proposition is currently only a reduction. Lemmas 5.1 and 9 explain
 why the most obvious dense-interval/marker stages fail.
 
+After Corollary 8.3, this singleton stage route is known to be impossible
+for \(k=2\). Indeed, the conclusion of the stage hypotheses would make
+infinitely many one-point deletions fail at order \(3\), while Corollary
+8.3 says that any order-2 basis with infinitely many such one-point
+failures has a good infinite deletion. Thus Proposition 13.1 is best read
+as a diagnostic for why naive private-witness block constructions cannot
+exist in the \(k=2\) setting.
+
 ## Proposition 13.1b: Stage barriers need only be unbounded
 
 The singleton protection in Proposition 13.1 can be replaced by any
@@ -2553,6 +2715,15 @@ deletions may be harmless at order \(3\), while cross-stage pairs form an
 unbounded barrier. No construction satisfying the stage hypotheses is known
 in this workspace.
 
+Corollary 8.6b further restricts this route. In any cross-stage pair
+construction that evades the positive theorem, the witnesses for pairs
+\[
+a<b,\qquad a\in A_{s-1},\ b\in P_s,
+\]
+cannot have \(w_{s,a,b}-b\) bounded on every infinite tail. Persistent pair
+barriers must have unbounded top excess, or else tail reflection-recurrence
+would give a good deletion.
+
 ## Example 13.2: An isolated endpoint stage
 
 Proposition 13.1 is not locally inconsistent. Let \(a\ge4\) be even and put
@@ -2683,14 +2854,24 @@ the added elements needs local witnesses.
   after deleting \(F\) creates a retained gap below the witness, from
   \(w-\min F-\min A\) up to \(w-N_0\).
 * Warning 8.5 records that bounded-width barriers do not automatically
-  reduce to one fixed uniformity.
+  reduce to one fixed uniformity, and that abstract barriers need not have
+  bounded width on any infinite tail.
+* Lemma 8.5a says that if bounded width is supplied by arithmetic, Ramsey
+  thinning reduces the late-bad barrier to one fixed uniformity on an
+  infinite tail.
 * Lemma 8.6 shows that bounded-width barriers with large witness excess
   force partial reflection-recurrence.
-* Lemma 8.6a proves that bounded top-excess pair barriers actually force
-  tail reflection-recurrence and hence a good deletion.
+* Lemma 8.6a proves that finite barriers whose witnesses have bounded
+  excess over the second-smallest deleted element force tail
+  reflection-recurrence and hence a good deletion.
+* Corollary 8.6b gives the pair-barrier consequence: bounded top-excess
+  pair barriers cannot persist in a counterexample.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.
+* Example 8.8 shows that finite-center repair conditions need coherence:
+  repairing different deleted patterns with different retained centers does
+  not by itself imply an order-3 basis after deletion.
 * Lemma 9 gives a necessary domination-gap condition for individual robust
   two-sum witnesses in the \(k=2\) counterexample route.
 * Lemma 10 generalizes Lemma 8 to arbitrary \(k\), replacing translates of

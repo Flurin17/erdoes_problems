@@ -38,8 +38,11 @@ Current components:
   sufficient `3alpha+2beta=pi` constructions, including the triquadratic
   condition `N=2K^2-M^2`, `K|M^2`.
 - `beeson_3alpha2beta_boundary.py`: local boundary-star feasibility check for
-  selected `3alpha+2beta=pi` candidates; currently rules out the `N=14`
-  triquadratic raw candidate `(6,5,9)` in outer sides `(28,15,27)`.
+  selected `3alpha+2beta=pi` candidates, plus a generic boundary-integrality
+  filter for supported triquadratic, isosceles-beta, and isosceles-alpha
+  outer shapes. The boundary-star checks currently rule out the `N=14`
+  triquadratic raw candidate `(6,5,9)` in outer sides `(28,15,27)`, the `N=21`
+  isosceles-alpha candidate, and triquadratic candidates for `N=46` and `N=56`.
 - `beeson_isosceles_alpha_plus_beta_filter.py`: stronger source filter for the
   `3alpha+2beta=pi` isosceles-`alpha+beta` case.
 - `prime_case_dashboard.py`: high-level report for prime `N`, combining the
@@ -50,11 +53,12 @@ Current components:
 - `gamma_2pi3_nonisosceles_exact.py`: exact arithmetic filters for all four
   non-isosceles `gamma=2pi/3` templates, combining BLZ formulas with the
   boundary-integrality product formulas.
-- `gamma_2pi3_nonisosceles_boundary.py`: local boundary-star checker for small
-  exact non-isosceles `gamma=2pi/3` arithmetic candidates; currently rules out
-  `N=21`, `N=30`, `N=55`, `N=105`, and `N=120` in the
-  `(alpha,alpha+beta,alpha+2beta)` template, and `N=88` in the
-  `(alpha,2beta,2alpha+beta)` template.
+- `gamma_2pi3_nonisosceles_boundary.py`: endpoint-pair boundary-star checker
+  for exact non-isosceles `gamma=2pi/3` arithmetic candidates in all four BLZ
+  templates; currently rules out the recorded candidates for `N=21`, `N=30`,
+  `N=55`, `N=88`, `N=105`, `N=120`, and the `N=143` swaps.  In the `100..250`
+  dashboard it also removes the later BLZ survivors `154`, `168`, `210`, and
+  `220`.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

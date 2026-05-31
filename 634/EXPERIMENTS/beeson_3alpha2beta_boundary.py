@@ -34,6 +34,7 @@ from math import gcd, isqrt
 Angle = str
 Side = str
 PlacedEdge = tuple[Side, Angle, Angle]
+EndpointPair = tuple[PlacedEdge, PlacedEdge]
 
 SIDE_LENGTHS_14 = {"a": 6, "b": 5, "c": 9}
 SIDE_ENDPOINTS: dict[Side, tuple[Angle, Angle]] = {
@@ -155,6 +156,33 @@ def oriented_boundary_paths(length: int, side_lengths: dict[Side, int]) -> list[
 
         rec(0, [])
     return paths
+
+
+def oriented_boundary_endpoint_pairs(length: int, side_lengths: dict[Side, int]) -> set[EndpointPair]:
+    """Return possible `(first,last)` oriented edges for a straight boundary side.
+
+    This is the finite-state version of `oriented_boundary_paths`. It preserves
+    exactly the information needed for corner star compatibility, but avoids
+    enumerating all side-label decompositions for long sides.
+    """
+    straight_targets = ["straight-no-gamma", "straight-gamma"]
+    states_by_length: list[set[EndpointPair]] = [set() for _ in range(length + 1)]
+    for side, side_length in side_lengths.items():
+        if side_length > length:
+            continue
+        for edge in orientations(side):
+            states_by_length[side_length].add((edge, edge))
+
+    for total in range(length + 1):
+        for first, last in tuple(states_by_length[total]):
+            for side, side_length in side_lengths.items():
+                next_total = total + side_length
+                if next_total > length:
+                    continue
+                for edge in orientations(side):
+                    if transition_types(last, edge, straight_targets):
+                        states_by_length[next_total].add((first, edge))
+    return states_by_length[length]
 
 
 def feasible_n14_triquadratic_boundaries() -> list[
@@ -329,39 +357,6 @@ def feasible_n21_isosceles_alpha_boundaries() -> list[
                 continue
             for path_20 in paths_20:
                 if not transition_types(path_12[-1], path_20[0], ["alpha+2beta"]):
-                    continue
-                if not transition_types(path_20[-1], path_01[0], ["alpha"]):
-                    continue
-                out.append((path_01, path_12, path_20))
-    return out
-
-
-def feasible_isosceles_alpha_plus_beta_boundaries(
-    tile_sides: tuple[int, int, int],
-    equal_side: int,
-    base: int,
-) -> list[tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]]:
-    """Return feasible cycles for outer angles `(alpha,alpha+beta,alpha+beta)`.
-
-    Vertices are ordered as:
-
-    - V0 has angle `alpha`,
-    - V1 and V2 have angle `alpha+beta`.
-
-    Therefore side V1-V2 is the base opposite `alpha`, and the other two sides
-    have the equal-side length from Beeson's Section 11.4 filter.
-    """
-    side_lengths = dict(zip(("a", "b", "c"), tile_sides, strict=True))
-    paths_01 = oriented_boundary_paths(equal_side, side_lengths)
-    paths_12 = oriented_boundary_paths(base, side_lengths)
-    paths_20 = oriented_boundary_paths(equal_side, side_lengths)
-    out = []
-    for path_01 in paths_01:
-        for path_12 in paths_12:
-            if not transition_types(path_01[-1], path_12[0], ["alpha+beta"]):
-                continue
-            for path_20 in paths_20:
-                if not transition_types(path_12[-1], path_20[0], ["alpha+beta"]):
                     continue
                 if not transition_types(path_20[-1], path_01[0], ["alpha"]):
                     continue

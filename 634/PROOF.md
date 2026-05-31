@@ -555,6 +555,21 @@ N = (a+2b)(b+2a)m^2.
 Both factors are integers greater than `1`, so this template also has no prime
 tile count.
 
+The corresponding primitive sine-law outer side ratio is
+
+```text
+(a(a+2b), b(b+2a), c^2).
+```
+
+For primitive `c^2=a^2+ab+b^2`, this triple has gcd `1`. A common prime divisor
+would divide `c`; since `c` is coprime to `a` and `b`, it must divide both
+`a+2b` and `b+2a`, hence either divides `3` or contradicts primitivity. The
+lemma below rules out `3 | c`. Thus the integral BLZ coefficient is already the
+area coefficient forced by boundary integrality. In particular, `N=143` has the
+two arithmetic candidates `(a,b,c)=(3,5,7)` and `(5,3,7)` with primitive outer
+side triples `(39,55,49)` and `(55,39,49)`; they require a separate
+boundary-star obstruction, not a length-integrality obstruction.
+
 For the two remaining templates BLZ gives exact square-class constraints, not
 prime impossibility:
 
@@ -680,21 +695,30 @@ N = 3(a+2b)(a+b)m^2,
 respectively. This proves, for example, that `N=14`, `15`, and `22` do not even
 survive the non-isosceles `gamma=2pi/3` arithmetic filters, while `21` and `30`
 survive in the first BLZ template. The follow-up experiment
-`EXPERIMENTS/gamma_2pi3_nonisosceles_boundary.py` applies the local
+`EXPERIMENTS/gamma_2pi3_nonisosceles_boundary.py` applies the local endpoint
 boundary-star check to these and later low-scale survivors:
 
+The endpoint check is deliberately corner-aware: at a straight boundary vertex
+it requires the ordinary side-label star, while at an outer corner it also
+allows the two incident boundary sides to be the two sides of a single tile
+when the whole outer corner is exactly one tile angle. This avoids the
+overcounting error that would count one tile corner twice.
+
 ```text
-N=21: tile (5,16,19), scale 4, outer sides (84,20,76);
-N=30: tile (7,8,13), scale 4, outer sides (60,28,52);
-N=55: tile (39,16,49), scale 4, outer sides (220,156,196);
-N=88: tile (3,5,7), scale 1, outer sides (21,55,56);
-N=105: tiles (8,7,13) and (16,5,19), outer sides
-       (105,56,91) and (105,80,95);
-N=120: tile (7,8,13), scale 8, outer sides (120,56,104).
+N=21: tile (5,16,19), scale 4, opposite outer sides (20,76,84);
+N=30: tile (7,8,13), scale 4, opposite outer sides (28,52,60);
+N=55: tile (39,16,49), scale 4, opposite outer sides (156,196,220);
+N=88: tile (3,5,7), scale 1, opposite outer sides (21,55,56);
+N=105: tiles (8,7,13) and (16,5,19), opposite outer sides
+       (56,91,105) and (80,95,105);
+N=120: tile (7,8,13), scale 8, opposite outer sides (56,104,120);
+N=143: tiles (3,5,7) and (5,3,7), opposite outer sides
+       (39,55,49) and (55,39,49).
 ```
 
-All these candidates have zero feasible full boundary cycles, so none can be a
-tiling.
+All these candidates have zero feasible full boundary endpoint cycles, so none
+can be a tiling. The same generic endpoint-pair check removes the later BLZ
+survivors `154`, `168`, `210`, and `220` in the `100..250` diagnostic scan.
 
 The remaining prime-specific issue is Beeson's isosceles
 `gamma=2pi/3` filter. Running the exact divisibility and square test from
@@ -946,8 +970,8 @@ BLZ Problem #633 outer-triangle classes to the #634 case filters below.
 | right-tile isosceles | recorded arithmetic restrictions | source dependence remains |
 | isosceles `gamma=2alpha` | squarefree obstruction recorded | complete composite formula not reconstructed |
 | isosceles `gamma=2pi/3` | ruled out in the rational nondegenerate case by boundary-transition lemma | audit interaction with every source-reduced equilateral/degenerate exception |
-| `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected local boundary/integrality eliminations for `14`, `21`, `39`, `46`, `56`, `62`, `63`, `66`, `70`, `92`, `94`, `99`, `111`, `119`, and `124` | not a complete composite classification |
-| non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; selected local boundary eliminations for `21`, `30`, `55`, `88`, `105`, and `120` | composite survivors above this range are not classified |
+| `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected boundary-star eliminations and a generic boundary-integrality filter for supported outer shapes | isosceles-`alpha+beta` composite survivors remain after Beeson's stronger source filter; not a complete composite classification |
+| non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; endpoint boundary-star eliminations for `21`, `30`, `55`, `88`, `105`, `120`, `143`, and the later `100..250` BLZ survivors | no explicit encoded survivor remains below `250`; a general composite obstruction is not yet proved |
 | equilateral outer triangle with tile angle `pi/3` or `2pi/3` | exact boundary-length arithmetic filter, `gamma=2pi/3` and `gamma=pi/3` boundary-star checks, and lattice exact-cover checks added | exact `14`, `15`, `21`, and `30` equilateral candidates eliminated; source-level reduction to this rational/integer model still needs auditing |
 | Zhang positive families | sufficient constructions recorded | conjectural converses are not used as obstructions |
 
@@ -986,6 +1010,11 @@ tile shapes and other counts.
   `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor
   in the currently encoded filters. This is not a proof of negativity until
   the source-reduction coverage gaps in the matrix above are closed.
+- In the range `100..250`, the current encoded survivor list has shrunk to
+  `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`, and `240`. All are
+  `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4
+  filter; no non-isosceles `gamma=2pi/3` BLZ survivor remains in this range
+  after the endpoint boundary-star check.
 - Zhang's conjectural exactness statements are not proved here.
 - For `19`, all source-reduced cases are now ruled out in this workspace:
   similar/reptile, commensurable-angle, equilateral-outer, all isosceles

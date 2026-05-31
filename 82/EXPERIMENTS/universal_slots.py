@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Search fixed residue-slot multisets for all small even graphs."""
+"""Search fixed residue-slot multisets for small source-modular graphs."""
 
 from __future__ import annotations
 
@@ -154,15 +154,76 @@ def sample(
         print("survivor=" + ",".join(map(str, slots)))
 
 
+def sample_source_modular(
+    n: int,
+    source_modulus: int,
+    target_modulus: int,
+    candidates: list[tuple[int, ...]],
+    trials: int,
+    seed: int,
+    max_attempts: int,
+) -> None:
+    rng = random.Random(seed)
+    pc = ri.precompute(n)
+    edge_index = {edge: i for i, edge in enumerate(pc.edges)}
+    edge_count = len(pc.edges)
+    full = (1 << n) - 1
+    survivors = list(candidates)
+    attempts = 0
+    checked = 0
+    while checked < trials and attempts < max_attempts and survivors:
+        attempts += 1
+        graph_mask = modular_partition.random_full_modular_candidate(
+            n,
+            source_modulus,
+            edge_count,
+            rng,
+            pc,
+            edge_index,
+        )
+        if graph_mask is None:
+            continue
+        if not ri.is_modular_on(graph_mask, full, source_modulus, pc):
+            continue
+        checked += 1
+        next_survivors: list[tuple[int, ...]] = []
+        for slots in survivors:
+            if has_slot_partition(n, graph_mask, target_modulus, slots, pc):
+                next_survivors.append(slots)
+            else:
+                print(
+                    "killed="
+                    + ",".join(map(str, slots))
+                    + f" mask={graph_mask} trial={checked}"
+                )
+        survivors = next_survivors
+    print(f"n={n}")
+    print(f"source_modulus={source_modulus}")
+    print(f"target_modulus={target_modulus}")
+    print(f"attempts={attempts}")
+    print(f"sample_source_modular_checked={checked}")
+    print(f"survivor_count={len(survivors)}")
+    for slots in survivors:
+        print("survivor=" + ",".join(map(str, slots)))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--modulus", type=int, default=4)
     parser.add_argument(
+        "--slot-count",
+        type=int,
+        help="number of slots to generate when --candidates is omitted",
+    )
+    parser.add_argument(
         "--candidates",
         help="semicolon-separated residue multisets, e.g. 0,0,1,2;0,1,2,3",
     )
     parser.add_argument("--sample-even", type=int, default=0)
+    parser.add_argument("--sample-source-modular", type=int, default=0)
+    parser.add_argument("--source-modulus", type=int)
+    parser.add_argument("--max-attempts", type=int, default=1000000)
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
     if args.candidates:
@@ -172,7 +233,21 @@ def main() -> None:
             if block
         ]
     else:
-        candidates = list(combinations_with_replacement(range(args.modulus), args.modulus))
+        slot_count = args.slot_count if args.slot_count is not None else args.modulus
+        candidates = list(combinations_with_replacement(range(args.modulus), slot_count))
+    if args.sample_source_modular:
+        if args.source_modulus is None:
+            parser.error("--sample-source-modular requires --source-modulus")
+        sample_source_modular(
+            args.n,
+            args.source_modulus,
+            args.modulus,
+            candidates,
+            args.sample_source_modular,
+            args.seed,
+            args.max_attempts,
+        )
+        return
     if args.sample_even:
         sample(args.n, args.modulus, candidates, args.sample_even, args.seed)
     else:

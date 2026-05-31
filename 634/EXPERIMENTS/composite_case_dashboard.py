@@ -26,8 +26,7 @@ from equilateral_boundary_exact import candidates_for_n as equilateral_exact_can
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
-from gamma_2pi3_nonisosceles_boundary import feasible_alpha_alpha_beta_alpha_2beta
-from gamma_2pi3_nonisosceles_boundary import feasible_alpha_2beta_2alpha_beta
+from gamma_2pi3_nonisosceles_boundary import boundary_star_obstructed as gamma_boundary_obstructed
 from gamma_2pi3_nonisosceles_exact import candidates_for_n as gamma_nonisosceles_candidates
 from zhang_constructive_families import constructed_counts as zhang_counts
 
@@ -307,55 +306,8 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int, equila
     blz = gamma_nonisosceles_candidates(n)
     unresolved_blz = []
     eliminated_blz = []
-    n21_gamma_boundary_obstructed = n == 21 and not feasible_alpha_alpha_beta_alpha_2beta((5, 16, 19), 4)
-    n30_gamma_boundary_obstructed = n == 30 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 4)
-    n55_gamma_boundary_obstructed = n == 55 and not feasible_alpha_alpha_beta_alpha_2beta((39, 16, 49), 4)
-    n105_first_gamma_boundary_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((8, 7, 13), 7)
-    n105_second_gamma_boundary_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((16, 5, 19), 5)
-    n120_gamma_boundary_obstructed = n == 120 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 8)
-    n88_gamma_boundary_obstructed = n == 88 and not feasible_alpha_2beta_2alpha_beta((3, 5, 7), 1)
     for candidate in blz:
-        if (
-            n21_gamma_boundary_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (5, 16, 19)
-        ):
-            eliminated_blz.append((candidate, "boundary-star obstruction"))
-        elif (
-            n30_gamma_boundary_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (7, 8, 13)
-        ):
-            eliminated_blz.append((candidate, "boundary-star obstruction"))
-        elif (
-            n55_gamma_boundary_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (39, 16, 49)
-        ):
-            eliminated_blz.append((candidate, "boundary-star obstruction"))
-        elif (
-            n105_first_gamma_boundary_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (8, 7, 13)
-        ):
-            eliminated_blz.append((candidate, "boundary-star obstruction"))
-        elif (
-            n105_second_gamma_boundary_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (16, 5, 19)
-        ):
-            eliminated_blz.append((candidate, "boundary-star obstruction"))
-        elif (
-            n120_gamma_boundary_obstructed
-            and candidate.template == "alpha,alpha+beta,alpha+2beta"
-            and candidate.sides == (7, 8, 13)
-        ):
-            eliminated_blz.append((candidate, "boundary-star obstruction"))
-        elif (
-            n88_gamma_boundary_obstructed
-            and candidate.template == "alpha,2beta,2alpha+beta"
-            and candidate.sides == (3, 5, 7)
-        ):
+        if gamma_boundary_obstructed(candidate.template, candidate.sides, candidate.square_parameter):
             eliminated_blz.append((candidate, "boundary-star obstruction"))
         else:
             unresolved_blz.append(candidate)
