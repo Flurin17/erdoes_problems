@@ -7290,6 +7290,56 @@ This corollary is the packet-level form of Lemma 8.6g'''': finite windows
 may contain large cross-reflected Sidon packets, but such a packet cannot
 coexist with recurrence of the target color in the integer setting.
 
+### Lemma 8.6g''''.2: Finite Sidon colorings cannot be recurrent
+
+Let
+\[
+A=E\cup C_1\cup\cdots\cup C_q
+\]
+be a disjoint union, where \(E\) is finite and each \(C_j\) is Sidon. If
+\[
+C_i
+\]
+is reflection-recurrent in \(A\), then
+\[
+|C_i|\le q. \tag{1}
+\]
+Consequently, no infinite set \(A\) can be partitioned, up to a finite
+exceptional set, into finitely many Sidon color classes that are all
+reflection-recurrent in \(A\).
+
+Proof. Suppose \(C_i\) contains \(q+1\) distinct elements; call this set
+\[
+U.
+\]
+Take recurrence centers \(m\) for \(U\) arbitrarily large, with
+\[
+m>2\max U+\max(E\cup\{0\}).
+\]
+For any such \(m\), at most one mirror \(m-u\) lies in \(C_i\), since two
+would give the same-color collision
+\[
+u+(m-u)=v+(m-v)
+\]
+inside \(C_i\). None of the mirrors lies in \(E\), so at least \(q\) of the
+\(q+1\) mirrors lie in the other \(q-1\) colors. Hence some color
+\[
+C_j,\qquad j\ne i,
+\]
+contains mirrors of two distinct elements \(u,v\in U\). There are only
+finitely many choices of \((j,\{u,v\})\), so two distinct recurrence
+centers \(m\ne n\) have
+\[
+m-u,\ m-v,\ n-u,\ n-v\in C_j.
+\]
+Then
+\[
+(m-u)+(n-v)=(m-v)+(n-u)
+\]
+is a nontrivial same-color two-sum collision in \(C_j\), contradiction.
+Thus \(|C_i|\le q\). If all \(C_i\) are recurrent, every color has at most
+\(q\) elements, so \(A\) is finite up to \(E\). \(\square\)
+
 ## Warning 8.6g'''a: Bipartite recurrent colors are quotient-compatible
 
 The almost-bipartite conclusion of Lemma 8.6g''' is not a finite quotient
@@ -11522,6 +11572,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.6g''''.1 is the packet-level version: a cross-reflected
   packet \(S\subset C\), \(t-S\subset D\), has size at most two when the
   target Sidon color \(D\) is recurrent.
+* Lemma 8.6g''''.2 generalizes this to any finite Sidon coloring: in a
+  \(q\)-color partition up to finite exceptions, a recurrent color has at
+  most \(q\) elements. Hence no finite certificate-free coloring of a
+  cofinite tail can make all colors recurrent.
 * Warning 8.6g'''a shows only the finite quotient shadow of this shape:
   one center can swap two two-point colors modulo \(6\), but this does not
   lift to arbitrarily many integer centers for a three-point test set.

@@ -1813,6 +1813,11 @@ Corollary 8.6g''''.1 gives the packet version: if \(S\subset C\),
 \(t-S\subset D\), and \(D\) is recurrent, then \(|S|\le2\). A recurrence
 center for \(t-S\) shifts all but one element of \(S\) by a fixed nonzero
 \(h\) inside \(C\), which a Sidon set cannot do twice.
+Lemma 8.6g''''.2 gives the finite-color version: in a \(q\)-color Sidon
+partition up to a finite exceptional set, any recurrent color has at most
+\(q\) elements. Thus no finite certificate-free coloring of a cofinite
+tail can have all colors recurrent. This is the likely replacement for the
+old rank-sensitive certificate-free-color escape in fixed-rank barriers.
 The shape is still finite-quotient compatible:
 in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
 \(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the
