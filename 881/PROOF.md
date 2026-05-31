@@ -3824,6 +3824,66 @@ genuine pair-private holes for \(\{d,b\}\). A prefix star may instead be
 repaired after deleting only \(\{d,b\}\) but fail after a larger old core is
 deleted, as in the finite example below.
 
+## Lemma 8.2c'': Low-excess fixed-singleton barriers force tail recurrence
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Fix \(d\in A\) and \(D\ge0\), and put
+\[
+M=\max\{D,d\}.
+\]
+Suppose that for every finite nonempty
+\[
+T\subset A\cap(M,\infty)
+\]
+and every \(L\), there are a finite nonempty set
+\[
+G\subset A\setminus(T\cup\{d\})
+\]
+and a witness \(w\) such that
+\[
+w-\max T\ge N_0,\qquad w-d>L,\qquad \min G\le w\le \min G+D, \tag{1}
+\]
+and
+\[
+w\notin3(A\setminus(\{d\}\cup G)). \tag{2}
+\]
+Then the tail \(A\cap(M,\infty)\) is reflection-recurrent. Consequently
+there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. Fix finite nonempty \(T\subset A\cap(M,\infty)\) and \(L\), and
+choose \(G,w\) satisfying (1)--(2). Put \(F=\{d\}\cup G\). For each
+\(t\in T\), choose a two-term representation
+\[
+w-t=a_t+a'_t,\qquad a_t,a'_t\in A,
+\]
+which exists because \(w-t\ge N_0\). If some representation avoided \(F\),
+then adding \(t\in A\setminus F\) would put \(w\) in \(3(A\setminus F)\),
+contrary to (2). Hence every two-term representation of \(w-t\) uses
+either \(d\) or an element of \(G\).
+
+No element \(g\in G\) can occur, since
+\[
+w-t-g\le w-t-\min G\le D-t<0.
+\]
+Therefore some representation uses \(d\), and
+\[
+w-t=d+c_t,\qquad c_t\in A.
+\]
+With \(m=w-d\), this gives \(m>L\) and
+\[
+m-t=c_t\in A\qquad(t\in T).
+\]
+Thus \(A\cap(M,\infty)\) is reflection-recurrent, and Lemma 2.4 gives the
+desired deletion. \(\square\)
+
+Lemma 8.2c' is the special case \(|G|=1\). The point of the more general
+form is that an enumerated Schreier edge first completed by a fixed prefix
+vertex has exactly one fixed endpoint and several later moving endpoints.
+If its witness remains close to the first later endpoint, all those moving
+endpoints are too large to color shifted test rows, so the fixed endpoint
+again reflects the tail.
+
 For the pure-star setting, more generally, if a fixed finite prefix
 \(\Delta\) and infinitely many candidates \(b\) satisfy
 \[
@@ -9551,6 +9611,56 @@ Corollary 13.1k gives an infinite \(B\subset A\) such that \(A\setminus B\)
 is an order-3 basis, contradicting that \(A\) is a counterexample.
 \(\square\)
 
+## Corollary 13.1l.1: Higher prefix edges need divergent first-tail excess
+
+Work in the \(k=2\) case, and suppose \(A\) is a counterexample to the
+desired order-3 deletion conclusion, with order-2 threshold \(N_0\). Fix
+\[
+d\in A,\qquad r\ge1.
+\]
+Let \(Y\subset A\setminus\{d\}\) be infinite. Then for every \(D\ge0\) it
+is not possible that every \(r\)-element subset \(H\subset Y\) has a
+witness \(w_H\) satisfying
+\[
+\min H\le w_H\le \min H+D,\qquad
+w_H\notin3(A\setminus(\{d\}\cup H)). \tag{1}
+\]
+
+Equivalently, for any fixed prefix vertex \(d\) and any fixed rank \(r+1\),
+the minimum possible excess
+\[
+w_H-\min H
+\]
+for genuine holes of \(\{d\}\cup H\) is unbounded on every infinite later
+tail \(Y\). Missing witnesses count as infinite excess.
+
+Proof. Suppose (1) holds for some \(D\) and infinite \(Y\). Put
+\[
+M=\max\{D,d\}.
+\]
+Fix finite nonempty \(T\subset A\cap(M,\infty)\) and \(L\). Choose
+\[
+H\in[Y]^r
+\]
+disjoint from \(T\cup\{d\}\), with
+\[
+\min H>\max\{M,\max T+N_0,L+d\}.
+\]
+Then its witness \(w_H\) satisfies
+\[
+w_H-\max T\ge N_0,\qquad w_H-d>L,\qquad
+\min H\le w_H\le\min H+D,
+\]
+and Lemma 8.2c'' gives a good infinite deletion, contradiction. \(\square\)
+
+For an enumerated Schreier target, apply this with \(d=u_i\), \(r=i\), and
+\(Y\) an infinite subset of the later vertices \(\{u_j:j>i\}\). Since
+Lemma 13.1j requires all edges \(\{u_i\}\cup H\) with
+\(H\in[Y]^i\), a counterexample cannot witness all of them within bounded
+distance of their first later endpoint. Thus every prefix level in a
+Schreier lift must develop its own divergent first-tail excess, not merely
+the first pair level.
+
 ### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
 
 Corollary 13.1l does not say that a finite first-prefix pair edge must be
@@ -10426,6 +10536,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.2c' gives the bounded pair-private analogue: a fixed lower
   endpoint with uniformly low-top-excess pair witnesses over arbitrary
   finite tail tests also forces tail reflection-recurrence.
+* Lemma 8.2c'' extends this to fixed-singleton finite barriers: if all
+  moving deleted endpoints are above the shifted rows because the witness
+  is close to their minimum, the fixed endpoint reflects the whole tail.
 * Lemma 8.2d gives the matching certificate-forcing statement for
   multi-center fixed-prefix stars; persistent star obstructions must again
   live in the large certificate-free subset regime.
@@ -10683,6 +10796,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l removes the non-uniform escape for rank-2 first-prefix
   links: infinitely many bounded-excess pair witnesses for a fixed lower
   endpoint already supply Corollary 13.1k's finite-test quantifier.
+* Corollary 13.1l.1 applies Lemma 8.2c'' to every fixed Schreier prefix
+  level: witnesses must have unbounded excess over the first later endpoint
+  on every infinite later tail.
 * Diagnostic 13.1m shows that high-excess first-pair starts are locally
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.

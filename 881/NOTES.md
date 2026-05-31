@@ -1511,6 +1511,13 @@ taking a later witness. Hence, in a counterexample, for each fixed \(D\)
 only finitely many later pair links may have \(w-p\le D\). Any viable
 Schreier lift must make first-prefix pair excess diverge on every infinite
 tail, or move into genuinely higher-rank prefix obstructions.
+Lemma 8.2c'' and Corollary 13.1l.1 extend this beyond pairs. If a fixed
+prefix vertex \(d\) is deleted together with a finite moving set \(H\), and
+the witness stays within \(D\) of \(\min H\), then none of the moving
+vertices can occur in the shifted rows \(w-t\) for \(t>D\); the fixed
+vertex \(d\) reflects the whole tail. Hence every Schreier prefix level
+\(u_i\) must have divergent witness excess above the first later endpoint
+on every infinite later tail.
 
 The new `--pair-edge-search` diagnostic confirms that high-excess first
 pair starts are locally possible but expensive. Starting from the P5 seed,
