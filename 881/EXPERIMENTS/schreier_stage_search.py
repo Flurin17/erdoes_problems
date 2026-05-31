@@ -406,6 +406,34 @@ def p6_order_diagnostic() -> None:
     elements = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30, 38, 40, 43, 44}
     vertices = (10, 15, 18, 19, 30, 38)
     coverage = cover_end(elements, 2, 3 * max(elements))
+    good_pairs = {
+        frozenset(pair)
+        for pair in combinations(vertices, 2)
+        if witnesses_for_edges(elements, [pair], coverage) is not None
+    }
+    good_triples = {
+        frozenset(triple)
+        for triple in combinations(vertices, 3)
+        if witnesses_for_edges(elements, [triple], coverage) is not None
+    }
+    first_candidates = [
+        v
+        for v in vertices
+        if all(frozenset({v, u}) in good_pairs for u in vertices if u != v)
+    ]
+    print("order-prefix constraints")
+    print("  first candidates=", first_candidates)
+    for first in first_candidates:
+        second_candidates = []
+        after_first = tuple(v for v in vertices if v != first)
+        for second in after_first:
+            tail = tuple(v for v in after_first if v != second)
+            if all(
+                frozenset({second, a, b}) in good_triples
+                for a, b in combinations(tail, 2)
+            ):
+                second_candidates.append(second)
+        print("  after first=", first, "second candidates=", second_candidates)
     best: list[tuple[int, tuple[int, ...], list[tuple[int, ...]]]] = []
     for order in permutations(vertices):
         failed: list[tuple[int, ...]] = []

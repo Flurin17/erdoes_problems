@@ -9351,6 +9351,15 @@ fails at
 Thus delaying the fillers alone does not repair the P6 finite obstruction;
 an enumerated-barrier construction would also have to alter the placement
 or witness scheme for the new vertex \(38\) itself.
+The obstruction appears before the full \(6!\)-order check. Among the six
+vertices, the only vertex with pair witnesses to every other vertex is
+\[
+10.
+\]
+So any successful enumeration would have to start with \(10\). But after
+placing \(10\) first, no remaining vertex has all required rank-three
+Schreier edges against the four-element tail. This two-level prefix failure
+is the exact finite combinatorial obstruction reported by the diagnostic.
 
 The bounded search mode `--p6-enum-search` tests this delayed-enumeration
 escape from the P5 seed without fixing \(p_6=38\). With
