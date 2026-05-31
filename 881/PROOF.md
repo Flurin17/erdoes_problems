@@ -5511,6 +5511,15 @@ order \(2\). The certificate-density route should therefore not be treated
 as a routine Ramsey consequence of order-2 basishood; it reaches the
 critical Sidon-basis frontier.
 
+This does not make the displayed \(A\) a counterexample. Since \(S\) is
+Sidon, the two-term representation multiplicity of \(A\) is bounded:
+each residue class modulo \(3\) fixes the summand type \(C+C\), \(C+D\), or
+\(D+D\), and then the quotient equation has at most one unordered
+representation in \(S+S\). Thus Corollary 3.4b gives an infinite deletion
+from \(A\) whose complement is an order-3 basis. The point is only that the
+certificate-density subroute is stronger than what the deletion problem
+itself needs in this critical model.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose

@@ -1447,6 +1447,11 @@ order-2 basis has arbitrarily large finite certificate-density would also
 rule out Sidon asymptotic bases of order \(2\), a much deeper-looking
 statement than the local finite-window checks.
 
+This hypothetical \(A\) would still not be a counterexample to #881:
+Sidonicity keeps the two-sum representation multiplicity of \(A\) bounded,
+so Corollary 3.4b would produce a good infinite deletion. The lesson is only
+that the certificate-density method is too strong as a universal route.
+
 ## Robust Residue Boosters
 
 The finite residue obstruction becomes more promising in order \(k=3\).
