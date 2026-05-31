@@ -527,6 +527,21 @@ A\cap(w-d-A)
 lands under translation by \(d\) in values \(s\) with
 \(r_{2,A}(s)\le Q_E\). Proving a reflected low-count translate exclusion
 for order-2 bases would close this branch.
+Warning 3.4k shows that such an exclusion is false if it uses only
+order-2 basishood. In the benign basis \(A=\{1\}\cup2\mathbb N\), taking
+\(d=1\) and \(w=2M+1\) gives \(M-1\) even rows \(a\) with
+\[
+w-d-a\in A,\qquad r_{2,A}(a+d)=1,
+\]
+a proportion tending to \(1\) of \(A(w)\). The escape is that all these
+rows are pinned by the single element \(1\).
+Lemma 3.4l records the useful conditional form: if all large low-count
+two-sums are forced to use one of finitely many pins \(P\), then after
+protecting \(P\) no reflected low-count translate slice can have positive
+density in \(A(w)\). Thus a remaining counterexample needs genuinely
+unpinned bounded-count translate rows outside every finite protected core,
+in addition to terminal gaps, active repairs, and occurrence inside every
+infinite deletion tail.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all

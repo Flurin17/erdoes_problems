@@ -1872,6 +1872,105 @@ strictly stronger than forbidding a particular hole, because it mentions
 only the distribution of low representation counts along moving reflected
 slices.
 
+## Warning 3.4k: Low-count reflected slices alone are not contradictory
+
+The reflected low-count slice pattern in Corollary 3.4j cannot be ruled out
+from order-2 basishood alone. The benign basis
+\[
+A=\{1\}\cup2\mathbb N
+\]
+already has such slices.
+
+Take
+\[
+d=1,\qquad w=2M+1.
+\]
+Then
+\[
+A(w)=M+1.
+\]
+For every even
+\[
+a\in\{2,4,\ldots,2M-2\},
+\]
+one has
+\[
+w-d-a=2M-a\in A.
+\]
+Also \(a+d=a+1\) is odd. Since the only odd element of \(A\) is \(1\), the
+only unordered two-term representation of \(a+1\) from \(A\) is
+\[
+a+1=1+a.
+\]
+Thus
+\[
+r_{2,A}(a+d)=1
+\]
+for \(M-1\) values of \(a\), and
+\[
+\frac{M-1}{A(w)}=\frac{M-1}{M+1}\to1.
+\]
+The escape is that all these low-count rows are pinned by the fixed element
+\(1\). Once \(1\) is included in the protected core, this particular moving
+gate is no longer available. Therefore Corollary 3.4j is useful only if the
+bounded-count rows remain unpinned outside every finite protected core.
+
+## Lemma 3.4l: Finitely pinned low-count rows cannot support the star obstruction
+
+Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose there is
+a finite set \(P\subset A\) such that for every \(Q\ge1\) there is
+\(N_Q\) with the following property:
+whenever
+\[
+s>N_Q,\qquad x,y\in A\setminus P,\qquad s=x+y,
+\]
+one has
+\[
+r_{2,A}(s)>Q. \tag{1}
+\]
+
+Then for every finite \(E\supset P\), every \(Q\ge1\), and every
+\(\eta>0\), there is \(W\) such that for all \(w>W\) and all
+\[
+d\in A\setminus E,
+\]
+one has
+\[
+\left|\{a\in A:\ w-d-a\in A,\ r_{2,A}(a+d)\le Q\}\right|
+   <\eta A(w). \tag{2}
+\]
+
+Proof. Fix \(E\supset P\), \(Q\), and \(\eta\), and take \(N_Q\) from
+(1). If \(d\in A\setminus E\), then \(d\notin P\). Let \(a\) be counted in
+(2). If
+\[
+a+d>N_Q
+\]
+and \(a\notin P\), then the representation
+\[
+a+d=a+d
+\]
+uses two elements of \(A\setminus P\), so (1) gives
+\[
+r_{2,A}(a+d)>Q,
+\]
+contrary to the definition of the counted set. Hence every counted \(a\)
+lies either in \(P\), or satisfies \(a+d\le N_Q\). Since \(d\ge1\), the
+latter alternative implies \(a\le N_Q\). Therefore the counted set has size
+at most
+\[
+|P|+A(N_Q),
+\]
+independently of \(w\) and \(d\). Since \(A(w)\to\infty\), this bound is
+less than \(\eta A(w)\) for all sufficiently large \(w\). \(\square\)
+
+For \(A=\{1\}\cup2\mathbb N\), the lemma applies with \(P=\{1\}\): every
+large even sum of two unpinned elements has many even-even representations.
+Thus the low-count slices in Warning 3.4k are entirely finite-pinned. A
+remaining counterexample would need genuinely unpinned bounded-count
+translate rows outside every finite protected core, together with the
+collective-hole structure from Corollaries 3.4i and 3.4j.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6983,6 +7082,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   low-count translate slice: for arbitrarily large \(w\), a moving
   \(d\notin E\) sends \(\gg_E A(w)\) points of
   \(A\cap(w-d-A)\) into bounded two-sum representation values.
+* Warning 3.4k shows that reflected low-count slices are not contradictory
+  in arbitrary order-2 bases: \(\{1\}\cup2\mathbb N\) has large slices
+  pinned by the element \(1\).
+* Lemma 3.4l shows that finitely pinned low-count rows cannot support the
+  star obstruction after the pins are protected. A remaining counterexample
+  must have unpinned bounded-count translate rows outside every finite core.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
