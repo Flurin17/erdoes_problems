@@ -12,8 +12,9 @@ finitely-bad obstruction:
 This is not an integer counterexample; thick residue lifts lose
 single-integer privacy as explained by Lemma 6.1 in PROOF.md.
 
-The script also checks the Z/5Z finite-center incoherence example from
-Example 8.8 in PROOF.md.
+The script also checks the complete pair-barrier warning from Example 8.7b
+and the Z/5Z finite-center incoherence example from Example 8.8 in
+PROOF.md.
 """
 
 from __future__ import annotations
@@ -95,8 +96,49 @@ def check_finite_center_incoherence() -> None:
         )
 
 
+def check_complete_pair_barrier() -> None:
+    mod = 5
+    s_set = {0, 1, 2, 3}
+    group = set(range(mod))
+    bad_pairs: list[tuple[int, int, list[int]]] = []
+
+    for x in sorted(s_set):
+        for y in sorted(t for t in s_set if t > x):
+            retained = s_set - {x, y}
+            holes = sorted(group - hsum(retained, 3, mod))
+            if holes:
+                bad_pairs.append((x, y, holes))
+
+    print("complete pair barrier S=", sorted(s_set), "mod", mod)
+    print("2S whole group:", hsum(s_set, 2, mod) == group)
+    print(
+        "all singleton deletions are 3-bases:",
+        all(hsum(s_set - {s}, 3, mod) == group for s in s_set),
+    )
+    print("bad pair holes:", bad_pairs)
+
+    pair = {0, 1}
+    hole = 0
+    centers = [(hole - x) % mod for x in sorted(pair)]
+    for center in centers:
+        reflected = {(center - s) % mod for s in s_set}
+        print(
+            "center",
+            center,
+            "reflects all S:",
+            reflected <= s_set,
+            "reflected=",
+            sorted(reflected),
+        )
+    print(
+        "two centers cover S:",
+        all(any((center - s) % mod in s_set for center in centers) for s in s_set),
+    )
+
+
 def main() -> None:
     check_two_center_cover()
+    check_complete_pair_barrier()
     check_finite_center_incoherence()
 
 
