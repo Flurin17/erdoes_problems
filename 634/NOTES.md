@@ -133,7 +133,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
   violations, and `19244` non-simple residual graphs. Through generated shell
   `200000`, lazy local-cover mode gives cumulative counts `139104`, `34292`,
   and `26604`. Through generated shell `500000`, the cumulative exact prefix
-  counts are `358826`, `61534`, and `79640`.
+  counts are `358826`, `61534`, and `79640`. The full mixed-`6` `63` coarse
+  pass is now exact: `940800` local-cover hits, `207888` residual corner-label
+  violations, and `207952` non-simple residual graphs; the non-simple half
+  still needs the refined residual obstruction.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

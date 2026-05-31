@@ -2190,8 +2190,20 @@ corner-label-violation:   61,534
 not-simple-cycle:         79,640
 ```
 
-These are still prefix counts in the deterministic enumeration, not sampled
-estimates and not complete stratum counts.
+The full exact coarse pass for `N=63`, mixed exactly `6`, is now complete:
+
+```text
+total mixed-6 shells:          1,356,640
+local-cover hits:                940,800
+outside-cover shells:            415,840
+corner-label-violation:          207,888
+not-simple-cycle:                207,952
+```
+
+This exactly agrees with the independent count-only local-overlap cover. It
+does not yet close the mixed-`6` stratum because the non-simple residual graphs
+still need the refined pinch-sector/split-component obstruction rather than
+only the coarse residual graph status.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
