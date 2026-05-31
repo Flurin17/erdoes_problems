@@ -1080,14 +1080,14 @@ source of growth beyond Ramsey.
   samples.  This blocks a tempting way to turn fixed-modulus modular
   partition theorems into large witnesses: balance or size control is a
   genuinely stronger demand.
-- 2026-05-31: Added a near-terminal modular extraction lemma.  If a
-  `q`-modular graph has `q+s` vertices with `1<=s<q`, then its degrees take at
-  most two values.  The low-degree class has maximum internal degree at most
-  the lower residue, while the high-degree class has bounded maximum degree in
-  the complement; Caro--Wei/greedy independence gives a clique or independent
-  set of order at least `(q+s)/(s+1)`.  This helps only when the excess over
-  `q` is small, so it does not by itself fix dyadic partition losses of order
-  `q`.
+- 2026-05-31: Added a near-terminal modular extraction lemma and strengthened
+  the terminal criterion from size `<=q` to size `<=q+1`.  In the size `q+1`
+  case, the only distinct congruent degree values would be `0` and `q`, which
+  cannot coexist.  If a `q`-modular graph has `q+s` vertices with `2<=s<q`,
+  then its degrees take at most two values; the low-degree class has bounded
+  internal maximum degree and the high-degree class has bounded complement
+  maximum degree, giving a clique or independent set of order at least
+  `(q+s)/(s+1)`.  This helps only when the excess over `q` is small.
 - 2026-05-31: Sharpened the quantitative dyadic conditional.  A full
   sublinear power bound `b(q)<=q^alpha` is not necessary: if every dyadic lift
   `q -> 2q` can be done with at most `q/(log_2 q)^C` parts for some `C>2`,

@@ -211,17 +211,25 @@ holes.
 
 ## Lemma 2: Modular Terminal Criterion
 
-Let `q` be a positive integer and let `S` be a vertex set with `|S| <= q`.  If
-all degrees in `G[S]` are congruent modulo `q`, then `G[S]` is regular.
+Let `q` be a positive integer and let `S` be a vertex set with
+`|S| <= q+1`.  If all degrees in `G[S]` are congruent modulo `q`, then
+`G[S]` is regular.
 
-Proof.  Every degree in `G[S]` lies in the interval `[0, |S|-1]`, whose length
-is at most `q-1`.  Two integers in this interval that are congruent modulo `q`
-are equal.  Hence all induced degrees are equal.  QED.
+Proof.  If `|S|<=q`, every degree in `G[S]` lies in the interval
+`[0, |S|-1]`, whose length is at most `q-1`.  Two integers in this interval
+that are congruent modulo `q` are equal, so all induced degrees are equal.
+
+It remains to consider `|S|=q+1`.  Then two distinct degrees in
+`[0,q]` can be congruent modulo `q` only if they are `0` and `q`.  These two
+degree values cannot both occur in a graph on `q+1` vertices: a vertex of
+degree `q` is adjacent to every other vertex, while a vertex of degree `0` is
+adjacent to none.  Therefore either all degrees are equal, or the only
+possible two-value case is impossible.  Thus `G[S]` is regular.  QED.
 
 ## Lemma 2A: Near-Terminal Modular Extraction
 
 Let `q` be a positive integer, and let `H` be a `q`-modular graph on
-`m=q+s` vertices with `1<=s<q`.  Then `H` contains a clique or independent
+`m=q+s` vertices with `2<=s<q`.  Then `H` contains a clique or independent
 set, and hence a regular induced subgraph, on at least
 
 ```text
@@ -261,10 +269,11 @@ max( |L|/(a+1), |U|/(s-a) ) >= (|L|+|U|)/(s+1) = m/(s+1).
 
 The corresponding independent set or clique is regular.  QED.
 
-This lemma gives useful information only when the excess `s=m-q` is small.
-It does not by itself repair a dyadic partition argument with loss comparable
-to `q`, because such an argument need not produce a `q`-modular witness with
-small excess over `q`.
+The omitted case `s=1` is covered by Lemma 2 and gives regularity of all of
+`H`.  Lemma 2A gives useful additional information only when the excess
+`s=m-q` is small.  It does not by itself repair a dyadic partition argument
+with loss comparable to `q`, because such an argument need not produce a
+`q`-modular witness with small excess over `q`.
 
 ## Lemma 3: Gallai Parity Witness
 
