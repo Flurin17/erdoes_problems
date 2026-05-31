@@ -5520,6 +5520,52 @@ from \(A\) whose complement is an order-3 basis. The point is only that the
 certificate-density subroute is stronger than what the deletion problem
 itself needs in this critical model.
 
+One can also see the exact extra robustness that ordinary minimality of
+\(S\) would not supply. Let \(T\subset S\), put \(X=S\setminus T\), and
+delete only
+\[
+3T+1
+\]
+from \(A\), leaving
+\[
+A_T=(3X+1)\cup(3S+2).
+\]
+Then \(A_T\) is an order-3 basis if and only if
+\[
+2X+S
+\]
+is cofinite. The residues modulo \(3\) force this condition exactly:
+large \(0\)-residue integers are handled by three terms from \(3S+2\),
+large \(2\)-residue integers by one term from \(3X+1\) and two from
+\(3S+2\) whenever \(X\ne\varnothing\), while large \(1\)-residue integers
+must be represented as
+\[
+(3x_1+1)+(3x_2+1)+(3s+2),
+\]
+equivalent to the cofiniteness of \(2X+S\). Conversely, if \(2X+S\) is
+cofinite, then \(X\ne\varnothing\); fixing one \(x_0\in X\), the
+cofiniteness of \(2S\) handles the \(2\)-residue class through
+\[
+(3x_0+1)+(3s_1+2)+(3s_2+2),
+\]
+and the cofiniteness of \(3S\) handles the \(0\)-residue class. Thus a
+Sidon-copy counterexample would require
+\[
+2(S\setminus T)+S
+\]
+to fail cofiniteness for every infinite deletion \(T\subset S\), much
+stronger than ordinary strong minimality, which only controls
+\[
+2(S\setminus T).
+\]
+Equivalently, the unique two-sum representations in a Sidon basis would
+have to form shifted vertex-cover barriers for the graphs
+\[
+\{\rho(u-s):s\in S,\ u-s\in2S\},
+\]
+where \(\rho(m)\) denotes the unique two-term representation of \(m\) from
+\(S\), when it exists.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose

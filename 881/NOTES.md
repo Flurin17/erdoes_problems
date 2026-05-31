@@ -1452,6 +1452,17 @@ Sidonicity keeps the two-sum representation multiplicity of \(A\) bounded,
 so Corollary 3.4b would produce a good infinite deletion. The lesson is only
 that the certificate-density method is too strong as a universal route.
 
+More concretely, deleting \(3T+1\) from the first copy leaves an order-3
+basis exactly when
+\[
+2(S\setminus T)+S
+\]
+is cofinite. The residue \(1\pmod3\) class must use two retained elements
+from \(3(S\setminus T)+1\) and one element from \(3S+2\). Thus ordinary
+strong minimality of \(S\), which only makes \(2(S\setminus T)\) fail
+cofiniteness, is not enough; a counterexample would need shifted robust
+minimality against the extra summand \(S\).
+
 ## Robust Residue Boosters
 
 The finite residue obstruction becomes more promising in order \(k=3\).
