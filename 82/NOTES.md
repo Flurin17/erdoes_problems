@@ -968,3 +968,8 @@ source of growth beyond Ramsey.
   Also noted a caution for future trace searches: the host condition is really
   a spread condition on the `k` coordinate sums, not just an `L_infty` bound
   on the first `k-1` difference coordinates.
+- 2026-05-31: Added `--exact-spread` to `trace_balance_bound.py` to test that
+  stronger host condition directly.  The exact-spread graphical search gives
+  the same complete value `4` for `k=4`; for `k=5`, a `200000` node partial
+  search still finds an admissible family of size `8`, so the corrected
+  spread filter alone does not collapse the trace obstruction.

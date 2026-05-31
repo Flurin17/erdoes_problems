@@ -114,8 +114,9 @@ Computational checks and generated data for Erdos Problem 82.
   balanced subfamily in the minimal repeated-degree host obstruction.
 - `trace_balance_bound.py`: brute force for distinct trace families that have
   no balanced subfamily even after imposing the repeated-degree host's small
-  total-imbalance condition, optionally also requiring graphical compensation
-  by the internal graph on the repeated-degree class.
+  total-imbalance condition, optionally using the exact spread condition on
+  all `k` trace coordinates and optionally requiring graphical compensation by
+  the internal graph on the repeated-degree class.
 - `trace_multiset_bound.py`: bounded multiplicity search for zero-sum-free
   trace multisets with small total imbalance and optional graphical
   compensation; larger runs should use tight caps because subset-sum sets grow

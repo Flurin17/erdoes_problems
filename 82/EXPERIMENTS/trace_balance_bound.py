@@ -38,7 +38,10 @@ def neg(v: Vector) -> Vector:
     return tuple(-x for x in v)
 
 
-def total_ok(total: Vector, bound: int) -> bool:
+def total_ok(total: Vector, bound: int, exact_spread: bool) -> bool:
+    if exact_spread:
+        values = total + (0,)
+        return max(values) - min(values) <= bound
     return all(abs(x) <= bound for x in total)
 
 
@@ -73,7 +76,13 @@ class NodeLimitReached(Exception):
     pass
 
 
-def search(k: int, bound: int, require_graphical: bool, max_nodes: int | None) -> None:
+def search(
+    k: int,
+    bound: int,
+    require_graphical: bool,
+    exact_spread: bool,
+    max_nodes: int | None,
+) -> None:
     vectors = trace_vectors(k)
     zero = tuple(0 for _ in range(k - 1))
     best_size = 0
@@ -95,7 +104,7 @@ def search(k: int, bound: int, require_graphical: bool, max_nodes: int | None) -
         if index == len(vectors):
             if (
                 len(chosen) > best_size
-                and total_ok(total, bound)
+                and total_ok(total, bound, exact_spread)
                 and (not require_graphical or has_graphical_compensator(k, total))
             ):
                 best_size = len(chosen)
@@ -125,6 +134,7 @@ def search(k: int, bound: int, require_graphical: bool, max_nodes: int | None) -
     print(f"k={k}")
     print(f"num_nonconstant_traces={len(vectors)}")
     print(f"total_imbalance_bound={bound}")
+    print(f"exact_spread={exact_spread}")
     print(f"require_graphical_compensator={require_graphical}")
     print(f"complete={complete}")
     print(f"search_nodes={nodes}")
@@ -138,6 +148,7 @@ def main() -> None:
     parser.add_argument("k", type=int)
     parser.add_argument("--bound", type=int)
     parser.add_argument("--require-graphical", action="store_true")
+    parser.add_argument("--exact-spread", action="store_true")
     parser.add_argument("--max-nodes", type=int)
     args = parser.parse_args()
     if args.k > 5:
@@ -146,6 +157,7 @@ def main() -> None:
         args.k,
         args.bound if args.bound is not None else args.k - 1,
         args.require_graphical,
+        args.exact_spread,
         args.max_nodes,
     )
 
