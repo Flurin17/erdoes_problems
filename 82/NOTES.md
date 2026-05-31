@@ -1370,6 +1370,13 @@ source of growth beyond Ramsey.
   total at most `64` checked, `15,498,424` cached states, `71,697,184`
   candidate branches, and no counterexample.  Thus the complete-multipartite
   `q+2` bin target is now exhaustively verified for every `q<=8`.
+- 2026-05-31: Returned briefly to the arbitrary-graph one-shot target at
+  `q=9,n=81`.  A local-search coloring run on one random graph with parts
+  capped at `11` reduced the violation score to `12` but did not find a
+  partition in `30` restarts of `30,000` steps; an exact on-the-fly check was
+  killed after producing no output because candidate generation was too slow.
+  This is not evidence of a counterexample, only a tooling limit for the
+  arbitrary-graph capped partition search at `q=9`.
 - 2026-05-31: Added an alternative dyadic conditional that avoids both the
   `q+2` one-shot target and pointwise polylog-saving partitions.  It suffices
   to prove a coarse largest-witness lift, namely every `q`-modular graph on
