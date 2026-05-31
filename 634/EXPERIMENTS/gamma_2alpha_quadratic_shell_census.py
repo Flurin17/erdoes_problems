@@ -51,6 +51,7 @@ KQuad = tuple[int, int]
 KPoint = tuple[KQuad, KQuad]
 KPolygon = tuple[KPoint, ...]
 KSegment = tuple[KPoint, KPoint]
+KLineKey = tuple[tuple[Fraction, Fraction], tuple[Fraction, Fraction], tuple[Fraction, Fraction]]
 
 
 @dataclass(frozen=True)
@@ -572,6 +573,10 @@ def kadd(left: KQuad, right: KQuad) -> KQuad:
     return left[0] + right[0], left[1] + right[1]
 
 
+def kneg(value: KQuad) -> KQuad:
+    return -value[0], -value[1]
+
+
 def ksub(left: KQuad, right: KQuad) -> KQuad:
     return left[0] - right[0], left[1] - right[1]
 
@@ -609,6 +614,15 @@ def kle(left: KQuad, right: KQuad) -> bool:
 
 def kzero(value: KQuad) -> bool:
     return value[0] == 0 and value[1] == 0
+
+
+def kquad_ratio(left: KQuad, right: KQuad) -> tuple[Fraction, Fraction]:
+    denominator = right[0] * right[0] - right[1] * right[1] * RADICAND
+    if denominator == 0:
+        raise ZeroDivisionError(right)
+    rational = Fraction(left[0] * right[0] - left[1] * right[1] * RADICAND, denominator)
+    radical = Fraction(left[1] * right[0] - left[0] * right[1], denominator)
+    return rational, radical
 
 
 def kpsub(left: KPoint, right: KPoint) -> KPoint:
@@ -702,6 +716,51 @@ def kpoint_on_segment(point: KPoint, start: KPoint, end: KPoint) -> bool:
     )
 
 
+def kline_coefficients(start: KPoint, end: KPoint) -> tuple[KQuad, KQuad, KQuad]:
+    direction = kpsub(end, start)
+    a_coeff = kneg(direction[1])
+    b_coeff = direction[0]
+    c_coeff = ksub(kmul(direction[1], start[0]), kmul(direction[0], start[1]))
+    return a_coeff, b_coeff, c_coeff
+
+
+def kline_key(start: KPoint, end: KPoint) -> KLineKey:
+    coefficients = kline_coefficients(start, end)
+    pivot = next(coefficient for coefficient in coefficients if not kzero(coefficient))
+    return (
+        kquad_ratio(coefficients[0], pivot),
+        kquad_ratio(coefficients[1], pivot),
+        kquad_ratio(coefficients[2], pivot),
+    )
+
+
+def kpoint_on_line_coefficients(point: KPoint, coefficients: tuple[KQuad, KQuad, KQuad]) -> bool:
+    a_coeff, b_coeff, c_coeff = coefficients
+    return kzero(kadd(kadd(kmul(a_coeff, point[0]), kmul(b_coeff, point[1])), c_coeff))
+
+
+def ksplit_segment_from_candidates(
+    start: KPoint,
+    end: KPoint,
+    candidates: tuple[KPoint, ...],
+) -> tuple[KSegment, ...]:
+    direction = kpsub(end, start)
+    cuts = {
+        point
+        for point in candidates
+        if ksign(kdot(kpsub(point, start), direction)) >= 0
+        and ksign(kdot(kpsub(point, end), direction)) <= 0
+    }
+
+    def compare(left: KPoint, right: KPoint) -> int:
+        left_parameter = kdot(kpsub(left, start), direction)
+        right_parameter = kdot(kpsub(right, start), direction)
+        return kcmp(left_parameter, right_parameter)
+
+    ordered = sorted(cuts, key=cmp_to_key(compare))
+    return tuple((ordered[index], ordered[index + 1]) for index in range(len(ordered) - 1) if ordered[index] != ordered[index + 1])
+
+
 def ksplit_segment(start: KPoint, end: KPoint, points: tuple[KPoint, ...]) -> tuple[KSegment, ...]:
     direction = kpsub(end, start)
     cuts = {point for point in points if kpoint_on_segment(point, start, end)}
@@ -741,13 +800,20 @@ def kresidual_segments_with_labels(
     outer: tuple[KPoint, KPoint, KPoint],
 ) -> dict[KSegment, str]:
     all_points = tuple(point for tile in tiles for point in tile.polygon)
+    line_points_cache: dict[KLineKey, tuple[KPoint, ...]] = {}
     counts: Counter[KSegment] = Counter()
     labels: dict[KSegment, str] = {}
     for tile in tiles:
         for index, label in enumerate(kedge_labels_for_tile(tile)):
             start = tile.polygon[index]
             end = tile.polygon[(index + 1) % 3]
-            for atom_start, atom_end in ksplit_segment(start, end, all_points):
+            line_key = kline_key(start, end)
+            candidates = line_points_cache.get(line_key)
+            if candidates is None:
+                coefficients = kline_coefficients(start, end)
+                candidates = tuple(point for point in all_points if kpoint_on_line_coefficients(point, coefficients))
+                line_points_cache[line_key] = candidates
+            for atom_start, atom_end in ksplit_segment_from_candidates(start, end, candidates):
                 key = ksegment_key(atom_start, atom_end)
                 counts[key] += 1
                 labels[key] = label
