@@ -2173,6 +2173,44 @@ hence order \(3\). The construction only shows that the low-count star
 normal form is locally compatible; it does not satisfy the global
 late-barrier condition in every infinite tail.
 
+## Corollary 3.4q: Uniform low-count degree control is enough
+
+Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose there
+is a finite set \(E_0\subset A\) such that for every \(Q\ge1\),
+\[
+D_Q(X):=\sup_{d\in A\setminus E_0}
+ \left|\{a\in A\setminus E_0:\ a\le X,\ r_{2,A}(a+d)\le Q\}\right|
+       =o(A(X)). \tag{1}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(3\).
+
+Proof. Assume the contrary and let \(E_*\) be the finite exceptional set
+from Corollary 8.3b. Put
+\[
+E=E_0\cup E_*.
+\]
+Corollary 3.4n supplies constants \(Q_E,\eta_E>0\) and arbitrarily large
+\(w\), with a gate \(d\in A\setminus E\), such that
+\[
+\left|\{a\in A\setminus E:\ w-d-a\in A\setminus E,
+        r_{2,A}(a+d)\le Q_E\}\right|
+   \ge \eta_E A(w). \tag{2}
+\]
+Every \(a\) counted in (2) satisfies \(a<w\), and since \(E\supset E_0\)
+it is also counted in the definition of \(D_{Q_E}(w)\). Hence
+\[
+D_{Q_E}(w)\ge\eta_E A(w)
+\]
+for arbitrarily large \(w\), contradicting (1). \(\square\)
+
+Equivalently, a remaining \(k=2\) counterexample has the following
+low-count graph consequence: after every finite core is removed, for some
+count bound \(Q\) and infinitely many scales \(X\), there is a fresh vertex
+\(d\) adjacent through bounded-count sums \(a+d\) to a positive proportion
+of \(A\cap[1,X]\). The reflected condition in Corollary 3.4n is stronger,
+but this graph-degree shadow is already necessary.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -7301,6 +7339,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   deletion.
 * Warning 3.4p gives finite local star gadgets outside any prescribed core,
   showing that Corollary 3.4o needs global tail or minimal-hole input.
+* Corollary 3.4q gives a simpler graph-degree version: if bounded-count
+  translate neighbours have \(o(A(X))\) initial-segment degree uniformly in
+  the center after one finite core, then the desired deletion exists.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

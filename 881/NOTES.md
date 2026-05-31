@@ -561,6 +561,12 @@ then add a later cofinite tail to get a harmless order-2 basis without
 destroying the low-count rows. A proof must use recurrence across every
 infinite tail or the minimal collective-hole structure, not only local
 order-2 coverage.
+Corollary 3.4q gives a simpler sufficient condition: if after protecting
+one finite core, every bounded-count translate graph has initial-segment
+degree \(o(A(X))\) uniformly in the center \(d\), then a good deletion
+exists. Therefore a counterexample must have low-count graph stars of
+positive \(A(X)\)-density outside every finite core, even before imposing
+the reflected partner \(w-d-a\in A\).
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
