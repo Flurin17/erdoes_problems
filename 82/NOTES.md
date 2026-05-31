@@ -1559,3 +1559,11 @@ source of growth beyond Ramsey.
   rejection samples found best regular orders `7` on `n=16` (`11` checked) and
   `9` on `n=20` (`3` checked).  Acceptance is low and this is only a sanity
   check, but it supports the new terminal host target in small cases.
+- 2026-05-31: Added the basic sparse/co-sparse reduction for the `q`-modular
+  host theorem.  By Caro--Wei, any graph on at least `q^2` vertices with
+  average degree at most `q^2/L` contains an independent set of order
+  `Omega(L)`, and the complement gives a clique under the analogous
+  co-average condition.  Therefore the hard terminal hosts for
+  `L=(log q)^2` have both density and co-density at least
+  `Omega(1/(log q)^2)`; the modular trace-balance structure is only needed in
+  this ordinary-density core.

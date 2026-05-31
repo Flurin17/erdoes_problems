@@ -864,6 +864,32 @@ internal structure.  Any proof of the `q`-modular host theorem must use global
 trace balance against the rest of the host, not only pigeonhole a large degree
 level or apply Ramsey theory inside one level.
 
+There is also a basic density reduction for the `q`-modular host theorem.
+
+**Lemma: Sparse Or Co-Sparse Hosts Are Easy.**  Let `H` be any graph on
+`m>=q^2` vertices.  If the average degree of `H` is at most
+`q^2/L`, then `H` contains an independent set, hence a regular induced
+subgraph, on at least `L` vertices.  The same conclusion holds if the average
+degree of the complement of `H` is at most `q^2/L`, with a clique in place of
+an independent set.
+
+Proof.  By the Caro--Wei bound,
+
+```text
+alpha(H) >= sum_{v in V(H)} 1/(deg(v)+1)
+          >= m/(average_degree(H)+1).
+```
+
+If `average_degree(H)<=q^2/L` and `m>=q^2`, this is at least `L` up to a
+harmless additive constant, which can be absorbed by replacing `L` with
+`L/2` in asymptotic applications.  Applying the same argument to the
+complement gives the clique statement.  QED.
+
+Thus, for the terminal target with `L=(log q)^2`, the hard `q`-modular hosts
+have both edge density and co-density at least `Omega(1/(log q)^2)`.  The
+modular degree-level structure must be used only after this ordinary
+sparse/co-sparse Ramsey obstruction has been removed.
+
 The terminal-window lift has a rigid endpoint shape.
 
 **Lemma: Shape Of Near-Terminal Dyadic Witnesses.**  Let `|S|=2q+r` with
