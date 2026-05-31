@@ -14,8 +14,9 @@ single-integer privacy as explained by Lemma 6.1 in PROOF.md.
 
 The script also checks the complete pair-barrier warning from Example 8.7b
 and the Z/5Z finite-center incoherence example from Example 8.8 in
-PROOF.md. Finally it checks the Z/13Z certificate-free complete pair-hole
-model from Example 8.7e.
+PROOF.md. It also checks the Z/6Z bipartite recurrent-color quotient model
+from Warning 8.6g'''a. Finally it checks the Z/13Z certificate-free
+complete pair-hole model from Example 8.7e.
 """
 
 from __future__ import annotations
@@ -171,9 +172,36 @@ def check_certificate_free_pair_holes() -> None:
     print("minimal pair holes:", minimal_repairs)
 
 
+def check_bipartite_recurrent_colors() -> None:
+    mod = 6
+    a_set = {0, 1, 2, 3}
+    c_set = {0, 2}
+    d_set = {1, 3}
+    group = set(range(mod))
+
+    def certificate_free(color: set[int]) -> bool:
+        return all(
+            (y1 + y2 - e) % mod not in a_set
+            for e in color
+            for y1 in color
+            for y2 in color
+            if y1 != e and y2 != e
+        )
+
+    center = 3
+    print("bipartite recurrent colors mod", mod)
+    print("A=", sorted(a_set), "C=", sorted(c_set), "D=", sorted(d_set))
+    print("2A whole group:", hsum(a_set, 2, mod) == group)
+    print("C certificate-free:", certificate_free(c_set))
+    print("D certificate-free:", certificate_free(d_set))
+    print("center swaps C to D:", {(center - c) % mod for c in c_set} == d_set)
+    print("center swaps D to C:", {(center - d) % mod for d in d_set} == c_set)
+
+
 def main() -> None:
     check_two_center_cover()
     check_complete_pair_barrier()
+    check_bipartite_recurrent_colors()
     check_certificate_free_pair_holes()
     check_finite_center_incoherence()
 

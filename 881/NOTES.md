@@ -1511,7 +1511,10 @@ can lie in that same color, otherwise \(u+(m-u)=v+(m-v)\) is a nontrivial
 same-color collision. Hence each recurrent color must reflect finite
 patterns almost entirely into the other color. The surviving structure is
 therefore close to a bipartite complementing system with large mixed
-representation clusters.
+representation clusters. This is still finite-quotient compatible:
+in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
+\(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the
+whole group, and the center \(3\) swaps the two colors by reflection.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then

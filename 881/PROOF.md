@@ -5875,6 +5875,41 @@ to the linear-scale mixed spikes required by Corollary 8.6j-3, or to show
 that such an almost-bipartite recurrent Sidon structure can actually be
 arithmetized.
 
+## Warning 8.6g'''a: Bipartite recurrent colors are quotient-compatible
+
+The almost-bipartite conclusion of Lemma 8.6g''' is not a finite quotient
+contradiction. In
+\[
+G=\mathbb Z/6\mathbb Z
+\]
+put
+\[
+A_0=\{0,1,2,3\},\qquad C=\{0,2\},\qquad D=\{1,3\}.
+\]
+Then
+\[
+2A_0=G.
+\]
+Both \(C\) and \(D\) are certificate-free relative to \(A_0\). For example,
+the only nontrivial certificate candidates in \(C\) are
+\[
+2+2-0\equiv4,\qquad 0+0-2\equiv4\pmod6,
+\]
+and \(4\notin A_0\); the check for \(D\) is the same.
+
+Moreover the single center
+\[
+m=3
+\]
+reflects the two colors across each other:
+\[
+3-C=D,\qquad 3-D=C.
+\]
+Thus finite residue data can exhibit exactly the bipartite recurrent
+Sidon-like shape left by Lemma 8.6g'''. Any contradiction must use integer
+lifting, growth, threshold, or barrier information beyond residue-level
+coverage.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -8585,6 +8620,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   comparable to \(A(X)\) along an unbounded sequence.
 * Lemma 8.6g''' adds that these recurrent colors must reflect almost across
   colors: same-color mirrors would create nontrivial Sidon collisions.
+* Warning 8.6g'''a shows this bipartite recurrent color shape is
+  finite-quotient compatible, so it cannot be ruled out by residue coverage
+  alone.
 * Lemma 8.6h supplies such finite test sets when \(A\) contains long
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of
