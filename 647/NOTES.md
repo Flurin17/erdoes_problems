@@ -281,6 +281,17 @@ remaining cofactor.
   smallest positive representative in the residue class is already larger
   than every such forced-smooth number with at most `k+2` divisors, the
   class is impossible.
+- A complete scan of those 41 classes for `N < 10^15` found 331,487 branch
+  prime tuples and no value passing direct checks through `k <= 5000`.
+  Aggregated first failures were:
+
+```text
+5:288159 7:26766 9:14390 10:1880 11:190 13:61 14:32 15:6 16:3
+```
+
+  The deepest near misses failed at `k=16`; the best recorded one is
+  `N = 832414790665601`, `n = 2097685272477314520`,
+  `tau(n-16) = 32`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a

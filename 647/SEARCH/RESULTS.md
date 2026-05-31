@@ -150,6 +150,49 @@ Interpretation: among `21*10^9 < N <= 31*10^9`, 1892 values satisfy the
 complete branch prime-form conditions; none passes direct shift checks
 through `k=500`.
 
+## Complete 41-Residue Branch Scan
+
+After reconstructing the 41 residue classes modulo `46189`, the search was
+restricted to those classes and run through a deeper direct shift window.
+
+Command shape:
+
+```sh
+./SEARCH/prime_tuple_search \
+  --variable-mod 46189 \
+  --variable-rem <one of the 41 residues> \
+  --start 0 \
+  --count 21650176450 \
+  --segment 10000000 \
+  --sieve-limit 500000 \
+  --quick-shift 5000 \
+  --report-survive 13 \
+  --stats
+```
+
+The 41 residue jobs together cover all `N < 10^15` that survive the modular
+reduction.
+
+Aggregate output:
+
+```text
+prime_tuples=331487 quick_pass=0
+BRANCH_COUNTS A=75289 B=256198
+FIRST_FAIL_COUNTS 5:288159 7:26766 9:14390 10:1880 11:190 13:61 14:32 15:6 16:3
+```
+
+Interpretation: among all branch tuples in the 41 residue classes with
+`N < 10^15`, none passed direct shift checks through `k=5000`. The deepest
+near misses failed at `k=16`; the best by failing shift and then smaller
+failing divisor count was
+
+```text
+N = 832414790665601
+n = 2097685272477314520
+first_fail_k = 16
+tau(n-16) = 32
+```
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms
