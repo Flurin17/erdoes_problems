@@ -1883,6 +1883,10 @@ The `mixed=4` row is already handled by the exact low-overhang census above,
 so this exact local-overlap cover removes most but not all of the higher-mixed
 boundary-word space. The remaining high-mixed shell counts after these local
 overlap tests are `19,310,880` for `N=63` and `3,109,717,224` for `N=99`.
+Expanding the tested positions to the full nearby base-corner bands
+`L1..L4` against `B6..B9` and the symmetric right-side band against `B1..B4`
+does not increase these counts, so the remaining shells avoid this entire
+local overlap band rather than only the sampled hotspot positions.
 
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`

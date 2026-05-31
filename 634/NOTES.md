@@ -294,6 +294,8 @@ Important distinction: "positive square class" and "smallest representative" are
    boundary shells for `63`, and `8012836776` of `11122617000` boundary shells
    for `99`; after subtracting the already-closed mixed-`4` row, the remaining
    high-mixed spaces are `19310880` and `3109717224` shells respectively.
+   Expanding to the full nearby base-corner position bands does not improve the
+   cover, so the remaining shells avoid that whole local overlap mechanism.
    A stratified low-overhang run with total mixed
    count at most `4` found `189` unique `63` shells and `143` unique `99`
    shells, again with no pass. The full low-overhang census is now exact: all `11040`
