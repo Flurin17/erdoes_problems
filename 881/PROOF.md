@@ -5297,6 +5297,46 @@ private-incidence structure, or produce a finite recurrent
 certificate-free coloring, already impossible by Lemma 8.6g''''.2. Pure
 combinatorics alone does not provide that descent.
 
+### Lemma 8.5a.2: Front sections are fronts
+
+Let \(P\) be an infinite ordered set, and let \(\mathcal F\) be a front on
+\(P\): no two members of \(\mathcal F\) contain one another, and every
+infinite
+\[
+X=\{x_1<x_2<\cdots\}\subset P
+\]
+has a unique initial segment in \(\mathcal F\). Let \(s\subset P\) be a
+finite initial segment of some member of \(\mathcal F\), but suppose no
+initial segment of \(s\) lies in \(\mathcal F\). Put
+\[
+P_s=\{p\in P:p>\max s\}
+\]
+and
+\[
+\mathcal F_s=\{G\subset P_s:s\cup G\in\mathcal F\}.
+\]
+Then \(\mathcal F_s\) is a front on \(P_s\).
+
+Proof. Let \(Y\subset P_s\) be infinite. Apply the front property of
+\(\mathcal F\) to the infinite ordered set
+\[
+s\cup Y.
+\]
+Its unique initial segment in \(\mathcal F\) cannot be a proper initial
+segment of \(s\), by the hypothesis on \(s\). Hence it has the form
+\[
+s\cup G
+\]
+for some finite initial segment \(G\) of \(Y\), and \(G\in\mathcal F_s\).
+This proves existence. Uniqueness and the antichain property for
+\(\mathcal F_s\) follow immediately from the corresponding properties of
+\(\mathcal F\). \(\square\)
+
+Thus higher-front barriers can be studied recursively through their
+sections. The missing arithmetic step is to show that the private-incidence
+normal form survives passage to a section strongly enough to run an
+induction, rather than merely producing selector-avoidable full cuts.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -11762,6 +11802,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the second-element front shows rank may be controlled by later points.
   The remaining abstract target is recursive front-section descent plus
   arithmetic input.
+* Lemma 8.5a.2 supplies the basic recursive tool: proper sections of a
+  front are fronts on the tail. The missing step is preserving the
+  arithmetic private-incidence normal form under this descent.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.

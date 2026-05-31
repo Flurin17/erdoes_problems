@@ -1243,6 +1243,11 @@ second point controls the rank, so fixing the first point does not give
 complete first-prefix links. The right remaining combinatorial target is a
 recursive section analysis of fronts, not a direct reduction to the first
 Schreier barrier.
+Lemma 8.5a.2 records the basic section fact: if \(\mathcal F\) is a front
+and \(s\) is a proper node, then the section
+\(\mathcal F_s=\{G:s\cup G\in\mathcal F\}\) is again a front on the tail.
+The missing arithmetic step is to make the private-incidence and terminal
+gap normal forms descend through these sections.
 
 There is a positive Ramsey reduction once bounded width is supplied by
 arithmetic. Lemma 8.5a says that if every infinite subset contains a
