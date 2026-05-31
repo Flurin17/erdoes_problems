@@ -1977,3 +1977,8 @@ source of growth beyond Ramsey.
   `8` vertices containing edge `0:1` pass the good-edge matching-slot target.
   This gives stronger finite support for an edge-rooted theorem that would
   make degree-`2` suppression valid in a minimal-counterexample proof.
+- 2026-05-31: Ran an `n=9` prefix with
+  `/tmp/matching_slot_fast --n 9 --good-edge 0:1 --limit 2000000`; this checks
+  `1,000,000` even graphs containing edge `0:1` and found no edge-rooted
+  counterexample.  This is prefix evidence only, not an exhaustive `n=9`
+  result.
