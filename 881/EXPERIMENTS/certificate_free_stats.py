@@ -39,7 +39,9 @@ def max_certificate_free(ambient: set[int]) -> set[int]:
 def main() -> None:
     examples = [
         ("pair-window", {1, 2, 3, 6, 7, 8}),
+        ("delayed-pair-window", {1, 2, 3, 5, 6, 7}),
         ("rank3-window", {1, 2, 3, 4, 5, 6, 8, 9}),
+        ("delayed-rank3-window", {1, 2, 3, 4, 5, 6, 7, 8}),
         ("rank4-window", {1, 2, 3, 4, 5, 6, 8, 9, 10, 11}),
         ("minimal-hole-toy", {1, 2, 3, 4, 5}),
     ]

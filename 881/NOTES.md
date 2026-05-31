@@ -147,6 +147,11 @@ whose proper singleton deletions have finite three-sum tail from \(3\), but
 whose full deletion has minimal holes at \(16,17\) and tail only from \(18\).
 Thus collective delay is a genuine local phenomenon, not an artefact of the
 abstract barrier formulation.
+However `certificate_free_stats.py` gives \(\alpha_{\rm cert}=2\) and
+\(|S|/\alpha_{\rm cert}=3\) for this same window, so it cannot be scaled as
+a fixed rank-2 large-excess obstruction without triggering Lemma 8.6g. A
+true counterexample would need either unbounded ranks or much stronger
+certificate-free arithmetic.
 Corollary 10.3d records the complementary genuine-failure case: if no
 finite core gives finite-deletion stability, then after every finite core
 there are active finite barriers whose terminal windows are actual long

@@ -160,7 +160,9 @@ several finite integer-window examples. This is a diagnostic for Lemma
 8.6g: fixed-rank large-excess barriers can persist only if every finite
 test set has a large certificate-free subset. It also prints
 `gamma=|A|/alpha_cert`, the rank threshold from the rank-sensitive
-certificate discussion after Lemma 8.6g.
+certificate discussion after Lemma 8.6g. The delayed pair window has
+`gamma=3`, so it is a local delayed barrier but not a scalable rank-2
+certificate-free obstruction.
 
 `star_pair_search.py` searches for the fixed-center star obstruction from
 Warning 8.2b. It finds the small window

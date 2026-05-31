@@ -1107,6 +1107,16 @@ has a minimal hole at \(20\), a finite three-sum tail from \(21\), and all
 proper subdeletions have finite three-sum tail from \(3\). These are finite
 window artefacts, but they confirm that collective delay is not ruled out
 by inclusion-minimality or proper-subdeletion stability alone.
+The certificate diagnostic gives the complementary warning: these small
+delayed examples are not certificate-free enough to scale as fixed-rank
+large-excess obstructions. For the pair example above,
+`certificate_free_stats.py` gives
+\[
+\alpha_{\rm cert}=2,\qquad |S|/\alpha_{\rm cert}=3>2,
+\]
+so Lemma 8.6g would force a recurrent certificate if such rank-\(2\)
+barriers persisted over every finite test set. The unresolved construction
+would need either more certificate-free arithmetic or unbounded ranks.
 
 ## Proposition 3.1f: Syndetic tail criterion
 
