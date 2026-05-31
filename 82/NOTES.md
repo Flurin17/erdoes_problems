@@ -1347,6 +1347,12 @@ source of growth beyond Ramsey.
   `(9,8,7,6,6,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)`;
   a direct fixed-vector check covers it in `8` bins.  Candidate ordering still
   needs optimization before larger exhaustive full-bin sweeps are useful.
+- 2026-05-31: Recorded the sparse-tail multipartite repair lemma from the
+  subagent.  If a vector has one class of size `x`, tail total `A<=q`,
+  `x>=(q+1)A`, and total at most `q^2`, then `A` special `(q+1,1)` bins cover
+  the tail and the remaining large class fits in at most `q-1-A` single-class
+  bins.  This explains why the rectangle-only counterexamples are harmless for
+  the full complete-multipartite bin target.
 - 2026-05-31: Added an alternative dyadic conditional that avoids both the
   `q+2` one-shot target and pointwise polylog-saving partitions.  It suffices
   to prove a coarse largest-witness lift, namely every `q`-modular graph on

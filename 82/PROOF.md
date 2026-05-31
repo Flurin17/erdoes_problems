@@ -1058,6 +1058,52 @@ following types:
 Such a decomposition is exactly a partition of the corresponding complete
 multipartite graph into induced `q`-modular subgraphs of order at most `q+2`.
 
+The special bins handle the sparse-tail obstruction in a clean range.
+
+**Lemma: Sparse-Tail Multipartite Repair.**  Fix `q>=3`.  Let
+`a=(x,a_2,...,a_t)` be a nonnegative integer vector with tail total
+
+```text
+A = a_2+...+a_t <= q.
+```
+
+If `x>= (q+1)A` and `x+A<=q^2`, then `a` has a multipartite bin decomposition
+using at most `q` bins.
+
+Proof.  For each of the `A` tail vertices, use one special bin containing that
+tail vertex and `q+1` vertices from the first class.  This is possible because
+`x>= (q+1)A`.  These `A` bins cover the whole tail and `(q+1)A` vertices from
+the first class.  The remaining first-class size is
+
+```text
+x' = x-(q+1)A.
+```
+
+Cover it by single-class bins of size at most `q+2`; these are rectangle bins
+of width `1`.  The number of additional bins is at most
+
+```text
+ceil(x'/(q+2)).
+```
+
+Since `x+A<=q^2`, we have
+
+```text
+x' <= q^2-(q+2)A,
+```
+
+and therefore
+
+```text
+A + ceil(x'/(q+2))
+    <= A + ceil(q^2/(q+2)-A)
+    = ceil(q^2/(q+2))
+    = q-1
+```
+
+for `q>=3`.  Hence the vector is covered by at most `q-1`, and therefore at
+most `q`, legal bins.  QED.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with
