@@ -116,6 +116,52 @@ def search(n: int, modulus: int, candidates: list[tuple[int, ...]]) -> None:
         print("good=" + ",".join(map(str, slots)))
 
 
+def search_source_modular(
+    n: int,
+    source_modulus: int,
+    target_modulus: int,
+    candidates: list[tuple[int, ...]],
+    source_residue: int | None,
+    limit: int | None,
+) -> None:
+    pc = ri.precompute(n)
+    full = (1 << n) - 1
+    total = 1 << len(pc.edges)
+    survivors = list(candidates)
+    checked = 0
+    truncated = False
+    for graph_mask in range(total):
+        residue = modular_partition.residue_on(graph_mask, full, source_modulus, pc)
+        if residue is None:
+            continue
+        if source_residue is not None and residue != source_residue % source_modulus:
+            continue
+        checked += 1
+        next_survivors: list[tuple[int, ...]] = []
+        for slots in survivors:
+            if has_slot_partition(n, graph_mask, target_modulus, slots, pc):
+                next_survivors.append(slots)
+        survivors = next_survivors
+        if not survivors:
+            break
+        if limit is not None and checked >= limit:
+            truncated = True
+            break
+
+    print(f"n={n}")
+    print(f"source_modulus={source_modulus}")
+    print(f"target_modulus={target_modulus}")
+    if source_residue is not None:
+        print(f"source_residue={source_residue % source_modulus}")
+    if limit is not None:
+        print(f"limit={limit}")
+    print(f"source_modular_checked={checked}")
+    print(f"truncated={truncated}")
+    print(f"survivor_count={len(survivors)}")
+    for slots in survivors:
+        print("survivor=" + ",".join(map(str, slots)))
+
+
 def sample(
     n: int,
     modulus: int,
@@ -273,9 +319,11 @@ def main() -> None:
         help="semicolon-separated residue multisets, e.g. 0,0,1,2;0,1,2,3",
     )
     parser.add_argument("--sample-even", type=int, default=0)
+    parser.add_argument("--exhaustive-source-modular", action="store_true")
     parser.add_argument("--sample-source-modular", type=int, default=0)
     parser.add_argument("--source-modulus", type=int)
     parser.add_argument("--source-residue", type=int)
+    parser.add_argument("--limit", type=int)
     parser.add_argument("--max-attempts", type=int, default=1000000)
     parser.add_argument("--score-all", action="store_true")
     parser.add_argument("--seed", type=int, default=0)
@@ -289,6 +337,18 @@ def main() -> None:
     else:
         slot_count = args.slot_count if args.slot_count is not None else args.modulus
         candidates = list(combinations_with_replacement(range(args.modulus), slot_count))
+    if args.exhaustive_source_modular:
+        if args.source_modulus is None:
+            parser.error("--exhaustive-source-modular requires --source-modulus")
+        search_source_modular(
+            args.n,
+            args.source_modulus,
+            args.modulus,
+            candidates,
+            args.source_residue,
+            args.limit,
+        )
+        return
     if args.sample_source_modular:
         if args.source_modulus is None:
             parser.error("--sample-source-modular requires --source-modulus")

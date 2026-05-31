@@ -1053,3 +1053,9 @@ source of growth beyond Ramsey.
   vertices.  This can amplify dense or medium-density recursive witnesses, but
   high-degree witnesses only add a few vertices; the trace route still needs
   degree control, not just order control, inside trace classes.
+- 2026-05-31: Added `--exhaustive-source-modular` to `universal_slots.py` for
+  exact small fixed-source-residue slot sweeps.  For `4 -> 8` with four slots
+  on `n=7`, exact enumeration checks `592` source-`0` graphs and leaves `53`
+  candidate slot multisets, checks `592` source-`2` graphs and leaves `25`,
+  and has no source-`1` or source-`3` graphs because odd source residue is
+  incompatible with the even degree sum on an odd number of vertices.
