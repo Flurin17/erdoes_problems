@@ -280,7 +280,9 @@ Important distinction: "positive square class" and "smallest representative" are
    boundary orderings. A finite census over the eight canonical
    endpoint-minimal representatives for each of `63` and `99` also eliminates
    those representatives by overlap, non-simple residual boundary, or residual
-   corner-label mismatch.
+   corner-label mismatch. A randomized noncanonical shell sampler found no
+   survivor in fixed-seed `30000`-attempt runs (`795` unique shells for `63`,
+   `648` for `99`), but this is evidence rather than an exhaustive certificate.
 
 ## Current Diophantine Status for `n=19`
 

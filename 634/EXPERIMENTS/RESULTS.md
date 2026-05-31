@@ -1022,6 +1022,25 @@ This rules out the canonical endpoint-minimal shell representatives. The
 remaining task is larger: enumerate or theoretically control the noncanonical
 boundary paths with the same side-count representations.
 
+A randomized noncanonical shell sampler tests a wider part of that remaining
+space:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_random_shell_search.py 63 --samples 30000 --seed 17 --stop-on-pass
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_random_shell_search.py 99 --samples 30000 --seed 17 --stop-on-pass
+```
+
+```text
+N=63: sampled unique boundary cycles=795;
+      status counts={not-simple-cycle: 52, proper-overlap: 743}.
+N=99: sampled unique boundary cycles=648;
+      status counts={corner-label-violation: 108, not-simple-cycle: 70,
+                     proper-overlap: 470}.
+```
+
+No sampled noncanonical shell passes the current filters. This is search
+evidence only: the sampler does not exhaust the full boundary-order space.
+
 ## Zhang Constructive Families
 
 Command:

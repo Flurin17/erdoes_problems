@@ -107,6 +107,11 @@ Current components:
   endpoint-minimal boundary-shell representatives selected by the transition
   demand path DP. For `N=63` and `N=99` there are eight representatives each,
   and none passes the current overlap/simple-cycle/corner-label filters.
+- `gamma_2alpha_random_shell_search.py`: randomized sampler over all
+  angle-compatible noncanonical boundary paths for a refined `gamma=2alpha`
+  survivor. It applies the same shell filters and is useful for finding
+  candidate extensions or stress-testing the endpoint-minimal census, but it is
+  not an impossibility proof.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

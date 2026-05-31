@@ -1812,6 +1812,14 @@ graphs. Thus the endpoint-minimal representatives are exhausted, but arbitrary
 noncanonical boundary orderings remain to be controlled before this can become
 an impossibility proof.
 
+Randomized noncanonical shell sampling has so far found no counterexample to
+the shell obstruction pattern. With seed `17` and `30000` sampling attempts, the
+`N=63` run produced `795` distinct oriented boundary shells, all eliminated by
+proper overlap or non-simple residual boundary. The analogous `N=99` run
+produced `648` distinct shells, all eliminated by proper overlap, non-simple
+residual boundary, or residual corner-label violations. This is diagnostic
+evidence only and is not used as a proof-level elimination.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,
