@@ -2461,6 +2461,90 @@ construct the corresponding witnesses \(w\notin3(A\setminus\{x,y\})\). It
 does show that the missing positive step cannot be a Ramsey or coherence
 argument applied only to the reflected-cover inclusions from Lemma 10.1.
 
+## Example 8.7d: Genuine bad pairs need not give one-center recurrence
+
+The previous warning used only the cover-level shadow of pair holes. The
+following integer example shows that even one genuine bad pair, together
+with actual order-2 coverage, does not force one-center recurrence, bounded
+top-excess, or a density contradiction.
+
+Fix a large integer \(q\) and put
+\[
+x=8q+2,\qquad y=8q+6,\qquad R=\{0,1,4\}\pmod 8.
+\]
+Let
+\[
+A=\{x,y\}\cup\{n>y:n\bmod 8\in R\}.
+\]
+Then \(A\) is an asymptotic basis of order \(2\). Residue-wise,
+\[
+R+R=\{0,1,2,4,5\}\pmod 8,
+\]
+while
+\[
+x+R=\{2,3,6\}\pmod 8,\qquad y+R=\{6,7,2\}\pmod 8.
+\]
+Together these cover all residues modulo \(8\), and the tail in the
+residue classes \(R\) is cofinite in those classes, so every sufficiently
+large integer has a two-term representation from \(A\).
+
+Now let \(w\) be any sufficiently large integer with
+\[
+w\equiv7\pmod 8.
+\]
+After deleting the pair \(\{x,y\}\), only the \(R\)-tail remains. Since
+\[
+3R=\{0,1,2,3,4,5,6\}\pmod 8,
+\]
+we have
+\[
+w\notin3(A\setminus\{x,y\}).
+\]
+Thus \(\{x,y\}\) is a genuine bad pair for arbitrarily large witnesses, and
+\[
+w-y\to\infty.
+\]
+
+The reflected cover is genuinely split. If \(e\in A\setminus\{x,y\}\) is a
+tail element, then:
+\[
+\begin{array}{c|c|c}
+e\bmod8 & w-y-e\bmod8 & w-x-e\bmod8\\ \hline
+0 & 1\in R & 5\notin R\\
+1 & 0\in R & 4\in R\\
+4 & 5\notin R & 1\in R
+\end{array}
+\]
+For large \(w\), the entries in \(R\) are represented by actual tail
+elements of \(A\). Hence the two centers \(w-y\) and \(w-x\) cover all
+large retained tail padders, but neither center covers all three residue
+classes.
+
+Moreover choose a finite test set
+\[
+T=\{t_0,t_1,t_4\}\subset A
+\]
+with \(t_r\equiv r\pmod8\) for \(r\in R\). No sufficiently large center
+\(m\) satisfies
+\[
+m-T\subset A.
+\]
+Indeed, this would require
+\[
+m\bmod8\in R+0,\qquad
+m\bmod8\in R+1,\qquad
+m\bmod8\in R+4,
+\]
+but
+\[
+R\cap(R+1)\cap(R+4)=\varnothing.
+\]
+
+Thus the local inference from a genuine pair hole to one-center
+reflection-recurrence is false. A positive proof must use the global
+barrier/minimality hypotheses across all infinite deletions, not only the
+local data from a single pair.
+
 ## Example 8.8: Finite-center repairs need coherence
 
 A naive finite-center replacement for Lemma 8.2a is false. It is not enough
@@ -3356,6 +3440,18 @@ fourth stage. This is finite evidence only, but it locates the construction
 pressure more accurately: after several old elements are present, a new
 block must protect many old-new pairs simultaneously while still leaving
 the positive-summand coverage buffer from Lemma 13.1d.
+
+The distinction between formal pair holes and genuinely collective pair
+holes matters. With the script's `--minimal` flag, each old-new witness is
+required to be repaired after restoring either endpoint of the pair. Under
+the same default bounds the search finds only
+\[
+\{1,2\}\to\{1,2,4,5\}
+\]
+with endpoint \(9\), and no second stage. This agrees with the theoretical
+picture after Corollary 8.3b: in the unresolved \(k=2\) case, degenerate
+old-singleton witnesses must eventually disappear, leaving much harder
+minimal collective barriers.
 
 ## Proposition 13.1e: Cross-stage pairs in order \(k\)
 

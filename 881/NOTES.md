@@ -836,6 +836,16 @@ So Ramsey coherence of the covers from Lemma 10.1 is still insufficient;
 the proof must exploit actual two-sum representation hypergraphs or genuine
 holes, not just set-cover data.
 
+Example 8.7d shows that even one genuine integer pair hole plus actual
+order-2 tail coverage is insufficient locally. With tail residue classes
+\(R=\{0,1,4\}\pmod8\) and two exceptional elements \(x\equiv2\),
+\(y\equiv6\), every large \(w\equiv7\pmod8\) is absent from
+\(3(A\setminus\{x,y\})\), the top excess \(w-y\) is unbounded, and the
+two reflected centers split the three tail residue classes. A finite
+three-residue test set has no one-center reflection. Thus a positive proof
+must use global barrier/minimality over all infinite deletions, not just
+local pair-hole structure.
+
 Example 8.8 gives a second finite warning: even if every deleted singleton
 or pair pattern is repairable by one of finitely many retained centers, the
 repairs may be incoherent. Lemma 8.2a needs one fixed center compatible with

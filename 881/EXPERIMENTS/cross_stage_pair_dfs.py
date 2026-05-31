@@ -9,6 +9,7 @@ parameters. It is only a finite diagnostic for Proposition 13.1c in
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from itertools import combinations
 
@@ -35,18 +36,31 @@ def pair_witnesses(
     previous_endpoint: int,
     declared_endpoint: int,
     cap: int,
+    minimal: bool,
 ) -> dict[tuple[int, int], int] | None:
     elements = old | new
     two_sums = hsum(elements, 2, cap)
+    three_all = hsum(elements, 3, cap) if minimal else None
     witnesses: dict[tuple[int, int], int] = {}
     for a in sorted(old):
         for b in sorted(new):
             without = hsum(elements - {a, b}, 3, cap)
+            without_a = hsum(elements - {a}, 3, cap) if minimal else None
+            without_b = hsum(elements - {b}, 3, cap) if minimal else None
             found = next(
                 (
                     w
                     for w in range(previous_endpoint + 1, declared_endpoint + 1)
                     if w in two_sums and w not in without
+                    if not minimal
+                    or (
+                        three_all is not None
+                        and without_a is not None
+                        and without_b is not None
+                        and w in three_all
+                        and w in without_a
+                        and w in without_b
+                    )
                 ),
                 None,
             )
@@ -72,6 +86,7 @@ def extensions(
     slack: int,
     max_new_size: int,
     max_candidate: int,
+    minimal: bool,
 ) -> list[Stage]:
     oldcov = cover_end(old, base, max(500, 4 * max(old) + 200))
     hi = min(max_candidate, oldcov + slack)
@@ -87,7 +102,14 @@ def extensions(
                 continue
             first_declared = max(endpoint + 1, max(new))
             for declared in range(first_declared, newcov + 1):
-                witnesses = pair_witnesses(old, new, endpoint, declared, cap)
+                witnesses = pair_witnesses(
+                    old,
+                    new,
+                    endpoint,
+                    declared,
+                    cap,
+                    minimal,
+                )
                 if witnesses is None:
                     continue
                 out.append(
@@ -110,6 +132,7 @@ def search(
     max_new_size: int = 3,
     max_candidate: int = 30,
     branch_limit: int = 80,
+    minimal: bool = False,
 ) -> None:
     base = 2
     best: list[Stage] = []
@@ -134,7 +157,15 @@ def search(
         if key in seen:
             return False
         seen.add(key)
-        found = extensions(old, endpoint, base, slack, max_new_size, max_candidate)
+        found = extensions(
+            old,
+            endpoint,
+            base,
+            slack,
+            max_new_size,
+            max_candidate,
+            minimal,
+        )
         for stage in found[:branch_limit]:
             next_old = set(old) | set(stage.new)
             if dfs(next_old, stage.endpoint, [*chain, stage]):
@@ -147,4 +178,4 @@ def search(
 
 
 if __name__ == "__main__":
-    search()
+    search(minimal="--minimal" in sys.argv)

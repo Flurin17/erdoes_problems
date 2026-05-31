@@ -97,6 +97,13 @@ parameters it finds a non-greedy three-stage chain
 with endpoints \(4,7,15\), but no fourth stage in that bounded search.
 Thus the two-stage greedy stall was not conclusive; the next obstruction is
 simultaneous protection after several old elements are present.
+The `--minimal` flag requires each old-new pair hole to be repaired when
+either endpoint is restored. Under the same default bounds it finds only
+one stage,
+\[
+\{1,2\}\to\{1,2,4,5\},
+\]
+with endpoint \(9\), and no second stage.
 
 `reflection_certificate_verify.py` instantiates the balanced-certificate
 construction from Theorem 2.3 in the model \(A=\mathbb N\), and verifies
