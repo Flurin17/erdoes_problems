@@ -6496,10 +6496,37 @@ and use \(2^{t_1}\) as the third \(A_1\) summand. If \(T=\{t\}\) and
 The finitely many excluded small cases are \(1\) and \(2\). Thus all
 sufficiently large integers lie in \(3C\).
 
+The same model also fails to realize the certificate-free escape from
+Lemma 8.6g. Let
+\[
+X=\left\{\sum_{j\in F}4^j:\ \varnothing\ne F\subset\mathbb N
+\text{ finite}\right\},\qquad Y=2X,
+\]
+so \(X=A_0\) after relabelling the even binary positions and \(Y=A_1\).
+No finite coloring of
+\[
+A=X\cup Y
+\]
+can have all color classes certificate-free relative to \(A\). Indeed,
+restrict such a coloring to \(X\). By Hindman's finite-unions theorem,
+there are disjoint nonempty finite sets \(U,V\subset\mathbb N\) such that
+\[
+x_U,\quad x_V,\quad x_{U\cup V}
+\]
+have the same color, where \(x_F=\sum_{j\in F}4^j\). Put
+\[
+e=x_U,\qquad y_1=x_{U\cup V}=x_U+x_V,\qquad y_2=x_V.
+\]
+Then \(y_1,y_2\ne e\) and
+\[
+y_1+y_2-e=(x_U+x_V)+x_V-x_U=2x_V\in Y\subset A.
+\]
+Thus \(e,y_1,y_2\) are a monochromatic certificate, contradiction.
+
 Therefore the digital route currently gives no counterexample: the
 carry-free model and the natural binary critical-density model both satisfy
-the desired conclusion, while an exact additive embedding of the free
-monoid into \(\mathbb N\) is unavailable.
+the desired conclusion and contain finite certificate tests, while an exact
+additive embedding of the free monoid into \(\mathbb N\) is unavailable.
 
 ## Attempt 13: Staged protected-block counterexample
 

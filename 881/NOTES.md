@@ -1398,6 +1398,29 @@ systems must introduce carries or coefficient identifications, and those
 extra representations are exactly what the private-witness argument cannot
 control.
 
+The binary Raikov-Stöhr model also does not support the finite
+certificate-free coloring escape from Lemma 8.6g. Writing
+\[
+X=\{\sum_{j\in F}4^j:\varnothing\ne F\subset\mathbb N\text{ finite}\},
+\qquad Y=2X,\qquad A=X\cup Y,
+\]
+any finite coloring of \(X\) has, by Hindman's finite-unions theorem,
+disjoint nonempty \(U,V\) with
+\[
+x_U,\ x_V,\ x_{U\cup V}
+\]
+monochromatic. Then
+\[
+e=x_U,\quad y_1=x_{U\cup V},\quad y_2=x_V
+\]
+gives
+\[
+y_1+y_2-e=2x_V\in Y\subset A,
+\]
+so this is a monochromatic certificate. Thus standard digital bases have
+finite certificate tests; a certificate-free obstruction would have to be a
+different thin bipartite/Sidon complementing construction.
+
 ## Robust Residue Boosters
 
 The finite residue obstruction becomes more promising in order \(k=3\).
