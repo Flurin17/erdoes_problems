@@ -2738,6 +2738,41 @@ e+f\notin2(A_s\setminus F),
 except for the exceptional \(F+F\) values. This is the arithmetic
 condition missing from the purely abstract model in Warning 10.3c.
 
+### Corollary 8.4c.1: Absorptive test sets are pair-sum bounded
+
+Keep the hypotheses of Lemma 8.4c. Let \(T\subset C\) be finite and suppose
+\[
+w-\max T\ge N_0,\qquad T+F\subseteq2C. \tag{1}
+\]
+Then
+\[
+|T|\le |F+F|. \tag{2}
+\]
+In particular, if
+\[
+|F|=r,
+\]
+then
+\[
+|T|\le \frac{r(r+1)}2. \tag{3}
+\]
+
+Proof. For every \(t\in T\), condition (1) gives \(t+F\subseteq2C\). By
+Lemma 8.4c, the hole \(w\notin3C\) forces
+\[
+w-t\in F+F.
+\]
+The map \(t\mapsto w-t\) is injective, so \(|T|\le |F+F|\). The final
+bound is the trivial count of unordered deleted-pair sums. \(\square\)
+
+Thus a fixed-rank collective hole cannot coexist with an arbitrarily large
+retained test set whose translates by \(F\) are all absorbed into \(2C\).
+This is the precise no-go for direct arithmetizations of the abstract
+Schreier model that use a thick retained tail. It does not defeat the
+actual Schreier escape by itself: for an edge of rank \(r\), the natural
+earlier prefix has only \(O(r)\) rows, while \(F+F\) may have \(O(r^2)\)
+exception values.
+
 ## Lemma 8.4d: Private colors have low matching capacity
 
 Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite of size \(r\),
@@ -2753,6 +2788,10 @@ be the maximum number of pairwise vertex-disjoint two-term representations
 of \(s\) from \(A\) that do not use \(f\). Here a representation
 \(s=x+y\) uses the vertices \(\{x,y\}\), with a double representation
 \(s=2x\) using the single vertex \(x\).
+Equivalently, \(\nu_f(s)\) is just the number of unordered two-term
+representations of \(s\) from \(A\setminus\{f\}\): two distinct unordered
+representations of the same two-sum cannot share a vertex, since sharing
+one summand forces the other summand as well.
 
 If
 \[
@@ -2811,9 +2850,10 @@ The first part and (1) give membership in the displayed union. Inequality
 (3) follows by counting the union with multiplicity. \(\square\)
 
 This converts the private-color condition into a matching-capacity
-obstruction. A Schreier edge of rank \(r\) can protect a retained test
-point \(t\) through color \(f\) only when the cross-sum \(t+f\) has fewer
-than \(r\) disjoint two-term representations avoiding \(f\). Thus any
+obstruction, equivalently a low two-sum representation-count obstruction.
+A Schreier edge of rank \(r\) can protect a retained test point \(t\)
+through color \(f\) only when the cross-sum \(t+f\) has fewer than \(r\)
+two-term representations avoiding \(f\). Thus any
 unbounded-rank reflected-Schreier counterexample must arrange a large
 supply of low-matching cross-sums, after removing the exceptional
 \(F+F\)-rows.
@@ -2848,6 +2888,76 @@ w-(F+F)=[q,q+2r-2],
 an interval of length comparable to \(r\). This is exactly the scale of
 the early Schreier prefix. A positive proof through Lemma 8.4d must
 control both the low-matching rows and the \(F+F\) exception window.
+
+## Warning 8.4e: Low representation-count rows can be cofinite
+
+Lemma 8.4d is sharp enough to rule out absorptive or highly redundant
+local lifts, but no unconditional sparsity statement for its low-count rows
+can follow from the order-2 basis property alone.
+
+Fix a finite set \(F_0\subset\mathbb N\) and \(r\ge1\). Choose
+\[
+m>\max F_0
+\]
+and put
+\[
+A=m\mathbb N\cup\{1,2,\ldots,m-1\}. \tag{1}
+\]
+Then \(A\) is an asymptotic basis of order \(2\): if \(n\equiv i\pmod m\)
+with \(1\le i\le m-1\), then for large \(n\)
+\[
+n=i+(n-i),
+\]
+and if \(m\mid n\), then
+\[
+n=m+(n-m).
+\]
+
+For every \(f\in F_0\) and every sufficiently large
+\[
+t\in m\mathbb N,
+\]
+the cross-sum \(t+f\) has no two-term representation from
+\[
+A\setminus\{f\}.
+\]
+Indeed, two multiples of \(m\) have residue \(0\pmod m\), two elements of
+\(\{1,\ldots,m-1\}\) are too small for large \(t\), and a mixed
+representation of residue \(f\pmod m\) must use the unique small residue
+\(f\), which is forbidden. Hence
+\[
+\nu_f(t+f)=0<r
+\]
+for all such \(t\), simultaneously for every \(f\in F_0\).
+
+Thus the low-count set
+\[
+L_{r,f}=\{t\in A:\nu_f(t+f)<r\}
+\]
+may contain a cofinite tail of an arithmetic progression in \(A\), and the
+common intersection
+\[
+\bigcap_{f\in F_0} L_{r,f}
+\]
+may be cofinite in the infinite part of \(A\). In particular, there is no
+general Sidon, bounded-energy, or sparse-intersection theorem for these
+sets in arbitrary order-2 bases. The example is eventually periodic and is
+handled positively by Proposition 7.1, but it shows that any use of Lemma
+8.4d must exploit more than order-2 coverage.
+
+There are only dense local substitutes. If \(B=A\setminus\{f\}\) and
+\[
+|B\cap[1,s-1]|\ge\frac{s-1}{2}+r,
+\]
+then \(s\) has at least \(r\) two-term representations from \(B\). Indeed,
+\[
+|B\cap(s-B)|\ge2|B\cap[1,s-1]|-(s-1)\ge2r,
+\]
+and each unordered representation contributes at most two ordered witnesses.
+Therefore dense intervals inside \(A\), or lower density above \(1/2\),
+force low-count rows to disappear. This is not relevant to the remaining
+sparse case after Proposition 3.1f, but it is a useful check on finite
+block constructions.
 
 ## Lemma 8.4a: Collective holes force a retained gap
 
@@ -6250,12 +6360,22 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   sum or has a private deleted-retained sum \(e+f\notin2(A\setminus F)\).
   This rules out direct Schreier lifts whose retained tail absorbs
   \(T+F\) back into \(2(A\setminus F)\).
+* Corollary 8.4c.1 quantifies that no-go: if \(T+F\subseteq2(A\setminus F)\)
+  for an active retained test set \(T\), then \(|T|\le|F+F|\). This kills
+  fixed-rank absorptive lifts with arbitrarily large tests, but not
+  Schreier-scale ranks where the active prefix can be only linear in
+  \(|F|\).
 * Lemma 8.4d converts private colors into a rank-sensitive low-matching
   obstruction: if \(|F|=r\), a color \(f\) can serve \(t\) only when
   \(t+f\) has fewer than \(r\) disjoint two-term representations avoiding
   \(f\). The notes after it record why this is only a capacity obstruction,
   not a Hall matching theorem, and why \(F+F\) exception rows matter at
   Schreier scale.
+* Warning 8.4e shows that these low-count rows can be cofinite in the
+  infinite part of an order-2 basis, even simultaneously for every
+  \(f\) in a prescribed finite set. Thus Lemma 8.4d is useful only when
+  combined with non-sparse redundancy, dense intervals, or additional
+  structure beyond order-2 coverage.
 * Warning 8.5 records that bounded-width barriers do not automatically
   reduce to one fixed uniformity, and that abstract barriers need not have
   bounded width on any infinite tail.
