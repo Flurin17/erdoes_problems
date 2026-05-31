@@ -1477,6 +1477,15 @@ fibers, then one fiber contains a fixed certificate triple, reflected by
 \(w-x\) or \(w-y\), and Corollary 2.3c gives a good deletion. Thus a
 persistent pair-barrier obstruction needs coherent certificate-free
 endpoint list-colorings, not just abstract certificate-free halfsets.
+Moreover, if such list-colorable large-excess pair barriers exist for every
+finite \(T\), a compactness argument produces a global coloring
+\[
+A=C_0\cup C_1
+\]
+such that both colors are certificate-free and each color is separately
+reflection-recurrent in \(A\). Thus the remaining pair obstruction must
+look like two recurrent Sidon-like layers, not just isolated finite
+colorings.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then

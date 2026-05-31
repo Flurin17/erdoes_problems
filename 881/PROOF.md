@@ -5737,6 +5737,82 @@ certificate-free two-coloring. This is stronger and more coherent than the
 mere existence of a certificate-free half-subset; it is the list-coloring
 form of the remaining pair-barrier obstruction.
 
+## Lemma 8.6g'': Persistent list-colored pair barriers give two recurrent certificate-free colors
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Suppose
+that for every finite
+\[
+T\subset A
+\]
+and every \(M\), there are \(w\) and distinct
+\[
+x_w,y_w\in A\setminus T
+\]
+such that
+\[
+w-x_w>M,\qquad w-y_w>M,\qquad w\notin3(A\setminus\{x_w,y_w\}), \tag{1}
+\]
+and the endpoint lists
+\[
+L_w(t)=\{z\in\{x_w,y_w\}:w-t-z\in A\}\qquad(t\in T)
+\]
+admit a choice function whose two fibers are certificate-free relative to
+\(A\). Then \(A\) has a two-coloring
+\[
+A=C_0\cup C_1
+\]
+such that:
+
+1. each \(C_i\) is certificate-free relative to \(A\);
+2. each \(C_i\) is separately reflection-recurrent in \(A\): for every
+   finite \(U\subset C_i\) and every \(L\), there is \(m>L\) with
+   \[
+   m-U\subset A.
+   \]
+
+Proof. Enumerate
+\[
+A=\{a_1<a_2<\cdots\}
+\]
+and put \(T_j=\{a_1,\ldots,a_j\}\). For each \(j\), apply the hypothesis
+with \(T=T_j\) and \(M=j\). Choose one admissible endpoint choice, and
+label the fiber assigned to \(x_j\) by color \(0\), the fiber assigned to
+\(y_j\) by color \(1\).
+
+By the diagonal compactness of \(\{0,1\}^{\mathbb N}\), pass to a
+subsequence on which the color of every fixed \(a_i\) stabilizes. Let
+\[
+C_0,C_1
+\]
+be the resulting color classes.
+
+If some \(C_i\) contained a certificate triple
+\[
+e,y_1,y_2,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A,
+\]
+then that finite triple would lie in one stable fiber for all sufficiently
+large stages of the subsequence, contradicting that every chosen fiber is
+certificate-free. Thus both color classes are certificate-free.
+
+Now fix a finite \(U\subset C_0\) and \(L\). For all sufficiently large
+stages \(j\) in the subsequence, the set \(U\) lies in \(T_j\), every
+element of \(U\) has stabilized to color \(0\), and \(w_j-x_j>L\). Since
+the chosen endpoint for every \(u\in U\) is \(x_j\), the center
+\[
+m=w_j-x_j
+\]
+satisfies \(m-U\subset A\). This proves reflection-recurrence for \(C_0\).
+The proof for \(C_1\), using the centers \(w_j-y_j\), is identical.
+\(\square\)
+
+Consequently, if the large-excess pair-barrier case remains after Lemma
+8.6g', then the obstruction is no longer merely finite and local. It must
+produce a global partition of \(A\) into two Sidon-like certificate-free
+classes, with each class carrying its own independent reflection-recurrence
+inside \(A\). A final proof may therefore attack either the existence of
+such a two-color recurrent structure or the possibility that genuine pair
+holes generate it.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -8293,6 +8369,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   halfsets to endpoint list-colorings: pair holes force a recurrent
   certificate unless the shifted endpoint lists can split every finite test
   set into two certificate-free fibers.
+* Lemma 8.6g'' compactifies the surviving list-colorable pair obstruction:
+  if it persists for every finite test set, then \(A\) has a global
+  two-coloring into certificate-free classes, and each color is separately
+  reflection-recurrent in \(A\).
 * Lemma 8.6h supplies such finite test sets when \(A\) contains long
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of
