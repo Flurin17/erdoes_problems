@@ -122,6 +122,12 @@ finite delayed barrier \(F\) such that \(A\setminus F\) is eventually an
 order-\((k+1)\) basis, but every threshold is at least \(\max F\); the same
 terminal-gap and activity conclusions still hold for the delayed witness.
 
+Proposition 3.1f proves both finite-core stability and the desired infinite
+deletion under a tail-syndetic subset hypothesis. This blocks all
+eventually periodic or finite-accelerator counterexample attempts whose
+large background set has bounded gaps: finite fatal deletions would force
+terminal retained gaps longer than the syndetic gap bound.
+
 ## Trivial and Boundary Cases
 
 ### \(k=1\)
@@ -191,18 +197,22 @@ Thus \(A'\) is an order-3 basis.
 
 Proposition 7.1 in `PROOF.md` proves a more general fact: every eventually
 periodic asymptotic basis of order \(k\) satisfies the desired conclusion,
-without using the minimality hypothesis. If \(A\) is eventually the union of
-residue classes \(S\pmod m\), then \(kS=\mathbb Z/m\mathbb Z\), hence
-\((k+1)S=\mathbb Z/m\mathbb Z\). Deleting a zero-density infinite subset of
-one residue class leaves enough representatives to solve every large
-\((k+1)\)-term residue prescription.
+without using the minimality hypothesis. The proof must account for finite
+exceptional accelerators: if \(A\) is eventually the union of residue
+classes \(S\pmod m\), it need not be true that
+\(kS=\mathbb Z/m\mathbb Z\). Proposition 3.1f gives the cleaner reason:
+the nonempty eventual periodic tail is syndetic, and terminal gaps from
+finite order-\((k+1)\) holes cannot avoid a syndetic retained subset. The
+same argument proves finite-core finite-deletion stability for eventually
+periodic bases.
 
 Corollary 7.1b extends this to any basis containing an eventually periodic
 order-\(k\) subbasis \(P\). Delete the infinite sparse set inside \(P\)
 given by Proposition 7.1; the remaining \(A\setminus B\) contains
 \(P\setminus B\), so it is also order \(k+1\). Hence any counterexample to
 the broad deletion theorem must avoid even a structured eventually periodic
-subbasis of the original order.
+subbasis of the original order, and eventually periodic examples cannot
+refute the finite-core stability target.
 
 However, Example 7.2 shows that arbitrary finite deletion is not stable at
 order \(k+1\). A finite accelerator can lower the order of an eventually

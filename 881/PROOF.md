@@ -827,6 +827,106 @@ the protected core are eventually repaired at order \(k+1\), but every
 infinite tail contains finite subdeletions whose repair threshold is forced
 to start at or beyond the deleted block itself.
 
+## Proposition 3.1f: Syndetic tail criterion
+
+Let \(k\ge2\), let \(h=k+1\), and let \(A\subseteq\mathbb N\) be an
+asymptotic basis of order \(k\), with threshold \(N_0\) and
+\[
+m_0=\min A.
+\]
+Suppose \(A\) contains a tail-syndetic subset \(P\): there are \(R\) and
+\(G\) such that every interval
+\[
+(x,x+G],\qquad x\ge R,
+\]
+contains a point of \(P\). Then:
+
+1. there is a finite core \(E\subset A\) such that every finite
+   \(F\subset A\setminus E\) leaves \(A\setminus F\) an order-\(h\) basis;
+2. there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+   order-\(h\) basis.
+
+Proof. Choose \(M\) so large that
+\[
+M+(k-1)m_0-N_0>G.
+\]
+Put
+\[
+E=A\cap[1,M].
+\]
+Let \(F\subset A\setminus E\) be finite. If \(F=\varnothing\), then
+\(A\setminus F=A\) is an order-\(h\) basis by monotonicity. Suppose
+\(F\ne\varnothing\), and put \(f_0=\min F\). If \(A\setminus F\) were not
+an order-\(h\) basis, then there would be arbitrarily large
+\[
+w\notin h(A\setminus F).
+\]
+Choose such a \(w\) with
+\[
+w-f_0-(k-1)m_0>\max\{R,\max F\}.
+\]
+Lemma 10.3 gives
+\[
+(A\setminus F)\cap
+\bigl(w-f_0-(k-1)m_0,\ w-N_0\bigr]=\varnothing. \tag{1}
+\]
+The interval in (1) has length
+\[
+f_0+(k-1)m_0-N_0>M+(k-1)m_0-N_0>G
+\]
+and starts beyond \(R\), so it contains a point of \(P\). It also starts
+beyond \(\max F\), so that point is not in \(F\). This contradicts (1).
+Thus \(A\setminus F\) is an order-\(h\) basis, proving (1).
+
+For the infinite deletion, pass to a tail of \(P\) whose consecutive gaps
+are at most \(G\), enumerate it as
+\[
+p_1<p_2<\cdots,
+\]
+and choose an index \(J\) so large that
+\[
+p_{2J}>2G+N_0-(k-1)m_0.
+\]
+Let
+\[
+B=\{p_{2j}:j\ge J\}.
+\]
+Then \(B\) is infinite, and
+\[
+P_0=P\setminus B
+\]
+is still tail-syndetic, with gap at most \(2G\) after a sufficiently large
+threshold.
+
+Suppose \(C=A\setminus B\) is not an order-\(h\) basis. Choose a large
+\[
+w\notin hC
+\]
+so that the terminal interval below starts beyond a tail-syndetic threshold
+for \(P_0\). Put
+\[
+F_w=B\cap[1,w].
+\]
+For large \(w\), this set is nonempty and \(\min F_w=p_{2J}\). Since no
+positive summand in a representation of \(w\) can exceed \(w\), the
+nonrepresentation \(w\notin hC\) implies
+\[
+w\notin h(A\setminus F_w).
+\]
+Lemma 10.3 gives
+\[
+(A\setminus F_w)\cap
+\bigl(w-p_{2J}-(k-1)m_0,\ w-N_0\bigr]=\varnothing. \tag{2}
+\]
+The interval in (2) has length
+\[
+p_{2J}+(k-1)m_0-N_0>2G
+\]
+and lies in the tail where \(P_0\) has gaps at most \(2G\). Hence it
+contains a point of \(P_0\). This point is not deleted by \(F_w\), a
+contradiction. Therefore \(A\setminus B\) is an order-\(h\) basis.
+\(\square\)
+
 ## Lemma 3.2: Protected matching criterion
 
 Let \(A\) be an asymptotic basis of order \(k\). Suppose there is a finite
@@ -1452,7 +1552,7 @@ all sufficiently large integers in residue classes \(3,4,0\pmod5\), and
 \(2a+C'\) gives residue classes \(1,2\pmod5\). Therefore every sufficiently
 large integer lies in \(3A'\), so \(A'\) is an order-3 basis. \(\square\)
 
-## Proposition 7.1: Eventually periodic bases satisfy the conclusion
+## Proposition 7.1: Eventually periodic bases satisfy finite-core stability
 
 Let \(A\subseteq\mathbb N\) be eventually periodic: there are \(m\ge1\),
 a nonempty residue set \(S\subseteq\mathbb Z/m\mathbb Z\), and \(N_0\) such
@@ -1460,45 +1560,16 @@ that for all \(n\ge N_0\),
 \[
 n\in A\quad\Longleftrightarrow\quad n\bmod m\in S.
 \]
-If \(A\) is an asymptotic basis of order \(k\), then there is an infinite
-\(B\subset A\) such that \(A\setminus B\) is an asymptotic basis of order
-\(k+1\).
+If \(A\) is an asymptotic basis of order \(k\), then:
 
-Proof. Since \(A\) is an order-\(k\) basis, the residue set satisfies
-\[
-kS=\mathbb Z/m\mathbb Z.
-\]
-As \(S\ne\varnothing\), this implies
-\[
-(k+1)S=kS+S=\mathbb Z/m\mathbb Z.
-\]
-Choose one residue \(s_0\in S\), and let \(B\) be an infinite subset of
-\[
-\{n\in A:n\equiv s_0\pmod m\}
-\]
-with zero relative density in that progression; for instance, take a rapidly
-growing sequence in that progression.
+1. there is a finite core \(E\subset A\) such that for every finite
+   \(F\subset A\setminus E\), the set \(A\setminus F\) is an asymptotic
+   basis of order \(k+1\);
+2. there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+   asymptotic basis of order \(k+1\).
 
-We claim \(C=A\setminus B\) is an order-\((k+1)\) basis. Fix a residue
-class \(r\pmod m\), and choose residues \(s_1,\ldots,s_{k+1}\in S\) with
-\[
-s_1+\cdots+s_{k+1}\equiv r\pmod m.
-\]
-For all large \(n\equiv r\pmod m\), the number of solutions to
-\[
-x_1+\cdots+x_{k+1}=n,\qquad
-x_i\equiv s_i\pmod m,\qquad x_i\ge N_0,
-\]
-is \(\gg n^k\). The solutions with some \(x_i\in B\) are \(o(n^k)\), since
-\(B(x)=o(x)\) inside its progression and there are only \(O(n^{k-1})\)
-choices for the remaining variables once one coordinate is fixed. Therefore,
-for all sufficiently large \(n\equiv r\pmod m\), at least one such solution
-uses no element of \(B\). All its coordinates lie in \(C\), so
-\[
-n\in(k+1)C.
-\]
-There are finitely many residue classes \(r\), hence \(C\) is an
-order-\((k+1)\) asymptotic basis. \(\square\)
+Proof. Since \(S\ne\varnothing\), the eventual periodic tail of \(A\)
+contains a tail-syndetic subset. Apply Proposition 3.1f. \(\square\)
 
 ## Corollary 7.1b: Bases with eventually periodic subbases
 
@@ -1507,11 +1578,28 @@ there is an eventually periodic subset
 \[
 P\subseteq A
 \]
-which is itself an asymptotic basis of order \(k\). Then there is an
-infinite \(B\subset A\) such that \(A\setminus B\) is an asymptotic basis of
-order \(k+1\).
+which is itself an asymptotic basis of order \(k\). Then:
 
-Proof. Apply Proposition 7.1 to \(P\). There is an infinite
+1. there is a finite core \(E\subset A\) such that every finite
+   \(F\subset A\setminus E\) leaves \(A\setminus F\) an order-\((k+1)\)
+   basis;
+2. there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+   asymptotic basis of order \(k+1\).
+
+Proof. Apply Proposition 7.1 to \(P\). It gives a finite core
+\[
+E_P\subset P
+\]
+such that every finite \(G\subset P\setminus E_P\) leaves \(P\setminus G\)
+an order-\((k+1)\) basis. Put \(E=E_P\). If \(F\subset A\setminus E\) is
+finite, then
+\[
+P\setminus(F\cap P)
+\]
+is an order-\((k+1)\) basis and is contained in \(A\setminus F\). This
+proves finite-core stability for \(A\).
+
+Proposition 7.1 also gives an infinite
 \[
 B\subset P
 \]
@@ -1525,12 +1613,14 @@ the larger set \(A\setminus B\) is also an order-\((k+1)\) basis.
 Thus any counterexample to the broad deletion theorem cannot contain an
 eventually periodic order-\(k\) subbasis. In particular, the obstruction is
 not merely the presence of nonperiodic or sparse extra elements; it must be
-built into every order-\(k\) subbasis of \(A\).
+built into every order-\(k\) subbasis of \(A\). Moreover, eventually
+periodic bases cannot refute the finite-core finite-deletion stability
+target from Reduction 0.
 
 ## Example 7.2: Finite deletion can raise the order by an arbitrary amount
 
-Finite-deletion stability at order \(k+1\) is false, even for eventually
-periodic bases. Fix \(m\ge5\). Let
+Finite-deletion stability at order \(k+1\), with no protected finite core,
+is false even for eventually periodic bases. Fix \(m\ge5\). Let
 \[
 C=\{n\ge N_0:n\equiv0\text{ or }1\pmod m\}
 \]
@@ -4288,6 +4378,10 @@ new-design problem, not as a small non-greedy search miss.
   remaining counterexample must be purely delayed: finite deletions are
   eventually repaired, but every infinite tail contains finite subdeletions
   whose thresholds start at or beyond the deleted block.
+* Proposition 3.1f proves finite-core finite-deletion stability and the
+  desired infinite deletion for every basis containing a tail-syndetic
+  subset. It uses Lemma 10.3 to rule out terminal gaps after finite
+  deletions.
 * Lemma 3.2 proves the theorem under an arbitrarily-large protected matching
   hypothesis for \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded
@@ -4324,8 +4418,9 @@ new-design problem, not as a small non-greedy search miss.
   near endpoints.
 * Example 7 is a test case showing the desired conclusion for a nontrivial
   strongly minimal order-2 basis.
-* Proposition 7.1 proves the desired conclusion for all eventually periodic
-  asymptotic bases.
+* Proposition 7.1 applies the syndetic-tail criterion to prove finite-core
+  finite-deletion stability, and hence the desired conclusion, for all
+  eventually periodic asymptotic bases.
 * Corollary 7.1b extends this to every basis containing an eventually
   periodic order-\(k\) subbasis.
 * Lemma 8 gives a necessary condition for one-point deletion to fail at
