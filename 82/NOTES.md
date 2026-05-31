@@ -1744,3 +1744,21 @@ source of growth beyond Ramsey.
   The naive full-modular sampler rarely accepts nontrivial `q=8,n=14` samples
   under its current candidate generator, so two-level sampling remains better
   for higher-modulus stress tests.
+- 2026-05-31: Added the bounded-spread escape for narrow modular hosts.  Any
+  theorem forcing regular induced subgraphs in `N`-vertex graphs with degree
+  spread at most `s` immediately handles `q`-modular hosts whose ordinary
+  degree levels lie in an interval of length `s`; in particular it handles the
+  dense two-degree obstruction model with `s=q`.  A local search found no
+  spread-`1`, `n=16` graph with maximum regular order below `7`, but the
+  spread-`2`, `n=18` threshold run was too slow and was stopped without a
+  useful result.  Exact spread sweeps on `n=7` found minimum regular order `4`
+  for both maximum spread `1` (`83,658` graphs checked) and maximum spread `2`
+  (`637,372` graphs checked).
+- 2026-05-31: Added `--exhaustive` to `q_modular_host_sample.py` for exact
+  small tradeoff sweeps.  For `q=2,n=6`, all `2048` full even graphs were
+  checked: the Pareto gap first appears in `12` graphs with
+  `(max regular,max 4-modular)=(5,6)`, including the star mask `31`, whose
+  whole vertex set is `4`-modular but whose leaf set is the regular escape.
+  For `q=4,n=7`, all `1184` full `4`-modular graphs had matching regular and
+  `8`-modular maxima, as expected below the terminal size where `8`-modularity
+  forces actual regularity.

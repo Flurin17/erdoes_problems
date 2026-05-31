@@ -1359,6 +1359,35 @@ have no `2q`-modular witness much larger than `N/q`, but its largest regular
 induced subgraph should also live near the same `N/q` scale, far above both
 `rho(N)` and `psi(q)` when `N` is polynomially larger than `q`.
 
+One way to isolate the direct-regular side of the dichotomy is through
+bounded degree spread.
+
+**Lemma: Bounded-Spread Escape For Narrow Modular Hosts.**  Let `Phi(N,s)` be
+a function such that every `N`-vertex graph whose degrees lie in an interval
+of length at most `s` contains a regular induced subgraph of order at least
+`Phi(N,s)`.  If a `q`-modular graph `H` on `N` vertices has all ordinary
+degrees in an interval of length at most `s`, then `H` satisfies the direct
+regular alternative with lower bound `Phi(N,s)`.
+
+In particular, a two-degree `q`-modular graph with degree values `d` and
+`d+q` has a regular induced subgraph of order at least `Phi(N,q)`.
+
+Proof.  This is just the definition of `Phi`, applied to the underlying graph
+`H`.  In the two-degree case the degree spread is exactly `q` unless one of
+the two levels is empty, in which case `H` is already regular.  QED.
+
+Thus the random two-degree obstruction to the universal witness theorem would
+be harmless for the dichotomy if one could prove, for instance,
+
+```text
+Phi(N,q) >= N/q^{1+o(1)}
+```
+
+or even just `Phi(N,q) >= max{rho(N),psi(q)}` in the parameter range
+`N=q^3`, `psi(q)=omega((log q)^2)`.  This bounded-spread problem is far weaker
+than the full dichotomy but is a useful local test for the random obstruction
+model.
+
 The connected formulation still cannot demand too few parts.  The first
 dyadic lift already has a connected example requiring four flexible parts.
 

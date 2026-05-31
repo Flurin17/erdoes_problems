@@ -141,7 +141,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `q_modular_host_sample.py`: samples full `q`-modular host graphs and
   measures their largest regular induced subgraph and largest induced
   target-modular subgraph, testing the tradeoff in witness-or-regular
-  dichotomy targets.
+  dichotomy targets.  Use `--exhaustive` for small labelled sweeps and
+  `--target-modulus` to override the default target `2q`.
 - `two_level_modular_sample.py`: generates connected graphs with two prescribed
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic
