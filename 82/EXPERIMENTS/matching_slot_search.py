@@ -48,6 +48,7 @@ def find_assignment(
     pc: ri.Precomp | None = None,
     node_limit: int | None = None,
     forced_colors: dict[int, int] | None = None,
+    good_edge: tuple[int, int] | None = None,
 ) -> tuple[list[int] | None, int, bool]:
     if pc is None:
         pc = ri.precompute(n)
@@ -105,6 +106,12 @@ def find_assignment(
         if node_limit is not None and nodes > node_limit:
             raise TimeoutError
         if position == n:
+            if good_edge is not None:
+                first, second = good_edge
+                c1, c2 = assignment[first], assignment[second]
+                good = (c1 == c2 == 3) or (c1 != c2 and {c1, c2} != {0, 1})
+                if not good:
+                    return False
             return verify_assignment(adj, assignment)
         vertex = order[position]
         colors = (forced_colors[vertex],) if vertex in forced_colors else (0, 3, 1, 2)
@@ -146,12 +153,19 @@ def check_mask(
     graph_mask: int,
     node_limit: int | None,
     forced_colors: dict[int, int] | None,
+    good_edge: tuple[int, int] | None,
 ) -> None:
     assignment, nodes, limited = find_assignment(
-        n, graph_mask, node_limit=node_limit, forced_colors=forced_colors
+        n,
+        graph_mask,
+        node_limit=node_limit,
+        forced_colors=forced_colors,
+        good_edge=good_edge,
     )
     print(f"n={n}")
     print(f"mask={graph_mask}")
+    if good_edge is not None:
+        print(f"good_edge={good_edge[0]}:{good_edge[1]}")
     print(f"nodes={nodes}")
     if limited:
         print("matching_slot=unknown")
@@ -169,13 +183,19 @@ def exhaustive_even(
     limit: int | None,
     node_limit: int | None,
     forced_colors: dict[int, int] | None,
+    good_edge: tuple[int, int] | None,
 ) -> None:
     pc = ri.precompute(n)
+    edge_index = {edge: index for index, edge in enumerate(pc.edges)}
     checked = 0
     limited = 0
     for graph_mask in modular_lift.parity_graphs(n, odd=False):
+        if good_edge is not None:
+            edge = tuple(sorted(good_edge))
+            if ((graph_mask >> edge_index[edge]) & 1) == 0:
+                continue
         assignment, _nodes, hit_limit = find_assignment(
-            n, graph_mask, pc, node_limit, forced_colors
+            n, graph_mask, pc, node_limit, forced_colors, good_edge
         )
         if hit_limit:
             limited += 1
@@ -190,6 +210,8 @@ def exhaustive_even(
         if limit is not None and checked >= limit:
             break
     print(f"n={n}")
+    if good_edge is not None:
+        print(f"good_edge={good_edge[0]}:{good_edge[1]}")
     print(f"checked={checked}")
     print(f"limited={limited}")
     print("no_counterexample_seen")
@@ -201,6 +223,7 @@ def sample_even(
     seed: int,
     node_limit: int | None,
     forced_colors: dict[int, int] | None,
+    good_edge: tuple[int, int] | None,
 ) -> None:
     rng = random.Random(seed)
     pc = ri.precompute(n)
@@ -211,8 +234,12 @@ def sample_even(
         graph_mask = modular_partition.random_parity_mask(n, False, rng, pc, edge_index)
         if graph_mask is None:
             continue
+        if good_edge is not None:
+            edge = tuple(sorted(good_edge))
+            if ((graph_mask >> edge_index[edge]) & 1) == 0:
+                continue
         assignment, _nodes, hit_limit = find_assignment(
-            n, graph_mask, pc, node_limit, forced_colors
+            n, graph_mask, pc, node_limit, forced_colors, good_edge
         )
         if hit_limit:
             limited += 1
@@ -222,6 +249,8 @@ def sample_even(
             print(f"n={n}")
             print(f"sample_even={trials}")
             print(f"seed={seed}")
+            if good_edge is not None:
+                print(f"good_edge={good_edge[0]}:{good_edge[1]}")
             print(f"checked_before_counterexample={checked}")
             print(f"limited={limited}")
             print(f"counterexample_mask={graph_mask}")
@@ -229,6 +258,8 @@ def sample_even(
     print(f"n={n}")
     print(f"sample_even={trials}")
     print(f"seed={seed}")
+    if good_edge is not None:
+        print(f"good_edge={good_edge[0]}:{good_edge[1]}")
     print(f"checked={checked}")
     print(f"limited={limited}")
     print("no_counterexample_seen")
@@ -249,17 +280,27 @@ def main() -> None:
         default=[],
         help="force a vertex color as vertex:color; colors 0,1 are zero slots",
     )
+    parser.add_argument(
+        "--good-edge",
+        help="require endpoints u:v to be in a degree-2-suppression-good pattern",
+    )
     args = parser.parse_args()
     forced_colors: dict[int, int] = {}
     for item in args.force_color:
         vertex_text, color_text = item.split(":", 1)
         forced_colors[int(vertex_text)] = int(color_text)
+    good_edge = None
+    if args.good_edge is not None:
+        first_text, second_text = args.good_edge.split(":", 1)
+        good_edge = (int(first_text), int(second_text))
     if args.mask is not None:
-        check_mask(args.n, args.mask, args.node_limit, forced_colors)
+        check_mask(args.n, args.mask, args.node_limit, forced_colors, good_edge)
     elif args.exhaustive_even:
-        exhaustive_even(args.n, args.limit, args.node_limit, forced_colors)
+        exhaustive_even(args.n, args.limit, args.node_limit, forced_colors, good_edge)
     elif args.sample_even:
-        sample_even(args.n, args.sample_even, args.seed, args.node_limit, forced_colors)
+        sample_even(
+            args.n, args.sample_even, args.seed, args.node_limit, forced_colors, good_edge
+        )
     else:
         raise SystemExit("use --mask, --exhaustive-even, or --sample-even")
 

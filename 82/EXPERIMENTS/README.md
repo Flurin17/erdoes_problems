@@ -101,6 +101,8 @@ Computational checks and generated data for Erdos Problem 82.
   enumeration on fixed hard masks and supports exhaustive even-graph prefixes
   with `--limit` plus per-instance `--node-limit`.  Use `--force-color v:c`
   to test rooted variants, e.g. forcing a specified root into a zero slot.
+  Use `--good-edge u:v` to require the endpoints of an existing edge to be in
+  a pattern that lifts across degree-`2` suppression.
 - `matching_slot_fast.cpp`: C++ exact checker for the same matching-slot
   target on small even graphs.  It is intended to make the full labelled
   `n=8` even-graph sweep reproducible.

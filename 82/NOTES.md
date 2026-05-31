@@ -1964,3 +1964,11 @@ source of growth beyond Ramsey.
   by this direct lift are `same A`, `same B`, `same C`, and split `A/B`;
   eliminating degree-`2` vertices therefore requires an edge-rooted signature
   theorem or a nonlocal recoloring argument.
+- 2026-05-31: Added `--good-edge` to `matching_slot_search.py` to test the
+  edge-rooted strengthening needed for degree-`2` suppression.  The target is
+  a certificate where a specified edge has endpoints either both in `D`, or in
+  different slots but not split between the two zero slots.  Exact checking
+  with edge `0:1` passes every even graph through `n=7` in which that edge is
+  present (`16,384` graphs at `n=7`), which by relabelling covers every rooted
+  edge on at most seven vertices.  The `n=16` modular-OCT counterexample also
+  has a good-edge certificate for edge `0:1`.

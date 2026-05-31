@@ -3902,6 +3902,20 @@ minimum degree at least `4`; the missing induction object must record
 edge-rooted slot and local same-degree signatures, not just unrooted
 certificates.
 
+This motivates the following edge-rooted strengthening.
+
+**Edge-Rooted Good-Pattern Matching Candidate.**  For every even graph `G`
+and every edge `xy`, there is a matching-slot certificate in which the
+endpoints `x,y` are either both in `D`, or are in different slots but not split
+between `A` and `B`.
+
+If true, this candidate would make degree-`2` suppression a valid
+minimal-counterexample reduction by the previous lemma.  The checker
+`EXPERIMENTS/matching_slot_search.py --good-edge 0:1` verifies this
+edge-rooted candidate for every even graph on at most `7` vertices with edge
+`01` present; by relabelling this is the same as every rooted edge on at most
+`7` vertices.  No proof is currently known.
+
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
 `r` lies in the bipartite residual.
