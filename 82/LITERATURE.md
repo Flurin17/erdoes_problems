@@ -47,13 +47,15 @@ Notation in the paper:
 - `N_k` and `N_{>=k}` are the least orders forcing those properties.  In this
   workspace, `N_{>=k}=G(k)`.
 
-Indexed theorem statements record:
+The introduction records that `N_{>=k} <= N_k <= R(k,k)`, that the monotonicity
+of `N_k` itself is not known, and that the Erdős--Fajtlowicz--Staton questions
+are exactly whether `f(n)/log n -> infinity` and whether `f(n)-t(n)->infinity`,
+where `t(n)` is the diagonal-Ramsey inverse.
+
+The theorem statements in the May 2026 arXiv version record:
 
 - `N_5 = 21` and `N_{>=5} = 17`.
-- `N_6 >= 28`, `N_{>=6} >= 21`, `N_7 >= 48`, `N_{>=7} >= 30` in the arXiv
-  statement visible to the search index.
-- McKay's data page currently reports larger exact/search data for the
-  "exactly k" variant, including `N_7 >= 71`; this is distinct from `G(7)`.
+- `N_6 >= 28`, `N_{>=6} >= 21`, `N_7 >= 71`, `N_{>=7} >= 30`.
 - The Erdos Problems page records the asymptotic consequence
   `G(k) >= (9/163) k^2` for all large `k`.
 
@@ -66,6 +68,19 @@ Alon--Krivelevich--Sudakov improved this to
 `N_{>=k} = Omega(k^2/(log k)^{3/2})`.  It contrasts these heterogeneous random
 constructions with the homogeneous random graph `G(n,1/2)`, where the largest
 regular induced subgraph is typically `Theta(n^{2/3})`.
+
+The proof of the asymptotic lower construction estimates the number of labelled
+regular graphs of order `k` and degree `d`, then uses a heterogeneous random
+graph model.  This is important for proof search: the known bad examples are
+not homogeneous `G(n,1/2)`-type pseudorandom graphs.
+
+The computational section reports that `R_{>=5}` was fully enumerated, with
+`954` extremal graphs on `16` vertices and total count `159,379,295`; `P_4[P_4]`
+is an extremal example proving `N_{>=5} >= 17`.  For `R_{>=6}` the authors found
+`49,251,634` graphs on `20` vertices and verified none extend to `21`, giving
+`N_{>=6} >= 21`.  For `R_{>=7}` they found graphs on `29` vertices, proving
+`N_{>=7} >= 30`.  These data are useful test cases but not asymptotic evidence
+for the conjecture.
 
 ## Fajtlowicz--McColgan--Reid--Staton
 
@@ -101,6 +116,14 @@ that is `F(n)`.
 A GitHub repository `rsh3khar/erdos-82` advertises a CEGAR SAT extension check
 around McKay's `n=28` graphs for sizes `7--9`; this is computational support
 for finite lower-bound searches, not an asymptotic proof.
+
+The comments also record a useful reduction suggested by Ariel Edgardolevy:
+for triangle-free graphs, the Ajtai--Komlos--Szemeredi/Shearer independence
+bound gives a regular induced subgraph of order `Omega(sqrt(n log n))`, and
+fixed `K_r`-free analogues give polynomial-size independent sets.  In the
+language of this workspace, the conjecture therefore reduces to graph families
+whose clique number and independence number both tend to infinity.  The
+elementary fixed-`r` version is reconstructed in `PROOF.md`.
 
 ## Formal Lean Statement
 

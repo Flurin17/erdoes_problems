@@ -451,6 +451,8 @@ def exhaustive_full_modular_partitions(
     required_residue: int | None,
     min_part_size: int,
     max_part_size: int | None,
+    node_limit: int | None,
+    limit: int | None,
 ) -> None:
     pc = ri.precompute(n)
     full = (1 << n) - 1
@@ -469,6 +471,7 @@ def exhaustive_full_modular_partitions(
                 required_residue,
                 min_part_size,
                 max_part_size,
+                node_limit,
             )
             is None
         ):
@@ -484,6 +487,20 @@ def exhaustive_full_modular_partitions(
                 print(f"max_part_size={max_part_size}")
             print(f"checked_before_counterexample={checked}")
             print(f"counterexample_mask={graph_mask}")
+            return
+        if limit is not None and checked >= limit:
+            print(f"n={n}")
+            print(f"full_modulus={full_modulus}")
+            print(f"modulus={modulus}")
+            print(f"colors={colors}")
+            if required_residue is not None:
+                print(f"required_residue={required_residue}")
+            if min_part_size:
+                print(f"min_part_size={min_part_size}")
+            if max_part_size is not None:
+                print(f"max_part_size={max_part_size}")
+            print(f"limit_reached={limit}")
+            print("no_counterexample_seen")
             return
     print(f"n={n}")
     print(f"full_modulus={full_modulus}")
@@ -723,6 +740,7 @@ def main() -> None:
             min_part_size,
             max_part_size,
             args.node_limit,
+            args.limit,
         )
         return
 
@@ -738,6 +756,7 @@ def main() -> None:
             min_part_size,
             max_part_size,
             args.node_limit,
+            args.limit,
         )
         return
 
@@ -800,10 +819,11 @@ def main() -> None:
             args.modulus,
             args.colors,
             args.required_residue,
-                min_part_size,
-                max_part_size,
-                args.node_limit,
-            )
+            min_part_size,
+            max_part_size,
+            args.node_limit,
+            args.limit,
+        )
         return
 
     if args.exhaustive_parity:
