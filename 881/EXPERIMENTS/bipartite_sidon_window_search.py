@@ -30,6 +30,11 @@ def two_sums(elements: set[int]) -> set[int]:
     return {a + b for i, a in enumerate(ordered) for b in ordered[i:]}
 
 
+def rep_count(elements: set[int], target: int) -> int:
+    ordered = sorted(elements)
+    return sum(1 for i, a in enumerate(ordered) for b in ordered[i:] if a + b == target)
+
+
 def longest_interval(values: set[int]) -> tuple[int, int]:
     if not values:
         return (0, -1)
@@ -124,6 +129,24 @@ def cross_matching_summary(
     return (c_min, d_min, both_min)
 
 
+def best_unique_reflected_star(
+    ambient: set[int],
+) -> tuple[int, int, int, tuple[int, ...]]:
+    best = (0, 0, 0, ())
+    centers = two_sums(ambient)
+    for d in sorted(ambient):
+        for t in sorted(centers):
+            rows = tuple(
+                s
+                for s in sorted(ambient)
+                if t - s in ambient and rep_count(ambient, s + d) == 1
+            )
+            row = (len(rows), d, t, rows)
+            if row > best:
+                best = row
+    return best
+
+
 def search(max_value: int, size: int, limit: int, sort_mode: str) -> None:
     found = 0
     best_rows: list[
@@ -134,6 +157,10 @@ def search(max_value: int, size: int, limit: int, sort_mode: str) -> None:
             int,
             int,
             int,
+            int,
+            int,
+            int,
+            tuple[int, ...],
             tuple[int, ...],
             tuple[int, ...],
             tuple[int, int],
@@ -161,12 +188,19 @@ def search(max_value: int, size: int, limit: int, sort_mode: str) -> None:
                 d_set,
                 (lo, hi),
             )
+            unique_count, unique_d, unique_t, unique_rows = best_unique_reflected_star(
+                ambient
+            )
             row = (
                 interval_len,
                 spike,
                 both_match,
                 c_match,
                 d_match,
+                unique_count,
+                unique_d,
+                unique_t,
+                unique_rows,
                 center,
                 tuple(sorted(c_set)),
                 tuple(sorted(d_set)),
@@ -180,7 +214,7 @@ def search(max_value: int, size: int, limit: int, sort_mode: str) -> None:
                         min(item[3], item[4]),
                         item[0],
                         item[1],
-                        item[5],
+                        item[9],
                     ),
                     reverse=True,
                 )
@@ -202,6 +236,10 @@ def search(max_value: int, size: int, limit: int, sort_mode: str) -> None:
         both_match,
         c_match,
         d_match,
+        unique_count,
+        unique_d,
+        unique_t,
+        unique_rows,
         center,
         c_tuple,
         d_tuple,
@@ -220,6 +258,8 @@ def search(max_value: int, size: int, limit: int, sort_mode: str) -> None:
             (c_match, d_match),
             "best_color_min=",
             both_match,
+            "unique_star=",
+            (unique_count, unique_d, unique_t, list(unique_rows)),
             "C=",
             list(c_tuple),
             "D=",

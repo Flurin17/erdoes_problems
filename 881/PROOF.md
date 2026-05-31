@@ -10208,6 +10208,15 @@ Sorting by matching strength with
 at \((0,0)\), though the best-color minimum is \(1\): each target in the
 covered interval has a cross-residual edge from at least one color, but no
 single color supplies such edges throughout the interval.
+The same diagnostic now prints
+`unique_star=(count,d,t,rows)`, where \(t-\text{rows}\subset A\) and every
+row \(s+d\) is uniquely represented in \(2A\). For the top six-point
+window above it gives
+\[
+(5,16,24,\{9,11,13,15,16\}),
+\]
+so the unique-gate branch isolated in Corollary 13.1l.5 is also locally
+compatible.
 
 Thus the bipartite recurrent-Sidon obstruction is not finitely
 inconsistent. A final contradiction must use the infinite quantitative
@@ -11514,8 +11523,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
 * Diagnostic 13.1l.4 records finite integer windows with exactly this
-  bipartite certificate-free and mixed-spike shape, so this reduced
-  obstruction is locally compatible.
+  bipartite certificate-free and mixed-spike shape. Its unique-star output
+  also shows that the remaining unique-gate branch is locally compatible.
 * Corollary 13.1l.5 combines the two-color tail with Lemma 8.6j-7d:
   the shifted-overlap branch of the low-count-star normal form is bounded
   in the enumerated-Schreier reduction, so any surviving star obstruction

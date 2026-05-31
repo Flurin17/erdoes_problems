@@ -1877,6 +1877,18 @@ all bounded witness ranges for pairs involving \(q_e\) through old retained
 endpoints. Therefore a viable mirrored-packet construction must build a
 hierarchy of fresh buffers; one self-contained block cannot protect its own
 mirrors indefinitely.
+The bipartite window diagnostic now reports the largest local unique-gate
+packet as `unique_star=(count,d,t,rows)`. In the same top window
+\[
+A=\{8,9,11,13,15,16\}
+\]
+it finds
+\[
+d=16,\quad t=24,\quad S=\{9,11,13,15,16\},
+\]
+with \(24-S\subset A\) and every \(s+16\) uniquely represented in \(2A\).
+Thus Corollary 13.1l.5 narrows the infinite obstruction to unique-gate
+packets, but that branch remains finitely compatible.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then

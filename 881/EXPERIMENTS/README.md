@@ -306,6 +306,11 @@ the covered interval at least one color has a cross-residual edge, yet no
 single color supplies edges for the whole interval. This matches the
 bounded-transversal/star obstruction rather than the sparse-deletion
 matching branch.
+The same output now includes `unique_star=(count,d,t,rows)`, the largest
+reflected packet with `t-rows` retained and every shifted row `s+d`
+uniquely represented in `2A`. The top six-point window has
+`unique_star=(5,16,24,[9,11,13,15,16])`, showing that the remaining
+unique-gate branch is also locally compatible.
 Run `schreier_stage_search.py --pair-edge-search --max-p6 40 --max-u 60
 --max-nodes 20000 --max-found 2` for the complementary high-excess
 first-pair diagnostic. It looks for pair-private dominated holes for
