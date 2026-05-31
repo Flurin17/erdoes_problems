@@ -1477,3 +1477,16 @@ source of growth beyond Ramsey.
   `3<=q<=9` (`743,120` cases at `q=9`).  This supports a possible extension
   of the one-large-class repair from tail total `<=q` to at least `<=3q`,
   but remains only finite evidence.
+- 2026-05-31: Integrated the sharper slack form of the reservoir certificate.
+  If `delta=q^2-x-A`, `s` tail units are deleted by specials, and residual
+  tail `z` is represented by `R` lifted-legal rectangles with residual mass
+  `B` and reservoir height `H`, the remaining reservoir condition is exactly
+  `R(q+2)-(B+H)<=2q+delta`.  The binary-bit version gives an explicit
+  certificate when every active bit `h` has support `n_h` with
+  `h(n_h+1)<=q+2` and `B+H>=(R-2)q+2R-delta`.  Also recorded a wide-tail
+  one-large repair: if `A=q+e`, the tail has at least `e+3` positive
+  coordinates, and `x>=(q-3)(q+1)+1`, keep one unit in `e+3` tail coordinates,
+  delete the other `q-3` tail units by specials, and lift the resulting
+  unit-height rectangle.  Barrier: support sizes and slack prevent a
+  distinct-height-only lemma; near terminal slack forces sparse-special
+  certificates mostly down to one, two, or three dense lifted rectangles.

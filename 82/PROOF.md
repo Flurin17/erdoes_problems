@@ -1500,6 +1500,158 @@ first-coordinate mass is `x-s(q+1)-H`, which is nonnegative by the second
 display and fits into the remaining `q-s-R` singleton rectangle bins by the
 third display.  QED.
 
+It is useful to rewrite the last upper-reservoir condition as a slack
+condition depending only on the residual tail representation.
+
+**Lemma: Slack Form Of The Reservoir Certificate.**  Put `C=q+2` and let
+
+```text
+a=(x,y_1,...,y_t),       A=sum_i y_i,
+delta=q^2-x-A >= 0.
+```
+
+Choose a residual tail vector `z` with `0<=z_i<=y_i`; put
+
+```text
+s=A-sum_i z_i.
+```
+
+Assume that the deleted tail mass can be realized by `s` special bins from the
+first coordinate, and that `z` has a lifted-legal rectangle representation
+
+```text
+z_i = sum_{j: i in I_j} h_j,       h_j(|I_j|+1)<=C
+```
+
+with `R` rectangles.  Define
+
+```text
+B=sum_i z_i,       H=sum_j h_j,       Delta=R C-(B+H).
+```
+
+If
+
+```text
+s+R <= q,
+x >= s(q+1)+H,
+Delta <= 2q+delta,
+```
+
+then `a` has a multipartite bin decomposition using at most `q` bins.
+
+Proof.  Apply the reservoir lifting criterion.  The only condition not
+identical to one of the displayed assumptions is
+
+```text
+x-s(q+1)-H <= (q-s-R)C.
+```
+
+Since `x=q^2-A-delta=q^2-s-B-delta`, this inequality is equivalent to
+
+```text
+q^2-s-B-delta-s(q+1)-H <= (q-s-R)(q+2).
+```
+
+After cancellation, this is exactly
+
+```text
+R(q+2)-(B+H) <= 2q+delta,
+```
+
+which is the stated bound on `Delta`.  QED.
+
+**Corollary: Binary Reservoir Certificate.**  In the slack-form lemma, suppose
+`z` is represented by its active binary bits.  For each active bit `h`, let
+`n_h` be the number of coordinates of `z` whose binary expansion contains
+`h`.  If
+
+```text
+h(n_h+1) <= q+2
+```
+
+for every active bit, and if with
+
+```text
+R=#{active bits},       H=sum_{h active} h,       B=sum_i z_i
+```
+
+we have
+
+```text
+s+R <= q,
+x >= s(q+1)+H,
+B+H >= (R-2)q+2R-delta,
+```
+
+then `a` has a multipartite bin decomposition using at most `q` bins.
+
+Proof.  The active bit `h` supplies one tail rectangle of height `h` on its
+support.  The displayed support bound is exactly lifted legality after adding
+the reservoir coordinate.  The final displayed inequality is the slack
+condition `R(q+2)-(B+H)<=2q+delta`.  QED.
+
+In the common three-bit case, if after deleting `s` tail units the residual
+satisfies `0<=z_i<=7`, the active bits are `1,2,4`, and all three lifted bit
+supports are legal, then `R=3` and `H=7`; it is enough that
+
+```text
+s+3 <= q,
+x >= s(q+1)+7,
+sum_i z_i >= q-1-delta.
+```
+
+The reservoir criterion also gives a small extension past the previously
+proved one-large-class boundary.
+
+**Lemma: Wide-Tail One-Large Repair.**  Let `A=sum_i y_i=q+e` with
+`0<=e<=q-2`, and suppose the tail has at least `e+3` positive coordinates.  If
+
+```text
+x >= (q-3)(q+1)+1,
+```
+
+then `a=(x,y)` has a multipartite bin decomposition using at most `q` bins.
+
+Proof.  Retain one tail unit in any `e+3` positive tail coordinates and delete
+all other tail units by specials from the first coordinate.  The number of
+deleted units is
+
+```text
+s=A-(e+3)=q-3.
+```
+
+The residual tail is a single rectangle of height `1` and width `e+3`; after
+adding the reservoir coordinate, its lifted area is `e+4<=q+2`, so `R=1` and
+`H=1`.  The bin count condition is `s+R=q-2<=q`, and the reservoir lower
+condition is exactly `x>=s(q+1)+1`.  Finally, the remaining reservoir mass is
+at most
+
+```text
+q^2-A-s(q+1)-1
+= q^2-(q+e)-(q-3)(q+1)-1
+= q-e+2,
+```
+
+which fits into the remaining two singleton bins because `q-e+2<=2(q+2)`.
+QED.
+
+These reservoir certificates have a real limitation.  They depend not only on
+the number of residual heights but also on support sizes: for example, when
+`4|q`, a residual tail with `q/4` coordinates all equal to `4` has one
+distinct positive height, but the lifted height-`4` rectangle has area
+`4(q/4+1)=q+4>q+2`.  In addition, for near-terminal vectors with
+`delta=o(q)`, a rank-`R` residual certificate must satisfy
+
+```text
+B+H >= (R-2)q+O(R).
+```
+
+Thus if the residual tail mass is only `q+o(q)` and its maximum height is
+`o(q)`, ranks `R>=4` cannot be certified by this method unless most of the
+required mass is left in the residual tail.  A successful sparse-special proof
+must therefore usually reduce to one, two, or three dense lifted rectangles,
+or deliberately keep residual tail mass of order `(R-2)q`.
+
 The reservoir criterion explains how a single special repairs the staircase
 obstruction to rectangle-only covering.
 
