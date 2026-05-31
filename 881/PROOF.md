@@ -5898,6 +5898,79 @@ Fixed-rank barriers fail as soon as \(\Gamma_A(T)\) is larger than that
 rank for some finite \(T\); Schreier-type barriers try to evade the
 argument by letting \(|F|\) grow beyond every finite certificate test.
 
+### Corollary 8.6g.1: Fixed-rank full list-color barriers are impossible
+
+Fix \(r\ge1\). Let \(A\subseteq\mathbb N\) be infinite. It is impossible
+that for every finite
+\[
+T\subset A
+\]
+and every \(M\), there are a witness \(w\), an ordered \(r\)-tuple of
+distinct colors
+\[
+F=(f_1,\ldots,f_r)\subset A\setminus T,
+\]
+and a coloring
+\[
+\chi:T\to\{1,\ldots,r\}
+\]
+such that:
+
+1. every color center is large:
+   \[
+   w-f_i>M\qquad(1\le i\le r);
+   \]
+2. every colored row is reflected by its color:
+   \[
+   w-t-f_{\chi(t)}\in A\qquad(t\in T);
+   \]
+3. every fiber
+   \[
+   \chi^{-1}(i)
+   \]
+   is certificate-free relative to \(A\).
+
+Proof. Enumerate \(A=\{a_1<a_2<\cdots\}\), put
+\[
+T_j=\{a_1,\ldots,a_j\},
+\]
+and choose data as in the hypothesis with \(M=j\). By compactness of
+\[
+\{1,\ldots,r\}^{\mathbb N},
+\]
+pass to a subsequence on which the color of every fixed \(a_n\) stabilizes.
+Let
+\[
+C_1,\ldots,C_r
+\]
+be the stable color classes. Each \(C_i\) is certificate-free relative to
+\(A\), hence Sidon.
+
+If \(U\subset C_i\) is finite, then for all sufficiently large stages in
+the subsequence, every element of \(U\) lies in the \(i\)-th fiber. The
+centers
+\[
+m_j=w_j-f_{j,i}
+\]
+tend to infinity because \(m_j>j\), and they satisfy
+\[
+m_j-U\subset A.
+\]
+Thus every nonempty stable color class is reflection-recurrent in \(A\).
+Applying Lemma 8.6g''''.2 to the finite Sidon coloring after discarding
+empty classes shows that each stable color class has size at most \(r\).
+Hence
+\[
+A=C_1\cup\cdots\cup C_r
+\]
+is finite, contradiction. \(\square\)
+
+Thus fixed-rank high-excess barriers cannot evade Lemma 8.6g merely by
+list-coloring every finite test into endpoint-certificate-free fibers. A
+remaining fixed-rank obstruction would have to fail the full-list
+hypothesis above while still avoiding a single finite certificate-density
+test.
+
 ## Lemma 8.6h: Progressions force certificate density
 
 Let \(A\subseteq\mathbb N\) and let
@@ -11555,6 +11628,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   rank-sensitive paragraph after it says variable-rank barriers can evade
   this only by outrunning the certificate-density ratio of every finite test
   set.
+* Corollary 8.6g.1 rules out the full-list fixed-rank escape: if every
+  finite test could be split into endpoint-certificate-free fibers with
+  unbounded endpoint centers, compactness would produce finitely many
+  recurrent Sidon colors, contradicting Lemma 8.6g''''.2.
 * Lemma 8.6g' sharpens the pair-barrier case from large certificate-free
   halfsets to endpoint list-colorings: pair holes force a recurrent
   certificate unless the shifted endpoint lists can split every finite test

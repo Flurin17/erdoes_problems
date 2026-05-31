@@ -1818,6 +1818,10 @@ partition up to a finite exceptional set, any recurrent color has at most
 \(q\) elements. Thus no finite certificate-free coloring of a cofinite
 tail can have all colors recurrent. This is the likely replacement for the
 old rank-sensitive certificate-free-color escape in fixed-rank barriers.
+Corollary 8.6g.1 packages the fixed-rank list version: if every finite test
+could be colored by \(r\) moving endpoints so that each endpoint fiber is
+certificate-free and has an unbounded reflected center, compactness would
+produce \(r\) recurrent Sidon colors, contradicting Lemma 8.6g''''.2.
 The shape is still finite-quotient compatible:
 in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
 \(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the
