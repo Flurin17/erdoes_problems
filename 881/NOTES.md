@@ -328,6 +328,13 @@ there are arbitrarily large \(n\) for which all \((k+1)\)-representations of
 \(n\) are hit by a bounded set \(D_n\subset A\setminus E\). The bound may
 depend on \(E\), but not on \(n\) along the bad sequence.
 
+Corollary 3.3b combines this with the terminal-gap lemma: after protecting
+any finite core, a counterexample has arbitrarily large genuine
+order-\((k+1)\) holes caused by bounded-size deletions outside that core,
+and each such hole forces a terminal retained gap below the witness. The
+bound can grow with the protected core, which is exactly the loophole used
+by Schreier-type barriers.
+
 Proposition 3.4 gives a countable criterion for ruling this out. Let
 \(\mathcal H_E(n)\) be the hypergraph of \((k+1)\)-representations of \(n\)
 outside a finite protected core \(E\). If

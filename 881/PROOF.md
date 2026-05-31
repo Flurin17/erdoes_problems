@@ -752,6 +752,47 @@ order-\(k\) bases, or build a counterexample whose representation
 hypergraphs exhibit them. By Reduction 0, such a counterexample would
 automatically satisfy the Erdős infinite-deletion minimality hypothesis.
 
+## Corollary 3.3b: Bounded terminal-gap holes outside any finite core
+
+Assume that no infinite \(B\subset A\) has \(A\setminus B\) an
+order-\((k+1)\) basis. Let \(E\subset A\) be finite. Then there is an
+integer \(q_E\) such that for arbitrarily large \(n\) there is a finite set
+\[
+D_n\subset A\setminus E,\qquad 1\le |D_n|\le q_E,
+\]
+with
+\[
+n\notin(k+1)(A\setminus D_n). \tag{1}
+\]
+If \(A\) has order-\(k\) threshold \(N_0\), \(m_0=\min A\), and
+\[
+d_n=\min D_n,
+\]
+then these \(n\) may be chosen so large that
+\[
+(A\setminus D_n)\cap
+\bigl(n-d_n-(k-1)m_0,\ n-N_0\bigr]=\varnothing. \tag{2}
+\]
+
+Proof. Apply Corollary 3.3 to the finite core \(E\), obtaining arbitrarily
+large \(n\) and a bounded transversal
+\[
+D_n\subset A\setminus E
+\]
+for the hypergraph \(\mathcal H_E(n)\). Taking \(n\) larger than every
+\((k+1)\)-term sum from \(E\), no representation of \(n\) can lie entirely
+inside \(E\). Hence every \((k+1)\)-term representation of \(n\) from \(A\)
+has a nonempty outside-\(E\) edge and therefore meets \(D_n\). This proves
+(1), and \(D_n\) is nonempty because \(n\in(k+1)A\) for all sufficiently
+large \(n\).
+
+Now apply Lemma 10.3 to the finite deletion \(D_n\) and the witness
+\(w=n\). This gives the terminal gap (2). \(\square\)
+
+Thus a counterexample has bounded-size terminal-gap holes after every fixed
+finite core is protected. The bound \(q_E\) may grow with \(E\); this is
+exactly how Schreier-type barriers evade a uniform bounded-width reduction.
+
 ## Proposition 3.4: Redundant representation criterion
 
 With the notation of Corollary 3.3, suppose there is a finite
@@ -4025,6 +4066,8 @@ domination for many old elements.
   hypothesis for \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded
   moving transversals for representation hypergraphs.
+* Corollary 3.3b turns those bounded transversals into bounded-size
+  terminal-gap holes outside any prescribed finite protected core.
 * Proposition 3.4 proves the conclusion for bases with sufficiently
   redundant \((k+1)\)-representations.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
