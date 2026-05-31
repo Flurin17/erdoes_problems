@@ -1353,6 +1353,14 @@ source of growth beyond Ramsey.
   the tail and the remaining large class fits in at most `q-1-A` single-class
   bins.  This explains why the rectangle-only counterexamples are harmless for
   the full complete-multipartite bin target.
+- 2026-05-31: Strengthened the complete-multipartite arithmetic toolkit with
+  two lemmas.  The special-plus-excess trimming lemma says that after any
+  chosen special bins, it is enough to trim excess above a threshold `B` by
+  single-class bins and unit-layer pack the bounded core.  The one-large-class
+  repair shows that every vector `(x,tail)` with tail total `<q` and total at
+  most `q^2` is coverable, with no lower bound on `x`.  Therefore any
+  counterexample to the multipartite bin target must have largest coordinate
+  greater than `q` and remaining tail total at least `q`.
 - 2026-05-31: Rechecked the full-bin target after the rectangle-only diagonal
   refutation.  `full_bin_cover.py` verifies `(q^2-7,4,2,1)` for every
   `9<=q<=15` with an explicit cover pattern using single-column bins, one
@@ -1388,3 +1396,10 @@ source of growth beyond Ramsey.
   larger than `q^2`, and Lemma 2A extracts a regular set of size
   `omega(log n)` from the terminal-window witness.  This separates the problem
   into a naive-order dyadic lift and one near-terminal exact-size step.
+- 2026-05-31: Recorded a dyadic subagent observation: complete multipartite
+  `q`-modular graphs satisfy the coarse `q -> 2q` lift with `D=1`, because
+  grouping whole classes by their class-size residue modulo `2q` gives at most
+  two `2q`-modular parts and hence retains at least half the vertices.  The
+  half-retention factor is sharp at `q=2`: `K_4 union K_{1,3}` is
+  `2`-modular but has no `4`-modular induced subgraph on more than `4` of its
+  `8` vertices, and disjoint copies preserve the ratio.

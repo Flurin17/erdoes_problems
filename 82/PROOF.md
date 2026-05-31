@@ -507,6 +507,38 @@ By complementation, the same statement holds for disjoint unions of cliques.
 Thus neither complete multipartite graphs nor their complements can force a
 large number of parts in a residue-flexible dyadic lift.
 
+In particular, complete multipartite graphs satisfy the coarse dyadic lift
+from the later conditional proposition with the best possible constant
+retention at the first step.  If `G` has `M` vertices, the larger of the two
+parts above has order at least `M/2`; since `q>=2` in the dyadic program, this
+is at least `M/q`.  Thus the coarse lift holds for this class with `D=1`.
+
+The factor `1/2` is sharp already for `q=2`.  Let
+
+```text
+C = K_4 union K_{1,3}.
+```
+
+Every vertex of `C` has odd degree, so `C` is `2`-modular.  Any
+`4`-modular induced subgraph of `C` has at most `4` vertices.  Indeed, write a
+chosen induced subgraph by coordinates `(a,b,c)`, where `a` is the number of
+chosen vertices from `K_4`, `b in {0,1}` records whether the star center is
+chosen, and `c` is the number of chosen leaves.  The displayed internal degree
+values are
+
+```text
+a-1  if a>0,
+c    if b=1,
+b    if c>0.
+```
+
+For `4`-modularity, all displayed values must be congruent modulo `4`.  A
+case check over `0<=a<=4`, `b in {0,1}`, and `0<=c<=3` shows that the maximum
+of `a+b+c` under these congruences is `4`: examples attaining it are
+`(4,0,0)`, `(1,0,3)`, and `(2,1,1)`.  Taking disjoint unions of this graph
+shows that a `2 -> 4` coarse lift cannot generally retain more than half of
+the vertices.
+
 For the next dyadic step, exact enumeration shows that every `4`-modular graph
 on `6` or `7` vertices admits a partition into four induced `8`-modular
 parts.  This is tiny evidence, but it is consistent with the uniform
@@ -1060,6 +1092,63 @@ multipartite graph into induced `q`-modular subgraphs of order at most `q+2`.
 
 The special bins handle the sparse-tail obstruction in a clean range.
 
+**Lemma: Special-Plus-Excess Trimming.**  Fix `q>=3` and put `C=q+2`.  Let
+`a` be a nonnegative integer vector.  Suppose that after subtracting `s`
+legal special bins `(q+1)e_i+e_j`, the residual vector is `b`.  Let
+`B,h>=0` satisfy
+
+```text
+s+h+B <= q.
+```
+
+For each coordinate define the excess above `B` by
+
+```text
+E_i = max(b_i-B,0).
+```
+
+If
+
+```text
+sum_i ceil(E_i/C) <= h
+```
+
+and
+
+```text
+sum_i min(b_i,B) <= B C,
+```
+
+then `a` has a multipartite bin decomposition using at most `q` bins.
+
+Proof.  Use the `s` special bins first.  For each coordinate `i`, cover its
+excess `E_i` by single-coordinate rectangle bins of heights at most `C`.  This
+uses exactly `ceil(E_i/C)` bins for coordinate `i`, hence at most `h` bins in
+total.
+
+After removing all excesses, the remaining vector is
+
+```text
+c_i = b_i-E_i = min(b_i,B).
+```
+
+Every coordinate of `c` is at most `B`, and the assumed total bound gives
+`sum_i c_i<=BC`.  If `B=0`, this residual is empty.  If `B>0`, the unit-layer
+packing lemma covers it by at most `B` unit-height rectangle bins, each of
+total size at most `C`.  The total number of bins used is at most
+
+```text
+s+h+B <= q.
+```
+
+All non-special bins used above are rectangles of area at most `C=q+2`, so
+all bins are legal.  QED.
+
+The unit-layer packing proposition is the special case `s=h=0`.  The
+sparse-tail repair below is the case where the chosen special bins consume
+the whole tail and the remaining one-coordinate residual is trimmed by
+single-class bins.
+
 **Lemma: Sparse-Tail Multipartite Repair.**  Fix `q>=3`.  Let
 `a=(x,a_2,...,a_t)` be a nonnegative integer vector with tail total
 
@@ -1103,6 +1192,92 @@ A + ceil(x'/(q+2))
 
 for `q>=3`.  Hence the vector is covered by at most `q-1`, and therefore at
 most `q`, legal bins.  QED.
+
+The lower bound `x>=(q+1)A` is unnecessary except at the boundary where the
+tail has size exactly `q`.
+
+**Lemma: One-Large-Class Repair Below The Boundary.**  Fix `q>=3`.  Let
+`a=(x,a_2,...,a_t)` be a nonnegative integer vector with
+
+```text
+A = a_2+...+a_t < q,
+x+A <= q^2.
+```
+
+Then `a` has a multipartite bin decomposition using at most `q` bins.
+
+Proof.  Split the `A` tail vertices into `A` singleton tail bins.  In a
+singleton tail bin we may consume from the first class either:
+
+- `0` vertices, leaving a one-class singleton bin;
+- `1` vertex, giving a rectangle of type `(1,1)`;
+- `q+1` vertices, giving a special bin of type `(q+1,1)`.
+
+Thus the `A` tail bins can be made to consume any number
+
+```text
+L = s(q+1)+u
+```
+
+of first-class vertices with `s,u>=0` and `s+u<=A`.
+
+The remaining `q-A` bins will be one-class bins from the first class, so they
+can cover any remaining first-class size up to `(q-A)(q+2)`.  It is therefore
+enough to choose such an `L` with
+
+```text
+max(0, x-(q-A)(q+2)) <= L <= x.
+```
+
+Put
+
+```text
+E = max(0, x-(q-A)(q+2)).
+```
+
+If `E=0`, choose `L=0`.  Suppose `E>0`, and write
+
+```text
+E = m(q+1)+r,       0 <= r <= q.
+```
+
+Since `x+A<=q^2`,
+
+```text
+E <= q^2-A-(q-A)(q+2) = A(q+1)-2q < A(q+1),
+```
+
+where the final inequality uses `A<q`.  Hence `m+1<=A` whenever we need one
+more special bin.
+
+If `r<=A-m`, choose `L=E`, using `m` special tail bins and `r` ordinary
+`(1,1)` tail bins.  If `r>A-m`, choose
+
+```text
+L=(m+1)(q+1).
+```
+
+This uses `m+1<=A` special tail bins.  Its overshoot over `E` is
+
+```text
+L-E=q+1-r <= q+1-(A-m+1) = q-A+m <= q-1,
+```
+
+because `m<=A-1`.  Since `A<q`, we have
+
+```text
+q-1 <= (q-A)(q+2),
+```
+
+and therefore `L<=E+(q-A)(q+2)<=x`.  In both cases we have chosen an allowed
+`L` in the desired interval.  Cover the remaining `x-L` first-class vertices
+by the reserved `q-A` one-class bins.  All bins are legal, and the total
+number of bins is exactly `A+(q-A)=q`, with empty one-class bins omitted if
+not needed.  QED.
+
+Consequently, any counterexample to the multipartite bin target must have
+largest coordinate greater than `q` and all other coordinates summing at least
+`q`.
 
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
