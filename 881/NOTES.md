@@ -1098,7 +1098,7 @@ surviving pair construction must place its witnesses far above the larger
 deleted element.
 
 Proposition 13.1b-Schreier records the remaining unbounded-rank target. One
-would build a tail \(P=\{p_i\}\) and protect the Schreier barrier
+would build a cofinite tail \(P=\{p_i\}\) and protect the Schreier barrier
 \[
 \{F\subset P:|F|=\operatorname{index}(\min F)+1\}.
 \]

@@ -4345,7 +4345,7 @@ Let
 \[
 P=\{p_1<p_2<\cdots\}
 \]
-be an infinite subset of the final set, and let
+be a cofinite subset of the final set, and let
 \[
 \mathcal S=\{F\subset P:\ |F|=\operatorname{index}(\min F)+1\}
 \]
@@ -4395,15 +4395,16 @@ A=\bigcup_s A_s
 \]
 is an asymptotic basis of order \(2\), and for every infinite
 \[
-B\subset P
+B\subset A
 \]
 the set \(A\setminus B\) is not an asymptotic basis of order \(3\).
 Consequently \(A\setminus B\) is not an order-2 basis either.
 
 Proof. The coverage intervals (2) imply that \(A\) is an order-2 basis.
-Let \(B\subset P\) be infinite and \(L\) arbitrary. By (5), choose
+Let \(B\subset A\) be infinite and \(L\) arbitrary. Since \(A\setminus P\)
+is finite, \(B\cap P\) is infinite. By (5), applied to \(B\cap P\), choose
 \[
-F\in\mathcal S,\qquad F\subset B,\qquad w_F>L.
+F\in\mathcal S,\qquad F\subset B\cap P,\qquad w_F>L.
 \]
 Let \(s=s(F)\) be the stage at which \(F\) was completed. Since all later
 elements are \(>R_s\ge w_F\), no later positive summand can occur in a
