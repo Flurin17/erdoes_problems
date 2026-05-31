@@ -1525,6 +1525,11 @@ lists into two certificate-free fibers. Compactness then gives a
 two-coloring of the tail into certificate-free sets that are separately
 reflection-recurrent in \(A\). This is now the canonical high-excess
 first-prefix obstruction.
+Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
+the later tail after the first protected vertex must be a union of two
+recurrent Sidon-like colors. Since that tail is cofinite in \(A\), the
+construction is forced to the critical density scale \(A(X)=O(\sqrt X)\)
+and must have mixed two-sum spikes of size not \(o(A(X))\).
 
 The new `--pair-edge-search` diagnostic confirms that high-excess first
 pair starts are locally possible but expensive. Starting from the P5 seed,

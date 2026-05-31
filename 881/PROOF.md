@@ -9742,6 +9742,54 @@ chosen center \(w_j-d\) reflects \(U\) into \(A\), and \(w_j-d\to\infty\).
 The same argument with centers \(w_j-p_j\) proves recurrence for finite
 \(U\subset C_p\). \(\square\)
 
+## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
+
+In any \(k=2\) counterexample realized by the enumerated-Schreier target of
+Variant 13.1b-enum, let
+\[
+u_1
+\]
+be the first protected vertex and let
+\[
+P_1=\{u_j:j>1\}
+\]
+be the later protected tail. Then \(P_1\) has a two-coloring
+\[
+P_1=C_0\cup C_1
+\]
+such that:
+
+1. each \(C_i\) is certificate-free relative to \(A\), hence Sidon;
+2. each \(C_i\) is separately reflection-recurrent in \(A\);
+3. consequently, since \(P_1\) is cofinite in \(A\), one has
+   \[
+   |A\cap[1,X]|=O(\sqrt X);
+   \]
+4. and the mixed representation counts between the two colors are not
+   uniformly \(o(A(X))\). More precisely,
+   \[
+   \max_{n\le X}|\{(c_0,c_1)\in C_0\times C_1:c_0+c_1=n\}|
+   \]
+   is not \(o(A(X))\).
+
+Proof. Lemma 13.1j requires the first prefix vertex \(u_1\) to have a
+genuine pair witness with every later vertex \(p\in P_1\). Apply
+Corollary 13.1l.2 with \(d=u_1\) and \(R=Y=P_1\). This gives (1) and (2).
+Warning 8.6j gives the Sidon conclusion for certificate-free sets, so the
+union of two such colors has \(O(\sqrt X)\) elements up to \(X\); adding
+the finite set \(A\setminus P_1\) proves (3). Finally, if the mixed counts
+between \(C_0\) and \(C_1\) were uniformly \(o(A(X))\), color the finite
+exceptional set \(A\setminus P_1\) by singleton colors. Those singleton
+colors are certificate-free and contribute only \(O(1)\) mixed
+representations to each target. Corollary 8.6j-3 would then give the
+desired infinite deletion, contradicting that \(A\) is a counterexample.
+\(\square\)
+
+Thus the enumerated-Schreier route is forced all the way to the critical
+order-2 density scale. It cannot be implemented in a denser basis, and in
+the critical case it must create large mixed two-sum spikes between two
+recurrent Sidon-like tail colors.
+
 ### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
 
 Corollary 13.1l does not say that a finite first-prefix pair edge must be
@@ -10883,6 +10931,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.2 adds the high-excess pair consequence: fixed-prefix
   pair tails must be endpoint-list colorable on every finite test set, and
   compactness yields two recurrent certificate-free tail colors.
+* Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
+  the first protected tail must be a cofinite union of two recurrent Sidon
+  colors at critical density, with large mixed two-sum spikes.
 * Diagnostic 13.1m shows that high-excess first-pair starts are locally
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.
