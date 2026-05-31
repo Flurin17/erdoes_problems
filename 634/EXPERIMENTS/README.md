@@ -238,7 +238,7 @@ Current components:
   census: `207888` corner-label violations, `58224` pinch-sector obstructions,
   and `149728` split-corner-label obstructions. For `N=99` mixed `6`, it
   counts `418260` word groups over `5867040` outside-cover shells; the first
-  `200000` classified word groups cover cumulative weight `3094920` with no
+  `250000` classified word groups cover cumulative weight `3844020` with no
   mixed-status word group. The runner supports `--skip-classified-words` for
   disjoint classification intervals.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
