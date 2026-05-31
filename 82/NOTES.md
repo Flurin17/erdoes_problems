@@ -1195,3 +1195,14 @@ source of growth beyond Ramsey.
   `q=7` through `5000` generated vectors with up to four classes, while the
   strict `q+1` cap fails again for `q=6` on `K_{32,2,1}`.  This supports, but
   does not prove, using small excess rather than terminal size.
+- 2026-05-31: Extended `color_modular_partition.py` with a size-excess
+  penalty and replaced its scoring path by adjacency bitmasks instead of the
+  `2^n` subset precomputation.  This makes capped modular coloring local
+  search viable at `n=25` for unrestricted graphs.  Sanity checks: it finds a
+  capped partition for the balanced `n=9` mask `30931749293` with
+  `q=3,max_part_size=4`; it finds the exact capped partition for the
+  previously hard random `n=16,q=4,max_part_size=6` mask
+  `66886435753514383419085300530575522`; and a longer run found a
+  `q=5,max_part_size=7` partition for the first random `n=25` mask that the
+  short run initially left at score `3`.  These are heuristic successes, not
+  certificates for all graphs.

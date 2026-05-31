@@ -48,7 +48,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `color_modular_partition.py`: local search directly over fixed-color
   assignments, scoring residue disagreement inside color classes; includes a
   bounded Hamming repair step for near-miss colorings and a full-modular
-  sampling mode for higher dyadic lifts.
+  sampling mode for higher dyadic lifts.  `--max-part-size` adds a size-excess
+  penalty so score zero means the coloring is both modular and capped.
 - `cycle_block_signature.py`: enumerates finite signatures of cycle blocks
   for cactus-graph self-labelled mod-`4` coloring tests, recording marked
   articulation labels and their same-labelled degree contributions from the
