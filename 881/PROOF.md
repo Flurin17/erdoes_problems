@@ -9866,6 +9866,31 @@ and both fail the pair-witness condition against the old elements
 \]
 Thus the obstruction is not merely lack of coverage; it is simultaneous
 domination for many old elements.
+
+### Diagnostic 16.1: The robust-booster third stage is domination-limited
+
+In the cross-stage pair search after the two successful stages, the current
+data are
+\[
+C=\{1,3,20,21,23,30,31\},\qquad f=5,\qquad N=40.
+\]
+For the residue-restricted singleton candidates checked by
+`EXPERIMENTS/robust_booster_pair_stage_search.py --diagnose`, only
+\[
+b=41,\qquad b=43
+\]
+extend three-fold coverage with the required two-point buffer. For both
+candidates, the pair witnesses exist only for the old elements \(20\) and
+\(30\); they fail for
+\[
+1,\ 3,\ 21,\ 23,\ 31.
+\]
+Thus the first obstruction to continuing the robust-booster lift is not a
+coverage endpoint failure. It is the inability of one new element to carry
+simultaneous order-4 private witnesses against many old elements. This is
+the same collective-barrier pressure as in the \(k=2\) Schreier route,
+rather than a pure singleton-booster phenomenon.
+
 A bounded non-greedy DFS with candidate values up to \(110\), increments of
 size at most \(3\), and slack \(100\) also reaches only depth \(2\). Wider
 enumeration shows several alternative first moves and some alternative

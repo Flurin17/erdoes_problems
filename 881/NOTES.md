@@ -1773,6 +1773,17 @@ endpoint. The extended search still finds no third stage. This points to
 the same conclusion as the \(k=2\) pair-barrier work: pair barriers are the
 right finite shape, but simultaneous domination of all old elements becomes
 rapidly expensive.
+Diagnostic 16.1 makes the third-stage stall explicit. After
+\[
+C=\{1,3,20,21,23,30,31\},\qquad f=5,\qquad N=40,
+\]
+the only singleton candidates extending coverage in the prescribed residue
+classes are \(41\) and \(43\), and both fail pair witnesses against
+\[
+1,\ 3,\ 21,\ 23,\ 31.
+\]
+So the robust-booster lift is blocked first by simultaneous domination
+against many old elements, not by lack of three-fold coverage.
 
 Propositions 13.1b-general and 13.1e now record the exact infinite
 criterion behind these searches. For any order \(k\), an iterable
