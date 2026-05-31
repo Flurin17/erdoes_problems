@@ -135,6 +135,65 @@ static uint32_t tau64(u64 n) {
     return ans;
 }
 
+static u64 isqrt64(u64 n) {
+    u64 lo = 0, hi = (1ull << 32);
+    while (lo + 1 < hi) {
+        u64 mid = lo + (hi - lo) / 2;
+        if ((u128)mid * mid <= n) lo = mid;
+        else hi = mid;
+    }
+    return lo;
+}
+
+static u64 icbrt64(u64 n) {
+    u64 lo = 0, hi = (1ull << 22);
+    while ((u128)hi * hi * hi <= n) hi *= 2;
+    while (lo + 1 < hi) {
+        u64 mid = lo + (hi - lo) / 2;
+        if ((u128)mid * mid * mid <= n) lo = mid;
+        else hi = mid;
+    }
+    return lo;
+}
+
+static bool tau_leq_small(u64 n, uint32_t bound) {
+    if (bound == 0) return false;
+    static const int trial_primes[] = {
+        2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97
+    };
+    uint32_t known = 1;
+    for (int pp : trial_primes) {
+        u64 p = (u64)pp;
+        if (p * p > n) break;
+        if (n % p == 0) {
+            uint32_t e = 0;
+            do {
+                n /= p;
+                ++e;
+            } while (n % p == 0);
+            known *= e + 1;
+            if (known > bound) return false;
+        }
+    }
+    bound /= known;
+    if (n == 1) return true;
+    if (bound == 1) return false;
+    if (is_prime64(n)) return true;
+    if (bound == 2) return false;
+
+    u64 root = isqrt64(n);
+    if ((u128)root * root == n && is_prime64(root)) return true;
+    if (bound == 3) return false;
+
+    u64 cube = icbrt64(n);
+    if ((u128)cube * cube * cube == n && is_prime64(cube)) return true;
+
+    std::vector<u64> factors;
+    factor_rec(n, factors);
+    if (factors.size() != 2) return false;
+    return is_prime64(factors[0]) && is_prime64(factors[1]);
+}
+
 static std::vector<int> prime_sieve(int limit) {
     std::vector<bool> comp(limit + 1);
     std::vector<int> primes;
@@ -232,6 +291,19 @@ static bool power_prime_budget_ok(u64 L, u64 p, uint32_t fixed_exp, uint32_t oth
     return is_prime64(L);
 }
 
+static bool shared_prime_budget_ok(u64 L, u64 p, uint32_t fixed_exp,
+                                   uint32_t other_tau, uint32_t bound) {
+    uint32_t a = 0;
+    while (L % p == 0) {
+        L /= p;
+        ++a;
+    }
+    uint32_t fixed_part = fixed_exp + a + 1;
+    uint32_t forced_tau = other_tau * fixed_part;
+    if (forced_tau > bound) return false;
+    return tau_leq_small(L, bound / forced_tau);
+}
+
 static bool shift5_ok(u64 N) {
     // n-5 = 5(504N-1), and 504N-1 is 7 mod 8 before removing powers of 5.
     return power_prime_budget_ok(504 * N - 1, 5, 1, 1, 7);
@@ -245,6 +317,22 @@ static bool shift9_ok(u64 N) {
 static bool shift10_ok(u64 N) {
     // n-10 = 2*5*(252N-1), and 252N-1 is 3 mod 4 before removing powers of 5.
     return power_prime_budget_ok(252 * N - 1, 5, 1, 2, 12);
+}
+
+static bool shift7_ok(u64 N) {
+    return shared_prime_budget_ok(360 * N - 1, 7, 1, 1, 9);
+}
+
+static bool shift14_ok(u64 N) {
+    return shared_prime_budget_ok(180 * N - 1, 7, 1, 2, 16);
+}
+
+static bool shift15_ok(u64 N) {
+    return shared_prime_budget_ok(168 * N - 1, 5, 1, 2, 17);
+}
+
+static bool shift16_ok(u64 N) {
+    return shared_prime_budget_ok(315 * N - 2, 2, 3, 1, 18);
 }
 
 static bool guaranteed_by_branch(uint32_t k, int branch) {
@@ -263,6 +351,11 @@ static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, ui
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }
+        if (k == 7) {
+            if (shift7_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
         if (k == 9) {
             if (shift9_ok(N)) continue;
             if (tau_out) *tau_out = tau64(n - k);
@@ -270,6 +363,21 @@ static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, ui
         }
         if (k == 10) {
             if (shift10_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 14) {
+            if (shift14_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 15) {
+            if (shift15_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 16) {
+            if (shift16_ok(N)) continue;
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }
