@@ -8132,6 +8132,15 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.6j says certificate-free color classes are Sidon, which gives
   only an \(O(\sqrt X)\) counting bound and therefore does not contradict
   thin order-2 bases.
+* Lemma 8.6j' strengthens this: each certificate-free color has its
+  same-color sums disjoint from its mixed sums with the rest of \(A\).
+* Warning 8.6j'' shows that a universal certificate-density theorem would
+  reach the Sidon-basis frontier. A hypothetical Sidon order-2 basis can be
+  copied into two certificate-free residue classes, although the resulting
+  order-2 basis still has bounded representation multiplicity and is handled
+  by Corollary 3.4b. The exact failed counterexample condition is the
+  stronger shifted requirement \(2(S\setminus T)+S\) non-cofinite after
+  every infinite deletion \(T\subset S\).
 * Corollary 8.6k uses the Sidon bound to rule out fixed-rank large-excess
   barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\), while
   noting that sparse fixed-rank tails with bounded top excess are not ruled
