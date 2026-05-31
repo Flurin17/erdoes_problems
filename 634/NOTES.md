@@ -65,7 +65,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   Lemma 11.17.
 - `n = 63` and `n = 99` remain open in this workspace: all other source rows
   are eliminated locally, and the final `gamma=2alpha` boundary patterns are
-  the current benchmark survivors.
+  the current benchmark survivors. Local overhang fans using `ca | bbb` for
+  `63` and `ca | bbbbb` for `99` show that the strict side-label fan diagnostic
+  is not enough.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

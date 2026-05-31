@@ -276,9 +276,11 @@ these `gamma=2alpha` boundary-arithmetic survivors:
 99: tile=(25,11,30), X=2a+5b+2c, Y=3a+3b+3c.
 ```
 
-The side-label fan diagnostic has no witness for either pattern, but primitive
-equal-length overhangs such as `a+c=kb` may emanate along interior rays from an
-outer-boundary transition. That no-overhang case is the current proof gap.
+The strict side-label fan diagnostic has no witness for either pattern, but
+`gamma_2alpha_overhang_fan.py` finds local overhang-supported fans using
+`ca | bbb` for `63` and `ca | bbbbb` for `99`. Thus the current proof gap is
+global: either rule out such overhang fans in a full tiling, or find another
+obstruction.
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`

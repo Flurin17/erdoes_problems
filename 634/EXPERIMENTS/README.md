@@ -80,6 +80,9 @@ Current components:
   equal-length overhang components such as `a+c=kb`; these matter for interior
   interfaces and calibrate the missing no-overhang lemma needed before the
   `N=63`/`N=99` fan diagnostic can become a proof.
+- `gamma_2alpha_overhang_fan.py`: local overhang-aware boundary fan diagnostic;
+  it shows that the primitive `a+c=kb` components can support the `c`/non-`c`
+  transitions that the strict side-label fan automaton rejects.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

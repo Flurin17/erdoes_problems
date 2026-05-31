@@ -1558,7 +1558,15 @@ This table would forbid a `c` edge from transitioning to an `a`- or `b`-edge,
 but it is not yet a proof-level obstruction. Primitive equal-length overhangs
 such as `a+c=kb` occur in the relevant arithmetic rows, so the missing lemma is
 to prove that such overhangs cannot emanate from an outer-boundary transition
-in the `gamma=2alpha` branch.
+in the `gamma=2alpha` branch. The diagnostic
+`gamma_2alpha_overhang_fan.py` currently shows the opposite local picture:
+using `ca | bbb` for `N=63` and `ca | bbbbb` for `N=99`, the primitive
+overhang components can support the `c`/non-`c` boundary fan transitions
+locally. For example, a boundary transition `b:gamma->alpha` to
+`c:beta->alpha` supplies the visible `alpha+beta`; the overhang ray
+`ca | b^k` and one remaining `gamma` sector complete
+`alpha+beta+gamma=pi`. Any obstruction must therefore use more global
+constraints.
 
 Two further safe refinements are used only when their hypotheses are checked.
 Beeson's older boundary `c`-edge lemma says that if `gamma > pi/2`,

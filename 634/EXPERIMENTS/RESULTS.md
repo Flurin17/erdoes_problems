@@ -606,9 +606,24 @@ N=99: the <=3-piece list includes clean reorderings such as ac | ca;
       the distinct-count primitive ac | bbbbb appears with max-pieces 6.
 ```
 
-Interpretation: these overhang components calibrate non-strict interior
-interfaces. They are not outer-boundary transition rescues, because an outer
-side has only the interior half-plane available.
+The follow-up local fan diagnostic checks whether these components can emanate
+from an outer-boundary transition along interior rays:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_overhang_fan.py 63 99 --max-pieces 6 --limit 16
+```
+
+It finds local overhang-supported fans for all displayed `c`/non-`c`
+transition types. Typical supporting rays are `ca | bbb` for `N=63` and
+`ca | bbbbb` for `N=99`, plus the shifted equal-multiset component `ab | ba`.
+One explicit model is the boundary transition
+`b:gamma->alpha` followed by `c:beta->alpha`: the visible angles contribute
+`alpha+beta`, the overhang ray uses `ca | b^k`, and a remaining `gamma` sector
+completes `alpha+beta+gamma=pi` (`k=3` for `63`, `k=5` for `99`).
+Interpretation: the strict side-label fan automaton is not a proof-level
+obstruction by itself. A proof still needs a global no-overhang lemma at
+outer-boundary fans or a different obstruction for the final `63` and `99`
+patterns.
 
 ## Equilateral Boundary-Length Checks
 
