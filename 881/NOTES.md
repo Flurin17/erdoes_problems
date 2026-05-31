@@ -1518,6 +1518,11 @@ vertices can occur in the shifted rows \(w-t\) for \(t>D\); the fixed
 vertex \(d\) reflects the whole tail. Hence every Schreier prefix level
 \(u_i\) must have divergent witness excess above the first later endpoint
 on every infinite later tail.
+Lemma 8.2c''' records the intermediate version: if the witness is close to
+the \(j\)-th moving endpoint, then only the fixed endpoint and the first
+\(j-1\) moving endpoints can color shifted rows, giving \(1/j\)-fractional
+recurrence. Unless a finite test set forces a certificate in every such
+large fraction, this again falls into the certificate-free branch.
 For the first pair level, Corollary 13.1l.2 combines this with the
 endpoint-list lemma 8.6g': unless a good deletion already exists, every
 finite test set in the later tail can be split by the shifted endpoint

@@ -3884,6 +3884,96 @@ If its witness remains close to the first later endpoint, all those moving
 endpoints are too large to color shifted test rows, so the fixed endpoint
 again reflects the tail.
 
+## Lemma 8.2c''': Intermediate endpoint excess gives fractional recurrence
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Fix \(D\ge0\) and \(j\ge1\). Suppose that for every
+finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and every \(L\), there are distinct elements
+\[
+f_0,f_1,\ldots,f_r\in A\setminus T,\qquad r\ge j,
+\]
+with
+\[
+f_1<\cdots<f_r,
+\]
+and a witness \(w\) such that
+\[
+w-\max T\ge N_0,\qquad w-\max\{f_0,f_1,\ldots,f_{j-1}\}>L,
+\qquad w\le f_j+D, \tag{1}
+\]
+and
+\[
+w\notin3(A\setminus\{f_0,f_1,\ldots,f_r\}). \tag{2}
+\]
+Then for every finite nonempty \(T\subset A\cap(D,\infty)\) and every
+\(L_0\), there is a subset
+\[
+U\subset T,\qquad |U|\ge |T|/j,
+\]
+and a center \(m>L_0\) such that
+\[
+m-U\subset A. \tag{3}
+\]
+
+If, in addition, there is a finite
+\[
+T_0\subset A\cap(D,\infty)
+\]
+such that every \(U\subset T_0\) with \(|U|\ge |T_0|/j\) contains a
+certificate triple
+\[
+e,y_1,y_2\in U,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A,
+\]
+then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. Fix finite nonempty \(T\subset A\cap(D,\infty)\) and \(L_0\), and
+apply the hypothesis with \(L>L_0+\max T\). For each \(t\in T\), choose a
+two-term representation
+\[
+w-t=a_t+a'_t,\qquad a_t,a'_t\in A,
+\]
+possible because \(w-t\ge N_0\). By (2), every such representation meets
+\[
+F=\{f_0,\ldots,f_r\}.
+\]
+No representation can use \(f_\ell\) with \(\ell\ge j\), since
+\[
+w-t-f_\ell\le f_j+D-t-f_\ell\le D-t<0.
+\]
+Thus each \(t\) has a representation using one of
+\[
+f_0,f_1,\ldots,f_{j-1}.
+\]
+Pigeonhole gives one such \(f_i\) and a subset
+\[
+U\subset T,\qquad |U|\ge |T|/j,
+\]
+for which
+\[
+w-t=f_i+c_t,\qquad c_t\in A\quad(t\in U).
+\]
+Then
+\[
+m=w-f_i
+\]
+satisfies \(m-U\subset A\), and (1) gives \(m>L_0\).
+
+For the final assertion, apply the first part to \(T_0\) with \(L_0\to
+\infty\). Each resulting large subset \(U\subset T_0\) contains a
+certificate triple, and since \(T_0\) has only finitely many such triples,
+one fixed triple is reflected by arbitrarily large centers. Corollary 2.3c
+gives the desired deletion. \(\square\)
+
+The case \(j=1\) recovers Lemma 8.2c'' with \(f_0\) the fixed endpoint:
+all moving endpoints are too large to appear, so the whole test set
+reflects through \(f_0\). For \(j>1\), the obstruction falls back to the
+same certificate-free fractional-recurrence branch as Lemma 8.6g.
+
 For the pure-star setting, more generally, if a fixed finite prefix
 \(\Delta\) and infinitely many candidates \(b\) satisfy
 \[
@@ -10860,6 +10950,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.2c'' extends this to fixed-singleton finite barriers: if all
   moving deleted endpoints are above the shifted rows because the witness
   is close to their minimum, the fixed endpoint reflects the whole tail.
+* Lemma 8.2c''' gives the intermediate endpoint version: closeness to the
+  \(j\)-th moving endpoint yields \(1/j\)-fractional recurrence, closing
+  only when large fractional subsets force certificates.
 * Lemma 8.2d gives the matching certificate-forcing statement for
   multi-center fixed-prefix stars; persistent star obstructions must again
   live in the large certificate-free subset regime.
