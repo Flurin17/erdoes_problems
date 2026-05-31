@@ -12,6 +12,8 @@ Problem 647.
 - `verify_candidate.py`: independent factorization-based verifier for a
   proposed `n`.
 - `residue_classes.cpp`: experimental small-modulus residue filter.
+- `run_residue_scan.py`: launches and aggregates one `prime_tuple_search`
+  job per residue class over an exact half-open range of `N` values.
 
 ## Build
 
@@ -70,6 +72,23 @@ This is used with the 41-class reduction modulo `46189`. The
 requires each `A*X+B` to be prime. This supports exact split-residue filters
 such as `(504N-1)/5`, `(280N-1)/3`, `(280N-1)/9`, and `(252N-1)/5` when the
 chosen variable modulus makes the division integral for all `X`.
+
+The range driver records reproducible logs for complete residue scans. For
+example, this covers `3*10^15 <= N < 7320136537186331`, the largest range
+where `2520N` still fits in an unsigned 64-bit word:
+
+```sh
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search \
+  --n-start 3000000000000000 \
+  --n-stop 7320136537186331 \
+  --outdir /tmp/erdos647-scan-3e15-u64 \
+  --workers 8 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
+```
 
 ## Restrictive Subsearch
 
