@@ -1228,6 +1228,12 @@ need not have bounded width on any infinite tail. So a proof cannot first
 thin the problem to pair barriers or bounded-size barriers by combinatorics
 alone; any such reduction must use the additive gap and reflected-cover
 constraints.
+Warning 8.5a.1 adds that the first Schreier barrier is not universal. A
+second-order Schreier front, built as a Schreier number of consecutive
+first-Schreier blocks, is still a barrier on every infinite tail but has no
+two-element edges. Hence no tail contains the complete first-prefix pair
+links from Lemma 13.1j. Closing the enumerated-Schreier route does not
+automatically close arbitrary variable-rank fronts.
 
 There is a positive Ramsey reduction once bounded width is supplied by
 arithmetic. Lemma 8.5a says that if every infinite subset contains a

@@ -5207,6 +5207,62 @@ This lemma is useful only after an arithmetic argument supplies a bounded
 width \(q\). The Schreier example above shows that no such \(q\) follows
 from the abstract barrier property alone.
 
+## Warning 8.5a.1: The first Schreier barrier is not universal
+
+The closure of the enumerated-Schreier target in Corollary 13.1l.3a does
+not by itself close all unbounded finite barriers. There are higher
+Schreier-type barriers with no first-prefix pair links on any tail.
+
+Let
+\[
+P=\{p_1<p_2<\cdots\}.
+\]
+Define the first Schreier barrier
+\[
+\mathcal S_1(P)=\{F\subset P:\ |F|=\operatorname{index}(\min F)+1\}.
+\]
+Now define \(\mathcal S_2(P)\) to consist of all finite unions
+\[
+F=F_0\cup F_1\cup\cdots\cup F_r
+\]
+such that
+\[
+F_0<F_1<\cdots<F_r,\qquad F_j\in\mathcal S_1(P),
+\]
+and
+\[
+r+1=\operatorname{index}(\min F_0)+1.
+\]
+Then \(\mathcal S_2(P)\) is a barrier on \(P\). Indeed, given any infinite
+\[
+X\subset P,
+\]
+choose \(F_0\) to be the first \(\operatorname{index}(\min X)+1\) elements
+of \(X\). This is an \(\mathcal S_1(P)\)-edge. Since \(X\) is infinite,
+repeat the same construction after \(F_0\) to choose \(F_1\), and so on
+until the required number of blocks has been chosen. Their union is an
+\(\mathcal S_2(P)\)-edge inside \(X\).
+
+However, no infinite
+\[
+M=\{m_1<m_2<\cdots\}\subset P
+\]
+has
+\[
+\mathcal S_1(M)\subseteq \mathcal S_2(P).
+\]
+The first Schreier barrier on \(M\) contains two-element edges
+\[
+\{m_1,m_j\}\qquad(j>1),
+\]
+whereas every \(\mathcal S_2(P)\)-edge contains at least two nonempty
+\(\mathcal S_1(P)\)-blocks and therefore has size greater than \(2\).
+
+Thus an arbitrary variable-rank late-bad barrier cannot be reduced by pure
+combinatorics to the first-prefix-link structure of Lemma 13.1j. A final
+argument must either extract additional arithmetic structure from the
+finite holes, or handle higher front ranks directly.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -11666,6 +11722,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.5a says that if bounded width is supplied by arithmetic, Ramsey
   thinning reduces the late-bad barrier to one fixed uniformity on an
   infinite tail.
+* Warning 8.5a.1 shows that the closed first-Schreier target is not a
+  universal model for unbounded barriers: second-order Schreier fronts are
+  still barriers but contain no pair-level first-prefix links on any tail.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.
