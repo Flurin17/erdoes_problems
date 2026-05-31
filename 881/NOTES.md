@@ -257,6 +257,9 @@ with a fixed padder \(t\), moving anchors \(e_j\), and deleted elements
 \(b_j\), the identities \(t+b_j=e_j+q_j\) and \(e_j+b_i\in2C\) for
 \(i\le j\) imply \(A\setminus\{b_j\}\) is an order-3 basis. For cross
 packets this asks for the extra bridge value \(q_j=t+m_j-2e_j\in C\).
+The diagnostic `bridge_repair_search.py` finds this bridge in the finite
+delayed pair window \(S=\{1,2,3,5,6,7\},F=\{5,7\}\), but not in the
+rank-three delayed window or in the alternating pair-hole window.
 
 ## Trivial and Boundary Cases
 

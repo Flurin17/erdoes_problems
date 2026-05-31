@@ -205,6 +205,16 @@ must create genuinely unpinned bounded-count rows, not only repairs through
 old elements. It also prints the internal translated-Schur count for
 `x+y=s+d` inside the displayed row set, corresponding to Corollary 3.4r.
 
+`bridge_repair_search.py` checks the moving-anchor bridge identities from
+Lemma 8.2a'. With `--examples`, it finds bridge data for the finite delayed
+pair window
+\[
+S=\{1,2,3,5,6,7\},\qquad F=\{5,7\},
+\]
+namely `t=1` and rows `(5,3,3),(7,2,6)`. It finds no bridge data for the
+rank-three delayed example or for the alternating-deletion pair hole, so
+the bridge identity is a genuine positive mechanism but not automatic.
+
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
 \[

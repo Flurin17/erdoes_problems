@@ -3540,6 +3540,28 @@ that moving anchor back to the fixed padder \(t\). The old-anchor rows
 \(e_j+b_i\in2C\) are the coherence condition needed to repair mixed
 deleted pairs.
 
+The finite diagnostic `EXPERIMENTS/bridge_repair_search.py` checks these
+identities in local windows. In the delayed pair example
+\[
+S=\{1,2,3,5,6,7\},\qquad F=\{5,7\},
+\]
+it finds the bridge data
+\[
+t=1,\qquad (b,e_b,q_b)=(5,3,3),(7,2,6).
+\]
+Thus this local pair delay is repairable by Lemma 8.2a'. By contrast, the
+rank-three delayed example
+\[
+S=\{1,2,3,4,5,6,7,8\},\qquad F=\{4,5,6\}
+\]
+and the alternating pair-hole window
+\[
+S=\{1,2,3,6,7,8\},\qquad F=\{6,8\}
+\]
+have no such bridge data in the finite set. The bridge route is therefore a
+real positive mechanism, but not a complete explanation of all collective
+finite holes.
+
 ## Warning 8.2b: Fixed-center greedy absorption has star obstructions
 
 Lemma 8.2a suggests a direct greedy proof for \(k=2\): fix a retained
