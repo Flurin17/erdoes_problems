@@ -292,6 +292,7 @@ def search(
 
 def search_slots(
     source_modulus: int,
+    source_residue: int | None,
     target_modulus: int,
     max_classes: int,
     max_size: int,
@@ -305,6 +306,10 @@ def search_slots(
         for sizes in combinations_with_replacement(range(1, max_size + 1), classes):
             if not full_is_modular(sizes, source_modulus):
                 continue
+            if source_residue is not None:
+                residue = (sum(sizes) - sizes[0]) % source_modulus
+                if residue != source_residue % source_modulus:
+                    continue
             checked += 1
             if not can_slot_partition(sizes, target_modulus, slots):
                 bad = sizes
@@ -317,6 +322,8 @@ def search_slots(
             break
 
     print(f"source_modulus={source_modulus}")
+    if source_residue is not None:
+        print(f"source_residue={source_residue % source_modulus}")
     print(f"target_modulus={target_modulus}")
     print(f"max_classes={max_classes}")
     print(f"max_size={max_size}")
@@ -352,6 +359,7 @@ def run_fixed_sizes(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-modulus", type=int, default=2)
+    parser.add_argument("--source-residue", type=int)
     parser.add_argument("--target-modulus", type=int, default=4)
     parser.add_argument("--max-classes", type=int, default=5)
     parser.add_argument("--max-size", type=int, default=8)
@@ -392,6 +400,7 @@ def main() -> None:
         slots = tuple(int(item) % args.target_modulus for item in args.slots.split(","))
         search_slots(
             args.source_modulus,
+            args.source_residue,
             args.target_modulus,
             args.max_classes,
             args.max_size,

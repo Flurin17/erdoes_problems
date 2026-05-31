@@ -3765,7 +3765,11 @@ R_2=(0,0,1,2),   R_3=(0,0,1,3),
 where `R_a` is meant for graphs whose total degree residue is `a mod 4`.
 This is only finite evidence for a source-residue four-part lift, not a
 proof.  It also illustrates why higher dyadic slots must depend on the source
-residue and cannot simply reuse `(0,0,1,2)`.
+residue and cannot simply reuse `(0,0,1,2)`.  In the complete-multipartite
+count model, this four-family passes all source-filtered checks through six
+multipartite classes of size at most `16`, using `EXPERIMENTS/multipartite_modular.py`
+with `--source-residue`; the same tests without source filtering give
+irrelevant counterexamples from other source classes.
 
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.

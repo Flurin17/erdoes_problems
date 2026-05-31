@@ -1928,3 +1928,12 @@ source of growth beyond Ramsey.
   spread-one masks with max regular order `7` on `n=14` and `9` on `n=18`,
   matching the qualitative obstruction but not improving the previous
   extremal examples.
+- 2026-05-31: Added `--source-residue` to `multipartite_modular.py` fixed-slot
+  mode and rechecked the compact ordinary `4 -> 8` source-residue slot
+  candidates against complete multipartite graphs with at most six classes and
+  class sizes at most `16`.  The four checks all pass:
+  source `0` with `(0,1,2,4)` checked `409` size vectors; source `1` with
+  `(0,0,2,2)` checked `129`; source `2` with `(0,0,1,2)` checked `169`; and
+  source `3` with `(0,0,1,3)` checked `129`.  Without the fixed source
+  residue filter, the same slot multisets can be killed by irrelevant source
+  classes, so this option is needed for correct dyadic-source calibration.

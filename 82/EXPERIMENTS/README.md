@@ -180,7 +180,9 @@ Computational checks and generated data for Erdos Problem 82.
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts
   for small instances.  With `--slots`, it checks fixed target residue slots
-  such as `(0,0,1,2)` using partial counts from multipartite classes.
+  such as `(0,0,1,2)` using partial counts from multipartite classes;
+  `--source-residue` restricts this fixed-slot mode to one source degree
+  residue class modulo `--source-modulus`.
   `--max-bin-size` adds terminal-size caps, `--max-total-size` bounds the
   generated search space by total graph order, and `--sizes` verifies a fixed
   complete multipartite instance such as the `K_{22,2,1}` strict-terminal
