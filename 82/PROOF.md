@@ -3565,6 +3565,59 @@ residue-slot alignment strategies.  Any such theorem would still only be a
 first-lift alignment result unless it extends uniformly to higher dyadic
 moduli.
 
+One tempting simplification of the surviving clean even-source candidate
+`R=(0,0,2,2)` is false: the two zero slots cannot be merged into one.
+
+**Example: The Three-Slot `(0,2,2)` Strengthening Is False.**  There is an
+even graph with a `(0,0,2,2)` partition but no `(0,2,2)` partition.
+
+Proof.  Let `G` be the graph on vertices `0,...,6` with edge set
+
+```text
+03, 06, 12, 16, 26, 36.
+```
+
+Equivalently, `G` is two triangles, `036` and `126`, sharing the vertex `6`,
+together with two isolated vertices.  Its degree sequence is
+
+```text
+2,2,2,2,0,0,4,
+```
+
+so it is even.  A `(0,0,2,2)` partition exists, for instance
+
+```text
+{0,4,5}, {1,2,6}, {3}, empty,
+```
+
+with residues `0,2,0,0` after ordering into the slots.
+
+Now suppose that a `(0,2,2)` partition exists.  In this graph every induced
+`2 mod 4` part must have internal degree exactly `2` at each of its vertices.
+The only such nonempty induced parts are the two triangles `036` and `126`:
+any proper subset of a triangle has a vertex of internal degree `0` or `1`,
+and any set meeting both triangles without being exactly one triangle gives
+the shared vertex and some leaf unequal internal degrees, or gives a leaf
+internal degree other than `2`.  The two available residue-`2` slots therefore
+cannot cover both triangles, because they overlap at vertex `6`.  If only one
+triangle is placed in a residue-`2` slot, the two non-shared vertices of the
+other triangle are adjacent and cannot both lie in the single zero slot, while
+a singleton cannot lie in a residue-`2` slot.  This contradiction proves that
+no `(0,2,2)` partition exists.  QED.
+
+Computationally, the exact checker first finds this graph as the `n=7` killer
+for the three-slot shortcut:
+
+```text
+python3 EXPERIMENTS/universal_slots.py 7 --candidates 0,2,2
+```
+
+with mask `148580`.  The same mask is accepted by
+
+```text
+python3 EXPERIMENTS/slot_partition.py 7 --mask 148580 --slots 0,0,2,2.
+```
+
 The strongest-looking surviving candidate is `R=(0,0,1,2)`, because it has
 two zero slots and one slot for each nonzero parity class.  The next lemma
 records an equivalent form that replaces the two zero slots by a cut

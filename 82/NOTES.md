@@ -2073,3 +2073,14 @@ source of growth beyond Ramsey.
   set `02,06,07,12,14,15,23`, and degrees `3,3,3,1,1,1,1,1` has no
   `(0,1,2,3)` mod-`4` slot partition.  Therefore the complete-multipartite
   clean pattern cannot be the full dyadic fixed-slot theorem.
+- 2026-05-31: Focused the even-source clean first-lift candidate
+  `(0,0,2,2)`.  The fast exact checker confirms that all `2097152` labelled
+  even graphs on `8` vertices have such a partition:
+  `/tmp/universal_slots_fast --n 8 --candidates 0,0,2,2`.  Additional focused
+  random exact-cover checks found no counterexample in `100` even graphs on
+  `18` vertices (`seed=200022`) and `25` even graphs on `20` vertices
+  (`seed=200020`).  The stronger three-slot shortcut `(0,2,2)` is false:
+  the `7`-vertex bowtie mask `148580` (two triangles sharing a vertex plus
+  two isolates, edge set `03,06,12,16,26,36`) has no `(0,2,2)` partition but
+  does have a `(0,0,2,2)` partition.  Thus the two zero slots are genuinely
+  needed in this clean even-source route.
