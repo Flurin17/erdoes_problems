@@ -1131,3 +1131,8 @@ source of growth beyond Ramsey.
   partitions.  A quick even-graph search for `n=12,q=4,max_part_size=5`
   evaluated `22` masks with no unknowns and found best minimum color count
   `3`, not a counterexample to the four-part capped target.
+- 2026-05-31: Generalized `search_modular_partition.py` with `--unrestricted`
+  for all-graph local search via single-edge flips.  A quick unrestricted
+  capped search for `n=10,q=3,max_part_size=4` evaluated `61` masks with no
+  unknowns and found best minimum color count `3`, again no counterexample to
+  the terminal-size target.

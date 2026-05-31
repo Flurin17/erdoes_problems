@@ -32,6 +32,10 @@ def flip_triangle(mask: int, triple: tuple[int, int, int]) -> int:
     return mask
 
 
+def random_mask(n: int, rng: random.Random, edge_count: int) -> int:
+    return rng.getrandbits(edge_count)
+
+
 def score_label(value: int, max_colors: int) -> str:
     if value == 0:
         return "unknown"
@@ -91,6 +95,7 @@ def search(
     max_colors: int,
     min_part_size: int,
     max_part_size: int | None,
+    unrestricted: bool,
     steps: int,
     restarts: int,
     seed: int,
@@ -100,16 +105,20 @@ def search(
     rng = random.Random(seed)
     pc = ri.precompute(n)
     edge_index = {edge: i for i, edge in enumerate(pc.edges)}
-    moves = triangle_indices(n, edge_index)
+    edge_count = len(pc.edges)
+    triangle_moves = triangle_indices(n, edge_index)
     cache: dict[int, int] = {}
     best_score = -1
     best_mask = 0
     unknown = 0
 
     for restart in range(restarts):
-        mask = modular_partition.random_parity_mask(n, False, rng, pc, edge_index)
-        if mask is None:
-            continue
+        if unrestricted:
+            mask = random_mask(n, rng, edge_count)
+        else:
+            mask = modular_partition.random_parity_mask(n, False, rng, pc, edge_index)
+            if mask is None:
+                continue
         current = score(
             mask,
             n,
@@ -137,7 +146,10 @@ def search(
                 if best_score > max_colors:
                     break
 
-            candidate = flip_triangle(mask, rng.choice(moves))
+            if unrestricted:
+                candidate = mask ^ (1 << rng.randrange(edge_count))
+            else:
+                candidate = flip_triangle(mask, rng.choice(triangle_moves))
             candidate_score = score(
                 candidate,
                 n,
@@ -159,6 +171,10 @@ def search(
             break
 
     print(f"n={n}")
+    if unrestricted:
+        print("search_space=all_graphs")
+    else:
+        print("search_space=even_graphs")
     print(f"modulus={modulus}")
     print(f"max_colors={max_colors}")
     if min_part_size:
@@ -192,6 +208,7 @@ def main() -> None:
     parser.add_argument("--merge-restarts", type=int, default=0)
     parser.add_argument("--min-part-size", type=int, default=0)
     parser.add_argument("--max-part-size", type=int)
+    parser.add_argument("--unrestricted", action="store_true")
     args = parser.parse_args()
     search(
         args.n,
@@ -199,6 +216,7 @@ def main() -> None:
         args.max_colors,
         args.min_part_size,
         args.max_part_size,
+        args.unrestricted,
         args.steps,
         args.restarts,
         args.seed,
