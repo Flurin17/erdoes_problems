@@ -83,6 +83,18 @@ def eval_poly(poly: Poly, value: Fraction) -> Fraction:
     return total
 
 
+def has_mod_root(poly: Poly, prime: int) -> bool:
+    for value in range(prime):
+        total = 0
+        power = 1
+        for coefficient in poly:
+            total = (total + coefficient * power) % prime
+            power = (power * value) % prime
+        if total == 0:
+            return True
+    return False
+
+
 @lru_cache(maxsize=None)
 def divisors(n: int) -> tuple[int, ...]:
     n = abs(n)
@@ -111,6 +123,9 @@ def rational_roots_cached(poly_tuple: tuple[int, ...]) -> tuple[Fraction, ...]:
         return (Fraction(-c0, c1),)
     c0 = poly[0]
     lead = poly[-1]
+    for prime in (5, 7, 11, 13, 17, 19, 23, 29, 31):
+        if lead % prime != 0 and not has_mod_root(poly, prime):
+            return ()
     roots: set[Fraction] = set()
     for numerator in divisors(c0):
         for denominator in divisors(lead):

@@ -58,6 +58,20 @@ def valid_bin(counts: tuple[int, ...], target_modulus: int) -> bool:
     return len(residues) == 1
 
 
+def bin_residue(counts: tuple[int, ...], target_modulus: int) -> int | None:
+    positives = [count for count in counts if count]
+    if not positives:
+        return None
+    total = sum(positives)
+    if len(positives) == 1:
+        return 0
+    residues = {count % target_modulus for count in positives}
+    if len(residues) != 1:
+        return None
+    count_residue = next(iter(residues))
+    return (total - count_residue) % target_modulus
+
+
 def all_bins(sizes: tuple[int, ...], target_modulus: int) -> list[tuple[int, ...]]:
     ranges = [range(size + 1) for size in sizes]
     bins = []
@@ -66,6 +80,22 @@ def all_bins(sizes: tuple[int, ...], target_modulus: int) -> list[tuple[int, ...
             bins.append(counts)
     bins.sort(key=lambda item: (sum(item), item), reverse=True)
     return bins
+
+
+def all_bins_by_residue(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    slots: tuple[int, ...],
+) -> dict[int, list[tuple[int, ...]]]:
+    by_residue: dict[int, list[tuple[int, ...]]] = {slot: [] for slot in set(slots)}
+    ranges = [range(size + 1) for size in sizes]
+    for counts in product(*ranges):
+        residue = bin_residue(counts, target_modulus)
+        if residue in by_residue:
+            by_residue[residue].append(counts)
+    for residue in by_residue:
+        by_residue[residue].sort(key=lambda item: (sum(item), item), reverse=True)
+    return by_residue
 
 
 def can_partition(
@@ -95,6 +125,40 @@ def can_partition(
         return False
 
     return rec(sizes, bins)
+
+
+def can_slot_partition(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    slots: tuple[int, ...],
+) -> bool:
+    slots = tuple(sorted(slots))
+    choices = all_bins_by_residue(sizes, target_modulus, slots)
+
+    def remove_slot(state: tuple[int, ...], residue: int) -> tuple[int, ...]:
+        out = list(state)
+        out.remove(residue)
+        return tuple(out)
+
+    @lru_cache(maxsize=None)
+    def rec(remaining: tuple[int, ...], state: tuple[int, ...]) -> bool:
+        if all(value == 0 for value in remaining):
+            return True
+        if not state:
+            return False
+        pivot = next(i for i, value in enumerate(remaining) if value)
+        for residue in sorted(set(state)):
+            next_state = remove_slot(state, residue)
+            for choice in choices[residue]:
+                if choice[pivot] == 0:
+                    continue
+                if all(choice[i] <= remaining[i] for i in range(len(sizes))):
+                    nxt = tuple(remaining[i] - choice[i] for i in range(len(sizes)))
+                    if rec(nxt, next_state):
+                        return True
+        return False
+
+    return rec(sizes, slots)
 
 
 def min_bins(sizes: tuple[int, ...], target_modulus: int, cap: int) -> int | None:
@@ -156,6 +220,45 @@ def search(
         print(f"  {key}: {histogram[key]}")
 
 
+def search_slots(
+    source_modulus: int,
+    target_modulus: int,
+    max_classes: int,
+    max_size: int,
+    slots: tuple[int, ...],
+    max_checked: int | None,
+) -> None:
+    checked = 0
+    bad: tuple[int, ...] | None = None
+    truncated = False
+    for classes in range(1, max_classes + 1):
+        for sizes in combinations_with_replacement(range(1, max_size + 1), classes):
+            if not full_is_modular(sizes, source_modulus):
+                continue
+            checked += 1
+            if not can_slot_partition(sizes, target_modulus, slots):
+                bad = sizes
+                truncated = False
+                break
+            if max_checked is not None and checked >= max_checked:
+                truncated = True
+                break
+        if bad is not None or truncated:
+            break
+
+    print(f"source_modulus={source_modulus}")
+    print(f"target_modulus={target_modulus}")
+    print(f"max_classes={max_classes}")
+    print(f"max_size={max_size}")
+    print("slots=" + ",".join(map(str, slots)))
+    print(f"checked={checked}")
+    print(f"truncated={truncated}")
+    if bad is None:
+        print("slot_counterexample=none")
+    else:
+        print("slot_counterexample=" + ",".join(map(str, bad)))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-modulus", type=int, default=2)
@@ -173,7 +276,22 @@ def main() -> None:
         type=int,
         help="stop after this many source-modular size vectors",
     )
+    parser.add_argument(
+        "--slots",
+        help="fixed target residues, e.g. 0,0,1,2; switches to slot mode",
+    )
     args = parser.parse_args()
+    if args.slots:
+        slots = tuple(int(item) % args.target_modulus for item in args.slots.split(","))
+        search_slots(
+            args.source_modulus,
+            args.target_modulus,
+            args.max_classes,
+            args.max_size,
+            slots,
+            args.max_checked,
+        )
+        return
     search(
         args.source_modulus,
         args.target_modulus,

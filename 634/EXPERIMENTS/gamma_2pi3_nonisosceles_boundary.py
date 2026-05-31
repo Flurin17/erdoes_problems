@@ -34,8 +34,10 @@ ANGLE_SIDES: dict[Angle, tuple[Side, Side]] = {
 }
 TARGETS: dict[str, Counter[Angle]] = {
     "alpha": Counter({"alpha": 1}),
+    "2beta": Counter({"beta": 2}),
     "alpha+beta": Counter({"alpha": 1, "beta": 1}),
     "alpha+2beta": Counter({"alpha": 1, "beta": 2}),
+    "2alpha+beta": Counter({"alpha": 2, "beta": 1}),
     "straight-no-gamma": Counter({"alpha": 3, "beta": 3}),
     "straight-gamma": Counter({"alpha": 1, "beta": 1, "gamma": 1}),
 }
@@ -167,6 +169,49 @@ def feasible_alpha_alpha_beta_alpha_2beta(
     return out
 
 
+def feasible_boundary_by_vertices(
+    sides: tuple[int, int, int],
+    vertex_angles: tuple[str, str, str],
+    opposite_side_lengths: tuple[int, int, int],
+) -> list[tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]]:
+    """Return feasible boundary cycles for a triangle with labelled vertex angles.
+
+    The vertices are `V0,V1,V2`.  `opposite_side_lengths[i]` is the side length
+    opposite `Vi`.
+    """
+    side_lengths = dict(zip(("a", "b", "c"), sides, strict=True))
+    length_01 = opposite_side_lengths[2]
+    length_12 = opposite_side_lengths[0]
+    length_20 = opposite_side_lengths[1]
+    paths_01 = oriented_boundary_paths(length_01, side_lengths)
+    paths_12 = oriented_boundary_paths(length_12, side_lengths)
+    paths_20 = oriented_boundary_paths(length_20, side_lengths)
+    out = []
+    for path_01 in paths_01:
+        for path_12 in paths_12:
+            if not transition_types(path_01[-1], path_12[0], [vertex_angles[1]]):
+                continue
+            for path_20 in paths_20:
+                if not transition_types(path_12[-1], path_20[0], [vertex_angles[2]]):
+                    continue
+                if not transition_types(path_20[-1], path_01[0], [vertex_angles[0]]):
+                    continue
+                out.append((path_01, path_12, path_20))
+    return out
+
+
+def feasible_alpha_2beta_2alpha_beta(
+    sides: tuple[int, int, int], scale: int
+) -> list[tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]]:
+    a, b, c = sides
+    opposite = (
+        scale * a * c,
+        scale * b * (b + 2 * a),
+        scale * c * (a + b),
+    )
+    return feasible_boundary_by_vertices(sides, ("alpha", "2beta", "2alpha+beta"), opposite)
+
+
 def report(n: int, sides: tuple[int, int, int], scale: int) -> None:
     a, b, c = sides
     side_lengths = {"a": a, "b": b, "c": c}
@@ -182,10 +227,40 @@ def report(n: int, sides: tuple[int, int, int], scale: int) -> None:
         print("boundary-star obstruction: candidate cannot be a tiling")
 
 
+def report_alpha_2beta_2alpha_beta(n: int, sides: tuple[int, int, int], scale: int) -> None:
+    a, b, c = sides
+    side_lengths = {"a": a, "b": b, "c": c}
+    opposite = (
+        scale * a * c,
+        scale * b * (b + 2 * a),
+        scale * c * (a + b),
+    )
+    edge_lengths = [opposite[2], opposite[0], opposite[1]]
+    path_counts = {length: len(oriented_boundary_paths(length, side_lengths)) for length in edge_lengths}
+    feasible = feasible_alpha_2beta_2alpha_beta(sides, scale)
+    print(f"N={n} non-isosceles gamma=2pi/3 boundary-star check")
+    print(f"tile sides (a,b,c)={sides}; scale={scale}; outer sides={opposite}")
+    print("outer angles: (alpha, 2beta, 2alpha+beta)")
+    print(f"oriented side paths passing straight-vertex stars: {path_counts}")
+    print(f"feasible full boundary cycles: {len(feasible)}")
+    if not feasible:
+        print("boundary-star obstruction: candidate cannot be a tiling")
+
+
 def main() -> None:
     report(21, (5, 16, 19), 4)
     print()
     report(30, (7, 8, 13), 4)
+    print()
+    report(55, (39, 16, 49), 4)
+    print()
+    report(105, (8, 7, 13), 7)
+    print()
+    report(105, (16, 5, 19), 5)
+    print()
+    report(120, (7, 8, 13), 8)
+    print()
+    report_alpha_2beta_2alpha_beta(88, (3, 5, 7), 1)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Test a hierarchical route from self-labelled mod 2 to mod 4.
+"""Test hierarchical routes from a self-labelled mod-2 split to mod-4 slots.
 
-The route is:
+The default route is:
 1. split V into a self-labelled mod-2 partition, so the 0-side has even
    internal degrees and the 1-side has odd internal degrees;
 2. split the 0-side into residues {0,2} modulo 4 and the 1-side into
@@ -55,6 +55,8 @@ def has_slot_split(
 def find_hierarchical(
     n: int,
     graph_mask: int,
+    even_slots: tuple[int, int],
+    odd_slots: tuple[int, int],
 ) -> tuple[int, tuple[int, int, int, int]] | None:
     full = (1 << n) - 1
     residues2 = subset_residues(n, graph_mask, 2)
@@ -70,7 +72,7 @@ def find_hierarchical(
             continue
         if odd_side and residues2[odd_side] != 1:
             continue
-        if side_ok(even_side, (0, 2)) and side_ok(odd_side, (1, 3)):
+        if side_ok(even_side, even_slots) and side_ok(odd_side, odd_slots):
             return odd_side, (
                 residues4[even_side] if even_side else -1,
                 residues4[odd_side] if odd_side else -1,
@@ -84,10 +86,18 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--mask", type=int, required=True)
+    parser.add_argument("--even-slots", default="0,2")
+    parser.add_argument("--odd-slots", default="1,3")
     args = parser.parse_args()
-    result = find_hierarchical(args.n, args.mask)
+    even_slots = tuple(int(item) % 4 for item in args.even_slots.split(","))
+    odd_slots = tuple(int(item) % 4 for item in args.odd_slots.split(","))
+    if len(even_slots) != 2 or len(odd_slots) != 2:
+        raise SystemExit("--even-slots and --odd-slots must each contain two residues")
+    result = find_hierarchical(args.n, args.mask, even_slots, odd_slots)
     print(f"n={args.n}")
     print(f"mask={args.mask}")
+    print("even_slots=" + ",".join(map(str, even_slots)))
+    print("odd_slots=" + ",".join(map(str, odd_slots)))
     if result is None:
         print("hier_self_label=no")
         return

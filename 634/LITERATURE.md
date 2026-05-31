@@ -80,6 +80,20 @@ ordering of angles `(A,B,C)`, one of the following holds:
 This solves the "which outer triangles have a non-square tiling?" problem, not
 the #634 "which numbers occur?" problem.
 
+Workspace interpretation for #634:
+
+- Row 1 is the isosceles/equilateral branch and must still be split by the
+  stronger Beeson isosceles and equilateral reductions.
+- Rows 2 and 3 explain the right-triangle reptile mechanisms that give
+  `m^2+k^2` and `3m^2`, but do not by themselves rule out other tile shapes for
+  those same outer triangles.
+- Rows 4, 5, and 8 are the non-isosceles `gamma=2pi/3` branches after choosing
+  angle orderings; row 4 contains the two branches with a `pi/3` outer angle.
+- Rows 6 and 7 are represented in Beeson's `3alpha+2beta=pi` analysis, with
+  row 7 matching the triquadratic branch.
+
+The detailed row-to-filter ledger is maintained in `SOURCE_REDUCTION_AUDIT.md`.
+
 BLZ also gives useful number-of-tiles formulas for non-isosceles
 `gamma=2pi/3` cases. For a primitive integer tile `(a,b,c)` with
 `c^2=a^2+ab+b^2`:

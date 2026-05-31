@@ -52,8 +52,9 @@ Current components:
   boundary-integrality product formulas.
 - `gamma_2pi3_nonisosceles_boundary.py`: local boundary-star checker for small
   exact non-isosceles `gamma=2pi/3` arithmetic candidates; currently rules out
-  the `N=21` and `N=30` candidates in the
-  `(alpha,alpha+beta,alpha+2beta)` template.
+  `N=21`, `N=30`, `N=55`, `N=105`, and `N=120` in the
+  `(alpha,alpha+beta,alpha+2beta)` template, and `N=88` in the
+  `(alpha,2beta,2alpha+beta)` template.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

@@ -58,7 +58,10 @@ finite analogues of the threshold-control obstruction in Warning 3.0.
 Proposition 13.1 type that also leave two-sum coverage beyond the declared
 endpoint. That extra buffer is necessary if the stage is to be iterated,
 because the next stage's new elements must be larger than the previous
-declared endpoint.
+declared endpoint. The current version also filters out the lowest
+padding-range artefacts by requiring the candidate witness to remain above
+the old two-sum coverage base after subtracting the least retained old
+element.
 
 `collective_barrier_search.py` searches for finite windows where all
 one-point deletions preserve order-3 coverage on the window, but some pair
@@ -75,7 +78,10 @@ whose reflected-cover obstruction genuinely needs two centers.
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short
 initial chain but stalls quickly in the default bounded greedy search,
 highlighting how demanding it is to protect every old-new pair while
-continuing two-sum coverage.
+continuing two-sum coverage. The default search additionally requires the
+declared endpoint to be at least the largest new element; this filters for
+genuinely local pair witnesses and is stronger than the proposition, which
+would also allow dormant new elements above the declared endpoint.
 
 `reflection_certificate_verify.py` instantiates the balanced-certificate
 construction from Theorem 2.3 in the model \(A=\mathbb N\), and verifies

@@ -1376,10 +1376,127 @@ such that \(A\setminus B\) is an asymptotic basis of order \(3\).
 Proof. Corollary 8.1 gives finite reflection-recurrence of \(A\). Apply
 Theorem 8.2. \(\square\)
 
+## Lemma 8.3a: Late one-point deletions also force recurrence
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\), and let \(m_0=\min A\). Suppose that there are
+infinitely many \(b\in A\) such that \(A\setminus\{b\}\) is an order-3
+basis but has no order-3 threshold below \(b\). Then \(A\) is finitely
+reflection-recurrent. Consequently there is an infinite
+\(B\subset A\) such that \(A\setminus B\) is an order-3 basis.
+
+Proof. For each such \(b\), choose
+\[
+w_b\ge b-1,\qquad w_b\notin3(A\setminus\{b\}).
+\]
+This is possible because \(b-1\) is not a threshold for
+\(A\setminus\{b\}\). Put
+\[
+d_b=w_b-b.
+\]
+We first show that \(d_b\to\infty\) along every infinite sequence of these
+late elements with \(b\to\infty\).
+
+Let
+\[
+C_b=A\setminus\{b\}.
+\]
+If \(e\in C_b\) and \(w_b-e\ge N_0\), then every two-term representation of
+\(w_b-e\) from \(A\) must use \(b\); otherwise adding \(e\) would give a
+three-term representation of \(w_b\) from \(C_b\). If also \(e>d_b\), then
+\[
+w_b-e=b+(d_b-e)<b,
+\]
+so no positive two-term representation of \(w_b-e\) can use \(b\). Hence
+\[
+A\cap(d_b,\ w_b-N_0]\subseteq\{b\}. \tag{1}
+\]
+
+If the numbers \(d_b\) were bounded along an infinite sequence, say
+\(d_b\le D\), and increasing \(D\) if necessary so that \(D\ge m_0\), then
+(1) implies that every element of \(A\), except possibly \(b\), in
+\[
+(D,\ b+d_b-N_0]
+\]
+is absent. Choose
+\[
+n>\max\{N_0,\ 2D\}
+\]
+with
+\[
+n<b+d_b-N_0+m_0.
+\]
+This is possible for all sufficiently large \(b\), since \(d_b\ge-1\).
+The integer \(n\) cannot be represented as a sum of two elements of \(A\).
+A representation using \(b\) is already at least \(b+m_0>n\). A
+representation avoiding \(b\) cannot use any element in
+\((D,b+d_b-N_0]\), and any element larger than \(b+d_b-N_0\) would already
+make the two-term sum exceed \(n\). Hence a representation avoiding \(b\)
+uses only elements at most \(D\), and has sum at most \(2D<n\). This
+contradicts that \(A\) is an order-2 basis. Therefore \(d_b\) is unbounded.
+
+Now fix a finite set \(T\subset A\) and a bound \(L\). Choose a late
+element \(b\notin T\) such that
+\[
+d_b>\max(T\cup\{L\})
+\]
+and
+\[
+w_b-\max T\ge N_0.
+\]
+For every \(t\in T\), the integer \(w_b-t\) has a two-term representation
+from \(A\), and every such representation uses \(b\). Therefore
+\[
+w_b-t=b+c_t
+\]
+with \(c_t\in A\), or equivalently
+\[
+d_b-t\in A.
+\]
+Thus
+\[
+d_b-T\subset A.
+\]
+Since \(d_b\) can be made arbitrarily large, \(A\) is finitely
+reflection-recurrent. The final assertion follows from Theorem 8.2.
+\(\square\)
+
 Thus any unresolved \(k=2\) counterexample must lie in the complementary
 case: all but finitely many one-point deletions \(A\setminus\{a\}\) are
-order-3 bases, but infinite deletions still fail at order \(3\) through
-collective finite barriers or uncontrolled finite-prefix thresholds.
+order-3 bases with some threshold below \(a\), but infinite deletions still
+fail at order \(3\) through collective finite barriers or uncontrolled
+finite-prefix thresholds.
+
+## Corollary 8.3b: In a \(k=2\) counterexample, late barriers are non-singleton
+
+Let \(A\subseteq\mathbb N\) be an order-2 basis which is a counterexample
+to the desired \(k=2\) conclusion. Then there is a finite set
+\[
+E\subset A
+\]
+such that for every \(a\in A\setminus E\), the singleton deletion
+\[
+A\setminus\{a\}
+\]
+is an order-3 basis with some threshold \(N_a<a\). Consequently, for every
+infinite \(X\subset A\setminus E\), there is a finite set
+\[
+F\subset X,\qquad |F|\ge2,
+\]
+which is late-bad at order \(3\) in the sense of Corollary 3.1b.
+
+Proof. If infinitely many one-point deletions are not order-3 bases, then
+Corollary 8.3 gives the desired infinite deletion, contrary to the
+counterexample assumption. If infinitely many one-point deletions are
+order-3 bases but have no threshold below the deleted element, then Lemma
+8.3a gives the desired infinite deletion, again a contradiction. Thus all
+but finitely many \(a\in A\) have the stated singleton property; put the
+exceptions in \(E\).
+
+By Corollary 3.1c, every infinite \(X\subset A\setminus E\) contains a
+finite late-bad subset \(F\). No singleton subset of \(X\) is late-bad,
+because each singleton deletion has an order-3 threshold below its only
+element. Hence \(|F|\ge2\). \(\square\)
 
 ## Lemma 8.4: The remaining \(k=2\) obstruction is collective
 
@@ -1448,6 +1565,65 @@ Thus the obstruction in Lemma 8.4 is either a delayed threshold for a
 finite deletion that is eventually repaired, or a genuinely collective
 finite deletion failure. In particular, the remaining \(k=2\) case cannot
 be settled by considering one-point deletions alone.
+
+## Lemma 8.4a: Collective holes force a retained gap
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\), and put \(m_0=\min A\). Let \(F\subset A\) be finite and
+nonempty, put \(C=A\setminus F\), and suppose
+\[
+w\notin3C.
+\]
+Writing \(f_0=\min F\), one has
+\[
+C\cap(w-f_0-m_0,\ w-N_0]=\varnothing. \tag{1}
+\]
+
+Proof. Let
+\[
+e\in C\cap(w-f_0-m_0,\ w-N_0].
+\]
+Then \(w-e\ge N_0\), so \(w-e\in2A\). Since \(w\notin3C\), every two-term
+representation of \(w-e\) from \(A\) must use an element of \(F\); otherwise
+adding \(e\) would give a three-term representation of \(w\) from \(C\).
+Thus
+\[
+w-e=f+a
+\]
+with \(f\in F\) and \(a\in A\). But then
+\[
+w-e\ge f_0+m_0,
+\]
+whereas \(e>w-f_0-m_0\) gives
+\[
+w-e<f_0+m_0,
+\]
+a contradiction. \(\square\)
+
+Consequently, if \(F_i\) are finite sets with \(|F_i|\le q\),
+\(\min F_i\to\infty\), and witnesses
+\[
+w_i\notin3(A\setminus F_i)
+\]
+satisfying \(w_i-\min F_i\le D\), then such a sequence cannot occur in an
+order-2 basis. Indeed, (1) implies
+\[
+A\cap[1,w_i-N_0]\subseteq
+[1,D-m_0]\cup F_i
+\]
+for all \(i\), so \(|A\cap[1,w_i-N_0]|\) is bounded. But an order-2 basis
+must have \(|A\cap[1,x]|\to\infty\), since otherwise \(2A\cap[1,x]\) would
+have bounded size and could not contain all sufficiently large integers up
+to \(x\).
+
+Thus any bounded-size genuine finite-barrier sequence with
+\(\min F\to\infty\) must have
+\[
+w-\min F\to\infty.
+\]
+For late-bad sets with \(w\ge\max F-1\), this says that a bounded-size
+remaining obstruction cannot keep both its internal diameter and its
+witness excess bounded.
 
 ## Warning 8.5: Bounded-width barriers need not have one fixed size
 
@@ -1757,6 +1933,50 @@ Indeed, for each retained \(e\le w-N_0\), every two-sum representation of
 \(w-e\) uses \(x\) or \(y\), so \(w-e=x+a\) or \(w-e=y+a\) for some
 \(a\in A\).
 
+## Lemma 10.3: Finite holes force terminal retained gaps
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\), with
+threshold \(N_0\), and put \(m_0=\min A\). Let \(F\subset A\) be finite and
+nonempty, put \(C=A\setminus F\), and suppose
+\[
+w\notin(k+1)C.
+\]
+If \(f_0=\min F\), then
+\[
+C\cap\bigl(w-f_0-(k-1)m_0,\ w-N_0\bigr]=\varnothing. \tag{1}
+\]
+
+Proof. Take
+\[
+e\in C\cap\bigl(w-f_0-(k-1)m_0,\ w-N_0\bigr].
+\]
+Since \(w-e\ge N_0\), there is a \(k\)-term representation of \(w-e\) from
+\(A\). By Lemma 10.1, every such representation uses an element of \(F\).
+But any \(k\)-term representation using an element of \(F\) has sum at
+least
+\[
+f_0+(k-1)m_0,
+\]
+whereas \(e>w-f_0-(k-1)m_0\) gives
+\[
+w-e<f_0+(k-1)m_0.
+\]
+This contradiction proves (1). \(\square\)
+
+Consequently, if \(F_i\) are finite sets with \(|F_i|\le q\),
+\(\min F_i\to\infty\), and witnesses
+\[
+w_i\notin(k+1)(A\setminus F_i)
+\]
+satisfying \(w_i-\min F_i\le D\), then such a sequence cannot occur in an
+order-\(k\) basis. For (1) gives
+\[
+A\cap[1,w_i-N_0]\subseteq
+[1,D-(k-1)m_0]\cup F_i,
+\]
+so \(|A\cap[1,w_i-N_0]|\) is bounded, contradicting the fact that an
+asymptotic basis of finite order must have an unbounded counting function.
+
 ## Example 11: Residue-padding bases where the answer is yes
 
 For \(k\ge2\), let
@@ -1893,6 +2113,32 @@ Moreover, a faithful carry-free additive embedding of this monoid into
 although \(bu\ne av\) in the free commutative monoid. Equivalently, bounded
 integer digit systems must use carries to represent all coefficients, and
 those carries create integer representations absent from the formal monoid.
+
+A finite residue decoration does not remove the basic splitting problem.
+Suppose a model has \(k\) digit classes and finite nonempty residue sets
+\[
+R_1,\ldots,R_k\subseteq G
+\]
+in an abelian group \(G\), and suppose the residue layer covers every
+target residue with one term from each digit class:
+\[
+R_1+\cdots+R_k=G. \tag{2}
+\]
+Then for any target residue \(\rho\in G\), any class \(i\), and any
+prescribed residue \(r\in R_i\), there is a \((k+1)\)-term residue
+representation of \(\rho\) using \(r\) and still using one term from every
+digit class. Indeed, by (2),
+\[
+\rho-r=s_1+\cdots+s_k,\qquad s_j\in R_j,
+\]
+so
+\[
+\rho=r+s_1+\cdots+s_k.
+\]
+Thus residue constraints alone cannot force a \((k+1)\)-term repair to
+have exactly one term from a chosen digit class. They always allow an
+additional term in that class, which is precisely the residue-level shadow
+of splitting the deleted digit component into two retained components.
 
 Thus the digital route currently gives no counterexample: the carry-free
 model satisfies the desired conclusion, while an exact additive embedding
@@ -2264,8 +2510,16 @@ the added elements needs local witnesses.
   deletion preserving order 3.
 * Corollary 8.3 therefore resolves the \(k=2\) problem whenever infinitely
   many one-point deletions fail at order 3.
+* Lemma 8.3a also resolves the case where infinitely many one-point
+  deletions are order-3 bases but only with thresholds at least as large as
+  the deleted element.
+* Corollary 8.3b says every remaining \(k=2\) counterexample has, after a
+  finite exceptional set, only non-singleton late-bad barriers.
 * Lemma 8.4 identifies the remaining \(k=2\) finitely-bad case as a
   collective finite-barrier problem with reflected-cover domination.
+* Lemma 8.4a strengthens the domination picture: any finite order-3 hole
+  after deleting \(F\) creates a retained gap below the witness, from
+  \(w-\min F-\min A\) up to \(w-N_0\).
 * Warning 8.5 records that bounded-width barriers do not automatically
   reduce to one fixed uniformity.
 * Lemma 8.6 shows that bounded-width barriers with large witness excess
@@ -2282,6 +2536,9 @@ the added elements needs local witnesses.
   becomes full reflection-recurrence.
 * Lemma 10.1 records the finite-vertex-cover obstruction for collective
   holes after finite deletions.
+* Lemma 10.3 strengthens this for all orders: a finite
+  order-\((k+1)\) hole after deleting \(F\) forces a terminal retained gap
+  below the witness, starting at \(w-\min F-(k-1)\min A\).
 * Example 11 gives a residue-padding family satisfying the desired
   conclusion for every \(k\ge2\).
 * Attempt 12 records that the clean direct-sum digital model satisfies the

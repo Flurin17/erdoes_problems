@@ -258,6 +258,37 @@ Beeson proves that if an equilateral triangle has an `N`-tiling and `N > 3`, the
 `N` is not prime. This is stronger than the `7`/`11` obstruction for equilateral
 outer triangles only.
 
+The following normalization is the local proof behind the exact equilateral
+filters. Suppose the source reductions have put an equilateral outer-triangle
+tiling into one of the rational tile-side cases with a distinguished tile angle
+`gamma` equal to `pi/3` or `2pi/3`. Scale the tile so its sides adjacent to
+`gamma` are coprime positive integers `a,b`, and let `c` be the opposite side.
+The law of cosines gives
+
+```text
+c^2 = a^2-ab+b^2        when gamma=pi/3,
+c^2 = a^2+ab+b^2        when gamma=2pi/3.
+```
+
+Let `L` be the equilateral outer side. The tile area is
+`ab sin(gamma)/2 = ab sqrt(3)/4`, and the outer area is `L^2 sqrt(3)/4`, so
+
+```text
+L^2 = Nab.
+```
+
+Finally, each outer side is covered by full sides of boundary tiles. Therefore
+for some nonnegative integers `x,y,z`, not all zero, and with at most `N`
+boundary tile sides on a fixed outer side,
+
+```text
+L = xa + yb + zc,        0 < x+y+z <= N.
+```
+
+This proves that, once the source rationality hypothesis is accepted, every
+candidate in these equilateral `pi/3` and `2pi/3` cases lies in the finite
+integer-side model used below.
+
 For composite diagnostics, an equilateral outer triangle with a tile angle
 `gamma=2pi/3` and primitive integer sides `(a,b,c)` must satisfy
 
@@ -650,14 +681,19 @@ respectively. This proves, for example, that `N=14`, `15`, and `22` do not even
 survive the non-isosceles `gamma=2pi/3` arithmetic filters, while `21` and `30`
 survive in the first BLZ template. The follow-up experiment
 `EXPERIMENTS/gamma_2pi3_nonisosceles_boundary.py` applies the local
-boundary-star check to these two low-scale survivors:
+boundary-star check to these and later low-scale survivors:
 
 ```text
 N=21: tile (5,16,19), scale 4, outer sides (84,20,76);
-N=30: tile (7,8,13), scale 4, outer sides (60,28,52).
+N=30: tile (7,8,13), scale 4, outer sides (60,28,52);
+N=55: tile (39,16,49), scale 4, outer sides (220,156,196);
+N=88: tile (3,5,7), scale 1, outer sides (21,55,56);
+N=105: tiles (8,7,13) and (16,5,19), outer sides
+       (105,56,91) and (105,80,95);
+N=120: tile (7,8,13), scale 8, outer sides (120,56,104).
 ```
 
-Both have zero feasible full boundary cycles, so neither candidate can be a
+All these candidates have zero feasible full boundary cycles, so none can be a
 tiling.
 
 The remaining prime-specific issue is Beeson's isosceles
@@ -899,7 +935,9 @@ This table records only values/families classified by the current proof file.
 
 This matrix records which reductions are theorem-level in this workspace and
 which are only implemented as diagnostics. It is meant to prevent a dashboard
-empty set from being mistaken for a proof.
+empty set from being mistaken for a proof. The detailed proof-obligation ledger
+is maintained in `SOURCE_REDUCTION_AUDIT.md`, including a row-by-row map from
+BLZ Problem #633 outer-triangle classes to the #634 case filters below.
 
 | case/template | current status | remaining gap |
 |---|---|---|
@@ -908,10 +946,17 @@ empty set from being mistaken for a proof.
 | right-tile isosceles | recorded arithmetic restrictions | source dependence remains |
 | isosceles `gamma=2alpha` | squarefree obstruction recorded | complete composite formula not reconstructed |
 | isosceles `gamma=2pi/3` | ruled out in the rational nondegenerate case by boundary-transition lemma | audit interaction with every source-reduced equilateral/degenerate exception |
-| `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected local boundary eliminations for `14` and `21` | not a complete composite classification |
-| non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; selected local boundary eliminations for `21` and `30` | composite survivors such as `55` and `88` are not classified |
+| `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected local boundary/integrality eliminations for `14`, `21`, `39`, `46`, `56`, `62`, `63`, `66`, `70`, `92`, `94`, `99`, `111`, `119`, and `124` | not a complete composite classification |
+| non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; selected local boundary eliminations for `21`, `30`, `55`, `88`, `105`, and `120` | composite survivors above this range are not classified |
 | equilateral outer triangle with tile angle `pi/3` or `2pi/3` | exact boundary-length arithmetic filter, `gamma=2pi/3` and `gamma=pi/3` boundary-star checks, and lattice exact-cover checks added | exact `14`, `15`, `21`, and `30` equilateral candidates eliminated; source-level reduction to this rational/integer model still needs auditing |
 | Zhang positive families | sufficient constructions recorded | conjectural converses are not used as obstructions |
+
+The BLZ #633 theorem is used here only as a cover of possible outer-triangle
+similarity classes for non-square tilings. It does not by itself determine
+which `N` occur for a given row. In particular, an outer triangle in the
+right-triangle or `pi/3` rows may have the obvious similar-tile construction
+while still requiring a separate source reduction to rule out other congruent
+tile shapes and other counts.
 
 ## Open/Unresolved Ledger
 
@@ -936,9 +981,11 @@ empty set from being mistaken for a proof.
   `equilateral_pi_boundary.py` eliminates the `21` and `30` candidates and
   their `a,b` swaps by the full-boundary side-label star check.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `42`, and `51` as open with
-  no survivor in the currently encoded filters; later values such as `39`,
-  `46`, `55`, and `56` remain open with explicit encoded survivors.
+  `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
+  `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
+  `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor
+  in the currently encoded filters. This is not a proof of negativity until
+  the source-reduction coverage gaps in the matrix above are closed.
 - Zhang's conjectural exactness statements are not proved here.
 - For `19`, all source-reduced cases are now ruled out in this workspace:
   similar/reptile, commensurable-angle, equilateral-outer, all isosceles

@@ -804,24 +804,140 @@ There remains an intermediate alignment question: perhaps there is a fixed
 multiset `R` of four residues modulo `4` such that every even graph partitions
 into `4`-modular parts whose residue signature is a submultiset of `R`.
 This would still be strong enough to align disjoint unions via Lemma 4E.
-The script `EXPERIMENTS/universal_slots.py` tests this finite question.  It
-shows that no all-zero four-slot theorem is possible already on `7` vertices,
-and that the self-labelled slots `(0,1,2,3)` are killed by the cactus above.
-The current exact and sampled tests leave the following `11` residue multisets
-alive:
+The scripts `EXPERIMENTS/universal_slots.py` and
+`EXPERIMENTS/universal_slots_fast.cpp` test this finite question.  The full
+labelled even-graph sweep on `8` vertices leaves exactly ten four-slot
+multisets:
 
 ```text
 (0,0,0,1), (0,0,0,2), (0,0,1,1), (0,0,1,2),
-(0,0,1,3), (0,0,2,2), (0,0,2,3), (0,1,1,1),
-(0,1,1,2), (0,1,1,3), (0,1,2,2).
+(0,0,2,2), (0,0,2,3), (0,1,1,1), (0,1,1,2),
+(0,1,2,2), (0,1,2,3).
 ```
+
+The aligned self-labelled slots `(0,1,2,3)` survive this `n=8` sweep but are
+killed by the `15`-vertex cactus above.  Combining all current exact
+counterexamples leaves eight residue multisets as plausible universal
+first-lift slots:
+
+```text
+(0,0,0,1), (0,0,0,2), (0,0,1,1), (0,0,1,2),
+(0,0,2,2), (0,0,2,3), (0,1,1,2), (0,1,2,2).
+```
+
+The extra elimination beyond the `n=8` sweep is a random even graph on
+`14` vertices, mask `1938867942138712527476832246`, which has no
+`(0,1,1,1)` slot partition.
 
 Thus the self-labelled obstruction above does not rule out all useful
 residue-slot alignment strategies.  Any such theorem would still only be a
 first-lift alignment result unless it extends uniformly to higher dyadic
 moduli.
 
-The most direct bootstrapping attempt from this lemma to `M=4` is false.  One
+The strongest-looking surviving candidate is `R=(0,0,1,2)`, because it has
+two zero slots and one slot for each nonzero parity class.  The next lemma
+records an equivalent form that replaces the two zero slots by a cut
+congruence problem.
+
+## Lemma 4I.6: Cut-Congruence Form For The Slots `(0,0,1,2)`
+
+Let `G` be an even graph.  Then `G` has a `4`-modular partition with residue
+signature contained in `(0,0,1,2)` if and only if there are disjoint sets
+`C,D subset V(G)` such that:
+
+1. `G[C]` is `1`-modular modulo `4`;
+2. `G[D]` is `2`-modular modulo `4`;
+3. writing `H=G[V(G)\(C union D)]`, there is a cut `V(H)=A union B` such
+   that, for every `v in V(H)`,
+
+```text
+deg_H(v, opposite side of the cut) congruent deg_H(v) mod 4.
+```
+
+Proof.  Suppose first that `A,B,C,D` is such a partition, with `A` and `B`
+the two zero-residue parts.  For `v in A`, the degree of `v` inside `A` is
+`0` modulo `4`, so
+
+```text
+deg_H(v,B) = deg_H(v)-deg_H(v,A) congruent deg_H(v) mod 4.
+```
+
+The same argument applies to vertices of `B`.
+
+Conversely, suppose `C,D` and a cut `A,B` of the residual graph `H` satisfy
+the displayed congruence.  Then for `v in A`,
+
+```text
+deg_H(v,A)=deg_H(v)-deg_H(v,B) congruent 0 mod 4,
+```
+
+and similarly `deg_H(v,B) congruent 0 mod 4` for `v in B`.  Thus `A` and `B`
+are zero-residue parts, while `C` and `D` have residues `1` and `2` by
+assumption.  QED.
+
+Equivalently, if the cut is encoded by signs `x_v in {+1,-1}` on `V(H)`,
+then the residual condition is
+
+```text
+x_v sum_{u in N_H(v)} x_u congruent -deg_H(v) mod 8
+```
+
+for every vertex `v`.  Indeed,
+`x_v sum_{u in N_H(v)} x_u = deg_H(v,same side)-deg_H(v,opposite side)`,
+and this is congruent to `-deg_H(v)` modulo `8` exactly when the
+opposite-side degree is congruent to `deg_H(v)` modulo `4`.
+
+In particular, every bipartite even graph has a `(0,0,1,2)` partition: take
+`C=D=empty` and use a bipartition of `G`, so both zero-residue parts are
+independent.  More generally, the task for this slot multiset is to remove
+one `1`-modular part and one `2`-modular part so that the residual graph has
+the displayed mod-`4` cut-degree prescription.
+
+## Proposition 4I.7: Multipartite Classes Covered By `(0,0,1,2)`
+
+Let `G` be a complete multipartite even graph with class sizes
+`s_1,...,s_t`.
+
+1. If every `s_i` is even, then `G` has a `4`-modular partition with residue
+   signature contained in `(0,0,1,2)`.
+2. If every `s_i` is odd and the `s_i` are all congruent modulo `4`, then
+   `G` has a `4`-modular partition with residue signature contained in
+   `(0,0,1,2)`.
+
+Proof.  For a union of whole multipartite classes, the induced graph is again
+complete multipartite.  If the classes used in this union all have the same
+size residue `r` modulo `4`, and there are `m` such classes, then every
+internal degree in the union is congruent to
+
+```text
+(m-1)r mod 4.
+```
+
+First assume every class size is even.  Let `I_0` be the classes with
+`s_i congruent 0 mod 4` and `I_2` the classes with
+`s_i congruent 2 mod 4`.  The union of the classes in `I_0`, if nonempty,
+has residue `0`.  The union of the classes in `I_2` has residue
+
+```text
+2(|I_2|-1) mod 4,
+```
+
+which is either `0` or `2`.  Thus these two unions fit into the two zero
+slots and the residue-`2` slot.
+
+Now assume all class sizes are odd and congruent to the same residue
+`r in {1,3}` modulo `4`.  Since `G` is even, the number `t` of classes is
+odd: each degree is `sum_i s_i - s_j`, whose parity is `t-1`.  The whole graph
+therefore has common degree residue
+
+```text
+(t-1)r mod 4,
+```
+
+which is either `0` or `2`, because `t-1` is even.  Hence the whole graph
+fits into a zero slot or the residue-`2` slot.  QED.
+
+The most direct bootstrapping attempt from Lemma 4G to `M=4` is false.  One
 might try to choose a self-labelled mod-`2` split, then refine the even side
 into residues `{0,2}` modulo `4` and the odd side into residues `{1,3}`
 modulo `4`.  The exact checker `EXPERIMENTS/hier_self_label.py` shows that
@@ -1119,6 +1235,59 @@ neighbors.  In a four-coloring represented by two vertex bits, each same-part
 indicator has degree `2`; the resulting equations have degree `2q`.  Thus the
 algebraic formulation has enough variables heuristically, but a direct
 Chevalley-Warning degree count deteriorates with `q`.
+
+## Lemma 5C: The Dyadic-Bit Degree Barrier Is Real
+
+Let `q=2^s`, let colors be encoded by vectors in `F_2^t`, and consider a
+star whose center has fixed color `0`.  If the leaf `i` has color variables
+
+```text
+x_i=(x_{i1},...,x_{it}) in F_2^t,
+```
+
+put
+
+```text
+z_i = 1_{x_i=0} = product_{j=1}^t (1+x_{ij}).
+```
+
+For `D>=q`, the Boolean function
+
+```text
+floor((z_1+...+z_D)/q) mod 2
+```
+
+has multilinear degree exactly `qt` over `F_2`.
+
+Proof.  By Lemma 5B the function is the elementary symmetric polynomial
+
+```text
+e_q(z_1,...,z_D).
+```
+
+The monomial
+
+```text
+prod_{i=1}^q prod_{j=1}^t x_{ij}
+```
+
+appears with coefficient `1`, coming from the unique term
+`z_1 z_2 ... z_q` in `e_q`.  No other `q`-subset of leaves can produce this
+same monomial, because it would omit at least one of the leaf blocks
+`{x_{ij}:1<=j<=t}` or include variables from a different block.  Hence the
+degree is at least `qt`.  Since each `z_i` has degree `t` and `e_q` is a sum
+of products of `q` of the `z_i`, the degree is at most `qt`.  QED.
+
+Consequently, the degree growth in Lemma 5B is not an artifact of the sign
+formula.  With `r=q^alpha` colors one has `t=alpha log_2 q+O(1)` color bits,
+so the local equations for the new dyadic bit have degree
+`Omega(q log q)` even in this star subproblem.  A direct
+Chevalley--Warning or Combinatorial Nullstellensatz attack that writes one
+such exact local equation per vertex has total degree larger than the number
+of coloring variables by a factor of order `q`.  Any algebraic proof of a
+sublinear-exponent dyadic partition theorem must therefore use a nonlocal
+compression, a hidden linearization, or a structural reduction rather than
+the raw vertex-by-vertex top-bit equations.
 
 ## Lemma 6: Degree-Class Bridge
 

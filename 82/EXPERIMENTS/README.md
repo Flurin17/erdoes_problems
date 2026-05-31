@@ -54,7 +54,15 @@ Computational checks and generated data for Erdos Problem 82.
   Eulerian-graph checks for small `n`.
 - `universal_slots.py`: tests whether a fixed residue-slot multiset works for
   every even graph at the first lift, either exhaustively for small `n` or by
-  random even-graph sampling at larger `n`.
+  random even-graph sampling at larger `n`.  Its exact-cover recursion indexes
+  valid subsets by residue and pivot vertex for larger sampled checks.
+- `universal_slots_fast.cpp`: C++ exhaustive checker for the same fixed-slot
+  question.  It is intended for the full labelled even-graph sweep on `n=8`,
+  where the Python exact-cover loop is too slow.
+- `slot_local_search.py`: simulated-annealing heuristic for fixed residue-slot
+  colorings.  It directly scores a coloring against prescribed residues and
+  is useful for larger exploratory searches where exact slot DP is too slow;
+  nonzero scores are not counterexample certificates.
 - `self4_upper_bit.py`: for a fixed high-bit labeling in a candidate
   self-labelled mod-`4` coloring, solves the guaranteed lower-bit linear
   system and checks whether any low-bit solution also satisfies the upper-bit
@@ -70,7 +78,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `hier_self_label.py`: tests the stronger bootstrapping route where the
   first bipartition is specifically self-labelled modulo `2`, then the even
   side is split into residues `{0,2}` and the odd side into `{1,3}` modulo
-  `4`.
+  `4`; the two residue pairs can be overridden to test nearby hierarchical
+  slot routes.
 - `merge_modular_partition.py`: greedy compression heuristic that starts from
   singleton modular parts and repeatedly merges pairs whose union remains
   modular; useful for testing whether bounded modular partitions might have a
@@ -84,7 +93,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `multipartite_modular.py`: exact integer model for dyadic modular
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts
-  for small instances.
+  for small instances.  With `--slots`, it checks fixed target residue slots
+  such as `(0,0,1,2)` using partial counts from multipartite classes.
 - `twin_blowup_modular.py`: exact weighted congruence model for graphs with a
   bounded number of twin classes, allowing each class to be a clique or an
   independent set and each pair of classes to be complete or empty.

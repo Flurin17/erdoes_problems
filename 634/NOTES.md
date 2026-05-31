@@ -40,6 +40,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   both ends cannot be tiled by full tile sides once the side labels in the
   straight boundary vertex stars are enforced.
 - If the small triangle is similar to the large triangle, Snover-Waiveris-Williams give the complete restrictions: `N` is a square, a sum of two squares, or three times a square.
+- `SOURCE_REDUCTION_AUDIT.md` records the exact source-reduction bridges still
+  needed before the current "no encoded survivor" dashboards can be promoted to
+  negative classifications.
 
 ## Small Cases Ledger
 
@@ -92,14 +95,12 @@ Important distinction: "positive square class" and "smallest representative" are
    The same equilateral boundary-star workflow eliminates the exact
    `pi/3` candidates for `21` and `30`, namely `(16,21,19)` in side `84` and
    `(8,15,13)` in side `60`, including their `a,b` swaps.
-   The composite dashboard shows no surviving encoded `3alpha+2beta=pi`,
-   isosceles `gamma=2pi/3`, or non-isosceles `gamma=2pi/3` candidates for
-   `14`, `15`, `21`, `22`, or `30`. For `14`, the last triquadratic raw
-   candidate `(6,5,9)` in outer sides `(28,15,27)` is blocked by a local
-   boundary-star enumeration.
-   The same boundary-star checks also remove the encoded `3alpha+2beta=pi`
-   candidate for `21` and the exact non-isosceles `gamma=2pi/3` candidates for
-   `21` and `30`.
+   The composite dashboard currently shows no surviving encoded candidates
+   through the unresolved values below `100` checked in `RESULTS.md`. The newer
+   eliminations beyond `30` include: `39`, `62`, `63`, `66`, `70`, `92`, `94`,
+   `99`, `111`, `119`, and `124` by `3alpha+2beta` boundary integrality;
+   `46` and `56` by triquadratic boundary-star checks; and `55`, `88`, `105`, and `120` by
+   non-isosceles `gamma=2pi/3` boundary-star checks.
 
 ## Current Diophantine Status for `n=19`
 

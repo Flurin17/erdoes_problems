@@ -8,6 +8,12 @@ local condition.
 
 The search finds short initial chains, but the greedy chain currently stalls
 quickly. This is only finite evidence; it is not a proof of impossibility.
+
+By default this script requires the declared endpoint to be at least the
+largest new element. Proposition 13.1c does not formally require that:
+elements above the declared endpoint are dormant for that stage. The default
+is aimed at genuinely local old-new pair witnesses rather than witnesses
+that ignore a too-large new element and collapse to old singleton privacy.
 """
 
 from __future__ import annotations

@@ -26,7 +26,9 @@ used by the gamma=2pi/3 boundary automata.
 from __future__ import annotations
 
 from collections import Counter
+from fractions import Fraction
 from functools import lru_cache
+from math import gcd, isqrt
 
 
 Angle = str
@@ -185,6 +187,124 @@ def feasible_n14_triquadratic_boundaries() -> list[
     return out
 
 
+def feasible_triquadratic_boundaries(
+    tile_sides: tuple[int, int, int],
+    outer_sides: tuple[int, int, int],
+) -> list[tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]]:
+    """Return feasible boundary cycles for outer angles `(2alpha,beta,alpha+beta)`.
+
+    `outer_sides` are ordered by opposite angle:
+
+    - side opposite `2alpha`,
+    - side opposite `beta`,
+    - side opposite `alpha+beta`.
+    """
+    side_lengths = dict(zip(("a", "b", "c"), tile_sides, strict=True))
+    opposite_2alpha, opposite_beta, opposite_alpha_beta = outer_sides
+
+    # Vertices are ordered V0=2alpha, V1=beta, V2=alpha+beta.
+    paths_01 = oriented_boundary_paths(opposite_alpha_beta, side_lengths)
+    paths_12 = oriented_boundary_paths(opposite_2alpha, side_lengths)
+    paths_20 = oriented_boundary_paths(opposite_beta, side_lengths)
+    out = []
+    for path_01 in paths_01:
+        for path_12 in paths_12:
+            if not transition_types(path_01[-1], path_12[0], ["beta"]):
+                continue
+            for path_20 in paths_20:
+                if not transition_types(path_12[-1], path_20[0], ["alpha+beta"]):
+                    continue
+                if not transition_types(path_20[-1], path_01[0], ["2alpha"]):
+                    continue
+                out.append((path_01, path_12, path_20))
+    return out
+
+
+def feasible_n46_triquadratic_boundaries() -> list[
+    tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]
+]:
+    return feasible_triquadratic_boundaries((10, 21, 25), (92, 105, 125))
+
+
+def feasible_n56_triquadratic_boundaries() -> list[
+    tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]
+]:
+    return feasible_triquadratic_boundaries((6, 5, 9), (56, 30, 54))
+
+
+def heron4(sides: tuple[int, int, int]) -> int:
+    a, b, c = sides
+    return (a + b + c) * (-a + b + c) * (a - b + c) * (a + b - c)
+
+
+def primitive_outer_ratio(case: str, tile: tuple[int, int, int]) -> tuple[int, int, int] | None:
+    """Return primitive sine-law outer side ratios for selected cases.
+
+    The order is the same as the angle tuple displayed by `case`.
+    """
+    a, b, c = tile
+    if case == "(2a,b,a+b)":
+        # Outer angles (2alpha,beta,alpha+beta).
+        raw = (a * (b * b + c * c - a * a), b * b * c, b * c * c)
+    elif case == "(b,b,3a)":
+        # Outer angles (beta,beta,3alpha).  Since 3alpha=pi-2beta,
+        # sin(3alpha)/sin(beta)=2cos(beta).
+        raw = (a * b * c, a * b * c, b * (a * a + c * c - b * b))
+    elif case == "(a,a,a+2b)":
+        # Outer angles (alpha,alpha,alpha+2beta)= (alpha,alpha,pi-2alpha).
+        raw = (b * c, b * c, b * b + c * c - a * a)
+    else:
+        return None
+    g = abs(raw[0])
+    for value in raw[1:]:
+        g = gcd(g, abs(value))
+    return tuple(value // g for value in raw)
+
+
+def rational_square_root(value: Fraction) -> Fraction | None:
+    if value <= 0:
+        return None
+    numerator_root = isqrt(value.numerator)
+    denominator_root = isqrt(value.denominator)
+    if numerator_root * numerator_root != value.numerator:
+        return None
+    if denominator_root * denominator_root != value.denominator:
+        return None
+    return Fraction(numerator_root, denominator_root)
+
+
+def area_normalized_outer_sides(
+    n: int, case: str, tile: tuple[int, int, int]
+) -> tuple[Fraction, Fraction, Fraction] | None:
+    primitive = primitive_outer_ratio(case, tile)
+    if primitive is None:
+        return None
+    scale2 = Fraction(n * heron4(tile), heron4(primitive))
+    scale = rational_square_root(scale2)
+    if scale is None:
+        return None
+    return tuple(scale * side for side in primitive)
+
+
+def boundary_integrality_obstructed(n: int, case: str, tile: tuple[int, int, int]) -> bool:
+    if primitive_outer_ratio(case, tile) is None:
+        return False
+    outer = area_normalized_outer_sides(n, case, tile)
+    return outer is None or any(side.denominator != 1 for side in outer)
+
+
+def n39_isosceles_beta_outer_sides() -> tuple[Fraction, Fraction, Fraction] | None:
+    """Return the area-normalized outer sides for the N=39 survivor.
+
+    The candidate has tile `(a,b,c)=(12,7,16)` and outer angles
+    `(beta,beta,3alpha)`.  The primitive sine-law ratio is `(448,448,819)`.
+    Scaling this ratio to area ratio `N=39` requires an irrational side scale,
+    so the function returns `None`.
+    """
+    outer = area_normalized_outer_sides(39, "(b,b,3a)", (12, 7, 16))
+    return outer
+
+
 def feasible_n21_isosceles_alpha_boundaries() -> list[
     tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]
 ]:
@@ -252,6 +372,69 @@ def main() -> None:
     print(f"feasible full boundary cycles: {len(feasible_21)}")
     if not feasible_21:
         print("boundary-star obstruction: candidate cannot be a tiling")
+
+    print()
+    print("N=39 isosceles-beta 3alpha+2beta boundary-integrality check")
+    print("tile sides (a,b,c)=(12,7,16); outer angles (beta,beta,3alpha)")
+    outer_39 = n39_isosceles_beta_outer_sides()
+    print(f"area-normalized outer sides: {outer_39}")
+    if outer_39 is None:
+        print("boundary-integrality obstruction: area normalization requires an irrational side scale")
+    elif any(side.denominator != 1 for side in outer_39):
+        print("boundary-integrality obstruction: outer sides are not integer sums of primitive tile sides")
+
+    print()
+    print("N=111 isosceles-beta 3alpha+2beta boundary-integrality check")
+    print("tile sides (a,b,c)=(42,13,49); outer angles (beta,beta,3alpha)")
+    outer_111 = area_normalized_outer_sides(111, "(b,b,3a)", (42, 13, 49))
+    print(f"area-normalized outer sides: {outer_111}")
+    if outer_111 is None:
+        print("boundary-integrality obstruction: area normalization requires an irrational side scale")
+    elif any(side.denominator != 1 for side in outer_111):
+        print("boundary-integrality obstruction: outer sides are not integer sums of primitive tile sides")
+
+    print()
+    print("N=119 triquadratic 3alpha+2beta boundary-integrality checks")
+    for tile in ((24, 55, 64), (90, 19, 100)):
+        outer_119 = area_normalized_outer_sides(119, "(2a,b,a+b)", tile)
+        print(f"tile sides (a,b,c)={tile}; outer angles (2alpha,beta,alpha+beta)")
+        print(f"area-normalized outer sides: {outer_119}")
+        if outer_119 is None:
+            print("boundary-integrality obstruction: area normalization requires an irrational side scale")
+        elif any(side.denominator != 1 for side in outer_119):
+            print("boundary-integrality obstruction: outer sides are not integer sums of primitive tile sides")
+
+    print()
+    print("N=124 triquadratic 3alpha+2beta boundary-integrality check")
+    print("tile sides (a,b,c)=(4,15,16); outer angles (2alpha,beta,alpha+beta)")
+    outer_124 = area_normalized_outer_sides(124, "(2a,b,a+b)", (4, 15, 16))
+    print(f"area-normalized outer sides: {outer_124}")
+    if outer_124 is None:
+        print("boundary-integrality obstruction: area normalization requires an irrational side scale")
+    elif any(side.denominator != 1 for side in outer_124):
+        print("boundary-integrality obstruction: outer sides are not integer sums of primitive tile sides")
+
+    for n, tile_sides, outer_sides, feasible_fn in (
+        (46, (10, 21, 25), (92, 105, 125), feasible_n46_triquadratic_boundaries),
+        (56, (6, 5, 9), (56, 30, 54), feasible_n56_triquadratic_boundaries),
+    ):
+        side_lengths = dict(zip(("a", "b", "c"), tile_sides, strict=True))
+        opposite_2alpha, opposite_beta, opposite_alpha_beta = outer_sides
+        paths_a = oriented_boundary_paths(opposite_2alpha, side_lengths)
+        paths_b = oriented_boundary_paths(opposite_beta, side_lengths)
+        paths_ab = oriented_boundary_paths(opposite_alpha_beta, side_lengths)
+        feasible_more = feasible_fn()
+        print()
+        print(f"N={n} triquadratic 3alpha+2beta boundary-star check")
+        print(f"tile sides (a,b,c)={tile_sides}; outer sides {outer_sides}")
+        print("outer angles: (2alpha, beta, alpha+beta)")
+        print("oriented side paths passing straight-vertex stars:")
+        print(f"  opposite 2alpha length {opposite_2alpha}: {len(paths_a)}")
+        print(f"  opposite beta length {opposite_beta}: {len(paths_b)}")
+        print(f"  opposite alpha+beta length {opposite_alpha_beta}: {len(paths_ab)}")
+        print(f"feasible full boundary cycles: {len(feasible_more)}")
+        if not feasible_more:
+            print("boundary-star obstruction: candidate cannot be a tiling")
 
 
 if __name__ == "__main__":

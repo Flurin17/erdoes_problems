@@ -45,12 +45,26 @@ def has_slot_partition(
 ) -> bool:
     slots = tuple(sorted(slots))
     by_residue: dict[int, list[int]] = {residue: [] for residue in set(slots)}
+    by_residue_pivot: dict[int, list[list[int]]] = {
+        residue: [[] for _ in range(n)] for residue in set(slots)
+    }
     for subset in range(1, 1 << n):
         residue = modular_partition.residue_on(graph_mask, subset, modulus, pc)
         if residue is not None and residue in by_residue:
             by_residue[residue].append(subset)
+            rest = subset
+            while rest:
+                bit = rest & -rest
+                pivot = bit.bit_length() - 1
+                by_residue_pivot[residue][pivot].append(subset)
+                rest ^= bit
     for residue in by_residue:
         by_residue[residue].sort(key=lambda subset: (subset.bit_count(), subset), reverse=True)
+        for pivot in range(n):
+            by_residue_pivot[residue][pivot].sort(
+                key=lambda subset: (subset.bit_count(), subset),
+                reverse=True,
+            )
 
     def remove_slot(state: tuple[int, ...], residue: int) -> tuple[int, ...]:
         state_list = list(state)
@@ -64,10 +78,11 @@ def has_slot_partition(
         if not state:
             return False
         pivot = remaining & -remaining
+        pivot_index = pivot.bit_length() - 1
         for residue in sorted(set(state)):
             next_state = remove_slot(state, residue)
-            for subset in by_residue[residue]:
-                if subset & pivot and subset & ~remaining == 0:
+            for subset in by_residue_pivot[residue][pivot_index]:
+                if subset & ~remaining == 0:
                     if rec(remaining ^ subset, next_state):
                         return True
         return False

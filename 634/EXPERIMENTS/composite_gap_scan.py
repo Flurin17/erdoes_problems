@@ -19,6 +19,9 @@ from math import gcd, isqrt
 
 from beeson_3alpha2beta_boundary import feasible_n14_triquadratic_boundaries
 from beeson_3alpha2beta_boundary import feasible_n21_isosceles_alpha_boundaries
+from beeson_3alpha2beta_boundary import feasible_n46_triquadratic_boundaries
+from beeson_3alpha2beta_boundary import feasible_n56_triquadratic_boundaries
+from beeson_3alpha2beta_boundary import boundary_integrality_obstructed
 from beeson_3alpha2beta_filter import Candidate as ThreeAlphaCandidate
 from beeson_3alpha2beta_filter import candidates_for_n as three_alpha_candidates
 from beeson_3alpha2beta_sufficient import constructions as three_alpha_constructions
@@ -26,9 +29,11 @@ from beeson_isosceles_alpha_plus_beta_filter import (
     candidates_for_n as alpha_plus_beta_candidates,
 )
 from equilateral_area_candidates import candidates_for_n as equilateral_candidates
+from equilateral_boundary_exact import candidates_for_n as equilateral_exact_candidates
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
+from gamma_2pi3_nonisosceles_boundary import feasible_alpha_2beta_2alpha_beta
 from gamma_2pi3_nonisosceles_boundary import feasible_alpha_alpha_beta_alpha_2beta
 from gamma_2pi3_nonisosceles_exact import Candidate as GammaCandidate
 from gamma_2pi3_nonisosceles_exact import candidates_for_n as gamma_nonisosceles_candidates
@@ -131,6 +136,8 @@ def three_alpha_survivors(n: int) -> tuple[list[ThreeAlphaCandidate], list[Three
     strong_keys = {(row.M, row.sides) for row in strong_alpha_beta}
     n14_boundary_obstructed = n == 14 and not feasible_n14_triquadratic_boundaries()
     n21_boundary_obstructed = n == 21 and not feasible_n21_isosceles_alpha_boundaries()
+    n46_boundary_obstructed = n == 46 and not feasible_n46_triquadratic_boundaries()
+    n56_boundary_obstructed = n == 56 and not feasible_n56_triquadratic_boundaries()
 
     survivors: list[ThreeAlphaCandidate] = []
     for candidate in raw:
@@ -150,6 +157,22 @@ def three_alpha_survivors(n: int) -> tuple[list[ThreeAlphaCandidate], list[Three
             and candidate.sides == (2, 3, 4)
         ):
             continue
+        if (
+            n46_boundary_obstructed
+            and candidate.case == "(2a,b,a+b)"
+            and candidate.m == 2
+            and candidate.sides == (10, 21, 25)
+        ):
+            continue
+        if (
+            n56_boundary_obstructed
+            and candidate.case == "(2a,b,a+b)"
+            and candidate.m == 4
+            and candidate.sides == (6, 5, 9)
+        ):
+            continue
+        if boundary_integrality_obstructed(n, candidate.case, candidate.sides):
+            continue
         survivors.append(candidate)
     return raw, survivors
 
@@ -158,6 +181,11 @@ def gamma_survivors(n: int) -> tuple[list[GammaCandidate], list[GammaCandidate]]
     raw = gamma_nonisosceles_candidates(n)
     n21_obstructed = n == 21 and not feasible_alpha_alpha_beta_alpha_2beta((5, 16, 19), 4)
     n30_obstructed = n == 30 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 4)
+    n55_obstructed = n == 55 and not feasible_alpha_alpha_beta_alpha_2beta((39, 16, 49), 4)
+    n105_first_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((8, 7, 13), 7)
+    n105_second_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((16, 5, 19), 5)
+    n120_obstructed = n == 120 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 8)
+    n88_obstructed = n == 88 and not feasible_alpha_2beta_2alpha_beta((3, 5, 7), 1)
 
     survivors: list[GammaCandidate] = []
     for candidate in raw:
@@ -173,12 +201,42 @@ def gamma_survivors(n: int) -> tuple[list[GammaCandidate], list[GammaCandidate]]
             and candidate.sides == (7, 8, 13)
         ):
             continue
+        if (
+            n55_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (39, 16, 49)
+        ):
+            continue
+        if (
+            n105_first_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (8, 7, 13)
+        ):
+            continue
+        if (
+            n105_second_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (16, 5, 19)
+        ):
+            continue
+        if (
+            n120_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (7, 8, 13)
+        ):
+            continue
+        if (
+            n88_obstructed
+            and candidate.template == "alpha,2beta,2alpha+beta"
+            and candidate.sides == (3, 5, 7)
+        ):
+            continue
         survivors.append(candidate)
     return raw, survivors
 
 
-def equilateral_survivors(n: int, side_bound: int):
-    raw = equilateral_candidates(n, side_bound)
+def equilateral_survivors(n: int, side_bound: int, exact: bool):
+    raw = equilateral_exact_candidates(n) if exact else equilateral_candidates(n, side_bound)
     survivors = []
     for candidate in raw:
         a, b, _c = candidate.sides
@@ -190,13 +248,15 @@ def equilateral_survivors(n: int, side_bound: int):
     return raw, survivors
 
 
-def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> ScanRow:
+def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral_exact: bool) -> ScanRow:
     status, reasons = classified_reasons(n, zhang_side_bound)
     if status != "open":
         return ScanRow(n, status, tuple(reasons))
 
     three_raw, three_survivors = three_alpha_survivors(n)
-    equilateral_raw, equilateral_unresolved = equilateral_survivors(n, equilateral_side_bound)
+    equilateral_raw, equilateral_unresolved = equilateral_survivors(
+        n, equilateral_side_bound, equilateral_exact
+    )
     gamma_iso = gamma_isosceles_candidates(n)
     gamma_raw, gamma_unresolved = gamma_survivors(n)
 
@@ -244,6 +304,11 @@ def main() -> None:
     parser.add_argument("--zhang-side-bound", type=int, default=80)
     parser.add_argument("--equilateral-side-bound", type=int, default=250)
     parser.add_argument(
+        "--equilateral-exact",
+        action="store_true",
+        help="use exact finite equilateral boundary-length solver instead of side-bounded scan",
+    )
+    parser.add_argument(
         "--only-open",
         action="store_true",
         help="print only rows not classified by recorded certificates",
@@ -252,7 +317,7 @@ def main() -> None:
 
     ns = args.n if args.n else range(args.lo, args.limit + 1)
     for n in ns:
-        row = scan(n, args.zhang_side_bound, args.equilateral_side_bound)
+        row = scan(n, args.zhang_side_bound, args.equilateral_side_bound, args.equilateral_exact)
         if args.only_open and not row.status.startswith("open"):
             continue
         counts = (

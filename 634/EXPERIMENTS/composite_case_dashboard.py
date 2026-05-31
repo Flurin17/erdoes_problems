@@ -14,15 +14,20 @@ from math import gcd, isqrt
 from beeson_3alpha2beta_filter import candidates_for_n as beeson_3alpha2beta_candidates
 from beeson_3alpha2beta_boundary import feasible_n14_triquadratic_boundaries
 from beeson_3alpha2beta_boundary import feasible_n21_isosceles_alpha_boundaries
+from beeson_3alpha2beta_boundary import feasible_n46_triquadratic_boundaries
+from beeson_3alpha2beta_boundary import feasible_n56_triquadratic_boundaries
+from beeson_3alpha2beta_boundary import boundary_integrality_obstructed
 from beeson_3alpha2beta_sufficient import constructions as beeson_3alpha2beta_constructions
 from beeson_isosceles_alpha_plus_beta_filter import (
     candidates_for_n as beeson_alpha_plus_beta_candidates,
 )
 from equilateral_area_candidates import candidates_for_n as equilateral_candidates
+from equilateral_boundary_exact import candidates_for_n as equilateral_exact_candidates
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
 from gamma_2pi3_nonisosceles_boundary import feasible_alpha_alpha_beta_alpha_2beta
+from gamma_2pi3_nonisosceles_boundary import feasible_alpha_2beta_2alpha_beta
 from gamma_2pi3_nonisosceles_exact import candidates_for_n as gamma_nonisosceles_candidates
 from zhang_constructive_families import constructed_counts as zhang_counts
 
@@ -125,7 +130,7 @@ def gamma_prime_filter_survives(p: int) -> bool:
     return False
 
 
-def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> list[str]:
+def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral_exact: bool) -> list[str]:
     lines = [f"Composite/general case dashboard for N={n}"]
 
     if n in {7, 11}:
@@ -163,7 +168,11 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> lis
     else:
         lines.append(f"- Zhang proved constructive families: no hit with side bound {zhang_side_bound}")
 
-    equilateral = equilateral_candidates(n, equilateral_side_bound)
+    equilateral = (
+        equilateral_exact_candidates(n)
+        if equilateral_exact
+        else equilateral_candidates(n, equilateral_side_bound)
+    )
     equilateral_survivors = []
     equilateral_eliminated = []
     for candidate in equilateral:
@@ -185,11 +194,16 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> lis
             if equilateral_survivors
             else "0 remain after encoded boundary checks"
         )
+        equilateral_source = (
+            "from exact boundary-length equations; "
+            if equilateral_exact
+            else f"with primitive side entries <= {equilateral_side_bound}; "
+        )
         lines.append(
             "- equilateral outer arithmetic filter: "
-            f"{len(equilateral)} area/boundary-length candidate(s) "
-            f"with primitive side entries <= {equilateral_side_bound}; "
-            f"{survivor_text}"
+            + f"{len(equilateral)} area/boundary-length candidate(s) "
+            + equilateral_source
+            + f"{survivor_text}"
         )
         if equilateral_survivors:
             lines.append(f"  surviving equilateral candidates: {preview}{suffix}")
@@ -201,7 +215,11 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> lis
     else:
         lines.append(
             "- equilateral outer arithmetic filter: "
-            f"no area/boundary-length candidates with primitive side entries <= {equilateral_side_bound}"
+            + (
+                "no exact boundary-length candidates"
+                if equilateral_exact
+                else f"no area/boundary-length candidates with primitive side entries <= {equilateral_side_bound}"
+            )
         )
 
     raw_3a2b = beeson_3alpha2beta_candidates(n)
@@ -211,6 +229,8 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> lis
     strong_keys = {(row.M, row.sides) for row in strong_alpha_beta}
     n14_boundary_obstructed = n == 14 and not feasible_n14_triquadratic_boundaries()
     n21_boundary_obstructed = n == 21 and not feasible_n21_isosceles_alpha_boundaries()
+    n46_boundary_obstructed = n == 46 and not feasible_n46_triquadratic_boundaries()
+    n56_boundary_obstructed = n == 56 and not feasible_n56_triquadratic_boundaries()
     for candidate in raw_3a2b:
         if candidate.case == "(a+b,a+b,a)" and (candidate.m, candidate.sides) not in strong_keys:
             eliminated_3a2b.append((candidate, "strong isosceles-alpha+beta filter"))
@@ -228,6 +248,22 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> lis
             and candidate.sides == (2, 3, 4)
         ):
             eliminated_3a2b.append((candidate, "boundary-star obstruction"))
+        elif (
+            n46_boundary_obstructed
+            and candidate.case == "(2a,b,a+b)"
+            and candidate.m == 2
+            and candidate.sides == (10, 21, 25)
+        ):
+            eliminated_3a2b.append((candidate, "boundary-star obstruction"))
+        elif (
+            n56_boundary_obstructed
+            and candidate.case == "(2a,b,a+b)"
+            and candidate.m == 4
+            and candidate.sides == (6, 5, 9)
+        ):
+            eliminated_3a2b.append((candidate, "boundary-star obstruction"))
+        elif boundary_integrality_obstructed(n, candidate.case, candidate.sides):
+            eliminated_3a2b.append((candidate, "boundary-integrality obstruction"))
         else:
             unresolved_3a2b.append(candidate)
     lines.append(
@@ -273,6 +309,11 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> lis
     eliminated_blz = []
     n21_gamma_boundary_obstructed = n == 21 and not feasible_alpha_alpha_beta_alpha_2beta((5, 16, 19), 4)
     n30_gamma_boundary_obstructed = n == 30 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 4)
+    n55_gamma_boundary_obstructed = n == 55 and not feasible_alpha_alpha_beta_alpha_2beta((39, 16, 49), 4)
+    n105_first_gamma_boundary_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((8, 7, 13), 7)
+    n105_second_gamma_boundary_obstructed = n == 105 and not feasible_alpha_alpha_beta_alpha_2beta((16, 5, 19), 5)
+    n120_gamma_boundary_obstructed = n == 120 and not feasible_alpha_alpha_beta_alpha_2beta((7, 8, 13), 8)
+    n88_gamma_boundary_obstructed = n == 88 and not feasible_alpha_2beta_2alpha_beta((3, 5, 7), 1)
     for candidate in blz:
         if (
             n21_gamma_boundary_obstructed
@@ -284,6 +325,36 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int) -> lis
             n30_gamma_boundary_obstructed
             and candidate.template == "alpha,alpha+beta,alpha+2beta"
             and candidate.sides == (7, 8, 13)
+        ):
+            eliminated_blz.append((candidate, "boundary-star obstruction"))
+        elif (
+            n55_gamma_boundary_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (39, 16, 49)
+        ):
+            eliminated_blz.append((candidate, "boundary-star obstruction"))
+        elif (
+            n105_first_gamma_boundary_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (8, 7, 13)
+        ):
+            eliminated_blz.append((candidate, "boundary-star obstruction"))
+        elif (
+            n105_second_gamma_boundary_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (16, 5, 19)
+        ):
+            eliminated_blz.append((candidate, "boundary-star obstruction"))
+        elif (
+            n120_gamma_boundary_obstructed
+            and candidate.template == "alpha,alpha+beta,alpha+2beta"
+            and candidate.sides == (7, 8, 13)
+        ):
+            eliminated_blz.append((candidate, "boundary-star obstruction"))
+        elif (
+            n88_gamma_boundary_obstructed
+            and candidate.template == "alpha,2beta,2alpha+beta"
+            and candidate.sides == (3, 5, 7)
         ):
             eliminated_blz.append((candidate, "boundary-star obstruction"))
         else:
@@ -321,12 +392,17 @@ def main() -> None:
     parser.add_argument("n", nargs="+", type=int)
     parser.add_argument("--zhang-side-bound", type=int, default=80)
     parser.add_argument("--equilateral-side-bound", type=int, default=250)
+    parser.add_argument(
+        "--equilateral-exact",
+        action="store_true",
+        help="use the exact finite equilateral boundary-length solver instead of side-bounded scan",
+    )
     args = parser.parse_args()
 
     for index, n in enumerate(args.n):
         if index:
             print()
-        for line in dashboard(n, args.zhang_side_bound, args.equilateral_side_bound):
+        for line in dashboard(n, args.zhang_side_bound, args.equilateral_side_bound, args.equilateral_exact):
             print(line)
 
 

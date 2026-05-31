@@ -6,6 +6,8 @@ with a declared endpoint Ns such that:
 
   * [N+1, Ns] is contained in 2A;
   * every new element a has a witness w in [N+1, Ns] not in 3(A\\{a});
+  * the witness is above the first padding range, so w-min(old) is in the
+    old two-sum coverage window rather than below it;
   * for iteration, it is useful if 2A actually covers beyond Ns.
 
 This script searches small finite examples with an explicit buffer
@@ -36,17 +38,21 @@ def cover_end(two_sums: set[int], start: int, cap: int) -> int:
 def witnesses(
     elements: set[int],
     new_elements: set[int],
+    base: int,
     previous_endpoint: int,
     declared_endpoint: int,
     cap: int,
 ) -> dict[int, list[int]] | None:
     two_sums = sumset(elements, 2, cap)
     result: dict[int, list[int]] = {}
+    retained_old = elements - new_elements
+    min_retained = min(retained_old) if retained_old else min(elements)
     for a in sorted(new_elements):
         three_without_a = sumset(elements - {a}, 3, cap)
         found = [
             w
             for w in range(previous_endpoint + 1, declared_endpoint + 1)
+            if w - min_retained >= base
             if w in two_sums and w not in three_without_a
         ]
         if not found:
@@ -78,10 +84,10 @@ def old_intervals(elements: set[int], cap: int) -> list[tuple[int, int]]:
 
 
 def main() -> None:
-    max_old = 12
-    max_old_size = 6
-    max_new_size = 4
-    slack = 18
+    max_old = 10
+    max_old_size = 5
+    max_new_size = 3
+    slack = 12
 
     for old_max in range(5, max_old + 1):
         universe = range(1, old_max + 1)
@@ -115,6 +121,7 @@ def main() -> None:
                                     found = witnesses(
                                         elements,
                                         new,
+                                        base,
                                         previous_endpoint,
                                         declared,
                                         cap,

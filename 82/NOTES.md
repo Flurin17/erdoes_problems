@@ -837,6 +837,10 @@ source of growth beyond Ramsey.
   `(0,1,1,2)`, `(0,1,1,3)`, and `(0,1,2,2)`.  This is still only evidence
   for the first dyadic lift; it does not address higher moduli or prove a
   uniform partition theorem.
+- 2026-05-31: Re-ran the exact randomized universal-slot check more heavily
+  on `n=16`: `universal_slots.py 16 --sample-even 30 --seed 1600` left the
+  same `11` multisets alive.  This was later superseded by the faster exact
+  `n=8` sweep below.
 - 2026-05-31: Strengthened the induced-path exclusion.  A forbidden
   counterexample cannot contain an induced path on `3 ceil(k/2)-1` vertices,
   since such a path contains an induced matching of size `ceil(k/2)`, hence a
@@ -844,3 +848,66 @@ source of growth beyond Ramsey.
   complement.  This improves the constant in the path-free reduction but not
   its asymptotic usefulness; standard `P_t`-free machinery still yields only
   `k^{O(k)}`-type bounds.
+- 2026-05-31: Added `slot_local_search.py`, a heuristic scorer for fixed
+  residue-slot colorings.  Calibration checks on the `15`-vertex cactus
+  correctly leave positive score for the killed slots `(0,1,2,3)` and find a
+  score-`0` coloring for the surviving slots `(0,0,1,2)`.  An exploratory
+  `n=24` sweep was too slow and was stopped; it is not recorded as evidence.
+- 2026-05-31: Recorded a degree-barrier lemma for the algebraic dyadic route.
+  Even on a star, if `q=2^s` and colors are encoded by `t` bits, the Boolean
+  function giving the new dyadic bit of the same-colored leaf count has
+  multilinear degree exactly `q t`.  Thus the degree `2q` in the four-color
+  sign formula and the higher-degree version from Lemma 5B are intrinsic.
+  A direct Chevalley--Warning / Combinatorial Nullstellensatz proof using one
+  exact top-bit equation per vertex cannot have the needed degree count.
+- 2026-05-31: Added `universal_slots_fast.cpp` and completed the full exact
+  labelled even-graph sweep on `n=8` for all `35` four-slot residue multisets.
+  The fast checker first reproduced the known `n=7` result (`13` survivors),
+  then on `n=8` left exactly ten survivors:
+  `(0,0,0,1)`, `(0,0,0,2)`, `(0,0,1,1)`, `(0,0,1,2)`,
+  `(0,0,2,2)`, `(0,0,2,3)`, `(0,1,1,1)`, `(0,1,1,2)`,
+  `(0,1,2,2)`, and `(0,1,2,3)`.  It killed `(0,0,0,3)` and
+  `(0,0,1,3)` with mask `220640831`, and `(0,1,1,3)` with mask
+  `220231532`; independent `slot_partition.py` checks confirmed the latter
+  two no-certificates.  Since the `15`-vertex cactus already kills
+  `(0,1,2,3)`, the combined exact evidence now leaves nine plausible
+  universal first-lift slot multisets.
+- 2026-05-31: Optimized `universal_slots.py` by indexing target-modular
+  subsets by both residue and pivot vertex, avoiding scans through irrelevant
+  subsets during the exact-cover recursion.  The optimized script reproduced
+  the known `n=7` spot check and completed stronger exact random tests on the
+  current nine candidate slots: `25` even graphs on `n=18` with seed `918`
+  and `5` even graphs on `n=20` with seed `920`; all nine candidates
+  survived.  The current survivor list remains `(0,0,0,1)`, `(0,0,0,2)`,
+  `(0,0,1,1)`, `(0,0,1,2)`, `(0,0,2,2)`, `(0,0,2,3)`,
+  `(0,1,1,1)`, `(0,1,1,2)`, and `(0,1,2,2)`.
+- 2026-05-31: A larger exact random pass killed another universal-slot
+  candidate.  `universal_slots.py 14 --sample-even 200 --seed 914` killed
+  `(0,1,1,1)` at trial `197` with mask
+  `1938867942138712527476832246`; an independent `slot_partition.py` check
+  confirms no `(0,1,1,1)` slot partition, while the same graph has
+  `(0,0,1,2)` and `(0,1,2,2)` partitions.  A follow-up run
+  `universal_slots.py 14 --sample-even 500 --seed 1414` on the remaining
+  eight candidates found no further kills.  The current universal first-lift
+  slot candidates are `(0,0,0,1)`, `(0,0,0,2)`, `(0,0,1,1)`,
+  `(0,0,1,2)`, `(0,0,2,2)`, `(0,0,2,3)`, `(0,1,1,2)`, and
+  `(0,1,2,2)`.  A further exact random check on `n=16` with seed `1616`
+  over `100` even graphs left the same eight candidates alive.
+- 2026-05-31: Recorded a cut-congruence reduction for the strongest
+  remaining candidate `(0,0,1,2)`.  After choosing the residue-`1` part `C`
+  and residue-`2` part `D`, the two zero slots are equivalent to finding a
+  cut of the residual graph `H=G[V\(C union D)]` such that every vertex has
+  opposite-side degree congruent to its residual degree modulo `4`.  In signs
+  this is `x_v sum_{u in N_H(v)} x_u == -deg_H(v) mod 8`.  This proves the
+  candidate for bipartite even graphs and reframes counterexample search as
+  an admissible `(C,D)` enumeration plus a mod-`8` signing obstruction.
+- 2026-05-31: Extended `multipartite_modular.py` with a fixed-slot count
+  model.  Bounded checks with up to `4` multipartite classes and class size
+  at most `8` found no complete multipartite obstruction for any of the
+  current eight universal slot candidates.  The tool finds a small complete
+  multipartite obstruction to the already-killed `(0,1,1,1)` slot:
+  class sizes `(2,4,4,4)`.  Added a clean proof that `(0,0,1,2)` covers
+  complete multipartite even graphs when all classes are even, and when all
+  classes are odd with a common residue modulo `4`; the mixed odd-residue
+  complete multipartite case remains experimentally positive but not yet
+  proved in full.

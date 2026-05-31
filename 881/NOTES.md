@@ -559,10 +559,11 @@ iteration: the witness is exactly the coverage endpoint, so the stage leaves
 no buffer for the next stage's first required integer.
 
 The script `stage_buffer_search.py` searches for stages that do leave such a
-buffer. Its first tiny hit is `old={2,3,4}`, add `5`, declare endpoint `5`,
-with two-sum coverage continuing to `10`; this is a finite-window artefact
-from the lower edge of the three-sum range and did not extend to a second
-stage in the same bounded search.
+buffer, now filtering out the lowest padding artefacts by requiring
+\(w-\min(A_{\rm old})\) to lie in the old two-sum coverage window. Its first
+small hit is `old={1,2,3,9}`, add `6`, declare endpoint `10`, with two-sum
+coverage continuing to `12`. This remains a finite-window artefact and has
+not extended to a second stage in the same bounded search.
 
 Thus current finite searches find only window artefacts. Lemmas 5.1 and 9
 explain why dense interval or marker implementations fail.
@@ -617,15 +618,33 @@ Equivalently, one may build a protected reservoir \(P\subset C\) containing
 
 Therefore the \(k=2\) positive route now splits as follows:
 
-1. only finitely many one-point order-3 failures, where one must make
-   one-point deletions compose into an infinite deletion; this remains open
-   in this workspace;
-2. infinitely many failures, which is resolved by Corollary 8.3.
+1. infinitely many one-point order-3 failures, which is resolved by
+   Corollary 8.3;
+2. infinitely many one-point deletions that are order-3 bases but have no
+   threshold below the deleted element, which is resolved by Lemma 8.3a;
+3. the remaining collective case, where all but finitely many singleton
+   deletions are order-3 bases with a threshold below the deleted element.
 
 The remaining \(k=2\) obstruction is thus the **finitely-bad case**: all but
-finitely many one-point deletions \(A\setminus\{a\}\) are order-3 bases, but
-it is not yet known in this workspace how to choose an infinite deletion
-whose finite-prefix thresholds remain controlled.
+finitely many one-point deletions \(A\setminus\{a\}\) are order-3 bases
+with a threshold \(<a\), but it is not yet known in this workspace how to
+choose an infinite deletion whose finite-prefix thresholds remain
+controlled.
+
+Corollary 8.3b makes this barrier-theoretic: after discarding a finite
+exceptional set, no singleton is late-bad. Hence every infinite subset of
+the remaining elements must contain a late-bad finite subset of size at
+least two. The remaining obstruction is genuinely collective from its first
+possible finite prefix.
+
+Lemma 8.4a strengthens the obstruction produced by a finite hole. If
+\(w\notin3(A\setminus F)\), \(f_0=\min F\), and \(m_0=\min A\), then
+\[
+(A\setminus F)\cap(w-f_0-m_0,\ w-N_0]=\varnothing.
+\]
+So a bounded-size barrier sequence with \(\min F\to\infty\) must have
+\(w-\min F\to\infty\). In particular, bounded-size late-bad barriers cannot
+have both bounded internal diameter and bounded witness excess.
 
 Example 3.0a shows why the threshold issue is real. In the benign basis
 \[
@@ -685,7 +704,13 @@ contains cross-stage pairs with unbounded witnesses. The script
 \{1,2\}\to\{1,2,3\}\to\{1,2,3,5\}
 \]
 but the default bounded greedy search stalls at the next stage. This is
-finite evidence only; the stage criterion remains open.
+finite evidence only; the stage criterion remains open. Also, the script
+imposes the extra local condition \(N_s\ge\max P_s\). Proposition 13.1c
+does not formally require this, because elements above \(N_s\) are dormant
+for witnesses below \(N_s\); however, if a witness lies below \(b\in P_s\),
+then deleting \(b\) is irrelevant to that witness, so the pair condition
+collapses to singleton privacy for the old element. Thus the script is
+testing the genuinely pair-dependent version of the criterion.
 
 There is also a more local witness obstruction. If \(w=a+p\in2A\) is meant
 to remain outside \(3(A\setminus\{a\})\), then
@@ -737,6 +762,14 @@ formal monoid \(M=X\oplus Y\), \(A=X\cup Y\) is strongly minimal at order
 2, yet deleting the positive even-weight elements of \(X\) leaves an
 order-3 basis because every deleted \(X\)-element splits into two retained
 odd-weight elements.
+
+Adding a finite residue layer does not by itself stop this repair. If
+residue sets \(R_1,\ldots,R_k\) cover every target residue by one term from
+each digit class, then after prescribing any residue \(r\in R_i\), the
+remaining target \(\rho-r\) is again covered by one term from each class.
+Thus \(\rho\) has a \((k+1)\)-term residue representation with an extra
+class-\(i\) term. The residue layer therefore cannot force a repair to use
+exactly one term from the deleted element's digit class.
 
 The obstruction to turning the formal model into an integer counterexample
 is structural: a faithful additive embedding of a free commutative monoid

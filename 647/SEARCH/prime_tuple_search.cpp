@@ -220,8 +220,59 @@ static bool verify_shifts(u64 n, uint32_t limit, bool verbose) {
     return true;
 }
 
-static uint32_t first_failing_shift(u64 n, uint32_t limit, uint32_t* tau_out = nullptr) {
+static bool power_prime_budget_ok(u64 L, u64 p, uint32_t fixed_exp, uint32_t other_tau, uint32_t bound) {
+    uint32_t a = 0;
+    while (L % p == 0) {
+        L /= p;
+        ++a;
+    }
+    uint32_t fixed_part = fixed_exp + a + 1;
+    if (L == 1) return other_tau * fixed_part <= bound;
+    if (other_tau * fixed_part * 2 > bound) return false;
+    return is_prime64(L);
+}
+
+static bool shift5_ok(u64 N) {
+    // n-5 = 5(504N-1), and 504N-1 is 7 mod 8 before removing powers of 5.
+    return power_prime_budget_ok(504 * N - 1, 5, 1, 1, 7);
+}
+
+static bool shift9_ok(u64 N) {
+    // n-9 = 9(280N-1), and 280N-1 is 6 mod 7 before removing powers of 3.
+    return power_prime_budget_ok(280 * N - 1, 3, 2, 1, 11);
+}
+
+static bool shift10_ok(u64 N) {
+    // n-10 = 2*5*(252N-1), and 252N-1 is 3 mod 4 before removing powers of 5.
+    return power_prime_budget_ok(252 * N - 1, 5, 1, 2, 12);
+}
+
+static bool guaranteed_by_branch(uint32_t k, int branch) {
+    if (k == 1 || k == 2 || k == 3 || k == 4 || k == 6 || k == 8 || k == 12) {
+        return true;
+    }
+    if (branch == 1 && k == 24) return true;
+    return false;
+}
+
+static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, uint32_t* tau_out = nullptr) {
     for (uint32_t k = 1; k <= limit; ++k) {
+        if (guaranteed_by_branch(k, branch)) continue;
+        if (k == 5) {
+            if (shift5_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 9) {
+            if (shift9_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 10) {
+            if (shift10_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
         uint32_t t = tau64(n - k);
         if (t > k + 2) {
             if (tau_out) *tau_out = t;
@@ -242,6 +293,7 @@ struct Args {
     bool verbose = false;
     bool print_fails = false;
     bool progress = false;
+    bool stats = false;
     uint32_t report_survive = 0;
     u64 require_mod = 1;
     u64 require_rem = 0;
@@ -274,6 +326,7 @@ static Args parse_args(int argc, char** argv) {
         else if (key == "--verbose") a.verbose = true;
         else if (key == "--print-fails") a.print_fails = true;
         else if (key == "--progress") a.progress = true;
+        else if (key == "--stats") a.stats = true;
         else if (key == "--report-survive") a.report_survive = (uint32_t)parse_u64(need());
         else if (key == "--require-mod") a.require_mod = parse_u64(need());
         else if (key == "--require-rem") a.require_rem = parse_u64(need());
@@ -304,7 +357,9 @@ static bool check_extra_prime_coeffs(u64 N, const std::vector<u64>& coeffs) {
 
 static bool branch_a_prime_tuple(u64 N, const std::vector<u64>& extra_coeffs) {
     // Branch A: n=2520N, N even.
-    static const u64 coeff[] = {210,315,420,630,840,1260,2520};
+    // The extra 105N-1 prime is forced in Branch A by the k=24 condition:
+    // n-24 = 24(105N-1), N even makes 105N-1 odd and nonsquare.
+    static const u64 coeff[] = {105,210,315,420,630,840,1260,2520};
     if (N & 1) return false;
     for (u64 c : coeff) {
         if (!is_prime64(c * N - 1)) return false;
@@ -372,52 +427,78 @@ static void mark_roots(std::vector<uint8_t>& alive, u64 seg_start, uint32_t len,
 int main(int argc, char** argv) {
     Args args = parse_args(argc, argv);
     auto primes = prime_sieve(args.sieve_limit);
-    std::vector<u64> coeffs = {210,315,420,630,840,1260,2520};
+    std::vector<u64> common_coeffs = {210,315,420,630,840,1260,2520};
+    std::vector<u64> branch_a_coeffs = {105};
     for (u64 c : args.extra_prime_coeffs) {
-        coeffs.push_back(c);
+        common_coeffs.push_back(c);
     }
-    std::vector<AffineForm> forms;
-    for (u64 c : coeffs) {
-        forms.push_back({c * args.variable_mod, (int64_t)(c * args.variable_rem) - 1});
+    std::vector<AffineForm> common_forms;
+    for (u64 c : common_coeffs) {
+        common_forms.push_back({c * args.variable_mod, (int64_t)(c * args.variable_rem) - 1});
     }
-    std::vector<RootInfo> root_infos;
-    root_infos.reserve(primes.size());
+    std::vector<AffineForm> branch_a_forms;
+    for (u64 c : branch_a_coeffs) {
+        branch_a_forms.push_back({c * args.variable_mod, (int64_t)(c * args.variable_rem) - 1});
+    }
+    std::vector<RootInfo> common_root_infos;
+    std::vector<RootInfo> branch_a_root_infos;
+    common_root_infos.reserve(primes.size());
+    branch_a_root_infos.reserve(primes.size());
     for (int p : primes) {
         if (p == 2) continue;
-        root_infos.push_back(compute_roots_for_prime(p, forms));
+        common_root_infos.push_back(compute_roots_for_prime(p, common_forms));
+        branch_a_root_infos.push_back(compute_roots_for_prime(p, branch_a_forms));
     }
     u64 end = args.start + args.count;
     uint64_t tuple_count = 0;
     uint64_t quick_pass_count = 0;
+    std::vector<uint64_t> first_fail_counts(args.quick_shift + 1);
+    std::vector<uint64_t> branch_counts(3);
+    uint32_t best_fail_k = 0;
+    u64 best_fail_n = 0;
+    u64 best_fail_N = 0;
+    uint32_t best_fail_tau = 0;
     auto t0 = std::chrono::steady_clock::now();
 
     for (u64 base = args.start; base < end; base += args.segment) {
         uint32_t len = (uint32_t)std::min<u64>(args.segment, end - base);
-        std::vector<uint8_t> alive(len, 1);
+        std::vector<uint8_t> alive_common(len, 1);
+        std::vector<uint8_t> alive_a(len, 1);
 
-        for (const auto& info : root_infos) {
-            mark_roots(alive, base, len, info);
+        for (const auto& info : common_root_infos) {
+            mark_roots(alive_common, base, len, info);
+        }
+        alive_a = alive_common;
+        for (const auto& info : branch_a_root_infos) {
+            mark_roots(alive_a, base, len, info);
         }
 
         for (uint32_t i = 0; i < len; ++i) {
-            if (!alive[i]) continue;
             u64 X = base + i;
             u64 N = args.variable_mod * X + args.variable_rem;
             if (args.require_mod != 1 && N % args.require_mod != args.require_rem) continue;
             int branch = 0;
-            if ((N & 1) == 0 && branch_a_prime_tuple(N, args.extra_prime_coeffs)) branch = 1;
-            if (!branch && (N & 1) == 1 && branch_b_prime_tuple(N, args.extra_prime_coeffs)) branch = 2;
+            if ((N & 1) == 0 && alive_a[i] && branch_a_prime_tuple(N, args.extra_prime_coeffs)) branch = 1;
+            if (!branch && (N & 1) == 1 && alive_common[i] && branch_b_prime_tuple(N, args.extra_prime_coeffs)) branch = 2;
             if (!branch) continue;
 
             ++tuple_count;
+            ++branch_counts[(size_t)branch];
             u64 n = 2520 * N;
             if (args.verbose) {
                 std::cout << "PRIME_TUPLE branch=" << (branch == 1 ? "A" : "B")
                           << " N=" << N << " n=" << n << "\n";
             }
             uint32_t fail_tau = 0;
-            uint32_t fail_k = first_failing_shift(n, args.quick_shift, &fail_tau);
+            uint32_t fail_k = first_failing_shift(n, N, branch, args.quick_shift, &fail_tau);
             if (fail_k != 0) {
+                ++first_fail_counts[fail_k];
+                if (fail_k > best_fail_k) {
+                    best_fail_k = fail_k;
+                    best_fail_n = n;
+                    best_fail_N = N;
+                    best_fail_tau = fail_tau;
+                }
                 if (args.print_fails) {
                     std::cout << "FAIL n=" << n << " k=" << fail_k
                               << " m=" << (n - fail_k) << " tau=" << fail_tau
@@ -432,6 +513,7 @@ int main(int argc, char** argv) {
                 continue;
             }
             ++quick_pass_count;
+            ++first_fail_counts[0];
             std::cout << "QUICK_PASS branch=" << (branch == 1 ? "A" : "B")
                       << " N=" << N << " n=" << n
                       << " checked_k=" << args.quick_shift << "\n";
@@ -464,5 +546,18 @@ int main(int argc, char** argv) {
     std::cout << "DONE start=" << args.start << " count=" << args.count
               << " prime_tuples=" << tuple_count
               << " quick_pass=" << quick_pass_count << "\n";
+    if (args.stats) {
+        std::cout << "BRANCH_COUNTS A=" << branch_counts[1]
+                  << " B=" << branch_counts[2] << "\n";
+        std::cout << "BEST_FIRST_FAIL k=" << best_fail_k
+                  << " N=" << best_fail_N
+                  << " n=" << best_fail_n
+                  << " tau=" << best_fail_tau << "\n";
+        std::cout << "FIRST_FAIL_COUNTS";
+        for (uint32_t k = 0; k < first_fail_counts.size(); ++k) {
+            if (first_fail_counts[k]) std::cout << " " << k << ":" << first_fail_counts[k];
+        }
+        std::cout << "\n";
+    }
     return 0;
 }

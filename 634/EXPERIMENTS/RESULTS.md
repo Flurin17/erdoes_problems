@@ -126,14 +126,15 @@ side-bounded equilateral boundary-star filters leave no survivors for
 Command:
 
 ```sh
-python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 51 55 56 60 --equilateral-side-bound 250
+python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 51 55 56 57 60 62 63 66 69 70 76 78 86 87 88 91 92 93 94 95 99 --equilateral-side-bound 250
 ```
 
 Result summary:
 
 ```text
-39,46,55,56: open with an encoded survivor
-14,15,21,22,30,33,35,38,42,51,60: open with no survivor in the currently encoded filters
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,
+62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
+  open with no survivor in the currently encoded filters
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
@@ -235,7 +236,7 @@ up-minus-down difference while the outer triangle has difference `28`. This is
 useful sanity evidence but not an obstruction to arbitrary tilings with shifted,
 non-lattice vertices.
 
-## `N=14` Triquadratic Boundary-Star Check
+## `3alpha+2beta=pi` Boundary-Star Checks
 
 Command:
 
@@ -265,7 +266,7 @@ Interpretation: the `N=14` triquadratic raw candidate survives Beeson's first
 necessary equation but cannot satisfy even the local full-boundary side-label
 star constraints.
 
-The same script also checks the remaining `N=21` `3alpha+2beta=pi` candidate:
+The same script also checks additional `3alpha+2beta=pi` candidates:
 
 ```text
 N=21 isosceles-alpha 3alpha+2beta boundary-star check
@@ -274,6 +275,39 @@ outer angles: (alpha, alpha, alpha+2beta)
 oriented side paths passing straight-vertex stars:
   length 21: 10
   length 12: 6
+feasible full boundary cycles: 0
+boundary-star obstruction: candidate cannot be a tiling
+
+N=39 isosceles-beta 3alpha+2beta boundary-integrality check
+tile sides (a,b,c)=(12,7,16); outer angles (beta,beta,3alpha)
+area-normalized outer sides: None
+boundary-integrality obstruction: area normalization requires an irrational side scale
+
+N=111 isosceles-beta 3alpha+2beta boundary-integrality check
+tile sides (a,b,c)=(42,13,49); outer angles (beta,beta,3alpha)
+area-normalized outer sides: None
+boundary-integrality obstruction: area normalization requires an irrational side scale
+
+N=119 triquadratic 3alpha+2beta boundary-integrality checks
+tile sides (a,b,c)=(24,55,64); outer angles (2alpha,beta,alpha+beta)
+area-normalized outer sides: None
+boundary-integrality obstruction: area normalization requires an irrational side scale
+tile sides (a,b,c)=(90,19,100); outer angles (2alpha,beta,alpha+beta)
+area-normalized outer sides: None
+boundary-integrality obstruction: area normalization requires an irrational side scale
+
+N=124 triquadratic 3alpha+2beta boundary-integrality check
+tile sides (a,b,c)=(4,15,16); outer angles (2alpha,beta,alpha+beta)
+area-normalized outer sides: None
+boundary-integrality obstruction: area normalization requires an irrational side scale
+
+N=46 triquadratic 3alpha+2beta boundary-star check
+tile sides (a,b,c)=(10,21,25); outer sides (92,105,125)
+feasible full boundary cycles: 0
+boundary-star obstruction: candidate cannot be a tiling
+
+N=56 triquadratic 3alpha+2beta boundary-star check
+tile sides (a,b,c)=(6,5,9); outer sides (56,30,54)
 feasible full boundary cycles: 0
 boundary-star obstruction: candidate cannot be a tiling
 ```
@@ -723,7 +757,7 @@ boundary-word survivors left for the length-only diagnostic to inspect.
 Exact arithmetic command:
 
 ```sh
-python3 634/EXPERIMENTS/gamma_2pi3_nonisosceles_exact.py 14 15 21 22 30 88 143 264
+python3 634/EXPERIMENTS/gamma_2pi3_nonisosceles_exact.py 14 15 21 22 30 88 105 120 143 264
 ```
 
 Result summary:
@@ -733,6 +767,8 @@ N=14,15,22: 0 exact non-isosceles gamma=2pi/3 arithmetic candidates
 N=21: candidate in alpha,alpha+beta,alpha+2beta with sides=(5,16,19)
 N=30: candidate in alpha,alpha+beta,alpha+2beta with sides=(7,8,13)
 N=88: candidate in alpha,2beta,2alpha+beta with sides=(3,5,7)
+N=105: candidates in alpha,alpha+beta,alpha+2beta with sides=(8,7,13),(16,5,19)
+N=120: candidate in alpha,alpha+beta,alpha+2beta with sides=(7,8,13)
 N=143: candidates in 2alpha,2beta,alpha+beta with sides=(3,5,7),(5,3,7)
 N=264: candidate in alpha,2alpha,3beta with sides=(5,3,7)
 ```
@@ -754,10 +790,23 @@ N=21 with tile (5,16,19), scale 4, outer sides (84,20,76):
   feasible full boundary cycles: 0
 N=30 with tile (7,8,13), scale 4, outer sides (60,28,52):
   feasible full boundary cycles: 0
+N=55 with tile (39,16,49), scale 4, outer sides (220,156,196):
+  feasible full boundary cycles: 0
+N=88 with tile (3,5,7), scale 1, outer sides (21,55,56):
+  outer angles (alpha,2beta,2alpha+beta)
+  feasible full boundary cycles: 0
+N=105 with tile (8,7,13), scale 7, outer sides (105,56,91):
+  feasible full boundary cycles: 0
+N=105 with tile (16,5,19), scale 5, outer sides (105,80,95):
+  feasible full boundary cycles: 0
+N=120 with tile (7,8,13), scale 8, outer sides (120,56,104):
+  feasible full boundary cycles: 0
 ```
 
-Interpretation: the exact arithmetic candidates for `N=21` and `N=30` in the
-`(alpha,alpha+beta,alpha+2beta)` template fail the local boundary-star check.
+Interpretation: the exact arithmetic candidates for `N=21`, `N=30`, `N=55`,
+`N=105`, and `N=120` in the `(alpha,alpha+beta,alpha+2beta)` template, and the
+exact `N=88` candidate in the `(alpha,2beta,2alpha+beta)` template, fail the
+local boundary-star check.
 
 Command:
 
