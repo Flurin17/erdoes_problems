@@ -1505,6 +1505,13 @@ colorings. Since Corollary 8.6j-3 handles certificate-free colorings whose
 mixed sums have sublinear multiplicity, these two recurrent layers would
 also need mixed two-sum spikes comparable to \(A(X)\) along an unbounded
 sequence of scales.
+The same-color Sidon property also forces almost-cross-color recurrence:
+if \(U\) lies in one color and \(m>2\max U\), at most one mirror \(m-u\)
+can lie in that same color, otherwise \(u+(m-u)=v+(m-v)\) is a nontrivial
+same-color collision. Hence each recurrent color must reflect finite
+patterns almost entirely into the other color. The surviving structure is
+therefore close to a bipartite complementing system with large mixed
+representation clusters.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then

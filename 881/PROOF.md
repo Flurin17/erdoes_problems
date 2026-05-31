@@ -5828,6 +5828,53 @@ Corollary 8.6j-3, giving the desired infinite deletion. Thus the surviving
 large-excess pair obstruction must combine separate recurrence, Sidon-like
 same-color sparsity, and high-multiplicity mixed sums.
 
+## Lemma 8.6g''': Recurrent certificate-free colors reflect almost across colors
+
+Let \(A=C\cup D\), and suppose \(C\) is certificate-free relative to \(A\).
+Let
+\[
+U\subset C
+\]
+be finite, and let \(m>2\max U\). Then
+\[
+|\{u\in U:m-u\in C\}|\le1. \tag{1}
+\]
+Consequently, in the two-color obstruction supplied by Lemma 8.6g'', for
+each \(i\in\{0,1\}\), every finite
+\[
+U\subset C_i
+\]
+and every \(L\) have a center \(m>L\) such that
+\[
+|\{u\in U:m-u\in C_{1-i}\}|\ge |U|-1. \tag{2}
+\]
+
+Proof. A certificate-free subset of \(A\) is Sidon, as in Warning 8.6j.
+If two distinct elements \(u,v\in U\) had
+\[
+m-u,\ m-v\in C,
+\]
+then
+\[
+u+(m-u)=v+(m-v). \tag{3}
+\]
+Since \(m>2\max U\), both \(m-u\) and \(m-v\) are larger than every element
+of \(U\). Thus the unordered pairs in (3) are distinct, giving a
+nontrivial same-color two-sum collision in \(C\), contrary to the Sidon
+property. This proves (1).
+
+For (2), apply the separate reflection-recurrence of \(C_i\) from Lemma
+8.6g'' with \(m>\max(L,2\max U)\). Then \(m-U\subset A=C_i\cup C_{1-i}\),
+and (1) says at most one mirror lies in \(C_i\). \(\square\)
+
+Thus the compactified pair obstruction is essentially bipartite. Large
+finite pieces of either color must recur with almost all mirrors landing in
+the opposite color, producing arbitrarily large mixed representation
+clusters. The remaining gap is to upgrade this unbounded mixed clustering
+to the linear-scale mixed spikes required by Corollary 8.6j-3, or to show
+that such an almost-bipartite recurrent Sidon structure can actually be
+arithmetized.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -8536,6 +8583,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   reflection-recurrent in \(A\). Together with Corollary 8.6j-3, any such
   counterexample must also have mixed two-color representation spikes
   comparable to \(A(X)\) along an unbounded sequence.
+* Lemma 8.6g''' adds that these recurrent colors must reflect almost across
+  colors: same-color mirrors would create nontrivial Sidon collisions.
 * Lemma 8.6h supplies such finite test sets when \(A\) contains long
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of
