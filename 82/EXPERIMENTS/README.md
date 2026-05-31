@@ -128,6 +128,11 @@ Computational checks and generated data for Erdos Problem 82.
   includes a parity-sampling mode for finding gaps between the two parameters.
 - `modular_spectrum.py`: checks which exact sizes occur as modular induced
   subgraphs and searches for gaps in the spectrum.
+- `weighted_blowup.py`: searches for weighted exact-terminal witnesses in
+  regular twin blowups.  For a base graph `B`, cap `L`, and target `T`, it
+  looks for integer vectors `0<=x_i<=L`, `sum x_i=T`, such that
+  `(A_B x)_i` is constant over the support of `x`.  This is the finite
+  hard-core model for terminal dyadic lifts in regular twin blowups.
 - `multipartite_modular.py`: exact integer model for modular
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts

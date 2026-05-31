@@ -1519,3 +1519,12 @@ source of growth beyond Ramsey.
   constant modulo `2q` on the remaining vertices, literally constant when
   `|P|<2q`.  This makes simple deletion-only absorption implausible in
   generic regular hosts.
+- 2026-05-31: Added `weighted_blowup.py` for the regular twin-blowup hard
+  core.  Given a base graph `B`, cluster cap `L`, and target `T`, it searches
+  for `0<=x_i<=L`, `sum x_i=T`, with `(A_B x)_i` constant over the support.
+  The first cheap certificate is equal weights on a regular induced subgraph
+  of the base; randomized dense circulant bases with `(n,L,T)` equal to
+  `(24,4,16)`, `(32,4,16)`, `(48,4,32)`, and `(64,4,32)` all had witnesses
+  within the small search budget.  At `(128,4,64)` the bounded search reports
+  `unknown`, not a failure.  Current evidence suggests random dense regular
+  bases are not an immediate obstruction to the terminal twin-blowup target.
