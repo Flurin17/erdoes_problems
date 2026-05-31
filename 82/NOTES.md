@@ -1567,3 +1567,11 @@ source of growth beyond Ramsey.
   `L=(log q)^2` have both density and co-density at least
   `Omega(1/(log q)^2)`; the modular trace-balance structure is only needed in
   this ordinary-density core.
+- 2026-05-31: Recorded that a flexible `O(q)` partition theorem would provide
+  the coarse dyadic lift: if every `q`-modular graph partitions into at most
+  `Dq` induced `2q`-modular parts, the largest part has size at least
+  `M/(Dq)`.  This is weaker than the fixed-slot/self-labelled targets already
+  refuted elsewhere.  Fresh samples found no failures for even graphs on
+  `8` and `10` vertices partitioning into four `4`-modular parts, nor for
+  `4`-modular graphs on `12` vertices partitioning into eight `8`-modular
+  parts.

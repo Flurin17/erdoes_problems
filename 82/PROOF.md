@@ -890,6 +890,26 @@ have both edge density and co-density at least `Omega(1/(log q)^2)`.  The
 modular degree-level structure must be used only after this ordinary
 sparse/co-sparse Ramsey obstruction has been removed.
 
+The coarse-lift hypothesis in the preceding conditional follows from a
+flexible `O(q)` partition theorem.
+
+**Lemma: Flexible `O(q)` Partitions Give Coarse Lifts.**  Suppose there is a
+constant `D` such that every `q`-modular graph can be partitioned into at most
+`Dq` induced `2q`-modular subgraphs.  Then every `q`-modular graph on `M`
+vertices contains a `2q`-modular induced subgraph on at least `M/(Dq)`
+vertices.
+
+Proof.  In such a partition, one part has size at least the average
+`M/(Dq)`.  QED.
+
+This target is weaker than the fixed-slot and self-labelled formulations
+refuted later in this file, because the number of parts may be linear in `q`
+and each part may choose its own target residue.  Small experiments support
+the flexible version: sampled even graphs on `8` and `10` vertices partitioned
+into four `4`-modular parts, and sampled `4`-modular graphs on `12` vertices
+partitioned into eight `8`-modular parts, with no counterexample seen in the
+bounded searches.
+
 The terminal-window lift has a rigid endpoint shape.
 
 **Lemma: Shape Of Near-Terminal Dyadic Witnesses.**  Let `|S|=2q+r` with
