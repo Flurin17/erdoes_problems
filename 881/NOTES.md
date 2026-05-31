@@ -1435,6 +1435,18 @@ So a two-color certificate-free order-2 basis would need mixed sums
 separated from both same-color sumsets, in addition to the Sidon-type
 sparsity of each color.
 
+This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
+asymptotic basis of order \(2\), then
+\[
+A=(3S+1)\cup(3S+2)
+\]
+would be an order-2 basis split into two certificate-free classes: residues
+modulo \(3\) separate mixed and same-color sums, and a same-color certificate
+would be a nontrivial Sidon collision in \(S\). Thus proving that every
+order-2 basis has arbitrarily large finite certificate-density would also
+rule out Sidon asymptotic bases of order \(2\), a much deeper-looking
+statement than the local finite-window checks.
+
 ## Robust Residue Boosters
 
 The finite residue obstruction becomes more promising in order \(k=3\).

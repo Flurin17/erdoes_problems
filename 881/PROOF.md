@@ -5463,6 +5463,54 @@ with the critical \(A(X)\asymp\sqrt X\) counting scale, so it is not by
 itself a contradiction, but it is stronger than the Sidon bound and rules
 out many naive cross-sum constructions.
 
+## Warning 8.6j'': Certificate-density would rule out Sidon bases
+
+The certificate-free obstruction is at least as hard as the classical Sidon
+basis obstruction. Suppose \(S\subset\mathbb N\) were a Sidon asymptotic
+basis of order \(2\). Put
+\[
+C=3S+1,\qquad D=3S+2,\qquad A=C\cup D.
+\]
+Then \(A\) is an asymptotic basis of order \(2\). If \(n\) is sufficiently
+large, according to its residue modulo \(3\) write
+\[
+\frac{n-2}{3},\qquad \frac{n-3}{3},\qquad \frac{n-4}{3}
+\]
+as a sum of two elements of \(S\), and use respectively \(C+C\), \(C+D\),
+or \(D+D\).
+
+Moreover \(C\) and \(D\) are certificate-free relative to \(A\). For
+example, if
+\[
+e=3s_e+1,\qquad y_i=3s_i+1\in C\quad(i=1,2),
+\]
+with \(y_i\ne e\), and
+\[
+y_1+y_2-e\in A,
+\]
+then the residue modulo \(3\) forces \(y_1+y_2-e\in C\), say
+\[
+y_1+y_2-e=3s_3+1.
+\]
+Thus
+\[
+s_1+s_2=s_e+s_3.
+\]
+The Sidon property gives equality of unordered pairs
+\[
+\{s_1,s_2\}=\{s_e,s_3\},
+\]
+contradicting \(s_1,s_2\ne s_e\). The proof for \(D\) is identical.
+
+Therefore a theorem that every order-2 basis has finite test sets with
+\[
+\Gamma_A(T)=|T|/\alpha_A(T)
+\]
+arbitrarily large would, in particular, rule out Sidon asymptotic bases of
+order \(2\). The certificate-density route should therefore not be treated
+as a routine Ramsey consequence of order-2 basishood; it reaches the
+critical Sidon-basis frontier.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose
