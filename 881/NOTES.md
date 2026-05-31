@@ -1782,6 +1782,12 @@ representation clusters. This is still finite-quotient compatible:
 in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
 \(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the
 whole group, and the center \(3\) swaps the two colors by reflection.
+Lemma 8.6j-7a records the matching route that would close one color:
+if the graphs of representations \(n=c_1+c_2+d\), with
+\(c_i\in C\) and \(d\in D\cup E\), have arbitrarily large matchings
+eventually, then a sparse deletion from \(C\) leaves an order-3 basis. A
+counterexample must therefore keep these cross-residual graphs star-like
+or bounded-transversal on infinitely many targets.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then

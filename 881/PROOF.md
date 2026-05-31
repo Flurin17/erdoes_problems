@@ -6438,6 +6438,57 @@ transversals; whenever those graphs have many edges, the bounded
 transversals force large \(C+(A\setminus C)\) degrees through a few moving
 vertices.
 
+## Lemma 8.6j-7a: Cross-residual color matchings give a deletion
+
+Let \(A=C\cup D\cup E\), where the union is disjoint and \(E\) is finite.
+For each \(n\), define a graph \(H_n^C\) on the vertex set
+\(C\cap[1,n]\) by putting an edge with support
+\[
+\{c_1,c_2\}
+\]
+whenever
+\[
+c_1,c_2\in C,\qquad n-c_1-c_2\in D\cup E.
+\]
+Loops are allowed and use one vertex. If, for every \(q\), all sufficiently
+large \(n\) have a matching of size at least \(q\) in \(H_n^C\), then
+there is an infinite
+\[
+T\subset C
+\]
+such that \(A\setminus T\) is an order-3 basis.
+
+Proof. Choose
+\[
+t_1<t_2<\cdots,\qquad t_i\in C,
+\]
+recursively so fast that \(t_j\) is larger than a threshold after which
+every \(H_n^C\) has a matching of size at least \(j+2\). Put
+\[
+T=\{t_j:j\ge1\}.
+\]
+Let \(n\) be large and choose \(j\) with
+\[
+t_j\le n<t_{j+1}.
+\]
+Then \(H_n^C\) has \(j+2\) disjoint edges. Future deleted elements are
+larger than \(n\), hence cannot occur in any edge support for a
+representation of \(n\). The first \(j\) deleted elements meet at most
+\(j\) of the disjoint supports. Therefore one edge \(\{c_1,c_2\}\) avoids
+\(T\), and by definition
+\[
+n=c_1+c_2+a,\qquad c_1,c_2\in C\setminus T,\quad a\in D\cup E.
+\]
+Since \(D\cup E\subset A\setminus T\), this is a three-term retained
+representation of \(n\). \(\square\)
+
+Thus a counterexample with a cofinite two-color certificate-free tail
+\(C\cup D\) must have bounded moving transversals not only in the
+one-color graphs from Lemma 8.6j-7, but already in the cross-residual
+graphs \(C+C+D\) and \(D+D+C\). The almost-cross-color recurrence from
+Lemma 8.6g''' naturally produces star-shaped families in these graphs; the
+remaining difficulty is to force disjoint supports rather than stars.
+
 ## Warning 8.6j-8: Cross reflections give moving, not fixed, certificates
 
 The mixed-spike structure has a tempting but invalid shortcut to Corollary
@@ -10842,6 +10893,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   failure of the shifted deletion inside a certificate-free color forces
   bounded moving transversals, and if the graphs have many edges those
   transversals create mixed-color degree spikes.
+* Lemma 8.6j-7a gives the direct cross-residual matching criterion:
+  arbitrarily large matchings in \(C+C+(A\setminus C)\) representation
+  graphs allow a sparse deletion from \(C\) that leaves an order-3 basis.
 * Warning 8.6j-8 explains why the resulting cross-color reflected packets
   do not directly trigger Corollary 2.3c: the moving certificate value is
   the natural deleted mirror.
