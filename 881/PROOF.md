@@ -674,6 +674,44 @@ not merely combinatorial: it creates either a genuine order-\(h\) failure or
 a delayed threshold, and in the genuine-failure case \(F\) is a vertex cover
 for many order-\(k\) representation hypergraphs.
 
+## Lemma 3.1d: Uniform finite-hole characterization of a good deletion
+
+Let \(h\ge1\), let \(A\subseteq\mathbb N\), and let \(X\subseteq A\) be
+infinite. Then \(A\setminus X\) is an asymptotic basis of order \(h\) if
+and only if there is a threshold \(T\) such that for every finite
+\[
+F\subset X
+\]
+one has
+\[
+[T,\infty)\subseteq h(A\setminus F). \tag{1}
+\]
+
+Proof. If \(A\setminus X\) is an order-\(h\) basis with threshold \(T\),
+then for every finite \(F\subset X\),
+\[
+A\setminus F\supseteq A\setminus X,
+\]
+so (1) follows from monotonicity in the set.
+
+Conversely, suppose (1) holds. Fix \(n\ge T\), and put
+\[
+F_n=X\cap[1,n].
+\]
+This set is finite. By (1), there is an \(h\)-term representation of \(n\)
+from \(A\setminus F_n\). Since all summands are positive, every summand in
+such a representation is at most \(n\). Thus avoiding \(F_n\) is the same
+as avoiding all of \(X\), and the representation lies in
+\[
+h(A\setminus X).
+\]
+Therefore \([T,\infty)\subseteq h(A\setminus X)\). \(\square\)
+
+Thus Corollary 3.1b is a sparse-prefix way to manufacture the uniform
+threshold in Lemma 3.1d. A counterexample must do more than create late
+finite holes along one enumeration: for every infinite \(X\subset A\), the
+finite deletions inside \(X\) must have no common eventual threshold.
+
 ## Lemma 3.2: Protected matching criterion
 
 Let \(A\) be an asymptotic basis of order \(k\). Suppose there is a finite
@@ -4080,6 +4118,9 @@ domination for many old elements.
   prefixes.
 * Corollary 3.1c says the late-bad finite sets must form a barrier on \(A\)
   in any counterexample.
+* Lemma 3.1d gives an exact fixed-deletion test: \(A\setminus X\) is an
+  order-\(h\) basis if and only if all finite deletions inside \(X\) have a
+  common order-\(h\) threshold.
 * Lemma 3.2 proves the theorem under an arbitrarily-large protected matching
   hypothesis for \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded

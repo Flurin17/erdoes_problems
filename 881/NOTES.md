@@ -71,6 +71,13 @@ good infinite deletion gives such a sequence after discarding finitely many
 small deleted elements, and such a sequence gives the deletion by the usual
 interval argument \(b_j\le n<b_{j+1}\).
 
+A fixed infinite deletion has an even cleaner exact test. Lemma 3.1d says
+that \(A\setminus X\) is an order-\((k+1)\) basis if and only if all finite
+deletions \(F\subset X\) share one common eventual threshold. The prefix
+criterion above is a practical way to force such a uniform threshold by
+making the next deleted element outrun the threshold of the current finite
+prefix.
+
 So a counterexample to the equivalent broader theorem must make finite
 late-bad sets unavoidable in every infinite subset of \(A\). By the
 terminal-gap lemmas below, genuine late-bad holes must delete all retained
