@@ -143,6 +143,47 @@ def can_partition(
     return rec(sizes, bins)
 
 
+def find_partition(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    bins: int,
+    max_bin_size: int | None = None,
+) -> list[tuple[int, ...]] | None:
+    choices = all_bins_with_cap(sizes, target_modulus, max_bin_size)
+    selected: dict[tuple[tuple[int, ...], int], tuple[int, ...]] = {}
+
+    @lru_cache(maxsize=None)
+    def rec(remaining: tuple[int, ...], left: int) -> bool:
+        if all(value == 0 for value in remaining):
+            return True
+        if left == 0:
+            return False
+
+        pivot = next(i for i, value in enumerate(remaining) if value)
+        for choice in choices:
+            if choice[pivot] == 0:
+                continue
+            if all(choice[i] <= remaining[i] for i in range(len(sizes))):
+                nxt = tuple(remaining[i] - choice[i] for i in range(len(sizes)))
+                if rec(nxt, left - 1):
+                    selected[(remaining, left)] = choice
+                    return True
+        return False
+
+    if not rec(sizes, bins):
+        return None
+
+    out = []
+    remaining = sizes
+    left = bins
+    while any(value for value in remaining):
+        choice = selected[(remaining, left)]
+        out.append(choice)
+        remaining = tuple(remaining[i] - choice[i] for i in range(len(sizes)))
+        left -= 1
+    return out
+
+
 def can_slot_partition(
     sizes: tuple[int, ...],
     target_modulus: int,
@@ -293,6 +334,7 @@ def run_fixed_sizes(
     target_modulus: int,
     cap: int,
     max_bin_size: int | None,
+    print_partition: bool,
 ) -> None:
     value = min_bins(sizes, target_modulus, cap, max_bin_size)
     print("sizes=" + ",".join(map(str, sizes)))
@@ -301,6 +343,10 @@ def run_fixed_sizes(
     if max_bin_size is not None:
         print(f"max_bin_size={max_bin_size}")
     print(f"min_bins={value if value is not None else 'NA'}")
+    if print_partition and value is not None:
+        parts = find_partition(sizes, target_modulus, value, max_bin_size)
+        assert parts is not None
+        print("partition=" + " ".join(",".join(map(str, part)) for part in parts))
 
 
 def main() -> None:
@@ -316,6 +362,7 @@ def main() -> None:
         "--sizes",
         help="comma-separated complete multipartite class sizes for a fixed check",
     )
+    parser.add_argument("--print-partition", action="store_true")
     parser.add_argument(
         "--exact",
         action="store_true",
@@ -333,7 +380,13 @@ def main() -> None:
     args = parser.parse_args()
     if args.sizes:
         sizes = tuple(sorted(int(item) for item in args.sizes.split(",") if item))
-        run_fixed_sizes(sizes, args.target_modulus, args.cap, args.max_bin_size)
+        run_fixed_sizes(
+            sizes,
+            args.target_modulus,
+            args.cap,
+            args.max_bin_size,
+            args.print_partition,
+        )
         return
     if args.slots:
         slots = tuple(int(item) % args.target_modulus for item in args.slots.split(","))

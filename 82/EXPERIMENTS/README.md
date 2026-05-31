@@ -129,7 +129,8 @@ Computational checks and generated data for Erdos Problem 82.
   `--max-bin-size` adds terminal-size caps, `--max-total-size` bounds the
   generated search space by total graph order, and `--sizes` verifies a fixed
   complete multipartite instance such as the `K_{22,2,1}` strict-terminal
-  obstruction.
+  obstruction.  Add `--print-partition` with `--sizes` to print one minimum
+  bin packing certificate.
 - `twin_blowup_modular.py`: exact weighted congruence model for graphs with a
   bounded number of twin classes, allowing each class to be a clique or an
   independent set and each pair of classes to be complete or empty.

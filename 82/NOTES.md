@@ -1248,3 +1248,9 @@ source of growth beyond Ramsey.
   most `q` satisfy the `q+2` target.  The remaining gap is to prove that
   single-class chunks from large classes can always reduce to such a residual
   instance without using too many bins.
+- 2026-05-31: Added `--print-partition` to `multipartite_modular.py` for fixed
+  complete multipartite size vectors.  The family `(1,2,3,q^2-q-2)` shows why
+  the unit-layer lemma alone is insufficient: the checker repairs it by using
+  repeated `(q+1,1)` special bins between the large class and small classes,
+  for example at `q=5` the partition is `(1,0,0,6)`, `(0,1,0,6)`,
+  `(0,1,0,6)`, `(0,0,3,0)`.
