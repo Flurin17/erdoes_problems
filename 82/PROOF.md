@@ -953,6 +953,39 @@ Thus the final retained `q_t`-modular host still has size
 theorem with at most `q(log q)^C` flexible `2q`-modular parts, combined with
 the `q`-modular host theorem above, would also prove Problem 82.
 
+The disconnected case of such a partition theorem can be reduced to connected
+components at the cost of the unavoidable residue slots.
+
+**Lemma: Connected Flexible Partitions Suffice For Coarse Lifts.**  Suppose
+that every connected `q`-modular graph can be partitioned into at most `B(q)`
+induced `2q`-modular subgraphs.  Then every `q`-modular graph can be
+partitioned into at most `2q B(q)` induced `2q`-modular subgraphs.
+
+Proof.  Partition each connected component separately into at most `B(q)`
+target-modular pieces.  Each piece has a degree residue modulo `2q`.  For each
+residue `rho in Z/(2q)Z`, create `B(q)` global slots.  Within a fixed
+component, inject its pieces of residue `rho` into the `B(q)` slots for
+`rho`.  Finally take, for every global slot, the disjoint union of all pieces
+assigned to that slot across all components.  A disjoint union of
+`2q`-modular graphs with the same residue is again `2q`-modular, and the
+number of slots is `2q B(q)`.  QED.
+
+Consequently, a connected `O(1)`-part theorem gives an `O(q)` flexible
+partition theorem, and a connected `polylog(q)`-part theorem gives the
+`q polylog(q)` coarse lift allowed above.  The disjoint-union obstructions to
+fixed slots do not attack this connected formulation.
+
+There is also a compactness-style universal-slot reformulation for fixed part
+count.  Fix a source residue `a mod q` and an integer `B`.  If every
+`q`-modular graph with source residue `a` has some `B`-part `2q`-modular
+partition, then there is a residue multiset `R_{q,a,B}` of size `B` modulo
+`2q` that works for every such graph.  Indeed, if every residue multiset
+failed on some graph, take the disjoint union of one failure for each
+multiset.  Any `B`-part partition of the union would have some residue
+signature `R`, but the component chosen to kill `R` could not be partitioned
+with that signature.  Thus flexible bounded-part partitioning is equivalent to
+proving source-residue-dependent universal slots.
+
 The terminal-window lift has a rigid endpoint shape.
 
 **Lemma: Shape Of Near-Terminal Dyadic Witnesses.**  Let `|S|=2q+r` with

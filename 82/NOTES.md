@@ -1592,3 +1592,13 @@ source of growth beyond Ramsey.
   `prod_{i<t} i^C=2^{o(t^2)}=n^{o(1)}`, so the retained terminal host is still
   much larger than `q_t^2`.  Thus a flexible partition theorem with
   `q polylog(q)` parts plus the modular-host theorem would suffice.
+- 2026-05-31: Reduced the coarse flexible partition target to connected
+  graphs.  If every connected `q`-modular graph has a `B(q)`-part
+  `2q`-modular partition, then every `q`-modular graph has a
+  `2q B(q)`-part partition by aligning component pieces in global residue
+  slots.  Hence connected `O(1)` parts imply an `O(q)` coarse lift, and
+  connected `polylog(q)` parts imply the `q polylog(q)` lift allowed above.
+  Also recorded the universal-slot compactness: for fixed source residue and
+  bounded part count, flexible partitioning is equivalent to a single
+  source-residue-dependent residue multiset working for all graphs, by taking
+  disjoint unions over failed slot multisets.
