@@ -3914,7 +3914,9 @@ minimal-counterexample reduction by the previous lemma.  The checker
 `EXPERIMENTS/matching_slot_search.py --good-edge 0:1` verifies this
 edge-rooted candidate for every even graph on at most `7` vertices with edge
 `01` present; by relabelling this is the same as every rooted edge on at most
-`7` vertices.  No proof is currently known.
+`7` vertices.  The C++ checker `EXPERIMENTS/matching_slot_fast.cpp` verifies
+the same edge-rooted candidate for all `1048576` even labelled graphs on
+`8` vertices containing edge `01`.  No proof is currently known.
 
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which

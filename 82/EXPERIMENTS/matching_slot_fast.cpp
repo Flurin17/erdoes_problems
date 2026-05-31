@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -53,7 +54,8 @@ class Checker {
         : n(n_value),
           full((1 << n_value) - 1),
           incident(1 << n_value),
-          submasks_with_pivot(1 << n_value) {
+          submasks_with_pivot(1 << n_value),
+          memo(1 << n_value) {
         for (int subset = 1; subset <= full; ++subset) {
             for (int v = 0; v < n; ++v) {
                 if (!((subset >> v) & 1)) continue;
@@ -102,10 +104,12 @@ class Checker {
         }
     }
 
-    bool has_partition() {
-        for (auto& row : memo) row.fill(-1);
+    bool has_partition(std::optional<std::pair<int, int>> good_edge) {
+        for (auto& table : memo) {
+            for (auto& row : table) row.fill(-1);
+        }
         std::array<int, 4> counts{2, 1, 1, 0};
-        return rec(full, state_code(counts));
+        return rec(full, state_code(counts), 4, 4, good_edge);
     }
 
   private:
@@ -115,12 +119,23 @@ class Checker {
     std::vector<std::vector<int>> submasks_with_pivot;
     std::array<int, 1 << 10> residue{};
     std::array<bool, 1 << 10> exact_matching{};
-    std::array<std::array<int8_t, 625>, 1 << 10> memo{};
+    std::vector<std::array<std::array<int8_t, 25>, 625>> memo;
 
-    bool rec(int remaining, int code) {
-        if (remaining == 0) return true;
+    bool rec(
+        int remaining,
+        int code,
+        int first_residue,
+        int second_residue,
+        std::optional<std::pair<int, int>> good_edge
+    ) {
+        if (remaining == 0) {
+            if (!good_edge) return true;
+            return (first_residue == 2 && second_residue == 2)
+                || (first_residue != second_residue);
+        }
         if (code == 0) return false;
-        int8_t& saved = memo[remaining][code];
+        int endpoint_code = first_residue * 5 + second_residue;
+        int8_t& saved = memo[remaining][code][endpoint_code];
         if (saved != -1) return saved;
         for (int r = 0; r < 3; ++r) {
             if (!has_count(code, r)) continue;
@@ -128,7 +143,13 @@ class Checker {
             for (int sub : submasks_with_pivot[remaining]) {
                 if (residue[sub] != r) continue;
                 if (r == 1 && !exact_matching[sub]) continue;
-                if (rec(remaining ^ sub, next_code)) {
+                int next_first = first_residue;
+                int next_second = second_residue;
+                if (good_edge) {
+                    if ((sub >> good_edge->first) & 1) next_first = r;
+                    if ((sub >> good_edge->second) & 1) next_second = r;
+                }
+                if (rec(remaining ^ sub, next_code, next_first, next_second, good_edge)) {
                     saved = 1;
                     return true;
                 }
@@ -170,16 +191,29 @@ int main(int argc, char** argv) {
     int n = 8;
     uint64_t limit = 0;
     bool progress = false;
+    std::optional<std::pair<int, int>> good_edge;
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
         if (arg == "--n" && i + 1 < argc) {
             n = std::stoi(argv[++i]);
         } else if (arg == "--limit" && i + 1 < argc) {
             limit = std::stoull(argv[++i]);
+        } else if (arg == "--good-edge" && i + 1 < argc) {
+            std::string text = argv[++i];
+            size_t sep = text.find(':');
+            if (sep == std::string::npos) {
+                std::cerr << "--good-edge expects u:v\n";
+                return 2;
+            }
+            good_edge = {
+                std::stoi(text.substr(0, sep)),
+                std::stoi(text.substr(sep + 1)),
+            };
         } else if (arg == "--progress") {
             progress = true;
         } else {
-            std::cerr << "usage: matching_slot_fast [--n N] [--limit L] [--progress]\n";
+            std::cerr << "usage: matching_slot_fast [--n N] [--limit L]"
+                      << " [--good-edge u:v] [--progress]\n";
             return 2;
         }
     }
@@ -187,18 +221,41 @@ int main(int argc, char** argv) {
         std::cerr << "supported range: 1 <= n <= 10\n";
         return 2;
     }
+    if (good_edge) {
+        if (
+            good_edge->first < 0 || good_edge->first >= n
+            || good_edge->second < 0 || good_edge->second >= n
+            || good_edge->first == good_edge->second
+        ) {
+            std::cerr << "--good-edge endpoints must be distinct vertices in range\n";
+            return 2;
+        }
+        if (good_edge->first > good_edge->second) {
+            std::swap(good_edge->first, good_edge->second);
+        }
+    }
 
     int free_edges = (n - 1) * (n - 2) / 2;
     uint64_t total = uint64_t{1} << free_edges;
     if (limit && limit < total) total = limit;
 
     Checker checker(n);
+    uint64_t checked = 0;
     for (uint64_t bits = 0; bits < total; ++bits) {
         uint64_t graph_mask = even_graph_mask(n, bits);
+        if (good_edge) {
+            int idx = edge_index(n, good_edge->first, good_edge->second);
+            if (((graph_mask >> idx) & 1) == 0) continue;
+        }
+        ++checked;
         checker.compute_valid_subsets(graph_mask);
-        if (!checker.has_partition()) {
+        if (!checker.has_partition(good_edge)) {
             std::cout << "n=" << n << "\n";
-            std::cout << "checked_before_counterexample=" << bits << "\n";
+            if (good_edge) {
+                std::cout << "good_edge=" << good_edge->first << ":"
+                          << good_edge->second << "\n";
+            }
+            std::cout << "checked_before_counterexample=" << checked << "\n";
             std::cout << "counterexample_mask=" << graph_mask << "\n";
             return 0;
         }
@@ -207,7 +264,11 @@ int main(int argc, char** argv) {
         }
     }
     std::cout << "n=" << n << "\n";
-    std::cout << "checked=" << total << "\n";
+    if (good_edge) {
+        std::cout << "good_edge=" << good_edge->first << ":"
+                  << good_edge->second << "\n";
+    }
+    std::cout << "checked=" << checked << "\n";
     std::cout << "no_counterexample_seen\n";
     return 0;
 }

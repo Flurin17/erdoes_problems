@@ -105,7 +105,8 @@ Computational checks and generated data for Erdos Problem 82.
   a pattern that lifts across degree-`2` suppression.
 - `matching_slot_fast.cpp`: C++ exact checker for the same matching-slot
   target on small even graphs.  It is intended to make the full labelled
-  `n=8` even-graph sweep reproducible.
+  `n=8` even-graph sweep reproducible, and also supports `--good-edge u:v`
+  for the edge-rooted degree-`2` suppression strengthening.
 - `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus

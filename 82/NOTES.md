@@ -1972,3 +1972,8 @@ source of growth beyond Ramsey.
   present (`16,384` graphs at `n=7`), which by relabelling covers every rooted
   edge on at most seven vertices.  The `n=16` modular-OCT counterexample also
   has a good-edge certificate for edge `0:1`.
+- 2026-05-31: Extended `matching_slot_fast.cpp` with `--good-edge` and ran the
+  full edge-rooted `n=8` sweep.  All `1,048,576` labelled even graphs on
+  `8` vertices containing edge `0:1` pass the good-edge matching-slot target.
+  This gives stronger finite support for an edge-rooted theorem that would
+  make degree-`2` suppression valid in a minimal-counterexample proof.
