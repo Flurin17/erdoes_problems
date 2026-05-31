@@ -2705,6 +2705,40 @@ Lemma 8.4a by itself is insufficient. A sparse-gap proof would need an
 additional arithmetic thickness statement ruling out such locally isolated
 terminal windows in genuine order-2 bases.
 
+## Warning 8.6f: In the sparse case, ordinary gaps mimic terminal gaps
+
+After Proposition 3.1f, any counterexample to the broad deletion theorem has
+no tail-syndetic subset. In that remaining case the terminal retained gap
+from Lemma 8.4a is not, by itself, a strong obstruction.
+
+Let \(A\) be an order-2 basis with threshold \(N_0\), put
+\(m_0=\min A\), and suppose \(A\) has arbitrarily long tail gaps. Let
+\(F\subset A\) be finite and nonempty, write \(f_0=\min F\), and assume
+\[
+f_0>N_0-m_0.
+\]
+Then for every \(L\) there is \(w>L\) such that
+\[
+(A\setminus F)\cap(w-f_0-m_0,\ w-N_0]=\varnothing. \tag{1}
+\]
+Indeed, choose
+\[
+x>L-f_0-m_0
+\]
+so far out that
+\[
+A\cap(x,\ x+f_0+m_0-N_0]=\varnothing,
+\]
+and put \(w=x+f_0+m_0\). Then (1) is exactly this ordinary \(A\)-gap.
+
+Thus the sparse case supplies terminal windows of every relevant length
+without using any additive nonrepresentation. The missing input in the
+remaining \(k=2\) problem is therefore the arithmetic part of Lemma 8.4:
+the same finite set \(F\) must be a vertex cover for all shifted two-sum
+representation graphs below the witness. Any proof that only selects an
+infinite deletion to avoid complete terminal windows is vulnerable to the
+local-isolation pattern in Warning 8.6e.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -4477,6 +4511,10 @@ new-design problem, not as a small non-greedy search miss.
   are locally compatible with strong order-2 minimality and singleton
   order-3 stability; any bounded-second-excess reduction must use the
   global barrier hypothesis over every infinite deletion.
+* Warning 8.6f records that in the no-tail-syndetic case left by
+  Proposition 3.1f, ordinary \(A\)-gaps already mimic the terminal windows
+  from Lemma 8.4a; the unresolved obstruction is the shifted two-sum
+  vertex-cover condition, not gap existence.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.

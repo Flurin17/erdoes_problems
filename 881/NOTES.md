@@ -925,6 +925,17 @@ long intervals of the relevant length whose \(A\)-content is a prescribed
 single far-tail point. So any proof using retained gaps needs an additional
 arithmetic thickness lemma, not just sparsity.
 
+Warning 8.6f makes this sharper in the no-tail-syndetic case left by
+Proposition 3.1f. If \(A\) has arbitrarily long gaps, then for any late
+finite \(F\) with \(f_0=\min F\) and any \(L\), ordinary gaps alone produce
+some \(w>L\) with
+\[
+(A\setminus F)\cap(w-f_0-m_0,\ w-N_0]=\varnothing.
+\]
+Thus the remaining obstruction is not the existence of terminal gaps; it is
+the shifted two-sum vertex-cover condition attached to genuine
+nonrepresentations.
+
 Lemma 8.6a closes a broader delayed-barrier branch. If every infinite tail
 contains finite barriers \(F=\{f_1<\cdots<f_r\}\) whose witness lies within
 a bounded distance of the second-smallest element \(f_2\), then all test
