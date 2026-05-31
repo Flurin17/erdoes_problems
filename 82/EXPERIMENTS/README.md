@@ -96,6 +96,8 @@ Computational checks and generated data for Erdos Problem 82.
   `--diagnostics` prints the residue-`1` and residue-`2` sets and the residual
   cut-congruence rows from Lemma 4I.6.  `--residue-one-matching` additionally
   requires every residue-`1` part modulo `4` to be exactly `1`-regular.
+  `--force-residue v:r` forces vertex `v` into some part of residue `r`; the
+  option may be repeated.
 - `matching_slot_search.py`: direct vertex-coloring backtracker for the
   stronger `(0,0,1,2)` first-lift target in which the residue-`1` color class
   must be an induced matching.  This is often faster than exact-cover subset

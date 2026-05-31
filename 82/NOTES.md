@@ -2108,3 +2108,12 @@ source of growth beyond Ramsey.
   source-residue filters checked `417` source-`0` vectors and `85` source-`1`
   vectors, also with no counterexample.  An attempted eight-class size-`12`
   run was stopped for cost and is not evidence.
+- 2026-05-31: Added `--force-residue` to `slot_partition.py` and recorded the
+  exact two-cut sign form for `(0,0,2,2)`: choose a first split `X,Y`, then
+  cut `G[X]` into two `0 mod 4` parts and `G[Y]` into two `2 mod 4` parts;
+  a two-part target-`t` cut is equivalent to
+  `x_v sum_{u in N(v)} x_u == 2t-deg(v) mod 8`.  The rooted zero-slot
+  strengthening is false: the triangle plus four isolates, mask `1057`, has
+  a `(0,0,2,2)` partition, but a specified triangle vertex cannot be forced
+  into a zero-residue part.  Thus cut-vertex induction for this clean slot
+  target needs a richer boundary signature.

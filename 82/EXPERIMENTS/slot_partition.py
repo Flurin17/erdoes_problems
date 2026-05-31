@@ -23,8 +23,11 @@ def find_slot_partition(
     modulus: int,
     slots: tuple[int, ...],
     residue_one_matching: bool = False,
+    forced_residues: dict[int, int] | None = None,
 ) -> list[int] | None:
     slots = tuple(sorted(slots))
+    if forced_residues is None:
+        forced_residues = {}
     pc = ri.precompute(n)
     edge_index = {edge: index for index, edge in enumerate(pc.edges)}
     full = (1 << n) - 1
@@ -36,6 +39,11 @@ def find_slot_partition(
     for subset in range(1, 1 << n):
         residue = modular_partition.residue_on(graph_mask, subset, modulus, pc)
         if residue is not None and residue in by_residue:
+            if any(
+                ((subset >> vertex) & 1) and forced != residue
+                for vertex, forced in forced_residues.items()
+            ):
+                continue
             if residue_one_matching and modulus == 4 and residue == 1:
                 if any(
                     (graph_mask & pc.incident[subset][vertex]).bit_count() != 1
@@ -185,6 +193,12 @@ def main() -> None:
         action="store_true",
         help="for modulus 4, require every residue-1 part to be exactly 1-regular",
     )
+    parser.add_argument(
+        "--force-residue",
+        action="append",
+        default=[],
+        help="force a vertex into a part of a given residue, as vertex:residue",
+    )
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
     slots = (
@@ -192,6 +206,10 @@ def main() -> None:
         if args.self_labelled
         else tuple(int(item) % args.modulus for item in args.slots.split(",") if item)
     )
+    forced_residues: dict[int, int] = {}
+    for item in args.force_residue:
+        vertex_text, residue_text = item.split(":", 1)
+        forced_residues[int(vertex_text)] = int(residue_text) % args.modulus
     if args.exhaustive_even:
         pc = ri.precompute(args.n)
         edge_index = {edge: i for i, edge in enumerate(pc.edges)}
@@ -229,6 +247,7 @@ def main() -> None:
                     args.modulus,
                     slots,
                     args.residue_one_matching,
+                    forced_residues,
                 )
             if assignment is None:
                 bad = graph_mask
@@ -269,6 +288,7 @@ def main() -> None:
                     args.modulus,
                     slots,
                     args.residue_one_matching,
+                    forced_residues,
                 )
             if assignment is None:
                 failures.append(graph_mask)
@@ -301,6 +321,7 @@ def main() -> None:
             args.modulus,
             slots,
             args.residue_one_matching,
+            forced_residues,
         )
     print(f"n={args.n}")
     print(f"mask={args.mask}")

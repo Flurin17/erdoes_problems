@@ -3581,6 +3581,55 @@ clean source-residue slots `(0,1,2,3)` has an even stronger
 `(0,0,2,2)` certificate: its vertices split into the two zero-residue parts
 `{0,1,3}` and `{2,4,5,6,7}`.
 
+The following exact form isolates what a proof of this candidate must supply.
+
+**Lemma 4I.5B: Two-Cut Form For The Slots `(0,0,2,2)`.**  A graph `G` has a
+`4`-modular partition with residue signature contained in `(0,0,2,2)` if and
+only if there is a partition
+
+```text
+V(G)=X union Y
+```
+
+such that `G[X]` has a cut whose two sides both have internal degree
+`0 mod 4`, and `G[Y]` has a cut whose two sides both have internal degree
+`2 mod 4`.  Empty sides are allowed and impose no degree condition.
+
+Equivalently, for a graph `H` and a target `t in {0,2}`, a cut of `H` into
+parts of residue `t`, ignoring any empty side, is the same as a sign vector
+`x:V(H)->{+1,-1}` satisfying
+
+```text
+x_v sum_{u in N_H(v)} x_u congruent 2t - deg_H(v) mod 8
+```
+
+for every vertex `v`.
+
+Proof.  The first statement is just the grouping of the four slots according
+to whether their target residue is `0` or `2`: put the two zero-residue parts
+inside `X` and the two residue-`2` parts inside `Y`, and conversely split
+`X` and `Y` by the two displayed cuts.
+
+For the sign formulation, let `S_x(v)=sum_{u in N_H(v)} x_u`.  The number of
+same-side neighbors of `v` is
+
+```text
+(deg_H(v) + x_v S_x(v))/2.
+```
+
+This number is congruent to `t mod 4` exactly when
+
+```text
+deg_H(v) + x_v S_x(v) congruent 2t mod 8,
+```
+
+which is the displayed congruence.  QED.
+
+Thus the lower parity bit is not the obstruction: Lemma 4I.6B gives a cut
+with even same-side degree in any fixed `X` or `Y`.  The hard step is choosing
+`X` so that the upper bit can be made `0` on `X` and `1` on `Y` by the two
+sign equations.
+
 A natural attempt to deduce the odd-degree source case from the even case by
 complementation is too strong.  If `G` is odd-degree on an even number of
 vertices, then `bar G` is even-degree.  A `(0,0,2,2)` partition of `bar G`
@@ -3618,6 +3667,35 @@ The compiled checker finds this obstruction with
 ```
 
 as mask `220336191`.
+
+A rooted zero-slot version is also false, so cut-vertex induction cannot use
+the same boundary condition as the matching-slot candidate below.
+
+**Example: Rooted Zero Slots Are Not Forced For `(0,0,2,2)`.**  There is an
+even graph with a `(0,0,2,2)` partition, but with no such partition placing a
+specified vertex in a zero-residue part.
+
+Proof.  Let `G` be the disjoint union of a triangle on vertices `{0,1,6}` and
+four isolated vertices, and force vertex `0` into a zero-residue part.  The
+graph has a `(0,0,2,2)` partition by putting the whole triangle into one
+residue-`2` slot and the isolated vertices into a zero slot.
+
+In any `(0,0,2,2)` partition, a residue-`2` part cannot contain a nonempty
+proper subset of the triangle: a singleton has internal degree `0`, and an
+edge has internal degree `1` at its endpoints.  A zero-residue part can
+contain at most one triangle vertex, because two adjacent triangle vertices
+have internal degree `1`, while all three have internal degree `2`.
+Therefore, if vertex `0` is placed in a zero slot, the remaining triangle
+vertices `1` and `6` cannot both be placed in zero slots and cannot form
+residue-`2` parts without `0`.  This contradiction proves the rooted claim.
+QED.
+
+The exact checker verifies the obstruction as mask `1057`:
+
+```text
+python3 EXPERIMENTS/slot_partition.py 7 --exhaustive-even \
+  --slots 0,0,2,2 --force-residue 0:0
+```
 
 One tempting simplification of the surviving clean even-source candidate
 `R=(0,0,2,2)` is false: the two zero slots cannot be merged into one.
