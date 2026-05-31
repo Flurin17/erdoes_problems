@@ -1691,3 +1691,11 @@ source of growth beyond Ramsey.
   certificate from Proposition 4E.4.  Thus connected three-part `4 -> 8` is
   false; four parts remain the calibrated constant target for low dyadic
   lifts.
+- 2026-05-31: Further weakened the dyadic target.  A polylog-fraction witness
+  is unnecessary: it suffices to prove that every connected dyadic
+  `q`-modular graph has an induced `2q`-modular witness of size at least
+  `|V| psi(q)/q`, where `psi(q)=omega((log q)^2)`.  Iterating with this loss
+  keeps the process above the terminal range until `log q=Omega(sqrt(log n))`;
+  at the first terminal step Lemma 2 gives a regular graph of size at least
+  `psi(q)=omega(log n)`.  Thus the current weakest target is a logarithmic
+  saving over the natural `q`-scale loss, not a full polylogarithmic fraction.

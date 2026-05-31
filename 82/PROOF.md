@@ -1086,6 +1086,73 @@ every connected `q`-modular graph has a `polylog(q)`-part induced
 `2q`-modular partition, then one part has the required size, and the
 conditional proposition applies.
 
+The polylogarithmic-loss hypothesis is much stronger than necessary.  A
+sublinear-in-`q` loss with a logarithmic saving already suffices.
+
+## Conditional Proposition: A Log-Squared Saving In Dyadic Witnesses Suffices
+
+Let `psi(q)` be a function on dyadic integers with
+
+```text
+psi(q) = omega((log_2 q)^2).
+```
+
+Suppose that, for every dyadic `q>=2`, every connected `q`-modular graph `H`
+contains an induced `2q`-modular subgraph on at least
+
+```text
+|V(H)| psi(q) / q
+```
+
+vertices.  Then `F(n)/log n -> infinity`.
+
+Proof.  By the complement reduction, the same witness statement holds for all
+`q`-modular graphs.  Let `G` be an `n`-vertex graph, put `L=log_2 n`, and start
+from Gallai's `2`-modular induced subgraph of size at least `n/2`.  Recursively
+choose dyadic witnesses, writing `m_i` for the size at modulus `q_i=2^i`.
+Thus
+
+```text
+m_{i+1} >= m_i psi(q_i)/q_i.
+```
+
+Since `psi(q)>=1` for all sufficiently large dyadic `q`, discarding finitely
+many initial steps only changes constants.  For all later steps,
+
+```text
+m_i >= n / 2^{O(i^2)}.
+```
+
+Hence for every fixed small `c>0`, if `i<=c sqrt L`, then `m_i>q_i+1` for all
+sufficiently large `n`.  Let `t` be the first index with `m_t<=q_t+1`; such a
+`t` exists because eventually `q_t>n`.  The preceding bound gives
+
+```text
+t >= c sqrt L.
+```
+
+At this first terminal index, Lemma 2 makes the `q_t`-modular graph regular.
+Moreover `m_{t-1}>q_{t-1}+1`, so the final witness step gives
+
+```text
+m_t >= m_{t-1} psi(q_{t-1})/q_{t-1}
+    >= psi(q_{t-1}).
+```
+
+Since `log_2 q_{t-1}=t-1=Omega(sqrt L)`, the assumption on `psi` gives
+
+```text
+m_t = omega(L) = omega(log_2 n).
+```
+
+Thus every sufficiently large `n`-vertex graph has a regular induced subgraph
+of order `omega(log n)`.  QED.
+
+This is now the weakest dyadic target in the workspace: prove a connected
+large-witness lift with loss `q/omega((log q)^2)`.  A partition theorem with at
+most `q/omega((log q)^2)` induced `2q`-modular parts would imply it, but a
+direct large-witness proof may be easier.
+
 The connected formulation still cannot demand too few parts.  The first
 dyadic lift already has a connected example requiring four flexible parts.
 
