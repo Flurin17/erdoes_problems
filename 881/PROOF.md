@@ -2012,6 +2012,59 @@ handled separately by Corollary 3.4b. Any remaining \(k=2\) counterexample
 must combine large representation spikes with unpinned bounded-count
 translate rows after every finite set is protected.
 
+## Corollary 3.4n: Remaining counterexamples have unpinned low-count stars
+
+In the remaining \(k=2\) counterexample case, for every finite
+\[
+E\supset E_*
+\]
+there are constants \(Q_E,\eta_E>0\) and arbitrarily large \(w\) for which
+some
+\[
+d\in A\setminus E
+\]
+satisfies
+\[
+\left|\{a\in A\setminus E:\ w-d-a\in A\setminus E,
+        r_{2,A}(a+d)\le Q_E\}\right|
+   \ge \eta_E A(w). \tag{1}
+\]
+After decreasing \(\eta_E\), the gate \(d\) may also be required to lie
+above any prescribed bound.
+
+Proof. Apply Corollary 3.4i with a protected core \(E\) that also contains
+all elements below the prescribed bound. It gives arbitrarily large \(w\),
+an inclusion-minimal finite hole \(F\subset A\setminus E\), a gate
+\[
+d\in F,
+\]
+and at least \(\eta A(w)\) unordered retained repairs
+\[
+w-d=a+b,\qquad a,b\in A\setminus F.
+\]
+By Corollary 3.4h, every summand in such a repair has
+\[
+r_{2,A}(a+d)\le |F|\le q_E.
+\]
+Discard the \(O_E(1)\) repairs using any element of \(E\) as one of the two
+retained summands. Distinct unordered repairs have disjoint supports unless
+they are identical, so after decreasing the constant and taking \(w\) large
+enough, the remaining repairs contribute \(\gg_E A(w)\) distinct summands
+\[
+a\in A\setminus E
+\]
+with complementary summand \(w-d-a\in A\setminus E\). Taking
+\[
+Q_E=q_E
+\]
+proves (1). \(\square\)
+
+Thus a counterexample cannot hide all bounded-count rows behind finitely
+many small accelerators. Outside every finite protected core it must create
+a genuinely new low-count star: one fresh center \(d\) has linearly many
+fresh reflected neighbours \(a\), and every cross-sum \(a+d\) has bounded
+two-term representation count in the full set \(A\).
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -7132,6 +7185,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 3.4m gives the corresponding positive criterion for \(k=2\):
   if one finite pin set accounts for all large bounded-count two-sums, then
   the desired infinite deletion exists.
+* Corollary 3.4n makes the remaining unpinned obstruction explicit: outside
+  every finite core, a fresh gate \(d\) has \(\gg_E A(w)\) fresh reflected
+  neighbours \(a\) with \(r_{2,A}(a+d)\) bounded.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

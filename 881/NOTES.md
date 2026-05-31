@@ -547,6 +547,12 @@ basis with one finite pin set controlling all bounded-count large two-sums
 satisfies the desired order-3 deletion conclusion. The leftover sparse
 case must therefore have both large representation spikes and unpinned
 bounded-count rows after every finite core is protected.
+Corollary 3.4n makes this unpinned requirement explicit: outside every
+finite protected core, a counterexample must have a fresh gate \(d\) and
+\(\gg_E A(w)\) fresh reflected neighbours \(a\), all avoiding the core,
+with \(w-d-a\in A\) and bounded full count \(r_{2,A}(a+d)\). This is a
+low-count star in the graph of bounded-representation two-sums, coupled to
+the reflected slice at \(w-d\).
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
