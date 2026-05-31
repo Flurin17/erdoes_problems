@@ -1456,3 +1456,24 @@ source of growth beyond Ramsey.
   only a memory/runtime limit; the diagonal bounded-largest case remains
   unrefuted but is no longer the right standalone target after the
   small-`B` staircase obstruction.
+- 2026-05-31: Added the reservoir lifting criterion suggested by the full-bin
+  subagent.  If a large coordinate `x` is used as a reservoir, `s` specials
+  delete chosen tail units, and the residual tail has a rectangle cover
+  `r_j 1_{I_j}` satisfying the lifted area bounds `r_j(|I_j|+1)<=q+2`, then
+  adjoining the reservoir to every tail rectangle uses reservoir height
+  `H=sum r_j`; the remaining reservoir fits into singleton bins provided
+  `s+R<=q`, `x>=s(q+1)+H`, and
+  `x-s(q+1)-H <= (q-s-R)(q+2)`.  This exactly repairs the staircase family
+  `((q-3)(q+2),8,7,6,5,4,3,2,1)` for every `q>=30`: the vector has no
+  `q`-rectangle cover by a tail-height/capacity argument, but one special
+  lowers the `8` to `7`, and the tail `(7,7,6,5,4,3,2,1)` is covered by
+  three lifted binary rectangles of heights `4,2,1`.  Next target:
+  generalize this into a sparse-special rank-reduction lemma for arbitrary
+  tails with one large reservoir coordinate.
+- 2026-05-31: Added `one_large_tail_scan.py` to make the next reservoir
+  target reproducible.  It exhaustively enumerates vectors `(x,tail)` with
+  `x>=max(tail)`, `x+sum(tail)<=q^2`, and `sum(tail)<=factor*q`, then calls
+  the exact full-bin checker.  With `factor=3`, it found no counterexample for
+  `3<=q<=9` (`743,120` cases at `q=9`).  This supports a possible extension
+  of the one-large-class repair from tail total `<=q` to at least `<=3q`,
+  but remains only finite evidence.

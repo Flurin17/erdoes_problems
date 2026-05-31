@@ -1454,6 +1454,100 @@ inequalities for all sufficiently large `q`.  Therefore the conditional
 proposition remains formally valid, but its hypothesis cannot be the final
 multipartite arithmetic target.
 
+The preceding counterexample points to the right repair mechanism: keep a
+large coordinate as a reservoir and include it in the tail rectangles.  This
+simultaneously covers the tail and reduces the number of singleton bins needed
+for the reservoir.
+
+**Lemma: Reservoir Lifting Criterion.**  Put `C=q+2`.  Let
+
+```text
+a=(x,y_1,...,y_t)
+```
+
+be a nonnegative vector, and choose `s` tail units to be the small endpoints of
+special bins whose large endpoint is the first coordinate.  Let `y'` be the
+residual tail after these `s` deletions.  Suppose that `y'` has a rectangle
+decomposition
+
+```text
+y' = sum_{j=1}^R r_j 1_{I_j}
+```
+
+with the stronger lifted legality condition
+
+```text
+r_j(|I_j|+1) <= C
+```
+
+for every `j`.  Put `H=sum_j r_j`.  If
+
+```text
+s+R <= q,
+x >= s(q+1)+H,
+x-s(q+1)-H <= (q-s-R)C,
+```
+
+then `a` has a multipartite bin decomposition using at most `q` bins.
+
+Proof.  First use the `s` special bins, each taking `q+1` vertices from the
+first coordinate and one chosen tail vertex.  Then, for each tail rectangle
+`r_j 1_{I_j}`, use one ordinary rectangle bin on the index set
+`{0} union I_j`, where `0` denotes the first coordinate.  Its area is
+`r_j(|I_j|+1)<=C`, so it is legal; over all such bins it removes exactly
+`y'` from the tail and `H` vertices from the first coordinate.  The remaining
+first-coordinate mass is `x-s(q+1)-H`, which is nonnegative by the second
+display and fits into the remaining `q-s-R` singleton rectangle bins by the
+third display.  QED.
+
+The reservoir criterion explains how a single special repairs the staircase
+obstruction to rectangle-only covering.
+
+**Example: Reservoir Repair Of A Staircase Tail.**  For `q>=30`, put `C=q+2`
+and
+
+```text
+a=((q-3)C,8,7,6,5,4,3,2,1).
+```
+
+Then `sum_i a_i=(q-3)(q+2)+36=q^2-q+30<=q^2`.  This vector has no
+`q`-rectangle cover.  Indeed, let `m` be the number of rectangles that meet
+the tail.  The tail has eight distinct positive coordinate values, so by the
+distinct-height obstruction `m>=4`.  If the heights of the tail-meeting
+rectangles sum to `H`, then the first coordinate can receive at most
+`(q-m)C+H` mass from the `q` rectangles.  Since it needs `(q-3)C`, we have
+
+```text
+H >= (m-3)C.
+```
+
+On the other hand every tail-meeting rectangle has height at most `8`, so
+`H<=8m`.  For `m>=5` this contradicts `C>=32`; for `m=4`, the inequality
+forces `H>=C`, while `H<=32`.  If `q>30` then `C>32`, contradiction.  If
+`q=30`, equality would force all four tail-meeting heights to be `8`, which
+cannot produce the tail values `1,...,7`.  Thus no `q`-rectangle cover exists.
+
+However, one special bin repairs the vector.  Use one special bin from the
+first coordinate to the tail coordinate of size `8`, leaving tail
+
+```text
+(7,7,6,5,4,3,2,1).
+```
+
+This residual tail is the sum of three binary rectangles of heights `4`, `2`,
+and `1`, where in each case the index set consists of the tail coordinates
+whose binary expansion contains the corresponding bit.  Each bit occurs in
+five tail coordinates, so after adjoining the reservoir coordinate the lifted
+areas are `4*6`, `2*6`, and `1*6`, all at most `C`.  The reservoir height used
+by these three rectangles is `H=7`, and the remaining first-coordinate mass is
+
+```text
+(q-3)C-(q+1)-7 <= (q-4)C.
+```
+
+Therefore the reservoir lifting criterion gives a cover with
+`1+3+(q-4)=q` bins.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with
