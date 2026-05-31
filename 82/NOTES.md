@@ -2032,3 +2032,10 @@ source of growth beyond Ramsey.
   to report incidence, cancellation mass, and L1 imbalance for `--trace-cone`
   examples.  This isolates the remaining hard trace case as large mixed-sign
   cancellation, not one-sided trace counting.
+- 2026-05-31: Tested the naive two-root zero-slot strengthening for the
+  matching-slot theorem and found it false.  The graph with mask `1057` on
+  `7` vertices is just a triangle on `{0,1,6}` plus four isolated vertices;
+  it has a matching-slot certificate, but forcing adjacent triangle vertices
+  `0` and `1` into zero slots is impossible.  Therefore any 2-vertex separator
+  induction needs a richer boundary signature, not merely a two-root version
+  of the cut-vertex rooted-zero candidate.

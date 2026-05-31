@@ -3880,6 +3880,36 @@ Computationally, `EXPERIMENTS/matching_slot_search.py --force-color r:0`
 confirms this rooted form for every root in every even graph through
 `7` vertices, and for the current hard masks tested above.
 
+This single-root formulation is close to the limit of what can be asked in
+this direction.  The naive two-root strengthening is false even for graphs of
+maximum degree `2`.
+
+**Example: Two Prescribed Zero Roots Are Impossible.**  Let `G` be the
+disjoint union of a triangle on vertices `{0,1,6}` and four isolated
+vertices.  Then `G` is even and satisfies the matching-slot target, but no
+matching-slot certificate places both `0` and `1` in zero-residue slots.
+
+Proof.  The graph has a certificate by putting the edge `{1,6}` in the
+matching slot `C` and putting all remaining vertices, including `0`, in a
+zero slot.  This is the certificate found by
+`EXPERIMENTS/matching_slot_search.py 7 --mask 1057`.
+
+Suppose instead that both adjacent triangle vertices `0` and `1` lie in
+zero-residue slots.  If they lie in the same zero slot, then each has at least
+one same-slot neighbor inside the triangle, impossible because a zero slot
+requires same-slot degree divisible by `4` and the triangle has maximum
+degree `2`.  If they lie in different zero slots, then the third triangle
+vertex `6` cannot lie in either zero slot, because it would create same-slot
+degree `1` for itself and for one of `0,1`.  It also cannot lie in `C`,
+because then it has no same-`C` neighbor, and it cannot lie in `D`, because
+then it has same-`D` degree `0` instead of `2 mod 4`.  This contradiction
+proves the claim.  QED.
+
+Thus a 2-vertex separator induction cannot simply ask every lobe to put both
+boundary vertices into zero slots.  It needs a genuine two-root boundary
+signature that records colors and same-color degree contributions at the two
+boundary vertices.
+
 **Lemma: Cut-Vertex Reduction From Rooted Zero-Slot Lobes.**  Suppose the
 rooted zero-slot matching candidate holds for every even graph with fewer
 vertices than a connected even graph `G`.  If `G` has a cut vertex, then `G`
