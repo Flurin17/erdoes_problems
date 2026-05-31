@@ -2003,3 +2003,10 @@ source of growth beyond Ramsey.
   source residues `1,2,4,5,6,7`: survivor counts were `3,2,3,12,3,8`
   respectively.  Source `0` remained broad (`40` survivors after `80` of
   `88` vectors); source `3` was still slow under this naive candidate loop.
+- 2026-05-31: Added the signed-indicator trace refinement.  In the minimal
+  repeated-degree host, every outside trace difference vector relative to a
+  base vertex is not an arbitrary `{-1,0,1}` vector but a nonzero vector
+  `1_S` or `-1_S`.  Added `--trace-cone` to `trace_multiset_bound.py` to
+  restrict multiset searches to this actual support.  Short capped runs show
+  the restricted search still grows quickly at dimension `5`, so this is a
+  structural refinement rather than a closed trace proof.

@@ -42,6 +42,22 @@ def vectors(d: int) -> list[Vector]:
     return out
 
 
+def trace_cone_vectors(d: int) -> list[Vector]:
+    """Actual trace-difference vectors relative to one base coordinate.
+
+    If an outside vertex is nonadjacent to the base vertex, its difference
+    vector is a nonzero {0,1}-indicator.  If it is adjacent to the base vertex,
+    its difference vector is a nonzero {0,-1}-indicator.
+    """
+    out: list[Vector] = []
+    for mask in range(1, 1 << d):
+        positive = tuple((mask >> i) & 1 for i in range(d))
+        out.append(positive)
+        out.append(tuple(-x for x in positive))
+    out.sort(key=lambda v: (sum(abs(x) for x in v), v), reverse=True)
+    return out
+
+
 def total_ok(total: Vector, bound: int) -> bool:
     return all(abs(x) <= bound for x in total)
 
@@ -92,8 +108,9 @@ def search(
     require_graphical: bool,
     max_nodes: int | None,
     max_subset_sums: int | None,
+    trace_cone: bool,
 ) -> None:
-    support = vectors(d)
+    support = trace_cone_vectors(d) if trace_cone else vectors(d)
     zero = tuple(0 for _ in range(d))
     best_size = -1
     best_counts: list[int] = []
@@ -144,6 +161,7 @@ def search(
     print(f"support_size={len(support)}")
     print(f"total_bound={total_bound}")
     print(f"multiplicity_cap={multiplicity_cap}")
+    print(f"trace_cone={trace_cone}")
     print(f"max_subset_sums={max_subset_sums}")
     print(f"require_graphical_compensator={require_graphical}")
     print(f"complete={complete}")
@@ -164,6 +182,7 @@ def main() -> None:
     parser.add_argument("--total-bound", type=int)
     parser.add_argument("--multiplicity-cap", type=int, default=3)
     parser.add_argument("--require-graphical", action="store_true")
+    parser.add_argument("--trace-cone", action="store_true")
     parser.add_argument("--max-nodes", type=int)
     parser.add_argument("--max-subset-sums", type=int)
     args = parser.parse_args()
@@ -175,6 +194,7 @@ def main() -> None:
         args.require_graphical,
         args.max_nodes,
         args.max_subset_sums,
+        args.trace_cone,
     )
 
 

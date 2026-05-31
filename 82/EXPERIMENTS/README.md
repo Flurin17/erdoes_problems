@@ -213,5 +213,6 @@ Computational checks and generated data for Erdos Problem 82.
   the internal graph on the repeated-degree class.
 - `trace_multiset_bound.py`: bounded multiplicity search for zero-sum-free
   trace multisets with small total imbalance and optional graphical
-  compensation; larger runs should use tight caps because subset-sum sets grow
-  quickly.
+  compensation; `--trace-cone` restricts the support to the actual signed
+  indicator vectors arising from graph traces relative to a base vertex.
+  Larger runs should use tight caps because subset-sum sets grow quickly.

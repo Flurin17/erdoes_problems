@@ -4918,6 +4918,41 @@ Lemma 5 would make `H[A]` regular.  This frames the repeated-degree route as a
 finite discrepancy or zero-sum problem for trace vectors, with the additional
 complication that large repeated trace classes must be handled recursively.
 
+## Lemma 12A: Trace Vectors Are Signed Indicators
+
+In the setting of Lemma 12, fix the last vertex `a_k` as a base and encode
+each `b in B` by
+
+```text
+v_b = (1_{ba_1}-1_{ba_k}, ..., 1_{ba_{k-1}}-1_{ba_k}).
+```
+
+Then every `v_b` is a nonzero vector of one of the two forms
+
+```text
+1_S        or        -1_S
+```
+
+for a nonempty subset `S subset {1,...,k-1}`.
+
+Proof.  If `b` is nonadjacent to `a_k`, then the coordinates of `v_b` are
+`0` or `1`, so `v_b=1_S` for the set of neighbors of `b` inside
+`{a_1,...,a_{k-1}}`.  If `b` is adjacent to `a_k`, then the coordinates are
+`0` or `-1`, so `v_b=-1_S` for the set of non-neighbors of `b` inside
+`{a_1,...,a_{k-1}}`.
+
+The set `S` cannot be empty.  If `v_b=0`, then deleting the single vertex `b`
+would subtract the same number of incident edges from every vertex in `A`,
+leaving `k` equal-degree vertices in the proper induced subgraph `H-b`.  This
+contradicts the minimality assumption in Lemma 12.  QED.
+
+Thus the trace obstruction is narrower than an arbitrary zero-sum-free
+sequence in `{-1,0,1}^{k-1}`.  It is a pair of positive set systems whose
+nonzero subset-sum sets must be disjoint.  The script
+`EXPERIMENTS/trace_multiset_bound.py --trace-cone` restricts the multiset
+search to this signed-indicator cone.  This refinement has not yet yielded a
+proof; even the restricted subset-sum search grows quickly once `k=6`.
+
 ## Lemma 13: Exponential Trace-Counting Obstruction
 
 For every `k>=2`, there is a family `F` of `2^{k-1}-1` distinct nonconstant
