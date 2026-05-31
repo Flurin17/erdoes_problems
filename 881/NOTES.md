@@ -1889,6 +1889,14 @@ d=16,\quad t=24,\quad S=\{9,11,13,15,16\},
 with \(24-S\subset A\) and every \(s+16\) uniquely represented in \(2A\).
 Thus Corollary 13.1l.5 narrows the infinite obstruction to unique-gate
 packets, but that branch remains finitely compatible.
+Corollary 13.1l.6 splits that remaining branch by color. Since reflection
+through \(t\) flips colors except for \(O(1)\) Sidon exceptions, a large
+unique-gate packet has a positive subpacket in one of two forms:
+same-color unique rows \(s+d\) with \(s,d\) in one color and \(t-s\) in the
+other, or mixed degree-one rows \(s+d\) with \(s\) opposite \(d\). The next
+unresolved target is to rule out both subbranches globally, or to build a
+staged construction that alternates between them without triggering the
+promoted-mirror poison intervals.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then

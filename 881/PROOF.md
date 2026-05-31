@@ -10293,6 +10293,67 @@ shifted-overlap escape. Its remaining low-count stars must be genuinely
 unique rows \(s+d\), with no alternate deleted color \(f\) shifting a
 positive-density packet back into \(A\).
 
+## Corollary 13.1l.6: The unique-gate branch has two color subbranches
+
+Keep the hypotheses of Corollary 13.1l.5, and write the cofinite tail as
+\[
+P_1=C_0\cup C_1.
+\]
+After enlarging the protected finite set, for every remaining unique-gate
+packet
+\[
+d,\quad t,\quad S
+\]
+from Corollary 13.1l.5, all but \(O(1)\) elements \(s\in S\) satisfy
+\[
+s\in C_i\quad\Longrightarrow\quad t-s\in C_{1-i}. \tag{1}
+\]
+Consequently, after passing to a positive proportion of \(S\), one of the
+following two alternatives holds, where \(d\in C_\delta\).
+
+**Same-color unique branch.** There is a packet
+\[
+S'\subset C_\delta,\qquad |S'|\gg_E A(w),
+\]
+such that
+\[
+t-S'\subset C_{1-\delta}
+\]
+and
+\[
+r_{2,A}(s+d)=1\qquad(s\in S').
+\]
+
+**Mixed degree-one branch.** There is a packet
+\[
+S'\subset C_{1-\delta},\qquad |S'|\gg_E A(w),
+\]
+such that
+\[
+t-S'\subset C_{\delta}
+\]
+and
+\[
+r_{2,A}(s+d)=1\qquad(s\in S').
+\]
+
+Proof. For a fixed color \(C_i\), if two distinct unordered pairs
+\[
+\{s,t-s\}
+\]
+with \(s,t-s\in C_i\) occurred, they would give two same-color
+representations of the sum \(t\), contradicting Sidonicity of \(C_i\).
+Thus at most two values of \(s\) per color fail the color-flipping relation
+(1). Discarding those \(O(1)\) rows, split the remaining packet according
+to whether \(s\) has the same color as \(d\) or the opposite color. One of
+the two classes has positive proportion, giving the two alternatives.
+\(\square\)
+
+This leaves two different unique-row mechanisms. In the same-color branch,
+the rows \(s+d\) are same-color Sidon sums with no opposite-color
+two-sum collision. In the mixed branch, they are mixed sums of degree one
+in the bipartite representation graph.
+
 ### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
 
 Corollary 13.1l does not say that a finite first-prefix pair edge must be
@@ -11529,6 +11590,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the shifted-overlap branch of the low-count-star normal form is bounded
   in the enumerated-Schreier reduction, so any surviving star obstruction
   must be a large unique-gate packet.
+* Corollary 13.1l.6 splits that packet by color into same-color unique rows
+  and mixed degree-one rows, after discarding only \(O(1)\) non-flipping
+  reflected rows.
 * Diagnostic 13.1m shows that high-excess first-pair starts are locally
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.
