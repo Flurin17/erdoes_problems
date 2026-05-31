@@ -7119,6 +7119,112 @@ repairs for each \(f\in F\), and supplies all shifted representations that
 are vertex-covered by \(F\). Later elements beyond the terminal gap play no
 role in the local obstruction.
 
+## Proposition 10.3g: Interval half-deletion barriers are locally scalable
+
+The prefix-local genuine-gap normal form from Corollary 10.3d and Lemmas
+10.3e--10.3f is locally sharp for \(k=2\). Let
+\[
+M\ge X\ge1,
+\]
+and set
+\[
+I=[X+1,X+M],\qquad J=[X+2M,X+3M-1],
+\]
+\[
+S=I\cup J,\qquad r=\left\lfloor\frac{M-1}{2}\right\rfloor,
+\]
+\[
+F=\{X+2M,\ X+2M+1,\ldots,\ X+2M+r\},
+\]
+and
+\[
+w=3X+5M.
+\]
+Then:
+
+1. the two-fold sumset of \(S\) covers the full interval
+   \[
+   [2X+2,\ 3X+5M-2]\subseteq2S; \tag{1}
+   \]
+2. \(w\notin3(S\setminus F)\);
+3. \(F\) is inclusion-minimal for the hole \(w\);
+4. with the global minimum \(m_0=1\), the terminal window
+   \[
+   (w-\min F-1,\ w-2]=(2X+3M-1,\ 3X+5M-2] \tag{2}
+   \]
+   contains no element of \(S\).
+
+Proof. The sum intervals are
+\[
+I+I=[2X+2,\ 2X+2M],
+\]
+\[
+I+J=[2X+2M+1,\ 2X+4M-1],
+\]
+and
+\[
+J+J=[2X+4M,\ 2X+6M-2].
+\]
+Since \(M\ge X\),
+\[
+3X+5M-2\le2X+6M-2,
+\]
+so these intervals prove (1).
+
+Put \(C=S\setminus F\). The retained high block is
+\[
+J'=[X+2M+r+1,\ X+3M-1].
+\]
+A three-term sum from \(C\) cannot equal \(w\). Three low terms from \(I\)
+sum at most
+\[
+3X+3M<w.
+\]
+One retained high term and two low terms sum at most
+\[
+(X+3M-1)+2(X+M)=3X+5M-1<w.
+\]
+Two retained high terms and one low term sum at least
+\[
+2(X+2M+r+1)+(X+1)>3X+5M=w,
+\]
+because \(2r+3\ge1\). Three high terms are larger still. Hence
+\[
+w\notin3C.
+\]
+
+For inclusion-minimality, let
+\[
+f=X+2M+i,\qquad 0\le i\le r.
+\]
+Then
+\[
+w=2f+(X+M-2i).
+\]
+Since \(2i\le2r\le M-1\), the element
+\[
+X+M-2i
+\]
+lies in \(I\subset C\). Thus restoring \(f\) repairs the hole, and every
+\(f\in F\) is active.
+
+Finally,
+\[
+w-\min F-1=3X+5M-(X+2M)-1=2X+3M-1.
+\]
+The low block \(I\) lies below this value, and the high block \(J\) ends at
+\[
+X+3M-1\le2X+3M-1
+\]
+because \(X\ge1\). This proves the terminal \(S\)-gap (2). \(\square\)
+
+Thus no proof can rule out finite-core failure using only prefix coverage,
+genuine terminal gaps, and inclusion-minimal active repairs. These features
+exist in arbitrarily large finite windows. The unresolved issue is global:
+one must either prove that such interval barriers cannot be coded into an
+unbounded barrier met by every infinite deletion while maintaining coverage
+between stages, or build exactly such a staged construction.
+
 ## Warning 10.3c: Compactness and random deletion do not see additive structure
 
 The broad deletion theorem cannot be proved from finite-deletion robustness
@@ -9151,6 +9257,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 10.3f sharpens this to prefix-locality: active repairs and shifted
   representations dominated by the finite barrier use only prefix summands
   before the genuine terminal gap.
+* Proposition 10.3g gives arbitrarily large interval half-deletion barriers,
+  showing the prefix-local genuine-gap normal form is locally sharp.
 * Warning 10.3c gives an abstract Schreier-barrier representation model
   showing why compactness, Zorn, finite-prefix, and independent random
   deletion arguments need genuine additive input.

@@ -155,6 +155,15 @@ Lemma 10.3f sharpens this to a finite-prefix gadget: once the deleted set
 lies before the terminal gap, every active repair and every shifted
 representation dominated by the barrier uses only summands from the prefix
 before the gap. Later elements are irrelevant to that local obstruction.
+Proposition 10.3g shows this normal form is locally sharp: the interval
+blocks
+\[
+I=[X+1,X+M],\qquad J=[X+2M,X+3M-1]\quad(M\ge X)
+\]
+with \(F\) the lower half of \(J\) have two-sum coverage through the
+terminal gap, an inclusion-minimal three-sum hole, and an actual terminal
+gap of length growing with \(M\). Thus the remaining problem is not local
+existence of such barriers but cross-stage coding into an unbounded barrier.
 
 Proposition 3.1f proves both finite-core stability and the desired infinite
 deletion under a tail-syndetic subset hypothesis. This blocks all
