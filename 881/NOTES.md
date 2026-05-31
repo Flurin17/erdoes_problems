@@ -32,6 +32,41 @@ such that \(A\setminus B\) is an asymptotic additive basis of order \(k+1\):
 n\in (k+1)(A\setminus B).
 \]
 
+### Minimality is not extra leverage
+
+If \(C\) is an asymptotic basis of order \(h\), then \(C\) is also an
+asymptotic basis of order \(h+1\): fix \(c_0=\min C\), and write
+\[
+n=c_0+(n-c_0)
+\]
+once \(n-c_0\in hC\). Thus order is monotone upward.
+
+Therefore any order-\(k\) basis \(A\) with no infinite deletion remaining an
+order-\((k+1)\) basis is automatically minimal under infinite deletions at
+order \(k\). Problem 881 is equivalent to the broader deletion theorem:
+every asymptotic order-\(k\) basis should have some infinite deletion that
+remains an order-\((k+1)\) basis. Equivalently, every order-\(k\) basis
+should contain a co-infinite order-\((k+1)\) subbasis. A negative
+construction need not separately verify the stated minimality; it follows
+from blocking order \(k+1\).
+
+The equivalent threshold form is: there should be an increasing sequence
+\[
+b_1<b_2<\cdots
+\]
+in \(A\) such that every prefix \(F_j=\{b_1,\ldots,b_j\}\) leaves
+\(A\setminus F_j\) an order-\((k+1)\) basis with threshold \(<b_j\). Any
+good infinite deletion gives such a sequence after discarding finitely many
+small deleted elements, and such a sequence gives the deletion by the usual
+interval argument \(b_j\le n<b_{j+1}\).
+
+So a counterexample to the equivalent broader theorem must make finite
+late-bad sets unavoidable in every infinite subset of \(A\). By the
+terminal-gap lemmas below, genuine late-bad holes must delete all retained
+\(A\)-points in a long terminal window below the witness. The plausible
+negative shape is therefore an unbounded finite-barrier construction, not
+ordinary essential elements or a few sparse gaps.
+
 ## Trivial and Boundary Cases
 
 ### \(k=1\)

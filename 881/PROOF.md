@@ -13,6 +13,75 @@ of order \(k+1\).
 Complete for \(k=1\). Open in this workspace for \(k\ge 2\). No complete
 proof or counterexample has been verified yet.
 
+## Reduction 0: The minimality hypothesis is redundant for counterexamples
+
+If \(C\subseteq\mathbb N\) is an asymptotic basis of order \(h\), then it
+is also an asymptotic basis of every larger order. Indeed, let
+\(c_0=\min C\), and suppose
+\[
+[N,\infty)\subseteq hC.
+\]
+Then for every \(n\ge N+c_0\),
+\[
+n-c_0\in hC,
+\]
+so
+\[
+n=c_0+(n-c_0)\in(h+1)C.
+\]
+Iterating proves monotonicity in the order.
+
+Consequently, if an order-\(k\) basis \(A\) has no infinite
+\(B\subset A\) such that \(A\setminus B\) is an order-\((k+1)\) basis, then
+for every infinite \(B\subset A\), the set \(A\setminus B\) is not an
+order-\(k\) basis. Thus \(A\) is automatically minimal in the sense of the
+problem.
+
+Therefore Erdős Problem #881 is equivalent to the following broader
+deletion theorem:
+
+> Every asymptotic basis \(A\subseteq\mathbb N\) of order \(k\) contains an
+> infinite subset \(B\) such that \(A\setminus B\) is an asymptotic basis of
+> order \(k+1\).
+
+Equivalently, every order-\(k\) basis contains a co-infinite subset
+\[
+C\subset A
+\]
+which is an order-\((k+1)\) basis.
+
+The original minimality assumption is not available as extra leverage in a
+proof by contradiction: assuming that no good infinite deletion exists
+already implies it. Conversely, any counterexample to the broader deletion
+theorem is automatically a counterexample to the stated problem.
+
+In this language, Corollary 3.1b gives an exact threshold formulation. Let
+\(h=k+1\). The broader deletion theorem holds for \(A\) if and only if
+there is an increasing sequence
+\[
+b_1<b_2<\cdots,\qquad b_i\in A,
+\]
+such that every finite prefix \(F_j=\{b_1,\ldots,b_j\}\) has
+\[
+A\setminus F_j
+\]
+as an order-\(h\) basis with some threshold \(N_j<b_j\). The forward
+direction is Corollary 3.1b. Conversely, if \(A\setminus B\) is an
+order-\(h\) basis with threshold \(N\), enumerate the tail of \(B\) above
+\(N\) as \(b_1<b_2<\cdots\). Then
+\[
+A\setminus F_j\supseteq A\setminus B
+\]
+for every \(j\), so the same threshold \(N<b_j\) works.
+
+Thus any counterexample to the broader theorem must make late-bad finite
+sets an unavoidable barrier, and by Lemma 10.3 each genuine hole in such a
+barrier creates a terminal retained gap. It is not enough to have sparse
+bases, ordinary essential elements, or isolated one-point witnesses: every
+infinite deletion must contain, arbitrarily far out, a finite set \(F\)
+whose removal simultaneously blocks all shifted \(k\)-representations of a
+witness \(w\), while \(kA\) still covers the stage intervals.
+
 ## Theorem 1: The answer is yes for \(k=1\)
 
 Let \(A\subseteq\mathbb N\) be an asymptotic additive basis of order \(1\).
@@ -678,9 +747,10 @@ each of size at most \(k+1\). The union of these edges meets every edge of
 \((k+1)(r_E-1)\). \(\square\)
 
 This corollary is often the most concrete form of the remaining problem:
-one must either rule out such bounded moving transversals for bases
-satisfying the Erdős minimality hypothesis, or build a counterexample whose
-representation hypergraphs exhibit them.
+one must either rule out such bounded moving transversals for arbitrary
+order-\(k\) bases, or build a counterexample whose representation
+hypergraphs exhibit them. By Reduction 0, such a counterexample would
+automatically satisfy the Erdős infinite-deletion minimality hypothesis.
 
 ## Proposition 3.4: Redundant representation criterion
 
@@ -3749,6 +3819,10 @@ domination for many old elements.
 
 ## Dependency Graph
 
+* Reduction 0 shows that the stated infinite-deletion minimality hypothesis
+  is redundant for counterexamples. The problem is equivalent to the broader
+  assertion that every order-\(k\) asymptotic basis has an infinite deletion
+  that remains order \(k+1\).
 * Theorem 1 is independent and resolves \(k=1\).
 * Lemma 2 would imply the desired conclusion if an infinite \(B\) satisfying
   the two absorption hypotheses can be forced.
