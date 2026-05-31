@@ -185,6 +185,8 @@ def sample_source_modular(
     trials: int,
     seed: int,
     max_attempts: int,
+    source_residue: int | None,
+    score_all: bool,
 ) -> None:
     rng = random.Random(seed)
     pc = ri.precompute(n)
@@ -192,9 +194,12 @@ def sample_source_modular(
     edge_count = len(pc.edges)
     full = (1 << n) - 1
     survivors = list(candidates)
+    successes = {slots: 0 for slots in candidates}
+    failures = {slots: 0 for slots in candidates}
+    first_failure: dict[tuple[int, ...], tuple[int, int]] = {}
     attempts = 0
     checked = 0
-    while checked < trials and attempts < max_attempts and survivors:
+    while checked < trials and attempts < max_attempts and (survivors or score_all):
         attempts += 1
         graph_mask = modular_partition.random_full_modular_candidate(
             n,
@@ -208,7 +213,18 @@ def sample_source_modular(
             continue
         if not ri.is_modular_on(graph_mask, full, source_modulus, pc):
             continue
+        residue = modular_partition.residue_on(graph_mask, full, source_modulus, pc)
+        if source_residue is not None and residue != source_residue % source_modulus:
+            continue
         checked += 1
+        if score_all:
+            for slots in candidates:
+                if has_slot_partition(n, graph_mask, target_modulus, slots, pc):
+                    successes[slots] += 1
+                else:
+                    failures[slots] += 1
+                    first_failure.setdefault(slots, (graph_mask, checked))
+            continue
         next_survivors: list[tuple[int, ...]] = []
         for slots in survivors:
             if has_slot_partition(n, graph_mask, target_modulus, slots, pc):
@@ -223,8 +239,21 @@ def sample_source_modular(
     print(f"n={n}")
     print(f"source_modulus={source_modulus}")
     print(f"target_modulus={target_modulus}")
+    if source_residue is not None:
+        print(f"source_residue={source_residue % source_modulus}")
     print(f"attempts={attempts}")
     print(f"sample_source_modular_checked={checked}")
+    if score_all:
+        print("candidate_scores=slots:successes:failures:first_failure")
+        for slots in candidates:
+            prefix = ",".join(map(str, slots))
+            if slots in first_failure:
+                graph_mask, trial = first_failure[slots]
+                suffix = f"{graph_mask}@{trial}"
+            else:
+                suffix = "none"
+            print(f"  {prefix}:{successes[slots]}:{failures[slots]}:{suffix}")
+        return
     print(f"survivor_count={len(survivors)}")
     for slots in survivors:
         print("survivor=" + ",".join(map(str, slots)))
@@ -246,6 +275,7 @@ def main() -> None:
     parser.add_argument("--sample-even", type=int, default=0)
     parser.add_argument("--sample-source-modular", type=int, default=0)
     parser.add_argument("--source-modulus", type=int)
+    parser.add_argument("--source-residue", type=int)
     parser.add_argument("--max-attempts", type=int, default=1000000)
     parser.add_argument("--score-all", action="store_true")
     parser.add_argument("--seed", type=int, default=0)
@@ -270,6 +300,8 @@ def main() -> None:
             args.sample_source_modular,
             args.seed,
             args.max_attempts,
+            args.source_residue,
+            args.score_all,
         )
         return
     if args.sample_even:

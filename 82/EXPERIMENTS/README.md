@@ -65,9 +65,14 @@ Computational checks and generated data for Erdos Problem 82.
   random even-graph sampling at larger `n`.  Its exact-cover recursion indexes
   valid subsets by residue and pivot vertex for larger sampled checks.  It can
   also sample source-modular graphs for higher dyadic lifts, such as
-  `4 -> 8`, with `--sample-source-modular`.  Use `--score-all` with
-  `--sample-even` to score all supplied candidate slot multisets on the same
-  sampled graphs instead of discarding candidates after their first failure.
+  `4 -> 8`, with `--sample-source-modular`, and can restrict those samples to
+  a fixed source degree residue with `--source-residue`.  Use `--score-all`
+  with `--sample-even` or `--sample-source-modular` to score all supplied
+  candidate slot multisets on the same sampled graphs instead of discarding
+  candidates after their first failure.
+- `slot_obstruction_certificate.py`: verifies finite certificates showing
+  that a list of source-residue graphs kills every fixed target residue-slot
+  multiset with a prescribed slot count.
 - `universal_slots_fast.cpp`: C++ exhaustive checker for the same fixed-slot
   question.  It is intended for the full labelled even-graph sweep on `n=8`,
   where the Python exact-cover loop is too slow.

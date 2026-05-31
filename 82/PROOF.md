@@ -31,6 +31,37 @@ Every clique and every independent set is a regular induced subgraph.  Hence
 `c log n` for an absolute constant `c>0`.  Therefore `F(n) >= c log n`, or
 equivalently `G(k) <= 2^{O(k)}`.
 
+## Proposition 0A: Linear Homogeneous Sets Are The Hard Ramsey Regime
+
+For every `epsilon>0` there is a `delta>0` such that, for all sufficiently
+large `k`, every graph on at least `2^{epsilon k}` vertices contains either
+a clique of order `k`, an independent set of order `k`, or both a clique and
+an independent set of order at least `delta k`.
+
+Consequently, to prove `G(k)<=2^{o(k)}` it is enough to rule out
+counterexamples in which both ordinary Ramsey parameters are linear in `k`.
+
+Proof.  The Erdos--Szekeres bound gives
+
+```text
+R(k,l) <= binom(k+l-2,l-1).
+```
+
+If `l=floor(delta k)`, then
+
+```text
+log_2 R(k,l) <= (k+l) H_2(l/(k+l)) + O(log k),
+```
+
+where `H_2` is the binary entropy function.  As `delta -> 0`, the coefficient
+`(1+delta)H_2(delta/(1+delta))` tends to `0`.  Choose `delta` so small that
+this coefficient is less than `epsilon`.  Then every graph on
+`2^{epsilon k}` vertices with no clique of order `k` has an independent set
+of order at least `delta k`.  Applying the same argument to the complement
+shows that, unless there is already a clique or independent set of order
+`k`, both `alpha(G)` and `omega(G)` are at least `delta k`.  Since cliques
+and independent sets are regular, this proves the claimed reduction.  QED.
+
 ## Reconstructed Known Bound: Bollobas Upper Bound
 
 The literature records a construction, attributed first to Bollobas and then
@@ -591,6 +622,83 @@ using a submultiset of `R`.  Lemma 4I.8 is the all-cliques version of this
 necessary condition.  Thus fixed-slot candidates for higher dyadic lifts are
 already heavily constrained by elementary coin-representation conditions, but
 the constraint should be applied separately to the relevant source residues.
+
+## Corollary 4E.3: Dyadic Source Clique Test
+
+Let `q` be a positive integer, let `M=2q`, and fix a source residue
+`a mod q`.  For a residue `r mod 2q`, write `w(r)` for the least positive
+integer congruent to `r+1` modulo `2q`.  A target slot multiset `R` modulo
+`2q` passes all clique tests in source class `a mod q` if and only if both
+
+```text
+a+1      and      a+1+q
+```
+
+are subset sums of the multiset `{w(r): r in R}`.
+
+Proof.  The clique `K_m` belongs to source class `a mod q` exactly when
+`m-1 congruent a mod q`, or equivalently `m congruent a+1 mod q`.  In a
+target-slot partition of a clique, a part using slot `r` has positive size
+congruent to `r+1` modulo `2q`, so its least possible size is `w(r)`.
+
+The positive integers congruent to `a+1` modulo `q` split into two residue
+classes modulo `2q`, represented by `a+1` and `a+1+q`.  If these two smallest
+representatives are subset sums of the available weights, then every larger
+integer in the same modulo-`2q` class is represented by adding a suitable
+multiple of `2q` to one already-used clique part.  Conversely, if all clique
+sizes in source class `a mod q` are representable, then the two displayed
+smallest sizes are representable.  QED.
+
+In particular, the two slots `{a,a+q}` already pass all clique tests for the
+source residue `a mod q`.  Thus cliques alone do not obstruct a constant-part
+source-residue dyadic lift.
+
+## Computational Proposition 4E.4: Three Parts Do Not Suffice For `4 -> 8`
+
+There is a graph whose degrees are all congruent to `2 mod 4` and whose vertex
+set cannot be partitioned into three induced `8`-modular subgraphs.
+
+Proof.  Consider the following five `10`-vertex graph masks, in the edge order
+used by `EXPERIMENTS/regular_induced.py`:
+
+```text
+10576016915819
+964524775696
+33317578526621
+6543506392701
+30609183199989
+```
+
+The exact checker verifies that every vertex in each mask has degree
+`2 mod 4`.  It also verifies that these five masks kill all
+`binom(8+3-1,3)=120` three-slot residue multisets modulo `8`: after the
+five masks, the numbers of newly killed still-possible triples are
+
+```text
+110, 5, 3, 1, 1.
+```
+
+This is checked by:
+
+```text
+python3 82/EXPERIMENTS/slot_obstruction_certificate.py 10 \
+  --source-modulus 4 --source-residue 2 \
+  --target-modulus 8 --slot-count 3 \
+  --masks "10576016915819,964524775696,33317578526621,6543506392701,30609183199989"
+```
+
+Let `H` be the disjoint union of these five graphs.  Since all components have
+source residue `2 mod 4`, the graph `H` also has source residue `2 mod 4`.
+If `H` had a partition into at most three induced `8`-modular subgraphs, pad
+the residue signature to a three-element multiset `R`.  The finite
+verification says that one component has no `R`-slot partition.  Restricting
+the global partition of `H` to that component would give such an `R`-slot
+partition, because there are no edges between components, a contradiction.
+QED.
+
+This obstruction is useful calibration: the dyadic route cannot hope for a
+three-part theorem even at the second lift.  It does not contradict the
+currently plausible four-part source-residue version of `4 -> 8`.
 
 ## Lemma 4F: Self-Labelled Modular Colorings
 
@@ -1924,6 +2032,60 @@ needs `s>=k/2`, hence an independent set `A` of order at least `k/2`.
 Ramsey's theorem supplies only `Theta(log n)` vertices in the inverse regime
 `n=2^{o(k)}`.  A trace-amplification proof would therefore need to combine
 many trace classes, not just one large class.
+
+## Lemma 14B: Maximal Independent Trace Ramsey Bound
+
+Let `G` be a graph with no regular induced subgraph of order at least `k`,
+and let `A` be a maximal independent set of size `h<k`.  For each
+nonempty `T subset A`, put
+
+```text
+C_T = {v in V(G)\A : N_G(v) cap A = T}.
+```
+
+Then
+
+```text
+|V(G)| <= h + sum_{nonempty T subset A}
+              ( R(k-1, k-h+|T|) - 1 ).
+```
+
+Equivalently,
+
+```text
+|V(G)| <= h + sum_{j=1}^h binom(h,j)
+              ( R(k-1, k-h+j) - 1 ).
+```
+
+Proof.  Since `A` is maximal, every vertex outside `A` has at least one
+neighbor in `A`, so the nonempty trace classes cover `V(G)\A`.
+
+Fix a nonempty trace `T`.  The graph `G[C_T]` has no clique of order `k-1`:
+if `Q subset C_T` were such a clique, then for any `a in T` the set
+`Q union {a}` would be a clique of order `k`, hence a regular induced
+subgraph.  Also `G[C_T]` has no independent set of order `k-h+|T|`: such an
+independent set, together with `A\T`, would be independent of order
+
+```text
+(k-h+|T|) + (h-|T|) = k,
+```
+
+again a regular induced subgraph.  Hence
+
+```text
+|C_T| <= R(k-1,k-h+|T|)-1.
+```
+
+Summing over the trace classes gives the first inequality, and grouping by
+`j=|T|` gives the second.  QED.
+
+This improves the completely free trace recursion of Lemma 14 by using
+maximality of `A`, but by itself it does not break the diagonal Ramsey scale.
+When `h` is close to `k`, many large traces have weak independent-set
+thresholds, and the displayed sum remains exponentially large under the
+standard binomial estimates for ordinary Ramsey numbers.  Thus any trace
+route still needs an argument coupling different trace classes, not just a
+separate Ramsey bound for each class.
 
 ## Lemma 15: Total Trace Imbalance In A Repeated-Degree Host
 

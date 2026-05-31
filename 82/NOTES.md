@@ -1014,3 +1014,28 @@ source of growth beyond Ramsey.
   multiset for each source residue `a mod q`, not necessarily a single common
   multiset for all source residues.  The first-lift even-graph lemma remains
   unaffected because its source residue is fixed at `0 mod 2`.
+- 2026-05-31: Added source-residue filtering to `universal_slots.py` for the
+  corrected dyadic-slot formulation.  For `4 -> 8`, four-slot candidates,
+  and `10` sampled `4`-modular graphs on `n=10` in each fixed source residue,
+  the sampler still leaves candidates in every residue class: `27` survivors
+  for residue `0`, `27` for residue `1`, `20` for residue `2`, and `33` for
+  residue `3` with seeds `500,501,502,503`.  This is only small evidence, but
+  it supports testing the residue-family version of the dyadic route rather
+  than a single common slot family.
+- 2026-05-31: Recorded an exact obstruction showing that three target parts
+  cannot suffice for the second dyadic lift.  Five `10`-vertex graphs with all
+  degrees `2 mod 4` kill all `120` residue triples modulo `8`; their disjoint
+  union is source-`2 mod 4` and has no three-part `8`-modular partition.
+  Added `slot_obstruction_certificate.py` to verify this certificate.  This
+  calibrates the dyadic route: `4 -> 8` needs at least four parts in one
+  source residue, but the four-part source-residue version remains plausible.
+- 2026-05-31: Added two Ramsey/trace reductions.  Proposition 0A records that
+  any exponential-scale counterexample sequence must have both clique number
+  and independence number linear in `k`; if either is `o(k)`, the ordinary
+  off-diagonal Ramsey bound is already `2^{o(k)}`.  Lemma 14B bounds a graph
+  with no regular induced `k`-set by tracing vertices over a maximal
+  independent set `A`: each nonempty trace class `C_T` has no clique of order
+  `k-1` and no independent set of order `k-|A|+|T|`.  The resulting sum still
+  has diagonal-scale exponential terms when `|A|` is close to `k`, so a trace
+  proof must couple multiple trace classes rather than Ramsey-bound them
+  separately.
