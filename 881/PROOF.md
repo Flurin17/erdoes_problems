@@ -5805,6 +5805,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   Proposition 3.1f, ordinary \(A\)-gaps already mimic the terminal windows
   from Lemma 8.4a; the unresolved obstruction is the shifted two-sum
   vertex-cover condition, not gap existence.
+* Warning 8.6f' rules out a natural alternating-deletion shortcut: even if
+  the deletion set has no consecutive elements in the \(A\)-order, finite
+  collective holes can have singleton terminal windows and still satisfy
+  shifted domination.
 * Lemma 8.6g uses that vertex-cover condition: fixed-rank large-excess
   barriers plus one finite test set with no large certificate-free subset
   force a recurrent certificate triple and hence a good deletion.
