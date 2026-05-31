@@ -4427,6 +4427,27 @@ Lemma 8.4b and the shifted vertex-cover condition from Lemma 10.1. The
 criterion is not ruled out by the fixed-rank lemmas because edge sizes in
 \(\mathcal S\) tend to infinity on tails.
 
+The script `EXPERIMENTS/schreier_stage_search.py` verifies that the first
+finite Schreier pattern is not locally inconsistent. It finds
+\[
+A_0=\{1,2,3,4,8\},
+\]
+whose two-sums cover through \(12\). With protected tail
+\[
+P_0=\{1,2,3,4\},
+\]
+the first Schreier edges have minimal dominated holes
+\[
+\{1,2\}\mapsto6,\qquad
+\{1,3\}\mapsto7,\qquad
+\{1,4\}\mapsto10,\qquad
+\{2,3,4\}\mapsto12.
+\]
+This is finite evidence only. It shows that the Schreier-stage target is
+not ruled out by the local active-hole and shifted-domination checks at the
+first stage; it says nothing about iterating the construction with
+unbounded witnesses and coverage buffers.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets

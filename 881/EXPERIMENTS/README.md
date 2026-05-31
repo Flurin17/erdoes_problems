@@ -114,6 +114,16 @@ several finite integer-window examples. This is a diagnostic for Lemma
 8.6g: fixed-rank large-excess barriers can persist only if every finite
 test set has a large certificate-free subset.
 
+`schreier_stage_search.py` looks for the first finite analogue of the
+Schreier-stage criterion. It finds
+\[
+A=\{1,2,3,4,8\},
+\]
+whose two-sums cover through \(12\), and whose first protected Schreier
+edges \(\{1,2\},\{1,3\},\{1,4\},\{2,3,4\}\) have minimal dominated
+three-fold holes at \(6,7,10,12\), respectively. This is only a local
+gadget and does not address iteration.
+
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short
 initial chain but stalls quickly in the default bounded greedy search,
