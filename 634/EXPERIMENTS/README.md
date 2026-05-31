@@ -202,7 +202,11 @@ Current components:
   obstructions. Through generated shell `200000`, lazy local-cover mode gives
   cumulative coarse counts `139104`, `34292`, and `26604`. Through generated
   shell `500000`, the cumulative coarse counts are `358826`, `61534`, and
-  `79640`. The full mixed-`6` `N=63` coarse pass is now exact:
+  `79640`. The recorded refined chunks through generated shell `500000`
+  exactly refine that prefix: `358826` local-cover hits, `61534`
+  corner-label violations, `21816` pinch-sector obstructions, and `57824`
+  split-corner-label obstructions. The full mixed-`6` `N=63` coarse pass is
+  now exact:
   `940800` local-cover hits, `207888` residual corner-label violations, and
   `207952` non-simple residual graphs.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for

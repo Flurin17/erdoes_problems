@@ -2211,11 +2211,21 @@ pinch-sector-obstruction:         3,332
 split-corner-label-obstruction:  15,912
 ```
 
-This exactly agrees with the independent count-only local-overlap cover and the
-earlier coarse prefix totals. It
-does not yet close the mixed-`6` stratum because the non-simple residual graphs
-still need the refined pinch-sector/split-component obstruction rather than
-only the coarse residual graph status.
+Extending the recorded refined replay through generated shell `500000` exactly
+refines the already-recorded coarse prefix totals:
+
+```text
+local-cover hits:                358,826
+corner-label-violation:           61,534
+pinch-sector-obstruction:         21,816
+split-corner-label-obstruction:   57,824
+```
+
+These prefix checks exactly agree with the independent count-only
+local-overlap cover and the earlier coarse prefix totals. They do not yet close
+the mixed-`6` stratum because the remaining generated shells still need the
+refined pinch-sector/split-component obstruction rather than only the coarse
+residual graph status.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
