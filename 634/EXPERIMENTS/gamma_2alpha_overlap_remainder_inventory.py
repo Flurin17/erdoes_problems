@@ -19,7 +19,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import gamma_2alpha_quadratic_shell_census as exact  # noqa: E402
 from gamma_2alpha_boundary import refined_survivors_for_n, viable_x_representations  # noqa: E402
-from gamma_2alpha_endpoint_automaton import PlacedEdge, alpha_corner, apex_corner  # noqa: E402
+from gamma_2alpha_endpoint_automaton import (  # noqa: E402
+    STRAIGHT_TYPES,
+    PlacedEdge,
+    alpha_corner,
+    apex_corner,
+    other_side,
+)
 from gamma_2alpha_overlap_cover import (  # noqa: E402
     DEFAULT_PAIR_TEXT,
     KPolygon,
@@ -35,7 +41,7 @@ from gamma_2alpha_random_shell_search import all_path_options, by_endpoint_and_m
 
 
 EndpointMixed = tuple[PlacedEdge, PlacedEdge, int]
-PathProfile = tuple[tuple[int, ...], tuple[int, ...], str]
+PathProfile = tuple[tuple[int, ...], tuple[int, ...], str, tuple[str, ...]]
 
 
 def edge_text(edge: PlacedEdge) -> str:
@@ -62,6 +68,29 @@ def tuple_text(values: tuple[int, ...]) -> str:
     return ",".join(str(value) for value in values) if values else "-"
 
 
+def angle_counter_text(counter: Counter[str]) -> str:
+    parts: list[str] = []
+    for name in ("alpha", "beta", "gamma"):
+        count = counter[name]
+        if count == 1:
+            parts.append(name)
+        elif count > 1:
+            parts.append(f"{count}{name}")
+    return "+".join(parts) if parts else "0"
+
+
+def mixed_transition_signature(index: int, left: PlacedEdge, right: PlacedEdge) -> str:
+    visible = Counter((left.end, right.start))
+    deficits = tuple(
+        angle_counter_text(target - visible)
+        for target in STRAIGHT_TYPES
+        if all(visible[key] <= target[key] for key in visible)
+    )
+    deficit_text = "/".join(deficits) if deficits else "none"
+    inward = f"{other_side(left, left.end)}>{other_side(right, right.start)}"
+    return f"{index}:{left.side}{right.side}:{left.end}+{right.start}:{inward}:{deficit_text}"
+
+
 def path_profile(path: BoundaryPath, positions: tuple[int, ...]) -> PathProfile:
     c_positions = tuple(index for index, edge in enumerate(path, start=1) if edge.side == "c")
     mixed_positions = tuple(
@@ -70,12 +99,18 @@ def path_profile(path: BoundaryPath, positions: tuple[int, ...]) -> PathProfile:
         if (left.side == "c") != (right.side == "c")
     )
     tested_labels = "".join(path[position - 1].side for position in positions if position <= len(path))
-    return c_positions, mixed_positions, tested_labels
+    fan_signatures = tuple(
+        mixed_transition_signature(index, left, right)
+        for index, (left, right) in enumerate(zip(path, path[1:]), start=1)
+        if (left.side == "c") != (right.side == "c")
+    )
+    return c_positions, mixed_positions, tested_labels, fan_signatures
 
 
 def profile_text(profile: PathProfile) -> str:
-    c_positions, mixed_positions, tested_labels = profile
-    return f"c={tuple_text(c_positions)} mix={tuple_text(mixed_positions)} test={tested_labels or '-'}"
+    c_positions, mixed_positions, tested_labels, fan_signatures = profile
+    fan_text = "|".join(fan_signatures) if fan_signatures else "-"
+    return f"c={tuple_text(c_positions)} mix={tuple_text(mixed_positions)} test={tested_labels or '-'} fan={fan_text}"
 
 
 def profile_signature(left: PathProfile, right: PathProfile, base: PathProfile) -> str:
@@ -90,7 +125,13 @@ def overlap(left: KPolygon, right: KPolygon) -> bool:
     return exact.kpositive_overlap(left, right)
 
 
-def inventory_n(n: int, *, max_total_mixed: int | None, top: int) -> None:
+def inventory_n(
+    n: int,
+    *,
+    min_total_mixed: int,
+    max_total_mixed: int | None,
+    top: int,
+) -> None:
     survivors = refined_survivors_for_n(n)
     print(f"N={n}: {len(survivors)} refined gamma=2alpha survivor(s)")
     pairs = tuple(parse_pair(text) for text in DEFAULT_PAIR_TEXT)
@@ -190,6 +231,8 @@ def inventory_n(n: int, *, max_total_mixed: int | None, top: int) -> None:
                 for base_key, base_paths_for_key in base_index.items():
                     base_first, base_last, base_mixed = base_key
                     total_mixed = left_mixed + right_mixed + base_mixed
+                    if total_mixed < min_total_mixed:
+                        continue
                     if max_total_mixed is not None and total_mixed > max_total_mixed:
                         continue
                     if not alpha_corner(right_last, base_first):
@@ -247,7 +290,15 @@ def inventory_n(n: int, *, max_total_mixed: int | None, top: int) -> None:
         print("  top outside-cover endpoint/mixed groups:")
         for signature, count in uncovered_by_endpoint_group.most_common(top):
             print(f"    {format_count(count)}: {signature}")
-        print("  top outside-cover c/mixed/test profiles:")
+        print("  top outside-cover c/mixed/test/fan profiles:")
+        profile_total = sum(uncovered_by_c_profile.values())
+        profile_top_total = sum(count for _signature, count in uncovered_by_c_profile.most_common(top))
+        profile_top_percent = 100 * profile_top_total / profile_total if profile_total else 0.0
+        print(
+            f"    profile_groups={len(uncovered_by_c_profile)} "
+            f"top_{top}_mass={format_count(profile_top_total)} "
+            f"of {format_count(profile_total)} ({profile_top_percent:.2f}%)"
+        )
         for signature, count in uncovered_by_c_profile.most_common(top):
             print(f"    {format_count(count)}: {signature}")
 
@@ -255,12 +306,22 @@ def inventory_n(n: int, *, max_total_mixed: int | None, top: int) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", nargs="+", type=int)
+    parser.add_argument("--min-total-mixed", type=int, default=0)
     parser.add_argument("--max-total-mixed", type=int)
     parser.add_argument("--top", type=int, default=20)
     args = parser.parse_args()
+    if args.min_total_mixed < 0:
+        raise SystemExit("--min-total-mixed must be nonnegative")
+    if args.max_total_mixed is not None and args.max_total_mixed < args.min_total_mixed:
+        raise SystemExit("--max-total-mixed must be at least --min-total-mixed")
 
     for n in args.n:
-        inventory_n(n, max_total_mixed=args.max_total_mixed, top=args.top)
+        inventory_n(
+            n,
+            min_total_mixed=args.min_total_mixed,
+            max_total_mixed=args.max_total_mixed,
+            top=args.top,
+        )
 
 
 if __name__ == "__main__":

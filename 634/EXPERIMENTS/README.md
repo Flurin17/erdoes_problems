@@ -142,8 +142,11 @@ Current components:
   splits are `(2,1,3)` and `(1,2,3)`, each with `111600` shells, followed by
   `(2,2,2)` with `51840`; for `N=99`, `(2,2,2)` contributes `2095200`, then
   `(2,1,3)` and `(1,2,3)` contribute `947700` each. It also prints top
-  c-position, mixed-position, and tested-local-label profiles for the
-  outside-cover mass.
+  c-position, mixed-position, tested-local-label, and oriented fan-transition
+  profiles for the outside-cover mass. The oriented fan profile is useful as a
+  negative calibration: at mixed exactly `6`, it gives `120224` profile groups
+  for `N=63` and `1080609` for `N=99`, so boundary-only fan signatures are too
+  fine for manual casework.
 - `gamma_2alpha_residual_failure_causes.py`: exact valid-weighted sampler for
   the residual failures after optional local-overlap-cover filtering. It
   refines `not-simple-cycle` into residual graph degree/component profiles,

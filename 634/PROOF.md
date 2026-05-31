@@ -2107,6 +2107,24 @@ c-position, mixed-position, or tested-local-label data. This is still only
 representative evidence; it does not prove that every shell inside a refined
 group has the same obstruction.
 
+The count-only inventory was next refined by adding oriented fan signatures at
+each `c`/non-`c` transition: the adjacent side labels, the two visible angles,
+the inward side labels, and the straight-angle deficit type. This is exact
+boundary data, but it is far too fine for a direct proof by case enumeration.
+For mixed exactly `6`, the outside-cover remainder has
+
+```text
+N=63:  120,224 fan-profile groups over 415,840 shells;
+       top 5 profiles cover only 360 shells.
+
+N=99:  1,080,609 fan-profile groups over 5,867,040 shells;
+       top 5 profiles cover only 1,575 shells.
+```
+
+Thus the next useful quotient is unlikely to be a boundary-word profile alone;
+it should group by residual obstruction certificates or derive a structural
+reason why the residual corner/pinch/split obstructions must occur.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`

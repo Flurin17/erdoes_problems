@@ -112,6 +112,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   is proving that those obstructions cover whole groups rather than selected
   representatives. A two-representative `99` probe shows mixed statuses inside
   the `(1,3,2)` endpoint groups, so endpoint/mixed grouping alone is too coarse.
+  Adding oriented fan-transition data to the count-only profile goes too far in
+  the other direction: the mixed-`6` outside-cover remainder has `120224`
+  fan-profile groups for `63` and `1080609` for `99`. The next promising
+  quotient should use residual obstruction certificates rather than boundary
+  profiles alone.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
