@@ -192,7 +192,9 @@ Current components:
   `838` corner-label violations and `192` non-simple residual graphs. Extending
   through generated shell `10000` gives cumulative exact coarse counts:
   `4899` local-cover hits, `4077` corner-label violations, and `1024`
-  non-simple residual graphs.
+  non-simple residual graphs. Through generated shell `100000`, the cumulative
+  counts are `52430` local-cover hits, `28326` corner-label violations, and
+  `19244` non-simple residual graphs.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and

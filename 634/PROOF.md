@@ -2164,6 +2164,17 @@ corner-label-violation:  4,077
 not-simple-cycle:        1,024
 ```
 
+Extending the same exact coarse pass through generated shell `100000` gives
+
+```text
+local-cover hits:        52,430
+corner-label-violation:  28,326
+not-simple-cycle:        19,244
+```
+
+These are still prefix counts in the deterministic enumeration, not sampled
+estimates and not complete stratum counts.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`
