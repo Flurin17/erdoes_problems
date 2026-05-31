@@ -1003,6 +1003,12 @@ Warning 8.6i records that this is not a residue-level consequence of
 \(2A=G\): in \(\mathbb Z/(2r+1)\mathbb Z\), the set
 \(\{1,\ldots,r+1\}\) is a 2-basis but can be partitioned into \(r\)
 certificate-free classes.
+Warning 8.6j adds that each certificate-free class is Sidon, so a finite
+certificate-free coloring only implies \(A(X)=O_r(\sqrt X)\). This rules
+out dense bases but not thin order-2 bases, whose necessary lower bound is
+also of order \(\sqrt X\). Finite integer windows such as
+\(\{1,2,7,8,10,11\}\), with \(2A\) covering \([8,22]\), can already be
+2-colored into certificate-free classes.
 
 Lemma 8.6a closes a broader delayed-barrier branch. If every infinite tail
 contains finite barriers \(F=\{f_1<\cdots<f_r\}\) whose witness lies within

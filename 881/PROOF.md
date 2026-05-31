@@ -3167,6 +3167,55 @@ create integer certificates. It shows that the certificate-free alternative
 in Lemma 8.6g cannot be eliminated by a purely quotient-level
 \(2A=G\) argument.
 
+## Warning 8.6j: Certificate-free colorings are only Sidon-sparse
+
+The certificate-density principle needed in Lemma 8.6g cannot be obtained
+from a simple density contradiction. If \(C\subset A\) is certificate-free,
+then \(C\) is a Sidon set. Indeed, suppose
+\[
+a+b=c+d,\qquad a,b,c,d\in C,
+\]
+is a nontrivial equality with \(a\ne c,d\). Then
+\[
+c+d-a=b\in A,
+\]
+so \(e=a\), \(y_1=c\), \(y_2=d\) form a forbidden certificate in \(C\).
+Thus all nontrivial two-sum collisions inside \(C\) are impossible.
+
+Consequently, if
+\[
+A=C_1\cup\cdots\cup C_r
+\]
+is a coloring into certificate-free classes, then
+\[
+|A\cap[1,X]|=O_r(\sqrt X).
+\]
+This rules out certificate-free colorings for bases with
+\[
+|A\cap[1,X]|/\sqrt X\to\infty,
+\]
+but it does not contradict the lower bound for an order-2 basis, which is
+only \(|A\cap[1,X]|\gg\sqrt X\). Thus a proof that every order-2 basis has
+a finite test set with small certificate-free independence would need
+structure beyond Sidon counting, Schur's theorem, van der Waerden's theorem,
+or finite residue coverage.
+
+Finite windows show the same limitation. For example
+\[
+A_0=\{1,2,7,8,10,11\}
+\]
+has
+\[
+[8,22]\subseteq2A_0
+\]
+and admits the certificate-free 2-coloring
+\[
+\{1,7,10\}\cup\{2,8,11\}.
+\]
+This is only a finite-window model, but it shows that certificate-free
+colorability is not immediately incompatible with local two-sum interval
+coverage.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -5097,6 +5146,9 @@ new-design problem, not as a small non-greedy search miss.
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of
   residue-level order-2 coverage.
+* Warning 8.6j says certificate-free color classes are Sidon, which gives
+  only an \(O(\sqrt X)\) counting bound and therefore does not contradict
+  thin order-2 bases.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.
