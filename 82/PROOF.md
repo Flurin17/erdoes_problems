@@ -3872,67 +3872,60 @@ through eight classes of size at most `16` with the four slots
 R_a = (0, a, 8, a+8)       modulo 16.
 ```
 
-The analogous family `(0,a,4,a+4)` also passes the `4 -> 8`
-complete-multipartite check through eight classes of size at most `8`.  This
-does not prove a graph theorem, but it gives a much cleaner source-residue
-candidate than the ad hoc survivor lists and is consistent with the dyadic
-clique subset-sum test.
+The analogous family `(0,a,4,a+4)` also passes the `4 -> 8` checks.  In fact
+this clean pattern is forced by a simple layer argument for every complete
+multipartite graph, without a class-size cap.
 
-In fact this clean pattern is forced by a simple layer argument in exactly the
-capped complete-multipartite regime tested above.
-
-**Lemma: Capped Complete Multipartite Clean Slots.**  Let `q` be a positive
+**Lemma: Complete Multipartite Clean Source Slots.**  Let `q` be a positive
 integer and let `H` be a complete multipartite graph whose class sizes are all
-congruent modulo `q` and are at most `2q`.  Suppose every vertex degree of
-`H` is congruent to `a mod q`.  Then `V(H)` can be partitioned into at most two
-induced `2q`-modular subgraphs, with residues belonging to
+congruent modulo `q`.  Suppose every vertex degree of `H` is congruent to
+`a mod q`.  Then `V(H)` can be partitioned into at most three induced
+`2q`-modular subgraphs, with residues belonging to
 
 ```text
 {0, q, a, a+q}   modulo 2q.
 ```
 
 Proof.  Let the class sizes be `s_1,...,s_t`, and let
-`s_i congruent r mod q`.  Since `s_i<=2q`, each size is either `r` or `r+q`
-when `r>0`, and either `q` or `2q` when `r=0`.
+`s_i congruent r mod q`.
 
-Let
-
-```text
-c = r        if r>0,
-c = q        if r=0.
-```
-
-Choose a set `X` containing exactly `c` vertices from every multipartite
-class.  If `t=1`, then `H[X]` is independent and has residue `0`.  If
-`t>=2`, then all positive class intersections in `X` have the same size `c`,
-so `H[X]` is `2q`-modular, and every vertex in `X` has internal degree
+First suppose `r>0`.  Choose a set `X` containing exactly `r` vertices from
+every multipartite class.  If `t=1`, then `H[X]` is independent and has
+residue `0`.  If `t>=2`, then all positive class intersections in `X` have
+the same size `r`, so `H[X]` is `2q`-modular, and every vertex in `X` has
+internal degree
 
 ```text
-tc-c = (t-1)c  modulo 2q.
+tr-r = (t-1)r  modulo 2q.
 ```
 
 Modulo `q`, this residue is `(t-1)r`, which is the common degree residue
 `a`, because `sum_i s_i - s_j congruent tr-r mod q`.  Hence the residue of
 `H[X]` modulo `2q` is either `a` or `a+q`.
 
-The remaining set `Y=V(H)\X` consists of exactly `q` vertices in each class
-whose original size was `c+q`, and no vertices in the other classes.  If `Y`
-meets at most one class, then `H[Y]` is independent and has residue `0`.  If
-it meets `u>=2` classes, every positive class intersection has size `q`, so
-every vertex in `Y` has internal degree
+After removing `X`, each class has size divisible by `q`.  In each remaining
+class write the size as
 
 ```text
-uq-q = (u-1)q,
+2q h_i + epsilon_i q,        epsilon_i in {0,1}.
 ```
 
-which is congruent to either `0` or `q` modulo `2q`.  Therefore `X` and the
-nonempty `Y`, after deleting empty parts, give the required partition.  QED.
+Let `Y` contain exactly `epsilon_i q` vertices from class `i`, and let `Z`
+contain all remaining vertices.  The set `Y` has either no positive class
+intersections, one positive class intersection, or all positive intersections
+equal to `q`; therefore `H[Y]` is `2q`-modular with residue `0` or `q`.
+Every positive class intersection in `Z` is divisible by `2q`, so `H[Z]` is
+`2q`-modular with residue `0`.
 
-This lemma explains why the source-residue family `(0,a,q,a+q)` survives all
-current complete-multipartite checks whose maximum class size is the target
-modulus `2q`.  It does not prove the corresponding fixed-slot theorem for
-arbitrary graphs, nor for complete multipartite graphs with unrestricted class
-sizes.
+If `r=0`, skip the set `X` and apply the same `Y,Z` construction directly to
+the original class sizes.  Since in this case every vertex degree of `H` is
+`0 mod q`, the allowed residue set is just `{0,q}` with repetitions.  Removing
+empty parts in either case gives the required partition.  QED.
+
+This lemma explains why the source-residue family `(0,a,q,a+q)` survives the
+complete-multipartite checks and shows that complete multipartite graphs are
+not an obstruction to this clean fixed-slot dyadic lift.  It does not prove
+the corresponding fixed-slot theorem for arbitrary graphs.
 
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
