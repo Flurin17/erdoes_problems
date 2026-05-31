@@ -2029,8 +2029,8 @@ satisfies
         r_{2,A}(a+d)\le Q_E\}\right|
    \ge \eta_E A(w). \tag{1}
 \]
-After decreasing \(\eta_E\), the gate \(d\) may also be required to lie
-above any prescribed bound.
+Equivalently, by enlarging the protected core first, the gate \(d\) may be
+required to lie above any prescribed bound.
 
 Proof. Apply Corollary 3.4i with a protected core \(E\) that also contains
 all elements below the prescribed bound. It gives arbitrarily large \(w\),
