@@ -1615,3 +1615,8 @@ source of growth beyond Ramsey.
   counterexample, with `2` node-limited skips; a min-color run on `10`
   connected samples had histogram `3:10`.  This continues to support the
   conjectural connected constant-part coarse lift.
+- 2026-05-31: Pushed the connected first lift `2 -> 4` further.  Direct
+  three-color checks on connected even graphs found no counterexample in
+  `100` accepted samples at `n=12` and `100` accepted samples at `n=14`, with
+  no node-limited skips.  This supports the focused conjecture that every
+  connected even graph has a three-part flexible `4`-modular partition.
