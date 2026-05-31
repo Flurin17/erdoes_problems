@@ -105,6 +105,14 @@ checks the complete pair-barrier example
 finite-center incoherence example from Example 8.8, where every deleted
 pattern is repairable by some retained center but no single center works
 coherently.
+It also checks the \(\mathbb Z/13\mathbb Z\) model from Example 8.7e, where
+a certificate-free three-point set supports complete inclusion-minimal pair
+holes.
+
+`certificate_free_stats.py` computes the largest certificate-free subset in
+several finite integer-window examples. This is a diagnostic for Lemma
+8.6g: fixed-rank large-excess barriers can persist only if every finite
+test set has a large certificate-free subset.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short
