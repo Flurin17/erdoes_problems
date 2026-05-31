@@ -9,6 +9,7 @@ diagnostic for Proposition 13.1b-Schreier in PROOF.md.
 
 from __future__ import annotations
 
+import argparse
 from itertools import combinations
 
 
@@ -69,33 +70,88 @@ def first_schreier_edges(protected: list[int]) -> list[tuple[int, ...]]:
     ]
 
 
-def main() -> None:
-    for max_value in range(8, 24):
-        for size in range(5, min(max_value, 10) + 1):
-            for tuple_a in combinations(range(1, max_value + 1), size):
+def schreier_edges(protected: list[int]) -> list[tuple[int, ...]]:
+    out: list[tuple[int, ...]] = []
+    for index, first in enumerate(protected):
+        size = index + 2
+        tail = protected[index + 1 :]
+        if len(tail) < size - 1:
+            continue
+        for rest in combinations(tail, size - 1):
+            out.append((first, *rest))
+    return out
+
+
+def witnesses_for_edges(
+    elements: set[int],
+    edges: list[tuple[int, ...]],
+    coverage: int,
+) -> list[tuple[tuple[int, ...], int]] | None:
+    data: list[tuple[tuple[int, ...], int]] = []
+    for edge in edges:
+        witness = None
+        for w in range(max(edge), coverage + 1):
+            if minimal_hole(elements, edge, w) and dominates(elements, edge, w, 2):
+                witness = w
+                break
+        if witness is None:
+            return None
+        data.append((edge, witness))
+    return data
+
+
+def search_first(max_value: int, max_size: int) -> None:
+    for candidate_max in range(8, max_value + 1):
+        for size in range(5, min(candidate_max, max_size) + 1):
+            for tuple_a in combinations(range(1, candidate_max + 1), size):
                 elements = set(tuple_a)
-                coverage = cover_end(elements, 2, 3 * max_value)
-                if coverage < max_value:
+                coverage = cover_end(elements, 2, 3 * candidate_max)
+                if coverage < candidate_max:
                     continue
                 protected = sorted(elements)[:4]
                 edges = first_schreier_edges(protected)
-                data: list[tuple[tuple[int, ...], int]] = []
-                for edge in edges:
-                    witness = None
-                    for w in range(max(edge), coverage + 1):
-                        if minimal_hole(elements, edge, w) and dominates(elements, edge, w, 2):
-                            witness = w
-                            break
-                    if witness is None:
-                        break
-                    data.append((edge, witness))
-                else:
+                data = witnesses_for_edges(elements, edges, coverage)
+                if data is not None:
                     print("finite Schreier-stage gadget")
                     print("A=", sorted(elements), "coverage_end=", coverage)
                     print("protected=", protected)
                     print("edges=", data)
                     return
     print("no finite Schreier-stage gadget found within searched bounds")
+
+
+def extend_first(max_new: int, max_candidate: int) -> None:
+    base = {1, 2, 3, 4, 8}
+    base_protected = [1, 2, 3, 4]
+    for size in range(1, max_new + 1):
+        for new_tuple in combinations(range(13, max_candidate + 1), size):
+            elements = base | set(new_tuple)
+            coverage = cover_end(elements, 2, 4 * max(elements) + 100)
+            if coverage < max(elements) + 1:
+                continue
+            protected = sorted([*base_protected, *new_tuple])[:5]
+            data = witnesses_for_edges(elements, schreier_edges(protected), coverage)
+            if data is not None:
+                print("second Schreier-stage candidate")
+                print("A=", sorted(elements), "coverage_end=", coverage)
+                print("protected=", protected)
+                print("edges=", data)
+                return
+    print("no second-stage extension found within searched bounds")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--extend-first", action="store_true")
+    parser.add_argument("--max-value", type=int, default=23)
+    parser.add_argument("--max-size", type=int, default=10)
+    parser.add_argument("--max-new", type=int, default=4)
+    parser.add_argument("--max-candidate", type=int, default=35)
+    args = parser.parse_args()
+    if args.extend_first:
+        extend_first(args.max_new, args.max_candidate)
+    else:
+        search_first(args.max_value, args.max_size)
 
 
 if __name__ == "__main__":
