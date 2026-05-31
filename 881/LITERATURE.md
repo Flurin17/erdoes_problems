@@ -89,3 +89,29 @@ primary sources before being used in a final proof.
   constructions create private witnesses for each element at order \(h\).
   What is needed here is stronger: private witnesses that survive against
   order \(h+1\) after deletion, or a theorem preventing such witnesses.
+
+## Essential-subset theory does not directly settle #881
+
+Classical essential element/subset results control finite deletions that
+destroy the basis property in every finite order, usually through gcd-type
+obstructions and primitive transforms. Erdős #881 is more quantitative. It
+asks for an infinite deletion whose complement is specifically an
+order-\((k+1)\) basis and has one eventual threshold.
+
+Two workspace examples show why the classical package is insufficient by
+itself.
+
+* Example 7.2 in `PROOF.md` gives eventually periodic bases where deleting
+  one finite accelerator raises the required order far above \(k+1\), even
+  though the remaining set is still a basis of some finite order.
+* Warning 3.0 and Example 3.0a show that even when all finite subdeletions
+  of a candidate reservoir remain order-\((k+1)\) bases, their thresholds
+  can drift past the deleted block; an infinite deletion needs a common
+  threshold, or equivalently the late-successor reservoir property after
+  Lemma 3.
+
+Thus any use of essential-subset theory would still need an additional
+argument controlling the exact order \(k+1\) and the thresholds of finite
+subdeletions. The unresolved obstruction in the proof notes is precisely
+the moving finite-transversal / late-bad-successor barrier at order
+\(k+1\), not merely classical finite-order essentiality.
