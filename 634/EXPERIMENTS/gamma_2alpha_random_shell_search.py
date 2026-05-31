@@ -269,7 +269,20 @@ def main() -> None:
     )
     parser.add_argument("--stop-on-pass", action="store_true")
     parser.add_argument("--show-examples", action="store_true")
+    parser.add_argument(
+        "--exact-quadratic",
+        action="store_true",
+        help="classify sampled shells with the exact Q(sqrt(d)) classifier",
+    )
     args = parser.parse_args()
+
+    exact_classifier = None
+    field_radicand = None
+    if args.exact_quadratic:
+        from gamma_2alpha_quadratic_shell_census import classify_quadratic_shell, field_radicand as exact_radicand
+
+        exact_classifier = classify_quadratic_shell
+        field_radicand = exact_radicand
 
     rng = random.Random(args.seed)
     for n in args.n:
@@ -288,8 +301,14 @@ def main() -> None:
             if args.max_total_mixed is not None:
                 suffix = f" with total mixed <= {args.max_total_mixed}"
             print(f"  sampled unique boundary cycles={len(demands)} from {args.samples} attempts{suffix}")
+            radicand = field_radicand(survivor) if field_radicand is not None else None
             for demand in demands:
-                result = classify_shell(survivor, demand)
+                if exact_classifier is None:
+                    result = classify_shell(survivor, demand)
+                elif radicand is None:
+                    result = ShellResult("not-quadratic", 0, 0)
+                else:
+                    result = exact_classifier(survivor, demand, radicand)
                 counts[result.status] += 1
                 examples.setdefault(result.status, (demand, result))
                 if args.stop_on_pass and result.status == "passes-corner-label-check":

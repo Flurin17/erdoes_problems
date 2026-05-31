@@ -283,9 +283,11 @@ Important distinction: "positive square class" and "smallest representative" are
    boundary, or residual corner-label mismatch. A randomized noncanonical shell
    sampler found no survivor in fixed-seed `30000`-attempt runs (`795` unique
    shells for `63`, `648` for `99`), but this is evidence rather than an
-   exhaustive certificate. A stratified low-overhang run with total mixed count
-   at most `4` found `189` unique `63` shells and `143` unique `99` shells,
-   again with no pass. The full low-overhang census is now exact: all `11040`
+   exhaustive certificate. The exact `Q(sqrt(d))` sampler also found no pass in
+   an uncapped seed-`20260531`, `10000`-attempt run (`246` unique `63` shells,
+   `201` unique `99` shells). A stratified low-overhang run with total mixed
+   count at most `4` found `189` unique `63` shells and `143` unique `99`
+   shells, again with no pass. The full low-overhang census is now exact: all `11040`
    shells for `63` are eliminated over `Q(sqrt(5))` (`6144` non-simple,
    `4896` corner-label violations), and all `63000` shells for `99` are
    eliminated over `Q` (`42480` non-simple, `20520` corner-label violations).

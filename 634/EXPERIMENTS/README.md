@@ -116,7 +116,8 @@ Current components:
   survivor. It applies the same shell filters and is useful for finding
   candidate extensions or stress-testing the endpoint-minimal census, but it is
   not an impossibility proof. The `--max-total-mixed` option stratifies the
-  sampler into low-overhang boundary shells.
+  sampler into low-overhang boundary shells; `--exact-quadratic` reruns sampled
+  shells through the exact `Q(sqrt(d))` classifier.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`
