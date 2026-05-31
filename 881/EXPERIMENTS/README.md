@@ -90,3 +90,10 @@ would also allow dormant new elements above the declared endpoint.
 construction from Theorem 2.3 in the model \(A=\mathbb N\), and verifies
 for small parameters that every deleted multiset of size at most \(k\) has
 the required repair from the protected reservoir.
+
+`adjacent_stage_search.py` tests a possible \(k=3\) disproof route:
+constructing an order-3 basis that is ordinary minimal as an order-4 basis.
+It searches finite stages where new elements extend three-sum coverage and
+already have local four-sum private witnesses. The default greedy run finds
+two endpoint-style stages and then stalls, reflecting the same buffer
+obstruction seen in the \(k=2\) stage searches.
