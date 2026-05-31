@@ -1570,6 +1570,82 @@ it is a model showing that representation spikes alone do not imply a
 fixed recurrent certificate. A proof must prevent this mass escape using
 the basis, barrier, or private-color structure.
 
+## Corollary 3.4g: \(k=2\) counterexamples force star-gated holes
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Suppose
+no infinite deletion from \(A\) remains an order-3 basis. Then for every
+finite \(E\subset A\) there are constants \(q_E\) and \(\eta_E>0\) such
+that, for arbitrarily large \(w\), there are a finite set
+\[
+D\subset A\setminus E,\qquad 1\le |D|\le q_E,
+\]
+and an element \(d\in D\) with:
+
+1. \(w\notin3(A\setminus D)\);
+2. there are at least
+   \[
+   \eta_E A(w)
+   \]
+   unordered two-term representations
+   \[
+   w-d=a+b,\qquad a,b\in A\setminus D. \tag{1}
+   \]
+
+Proof. Fix \(E\). Corollary 3.3 gives arbitrarily large \(w\) for which
+\(\mathcal H_E(w)\) has matching number bounded by some \(M_E\). Let
+\(D\) be the union of a maximal matching, so \(D\subset A\setminus E\),
+\[
+|D|<3M_E=:q_E,
+\]
+and \(D\) meets every edge of \(\mathcal H_E(w)\). Taking \(w\) larger than
+every three-term sum from \(E\), this implies
+\[
+w\notin3(A\setminus D).
+\]
+
+As in Corollary 3.4d, the number of edges of \(\mathcal H_E(w)\) is at
+least \(c_E A(w)\) for a constant \(c_E>0\). Since every edge meets \(D\),
+some \(d\in D\) lies in at least
+\[
+\frac{c_E}{q_E}A(w)
+\]
+edges. Of these edges, at most \(2(|D|-1)\) contain another element of
+\[
+D\setminus\{d\};
+\]
+indeed, for a fixed \(d'\in D\setminus\{d\}\), a three-term representation
+of \(w\) whose outside-\(E\) support contains both \(d\) and \(d'\) has at
+most one further summand, hence determines at most two outside-\(E\)
+support edges: \(\{d,d'\}\), if the third summand lies in \(E\) or is a
+repeat, and possibly \(\{d,d',w-d-d'\}\).
+
+Also discard the \(O(1)\) edges whose only representatives use \(d\) with
+multiplicity at least two. Such a representation has the form \(w=3d\) or
+\[
+w=2d+a,
+\]
+so it contributes only the support \(\{d\}\) or the support
+\(\{d,a\}\) with \(a=w-2d\).
+
+After discarding these \(O_E(1)\) edges, each remaining edge containing
+\(d\) has a representative three-term sum
+\[
+w=d+a+b
+\]
+with \(a,b\in A\setminus D\). Distinct outside-\(E\) support edges give
+distinct unordered pairs \(\{a,b\}\). Therefore, for all sufficiently large
+\(w\), the number of retained two-term representations (1) is at least
+\(\eta_E A(w)\) for a suitable constant \(\eta_E>0\). \(\square\)
+
+Thus any \(k=2\) counterexample must contain arbitrarily late finite holes
+where one deleted element \(d\) acts as a gate for linearly many retained
+two-sum repairs of the same witness. If such a gate \(d\) could be fixed
+along an infinite sequence with enough control on the rest of \(D\), the
+fixed-star recurrence mechanisms from Lemma 8.2c and Lemma 8.2d would
+become relevant. The remaining escape is again motion: the star center
+\(d\) and the finite auxiliary deletion set may move beyond every protected
+core.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6665,6 +6741,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   certificate-dense test set, then a fixed recurrent certificate triple
   appears and Corollary 2.3c gives a good deletion. The escaping-block
   model after it explains why large spikes alone do not guarantee this.
+* Corollary 3.4g combines bounded transversals with the padded edge lower
+  bound in the \(k=2\) case: every counterexample has arbitrarily late
+  finite holes where one deleted element gates \(\gg A(w)\) retained
+  two-sum repairs of the witness.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

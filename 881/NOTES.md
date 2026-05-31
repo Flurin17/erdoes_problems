@@ -479,6 +479,19 @@ stable overlap, spikes can escape to fresh blocks: finite models with
 paired blocks \(P_j\) and \(n_j-P_j\) have huge reflected clusters at
 \(n_j\) but eventually miss every fixed finite test set.
 
+Corollary 3.4g gives the \(k=2\) bounded-transversal form of the same
+phenomenon. In any counterexample, after protecting a finite core \(E\),
+there are arbitrarily large holes \(w\notin3(A\setminus D)\) with
+\(|D|\le q_E\), and one deleted element \(d\in D\) gates
+\[
+\gg_E A(w)
+\]
+retained two-sum repairs \(w-d=a+b\), \(a,b\in A\setminus D\). Thus the
+remaining obstruction is not just a finite gate; it is a moving star gate
+with linearly many retained repairs. If the same gate or a certificate-rich
+part of those repairs could be made recurrent, the positive recurrence
+theorems would apply.
+
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
 shifted targets \(n-c\), as \(c\) ranges through retained elements of \(A\).
