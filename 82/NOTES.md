@@ -1602,3 +1602,11 @@ source of growth beyond Ramsey.
   bounded part count, flexible partitioning is equivalent to a single
   source-residue-dependent residue multiset working for all graphs, by taking
   disjoint unions over failed slot multisets.
+- 2026-05-31: Added `--connected-only` to `modular_partition.py` for
+  full-modular sampling.  Connected samples strengthen the coarse-lift
+  evidence: `2 -> 4` on `n=10` had minimum flexible color count at most `3`
+  in `50` connected accepted samples; `4 -> 8` on `n=12` had minimum at most
+  `3` in `20` connected accepted samples, and a direct `3`-color check saw no
+  counterexample in `50` connected samples.  For `n=14`, `4 -> 8` had minimum
+  at most `3` in `10` connected samples.  This supports the connected
+  constant-part target, though it is still small finite evidence.

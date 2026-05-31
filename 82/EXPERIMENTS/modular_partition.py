@@ -182,6 +182,28 @@ def random_full_modular_candidate(
     return rng.getrandbits(edge_count)
 
 
+def is_connected_graph(n: int, graph_mask: int, pc: ri.Precomp) -> bool:
+    if n <= 1:
+        return True
+    adj = [0] * n
+    for index, (u, v) in enumerate(pc.edges):
+        if (graph_mask >> index) & 1:
+            adj[u] |= 1 << v
+            adj[v] |= 1 << u
+    seen = 1
+    stack = [0]
+    while stack:
+        vertex = stack.pop()
+        unseen_neighbors = adj[vertex] & ~seen
+        while unseen_neighbors:
+            bit = unseen_neighbors & -unseen_neighbors
+            other = bit.bit_length() - 1
+            seen |= bit
+            stack.append(other)
+            unseen_neighbors ^= bit
+    return seen == (1 << n) - 1
+
+
 def sample_parity_partitions(
     n: int,
     odd: bool,
@@ -265,6 +287,7 @@ def sample_full_modular_partitions(
     max_part_size: int | None,
     max_attempts: int,
     node_limit: int | None,
+    connected_only: bool,
 ) -> None:
     rng = random.Random(seed)
     pc = ri.precompute(n)
@@ -282,6 +305,8 @@ def sample_full_modular_partitions(
         if graph_mask is None:
             continue
         if not ri.is_modular_on(graph_mask, full, full_modulus, pc):
+            continue
+        if connected_only and not is_connected_graph(n, graph_mask, pc):
             continue
         accepted += 1
         try:
@@ -407,6 +432,7 @@ def sample_full_modular_min_colors(
     max_part_size: int | None,
     max_attempts: int,
     node_limit: int | None,
+    connected_only: bool,
 ) -> None:
     rng = random.Random(seed)
     pc = ri.precompute(n)
@@ -427,6 +453,8 @@ def sample_full_modular_min_colors(
         if graph_mask is None:
             continue
         if not ri.is_modular_on(graph_mask, full, full_modulus, pc):
+            continue
+        if connected_only and not is_connected_graph(n, graph_mask, pc):
             continue
         accepted += 1
         try:
@@ -459,6 +487,8 @@ def sample_full_modular_min_colors(
         print(f"min_part_size={min_part_size}")
     if max_part_size is not None:
         print(f"max_part_size={max_part_size}")
+    if connected_only:
+        print("connected_only=True")
     print(f"trials={trials}")
     print(f"attempts={attempts}")
     print(f"accepted={accepted}")
@@ -745,6 +775,7 @@ def main() -> None:
     parser.add_argument("--min-part-size", type=int, default=0)
     parser.add_argument("--max-part-size", type=int)
     parser.add_argument("--balanced", action="store_true")
+    parser.add_argument("--connected-only", action="store_true")
     parser.add_argument("--find-min-colors", type=int)
     parser.add_argument("--diagnostics", action="store_true")
     parser.add_argument("--node-limit", type=int)
@@ -815,6 +846,7 @@ def main() -> None:
             max_part_size,
             args.max_attempts,
             args.node_limit,
+            args.connected_only,
         )
         return
 
@@ -833,6 +865,7 @@ def main() -> None:
             max_part_size,
             args.max_attempts,
             args.node_limit,
+            args.connected_only,
         )
         return
 

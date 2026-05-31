@@ -40,6 +40,8 @@ Computational checks and generated data for Erdos Problem 82.
   to skip hard exact-cover instances without certifying counterexamples.
   When `--max-part-size` is active, the exact-cover recursion indexes allowed
   modular subsets by pivot vertex rather than enumerating all submasks.
+  `--connected-only` filters full-modular samples to connected source graphs,
+  which is useful for testing the connected coarse-lift reduction.
 - `first_lift_chromatic.py`: tests the chromatic pruning lemma for the first
   dyadic lift by sampling or enumerating even graphs, filtering for
   `chi(G),chi(complement(G)) >= 5`, and then running the exact four-part
