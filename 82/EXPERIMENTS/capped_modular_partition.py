@@ -5,6 +5,8 @@ Unlike `modular_partition.py`, this script never builds all `2^n` subsets.
 It enumerates only candidate parts up to `--max-part-size`, then runs an exact
 cover search indexed by the first uncovered vertex.  This is intended for
 terminal and small-excess experiments such as `n=25,q=5,max_part_size=7`.
+For larger random checks, `--on-the-fly` skips the upfront candidate table and
+generates only pivot-containing candidates as the search needs them.
 """
 
 from __future__ import annotations
@@ -124,6 +126,88 @@ def find_partition(
     return assignment, nodes, branches
 
 
+def pivot_candidates(
+    n: int,
+    remaining: int,
+    pivot: int,
+    modulus: int,
+    min_part_size: int,
+    max_part_size: int,
+    adj: list[int],
+):
+    others = [vertex for vertex in range(n) if vertex != pivot and (remaining >> vertex) & 1]
+    lower = max(1, min_part_size)
+    upper = min(max_part_size, remaining.bit_count())
+    pivot_bit = 1 << pivot
+    for size in range(upper, lower - 1, -1):
+        for combo in combinations(others, size - 1):
+            vertices = (pivot,) + combo
+            subset = pivot_bit | subset_from_vertices(combo)
+            if is_modular_subset(subset, vertices, modulus, adj):
+                yield subset
+
+
+def find_partition_on_the_fly(
+    n: int,
+    graph_mask: int,
+    modulus: int,
+    colors: int,
+    min_part_size: int,
+    max_part_size: int,
+    node_limit: int | None,
+) -> tuple[list[int] | None, int, int]:
+    adj = adjacency_masks(n, graph_mask)
+    full = (1 << n) - 1
+    choices: dict[tuple[int, int], int] = {}
+    nodes = 0
+    branches = 0
+
+    @lru_cache(maxsize=None)
+    def rec(remaining: int, colors_left: int) -> bool:
+        nonlocal nodes, branches
+        nodes += 1
+        if node_limit is not None and nodes + branches > node_limit:
+            raise SearchLimitExceeded
+        if remaining == 0:
+            return True
+        if colors_left == 0:
+            return False
+        remaining_size = remaining.bit_count()
+        if remaining_size > colors_left * max_part_size:
+            return False
+        if min_part_size and remaining_size < min_part_size:
+            return False
+
+        pivot = (remaining & -remaining).bit_length() - 1
+        for subset in pivot_candidates(
+            n, remaining, pivot, modulus, min_part_size, max_part_size, adj
+        ):
+            branches += 1
+            if node_limit is not None and nodes + branches > node_limit:
+                raise SearchLimitExceeded
+            if rec(remaining ^ subset, colors_left - 1):
+                choices[(remaining, colors_left)] = subset
+                return True
+        return False
+
+    if not rec(full, colors):
+        return None, nodes, branches
+
+    assignment = [-1] * n
+    remaining = full
+    colors_left = colors
+    color = 0
+    while remaining:
+        subset = choices[(remaining, colors_left)]
+        for vertex in range(n):
+            if (subset >> vertex) & 1:
+                assignment[vertex] = color
+        remaining ^= subset
+        colors_left -= 1
+        color += 1
+    return assignment, nodes, branches
+
+
 def assignment_stats(
     n: int,
     graph_mask: int,
@@ -155,6 +239,7 @@ def sample_random(
     node_limit: int | None,
     trials: int,
     seed: int,
+    on_the_fly: bool,
 ) -> None:
     rng = random.Random(seed)
     edges = n * (n - 1) // 2
@@ -162,14 +247,9 @@ def sample_random(
     for trial in range(1, trials + 1):
         graph_mask = rng.getrandbits(edges)
         try:
-            assignment, nodes, branches = find_partition(
-                n,
-                graph_mask,
-                modulus,
-                colors,
-                min_part_size,
-                max_part_size,
-                node_limit,
+            finder = find_partition_on_the_fly if on_the_fly else find_partition
+            assignment, nodes, branches = finder(
+                n, graph_mask, modulus, colors, min_part_size, max_part_size, node_limit
             )
         except SearchLimitExceeded:
             limited += 1
@@ -194,6 +274,8 @@ def sample_random(
     if min_part_size:
         print(f"min_part_size={min_part_size}")
     print(f"max_part_size={max_part_size}")
+    if on_the_fly:
+        print("mode=on_the_fly")
     print(f"trials={trials}")
     print(f"limited={limited}")
     print("no_counterexample_seen")
@@ -210,6 +292,7 @@ def main() -> None:
     parser.add_argument("--node-limit", type=int)
     parser.add_argument("--sample-random", type=int, default=0)
     parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--on-the-fly", action="store_true")
     args = parser.parse_args()
 
     if args.sample_random:
@@ -222,6 +305,7 @@ def main() -> None:
             args.node_limit,
             args.sample_random,
             args.seed,
+            args.on_the_fly,
         )
         return
 
@@ -229,7 +313,8 @@ def main() -> None:
         parser.error("mask is required unless --sample-random is used")
 
     try:
-        assignment, nodes, branches = find_partition(
+        finder = find_partition_on_the_fly if args.on_the_fly else find_partition
+        assignment, nodes, branches = finder(
             args.n,
             args.mask,
             args.modulus,
@@ -244,6 +329,8 @@ def main() -> None:
         print(f"modulus={args.modulus}")
         print(f"colors={args.colors}")
         print(f"max_part_size={args.max_part_size}")
+        if args.on_the_fly:
+            print("mode=on_the_fly")
         print("partition_exists=unknown_node_limit")
         return
 
@@ -254,6 +341,8 @@ def main() -> None:
     if args.min_part_size:
         print(f"min_part_size={args.min_part_size}")
     print(f"max_part_size={args.max_part_size}")
+    if args.on_the_fly:
+        print("mode=on_the_fly")
     print(f"nodes={nodes}")
     print(f"branches={branches}")
     print(f"partition_exists={assignment is not None}")

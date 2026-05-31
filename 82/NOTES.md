@@ -1222,3 +1222,11 @@ source of growth beyond Ramsey.
   node-limited instances.  A direct `n=36,q=6,max_part_size=8` random sweep is
   still too slow because the candidate subset count through size `8` is much
   larger.
+- 2026-05-31: Improved `capped_modular_partition.py` with `--on-the-fly`,
+  which generates candidate parts only for the current uncovered pivot vertex.
+  This turned the previously too-slow random checks into quick exact
+  certificates: `100` random graphs at `n=36,q=6,max_part_size=8` and `50`
+  random graphs at `n=49,q=7,max_part_size=9` all had capped modular
+  partitions, with no node limits.  The first hard local-search `n=36` mask
+  was also exactly partitioned into part sizes `8,8,8,8,3,1`.  This provides
+  stronger evidence for a `q+2` one-shot target, though still no proof.

@@ -54,6 +54,8 @@ Computational checks and generated data for Erdos Problem 82.
   partitions that enumerates only subsets up to `--max-part-size`, avoiding
   the `2^n` subset table used by `modular_partition.py`; includes
   `--sample-random` for unrestricted capped checks such as `n=25,q=5`.
+  `--on-the-fly` generates candidate parts only for the current pivot vertex,
+  which is much faster for random large capped searches.
 - `cycle_block_signature.py`: enumerates finite signatures of cycle blocks
   for cactus-graph self-labelled mod-`4` coloring tests, recording marked
   articulation labels and their same-labelled degree contributions from the
