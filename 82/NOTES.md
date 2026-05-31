@@ -1863,3 +1863,16 @@ source of growth beyond Ramsey.
   zero.  Connectivity is harmless: if the sampled witness-free graph is
   disconnected, its complement is connected, remains `q`-modular, and has the
   same target-modular induced sets.
+- 2026-05-31: Added a reproducible checker for the surviving strengthened
+  first-lift target where the residue-`1` slot in `(0,0,1,2)` must be exactly
+  `1`-regular, i.e. an induced matching.  `slot_partition.py` now supports
+  `--residue-one-matching`, and the new direct backtracker
+  `matching_slot_search.py` verifies the same target by vertex coloring.  The
+  strengthened target passes all even graphs through `n=7`, the first
+  `200000` even graphs on `n=8`, the known connected `n=13` and `n=14`
+  first-lift hard masks, `K_9`, and the `16`-vertex modular-OCT
+  counterexample.  Random exact-cover probes on even `n=14,16,18` graphs also
+  found no counterexample, but larger dense instances remain search-hard.
+  This route survives the OCT refutation because it still permits the
+  residual graph to satisfy the full cut congruence instead of being
+  bipartite.

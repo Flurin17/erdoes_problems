@@ -3712,6 +3712,38 @@ bipartite; instead it satisfies the weaker cut congruence from Lemma 4I.6.
 Thus the modular OCT strengthening fails, while the original first-lift slot
 target survives.  QED.
 
+**Surviving Candidate: Matching Residue-`1` Slot.**  A different
+strengthening of the same first-lift slot target is still consistent with the
+current data:
+
+```text
+Every even graph has a partition A,B,C,D such that
+G[A] and G[B] have all degrees 0 mod 4,
+G[C] is exactly 1-regular,
+and G[D] has all degrees 2 mod 4.
+```
+
+This would imply the `(0,0,1,2)` slot target because an induced matching is
+`1`-modular modulo `4`.  It is incomparable with the modular OCT candidate:
+it keeps the residue-`1` set very rigid, but it still allows the residual
+`A union B` to satisfy only the cut congruence of Lemma 4I.6 rather than being
+bipartite.
+
+The exact checker `EXPERIMENTS/slot_partition.py --residue-one-matching` and
+the direct coloring checker `EXPERIMENTS/matching_slot_search.py` verify this
+candidate for all even graphs on at most `7` vertices, the first `200000`
+even graphs on `8` vertices in the standard parity enumeration, the known
+connected first-lift hard masks on `13` and `14` vertices, `K_9`, and the
+`16`-vertex modular-OCT counterexample above.  Larger random exact-cover
+probes on even graphs with `14`, `16`, and `18` vertices also found no
+counterexample, although dense random instances can be search-hard and timed
+out probes are not treated as evidence.
+
+No proof is known from this candidate yet.  A plausible proof would need to
+explain why the residue-`1` corrections can always be chosen as an induced
+matching while the remaining residue errors are absorbed by the residue-`2`
+set and the residual mod-`4` cut equation.
+
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
 

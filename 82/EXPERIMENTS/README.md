@@ -89,7 +89,13 @@ Computational checks and generated data for Erdos Problem 82.
   supports even-graph or unrestricted random sampling, plus exhaustive
   Eulerian-graph checks for small `n`.  With slots `0,0,1,2`,
   `--diagnostics` prints the residue-`1` and residue-`2` sets and the residual
-  cut-congruence rows from Lemma 4I.6.
+  cut-congruence rows from Lemma 4I.6.  `--residue-one-matching` additionally
+  requires every residue-`1` part modulo `4` to be exactly `1`-regular.
+- `matching_slot_search.py`: direct vertex-coloring backtracker for the
+  stronger `(0,0,1,2)` first-lift target in which the residue-`1` color class
+  must be an induced matching.  This is often faster than exact-cover subset
+  enumeration on fixed hard masks and supports exhaustive even-graph prefixes
+  with `--limit` plus per-instance `--node-limit`.
 - `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus

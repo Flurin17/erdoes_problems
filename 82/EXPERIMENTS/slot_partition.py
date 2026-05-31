@@ -22,6 +22,7 @@ def find_slot_partition(
     graph_mask: int,
     modulus: int,
     slots: tuple[int, ...],
+    residue_one_matching: bool = False,
 ) -> list[int] | None:
     slots = tuple(sorted(slots))
     pc = ri.precompute(n)
@@ -29,14 +30,30 @@ def find_slot_partition(
     full = (1 << n) - 1
     residues: dict[int, int] = {}
     by_residue: dict[int, list[int]] = {residue: [] for residue in set(slots)}
+    by_residue_pivot: dict[int, list[list[int]]] = {
+        residue: [[] for _ in range(n)] for residue in set(slots)
+    }
     for subset in range(1, 1 << n):
         residue = modular_partition.residue_on(graph_mask, subset, modulus, pc)
         if residue is not None and residue in by_residue:
+            if residue_one_matching and modulus == 4 and residue == 1:
+                if any(
+                    (graph_mask & pc.incident[subset][vertex]).bit_count() != 1
+                    for vertex in pc.vertices[subset]
+                ):
+                    continue
             residues[subset] = residue
             by_residue[residue].append(subset)
+            rest = subset
+            while rest:
+                bit = rest & -rest
+                by_residue_pivot[residue][bit.bit_length() - 1].append(subset)
+                rest ^= bit
 
     for residue in by_residue:
         by_residue[residue].sort(key=lambda subset: (subset.bit_count(), subset), reverse=True)
+        for choices in by_residue_pivot[residue]:
+            choices.sort(key=lambda subset: (subset.bit_count(), subset), reverse=True)
 
     choice: dict[tuple[int, tuple[int, ...]], tuple[int, int]] = {}
 
@@ -59,8 +76,8 @@ def find_slot_partition(
         for residue in sorted(set(state)):
             next_state = remove_slot(state, residue)
             assert next_state is not None
-            for subset in by_residue[residue]:
-                if subset & pivot and subset & ~remaining == 0:
+            for subset in by_residue_pivot[residue][pivot.bit_length() - 1]:
+                if subset & ~remaining == 0:
                     if rec(remaining ^ subset, next_state):
                         choice[(remaining, state)] = (subset, residue)
                         return True
@@ -163,6 +180,11 @@ def main() -> None:
     parser.add_argument("--exhaustive-even", action="store_true")
     parser.add_argument("--self-labelled", action="store_true")
     parser.add_argument("--diagnostics", action="store_true")
+    parser.add_argument(
+        "--residue-one-matching",
+        action="store_true",
+        help="for modulus 4, require every residue-1 part to be exactly 1-regular",
+    )
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
     slots = (
@@ -201,13 +223,21 @@ def main() -> None:
             if args.self_labelled:
                 assignment = find_self_labelled_partition(args.n, graph_mask, args.modulus)
             else:
-                assignment = find_slot_partition(args.n, graph_mask, args.modulus, slots)
+                assignment = find_slot_partition(
+                    args.n,
+                    graph_mask,
+                    args.modulus,
+                    slots,
+                    args.residue_one_matching,
+                )
             if assignment is None:
                 bad = graph_mask
                 break
         print(f"n={args.n}")
         print(f"modulus={args.modulus}")
         print("slots=" + ",".join(map(str, slots)))
+        if args.residue_one_matching:
+            print("residue_one_matching=True")
         print(f"exhaustive_even_checked={checked}")
         if bad is None:
             print("no_counterexample_seen")
@@ -233,13 +263,21 @@ def main() -> None:
             if args.self_labelled:
                 assignment = find_self_labelled_partition(args.n, graph_mask, args.modulus)
             else:
-                assignment = find_slot_partition(args.n, graph_mask, args.modulus, slots)
+                assignment = find_slot_partition(
+                    args.n,
+                    graph_mask,
+                    args.modulus,
+                    slots,
+                    args.residue_one_matching,
+                )
             if assignment is None:
                 failures.append(graph_mask)
                 break
         print(f"n={args.n}")
         print(f"modulus={args.modulus}")
         print("slots=" + ",".join(map(str, slots)))
+        if args.residue_one_matching:
+            print("residue_one_matching=True")
         if args.sample_even:
             print(f"sample_even={args.sample_even}")
         else:
@@ -257,11 +295,19 @@ def main() -> None:
     if args.self_labelled:
         assignment = find_self_labelled_partition(args.n, args.mask, args.modulus)
     else:
-        assignment = find_slot_partition(args.n, args.mask, args.modulus, slots)
+        assignment = find_slot_partition(
+            args.n,
+            args.mask,
+            args.modulus,
+            slots,
+            args.residue_one_matching,
+        )
     print(f"n={args.n}")
     print(f"mask={args.mask}")
     print(f"modulus={args.modulus}")
     print("slots=" + ",".join(map(str, slots)))
+    if args.residue_one_matching:
+        print("residue_one_matching=True")
     if assignment is None:
         print("slot_partition=no")
         return
