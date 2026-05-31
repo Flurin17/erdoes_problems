@@ -1462,6 +1462,22 @@ is \(o(A(X))\) uniformly for \(n\le X\), then same-color sums contribute
 only \(O_r(1)\) because the colors are Sidon, and Corollary 3.4c gives a
 good deletion.
 
+For large-excess pair barriers, the precise certificate obstruction is
+list-valued. Given a pair hole \(\{x,y\}\) at \(w\), with endpoint centers
+\(w-x\) and \(w-y\) arbitrarily large, and a finite test set \(T\), each
+\[
+t\in T
+\]
+has an endpoint list
+\[
+L_w(t)=\{z\in\{x,y\}:w-t-z\in A\}.
+\]
+If no admissible choice of endpoints splits \(T\) into two certificate-free
+fibers, then one fiber contains a fixed certificate triple, reflected by
+\(w-x\) or \(w-y\), and Corollary 2.3c gives a good deletion. Thus a
+persistent pair-barrier obstruction needs coherent certificate-free
+endpoint list-colorings, not just abstract certificate-free halfsets.
+
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then
 \[

@@ -5673,6 +5673,70 @@ allows a sparse fixed-rank tail with bounded top excess, unless an
 additional arithmetic argument upgrades it to bounded second-excess
 (handled by Lemma 8.6a) or to the large-excess hypothesis above.
 
+## Lemma 8.6g': Pair barriers force certificates unless endpoint lists split certificate-free
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Suppose there is a finite set \(T_0\subset A\) with the
+following property: for every \(M\) there are \(w\) and distinct
+\[
+x_w,y_w\in A\setminus T_0
+\]
+such that
+\[
+w-\max T_0\ge N_0,\qquad w-x_w>M,\qquad w-y_w>M,
+\qquad w\notin3(A\setminus\{x_w,y_w\}), \tag{1}
+\]
+and the endpoint lists
+\[
+L_w(t)=\{z\in\{x_w,y_w\}:w-t-z\in A\}\qquad(t\in T_0)
+\]
+admit no choice function
+\[
+\chi(t)\in L_w(t)
+\]
+whose two fibers
+\[
+\chi^{-1}(x_w),\qquad \chi^{-1}(y_w)
+\]
+are both certificate-free relative to \(A\). Then there is an infinite
+\[
+B\subset A
+\]
+such that \(A\setminus B\) is an asymptotic basis of order \(3\).
+
+Proof. For each \(t\in T_0\), Lemma 10.1 applied to (1) implies that every
+two-term representation of \(w-t\) meets \(\{x_w,y_w\}\). Since
+\[
+w-t\ge N_0,
+\]
+the target \(w-t\) has a two-term representation from \(A\), so
+\(L_w(t)\ne\varnothing\). Choose any
+\[
+\chi(t)\in L_w(t).
+\]
+By hypothesis, one fiber contains a certificate triple
+\[
+e,y_1,y_2,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A.
+\]
+If this fiber is \(\chi^{-1}(x_w)\), then
+\[
+w-x_w-\{e,y_1,y_2\}\subset A.
+\]
+If it is \(\chi^{-1}(y_w)\), then
+\[
+w-y_w-\{e,y_1,y_2\}\subset A.
+\]
+Thus some certificate triple in the fixed finite set \(T_0\) is reflected
+into \(A\) with arbitrarily large centers, because both endpoint centers in
+(1) exceed the arbitrary parameter \(M\). Passing to an unbounded subsequence,
+the same triple recurs. Corollary 2.3c gives the desired deletion. \(\square\)
+
+Therefore complete pair barriers can evade the fixed-triple theorem only if,
+on every finite test set, the shifted endpoint lists admit a
+certificate-free two-coloring. This is stronger and more coherent than the
+mere existence of a certificate-free half-subset; it is the list-coloring
+form of the remaining pair-barrier obstruction.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -8225,6 +8289,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   rank-sensitive paragraph after it says variable-rank barriers can evade
   this only by outrunning the certificate-density ratio of every finite test
   set.
+* Lemma 8.6g' sharpens the pair-barrier case from large certificate-free
+  halfsets to endpoint list-colorings: pair holes force a recurrent
+  certificate unless the shifted endpoint lists can split every finite test
+  set into two certificate-free fibers.
 * Lemma 8.6h supplies such finite test sets when \(A\) contains long
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of
