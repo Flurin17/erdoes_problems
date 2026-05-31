@@ -118,6 +118,11 @@ R=\{0,1\},\qquad x=2,\qquad y=3,\qquad h=4.
 \]
 This is a local diagnostic only; an integer or staged lift must still stop
 other old exceptional representatives from repairing the hole.
+The same script prints the \(\mathbb Z/8\) translate-separation diagnostic
+for \(R=\{0,1,4\}\): among four protected residues, translates of \(R\) can
+separate at most four of the six pairs from all other protected residues,
+so the residue pair-hole mechanism cannot support a complete pair system by
+phase choices alone.
 
 `certificate_free_stats.py` computes the largest certificate-free subset in
 several finite integer-window examples. This is a diagnostic for Lemma

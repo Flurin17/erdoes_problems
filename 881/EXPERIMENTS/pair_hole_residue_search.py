@@ -53,5 +53,35 @@ def search(max_modulus: int = 18) -> None:
     print("no two-center residue pair hole found")
 
 
+def separation_diagnostic() -> None:
+    """Check complete-pair separation by translates of {0,1,4} mod 8."""
+    modulus = 8
+    background = {0, 1, 4}
+    residues = set(range(modulus))
+    translates = [
+        {(alpha + r) % modulus for r in background}
+        for alpha in range(modulus)
+    ]
+    best: tuple[int, tuple[int, ...], list[tuple[int, int]]] | None = None
+    for protected in combinations(range(modulus), 4):
+        protected_set = set(protected)
+        separated: list[tuple[int, int]] = []
+        for x, y in combinations(protected, 2):
+            for translate in translates:
+                if x in translate or y in translate:
+                    continue
+                if protected_set - {x, y} <= translate:
+                    separated.append((x, y))
+                    break
+        score = len(separated)
+        if best is None or score > best[0]:
+            best = (score, protected, separated)
+    assert best is not None
+    print("Z/8 translate separation diagnostic for R={0,1,4}")
+    print("best separated pairs among four residues=", best[0], "of 6")
+    print("protected=", list(best[1]), "separated=", best[2])
+
+
 if __name__ == "__main__":
     search()
+    separation_diagnostic()
