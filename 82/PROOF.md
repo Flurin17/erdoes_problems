@@ -4889,6 +4889,17 @@ vertex `b_i` has `m-1-d_i` neighbors inside `complement(F)` and
 `m-1+epsilon_i`.  QED.
 
 This template embeds an arbitrary graph `F` as half of a spread-one graph.
+The cross-degree sums impose the calibration
+
+```text
+sum_i epsilon_i = sum_i (m-1-d_i) - sum_i d_i
+                = m(m-1) - 4e(F).
+```
+
+Thus this exact spread-one template is possible only when
+`0 <= m(m-1)-4e(F) <= m`, so the base graph has about half of the possible
+edges, not quarter density.
+
 Thus a bounded-spread proof cannot simply take a large exact-degree side and
 argue from its internal graph alone; the other side can compensate the degree
 variation almost arbitrarily.  The remaining hope for bounded spread is a

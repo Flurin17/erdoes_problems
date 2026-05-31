@@ -131,7 +131,7 @@ def main() -> None:
     parser.add_argument("--trials", type=int, default=100)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--p-num", type=int, default=1)
-    parser.add_argument("--p-den", type=int, default=4)
+    parser.add_argument("--p-den", type=int, default=2)
     args = parser.parse_args()
     if args.p_den <= 0 or not (0 <= args.p_num <= args.p_den):
         parser.error("need 0 <= --p-num <= --p-den")

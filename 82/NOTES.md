@@ -1923,8 +1923,9 @@ source of growth beyond Ramsey.
   `5,6,8,9,10` on `n=12,14,16,18,20`.
 - 2026-05-31: Added `compensated_spread.py` to generate the compensated-double
   spread-one template.  The bipartite degree sums require the base graph to
-  have about quarter density: the epsilon count is
-  `sum_i(m-1-d_i)-sum_i d_i`.  Quick random checks produced verified
+  have about half density: the epsilon count is
+  `sum_i(m-1-d_i)-sum_i d_i = m(m-1)-4e(F)`, which must lie between `0` and
+  `m`.  Quick random checks produced verified
   spread-one masks with max regular order `7` on `n=14` and `9` on `n=18`,
   matching the qualitative obstruction but not improving the previous
   extremal examples.
@@ -2017,3 +2018,9 @@ source of growth beyond Ramsey.
   `524288` even graphs containing edge `0:1` and finding no counterexample.
   A first `n=9` chunk `0..524288` checked `262144` edge-containing even graphs
   and also found no edge-rooted matching-slot counterexample.
+- 2026-05-31: Corrected the compensated-spread density calibration.  In
+  Lemma 11B the epsilon count is `m(m-1)-4e(F)`, so the base graph must have
+  about half of the possible edges, not quarter density.  Updated
+  `compensated_spread.py` to sample `p=1/2` by default; a quick
+  `m=7,trials=20` check accepted `4` templates and found best regular order
+  `8` on `n=14`.

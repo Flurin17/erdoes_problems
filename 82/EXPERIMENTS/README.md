@@ -23,7 +23,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `compensated_spread.py`: generates the compensated-double spread-one
   template from Lemma 11B, putting a random base graph on one side, its
   complement on the other, and a bipartite graph with complementary degree
-  prescriptions between them.
+  prescriptions between them.  The default base density is `1/2`, matching
+  the degree-sum condition `m(m-1)-4e(F) in [0,m]`.
 - `defect_set.py`: checks the one-defect sufficient condition for the
   `(0,0,1,2)` first-lift slot target, where a residue-`2` part leaves a
   zero-residue complement.
