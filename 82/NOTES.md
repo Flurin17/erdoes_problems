@@ -1634,3 +1634,9 @@ source of growth beyond Ramsey.
   `{0,2,11,12}`, `{1,7,9,10}`, `{3,4,8}`, `{5,6}` with residues
   `0,2,2,0`.  Therefore the connected first-lift theorem, if true, needs at
   least four parts; the broader connected `O(1)` target remains plausible.
+- 2026-05-31: Tested the corrected connected first-lift target with four
+  parts.  Connected even samples found no `2 -> 4` counterexample with four
+  flexible parts in `100` accepted samples at `n=16`; at `n=18`, the run
+  accepted `43` connected samples before the `3,000,000` attempt cap and
+  likewise found no counterexample.  This supports connected `C=4` as the
+  next first-lift target.
