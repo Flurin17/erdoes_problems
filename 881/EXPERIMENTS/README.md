@@ -143,6 +143,10 @@ It searches finite stages where new elements extend three-sum coverage and
 already have local four-sum private witnesses. The default greedy run finds
 two endpoint-style stages and then stalls, reflecting the same buffer
 obstruction seen in the \(k=2\) stage searches.
+A separate bounded non-greedy DFS over increments of size at most `3`,
+candidate values up to `100`, and a two-point buffer again found depth only
+`2`; its best alternative chain starts with adding `{4,11}` and then
+`{18,21}`.
 
 `robust_booster_residue.py` searches cyclic residue models for a finite
 booster that lowers the order while private residue holes survive with the
@@ -172,3 +176,7 @@ Run it with `--diagnose` to see the immediate obstruction: the only
 residue-restricted singleton candidates that extend coverage are `41` and
 `43`, and both fail the pair-witness condition against old elements
 `1,3,21,23,31`.
+A bounded non-greedy DFS with candidate values up to `110`, increments of
+size at most `3`, and slack `100` also found no chain beyond depth `2`.
+With wider first/second-stage enumeration, alternative first moves exist
+but the branches tested still have no third extension.

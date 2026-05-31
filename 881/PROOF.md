@@ -4007,6 +4007,18 @@ singleton stage was found within the tested bounds. This is finite evidence
 only, but it reinforces the structural obstruction from Lemma 10.3:
 singleton order-4 holes force terminal retained gaps, so cofinally many
 singletons with bounded excess cannot coexist with order-3 coverage.
+A bounded non-greedy DFS gives the same qualitative picture: with increments
+of size at most \(3\), candidate values up to \(100\), and the two-point
+buffer imposed, the best chain has depth \(2\), for instance adding
+\[
+\{4,11\}
+\]
+and then
+\[
+\{18,21\}.
+\]
+Thus the observed stall is not only an artefact of the first greedy
+singleton choices in the smallest range.
 
 The more plausible \(k=3\) negative route is therefore the same as in the
 remaining \(k=2\) case: unbounded collective barriers, such as cross-stage
@@ -4094,6 +4106,12 @@ and both fail the pair-witness condition against the old elements
 \]
 Thus the obstruction is not merely lack of coverage; it is simultaneous
 domination for many old elements.
+A bounded non-greedy DFS with candidate values up to \(110\), increments of
+size at most \(3\), and slack \(100\) also reaches only depth \(2\). Wider
+enumeration shows several alternative first moves and some alternative
+second moves, but the tested branches still have no third extension. This
+keeps the robust-booster pair route open only as a genuinely large-block or
+new-design problem, not as a small non-greedy search miss.
 
 ## Dependency Graph
 
