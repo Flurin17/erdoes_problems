@@ -2460,6 +2460,91 @@ This lemma is useful only after an arithmetic argument supplies a bounded
 width \(q\). The Schreier example above shows that no such \(q\) follows
 from the abstract barrier property alone.
 
+## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\), and put \(m_0=\min A\). Let \(P\subset A\) be cofinite
+in \(A\). Fix \(r\ge2\) and \(D\ge0\). It is impossible that, for all
+sufficiently late
+\[
+F\in[P]^r,
+\]
+there is a witness \(w_F\) satisfying
+\[
+\max F\le w_F\le \max F+D,\qquad
+w_F\notin3(A\setminus F). \tag{1}
+\]
+
+Proof. Suppose such \(P,r,D\) exist. Choose \(T\) so that (1) holds
+whenever \(\min F>T\). We first prove a local counting bound. For every
+sufficiently large \(x>T\), put
+\[
+I_x=[x,\ 2x+m_0-D-1]\cap\mathbb N.
+\]
+We claim that
+\[
+|P\cap I_x|\le r+N_0+1. \tag{2}
+\]
+Assume otherwise, and let
+\[
+Y=P\cap I_x,\qquad y_0=\min Y,\qquad y_*=\max Y.
+\]
+At most \(N_0\) integers of \(Y\) lie in \((y_*-N_0,y_*]\), so there is an
+element
+\[
+e\in Y\setminus\{y_0\},\qquad e\le y_*-N_0.
+\]
+Since \(|Y\setminus\{e\}|\ge r\), choose
+\[
+F\in[Y\setminus\{e\}]^r
+\]
+containing \(y_0\) and \(y_*\). Then \(\min F=y_0>T\), so (1) supplies
+\[
+w=w_F.
+\]
+By Lemma 8.4a,
+\[
+(A\setminus F)\cap(w-y_0-m_0,\ w-N_0]=\varnothing. \tag{3}
+\]
+But \(e\notin F\), so \(e\in A\setminus F\). Also \(w\ge y_*\) and
+\(e\le y_*-N_0\) give
+\[
+e\le w-N_0.
+\]
+On the other side, \(y_*\le2x+m_0-D-1\) and \(y_0\ge x\), so
+\[
+w-y_0-m_0\le y_*+D-y_0-m_0<y_0<e.
+\]
+Thus \(e\) lies in the forbidden interval (3), a contradiction. This proves
+(2).
+
+Now cover the tail of \(\mathbb N\) by consecutive intervals of the form
+\[
+I_{x_j}=[x_j,\ 2x_j+m_0-D-1],
+\qquad
+x_{j+1}=2x_j+m_0-D,
+\]
+starting with \(x_0\) large enough that \(x_j>T\) and \(x_{j+1}>x_j\). The
+number of such intervals needed to reach \(X\) is \(O(\log X)\), and each
+contains at most \(r+N_0+1\) points of \(P\). Since \(A\setminus P\) is
+finite,
+\[
+|A\cap[1,X]|=O(\log X). \tag{4}
+\]
+This contradicts order-2 basishood: if \(A(X)=|A\cap[1,X]|\), then for all
+large \(X\), the integers in \([N_0,X]\) are represented by ordered pairs
+from \(A\cap[1,X]\), hence
+\[
+X-N_0+1\le A(X)^2,
+\]
+so \(A(X)\gg\sqrt X\). \(\square\)
+
+Therefore a complete fixed-rank barrier on a cofinite tail can only evade
+the positive theory by having unbounded top excess \(w_F-\max F\) on every
+tail, or by abandoning fixed rank. In the bounded-width case, Lemma 8.6
+then forces fractional recurrence; the remaining escape is the
+certificate-free recurrent-cluster obstruction from Warning 8.6c'.
+
 ## Lemma 8.6: Large-excess collective barriers force partial recurrence
 
 Keep the hypotheses of Lemma 8.4. Suppose that for some \(q\), the sets
@@ -4675,6 +4760,9 @@ new-design problem, not as a small non-greedy search miss.
 * Lemma 8.5a says that if bounded width is supplied by arithmetic, Ramsey
   thinning reduces the late-bad barrier to one fixed uniformity on an
   infinite tail.
+* Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
+  bounded top excess \(w_F-\max F\); terminal gaps would force
+  \(A(X)=O(\log X)\), contradicting order-2 basishood.
 * Lemma 8.6 shows that bounded-width barriers with large witness excess
   force partial reflection-recurrence.
 * Lemma 8.6a proves that finite barriers whose witnesses have bounded

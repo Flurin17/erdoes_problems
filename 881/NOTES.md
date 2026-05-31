@@ -910,6 +910,19 @@ an infinite tail and a fixed \(r\le q\), all sufficiently far \(r\)-subsets
 are late-bad with arbitrarily large witnesses. Thus bounded-width
 collective barriers may be studied one uniformity at a time.
 
+Lemma 8.5b gives a new restriction on that uniform case. A complete
+\(r\)-uniform barrier on a cofinite tail cannot have bounded top excess:
+if every sufficiently late \(F\in[P]^r\) had a witness
+\[
+\max F\le w_F\le\max F+D,
+\]
+then Lemma 8.4a would force every interval
+\([x,2x+m_0-D-1]\) to contain only \(O_{r,D,N_0}(1)\) points of \(P\).
+Since \(P\) is cofinite in \(A\), this would imply \(A(X)=O(\log X)\),
+contradicting the \(A(X)\gg\sqrt X\) lower bound for an order-2 basis.
+Thus a fixed-rank complete-barrier counterexample must live in the
+large-top-excess branch, or use growing edge sizes.
+
 Lemma 8.6 adds a second distinction. If such bounded-width barriers can be
 chosen with witness excess \(w-\max F\) arbitrarily large, then every finite
 pattern in \(A\) has arbitrarily large reflected subpatterns of size at
