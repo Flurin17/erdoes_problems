@@ -183,8 +183,9 @@ Current components:
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and
   `N=99`; every probed representative falls into one of the exact residual
-  obstruction statuses. This is evidence for the grouped proof target, not a
-  complete count.
+  obstruction statuses. Its `--group-by profile` mode instead groups by
+  c-position, mixed-position, and tested-local-label profiles. This is evidence
+  for the grouped proof target, not a complete count.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

@@ -19,6 +19,7 @@ from gamma_2alpha_boundary import (  # noqa: E402
 from gamma_2alpha_boundary_transition_demand import BoundaryDemand  # noqa: E402
 from gamma_2alpha_endpoint_automaton import PlacedEdge, alpha_corner, apex_corner  # noqa: E402
 from gamma_2alpha_low_mixed_shell_census import paths_by_endpoint_and_mixed  # noqa: E402
+from gamma_2alpha_overlap_remainder_inventory import path_profile, profile_signature  # noqa: E402
 from gamma_2alpha_residual_capped_census import (  # noqa: E402
     LocalCoverChecker,
     classify_shell,
@@ -38,6 +39,14 @@ def group_key(demand) -> str:
     )
 
 
+def profile_key(demand, needed_positions: dict[str, tuple[int, ...]]) -> str:
+    return profile_signature(
+        path_profile(demand.left_path, needed_positions["L"]),
+        path_profile(demand.right_path, needed_positions["R"]),
+        path_profile(demand.base_path, needed_positions["B"]),
+    )
+
+
 def mixed(path: tuple[PlacedEdge, ...]) -> int:
     return sum((left.side == "c") != (right.side == "c") for left, right in zip(path, path[1:]))
 
@@ -50,6 +59,7 @@ def main() -> None:
     parser.add_argument("--per-group", type=int, default=3)
     parser.add_argument("--limit", type=int, default=250000)
     parser.add_argument("--top", type=int, default=30)
+    parser.add_argument("--group-by", choices=("endpoint", "profile"), default="endpoint")
     args = parser.parse_args()
 
     for n in args.n:
@@ -61,6 +71,11 @@ def main() -> None:
                 print("  exact quadratic classifier unavailable", flush=True)
                 continue
             local_checker = LocalCoverChecker(survivor, radicand)
+            needed_positions = {
+                "L": tuple(sorted({pair.side_position for pair in local_checker.active_pairs if pair.side == "L"})),
+                "R": tuple(sorted({pair.side_position for pair in local_checker.active_pairs if pair.side == "R"})),
+                "B": tuple(sorted({pair.base_position for pair in local_checker.active_pairs})),
+            }
             candidate = survivor.candidate
             bounded_reps = viable_x_representations(candidate)
             free_reps = viable_free_x_representations(candidate)
@@ -117,19 +132,27 @@ def main() -> None:
                                                     if local_checker.first_overlap(demand) is not None:
                                                         covered += 1
                                                         continue
-                                                    key = group_key(demand)
+                                                    key = (
+                                                        group_key(demand)
+                                                        if args.group_by == "endpoint"
+                                                        else profile_key(demand, needed_positions)
+                                                    )
                                                     if sum(group_counts[key].values()) >= args.per_group:
-                                                        group_done = True
-                                                        break
+                                                        if args.group_by == "endpoint":
+                                                            group_done = True
+                                                            break
+                                                        continue
                                                     detail = classify_shell(survivor, demand, radicand)
                                                     diagnosed += 1
                                                     group_counts[key][detail.status] += 1
                                                     if sum(group_counts[key].values()) >= args.per_group:
-                                                        group_done = True
-                                                        break
+                                                        if args.group_by == "endpoint":
+                                                            group_done = True
+                                                            break
             print(
                 f"  generated={min(generated, args.limit)} covered={covered} "
-                f"diagnosed={diagnosed} endpoint_groups={endpoint_groups} groups={len(group_counts)}",
+                f"diagnosed={diagnosed} endpoint_groups={endpoint_groups} "
+                f"{args.group_by}_groups={len(group_counts)}",
                 flush=True,
             )
             for key, counts in sorted(group_counts.items())[: args.top]:
