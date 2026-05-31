@@ -32,6 +32,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
 - `n = 14` and `n = 15` impossible in this workspace: the same source split
   used for `22` leaves only exact equilateral and `3alpha+2beta` candidates,
   and all are removed by the recorded boundary/Section 11.4 filters.
+- `n = 21` and `n = 30` impossible in this workspace: exact `pi/3`
+  equilateral candidates and the remaining non-isosceles `gamma=2pi/3`
+  candidates are removed by boundary-star checks, while the other source rows
+  have no survivor.
 - `n = 22` impossible in this workspace: the published Laczkovich/Beeson source
   case split reduces the count to exact arithmetic branches, and each branch is
   eliminated in `PROOF.md`.
@@ -79,8 +83,16 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 18 | positive | `2*3^2` |
 | 19 | negative in this workspace | source reductions plus boundary integrality in final BLZ `gamma=2pi/3` cases |
 | 20 | positive | `2^2+4^2` |
-| 21 | not classified here | exact `pi/3` equilateral candidate is eliminated by boundary-star; full source-row obstruction still incomplete |
+| 21 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 22 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 23 | negative in this workspace | prime `3 mod 4` source reduction |
+| 24 | positive | `6*2^2` |
+| 25 | positive | square family |
+| 26 | positive | `1^2+5^2` |
+| 27 | positive | `3*3^2` |
+| 28 | positive | Beeson `3alpha+2beta=pi` table |
+| 29 | positive | `2^2+5^2` |
+| 30 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 
 Important distinction: "positive square class" and "smallest representative" are different. A construction of `15m^2` for all large `m` proves positive infinitely many `n` with squarefree kernel `15`, but it does not prove `n=15`.
 
@@ -94,10 +106,10 @@ Important distinction: "positive square class" and "smallest representative" are
 6. Keep the `71` length-only side-matching and lattice-coloring diagnostics as
    sanity checks for future invariants, but the boundary-transition lemma is now
    the decisive isosceles `gamma=2pi/3` obstruction.
-7. With prime cases classified and `14`, `15`, and `22` promoted to workspace
-   negative theorems, shift effort back to the remaining composite values not
-   covered by the positive families. The exact equilateral boundary-length scan
-   gives candidates:
+7. With prime cases classified and `14`, `15`, `21`, `22`, and `30` promoted
+   to workspace negative theorems, shift effort back to the remaining composite
+   values not covered by the positive families. The exact equilateral
+   boundary-length scan gives candidates:
    `14` from the `2pi/3` tile `(7,8,13)` in an equilateral side-`28` triangle,
    and `15` from `(3,5,7)` in an equilateral side-`15` triangle. The
    `equilateral_gamma_boundary.py` full-boundary star check eliminates both
@@ -106,11 +118,13 @@ Important distinction: "positive square class" and "smallest representative" are
    both counts.
    The same equilateral boundary-star workflow eliminates the exact
    `pi/3` candidates for `21` and `30`, namely `(16,21,19)` in side `84` and
-   `(8,15,13)` in side `60`, including their `a,b` swaps.
+   `(8,15,13)` in side `60`, including their `a,b` swaps; combined with the
+   source split and non-isosceles `gamma=2pi/3` endpoint checks, this now gives
+   negative workspace proofs for both counts.
    The composite dashboard currently shows no surviving encoded candidates
    through the unresolved values below `100` checked in `RESULTS.md`, with
-   `14`, `15`, and `22` now upgraded from dashboard evidence to proof entries.
-   The newer
+   `14`, `15`, `21`, `22`, and `30` now upgraded from dashboard evidence to
+   proof entries. The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha
    outer shapes; `46` and `56` by triquadratic boundary-star checks; and

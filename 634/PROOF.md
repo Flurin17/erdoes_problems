@@ -1027,7 +1027,9 @@ This table records only values/families classified by the current proof file.
 | `14` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `15` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `19` | negative in this workspace | Beeson/Laczkovich/SWW source reductions; equilateral and `3alpha+2beta` prime theorems; isosceles reductions; boundary-transition and BLZ `gamma=2pi/3` boundary-integrality arguments |
+| `21` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `22` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `30` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1128,6 +1130,73 @@ All three fail Beeson's stronger Section 11.4 filter. Therefore `N=14` and
 `N=15` have no survivor in any source case, and both are classified negative in
 this workspace.
 
+## Composite Benchmark: `N=21` and `N=30`
+
+The values `21` and `30` are removed by the same source-row method. Neither is
+a square, a sum of two positive squares, `2m^2`, `3m^2`, or `6m^2`; hence the
+similar/reptile, commensurable-angle, and right-tile isosceles branches are
+removed. Both counts are squarefree, so Beeson's `gamma=2alpha` isosceles
+branch is removed as well.
+
+The exact equilateral boundary-length equations leave only `gamma=pi/3`
+candidates:
+
+| N | primitive tile | equilateral side L | exact boundary decompositions |
+|---:|---|---:|---|
+| 21 | `(16,21,19)` and `(21,16,19)` | 84 | `4b` or swapped `4a` |
+| 30 | `(8,15,13)` and `(15,8,13)` | 60 | `4b`, `a+4c`, `4a+b+c` or swapped |
+
+For `gamma=pi/3`, each equilateral corner is one tile `gamma` angle, so its
+incident boundary side labels must be `a` and `b`. The script
+`EXPERIMENTS/equilateral_pi_boundary.py` enumerates the legal straight-boundary
+side words and corner stars. It finds two oriented side paths and zero
+compatible full boundary cycles for both `N=21` and `N=30`, and the `a,b` swaps
+are symmetric. Thus the equilateral source branch is eliminated.
+
+The `gamma=2pi/3` isosceles arithmetic filter gives no candidates for `21` or
+`30`. The exact non-isosceles `gamma=2pi/3` formulas leave one candidate for
+each value:
+
+| N | template | primitive tile | scale | outer sides |
+|---:|---|---|---:|---|
+| 21 | `(alpha,alpha+beta,alpha+2beta)` | `(5,16,19)` | 4 | `(20,76,84)` |
+| 30 | `(alpha,alpha+beta,alpha+2beta)` | `(7,8,13)` | 4 | `(28,52,60)` |
+
+`EXPERIMENTS/gamma_2pi3_nonisosceles_boundary.py` applies the endpoint
+boundary-star obstruction: the possible endpoint-pair states are `{84: 2,
+20: 2, 76: 4}` for `N=21` and `{60: 2, 28: 2, 52: 4}` for `N=30`, with zero
+compatible full boundary endpoint cycles in both cases.
+
+It remains to check `3alpha+2beta=pi`. For `N=21`, the five raw roots are:
+
+| M | source row | s=a/c | primitive tile sides |
+|---:|---|---:|---|
+| 1 | isosceles `(a+b,a+b,a)` | `10/11` | `(110,21,121)` |
+| 2 | isosceles `(a+b,a+b,a)` | `17/25` | `(425,336,625)` |
+| 3 | isosceles `(a+b,a+b,a)` | `2/5` | `(10,21,25)` |
+| 4 | isosceles `(a+b,a+b,a)` | `5/37` | `(185,1344,1369)` |
+| 5 | isosceles-alpha `(a,a,a+2b)` | `1/2` | `(2,3,4)` |
+
+The four isosceles-`alpha+beta` roots fail Beeson's stronger Section 11.4
+filter. The remaining isosceles-alpha root has outer sides `(12,12,21)`;
+`EXPERIMENTS/beeson_3alpha2beta_boundary.py` finds `10` legal oriented paths on
+the base, `6` on each equal side, and zero full boundary cycles compatible with
+the corner stars `(alpha,alpha,alpha+2beta)`.
+
+For `N=30`, all five raw roots are isosceles-`alpha+beta` and fail Beeson's
+stronger Section 11.4 filter:
+
+| M | s=a/c | primitive tile sides |
+|---:|---:|---|
+| 1 | `29/31` | `(899,120,961)` |
+| 2 | `13/17` | `(221,120,289)` |
+| 3 | `7/13` | `(91,120,169)` |
+| 4 | `7/23` | `(161,480,529)` |
+| 5 | `1/11` | `(11,120,121)` |
+
+Therefore `N=21` and `N=30` have no survivor in any source case, and both are
+classified negative in this workspace.
+
 ## Composite Benchmark: `N=22`
 
 The published Laczkovich/Beeson reduction bridge recorded in
@@ -1214,7 +1283,8 @@ Therefore `N=22` has no survivor in any source case. This promotes `22` from
 - The prime cases are now classified: `2`, `3`, and primes `1 mod 4` are
   positive, while primes `3 mod 4` greater than `3` are negative.
 - The first composite negative values beyond Beeson's `7` and `11`
-  obstructions now recorded in this workspace are `14`, `15`, and `22`.
+  obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
+  `30`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1232,16 +1302,17 @@ Therefore `N=22` has no survivor in any source case. This promotes `22` from
   filters to classify both values negative.
 - The same exact equilateral boundary-length scan finds `gamma=pi/3` candidates
   for `21` and `30`, and no equilateral candidates for `22`;
-  `equilateral_pi_boundary.py` eliminates the `21` and `30` candidates and
-  their `a,b` swaps by the full-boundary side-label star check.
+  the composite benchmark above now combines the equilateral boundary-star
+  obstruction with the other source filters to classify `21` and `30`
+  negative.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `21`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-  `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
-  `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor
-  in the currently encoded filters. The same scan formerly listed `14`, `15`,
-  and `22`, which are now removed by the composite benchmarks above. The
-  remaining values are not negative theorems until their source-row arithmetic
-  eliminations are written out.
+  `33`, `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`,
+  `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`, `88`, `91`, `92`, `93`,
+  `94`, `95`, and `99` as open with no survivor in the currently encoded
+  filters. The same scan formerly listed `14`, `15`, `21`, `22`, and `30`,
+  which are now removed by the composite benchmarks above. The remaining values
+  are not negative theorems until their source-row arithmetic eliminations are
+  written out.
 - In the range `100..250`, the current encoded survivor list has shrunk to
   `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`, and `240`. All are
   `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4

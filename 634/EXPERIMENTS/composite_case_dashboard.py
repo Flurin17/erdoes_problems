@@ -132,6 +132,8 @@ def gamma_prime_filter_survives(p: int) -> bool:
 def workspace_negative_reason(n: int) -> str | None:
     if n in {14, 15}:
         return "negative by the 14/15 composite benchmark in PROOF.md"
+    if n in {21, 30}:
+        return "negative by the 21/30 composite benchmark in PROOF.md"
     if n == 22:
         return "negative by the N=22 composite benchmark in PROOF.md"
     return None
