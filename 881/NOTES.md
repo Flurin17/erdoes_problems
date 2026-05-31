@@ -252,6 +252,11 @@ Warning 8.6j-9 adds the algebraic reason: if one deletes mirrors
 \(m_i-t\), then any two-deleted repair using one mirror from each of two
 centers requires a fixed value \(y_1+y_2-t\in A\). Thus a
 certificate-free reflected packet cannot run the balanced repair recursion.
+Lemma 8.2a' supplies the alternative bridge repair found from this failure:
+with a fixed padder \(t\), moving anchors \(e_j\), and deleted elements
+\(b_j\), the identities \(t+b_j=e_j+q_j\) and \(e_j+b_i\in2C\) for
+\(i\le j\) imply \(A\setminus\{b_j\}\) is an order-3 basis. For cross
+packets this asks for the extra bridge value \(q_j=t+m_j-2e_j\in C\).
 
 ## Trivial and Boundary Cases
 

@@ -3493,6 +3493,53 @@ b+b'+e\in3P\qquad(b,b'\in B),
 then the hypotheses of Lemma 8.2a hold. Theorem 8.2 constructs such a
 protected reservoir recursively from finite reflection-recurrence.
 
+## Lemma 8.2a': Moving-anchor bridge repair
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Let
+\[
+B=\{b_1<b_2<\cdots\}\subset A,
+\qquad C=A\setminus B.
+\]
+Suppose there is a fixed retained element \(t\in C\) such that for every
+\(j\) there are retained elements
+\[
+e_j,q_j\in C
+\]
+with
+\[
+t+b_j=e_j+q_j, \tag{1}
+\]
+and for every \(i\le j\),
+\[
+e_j+b_i\in2C. \tag{2}
+\]
+Then \(C\) is an asymptotic basis of order \(3\).
+
+Proof. We verify Lemma 8.2a with center \(t\). The one-deleted repair is
+exactly (1):
+\[
+t+b_j=e_j+q_j\in2C.
+\]
+For diagonal two-deleted repairs, (1) and (2) with \(i=j\) give
+\[
+t+2b_j=q_j+(e_j+b_j)\in3C.
+\]
+For \(i<j\), (1) and (2) give
+\[
+t+b_i+b_j=q_j+(e_j+b_i)\in3C.
+\]
+The same identity, with indices swapped if necessary, covers all
+\(b_i+b_j+t\). Lemma 8.2a now gives that \(C\) is an order-3 basis.
+\(\square\)
+
+This criterion separates two tasks that are fused in the fixed-certificate
+construction. The row \(e_j+b_j\in2C\) can come from a reflected packet at a
+moving anchor \(e_j\), while the bridge identity \(t+b_j=e_j+q_j\) connects
+that moving anchor back to the fixed padder \(t\). The old-anchor rows
+\(e_j+b_i\in2C\) are the coherence condition needed to repair mixed
+deleted pairs.
+
 ## Warning 8.2b: Fixed-center greedy absorption has star obstructions
 
 Lemma 8.2a suggests a direct greedy proof for \(k=2\): fix a retained
@@ -6281,6 +6328,28 @@ reflected packets from \(Y\) cannot by themselves run the usual order-3
 deletion recursion. One must either find a reflected packet that contains a
 genuine fixed certificate, or use a repair identity that is not of this
 balanced two-mirror form.
+
+Lemma 8.2a' gives one such different identity. If a reflected packet at
+center \(m_j\) supplies
+\[
+e_j+b_j=m_j\in2C,\qquad b_j=m_j-e_j,
+\]
+then the moving-anchor bridge route additionally needs a fixed retained
+padder \(t\) and retained elements \(q_j\) with
+\[
+t+b_j=e_j+q_j,
+\]
+equivalently
+\[
+q_j=t+m_j-2e_j\in C,
+\]
+as well as the old-anchor rows
+\[
+e_j+b_i\in2C\qquad(i<j).
+\]
+Thus cross-reflected packets are useful only when they come with these
+bridge and old-row conditions, or when they contain a genuine fixed
+certificate.
 
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
@@ -9847,6 +9916,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   reflection-recurrence of \(A\).
 * Lemma 8.2a isolates the repair criterion used to turn a carefully chosen
   infinite deletion into an order-3 basis.
+* Lemma 8.2a' gives a moving-anchor bridge variant: a fixed padder \(t\)
+  can be connected to moving anchors \(e_j\) by bridges
+  \(t+b_j=e_j+q_j\), provided the old-anchor rows \(e_j+b_i\in2C\) hold.
 * Warning 8.2b records why the most direct fixed-center greedy use of
   Lemma 8.2a does not close the remaining \(k=2\) case: a finite prefix can
   create fixed-center or star-shaped old-new obstructions not covered by
