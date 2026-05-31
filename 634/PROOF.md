@@ -2044,21 +2044,29 @@ Thus a complete treatment of these two boundary survivors needs a structural
 higher-mixed obstruction, an exact quotient/canonicalization much stronger than
 raw side-word enumeration, or a new construction.
 
-At the next cap, the exact local-overlap cover gives a deterministic first
-split of the cap-`6` space:
+The exact local-overlap cover gives a deterministic first split of the
+remaining finite boundary-shell space. Expanding the local test set from the
+sampled pairs to every possible equal-side/base boundary-tile position pair
+does not improve these counts, so the residual mass is not caused by missing a
+nearby side-base overlap pair. By mixed level, the all-pair cover leaves:
 
 ```text
 N=63: mixed=6 covered 940,800 / 1,356,640,
-      mixed=6 outside cover 415,840.
+      mixed=8 covered 20,855,200 / 24,237,920,
+      mixed=10 covered 110,159,360 / 119,281,920,
+      mixed=12 covered 144,600,320 / 150,990,080.
 
 N=99: mixed=6 covered 7,941,960 / 13,809,000,
-      mixed=6 outside cover 5,867,040.
+      mixed=8 covered 281,725,280 / 418,281,000,
+      mixed=10 covered 2,500,633,768 / 3,550,812,000,
+      mixed=12 covered 5,222,535,768 / 7,139,652,000.
 ```
 
-These outside-cover shells are not yet classified. The residual obstruction
-types are exact for any individual shell, but the cap-`6` remainder still needs
-either a grouped count or a symbolic proof that all outside-cover shells fall
-into the corner-label, pinch-sector, or split-corner-label obstruction classes.
+The residual obstruction types are exact for any individual shell. The
+mixed-`6` `N=63` remainder is now classified below, but `N=99` at mixed `6`
+and both rows at higher mixed levels still need either a grouped count or a
+symbolic proof that all outside-cover shells fall into the corner-label,
+pinch-sector, or split-corner-label obstruction classes.
 
 The grouped inventory
 `EXPERIMENTS/gamma_2alpha_overlap_remainder_inventory.py` shows that this

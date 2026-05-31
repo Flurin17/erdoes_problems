@@ -122,7 +122,13 @@ The tile triangle is not required to be similar to the large triangle unless exp
   outside-cover shells gives only corner-label violations but already splits
   into `17` certificate types for `63` and `18` for `99`, so even the residual
   proof likely needs a structural forced-corner lemma rather than a tiny
-  certificate table. The chunked coarse census now gives a resumable exact
+  certificate table. Extending the local-overlap test from the default sampled
+  pairs to every possible equal-side/base boundary-tile position pair gives no
+  additional coverage for either benchmark row; the high-mixed outside-cover
+  mass is therefore not a missed local side-base overlap. For `63`, the
+  outside-cover counts at mixed `8`, `10`, and `12` are `3382720`,
+  `9122560`, and `6389760`; for `99`, they are `136555720`, `1050178232`,
+  and `1917116232`. The chunked coarse census now gives a resumable exact
   counting path; its first `63` mixed-`6` outside-cover chunk processed `2000`
   generated shells, with `970` local-cover hits and outside-cover statuses
   `838` corner-label violations plus `192` non-simple residual graphs. Through

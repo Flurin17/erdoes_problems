@@ -134,7 +134,12 @@ Current components:
   `L2-B8,R6-B2,R5-B3,R8-B2,R7-B2,L2-B7,R7-B3,L3-B7,R6-B4`, it covers
   `276555680/295877600` boundary shells for `N=63` and
   `8012836776/11122617000` for `N=99` by local positive-area overlap tests;
-  expanding to the full nearby base-corner bands gives the same counts.
+  expanding to every possible equal-side/base boundary-tile position pair gives
+  the same counts. By mixed level, the default/all-pair cover leaves
+  `3,382,720`, `9,122,560`, and `6,389,760` outside-cover shells at
+  `N=63` mixed `8`, `10`, and `12`, and leaves `136,555,720`,
+  `1,050,178,232`, and `1,917,116,232` outside-cover shells at `N=99`
+  mixed `8`, `10`, and `12`.
 - `gamma_2alpha_overlap_remainder_inventory.py`: grouped count-only inventory
   of the boundary shells outside the local overlap cover. At cap `6`, the
   millions of outside-cover shells collapse to `26` endpoint/mixed boundary
