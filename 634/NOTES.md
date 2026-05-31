@@ -29,6 +29,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
 
 - `n = 7` impossible.
 - `n = 11` impossible.
+- `n = 14` and `n = 15` impossible in this workspace: the same source split
+  used for `22` leaves only exact equilateral and `3alpha+2beta` candidates,
+  and all are removed by the recorded boundary/Section 11.4 filters.
 - `n = 22` impossible in this workspace: the published Laczkovich/Beeson source
   case split reduces the count to exact arithmetic branches, and each branch is
   eliminated in `PROOF.md`.
@@ -69,8 +72,8 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 11 | negative | Beeson theorem |
 | 12 | positive | `3*2^2` |
 | 13 | positive | `2^2+3^2` |
-| 14 | not classified here | side-bounded equilateral `(7,8,13)` `2pi/3` candidate is eliminated by boundary-star; full source coverage still incomplete |
-| 15 | not classified here | side-bounded equilateral `(3,5,7)` `2pi/3` candidate is eliminated by boundary-star; Zhang gives `15m^2` only for `m>=9`; full source coverage still incomplete |
+| 14 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 15 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 16 | positive | square family |
 | 17 | positive | `1^2+4^2` |
 | 18 | positive | `2*3^2` |
@@ -91,25 +94,23 @@ Important distinction: "positive square class" and "smallest representative" are
 6. Keep the `71` length-only side-matching and lattice-coloring diagnostics as
    sanity checks for future invariants, but the boundary-transition lemma is now
    the decisive isosceles `gamma=2pi/3` obstruction.
-7. With prime cases classified and `22` promoted to a workspace negative
-   theorem, shift effort back to composite values not covered by the positive
-   families, starting with `14` and `15`. The exact
-   equilateral boundary-length scan gives candidates:
+7. With prime cases classified and `14`, `15`, and `22` promoted to workspace
+   negative theorems, shift effort back to the remaining composite values not
+   covered by the positive families. The exact equilateral boundary-length scan
+   gives candidates:
    `14` from the `2pi/3` tile `(7,8,13)` in an equilateral side-`28` triangle,
    and `15` from `(3,5,7)` in an equilateral side-`15` triangle. The
    `equilateral_gamma_boundary.py` full-boundary star check eliminates both
-   candidates before any interior search. The generic triangular-lattice
-   exact-cover checker also finds no lattice-aligned cover for either smallest
-   candidate; for `14`, the lattice model is already blocked by an orientation
-   coloring obstruction. A complete nonexistence proof for `14` or `15` still
-   needs a source-level reduction showing every relevant equilateral case is
-   covered by the rational/integer model used in the exact scan.
+   candidates before any interior search; combined with the source split and
+   the `3alpha+2beta` filters, this now gives negative workspace proofs for
+   both counts.
    The same equilateral boundary-star workflow eliminates the exact
    `pi/3` candidates for `21` and `30`, namely `(16,21,19)` in side `84` and
    `(8,15,13)` in side `60`, including their `a,b` swaps.
    The composite dashboard currently shows no surviving encoded candidates
    through the unresolved values below `100` checked in `RESULTS.md`, with
-   `22` now upgraded from dashboard evidence to a proof entry. The newer
+   `14`, `15`, and `22` now upgraded from dashboard evidence to proof entries.
+   The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha
    outer shapes; `46` and `56` by triquadratic boundary-star checks; and

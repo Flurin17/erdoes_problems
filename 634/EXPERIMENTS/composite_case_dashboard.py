@@ -129,6 +129,14 @@ def gamma_prime_filter_survives(p: int) -> bool:
     return False
 
 
+def workspace_negative_reason(n: int) -> str | None:
+    if n in {14, 15}:
+        return "negative by the 14/15 composite benchmark in PROOF.md"
+    if n == 22:
+        return "negative by the N=22 composite benchmark in PROOF.md"
+    return None
+
+
 def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral_exact: bool) -> list[str]:
     lines = [f"Composite/general case dashboard for N={n}"]
 
@@ -143,6 +151,9 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int, equila
         )
         lines.append(f"- prime obstruction: ruled out by {reason}")
         return lines
+    workspace_negative = workspace_negative_reason(n)
+    if workspace_negative:
+        lines.append(f"- workspace classification: {workspace_negative}")
 
     elementary = elementary_positive_reasons(n)
     lines.append(

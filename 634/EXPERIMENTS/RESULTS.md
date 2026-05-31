@@ -7,17 +7,53 @@ The following commands were rerun successfully from the repository root:
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/positive_constructions.py
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/small_family_coverage.py
-PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/composite_case_dashboard.py 14 15 21 22 30 --equilateral-side-bound 250
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/composite_case_dashboard.py 14 15 21 22 30 --equilateral-exact
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py --counts 132 156 175 189 198 204 224 228 240
 ```
 
 The rerun agrees with the status already recorded below: elementary certificates
 pass, `14`, `15`, `21`, `22`, and `30` have no surviving encoded candidates.
-The `N=22` certificate is now promoted in `PROOF.md`; the other listed
-small composites remain dashboard eliminations until their source-row
-arithmetic proofs are written out. The explicit encoded survivors in `100..250`
-remain the isosceles-`alpha+beta` `3alpha+2beta=pi` candidates at
+The `N=14`, `N=15`, and `N=22` certificates are now promoted in `PROOF.md`;
+`21` and `30` remain dashboard eliminations until their source-row arithmetic
+proofs are written out. The explicit encoded survivors in `100..250` remain
+the isosceles-`alpha+beta` `3alpha+2beta=pi` candidates at
 `132,156,175,189,198,204,224,228,240`.
+
+## `N=14` and `N=15` Exact Filter Certificate
+
+The two smallest unresolved composite benchmarks were rerun with exact
+equilateral arithmetic:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 14 15
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 14 7 8
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 15 3 5
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_3alpha2beta_filter.py 14 15 --json
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py 14 15 --json
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_isosceles_filter.py 14 15
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_nonisosceles_exact.py 14 15
+```
+
+The exact equilateral scan leaves only `2pi/3` candidates:
+
+```text
+N=14: (7,8,13), L=28 and its a/b swap
+N=15: (3,5,7), L=15 and its a/b swap
+```
+
+Both fail the equilateral boundary-star check: `N=14` has two oriented side
+paths and zero compatible full boundary cycles, while `N=15` has four oriented
+side paths and zero compatible full boundary cycles.
+
+The `3alpha+2beta=pi` first-pass filter gives four raw roots for `14` and
+three for `15`. Beeson's stronger Section 11.4 filter returns `{ "14": [],
+"15": [] }`; the only non-isosceles raw `14` root `(6,5,9)` is separately
+removed by `beeson_3alpha2beta_boundary.py`. Both `gamma=2pi/3` isosceles and
+non-isosceles exact filters return zero candidates for `14` and `15`.
+
+Interpretation: the row-by-row arithmetic and boundary checks now match the
+published finite source split recorded in `PROOF.md`, so the proof file treats
+`14` and `15` as classified negative values.
 
 ## `N=22` Exact Filter Certificate
 
@@ -70,9 +106,7 @@ only by the boundary-integrality product upgrade to
 
 Interpretation: the row-by-row arithmetic checks for `N=22` now match the
 published finite source split recorded in `PROOF.md`, so the proof file treats
-`22` as a classified negative value. This does not promote the neighboring
-composite dashboard values, whose source-row eliminations still need to be
-written out separately.
+`22` as a classified negative value.
 
 ## Elementary Certificate Checks
 
@@ -100,6 +134,7 @@ The script includes:
 
 - elementary positive families;
 - Beeson negatives `7` and `11`;
+- workspace composite obstructions `14`, `15`, and `22`;
 - workspace prime obstructions for primes `3 mod 4`;
 - recorded sufficient Beeson `3alpha+2beta=pi` constructions, including table
   entries `28,44,48,77,84` and the triquadratic sufficient values
@@ -139,7 +174,7 @@ constructive ledger.
 Command:
 
 ```sh
-python3 634/EXPERIMENTS/composite_case_dashboard.py 14 15 21 22 30 --equilateral-side-bound 250
+python3 634/EXPERIMENTS/composite_case_dashboard.py 14 15 21 22 30 --equilateral-exact
 ```
 
 Result summary:
@@ -190,11 +225,12 @@ N=30:
 ```
 
 Interpretation: the first composite obstruction gap has shifted to exact
-coverage of the equilateral outer-triangle reductions. The encoded
+coverage of the equilateral outer-triangle reductions for values after the
+benchmarks. The encoded
 `3alpha+2beta=pi`, isosceles `gamma=2pi/3`, non-isosceles `gamma=2pi/3`, and
-side-bounded equilateral boundary-star filters leave no survivors for
-`14`, `15`, `21`, `22`, or `30`. The `22` row is now promoted by the
-row-by-row proof in `PROOF.md`; the others remain dashboard eliminations.
+exact equilateral boundary-star filters leave no survivors for
+`14`, `15`, `21`, `22`, or `30`. The `14`, `15`, and `22` rows are now promoted
+by row-by-row proofs in `PROOF.md`; `21` and `30` remain dashboard eliminations.
 
 ## Composite Gap Scan
 
@@ -204,18 +240,21 @@ Command:
 python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 51 55 56 57 60 62 63 66 69 70 76 78 86 87 88 91 92 93 94 95 99 --equilateral-side-bound 250
 ```
 
-Historical result summary:
+Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,
-62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
+14,15,22:
+  negative by workspace composite benchmarks
+
+21,30,33,35,38,39,42,46,51,55,56,57,60,62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
   open with no survivor in the currently encoded filters
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
-the source reductions is still incomplete. After the later `N=22` source-row
-audit, the current open ledger removes `22` from this historical scanner list.
+the source reductions is still incomplete. After the `N=14`, `N=15`, and
+`N=22` source-row audits, the current open ledger removes those values from the
+scanner's unresolved list.
 
 ## Equilateral Boundary-Length Checks
 

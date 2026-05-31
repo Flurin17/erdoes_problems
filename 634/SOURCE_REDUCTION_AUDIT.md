@@ -248,12 +248,12 @@ Impact:
 ## Current Small-Value Status
 
 The following unresolved values below `100` have no survivor in the currently
-encoded filters. The value `22` formerly appeared in this list, but is now
-classified negative in `PROOF.md` after writing out the source-row arithmetic
-eliminations:
+encoded filters. The values `14`, `15`, and `22` formerly appeared in this
+list, but are now classified negative in `PROOF.md` after writing out the
+source-row arithmetic eliminations:
 
 ```text
-14, 15, 21, 30, 33, 35, 38, 39, 42, 46, 51, 55, 56, 57,
+21, 30, 33, 35, 38, 39, 42, 46, 51, 55, 56, 57,
 60, 62, 63, 66, 69, 70, 76, 78, 86, 87, 88, 91, 92, 93, 94,
 95, 99
 ```
@@ -312,10 +312,11 @@ the Type I side-label configuration and non-similar `gamma=2pi/3`,
    contradiction. If accepted, use the draft to replace the current
    source-reduction-dependent prime obstruction with a cleaner theorem-level
    prime classification. This does not close the composite classification gap.
-3. Use the `N=22` proof as the template for the next composite targets: promote
-   a value only after the global source split, equilateral integer model,
-   isosceles reductions, non-isosceles product formulas, and
-   `3alpha+2beta=pi` Section 11.4 filter have all been checked for that count.
+3. Use the `N=14`, `N=15`, and `N=22` proofs as templates for the next
+   composite targets: promote a value only after the global source split,
+   equilateral integer model, isosceles reductions, non-isosceles product
+   formulas, and `3alpha+2beta=pi` Section 11.4/boundary filters have all been
+   checked for that count.
 4. Build a corner-capped ordering/matching obstruction for the remaining
    `3alpha+2beta` isosceles-`alpha+beta` survivors, using `N=48` as the
    positive regression case.

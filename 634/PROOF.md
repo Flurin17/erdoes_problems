@@ -422,10 +422,9 @@ N=15, L=15, sides=(3,5,7):
 
 No ordered triple of these side words satisfies the three equilateral corner
 transition constraints. Therefore these two exact equilateral `gamma=2pi/3`
-candidates cannot be tilings. This is not yet a complete equilateral
-obstruction for `N=14` or `N=15`, because the source-level proof that every
-relevant equilateral case has a rational/integer side model of this kind has
-not been fully reconstructed.
+candidates cannot be tilings. Together with the Laczkovich/Beeson rationality
+bridge for equilateral outer-triangle tilings, this eliminates the equilateral
+source branch for `N=14` and `N=15`.
 
 The analogous exact `gamma=pi/3` equilateral candidates for the next composite
 cases are
@@ -1025,6 +1024,8 @@ This table records only values/families classified by the current proof file.
 | sufficiently large `m^2ab` for `c^2=a^2+ab+b^2` | positive | Zhang construction |
 | `7` | negative | Beeson |
 | `11` | negative | Beeson |
+| `14` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
+| `15` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `19` | negative in this workspace | Beeson/Laczkovich/SWW source reductions; equilateral and `3alpha+2beta` prime theorems; isosceles reductions; boundary-transition and BLZ `gamma=2pi/3` boundary-integrality arguments |
 | `22` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
@@ -1060,6 +1061,72 @@ which `N` occur for a given row. In particular, an outer triangle in the
 right-triangle or `pi/3` rows may have the obvious similar-tile construction
 while still requiring a separate source reduction to rule out other congruent
 tile shapes and other counts.
+
+## Composite Benchmark: `N=14` and `N=15`
+
+The same published source case split used for `N=22` also classifies `14` and
+`15`. The elementary and commensurable-count forms do not contain either value:
+
+```text
+14 and 15 are not squares,
+14 and 15 are not sums of two positive squares,
+14 and 15 are not 2m^2, 3m^2, or 6m^2.
+```
+
+Thus the similar/reptile and commensurable-angle table branches are removed.
+The right-tile isosceles branch is also removed by Beeson's Theorem 7.8: neither
+count is a square, `6m^2`, or twice a sum of two squares. The
+`gamma=2alpha` isosceles branch is removed by Beeson's squarefree obstruction.
+
+The exact equilateral boundary-length equations leave only the following
+`gamma=2pi/3` candidates, together with the displayed `a,b` swaps:
+
+| N | primitive tile | equilateral side L | boundary decompositions found by exact scan |
+|---:|---|---:|---|
+| 14 | `(7,8,13)` and `(8,7,13)` | 28 | `a+b+c`, `4a` or swapped `4b` |
+| 15 | `(3,5,7)` and `(5,3,7)` | 15 | `3b`, `a+b+c`, `5a` or swapped |
+
+For `gamma=2pi/3`, an equilateral corner must be one tile `gamma` angle. The
+straight-boundary side-label transitions are the ones recorded in the
+equilateral section above. The script
+`EXPERIMENTS/equilateral_gamma_boundary.py` enumerates every oriented boundary
+side word passing those straight-vertex stars and then tests the three
+equilateral corner stars. It finds two oriented side paths and zero full cycles
+for `N=14`, and four oriented side paths and zero full cycles for `N=15`.
+Therefore neither equilateral candidate can be a tiling.
+
+The `gamma=2pi/3` isosceles arithmetic filter gives no candidates for `14` or
+`15`. The exact non-isosceles `gamma=2pi/3` formulas likewise give no candidates
+in any of the four BLZ templates.
+
+It remains to check the `3alpha+2beta=pi` template. Beeson's five final
+necessary equations leave four raw roots for `N=14`:
+
+| M | source row | s=a/c | primitive tile sides |
+|---:|---|---:|---|
+| 2 | triquadratic `(2a,b,a+b)` | `2/3` | `(6,5,9)` |
+| 1 | isosceles `(a+b,a+b,a)` | `13/15` | `(195,56,225)` |
+| 2 | isosceles `(a+b,a+b,a)` | `5/9` | `(45,56,81)` |
+| 3 | isosceles `(a+b,a+b,a)` | `5/23` | `(115,504,529)` |
+
+The three isosceles-`alpha+beta` roots fail Beeson's stronger Section 11.4
+filter. The remaining triquadratic root has outer side lengths `(28,15,27)`;
+`EXPERIMENTS/beeson_3alpha2beta_boundary.py` enumerates the full boundary side
+words and finds `6`, `2`, and `2` oriented side paths on the three sides, but
+zero full cycles compatible with the corner stars `(2alpha,beta,alpha+beta)`.
+
+For `N=15`, Beeson's necessary equations leave only three
+isosceles-`alpha+beta` roots:
+
+| M | s=a/c | primitive tile sides |
+|---:|---:|---|
+| 1 | `7/8` | `(56,15,64)` |
+| 2 | `11/19` | `(209,240,361)` |
+| 3 | `1/4` | `(4,15,16)` |
+
+All three fail Beeson's stronger Section 11.4 filter. Therefore `N=14` and
+`N=15` have no survivor in any source case, and both are classified negative in
+this workspace.
 
 ## Composite Benchmark: `N=22`
 
@@ -1146,8 +1213,8 @@ Therefore `N=22` has no survivor in any source case. This promotes `22` from
   source case reductions summarized above.
 - The prime cases are now classified: `2`, `3`, and primes `1 mod 4` are
   positive, while primes `3 mod 4` greater than `3` are negative.
-- The first composite negative value beyond Beeson's `7` and `11` obstructions
-  now recorded in this workspace is `22`.
+- The first composite negative values beyond Beeson's `7` and `11`
+  obstructions now recorded in this workspace are `14`, `15`, and `22`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1158,27 +1225,23 @@ Therefore `N=22` has no survivor in any source case. This promotes `22` from
   supports local reuse of Lemma 12's sweep technique at a non-apex corner, but
   the draft still needs its corner-unsplitting, Type I side-label, and width
   contradiction checked before it can replace the current proof ledger.
-- Small non-prime values not covered by the positive families above are not
-  classified here. The exact equilateral boundary-length scan gives a
-  `2pi/3` candidate for `14` with tile `(7,8,13)` and outer side `28`, and the
-  analogous `(3,5,7)` candidate for `15` with outer side `15`; the
-  `equilateral_gamma_boundary.py` boundary-star check eliminates both. They
-  also fail the induced triangular-lattice exact-cover check; for `14`, the
-  lattice model is already blocked by an up-minus-down coloring count. A full
-  negative proof still needs a source-level reduction showing that all relevant
-  equilateral cases are covered by this rational/integer model.
+- The exact equilateral boundary-length scan gives a `2pi/3` candidate for
+  `14` with tile `(7,8,13)` and outer side `28`, and the analogous `(3,5,7)`
+  candidate for `15` with outer side `15`; the composite benchmark above now
+  combines the source reduction, boundary-star obstruction, and other source
+  filters to classify both values negative.
 - The same exact equilateral boundary-length scan finds `gamma=pi/3` candidates
   for `21` and `30`, and no equilateral candidates for `22`;
   `equilateral_pi_boundary.py` eliminates the `21` and `30` candidates and
   their `a,b` swaps by the full-boundary side-label star check.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `14`, `15`, `21`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
+  `21`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
   `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
   `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor
-  in the currently encoded filters. The same scan formerly listed `22`, which
-  is now removed by the composite benchmark above. The remaining values are not
-  negative theorems until their source-row arithmetic eliminations are written
-  out.
+  in the currently encoded filters. The same scan formerly listed `14`, `15`,
+  and `22`, which are now removed by the composite benchmarks above. The
+  remaining values are not negative theorems until their source-row arithmetic
+  eliminations are written out.
 - In the range `100..250`, the current encoded survivor list has shrunk to
   `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`, and `240`. All are
   `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4

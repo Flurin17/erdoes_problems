@@ -122,6 +122,10 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
 
     if n in {7, 11}:
         return "negative", ["Beeson no-7/no-11 theorem"]
+    if n in {14, 15}:
+        return "negative", ["workspace composite benchmark; exact source-row eliminations"]
+    if n == 22:
+        return "negative", ["workspace N=22 composite benchmark; exact source-row eliminations"]
     if is_prime(n) and n % 4 == 3 and n != 3:
         if gamma_prime_filter_survives(n):
             return "negative", ["prime 3 mod 4 obstruction; isosceles gamma removed by boundary transition"]
