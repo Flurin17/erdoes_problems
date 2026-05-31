@@ -230,6 +230,16 @@ Current components:
   `--group-by profile` mode instead groups by
   c-position, mixed-position, and tested-local-label profiles. This is evidence
   for the grouped proof target, not a complete count.
+- `gamma_2alpha_word_quotient_census.py`: exact count-plus-representative
+  classifier for outside-cover side-label word triples. It reproduces the full
+  `N=63` mixed-`6` outside-cover mass as `40560` word groups over `415840`
+  shells; classifying up to two representatives in every word group gives no
+  mixed-status word group and weighted totals exactly matching the full refined
+  census: `207888` corner-label violations, `58224` pinch-sector obstructions,
+  and `149728` split-corner-label obstructions. For `N=99` mixed `6`, it
+  counts `418260` word groups over `5867040` outside-cover shells; the first
+  `10000` classified word groups cover weight `114540` with no mixed-status
+  word group.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and

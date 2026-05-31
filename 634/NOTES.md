@@ -169,7 +169,14 @@ The tile triangle is not required to be similar to the large triangle unless exp
   more promising empirically but remain unproved: in a `99` mixed-`6` 100k
   prefix, up to two representatives per word group found no mixed-status groups among
   `5600` touched word groups; in a `63` mixed-`8` 20k prefix, the same test
-  found no mixed-status groups among `320` touched word groups.
+  found no mixed-status groups among `320` touched word groups. The new
+  word-quotient counter validates this exactly against the completed `63`
+  mixed-`6` stratum: all `40560` outside-cover word groups, with up to two
+  representatives per word, have no mixed-status word group, and the weighted
+  totals match the full refined census (`207888`, `58224`, `149728`). For `99`
+  mixed `6`, the same counter finds `418260` outside-cover word groups over
+  `5867040` shells; the first `10000` representative-classified word groups
+  cover weight `114540` with no mixed-status word group.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

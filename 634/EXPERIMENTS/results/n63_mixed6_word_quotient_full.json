@@ -1,0 +1,37 @@
+{
+  "classified_weight": 415840,
+  "classified_words": 40560,
+  "elapsed_seconds": 496.063484,
+  "endpoint_groups": 20,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_status_words": 0,
+  "n": 63,
+  "outside_cover_shells": 415840,
+  "radicand": 5,
+  "reps_per_word": 2,
+  "status_group_counts": {
+    "corner-label-violation": 18672,
+    "pinch-sector-obstruction": 7344,
+    "split-corner-label-obstruction": 14544
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 1}": 7128,
+    "{\"corner-label-violation\": 2}": 11544,
+    "{\"pinch-sector-obstruction\": 1}": 4848,
+    "{\"pinch-sector-obstruction\": 2}": 2496,
+    "{\"split-corner-label-obstruction\": 1}": 7104,
+    "{\"split-corner-label-obstruction\": 2}": 7440
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 207888,
+    "pinch-sector-obstruction": 58224,
+    "split-corner-label-obstruction": 149728
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "word_groups": 40560
+}

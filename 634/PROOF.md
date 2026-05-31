@@ -2285,6 +2285,26 @@ prefix touched `320` word groups with the same result. These are stored as
 `EXPERIMENTS/results/n99_mixed6_word_group_probe_limit100000.json` and
 `EXPERIMENTS/results/n63_mixed8_word_group_probe_limit20000.json`.
 
+The dedicated word-quotient counter
+`EXPERIMENTS/gamma_2alpha_word_quotient_census.py` gives a stronger calibration
+on the completed `N=63` mixed-`6` stratum. It counts exactly `40560`
+outside-cover side-label word triples over `415840` shells. Classifying up to
+two representative demands in every word group produces no mixed-status word
+group, and the representative weighted totals exactly match the full refined
+census:
+
+```text
+corner-label-violation:          207,888
+pinch-sector-obstruction:         58,224
+split-corner-label-obstruction:  149,728
+```
+
+For `N=99` mixed `6`, the same counter finds `418260` outside-cover word groups
+over `5867040` outside-cover shells. The first `10000` classified word groups
+cover weight `114540` and again show no mixed-status word group. These results
+are recorded in `EXPERIMENTS/results/n63_mixed6_word_quotient_full.json` and
+`EXPERIMENTS/results/n99_mixed6_word_quotient_first10000.json`.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`
