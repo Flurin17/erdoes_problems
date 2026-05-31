@@ -1497,3 +1497,12 @@ source of growth beyond Ramsey.
   `2,4,8`, support counts `4,4,1`, and zero global slack.  This gives a
   second explicit repair of the rectangle-only staircase obstruction and
   provides a way to test future sparse-special lemmas directly.
+- 2026-05-31: Closed the pure hole/antihole structural route.  A random graph
+  `G(n,1/2)` with `n=2^{(1/2-epsilon)k}` has, with positive probability,
+  `alpha,omega<k` and no induced cycle or induced path of order at least `k`
+  in either `G` or its complement.  The expected number of long induced cycles
+  is dominated by `n^k 2^{-binom(k,2)}=2^{-epsilon k^2+O(k)}`, and the path
+  estimate is no larger up to subexponential factors.  Thus the consequences
+  “no large clique/independent set, no long hole/antihole, no long
+  path/copath” still permit exponential-size graphs and cannot by themselves
+  imply `G(k)<=2^{o(k)}`.

@@ -4002,6 +4002,69 @@ quantitative tools.  Known chi-bounds for `P_t`-free graphs combined with
 `omega(G)<k` and `alpha(G)<k` lead only to exponential or worse bounds in
 `k`, not to `2^{o(k)}`.
 
+There is a sharper reason why this structural information alone cannot prove
+Problem 82: random graphs satisfy all these restrictions up to the exponential
+Ramsey scale.
+
+**Lemma 20B: Random Obstruction To Hole/Antihole Restrictions.**  Fix
+`epsilon>0`.  For all sufficiently large `k`, there exists a graph `G` on
+
+```text
+n=floor(2^{(1/2-epsilon)k})
+```
+
+vertices such that `alpha(G)<k`, `omega(G)<k`, neither `G` nor its complement
+has an induced cycle on at least `k` vertices, and neither `G` nor its
+complement has an induced path on at least `k` vertices.
+
+Proof.  Take `G` from `G(n,1/2)`.  The expected number of `k`-cliques plus
+`k`-independent sets is at most
+
+```text
+2 binom(n,k) 2^{-binom(k,2)}
+  <= 2 (en/k)^k 2^{-k(k-1)/2}
+  = o(1),
+```
+
+because `log_2 n=(1/2-epsilon)k+O(1)`.
+
+For induced cycles, the expected number of induced cycles of length `l` is at
+most
+
+```text
+binom(n,l) (l-1)!/2 * 2^{-binom(l,2)}
+  <= n^l 2^{-l(l-1)/2}.
+```
+
+Writing `a_l=n^l 2^{-l(l-1)/2}`, for every `l>=k` we have
+
+```text
+a_{l+1}/a_l = n 2^{-l}
+             <= 2^{(1/2-epsilon)k-k+O(1)}
+             = 2^{-(1/2+epsilon)k+O(1)}.
+```
+
+Thus the tail over `l>=k` is dominated by its first term, and
+
+```text
+sum_{l>=k} a_l <= 2 a_k
+               <= 2^{-\epsilon k^2+O(k)}
+               = o(1).
+```
+
+The same estimate applies to induced cycles in the complement, by symmetry.
+For induced paths, the union bound is even simpler: a fixed ordered `l`-tuple
+induces a path with probability at most `2^{-binom(l,2)+O(l)}`, so the same
+geometric-tail calculation excludes induced paths of order at least `k` in
+both `G` and its complement with probability `1-o(1)`.  With positive
+probability all desired properties hold.  QED.
+
+Consequently, no proof can use only the consequences `alpha,omega<k` plus no
+long holes, antiholes, paths, or copaths.  Those restrictions still allow
+`2^{(1/2-o(1))k}` vertices and chromatic number at least `n/k`.  A structural
+proof must use additional information genuinely forced by the absence of
+large regular induced subgraphs.
+
 ## Lemma 20A: Stronger Induced-Path Exclusion Via Induced Matchings
 
 If `G` has no regular induced subgraph of order at least `k`, then neither
