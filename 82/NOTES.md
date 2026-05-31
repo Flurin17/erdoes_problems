@@ -1039,3 +1039,10 @@ source of growth beyond Ramsey.
   has diagonal-scale exponential terms when `|A|` is close to `k`, so a trace
   proof must couple multiple trace classes rather than Ramsey-bound them
   separately.
+- 2026-05-31: Fixed a CLI regression in `modular_partition.py` where
+  `--sample-parity` and `--sample-parity-min-colors` passed an obsolete extra
+  `limit` argument.  A quick check of the tempting stronger theorem "partition
+  into `q` zero-residue mod-`q` parts" found an even `8`-vertex counterexample
+  for `q=3`, mask `133782443`, with no three-part partition into induced
+  `0 mod 3` subgraphs.  Thus a one-shot zero-residue modular partition theorem
+  is also false; residue flexibility remains essential.

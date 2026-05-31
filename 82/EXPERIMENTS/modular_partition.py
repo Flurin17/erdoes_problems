@@ -740,7 +740,6 @@ def main() -> None:
             min_part_size,
             max_part_size,
             args.node_limit,
-            args.limit,
         )
         return
 
@@ -756,7 +755,6 @@ def main() -> None:
             min_part_size,
             max_part_size,
             args.node_limit,
-            args.limit,
         )
         return
 
