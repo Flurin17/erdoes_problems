@@ -1037,6 +1037,7 @@ This table records only values/families classified by the current proof file.
 | `42` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `46` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `51` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `55` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1411,6 +1412,41 @@ filter.
 Therefore `N=46` and `N=51` have no survivor in any source case, and both are
 classified negative in this workspace.
 
+## Composite Benchmark: `N=55`
+
+The value `55` is also classified by the source-row checks. It is not a square,
+a sum of two positive squares, `2m^2`, `3m^2`, or `6m^2`, so the
+similar/reptile, commensurable-angle, and right-tile isosceles branches are
+removed. It is squarefree, so Beeson's `gamma=2alpha` isosceles branch is
+removed.
+
+The exact equilateral boundary-length equations leave exactly two `gamma=pi/3`
+candidates:
+
+```text
+N=55: tile (16,55,49), L=220, and its a,b swap.
+```
+
+The `pi/3` equilateral boundary-star check for `(16,55,49)` finds two oriented
+side paths and zero compatible full boundary cycles; the swap is symmetric.
+Thus the equilateral source branch is eliminated.
+
+The isosceles `gamma=2pi/3` arithmetic filter gives no candidates. The exact
+non-isosceles `gamma=2pi/3` product formulas leave one candidate:
+
+```text
+template=(alpha,alpha+beta,alpha+2beta),
+tile (39,16,49), scale 4, outer sides (156,196,220).
+```
+
+The endpoint boundary-star check finds endpoint-pair states `{220: 2, 156: 2,
+196: 2}` and zero compatible full boundary endpoint cycles.
+
+In the `3alpha+2beta=pi` branch, Beeson's necessary equations leave seven raw
+isosceles-`alpha+beta` roots; all seven fail Beeson's stronger Section 11.4
+filter. Therefore `N=55` has no survivor in any source case and is classified
+negative in this workspace.
+
 ## Open/Unresolved Ledger
 
 - `19` is listed as open in the source corpus, but the workspace now records a
@@ -1422,7 +1458,7 @@ classified negative in this workspace.
   positive, while primes `3 mod 4` greater than `3` are negative.
 - The first composite negative values beyond Beeson's `7` and `11`
   obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
-  `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, and `51`.
+  `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, `51`, and `55`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1444,11 +1480,11 @@ classified negative in this workspace.
   obstruction with the other source filters to classify `21` and `30`
   negative.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
-  `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor
-  in the currently encoded
+  `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
+  `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor in
+  the currently encoded
   filters. The same scan formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
-  `35`, `38`, `39`, `42`, `46`, and `51`, which are now removed by the
+  `35`, `38`, `39`, `42`, `46`, `51`, and `55`, which are now removed by the
   composite benchmarks above. The remaining values are not negative theorems
   until their source-row arithmetic eliminations are written out.
 - In the range `100..250`, the current encoded survivor list has shrunk to
