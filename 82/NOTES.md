@@ -1053,6 +1053,12 @@ source of growth beyond Ramsey.
   vertices.  This can amplify dense or medium-density recursive witnesses, but
   high-degree witnesses only add a few vertices; the trace route still needs
   degree control, not just order control, inside trace classes.
+- 2026-05-31: Added the clique-base analogue of trace amplification.  If `A`
+  is a clique, all vertices of `B` have trace `T subset A`, and `G[B]` is
+  `r`-regular on `b` vertices with `r+1<=|A\T|`, then adjoining `r+1`
+  vertices of `A\T` gives an `r`-regular induced subgraph on `b+r+1`
+  vertices.  Independent bases amplify low-degree witnesses; clique bases
+  amplify high-degree witnesses.
 - 2026-05-31: Added `--exhaustive-source-modular` to `universal_slots.py` for
   exact small fixed-source-residue slot sweeps.  For `4 -> 8` with four slots
   on `n=7`, exact enumeration checks `592` source-`0` graphs and leaves `53`

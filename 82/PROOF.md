@@ -2382,6 +2382,36 @@ not too close to its order.  A high-degree witness only adds a few vertices
 from `T`, so this lemma still does not close the trace route without degree
 control for the regular witnesses found recursively.
 
+## Lemma 14A.2: Clique-Base Trace-Class Amplification
+
+Let `A` be a clique in `G`, let `T subset A`, and let
+
+```text
+C_T = {v in V(G)\A : N_G(v) cap A = T}.
+```
+
+Suppose `B subset C_T` induces an `r`-regular graph on `b` vertices.  If
+
+```text
+r+1 <= |A\T|,
+```
+
+then `G` contains a regular induced subgraph on `b+r+1` vertices.
+
+Proof.  Choose `X subset A\T` with `|X|=r+1`.  Since `A` is a clique, `X`
+induces a clique, and every vertex of `X` has degree `r` inside `X`.  There
+are no edges between `B` and `X`, because all vertices of `B` have trace `T`
+on `A`.  Therefore every vertex of `B` has degree `r` inside
+`G[B union X]`, and every vertex of `X` also has degree `r`.  Thus
+`G[B union X]` is `r`-regular on `b+r+1` vertices.  QED.
+
+The independent-base and clique-base amplification lemmas pull in opposite
+directions.  With an independent base, low internal degree in `B` is useful
+because `b-r` vertices from the trace can be added.  With a clique base, high
+internal degree in `B` is useful because `r+1` non-neighbors in the base can
+be added.  A trace proof that alternates between large independent and clique
+bases would need to exploit this complementary degree information.
+
 ## Lemma 14B: Maximal Independent Trace Ramsey Bound
 
 Let `G` be a graph with no regular induced subgraph of order at least `k`,
