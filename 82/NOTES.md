@@ -1101,9 +1101,10 @@ source of growth beyond Ramsey.
   possible residues modulo `2q` gives at most two induced `2q`-modular parts.
   Complements give the same conclusion for disjoint unions of cliques.
 - 2026-05-31: Added a warning about clique-compatible common slots.  Binary
-  weights `1,2,4,...,q` give `O(log q)` target slots that pass every clique
-  test modulo `2q`, but this does not control multipartite structure:
-  for `q=4`, the slots `(0,1,3,7)` are killed by `K_{2,2}`.  Slot proofs need
+  weights `1,2,4,...,q,2q` give `O(log q)` target slots that pass every clique
+  test modulo `2q`, but this does not control multipartite structure.  For
+  `q=4`, the uncorrected power-of-two slots `(0,1,3,7)` are already killed by
+  `K_{2,2}`, and the lesson remains that slot proofs need
   absorption/repetition beyond subset sums for clique sizes.
 - 2026-05-31: Added the perfect-graph reduction.  If `G` is perfect, then
   `n<=alpha(G)omega(G)`, so `G` has a clique or independent set, hence a
