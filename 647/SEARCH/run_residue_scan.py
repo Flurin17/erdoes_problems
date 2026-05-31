@@ -226,6 +226,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--residue-file", type=Path, help="file containing residues as CSV or whitespace")
     parser.add_argument("--outdir", type=Path, required=True)
     parser.add_argument("--workers", type=int, default=max(1, os.cpu_count() or 1))
+    parser.add_argument("--batch-size", type=int, default=1, help="residue classes per binary process")
     parser.add_argument("--segment", type=int, default=10_000_000)
     parser.add_argument("--sieve-limit", type=int, default=10_000)
     parser.add_argument("--quick-shift", type=int, default=5000)
@@ -238,35 +239,59 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def chunk_jobs(jobs: list[tuple[int, int, int, Path]], batch_size: int) -> list[tuple[list[tuple[int, int, int]], Path, Path | None]]:
+    if batch_size <= 1:
+        return [([(residue, start, count)], path, None) for residue, start, count, path in jobs]
+
+    batches = []
+    for index in range(0, len(jobs), batch_size):
+        chunk = jobs[index : index + batch_size]
+        batch_index = index // batch_size
+        first_residue = chunk[0][0]
+        path = chunk[0][3].parent / f"batch_{batch_index:05d}_{first_residue}.log"
+        spec_path = chunk[0][3].parent / f"batch_{batch_index:05d}_{first_residue}.jobs"
+        batches.append(([(residue, start, count) for residue, start, count, _ in chunk], path, spec_path))
+    return batches
+
+
 def main() -> int:
     args = parse_args()
     if args.n_stop <= args.n_start:
         raise SystemExit("--n-stop must be greater than --n-start")
     if args.workers < 1:
         raise SystemExit("--workers must be positive")
+    if args.batch_size < 1:
+        raise SystemExit("--batch-size must be positive")
 
     try:
         residues = parse_residues(args.residues, args.residue_file)
     except OSError as exc:
         raise SystemExit(f"could not read residue file: {exc}") from exc
-    jobs = []
+    residue_jobs = []
     for residue in residues:
         start, count = x_range_for_residue(args.n_start, args.n_stop, args.modulus, residue)
-        jobs.append((residue, start, count, args.outdir / f"res_{residue}.log"))
+        residue_jobs.append((residue, start, count, args.outdir / f"res_{residue}.log"))
+
+    jobs = chunk_jobs(residue_jobs, args.batch_size)
 
     print(
         f"RANGE n_start={args.n_start} n_stop={args.n_stop} modulus={args.modulus} "
-        f"jobs={len(jobs)} total_x={sum(count for _, _, count, _ in jobs)} outdir={args.outdir}"
+        f"residues={len(residue_jobs)} jobs={len(jobs)} batch_size={args.batch_size} "
+        f"total_x={sum(count for _, _, count, _ in residue_jobs)} outdir={args.outdir}"
     )
     if args.dry_run:
-        for residue, start, count, _ in jobs:
-            print(f"JOB residue={residue} start={start} count={count}")
+        for batch, path, _ in jobs:
+            if len(batch) == 1:
+                residues_text = str(batch[0][0])
+            else:
+                residues_text = f"{batch[0][0]}..{batch[-1][0]}({len(batch)})"
+            print(f"JOB path={path.name} residues={residues_text}")
         return 0
 
     args.outdir.mkdir(parents=True, exist_ok=True)
 
     if args.aggregate_only:
-        print_summary(merge_summaries([path for _, _, _, path in jobs]))
+        print_summary(merge_summaries([path for _, path, _ in jobs]))
         return 0
 
     active = []
@@ -278,18 +303,17 @@ def main() -> int:
 
     while next_index < len(jobs) or active:
         while not failed and next_index < len(jobs) and len(active) < args.workers:
-            residue, start, count, path = jobs[next_index]
+            batch, path, spec_path = jobs[next_index]
             next_index += 1
+            if spec_path is not None:
+                spec_path.write_text(
+                    "".join(f"{residue} {start} {count}\n" for residue, start, count in batch),
+                    encoding="utf-8",
+                )
             command = [
                 args.binary,
                 "--variable-mod",
                 str(args.modulus),
-                "--variable-rem",
-                str(residue),
-                "--start",
-                str(start),
-                "--count",
-                str(count),
                 "--segment",
                 str(args.segment),
                 "--sieve-limit",
@@ -301,10 +325,23 @@ def main() -> int:
                 "--stats",
                 *args.extra_arg,
             ]
+            if spec_path is None:
+                residue, start, count = batch[0]
+                command[3:3] = ["--variable-rem", str(residue), "--start", str(start), "--count", str(count)]
+            else:
+                command[3:3] = ["--jobs-file", str(spec_path)]
             handle = path.open("w", encoding="utf-8")
             process = subprocess.Popen(command, stdout=handle, stderr=subprocess.STDOUT)
-            active.append((process, handle, residue, path, time.time()))
-            print(f"START residue={residue} start={start} count={count}", flush=True)
+            if len(batch) == 1:
+                residues_text = str(batch[0][0])
+            else:
+                residues_text = f"{batch[0][0]}..{batch[-1][0]}({len(batch)})"
+            active.append((process, handle, residues_text, path, time.time()))
+            if len(batch) == 1:
+                residue, start, count = batch[0]
+                print(f"START residue={residue} start={start} count={count}", flush=True)
+            else:
+                print(f"START batch={path.stem} residues={len(batch)} first={batch[0][0]}", flush=True)
 
         now = time.time()
         if args.heartbeat > 0 and now - last_heartbeat >= args.heartbeat:
@@ -318,20 +355,20 @@ def main() -> int:
 
         time.sleep(args.poll_interval)
         still_active = []
-        for process, handle, residue, path, job_start in active:
+        for process, handle, residue_text, path, job_start in active:
             returncode = process.poll()
             if returncode is None:
-                still_active.append((process, handle, residue, path, job_start))
+                still_active.append((process, handle, residue_text, path, job_start))
                 continue
             handle.close()
             completed.append(path)
             elapsed = time.time() - job_start
-            print(f"DONE residue={residue} rc={returncode} elapsed={elapsed:.1f}", flush=True)
+            print(f"DONE residue={residue_text} rc={returncode} elapsed={elapsed:.1f}", flush=True)
             if returncode != 0:
                 failed = True
         active = still_active
 
-    summary = merge_summaries([path for _, _, _, path in jobs])
+    summary = merge_summaries([path for _, path, _ in jobs])
     print_summary(summary, time.time() - started)
     return 1 if failed else 0
 

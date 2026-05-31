@@ -358,6 +358,11 @@ budgets above 5 it falls back to the exact factorization routine.
   `k <= 1000` gives 4,374 residue classes modulo `30808063`, density
   approximately `1.41975819772e-4`. This is the current search modulus for
   the range `2*10^16 <= N < 4*10^16`.
+- Lifting through primes `23,29,31` with `k <= 1000` gives 59,128 residue
+  classes modulo `955049953`, density approximately `6.1911e-5`. This cuts
+  the tested progression density by about `2.29x` compared with the
+  `23,29` lift, but it requires the batched job mode in `prime_tuple_search128`
+  and `run_residue_scan.py` to avoid one process per residue class.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a

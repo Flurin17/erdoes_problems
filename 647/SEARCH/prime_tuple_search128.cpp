@@ -3,6 +3,7 @@
 #include <cctype>
 #include <cstdint>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <limits>
 #include <random>
@@ -802,6 +803,7 @@ struct Args {
     u128 require_rem = 0;
     u128 variable_mod = 1;
     u128 variable_rem = 0;
+    std::string jobs_file;
     std::vector<u128> extra_prime_coeffs;
     std::vector<AffineForm> extra_prime_forms;
 };
@@ -829,6 +831,7 @@ static Args parse_args(int argc, char** argv) {
         else if (key == "--require-rem") a.require_rem = parse_u128(need());
         else if (key == "--variable-mod") a.variable_mod = parse_u128(need());
         else if (key == "--variable-rem") a.variable_rem = parse_u128(need());
+        else if (key == "--jobs-file") a.jobs_file = need();
         else if (key == "--extra-prime-coeffs") {
             std::stringstream ss(need());
             std::string part;
@@ -857,6 +860,39 @@ static Args parse_args(int argc, char** argv) {
     if (a.segment == 0) die("--segment must be positive");
     if (a.require_mod == 0) die("--require-mod must be positive");
     return a;
+}
+
+struct ScanJob {
+    u128 variable_rem;
+    u128 start;
+    u128 count;
+};
+
+static std::vector<ScanJob> read_jobs_file(const std::string& path) {
+    std::ifstream in(path);
+    if (!in) die("could not open jobs file: " + path);
+
+    std::vector<ScanJob> jobs;
+    std::string line;
+    uint64_t line_no = 0;
+    while (std::getline(in, line)) {
+        ++line_no;
+        size_t comment = line.find('#');
+        if (comment != std::string::npos) line.resize(comment);
+        std::stringstream ss(line);
+        std::string rem_s, start_s, count_s;
+        if (!(ss >> rem_s)) continue;
+        if (!(ss >> start_s >> count_s)) {
+            die("invalid jobs file line " + std::to_string(line_no) + ": expected residue start count");
+        }
+        std::string extra;
+        if (ss >> extra) {
+            die("invalid jobs file line " + std::to_string(line_no) + ": trailing data");
+        }
+        jobs.push_back({parse_u128(rem_s), parse_u128(start_s), parse_u128(count_s)});
+    }
+    if (jobs.empty()) die("jobs file is empty: " + path);
+    return jobs;
 }
 
 static bool make_N_coeff_form(u128 coeff, const Args& args, AffineForm& out) {
@@ -966,10 +1002,7 @@ static bool compute_N(const Args& args, u128 X, u128& N) {
     return checked_add(prod, args.variable_rem, N);
 }
 
-int main(int argc, char** argv) {
-    Args args = parse_args(argc, argv);
-    auto primes = prime_sieve(args.sieve_limit);
-
+static bool run_scan(const Args& args, const std::vector<int>& primes) {
     std::vector<u128> common_coeffs = {210, 315, 420, 630, 840, 1260, 2520};
     std::vector<u128> branch_a_coeffs = {105};
     for (u128 c : args.extra_prime_coeffs) {
@@ -1105,7 +1138,7 @@ int main(int argc, char** argv) {
                               << " branch=" << (branch == 1 ? "A" : "B")
                               << " max_tau_bound=" << rec.tau
                               << " max_tau_arg=" << u128_to_string(rec.arg) << "\n";
-                    return 0;
+                    return true;
                 }
             }
         }
@@ -1141,5 +1174,25 @@ int main(int argc, char** argv) {
         }
         std::cout << "\n";
     }
+    return false;
+}
+
+int main(int argc, char** argv) {
+    Args args = parse_args(argc, argv);
+    auto primes = prime_sieve(args.sieve_limit);
+
+    if (!args.jobs_file.empty()) {
+        std::vector<ScanJob> jobs = read_jobs_file(args.jobs_file);
+        for (const auto& job : jobs) {
+            Args job_args = args;
+            job_args.variable_rem = job.variable_rem;
+            job_args.start = job.start;
+            job_args.count = job.count;
+            if (run_scan(job_args, primes)) return 0;
+        }
+        return 0;
+    }
+
+    run_scan(args, primes);
     return 0;
 }

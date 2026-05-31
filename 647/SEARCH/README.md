@@ -8,19 +8,23 @@ Problem 647.
 - `record_sieve.cpp`: independent low-range divisor sieve for records of
   `m + tau(m)`.
 - `prime_tuple_search.cpp`: segmented prime-form sieve plus Miller-Rabin /
-  Pollard-Rho shift verification.
+  Pollard-Rho shift verification for unsigned 64-bit ranges.
+- `prime_tuple_search128.cpp`: the same search with 128-bit `N`/`n`
+  support and optional batched residue jobs.
 - `verify_candidate.py`: independent factorization-based verifier for a
   proposed `n`.
 - `residue_classes.cpp`: experimental small-modulus residue filter.
 - `residue_lift.py`: lifts the 41-class filter through extra small primes
   using the forced-smooth obstruction.
-- `run_residue_scan.py`: launches and aggregates one `prime_tuple_search`
-  job per residue class over an exact half-open range of `N` values.
+- `run_residue_scan.py`: launches and aggregates `prime_tuple_search` jobs
+  over exact half-open ranges of `N`, either one residue per process or
+  batched with `--batch-size` for the 128-bit binary.
 
 ## Build
 
 ```sh
 c++ -O3 -std=c++17 -march=native SEARCH/prime_tuple_search.cpp -o SEARCH/prime_tuple_search
+c++ -O3 -std=c++17 -march=native SEARCH/prime_tuple_search128.cpp -o SEARCH/prime_tuple_search128
 c++ -O3 -std=c++17 -march=native SEARCH/record_sieve.cpp -o SEARCH/record_sieve
 c++ -O3 -std=c++17 SEARCH/residue_classes.cpp -o SEARCH/residue_classes
 ```
@@ -106,6 +110,28 @@ python3 SEARCH/run_residue_scan.py \
   --n-start 10000000000000000 \
   --n-stop 20000000000000000 \
   --outdir /tmp/erdos647-scan-1e16-2e16-lift23
+```
+
+Deeper lifts have many more residue classes. Use the 128-bit binary's
+batched job mode through the range driver to keep process overhead low:
+
+```sh
+python3 SEARCH/residue_lift.py --k 1000 --add-primes 23,29,31 --format csv \
+  | tail -1 > /tmp/erdos647-residues-mod955049953-k1000.csv
+
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search128 \
+  --modulus 955049953 \
+  --residue-file /tmp/erdos647-residues-mod955049953-k1000.csv \
+  --n-start 40000000000000000 \
+  --n-stop 80000000000000000 \
+  --outdir /tmp/erdos647-scan-4e16-8e16-lift23-29-31-k1000 \
+  --workers 6 \
+  --batch-size 128 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
 ```
 
 ## Restrictive Subsearch

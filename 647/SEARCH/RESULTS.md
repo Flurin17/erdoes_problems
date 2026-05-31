@@ -348,6 +348,30 @@ This scan is in progress. A prior attempt over this interval using only the
 352 classes modulo `1062347` was stopped early because the `23,29` lift cuts
 the tested progression density from about `3.3134e-4` to `1.4198e-4`.
 
+The next lift through `23,29,31` with `k <= 1000` gives 59,128 residue
+classes modulo `955049953`, density about `6.1911e-5`. Because this creates
+too many small one-residue jobs, `prime_tuple_search128` now accepts
+`--jobs-file` with `residue start count` triples, and `run_residue_scan.py`
+supports `--batch-size`. The dry run for `4*10^16 <= N < 8*10^16` with
+`--batch-size 128` produces 462 process jobs and total `X` count
+`2476435910553`:
+
+```sh
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search128_batch \
+  --modulus 955049953 \
+  --residue-file /tmp/erdos647-residues-mod955049953-k1000.csv \
+  --n-start 40000000000000000 \
+  --n-stop 80000000000000000 \
+  --outdir /tmp/erdos647-scan-4e16-8e16-lift23-29-31-k1000 \
+  --workers 6 \
+  --batch-size 128 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
+```
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms
