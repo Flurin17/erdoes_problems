@@ -190,6 +190,31 @@ def base_representation_obstructed(rep: Triple) -> bool:
     return v == 0 or w == 0
 
 
+def c_edge_lower_bound_applies(sides: Triple) -> bool:
+    """Whether Beeson's two-`c` boundary-edge lemma applies.
+
+    The lemma applies when `gamma > pi/2`, `alpha/pi` is irrational, and every
+    outer angle is less than `gamma`.  In the `gamma=2alpha` isosceles branch,
+    `gamma > pi/2` also makes the apex angle `pi-2alpha` less than `gamma`;
+    the base angles are `alpha < gamma`.
+    """
+    a, b, c = sides
+    if c * c <= a * a + b * b:
+        return False
+
+    # cos(alpha) is rational for integer sides.  Niven's theorem rules out a
+    # rational multiple of pi unless this rational cosine is 0, +/-1/2, or +/-1.
+    numerator = b * b + c * c - a * a
+    denominator = 2 * b * c
+    return 2 * numerator not in {
+        -2 * denominator,
+        -denominator,
+        0,
+        denominator,
+        2 * denominator,
+    }
+
+
 def lemma_1117_obstructed(candidate: BoundaryCandidate, y_rep: Triple) -> bool:
     """Return whether Beeson Lemma 11.17 eliminates this base representation.
 
@@ -201,6 +226,33 @@ def lemma_1117_obstructed(candidate: BoundaryCandidate, y_rep: Triple) -> bool:
     return all(rep[2] == 1 for rep in candidate.x_representations) and y_rep[2] in {1, 2}
 
 
+def viable_x_representations(candidate: BoundaryCandidate) -> tuple[Triple, ...]:
+    reps = candidate.x_representations
+    if c_edge_lower_bound_applies(candidate.tile):
+        reps = tuple(rep for rep in reps if rep[2] >= 2)
+    return reps
+
+
+def viable_free_x_representations(candidate: BoundaryCandidate) -> tuple[Triple, ...]:
+    reps = side_representations(candidate.x, candidate.tile, require_qr=True)
+    if c_edge_lower_bound_applies(candidate.tile):
+        reps = tuple(rep for rep in reps if rep[2] >= 2)
+    return reps
+
+
+def boundary_c_parity_obstructed(candidate: BoundaryCandidate, y_rep: Triple) -> bool:
+    """Every interior `c` edge is counted twice, so `N - boundary_c` is even."""
+    bounded = viable_x_representations(candidate)
+    free = viable_free_x_representations(candidate)
+    if not bounded or not free:
+        return True
+    return not any(
+        (candidate.n - short[2] - other[2] - y_rep[2]) % 2 == 0
+        for short in bounded
+        for other in free
+    )
+
+
 def refined_surviving_y_representations(candidate: BoundaryCandidate) -> tuple[Triple, ...]:
     """Surviving base reps after the local base lemma and Lemma 11.17.
 
@@ -209,10 +261,16 @@ def refined_surviving_y_representations(candidate: BoundaryCandidate) -> tuple[T
     `N=63` and `N=99` two-`c` equal-side cases open.
     """
     out: list[Triple] = []
+    if not viable_x_representations(candidate) or not viable_free_x_representations(candidate):
+        return tuple(out)
     for rep in candidate.y_representations:
         if base_representation_obstructed(rep):
             continue
+        if c_edge_lower_bound_applies(candidate.tile) and rep[2] < 2:
+            continue
         if lemma_1117_obstructed(candidate, rep):
+            continue
+        if boundary_c_parity_obstructed(candidate, rep):
             continue
         out.append(rep)
     return tuple(out)
@@ -246,7 +304,7 @@ def main() -> None:
         print(
             f"N={n}: {len(rows)} gamma=2alpha boundary candidate(s), "
             f"{len(survivors)} after boundary-count obstruction, "
-            f"{len(refined)} after base/Lemma 11.17 obstruction"
+            f"{len(refined)} after refined local obstructions"
         )
         for row in rows:
             status = "obstructed" if row.boundary_count_obstructed else "survives"
@@ -255,12 +313,18 @@ def main() -> None:
                 f"min_boundary_tiles={row.min_boundary_tiles}, {status}"
             )
             print(f"    X reps: {format_reps(row.x_representations)}")
+            viable_x = viable_x_representations(row)
+            if viable_x != row.x_representations:
+                print(f"    viable X reps after c-edge lower bound: {format_reps(viable_x)}")
             print(f"    Y reps: {format_reps(row.y_representations)}")
             refined_y = refined_surviving_y_representations(row)
             if refined_y:
                 print(f"    refined Y survivors: {format_reps(refined_y)}")
             elif not row.boundary_count_obstructed:
-                print("    refined obstruction: base endpoint lemma plus Beeson Lemma 11.17")
+                print(
+                    "    refined obstruction: c-edge lower bound, base endpoint lemma, "
+                    "boundary c-parity, and Beeson Lemma 11.17"
+                )
 
 
 if __name__ == "__main__":

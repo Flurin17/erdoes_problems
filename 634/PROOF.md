@@ -1040,18 +1040,18 @@ This table records only values/families classified by the current proof file.
 | `55` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `56` | negative in this workspace | published source case split plus exact arithmetic and `gamma=2alpha` boundary-enumeration elimination in the composite benchmark below |
 | `57` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
-| `60` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` base endpoint/Lemma 11.17 obstruction |
+| `60` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` c-edge/base endpoint/Lemma 11.17 obstruction |
 | `62` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `66` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `69` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `70` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
-| `76` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` base endpoint/Lemma 11.17 obstruction |
+| `76` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` c-edge/base endpoint/Lemma 11.17 obstruction |
 | `78` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `86` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `87` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `88` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `91` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
-| `92` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` base endpoint/Lemma 11.17 obstruction |
+| `92` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` c-edge/base endpoint/Lemma 11.17 obstruction |
 | `93` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `94` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `95` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
@@ -1531,6 +1531,15 @@ last base edge then cannot present the required `alpha` endpoint at the right
 base corner. The case `v=0` is identical with `c` in place of `b` and uses the
 forbidden `beta+beta` straight boundary point.
 
+Two further safe refinements are used only when their hypotheses are checked.
+Beeson's older boundary `c`-edge lemma says that if `gamma > pi/2`,
+`alpha/pi` is irrational, and all three outer angles are less than `gamma`, then
+each outer side contains at least two `c` edges. In the `gamma=2alpha`
+isosceles branch this removes any side representation with fewer than two
+`c` edges whenever `c^2 > a^2+b^2` and Niven's theorem rules out
+`alpha/pi in Q`. Finally, the total number of boundary `c` edges has the same
+parity as `N`, since every interior `c` edge is counted by two tiles.
+
 ## Composite Benchmark: `N=60`
 
 The value `60` is not in the elementary positive forms, so the
@@ -1721,7 +1730,16 @@ workspace.
   negative.
 - The current gap scan with primitive equilateral side bound `250` reports
   `63` and `99` as open with `gamma=2alpha`
-  boundary-arithmetic survivors. The same scan
+  boundary-arithmetic survivors. The refined local filters reduce both to the
+  single remaining boundary pattern in which both equal sides use their two-`c`
+  representation and the base uses `Y=3a+3b+3c`; explicitly,
+
+  ```text
+  N=63: X=2a+3b+2c, Y=3a+3b+3c for tile (9,7,12).
+  N=99: X=2a+5b+2c, Y=3a+3b+3c for tile (25,11,30).
+  ```
+
+  The same scan
   formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
   `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`,
   `69`, `70`, `76`, `78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, and

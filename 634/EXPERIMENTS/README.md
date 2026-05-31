@@ -64,7 +64,8 @@ Current components:
   `220`.
 - `gamma_2alpha_boundary.py`: Beeson Lemma 11.14 arithmetic enumerator for the
   isosceles `gamma=2alpha` branch, now also reporting the conservative
-  refinement from the base endpoint lemma and Beeson Lemma 11.17.
+  refinement from the two-`c` boundary-edge lemma, base endpoint lemma,
+  boundary `c`-parity, and Beeson Lemma 11.17.
 - `gamma_2alpha_endpoint_automaton.py`: diagnostic endpoint automaton for
   `gamma=2alpha`; its `angle` mode preserves the open boundary controls, while
   the stricter `fan` mode is not used as a proof because non-strict tilings can

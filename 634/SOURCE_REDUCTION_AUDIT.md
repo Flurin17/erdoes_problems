@@ -165,9 +165,10 @@ Current evidence:
   `gamma=2alpha` branch, and Theorem 11.18 plus its following note say that
   after `N=45` the next possibilities left open are `63,64,72`. This would
   remove the branch for `60` if accepted as a black-box computation. The local
-  scripts now remove `60`, `76`, and `92` by the base endpoint lemma plus
-  Beeson Lemma 11.17, and reproduce the stronger fact that `56` has no
-  Lemma 11.14 boundary-arithmetic candidate.
+  scripts now remove `60`, `76`, and `92` by the two-`c` boundary-edge lemma,
+  base endpoint lemma, boundary `c`-parity, and Beeson Lemma 11.17. They also
+  reduce `63` and `99` to one final boundary pattern each, and reproduce the
+  stronger fact that `56` has no Lemma 11.14 boundary-arithmetic candidate.
 - `gamma=2pi/3` has a local boundary-transition obstruction.
 - The `gamma=2pi/3` arithmetic filter is encoded from Lemma 12.9 and Theorem
   12.10.
@@ -270,7 +271,13 @@ boundary-arithmetic survivors:
 
 The remaining values should remain recorded as open with encoded
 `gamma=2alpha` survivors until their survivor eliminations are written out at
-theorem level.
+theorem level. After the latest local refinements, their only remaining
+patterns are:
+
+```text
+63: tile=(9,7,12), X=2a+3b+2c, Y=3a+3b+3c.
+99: tile=(25,11,30), X=2a+5b+2c, Y=3a+3b+3c.
+```
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`

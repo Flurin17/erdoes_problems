@@ -342,6 +342,7 @@ Command:
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 76 92
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 63 99
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_endpoint_automaton.py 45 63 64 72 --mode angle --beeson-corner-filter --limit 0
 ```
 
@@ -365,6 +366,18 @@ Beeson corner filter, it preserves the `45`, `63`, one `64` tile, and `72`
 boundary controls instead of over-pruning them. The other source cases are
 empty or locally eliminated, so `PROOF.md` now treats `76` and `92` as
 classified negative.
+
+For the remaining `63` and `99` rows, the two-`c` boundary-edge lemma and
+boundary `c`-parity reduce the refined survivors to a single boundary pattern
+in each case:
+
+```text
+N=63: tile=(9,7,12),   X=2a+3b+2c on both equal sides, Y=3a+3b+3c.
+N=99: tile=(25,11,30), X=2a+5b+2c on both equal sides, Y=3a+3b+3c.
+```
+
+These are still open; the current filters do not provide an interior/global
+matching obstruction for that final pattern.
 
 ## `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` Exact Filter Certificate
 
@@ -539,7 +552,7 @@ Current result summary:
   negative by workspace composite benchmarks
 
 63,99:
-  open with a gamma=2alpha boundary-arithmetic survivor
+  open with the final gamma=2alpha boundary pattern recorded above
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The

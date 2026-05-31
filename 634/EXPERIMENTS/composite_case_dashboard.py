@@ -27,6 +27,7 @@ from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
 from gamma_2alpha_boundary import refined_survivors_for_n as gamma_2alpha_refined_survivors
 from gamma_2alpha_boundary import survivors_for_n as gamma_2alpha_survivors
+from gamma_2alpha_boundary import viable_x_representations as gamma_2alpha_viable_x
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
 from gamma_2pi3_nonisosceles_boundary import boundary_star_obstructed as gamma_boundary_obstructed
 from gamma_2pi3_nonisosceles_exact import candidates_for_n as gamma_nonisosceles_candidates
@@ -123,6 +124,7 @@ def gamma_2alpha_status(n: int) -> str:
         return "ruled out by base endpoint lemma plus Beeson Lemma 11.17"
     preview = ", ".join(
         f"sides={row.candidate.tile}, X={row.candidate.x}, Y={row.candidate.y}, "
+        f"X survivors={gamma_2alpha_viable_x(row.candidate)}, "
         f"Y survivors={row.y_representations}"
         for row in refined[:2]
     )
