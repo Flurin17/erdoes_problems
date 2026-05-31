@@ -157,7 +157,8 @@ deleted-pair sum. It also prints `nu_f(e+f)`, the maximum number of
 disjoint two-sum representations of `e+f` avoiding `f`, for the matching
 capacity obstruction in Lemma 8.4d. The final block prints the
 Corollary 3.4g/3.4h star-gate data: retained repairs `w-d=a+b` for each
-deleted gate `d` and the private rows forced by those repairs.
+deleted gate `d` and the full two-sum counts `r2(row+d)` for the bounded
+translate rows forced by those repairs.
 
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds

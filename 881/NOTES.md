@@ -496,10 +496,15 @@ star-gated hole, almost every retained summand \(a\) in a repair
 \[
 w-d=a+b
 \]
-satisfies \(a+d\notin2(A\setminus D)\) and has low two-sum count
-\(\nu_d(a+d)<|D|\), except when \(w-a\in D+D\). Thus a moving-star
-counterexample must carry a large reflected set of low-count private rows
-for the same moving gate.
+satisfies \(a+d\notin2(A\setminus D)\). In fact the direct star equation
+gives the stronger bound
+\[
+r_{2,A}(a+d)\le |D|
+\]
+for the full unordered two-sum representation count, with no \(N_0\)
+threshold condition and no deleted-pair exceptions. Thus a moving-star
+counterexample must carry a large reflected set of bounded-count translate
+rows for the same moving gate.
 Corollary 3.4i strengthens the star-gate normal form in the remaining
 \(k=2\) case. After the finite singleton-exceptional set is protected, the
 bounded deletion set can be shrunk to an inclusion-minimal collective hole
@@ -512,6 +517,16 @@ inside a minimal collective barrier whose every deleted element is active
 and individually order-3-good. Since \(w>d\) for every retained repair, the
 singleton deletion \(A\setminus\{d\}\) represents \(w\); every such
 singleton repair must use another element of \(F\setminus\{d\}\).
+Corollary 3.4j packages the same conclusion without mentioning the hole:
+for every finite protected core \(E\), a counterexample has arbitrarily
+large \(w\) and a moving \(d\in A\setminus E\) such that a positive
+proportion of the reflected slice
+\[
+A\cap(w-d-A)
+\]
+lands under translation by \(d\) in values \(s\) with
+\(r_{2,A}(s)\le Q_E\). Proving a reflected low-count translate exclusion
+for order-2 bases would close this branch.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all

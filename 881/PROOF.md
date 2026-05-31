@@ -1646,7 +1646,7 @@ become relevant. The remaining escape is again motion: the star center
 \(d\) and the finite auxiliary deletion set may move beyond every protected
 core.
 
-## Corollary 3.4h: Star gates create many private low-count rows
+## Corollary 3.4h: Star gates create bounded-count translate rows
 
 Let \(A\subseteq\mathbb N\) be an order-2 basis with threshold \(N_0\).
 Let \(D\subset A\) be finite, put
@@ -1665,51 +1665,65 @@ Then every
 \[
 a\in R_d(w)
 \]
-with
-\[
-w-a\ge N_0,\qquad w-a\notin D+D
-\]
 satisfies
 \[
-a+d\notin2C
+a+d\notin2C. \tag{1}
 \]
-and hence
+Consequently, if \(r_{2,A}(s)\) denotes the number of unordered two-term
+representations of \(s\) from \(A\), then
 \[
-\nu_d(a+d)<|D|.
+r_{2,A}(a+d)\le |D| \tag{2}
+\]
+and
+\[
+\nu_d(a+d)<|D|. \tag{3}
 \]
 Consequently, if \(d\) supplies \(M\) unordered retained repairs
 \[
 w-d=a+b,\qquad a,b\in C,
 \]
-then, apart from at most \(|D+D|\) exceptional values of \(a\), the
-summands appearing in those repairs are private low-count rows for the same
-color \(d\).
+then every summand appearing in those repairs is a bounded-count translate
+row for the same gate \(d\); in particular there are at least \(M\) distinct
+values \(a\in A\) with
+\[
+w-d-a\in A,\qquad r_{2,A}(a+d)\le |D|.
+\]
 
 Proof. Let \(a\in R_d(w)\), and write
 \[
 b=w-d-a\in C.
 \]
-Then
+If \(a+d\in2C\), say
 \[
-w-a=d+b.
+c_1+c_2=a+d,\qquad c_1,c_2\in C,
 \]
-If \(w-a\ge N_0\) and \(w-a\notin D+D\), Lemma 8.4c applies with
+then
 \[
-F=D,\qquad e=a,\qquad f=d,
+w=b+c_1+c_2\in3C,
 \]
-and gives
+contrary to the hole. This proves (1).
+
+Thus every unordered two-term representation of \(a+d\) from \(A\) uses at
+least one element of \(D\). For each \(f\in D\), there is at most one such
+unordered representation containing \(f\), namely
 \[
-a+d\notin2C.
+\{f,\ a+d-f\}.
 \]
-Lemma 8.4d then gives \(\nu_d(a+d)<|D|\). The exceptional bound follows
-because the map \(a\mapsto w-a\) is injective. \(\square\)
+The union bound gives (2). The representations counted by \(\nu_d(a+d)\)
+avoid \(d\), so they must use an element of \(D\setminus\{d\}\); hence there
+are at most \(|D|-1\) of them, proving (3).
+
+Finally, distinct unordered pairs \(\{a,b\}\) with fixed sum \(w-d\) have
+disjoint supports unless they are the same pair. Therefore \(M\) unordered
+repairs contribute at least \(M\) distinct summands \(a\), and each of those
+summands satisfies the displayed low-count condition. \(\square\)
 
 Combining Corollaries 3.4g and 3.4h, a \(k=2\) counterexample must produce,
 outside every finite protected core, arbitrarily late holes with a moving
-deleted gate \(d\) and a set of \(\gg A(w)\) reflected retained rows that
-are all low-count for the translates \(a+d\), except for the bounded
-deleted-pair exception window. This is the current sharpest form of the
-mass-escape obstruction.
+deleted gate \(d\) and a set of \(\gg A(w)\) reflected retained rows whose
+translates \(a+d\) all have bounded total two-sum representation count. This
+is a sharper obstruction than the private-color statement from Lemma 8.4c:
+it has no \(N_0\) threshold condition and no deleted-pair exception rows.
 
 ## Corollary 3.4i: Star gates may be made collective and minimal
 
@@ -1803,6 +1817,60 @@ w\in3(A\setminus\{d\}).
 If a representation of \(w\) from \(A\setminus\{d\}\) avoided all of
 \(F\setminus\{d\}\), it would lie in \(3(A\setminus F)\), contradicting
 the hole. \(\square\)
+
+## Corollary 3.4j: Counterexamples force large reflected low-count slices
+
+In the remaining \(k=2\) counterexample case of Corollary 3.4i, for every
+finite \(E\supset E_*\) there are constants
+\[
+Q_E,\eta_E>0
+\]
+and arbitrarily large \(w\) for which some
+\[
+d\in A\setminus E
+\]
+satisfies
+\[
+\left|\{a\in A:\ w-d-a\in A,\ r_{2,A}(a+d)\le Q_E\}\right|
+   \ge \eta_E A(w). \tag{1}
+\]
+In particular,
+\[
+A(w-d)\ge \eta_E A(w). \tag{2}
+\]
+
+Proof. Apply Corollary 3.4i and write \(C=A\setminus F\). The gate
+\[
+d\in F,\qquad |F|\le q_E,
+\]
+has at least \(\eta_E A(w)\) unordered retained repairs
+\[
+w-d=a+b,\qquad a,b\in C.
+\]
+By Corollary 3.4h, every summand occurring in such a repair satisfies
+\[
+r_{2,A}(a+d)\le |F|\le q_E.
+\]
+As above, distinct unordered pairs with the same sum \(w-d\) have disjoint
+supports unless they are identical, so the repairs contribute at least
+\(\eta_E A(w)\) distinct values \(a\) counted in (1). Taking
+\[
+Q_E=q_E
+\]
+proves (1). Those same \(a\)'s all lie in \(A\cap[1,w-d]\), proving (2).
+\(\square\)
+
+Thus a proof excluding counterexamples may equivalently target reflected
+low-count translate slices: one must show that, after a finite core is
+protected, no moving translate \(a\mapsto a+d\) can carry a positive
+proportion of a reflected slice
+\[
+A\cap(w-d-A)
+\]
+into values with bounded two-sum representation count. This statement is
+strictly stronger than forbidding a particular hole, because it mentions
+only the distribution of low representation counts along moving reflected
+slices.
 
 ## Lemma 3.5: Transversals are shifted finite barriers
 
@@ -6903,13 +6971,18 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   bound in the \(k=2\) case: every counterexample has arbitrarily late
   finite holes where one deleted element gates \(\gg A(w)\) retained
   two-sum repairs of the witness.
-* Corollary 3.4h feeds those star-gated repairs back into Lemma 8.4c:
-  except for deleted-pair rows, the retained summands in the repairs are
-  private low-count rows for the same deleted gate.
+* Corollary 3.4h strengthens the private-color consequence for star gates:
+  every retained repair summand \(a\) has \(a+d\notin2(A\setminus D)\) and
+  full representation count \(r_{2,A}(a+d)\le |D|\), with no threshold or
+  deleted-pair exceptions.
 * Corollary 3.4i strengthens this after the singleton-exceptional core is
   protected: the star gate can be chosen inside an inclusion-minimal
   collective hole of bounded size, so every deleted vertex is active and
   individually order-3-good.
+* Corollary 3.4j packages the remaining star obstruction as a reflected
+  low-count translate slice: for arbitrarily large \(w\), a moving
+  \(d\notin E\) sends \(\gg_E A(w)\) points of
+  \(A\cap(w-d-A)\) into bounded two-sum representation values.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
