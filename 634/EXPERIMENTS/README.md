@@ -189,7 +189,10 @@ Current components:
   pinch/split-component diagnostic. A first sanity chunk for `N=63`, mixed
   exactly `6`, outside the local cover, processed `2000` generated shells:
   `970` were local-cover hits, and the `1030` diagnosed shells split as
-  `838` corner-label violations and `192` non-simple residual graphs.
+  `838` corner-label violations and `192` non-simple residual graphs. Extending
+  through generated shell `10000` gives cumulative exact coarse counts:
+  `4899` local-cover hits, `4077` corner-label violations, and `1024`
+  non-simple residual graphs.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and

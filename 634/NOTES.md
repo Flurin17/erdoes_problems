@@ -125,7 +125,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
   certificate table. The chunked coarse census now gives a resumable exact
   counting path; its first `63` mixed-`6` outside-cover chunk processed `2000`
   generated shells, with `970` local-cover hits and outside-cover statuses
-  `838` corner-label violations plus `192` non-simple residual graphs.
+  `838` corner-label violations plus `192` non-simple residual graphs. Through
+  generated shell `10000`, the cumulative exact coarse counts are `4899`
+  local-cover hits, `4077` corner-label violations, and `1024` non-simple
+  residual graphs.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

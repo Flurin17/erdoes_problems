@@ -2153,7 +2153,16 @@ not-simple-cycle:       192
 
 This is not a theorem-level count for the stratum, but it provides a
 reproducible exact way to accumulate such counts without changing the shell
-enumeration order.
+enumeration order. A second chunk covering generated shells `2001..10000`
+adds `3929` local-cover hits, `3239` corner-label violations, and `832`
+non-simple residual graphs. Thus the first `10000` generated shells in this
+stratum have exact cumulative coarse counts
+
+```text
+local-cover hits:        4,899
+corner-label-violation:  4,077
+not-simple-cycle:        1,024
+```
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
