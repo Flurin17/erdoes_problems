@@ -1899,6 +1899,31 @@ shells and split as `8512` residual corner-label violations and `5594`
 non-simple residual graphs. No proper overlaps appeared in either remainder
 sample.
 
+The residual failure sampler `gamma_2alpha_residual_failure_causes.py` refines
+this outside-cover sample. In the same seed-`20260602`, `50000`-attempt run,
+every non-simple residual graph in both benchmark rows is connected and fails
+by degree-4 pinch vertices:
+
+```text
+N=63 top non-simple profiles:
+  edges=39, vertices=38, components=1, degree=2:37,4:1  (1087)
+  edges=38, vertices=37, components=1, degree=2:36,4:1  (215)
+  edges=40, vertices=38, components=1, degree=2:36,4:2  (111)
+
+N=99 top non-simple profiles:
+  edges=47, vertices=46, components=1, degree=2:45,4:1  (2125)
+  edges=48, vertices=46, components=1, degree=2:44,4:2  (1928)
+  edges=46, vertices=45, components=1, degree=2:44,4:1  (1128)
+```
+
+The same run shows that the most common all-full residual atom profiles have no
+side-parity mismatch: `N=63` has `1967` samples with labels
+`a:14,b:12,c:12`, and `N=99` has `9646` samples with labels
+`a:18,b:12,c:16`. Therefore the next obstruction cannot be only the elementary
+residual side-count parity test; it needs either a degree-4 pinch/star
+infeasibility lemma, a stronger residual graph topology lemma, or a finer
+forced-corner label invariant.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`
