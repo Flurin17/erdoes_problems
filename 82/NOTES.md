@@ -1073,3 +1073,10 @@ source of growth beyond Ramsey.
   clique number and linear independence number cannot be exploited merely by
   taking one large clique and one large independent set and analyzing their
   arbitrary cross-incidence pattern; more global structure is needed.
+- 2026-05-31: Tested size-controlled modular partitions.  Random sampling
+  found a `9`-vertex graph, mask `30931749293`, with no balanced three-part
+  partition into induced `3`-modular subgraphs of sizes exactly `3,3,3`,
+  despite unrestricted three-part mod-`3` partitions appearing easy in small
+  samples.  This blocks a tempting way to turn fixed-modulus modular
+  partition theorems into large witnesses: balance or size control is a
+  genuinely stronger demand.
