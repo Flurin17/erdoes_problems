@@ -1709,3 +1709,38 @@ source of growth beyond Ramsey.
   maximum target-modular order can be scanned without the large incident-table
   precompute.  A connected `n=24`, `q=8`, degree-level `5,13` sample with
   `8000` swaps had largest `16`-modular witness `9`, ratio `0.375`.
+- 2026-05-31: Reassessed the log-squared dyadic witness target.  A random
+  dense two-degree heuristic with `N` vertices and two degree values separated
+  by `q` suggests that fixed sets of size `N psi(q)/q` are `2q`-modular with
+  first moment about `2q(e/(2psi(q)))^s`, so the universal witness theorem is
+  probably false once `psi(q)->infinity`.  The viable replacement is a
+  witness-or-regular dichotomy.
+- 2026-05-31: Added a conditional reduction for that replacement.  It suffices
+  to prove a connected dyadic dichotomy: every nonterminal `q`-modular host on
+  `M` vertices contains either a `2q`-modular witness of size
+  `Omega(M psi(q)/q)` with `psi(q)=omega((log q)^2)`, or a regular induced
+  subgraph of size `Omega(max{rho(M),psi(q)})` with `rho(M)=omega(log M)`.
+  Early direct regular escapes use `rho(M)=omega(log M)`, late escapes and the
+  terminal step use `psi(2^{Theta(sqrt(log n))})=omega(log n)`.
+- 2026-05-31: Extended `two_level_modular_sample.py` with `--measure-regular`
+  to test the regular side of the dichotomy in the same two-degree samples.
+  Exact checks found matching modular and regular maxima in small dense cases:
+  `q=8,n=20` degrees `5,13` gave max `16`-modular and regular order `9` in
+  three samples; `q=8,n=22` degrees `7,15` gave best `8` with histogram
+  `8:1, 9:1`; `q=4,n=18` degrees `7,11` gave best `7`; and `q=4,n=20`
+  degrees `8,12` gave best `9`.
+- 2026-05-31: Recorded the rigorous iid analogue of the two-degree
+  anti-concentration heuristic.  If `H~G(k,1/2)`, `M>=2`, and
+  `R=C M^2 log M`, then
+  `P(H is M-modular) <= M((1+o_M(1))/M)^(k-R-1)` by sequentially exposing
+  future-neighbor blocks and applying the roots-of-unity formula to binomial
+  residues.  The missing asymptotic counterexample step is the dense
+  fixed-degree version of this anti-concentration lemma.
+- 2026-05-31: Extended `q_modular_host_sample.py` to measure the
+  target-modular side of the dyadic tradeoff in addition to direct regular
+  subgraphs.  Small full `q=4` modular samples again showed matching maxima:
+  at `n=12`, ten accepted samples had best regular and `8`-modular order `5`;
+  at `n=14`, ten accepted samples had best regular and `8`-modular order `6`.
+  The naive full-modular sampler rarely accepts nontrivial `q=8,n=14` samples
+  under its current candidate generator, so two-level sampling remains better
+  for higher-modulus stress tests.

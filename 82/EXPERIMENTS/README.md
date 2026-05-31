@@ -139,15 +139,17 @@ Computational checks and generated data for Erdos Problem 82.
   `q^2` vertices and checks, by fixed-size subset enumeration, whether they
   contain a regular induced subgraph on exactly `2q` vertices.
 - `q_modular_host_sample.py`: samples full `q`-modular host graphs and
-  measures their largest regular induced subgraph, testing the weaker
-  terminal target that every `q`-modular graph on at least `q^2` vertices
-  should contain a regular induced subgraph of size `omega((log q)^2)`.
+  measures their largest regular induced subgraph and largest induced
+  target-modular subgraph, testing the tradeoff in witness-or-regular
+  dichotomy targets.
 - `two_level_modular_sample.py`: generates connected graphs with two prescribed
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic
   witness conjectures on dense `q`-modular graphs that are usually not already
   `2q`-modular.  Use `--on-the-fly` to avoid the exponential incident-table
-  precompute and scan larger exact subset spaces.
+  precompute and scan larger exact subset spaces.  Use `--measure-regular` to
+  measure the largest regular induced subgraph in the same samples, which is
+  useful for testing witness-or-regular dichotomy targets.
 - `multipartite_modular.py`: exact integer model for modular
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts

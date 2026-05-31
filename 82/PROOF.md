@@ -1153,6 +1153,212 @@ large-witness lift with loss `q/omega((log q)^2)`.  A partition theorem with at
 most `q/omega((log q)^2)` induced `2q`-modular parts would imply it, but a
 direct large-witness proof may be easier.
 
+However, this universal witness hypothesis now looks too strong.  The dense
+two-degree model gives the right warning.  Take `N` much larger than `q`, and
+consider a random connected graph whose degrees take two values differing by
+exactly `q`, with each value appearing on about half of the vertices.  Such a
+graph is `q`-modular but typically not `2q`-modular.  For a fixed set `S` of
+size
+
+```text
+s = N psi(q) / q,
+```
+
+the residues of the induced degrees in `G[S]` should behave close to
+independent uniform residues modulo `2q` once `psi(q)->infinity`.  The first
+moment heuristic for `2q`-modular sets is then
+
+```text
+E #{S: |S|=s, G[S] is 2q-modular}
+    roughly <= binom(N,s) (2q)^(1-s)
+    <= 2q (e/(2 psi(q)))^s,
+```
+
+which tends to `0` for every `psi(q)->infinity`.  Thus the natural witness
+scale in this random model is `N/q`, not `N omega((log q)^2)/q`.  The
+calculation is not yet a rigorous construction because the prescribed-degree
+conditioning must be controlled, but it is strong enough to redirect the proof
+search: a successful dyadic theorem should be a witness-or-regular dichotomy,
+not a universal large-witness theorem.
+
+The corresponding independent-edge anti-concentration estimate is elementary;
+the missing part is transferring it to the dense fixed-degree model.
+
+**Lemma: Independent-Edge Modular Anti-Concentration.**  Let `H` be sampled
+from `G(k,1/2)`, let `M>=2`, and put
+
+```text
+R = C M^2 log M
+```
+
+with `C` a sufficiently large absolute constant.  If `k>R+1`, then
+
+```text
+P(H is M-modular) <= M ((1+o_M(1))/M)^(k-R-1),
+```
+
+where `o_M(1)->0` as `M->infinity`, uniformly in `k`.
+
+Proof.  For `X_h~Bin(h,1/2)` and every residue `r mod M`, the roots-of-unity
+filter gives
+
+```text
+P(X_h congruent r mod M)
+ = 1/M sum_{j=0}^{M-1} zeta^{-rj} ((1+zeta^j)/2)^h,
+```
+
+where `zeta` is a primitive `M`th root of unity.  For `j!=0`,
+
+```text
+|(1+zeta^j)/2| = |cos(pi j/M)| <= exp(-c min(j,M-j)^2/M^2).
+```
+
+Therefore, for all `h>=R`,
+
+```text
+max_r P(X_h congruent r mod M) <= (1+o_M(1))/M.
+```
+
+Order the vertices as `1,...,k`.  For each `i<=k-R-1`, expose only the edges
+from `i` to vertices `i+1,...,k`.  These exposed blocks are independent, and
+each block contributes a binomial `Bin(k-i,1/2)` variable to the degree of
+vertex `i`.  Fix a candidate common residue `r mod M`.  At the moment the
+`i`th block is exposed, all earlier-neighbor contributions to the degree of
+`i` are already fixed, so the requirement `deg_H(i) congruent r mod M` imposes
+one residue condition on this independent binomial variable.  The preceding
+bound applies because `k-i>=R+1`.  Multiplying over
+`i=1,...,k-R-1` and summing over the `M` possible common residues proves the
+claim.  QED.
+
+In the uniform two-degree model one would need the analogue
+
+```text
+P(G[S] is 2q-modular) <= exp(o(|S|)) (2q)^-(|S|-1)
+```
+
+for every fixed `S` with `|S|>=q^2 psi(q)`.  A dense switching or local-CLT
+argument should replace the independent binomial variables above by
+conditional hypergeometric variables with variance `Theta(|S|-i)`.  This is
+currently an obstruction lemma to prove, not an established fact.
+
+## Conditional Proposition: A Witness-Or-Regular Dyadic Dichotomy Suffices
+
+Let `psi(q)` be an eventually nondecreasing function on dyadic integers and
+let `rho(M)` be an eventually nondecreasing function on positive integers such
+that
+
+```text
+psi(q) = omega((log_2 q)^2),        rho(M) = omega(log_2 M).
+```
+
+After replacing them by smaller eventual monotone minorants, assume also that
+`1<=psi(q)<=q` and `1<=rho(M)<=M` for all sufficiently large arguments.
+Suppose there is an absolute constant `0<a<=1` such that, for every dyadic
+`q>=2`, every connected `q`-modular graph `H` on `M>q+1` vertices has at least
+one of the following two induced subgraphs:
+
+1. an induced `2q`-modular subgraph on at least
+
+```text
+a M psi(q) / q
+```
+
+vertices;
+
+2. a regular induced subgraph on at least
+
+```text
+a max { rho(M), psi(q) }
+```
+
+vertices.
+
+Then `F(n)/log n -> infinity`.
+
+Proof.  By the complement reduction, the same dichotomy holds for all
+`q`-modular graphs, not only connected ones: both modularity and regularity of
+an induced subgraph transfer through complement.
+
+It is enough to prove that, for every fixed `A>0`, every sufficiently large
+`n`-vertex graph has a regular induced subgraph of order at least
+`A log_2 n`.  Let `G` be an `n`-vertex graph, write `L=log_2 n`, and put
+`q_i=2^i`.  Choose a small fixed `epsilon>0` and set
+
+```text
+T = floor(epsilon sqrt L).
+```
+
+Start with Gallai's induced `2`-modular subgraph of order at least `n/2`.
+Recursively, while the current `q_i`-modular graph `H_i` is not terminal
+(`|V(H_i)|>q_i+1`), apply the dichotomy.  If the regular alternative has size
+at least `A L`, we are done.  Otherwise the `2q_i`-modular witness alternative
+must occur, and we continue with such a witness.  Write `m_i=|V(H_i)|`.
+
+Every witness step loses at most a factor `q_i/(a psi(q_i))`.  Since only
+finitely many initial dyadic levels have `psi(q_i)<1`, all witness steps before
+time `T` give
+
+```text
+m_i >= n / 2^{O(i^2)},
+```
+
+with a constant depending only on `a` and the finite initial values of `psi`.
+Choose `epsilon` small enough that, for all `i<T`,
+
+```text
+m_i >= 2^{gamma L}
+```
+
+for some fixed `gamma>0`, whenever the process reaches stage `i` without
+already finding a regular induced subgraph of order `A L`.  In particular
+`m_i>q_i+1` for all `i<T` and large `n`, so the process cannot become terminal
+before time `T`.
+
+If the regular alternative occurs at some `i<T`, then its size is at least
+`a rho(m_i)`.  Since `rho` is eventually nondecreasing and
+`rho(M)=omega(log M)`, the lower bound `m_i>=2^{gamma L}` gives
+
+```text
+a rho(m_i) >= a rho(2^{gamma L}) > A L
+```
+
+for all sufficiently large `n`, and we are done.  If the regular alternative
+occurs at some nonterminal `i>=T`, then its size is at least
+`a psi(q_i)`.  By eventual monotonicity,
+
+```text
+a psi(q_i) >= a psi(2^T) = omega(T^2) = omega(L),
+```
+
+so this is again larger than `A L` for all sufficiently large `n`.
+
+Let `t` be the first terminal index.  We have `t>=T`.  Since `H_t` is
+`q_t`-modular and `m_t<=q_t+1`, Lemma 2 makes `H_t` regular.  Such a `t`
+exists by time `L+1`, since `q_{L+1}>n>=m_i`.  If no earlier regular
+alternative has already finished the proof, the previous step was
+nonterminal, so `m_{t-1}>q_{t-1}+1`, and the forced witness step gives
+
+```text
+m_t >= a m_{t-1} psi(q_{t-1}) / q_{t-1}
+    > a psi(q_{t-1}).
+```
+
+Since `t>=T`, we have `q_{t-1}>=2^{T-1}`, and eventual monotonicity gives
+
+```text
+psi(q_{t-1}) >= psi(2^{T-1}) = omega((T-1)^2) = omega(L).
+```
+
+Thus the terminal regular graph has order greater than `A L` for all large
+`n`.  Consequently every large enough `n`-vertex graph has a regular induced
+subgraph of order at least `A log_2 n`.  As `A` was arbitrary, `F(n)/log n ->
+infinity`.  QED.
+
+The dense two-degree model is consistent with this dichotomy: it appears to
+have no `2q`-modular witness much larger than `N/q`, but its largest regular
+induced subgraph should also live near the same `N/q` scale, far above both
+`rho(N)` and `psi(q)` when `N` is polynomially larger than `q`.
+
 The connected formulation still cannot demand too few parts.  The first
 dyadic lift already has a connected example requiring four flexible parts.
 

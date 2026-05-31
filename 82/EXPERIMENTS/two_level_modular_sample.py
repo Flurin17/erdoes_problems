@@ -114,22 +114,50 @@ def is_connected_adjacency(adjacency: list[int], n: int) -> bool:
     return seen == (1 << n) - 1
 
 
-def max_modular_order_on_the_fly(adjacency: list[int], n: int, modulus: int) -> int:
+def max_orders_on_the_fly(
+    adjacency: list[int], n: int, modulus: int, measure_regular: bool
+) -> tuple[int, int | None]:
+    modular_value = 0
+    regular_value: int | None = None
     for size in range(n, 0, -1):
         for vertices in combinations(range(n), size):
             subset = 0
             for vertex in vertices:
                 subset |= 1 << vertex
-            first: int | None = None
-            ok = True
+            degrees = [(adjacency[vertex] & subset).bit_count() for vertex in vertices]
+            if modular_value == 0:
+                first: int | None = None
+                ok = True
+                for degree in degrees:
+                    residue = degree % modulus
+                    if first is None:
+                        first = residue
+                    elif residue != first:
+                        ok = False
+                        break
+                if ok:
+                    modular_value = size
+            if measure_regular and regular_value is None and all(
+                degree == degrees[0] for degree in degrees[1:]
+            ):
+                regular_value = size
+            if modular_value and (not measure_regular or regular_value is not None):
+                return modular_value, regular_value
+    return modular_value, regular_value
+
+
+def max_modular_order_on_the_fly(adjacency: list[int], n: int, modulus: int) -> int:
+    return max_orders_on_the_fly(adjacency, n, modulus, False)[0]
+
+
+def max_regular_order_on_the_fly(adjacency: list[int], n: int) -> int:
+    for size in range(n, 0, -1):
+        for vertices in combinations(range(n), size):
+            subset = 0
             for vertex in vertices:
-                residue = (adjacency[vertex] & subset).bit_count() % modulus
-                if first is None:
-                    first = residue
-                elif residue != first:
-                    ok = False
-                    break
-            if ok:
+                subset |= 1 << vertex
+            first = (adjacency[vertices[0]] & subset).bit_count()
+            if all((adjacency[vertex] & subset).bit_count() == first for vertex in vertices[1:]):
                 return size
     return 0
 
@@ -147,8 +175,11 @@ def sample(args: argparse.Namespace) -> None:
     accepted = 0
     attempts = 0
     histogram: dict[int, int] = {}
+    regular_histogram: dict[int, int] = {}
     best_value = args.n + 1
     best_mask = 0
+    best_regular_value = args.n + 1
+    best_regular_mask = 0
     while accepted < args.trials and attempts < args.max_attempts:
         attempts += 1
         degrees = degree_sequence[:]
@@ -163,15 +194,30 @@ def sample(args: argparse.Namespace) -> None:
         accepted += 1
         if args.on_the_fly:
             graph_mask = mask_from_edges_by_order(edges, args.n)
-            value = max_modular_order_on_the_fly(adjacency, args.n, 2 * args.q)
+            if args.measure_regular:
+                value, regular_value = max_orders_on_the_fly(
+                    adjacency, args.n, 2 * args.q, True
+                )
+                assert regular_value is not None
+            else:
+                value = max_modular_order_on_the_fly(adjacency, args.n, 2 * args.q)
+                regular_value = None
         else:
             assert pc is not None
             graph_mask = mask_from_edges(edges, pc)
             value = ri.max_modular_order(graph_mask, 2 * args.q, pc)
+            regular_value = (
+                ri.max_regular_order(graph_mask, pc) if args.measure_regular else None
+            )
         histogram[value] = histogram.get(value, 0) + 1
         if value < best_value:
             best_value = value
             best_mask = graph_mask
+        if regular_value is not None:
+            regular_histogram[regular_value] = regular_histogram.get(regular_value, 0) + 1
+            if regular_value < best_regular_value:
+                best_regular_value = regular_value
+                best_regular_mask = graph_mask
 
     print(f"n={args.n}")
     print(f"q={args.q}")
@@ -186,11 +232,19 @@ def sample(args: argparse.Namespace) -> None:
         print("connected_only=True")
     if args.on_the_fly:
         print("on_the_fly=True")
+    if args.measure_regular:
+        print("measure_regular=True")
     print(f"best_max_{2 * args.q}_modular_order={best_value if accepted else 'NA'}")
     print(f"best_mask={best_mask}")
     print("histogram=max_target_modular_order:count")
     for value in sorted(histogram):
         print(f"  {value}: {histogram[value]}")
+    if args.measure_regular:
+        print(f"best_max_regular_order={best_regular_value if accepted else 'NA'}")
+        print(f"best_regular_mask={best_regular_mask}")
+        print("histogram=max_regular_order:count")
+        for value in sorted(regular_histogram):
+            print(f"  {value}: {regular_histogram[value]}")
 
 
 def main() -> None:
@@ -208,6 +262,11 @@ def main() -> None:
         "--on-the-fly",
         action="store_true",
         help="avoid the exponential incident-table precompute for larger n",
+    )
+    parser.add_argument(
+        "--measure-regular",
+        action="store_true",
+        help="also measure the largest regular induced subgraph in each sample",
     )
     args = parser.parse_args()
     if args.low_count is None:
