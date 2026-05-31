@@ -1138,6 +1138,12 @@ source of growth beyond Ramsey.
   counterexample mask `30931749293` has a three-part mod-`3` partition with
   sizes `4,4,1`, and `200` random `n=10,q=3` samples with max part size `4`
   showed no counterexample.
+- 2026-05-31: Relaxed the terminal-size criterion using Lemma 2A.  It is
+  enough to partition every `n`-vertex graph, for `q=ceil(sqrt n)`, into at
+  most `q` induced `q`-modular parts of size at most `q+s(n)`, provided
+  `s(n)=o(sqrt(n)/log n)`.  The largest part has size `Omega(sqrt n)`, and
+  the near-terminal extraction gives a regular subset of size at least
+  `Omega(sqrt n/(s(n)+1))=omega(log n)`.
 - 2026-05-31: Extended `search_modular_partition.py` with `--min-part-size`
   and `--max-part-size` so local search can target terminal-size modular
   partitions.  A quick even-graph search for `n=12,q=4,max_part_size=5`

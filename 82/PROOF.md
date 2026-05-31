@@ -605,6 +605,47 @@ terminal size bound, the partition may place almost all vertices in one large
 versions are false even for small parameters, but the weaker cap
 `|P_i|<=q+1` remains a plausible finite target in the current small checks.
 
+## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
+
+Let `s(n)` be a function with
+
+```text
+s(n) = o(sqrt(n)/log n).
+```
+
+Suppose that every graph on `n` vertices admits, for `q=ceil(sqrt(n))`, a
+partition of its vertex set into at most `q` induced `q`-modular subgraphs,
+each of order at most `q+s(n)`.  Then `F(n)/log n -> infinity`.
+
+Proof.  Let
+
+```text
+V(G)=P_1 union ... union P_t,    t<=q,
+```
+
+be such a partition, and choose a largest part `P`.  Its order `m` satisfies
+
+```text
+m >= n/q = (1-o(1)) sqrt(n).
+```
+
+If `m<=q+1`, Lemma 2 makes `G[P]` regular, so this part itself has order
+`Omega(sqrt(n))`.  Otherwise write `m=q+r` with `2<=r<=s(n)`.  Lemma 2A
+applied to `G[P]` gives a clique or independent set, hence a regular induced
+subgraph, of order at least
+
+```text
+m/(r+1) >= (1-o(1)) sqrt(n)/(s(n)+1).
+```
+
+By the hypothesis on `s(n)`, this lower bound is `omega(log n)`.  QED.
+
+Thus the one-shot modular route does not need terminal-sized parts exactly.
+It would be enough to partition into `ceil(sqrt n)` modular parts whose sizes
+exceed `q` by `o(q/log n)`.  Conversely, partitions with part sizes as large
+as `2q` would not feed this argument, because Lemma 2A may then give only a
+constant-size homogeneous subset inside the largest modular part.
+
 ## Conditional Corollary: Constant Dyadic Partitions Give Polynomial Growth
 
 For powers of two `q>=2`, suppose every `q`-modular induced subgraph can be
