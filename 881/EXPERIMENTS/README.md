@@ -160,6 +160,13 @@ Corollary 3.4g/3.4h star-gate data: retained repairs `w-d=a+b` for each
 deleted gate `d` and the full two-sum counts `r2(row+d)` for the bounded
 translate rows forced by those repairs.
 
+`low_count_star_scan.py` scans finite windows for the Corollary 3.4n
+normal form: triples with `d`, `a`, and `w-d-a` outside a protected core and
+bounded full count `r2(a+d)`. It contrasts the pinned low-count stars in
+`\{1\}\cup2\mathbb N` before and after protecting `1`, and prints the same
+diagnostic on the P6 Schreier escape with and without its old core
+protected.
+
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
 \[
