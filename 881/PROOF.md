@@ -2936,6 +2936,44 @@ The more plausible \(k=3\) negative route is therefore the same as in the
 remaining \(k=2\) case: unbounded collective barriers, such as cross-stage
 pairs, rather than cofinite singleton private witnesses.
 
+## Attempt 16: Robust residue boosters for \(k=3\)
+
+There is a finite cyclic model for a negative construction with a retained
+booster. In \(G=\mathbb Z/10\mathbb Z\), set
+\[
+S=\{0,1,3\},\qquad f=5.
+\]
+Then
+\[
+4S=G,\qquad 3(S\cup\{f\})=G.
+\]
+Moreover, deleting any residue in \(S\) leaves a four-fold hole even though
+the booster \(f\) remains:
+\[
+4(\{1,3,5\})\subseteq 2\mathbb Z/10\mathbb Z,
+\]
+so deleting \(0\) misses every odd residue, while direct calculation gives
+\[
+7\notin4\{0,3,5\},\qquad
+9\notin4\{0,1,5\}.
+\]
+Thus the residue-level pattern has exactly the desired order mismatch:
+\(S\) is a four-fold residue basis, adjoining one finite booster lowers the
+residue order to three, and the four-fold private residue holes survive
+with the booster retained.
+
+This does not yet lift to an integer counterexample. A thick lift of the
+three residue classes loses single-integer privacy: deleting one integer in
+the class \(s\) leaves many other integers of residue \(s\), and central
+quotient representations can replace the deleted lift. A successful lift
+would need endpoint or block gadgets that force the required residue \(s\)
+to be realized by one prescribed integer while retaining enough three-term
+coverage, including the buffer of Lemma 13.1d.
+
+The script `EXPERIMENTS/robust_booster_residue.py` records this search. It
+is a better finite seed than the invalid affine booster attempt, but the
+integer lifting problem remains open in this workspace.
+
 ## Dependency Graph
 
 * Theorem 1 is independent and resolves \(k=1\).
@@ -3074,3 +3112,6 @@ pairs, rather than cofinite singleton private witnesses.
 * Attempt 15 records the adjacent-order minimality route for \(k=3\); small
   buffered singleton searches stall, pointing again toward collective
   finite barriers as the only viable negative mechanism.
+* Attempt 16 gives a robust cyclic booster pattern for \(k=3\), while
+  isolating the remaining lift problem: private residue holes must be made
+  private for individual integers without losing three-term coverage.

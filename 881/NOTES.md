@@ -848,3 +848,23 @@ of rank at least two into \((\mathbb N,+)\) is impossible. Integer digit
 systems must introduce carries or coefficient identifications, and those
 extra representations are exactly what the private-witness argument cannot
 control.
+
+## Robust Residue Boosters
+
+The finite residue obstruction becomes more promising in order \(k=3\).
+The script `robust_booster_residue.py` finds
+\[
+S=\{0,1,3\}\subset\mathbb Z/10\mathbb Z,\qquad f=5.
+\]
+Here \(4S=\mathbb Z/10\mathbb Z\) and \(3(S\cup\{f\})=\mathbb Z/10\mathbb Z\).
+Deleting any residue in \(S\) still leaves a four-sum hole even with the
+booster retained: deleting \(0\) leaves only odd summands \(1,3,5\), so
+four-fold sums are even; deleting \(1\) misses \(7\); deleting \(3\) misses
+\(9\).
+
+This is the right residue-level shape for a negative answer at \(k=3\), but
+it is not an integer construction. A thick lift gives whole-residue-class
+privacy, not single-integer privacy. The unresolved lifting problem is to
+force an individual representative of residue \(0,1\), or \(3\) to be used
+in a witness while preserving order-3 coverage with the booster and the
+positive-summand buffer from Lemma 13.1d.

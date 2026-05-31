@@ -97,3 +97,12 @@ It searches finite stages where new elements extend three-sum coverage and
 already have local four-sum private witnesses. The default greedy run finds
 two endpoint-style stages and then stalls, reflecting the same buffer
 obstruction seen in the \(k=2\) stage searches.
+
+`robust_booster_residue.py` searches cyclic residue models for a finite
+booster that lowers the order while private residue holes survive with the
+booster retained. It finds the \(k=3\) pattern
+\(S=\{0,1,3\}\subset\mathbb Z/10\mathbb Z\), \(f=5\): \(4S\) and
+\(3(S\cup\{f\})\) cover all residues, but deleting any residue of \(S\)
+leaves a four-sum residue hole even with \(f\) available. This is only a
+residue seed; an integer lift must still force single-integer, not
+whole-residue-class, privacy.
