@@ -2140,6 +2140,21 @@ certificates already split into `17` types for `N=63` and `18` types for
 `N=99`. This reinforces that a proof needs a structural residual-corner
 argument, not merely a small enumerated list of certificate strings.
 
+For longer exact passes, the chunk runner
+`EXPERIMENTS/gamma_2alpha_residual_chunked_census.py` records deterministic
+generated-shell slices. In its first `N=63` mixed-`6` outside-cover sanity run,
+the first `2000` generated shells had `970` local-cover hits, and the `1030`
+outside-cover shells split coarsely as
+
+```text
+corner-label-violation: 838
+not-simple-cycle:       192
+```
+
+This is not a theorem-level count for the stratum, but it provides a
+reproducible exact way to accumulate such counts without changing the shell
+enumeration order.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`

@@ -183,6 +183,13 @@ Current components:
   has `20520` and `42480`. Cap `6` is not yet fully residual-classified; the
   count-only local-overlap cover leaves `415840` mixed-`6` shells for `N=63`
   and `5867040` mixed-`6` shells for `N=99` outside the current local cover.
+- `gamma_2alpha_residual_chunked_census.py`: resumable chunk runner for exact
+  residual status counts over generated-shell slices. It supports coarse mode
+  using the quadratic shell classifier and refined mode using the
+  pinch/split-component diagnostic. A first sanity chunk for `N=63`, mixed
+  exactly `6`, outside the local cover, processed `2000` generated shells:
+  `970` were local-cover hits, and the `1030` diagnosed shells split as
+  `838` corner-label violations and `192` non-simple residual graphs.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and

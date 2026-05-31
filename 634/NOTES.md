@@ -122,7 +122,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
   outside-cover shells gives only corner-label violations but already splits
   into `17` certificate types for `63` and `18` for `99`, so even the residual
   proof likely needs a structural forced-corner lemma rather than a tiny
-  certificate table.
+  certificate table. The chunked coarse census now gives a resumable exact
+  counting path; its first `63` mixed-`6` outside-cover chunk processed `2000`
+  generated shells, with `970` local-cover hits and outside-cover statuses
+  `838` corner-label violations plus `192` non-simple residual graphs.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
