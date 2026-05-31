@@ -496,6 +496,22 @@ The stronger filter printed in Beeson Section 11.4 eliminates all four. In any
 case, the prime-nonexistence theorem already rules out this template completely
 for `N=19`.
 
+For the isosceles-`alpha+beta` branch, Section 11.4 is used only as a necessary
+filter. The source first derives the equation
+
+```text
+s = (N-M^2)/(N+M^2)
+```
+
+and then checks the following necessary conditions: primitive integral tile
+sides, `c=g^2` with `g=gcd(a,c)`, integrality of `g*mu` for
+`mu=M(1+s)`, the square condition `Nbc`, Lemma 46's extra `mu`-integrality
+condition when `b` is squarefree and coprime to `c-a`, and boundary side
+decompositions after the two forced `c` edges are removed. This is exactly the
+filter implemented in `EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py`.
+Failing the filter is a source-backed obstruction; passing it is not a tiling
+certificate.
+
 For small composite diagnostics, the same necessary-equation filter leaves raw
 `N=14` and `N=15` candidates. The `N=15` candidates, and three of the four
 `N=14` candidates, are in the isosceles-`alpha+beta` case and fail Beeson's

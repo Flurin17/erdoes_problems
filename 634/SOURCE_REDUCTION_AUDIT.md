@@ -206,8 +206,9 @@ Needed statement:
 Current evidence:
 
 - `beeson_3alpha2beta_filter.py` encodes the five final equations.
-- `beeson_isosceles_alpha_plus_beta_filter.py` encodes the stronger
-  isosceles-alpha+beta source filter.
+- `PROOF.md` now records the Section 11.4 necessary conditions for the
+  isosceles-`alpha+beta` branch; `beeson_isosceles_alpha_plus_beta_filter.py`
+  encodes that source filter.
 - `beeson_3alpha2beta_boundary.py` removes selected boundary-star survivors
   and now applies the generic boundary-integrality obstruction to every
   supported `3alpha+2beta=pi` outer shape.
