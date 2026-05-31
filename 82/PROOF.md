@@ -3731,13 +3731,14 @@ bipartite.
 
 The exact checker `EXPERIMENTS/slot_partition.py --residue-one-matching` and
 the direct coloring checker `EXPERIMENTS/matching_slot_search.py` verify this
-candidate for all even graphs on at most `7` vertices, the first `200000`
-even graphs on `8` vertices in the standard parity enumeration, the known
-connected first-lift hard masks on `13` and `14` vertices, `K_9`, and the
-`16`-vertex modular-OCT counterexample above.  Larger random exact-cover
-probes on even graphs with `14`, `16`, and `18` vertices also found no
-counterexample, although dense random instances can be search-hard and timed
-out probes are not treated as evidence.
+candidate for all even graphs on at most `7` vertices, the known connected
+first-lift hard masks on `13` and `14` vertices, `K_9`, and the `16`-vertex
+modular-OCT counterexample above.  An independent subagent audit also checked
+all `2097152` labelled even graphs on `8` vertices with a temporary C++
+checker.  Larger random exact-cover probes on even graphs with `14`, `16`,
+and `18` vertices also found no counterexample, although dense random
+instances can be search-hard and timed out probes are not treated as
+evidence.
 
 No proof is known from this candidate yet.  A plausible proof would need to
 explain why the residue-`1` corrections can always be chosen as an induced

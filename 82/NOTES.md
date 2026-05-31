@@ -1876,3 +1876,13 @@ source of growth beyond Ramsey.
   This route survives the OCT refutation because it still permits the
   residual graph to satisfy the full cut congruence instead of being
   bipartite.
+- 2026-05-31: Independent subagent audit of the matching-slot first-lift
+  target found no counterexample in a stronger sweep: all `2,097,152`
+  labelled even graphs on `8` vertices passed using a temporary C++ checker;
+  random even samples also passed at `n=10` (`200/200`), `n=12` (`100/100`),
+  `n=14` (`50/50`), `n=16` (`20/20`), `n=18` (`50/50`), and `n=20`
+  (`19/20` certified, one node-limit skip).  The same audit checked complete
+  multipartite count models up to four classes of size at most `16` and five
+  classes of size at most `8`, again with no counterexample.  This upgrades
+  the computational confidence in the matching-slot lemma, but it remains a
+  first-lift statement only.
