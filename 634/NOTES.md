@@ -285,11 +285,12 @@ Important distinction: "positive square class" and "smallest representative" are
    shells for `63`, `648` for `99`), but this is evidence rather than an
    exhaustive certificate. The exact `Q(sqrt(d))` sampler also found no pass in
    an uncapped seed-`6342026`, `200000`-attempt run (`5247` unique `63` shells,
-   `4270` unique `99` shells), or in a valid-weighted seed-`123`,
-   `5000`-attempt run that produced `5000` unique valid shells for each
-   benchmark row. Exact overlap-cause sampling on the valid-weighted run shows
-   proper overlaps concentrate at base/equal-side pairs, especially `L2` with
-   `B8` and the symmetric right-base positions. Turning those sampled local
+   `4270` unique `99` shells), or in a valid-weighted seed-`20260601`,
+   `50000`-attempt run that produced `49991` valid `63` shells and `50000`
+   valid `99` shells. Exact overlap-cause sampling on the valid-weighted run
+   shows proper overlaps concentrate at base/equal-side pairs, especially
+   `L2` with `B8` and the symmetric right-base positions; no new first-overlap
+   positions appeared beyond the current local pair set. Turning those sampled local
    positions into exact count filters covers `276555680` of `295877600`
    boundary shells for `63`, and `8012836776` of `11122617000` boundary shells
    for `99`; after subtracting the already-closed mixed-`4` row, the remaining

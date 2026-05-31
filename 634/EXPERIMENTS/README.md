@@ -124,8 +124,10 @@ Current components:
 - `gamma_2alpha_overlap_causes.py`: exact valid-weighted sampler focused on
   proper shell overlaps. It records the first exact positive-area overlap by
   outer-side pair, boundary-tile position, and oriented tile label. In a
-  seed-`123`, `5000`-sample run, proper overlaps concentrate at base/equal-side
-  pairs such as `L2` with `B8` and the symmetric right-base positions.
+  seed-`20260601`, `50000`-sample run, proper overlaps concentrate at
+  base/equal-side pairs such as `L2` with `B8` and the symmetric right-base
+  positions, with no new first-overlap positions beyond the current local pair
+  set.
 - `gamma_2alpha_overlap_cover.py`: exact count-only version of the local
   overlap-position diagnostic. For the sampled local pairs
   `L2-B8,R6-B2,R5-B3,R8-B2,R7-B2,L2-B7,R7-B3,L3-B7,R6-B4`, it covers

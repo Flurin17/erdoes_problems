@@ -1836,19 +1836,21 @@ non-simple residual graphs, and `4922` proper overlaps; the `N=99` sample split
 as `696`, `492`, and `3082` respectively.
 
 The sampler now also has a valid-weighted mode that samples directly from the
-corner-compatible endpoint/mixed classes. In a seed-`123` run with `5000`
-attempts for each benchmark row, every attempt produced a distinct valid shell.
-Again none passed: the `N=63` sample split as `169` corner-label violations,
-`150` non-simple residual graphs, and `4681` proper overlaps; the `N=99` sample
-split as `879`, `550`, and `3571` respectively.
+corner-compatible endpoint/mixed classes. In a seed-`20260601` run with `50000`
+attempts for each benchmark row, it produced `49991` valid `N=63` shells and
+`50000` valid `N=99` shells. Again none passed: the `N=63` sample split as
+`1779` corner-label violations, `1546` non-simple residual graphs, and `46666`
+proper overlaps; the `N=99` sample split as `8414`, `5435`, and `36151`
+respectively.
 
 An exact overlap-cause pass on the same valid-weighted sample shows that the
-proper overlaps are highly localized. For `N=63`, `3639` of the `4681` proper
+proper overlaps are highly localized. For `N=63`, `36526` of the `46666` proper
 overlaps are between the left equal side and the base, all first detected at
-`L2` with `B8`; another `1042` are between the right equal side and the base,
-almost all at `R6` with `B2`. For `N=99`, the analogous counts are `2272`
-base-left overlaps and `1299` base-right overlaps, led by `L2` with `B8` and
-`R8` or `R7` with `B2`. This suggests a possible next local-overlap lemma, but
+`L2` with `B8`; another `10140` are between the right equal side and the base,
+almost all at `R6` with `B2`. For `N=99`, the analogous counts are `23313`
+base-left overlaps and `12838` base-right overlaps, led by `L2` with `B8` and
+`R8` or `R7` with `B2`. No new first-overlap positions appeared beyond the
+sampled local pair set. This suggests a possible next local-overlap lemma, but
 it is still sampling evidence.
 
 The localized overlap pattern can be counted exactly without enumerating full
