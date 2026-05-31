@@ -193,6 +193,33 @@ first_fail_k = 16
 tau(n-16) = 32
 ```
 
+The next range was scanned with the same 41 residue classes. This command
+shape covers `10^15 <= N < 3*10^15`:
+
+```sh
+./SEARCH/prime_tuple_search \
+  --variable-mod 46189 \
+  --variable-rem <one of the 41 residues> \
+  --start 21650176449 \
+  --count 43300352899 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15 \
+  --stats
+```
+
+Aggregate output:
+
+```text
+prime_tuples=485824 quick_pass=0
+BRANCH_COUNTS A=106851 B=378973
+FIRST_FAIL_COUNTS 5:425531 7:37720 9:19745 10:2480 11:231 13:81 14:27 15:9
+```
+
+Interpretation: no branch tuple with `10^15 <= N < 3*10^15` passed direct
+checks through `k=5000`; no tuple in this range survived past `k=15`.
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms

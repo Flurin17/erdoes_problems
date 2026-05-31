@@ -292,6 +292,15 @@ remaining cofactor.
   The deepest near misses failed at `k=16`; the best recorded one is
   `N = 832414790665601`, `n = 2097685272477314520`,
   `tau(n-16) = 32`.
+- The follow-up scan over `10^15 <= N < 3*10^15` found 485,824 branch
+  prime tuples and no value passing direct checks through `k <= 5000`.
+  Aggregated first failures were:
+
+```text
+5:425531 7:37720 9:19745 10:2480 11:231 13:81 14:27 15:9
+```
+
+  No tuple in this range survived past `k=15`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a
