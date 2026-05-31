@@ -1193,20 +1193,20 @@ A + ceil(x'/(q+2))
 for `q>=3`.  Hence the vector is covered by at most `q-1`, and therefore at
 most `q`, legal bins.  QED.
 
-The lower bound `x>=(q+1)A` is unnecessary except at the boundary where the
-tail has size exactly `q`.
+The lower bound `x>=(q+1)A` is unnecessary.
 
-**Lemma: One-Large-Class Repair Below The Boundary.**  Fix `q>=3`.  Let
+**Lemma: One-Large-Class Repair.**  Fix `q>=3`.  Let
 `a=(x,a_2,...,a_t)` be a nonnegative integer vector with
 
 ```text
-A = a_2+...+a_t < q,
+A = a_2+...+a_t <= q,
 x+A <= q^2.
 ```
 
 Then `a` has a multipartite bin decomposition using at most `q` bins.
 
-Proof.  Split the `A` tail vertices into `A` singleton tail bins.  In a
+Proof.  First suppose `A<q`.  Split the `A` tail vertices into `A` singleton
+tail bins.  In a
 singleton tail bin we may consume from the first class either:
 
 - `0` vertices, leaving a one-class singleton bin;
@@ -1273,11 +1273,51 @@ and therefore `L<=E+(q-A)(q+2)<=x`.  In both cases we have chosen an allowed
 `L` in the desired interval.  Cover the remaining `x-L` first-class vertices
 by the reserved `q-A` one-class bins.  All bins are legal, and the total
 number of bins is exactly `A+(q-A)=q`, with empty one-class bins omitted if
-not needed.  QED.
+not needed.  This proves the case `A<q`.
+
+It remains to handle the boundary case `A=q`.  Then `x<=q^2-q=q(q-1)`.  Put
+`C=q+2`.  For `0<=s<=q`, consider the interval
+
+```text
+I_s = [ s(q+1), s(q+1) + floor((q-s)/2) C ].
+```
+
+The intervals `I_s` with `0<=s<=q-2` cover every integer from `0` through
+`q(q-1)`.  Indeed, for `s<=q-2`,
+
+```text
+floor((q-s)/2) C >= C >= q,
+```
+
+so the end of `I_s` is at least one less than the start of `I_{s+1}`.  Also
+`I_0` starts at `0`, and
+
+```text
+end(I_{q-2}) = (q-2)(q+1)+C = q^2 >= q(q-1).
+```
+
+Choose `s` with `x in I_s`.  Use `s` special bins, each containing `q+1`
+vertices from the first class and one tail vertex.  This is possible because
+`x>=s(q+1)` and the tail has `q` vertices.  The remaining tail has size
+`q-s`; cover it in `ceil((q-s)/2)` rectangle bins by pairing tail vertices
+arbitrarily, with a singleton bin if one vertex is left over.  A pair from
+one class is a one-coordinate rectangle of height `2`; a pair from two classes
+is a height-`1`, width-`2` rectangle.  Both have area `2<=C`.
+
+The remaining first-class size is `x-s(q+1)`, which is at most
+`floor((q-s)/2)C` because `x in I_s`.  Cover these vertices by
+`floor((q-s)/2)` one-class bins of size at most `C`.  The total number of bins
+is
+
+```text
+s + ceil((q-s)/2) + floor((q-s)/2) = q.
+```
+
+Thus the boundary case is also covered.  QED.
 
 Consequently, any counterexample to the multipartite bin target must have
 largest coordinate greater than `q` and all other coordinates summing at least
-`q`.
+`q+1`.
 
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
