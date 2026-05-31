@@ -228,9 +228,10 @@ Impact:
 
 - The generic boundary-integrality obstruction now removes all supported
   `3alpha+2beta=pi` branches below `250` except the isosceles-`alpha+beta`
-  source-filter branch. The remaining `3alpha+2beta` survivors in the
-  `100..250` scan are all in that branch. This is still conditional on the full
-  `3alpha+2beta=pi` source setup.
+  source-filter branch. The boundary-order/nonfit obstruction then removes the
+  later Section 11.4 survivor records at `132`, `156`, `175`, `189`, `198`,
+  `204`, `224`, and `228`, leaving the resonant `240` record in this branch.
+  This is still conditional on the full `3alpha+2beta=pi` source setup.
 
 ### 4. Composite Non-Isosceles `gamma=2pi/3` Completeness
 
@@ -277,18 +278,19 @@ obstruction recorded in `PROOF.md`.
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`
-endpoint-pair boundary-star filter, the remaining values with explicit encoded
-survivors are:
+endpoint-pair boundary-star filter, the formerly recorded
+`3alpha+2beta=pi` isosceles-`alpha+beta` survivor values were:
 
 ```text
 132, 156, 175, 189, 198, 204, 224, 228, 240
 ```
 
-The `3alpha+2beta` survivors among these are only the
-isosceles-`alpha+beta` branch that passes Beeson's Section 11.4 filter.
-The `--counts` diagnostic in `beeson_isosceles_alpha_plus_beta_filter.py`
-records the remaining side-count structure. Most of these survivors are rigid
-at the count level, but this is not yet an ordering or matching obstruction.
+The boundary-order/nonfit obstruction now removes that branch for `132`, `156`,
+`175`, `189`, `198`, `204`, `224`, and `228`. It preserves the known positive
+`48` regression case and leaves the resonant `240` branch survivor, where
+`c-a=12=3a`. Several values in this range remain open through `gamma=2alpha`
+boundary-arithmetic survivors or through source-reduction completeness gaps;
+this branch refinement is not a whole-count classification.
 
 ## Beeson IV Base-Corner Audit
 

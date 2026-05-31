@@ -243,10 +243,12 @@ Important distinction: "positive square class" and "smallest representative" are
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha
    outer shapes; `46` and `56` by triquadratic boundary-star checks; and
    `55`, `88`, `105`, `120`, and `143` by non-isosceles `gamma=2pi/3`
-   endpoint boundary-star checks. In the range `100..250`, explicit encoded
-   survivors remain only at `132`, `156`, `175`, `189`, `198`, `204`, `224`,
-   `228`, and `240`; all are `3alpha+2beta` isosceles-`alpha+beta`
-   survivors.
+   endpoint boundary-star checks. In the range `100..250`, the former
+   `3alpha+2beta` isosceles-`alpha+beta` survivor records at `132`, `156`,
+   `175`, `189`, `198`, `204`, `224`, and `228` are now removed by a boundary
+   order plus side-difference nonfit obstruction. The resonant `240` record
+   survives that test because `c-a=12=3a`, and several of these counts still
+   have separate `gamma=2alpha` survivors.
 
 ## Current Diophantine Status for `n=19`
 

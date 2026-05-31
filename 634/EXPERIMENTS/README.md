@@ -48,6 +48,11 @@ Current components:
   the source side-count triples after the two reserved `c` edges on each outer
   side; this is a safe diagnostic and accepts the known positive `N=48`
   example.
+- `beeson_isosceles_alpha_plus_beta_boundary.py`: boundary-order/nonfit
+  obstruction for the `3alpha+2beta=pi` isosceles-`alpha+beta` survivors. It
+  closes the Section 11.4 survivor records at `132`, `156`, `175`, `189`,
+  `198`, `204`, `224`, and `228`, while preserving the resonant `48` positive
+  example and the unresolved `240` survivor.
 - `prime_case_dashboard.py`: high-level report for prime `N`, combining the
   source arithmetic reductions with the `3alpha+2beta=pi` filter.
 - `gamma_2pi3_isosceles_filter.py`: exact arithmetic filter from Beeson's

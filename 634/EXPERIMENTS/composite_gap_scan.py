@@ -28,6 +28,9 @@ from beeson_3alpha2beta_sufficient import constructions as three_alpha_construct
 from beeson_isosceles_alpha_plus_beta_filter import (
     candidates_for_n as alpha_plus_beta_candidates,
 )
+from beeson_isosceles_alpha_plus_beta_boundary import (
+    boundary_order_obstructed as alpha_plus_beta_boundary_obstructed,
+)
 from equilateral_area_candidates import candidates_for_n as equilateral_candidates
 from equilateral_boundary_exact import candidates_for_n as equilateral_exact_candidates
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
@@ -184,7 +187,8 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
 def three_alpha_survivors(n: int) -> tuple[list[ThreeAlphaCandidate], list[ThreeAlphaCandidate]]:
     raw = three_alpha_candidates(n)
     strong_alpha_beta = alpha_plus_beta_candidates(n)
-    strong_keys = {(row.M, row.sides) for row in strong_alpha_beta}
+    strong_by_key = {(row.M, row.sides): row for row in strong_alpha_beta}
+    strong_keys = set(strong_by_key)
     n14_boundary_obstructed = n == 14 and not feasible_n14_triquadratic_boundaries()
     n21_boundary_obstructed = n == 21 and not feasible_n21_isosceles_alpha_boundaries()
     n46_boundary_obstructed = n == 46 and not feasible_n46_triquadratic_boundaries()
@@ -193,6 +197,12 @@ def three_alpha_survivors(n: int) -> tuple[list[ThreeAlphaCandidate], list[Three
     survivors: list[ThreeAlphaCandidate] = []
     for candidate in raw:
         if candidate.case == "(a+b,a+b,a)" and (candidate.m, candidate.sides) not in strong_keys:
+            continue
+        if (
+            candidate.case == "(a+b,a+b,a)"
+            and (candidate.m, candidate.sides) in strong_keys
+            and alpha_plus_beta_boundary_obstructed(strong_by_key[(candidate.m, candidate.sides)])
+        ):
             continue
         if (
             n14_boundary_obstructed

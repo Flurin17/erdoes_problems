@@ -21,6 +21,9 @@ from beeson_3alpha2beta_sufficient import constructions as beeson_3alpha2beta_co
 from beeson_isosceles_alpha_plus_beta_filter import (
     candidates_for_n as beeson_alpha_plus_beta_candidates,
 )
+from beeson_isosceles_alpha_plus_beta_boundary import (
+    boundary_order_obstructed as alpha_plus_beta_boundary_obstructed,
+)
 from equilateral_area_candidates import candidates_for_n as equilateral_candidates
 from equilateral_boundary_exact import candidates_for_n as equilateral_exact_candidates
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
@@ -278,7 +281,8 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int, equila
     strong_alpha_beta = beeson_alpha_plus_beta_candidates(n)
     unresolved_3a2b = []
     eliminated_3a2b = []
-    strong_keys = {(row.M, row.sides) for row in strong_alpha_beta}
+    strong_by_key = {(row.M, row.sides): row for row in strong_alpha_beta}
+    strong_keys = set(strong_by_key)
     n14_boundary_obstructed = n == 14 and not feasible_n14_triquadratic_boundaries()
     n21_boundary_obstructed = n == 21 and not feasible_n21_isosceles_alpha_boundaries()
     n46_boundary_obstructed = n == 46 and not feasible_n46_triquadratic_boundaries()
@@ -286,6 +290,12 @@ def dashboard(n: int, zhang_side_bound: int, equilateral_side_bound: int, equila
     for candidate in raw_3a2b:
         if candidate.case == "(a+b,a+b,a)" and (candidate.m, candidate.sides) not in strong_keys:
             eliminated_3a2b.append((candidate, "strong isosceles-alpha+beta filter"))
+        elif (
+            candidate.case == "(a+b,a+b,a)"
+            and (candidate.m, candidate.sides) in strong_keys
+            and alpha_plus_beta_boundary_obstructed(strong_by_key[(candidate.m, candidate.sides)])
+        ):
+            eliminated_3a2b.append((candidate, "isosceles-alpha+beta boundary-order obstruction"))
         elif (
             n14_boundary_obstructed
             and candidate.case == "(2a,b,a+b)"

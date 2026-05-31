@@ -9,6 +9,7 @@ PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/positive_constructions.py
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/small_family_coverage.py
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/composite_case_dashboard.py 14 15 21 22 30 --equilateral-exact
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py --counts 132 156 175 189 198 204 224 228 240
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_boundary.py 48 132 156 175 189 198 204 224 228 240
 ```
 
 The rerun agrees with the status already recorded below: elementary certificates
@@ -18,10 +19,11 @@ The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
 `N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`,
 `N=66`, `N=69`, `N=70`, `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`,
 `N=92`, `N=93`, `N=94`, `N=95`, and `N=99`
-certificates are now promoted in `PROOF.md`. The explicit encoded survivors in
-`100..250` remain the isosceles-`alpha+beta`
-`3alpha+2beta=pi` candidates at
-`132,156,175,189,198,204,224,228,240`.
+certificates are now promoted in `PROOF.md`. In the `100..250`
+`3alpha+2beta` isosceles-`alpha+beta` branch, the boundary-order/nonfit check
+removes the former Section 11.4 survivor records at `132`, `156`, `175`,
+`189`, `198`, `204`, `224`, and `228`; `240` remains for a separate overhang
+analysis.
 
 ## `N=14` and `N=15` Exact Filter Certificate
 
@@ -764,63 +766,63 @@ area-normalized outer side scale is irrational or gives nonintegral boundary
 lengths.
 
 After this generic filter and the non-isosceles `gamma=2pi/3` endpoint
-boundary-star filter, the scan
+boundary-star filter, an earlier scan
 
 ```sh
 python3 634/EXPERIMENTS/composite_gap_scan.py --lo 100 --limit 250 --only-open --equilateral-side-bound 250
 ```
 
-has explicit encoded survivors only at
+had `3alpha+2beta=pi` isosceles-`alpha+beta` survivors at
 
 ```text
 132, 156, 175, 189, 198, 204, 224, 228, 240
 ```
 
-The `3alpha+2beta=pi` survivors in this list are exactly the
-isosceles-`alpha+beta` candidates passing Beeson's Section 11.4 filter. The
-previous non-isosceles `gamma=2pi/3` survivors `143`, `154`, `168`, `210`, and
-`220` are now locally eliminated by the endpoint boundary-star check.
+The previous non-isosceles `gamma=2pi/3` survivors `143`, `154`, `168`, `210`,
+and `220` are locally eliminated by the endpoint boundary-star check.
 
-For the remaining `3alpha+2beta=pi` isosceles-`alpha+beta` branch, the safe
-next diagnostic is count-level rather than endpoint-order-level. The command
+For the remaining `3alpha+2beta=pi` isosceles-`alpha+beta` branch, the command
 
 ```sh
 python3 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py 48 132 156 175 189 198 204 224 228 240 --counts
 ```
 
 keeps the known positive `N=48` example and shows that many later survivors are
-rigid at the side-count level:
+rigid at the side-count level. The follow-up boundary-order command is:
 
-```text
-N=48: sides=(2,3,4), X=24, Y=12
-  equal-side count triples: five possibilities
-  base count triples: (0,0,3), (2,0,2)
-N=132: sides=(28,33,49), X=462, Y=264
-  equal-side count triple: (3,7,3)
-  base count triple: (3,1,3)
-N=156: sides=(40,39,64), X=624, Y=390
-  equal-side count triple: (3,8,3)
-  base count triple: (3,2,3)
-N=175: sides=(33,112,121), X=1540, Y=420
-  equal-side count triple: (2,11,2)
-  base count triple: (2,1,2)
-N=198: sides=(117,88,169), X=1716, Y=1188
-  equal-side count triple: (2,13,2)
-  base count triple: (2,7,2)
-N=204: sides=(70,51,100), X=1020, Y=714
-  equal-side count triple: (3,10,3)
-  base count triple: (3,4,3)
-N=224: two candidates with single count triples, (2,15,2)/(2,11,2)
-       and (4,9,4)/(4,1,4)
-N=228: sides=(88,57,121), X=1254, Y=912
-  equal-side count triple: (3,11,3)
-  base count triple: (3,5,3)
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_boundary.py 48 132 156 175 189 198 204 224 228 240
 ```
 
-The less rigid survivors in this range are `N=189` and `N=240`, whose equal
-sides have multiple count decompositions. This count diagnostic is not an
-obstruction by itself; it is the input for a future corner-capped ordering or
-matching argument that must pass `N=48` as a positive regression case.
+Its result is:
+
+```text
+N=48: survives; representable_diffs=(2,)
+N=132: obstructed; diffs=(5,16,21); representable_diffs=()
+N=156: obstructed; diffs=(1,24,25); representable_diffs=()
+N=175: obstructed; diffs=(9,79,88); representable_diffs=()
+N=189: obstructed; diffs=(4,11,15); representable_diffs=()
+N=198: obstructed; diffs=(29,52,81); representable_diffs=()
+N=204: obstructed; diffs=(19,30,49); representable_diffs=()
+N=224: both survivor records obstructed
+N=228: obstructed; diffs=(31,33,64); representable_diffs=()
+N=240: survives; representable_diffs=(12,)
+```
+
+The proof idea is local. In the strict straight-boundary transition table for
+this branch, an oriented `a` edge can only be followed by the same oriented
+`a` edge, so a boundary side cannot mix `a` with `b` or `c`. If no side-length
+difference is a nonnegative sum of tile sides, shifted non-strict contacts
+cannot absorb a forbidden strict transition. Every Section 11.4 survivor above
+except `48` and `240` has no representable side difference and every Beeson
+side-count triple mixes `a` with a non-`a` side, so those `3alpha+2beta`
+branch records are locally eliminated.
+
+This is a branch closure, not a whole-count classification. Many of these
+values still have `gamma=2alpha` boundary-arithmetic survivors in the current
+dashboard. The remaining `3alpha+2beta` isosceles-`alpha+beta` survivor in
+this batch is `N=240`, where `c-a=12=3a`; it needs a T-junction-aware overhang
+automaton.
 
 ## Zhang Constructive Families
 
