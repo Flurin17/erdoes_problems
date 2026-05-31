@@ -3624,16 +3624,17 @@ independent.  More generally, the task for this slot multiset is to remove
 one `1`-modular part and one `2`-modular part so that the residual graph has
 the displayed mod-`4` cut-degree prescription.
 
-The following stronger formulation is the current cleanest first-lift target.
+The following stronger formulation was a tempting way to force the residual
+cut congruence by literal bipartiteness.
 
-**Candidate Lemma: Modular Odd-Cycle Transversal.**  Every even graph `G` has
+**False Candidate: Modular Odd-Cycle Transversal.**  Every even graph `G` has
 disjoint vertex sets `C,D` such that:
 
 1. every vertex of `G[C]` has degree congruent to `1 mod 4`;
 2. every vertex of `G[D]` has degree congruent to `2 mod 4`;
 3. `G[V(G)\(C union D)]` is bipartite.
 
-This candidate lemma implies that every even graph has a `4`-modular
+If true, this candidate would imply that every even graph has a `4`-modular
 partition with residue signature contained in `(0,0,1,2)`.
 
 Proof of implication.  Let `A,B` be a bipartition of the residual graph
@@ -3650,9 +3651,9 @@ deg_H(v, opposite side) = deg_H(v)
 for every residual vertex.  QED.
 
 The candidate is stronger than Lemma 4I.6 because it requires the residual
-cut congruence to hold by literal bipartiteness.  It is nevertheless
-consistent with the known first-lift hard examples: in the `13`-vertex
-connected example one certificate is
+cut congruence to hold by literal bipartiteness.  It is consistent with the
+known first-lift hard examples: in the `13`-vertex connected example one
+certificate is
 
 ```text
 A={3,11}, B={0,2,8}, C={4,5,6,9}, D={1,7,10,12},
@@ -3670,14 +3671,56 @@ deleted cycles change the internal degrees inside their union.  Any proof of
 the candidate lemma needs an absorption or switching step that controls these
 cross-edge contributions.
 
-A rooted strengthening would give a useful structural reduction.
+In fact the candidate is false.
 
-**Rooted Modular OCT Candidate.**  For every even graph `G` and every vertex
+**Computational Counterexample: Modular OCT Is False.**  There is an even
+graph on `16` vertices with no modular odd-cycle-transversal certificate.
+
+Proof.  In the edge order used by `EXPERIMENTS/regular_induced.py`, take the
+mask
+
+```text
+310072714880078432860970147557715681.
+```
+
+The exact checker
+
+```text
+python3 82/EXPERIMENTS/modular_oct.py 16 \
+  --mask 310072714880078432860970147557715681
+```
+
+returns `modular_oct=no`.  The graph is even, with degree sequence
+
+```text
+6,6,6,6,6,8,8,8,8,8,10,10,10,12,12,12.
+```
+
+It is not a counterexample to the `(0,0,1,2)` slot target.  The exact slot
+checker gives the partition
+
+```text
+A={0,2,6,7,9,11,12,13,15},
+B={1,4},
+C={3,10},
+D={5,8,14},
+```
+
+where `A,B` are the two zero-residue parts, `C` has residue `1`, and `D` has
+residue `2`.  The residual graph on `A union B` is not required to be
+bipartite; instead it satisfies the weaker cut congruence from Lemma 4I.6.
+Thus the modular OCT strengthening fails, while the original first-lift slot
+target survives.  QED.
+
+A rooted strengthening was the natural route for this false candidate and is
+still useful for understanding why the attempt breaks.
+
+**Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
 `r` lies in the bipartite residual.
 
-The rooted candidate gives the following rigorous cut-vertex reduction for
-the unrooted modular OCT candidate.
+This rooted variant, if true below a graph `G`, would give the following
+rigorous cut-vertex reduction for the unrooted modular OCT candidate.
 
 **Lemma: Cut-Vertex Reduction From Rooted Lobes.**  Suppose the rooted
 candidate holds for every even graph with fewer vertices than `G`.  If `G` is
@@ -3707,7 +3750,7 @@ residues because different lobes meet only at the residual vertex `v`, and the
 residual bipartitions combine by placing every copy of `v` on the same side.
 QED.
 
-For the rooted candidate itself, the same reduction would require a two-root
+For the rooted variant itself, the same reduction would require a two-root
 or prescribed-independent-set strengthening in the lobe that contains the
 global root.  The exact checker finds the one-root strengthening for every
 root in all even graphs through `7` vertices and in the current hard masks,

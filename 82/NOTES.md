@@ -1817,6 +1817,16 @@ source of growth beyond Ramsey.
   The full `n=8` sweep was still too slow and was stopped.  Greedy odd-cycle
   deletion is not a proof because cross-edges among deleted cycles alter the
   internal residues inside their union.
+- 2026-05-31: Refuted the modular odd-cycle-transversal strengthening.  A
+  random even `16`-vertex graph with mask
+  `310072714880078432860970147557715681` has no certificate with bipartite
+  residual, as verified by `modular_oct.py`.  It is still even, with degree
+  sequence `6^5,8^5,10^3,12^3`, and it does have a `(0,0,1,2)` slot
+  partition: `A={0,2,6,7,9,11,12,13,15}`, `B={1,4}`, `C={3,10}`,
+  `D={5,8,14}`.  Thus the first-lift slot target survives, but the residual
+  must satisfy the full cut congruence of Lemma 4I.6 rather than being
+  literally bipartite.  A second random counterexample appeared at `n=18`
+  before that longer run was stopped.
 - 2026-05-31: Audited minimal-counterexample reductions for modular OCT.
   Disconnected components, isolated vertices, whole cycles, and whole complete
   graphs reduce cleanly.  Cut vertices do not reduce from ordinary witnesses:
