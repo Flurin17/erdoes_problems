@@ -2211,6 +2211,64 @@ count bound \(Q\) and infinitely many scales \(X\), there is a fresh vertex
 of \(A\cap[1,X]\). The reflected condition in Corollary 3.4n is stronger,
 but this graph-degree shadow is already necessary.
 
+## Corollary 3.4r: Counterexamples contain large reflected low-Schur packets
+
+In the remaining \(k=2\) counterexample case, for every finite
+\[
+E\supset E_*
+\]
+there are constants \(Q_E,\eta_E>0\), arbitrarily large \(w\), and elements
+\[
+d\in A\setminus E,\qquad t=w-d,
+\]
+with a finite set
+\[
+S\subset A\setminus E
+\]
+such that:
+
+1. \(S\) is large:
+   \[
+   |S|\ge \eta_E A(w);
+   \]
+2. \(S\) is reflected at \(t\) outside the core:
+   \[
+   t-S\subset A\setminus E;
+   \]
+3. every translated row has bounded full representation count:
+   \[
+   r_{2,A}(s+d)\le Q_E\qquad(s\in S). \tag{1}
+   \]
+
+Consequently \(S\) has only linearly many internal translated Schur triples:
+the number of unordered pairs \(\{x,y\}\subset S\), counted with
+repetition, and \(s\in S\), satisfying
+\[
+x+y=s+d \tag{2}
+\]
+is at most
+\[
+Q_E|S|. \tag{3}
+\]
+
+Proof. Take \(S\) to be the set counted in Corollary 3.4n. Then (1) and
+the reflected inclusion are exactly the conclusions there. For each fixed
+\[
+s\in S,
+\]
+the number of unordered pairs from \(S\) satisfying (2) is at most the full
+number of unordered two-term representations of \(s+d\) from \(A\), which
+is at most \(Q_E\). Summing over \(s\in S\) proves (3). \(\square\)
+
+Thus the remaining obstruction is not just a large reflected packet; it is
+a large reflected packet that is sparse for the shifted equation
+\[
+x+y=s+d.
+\]
+If every large reflected packet outside some finite core forced
+superlinear internal solutions of this equation for every fresh \(d\), then
+Corollary 3.4r would contradict the counterexample normal form.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -7342,6 +7400,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 3.4q gives a simpler graph-degree version: if bounded-count
   translate neighbours have \(o(A(X))\) initial-segment degree uniformly in
   the center after one finite core, then the desired deletion exists.
+* Corollary 3.4r packages the surviving obstruction as a large reflected
+  packet \(S\) with only \(O(|S|)\) solutions to \(x+y=s+d\) inside \(S\).
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

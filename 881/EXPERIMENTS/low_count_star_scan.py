@@ -19,6 +19,18 @@ def rep_count(s: set[int], target: int) -> int:
     return count
 
 
+def translated_schur_count(rows: list[int], d: int) -> int:
+    row_set = set(rows)
+    count = 0
+    for z in rows:
+        for x in rows:
+            y = z + d - x
+            if y < x or y not in row_set:
+                continue
+            count += 1
+    return count
+
+
 def best_stars(
     name: str,
     s_list: list[int],
@@ -46,7 +58,11 @@ def best_stars(
         print("  none")
         return
     for count, w, d, witnesses in rows[:limit]:
-        print(f"  count={count:>2} w={w:>3} d={d:>3} rows={witnesses}")
+        schur = translated_schur_count(witnesses, d)
+        print(
+            f"  count={count:>2} schur={schur:>2} "
+            f"w={w:>3} d={d:>3} rows={witnesses}"
+        )
 
 
 def main() -> None:

@@ -567,6 +567,14 @@ degree \(o(A(X))\) uniformly in the center \(d\), then a good deletion
 exists. Therefore a counterexample must have low-count graph stars of
 positive \(A(X)\)-density outside every finite core, even before imposing
 the reflected partner \(w-d-a\in A\).
+Corollary 3.4r adds the additive-combinatorial shape of such a star. The
+fresh neighbours form a large reflected packet \(S\) with \(t-S\subset A\),
+but the shifted equation
+\[
+x+y=s+d,\qquad x,y,s\in S,
+\]
+has only \(O(|S|)\) unordered solutions. So the remaining obstruction is a
+large reflected packet that is sparse for a translated Schur equation.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all

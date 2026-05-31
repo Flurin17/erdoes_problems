@@ -168,7 +168,8 @@ diagnostic on the P6 Schreier escape with and without its old core
 protected. In the P6 pair-edge escape, the old-core-protected scan has no
 fresh `Q=2` star, matching the theoretical point that a viable next stage
 must create genuinely unpinned bounded-count rows, not only repairs through
-old elements.
+old elements. It also prints the internal translated-Schur count for
+`x+y=s+d` inside the displayed row set, corresponding to Corollary 3.4r.
 
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
