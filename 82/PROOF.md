@@ -891,6 +891,30 @@ In particular, the two slots `{a,a+q}` already pass all clique tests for the
 source residue `a mod q`.  Thus cliques alone do not obstruct a constant-part
 source-residue dyadic lift.
 
+There is also a small common slot family passing all clique tests across all
+source residues: choose weights
+
+```text
+1,2,4,...,q
+```
+
+and use the corresponding target residues
+
+```text
+0,1,3,...,q-1.
+```
+
+Every residue class modulo `2q` has a representative in `[1,2q]`, and binary
+expansion expresses each such representative as a subset sum of these weights.
+This shows that even a common slot family needs only `O(log q)` slots for
+cliques.  However, clique tests are far too weak: for `q=4`, the four slots
+`(0,1,3,7)` pass all clique tests, but the complete bipartite graph `K_{2,2}`
+has no `(0,1,3,7)`-slot partition modulo `8`.  Indeed, a part in a complete
+multipartite graph is `8`-modular only when the positive intersections with
+its two sides have equal size modulo `8`, or when it uses just one side; the
+size vector `(2,2)` cannot be packed into the allowed residues
+`0,1,3,7` without a residue-`2` part or repeated lower slots.
+
 ## Computational Proposition 4E.4: Three Parts Do Not Suffice For `4 -> 8`
 
 There is a graph whose degrees are all congruent to `2 mod 4` and whose vertex
