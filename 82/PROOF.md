@@ -106,6 +106,40 @@ itself a source of extra regularity: the cross edges between one clique and
 one independent set may form a split graph, and in split graphs regular
 induced subgraphs are exactly the ordinary homogeneous induced subgraphs.
 
+## Lemma 0C: Split Graphs Satisfy The Terminal-Size Partition Target
+
+Let `G` be a split graph on `n` vertices, and put `q=ceil(sqrt n)`.  Then
+`V(G)` can be partitioned into at most `q` regular induced subgraphs, each of
+order at most `q+1`.
+
+Proof.  Fix a split partition `V(G)=A union B`, where `A` is a clique and
+`B` is independent.  Partition `A` into cliques of size at most `q+1`, and
+partition `B` into independent sets of size at most `q+1`.  Every part is
+regular.  It remains only to count the number of parts.
+
+Let `c=q+1`, and write `a=|A|`, `b=|B|`.  The number of parts is
+
+```text
+ceil(a/c) + ceil(b/c).
+```
+
+Since `n<=q^2=(q+1)(q-1)+1=c(q-1)+1`, this sum is at most `q`.  Indeed, write
+`a=rc+alpha` and `b=sc+beta` with `0<=alpha,beta<c`.  If both remainders are
+positive, then
+
+```text
+(r+s)c+2 <= a+b <= c(q-1)+1,
+```
+
+so `r+s<=q-2`, and the number of parts is `r+s+2<=q`.  If exactly one
+remainder is positive, the same inequality with `+1` gives `r+s<=q-1`, so
+the number of parts is `r+s+1<=q`.  If neither is positive, then
+`(r+s)c<=c(q-1)+1`, hence `r+s<=q-1<=q`.  QED.
+
+Thus split graphs are a barrier for extracting non-Ramsey regularity from one
+fixed clique-independent pair, but not a barrier for the terminal-size modular
+partition program.
+
 ## Reconstructed Known Bound: Bollobas Upper Bound
 
 The literature records a construction, attributed first to Bollobas and then

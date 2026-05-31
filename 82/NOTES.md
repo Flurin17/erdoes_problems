@@ -1085,6 +1085,12 @@ source of growth beyond Ramsey.
   clique number and linear independence number cannot be exploited merely by
   taking one large clique and one large independent set and analyzing their
   arbitrary cross-incidence pattern; more global structure is needed.
+- 2026-05-31: Proved that split graphs nevertheless satisfy the terminal-size
+  partition target.  For `q=ceil(sqrt n)`, split the clique side and
+  independent side into chunks of size at most `q+1`; the ceiling inequality
+  `ceil(|A|/(q+1))+ceil(|B|/(q+1))<=q` follows from `n<=q^2`.  Thus split
+  graphs obstruct the large-clique/large-independent-set trace shortcut, but
+  not the capped modular partition program.
 - 2026-05-31: Tested size-controlled modular partitions.  Random sampling
   found a `9`-vertex graph, mask `30931749293`, with no balanced three-part
   partition into induced `3`-modular subgraphs of sizes exactly `3,3,3`,
