@@ -138,6 +138,15 @@ normal form: \(F\) may be chosen late-bad while every proper subset is not,
 and also inclusion-minimal for one witness \(w\ge\max F-1\). For \(k=2\),
 after enlarging the protected core by finitely many singleton exceptions,
 all remaining delayed barriers have size at least two.
+The diagnostic `delayed_collective_barrier_search.py` finds small finite
+models of this checklist, including the pair delayed barrier
+\[
+S=\{1,2,3,5,6,7\},\quad F=\{5,7\},
+\]
+whose proper singleton deletions have finite three-sum tail from \(3\), but
+whose full deletion has minimal holes at \(16,17\) and tail only from \(18\).
+Thus collective delay is a genuine local phenomenon, not an artefact of the
+abstract barrier formulation.
 Corollary 10.3d records the complementary genuine-failure case: if no
 finite core gives finite-deletion stability, then after every finite core
 there are active finite barriers whose terminal windows are actual long

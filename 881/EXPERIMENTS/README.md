@@ -103,6 +103,21 @@ on the window \([12,22]\), again inside the two-sum coverage interval:
 all deletions of size \(<4\) preserve order-3 coverage on the test window,
 while several four-point deletions create holes.
 
+`delayed_collective_barrier_search.py` searches for finite analogues of
+Corollary 3.1e': all proper subdeletions have early finite order-3 tails,
+but one inclusion-minimal collective deletion pushes the finite tail past
+the deleted block. The first pair example is
+\[
+S=\{1,2,3,5,6,7\},\qquad F=\{5,7\},
+\]
+where the full deletion has minimal holes at `16,17` and finite tail only
+from `18`, while the singleton subdeletions have finite tail from `3`.
+With `--rank 3`, it finds
+\[
+S=\{1,2,3,4,5,6,7,8\},\qquad F=\{4,5,6\},
+\]
+with a minimal hole at `20` and tail from `21`.
+
 `finite_barrier_hypergraph.py` builds the finite residue hypergraph of
 deletions \(F\subset S\) for which \((k+1)(S\setminus F)\) is not the whole
 group. The default run reports the minimal pair barrier

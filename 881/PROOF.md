@@ -1085,6 +1085,29 @@ late-bad. Thus only finitely many singleton late-bad sets can occur in a
 counterexample; enlarge \(E_0\) to contain those singleton elements.
 \(\square\)
 
+The finite diagnostic `EXPERIMENTS/delayed_collective_barrier_search.py`
+shows that this normal form is locally nonempty. For instance,
+\[
+S=\{1,2,3,5,6,7\}
+\]
+has \(2S\) covering \([2,14]\). Deleting
+\[
+F=\{5,7\}
+\]
+leaves a finite three-sum tail only from \(18\) onward, with minimal holes
+\[
+16,\ 17,
+\]
+while each singleton subdeletion has finite three-sum tail from \(3\). At
+rank \(3\),
+\[
+S=\{1,2,3,4,5,6,7,8\},\qquad F=\{4,5,6\}
+\]
+has a minimal hole at \(20\), a finite three-sum tail from \(21\), and all
+proper subdeletions have finite three-sum tail from \(3\). These are finite
+window artefacts, but they confirm that collective delay is not ruled out
+by inclusion-minimality or proper-subdeletion stability alone.
+
 ## Proposition 3.1f: Syndetic tail criterion
 
 Let \(k\ge2\), let \(h=k+1\), and let \(A\subseteq\mathbb N\) be an
