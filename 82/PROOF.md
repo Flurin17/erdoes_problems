@@ -5788,6 +5788,86 @@ degree imbalance and no alternating closed trail.  Proving a subexponential
 bound in this colored-graph model would eliminate the first nontrivial support
 layer of the trace route.
 
+In fact this colored-graph model is already polynomially bounded.
+
+**Corollary 15E: Pure Two-Coordinate Trace Obstructions Are Polynomial.**  In
+the setting of Lemma 12A, suppose every outside trace difference vector has
+support of size exactly `2`.  Then, with `d=k-1`,
+
+```text
+|B| <= d^2(2d-1)/2 < d^3.
+```
+
+Proof.  Use the red/blue multigraph `L` from Lemma 15D.  Let
+
+```text
+r_i = red degree of coordinate i,     b_i = blue degree of coordinate i.
+```
+
+By Lemma 15, `|r_i-b_i|<=d` for every coordinate `i`.
+
+Build a directed multigraph `D` with vertex set
+
+```text
+{(i,R),(i,B): 1<=i<=d}.
+```
+
+For each red edge `ij` of `L`, add arcs
+
+```text
+(i,R)->(j,B),     (j,R)->(i,B),
+```
+
+and for each blue edge `ij`, add arcs
+
+```text
+(i,B)->(j,R),     (j,B)->(i,R).
+```
+
+A directed cycle in `D` is exactly an alternating closed walk in `L`; deleting
+repeated closed subwalks from a shortest such walk gives an alternating
+closed trail.  By Lemma 15D no such trail exists, so `D` is acyclic.
+
+The imbalance at the state `(i,R)` is
+
+```text
+out_D(i,R)-in_D(i,R) = r_i-b_i,
+```
+
+and the imbalance at `(i,B)` is `b_i-r_i`.  Hence every state has imbalance
+at most `d` in absolute value.  In any finite acyclic directed multigraph,
+the arcs decompose into directed paths from vertices of positive imbalance to
+vertices of negative imbalance: repeatedly follow an outgoing arc from a
+positive-imbalance vertex until reaching a sink in the remaining acyclic
+graph, delete that path, and continue.  Each path has length at most
+`|V(D)|-1=2d-1`, and the total number of paths counted with multiplicity is
+the total positive imbalance, at most
+
+```text
+(1/2) sum_{v in V(D)} |out_D(v)-in_D(v)| <= (1/2)(2d)d=d^2.
+```
+
+Therefore
+
+```text
+|E(D)| <= (2d-1)d^2.
+```
+
+Since each trace vector of support size `2` contributes exactly two arcs to
+`D`, we get
+
+```text
+|B| = |E(D)|/2 <= d^2(2d-1)/2.
+```
+
+QED.
+
+Thus a superpolynomial trace obstruction cannot live entirely in the first
+two support layers separately.  It must either use supports of size at least
+`3`, or use a genuinely mixed system in which singleton and two-coordinate
+traces compensate one another in a way not captured by Corollaries 15C and
+15E.
+
 One genuinely low-dimensional trace obstruction does collapse.
 
 ## Lemma 15A: Rank-One Trace Obstructions Are Small

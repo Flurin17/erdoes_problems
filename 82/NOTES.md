@@ -2151,3 +2151,12 @@ source of growth beyond Ramsey.
   exactly an alternating closed trail.  Thus the first nontrivial support
   layer of the trace route reduces to bounding two-colored multigraphs with
   small red-blue degree imbalance and no alternating closed trail.
+- 2026-05-31: Upgraded the support-size-`2` trace layer to a polynomial
+  bound.  Convert the red/blue multigraph with no alternating closed trail
+  into an acyclic directed multigraph on the `2d` color-states
+  `(coordinate,next color)`.  Each state has imbalance at most `d` by Lemma
+  15, so decomposing the DAG into source-sink paths of length at most
+  `2d-1` gives at most `(2d-1)d^2` directed arcs, hence fewer than `d^3`
+  support-size-`2` trace vectors.  Therefore any superpolynomial trace
+  obstruction must involve supports of size at least `3` or nontrivial mixing
+  between support sizes.
