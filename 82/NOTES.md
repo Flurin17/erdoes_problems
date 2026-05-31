@@ -2167,3 +2167,10 @@ source of growth beyond Ramsey.
   `4*(1,1,0), 3*(0,-1,-1), 2*(0,1,0), 4*(-1,0,0)`.  This is not a validated
   extremal obstruction, but it confirms that the mixed support case is not
   captured by the pure singleton and pure pair lemmas.
+- 2026-05-31: Added Corollary 15F for one easy mixed support case.  If all
+  singleton trace differences have the same sign and every coordinate touched
+  by a pair trace has such a singleton available, then opposite-sign pair
+  traces are forbidden by a three-vector zero sum; all remaining traces have
+  one sign, so Lemma 15B gives `|B|<=d^2`.  Thus a large support-`<=2`
+  obstruction must use singleton traces of both signs or pair traces touching
+  coordinates not covered by a singleton of the global sign.

@@ -5868,6 +5868,38 @@ two support layers separately.  It must either use supports of size at least
 traces compensate one another in a way not captured by Corollaries 15C and
 15E.
 
+There is also a simple mixed-support case that collapses.
+
+**Corollary 15F: One-Signed Singleton Cover Gives Quadratic Size.**  In the
+setting of Lemma 12A, suppose every trace difference has support size at most
+`2`.  Suppose further that there is a set `U` of coordinates such that:
+
+1. for every `i in U`, at least one singleton trace `+e_i` occurs;
+2. every singleton trace is `+e_i` with `i in U`;
+3. every two-coordinate trace has both endpoints in `U`.
+
+Then `|B|<=d^2`, where `d=k-1`.  The same conclusion holds with all singleton
+traces `-e_i` instead.
+
+Proof.  Assume the singleton traces are positive; the negative case is
+identical after multiplying every trace vector by `-1`.  If a negative
+two-coordinate trace `-1_{i,j}` occurred, then by hypothesis the singleton
+traces `+e_i` and `+e_j` both occur.  Selecting one copy of each of
+
+```text
+e_i,  e_j,  -1_{i,j}
+```
+
+would give a zero-sum deletion, contradicting Lemma 12.  Thus every
+two-coordinate trace is also positive.  All trace vectors have the same sign,
+so Lemma 15B gives `|B|<=d^2`.  QED.
+
+Consequently, any support-at-most-two obstruction larger than quadratic must
+either contain singleton traces of both signs, or contain two-coordinate
+traces touching a coordinate with no singleton of the relevant global sign.
+This matches the small mixed-support searches: the first large examples use
+singleton compensators with incompatible signs.
+
 One genuinely low-dimensional trace obstruction does collapse.
 
 ## Lemma 15A: Rank-One Trace Obstructions Are Small
