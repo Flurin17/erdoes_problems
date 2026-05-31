@@ -1441,7 +1441,9 @@ hole must also lie in
 where \(C=S\setminus F\). Lemma 13.1h records the retained-endpoint poison
 interval: if \(p\in C\) and \([q-p,R-p]\subset2C\), then every candidate
 for the pair edge \(\{a,q\}\) in \([q,R]\) already lies in \(3C\). For
-low-excess pair holes, Lemma 13.1i makes the private-color closure explicit:
+promoted fillers, Corollary 13.1h.1 gives the pointwise version: any
+witness for \(\{a,q\}\) must avoid \(p+2C\) for every retained old endpoint
+\(p\). For low-excess pair holes, Lemma 13.1i makes the private-color closure explicit:
 each active row is colored by one endpoint, and the lower endpoint can force
 new mirrors above the moving endpoint. These tests explain the P6 search
 stall without proving a global obstruction; a surviving construction would

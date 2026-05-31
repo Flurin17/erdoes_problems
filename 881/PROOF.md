@@ -8989,6 +8989,45 @@ loophole is equally clear: a construction would have to break the interval
 \([q-p,R-p]\) after deleting the new pair, or push the new protected point
 beyond the poisoned range.
 
+### Corollary 13.1h.1: Promoted pair vertices need shifted gaps
+
+Let \(S\subset\mathbb N\), let \(a<q\) be elements of \(S\), and put
+\[
+C=S\setminus\{a,q\}.
+\]
+If \(v\notin3C\), then every retained
+\[
+p\in C
+\]
+satisfies
+\[
+v-p\notin2C. \tag{1}
+\]
+Consequently, a candidate witness \(v\) for the pair edge \(\{a,q\}\)
+must lie outside
+\[
+\bigcup_{p\in C}(p+2C). \tag{2}
+\]
+In particular, if a previously retained endpoint \(p<q\) has
+\[
+[q-p,R-p]\subseteq2C,
+\]
+then no witness for \(\{a,q\}\) can lie in \([q,R]\).
+
+Proof. If \(v-p\in2C\) for some \(p\in C\), then
+\[
+v=p+(v-p)\in C+2C=3C,
+\]
+contrary to the hypothesis. The union statement is the same assertion for
+all retained \(p\). The final interval statement is Lemma 13.1h. \(\square\)
+
+Thus any finite-stage construction that repairs a pair edge by adding
+mirrors or fillers and later promotes those fillers into the protected tail
+incurs a new obligation: before the filler \(q\) can support its own pair
+edge with the old lower endpoint \(a\), the stage must reserve a shifted
+two-sum gap for a witness \(v\) against every old retained \(p\). This is
+the local closure cost visible in the P6 diagnostic.
+
 ## Lemma 13.1i: Low-excess pair holes force private mirrors
 
 Let \(S\subset\mathbb N\) be finite, let \(a<p\) be elements of \(S\), put
