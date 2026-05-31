@@ -33,6 +33,7 @@ from equilateral_boundary_exact import candidates_for_n as equilateral_exact_can
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
 from gamma_2alpha_boundary import candidates_for_n as gamma_2alpha_candidates
+from gamma_2alpha_boundary import refined_survivors_for_n as gamma_2alpha_refined_survivors
 from gamma_2alpha_boundary import survivors_for_n as gamma_2alpha_survivors
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
 from gamma_2pi3_nonisosceles_boundary import boundary_star_obstructed as gamma_boundary_obstructed
@@ -153,6 +154,7 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
         57,
         60,
         62,
+        76,
         66,
         69,
         70,
@@ -161,6 +163,7 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
         87,
         88,
         91,
+        92,
         93,
         94,
         95,
@@ -256,7 +259,8 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
     )
     gamma_iso = gamma_isosceles_candidates(n)
     gamma_2alpha_raw = [] if is_squarefree(n) else list(gamma_2alpha_candidates(n))
-    gamma_2alpha_unresolved = [] if is_squarefree(n) else list(gamma_2alpha_survivors(n))
+    gamma_2alpha_boundary = [] if is_squarefree(n) else list(gamma_2alpha_survivors(n))
+    gamma_2alpha_refined = [] if is_squarefree(n) else list(gamma_2alpha_refined_survivors(n))
     gamma_raw, gamma_unresolved = gamma_survivors(n)
 
     reasons = []
@@ -266,10 +270,16 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
         reasons.append("non-isosceles gamma=2pi/3 survivor")
     if gamma_iso:
         reasons.append("isosceles gamma arithmetic candidate; boundary-transition lemma rules this template out")
-    if gamma_2alpha_unresolved:
-        preview = ", ".join(f"sides={row.tile}, X={row.x}, Y={row.y}" for row in gamma_2alpha_unresolved[:2])
-        suffix = " ..." if len(gamma_2alpha_unresolved) > 2 else ""
+    if gamma_2alpha_refined:
+        preview = ", ".join(
+            f"sides={row.candidate.tile}, X={row.candidate.x}, Y={row.candidate.y}, "
+            f"Y survivors={row.y_representations}"
+            for row in gamma_2alpha_refined[:2]
+        )
+        suffix = " ..." if len(gamma_2alpha_refined) > 2 else ""
         reasons.append(f"gamma=2alpha boundary candidate(s): {preview}{suffix}")
+    elif gamma_2alpha_boundary:
+        reasons.append("gamma=2alpha boundary candidates eliminated by base endpoint lemma/Lemma 11.17")
     if equilateral_unresolved:
         preview = ", ".join(
             f"{row.angle} sides={row.sides} L={row.outer_side}" for row in equilateral_unresolved[:2]
@@ -279,7 +289,7 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
     elif equilateral_raw:
         reasons.append("equilateral area candidates locally eliminated by boundary-star check")
 
-    if three_survivors or gamma_unresolved or gamma_2alpha_unresolved or equilateral_unresolved:
+    if three_survivors or gamma_unresolved or gamma_2alpha_refined or equilateral_unresolved:
         status = "open-with-encoded-survivor"
     else:
         status = "open-no-encoded-survivor"
@@ -293,7 +303,7 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
         three_alpha_survivors=len(three_survivors),
         gamma_iso_raw=len(gamma_iso),
         gamma_2alpha_raw=len(gamma_2alpha_raw),
-        gamma_2alpha_survivors=len(gamma_2alpha_unresolved),
+        gamma_2alpha_survivors=len(gamma_2alpha_refined),
         gamma_noniso_raw=len(gamma_raw),
         gamma_noniso_survivors=len(gamma_unresolved),
         equilateral_raw=len(equilateral_raw),

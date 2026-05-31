@@ -25,6 +25,7 @@ from equilateral_area_candidates import candidates_for_n as equilateral_candidat
 from equilateral_boundary_exact import candidates_for_n as equilateral_exact_candidates
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
+from gamma_2alpha_boundary import refined_survivors_for_n as gamma_2alpha_refined_survivors
 from gamma_2alpha_boundary import survivors_for_n as gamma_2alpha_survivors
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
 from gamma_2pi3_nonisosceles_boundary import boundary_star_obstructed as gamma_boundary_obstructed
@@ -114,14 +115,19 @@ def right_tile_isosceles_status(n: int) -> str:
 def gamma_2alpha_status(n: int) -> str:
     if is_squarefree(n):
         return "ruled out because recorded counts are not squarefree"
-    if n == 60:
-        return "ruled out by Beeson's post-Theorem 11.18 finite boundary computation"
-    candidates = gamma_2alpha_survivors(n)
-    if not candidates:
+    boundary_candidates = gamma_2alpha_survivors(n)
+    refined = gamma_2alpha_refined_survivors(n)
+    if not boundary_candidates:
         return "ruled out by Lemma 11.14 boundary-arithmetic enumeration"
-    preview = ", ".join(f"sides={row.tile}, X={row.x}, Y={row.y}" for row in candidates[:2])
-    suffix = " ..." if len(candidates) > 2 else ""
-    return f"{len(candidates)} boundary-arithmetic candidate(s) remain: {preview}{suffix}"
+    if not refined:
+        return "ruled out by base endpoint lemma plus Beeson Lemma 11.17"
+    preview = ", ".join(
+        f"sides={row.candidate.tile}, X={row.candidate.x}, Y={row.candidate.y}, "
+        f"Y survivors={row.y_representations}"
+        for row in refined[:2]
+    )
+    suffix = " ..." if len(refined) > 2 else ""
+    return f"{len(refined)} refined boundary candidate(s) remain: {preview}{suffix}"
 
 
 def gamma_prime_filter_survives(p: int) -> bool:
@@ -155,7 +161,9 @@ def workspace_negative_reason(n: int) -> str | None:
     if n in {57, 62}:
         return "negative by the 57/62 composite benchmark in PROOF.md"
     if n == 60:
-        return "negative by the N=60 source-backed gamma=2alpha benchmark in PROOF.md"
+        return "negative by the N=60 gamma=2alpha benchmark in PROOF.md"
+    if n in {76, 92}:
+        return "negative by the 76/92 gamma=2alpha benchmark in PROOF.md"
     if n in {66, 69, 70}:
         return "negative by the 66/69/70 composite benchmark in PROOF.md"
     if n in {78, 86, 87, 88, 91, 93, 94, 95}:

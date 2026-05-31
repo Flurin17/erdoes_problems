@@ -28,6 +28,12 @@ class BoundaryCandidate:
     boundary_count_obstructed: bool
 
 
+@dataclass(frozen=True)
+class RefinedGamma2AlphaSurvivor:
+    candidate: BoundaryCandidate
+    y_representations: tuple[Triple, ...]
+
+
 def squarefree_part(n: int) -> int:
     n = abs(n)
     out = 1
@@ -170,6 +176,57 @@ def survivors_for_n(n: int) -> tuple[BoundaryCandidate, ...]:
     return tuple(row for row in candidates_for_n(n) if not row.boundary_count_obstructed)
 
 
+def base_representation_obstructed(rep: Triple) -> bool:
+    """Beeson-style base endpoint obstruction for `gamma=2alpha`.
+
+    On the base `AC`, both outer corners are alpha angles.  If the base has no
+    `c` edges, then the first and last edges must be `b` edges using their alpha
+    endpoints.  Starting from the left corner, avoiding a forbidden gamma-gamma
+    straight boundary point forces every `a`/`b` edge to end at gamma, so the
+    right corner cannot be alpha.  The case with no `b` edges is the analogous
+    beta-beta argument for `a`/`c` edges.
+    """
+    _u, v, w = rep
+    return v == 0 or w == 0
+
+
+def lemma_1117_obstructed(candidate: BoundaryCandidate, y_rep: Triple) -> bool:
+    """Return whether Beeson Lemma 11.17 eliminates this base representation.
+
+    The lemma applies when both equal sides have exactly one `c` edge and the
+    base has one or two `c` edges.  We only use it when every allowed short
+    `X` representation has one `c`; otherwise the other equal side might use a
+    two-`c` representation not covered by the lemma.
+    """
+    return all(rep[2] == 1 for rep in candidate.x_representations) and y_rep[2] in {1, 2}
+
+
+def refined_surviving_y_representations(candidate: BoundaryCandidate) -> tuple[Triple, ...]:
+    """Surviving base reps after the local base lemma and Lemma 11.17.
+
+    This is intentionally conservative.  It is a proof-level filter for rows
+    with a unique one-`c` equal-side representation, but it leaves the hard
+    `N=63` and `N=99` two-`c` equal-side cases open.
+    """
+    out: list[Triple] = []
+    for rep in candidate.y_representations:
+        if base_representation_obstructed(rep):
+            continue
+        if lemma_1117_obstructed(candidate, rep):
+            continue
+        out.append(rep)
+    return tuple(out)
+
+
+def refined_survivors_for_n(n: int) -> tuple[RefinedGamma2AlphaSurvivor, ...]:
+    out: list[RefinedGamma2AlphaSurvivor] = []
+    for candidate in survivors_for_n(n):
+        y_reps = refined_surviving_y_representations(candidate)
+        if y_reps:
+            out.append(RefinedGamma2AlphaSurvivor(candidate, y_reps))
+    return tuple(out)
+
+
 def format_reps(reps: tuple[Triple, ...], limit: int = 4) -> str:
     text = ", ".join(f"{p}a+{q}b+{r}c" for p, q, r in reps[:limit])
     if len(reps) > limit:
@@ -185,9 +242,11 @@ def main() -> None:
     for n in args.n:
         rows = candidates_for_n(n)
         survivors = survivors_for_n(n)
+        refined = refined_survivors_for_n(n)
         print(
             f"N={n}: {len(rows)} gamma=2alpha boundary candidate(s), "
-            f"{len(survivors)} after boundary-count obstruction"
+            f"{len(survivors)} after boundary-count obstruction, "
+            f"{len(refined)} after base/Lemma 11.17 obstruction"
         )
         for row in rows:
             status = "obstructed" if row.boundary_count_obstructed else "survives"
@@ -197,6 +256,11 @@ def main() -> None:
             )
             print(f"    X reps: {format_reps(row.x_representations)}")
             print(f"    Y reps: {format_reps(row.y_representations)}")
+            refined_y = refined_surviving_y_representations(row)
+            if refined_y:
+                print(f"    refined Y survivors: {format_reps(refined_y)}")
+            elif not row.boundary_count_obstructed:
+                print("    refined obstruction: base endpoint lemma plus Beeson Lemma 11.17")
 
 
 if __name__ == "__main__":

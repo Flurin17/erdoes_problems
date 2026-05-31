@@ -61,10 +61,13 @@ The tile triangle is not required to be similar to the large triangle unless exp
   `gamma=2pi/3`, and `3alpha+2beta` source-row filters leave no survivor.
 - `n = 60` impossible in this workspace: all non-`gamma=2alpha` source rows
   are eliminated locally, and the remaining `gamma=2alpha` candidate is removed
-  by Beeson's post-Theorem 11.18 finite boundary-enumeration computation.
+  by the local base endpoint lemma plus Beeson Lemma 11.17.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
+- `n = 76` and `n = 92` impossible in this workspace: all source rows are empty
+  or locally eliminated, and the only `gamma=2alpha` survivor in each case is
+  removed by the local base endpoint lemma plus Beeson Lemma 11.17.
 - `n = 78`, `n = 86`, `n = 87`, `n = 88`, `n = 91`, `n = 93`, `n = 94`, and `n = 95`
   impossible in this workspace: these squarefree composite counts are outside
   the elementary positive forms except for non-squarefree `88`, whose

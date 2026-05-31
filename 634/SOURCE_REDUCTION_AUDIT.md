@@ -164,9 +164,10 @@ Current evidence:
 - Lemma 11.14 gives a complete finite boundary-enumeration algorithm for the
   `gamma=2alpha` branch, and Theorem 11.18 plus its following note say that
   after `N=45` the next possibilities left open are `63,64,72`. This would
-  remove the branch for `60` if accepted as a black-box computation; the local
-  script now reproduces the stronger fact that `56` has no Lemma 11.14
-  boundary-arithmetic candidate.
+  remove the branch for `60` if accepted as a black-box computation. The local
+  scripts now remove `60`, `76`, and `92` by the base endpoint lemma plus
+  Beeson Lemma 11.17, and reproduce the stronger fact that `56` has no
+  Lemma 11.14 boundary-arithmetic candidate.
 - `gamma=2pi/3` has a local boundary-transition obstruction.
 - The `gamma=2pi/3` arithmetic filter is encoded from Lemma 12.9 and Theorem
   12.10.
@@ -174,10 +175,8 @@ Current evidence:
 Impact:
 
 - The right-tile and `gamma=2alpha` rows are now source-backed enough for
-  small-value obstructions such as `N=22` and `N=56`; the stronger
-  `gamma=2alpha` finite enumeration is still the next target for `N=60`,
-  because that value has a local boundary-arithmetic candidate. The remaining
-  isosceles gap also includes exact composite completeness in the
+  small-value obstructions such as `N=22`, `N=56`, `N=60`, `N=76`, and `N=92`.
+  The remaining isosceles gap includes exact composite completeness in the
   `gamma=2pi/3` and `3alpha+2beta=pi` rows.
 
 ### Closed Check: Equilateral Rational/Integer Side Model
@@ -258,19 +257,20 @@ Impact:
 
 The following unresolved values below `100` remain after the currently encoded
 filters. The values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`,
-`42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `78`,
-`86`, `87`, `88`, `91`, `93`, `94`, and `95` formerly appeared in this list,
-but are now
+`42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `76`,
+`78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, and `95` formerly appeared in
+this list, but are now
 classified negative in `PROOF.md` after writing out the source-row arithmetic
 eliminations. The remaining values now have explicit `gamma=2alpha`
 boundary-arithmetic survivors:
 
 ```text
-63, 76, 92, 99
+63, 99
 ```
 
-The remaining values should remain recorded as "open/no encoded survivor" until
-their source-row arithmetic eliminations are written out at theorem level.
+The remaining values should remain recorded as open with encoded
+`gamma=2alpha` survivors until their survivor eliminations are written out at
+theorem level.
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`

@@ -62,6 +62,13 @@ Current components:
   `N=55`, `N=88`, `N=105`, `N=120`, and the `N=143` swaps.  In the `100..250`
   dashboard it also removes the later BLZ survivors `154`, `168`, `210`, and
   `220`.
+- `gamma_2alpha_boundary.py`: Beeson Lemma 11.14 arithmetic enumerator for the
+  isosceles `gamma=2alpha` branch, now also reporting the conservative
+  refinement from the base endpoint lemma and Beeson Lemma 11.17.
+- `gamma_2alpha_endpoint_automaton.py`: diagnostic endpoint automaton for
+  `gamma=2alpha`; its `angle` mode preserves the open boundary controls, while
+  the stricter `fan` mode is not used as a proof because non-strict tilings can
+  have shifted side contacts.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation
