@@ -7132,24 +7132,8 @@ Consequently, if the large-excess pair-barrier case remains after Lemma
 8.6g', then the obstruction is no longer merely finite and local. It must
 produce a global partition of \(A\) into two Sidon-like certificate-free
 classes, with each class carrying its own independent reflection-recurrence
-inside \(A\). A final proof may therefore attack either the existence of
-such a two-color recurrent structure or the possibility that genuine pair
-holes generate it.
-
-Combining this with Corollary 8.6j-3 gives the following sharper necessary
-condition. In a genuine counterexample satisfying the persistent
-list-colorable pair-barrier hypothesis, the coloring
-\[
-A=C_0\cup C_1
-\]
-from Lemma 8.6g'' must have mixed two-sum spikes:
-\[
-\max_{n\le X}|\{(c_0,c_1)\in C_0\times C_1:c_0+c_1=n\}|
-\]
-is not \(o(A(X))\). Otherwise the two certificate-free colors would satisfy
-Corollary 8.6j-3, giving the desired infinite deletion. Thus the surviving
-large-excess pair obstruction must combine separate recurrence, Sidon-like
-same-color sparsity, and high-multiplicity mixed sums.
+inside \(A\). Lemmas 8.6g''' and 8.6g'''' show that this global structure
+is impossible in the integers.
 
 ## Lemma 8.6g''': Recurrent certificate-free colors reflect almost across colors
 
