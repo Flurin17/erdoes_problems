@@ -195,10 +195,14 @@ Current components:
   `4899` local-cover hits, `4077` corner-label violations, and `1024`
   non-simple residual graphs. Through generated shell `100000`, the cumulative
   counts are `52430` local-cover hits, `28326` corner-label violations, and
-  `19244` non-simple residual graphs. Through generated shell `200000`, lazy
-  local-cover mode gives cumulative counts `139104`, `34292`, and `26604`.
-  Through generated shell `500000`, the cumulative counts are `358826`,
-  `61534`, and `79640`. The full mixed-`6` `N=63` coarse pass is now exact:
+  `19244` non-simple residual graphs. A refined replay of that same prefix,
+  stored under `results/n63_mixed6_refined_chunk_0000000_0100000.json`,
+  splits the `47570` outside-cover shells as `28326` corner-label violations,
+  `3332` pinch-sector obstructions, and `15912` split-corner-label
+  obstructions. Through generated shell `200000`, lazy local-cover mode gives
+  cumulative coarse counts `139104`, `34292`, and `26604`. Through generated
+  shell `500000`, the cumulative coarse counts are `358826`, `61534`, and
+  `79640`. The full mixed-`6` `N=63` coarse pass is now exact:
   `940800` local-cover hits, `207888` residual corner-label violations, and
   `207952` non-simple residual graphs.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for

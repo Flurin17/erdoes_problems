@@ -2200,7 +2200,19 @@ corner-label-violation:          207,888
 not-simple-cycle:                207,952
 ```
 
-This exactly agrees with the independent count-only local-overlap cover. It
+A recorded refined replay of the first `100000` generated shells in this same
+stratum is stored as
+`EXPERIMENTS/results/n63_mixed6_refined_chunk_0000000_0100000.json`. It has
+`52430` local-cover hits and splits the `47570` outside-cover shells as
+
+```text
+corner-label-violation:          28,326
+pinch-sector-obstruction:         3,332
+split-corner-label-obstruction:  15,912
+```
+
+This exactly agrees with the independent count-only local-overlap cover and the
+earlier coarse prefix totals. It
 does not yet close the mixed-`6` stratum because the non-simple residual graphs
 still need the refined pinch-sector/split-component obstruction rather than
 only the coarse residual graph status.

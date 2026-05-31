@@ -130,9 +130,13 @@ The tile triangle is not required to be similar to the large triangle unless exp
   local-cover hits, `4077` corner-label violations, and `1024` non-simple
   residual graphs. Through generated shell `100000`, the cumulative exact
   coarse prefix counts are `52430` local-cover hits, `28326` corner-label
-  violations, and `19244` non-simple residual graphs. Through generated shell
-  `200000`, lazy local-cover mode gives cumulative counts `139104`, `34292`,
-  and `26604`. Through generated shell `500000`, the cumulative exact prefix
+  violations, and `19244` non-simple residual graphs. The recorded refined
+  replay of that same first `100000` generated shells has `52430` local-cover
+  hits and splits the `47570` outside-cover shells as `28326` corner-label
+  violations, `3332` pinch-sector obstructions, and `15912`
+  split-corner-label obstructions. Through generated shell `200000`, lazy
+  local-cover mode gives cumulative coarse counts `139104`, `34292`, and
+  `26604`. Through generated shell `500000`, the cumulative exact coarse prefix
   counts are `358826`, `61534`, and `79640`. The full mixed-`6` `63` coarse
   pass is now exact: `940800` local-cover hits, `207888` residual corner-label
   violations, and `207952` non-simple residual graphs; the non-simple half
