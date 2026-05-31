@@ -162,6 +162,13 @@ residue classes \(S\pmod m\), then \(kS=\mathbb Z/m\mathbb Z\), hence
 one residue class leaves enough representatives to solve every large
 \((k+1)\)-term residue prescription.
 
+Corollary 7.1b extends this to any basis containing an eventually periodic
+order-\(k\) subbasis \(P\). Delete the infinite sparse set inside \(P\)
+given by Proposition 7.1; the remaining \(A\setminus B\) contains
+\(P\setminus B\), so it is also order \(k+1\). Hence any counterexample to
+the broad deletion theorem must avoid even a structured eventually periodic
+subbasis of the original order.
+
 However, Example 7.2 shows that arbitrary finite deletion is not stable at
 order \(k+1\). A finite accelerator can lower the order of an eventually
 periodic basis from \(m-1\) to about \(m/2\), so deleting that single

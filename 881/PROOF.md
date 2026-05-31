@@ -1291,6 +1291,33 @@ n\in(k+1)C.
 There are finitely many residue classes \(r\), hence \(C\) is an
 order-\((k+1)\) asymptotic basis. \(\square\)
 
+## Corollary 7.1b: Bases with eventually periodic subbases
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\). Suppose
+there is an eventually periodic subset
+\[
+P\subseteq A
+\]
+which is itself an asymptotic basis of order \(k\). Then there is an
+infinite \(B\subset A\) such that \(A\setminus B\) is an asymptotic basis of
+order \(k+1\).
+
+Proof. Apply Proposition 7.1 to \(P\). There is an infinite
+\[
+B\subset P
+\]
+such that \(P\setminus B\) is an order-\((k+1)\) basis. Since
+\[
+P\setminus B\subseteq A\setminus B,
+\]
+the larger set \(A\setminus B\) is also an order-\((k+1)\) basis.
+\(\square\)
+
+Thus any counterexample to the broad deletion theorem cannot contain an
+eventually periodic order-\(k\) subbasis. In particular, the obstruction is
+not merely the presence of nonperiodic or sparse extra elements; it must be
+built into every order-\(k\) subbasis of \(A\).
+
 ## Example 7.2: Finite deletion can raise the order by an arbitrary amount
 
 Finite-deletion stability at order \(k+1\) is false, even for eventually
@@ -4027,6 +4054,8 @@ domination for many old elements.
   strongly minimal order-2 basis.
 * Proposition 7.1 proves the desired conclusion for all eventually periodic
   asymptotic bases.
+* Corollary 7.1b extends this to every basis containing an eventually
+  periodic order-\(k\) subbasis.
 * Lemma 8 gives a necessary condition for one-point deletion to fail at
   order 3 in an order-2 basis.
 * Corollary 8.1 says infinitely many such failures force finite
