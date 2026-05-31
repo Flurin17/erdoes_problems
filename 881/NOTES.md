@@ -1479,7 +1479,10 @@ a=c_1+c_2-c\in A.
 \]
 So a two-color certificate-free order-2 basis would need mixed sums
 separated from both same-color sumsets, in addition to the Sidon-type
-sparsity of each color.
+sparsity of each color. The two same-color sumsets need not be disjoint
+from each other: \(\{1,6\}\cup\{2,5\}\) has certificate-free colors but
+\(1+6=2+5\). Thus the usable separation is mixed-versus-same, not a full
+three-way partition of \(2A\).
 
 This also forces any certificate-free counterexample to have mixed-color
 representation spikes. If

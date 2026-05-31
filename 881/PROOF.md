@@ -5463,6 +5463,46 @@ with the critical \(A(X)\asymp\sqrt X\) counting scale, so it is not by
 itself a contradiction, but it is stronger than the Sidon bound and rules
 out many naive cross-sum constructions.
 
+## Warning 8.6j-2: Same-color supports need not be disjoint
+
+Lemma 8.6j' says that mixed sums are disjoint from both same-color
+sumsets. It does not imply that the two same-color sumsets are disjoint
+from each other.
+
+For example, let
+\[
+C=\{1,6\},\qquad D=\{2,5\},\qquad A=C\cup D.
+\]
+Both \(C\) and \(D\) are certificate-free relative to \(A\): the only
+nontrivial certificate candidates in \(C\) are
+\[
+6+6-1=11,\qquad 1+1-6=-4,
+\]
+and the candidates in \(D\) are
+\[
+5+5-2=8,\qquad 2+2-5=-1,
+\]
+none of which belongs to \(A\). But
+\[
+1+6=2+5.
+\]
+Thus
+\[
+(C+C)\cap(D+D)\ne\varnothing.
+\]
+
+Therefore the correct support separation for two certificate-free colors is
+only
+\[
+(C+D)\cap(C+C)=\varnothing,\qquad (C+D)\cap(D+D)=\varnothing.
+\]
+The same-color supports may overlap. In a certificate-free order-2 basis,
+the mixed support is separated from the same-color support, but the
+same-color part can be covered redundantly by both colors. The
+representation-spike criterion still applies because each color is Sidon:
+same-color sums contribute only \(O(1)\) representations per color, so any
+large total multiplicity must come from mixed sums.
+
 ## Corollary 8.6j-3: Certificate-free counterexamples need mixed spikes
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), and
@@ -6536,6 +6576,39 @@ w_b-t-b=d_b-t\in(k-1)A.
 \]
 This proves (1). When \(k=2\), (1) is finite reflection-recurrence in
 \(A\), so Theorem 8.2 gives the final assertion. \(\square\)
+
+## Warning 10.2b': Lower-sumset recurrence can be vacuous
+
+For \(k>2\), the conclusion
+\[
+d-T\subseteq(k-1)A
+\]
+does not by itself contain usable reflection information about \(A\). The
+simple basis
+\[
+A=\{1\}\cup2\mathbb N
+\]
+already shows this for \(k=3\). Here \(A\) is an order-2, hence order-3,
+asymptotic basis, and
+\[
+2A
+\]
+is cofinite. Therefore every finite \(T\subset A\) has
+\[
+d-T\subseteq2A
+\]
+for all sufficiently large \(d\). But \(A\) is not finitely
+reflection-recurrent: the two-point set \(\{1,2\}\) has no large center
+\(m\) with
+\[
+m-1,\ m-2\in A,
+\]
+because one of these two numbers is an odd integer larger than \(1\).
+
+Thus the higher-order singleton and delayed-threshold lemmas need an
+additional mechanism converting lower-sumset mirrors into actual \(A\)
+mirrors, or a new repair scheme that can spend lower-sumset mirrors without
+exceeding the order-\((k+1)\) budget.
 
 ## Warning 10.2a: The \(k=3\) one-point split
 
@@ -8738,6 +8811,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   thin order-2 bases.
 * Lemma 8.6j' strengthens this: each certificate-free color has its
   same-color sums disjoint from its mixed sums with the rest of \(A\).
+* Warning 8.6j-2 records the limit of that separation: in two colors, the
+  two same-color sumsets may still overlap.
 * Corollary 8.6j-3 connects certificate-free colorings back to the
   representation-count criteria: if all mixed-color two-sum counts are
   sublinear relative to \(A(X)\), Corollary 3.4c gives a good deletion.
@@ -8771,6 +8846,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 10.2b proves the delayed-threshold analogue: late one-point
   deletions force full recurrence into \((k-1)A\), which again becomes
   usable reflection-recurrence only for \(k=2\).
+* Warning 10.2b' shows lower-sumset recurrence can be vacuous for \(k>2\):
+  \((k-1)A\) may already be cofinite while \(A\) has no finite reflection
+  recurrence.
 * Lemma 10.1 records the finite-vertex-cover obstruction for collective
   holes after finite deletions.
 * Lemma 10.3 strengthens this for all orders: a finite
