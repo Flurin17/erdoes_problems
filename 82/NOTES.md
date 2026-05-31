@@ -1262,3 +1262,9 @@ source of growth beyond Ramsey.
   whose total is `3(q+2)` but which has no legal rectangle of full area
   `q+2=7`; it still packs in four rectangles.  `PROOF.md` now records these
   as warnings for the multipartite arithmetic theorem.
+- 2026-05-31: Added `rectangle_cover.py` for the rectangle-only version of the
+  complete-multipartite arithmetic theorem.  Exhaustive integer-partition
+  checks found no rectangle-cover counterexample for `(bins,cap,max_total)`
+  equal to `(5,7,25)` after `9295` vectors and `(6,8,36)` after `99132`
+  vectors.  The full `(7,9,49)` sweep is slower than the current Python
+  recursion and was killed after about a minute without output.

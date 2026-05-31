@@ -8,6 +8,10 @@ Computational checks and generated data for Erdos Problem 82.
   to regular induced subgraphs.
 - `ramsey_sample.py`: compares largest homogeneous and regular induced
   subgraphs in random samples.
+- `rectangle_cover.py`: exact checker for the Ferrers rectangle-covering
+  formulation of complete multipartite capped modular packing, where one
+  rectangle `(r^h)` subtracts `r` from `h` classes and has area at most the
+  cap.
 - `equitable_partition.py`: computes color-refinement/equitable-partition
   cells and the regular-subgraph certificate from the largest cell.
 - `degree_spread.py`: filters or samples graphs with bounded degree spread or
