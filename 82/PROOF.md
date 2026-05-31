@@ -4675,6 +4675,36 @@ both `G` and its complement have minimum degree larger than a polynomial in
 `s`.  The hard bounded-spread regime is therefore medium-density and
 near-regular, consistent with the adjacent-degree random samples.
 
+There is also a structural reason why bounded spread alone does not make an
+equal-degree class transparent.
+
+**Lemma 11B: Compensated Double Spread-One Template.**  Let `F` be a graph on
+`m` vertices `1,...,m` with degrees `d_i`.  Suppose there is a bipartite graph
+`X` with left side `A={a_i}` and right side `B={b_i}` such that
+
+```text
+deg_X(a_i)=m-1-d_i,
+deg_X(b_i)=d_i+epsilon_i,        epsilon_i in {0,1}.
+```
+
+Construct a graph `G` on `A union B` by putting a copy of `F` on `A`, a copy
+of `complement(F)` on `B`, and the cross graph `X` between `A` and `B`.
+Then every vertex in `A` has degree `m-1`, and every vertex `b_i in B` has
+degree `m-1+epsilon_i`.  Hence `G` has degree spread at most `1`.
+
+Proof.  In `A`, vertex `a_i` has `d_i` neighbors from `F` and
+`m-1-d_i` cross-neighbors in `X`, so its total degree is `m-1`.  In `B`,
+vertex `b_i` has `m-1-d_i` neighbors inside `complement(F)` and
+`d_i+epsilon_i` cross-neighbors, so its total degree is
+`m-1+epsilon_i`.  QED.
+
+This template embeds an arbitrary graph `F` as half of a spread-one graph.
+Thus a bounded-spread proof cannot simply take a large exact-degree side and
+argue from its internal graph alone; the other side can compensate the degree
+variation almost arbitrarily.  The remaining hope for bounded spread is a
+global argument using both sides or the regular subgraphs created by the
+compensating cross graph.
+
 ## Lemma 12: Minimal Repeated-Degree Host Obstruction
 
 Let `H` be an induced subgraph of `G` containing a set

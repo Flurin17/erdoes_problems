@@ -1909,3 +1909,15 @@ source of growth beyond Ramsey.
   any counterexample to an `n/poly(s)` bounded-spread theorem must be
   medium-density with both graph and complement minimum degree polynomially
   larger than `s`.
+- 2026-05-31: Bounded-spread subagent audit found no proof of
+  `Phi(n,s)>=n/poly(s)` and no counterexample to the weak `n/(s+2)` scale, but
+  confirmed that `Phi(n,1)>=n/2` is false using known spread-`1` masks on
+  `n=12` and `n=14`.  It also identified the compensated-double template:
+  for any graph `F` with degrees `d_i`, put `F` on one side, `complement(F)`
+  on the other, and choose cross-degrees `m-1-d_i` on the first side and
+  `d_i+epsilon_i` on the second.  When such a bipartite cross graph exists,
+  the resulting graph has degree spread at most `1`.  Thus bounded-spread
+  proofs cannot reason only inside a large equal-degree side; the
+  compensating side can hide arbitrary internal variation.  Verified
+  spread-`1` examples from this template reached regular orders
+  `5,6,8,9,10` on `n=12,14,16,18,20`.
