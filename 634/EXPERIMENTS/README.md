@@ -74,13 +74,12 @@ Current components:
   boundary `c`-parity, and Beeson Lemma 11.17.
 - `gamma_2alpha_endpoint_automaton.py`: diagnostic endpoint automaton for
   `gamma=2alpha`; its `angle` mode preserves the open boundary controls, while
-  the stricter `fan` mode is promoted only for actual outer-boundary
-  transitions using the half-plane fan lemma in `PROOF.md`. It closes the
-  remaining `N=63` and `N=99` patterns.
+  the stricter `fan` mode is only a side-label diagnostic until boundary
+  overhangs along interior rays are ruled out.
 - `gamma_2alpha_overhang_components.py`: diagnostic enumerator for primitive
   equal-length overhang components such as `a+c=kb`; these matter for interior
-  interfaces and were used to calibrate why the `N=63`/`N=99` fan proof must be
-  stated only for outer-boundary transitions.
+  interfaces and calibrate the missing no-overhang lemma needed before the
+  `N=63`/`N=99` fan diagnostic can become a proof.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

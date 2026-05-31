@@ -119,14 +119,12 @@ def right_tile_isosceles_status(n: int) -> str:
 def gamma_2alpha_status(n: int) -> str:
     if is_squarefree(n):
         return "ruled out because recorded counts are not squarefree"
-    if n in {63, 99}:
-        return "ruled out by outer-boundary fan obstruction"
     boundary_candidates = gamma_2alpha_survivors(n)
     refined = gamma_2alpha_refined_survivors(n)
     if not boundary_candidates:
         return "ruled out by Lemma 11.14 boundary-arithmetic enumeration"
     if not refined:
-        return "ruled out by base endpoint lemma plus Beeson Lemma 11.17"
+        return "ruled out by base endpoint lemma, c-parity, and Beeson Lemma 11.17"
     preview = ", ".join(
         f"sides={row.candidate.tile}, X={row.candidate.x}, Y={row.candidate.y}, "
         f"X survivors={gamma_2alpha_viable_x(row.candidate)}, "
@@ -169,8 +167,6 @@ def workspace_negative_reason(n: int) -> str | None:
         return "negative by the 57/62 composite benchmark in PROOF.md"
     if n == 60:
         return "negative by the N=60 gamma=2alpha benchmark in PROOF.md"
-    if n in {63, 99}:
-        return "negative by the 63/99 gamma=2alpha outer-boundary fan benchmark in PROOF.md"
     if n in {76, 92}:
         return "negative by the 76/92 gamma=2alpha benchmark in PROOF.md"
     if n in {66, 69, 70}:

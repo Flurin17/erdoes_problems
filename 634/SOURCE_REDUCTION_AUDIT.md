@@ -167,9 +167,10 @@ Current evidence:
   remove the branch for `60` if accepted as a black-box computation. The local
   scripts now remove `60`, `76`, and `92` by the two-`c` boundary-edge lemma,
   base endpoint lemma, boundary `c`-parity, and Beeson Lemma 11.17. They also
-  reduce `63` and `99` to one final boundary pattern each and remove those by
-  the outer-boundary fan obstruction recorded in `PROOF.md`. The scripts also
-  reproduce the stronger fact that `56` has no Lemma 11.14
+  reduce `63` and `99` to one final boundary pattern each. The side-label fan
+  diagnostic removes those patterns only under a no-overhang assumption that is
+  not yet proved. The scripts also reproduce the stronger fact that `56` has no
+  Lemma 11.14
   boundary-arithmetic candidate.
 - `gamma=2pi/3` has a local boundary-transition obstruction.
 - The `gamma=2pi/3` arithmetic filter is encoded from Lemma 12.9 and Theorem
@@ -178,8 +179,9 @@ Current evidence:
 Impact:
 
 - The right-tile and `gamma=2alpha` rows are now source-backed enough for
-  small-value obstructions such as `N=22`, `N=56`, `N=60`, `N=63`, `N=76`,
-  `N=92`, and `N=99`.
+  small-value obstructions such as `N=22`, `N=56`, `N=60`, `N=76`, and `N=92`.
+  The `N=63` and `N=99` `gamma=2alpha` rows remain open pending a no-overhang
+  boundary-fan lemma or a different obstruction.
   The remaining isosceles gap includes exact composite completeness in the
   `gamma=2pi/3` and `3alpha+2beta=pi` rows.
 
@@ -261,22 +263,22 @@ Impact:
 
 ## Current Small-Value Status
 
-No unresolved values below `100` remain in the current workspace ledger. The
-values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-`55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
-`88`, `91`, `92`, `93`, `94`, `95`, and `99` formerly appeared in the
-composite gap list, but are now classified negative in `PROOF.md` after
-writing out the source-row arithmetic eliminations. The last two were the
-`gamma=2alpha` boundary-arithmetic survivors:
+Two unresolved values below `100` remain in the current workspace ledger:
+`63` and `99`. The values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`,
+`39`, `42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `76`,
+`78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, and `95` formerly appeared in
+the composite gap list, but are now classified negative in `PROOF.md` after
+writing out the source-row arithmetic eliminations. The two open rows have
+these `gamma=2alpha` boundary-arithmetic survivors:
 
 ```text
 63: tile=(9,7,12), X=2a+3b+2c, Y=3a+3b+3c.
 99: tile=(25,11,30), X=2a+5b+2c, Y=3a+3b+3c.
 ```
 
-They are removed by the local outer-boundary fan obstruction recorded in
-`PROOF.md`. Primitive equal-length overhangs still matter for interior
-interfaces, but they do not rescue a transition point on the outer side.
+The side-label fan diagnostic has no witness for either pattern, but primitive
+equal-length overhangs such as `a+c=kb` may emanate along interior rays from an
+outer-boundary transition. That no-overhang case is the current proof gap.
 
 In the range `100..250`, after the generic `3alpha+2beta`
 boundary-integrality filter and the non-isosceles `gamma=2pi/3`
@@ -291,9 +293,9 @@ The boundary-order/nonfit obstruction now removes that branch for `132`, `156`,
 `175`, `189`, `198`, `204`, `224`, and `228`. It preserves the known positive
 `48` regression case. The resonant `240` branch survivor, where `c-a=12=3a`,
 is removed by a separate overhang endpoint argument. Several values in this
-range remain open through `gamma=2alpha`
-boundary-arithmetic survivors or through source-reduction completeness gaps;
-this branch refinement is not a whole-count classification.
+range remain open through exact equilateral/source-reduction completeness gaps
+and separate `gamma=2alpha` boundary-arithmetic survivors; this branch
+refinement is not a whole-count classification.
 
 ## Beeson IV Base-Corner Audit
 

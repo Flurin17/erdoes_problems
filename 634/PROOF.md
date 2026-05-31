@@ -1042,7 +1042,6 @@ This table records only values/families classified by the current proof file.
 | `57` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `60` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` c-edge/base endpoint/Lemma 11.17 obstruction |
 | `62` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
-| `63` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` outer-boundary fan obstruction |
 | `66` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `69` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `70` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
@@ -1056,7 +1055,6 @@ This table records only values/families classified by the current proof file.
 | `93` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `94` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `95` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
-| `99` | negative in this workspace | published source case split plus exact arithmetic and local `gamma=2alpha` outer-boundary fan obstruction |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1077,7 +1075,7 @@ BLZ Problem #633 outer-triangle classes to the #634 case filters below.
 | similar/reptile | classified by Snover-Waiveris-Williams | none for this subcase |
 | commensurable-angle source table | closed by Beeson's NoSevenTiling Table 3 and Theorem 3, with forms `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | none for this branch |
 | right-tile isosceles | source-backed count forms from Beeson Theorem 7.8 | none for small-value obstructions using these forms |
-| isosceles `gamma=2alpha` | source-backed non-squarefree obstruction from Beeson Theorem 11.7; Beeson Lemma 11.14/Theorem 11.18 give a finite boundary enumeration and state that after `45` the next left-open values are `63,64,72` | complete positive composite formula and per-`N` enumeration certificates not reconstructed |
+| isosceles `gamma=2alpha` | source-backed non-squarefree obstruction from Beeson Theorem 11.7; Beeson Lemma 11.14/Theorem 11.18 give a finite boundary enumeration and state that after `45` the next left-open values are `63,64,72`; local base endpoint, `c`-parity, and Lemma 11.17 filters are encoded | non-edge-to-edge overhangs at outer-boundary fans remain the gap for `63` and `99` |
 | isosceles `gamma=2pi/3` | ruled out in the rational nondegenerate case by boundary-transition lemma | audit interaction with every source-reduced equilateral/degenerate exception |
 | `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected boundary-star eliminations and a generic boundary-integrality filter for supported outer shapes | isosceles-`alpha+beta` composite survivors remain after Beeson's stronger source filter; not a complete composite classification |
 | non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; endpoint boundary-star eliminations for `21`, `30`, `55`, `88`, `105`, `120`, `143`, and the later `100..250` BLZ survivors | no explicit encoded survivor remains below `250`; a general composite obstruction is not yet proved |
@@ -1503,7 +1501,7 @@ N=56: 0 gamma=2alpha boundary candidate(s), 0 after boundary-count obstruction
 Therefore `N=56` has no survivor in any source case and is classified negative
 in this workspace.
 
-### Local `gamma=2alpha` Base Endpoint Lemma
+### Local `gamma=2alpha` Base Endpoint Lemma And Fan Gap
 
 In the isosceles `gamma=2alpha` branch, the tile angles satisfy
 
@@ -1532,6 +1530,35 @@ straight boundary point, every subsequent edge must also end at `gamma`. The
 last base edge then cannot present the required `alpha` endpoint at the right
 base corner. The case `v=0` is identical with `c` in place of `b` and uses the
 forbidden `beta+beta` straight boundary point.
+
+For `v>0` and `w>0`, the base necessarily has a transition between a `c` edge
+and an `a`- or `b`-edge. At a transition point in the relative interior of a
+straight outer side, no tile side can pass through the point along the outer
+line: a non-tangent side would leave the tiled triangle, and a tangent
+pass-through would overlap the adjacent boundary intervals. Thus the visible
+angles at the point form a half-plane angle fan.
+
+The stricter side-label fan table used by
+`gamma_2alpha_endpoint_automaton.py --mode fan` is only diagnostic at present.
+In a non-edge-to-edge tiling, an interior ray from that boundary point may be
+covered by unequal tile sides on its two sides, with the overhang resolved
+farther inside. The following side-label transitions would be valid if such
+overhangs were ruled out at the boundary fan:
+
+```text
+a:beta->gamma   -> a:beta->gamma
+a:gamma->beta   -> a:gamma->beta or b:alpha->gamma
+b:alpha->gamma  -> b:alpha->gamma
+b:gamma->alpha  -> a:beta->gamma or b:gamma->alpha
+c:alpha->beta   -> c:alpha->beta
+c:beta->alpha   -> c:beta->alpha
+```
+
+This table would forbid a `c` edge from transitioning to an `a`- or `b`-edge,
+but it is not yet a proof-level obstruction. Primitive equal-length overhangs
+such as `a+c=kb` occur in the relevant arithmetic rows, so the missing lemma is
+to prove that such overhangs cannot emanate from an outer-boundary transition
+in the `gamma=2alpha` branch.
 
 Two further safe refinements are used only when their hypotheses are checked.
 Beeson's older boundary `c`-edge lemma says that if `gamma > pi/2`,
@@ -1564,8 +1591,8 @@ Y representations: 16b, a+9b+c, 2a+2b+2c.
 ```
 
 The two `Y` representations with one or two `c` edges are removed by Beeson
-Lemma 11.17. The zero-`c` representation `Y=16b` is removed by the local
-`gamma=2alpha` base endpoint lemma above.
+Lemma 11.17. The zero-`c` representation `Y=16b` is removed by the base-endpoint
+lemma above.
 
 Therefore `N=60` has no survivor in any source case and is classified negative
 in this workspace.
@@ -1657,9 +1684,9 @@ N=92: tile=(121,23,132), X=506=a+11b+c,
 ```
 
 In both rows the equal side has exactly one `c` edge. Beeson Lemma 11.17
-therefore eliminates the base representations with one or two `c` edges, and
+therefore eliminates the base representations with one or two `c` edges, while
 the local `gamma=2alpha` base endpoint lemma eliminates the all-`b`
-representations `20b` and `24b`.
+representations.
 
 Therefore `N=76` and `N=92` have no survivor in any source case and are
 classified negative in this workspace.
@@ -1674,53 +1701,20 @@ exact non-isosceles `gamma=2pi/3` filters give no candidates. In the
 `3alpha+2beta=pi` branch, the stronger isosceles-`alpha+beta` filter and
 boundary-integrality checks remove all raw roots.
 
-The only remaining branch is `gamma=2alpha`. After the two-`c` boundary-edge
-lemma, the base endpoint lemma, boundary `c`-parity, and Beeson Lemma 11.17,
-the boundary arithmetic has exactly one pattern for each value:
+The only remaining branch is `gamma=2alpha`. The two-`c` boundary-edge lemma,
+the base-endpoint lemma, boundary `c`-parity, and Beeson Lemma 11.17 reduce the
+boundary arithmetic to exactly one pattern for each value:
 
 ```text
 N=63: tile=(9,7,12),   X=2a+3b+2c on both equal sides, Y=3a+3b+3c.
 N=99: tile=(25,11,30), X=2a+5b+2c on both equal sides, Y=3a+3b+3c.
 ```
 
-These patterns are eliminated by the outer-boundary fan obstruction. Let `P` be
-a transition point in the relative interior of a straight outer side, and put
-that side on a line `L` with the tiled triangle locally contained in a closed
-half-plane `H`. If a tile side segment contained `P` in its relative interior,
-both small rays of that segment from `P` would have to lie in `H`; hence the
-segment must be tangent to `L`. A tangent segment through `P` lies on the outer
-side line and overlaps the boundary-side segments adjacent to `P` in
-positive-length intervals. Distinct tiles cannot overlap there, and if it is
-the same maximal boundary side then `P` was not a transition point. Thus every
-tile side incident to an outer-boundary transition has `P` as an endpoint, so
-the local star is a genuine half-plane fan. This is an outer-boundary statement
-only; primitive overhangs such as `a+c=kb` can still occur on interior
-interfaces with tiles on both sides.
-
-For both displayed tiles, `alpha/pi` is irrational: the cosines of `alpha` are
-`2/3` for `(9,7,12)` and `3/5` for `(25,11,30)`, and Niven's theorem excludes
-these rational cosines for rational multiples of `pi`. Therefore the straight
-outer-boundary angle star is exactly `alpha+beta+gamma` or `3alpha+beta`. The
-possible oriented boundary-side transitions are:
-
-```text
-a:beta->gamma   -> a:beta->gamma
-a:gamma->beta   -> a:gamma->beta or b:alpha->gamma
-b:alpha->gamma  -> b:alpha->gamma
-b:gamma->alpha  -> a:beta->gamma or b:gamma->alpha
-c:alpha->beta   -> c:alpha->beta
-c:beta->alpha   -> c:beta->alpha
-```
-
-Thus a `c` boundary edge cannot be followed on the same outer side by an `a`-
-or `b`-edge in any actual outer-boundary fan. Every outer side in both
-displayed patterns mixes `c` edges with non-`c` edges, so any ordering would
-contain a forbidden transition between a `c` edge and an `a`- or `b`-edge. The
-endpoint automaton confirms that the full three-side boundary has zero fan
-witnesses for both patterns.
-
-Therefore `N=63` and `N=99` have no survivor in any source case and are
-classified negative in this workspace.
+The side-label fan automaton has zero witnesses for both patterns, but that is
+not a proof-level obstruction until the boundary-overhang gap in the preceding
+section is closed. Therefore `N=63` and `N=99` remain open in this workspace,
+with exactly the displayed `gamma=2alpha` boundary patterns as the current
+benchmark survivors.
 
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
@@ -1766,8 +1760,8 @@ workspace.
 - The first composite negative values beyond Beeson's `7` and `11`
   obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
   `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`,
-  `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`, `88`,
-  `91`, `92`, `93`, `94`, `95`, and `99`.
+  `57`, `60`, `62`, `66`, `69`, `70`, `76`, `78`, `86`, `87`, `88`,
+  `91`, `92`, `93`, `94`, and `95`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1789,9 +1783,8 @@ workspace.
   obstruction with the other source filters to classify `21` and `30`
   negative.
 - The current below-`100` gap scan with primitive equilateral side bound `250`
-  has no remaining open composite rows after the final `63` and `99`
-  `gamma=2alpha` patterns are eliminated by the outer-boundary fan obstruction.
-  Those final patterns were:
+  has two remaining open composite rows, `63` and `99`. All source rows except
+  `gamma=2alpha` are eliminated, and the surviving boundary patterns are:
 
   ```text
   N=63: X=2a+3b+2c, Y=3a+3b+3c for tile (9,7,12).
@@ -1801,17 +1794,20 @@ workspace.
   The same scan formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
   `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`, `57`, `60`, `62`, `66`,
   `69`, `70`, `76`, `78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, and
-  `95`; `63` and `99` were the last two rows in this below-`100` batch.
+  `95`; these are now classified negative, while `63` and `99` are the next
+  benchmark open rows.
 - For the `gamma=2alpha` branch, Beeson records a finite boundary-enumeration
-  algorithm and says that after the possible `N=45` boundary tiling the next
-  values left open are `63,64,72`. The local base endpoint lemma above now
-  replaces the previous black-box use of this computation for `N=60`.
+  algorithm and says that after the `N=45` threshold row the next values left
+  open are `63,64,72`. The local base endpoint lemma removes the no-`b` and
+  no-`c` base representations, but the side-label fan obstruction still needs a
+  no-overhang lemma before it can remove the surviving `63` and `99` patterns.
 - In the range `100..250`, the former `3alpha+2beta` isosceles-`alpha+beta`
   survivor records at `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`,
   and `240` are removed by the branch lemma below. The resonant `240` record
   needs the special overhang-endpoint argument because `c-a=12=3a`. This is
-  only a branch refinement: several of these counts still have separate
-  `gamma=2alpha` boundary-arithmetic survivors.
+  only a branch refinement; some of these counts still have separate
+  `gamma=2alpha` boundary-arithmetic survivors until the no-overhang fan gap is
+  closed.
 - Zhang's conjectural exactness statements are not proved here.
 - For `19`, all source-reduced cases are now ruled out in this workspace:
   similar/reptile, commensurable-angle, equilateral-outer, all isosceles

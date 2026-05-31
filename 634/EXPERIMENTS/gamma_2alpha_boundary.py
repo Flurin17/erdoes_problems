@@ -256,9 +256,10 @@ def boundary_c_parity_obstructed(candidate: BoundaryCandidate, y_rep: Triple) ->
 def refined_surviving_y_representations(candidate: BoundaryCandidate) -> tuple[Triple, ...]:
     """Surviving base reps after the local base lemma and Lemma 11.17.
 
-    This is intentionally conservative.  It is a proof-level filter for rows
-    with a unique one-`c` equal-side representation, but it leaves the hard
-    `N=63` and `N=99` two-`c` equal-side cases open.
+    This intentionally does not use the stricter side-label fan automaton:
+    in non-edge-to-edge tilings, overhangs can emanate from an outer-boundary
+    transition along interior rays.  The fan automaton remains diagnostic until
+    that overhang case is ruled out.
     """
     out: list[Triple] = []
     if not viable_x_representations(candidate) or not viable_free_x_representations(candidate):

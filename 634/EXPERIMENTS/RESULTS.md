@@ -16,10 +16,11 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`,
-`N=66`, `N=69`, `N=70`, `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`,
-`N=92`, `N=93`, `N=94`, `N=95`, and `N=99`
-certificates are now promoted in `PROOF.md`. In the `100..250`
+`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=66`,
+`N=69`, `N=70`, `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=92`,
+`N=93`, `N=94`, and `N=95`
+certificates are now promoted in `PROOF.md`; `63` and `99` remain open through
+final `gamma=2alpha` boundary patterns. In the `100..250`
 `3alpha+2beta` isosceles-`alpha+beta` branch, the boundary-order/nonfit check
 removes the former Section 11.4 survivor records at `132`, `156`, `175`,
 `189`, `198`, `204`, `224`, and `228`; a separate resonant overhang endpoint
@@ -291,7 +292,8 @@ PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 56
 The script reproduces Beeson Lemma 11.14's arithmetic enumeration. It returns
 zero `gamma=2alpha` candidates for `56`, `66`, `69`, and `70`; `60`, `63`,
 `64`, and `72` still have boundary-arithmetic candidates at this filter stage.
-The `60` and `63` candidates are closed by later local refinements below.
+The `60` candidate is closed by later local refinements below; `63` remains a
+benchmark open row.
 
 The exact equilateral scans and boundary-star checks were also rerun:
 
@@ -362,7 +364,7 @@ N=92: tile=(121,23,132), X=506=a+11b+c,
 ```
 
 Interpretation: the all-`b` base representations are eliminated by the local
-base endpoint lemma. The one- and two-`c` base representations are eliminated
+base endpoint lemma. The base representations mixing `b` and `c` are eliminated
 by Beeson Lemma 11.17 because the equal side has exactly one `c` edge in both
 rows. The endpoint automaton is a calibration check: in angle mode with the
 Beeson corner filter, it preserves the `45`, `63`, one `64` tile, and `72`
@@ -370,17 +372,17 @@ boundary controls instead of over-pruning them. The other source cases are
 empty or locally eliminated, so `PROOF.md` now treats `76` and `92` as
 classified negative.
 
-For the remaining `63` and `99` rows, the two-`c` boundary-edge lemma and
-boundary `c`-parity reduce the refined survivors to a single boundary pattern
-in each case:
+For `63` and `99`, the two-`c` boundary-edge lemma, boundary `c`-parity, base
+endpoint lemma, and Beeson Lemma 11.17 isolate a single boundary pattern in
+each case:
 
 ```text
 N=63: tile=(9,7,12),   X=2a+3b+2c on both equal sides, Y=3a+3b+3c.
 N=99: tile=(25,11,30), X=2a+5b+2c on both equal sides, Y=3a+3b+3c.
 ```
 
-The stricter endpoint fan automaton then gives no boundary witness for either
-final pattern:
+The stricter endpoint fan automaton gives no boundary witness for either final
+pattern under a side-label/no-overhang fan assumption:
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_endpoint_automaton.py 63 99 --mode fan --limit 20
@@ -393,15 +395,13 @@ N=99: 1 boundary-arithmetic candidate(s)
   tile=(25, 11, 30), X=165, Y=198: 0 endpoint witness(es) [fan]
 ```
 
-This fan check is promoted by the outer-boundary half-plane lemma recorded in
-`PROOF.md`: at a transition point on a straight outer side, a non-tangent tile
-side cannot pass through the boundary point without leaving the triangle, and a
-tangent pass-through would overlap the adjacent boundary side intervals. Thus
-the transition is a genuine fan even in a globally non-edge-to-edge tiling.
-The primitive equal-length overhangs `a+c=3b` for `N=63`, `a+c=5b` for `N=99`,
-and Beeson's calibration `a+c=2b` for `N=45` remain relevant to interior
-interfaces, but not to an outer-boundary transition. Therefore `PROOF.md`
-treats `63` and `99` as classified negative.
+This fan check is diagnostic only. The half-plane argument rules out a tile
+side passing through the transition point on the outer boundary line, but it
+does not by itself rule out unequal side-label overhangs along interior rays
+emanating from that point. The primitive equal-length overhangs `a+c=3b` for
+`N=63`, `a+c=5b` for `N=99`, and Beeson's calibration `a+c=2b` for `N=45`
+are exactly the local components that the missing no-overhang lemma must
+handle. Therefore `PROOF.md` keeps `63` and `99` open.
 
 ## `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` Exact Filter Certificate
 
@@ -462,8 +462,7 @@ The script includes:
 - elementary positive families;
 - Beeson negatives `7` and `11`;
 - workspace composite obstructions below `100` recorded in `PROOF.md`,
-  including the local `gamma=2alpha` closures for `60`, `63`, `76`, `92`, and
-  `99`;
+  including the local `gamma=2alpha` closures for `60`, `76`, and `92`;
 - workspace prime obstructions for primes `3 mod 4`;
 - recorded sufficient Beeson `3alpha+2beta=pi` constructions, including table
   entries `28,44,48,77,84` and the triquadratic sufficient values
@@ -573,19 +572,22 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,66,69,70,76,78,86,87,88,91,92,93,94,95:
   negative by workspace composite benchmarks
+63,99:
+  open with final gamma=2alpha boundary patterns
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
 the source reductions is still incomplete. After the `N=14`, `N=15`, `N=21`,
 `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`,
-`N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`, `N=66`, `N=69`, `N=70`,
+`N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=66`, `N=69`, `N=70`,
 `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=92`, `N=93`, `N=94`,
-`N=95`, and `N=99`
+and `N=95`
 source-row audits, the current open ledger removes those values from the
-scanner's unresolved list.
+scanner's unresolved list. `63` and `99` stay on the open ledger pending a
+no-overhang fan lemma or a different obstruction.
 
 ## Gamma=2alpha Primitive Overhang Calibration
 
@@ -847,9 +849,9 @@ overhang endpoint check still fails because the no-`b` base triples force a
 `b:gamma->alpha` equal-side endpoint, and that endpoint can only be preceded by
 another `b:gamma->alpha` edge. No equal-side triple is all `b`.
 
-This is a branch closure, not a whole-count classification. Many of these
-values still have `gamma=2alpha` boundary-arithmetic survivors in the current
-dashboard.
+This is a branch closure, not a whole-count classification. Separate
+`gamma=2alpha` boundary-arithmetic survivors remain in the dashboard until the
+no-overhang fan gap is closed or another obstruction is found.
 
 ## Zhang Constructive Families
 
