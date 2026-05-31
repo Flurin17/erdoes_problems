@@ -888,3 +888,11 @@ endpoint. The extended search still finds no third stage. This points to
 the same conclusion as the \(k=2\) pair-barrier work: pair barriers are the
 right finite shape, but simultaneous domination of all old elements becomes
 rapidly expensive.
+
+Propositions 13.1b-general and 13.1e now record the exact infinite
+criterion behind these searches. For any order \(k\), an iterable
+cross-stage pair construction would give an order-\(k\) basis \(A\) such
+that every infinite deletion fails at order \(k+1\), and hence fails at
+order \(k\) by padding. Thus the robust \(k=3\) booster-pair search is not
+just a local curiosity: it is a finite attempt at a complete negative
+answer.

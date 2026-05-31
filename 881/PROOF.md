@@ -2672,6 +2672,67 @@ witness, hence also an order-2-private witness. In the more general
 barrier form, order-2 minimality must be supplied separately or by a second
 unbounded barrier for two-term representations.
 
+## Proposition 13.1b-general: General finite-stage barrier criterion
+
+Let \(k\ge1\). Suppose there are increasing finite sets
+\[
+A_0\subset A_1\subset A_2\subset\cdots\subset\mathbb N
+\]
+and increasing endpoints \(N_s\to\infty\) such that, for all sufficiently
+large \(s\),
+\[
+[N_{s-1}+1,N_s]\subseteq kA_s
+\]
+and every element added after stage \(s\) is larger than \(N_s\). Let
+\[
+A=\bigcup_s A_s.
+\]
+Suppose further that there is a finite-uniform hypergraph
+\(\mathcal F\) on \(A\) and, for every \(F\in\mathcal F\), a stage
+\(s(F)\) and a witness \(w_F\) such that
+\[
+F\subset A_{s(F)},\qquad w_F\le N_{s(F)},\qquad
+w_F\notin(k+1)(A_{s(F)}\setminus F),
+\]
+and such that \(\mathcal F\) is an unbounded barrier with respect to
+\(F\mapsto w_F\): for every infinite \(B\subset A\) and every \(L\), there
+is
+\[
+F\in\mathcal F,\qquad F\subset B,\qquad w_F>L.
+\]
+
+Then \(A\) is an asymptotic basis of order \(k\), and for every infinite
+\(B\subset A\), the set \(A\setminus B\) is not an asymptotic basis of
+order \(k+1\). Consequently \(A\setminus B\) is not an asymptotic basis of
+order \(k\) either.
+
+Proof. The interval coverage gives the order-\(k\) basis property. Let
+\(B\subset A\) be infinite and \(L\) arbitrary. Choose
+\[
+F\in\mathcal F,\qquad F\subset B,\qquad w_F>L.
+\]
+All elements added after stage \(s(F)\) are larger than
+\(N_{s(F)}\ge w_F\), so no later element can appear in a positive
+\((k+1)\)-term representation of \(w_F\). Hence the local nonrepresentation
+persists:
+\[
+w_F\notin(k+1)(A\setminus F).
+\]
+Since \(F\subset B\), we have \(A\setminus B\subseteq A\setminus F\), and
+therefore
+\[
+w_F\notin(k+1)(A\setminus B).
+\]
+These missing witnesses are unbounded as \(L\to\infty\), so
+\(A\setminus B\) is not an order-\((k+1)\) basis. If \(A\setminus B\) were
+an order-\(k\) basis and nonempty, padding would make it an order-\((k+1)\)
+basis; if it is empty or finite, it is not an asymptotic basis. Thus it is
+not an order-\(k\) basis either. \(\square\)
+
+For \(k=2\), this is Proposition 13.1b. For \(k=3\), the robust-booster
+pair-stage searches are attempts to realize this criterion with
+\(\mathcal F\) consisting of cross-stage pairs.
+
 ## Lemma 13.1d: Positive-summand buffer needed for any staged construction
 
 Let \(A_s\subset\mathbb N\) be a finite stage, let \(m=\min A_s\), and let
@@ -2785,6 +2846,67 @@ a<b,\qquad a\in A_{s-1},\ b\in P_s,
 cannot have \(w_{s,a,b}-b\) bounded on every infinite tail. Persistent pair
 barriers must have unbounded top excess, or else tail reflection-recurrence
 would give a good deletion.
+
+## Proposition 13.1e: Cross-stage pairs in order \(k\)
+
+Let \(k\ge1\). Suppose there are increasing finite sets
+\[
+A_0\subset A_1\subset A_2\subset\cdots\subset\mathbb N
+\]
+and increasing endpoints \(N_s\to\infty\), and write
+\[
+P_s=A_s\setminus A_{s-1}.
+\]
+Assume that, for all sufficiently large \(s\):
+
+1. \(P_s\) is nonempty and every element of \(P_s\) is larger than
+   \(N_{s-1}\);
+2. the new interval is covered at order \(k\):
+   \[
+   [N_{s-1}+1,N_s]\subseteq kA_s;
+   \]
+3. every cross-stage pair has a local order-\((k+1)\)-private witness: for
+   every
+   \[
+   a\in A_{s-1},\qquad b\in P_s,
+   \]
+   there is
+   \[
+   w_{s,a,b}\in[N_{s-1}+1,N_s]
+   \]
+   such that
+   \[
+   w_{s,a,b}\notin(k+1)(A_s\setminus\{a,b\}).
+   \]
+
+Then
+\[
+A=\bigcup_s A_s
+\]
+is an asymptotic basis of order \(k\), and no infinite deletion
+\(B\subset A\) leaves \(A\setminus B\) an asymptotic basis of order
+\(k+1\). Hence \(A\) is strongly minimal under infinite deletions at order
+\(k\).
+
+Proof. This is a special case of Proposition 13.1b-general. Let
+\(\mathcal F\) be the family of cross-stage pairs \(\{a,b\}\) with
+\(a\in A_{s-1}\) and \(b\in P_s\) for sufficiently large \(s\), and assign
+the witness \(w_{s,a,b}\). Every infinite \(B\subset A\) meets infinitely
+many stage increments. Choose one element
+\[
+a\in B
+\]
+from a sufficiently large stage. Then \(B\) meets infinitely many later
+increments \(P_s\); for each such \(s\), choose \(b_s\in B\cap P_s\). The
+pairs \(\{a,b_s\}\) lie in \(\mathcal F\) and have witnesses
+\[
+w_{s,a,b_s}>N_{s-1}\to\infty.
+\]
+Thus \(\mathcal F\) is an unbounded barrier, and Proposition
+13.1b-general applies. \(\square\)
+
+The script `EXPERIMENTS/robust_booster_pair_stage_search.py` is a finite
+\(k=3\) search for this criterion with a retained booster.
 
 ## Example 13.2: An isolated endpoint stage
 
@@ -3134,11 +3256,17 @@ third extension.
 * Proposition 13.1b replaces singleton stage protection by an unbounded
   finite-barrier system, while noting that order-2 minimality then needs a
   separate proof.
+* Proposition 13.1b-general gives the same finite-stage barrier criterion
+  for every order \(k\), and observes that failure at order \(k+1\)
+  automatically gives strong infinite-deletion minimality at order \(k\).
 * Proposition 13.1c gives a concrete pair-barrier stage criterion: protecting
   every old-new pair would already produce a \(k=2\) counterexample.
 * Lemma 13.1d records the positive-summand buffer condition that every
   staged construction must satisfy before moving all future elements past
   the declared endpoint.
+* Proposition 13.1e extends the cross-stage pair criterion to every order
+  \(k\); the robust \(k=3\) booster-pair experiments are finite searches for
+  this criterion.
 * Example 13.2 gives an isolated stage satisfying the local conditions, but
   explains why endpoint witnesses do not provide the buffer needed for an
   iteration.
