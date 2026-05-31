@@ -3624,6 +3624,52 @@ independent.  More generally, the task for this slot multiset is to remove
 one `1`-modular part and one `2`-modular part so that the residual graph has
 the displayed mod-`4` cut-degree prescription.
 
+The following stronger formulation is the current cleanest first-lift target.
+
+**Candidate Lemma: Modular Odd-Cycle Transversal.**  Every even graph `G` has
+disjoint vertex sets `C,D` such that:
+
+1. every vertex of `G[C]` has degree congruent to `1 mod 4`;
+2. every vertex of `G[D]` has degree congruent to `2 mod 4`;
+3. `G[V(G)\(C union D)]` is bipartite.
+
+This candidate lemma implies that every even graph has a `4`-modular
+partition with residue signature contained in `(0,0,1,2)`.
+
+Proof of implication.  Let `A,B` be a bipartition of the residual graph
+`H=G[V(G)\(C union D)]`.  Then `A` and `B` are independent, hence
+zero-residue modulo `4`; by hypothesis `C` has residue `1` and `D` has
+residue `2`.  Therefore `A,B,C,D` form the required `(0,0,1,2)` slot
+partition.  Equivalently, Lemma 4I.6 applies because every residual edge is
+across the cut, so
+
+```text
+deg_H(v, opposite side) = deg_H(v)
+```
+
+for every residual vertex.  QED.
+
+The candidate is stronger than Lemma 4I.6 because it requires the residual
+cut congruence to hold by literal bipartiteness.  It is nevertheless
+consistent with the known first-lift hard examples: in the `13`-vertex
+connected example one certificate is
+
+```text
+A={3,11}, B={0,2,8}, C={4,5,6,9}, D={1,7,10,12},
+```
+
+and in the `14`-vertex connected hard mask one certificate is
+
+```text
+A={0,13}, B={2,5,6}, C={3,4,7,8}, D={1,9,10,11,12}.
+```
+
+The naive proof by greedily deleting chordless odd cycles is insufficient: an
+odd cycle itself is a valid residue-`2` set, but cross-edges among several
+deleted cycles change the internal degrees inside their union.  Any proof of
+the candidate lemma needs an absorption or switching step that controls these
+cross-edge contributions.
+
 ## Lemma 4I.6A: One-Defect Sufficient Condition
 
 Let `G` be an even graph.  Suppose there is a vertex set `D` such that

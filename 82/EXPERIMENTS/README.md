@@ -42,6 +42,10 @@ Computational checks and generated data for Erdos Problem 82.
   modular subsets by pivot vertex rather than enumerating all submasks.
   `--connected-only` filters full-modular samples to connected source graphs,
   which is useful for testing the connected coarse-lift reduction.
+- `modular_oct.py`: checks the modular odd-cycle-transversal candidate for
+  even graphs: colors `A,B` must be independent, color `C` must have internal
+  degree `1 mod 4`, and color `D` internal degree `2 mod 4`.  This stronger
+  certificate implies the `(0,0,1,2)` first-lift slot target.
 - `first_lift_chromatic.py`: tests the chromatic pruning lemma for the first
   dyadic lift by sampling or enumerating even graphs, filtering for
   `chi(G),chi(complement(G)) >= 5`, and then running the exact four-part
@@ -87,7 +91,7 @@ Computational checks and generated data for Erdos Problem 82.
 - `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus
-  residual-cut argument.
+  residual-cut argument.  `--sample-even` profiles random even graphs.
 - `universal_slots.py`: tests whether a fixed residue-slot multiset works for
   every even graph at the first lift, either exhaustively for small `n` or by
   random even-graph sampling at larger `n`.  Its exact-cover recursion indexes

@@ -1802,6 +1802,21 @@ source of growth beyond Ramsey.
   size `2` suffice, after which the residual splits into the two zero slots.
   The connected zero-residue obstruction mask `22114857535095` has nonzero
   cost `3` for the same slots.
+- 2026-05-31: Added `--sample-even` to `slot_profile.py`.  For `(0,0,1,2)`,
+  ten random even graphs on `12` vertices had nonzero-cost histogram
+  `2:1, 4:5, 5:4`; ten random even graphs on `14` vertices had histogram
+  `2:1, 3:2, 4:3, 5:2, 6:2`.  This supports a small-defect first-lift
+  heuristic at these sizes, but there is no proof or asymptotic bound yet.
+- 2026-05-31: Added `modular_oct.py` for the stronger modular
+  odd-cycle-transversal candidate: every even graph should have disjoint
+  `C,D` with `G[C]` residue `1 mod 4`, `G[D]` residue `2 mod 4`, and bipartite
+  residual.  This implies the `(0,0,1,2)` slot theorem by taking the residual
+  bipartition as the two zero slots.  The checker confirms the connected
+  `n=13` and `n=14` hard masks, all even graphs through `n=7`, the first
+  `50,000` even graphs on `n=8`, and random even samples on `n=10,12,14`.
+  The full `n=8` sweep was still too slow and was stopped.  Greedy odd-cycle
+  deletion is not a proof because cross-edges among deleted cycles alter the
+  internal residues inside their union.
 - 2026-05-31: Refined the bounded-spread target after subagent review.  A
   fixed-spread linear theorem is probably too optimistic because dense random
   adjacent-degree graphs should locally resemble `G(k,1/2)` on induced

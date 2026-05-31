@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import random
 from functools import lru_cache
 
 import modular_partition
@@ -57,12 +58,46 @@ def optimize(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
-    parser.add_argument("--mask", type=int, required=True)
+    parser.add_argument("--mask", type=int)
     parser.add_argument("--modulus", type=int, default=4)
     parser.add_argument("--slots", type=str, default="0,0,1,2")
     parser.add_argument("--zero-residue", type=int, default=0)
+    parser.add_argument("--sample-even", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
     slots = tuple(int(item) % args.modulus for item in args.slots.split(",") if item)
+    if args.sample_even:
+        rng = random.Random(args.seed)
+        pc = ri.precompute(args.n)
+        edge_index = {edge: index for index, edge in enumerate(pc.edges)}
+        histogram: dict[int | str, int] = {}
+        examples: list[tuple[int, int | str]] = []
+        for _ in range(args.sample_even):
+            graph_mask = modular_partition.random_parity_mask(
+                args.n, False, rng, pc, edge_index
+            )
+            if graph_mask is None:
+                continue
+            answer = optimize(args.n, graph_mask, args.modulus, slots, args.zero_residue)
+            cost: int | str = "NA" if answer is None else answer[0]
+            histogram[cost] = histogram.get(cost, 0) + 1
+            if len(examples) < 5:
+                examples.append((graph_mask, cost))
+        print(f"n={args.n}")
+        print(f"modulus={args.modulus}")
+        print("slots=" + ",".join(map(str, slots)))
+        print(f"zero_residue={args.zero_residue}")
+        print(f"sample_even={args.sample_even}")
+        print(f"seed={args.seed}")
+        print("histogram=nonzero_cost:count")
+        for cost in sorted(histogram, key=lambda item: args.n + 1 if item == "NA" else item):
+            print(f"  {cost}: {histogram[cost]}")
+        print("examples=mask,cost")
+        for graph_mask, cost in examples:
+            print(f"  {graph_mask},{cost}")
+        return
+    if args.mask is None:
+        raise SystemExit("--mask is required unless --sample-even is used")
     answer = optimize(args.n, args.mask, args.modulus, slots, args.zero_residue)
     print(f"n={args.n}")
     print(f"mask={args.mask}")
