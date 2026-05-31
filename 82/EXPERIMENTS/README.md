@@ -13,6 +13,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `degree_spread.py`: filters or samples graphs with bounded degree spread or
   few degree values to test additive near-regularity as a bridge; also verifies
   recorded graph masks with `--mask`.
+- `defect_set.py`: checks the one-defect sufficient condition for the
+  `(0,0,1,2)` first-lift slot target, where a residue-`2` part leaves a
+  zero-residue complement.
 - `search_bounded_spread.py`: local search for bounded-spread graphs with
   unusually small largest regular induced subgraphs.
 - `modular_lift.py`: exact parity-graph enumeration and sampling for the

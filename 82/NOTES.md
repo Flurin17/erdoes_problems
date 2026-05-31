@@ -906,8 +906,22 @@ source of growth beyond Ramsey.
   at most `8` found no complete multipartite obstruction for any of the
   current eight universal slot candidates.  The tool finds a small complete
   multipartite obstruction to the already-killed `(0,1,1,1)` slot:
-  class sizes `(2,4,4,4)`.  Added a clean proof that `(0,0,1,2)` covers
-  complete multipartite even graphs when all classes are even, and when all
-  classes are odd with a common residue modulo `4`; the mixed odd-residue
-  complete multipartite case remains experimentally positive but not yet
-  proved in full.
+  class sizes `(2,4,4,4)`.  Added a clean proof that `(0,0,1,2)` covers all
+  complete multipartite even graphs.  The even-class case groups whole
+  classes by residues `0` and `2` modulo `4`; the odd-class case uses a
+  four-case construction by the number of `3 mod 4` classes, splitting such
+  classes into pieces of sizes `1 mod 4` and `2 mod 4` when needed.
+- 2026-05-31: Validated the complete-multipartite theorem with the fixed-slot
+  count model for `(0,0,1,2)` up to `5` classes and class size `12`
+  (`922` source-modular size vectors, no counterexample).  A further exact
+  random graph check `universal_slots.py 18 --sample-even 50 --seed 1818` on
+  the current eight universal slot candidates found no new kill; all eight
+  survived.
+- 2026-05-31: Added `defect_set.py` to test the stronger one-defect shortcut
+  for `(0,0,1,2)`: a residue-`2` set `D` such that `V\D` is zero-residue.
+  This condition would prove the slot target with only two nonempty parts, but
+  it is much too strong.  The known hard `n=14`, cactus `n=15`, and hard
+  `n=16` masks have no such defect set, and `46/50` random even graphs on
+  `n=12` with seed `1202` failed it.  Thus the full cut-congruence form in
+  Lemma 4I.6 is not an artifact; the residual graph really needs a nontrivial
+  two-zero-slot cut in typical cases.

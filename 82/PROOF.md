@@ -893,16 +893,40 @@ independent.  More generally, the task for this slot multiset is to remove
 one `1`-modular part and one `2`-modular part so that the residual graph has
 the displayed mod-`4` cut-degree prescription.
 
-## Proposition 4I.7: Multipartite Classes Covered By `(0,0,1,2)`
+## Lemma 4I.6A: One-Defect Sufficient Condition
+
+Let `G` be an even graph.  Suppose there is a vertex set `D` such that
+
+```text
+deg_{G[D]}(v) congruent 2 mod 4  for every v in D,
+deg_G(v,D) congruent deg_G(v) mod 4  for every v notin D.
+```
+
+Then `G` has a `4`-modular partition with residue signature contained in
+`(0,0,1,2)`.
+
+Proof.  Put `D` in the residue-`2` slot.  For every vertex
+`v in V(G)\D`,
+
+```text
+deg_{G[V\D]}(v) = deg_G(v) - deg_G(v,D) congruent 0 mod 4.
+```
+
+Thus `V(G)\D` is a zero-residue part.  The remaining two slots may be empty.
+QED.
+
+This condition is only a sufficient shortcut, not a viable replacement for
+Lemma 4I.6.  The script `EXPERIMENTS/defect_set.py` checks the condition, and
+the recorded hard masks on `14`, `15`, and `16` vertices already have no such
+set `D`, despite having `(0,0,1,2)` partitions.  Random even graphs on
+`12` vertices also usually fail the shortcut.  Hence the two zero slots, or
+equivalently the residual cut in Lemma 4I.6, are genuinely needed.
+
+## Proposition 4I.7: Complete Multipartite Graphs Are Covered By `(0,0,1,2)`
 
 Let `G` be a complete multipartite even graph with class sizes
-`s_1,...,s_t`.
-
-1. If every `s_i` is even, then `G` has a `4`-modular partition with residue
-   signature contained in `(0,0,1,2)`.
-2. If every `s_i` is odd and the `s_i` are all congruent modulo `4`, then
-   `G` has a `4`-modular partition with residue signature contained in
-   `(0,0,1,2)`.
+`s_1,...,s_t`.  Then `G` has a `4`-modular partition with residue signature
+contained in `(0,0,1,2)`.
 
 Proof.  For a union of whole multipartite classes, the induced graph is again
 complete multipartite.  If the classes used in this union all have the same
@@ -925,17 +949,56 @@ has residue `0`.  The union of the classes in `I_2` has residue
 which is either `0` or `2`.  Thus these two unions fit into the two zero
 slots and the residue-`2` slot.
 
-Now assume all class sizes are odd and congruent to the same residue
-`r in {1,3}` modulo `4`.  Since `G` is even, the number `t` of classes is
-odd: each degree is `sum_i s_i - s_j`, whose parity is `t-1`.  The whole graph
-therefore has common degree residue
+It remains to handle the case where all class sizes are odd.  Since `G` is
+even, the number of classes is odd.  Let `a` be the number of classes with
+size `1` modulo `4`, and let `b` be the number of classes with size `3`
+modulo `4`; thus `a+b` is odd.
 
-```text
-(t-1)r mod 4,
-```
+For a class of size `3` modulo `4`, fix once and for all a split into two
+nonempty pieces of sizes `1` and `2` modulo `4`.  This is possible because
+the class size is at least `3`: choose one vertex for the first piece and put
+the rest in the second piece.
 
-which is either `0` or `2`, because `t-1` is even.  Hence the whole graph
-fits into a zero slot or the residue-`2` slot.  QED.
+We now give a construction according to `b mod 4`.
+
+If `b congruent 0 mod 4`, put all `3 mod 4` classes whole into the residue-`1`
+slot, since their whole-class union has residue `3(b-1) congruent 1 mod 4`.
+Here `a` is odd, so the whole union of all `1 mod 4` classes has residue
+`a-1`, which is either `0` or `2`, and fits an available zero or residue-`2`
+slot.
+
+If `b congruent 1 mod 4`, first suppose `a congruent 2 mod 4`.  Then put all
+`3 mod 4` classes whole into a zero slot and all `1 mod 4` classes whole into
+the residue-`1` slot.  If instead `a congruent 0 mod 4`, choose one
+`3 mod 4` class.  Put all `1 mod 4` classes together with the `1 mod 4` piece
+of the chosen class into one zero slot; put the `2 mod 4` piece of the chosen
+class into the other zero slot as an independent set; and put the remaining
+`3 mod 4` classes, whose number is divisible by `4`, whole into the
+residue-`1` slot.
+
+If `b congruent 2 mod 4`, split every `3 mod 4` class.  If
+`a congruent 1 mod 4`, put all `1 mod 4` classes whole into a zero slot, put
+all `1 mod 4` pieces of the `3 mod 4` classes into the residue-`1` slot, and
+put all `2 mod 4` pieces of those classes into the residue-`2` slot.  If
+`a congruent 3 mod 4`, put all `1 mod 4` classes together with all
+`1 mod 4` pieces of the `3 mod 4` classes into a zero slot; this uses
+`a+b congruent 1 mod 4` positive pieces of residue `1`.  Put all
+`2 mod 4` pieces of the `3 mod 4` classes into the residue-`2` slot.
+
+Finally suppose `b congruent 3 mod 4`.  If `a congruent 2 mod 4`, put all
+`3 mod 4` classes whole into the residue-`2` slot and all `1 mod 4` classes
+whole into the residue-`1` slot.  If `a congruent 0 mod 4`, choose one
+`3 mod 4` class.  Put all `1 mod 4` classes together with the `1 mod 4` piece
+of the chosen class into one zero slot; put the chosen class's `2 mod 4`
+piece alone into the second zero slot; and split the remaining
+`3 mod 4` classes.  Their number is `2 mod 4`, so their `1 mod 4` pieces form
+a residue-`1` part and their `2 mod 4` pieces form a residue-`2` part.
+
+Each part described above is a union of pieces whose positive intersections
+with multipartite classes all have the same residue modulo `4`, so the
+residue computation at the start of the proof verifies the claimed part
+residue.  The parts cover every vertex exactly once, proving the proposition.
+QED.
 
 The most direct bootstrapping attempt from Lemma 4G to `M=4` is false.  One
 might try to choose a self-labelled mod-`2` split, then refine the even side

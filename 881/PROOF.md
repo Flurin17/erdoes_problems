@@ -276,6 +276,56 @@ e+\sigma(D)\in(r+1)P\subset(r+1)C.
 Thus the hypothesis of Lemma 2.2 holds with \(t=e\), so \(C=A\setminus B\)
 is an asymptotic basis of order \(k+1\). \(\square\)
 
+## Lemma 2.4: Tail reflection-recurrence is enough
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\). Suppose
+there is \(D\) such that for every finite
+\[
+T\subset A\cap(D,\infty)
+\]
+there are arbitrarily large \(m\) with
+\[
+m-T\subset A.
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(k+1\).
+
+Proof. The proof of Theorem 2.3 uses reflection-recurrence only for the
+finite set \(R\) consisting of the fixed padder \(e\) and the finitely many
+entries occurring in the certificate tuples \(Y(S,d)\). We choose these
+initial certificate entries in the tail \(A\cap(D,\infty)\).
+
+First choose
+\[
+e,x_1=y_1\in A\cap(D,\infty),\qquad x_1\ne e.
+\]
+Suppose the empty-multiset certificate has been built through \(d\), with
+all entries \(e,x_d,y_1,\ldots,y_d\) larger than \(D\). By the tail
+recurrence hypothesis applied to \(\{e,x_d\}\), choose \(M\) arbitrarily
+large such that \(M-e,M-x_d\in A\). Taking \(M\) large also ensures
+\[
+M-e>D,\qquad M-x_d>D,\qquad M-x_d\ne e.
+\]
+Set \(x_{d+1}=M-e\) and \(y_{d+1}=M-x_d\), exactly as in Theorem 2.3. This
+builds the initial certificates with all relevant \(Y\)-entries in the
+tail.
+
+During the main deletion recursion, the set \(R\) to which recurrence is
+applied is always a subset of the fixed finite tail set
+\[
+\{e,y_1,\ldots,y_k\}.
+\]
+Indeed, the certificate propagation in Theorem 2.3 only reuses prefixes of
+old \(Y\)-tuples; the newly created elements \(m-y\) are protected
+\(X\)-entries, not future \(Y\)-entries. Thus the tail recurrence
+hypothesis supplies each required center \(m\), and \(m\) may be chosen so
+large that all new protected elements and deleted elements are positive,
+new, and outside the finite forbidden set.
+
+The repair identities and the final application of Lemma 2.2 are unchanged
+from Theorem 2.3. Hence the constructed infinite deletion leaves an
+order-\((k+1)\) basis. \(\square\)
+
 ## Lemma 3: Late finite-deletion reservoir criterion
 
 Let \(h=k+1\). Suppose \(R\subseteq A\) is infinite and has the following
@@ -1726,6 +1776,80 @@ reflected mirrors needed in the repair construction of Theorem 8.2. If the
 only available barriers have bounded excess, then this recurrence argument
 does not apply; this is exactly the delayed-threshold obstruction.
 
+## Lemma 8.6a: Bounded top-excess pair barriers force a good deletion
+
+Work in the remaining \(k=2\) case after Corollary 8.3b. Thus there is a
+finite set \(E\subset A\) such that every \(a\in G=A\setminus E\) has
+\[
+A\setminus\{a\}
+\]
+an order-3 threshold below \(a\). Suppose that there is a constant \(D\)
+such that for every infinite \(X\subset G\) and every \(L\), there are
+\[
+x<y,\qquad x,y\in X,
+\]
+and a witness \(w>L\) satisfying
+\[
+y\le w\le y+D,\qquad w\notin3(A\setminus\{x,y\}).
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. We prove tail finite reflection-recurrence and then apply Lemma 2.4
+with \(k=2\). Let \(N_0\) be an order-2 threshold for \(A\). Fix a finite
+\[
+T\subset A\cap(D,\infty)
+\]
+and a bound \(L_0\). Choose an infinite
+\[
+X\subset G\setminus T
+\]
+whose pairwise gaps exceed \(L_0\). Apply the hypothesis with
+\[
+L>\max T+N_0.
+\]
+We get \(x<y\) in \(X\) and \(w>L\) with \(y\le w\le y+D\) and
+\[
+w\notin3(A\setminus\{x,y\}).
+\]
+
+For every \(t\in T\), we have \(t\notin\{x,y\}\) and \(w-t\ge N_0\). By
+Lemma 10.1, the pair \(\{x,y\}\) meets every two-term representation of
+\(w-t\) from \(A\). But no such representation can use \(y\), since
+\[
+w-t-y\le D-t<0.
+\]
+Therefore every two-term representation of \(w-t\) uses \(x\). Since
+\(w-t\in2A\), there is \(c_t\in A\) with
+\[
+w-t=x+c_t.
+\]
+Putting
+\[
+m=w-x
+\]
+gives
+\[
+m-t=c_t\in A\qquad(t\in T).
+\]
+Also
+\[
+m=w-x\ge y-x>L_0
+\]
+by the pairwise-gap choice. Since \(L_0\) was arbitrary, the required
+reflection centers are arbitrarily large. Lemma 2.4 now gives the desired
+infinite deletion. \(\square\)
+
+In the same remaining case, genuine pair witnesses below the larger deleted
+element are only low-threshold artefacts. If \(x<y\) lie in \(G\), if
+\[
+w\notin3(A\setminus\{x,y\}),
+\]
+and if \(w\) is at least a threshold \(N_x<x\) for \(A\setminus\{x\}\), then
+necessarily \(w\ge y\). Indeed, if \(w<y\), then every three-term
+representation of \(w\) from \(A\setminus\{x\}\) automatically avoids
+\(y\), contradicting the displayed hole.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -2190,6 +2314,41 @@ not extend coverage unless \(A_s\) itself already contains a long interval.
 Adding such dense interval structure restores coverage but immediately
 conflicts with the domination gaps required by Lemma 9.
 
+The dense-block conflict can be stated more generally. Let a stage contain
+an interval
+\[
+I=[r,r+L]\cap\mathbb N\subset A_s
+\]
+and try to protect \(a\in I\) by a marker witness
+\[
+w=p+a,\qquad p\in A_s.
+\]
+If there is a retained element \(e\in I\setminus\{a\}\) such that
+\[
+p+a-e\in[2r+2,\ 2r+2L-2],
+\]
+then
+\[
+w\in3(A_s\setminus\{a\}).
+\]
+Indeed, the displayed central interval lies in \(2(I\setminus\{a\})\) by
+Lemma 5.1 with \(m=1\), so
+\[
+p+a-e=u+v
+\]
+with \(u,v\in I\setminus\{a\}\), and hence
+\[
+w=e+u+v\in3(A_s\setminus\{a\}).
+\]
+Thus a marker witness can be private only if
+\[
+p+a-(I\setminus\{a\})
+\]
+avoids the central two-sum interval of \(I\setminus\{a\}\). For interior
+points \(a\), this forces the marker far enough from the dense block that
+the marker sums no longer bridge the next coverage gap. This is the
+interval form of the same coverage-versus-privacy obstruction.
+
 ## Proposition 13.1: A finite-stage criterion for a \(k=2\) counterexample
 
 Suppose there are increasing finite sets
@@ -2452,6 +2611,9 @@ the added elements needs local witnesses.
   padder may absorb any multiset of at most \(k\) deleted summands.
 * Theorem 2.3 proves that finite reflection-recurrence gives a good infinite
   deletion in every order, using balanced repair certificates.
+* Lemma 2.4 shows that reflection-recurrence only on a tail of \(A\) is
+  enough, because the certificate construction can be initialized entirely
+  in that tail.
 * Lemma 2.1 reformulates the strong minimality hypothesis as a finite
   barrier property for order-\(k\) representations.
 * Warning 3.0 explains why finite deletability alone is insufficient without
@@ -2524,6 +2686,8 @@ the added elements needs local witnesses.
   reduce to one fixed uniformity.
 * Lemma 8.6 shows that bounded-width barriers with large witness excess
   force partial reflection-recurrence.
+* Lemma 8.6a proves that bounded top-excess pair barriers actually force
+  tail reflection-recurrence and hence a good deletion.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.

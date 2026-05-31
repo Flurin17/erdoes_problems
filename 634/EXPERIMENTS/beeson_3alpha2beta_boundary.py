@@ -336,6 +336,39 @@ def feasible_n21_isosceles_alpha_boundaries() -> list[
     return out
 
 
+def feasible_isosceles_alpha_plus_beta_boundaries(
+    tile_sides: tuple[int, int, int],
+    equal_side: int,
+    base: int,
+) -> list[tuple[tuple[PlacedEdge, ...], tuple[PlacedEdge, ...], tuple[PlacedEdge, ...]]]:
+    """Return feasible cycles for outer angles `(alpha,alpha+beta,alpha+beta)`.
+
+    Vertices are ordered as:
+
+    - V0 has angle `alpha`,
+    - V1 and V2 have angle `alpha+beta`.
+
+    Therefore side V1-V2 is the base opposite `alpha`, and the other two sides
+    have the equal-side length from Beeson's Section 11.4 filter.
+    """
+    side_lengths = dict(zip(("a", "b", "c"), tile_sides, strict=True))
+    paths_01 = oriented_boundary_paths(equal_side, side_lengths)
+    paths_12 = oriented_boundary_paths(base, side_lengths)
+    paths_20 = oriented_boundary_paths(equal_side, side_lengths)
+    out = []
+    for path_01 in paths_01:
+        for path_12 in paths_12:
+            if not transition_types(path_01[-1], path_12[0], ["alpha+beta"]):
+                continue
+            for path_20 in paths_20:
+                if not transition_types(path_12[-1], path_20[0], ["alpha+beta"]):
+                    continue
+                if not transition_types(path_20[-1], path_01[0], ["alpha"]):
+                    continue
+                out.append((path_01, path_12, path_20))
+    return out
+
+
 def main() -> None:
     paths_27 = oriented_boundary_paths(27, SIDE_LENGTHS_14)
     paths_28 = oriented_boundary_paths(28, SIDE_LENGTHS_14)

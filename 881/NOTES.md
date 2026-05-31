@@ -164,6 +164,11 @@ holds for every deleted multiset of size at most \(k\). Thus if an
 asymptotic order-\(k\) basis is finitely reflection-recurrent, it has the
 desired infinite deletion for order \(k+1\).
 
+Lemma 2.4 shows that the same conclusion follows from reflection-recurrence
+on a tail \(A\cap(D,\infty)\). The certificate construction can initialize
+the fixed padder and all \(Y\)-entries above \(D\), and later stages only
+reflect that fixed finite tail set.
+
 ### Late finite-deletion reservoir lemma
 
 Let \(h=k+1\). Suppose there is an infinite \(R\subseteq A\) such that for
@@ -578,6 +583,19 @@ Therefore markers placed near a dense coverage interval are repaired by
 central old two-sums for all but endpoint elements. Markers placed far away
 avoid this repair but fail to bridge the next coverage gap.
 
+Attempt 13 now records the sharper interval version: if
+\[
+w=p+a,\qquad a\in I=[r,r+L],
+\]
+and some retained \(e\in I\setminus\{a\}\) makes
+\[
+p+a-e\in[2r+2,2r+2L-2],
+\]
+then \(w\in3(A_s\setminus\{a\})\). Thus a private marker witness must avoid
+the whole central two-sum interval after subtracting every retained point of
+the dense block, which is incompatible with using nearby marker sums for
+coverage except at endpoints.
+
 ## Structural Obstruction for \(k=2\)
 
 If \(A\) is an order-2 basis and \(a\in A\), put \(S=A\setminus\{a\}\).
@@ -683,6 +701,14 @@ least a \(1/q\) fraction. For \(q=1\), this is full reflection-recurrence
 and Theorem 8.2 resolves the case. Therefore a remaining counterexample
 must either use barriers of growing size, or keep bounded-width witness
 excesses under control in a delayed-threshold fashion.
+
+Lemma 8.6a closes one delayed pair-barrier branch. If every infinite tail
+contains pair barriers \(\{x<y\}\) with witnesses in a bounded interval
+\([y,y+D]\), then all test elements above \(D\) are forced to reflect
+through the lower element \(x\). This gives tail reflection-recurrence, and
+Lemma 2.4 upgrades tail recurrence to the usual protected-reservoir
+deletion. Thus persistent pair barriers must either have unbounded top
+excess \(w-y\), or give way to barriers of size at least three.
 
 Example 8.7 warns that even pair barriers cannot be collapsed to one-center
 recurrence by pigeonhole alone. The residue set
