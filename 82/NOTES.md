@@ -1239,3 +1239,12 @@ source of growth beyond Ramsey.
   conjecture.  The next clean finite target is the complete-multipartite
   arithmetic theorem: every class-size vector of total at most `q^2` should
   pack into at most `q` valid bins of size at most `q+2`.
+- 2026-05-31: Proved a unit-layer packing lemma for the
+  complete-multipartite arithmetic target.  If residual class sizes
+  `r_i` satisfy `r_i<=B` and total size at most `B(q+2)`, then assigning each
+  class to its `r_i` least-loaded bins packs the residual graph into `B`
+  bins of size at most `q+2`, with each bin taking one vertex from every
+  assigned class.  Thus complete multipartite graphs with all class sizes at
+  most `q` satisfy the `q+2` target.  The remaining gap is to prove that
+  single-class chunks from large classes can always reduce to such a residual
+  instance without using too many bins.

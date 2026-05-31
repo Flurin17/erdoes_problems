@@ -791,6 +791,59 @@ q^2-2q-1 <= (q-2)(q+2).
 Thus the total number of parts is at most `2+(q-2)=q`, and all parts have
 order at most `q+2`.  QED.
 
+## Lemma: Unit-Layer Packing
+
+Let `B` and `C` be positive integers.  Let `r_1,...,r_t` be nonnegative
+integers such that
+
+```text
+r_i <= B        for every i,
+sum_i r_i <= B C.
+```
+
+Then one can assign, for each `i`, exactly `r_i` distinct bins from
+`{1,...,B}` so that no bin is assigned more than `C` indices.
+
+Proof.  Process the indices `i` in any order.  When assigning index `i`,
+choose `r_i` currently least-loaded bins and increase their loads by one.
+This is possible because `r_i<=B`.
+
+We claim that no load ever exceeds `C`.  Suppose the first violation occurs
+while assigning index `i`.  Then some chosen bin had load `C` before this
+assignment.  Since the chosen bins were least-loaded, every bin had load at
+least `C` before the assignment.  Hence the total previous load was at least
+`BC`.  But the final total load is `sum_i r_i<=BC`, and the current index
+still has positive demand, a contradiction.  QED.
+
+## Proposition: Bounded Complete Multipartite Classes Satisfy The `q+2` Target
+
+Let `q>=1`, let `B<=q`, and let `H` be a complete multipartite graph with
+class sizes `r_1,...,r_t` satisfying
+
+```text
+r_i <= B        for every i,
+sum_i r_i <= B(q+2).
+```
+
+Then `V(H)` can be partitioned into at most `B` induced `q`-modular subgraphs,
+each of order at most `q+2`.
+
+Proof.  Apply the unit-layer packing lemma with `C=q+2`.  For each bin, take
+one vertex from every multipartite class assigned to that bin.  Since each
+class `i` is assigned to exactly `r_i` distinct bins, all vertices are used
+exactly once.
+
+In any nonempty bin, the positive intersections with the multipartite classes
+all have size `1`, so the induced complete multipartite graph is regular
+with degree one less than the bin size.  In particular it is `q`-modular, and
+the bin size is at most `q+2` by the load bound.  QED.
+
+In particular, every complete multipartite graph on at most `q^2` vertices
+whose multipartite classes all have size at most `q` satisfies the `q+2`
+one-shot target, by taking `B=q`.  The remaining complete-multipartite
+packing problem is to combine this unit-layer lemma with single-class chunks
+from classes that are larger than the number of bins left.
+
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
 Let `s(n)` be a function with
