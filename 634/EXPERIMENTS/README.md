@@ -91,6 +91,10 @@ Current components:
   side incidences forced by those local fans and currently shows that the
   `N=63` and `N=99` benchmark survivors are not eliminated by this counting
   lower bound.
+- `gamma_2alpha_fan_frontier.py`: aggregate version of the boundary-fan
+  inventory over all endpoint/mixed boundary-word classes. It shows that all
+  `88` endpoint/mixed classes remain feasible under the local fan
+  side-incidence bound for both `N=63` and `N=99`.
 - `gamma_2alpha_boundary_shell.py`: floating geometry placement of the
   boundary-adjacent tile shell from a transition-demand witness. It merges the
   two duplicated base-corner tiles and checks for remaining positive-area

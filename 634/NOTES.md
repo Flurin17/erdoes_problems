@@ -293,7 +293,9 @@ Important distinction: "positive square class" and "smallest representative" are
    diagnostic shows the full boundary-order spaces plateau at `295877600`
    shells for `63` and `11122617000` shells for `99`, so the remaining attack
    needs a structural quotient or obstruction rather than raw exact shell
-   enumeration.
+   enumeration. The aggregate boundary-fan frontier does not supply that
+   obstruction: all `88` endpoint/mixed classes remain feasible under local fan
+   side-incidence counts for both benchmark rows.
 
 ## Current Diophantine Status for `n=19`
 

@@ -1866,6 +1866,13 @@ Thus a complete treatment of these two boundary survivors needs a structural
 higher-mixed obstruction, an exact quotient/canonicalization much stronger than
 raw side-word enumeration, or a new construction.
 
+The aggregate boundary-fan frontier does not provide that obstruction. After
+grouping complete boundary paths by endpoint pair and mixed-transition count
+and carrying Pareto-minimal local fan side-incidence vectors, all `88`
+endpoint/mixed classes remain feasible under the available interior side
+incidences for both benchmark rows. The best frontiers are `(32,28,32)` inside
+`(56,54,56)` for `N=63`, and `(40,28,40)` inside `(92,86,92)` for `N=99`.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,
