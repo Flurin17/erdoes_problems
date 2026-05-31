@@ -1776,6 +1776,17 @@ source of growth beyond Ramsey.
   `8`-modular, `4` needed two parts, `6` needed three).  This is only small
   evidence for an `O(q)` baseline partition theorem; it gives no logarithmic
   saving by itself.
+- 2026-05-31: A subagent audit found no elementary proof or small obstruction
+  for the baseline `O(q)` dyadic partition theorem.  It remains consistent
+  with all recorded data, but already contains the hard first-lift target:
+  every connected even graph should partition into at most four induced
+  `4`-modular parts.  The audit reconfirmed the `n=13` and `n=14` connected
+  first-lift masks requiring four parts, the five-mask `4 -> 8` three-part
+  obstruction, and positive small data: all `1184` full `4`-modular graphs on
+  `7` vertices partition into four induced `8`-modular parts, and all `3074`
+  full `3`-modular graphs on `7` vertices partition into three induced
+  `6`-modular parts.  The naive split by total degree modulo `2q` fails
+  because the induced residue depends on color-dependent cross-degree terms.
 - 2026-05-31: Refined the bounded-spread target after subagent review.  A
   fixed-spread linear theorem is probably too optimistic because dense random
   adjacent-degree graphs should locally resemble `G(k,1/2)` on induced
