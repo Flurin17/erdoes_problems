@@ -880,3 +880,11 @@ For \(A_1=C_1\cup\{5\}\), three-sums cover through \(47\), and
 \]
 The search then stalls on the next greedy stage, so this is evidence of
 local traction rather than an infinite construction.
+
+The cross-stage pair version is more promising locally. Starting from the
+same \(C_0\), the pair-stage search first adds \(23\), then adds \(30,31\),
+and every old-new pair has a robust four-sum witness below the declared
+endpoint. The extended search still finds no third stage. This points to
+the same conclusion as the \(k=2\) pair-barrier work: pair barriers are the
+right finite shape, but simultaneous domination of all old elements becomes
+rapidly expensive.

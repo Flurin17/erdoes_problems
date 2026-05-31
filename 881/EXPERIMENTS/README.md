@@ -115,3 +115,10 @@ after deleting \(30\) and \(31\), then stalls in the default greedy search.
 Run it with `--extend` to reproduce a bounded second-stage check through
 new elements up to `120` of size at most `5`, plus random larger increments;
 that extended check also finds no continuation.
+
+`robust_booster_pair_stage_search.py` tests the more plausible cross-stage
+pair-barrier version of the same \(k=3\) seed. It finds two buffered stages,
+first adding `23` and then adding `30,31`; every old-new pair has a local
+four-sum witness. Its `--extend` mode checks the next stage through new
+elements up to `160` of size at most `4`, plus random increments of sizes
+`5` through `12`, and finds no continuation.

@@ -3001,6 +3001,16 @@ sizes \(6,\ldots,12\); it still finds no continuation. This is heuristic
 evidence that the lift needs a more global block design or collective
 barriers, not a proof of impossibility.
 
+The cross-stage pair version has slightly more traction. The script
+`EXPERIMENTS/robust_booster_pair_stage_search.py` starts from the same
+\(C_0=\{1,3,20,21\}\), first adds \(23\), and then adds \(30,31\). At each
+of these two stages, every old-new pair has a four-fold witness below the
+declared endpoint, and the three-fold coverage interval leaves the required
+two-point buffer. The next stage stalls in the default search. Its
+`--extend` mode exhausts increments of size at most \(4\) using elements up
+to \(160\), and tries random increments of sizes \(5,\ldots,12\), finding no
+third extension.
+
 ## Dependency Graph
 
 * Theorem 1 is independent and resolves \(k=1\).
