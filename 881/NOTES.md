@@ -1485,7 +1485,10 @@ A=C_0\cup C_1
 such that both colors are certificate-free and each color is separately
 reflection-recurrent in \(A\). Thus the remaining pair obstruction must
 look like two recurrent Sidon-like layers, not just isolated finite
-colorings.
+colorings. Since Corollary 8.6j-3 handles certificate-free colorings whose
+mixed sums have sublinear multiplicity, these two recurrent layers would
+also need mixed two-sum spikes comparable to \(A(X)\) along an unbounded
+sequence of scales.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then

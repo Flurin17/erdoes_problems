@@ -5813,6 +5813,21 @@ inside \(A\). A final proof may therefore attack either the existence of
 such a two-color recurrent structure or the possibility that genuine pair
 holes generate it.
 
+Combining this with Corollary 8.6j-3 gives the following sharper necessary
+condition. In a genuine counterexample satisfying the persistent
+list-colorable pair-barrier hypothesis, the coloring
+\[
+A=C_0\cup C_1
+\]
+from Lemma 8.6g'' must have mixed two-sum spikes:
+\[
+\max_{n\le X}|\{(c_0,c_1)\in C_0\times C_1:c_0+c_1=n\}|
+\]
+is not \(o(A(X))\). Otherwise the two certificate-free colors would satisfy
+Corollary 8.6j-3, giving the desired infinite deletion. Thus the surviving
+large-excess pair obstruction must combine separate recurrence, Sidon-like
+same-color sparsity, and high-multiplicity mixed sums.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -8372,7 +8387,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.6g'' compactifies the surviving list-colorable pair obstruction:
   if it persists for every finite test set, then \(A\) has a global
   two-coloring into certificate-free classes, and each color is separately
-  reflection-recurrent in \(A\).
+  reflection-recurrent in \(A\). Together with Corollary 8.6j-3, any such
+  counterexample must also have mixed two-color representation spikes
+  comparable to \(A(X)\) along an unbounded sequence.
 * Lemma 8.6h supplies such finite test sets when \(A\) contains long
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of
