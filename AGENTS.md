@@ -1,0 +1,1 @@
+Focus on solving the problem without websearch. Use subagents whenever it makes sense.

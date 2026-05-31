@@ -1,0 +1,746 @@
+# Notes for Erdős Problem #881
+
+## Definitions
+
+Throughout, \(\mathbb N\) is interpreted as the positive integers unless
+explicitly stated otherwise. The asymptotic convention is the one used by
+the formalized statement linked from the problem page.
+
+For \(A\subseteq\mathbb N\) and \(h\ge 1\), write
+\[
+hA=\{a_1+\cdots+a_h:\ a_i\in A\}
+\]
+with repetitions allowed.
+
+An **asymptotic additive basis of order \(h\)** is a set
+\(A\subseteq\mathbb N\) for which there is \(N_0\) such that every
+\(n\ge N_0\) lies in \(hA\). Equivalently, \([N_0,\infty)\subseteq hA\).
+
+The problem's **minimal under infinite deletions** hypothesis is:
+\[
+\forall B\subseteq A,\quad B\text{ infinite}\implies
+A\setminus B\text{ is not an asymptotic basis of order }k.
+\]
+This is weaker than ordinary minimality under one-point deletions only in
+wording: ordinary minimality implies it by monotonicity, but the hypothesis
+does not require every one-point deletion to destroy order \(k\).
+
+The desired conclusion is the existence of an infinite \(B\subseteq A\)
+such that \(A\setminus B\) is an asymptotic additive basis of order \(k+1\):
+\[
+\exists N_1\ \forall n\ge N_1\quad
+n\in (k+1)(A\setminus B).
+\]
+
+## Trivial and Boundary Cases
+
+### \(k=1\)
+
+If \(A\) is an asymptotic basis of order \(1\), then \(A\) is cofinite.
+Every infinite deletion destroys order \(1\), so the minimality hypothesis
+is automatic. The desired conclusion is true: choose any infinite
+\(B\subset A\) with \(B(x)=o(x)\), for example a sufficiently sparse
+subsequence of \(A\). Then \(A\setminus B\) is an order-2 basis. A complete
+proof is written in `PROOF.md`.
+
+### Residue-padding examples for every \(k\)
+
+For \(k\ge2\), the set
+\[
+A_k=\{1\}\cup k\mathbb N
+\]
+is an order-\(k\) basis and is strongly minimal under infinite deletions at
+order \(k\). If \(B\subset A_k\) is infinite, then \(B\) contains infinitely
+many multiples \(b\) of \(k\). The number \(b+k-1\) has residue \(k-1\), so
+any \(k\)-term representation uses exactly \(k-1\) copies of \(1\) and one
+multiple of \(k\), forced to be \(b\). Thus deleting \(b\) removes this
+witness.
+
+The desired deletion exists: delete \(B_0=\{k2^i:i\ge1\}\). Since
+\(\mathbb N\setminus\{2^i:i\ge1\}\) is an asymptotic basis of every order
+\(L\ge2\), the remaining set \(\{1\}\cup k(\mathbb N\setminus\{2^i\})\) is
+an order-\((k+1)\) basis. The proof is written as Example 11 in `PROOF.md`.
+
+### A genuine \(k=2\) model where the desired deletion exists
+
+Fix \(a\equiv3\pmod5\), and let
+\[
+C=\{n\ge N_0:n\equiv0\text{ or }1\pmod5\},\qquad A=C\cup\{a\}.
+\]
+Then \(A\) is an asymptotic basis of order \(2\): the residues
+\[
+C+C:\{0,1,2\},\qquad a+C:\{3,4\}
+\]
+cover all classes modulo \(5\), and each required progression is eventually
+covered because \(C\) is cofinite inside its two progressions.
+
+It is strongly minimal under infinite deletions at order \(2\). If an
+infinite \(B\subseteq A\) contains infinitely many \(b\in C\), then the
+numbers \(a+b\) are unbounded and have no two-term representation from
+A\setminus B\): residue classes force a representation of \(a+b\) to be
+\(a+c\) with \(c\equiv b\pmod5\), and equality forces \(c=b\), while
+\(C+C\) has only residues \(0,1,2\). If \(B\) contains \(a\), then deleting
+the remaining infinite part of \(B\cap C\) only makes this worse; deleting
+\(a\) itself also leaves only residues \(0,1,2\) at order \(2\).
+
+Nevertheless the desired conclusion holds. Delete a sparse infinite
+\(B\subset C\) with zero relative density in each of the two progressions
+\(0,1\pmod5\), and put \(C'=C\setminus B\), \(A'=A\setminus B\). Then sums
+of two elements of \(C'\) still cover all sufficiently large integers in
+the residue classes \(0,1,2\pmod5\), by the same counting argument as the
+\(k=1\) case inside arithmetic progressions. Hence
+\[
+3C':\{0,1,2,3\},\quad
+a+2C':\{3,4,0\},\quad
+2a+C':\{1,2\}
+\]
+cover all residue classes modulo \(5\) for all sufficiently large integers.
+Thus \(A'\) is an order-3 basis.
+
+### Eventually periodic bases
+
+Proposition 7.1 in `PROOF.md` proves a more general fact: every eventually
+periodic asymptotic basis of order \(k\) satisfies the desired conclusion,
+without using the minimality hypothesis. If \(A\) is eventually the union of
+residue classes \(S\pmod m\), then \(kS=\mathbb Z/m\mathbb Z\), hence
+\((k+1)S=\mathbb Z/m\mathbb Z\). Deleting a zero-density infinite subset of
+one residue class leaves enough representatives to solve every large
+\((k+1)\)-term residue prescription.
+
+However, Example 7.2 shows that arbitrary finite deletion is not stable at
+order \(k+1\). A finite accelerator can lower the order of an eventually
+periodic basis from \(m-1\) to about \(m/2\), so deleting that single
+accelerator raises the order by an arbitrarily large amount. This is why
+the late-deletion and matching criteria are formulated with threshold
+control and carefully chosen deletions, not arbitrary finite deletions.
+
+## Candidate Positive Lemmas
+
+### Strong minimality as finite barriers
+
+Lemma 2.1 in `PROOF.md` gives the most direct reformulation of the
+hypothesis. The condition that every infinite \(B\subset A\) destroys
+order \(k\) is equivalent to:
+
+for every infinite \(B\subset A\) and every \(N\), there is some
+\(n\ge N\) and finite \(F\subset B\) such that every \(k\)-term
+representation of \(n\) from \(A\) uses an element of \(F\).
+
+So the given minimality is an unavoidable finite-barrier property at order
+\(k\). The problem asks whether one can choose an infinite \(B\) whose
+order-\(k\) barriers can all be bypassed with one extra summand.
+
+### One-hit absorption lemma
+
+Let \(A\) be an order-\(k\) basis, \(B\subseteq A\), \(C=A\setminus B\).
+Suppose there is \(t\in C\) such that:
+
+1. every sufficiently large integer has a \(k\)-term representation from
+   \(A\) using at most one element of \(B\);
+2. for every \(b\in B\), \(b+t\in 2C\).
+
+Then \(C\) is an order-\(k+1\) basis.
+
+Proof idea: write \(n-t\) as a \(k\)-sum with at most one deleted element.
+If none appears, add \(t\). If one deleted element \(b\) appears, replace
+\(b+t\) by two elements of \(C\).
+
+Gap: sparse choice of \(B\) does not by itself guarantee condition 1 for
+thin or nearly unique bases, and condition 2 is an additive-repair condition
+that can fail in Sidon-like constructions.
+
+Lemma 2.2 gives the full repair version. If a fixed retained element
+\(t\in C\) can absorb every multiset of \(r\le k\) deleted elements,
+\[
+t+b_1+\cdots+b_r\in(r+1)C,
+\]
+then \(C\) is automatically order \(k+1\). This is the general form of the
+repair criterion later used for \(k=2\) in Lemma 8.2a.
+
+Theorem 2.3 resolves the corresponding certificate problem under finite
+reflection-recurrence. It constructs a protected reservoir and a finite
+family of balanced certificates so that the repair condition in Lemma 2.2
+holds for every deleted multiset of size at most \(k\). Thus if an
+asymptotic order-\(k\) basis is finitely reflection-recurrent, it has the
+desired infinite deletion for order \(k+1\).
+
+### Late finite-deletion reservoir lemma
+
+Let \(h=k+1\). Suppose there is an infinite \(R\subseteq A\) such that for
+every finite \(F\subset R\) and every \(L\), one can find
+\(b\in R\setminus F\), \(b>L\), for which \(A\setminus(F\cup\{b\})\) is an
+order-\(h\) basis with threshold \(<b\). Then there is an infinite
+\(B\subset R\) such that \(A\setminus B\) is an order-\(h\) basis.
+
+Proof idea: delete \(b_1<b_2<\cdots\) recursively, always choosing the next
+deleted element beyond the current threshold. Future deletions are too large
+to affect already protected integers.
+
+Gap: no general proof yet that such an infinite reservoir must exist under
+the hypotheses of the problem.
+
+### Finite-deletion independence is insufficient
+
+Warning 3.0 in `PROOF.md` records a failed diagonal: it is not enough to
+find an infinite \(B_0\subseteq A\) such that every finite
+\(F\subset B_0\) is deletable at order \(k+1\). After deleting a finite
+prefix \(F_j\), its threshold \(N_j\) may lie beyond the last deleted
+element \(b_j\), leaving a gap \([b_j,N_j)\) that future choices cannot
+repair. This is why Lemma 3 requires the stronger condition \(N_j<b_j\) at
+each deletion stage.
+
+This suggests a possible no-answer mechanism not covered by permanent
+private witnesses: every finite deletion could be harmless at order \(k+1\),
+but only after a threshold far beyond the deleted elements. Then an infinite
+deletion might create infinitely many delayed gaps. A counterexample of this
+type would need blocks whose loss is eventually compensated by later blocks,
+while infinitely many losses leave unbounded uncovered intervals.
+
+This mechanism is not sufficient by itself. For \(k=2\), a delayed finite
+gap after deleting a finite prefix \(F\) may disappear after later retained
+elements are considered: if \(n-c\in2(A\setminus D)\) for some retained
+\(c\), then \(n\in3(A\setminus D)\). A genuine counterexample needs delayed
+gaps that are immune to all retained translates \(c+2(A\setminus D)\), not
+merely gaps for finite prefixes.
+
+Corollary 3.1b gives the exact finite-prefix language. A finite
+\(F\subset A\) is late-bad if \(A\setminus F\) is not order \(k+1\), or its
+order-\((k+1)\) threshold is at least \(\max F\). If some infinite
+increasing sequence has no late-bad finite prefix, then deleting that
+sequence preserves order \(k+1\). Hence any counterexample must make the
+late-bad finite sets form a barrier: every infinite increasing sequence in
+\(A\) has a late-bad initial segment.
+
+Corollary 3.1c strengthens this from initial segments to arbitrary infinite
+subsets: in a counterexample, every infinite \(X\subset A\) contains some
+finite late-bad \(F\subset X\). Thus a no-answer construction must build a
+finite-set barrier of delayed or genuine order-\((k+1)\) failures.
+
+### Protected matching criterion
+
+Lemma 3.2 in `PROOF.md` gives a broader sufficient condition. If there is a
+finite protected core \(E\subset A\) such that every sufficiently large
+\(n\) has arbitrarily many \((k+1)\)-representations whose summand sets are
+pairwise disjoint outside \(E\), then one can delete an infinite sparse
+subset of \(A\setminus E\) and preserve order \(k+1\). The recursive proof
+chooses the next deleted element beyond the threshold for one more disjoint
+representation; among \(r+1\) disjoint representations, only \(r\) can be
+hit by the first \(r\) deleted elements.
+
+Thus a counterexample must produce bounded moving transversals for
+\((k+1)\)-representations of infinitely many large integers, even after
+protecting any finite exceptional core.
+
+Corollary 3.3 makes the contrapositive precise. If no infinite deletion
+preserves order \(k+1\), then for every finite protected \(E\subset A\)
+there are arbitrarily large \(n\) for which all \((k+1)\)-representations of
+\(n\) are hit by a bounded set \(D_n\subset A\setminus E\). The bound may
+depend on \(E\), but not on \(n\) along the bad sequence.
+
+Proposition 3.4 gives a countable criterion for ruling this out. Let
+\(\mathcal H_E(n)\) be the hypergraph of \((k+1)\)-representations of \(n\)
+outside a finite protected core \(E\). If
+\[
+|\mathcal H_E(n)|/\Delta_E(n)\to\infty
+\]
+uniformly along large \(n\), where \(\Delta_E(n)\) is maximum vertex degree,
+then greedy matching plus Lemma 3.2 gives the desired infinite deletion.
+Thus any counterexample must have bounded-transversal structure, not merely
+few representations.
+
+Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
+\((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
+shifted targets \(n-c\), as \(c\) ranges through retained elements of \(A\).
+This explains why the matching route cannot be forced from order-\(k\)
+coverage alone: a local one-gate gadget realizes such a bounded
+transversal. What remains hard is embedding those moving gates into a global
+asymptotic basis with threshold control.
+
+## Counterexample Target
+
+A strong counterexample for \(k\ge 2\) would follow from a set \(A\) and
+unbounded witnesses \(t_a\), for all but finitely many \(a\in A\), such that
+\[
+t_a\in kA,\qquad
+t_a\notin (k+1)(A\setminus\{a\}).
+\]
+Then every infinite \(B\subseteq A\) removes infinitely many protected
+elements \(a\), and the corresponding unbounded witnesses \(t_a\) are absent
+from \((k+1)(A\setminus B)\).
+
+This condition is stronger than ordinary minimality at order \(k\). Standard
+minimal-basis constructions usually provide only
+\[
+t_a\in kA,\qquad t_a\notin k(A\setminus\{a\}),
+\]
+which is not enough because the extra summand may repair the deleted
+element.
+
+### Even stronger target: order \(k\), minimal at order \(k+1\)
+
+An ordinary minimal basis of order \(k+1\) that is also a basis of order
+\(k\) would immediately disprove the problem. Indeed, if every one-point
+deletion \(A\setminus\{a\}\) is not an order-\((k+1)\) basis, then every
+infinite deletion also fails at order \(k+1\), and hence fails at order
+\(k\).
+
+Finite cyclic residue analogues of this phenomenon exist. For example,
+there are sets \(S\subset\mathbb Z/m\mathbb Z\) with \(2S=G\) but
+\(3(S\setminus\{s\})\ne G\) for every \(s\in S\), in small moduli such as
+\(m=5,8,9,13\). The hard part is lifting this to integers: deleting one
+integer leaves many other integers in the same residue class, so residue
+minimality does not produce element-level private witnesses.
+
+Lemma 6.1 makes this obstruction precise for thick residue blocks
+\[
+T_L=\{s+mq:s\in S,\ 0\le q\le L\}.
+\]
+A modular hole \(\rho\notin3(S\setminus\{s_0\})\) has, by Lemma 6, a
+three-term residue representation using \(s_0\). Central integer lifts
+\(\rho+mQ\) then have \(\gg L^2\) lifted representations, while deleting a
+single copy \(s_0+mq_0\) removes only \(O(L)\) of them. Single-integer
+privacy can survive only near endpoint quotients, which is exactly the
+fragile pattern in Example 13.2.
+
+### Barrier target
+
+A counterexample need not assign a private witness to each single deleted
+element. It would be enough to find a fixed \(q\), an infinite core
+\(P\subset A\), and a family of finite sets \(F\subset P\) with witnesses
+\(w_F\) such that
+\[
+w_F\notin (k+1)(A\setminus F).
+\]
+The family must be an **unbounded barrier**: every infinite deletion
+\(B\subset A\) must contain such finite sets \(F\subset B\) with
+arbitrarily large \(w_F\). It is not enough that every infinite \(B\)
+contain one protected finite set, because one finite missing value does not
+destroy an asymptotic basis.
+
+Lemma 10.1 shows what this requires: for every retained padder \(e\), the
+finite set \(F\) must hit every \(k\)-term representation of \(w_F-e\).
+For \(k=2\) and \(q=2\), this means all relevant two-sum graphs must have
+the pair \(F\) as a vertex cover. This is a much stronger demand than
+ordinary pairwise uniqueness.
+
+More generally, one needs a finite-uniform hypergraph \(\mathcal F\) on an
+infinite core \(P\), together with a witness map \(F\mapsto w_F\), such that
+for every infinite \(X\subset P\) and every \(L\) there is
+\[
+F\in\mathcal F,\qquad F\subset X,\qquad w_F>L.
+\]
+Equivalently, for each \(L\), the subhypergraph of edges with \(w_F>L\)
+has no infinite independent set.
+Taking \(\mathcal F=[P]^q\) is the strongest version, but not necessary.
+This unbounded-barrier condition is the correct combinatorial form of a
+finite-barrier counterexample.
+
+## Finite Gadget Observations
+
+Finite analogues search for sets \(T\subset[0,D]\) such that \(T+T\) covers
+a long interval and each \(t\in T\) participates in some private two-sum
+not produced without \(t\). Small examples exist:
+
+* \(D=4\): \(T=\{0,1,3,4\}\), with \(T+T=[0,8]\).
+* \(D=8\): \(T=\{0,1,2,4,5,7,8\}\), with \(T+T=[0,16]\).
+
+These finite gadgets are encouraging for counterexample attempts, but they
+do not yet solve the infinite problem. A block construction must also stop
+three-term repairs involving earlier or later blocks.
+
+### Product construction for finite gadgets
+
+If \(T\subset[0,D]\) and \(S\subset[0,E]\) both have full two-sum intervals
+and every element has a private two-sum, then
+\[
+U=T+(2D+1)S=\{t+(2D+1)s:t\in T,\ s\in S\}
+\]
+has the same properties. Indeed, the choice of base \(2D+1\) prevents
+carries: a sum in \(U+U\) is uniquely decomposed into a low coordinate from
+\([0,2D]\) and a high-coordinate sum from \(S+S\). Fullness and private
+sums therefore tensor.
+
+Starting from \(T_0=\{0,1,3,4\}\), this gives arbitrarily large finite
+gadgets. The first diameters are \(4,40,364,3280,\ldots\), with sizes
+\(4,16,64,256,\ldots\).
+
+### Obstruction to using interval blocks as counterexamples
+
+Suppose a shifted block \(M+T\) has
+\[
+(M+T)+(M+T)=[2M,2M+2D].
+\]
+Let \(e\) be a fixed earlier retained element. If a proposed private witness
+has the form \(2M+u\) with \(u\ge e\), then
+\[
+2M+u = (2M+(u-e))+e.
+\]
+Since \(u-e\in[0,2D]\), the full-interval property gives
+\(2M+(u-e)\in (M+T)+(M+T)\). Thus the witness is repaired by two current
+block elements plus the earlier element \(e\), unless every such
+representation uses the deleted element in the current block.
+
+This is the central obstruction to converting full finite two-sum gadgets
+into a \(k=2\) counterexample: only the first \(e-1\) coordinates of a large
+block are automatically safe from the smallest earlier element, but a large
+block has many elements to protect.
+
+Finite searches show that one can avoid this obstruction locally by not
+asking \(T+T\) to be a full interval. For example
+\[
+T=\{0,4,8,10,13,15,20\}
+\]
+has \(T+T\) containing the interval \([12,21]\), and each element of \(T\)
+has a unique two-sum \(u\) using it with \(u-1\notin T+T\). This is a local
+model for safety against a retained earlier element \(1\). It is still far
+from an infinite counterexample, because an actual block construction must
+avoid repairs by all earlier one- and two-sums and must place the covered
+intervals consecutively.
+
+### Safe markers: local privacy is easy, efficiency is hard
+
+For any finite set \(E\) of earlier shifts and any \(L\), one can build a
+finite \(T\) such that \(T+T\supset[0,2L]\) and every element has a private
+two-sum \(u\) with \(u-E\) disjoint from \(T+T\). The construction starts
+with the coverage core \(C=[0,L]\) and gives every \(c\in C\) a very large
+marker \(p_c\); the private sums are \(c+p_c\) for \(c\), and \(2p_c\) for
+the marker \(p_c\). Choosing markers recursively and very far apart avoids
+all finitely many unwanted equalities.
+
+This proves that the counterexample obstruction is not local privacy
+against finitely many old elements. The hard part is **coverage efficiency**:
+the marker gadget has diameter much larger than its covered interval, while
+an infinite order-2 basis needs the covered intervals to bridge all gaps
+before the next block can be placed above the current private witnesses.
+
+## Failed Counterexample Route: finite accelerators
+
+Tempting plan for \(k=2\): take a minimal order-3 basis \(C\), add one
+finite "accelerator" \(f\), and arrange that \(A=C\cup\{f\}\) is order 2.
+Then hope that deleting any infinite subset of \(C\) still destroys order 3
+even with \(f\) present.
+
+At the residue-class level this cannot protect private witnesses from the
+accelerator. In an abelian group \(G\), write \(S\) for the residue set of
+\(C\) and translate so that \(f=0\). If \(S\cup\{0\}\) is a 2-basis of
+residues, then
+\[
+2(S\cup\{0\})=2S\cup S\cup\{0\}=G.
+\]
+But the right side is exactly the set of residues represented by a 3-term
+sum from \(S\cup\{0\}\) that uses at least one copy of the accelerator
+\(0\). Thus every residue already has an order-3 representation involving
+the accelerator.
+
+For general \(k\), the same translation gives
+\[
+k(S\cup\{0\})=G
+\]
+and every residue in this set is represented at order \(k+1\) with at least
+one accelerator by appending another \(0\). Therefore finite accelerators
+cannot give modularly protected order-\((k+1)\) private witnesses. Any such
+counterexample would have to rely on size/uniqueness constraints, not merely
+residue classes.
+
+## Failed Counterexample Route: direct-sum digits
+
+The formal direct-sum version of a Raikov-Stöhr construction also fails as a
+counterexample. In the monoid \(M=X\oplus Y\), the set \(A=X\cup Y\) is
+strongly minimal at order \(2\): deleting infinitely many elements from
+\(X\), for instance, leaves unbounded unique mixed witnesses \(x+y\).
+
+But it has the desired infinite deletion. Delete the positive even-weight
+elements of \(X\). Every \(x\in X\) is either retained, or splits as
+\[
+x=e+(x-e)
+\]
+with both summands of odd weight. Hence every \(x+y\in M\) becomes a
+three-sum from the remainder. Thus the clean carry-free model supports the
+positive side rather than a counterexample.
+
+A faithful additive embedding of this free commutative monoid into
+\((\mathbb N,+)\) is impossible in rank at least two: if independent
+generators \(u,v\) have images \(a,b\), then
+\[
+\phi(bu)=ba=ab=\phi(av),
+\]
+although \(bu\ne av\). Integer digit systems therefore must introduce
+carries or coefficient identifications, exactly where the formal private
+witness argument breaks.
+
+## Staged Block Counterexample Requirements
+
+A plausible counterexample for \(k=2\) would be built in stages. At a stage,
+with all old elements below a cutoff, add a finite block \(S\) such that:
+
+1. old elements together with \(S\) extend \(2A\)-coverage through a long
+   interval beyond the previous cutoff;
+2. every new element \(s\in S\) has an unbounded protected witness
+   \(w_s\in2A\) with \(w_s\notin3(A\setminus\{s\})\);
+3. all future blocks start above the current witnesses, so the witnesses
+   remain protected.
+
+The persistent difficulty is the ordering of coverage and witnesses. Marker
+gadgets can protect every element against a fixed finite old set, but their
+witnesses lie far beyond the interval that their two-sums cover. If future
+blocks must start above those witnesses, the construction creates uncovered
+gaps before the next block can contribute. Efficient-block searches have so
+far found only degenerate local blocks under even small old-shift constraints.
+
+Lemma 9 explains the obstruction: a witness \(w=a+p\) forces a gap
+\[
+A\cap(p,\ a+p-N_0]\subseteq\{a\}.
+\]
+Thus protecting many elements tends to create many long gaps exactly where
+an order-2 basis needs enough density to cover the next interval.
+
+For pair barriers \(F=\{x,y\}\), Lemma 10.1 specializes to a reflected-cover
+condition. If \(A\) is an order-2 basis with threshold \(N_0\) and
+\[
+n\notin3(A\setminus F),
+\]
+then for every retained \(a\in A\setminus F\) with \(n-a\ge N_0\), every
+two-sum representation of \(n-a\) uses \(x\) or \(y\). In particular,
+\[
+A\cap[1,n-N_0]\setminus F
+\subseteq (n-x-A)\cup(n-y-A).
+\]
+Thus a pair-barrier counterexample needs infinitely many witnesses whose
+large initial retained set is covered by two reflected copies of \(A\). This
+is a strong rigidity demand, not just pairwise uniqueness.
+
+### Failed marker-after-coverage scheme
+
+A natural attempt is:
+
+1. suppose \(2A_s\) covers \([0,N_s]\);
+2. add a marker \(p_s=N_s+1\);
+3. use witnesses \(p_s+a\) to protect old elements \(a\in A_s\);
+4. start the next stage above all \(p_s+a\).
+
+This would satisfy Lemma 9's domination gap if no new elements are placed in
+\((p_s,p_s+\max A_s]\). The problem is coverage: adding \(p_s\) only gives
+sums \(p_s+A_s\), not the whole interval \([p_s,p_s+N_s]\), unless \(A_s\)
+itself contains \([0,N_s]\). If one adds dense intervals to repair this,
+then those dense intervals create elements in the forbidden domination gaps
+for many private witnesses.
+
+This captures the recurring coverage/privacy conflict in the block route:
+coverage wants interval-like additive structure, while order-3 privacy wants
+large empty intervals after witness partners.
+
+Proposition 13.1 in `PROOF.md` gives the precise finite-stage criterion.
+It is enough to build increasing finite stages \(A_s\) covering successive
+intervals \([N_{s-1}+1,N_s]\) by two-sums, while every new element
+\(a\in A_s\setminus A_{s-1}\) has a witness
+\[
+w_{s,a}\le N_s,\qquad
+w_{s,a}\notin3(A_s\setminus\{a\}).
+\]
+Future stages start above \(N_s\), so these witnesses remain permanently
+private. Any infinite deletion hits infinitely many finite stages and hence
+misses infinitely many such witnesses at order 3.
+
+Proposition 13.1b records the correct weaker version. Singleton protection
+can be replaced by a finite-uniform stage-barrier system, but it must be
+unbounded: every infinite deletion must contain protected finite sets with
+arbitrarily large witnesses. This weaker version proves failure at order
+3; strong minimality at order 2 then has to be proved separately unless the
+protected finite sets are singletons for all but finitely many elements.
+
+No suitable infinite sequence of stages is known. Example 13.2 shows that
+isolated stages do exist: for even \(a\),
+\[
+A_{s-1}=\{1,3,\ldots,a-1\},\qquad P_s=\{a\}
+\]
+covers \([a,2a]\) at order \(2\), and \(2a\) is not a three-sum after
+deleting \(a\) because the retained set is odd. The obstruction is
+iteration: the witness is exactly the coverage endpoint, so the stage leaves
+no buffer for the next stage's first required integer.
+
+The script `stage_buffer_search.py` searches for stages that do leave such a
+buffer. Its first tiny hit is `old={2,3,4}`, add `5`, declare endpoint `5`,
+with two-sum coverage continuing to `10`; this is a finite-window artefact
+from the lower edge of the three-sum range and did not extend to a second
+stage in the same bounded search.
+
+Thus current finite searches find only window artefacts. Lemmas 5.1 and 9
+explain why dense interval or marker implementations fail.
+
+Lemma 5.1 in `PROOF.md` formalizes the repair mechanism: deleting \(m\)
+points from a dense interval \([r,r+L]\) still leaves the central two-sum
+interval
+\[
+[2r+2m,\ 2r+2L-2m].
+\]
+Therefore markers placed near a dense coverage interval are repaired by
+central old two-sums for all but endpoint elements. Markers placed far away
+avoid this repair but fail to bridge the next coverage gap.
+
+## Structural Obstruction for \(k=2\)
+
+If \(A\) is an order-2 basis and \(a\in A\), put \(S=A\setminus\{a\}\).
+If \(S\) is not an order-3 basis, then \(S\) must contain arbitrarily large
+translates of every finite subset of itself:
+\[
+\forall T\subset S\text{ finite}\quad
+\exists\text{ arbitrarily large }m\quad m-T\subset S.
+\]
+This is Lemma 8 in `PROOF.md`.
+
+Interpretation: order-3 essentiality of a point in an order-2 basis is very
+expensive. The remaining set cannot have even one finite pattern whose
+backward translates eventually disappear. A positive proof for \(k=2\)
+could try to show that infinitely many elements fail this translate-thick
+condition, then diagonalize their deletion using Lemma 3.
+
+If infinitely many elements \(a\) have \(A\setminus\{a\}\) not order 3, then
+Corollary 8.1 gives the stronger global conclusion:
+\[
+\forall T\subset A\text{ finite}\quad
+\exists\text{ arbitrarily large }m\quad m-T\subset A.
+\]
+Theorem 8.2 now proves that this recurrence is strong enough to construct a
+good infinite deletion. The construction fixes a retained element \(e\),
+chooses deleted elements \(b_j=m_j-e\), and protects enough reflected
+mirrors to repair every possible occurrence of one or two deleted summands
+in a two-term representation of \(n-e\). Consequently \(A\setminus B\) is
+an order-3 basis.
+
+Lemma 8.2a isolates the exact repair target. To prove that
+\(C=A\setminus B\) is order 3, it is enough to find a retained \(e\in C\)
+such that every deleted element satisfies \(b+e\in2C\) and every pair of
+deleted elements satisfies \(b+b'+e\in3C\). The unresolved cases can be
+viewed as attempts to construct such a repairable infinite deletion.
+Equivalently, one may build a protected reservoir \(P\subset C\) containing
+\(e\) that already contains all these repairs.
+
+Therefore the \(k=2\) positive route now splits as follows:
+
+1. only finitely many one-point order-3 failures, where one must make
+   one-point deletions compose into an infinite deletion; this remains open
+   in this workspace;
+2. infinitely many failures, which is resolved by Corollary 8.3.
+
+The remaining \(k=2\) obstruction is thus the **finitely-bad case**: all but
+finitely many one-point deletions \(A\setminus\{a\}\) are order-3 bases, but
+it is not yet known in this workspace how to choose an infinite deletion
+whose finite-prefix thresholds remain controlled.
+
+Example 3.0a shows why the threshold issue is real. In the benign basis
+\[
+A=\{1\}\cup2\mathbb N,
+\]
+which does have a good infinite deletion, the finite prefixes
+\[
+F_M=\{2,4,\ldots,2M\}
+\]
+are late-bad at order \(3\): \(A\setminus F_M\) is order-3, but its least
+threshold is \(4M+4>\max F_M\). Thus strong minimality at order \(2\) and
+good singleton deletions do not control arbitrary finite-prefix thresholds.
+The positive deletion must be chosen sparsely.
+
+The script `collective_barrier_search.py` gives finite-window evidence that
+this obstruction is genuinely collective. It finds, for instance,
+\[
+A=\{1,2,3,6,7,8\}
+\]
+on the window \([8,18]\): every singleton deletion still covers the window
+at order \(3\), but several pair deletions create holes. This is only a
+finite-threshold artefact, yet it shows why controlling one-point deletions
+alone cannot settle the finitely-bad case.
+
+Warning 8.5 rules out a tempting simplification: even if the finite
+barriers needed in Lemma 8.4 have bounded size, they need not reduce to one
+fixed uniformity. A finite union of non-barrier families can be a barrier.
+Thus a proof in the finitely-bad case must either use arithmetic structure
+beyond abstract barrier combinatorics or handle mixed-size finite barriers
+directly.
+
+Lemma 8.6 adds a second distinction. If such bounded-width barriers can be
+chosen with witness excess \(w-\max F\) arbitrarily large, then every finite
+pattern in \(A\) has arbitrarily large reflected subpatterns of size at
+least a \(1/q\) fraction. For \(q=1\), this is full reflection-recurrence
+and Theorem 8.2 resolves the case. Therefore a remaining counterexample
+must either use barriers of growing size, or keep bounded-width witness
+excesses under control in a delayed-threshold fashion.
+
+Example 8.7 warns that even pair barriers cannot be collapsed to one-center
+recurrence by pigeonhole alone. The residue set
+\[
+S=\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z
+\]
+has \(2S=G\), all singleton deletions remain 3-bases, but deleting
+\(\{0,1\}\) creates a 3-sum hole. The resulting reflected cover of \(S\)
+uses two centers and no single reflected copy covers \(S\). This is not an
+integer counterexample, but it identifies a real local obstruction that a
+proof of the finitely-bad case must overcome.
+
+Proposition 13.1c gives a concrete counterexample target for this
+obstruction: build finite stages where every old-new pair has a local
+order-3-private witness below the new endpoint. Any infinite deletion then
+contains cross-stage pairs with unbounded witnesses. The script
+`cross_stage_pair_search.py` finds the initial chain
+\[
+\{1,2\}\to\{1,2,3\}\to\{1,2,3,5\}
+\]
+but the default bounded greedy search stalls at the next stage. This is
+finite evidence only; the stage criterion remains open.
+
+There is also a more local witness obstruction. If \(w=a+p\in2A\) is meant
+to remain outside \(3(A\setminus\{a\})\), then
+\[
+A\cap(p,\ a+p-N_0]\subseteq\{a\}.
+\]
+Indeed any \(e\) in that interval lets one write \(w-e\in2A\), and if the
+two-sum avoids \(a\), then \(w\in3(A\setminus\{a\})\); if it uses \(a\),
+then the complementary summand is negative because \(e>p\). This is Lemma 9.
+It rules out dense interval-block/private-witness constructions for \(k=2\).
+
+## General One-Point Failure Pattern
+
+Lemma 10 generalizes the \(k=2\) translate-thickness obstruction. If
+\(A\) is an order-\(k\) basis, \(C=A\setminus\{a\}\), and \(C\) is not an
+order-\((k+1)\) basis, then every finite \(T\subset C\) has a large subset
+\(U\) for which some reflected translate lands in a lower sumset:
+\[
+n-ra-U\subseteq (k-r)C
+\]
+for some \(1\le r\le k-1\). The subset \(U\) has size at least
+\(\lceil |T|/(k-1)\rceil\).
+
+Thus any counterexample in general order must force substantial finite
+patterns of \(A\setminus\{a\}\) to recur inside lower sumsets after
+reflection about arbitrarily large integers.
+
+Corollary 10.2 is the global version: infinitely many bad one-point
+deletions force this fractional lower-sumset recurrence for every finite
+pattern in \(A\). For \(k=2\), the lower sumset is just \(A\) and the
+fraction is all of \(T\), giving the reflection-recurrence used in Theorem
+8.2. For \(k>2\), this is weaker than the finite reflection-recurrence
+needed by Theorem 2.3.
+
+For finite deletions, Lemma 10.1 gives the collective analogue. If
+\(C=A\setminus F\) misses \(w\) at order \(k+1\), then for every retained
+padder \(e\) with \(w-e\) above the order-\(k\) threshold, the finite set
+\(F\) must hit every \(k\)-term representation of \(w-e\). In graph terms
+for \(k=2\), \(F\) is a vertex cover for all relevant two-sum representation
+graphs. This shows that collective-hole counterexamples still require a
+strong domination mechanism, not just private witnesses for individual
+deleted elements.
+
+## Digital Minimal Bases
+
+A Raikov-Stöhr-type digital construction was a natural candidate, but the
+clean direct-sum model is now understood not to be a counterexample. In the
+formal monoid \(M=X\oplus Y\), \(A=X\cup Y\) is strongly minimal at order
+2, yet deleting the positive even-weight elements of \(X\) leaves an
+order-3 basis because every deleted \(X\)-element splits into two retained
+odd-weight elements.
+
+The obstruction to turning the formal model into an integer counterexample
+is structural: a faithful additive embedding of a free commutative monoid
+of rank at least two into \((\mathbb N,+)\) is impossible. Integer digit
+systems must introduce carries or coefficient identifications, and those
+extra representations are exactly what the private-witness argument cannot
+control.

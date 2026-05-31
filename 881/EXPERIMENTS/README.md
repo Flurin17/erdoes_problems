@@ -1,0 +1,83 @@
+# Experiments for Erdős Problem #881
+
+Finite experiments here are only heuristic. They search for local analogues
+of the two competing mechanisms:
+
+* positive deletion: after deleting a sparse set, enough representations
+  remain at one higher order;
+* counterexample gadgets: every element has a private witness that cannot be
+  repaired by adding one extra summand.
+
+The current script `finite_gadgets.py` searches for small finite sets
+\(T\subset[0,D]\) such that \(T+T=[0,2D]\) and each element of \(T\)
+participates in at least one private two-sum. It also demonstrates the
+mixed-radix product construction, starting from \(\{0,1,3,4\}\), that gives
+arbitrarily large finite gadgets. These are candidate local building blocks
+for \(k=2\) counterexample attempts, but an infinite block construction must
+also control cross-block three-sum repairs.
+
+`search_safe_gadgets.py` searches for a stronger local property: private
+two-sums \(u\) for which \(u-e\notin T+T\) for a finite forbidden set of
+earlier shifts \(e\). A sample run with forbidden set `{1}` finds
+`T=[0,4,8,10,13,15,20]`, whose two-sum set contains the interval `[12,21]`
+and whose elements all have `{1}`-safe private sums.
+
+`cyclic_minimal_deletions.py` checks a finite cyclic analogue: minimal
+2-bases in \(\mathbb Z/m\mathbb Z\) and whether some one-point deletion is
+a 3-basis. The output is mixed; this is a warning that finite residue
+models alone cannot prove the asymptotic statement.
+
+`random_one_point_deletion.py` samples finite interval sets \(A\subset[1,N]\)
+whose two-sums cover a tail and then checks one-point deletion at order 3 on
+the same finite tail. It often finds examples where every deletion fails on
+that finite window. These are finite-threshold artefacts, not counterexamples:
+an infinite order-3 basis may require a larger threshold after deletion.
+
+`efficient_block_search.py` searches for finite interval blocks whose
+two-sums cover a long interval and whose elements have order-3 witnesses
+safe against a prescribed finite set of earlier shifts. It is aimed at the
+block-counterexample route; failures here are heuristic evidence for the
+coverage-efficiency obstruction, not proof.
+
+`cyclic_barriers.py` checks a finite residue analogue of the barrier
+counterexample target: residue 2-bases \(S\) such that deleting any pair
+of residues destroys 3-basis status. Such examples are plentiful in small
+cyclic groups, but lifting them to integer element deletions is the hard
+part.
+
+`rep_hypergraph_stats.py` computes finite representation-hypergraph edge
+counts, maximum degrees, and greedy matching sizes for sample models. It is
+meant to sanity-check the matching criterion in Proposition 3.4.
+
+`delayed_gap_sim.py` is a toy finite-window simulation for the delayed-gap
+mechanism: after deleting one element, it estimates the first tail point
+where order-3 coverage resumes. Large threshold/deleted-element ratios are
+finite analogues of the threshold-control obstruction in Warning 3.0.
+
+`stage_buffer_search.py` searches directly for small finite stages of the
+Proposition 13.1 type that also leave two-sum coverage beyond the declared
+endpoint. That extra buffer is necessary if the stage is to be iterated,
+because the next stage's new elements must be larger than the previous
+declared endpoint.
+
+`collective_barrier_search.py` searches for finite windows where all
+one-point deletions preserve order-3 coverage on the window, but some pair
+deletions create holes. This models the remaining \(k=2\) finitely-bad
+case, where any obstruction must be genuinely collective rather than
+one-point.
+
+`two_center_residue.py` verifies the residue example
+\(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
+deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole
+whose reflected-cover obstruction genuinely needs two centers.
+
+`cross_stage_pair_search.py` searches for local stages satisfying the
+cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short
+initial chain but stalls quickly in the default bounded greedy search,
+highlighting how demanding it is to protect every old-new pair while
+continuing two-sum coverage.
+
+`reflection_certificate_verify.py` instantiates the balanced-certificate
+construction from Theorem 2.3 in the model \(A=\mathbb N\), and verifies
+for small parameters that every deleted multiset of size at most \(k\) has
+the required repair from the protected reservoir.

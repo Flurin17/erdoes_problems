@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""Search fixed residue-slot multisets for all small even graphs."""
+
+from __future__ import annotations
+
+import argparse
+import random
+from functools import lru_cache
+from itertools import combinations_with_replacement
+
+import modular_partition
+import regular_induced as ri
+
+
+def even_masks(n: int, pc: ri.Precomp) -> list[int]:
+    edge_index = {edge: i for i, edge in enumerate(pc.edges)}
+    free_edges = [(i, j) for i in range(n - 1) for j in range(i + 1, n - 1)]
+    out: list[int] = []
+    for bits in range(1 << len(free_edges)):
+        mask = 0
+        parities = [0] * n
+        for k, (i, j) in enumerate(free_edges):
+            if (bits >> k) & 1:
+                idx = edge_index[(i, j)]
+                mask |= 1 << idx
+                parities[i] ^= 1
+                parities[j] ^= 1
+        for i in range(n - 1):
+            if parities[i]:
+                idx = edge_index[(i, n - 1)]
+                mask |= 1 << idx
+                parities[i] ^= 1
+                parities[n - 1] ^= 1
+        if not parities[n - 1]:
+            out.append(mask)
+    return out
+
+
+def has_slot_partition(
+    n: int,
+    graph_mask: int,
+    modulus: int,
+    slots: tuple[int, ...],
+    pc: ri.Precomp,
+) -> bool:
+    slots = tuple(sorted(slots))
+    by_residue: dict[int, list[int]] = {residue: [] for residue in set(slots)}
+    for subset in range(1, 1 << n):
+        residue = modular_partition.residue_on(graph_mask, subset, modulus, pc)
+        if residue is not None and residue in by_residue:
+            by_residue[residue].append(subset)
+    for residue in by_residue:
+        by_residue[residue].sort(key=lambda subset: (subset.bit_count(), subset), reverse=True)
+
+    def remove_slot(state: tuple[int, ...], residue: int) -> tuple[int, ...]:
+        state_list = list(state)
+        state_list.remove(residue)
+        return tuple(state_list)
+
+    @lru_cache(maxsize=None)
+    def rec(remaining: int, state: tuple[int, ...]) -> bool:
+        if remaining == 0:
+            return True
+        if not state:
+            return False
+        pivot = remaining & -remaining
+        for residue in sorted(set(state)):
+            next_state = remove_slot(state, residue)
+            for subset in by_residue[residue]:
+                if subset & pivot and subset & ~remaining == 0:
+                    if rec(remaining ^ subset, next_state):
+                        return True
+        return False
+
+    return rec((1 << n) - 1, slots)
+
+
+def search(n: int, modulus: int, candidates: list[tuple[int, ...]]) -> None:
+    pc = ri.precompute(n)
+    masks = even_masks(n, pc)
+    print(f"n={n}")
+    print(f"modulus={modulus}")
+    print(f"even_graphs={len(masks)}")
+    good: list[tuple[int, ...]] = []
+    for slots in candidates:
+        bad = None
+        for graph_mask in masks:
+            if not has_slot_partition(n, graph_mask, modulus, slots, pc):
+                bad = graph_mask
+                break
+        print(
+            "slots="
+            + ",".join(map(str, slots))
+            + " "
+            + ("ok" if bad is None else f"bad={bad}")
+        )
+        if bad is None:
+            good.append(slots)
+    print(f"good_count={len(good)}")
+    for slots in good:
+        print("good=" + ",".join(map(str, slots)))
+
+
+def sample(
+    n: int,
+    modulus: int,
+    candidates: list[tuple[int, ...]],
+    trials: int,
+    seed: int,
+) -> None:
+    rng = random.Random(seed)
+    pc = ri.precompute(n)
+    edge_index = {edge: i for i, edge in enumerate(pc.edges)}
+    survivors = list(candidates)
+    checked = 0
+    for _ in range(trials):
+        graph_mask = modular_partition.random_parity_mask(n, False, rng, pc, edge_index)
+        if graph_mask is None:
+            continue
+        checked += 1
+        next_survivors: list[tuple[int, ...]] = []
+        for slots in survivors:
+            if has_slot_partition(n, graph_mask, modulus, slots, pc):
+                next_survivors.append(slots)
+            else:
+                print(
+                    "killed="
+                    + ",".join(map(str, slots))
+                    + f" mask={graph_mask} trial={checked}"
+                )
+        survivors = next_survivors
+        if not survivors:
+            break
+    print(f"n={n}")
+    print(f"modulus={modulus}")
+    print(f"sample_even_checked={checked}")
+    print(f"survivor_count={len(survivors)}")
+    for slots in survivors:
+        print("survivor=" + ",".join(map(str, slots)))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("n", type=int)
+    parser.add_argument("--modulus", type=int, default=4)
+    parser.add_argument(
+        "--candidates",
+        help="semicolon-separated residue multisets, e.g. 0,0,1,2;0,1,2,3",
+    )
+    parser.add_argument("--sample-even", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=0)
+    args = parser.parse_args()
+    if args.candidates:
+        candidates = [
+            tuple(int(item) % args.modulus for item in block.split(",") if item)
+            for block in args.candidates.split(";")
+            if block
+        ]
+    else:
+        candidates = list(combinations_with_replacement(range(args.modulus), args.modulus))
+    if args.sample_even:
+        sample(args.n, args.modulus, candidates, args.sample_even, args.seed)
+    else:
+        search(args.n, args.modulus, candidates)
+
+
+if __name__ == "__main__":
+    main()
