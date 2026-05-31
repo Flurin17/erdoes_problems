@@ -1415,15 +1415,13 @@ source of growth beyond Ramsey.
   `q+1` after removing its largest coordinate.
 - 2026-05-31: Added a `--max-first` filter to `rectangle_cover.py` so
   rectangle-only sweeps can test bounded-largest-coordinate subproblems while
-  reusing the shared DP cache.  Filtered exhaustive checks found no
-  rectangle-cover counterexample for `q=6,max_first=13=2q+1` and
-  `q=7,max_first=15=2q+1`.  The `q=7` run checked `827,261` filtered
-  partitions of total at most `49` and skipped `264,483` larger-first
-  partitions.  This supports the next arithmetic subtarget: rectangle-only
-  failures may require a coordinate larger than `2q+1`.
-- 2026-05-31: A filtered `q=8,max_first=17=2q+1` rectangle sweep reached
-  `4,926,734` checked partitions before the operation limit, stopping at
-  `(6,6,6,6,5,2,1^30)`.  A direct check covers this vector in `8` rectangles:
-  `6^1, 6^1, 6^1, 5^2, 2^1, 1^10, 1^10, 1^10`.  The bounded-height
-  rectangle subtarget remains plausible, but q=8 needs better candidate
-  ordering or stronger pruning to finish exhaustively.
+  reusing the shared DP cache.  Added safe single-column and unit-layer
+  pruning to the exhaustive rectangle recursion.  Filtered exhaustive checks
+  found no rectangle-cover counterexample for
+  `q=6,max_first=13=2q+1`, `q=7,max_first=15=2q+1`, and
+  `q=8,max_first=17=2q+1`.  The `q=8` run checked `8,707,829` filtered
+  partitions of total at most `64`, skipped `3,600,309` larger-first
+  partitions, used `11,084,717` cached states and `67,420,898` candidate
+  branches, and found no counterexample.  This supports the next arithmetic
+  subtarget: rectangle-only failures may require a coordinate larger than
+  `2q+1`.

@@ -47,6 +47,14 @@ def subtract_rectangle(
     return normalize(tuple(out))
 
 
+def singly_coverable(state: tuple[int, ...], left: int, cap: int) -> bool:
+    return sum((value + cap - 1) // cap for value in state) <= left
+
+
+def unit_layer_coverable(state: tuple[int, ...], left: int, cap: int) -> bool:
+    return bool(state) and state[0] <= left and sum(state) <= left * cap
+
+
 def find_cover(
     vector: tuple[int, ...],
     bins: int,
@@ -137,6 +145,10 @@ def exhaustive(
             return False
         if sum(state) > left * cap:
             return False
+        if singly_coverable(state, left, cap):
+            return True
+        if unit_layer_coverable(state, left, cap):
+            return True
 
         for indices, height in candidates(state, cap):
             branches += 1
