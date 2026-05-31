@@ -133,6 +133,11 @@ holds but no infinite deletion works, then every infinite tail contains a
 finite delayed barrier \(F\) such that \(A\setminus F\) is eventually an
 order-\((k+1)\) basis, but every threshold is at least \(\max F\); the same
 terminal-gap and activity conclusions still hold for the delayed witness.
+Corollary 3.1e' sharpens this to an inclusion-minimal delayed-barrier
+normal form: \(F\) may be chosen late-bad while every proper subset is not,
+and also inclusion-minimal for one witness \(w\ge\max F-1\). For \(k=2\),
+after enlarging the protected core by finitely many singleton exceptions,
+all remaining delayed barriers have size at least two.
 Corollary 10.3d records the complementary genuine-failure case: if no
 finite core gives finite-deletion stability, then after every finite core
 there are active finite barriers whose terminal windows are actual long
@@ -202,6 +207,14 @@ Consequently, any counterexample to the broad deletion theorem must have no
 tail-syndetic subset. Equivalently, every infinite subset of \(A\) has
 arbitrarily long tail gaps; in particular, \(A\) itself has arbitrarily
 long gaps.
+Lemma 8.2e adds a fixed-core delayed-singleton diagnostic for \(k=2\). If a
+finite core \(D\) plus one moving deleted point \(b\) keeps producing
+order-3 holes, then either the excess \(w-b\) is unbounded and gives
+reflected centers directly, or the excess is bounded and a test set above
+that bound prevents \(b\) from coloring the shifted rows. In both regimes,
+one finite test set with no large certificate-free subset forces a recurrent
+certificate triple and hence a good deletion. Thus fixed-core singleton
+delay has the same certificate-free escape as fixed-rank barriers.
 
 ## Trivial and Boundary Cases
 

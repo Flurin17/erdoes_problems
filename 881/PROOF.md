@@ -967,7 +967,9 @@ In particular,
 q_f f+(h-q_f)m_0\le w. \tag{3}
 \]
 
-Proof. Replace \(X\) by its infinite tail
+Proof. Since \(A\) is an order-\(h\) basis by monotonicity, increase \(L\)
+if necessary so that \(L\) is above an order-\(h\) threshold for \(A\).
+Replace \(X\) by its infinite tail
 \[
 X'=\{x\in X:x>L+1\}.
 \]
@@ -1015,6 +1017,73 @@ must be a pure delayed-threshold counterexample: finite deletions outside
 the protected core are eventually repaired at order \(k+1\), but every
 infinite tail contains finite subdeletions whose repair threshold is forced
 to start at or beyond the deleted block itself.
+
+## Corollary 3.1e': Collective delayed-barrier normal form
+
+Keep the hypotheses of Lemma 3.1e. Then for every finite
+\[
+E\supseteq E_0,
+\]
+every infinite
+\[
+X\subset A\setminus E,
+\]
+and every \(L\), there are a finite nonempty set
+\[
+F\subset X
+\]
+and an integer \(w>L\) such that:
+
+1. \(A\setminus F\) is an order-\(h\) basis;
+2. \(F\) is late-bad, but every proper subset \(G\subsetneq F\) is not
+   late-bad;
+3. \(w\ge\max F-1\) and \(w\notin h(A\setminus F)\);
+4. \(F\) is inclusion-minimal for this fixed witness \(w\).
+
+Consequently, if \(A\) is an order-\(k\) basis and \(h=k+1\), then the
+terminal gap and active-repair conclusions of Lemma 3.1e hold for this
+\(F,w\).
+
+For \(k=2\), in any remaining counterexample the core \(E_0\) may be
+enlarged so that every such \(F\) has size at least \(2\).
+
+Proof. As in Lemma 3.1e, increase \(L\) if necessary so it lies above an
+order-\(h\) threshold for \(A\), and replace \(X\) by its tail above
+\(L+1\). By Corollary 3.1c, this tail contains a late-bad finite set. Choose
+one that is inclusion-minimal for the late-bad property, and call it
+\(F_0\). Finite-core stability gives that \(A\setminus F_0\) is an
+order-\(h\) basis, so \(F_0\) is late-bad only because no threshold below
+\[
+M=\max F_0
+\]
+works. Hence there is
+\[
+w\ge M-1>L
+\]
+with
+\[
+w\notin h(A\setminus F_0).
+\]
+
+Shrink \(F_0\) inclusion-minimally for this fixed witness \(w\), and call
+the result \(F\). It is nonempty because \(w\) is above an order-\(h\)
+threshold for \(A\), so \(w\in hA\). Also \(A\setminus F\) is an order-\(h\)
+basis by finite-core stability, while \(w\notin h(A\setminus F)\). Thus
+every threshold for \(A\setminus F\) is \(>w\), and since
+\[
+w\ge M-1\ge\max F-1,
+\]
+the set \(F\) is late-bad. Every proper subset of \(F\) is a proper subset
+of the late-bad-minimal set \(F_0\), and hence is not late-bad. The
+inclusion-minimality for \(w\) was built into the final shrinking.
+
+The terminal gap and active repairs are exactly the second part of Lemma
+3.1e. Finally, when \(k=2\), Corollary 8.3 rules out infinitely many
+singleton deletions that are genuine order-3 failures, while Lemma 10.2b
+rules out infinitely many singleton deletions that are order-3 bases but
+late-bad. Thus only finitely many singleton late-bad sets can occur in a
+counterexample; enlarge \(E_0\) to contain those singleton elements.
+\(\square\)
 
 ## Proposition 3.1f: Syndetic tail criterion
 
@@ -3546,6 +3615,95 @@ Thus a finite-prefix star obstruction can persist only in the same
 certificate-free regime as Lemma 8.6g: every finite test set in the relevant
 tail must contain a certificate-free subset of size at least
 \(|T|/|D|\).
+
+## Lemma 8.2e: Finite-core singleton barriers have the same certificate escape
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\), and fix a finite nonempty set \(D\subset A\). Suppose
+there is a finite
+\[
+T_0\subset A\setminus D
+\]
+such that every subset
+\[
+U\subset T_0,\qquad |U|\ge |T_0|/(|D|+1),
+\]
+contains a certificate triple
+\[
+e,y_1,y_2\in U,\qquad y_1\ne e,\quad y_2\ne e,\quad y_1+y_2-e\in A.
+\]
+Assume that for every \(L\) there are
+\[
+b\in A\setminus(D\cup T_0),\qquad w\in\mathbb N,
+\]
+such that
+\[
+w-\max T_0\ge N_0,\qquad w-\max D>L+\max T_0, \tag{1}
+\]
+\[
+w\notin3(A\setminus(D\cup\{b\})), \tag{2}
+\]
+and either
+\[
+w-b>L+\max T_0 \tag{3}
+\]
+or
+\[
+w-b<\min T_0. \tag{4}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. We show that some certificate triple in \(T_0\) is
+reflection-recurrent, and then apply Corollary 2.3c. Fix \(L_0\), and apply
+the hypothesis with \(L>L_0\). For every \(t\in T_0\), choose a two-term
+representation
+\[
+w-t=a_t+a'_t,\qquad a_t,a'_t\in A,
+\]
+which exists by \(w-\max T_0\ge N_0\). If this representation avoided
+\[
+D\cup\{b\},
+\]
+then adding \(t\in A\setminus(D\cup\{b\})\) would put \(w\) in
+\[
+3(A\setminus(D\cup\{b\})),
+\]
+contrary to (2). Choose one color
+\[
+c_t\in(D\cup\{b\})\cap\{a_t,a'_t\}.
+\]
+Some color \(c\in D\cup\{b\}\) occurs on a subset
+\[
+U\subset T_0,\qquad |U|\ge |T_0|/(|D|+1).
+\]
+
+If \(c=b\), then (4) is impossible, since \(b\) occurring in a
+representation of \(w-t\) would leave the other summand \(w-t-b<0\).
+Therefore (3) holds, and the center
+\[
+m=w-b
+\]
+reflects \(U\) into \(A\). Moreover \(m>L_0+\max T_0\). If \(c\in D\),
+then the center
+\[
+m=w-c
+\]
+reflects \(U\) into \(A\), and (1) again gives \(m>L_0+\max T_0\).
+
+By the certificate-density hypothesis on \(T_0\), choose a certificate
+triple \(e,y_1,y_2\in U\). There are only finitely many such triples in
+\(T_0\), so as \(L_0\to\infty\) one fixed certificate triple is reflected
+by arbitrarily large centers. Corollary 2.3c gives the desired infinite
+deletion. \(\square\)
+
+This covers the two clean delayed-singleton regimes over a fixed finite
+core. If the excess \(w-b\) is unbounded, the moving element \(b\) itself
+can serve as the color and gives reflected centers \(w-b\). If the excess
+is bounded, one chooses \(T_0\) above that bound, so \(b\) cannot appear in
+the shifted two-sum rows and the colors come from the fixed core. The only
+remaining finite-core singleton escape is again the large certificate-free
+subset alternative.
 
 The important limitation is that a prefix star need not descend to a genuine
 pair hole. In the finite window
@@ -9134,6 +9292,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   remaining counterexample must be purely delayed: finite deletions are
   eventually repaired, but every infinite tail contains finite subdeletions
   whose thresholds start at or beyond the deleted block.
+* Corollary 3.1e' sharpens this to an inclusion-minimal collective delayed
+  barrier normal form. For \(k=2\), after finitely many singleton
+  exceptions are protected, the delayed barriers all have size at least
+  two.
 * Proposition 3.1f proves finite-core finite-deletion stability and the
   desired infinite deletion for every basis containing a tail-syndetic
   subset. It uses Lemma 10.3 to rule out terminal gaps after finite
@@ -9274,6 +9436,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.2d gives the matching certificate-forcing statement for
   multi-center fixed-prefix stars; persistent star obstructions must again
   live in the large certificate-free subset regime.
+* Lemma 8.2e applies the same certificate-forcing mechanism to fixed-core
+  delayed-singleton barriers, splitting the moving color into bounded- and
+  unbounded-excess regimes.
 * Theorem 8.2 proves that finite reflection-recurrence gives an infinite
   deletion preserving order 3.
 * Corollary 8.3 therefore resolves the \(k=2\) problem whenever infinitely
