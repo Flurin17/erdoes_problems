@@ -127,6 +127,10 @@ deletion under a tail-syndetic subset hypothesis. This blocks all
 eventually periodic or finite-accelerator counterexample attempts whose
 large background set has bounded gaps: finite fatal deletions would force
 terminal retained gaps longer than the syndetic gap bound.
+Consequently, any counterexample to the broad deletion theorem must have no
+tail-syndetic subset. Equivalently, every infinite subset of \(A\) has
+arbitrarily long tail gaps; in particular, \(A\) itself has arbitrarily
+long gaps.
 
 ## Trivial and Boundary Cases
 

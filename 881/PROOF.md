@@ -927,6 +927,12 @@ contains a point of \(P_0\). This point is not deleted by \(F_w\), a
 contradiction. Therefore \(A\setminus B\) is an order-\(h\) basis.
 \(\square\)
 
+Consequently, any counterexample to the broad deletion theorem has no
+tail-syndetic subset. Equivalently, every infinite subset of \(A\) has
+arbitrarily long gaps in the tail. Thus the remaining problem is genuinely
+sparse; bounded-gap background structure cannot be responsible for a
+negative answer.
+
 ## Lemma 3.2: Protected matching criterion
 
 Let \(A\) be an asymptotic basis of order \(k\). Suppose there is a finite
@@ -4382,6 +4388,9 @@ new-design problem, not as a small non-greedy search miss.
   desired infinite deletion for every basis containing a tail-syndetic
   subset. It uses Lemma 10.3 to rule out terminal gaps after finite
   deletions.
+* The contrapositive of Proposition 3.1f says every counterexample has no
+  tail-syndetic subset; every infinite subset of \(A\) has arbitrarily long
+  tail gaps.
 * Lemma 3.2 proves the theorem under an arbitrarily-large protected matching
   hypothesis for \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded
