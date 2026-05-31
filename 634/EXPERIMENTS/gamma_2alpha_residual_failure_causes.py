@@ -18,6 +18,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import cmp_to_key
+from itertools import product
 from pathlib import Path
 
 
@@ -52,6 +53,9 @@ class ShellDiagnostic:
     pinch_residual_sectors: int = 0
     pinch_unfillable_sectors: int = 0
     pinch_sector_signatures: CounterTuple = ()
+    split_options: int = 0
+    split_component_pass_options: int = 0
+    split_failure_reasons: CounterTuple = ()
     forced_corners: int = 0
     label_violations: int = 0
     forced_angles: CounterTuple = ()
@@ -79,6 +83,10 @@ def graph_data(segments: list[exact.KSegment]) -> tuple[dict[exact.KPoint, list[
                     seen.add(neighbor)
                     stack.append(neighbor)
     return graph, components
+
+
+def canonical_segment(start: exact.KPoint, end: exact.KPoint) -> exact.KSegment:
+    return exact.ksegment_key(start, end)
 
 
 def graph_profile(segments: list[exact.KSegment]) -> GraphProfile:
@@ -277,6 +285,150 @@ def pinch_sector_profile(
     return residual_sectors, unfillable, tuple(sorted(signatures.items()))
 
 
+def kneg(value: exact.KQuad) -> exact.KQuad:
+    return -value[0], -value[1]
+
+
+def kabs(value: exact.KQuad) -> exact.KQuad:
+    return kneg(value) if exact.ksign(value) < 0 else value
+
+
+def kquad_ratio(left: exact.KQuad, right: exact.KQuad) -> tuple[Fraction, Fraction] | None:
+    denominator = right[0] * right[0] - right[1] * right[1] * exact.RADICAND
+    if denominator == 0:
+        return None
+    rational = Fraction(left[0] * right[0] - left[1] * right[1] * exact.RADICAND, denominator)
+    radical = Fraction(left[1] * right[0] - left[0] * right[1], denominator)
+    return rational, radical
+
+
+def possible_vertex_pairings(
+    vertex: exact.KPoint,
+    neighbors: list[tuple[exact.KPoint, str]],
+) -> tuple[dict[exact.KPoint, exact.KPoint], ...]:
+    if len(neighbors) == 2:
+        first = neighbors[0][0]
+        second = neighbors[1][0]
+        return ({first: second, second: first},)
+    if len(neighbors) != 4:
+        return ()
+    half_edges = tuple((label, exact.kpsub(neighbor, vertex), neighbor) for neighbor, label in neighbors)
+    ordered = tuple(sorted(half_edges, key=cmp_to_key(lambda left, right: compare_incident_half_edges((left[0], left[1]), (right[0], right[1])))))
+    cyclic_neighbors = tuple(neighbor for _label, _vector, neighbor in ordered)
+    first = {
+        cyclic_neighbors[0]: cyclic_neighbors[1],
+        cyclic_neighbors[1]: cyclic_neighbors[0],
+        cyclic_neighbors[2]: cyclic_neighbors[3],
+        cyclic_neighbors[3]: cyclic_neighbors[2],
+    }
+    second = {
+        cyclic_neighbors[1]: cyclic_neighbors[2],
+        cyclic_neighbors[2]: cyclic_neighbors[1],
+        cyclic_neighbors[3]: cyclic_neighbors[0],
+        cyclic_neighbors[0]: cyclic_neighbors[3],
+    }
+    return first, second
+
+
+def split_cycles_for_pairing(
+    residual_labels: dict[exact.KSegment, str],
+    pairing: dict[exact.KPoint, dict[exact.KPoint, exact.KPoint]],
+) -> tuple[tuple[list[exact.KPoint], list[exact.KSegment]], ...] | None:
+    unused = set(residual_labels)
+    cycles: list[tuple[list[exact.KPoint], list[exact.KSegment]]] = []
+    while unused:
+        start_segment = next(iter(unused))
+        start, current = start_segment
+        previous = start
+        vertices = [start]
+        segments: list[exact.KSegment] = []
+        seen_in_cycle: set[exact.KSegment] = set()
+        while True:
+            segment = canonical_segment(previous, current)
+            if segment not in residual_labels:
+                return None
+            if segment in seen_in_cycle:
+                return None
+            seen_in_cycle.add(segment)
+            segments.append(segment)
+            vertices.append(current)
+            next_vertex = pairing.get(current, {}).get(previous)
+            if next_vertex is None:
+                return None
+            previous, current = current, next_vertex
+            if previous == start and current == vertices[1]:
+                break
+            if len(segments) > len(residual_labels):
+                return None
+        for segment in seen_in_cycle:
+            unused.discard(segment)
+        cycles.append((vertices[:-1], segments))
+    return tuple(cycles)
+
+
+def component_area_tiles(
+    vertices: list[exact.KPoint],
+    tile_area2: exact.KQuad,
+) -> Fraction | None:
+    area2 = kabs(exact.ksigned_area2(tuple(vertices)))
+    ratio = kquad_ratio(area2, tile_area2)
+    if ratio is None:
+        return None
+    rational, radical = ratio
+    if radical != 0:
+        return None
+    return rational
+
+
+def split_component_profile(
+    residual_labels: dict[exact.KSegment, str],
+    unique: tuple[exact.IntegerQuadraticTile, ...],
+) -> tuple[int, int, CounterTuple]:
+    graph: dict[exact.KPoint, list[tuple[exact.KPoint, str]]] = defaultdict(list)
+    for (start, end), label in residual_labels.items():
+        graph[start].append((end, label))
+        graph[end].append((start, label))
+
+    vertex_options: list[tuple[exact.KPoint, tuple[dict[exact.KPoint, exact.KPoint], ...]]] = []
+    for vertex, neighbors in graph.items():
+        options = possible_vertex_pairings(vertex, neighbors)
+        if not options:
+            return 0, 0, (("unsupported-degree", 1),)
+        vertex_options.append((vertex, options))
+
+    tile_area2 = kabs(exact.ksigned_area2(unique[0].polygon))
+    total_options = 0
+    pass_options = 0
+    failures: Counter[str] = Counter()
+    for choices in product(*(options for _vertex, options in vertex_options)):
+        total_options += 1
+        pairing = {vertex: choice for (vertex, _options), choice in zip(vertex_options, choices)}
+        cycles = split_cycles_for_pairing(residual_labels, pairing)
+        if cycles is None:
+            failures["bad-cycle-split"] += 1
+            continue
+        option_ok = True
+        for vertices, segments in cycles:
+            area_tiles = component_area_tiles(vertices, tile_area2)
+            if area_tiles is None or area_tiles.denominator != 1 or area_tiles <= 0:
+                failures["nonintegral-area"] += 1
+                option_ok = False
+                break
+            tile_count = area_tiles.numerator
+            label_counts = Counter(residual_labels[segment] for segment in segments)
+            if any(label_counts[label] > tile_count for label in ("a", "b", "c")):
+                failures["too-many-boundary-sides"] += 1
+                option_ok = False
+                break
+            if any(label_counts[label] % 2 != tile_count % 2 for label in ("a", "b", "c")):
+                failures["side-parity"] += 1
+                option_ok = False
+                break
+        if option_ok:
+            pass_options += 1
+    return total_options, pass_options, tuple(sorted(failures.items()))
+
+
 def segment_length(segment: exact.KSegment, scale: int):
     length_sq = exact.knorm_sq(exact.kpsub(segment[1], segment[0]))
     if length_sq[1] != 0:
@@ -338,6 +490,7 @@ def diagnose_shell(
         unique,
         survivor.candidate.tile,
     )
+    split_options, split_pass_options, split_failures = split_component_profile(residual_labels, unique)
     non_full_atoms, wrong_full_label_atoms = full_atom_failures(residual_labels, survivor.candidate.tile, scale)
     parity_bad = (
         parity_mismatches(label_profile, remaining_tiles)
@@ -362,6 +515,9 @@ def diagnose_shell(
             pinch_residual_sectors=residual_sector_count,
             pinch_unfillable_sectors=unfillable_sector_count,
             pinch_sector_signatures=sector_profile,
+            split_options=split_options,
+            split_component_pass_options=split_pass_options,
+            split_failure_reasons=split_failures,
         )
 
     if any(exact.kside_decomposable(segment, survivor.candidate.tile, scale) for segment in residual_labels):
@@ -381,6 +537,9 @@ def diagnose_shell(
             pinch_residual_sectors=residual_sector_count,
             pinch_unfillable_sectors=unfillable_sector_count,
             pinch_sector_signatures=sector_profile,
+            split_options=split_options,
+            split_component_pass_options=split_pass_options,
+            split_failure_reasons=split_failures,
         )
 
     forced_angles: Counter[str] = Counter()
@@ -417,6 +576,9 @@ def diagnose_shell(
         pinch_residual_sectors=residual_sector_count,
         pinch_unfillable_sectors=unfillable_sector_count,
         pinch_sector_signatures=sector_profile,
+        split_options=split_options,
+        split_component_pass_options=split_pass_options,
+        split_failure_reasons=split_failures,
         forced_corners=forced,
         label_violations=violations,
         forced_angles=tuple(sorted(forced_angles.items())),
@@ -490,6 +652,8 @@ def main() -> None:
             pinch_sector_counts: Counter[str] = Counter()
             pinch_sector_shell_profiles: Counter[CounterTuple] = Counter()
             unfillable_sector_counts: Counter[tuple[int, int]] = Counter()
+            split_pass_counts: Counter[tuple[int, int]] = Counter()
+            split_failure_counts: Counter[str] = Counter()
             examples: dict[str, tuple[BoundaryDemand, ShellDiagnostic]] = {}
             kept = 0
             covered = 0
@@ -532,6 +696,9 @@ def main() -> None:
                     unfillable_sector_counts[(detail.pinch_residual_sectors, detail.pinch_unfillable_sectors)] += 1
                     for signature, count in detail.pinch_sector_signatures:
                         pinch_sector_counts[signature] += count
+                    split_pass_counts[(detail.split_options, detail.split_component_pass_options)] += 1
+                    for reason, count in detail.split_failure_reasons:
+                        split_failure_counts[reason] += count
                 if detail.status == "corner-label-violation":
                     forced_angle_profiles[detail.forced_angles] += 1
                     violations_per_shell[detail.label_violations] += 1
@@ -581,6 +748,12 @@ def main() -> None:
             print("  top non-simple pinch sector signatures:")
             for signature, count in pinch_sector_counts.most_common(args.top):
                 print(f"    {signature}: {count}")
+            print("  non-simple split component pass counts:")
+            for (options, pass_options), count in sorted(split_pass_counts.items()):
+                print(f"    options={options}, pass={pass_options}: {count}")
+            print("  non-simple split component failure reasons:")
+            for reason, count in split_failure_counts.most_common(args.top):
+                print(f"    {reason}: {count}")
             print("  top forced-angle profiles among corner violations:")
             for profile, count in forced_angle_profiles.most_common(args.top):
                 print(f"    {counter_tuple_text(profile)}: {count}")

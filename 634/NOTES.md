@@ -86,7 +86,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   `aabc`, making those local pinch stars the next finite obstruction target.
   A diagnostic sector pass suggests every sampled `accc` pinch has locally
   unfillable residual sectors, while pure `aabc` pinches are locally fillable
-  and need a stronger component/topology invariant.
+  and need a stronger component/topology invariant. An exact split-cycle
+  component diagnostic now checks planar pairings, component areas, boundary
+  side-count bounds, and side parity; a seed-`20260602`, `10000`-attempt
+  outside-cover sample shows this coarse component invariant still permits the
+  pure `aabc` branch.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

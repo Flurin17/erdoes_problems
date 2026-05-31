@@ -1944,6 +1944,27 @@ shells with only `aabc` pinches therefore remain the important residual
 topology/component subcase after the local `accc` star obstruction is made
 exact.
 
+The same diagnostic now includes an exact split-cycle component check. At each
+degree-4 residual vertex it enumerates the two planar pairings of consecutive
+half-edges, traces the induced boundary cycles exactly, divides each component
+area by the exact scaled tile area, and applies the elementary component
+conditions:
+
+```text
+boundary label count for each side <= component tile count,
+boundary label count for each side == component tile count (mod 2).
+```
+
+This test is useful but not decisive. In a seed-`20260602`, `10000`-attempt
+outside-cover run, pure one-pinch `aabc` non-simple shells have `2` planar
+pairing options and both pass the exact component test: `42` such `N=63`
+samples and `217` such `N=99` samples appear. The split test does reject many
+`accc`-containing pairings by side parity, non-integral component area, or too
+many boundary sides, but the `accc` branch is already better targeted by the
+local unfillable-sector diagnostic above. Thus the remaining finite target has
+split into two parts: make the `accc` sector obstruction exact, and find a
+stronger invariant for the locally fillable `aabc` split components.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`
