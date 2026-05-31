@@ -3678,6 +3678,31 @@ unresolved counterexample, if it exists, must either be near the critical
 order-2 density scale or use genuinely unbounded-rank barriers such as the
 Schreier target in Proposition 13.1b-Schreier.
 
+Combining this with Lemma 8.6g gives a clean partial theorem. Let \(A\) be
+an order-2 basis satisfying (1). If, in the remaining collective case, there
+is a fixed rank \(r\) such that for every finite \(T\subset A\) and every
+\(L\) there are
+\[
+F\subset A\setminus T,\qquad |F|=r,
+\]
+and a witness \(w\) with
+\[
+w-\max F>L,\qquad w-\max T\ge N_0,\qquad
+w\notin3(A\setminus F),
+\]
+then the desired infinite deletion exists. Indeed, (1) and the Sidon bound
+provide the finite test set required by Lemma 8.6g, and Lemma 8.6g gives a
+recurrent certificate triple; Corollary 2.3c then gives an infinite
+deletion preserving order \(3\).
+
+This does not by itself settle bounded-width barriers. Lemma 8.5a can
+Ramsey-thin a bounded-width obstruction to one fixed rank on an infinite
+tail, but Lemma 8.5b's bounded-top-excess contradiction requires a cofinite
+tail, not merely a sparse infinite one. Thus the remaining dense case still
+allows a sparse fixed-rank tail with bounded top excess, unless an
+additional arithmetic argument upgrades it to bounded second-excess
+(handled by Lemma 8.6a) or to the large-excess hypothesis above.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -5918,7 +5943,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   only an \(O(\sqrt X)\) counting bound and therefore does not contradict
   thin order-2 bases.
 * Corollary 8.6k uses the Sidon bound to rule out fixed-rank large-excess
-  barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\).
+  barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\), while
+  noting that sparse fixed-rank tails with bounded top excess are not ruled
+  out by the cofinite-tail counting lemma.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.
