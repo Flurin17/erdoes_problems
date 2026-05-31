@@ -116,13 +116,22 @@ Current components:
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`
-  shells for `N=99`.
+  shells for `N=99`. Its geometry predicates are floating-point diagnostics;
+  the exact low-mixed classifications are now supplied by the rational and
+  quadratic scripts below.
 - `gamma_2alpha_rational_shell_census.py`: exact-arithmetic shell classifier
   for rational-coordinate `gamma=2alpha` survivors. It currently applies to
   the `N=99` benchmark; after rational placement it clears denominators and
   uses integer geometry to classify all `63000` total-mixed-`<=4` shell
   demands exactly as `42480` non-simple residual cycles and `20520` residual
   corner-label violations.
+- `gamma_2alpha_quadratic_shell_census.py`: exact-arithmetic shell classifier
+  for `gamma=2alpha` survivors whose shell coordinates lie in `Q(sqrt(d))`.
+  It currently applies to the `N=63` benchmark over `Q(sqrt(5))`; after
+  quadratic placement it clears denominators to integer pairs and classifies
+  all `11040` total-mixed-`<=4` shell demands exactly as `6144` non-simple
+  residual cycles and `4896` residual corner-label violations. It also
+  reproduces the endpoint-minimal `N=99` rational checks with `d=1`.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

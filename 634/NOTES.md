@@ -71,11 +71,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   minima `(39,35,31)` inside `(56,54,56)` for `63`, and `(48,34,40)` inside
   `(92,86,92)` for `99`. The floating boundary-shell placement has no proper
   positive-area overlaps after merging the two duplicate base-corner tiles,
-  leaving residual tile areas `42` and `74`. The residual boundary graph is a
-  clean 46-cycle of area `74` tile areas for `99`, but has degree-1 and
-  degree-4 junctions for `63`. The current `99` shell witness is eliminated by
-  residual corner labels: nine forced single-angle residual corners have
-  incompatible adjacent full-side labels.
+  leaving residual tile areas `42` and `74`. Exact shell classifiers now remove
+  all total-mixed-`<=4` boundary shells in both benchmark rows: `63` has `6144`
+  non-simple residual cycles and `4896` residual corner-label violations over
+  `Q(sqrt(5))`, while `99` has `42480` non-simple residual cycles and `20520`
+  residual corner-label violations over `Q`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
@@ -275,25 +275,21 @@ Important distinction: "positive square class" and "smallest representative" are
    than only counting labels consumed by local fans. A boundary-shell residual
    search is now the most concrete next construction/obstruction route; `99`
    is the cleaner first target because the residual shell boundary is a single
-   simple cycle in the current floating model. The first corner-label pass
-   rules out the displayed minimum-transition shell, but not yet all possible
-   boundary orderings. A finite census over the eight canonical
-   endpoint-minimal representatives for each of `63` and `99` also eliminates
-   those representatives by overlap, non-simple residual boundary, or residual
-   corner-label mismatch. A randomized noncanonical shell sampler found no
-   survivor in fixed-seed `30000`-attempt runs (`795` unique shells for `63`,
-   `648` for `99`), but this is evidence rather than an exhaustive certificate.
-   A stratified low-overhang run with total mixed count at most `4` found
-   `189` unique `63` shells and `143` unique `99` shells, again with no pass.
-   The full low-overhang census is now deterministic: all `11040` shells for
-   `63` have non-simple residual boundary, and all `63000` shells for `99` have
-   non-simple residual boundary or residual corner-label violations.
-   For `99`, the rational exact-arithmetic shell classifier now covers the full
-   `63000` low-mixed shells by clearing denominators and using integer geometry:
-   `42480` are non-simple residual cycles and `20520` have residual
-   corner-label violations. This is an exact low-overhang shell obstruction for
-   `99`, but higher-mixed boundary orders remain open, and the analogous `63`
-   low-overhang census still uses floating shell predicates.
+   simple cycle in the current floating model. Exact residual corner-label
+   passes rule out the displayed minimum-transition shells for both benchmark
+   values, but not yet all possible boundary orderings. A finite census over
+   the eight canonical endpoint-minimal representatives for each of `63` and
+   `99` also eliminates those representatives by overlap, non-simple residual
+   boundary, or residual corner-label mismatch. A randomized noncanonical shell
+   sampler found no survivor in fixed-seed `30000`-attempt runs (`795` unique
+   shells for `63`, `648` for `99`), but this is evidence rather than an
+   exhaustive certificate. A stratified low-overhang run with total mixed count
+   at most `4` found `189` unique `63` shells and `143` unique `99` shells,
+   again with no pass. The full low-overhang census is now exact: all `11040`
+   shells for `63` are eliminated over `Q(sqrt(5))` (`6144` non-simple,
+   `4896` corner-label violations), and all `63000` shells for `99` are
+   eliminated over `Q` (`42480` non-simple, `20520` corner-label violations).
+   Higher-mixed boundary orders remain open.
 
 ## Current Diophantine Status for `n=19`
 

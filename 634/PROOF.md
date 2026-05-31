@@ -1789,64 +1789,64 @@ Splitting the shell edges at T-junctions leaves a clean simple residual
 boundary cycle for `N=99` in the floating model: `46` residual segments and all
 `46` residual vertices of degree `2`, with area `9768`, exactly `74` tile
 areas. Each residual boundary angle is still a nonnegative sum of tile angles.
-For `N=63`, the same extraction has degree-1 and degree-4 junctions, so a
-residual search there must model a network domain rather than only a simple
-polygon.
+The earlier tolerance-based extraction reported a non-simple residual graph for
+the displayed `N=63` shell, but the exact `Q(sqrt(5))` splitter below supersedes
+that diagnostic: the displayed `N=63` shell has a simple residual cycle and is
+eliminated by the same corner-label mechanism.
 
 For the displayed `N=99` shell, the residual cycle has a stronger immediate
 failure: its `46` residual atoms are all full indecomposable tile sides
 (`12` of length `b=11`, `18` of length `a=25`, and `16` of length `c=30`).
 Among the residual vertices, `20` are forced single-angle corners
 (`9 alpha` and `11 beta`), but `9` of those have adjacent full-side labels that
-are not the side-label pair incident to the forced angle. Hence this particular
-minimum-transition boundary shell cannot be extended to a tiling. Since other
-boundary orders for the same arithmetic survivor are not yet exhausted, this is
-a shell-witness obstruction rather than a proof that `N=99` is impossible.
+are not the side-label pair incident to the forced angle. The displayed `N=63`
+shell has the analogous exact failure with `16` forced single-angle corners and
+`9` adjacent-label violations. Hence these particular minimum-transition
+boundary shells cannot be extended to tilings. Since other boundary orders for
+the same arithmetic survivors are not yet exhausted, this is a shell-witness
+obstruction rather than a proof that either value is impossible.
 
 The same diagnostic has been lifted one level to the canonical endpoint-minimal
 representatives selected by the transition-demand path DP. For each of `N=63`
-and `N=99`, there are `8` such representatives. For `N=63`, `6` have non-simple
-residual boundary graphs and `2` have proper shell overlaps. For `N=99`, `6`
-have residual corner-label violations and `2` have non-simple residual boundary
+and `N=99`, there are `8` such representatives. In exact `Q(sqrt(5))`
+arithmetic, the `N=63` representatives split as `4` residual corner-label
+violations, `2` non-simple residual boundary graphs, and `2` proper shell
+overlaps. In exact rational arithmetic, the `N=99` representatives split as
+`6` residual corner-label violations and `2` non-simple residual boundary
 graphs. Thus the endpoint-minimal representatives are exhausted, but arbitrary
 noncanonical boundary orderings remain to be controlled before this can become
 an impossibility proof.
 
-Randomized noncanonical shell sampling has so far found no counterexample to
-the shell obstruction pattern. With seed `17` and `30000` sampling attempts, the
-`N=63` run produced `795` distinct oriented boundary shells, all eliminated by
-proper overlap or non-simple residual boundary. The analogous `N=99` run
-produced `648` distinct shells, all eliminated by proper overlap, non-simple
-residual boundary, or residual corner-label violations. This is diagnostic
-evidence only and is not used as a proof-level elimination.
+Earlier floating randomized noncanonical shell sampling found no counterexample
+to the shell obstruction pattern. With seed `17` and `30000` sampling attempts,
+the `N=63` run produced `795` distinct oriented boundary shells, all eliminated
+by proper overlap or non-simple residual boundary in the tolerance-based
+classifier. The analogous `N=99` run produced `648` distinct shells, all
+eliminated by proper overlap, non-simple residual boundary, or residual
+corner-label violations. This is diagnostic evidence only and is superseded, in
+the low-overhang regime, by the exact census below.
 
-A stratified low-overhang sample with total boundary mixed count at most `4`
-also found no survivor: with seed `12345` and `20000` attempts, it produced
-`189` distinct `N=63` shells, all with non-simple residual boundary, and `143`
-distinct `N=99` shells, all with non-simple residual boundary or residual
-corner-label violations.
+An earlier floating stratified low-overhang sample with total boundary mixed
+count at most `4` also found no survivor: with seed `12345` and `20000`
+attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`
+shells, all eliminated by the then-current overlap, residual-boundary, or
+corner-label filters.
 
-The total-mixed-`<=4` shell space has now been enumerated deterministically.
-There are exactly `11040` such boundary shells for `N=63`, and every one has a
-non-simple residual boundary graph. There are exactly `63000` such boundary
-shells for `N=99`; `42480` have non-simple residual boundary graphs and `20520`
-have residual corner-label violations.
-
-For `N=99`, the low-overhang shell elimination has now been rerun with exact
-arithmetic. The outer triangle and all boundary-adjacent shell coordinates are
-rational; after rational placement the classifier clears denominators and uses
-integer predicates for triangle overlap, residual segment splitting, simple
-cycle extraction, residual atom decomposability, and forced single-angle
-corner-label checks. The exact endpoint-minimal run has the same result as
-above (`6` corner-label violations and `2` non-simple residual cycles), and the
-full exact total-mixed-`<=4` run gives exactly the same `63000`-shell split:
+The total-mixed-`<=4` shell space has now been enumerated deterministically and
+checked with exact arithmetic for both benchmark rows. For `N=63`, the
+coordinates lie in `Q(sqrt(5))`; after exact quadratic placement, the classifier
+clears denominators to integer pairs and uses exact predicates for triangle
+overlap, residual segment splitting, simple cycle extraction, residual atom
+decomposability, and forced single-angle corner-label checks. There are exactly
+`11040` such boundary shells: `6144` have non-simple residual boundary graphs
+and `4896` have residual corner-label violations. For `N=99`, the coordinates
+are rational and the analogous integer classifier gives exactly `63000` shells:
 `42480` non-simple residual boundary graphs and `20520` residual corner-label
 violations.
 
-Thus the low-overhang shell regime is now exact for `N=99`, and remains a
-floating shell-level census for `N=63`. In either case it does not close the
-global problem, because higher-mixed boundary orders and arbitrary interior
-extensions still remain to be controlled.
+Thus the low-overhang shell regime is now exact for both `N=63` and `N=99`.
+It still does not close the global problem, because higher-mixed boundary orders
+remain to be controlled.
 
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
