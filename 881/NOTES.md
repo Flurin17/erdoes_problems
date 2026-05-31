@@ -146,6 +146,11 @@ S=\{1,2,4,5,6\},\quad F=\{4,5\},\quad w=11,
 \]
 where \(2S\) covers through \(12\), \(w\notin3(S\setminus F)\) minimally,
 and the terminal window \((6,9]\) is an actual \(S\)-gap.
+Lemma 10.3e adds the corresponding coverage burden: any genuine \(A\)-gap
+\((G,H]\) below the order-\((k+1)\) witness must still be covered by
+\(k(A\cap[1,G])\). Hence finite-core failure requires long gaps that are
+already filled by prefix sumsets, together with nearby finite barriers that
+block the shifted repairs.
 
 Proposition 3.1f proves both finite-core stability and the desired infinite
 deletion under a tail-syndetic subset hypothesis. This blocks all

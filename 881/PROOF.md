@@ -7013,6 +7013,43 @@ genuine-gap condition is not itself inconsistent with finite order-2
 coverage, but it says nothing about iterating such barriers in an infinite
 basis.
 
+## Lemma 10.3e: Genuine terminal gaps must be covered by the prefix sumset
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\) with
+threshold \(N_0\). Suppose
+\[
+A\cap(G,H]=\varnothing.
+\]
+Then
+\[
+[N_0,H]\cap\mathbb N\subseteq k(A\cap[1,G]).
+\]
+In particular, for a genuine terminal gap from Corollary 10.3d,
+\[
+G=w-\min F-(k-1)m_0,\qquad H=w-N_0,
+\]
+the entire interval
+\[
+[N_0,H]
+\]
+inside the gap is already covered by \(k\)-term sums of elements before the
+gap.
+
+Proof. Let \(n\in[N_0,H]\). Since \(A\) is an order-\(k\) basis, write
+\[
+n=a_1+\cdots+a_k,\qquad a_i\in A.
+\]
+No summand can exceed \(H\), because all summands are positive and
+\(n\le H\). Also no summand can lie in \((G,H]\), since this interval is an
+\(A\)-gap. Hence every summand lies in \(A\cap[1,G]\), proving the claim.
+\(\square\)
+
+Thus finite-core failure needs more than long gaps. Each long terminal gap
+must be internally covered by the prefix \(k\)-sumset, while the adjacent
+finite deletion \(F\) still vertex-covers the shifted representation graphs
+that would otherwise repair the witness. This is the coverage-versus-barrier
+tension seen in the staged finite searches.
+
 ## Warning 10.3c: Compactness and random deletion do not see additive structure
 
 The broad deletion theorem cannot be proved from finite-deletion robustness
@@ -9039,6 +9076,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   stability target fails, those terminal windows can be made genuine long
   gaps of \(A\) itself; `actual_gap_barrier_search.py` records a small
   finite-window model.
+* Lemma 10.3e adds the prefix-coverage burden for such genuine gaps: the
+  gap interval must already lie in the \(k\)-fold sumset of the prefix
+  before the gap.
 * Warning 10.3c gives an abstract Schreier-barrier representation model
   showing why compactness, Zorn, finite-prefix, and independent random
   deletion arguments need genuine additive input.
