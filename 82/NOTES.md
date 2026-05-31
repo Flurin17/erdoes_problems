@@ -1620,3 +1620,9 @@ source of growth beyond Ramsey.
   `100` accepted samples at `n=12` and `100` accepted samples at `n=14`, with
   no node-limited skips.  This supports the focused conjecture that every
   connected even graph has a three-part flexible `4`-modular partition.
+- 2026-05-31: Checked several connected Eulerian cactus chains against the
+  three-part flexible `2 -> 4` target, including chains of triangles, 5-cycles,
+  6-cycles, and mixed odd cycles up to `16` vertices.  All had a flexible
+  `4`-modular partition using at most three parts.  Thus the known cactus
+  obstructions to self-labelled/fixed-slot strategies do not immediately
+  refute the connected flexible three-part conjecture.
