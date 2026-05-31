@@ -2101,3 +2101,10 @@ source of growth beyond Ramsey.
   `(0,0,2,2)` partition with all nonempty parts odd.  In `K_{2,6}`, every
   odd-order even-residue modular part is an independent zero-residue part,
   leaving only two usable zero slots for two even-sized bipartition classes.
+- 2026-05-31: Checked the complete multipartite count model for the common
+  first-lift slots `(0,0,2,2)` across both parity source classes.  With up to
+  `5` classes and class size at most `10`, `multipartite_modular.py --slots
+  0,0,2,2` checked `502` parity-modular size vectors with no counterexample;
+  source-residue filters checked `417` source-`0` vectors and `85` source-`1`
+  vectors, also with no counterexample.  An attempted eight-class size-`12`
+  run was stopped for cost and is not evidence.
