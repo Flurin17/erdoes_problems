@@ -5412,6 +5412,57 @@ This is only a finite-window model, but it shows that certificate-free
 colorability is not immediately incompatible with local two-sum interval
 coverage.
 
+## Lemma 8.6j': Certificate-free colors separate sum types
+
+Let \(C\subset A\) be certificate-free relative to \(A\). Then
+\[
+(C+C)\cap(C+(A\setminus C))=\varnothing. \tag{1}
+\]
+Consequently, if
+\[
+A=C_1\cup\cdots\cup C_r
+\]
+is a finite coloring into certificate-free classes, then for every \(i\),
+\[
+(C_i+C_i)\cap(C_i+(A\setminus C_i))=\varnothing. \tag{2}
+\]
+In the two-color case \(A=C\cup D\), the mixed sumset is disjoint from both
+same-color sumsets:
+\[
+(C+D)\cap(C+C)=\varnothing,\qquad
+(C+D)\cap(D+D)=\varnothing.
+\]
+
+Proof. Suppose
+\[
+c_1+c_2=c+a
+\]
+with \(c,c_1,c_2\in C\) and \(a\in A\setminus C\). If \(c_1=c\), then
+\[
+a=c_2\in C,
+\]
+contradiction; similarly \(c_2\ne c\). Hence
+\[
+a=c_1+c_2-c\in A
+\]
+is a forbidden certificate for the three elements \(c,c_1,c_2\in C\). This
+proves (1), and (2) follows by applying (1) to each color class. For two
+colors, (2) for \(C\) gives
+\[
+(C+C)\cap(C+D)=\varnothing,
+\]
+and (2) for \(D\) gives
+\[
+(D+D)\cap(C+D)=\varnothing.
+\]
+\(\square\)
+
+Thus a two-color certificate-free order-2 basis would have to be a very
+rigid separation between mixed sums and same-color sums. This is compatible
+with the critical \(A(X)\asymp\sqrt X\) counting scale, so it is not by
+itself a contradiction, but it is stronger than the Sidon bound and rules
+out many naive cross-sum constructions.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose

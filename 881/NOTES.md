@@ -1421,6 +1421,20 @@ so this is a monochromatic certificate. Thus standard digital bases have
 finite certificate tests; a certificate-free obstruction would have to be a
 different thin bipartite/Sidon complementing construction.
 
+Any such construction has an additional separation constraint. If
+\(C\subset A\) is certificate-free, then
+\[
+(C+C)\cap(C+(A\setminus C))=\varnothing.
+\]
+Otherwise \(c_1+c_2=c+a\) with \(c,c_1,c_2\in C\) and
+\(a\in A\setminus C\) would give the forbidden certificate
+\[
+a=c_1+c_2-c\in A.
+\]
+So a two-color certificate-free order-2 basis would need mixed sums
+separated from both same-color sumsets, in addition to the Sidon-type
+sparsity of each color.
+
 ## Robust Residue Boosters
 
 The finite residue obstruction becomes more promising in order \(k=3\).
