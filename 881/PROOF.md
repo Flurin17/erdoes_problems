@@ -7225,6 +7225,180 @@ one must either prove that such interval barriers cannot be coded into an
 unbounded barrier met by every infinite deletion while maintaining coverage
 between stages, or build exactly such a staged construction.
 
+## Lemma 10.3h: Covered interval-block barriers are threshold cuts
+
+The interval construction in Proposition 10.3g is rigid inside the
+coverage-compatible terminal-gap regime. Keep
+\[
+I=[X+1,X+M],\qquad J=[X+2M,X+3M-1],\qquad S=I\cup J,
+\]
+where \(M\ge X\ge1\). Write the high elements as
+\[
+H_d=X+2M+d,\qquad 0\le d\le M-1,
+\]
+and put
+\[
+w_q=3X+5M+q.
+\]
+Let \(D\) be a nonempty subset of \(\{0,\ldots,M-1\}\), set
+\[
+F_D=\{H_d:d\in D\},\qquad C_D=S\setminus F_D,
+\]
+and assume
+\[
+-X\le q\le M-X. \tag{1}
+\]
+Then \(w_q\notin3C_D\), \(F_D\) is inclusion-minimal for this hole, and
+the terminal interval
+\[
+(w_q-\min F_D-1,\ w_q-2]
+\]
+contains no point of \(S\) if and only if \(D\) is one of the following
+sets, with empty intervals omitted:
+
+* if \(q\le0\), then
+  \[
+  D=[0,\lfloor(M+q-1)/2\rfloor]\cup[M+q,M-1]; \tag{2}
+  \]
+* if \(q>0\), then
+  \[
+  D=[\lceil q/2\rceil,M-1], \tag{3}
+  \]
+  or, when \(q\le M-2\),
+  \[
+  D=[0,\lfloor(M+q-1)/2\rfloor]. \tag{4}
+  \]
+
+In particular every such \(D\) has size at least \(\lceil M/2\rceil\).
+Thus large interval blocks do not support singleton, pair, or any fixed-rank
+coverage-compatible terminal-gap barriers.
+
+Proof. Use low coordinates
+\[
+L_a=X+1+a,\qquad 0\le a\le M-1.
+\]
+In the range (1), three low terms are smaller than \(w_q\), and three high
+terms are larger than \(w_q\). Hence only two types of representations can
+matter.
+
+First, two high terms and one low term give
+\[
+H_r+H_s+L_a=w_q
+\]
+exactly when
+\[
+r+s+a=M+q-1.
+\]
+Equivalently, after choosing retained high coordinates \(r,s\), such a
+low coordinate exists precisely when
+\[
+q\le r+s\le M+q-1. \tag{5}
+\]
+Second, one high term and two low terms give
+\[
+H_r+L_a+L_b=w_q
+\]
+exactly when
+\[
+r+a+b=3M+q-2.
+\]
+Since \(0\le a+b\le2M-2\), this is possible exactly for retained
+\[
+r\ge M+q, \tag{6}
+\]
+which can occur only when \(q<0\).
+
+Let \(R=\{0,\ldots,M-1\}\setminus D\) be the retained high coordinates.
+The condition \(w_q\notin3C_D\) is therefore equivalent to saying that
+(6) never occurs in \(R\), and no two elements of \(R\), with repetition
+allowed, have sum in the interval (5). Inclusion-minimality of \(F_D\) is
+equivalent to maximality of \(R\) with respect to these two avoidance
+conditions: restoring \(H_d\) repairs the hole exactly when adjoining the
+coordinate \(d\) creates one of the forbidden representations.
+
+Suppose first that \(q\le0\). Condition (6) forces
+\[
+R\subseteq[0,M+q-1].
+\]
+Because the lower endpoint in (5) is nonpositive, the pair-sum condition
+says that every retained pair must have sum at least \(M+q\). The unique
+maximal set with this property is
+\[
+R=[\lceil(M+q)/2\rceil,M+q-1],
+\]
+with the evident empty interpretation when \(M+q=0\). Taking complements
+gives (2).
+
+Now suppose \(q>0\). Condition (6) is void. For each \(r\in R\), the
+self-pair \(2r\) cannot lie in (5), so every retained coordinate is either
+\[
+r\le\lfloor(q-1)/2\rfloor
+\]
+or
+\[
+r\ge\lceil(M+q)/2\rceil.
+\]
+These two alternatives cannot be mixed: if \(a\) is in the lower range and
+\(b\) in the upper range, then, since \(q<M\), the sum \(a+b\) lies in
+\([q,M+q-1]\). Hence a maximal retained set is either the full low block
+\[
+R=[0,\lfloor(q-1)/2\rfloor],
+\]
+whose complement is (3), or the full high block
+\[
+R=[\lceil(M+q)/2\rceil,M-1],
+\]
+whose complement is (4). The latter retained block is nonempty exactly when
+\(q\le M-2\); at the endpoint \(q=M-1\) the empty retained set is not
+maximal, because the low block can still be adjoined.
+
+It remains only to check the actual terminal gap. For the sets above,
+\[
+\min D\le X+q.
+\]
+This is immediate when \(\min D=0\), and for (3) follows from
+\(\lceil q/2\rceil\le X+q\). Therefore
+\[
+X+3M-1\le w_q-(X+2M+\min D)-1,
+\]
+so the whole high block \(J\) lies at or below the left endpoint of the
+terminal interval. The low block lies even lower, and the terminal interval
+contains no point of \(S\). Conversely, if a covered terminal-gap barrier
+exists in the range (1), the maximality classification above forces exactly
+one of (2)--(4). Finally the displayed formulas give \(|D|\ge\lceil
+M/2\rceil\) in every case. \(\square\)
+
+The script `EXPERIMENTS/interval_barrier_family.py` probes whether other
+subsets \(F\subset J\) inside the same block can do better. It enumerates
+coverage-compatible witnesses \(w\) with \(w-2\in2S\), an actual terminal
+\(S\)-gap, and inclusion-minimal three-sum failure after deleting \(F\).
+Its `--verify-classification` mode exhaustively checks Lemma 10.3h for
+specified finite values of \(X,M\).
+For example:
+\[
+X=3,\quad M=8
+\]
+has no supported deletions of ranks \(1,2,3\), and the first
+coverage-compatible barrier is the lower half
+\[
+F=(19,20,21,22),\qquad w=49.
+\]
+Similarly
+\[
+X=5,\quad M=12
+\]
+has no supported deletions of ranks \(1,\ldots,5\), and the first barrier is
+\[
+F=(29,30,31,32,33,34),\qquad w=75.
+\]
+In all searched cases \(5\le M\le12\), \(1\le X\le M\), no
+coverage-compatible pair deletion occurs. If the coverage condition is
+dropped, small-rank holes do appear, but only far beyond the two-sum
+coverage interval; for instance, with \(X=5,M=12\), the pair
+\((37,39)\) has a terminal hole at \(117\), while \(2S\) covers only
+through \(80\). These endpoint artefacts do not satisfy the finite-core
+burden from Lemma 10.3e.
+
 It is important that disjoint interval gadgets alone would not give a
 counterexample. If a staged construction protected only one finite set
 \[
@@ -9273,6 +9447,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   before the genuine terminal gap.
 * Proposition 10.3g gives arbitrarily large interval half-deletion barriers,
   showing the prefix-local genuine-gap normal form is locally sharp.
+* Lemma 10.3h classifies the coverage-compatible terminal-gap barriers
+  inside those interval blocks: they are threshold cuts of size at least
+  half the high block, so the interval gadget cannot by itself supply
+  fixed-rank or Schreier-type coding.
 * Warning 10.3c gives an abstract Schreier-barrier representation model
   showing why compactness, Zorn, finite-prefix, and independent random
   deletion arguments need genuine additive input.

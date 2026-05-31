@@ -63,6 +63,22 @@ padding-range artefacts by requiring the candidate witness to remain above
 the old two-sum coverage base after subtracting the least retained old
 element.
 
+`actual_gap_barrier_search.py` searches for inclusion-minimal finite
+deletions whose terminal forbidden interval is an actual gap of the finite
+set, not merely a gap after the deletion. This models the finite-core
+normal form in Corollary 10.3d and Lemmas 10.3e--10.3f.
+
+`interval_barrier_family.py` probes the scalable interval block from
+Proposition 10.3g. It enumerates subsets of the high interval \(J\) and
+reports which ones have coverage-compatible terminal-gap witnesses. Sample
+runs such as `--X 3 --M 8 --max-rank 4` and
+`--X 5 --M 12 --max-rank 7` show that the first useful barriers occur at
+roughly half the high block and that no pair deletions occur in the tested
+coverage-compatible range. With `--no-coverage --witness-cap`, pair holes
+do appear, but only as endpoint artefacts beyond the two-sum coverage
+interval. Its `--verify-classification` mode exhaustively checks the
+threshold-cut classification in Lemma 10.3h for a specified block.
+
 `collective_barrier_search.py` searches for finite windows where all
 one-point deletions preserve order-3 coverage on the window, but some pair
 deletions create holes. This models the remaining \(k=2\) finitely-bad

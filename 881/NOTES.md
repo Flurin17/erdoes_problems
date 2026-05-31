@@ -164,6 +164,30 @@ with \(F\) the lower half of \(J\) have two-sum coverage through the
 terminal gap, an inclusion-minimal three-sum hole, and an actual terminal
 gap of length growing with \(M\). Thus the remaining problem is not local
 existence of such barriers but cross-stage coding into an unbounded barrier.
+The same interval block is not a cheap source of pair barriers. Lemma
+10.3h classifies all coverage-compatible terminal-gap barriers in the
+block. If the high coordinates are \(0,\ldots,M-1\) and
+\(w_q=3X+5M+q\), then for \(-X\le q\le M-X\) the protected coordinate set
+must be one of a lower prefix, an upper suffix, or for \(q\le0\) a forced
+prefix-plus-suffix split:
+\[
+[0,\lfloor(M+q-1)/2\rfloor]\cup[M+q,M-1],
+\]
+\[
+[\lceil q/2\rceil,M-1],
+\]
+or
+\[
+[0,\lfloor(M+q-1)/2\rfloor].
+\]
+Every such deletion has size at least \(\lceil M/2\rceil\). Thus the
+interval gadget supplies only threshold-cut arithmetic, not arbitrary
+finite-set coding. The diagnostic `interval_barrier_family.py` enumerates
+these terminal-gap minimal holes and has a `--verify-classification` mode;
+for \(5\le M\le12\), \(1\le X\le M\), it finds no coverage-compatible pair
+deletions. Pair holes do appear after dropping coverage, but only far
+beyond the two-sum coverage endpoint, so they do not satisfy Lemma 10.3e's
+finite-core burden.
 Disjoint copies of the interval gadget are insufficient: an infinite
 deletion can take one protected point from each block and avoid containing
 any whole block-level \(F\). A negative construction would still need a
