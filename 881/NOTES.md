@@ -1479,6 +1479,10 @@ the first six protected vertices, and try all orders of
 \(\{10,15,18,19,30,38\}\). No order works; the best orders still have
 three failed edges, all involving the newly added \(38\). Thus delaying the
 fillers alone does not rescue the P6 escape.
+The bounded `--p6-enum-search` mode broadens this slightly: for
+\(p_6\le80\) and at most one delayed filler through \(120\), no arbitrary
+enumeration order extends the P5 seed. Only \(p_6\le38\) survive the
+coverage filter in that range.
 
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining

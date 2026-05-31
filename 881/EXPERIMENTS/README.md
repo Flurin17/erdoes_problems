@@ -270,6 +270,12 @@ enumeration variant on the same finite set. It tries all `6!` orders of the
 vertices `10,15,18,19,30,38`, with fillers `40,43,44` present but not among
 those six protected vertices. No order satisfies all Schreier edges; the
 best orders still have three failed edges involving `38`.
+Run `schreier_stage_search.py --p6-enum-search --max-p6 80 --max-extra 1
+--max-extra-value 120` for a bounded arbitrary-order extension search from
+the P5 seed. It checks all \(p_6\le80\) with at most one delayed filler
+through `120`, precomputing which protected subsets have witnesses and then
+testing all enumeration orders. It finds no extension; after `p6=38`, no
+candidate passes the coverage filter.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

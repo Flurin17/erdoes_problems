@@ -9352,6 +9352,15 @@ Thus delaying the fillers alone does not repair the P6 finite obstruction;
 an enumerated-barrier construction would also have to alter the placement
 or witness scheme for the new vertex \(38\) itself.
 
+The bounded search mode `--p6-enum-search` tests this delayed-enumeration
+escape from the P5 seed without fixing \(p_6=38\). With
+`--max-p6 80 --max-extra 1 --max-extra-value 120`, it checks all candidates
+with at most one delayed filler through \(120\), precomputes the protected
+subsets that have witnesses, and then tests all enumeration orders. It
+finds no extension. In that range only \(p_6\le38\) pass the coverage
+filter; larger \(p_6\)'s already outrun the available two-sum coverage with
+one delayed filler.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets

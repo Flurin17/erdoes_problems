@@ -429,12 +429,65 @@ def p6_order_diagnostic() -> None:
         print("   ", "count=", count, "order=", order, "failed=", failed[:10])
 
 
+def supported_order(
+    elements: set[int],
+    vertices: tuple[int, ...],
+    coverage: int,
+) -> tuple[int, ...] | None:
+    good: set[frozenset[int]] = set()
+    for rank in range(2, len(vertices) + 1):
+        for subset in combinations(vertices, rank):
+            if witnesses_for_edges(elements, [subset], coverage) is not None:
+                good.add(frozenset(subset))
+
+    for order in permutations(vertices):
+        if all(frozenset(edge) in good for edge in schreier_edges_in_order(order)):
+            return order
+    return None
+
+
+def p6_enum_search(max_p6: int, max_extra_count: int, max_extra_value: int) -> None:
+    """Bounded search for a P6 extension with arbitrary enumeration order."""
+    seed = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30}
+    old_vertices = (10, 15, 18, 19, 30)
+    checked = 0
+    for p6 in range(31, max_p6 + 1):
+        vertices = (*old_vertices, p6)
+        extra_pool = range(p6 + 1, max_extra_value + 1)
+        for extra_count in range(max_extra_count + 1):
+            for extras in combinations(extra_pool, extra_count):
+                elements = seed | {p6} | set(extras)
+                coverage = cover_end(elements, 2, 3 * max(elements) + 40)
+                if coverage < max(vertices):
+                    continue
+                checked += 1
+                order = supported_order(elements, vertices, coverage)
+                if order is not None:
+                    print("P6 enumeration extension")
+                    print(
+                        "  p6=", p6,
+                        "extras=", extras,
+                        "coverage_end=", coverage,
+                        "order=", order,
+                    )
+                    return
+        print("checked p6=", p6, "total_candidates=", checked)
+    print("no P6 enumeration extension found")
+    print(
+        "  max_p6=", max_p6,
+        "max_extra_count=", max_extra_count,
+        "max_extra_value=", max_extra_value,
+        "checked=", checked,
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--extend-first", action="store_true")
     parser.add_argument("--tail-chain", action="store_true")
     parser.add_argument("--p6-pair-diagnostic", action="store_true")
     parser.add_argument("--p6-order-diagnostic", action="store_true")
+    parser.add_argument("--p6-enum-search", action="store_true")
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
     parser.add_argument("--protected-count", type=int, default=4)
@@ -453,6 +506,8 @@ def main() -> None:
         p6_pair_diagnostic()
     elif args.p6_order_diagnostic:
         p6_order_diagnostic()
+    elif args.p6_enum_search:
+        p6_enum_search(args.max_p6, args.max_extra, args.max_extra_value)
     else:
         search_protected(
             args.max_value,
