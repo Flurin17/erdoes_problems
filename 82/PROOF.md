@@ -910,6 +910,21 @@ into four `4`-modular parts, and sampled `4`-modular graphs on `12` vertices
 partitioned into eight `8`-modular parts, with no counterexample seen in the
 bounded searches.
 
+The linear bound is more than is needed for the conditional host route.  The
+same proof works if the coarse lift loses a fixed polylogarithmic factor at
+each dyadic step: for any fixed `C`, replacing the loss `Dq_i` by
+`q_i(log_2 q_i)^C` changes the retained size after `t=floor(sqrt(log_2 n))`
+steps by the extra factor
+
+```text
+prod_{i<t} i^C = exp(O(t log t)) = 2^{o(t^2)} = n^{o(1)}.
+```
+
+Thus the final retained `q_t`-modular host still has size
+`2^{(1/2-o(1))log_2 n}`, far larger than `q_t^2`.  Therefore a partition
+theorem with at most `q(log q)^C` flexible `2q`-modular parts, combined with
+the `q`-modular host theorem above, would also prove Problem 82.
+
 The terminal-window lift has a rigid endpoint shape.
 
 **Lemma: Shape Of Near-Terminal Dyadic Witnesses.**  Let `|S|=2q+r` with

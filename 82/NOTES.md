@@ -1575,3 +1575,10 @@ source of growth beyond Ramsey.
   `8` and `10` vertices partitioning into four `4`-modular parts, nor for
   `4`-modular graphs on `12` vertices partitioning into eight `8`-modular
   parts.
+- 2026-05-31: Weakened the coarse partition target further.  For the
+  `q`-modular host route, each dyadic lift may lose a fixed polylogarithmic
+  factor: replacing `Dq_i` by `q_i(log q_i)^C` over
+  `t=floor(sqrt(log n))` steps costs only
+  `prod_{i<t} i^C=2^{o(t^2)}=n^{o(1)}`, so the retained terminal host is still
+  much larger than `q_t^2`.  Thus a flexible partition theorem with
+  `q polylog(q)` parts plus the modular-host theorem would suffice.
