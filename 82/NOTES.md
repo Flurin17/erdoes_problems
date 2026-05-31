@@ -1787,6 +1787,21 @@ source of growth beyond Ramsey.
   full `3`-modular graphs on `7` vertices partition into three induced
   `6`-modular parts.  The naive split by total degree modulo `2q` fails
   because the induced residue depends on color-dependent cross-degree terms.
+- 2026-05-31: Added `--diagnostics` for `slot_partition.py` in the
+  `(0,0,1,2)` case.  It prints the two zero-residue cut sides `A,B`, the
+  residue-`1` set `C`, the residue-`2` set `D`, and verifies the residual
+  cut congruence from Lemma 4I.6.  The connected `n=13` and `n=14` first-lift
+  hard masks both pass `(0,0,1,2)`; their diagnostics confirm that the
+  residue-`2` and residue-`1` sets are small and the residual cut carries the
+  remaining congruence work.  A random even `n=16` sample of `50` graphs found
+  no `(0,0,1,2)` failure; an `n=18` sample was too slow and was stopped.
+- 2026-05-31: Added `slot_profile.py` to minimize the number of vertices in
+  nonzero residue slots for a fixed slot multiset.  For `(0,0,1,2)`, the
+  connected `n=13` and `n=14` first-lift masks both have minimum nonzero cost
+  `5`: in each case a residue-`2` set of size `3` and a residue-`1` set of
+  size `2` suffice, after which the residual splits into the two zero slots.
+  The connected zero-residue obstruction mask `22114857535095` has nonzero
+  cost `3` for the same slots.
 - 2026-05-31: Refined the bounded-spread target after subagent review.  A
   fixed-spread linear theorem is probably too optimistic because dense random
   adjacent-degree graphs should locally resemble `G(k,1/2)` on induced

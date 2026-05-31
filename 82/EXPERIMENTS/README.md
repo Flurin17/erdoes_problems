@@ -81,7 +81,13 @@ Computational checks and generated data for Erdos Problem 82.
   `{0,1,2,3}` for the first lift from even graphs to `4`-modular parts; it
   also checks the equivalent self-labelled form `deg_same(v) == label(v)` and
   supports even-graph or unrestricted random sampling, plus exhaustive
-  Eulerian-graph checks for small `n`.
+  Eulerian-graph checks for small `n`.  With slots `0,0,1,2`,
+  `--diagnostics` prints the residue-`1` and residue-`2` sets and the residual
+  cut-congruence rows from Lemma 4I.6.
+- `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
+  of vertices outside a chosen residue, useful for testing whether
+  `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus
+  residual-cut argument.
 - `universal_slots.py`: tests whether a fixed residue-slot multiset works for
   every even graph at the first lift, either exhaustively for small `n` or by
   random even-graph sampling at larger `n`.  Its exact-cover recursion indexes

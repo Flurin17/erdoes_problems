@@ -25,6 +25,7 @@ def find_slot_partition(
 ) -> list[int] | None:
     slots = tuple(sorted(slots))
     pc = ri.precompute(n)
+    edge_index = {edge: index for index, edge in enumerate(pc.edges)}
     full = (1 << n) - 1
     residues: dict[int, int] = {}
     by_residue: dict[int, list[int]] = {residue: [] for residue in set(slots)}
@@ -100,6 +101,57 @@ def find_self_labelled_partition(
     return [color_to_residue[color] for color in assignment]
 
 
+def print_cut_0012_diagnostics(n: int, graph_mask: int, assignment: list[int]) -> None:
+    pc = ri.precompute(n)
+    edge_index = {edge: index for index, edge in enumerate(pc.edges)}
+    stats = modular_partition.assignment_stats(n, graph_mask, assignment, 4)
+    color_to_residue = {color: residue for color, _size, residue in stats}
+    zero_colors = [color for color, residue in color_to_residue.items() if residue == 0]
+    one_colors = [color for color, residue in color_to_residue.items() if residue == 1]
+    two_colors = [color for color, residue in color_to_residue.items() if residue == 2]
+    if len(zero_colors) > 2 or len(one_colors) > 1 or len(two_colors) > 1:
+        print("cut_0012_diagnostics=not_applicable")
+        return
+
+    names = {zero_colors[0]: "A"} if zero_colors else {}
+    if len(zero_colors) == 2:
+        names[zero_colors[1]] = "B"
+    if one_colors:
+        names[one_colors[0]] = "C"
+    if two_colors:
+        names[two_colors[0]] = "D"
+
+    sets: dict[str, list[int]] = {"A": [], "B": [], "C": [], "D": []}
+    for vertex, color in enumerate(assignment):
+        sets[names[color]].append(vertex)
+    for name in ("A", "B", "C", "D"):
+        print(f"{name}=" + ",".join(map(str, sets[name])))
+
+    residual = set(sets["A"]) | set(sets["B"])
+    color_of_vertex = {vertex: "A" for vertex in sets["A"]}
+    color_of_vertex.update({vertex: "B" for vertex in sets["B"]})
+    ok = True
+    rows = []
+    for vertex in sorted(residual):
+        deg_h = 0
+        opposite = 0
+        for other in residual:
+            if other == vertex:
+                continue
+            edge = (min(vertex, other), max(vertex, other))
+            if (graph_mask >> edge_index[edge]) & 1:
+                deg_h += 1
+                if color_of_vertex[other] != color_of_vertex[vertex]:
+                    opposite += 1
+        if opposite % 4 != deg_h % 4:
+            ok = False
+        rows.append((vertex, deg_h % 4, opposite % 4))
+    print(f"cut_congruence_ok={ok}")
+    print("cut_rows=vertex,deg_H_mod4,opposite_mod4")
+    for vertex, deg_h, opposite in rows:
+        print(f"  {vertex},{deg_h},{opposite}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
@@ -110,6 +162,7 @@ def main() -> None:
     parser.add_argument("--sample-random", type=int, default=0)
     parser.add_argument("--exhaustive-even", action="store_true")
     parser.add_argument("--self-labelled", action="store_true")
+    parser.add_argument("--diagnostics", action="store_true")
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
     slots = (
@@ -218,6 +271,8 @@ def main() -> None:
     print("stats=color,size,residue")
     for color, size, residue in stats:
         print(f"  {color},{size},{residue}")
+    if args.diagnostics and not args.self_labelled and sorted(slots) == [0, 0, 1, 2]:
+        print_cut_0012_diagnostics(args.n, args.mask, assignment)
 
 
 if __name__ == "__main__":
