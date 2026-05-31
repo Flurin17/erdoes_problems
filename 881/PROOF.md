@@ -6193,6 +6193,49 @@ transversals; whenever those graphs have many edges, the bounded
 transversals force large \(C+(A\setminus C)\) degrees through a few moving
 vertices.
 
+## Warning 8.6j-8: Cross reflections give moving, not fixed, certificates
+
+The mixed-spike structure has a tempting but invalid shortcut to Corollary
+2.3c. Suppose \(A=C\cup D\), and a large center \(m\) reflects two elements
+\[
+u_0,u_1\in C
+\]
+across the coloring:
+\[
+m-u_0,\ m-u_1\in D.
+\]
+Then the three elements
+\[
+e=u_0,\qquad y_1=u_1,\qquad y_2=m-u_1
+\]
+do form a certificate triple, because
+\[
+y_1+y_2-e=m-u_0\in A.
+\]
+Moreover the same center \(m\) reflects the triple:
+\[
+m-e=m-u_0\in A,\qquad m-y_1=m-u_1\in A,\qquad m-y_2=u_1\in A.
+\]
+
+This does not trigger the fixed-certificate deletion theorem. In Corollary
+2.3c, using the base element \(e\) and center \(m\) deletes
+\[
+b=m-e=m-u_0.
+\]
+But here the required certificate value
+\[
+x=y_1+y_2-e
+\]
+is exactly the same element \(m-u_0=b\). The proof of Corollary 2.3c needs
+\(x\) to remain protected, while the natural deletion would remove it. In
+addition, the element \(y_2=m-u_1\) varies with the center, so the
+certificate tuple is not fixed on an unbounded sequence.
+
+Thus large cross-color reflected packets are not by themselves enough.
+They must either contain a fixed certificate tuple whose certificate value
+is not the deleted mirror, or provide a different repair scheme from the
+balanced fixed-certificate recursion.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose
@@ -9906,6 +9949,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   failure of the shifted deletion inside a certificate-free color forces
   bounded moving transversals, and if the graphs have many edges those
   transversals create mixed-color degree spikes.
+* Warning 8.6j-8 explains why the resulting cross-color reflected packets
+  do not directly trigger Corollary 2.3c: the moving certificate value is
+  the natural deleted mirror.
 * Corollary 8.6k uses the Sidon bound to rule out fixed-rank large-excess
   barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\), while
   noting that sparse fixed-rank tails with bounded top excess are not ruled

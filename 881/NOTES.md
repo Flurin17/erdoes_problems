@@ -244,6 +244,10 @@ Lemma 8.6j-7 gives the one-color version: for a certificate-free color
 delete an infinite \(T\subset C\) while keeping \(2(C\setminus T)+A\)
 cofinite, or bounded moving transversals force large mixed degrees
 \(C+(A\setminus C)\) through a few moving vertices.
+Warning 8.6j-8 records why cross-color reflected packets do not immediately
+feed Corollary 2.3c: two reflected \(C\)-points create a certificate triple,
+but the certificate value is the mirror \(m-e\), which is exactly the
+natural element deleted by the fixed-certificate construction.
 
 ## Trivial and Boundary Cases
 
