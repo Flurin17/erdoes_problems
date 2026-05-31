@@ -9370,6 +9370,43 @@ finds no extension. In that range only \(p_6\le38\) pass the coverage
 filter; larger \(p_6\)'s already outrun the available two-sum coverage with
 one delayed filler.
 
+## Lemma 13.1j: Enumerated Schreier stages require complete prefix links
+
+Let \(V\) be a finite set, and for each \(r\ge2\) let
+\[
+\mathcal G_r\subseteq[V]^r
+\]
+be the family of \(r\)-element subsets that are supported by whatever local
+witness condition is being tested. An ordering
+\[
+v_1,\ldots,v_n
+\]
+of \(V\) supports all finite Schreier edges in this stage if and only if,
+for every \(i\) with \(i\le n-i\),
+\[
+\{v_i\}\cup H\in\mathcal G_{i+1}
+\qquad\text{for every }H\in[\{v_{i+1},\ldots,v_n\}]^i. \tag{1}
+\]
+In particular, \(v_1\) must be joined by good pairs to every later vertex;
+after \(v_1\) is fixed, \(v_2\) must have a complete good-triple link on
+the remaining tail; and so on.
+
+Proof. In the enumerated Schreier family, the edges first completed by the
+vertex \(v_i\) are exactly the sets
+\[
+\{v_i\}\cup H,\qquad H\in[\{v_{i+1},\ldots,v_n\}]^i,
+\]
+whenever the tail has at least \(i\) elements. Requiring all these edges to
+belong to the corresponding good family is precisely (1). \(\square\)
+
+For the P6 finite set above, \(\mathcal G_r\) is the family of protected
+\(r\)-subsets with an inclusion-minimal dominated witness in the current
+coverage window. Lemma 13.1j explains the diagnostic output: the first
+prefix-link condition forces \(v_1=10\), and the second prefix-link
+condition has no solution. Thus the finite obstruction is not merely that
+one unlucky value order fails; the supported-subset hypergraph has no
+Schreier-compatible prefix links at all.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets
@@ -10441,6 +10478,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * The P6 enumeration-order diagnostic shows that delaying only the fillers
   \(40,43,44\) does not rescue the finite P6 escape: all orders of
   \(\{10,15,18,19,30,38\}\) still have failed edges involving \(38\).
+* Lemma 13.1j abstracts this into the complete-prefix-link criterion for
+  finite enumerated Schreier stages: the first vertex needs complete good
+  pair links, the second needs complete good triple links on the remaining
+  tail, and so on.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).

@@ -272,7 +272,8 @@ those six protected vertices. No order satisfies all Schreier edges; the
 best orders still have three failed edges involving `38`. The prefix
 constraints already explain the failure: the good-pair graph forces `10` to
 be first, and after `10` no second vertex has all rank-three edges required
-against the remaining tail.
+against the remaining tail. This is the finite instance of Lemma 13.1j's
+complete-prefix-link criterion.
 Run `schreier_stage_search.py --p6-enum-search --max-p6 80 --max-extra 1
 --max-extra-value 120` for a bounded arbitrary-order extension search from
 the P5 seed. It checks all \(p_6\le80\) with at most one delayed filler

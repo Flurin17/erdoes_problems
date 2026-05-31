@@ -1486,6 +1486,10 @@ The bounded `--p6-enum-search` mode broadens this slightly: for
 \(p_6\le80\) and at most one delayed filler through \(120\), no arbitrary
 enumeration order extends the P5 seed. Only \(p_6\le38\) survive the
 coverage filter in that range.
+Lemma 13.1j abstracts the ordering test: an enumerated Schreier stage
+requires complete prefix links in the good-subset hypergraphs. In the P6
+escape, the pair link forces \(10\) to be first, and the triple link then
+has no possible second vertex.
 
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining
