@@ -1506,3 +1506,16 @@ source of growth beyond Ramsey.
   “no large clique/independent set, no long hole/antihole, no long
   path/copath” still permit exponential-size graphs and cannot by themselves
   imply `G(k)<=2^{o(k)}`.
+- 2026-05-31: Recorded terminal-window dyadic calibration.  A
+  `2q`-modular witness of size `2q+r<3q` is either regular or has only two
+  degree values `d,d+2q` with `0<=d<=r-1`; hence a nonregular witness in the
+  needed window is an almost split low/high graph.  The terminal-window lift
+  is already hard for regular graphs.  In a regular twin blowup of a
+  `D`-regular base `B`, a selected vector `x_i=|S cap C_i|` is
+  `2q`-modular exactly when `(A_B x)_i` is constant modulo `2q` on the
+  support, so exact size `2q` asks for a weighted equitable vector of total
+  `2q`.  Also recorded the deletion absorption criterion: deleting
+  `P` from a `2q`-modular set preserves `2q`-modularity iff `deg_P(v)` is
+  constant modulo `2q` on the remaining vertices, literally constant when
+  `|P|<2q`.  This makes simple deletion-only absorption implausible in
+  generic regular hosts.

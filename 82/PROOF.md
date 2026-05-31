@@ -747,6 +747,109 @@ already `q`-modular host of size at least `q^2`.  The price is that the final
 window must have excess `o(q/(log q)^2)`, not merely a constant-factor
 overshoot.
 
+The terminal-window lift has a rigid endpoint shape.
+
+**Lemma: Shape Of Near-Terminal Dyadic Witnesses.**  Let `|S|=2q+r` with
+`0<=r<q`.  If `G[S]` is `2q`-modular, then either `G[S]` is regular, or there
+is an integer `d` with `0<=d<=r-1` such that every vertex of `S` has degree
+either
+
+```text
+d       or       d+2q.
+```
+
+Proof.  All degrees in `G[S]` lie in `[0,2q+r-1]`.  In this interval, two
+integers congruent modulo `2q` are either equal or differ by exactly `2q`.
+Thus if more than one degree value occurs, the values are `d` and `d+2q` for
+some `d`.  The larger value can occur only if
+`d+2q<=2q+r-1`, so `d<=r-1`.  QED.
+
+Thus a nonregular terminal-window witness with
+`r=o(q/(log q)^2)` is almost split: its low-degree vertices have degree
+`o(q/(log q)^2)`, while its high-degree vertices have complement-degree
+`r-1-d=o(q/(log q)^2)` inside `S`.
+
+The same terminal-window demand is already strong on regular graphs.  Every
+regular graph is `q`-modular for every `q`, so the lift would imply that every
+regular graph on at least `q^2` vertices contains an induced subgraph of order
+`2q+o(q/(log q)^2)` of the rigid low/high form above, and in particular the
+exact `r=0` version asks for a regular induced subgraph on exactly `2q`
+vertices.
+
+There is also a clean weighted hard core obtained from twin blowups.
+
+**Lemma: Regular Twin Blowup Reduction.**  Let `B` be a `D`-regular graph on
+vertex set `{1,...,r}`.  Replace every vertex `i` by an independent cluster
+`C_i` of size `L`, and join `C_i` completely to `C_j` exactly when
+`ij in E(B)`.  The resulting graph `G` is `DL`-regular.  For an induced
+subset `S`, put
+
+```text
+x_i=|S cap C_i|.
+```
+
+Then every selected vertex in cluster `i` has degree
+
+```text
+(A_B x)_i = sum_{j~_B i} x_j
+```
+
+inside `G[S]`.  Consequently `S` is `2q`-modular if and only if the values
+`(A_B x)_i` are congruent modulo `2q` over all active indices `i` with
+`x_i>0`.
+
+Proof.  The blowup is regular because every vertex in `C_i` is adjacent to
+all `L` vertices in each of the `D` neighboring clusters of `i`.  Inside a
+selected set `S`, a selected vertex from `C_i` sees exactly `x_j` selected
+vertices in each neighboring cluster `C_j` and none inside its own
+independent cluster.  This gives the displayed degree formula, and reducing
+it modulo `2q` gives the criterion.  QED.
+
+In particular, an exact terminal witness of size `2q` in such a blowup is
+equivalent to an integer vector satisfying
+
+```text
+0<=x_i<=L,       sum_i x_i=2q,
+(A_B x)_i is constant on supp(x).
+```
+
+This removes much of the general graph noise while preserving the terminal
+dyadic difficulty.  For example, taking a regular base with about
+`q(log q)^3` vertices and cluster size about `q/(log q)^3` gives a regular
+`q^2`-vertex host in which any terminal witness must use many base vertices;
+ordinary clique or independent-set witnesses in the base do not explain such
+a weighted equitable vector.
+
+Finally, a purely deletion-based absorption proof has a strong trace
+restriction.
+
+**Lemma: Deletion Absorption Criterion.**  Let `W` be a `2q`-modular vertex
+set and let `P subset W`.  Then `W\P` is `2q`-modular if and only if
+
+```text
+deg_P(v) mod 2q
+```
+
+is constant over all `v in W\P`.  In particular, if `|P|<2q`, this condition
+is literal equality of the integers `deg_P(v)`.
+
+Proof.  For `v in W\P`,
+
+```text
+deg_{G[W\P]}(v)=deg_{G[W]}(v)-deg_P(v).
+```
+
+The degrees `deg_{G[W]}(v)` are already congruent modulo `2q`, so the
+remaining degrees are congruent modulo `2q` exactly when the deleted traces
+`deg_P(v)` are congruent modulo `2q`.  If `|P|<2q`, then
+`0<=deg_P(v)<2q`, so congruence is equality.  QED.
+
+Thus absorption by deleting small neutral blocks would require many subsets
+with constant outside trace, which generic regular or twin-free graphs need
+not provide.  A terminal-window proof likely needs swaps, weighted
+corrections, or a nonlocal linearization of the dyadic degree bit rather than
+simple deletion absorption.
+
 ## Conditional Proposition: Terminal-Size Modular Partitions Would Suffice
 
 Suppose that every graph on `n` vertices admits, for
