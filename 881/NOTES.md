@@ -1543,7 +1543,10 @@ C=\{11,15,16\},\quad D=\{8,9,13\}
 are certificate-free colors, \(2(C\cup D)\) covers \([16,32]\), and
 \(24=11+13=15+9=16+8\) is a mixed spike. The remaining contradiction, if
 true, must use infinite recurrence, cofinite coverage, or threshold
-control.
+control. The enhanced diagnostic also reports cross-residual matching
+minima, and the top interval examples have minimum \((0,0)\); mixed spikes
+alone are much weaker than the matching condition that would give a sparse
+deletion from one color.
 
 The new `--pair-edge-search` diagnostic confirms that high-excess first
 pair starts are locally possible but expensive. Starting from the P5 seed,

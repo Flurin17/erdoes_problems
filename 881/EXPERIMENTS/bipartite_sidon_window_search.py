@@ -67,9 +67,68 @@ def best_cross_reflection(c_set: set[int], d_set: set[int]) -> tuple[int, int]:
     return center, count
 
 
+def supports_for_cross_residual(
+    primary: set[int],
+    residual: set[int],
+    target: int,
+) -> set[frozenset[int]]:
+    edges: set[frozenset[int]] = set()
+    ordered = sorted(primary)
+    for i, a in enumerate(ordered):
+        for b in ordered[i:]:
+            if target - a - b in residual:
+                edges.add(frozenset((a, b)))
+    return edges
+
+
+def greedy_matching_size(edges: set[frozenset[int]]) -> int:
+    used: set[int] = set()
+    count = 0
+    for edge in sorted(edges, key=lambda item: (len(item), tuple(sorted(item)))):
+        if edge.isdisjoint(used):
+            used.update(edge)
+            count += 1
+    return count
+
+
+def cross_matching_summary(
+    c_set: set[int],
+    d_set: set[int],
+    interval: tuple[int, int],
+) -> tuple[int, int, int]:
+    lo, hi = interval
+    if lo > hi:
+        return (0, 0, 0)
+    c_min = d_min = 10**9
+    both_min = 10**9
+    for target in range(lo, hi + 1):
+        c_match = greedy_matching_size(
+            supports_for_cross_residual(c_set, d_set, target)
+        )
+        d_match = greedy_matching_size(
+            supports_for_cross_residual(d_set, c_set, target)
+        )
+        c_min = min(c_min, c_match)
+        d_min = min(d_min, d_match)
+        both_min = min(both_min, max(c_match, d_match))
+    return (c_min, d_min, both_min)
+
+
 def search(max_value: int, size: int, limit: int) -> None:
     found = 0
-    best_rows: list[tuple[int, int, int, tuple[int, ...], tuple[int, ...], tuple[int, int]]] = []
+    best_rows: list[
+        tuple[
+            int,
+            int,
+            int,
+            int,
+            int,
+            int,
+            tuple[int, ...],
+            tuple[int, ...],
+            tuple[int, int],
+        ]
+    ] = []
     for tuple_a in combinations(range(1, max_value + 1), size):
         ambient = set(tuple_a)
         masks = range(1, (1 << size) - 1)
@@ -87,9 +146,17 @@ def search(max_value: int, size: int, limit: int) -> None:
             center, spike = best_cross_reflection(c_set, d_set)
             if spike < 2 or interval_len < size:
                 continue
+            c_match, d_match, both_match = cross_matching_summary(
+                c_set,
+                d_set,
+                (lo, hi),
+            )
             row = (
                 interval_len,
                 spike,
+                both_match,
+                c_match,
+                d_match,
                 center,
                 tuple(sorted(c_set)),
                 tuple(sorted(d_set)),
@@ -106,7 +173,17 @@ def search(max_value: int, size: int, limit: int) -> None:
         "size=", size,
         "found=", found,
     )
-    for interval_len, spike, center, c_tuple, d_tuple, interval in best_rows:
+    for (
+        interval_len,
+        spike,
+        both_match,
+        c_match,
+        d_match,
+        center,
+        c_tuple,
+        d_tuple,
+        interval,
+    ) in best_rows:
         print(
             "  interval=",
             interval,
@@ -116,6 +193,10 @@ def search(max_value: int, size: int, limit: int) -> None:
             center,
             "spike=",
             spike,
+            "match_min=",
+            (c_match, d_match),
+            "best_color_min=",
+            both_match,
             "C=",
             list(c_tuple),
             "D=",

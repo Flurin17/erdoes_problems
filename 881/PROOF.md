@@ -10066,6 +10066,14 @@ has three representations:
 \[
 24=11+13=15+9=16+8.
 \]
+The enhanced output also prints the minimum greedy matching sizes for the
+cross-residual graphs \(C+C+D\) and \(D+D+C\) across the covered interval.
+For the displayed top windows these minima are
+\[
+(0,0),
+\]
+so the examples satisfy the mixed-spike condition but not the stronger
+cross-residual matching hypothesis from Lemma 8.6j-7a.
 
 Thus the bipartite recurrent-Sidon obstruction is not finitely
 inconsistent. A final contradiction must use the infinite quantitative
