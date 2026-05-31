@@ -192,6 +192,10 @@ Computational checks and generated data for Erdos Problem 82.
   complete multipartite instance such as the `K_{22,2,1}` strict-terminal
   obstruction.  Add `--print-partition` with `--sizes` to print one minimum
   bin packing certificate.
+- `source_slot_finder.py`: enumerates source-residue fixed slot multisets and
+  filters them through the complete multipartite integer model.  It applies
+  the dyadic clique subset-sum test by default, then keeps only slot families
+  that partition all generated source-residue multipartite size vectors.
 - `twin_blowup_modular.py`: exact weighted congruence model for graphs with a
   bounded number of twin classes, allowing each class to be a clique or an
   independent set and each pair of classes to be complete or empty.

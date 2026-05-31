@@ -3808,6 +3808,34 @@ multipartite classes of size at most `16`, using `EXPERIMENTS/multipartite_modul
 with `--source-residue`; the same tests without source filtering give
 irrelevant counterexamples from other source classes.
 
+The same complete-multipartite fixed-slot model remains consistent one dyadic
+level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
+slot multisets by the source-residue clique subset-sum test and then checks
+the multipartite bin-packing model.  For the `8 -> 16` lift, the following
+four-slot source-residue families all pass the complete-multipartite checks
+through six multipartite classes of size at most `16`:
+
+```text
+R_0=(0,0,0,8),     R_1=(0,0,2,4),
+R_2=(0,0,2,6),     R_3=(0,0,3,5),
+R_4=(0,4,8,12),    R_5=(0,0,5,5),
+R_6=(0,4,6,8),     R_7=(0,0,7,15).
+```
+
+This is still only structured finite evidence.  It does not prove a lift for
+arbitrary `8`-modular graphs, and some families that pass the five-class
+multipartite sweep already fail at six classes, for example source residue
+`6` with slots `(0,0,6,7)` on class sizes `(6,6,6,6,6,6)`.  The useful
+conclusion is calibration: complete multipartite graphs do not yet obstruct
+a four-part source-residue lift at `8 -> 16`, but the fixed slots become more
+source-sensitive as the modulus grows.
+
+The displayed choices should not be mistaken for stable conjectural families.
+For instance, the source-residue `1` choice `(0,0,2,4)` passes the six-class
+check but fails when the class-size vector `(7,7,7,7,7,15,15,15)` is included.
+No exhaustive eight-class search over all four-slot source-residue `1`
+families has been completed.
+
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
 

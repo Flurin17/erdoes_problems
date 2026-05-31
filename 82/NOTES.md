@@ -1982,3 +1982,16 @@ source of growth beyond Ramsey.
   `1,000,000` even graphs containing edge `0:1` and found no edge-rooted
   counterexample.  This is prefix evidence only, not an exhaustive `n=9`
   result.
+- 2026-05-31: Added `source_slot_finder.py` for source-residue fixed-slot
+  searches in the complete multipartite integer model.  For the `8 -> 16`
+  dyadic lift, four-slot source-residue families survive all checked
+  complete multipartite vectors through six classes of size at most `16`:
+  `R_0=(0,0,0,8)`, `R_1=(0,0,2,4)`, `R_2=(0,0,2,6)`,
+  `R_3=(0,0,3,5)`, `R_4=(0,4,8,12)`, `R_5=(0,0,5,5)`,
+  `R_6=(0,4,6,8)`, and `R_7=(0,0,7,15)`.  Some five-class survivors already
+  fail at six classes, e.g. source `6` slots `(0,0,6,7)` on
+  `(6,6,6,6,6,6)`, so the slot choices are genuinely source-sensitive.
+  A further single-family stress test shows that the displayed source `1`
+  choice `(0,0,2,4)` fails by eight classes, on
+  `(7,7,7,7,7,15,15,15)`; this does not yet refute four-slot source `1`
+  families because the full eight-class candidate search was too expensive.
