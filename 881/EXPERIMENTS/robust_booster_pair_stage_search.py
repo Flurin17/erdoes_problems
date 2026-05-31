@@ -175,8 +175,41 @@ def extended_third_stage_check() -> None:
     print("no third-stage extension found in extended bounded/random search")
 
 
+def diagnose_third_stage_failure() -> None:
+    """Show which old-new pairs fail for feasible singleton next elements."""
+
+    old = {1, 3, 20, 21, 23, 30, 31}
+    previous_endpoint = 40
+    base = 22
+    for b in (41, 43, 50, 51, 53, 60, 61, 63):
+        new = {b}
+        A = old | new | {BOOSTER}
+        cap = max(500, 6 * max(A) + 200)
+        newcov = cover_end(hsum(A, 3, cap), base, cap)
+        if newcov <= previous_endpoint or b > newcov - 2:
+            print("b=", b, "coverage fail", "coverage=", newcov)
+            continue
+        four_all = hsum(A, 4, cap)
+        failures = []
+        successes: dict[int, list[int]] = {}
+        for a in sorted(old):
+            without = hsum(A - {a, b}, 4, cap)
+            found = [
+                w
+                for w in range(previous_endpoint + 1, newcov - 1)
+                if w in four_all and w not in without
+            ]
+            if found:
+                successes[a] = found[:5]
+            else:
+                failures.append(a)
+        print("b=", b, "coverage=", newcov, "fail_old=", failures, "successes=", successes)
+
+
 if __name__ == "__main__":
     if "--extend" in sys.argv:
         extended_third_stage_check()
+    elif "--diagnose" in sys.argv:
+        diagnose_third_stage_failure()
     else:
         main()

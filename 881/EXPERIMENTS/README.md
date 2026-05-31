@@ -122,3 +122,7 @@ first adding `23` and then adding `30,31`; every old-new pair has a local
 four-sum witness. Its `--extend` mode checks the next stage through new
 elements up to `160` of size at most `4`, plus random increments of sizes
 `5` through `12`, and finds no continuation.
+Run it with `--diagnose` to see the immediate obstruction: the only
+residue-restricted singleton candidates that extend coverage are `41` and
+`43`, and both fail the pair-witness condition against old elements
+`1,3,21,23,31`.

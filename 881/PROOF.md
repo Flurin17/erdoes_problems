@@ -3132,6 +3132,14 @@ two-point buffer. The next stage stalls in the default search. Its
 `--extend` mode exhausts increments of size at most \(4\) using elements up
 to \(160\), and tries random increments of sizes \(5,\ldots,12\), finding no
 third extension.
+Its diagnostic mode shows the immediate failure: among singleton candidates
+in the prescribed residue classes, only \(41\) and \(43\) extend coverage,
+and both fail the pair-witness condition against the old elements
+\[
+1,\ 3,\ 21,\ 23,\ 31.
+\]
+Thus the obstruction is not merely lack of coverage; it is simultaneous
+domination for many old elements.
 
 ## Dependency Graph
 
