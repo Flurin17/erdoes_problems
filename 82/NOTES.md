@@ -1316,6 +1316,27 @@ source of growth beyond Ramsey.
   `(b-2)C+7` is not coverable.  The failed full-rectangle induction obstruction
   persists at `(C,b)=(7,3)` with vector `(5,4,4)`, so the next proof attempt
   should be an amortized exchange argument.
+- 2026-05-31: Refuted the generalized `+6` rectangle target off the diagonal:
+  for `(b,C)=(5,9)`, the vector `(26,4,2,1)` has total
+  `33=(b-2)C+6` and no five-rectangle cover.  The next attempted repair was
+  the `+4` statement: total at most `(b-2)C+4` should be coverable by `b`
+  rectangles of area at most `C`.  It would imply the needed diagonal theorem
+  because `(q-2)(q+2)+4=q^2`, and it is preserved by deleting a full
+  single-column rectangle.  Exhaustive checks found no counterexample for
+  `(b,C,max_total)=(4,9,22),(5,9,31),(6,9,40),(6,10,44)`.  The diagonal target
+  is essentially sharp: fixed checks show `(q^2-6,4,2,1)` is not coverable for
+  `q=8`, while `(q^2-7,4,2,1)` is coverable for `q=8`.
+- 2026-05-31: The rectangle-only diagonal theorem is false.  For `q=9` and
+  `q=10`, fixed checks show that `(q^2-7,4,2,1)` has total `q^2` but no cover
+  by `q` rectangles of area at most `q+2`; the loss proof generalizes to every
+  `q>=9`.  The broader `+4` rectangle target is also false far off the
+  diagonal; for example `(b,C)=(5,20)` and vector `(57,4,2,1)` has total
+  `(b-2)C+4` and no five-rectangle cover.  The full complete-multipartite
+  arithmetic target survives these examples because special `(q+1,1)` bins
+  repair them: the checker gives partitions of `(74,4,2,1)` with `8` bins for
+  `q=9` and `(93,4,2,1)` with `9` bins for `q=10`.  Pivot: prove the full
+  multipartite bin target (rectangles plus special bins), not the
+  rectangle-only target.
 - 2026-05-31: Added an alternative dyadic conditional that avoids both the
   `q+2` one-shot target and pointwise polylog-saving partitions.  It suffices
   to prove a coarse largest-witness lift, namely every `q`-modular graph on

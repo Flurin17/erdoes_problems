@@ -1008,58 +1008,55 @@ so the induced complete multipartite graph has all internal degrees equal to
 
 Thus the rectangle theorem would prove a strong positive class for the
 one-shot `q+2` program: all complete multipartite graphs and, by complement,
-all disjoint unions of cliques.
+all disjoint unions of cliques.  However, the rectangle theorem itself is
+false.
 
-The same arithmetic obstruction analysis suggests a sharper finite target.
+## Refutation Of The Rectangle-Only Target
 
-## Sharp Rectangle-Cover Target
-
-Let `C>=5` and `b>=2`.  Every nonnegative integer vector `a=(a_i)` with
-
-```text
-sum_i a_i <= (b-2)C+6
-```
-
-should be writable as a sum of at most `b` vectors `r 1_I` with `r>=1`,
-`I` nonempty, and `r|I|<=C`.
-
-This would imply the preceding rectangle theorem by taking `b=q` and
-`C=q+2`, because
+For every `q>=9`, the vector
 
 ```text
-(q-2)(q+2)+6 = q^2+2.
+(q^2-7, 4, 2, 1)
 ```
 
-The threshold is sharp.  The vector
+has total `q^2` and is not coverable by `q` rectangles of area at most `q+2`.
+Let `C=q+2`.  If all `q` rectangles are counted against the first coordinate,
+their total first-coordinate capacity is at most `qC=q^2+2q`.  The first
+coordinate itself uses `q^2-7`, leaving only `2q+7` unused capacity.
+
+On the other hand, covering the tail `(4,2,1)` forces loss at least
 
 ```text
-((b-2)C+4, 2, 1)
+(C-4)+(C-2)+(C-1)=3C-7=3q-1.
 ```
 
-has total `(b-2)C+7` and cannot be covered by `b` rectangles of area at most
-`C`.  Indeed, if all `b` rectangles are counted against the first coordinate,
-their total first-coordinate capacity is at most `bC`.  Covering the tail
-`(2,1)` forces a loss of at least `(C-2)+(C-1)=2C-3`.  To see this, decompose
-the tail contribution into horizontal slices.  A slice of height `h` that
-touches a tail coordinate contributes at most `h` to the first coordinate, and
-using it on the tail costs at least `C-h` of the corresponding first-coordinate
-capacity.  The cheapest way to cover tail height pattern `(2,1)` is one slice
-of height `2` and one slice of height `1`; splitting the height-`2` coordinate
-into smaller slices only increases `sum(C-h)`.  But the first coordinate
-leaves only
+Indeed, decompose the tail contribution into horizontal slices.  A slice of
+height `h` that touches a tail coordinate contributes at most `h` to the first
+coordinate, and therefore loses at least `C-h` from the corresponding
+first-coordinate capacity.  The cheapest exact slicing of `(4,2,1)` is by
+heights `4,2,1`; splitting a slice only increases the sum of losses.  Since
+`3q-1>2q+7` for `q>=9`, no such rectangle cover exists.
 
-```text
-bC - ((b-2)C+4) = 2C-4
-```
+This does not refute the complete-multipartite `q+2` target, because complete
+multipartite modular bins also allow the special type `(q+1,1)`: one bin may
+take `q+1` vertices from a large class and one vertex from another class.  For
+example, the vector `(q^2-7,4,2,1)` is repaired by four special bins using
+`q+1` vertices from the large class with one of the `4` small-class vertices,
+two special bins with the class of size `2`, one special bin with the singleton
+class, and then single-class bins for the remaining large class.
 
-unused capacity.  This contradiction rules out such a cover.
+The finite complete-multipartite target is therefore the following arithmetic
+statement, not the rectangle-only theorem.
 
-The natural proof by deleting one full rectangle is false even below the sharp
-threshold.  With `C=7,b=3`, the vector `(5,4,4)` has total
-`(b-2)C+6=13` and is coverable by three rectangles, but it contains no legal
-rectangle of area `7`.  Any proof of the sharp target must therefore use an
-amortized deletion or exchange argument rather than a literal full-rectangle
-first step.
+**Multipartite bin target.**  Let `q>=3`.  Every nonnegative integer vector of
+total at most `q^2` can be decomposed into at most `q` bins, each of one of the
+following types:
+
+- a rectangle `r 1_I` with `r>=1`, `I` nonempty, and `r|I|<=q+2`;
+- a special two-class bin `(q+1)e_i+e_j` with `i != j`.
+
+Such a decomposition is exactly a partition of the corresponding complete
+multipartite graph into induced `q`-modular subgraphs of order at most `q+2`.
 
 ## Conditional Proposition: Small-Excess Modular Partitions Would Suffice
 
