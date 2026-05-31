@@ -6908,6 +6908,88 @@ protected core, finite active barriers whose deletion creates a genuine
 order-\((k+1)\) hole and a terminal retained gap. This is the rigorous form
 of the high-rank obstruction suggested by the finite experiments.
 
+## Corollary 10.3d: Failure of finite-core stability forces genuine \(A\)-gaps
+
+Let \(k\ge2\), \(h=k+1\), and let \(A\subseteq\mathbb N\) be an
+asymptotic basis of order \(k\), with threshold \(N_0\) and \(m_0=\min A\).
+Suppose the finite-core finite-deletion stability target fails: for every
+finite
+\[
+E\subset A
+\]
+there is a nonempty finite
+\[
+F\subset A\setminus E
+\]
+such that \(A\setminus F\) is not an asymptotic basis of order \(h\).
+Then for every finite \(E\subset A\) and every \(L\), there are a finite
+nonempty
+\[
+F\subset A\setminus E
+\]
+and an integer \(w>L\) such that, after shrinking \(F\) inclusion-minimally
+for this \(w\),
+\[
+w\notin h(A\setminus F), \tag{1}
+\]
+every \(f\in F\) is active in the sense of Lemma 10.3b, and, writing
+\[
+f_0=\min F,
+\]
+the terminal window is a genuine gap of \(A\):
+\[
+A\cap\bigl(w-f_0-(k-1)m_0,\ w-N_0\bigr]=\varnothing. \tag{2}
+\]
+Moreover, by taking \(E\) to contain \(A\cap[1,R]\), these genuine gaps can
+be forced to have lengths tending to infinity.
+
+Proof. Fix \(E\) and \(L\). By the failure hypothesis choose finite
+\[
+F_0\subset A\setminus E
+\]
+such that \(A\setminus F_0\) is not an order-\(h\) basis. Since the failure
+is genuine, there are arbitrarily large \(h\)-holes after deleting \(F_0\).
+Choose
+\[
+w>\max\{L,\ 2\max F_0+(k-1)m_0\}
+\]
+with
+\[
+w\notin h(A\setminus F_0).
+\]
+Shrink \(F_0\) inclusion-minimally for this fixed witness \(w\), and call
+the resulting set \(F\). Then \(F\subset F_0\), so every element of \(F\) is
+at most \(\max F_0\), and (1) holds. Lemma 10.3b gives the activity of each
+deleted element and the retained terminal gap
+\[
+(A\setminus F)\cap\bigl(w-f_0-(k-1)m_0,\ w-N_0\bigr]=\varnothing. \tag{3}
+\]
+Because
+\[
+f_0\le\max F_0
+\]
+and
+\[
+w>2\max F_0+(k-1)m_0,
+\]
+the left endpoint in (3) is larger than \(\max F_0\), hence larger than
+every deleted element of \(F\). Thus no deleted element lies in the terminal
+window either, and (3) is the genuine \(A\)-gap (2).
+
+Finally, if \(E\) contains \(A\cap[1,R]\), then \(f_0>R\). The length of
+the terminal interval in (2) is
+\[
+f_0+(k-1)m_0-N_0
+\]
+up to the endpoint convention, and this tends to infinity with \(R\).
+\(\square\)
+
+Thus any disproof of finite-core finite-deletion stability must be built in
+the genuinely sparse regime. Its finite barriers cannot merely delete a few
+points from a dense tail; their witnesses must sit immediately after actual
+long gaps of \(A\), while still satisfying the active-repair and
+vertex-cover constraints.
+
 ## Warning 10.3c: Compactness and random deletion do not see additive structure
 
 The broad deletion theorem cannot be proved from finite-deletion robustness
@@ -8930,6 +9012,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   formulation, and Lemma 10.3: every counterexample must have active
   inclusion-minimal finite terminal-gap barriers in every infinite tail,
   away from every finite protected core.
+* Corollary 10.3d shows that if the stronger finite-core finite-deletion
+  stability target fails, those terminal windows can be made genuine long
+  gaps of \(A\) itself.
 * Warning 10.3c gives an abstract Schreier-barrier representation model
   showing why compactness, Zorn, finite-prefix, and independent random
   deletion arguments need genuine additive input.

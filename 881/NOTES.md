@@ -133,6 +133,12 @@ holds but no infinite deletion works, then every infinite tail contains a
 finite delayed barrier \(F\) such that \(A\setminus F\) is eventually an
 order-\((k+1)\) basis, but every threshold is at least \(\max F\); the same
 terminal-gap and activity conclusions still hold for the delayed witness.
+Corollary 10.3d records the complementary genuine-failure case: if no
+finite core gives finite-deletion stability, then after every finite core
+there are active finite barriers whose terminal windows are actual long
+gaps of \(A\), not just gaps after deleting \(F\). Thus any refutation of
+finite-core stability must live in the sparse regime and place its
+finite-barrier witnesses immediately after genuine long \(A\)-gaps.
 
 Proposition 3.1f proves both finite-core stability and the desired infinite
 deletion under a tail-syndetic subset hypothesis. This blocks all
