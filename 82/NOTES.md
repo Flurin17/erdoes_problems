@@ -1337,22 +1337,34 @@ source of growth beyond Ramsey.
   `q=9` and `(93,4,2,1)` with `9` bins for `q=10`.  Pivot: prove the full
   multipartite bin target (rectangles plus special bins), not the
   rectangle-only target.
-- 2026-05-31: Added `multipartite_bin_cover.py`, an exact checker for the full
+- 2026-05-31: Added `full_bin_cover.py`, an exact checker for the full
   complete-multipartite bin system: rectangles `r 1_I` plus special
   `(q+1,1)` bins.  It verifies the repaired rectangle counterexamples directly
   and exhaustively checks the full target for `q=5`, `q=6`, and, after adding
-  single-class and unit-layer pruning, `q=7`.  A node-limited `q=8` sweep
-  reached `8,931,197` integer partitions and stopped at the high-branching
-  unknown vector
-  `(9,8,7,6,6,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)`;
-  a direct fixed-vector check covers it in `8` bins.  Candidate ordering still
-  needs optimization before larger exhaustive full-bin sweeps are useful.
+  single-class and unit-layer pruning, `q=7`.  A blind `q=8` sweep remains
+  too slow for the current candidate ordering; the high-branching test vector
+  `(9,8,7,6,6,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)`
+  is nevertheless covered by a direct fixed-vector check in `8` bins.
+  Candidate ordering still needs optimization before larger exhaustive
+  full-bin sweeps are useful.
 - 2026-05-31: Recorded the sparse-tail multipartite repair lemma from the
   subagent.  If a vector has one class of size `x`, tail total `A<=q`,
   `x>=(q+1)A`, and total at most `q^2`, then `A` special `(q+1,1)` bins cover
   the tail and the remaining large class fits in at most `q-1-A` single-class
   bins.  This explains why the rectangle-only counterexamples are harmless for
   the full complete-multipartite bin target.
+- 2026-05-31: Rechecked the full-bin target after the rectangle-only diagonal
+  refutation.  `full_bin_cover.py` verifies `(q^2-7,4,2,1)` for every
+  `9<=q<=15` with an explicit cover pattern using single-column bins, one
+  special `(q+1,1)` bin, and small rectangles; the broader adversarial list
+  `(q^2-8,5,2,1)`, `(q^2-8,4,2,1,1)`, `(q^2-9,6,2,1)`,
+  `(q^2-9,5,2,1,1)`, `(q^2-10,4,3,2,1)`, and
+  `(q^2-12,4,4,2,1,1)` passed for `8<=q<=20`.  Biased random partitions
+  near total `q^2` found no full-bin failures through `q=12`.  Exact
+  first-layer checks found no full-bin failures at total `q^2+1` for
+  `3<=q<=7`, and no failures for `q=6` through total `45=q^2+9`.
+  The useful proof invariant is to preserve large coordinates for special-bin
+  tail absorption instead of deleting full single-column rectangles greedily.
 - 2026-05-31: Added an alternative dyadic conditional that avoids both the
   `q+2` one-shot target and pointwise polylog-saving partitions.  It suffices
   to prove a coarse largest-witness lift, namely every `q`-modular graph on

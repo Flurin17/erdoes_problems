@@ -12,6 +12,9 @@ Computational checks and generated data for Erdos Problem 82.
   formulation of complete multipartite capped modular packing, where one
   rectangle `(r^h)` subtracts `r` from `h` classes and has area at most the
   cap.  Long exhaustive sweeps can use `--progress-every`.
+- `full_bin_cover.py`: exact checker for the full complete-multipartite
+  capped bin model with rectangles plus special `(q+1,1)` bins.  This is the
+  arithmetic target that remains after the rectangle-only theorem is refuted.
 - `equitable_partition.py`: computes color-refinement/equitable-partition
   cells and the regular-subgraph certificate from the largest cell.
 - `degree_spread.py`: filters or samples graphs with bounded degree spread or
