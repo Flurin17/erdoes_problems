@@ -1365,6 +1365,11 @@ source of growth beyond Ramsey.
   `3<=q<=7`, and no failures for `q=6` through total `45=q^2+9`.
   The useful proof invariant is to preserve large coordinates for special-bin
   tail absorption instead of deleting full single-column rectangles greedily.
+- 2026-05-31: The independent `multipartite_bin_cover.py` exhaustive checker
+  completed the full-bin target for `q=8`: `12,308,138` integer partitions of
+  total at most `64` checked, `15,498,424` cached states, `71,697,184`
+  candidate branches, and no counterexample.  Thus the complete-multipartite
+  `q+2` bin target is now exhaustively verified for every `q<=8`.
 - 2026-05-31: Added an alternative dyadic conditional that avoids both the
   `q+2` one-shot target and pointwise polylog-saving partitions.  It suffices
   to prove a coarse largest-witness lift, namely every `q`-modular graph on
