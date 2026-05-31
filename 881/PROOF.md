@@ -6236,6 +6236,52 @@ They must either contain a fixed certificate tuple whose certificate value
 is not the deleted mirror, or provide a different repair scheme from the
 balanced fixed-certificate recursion.
 
+## Warning 8.6j-9: Pair repairs from reflected packets require a fixed certificate
+
+The obstruction in Warning 8.6j-8 is not just an artefact of choosing the
+wrong deleted mirror. Suppose one tries the following more flexible scheme.
+Fix a retained base point \(t\in A\), choose large centers \(m_i\), and
+delete
+\[
+b_i=m_i-t.
+\]
+Assume that for some fixed finite set \(Y\subset A\), the centers reflect
+\[
+m_i-Y\subset A
+\]
+and all these mirrors are retained. The one-deleted repair
+\[
+b_i+t=m_i
+\]
+can be supplied by any reflected pair
+\[
+m_i=y+(m_i-y),\qquad y\in Y.
+\]
+But the two-deleted repair has target
+\[
+b_i+b_j+t=m_i+m_j-t. \tag{1}
+\]
+Any balanced repair of (1) using one mirror from each center and one fixed
+retained element has the form
+\[
+(m_i-y_1)+(m_j-y_2)+z.
+\]
+It equals (1) exactly when
+\[
+z=y_1+y_2-t. \tag{2}
+\]
+Thus this whole class of repairs is available precisely when
+\[
+t,y_1,y_2
+\]
+form a fixed certificate triple with value \(z\in A\).
+
+Consequently, if \(Y\cup\{t\}\) is certificate-free relative to \(A\), then
+reflected packets from \(Y\) cannot by themselves run the usual order-3
+deletion recursion. One must either find a reflected packet that contains a
+genuine fixed certificate, or use a repair identity that is not of this
+balanced two-mirror form.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose
@@ -9952,6 +9998,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.6j-8 explains why the resulting cross-color reflected packets
   do not directly trigger Corollary 2.3c: the moving certificate value is
   the natural deleted mirror.
+* Warning 8.6j-9 records the corresponding repair-identity obstruction:
+  deleting mirrors \(m_i-t\) and repairing pairs with one mirror from each
+  center requires a fixed certificate \(y_1+y_2-t\in A\).
 * Corollary 8.6k uses the Sidon bound to rule out fixed-rank large-excess
   barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\), while
   noting that sparse fixed-rank tails with bounded top excess are not ruled

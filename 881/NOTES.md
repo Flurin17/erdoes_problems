@@ -248,6 +248,10 @@ Warning 8.6j-8 records why cross-color reflected packets do not immediately
 feed Corollary 2.3c: two reflected \(C\)-points create a certificate triple,
 but the certificate value is the mirror \(m-e\), which is exactly the
 natural element deleted by the fixed-certificate construction.
+Warning 8.6j-9 adds the algebraic reason: if one deletes mirrors
+\(m_i-t\), then any two-deleted repair using one mirror from each of two
+centers requires a fixed value \(y_1+y_2-t\in A\). Thus a
+certificate-free reflected packet cannot run the balanced repair recursion.
 
 ## Trivial and Boundary Cases
 
