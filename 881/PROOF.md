@@ -1646,6 +1646,71 @@ become relevant. The remaining escape is again motion: the star center
 \(d\) and the finite auxiliary deletion set may move beyond every protected
 core.
 
+## Corollary 3.4h: Star gates create many private low-count rows
+
+Let \(A\subseteq\mathbb N\) be an order-2 basis with threshold \(N_0\).
+Let \(D\subset A\) be finite, put
+\[
+C=A\setminus D,
+\]
+and suppose
+\[
+w\notin3C.
+\]
+Fix \(d\in D\), and define the retained repair row set
+\[
+R_d(w)=\{a\in C:w-d-a\in C\}.
+\]
+Then every
+\[
+a\in R_d(w)
+\]
+with
+\[
+w-a\ge N_0,\qquad w-a\notin D+D
+\]
+satisfies
+\[
+a+d\notin2C
+\]
+and hence
+\[
+\nu_d(a+d)<|D|.
+\]
+Consequently, if \(d\) supplies \(M\) unordered retained repairs
+\[
+w-d=a+b,\qquad a,b\in C,
+\]
+then, apart from at most \(|D+D|\) exceptional values of \(a\), the
+summands appearing in those repairs are private low-count rows for the same
+color \(d\).
+
+Proof. Let \(a\in R_d(w)\), and write
+\[
+b=w-d-a\in C.
+\]
+Then
+\[
+w-a=d+b.
+\]
+If \(w-a\ge N_0\) and \(w-a\notin D+D\), Lemma 8.4c applies with
+\[
+F=D,\qquad e=a,\qquad f=d,
+\]
+and gives
+\[
+a+d\notin2C.
+\]
+Lemma 8.4d then gives \(\nu_d(a+d)<|D|\). The exceptional bound follows
+because the map \(a\mapsto w-a\) is injective. \(\square\)
+
+Combining Corollaries 3.4g and 3.4h, a \(k=2\) counterexample must produce,
+outside every finite protected core, arbitrarily late holes with a moving
+deleted gate \(d\) and a set of \(\gg A(w)\) reflected retained rows that
+are all low-count for the translates \(a+d\), except for the bounded
+deleted-pair exception window. This is the current sharpest form of the
+mass-escape obstruction.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6745,6 +6810,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   bound in the \(k=2\) case: every counterexample has arbitrarily late
   finite holes where one deleted element gates \(\gg A(w)\) retained
   two-sum repairs of the witness.
+* Corollary 3.4h feeds those star-gated repairs back into Lemma 8.4c:
+  except for deleted-pair rows, the retained summands in the repairs are
+  private low-count rows for the same deleted gate.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

@@ -491,6 +491,15 @@ remaining obstruction is not just a finite gate; it is a moving star gate
 with linearly many retained repairs. If the same gate or a certificate-rich
 part of those repairs could be made recurrent, the positive recurrence
 theorems would apply.
+Corollary 3.4h ties this back to the private-color obstruction: for a
+star-gated hole, almost every retained summand \(a\) in a repair
+\[
+w-d=a+b
+\]
+satisfies \(a+d\notin2(A\setminus D)\) and has low two-sum count
+\(\nu_d(a+d)<|D|\), except when \(w-a\in D+D\). Thus a moving-star
+counterexample must carry a large reflected set of low-count private rows
+for the same moving gate.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
