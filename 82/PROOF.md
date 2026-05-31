@@ -3624,6 +3624,43 @@ independent.  More generally, the task for this slot multiset is to remove
 one `1`-modular part and one `2`-modular part so that the residual graph has
 the displayed mod-`4` cut-degree prescription.
 
+The lower bit of this residual cut equation is never the obstruction.
+
+**Lemma 4I.6B: The Parity Shadow Of The Residual Cut Is Always Solvable.**
+Let `H` be any graph.  Then there is a cut `V(H)=A union B` such that every
+vertex has even same-side degree.
+
+Proof.  Work over `F_2`.  Let `A_H` be the adjacency matrix of `H`, let
+`h=A_H 1` be the degree-parity vector, and encode the cut by
+`x_v=0` on one side and `x_v=1` on the other.  The parity of the same-side
+degree at `v` is
+
+```text
+(A_H x)_v + h_v(1+x_v).
+```
+
+Thus the condition that every same-side degree is even is the linear system
+
+```text
+(A_H + diag(h)) x = h.
+```
+
+Put `L=A_H+diag(h)`.  Since `L` is symmetric, `h` lies in the column space of
+`L` if and only if `y dot h=0` for every `y in ker L`.  If `L y=0`, then
+
+```text
+0 = y dot L y = sum_v h_v y_v,
+```
+
+because the off-diagonal edge terms occur twice and vanish in characteristic
+`2`.  Hence `y dot h=0` for every kernel vector, so the system is solvable.
+Any solution gives the desired cut.  QED.
+
+Consequently, the hard part of Lemma 4I.6 is the second binary digit of the
+same-side degrees after deleting `C` and `D`; it is a quadratic condition on
+the chosen parity-solution space.  A purely linear `F_2` proof can at best
+solve this lower-bit shadow.
+
 The following stronger formulation was a tempting way to force the residual
 cut congruence by literal bipartiteness.
 
@@ -3794,6 +3831,76 @@ is even, equivalently `n` is odd, then `K_n` has a matching-slot partition.
 Proof.  If `n congruent 1 mod 4`, put all vertices in one zero slot, since
 `K_n` has degree `n-1 congruent 0 mod 4`.  If `n congruent 3 mod 4`, put all
 vertices in `D`, since `n-1 congruent 2 mod 4`.  QED.
+
+The following rooted form is stronger and is the right object for cut-vertex
+induction.
+
+**Rooted Zero-Slot Matching Candidate.**  For every even graph `G` and every
+vertex `r`, there is a matching-slot partition `A,B,C,D` in which `r` lies in
+one of the zero-residue slots.
+
+Computationally, `EXPERIMENTS/matching_slot_search.py --force-color r:0`
+confirms this rooted form for every root in every even graph through
+`7` vertices, and for the current hard masks tested above.
+
+**Lemma: Cut-Vertex Reduction From Rooted Zero-Slot Lobes.**  Suppose the
+rooted zero-slot matching candidate holds for every even graph with fewer
+vertices than a connected even graph `G`.  If `G` has a cut vertex, then `G`
+satisfies the unrooted matching-slot target.
+
+Proof.  Let `v` be a cut vertex.  For each component `K` of `G-v`, put
+`G_K=G[K union {v}]`.  As in the modular-OCT cut-vertex reduction, `G_K` is
+even: every vertex of `K` has its original even degree, and the number of
+edges from `v` into `K` is even by summing degrees over `K`.
+
+Apply the rooted zero-slot candidate to each `G_K`, rooted at `v`, and rename
+the two zero slots within each lobe so that `v` belongs to the global slot
+`A`.  Take the union of all lobe `A`-, `B`-, `C`-, and `D`-sets, identifying
+the common vertex `v`.
+
+For every vertex other than `v`, its same-slot neighbors all lie in its own
+lobe, so its required condition is unchanged.  For `v`, the same-`A` degree
+is the sum of its lobe same-`A` degrees, each of which is `0 mod 4`; hence the
+global same-`A` degree is also `0 mod 4`.  The union of the `C`-sets remains
+an induced matching because distinct lobes are disjoint and meet only at
+`v`, which is in `A`; likewise the union of the `D`-sets remains
+`2 mod 4`.  Therefore the global partition is a matching-slot certificate for
+`G`.  QED.
+
+Degree-`2` suppression has a more delicate boundary obstruction.
+
+**Lemma: Direct Lifts Across Degree-`2` Suppression.**  Let `G` be an even
+graph, let `v` be a degree-`2` vertex with nonadjacent neighbors `x,y`, and
+let `G'=G-v+xy`.  Suppose `G'` has a matching-slot certificate.  This
+certificate lifts directly to a matching-slot certificate of `G` in each of
+the following cases:
+
+1. `x` and `y` both lie in the residue-`2` slot `D`; put `v` in `D`.
+2. `x` and `y` lie in different slots and are not split between the two zero
+   slots `A` and `B`; put `v` in a zero slot different from both endpoint
+   slots.
+
+Proof.  In the first case, the edge `xy` is a same-`D` edge in `G'`.  Removing
+it decreases the same-`D` degree of `x` and `y` by `1`, and adding `v` to `D`
+adds one same-`D` neighbor back to each.  The new vertex `v` has same-`D`
+degree `2`, so the residue-`2` condition is preserved.
+
+In the second case, `xy` is a cross-slot edge in `G'`, so deleting it does not
+change any same-slot degree of `x` or `y`.  Since the two endpoint slots are
+not exactly `A` and `B`, at least one zero slot is unused by the endpoints.
+Putting `v` in such a zero slot gives `v` same-slot degree `0` and does not
+change the same-slot degree of either endpoint.  All other vertices are
+unchanged.  QED.
+
+The endpoint patterns not covered by this direct lift are `same A`, `same B`,
+`same C`, and split `A/B`.  Thus a minimal counterexample with a suppressible
+degree-`2` vertex would force an edge-rooted obstruction in the smaller graph
+`G'`: every matching-slot certificate of `G'` must place the new edge `xy` in
+one of these bad boundary patterns, unless a nonlocal recoloring is used.
+This explains why the current reductions do not yet allow us to assume
+minimum degree at least `4`; the missing induction object must record
+edge-rooted slot and local same-degree signatures, not just unrooted
+certificates.
 
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which

@@ -1943,3 +1943,24 @@ source of growth beyond Ramsey.
   the remaining even cycles; complete even graphs work by putting all vertices
   into the zero slot or the residue-`2` slot according as `n` is `1` or
   `3 mod 4`.
+- 2026-05-31: Added `--force-color` to `matching_slot_search.py` and tested
+  the rooted zero-slot strengthening: every even graph with a specified root
+  should have a matching-slot certificate with the root in a zero slot.  Exact
+  checks pass for every root in every even graph through `n=7`, and the
+  `n=14` hard mask and `n=16` modular-OCT counterexample pass with vertex `0`
+  forced into a zero slot.  Recorded the cut-vertex reduction: if this rooted
+  strengthening holds for all smaller even lobes, then no connected
+  cut-vertex graph is a minimal counterexample to the unrooted matching-slot
+  theorem.
+- 2026-05-31: Added the linear-algebra shadow of the residual cut equation:
+  for any graph `H`, the cut making every same-side degree even is always
+  solvable over `F_2` via `(A_H+diag(h))x=h`, where `h` is the degree-parity
+  vector.  Hence the obstruction in Lemma 4I.6 is genuinely the second bit,
+  not parity.  Also recorded the degree-`2` suppression audit for the
+  matching-slot theorem.  If a degree-`2` vertex `v` with nonadjacent
+  neighbors `x,y` is suppressed to an edge `xy`, a certificate of the smaller
+  graph lifts directly when `x,y` are both in `D`, or when they are in
+  different slots but not split as `A/B`.  The boundary patterns not covered
+  by this direct lift are `same A`, `same B`, `same C`, and split `A/B`;
+  eliminating degree-`2` vertices therefore requires an edge-rooted signature
+  theorem or a nonlocal recoloring argument.

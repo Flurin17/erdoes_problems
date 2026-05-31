@@ -47,11 +47,18 @@ def find_assignment(
     graph_mask: int,
     pc: ri.Precomp | None = None,
     node_limit: int | None = None,
+    forced_colors: dict[int, int] | None = None,
 ) -> tuple[list[int] | None, int, bool]:
     if pc is None:
         pc = ri.precompute(n)
     adj = adjacency(n, graph_mask, pc)
-    order = sorted(range(n), key=lambda vertex: adj[vertex].bit_count(), reverse=True)
+    if forced_colors is None:
+        forced_colors = {}
+    order = list(forced_colors) + [
+        vertex
+        for vertex in sorted(range(n), key=lambda vertex: adj[vertex].bit_count(), reverse=True)
+        if vertex not in forced_colors
+    ]
     assignment = [-1] * n
     color_masks = [0, 0, 0, 0]
     nodes = 0
@@ -100,7 +107,7 @@ def find_assignment(
         if position == n:
             return verify_assignment(adj, assignment)
         vertex = order[position]
-        colors = (0, 3, 1, 2) if position else (0, 3, 2)
+        colors = (forced_colors[vertex],) if vertex in forced_colors else (0, 3, 1, 2)
         for color in colors:
             if not can_place(vertex, color):
                 continue
@@ -134,8 +141,15 @@ def print_certificate(assignment: list[int]) -> None:
         print(f"{name}=" + ",".join(map(str, vertices)))
 
 
-def check_mask(n: int, graph_mask: int, node_limit: int | None) -> None:
-    assignment, nodes, limited = find_assignment(n, graph_mask, node_limit=node_limit)
+def check_mask(
+    n: int,
+    graph_mask: int,
+    node_limit: int | None,
+    forced_colors: dict[int, int] | None,
+) -> None:
+    assignment, nodes, limited = find_assignment(
+        n, graph_mask, node_limit=node_limit, forced_colors=forced_colors
+    )
     print(f"n={n}")
     print(f"mask={graph_mask}")
     print(f"nodes={nodes}")
@@ -150,12 +164,19 @@ def check_mask(n: int, graph_mask: int, node_limit: int | None) -> None:
     print_certificate(assignment)
 
 
-def exhaustive_even(n: int, limit: int | None, node_limit: int | None) -> None:
+def exhaustive_even(
+    n: int,
+    limit: int | None,
+    node_limit: int | None,
+    forced_colors: dict[int, int] | None,
+) -> None:
     pc = ri.precompute(n)
     checked = 0
     limited = 0
     for graph_mask in modular_lift.parity_graphs(n, odd=False):
-        assignment, _nodes, hit_limit = find_assignment(n, graph_mask, pc, node_limit)
+        assignment, _nodes, hit_limit = find_assignment(
+            n, graph_mask, pc, node_limit, forced_colors
+        )
         if hit_limit:
             limited += 1
             continue
@@ -174,7 +195,13 @@ def exhaustive_even(n: int, limit: int | None, node_limit: int | None) -> None:
     print("no_counterexample_seen")
 
 
-def sample_even(n: int, trials: int, seed: int, node_limit: int | None) -> None:
+def sample_even(
+    n: int,
+    trials: int,
+    seed: int,
+    node_limit: int | None,
+    forced_colors: dict[int, int] | None,
+) -> None:
     rng = random.Random(seed)
     pc = ri.precompute(n)
     edge_index = {edge: index for index, edge in enumerate(pc.edges)}
@@ -184,7 +211,9 @@ def sample_even(n: int, trials: int, seed: int, node_limit: int | None) -> None:
         graph_mask = modular_partition.random_parity_mask(n, False, rng, pc, edge_index)
         if graph_mask is None:
             continue
-        assignment, _nodes, hit_limit = find_assignment(n, graph_mask, pc, node_limit)
+        assignment, _nodes, hit_limit = find_assignment(
+            n, graph_mask, pc, node_limit, forced_colors
+        )
         if hit_limit:
             limited += 1
             continue
@@ -214,13 +243,23 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--node-limit", type=int)
+    parser.add_argument(
+        "--force-color",
+        action="append",
+        default=[],
+        help="force a vertex color as vertex:color; colors 0,1 are zero slots",
+    )
     args = parser.parse_args()
+    forced_colors: dict[int, int] = {}
+    for item in args.force_color:
+        vertex_text, color_text = item.split(":", 1)
+        forced_colors[int(vertex_text)] = int(color_text)
     if args.mask is not None:
-        check_mask(args.n, args.mask, args.node_limit)
+        check_mask(args.n, args.mask, args.node_limit, forced_colors)
     elif args.exhaustive_even:
-        exhaustive_even(args.n, args.limit, args.node_limit)
+        exhaustive_even(args.n, args.limit, args.node_limit, forced_colors)
     elif args.sample_even:
-        sample_even(args.n, args.sample_even, args.seed, args.node_limit)
+        sample_even(args.n, args.sample_even, args.seed, args.node_limit, forced_colors)
     else:
         raise SystemExit("use --mask, --exhaustive-even, or --sample-even")
 

@@ -99,7 +99,8 @@ Computational checks and generated data for Erdos Problem 82.
   stronger `(0,0,1,2)` first-lift target in which the residue-`1` color class
   must be an induced matching.  This is often faster than exact-cover subset
   enumeration on fixed hard masks and supports exhaustive even-graph prefixes
-  with `--limit` plus per-instance `--node-limit`.
+  with `--limit` plus per-instance `--node-limit`.  Use `--force-color v:c`
+  to test rooted variants, e.g. forcing a specified root into a zero slot.
 - `matching_slot_fast.cpp`: C++ exact checker for the same matching-slot
   target on small even graphs.  It is intended to make the full labelled
   `n=8` even-graph sweep reproducible.
