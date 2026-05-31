@@ -81,14 +81,24 @@ def supports_for_cross_residual(
     return edges
 
 
-def greedy_matching_size(edges: set[frozenset[int]]) -> int:
-    used: set[int] = set()
-    count = 0
-    for edge in sorted(edges, key=lambda item: (len(item), tuple(sorted(item)))):
+def exact_matching_size(edges: set[frozenset[int]]) -> int:
+    ordered = tuple(sorted(edges, key=lambda item: (len(item), tuple(sorted(item)))))
+    memo: dict[tuple[int, frozenset[int]], int] = {}
+
+    def search(index: int, used: frozenset[int]) -> int:
+        key = (index, used)
+        if key in memo:
+            return memo[key]
+        if index == len(ordered):
+            return 0
+        best = search(index + 1, used)
+        edge = ordered[index]
         if edge.isdisjoint(used):
-            used.update(edge)
-            count += 1
-    return count
+            best = max(best, 1 + search(index + 1, used | edge))
+        memo[key] = best
+        return best
+
+    return search(0, frozenset())
 
 
 def cross_matching_summary(
@@ -102,10 +112,10 @@ def cross_matching_summary(
     c_min = d_min = 10**9
     both_min = 10**9
     for target in range(lo, hi + 1):
-        c_match = greedy_matching_size(
+        c_match = exact_matching_size(
             supports_for_cross_residual(c_set, d_set, target)
         )
-        d_match = greedy_matching_size(
+        d_match = exact_matching_size(
             supports_for_cross_residual(d_set, c_set, target)
         )
         c_min = min(c_min, c_match)

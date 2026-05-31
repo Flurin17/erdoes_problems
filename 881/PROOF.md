@@ -6686,6 +6686,130 @@ branch rather than at the matching criterion. Cofinite order-2 coverage and
 separate recurrence produce many cross-residual edges, but they do not
 force those edges to be disjoint.
 
+## Lemma 8.6j-7d: Two Sidon colors forbid large shifted-reflected packets
+
+Let
+\[
+A=C_0\cup C_1\cup E
+\]
+be a disjoint union, where \(E\) is finite and each \(C_i\) is
+certificate-free relative to \(A\). Let \(h\ne0\) and \(t\) be integers.
+If
+\[
+S\subset A\setminus E,\qquad S+h\subset A\setminus E,\qquad t-S\subset A\setminus E,
+\]
+then
+\[
+|S|\le 10. \tag{1}
+\]
+
+Proof. By Warning 8.6j, each \(C_i\) is Sidon. Color every element of
+\(A\setminus E\) by its membership in \(C_0\) or \(C_1\).
+
+First consider the translation \(s\mapsto s+h\). For a fixed color
+\(C_i\), there is at most one \(s\in S\cap C_i\) with
+\[
+s+h\in C_i.
+\]
+Indeed, two distinct such elements \(s,s'\) would give two distinct
+same-color representations
+\[
+s+(s'+h)=s'+(s+h),
+\]
+contradicting the Sidon property of \(C_i\). Thus at most two elements of
+\(S\) keep their color under translation by \(h\).
+
+Next consider the reflection \(s\mapsto t-s\). For a fixed color \(C_i\),
+there are at most two \(s\in S\cap C_i\) with
+\[
+t-s\in C_i,
+\]
+because all unordered pairs \(\{s,t-s\}\) have the same same-color sum
+\(t\), and a Sidon color admits at most one such pair. Hence at most four
+elements of \(S\) keep their color under reflection.
+
+Remove these at most six exceptional elements. For every remaining
+\(s\), both maps flip color, so
+\[
+s+h,\quad t-s
+\]
+lie in the same color, the color opposite to that of \(s\). For a fixed
+target color \(C_i\), the unordered pairs
+\[
+\{s+h,t-s\}
+\]
+all have sum \(t+h\). Sidonicity again allows at most one such unordered
+pair in \(C_i\), and hence at most two values of \(s\) for that color.
+The two target colors contribute at most four non-exceptional elements.
+Together with the six exceptional elements, this proves (1). \(\square\)
+
+Consequently, in the cofinite two-color certificate-free tail supplied by
+Corollary 13.1l.3, the shifted-overlap branch of Corollary 3.4t cannot
+carry packets of size tending to infinity once the finite exceptional set
+has been protected. Any surviving low-count-star obstruction in that
+two-color reduction must therefore fall in the unique-gate branch, not in
+the moving shifted-overlap branch.
+
+## Lemma 8.6j-7e: Same-color exception rows are sparse
+
+Let
+\[
+A=C_0\cup C_1\cup E
+\]
+be a disjoint union, where \(E\) is finite and each \(C_i\) is
+certificate-free relative to \(A\). Let
+\[
+F\subset C_0\cup C_1
+\]
+be finite, put \(R=A\setminus F\), and fix \(w\). For every
+\[
+c\in F
+\]
+and every color \(i\in\{0,1\}\), the set
+\[
+\{a\in F\cap C_i:\ w-a-c\in R\cap C_i\}
+\]
+has size at most \(1\). Consequently, the number of incidences
+\[
+(a,c,t)\in F\times F\times (R\setminus E)
+\]
+with
+\[
+t=w-a-c
+\]
+and \(a,t\) in the same color is at most \(2|F|\).
+
+Proof. Fix \(c\in F\) and \(i\in\{0,1\}\). Suppose distinct
+\[
+a,b\in F\cap C_i
+\]
+satisfy
+\[
+t_a=w-a-c\in R\cap C_i,\qquad t_b=w-b-c\in R\cap C_i.
+\]
+Since \(t_b\in R\), it is not equal to \(a\in F\). Therefore the three
+same-color elements
+\[
+a,\quad b,\quad t_b
+\]
+form a forbidden certificate: with \(e=a\),
+\[
+b+t_b-a=b+(w-b-c)-a=w-a-c=t_a\in A.
+\]
+This contradicts certificate-freeness of \(C_i\). Hence there is at most
+one such \(a\) for each fixed pair \((c,i)\). Summing over
+\[
+c\in F,\qquad i\in\{0,1\}
+\]
+gives the incidence bound. \(\square\)
+
+This is the two-color refinement of the \(F+F\) exception window in
+Corollary 8.4c.1. It does not improve the scalar bound \(|F+F|\) enough to
+close the problem: the surviving exception rows may still be star-like and
+color-flipping. It does rule out dense same-color rectangles inside the
+exception window, which is exactly the pattern that would otherwise mimic
+an absorptive finite test set.
+
 ## Warning 8.6j-8: Cross reflections give moving, not fixed, certificates
 
 The mixed-spike structure has a tempting but invalid shortcut to Corollary
@@ -10071,7 +10195,7 @@ has three representations:
 \[
 24=11+13=15+9=16+8.
 \]
-The enhanced output also prints the minimum greedy matching sizes for the
+The enhanced output also prints the minimum exact matching sizes for the
 cross-residual graphs \(C+C+D\) and \(D+D+C\) across the covered interval.
 For the displayed top windows these minima are
 \[
@@ -10089,6 +10213,76 @@ Thus the bipartite recurrent-Sidon obstruction is not finitely
 inconsistent. A final contradiction must use the infinite quantitative
 requirements: cofinite order-2 coverage, recurrence at unbounded centers,
 the Schreier barrier links, or threshold control for infinite deletions.
+
+## Corollary 13.1l.5: Schreier two-color stars are unique-gate
+
+In any \(k=2\) counterexample realized by the enumerated-Schreier target of
+Variant 13.1b-enum, let
+\[
+P_1=C_0\cup C_1
+\]
+be the cofinite two-color tail from Corollary 13.1l.3. Then, after
+protecting any finite
+\[
+E\supset A\setminus P_1,
+\]
+the low-count-star alternative from Corollary 3.4t cannot occur in its
+shifted-overlap branch for all sufficiently large witnesses. Consequently,
+for every such \(E\), the unique-gate branch of Corollary 3.4t occurs for
+arbitrarily large \(w\): there are
+\[
+d\in A\setminus E,\qquad t=w-d,
+\]
+and
+\[
+S\subset A\setminus E,\qquad |S|\gg_E A(w),
+\]
+such that
+\[
+t-S\subset A\setminus E
+\]
+and
+\[
+r_{2,A}(s+d)=1\qquad(s\in S). \tag{1}
+\]
+
+Proof. Replace \(E\) by a larger finite set \(E'\) containing both \(E\)
+and the finite exceptional set from Corollary 3.4t. Since
+\(A\setminus E'\subset P_1\), every element outside \(E'\) has one of the
+two Sidon colors \(C_0,C_1\).
+
+Suppose the shifted-overlap branch of Corollary 3.4t occurs with distinct
+\[
+d,f\in A\setminus E'
+\]
+and packet \(S\). Put
+\[
+h=d-f\ne0.
+\]
+That branch gives
+\[
+S+h\subset A,\qquad t-S\subset A.
+\]
+Because \(S\) and \(t-S\) lie outside \(E'\), and only \(O_{E'}(1)\)
+elements of \(S\) can have \(s+h\in E'\), discarding those rows lets us
+apply Lemma 8.6j-7d. Hence
+\[
+|S|\le 10+O_{E'}(1).
+\]
+But Corollary 3.4t supplies
+\[
+|S|\ge\eta_{E'} A(w)
+\]
+for a fixed \(\eta_{E'}>0\), and \(A(w)\to\infty\). Hence the
+shifted-overlap branch is impossible for all sufficiently large such
+witnesses. Since Corollary 3.4t gives arbitrarily large witnesses in one
+of its two branches, the unique-gate branch must occur arbitrarily often.
+\(\square\)
+
+Thus the enumerated-Schreier obstruction has lost the moving
+shifted-overlap escape. Its remaining low-count stars must be genuinely
+unique rows \(s+d\), with no alternate deleted color \(f\) shifting a
+positive-density packet back into \(A\).
 
 ### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
 
@@ -10157,6 +10351,46 @@ promoted. This is still finite evidence, but it sharpens the remaining
 construction target. A viable enumerated-Schreier lift must build a
 hierarchy in which first-prefix pair excess diverges at each promoted
 level without the required fillers becoming an unlinked tail.
+
+### Warning 13.1n: Mirrored packets leave promoted-mirror debt
+
+The construction-side version of Lemma 8.4c is concrete. For a finite
+Schreier edge \(F\), a witness \(w\), and a finite retained test set
+\[
+T\subset A\setminus F,
+\]
+one can try to choose a private coloring
+\[
+\chi:T\to F
+\]
+and add mirror fillers
+\[
+q_e=w-e-\chi(e)\qquad(e\in T).
+\]
+The Lemma 8.4c row condition then becomes
+\[
+q_e\in A\setminus F,\qquad e+\chi(e)\notin2(A\setminus F). \tag{1}
+\]
+If every \(f\in F\) occurs as some color \(\chi(e)\), restoring any one
+deleted element \(f\) repairs the hole through
+\[
+w=f+e+q_e.
+\]
+Thus mirrored Sidon packets can satisfy the private-incidence matrix
+row-by-row, at least as a finite affine-avoidance problem.
+
+The debt appears when a filler \(q_e\) is later promoted into the protected
+tail. For any old retained endpoint \(p\), Lemma 13.1h says that if an
+interval of shifted values is already absorbed,
+\[
+[q_e-p,R-p]\subseteq2(A\setminus\{d,q_e\}),
+\]
+then every candidate witness up to \(R\) for the pair \(\{d,q_e\}\) is
+poisoned by \(p+2(A\setminus\{d,q_e\})\). A staged mirrored-packet
+construction must therefore put each promoted mirror into a new buffer
+beyond all old poison intervals. A single block that merely protects its
+own mirrors does not iterate; the promoted mirrors become the next
+complete-prefix-link problem.
 
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
@@ -11141,6 +11375,15 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.6j-7c explains why separate recurrence does not force the
   matching branch: it naturally creates high-degree moving stars, and
   certificate-freeness blocks non-star same-residual edges.
+* Lemma 8.6j-7d adds a useful two-color Sidon constraint: a packet cannot
+  be simultaneously translated by a nonzero \(h\) and reflected by a center
+  \(t\) in a cofinite two-color certificate-free tail, except for \(O(1)\)
+  rows. The two maps flip colors and then create too many same-color
+  representations of \(t+h\).
+* Lemma 8.6j-7e gives the corresponding exception-window refinement:
+  same-color \(F+F\) exception rows in a two-color certificate-free tail
+  have only \(O(|F|)\) incidences, leaving only color-flipping star-like
+  exception patterns as a possible large obstruction.
 * Warning 8.6j-8 explains why the resulting cross-color reflected packets
   do not directly trigger Corollary 2.3c: the moving certificate value is
   the natural deleted mirror.
@@ -11273,9 +11516,17 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 13.1l.4 records finite integer windows with exactly this
   bipartite certificate-free and mixed-spike shape, so this reduced
   obstruction is locally compatible.
+* Corollary 13.1l.5 combines the two-color tail with Lemma 8.6j-7d:
+  the shifted-overlap branch of the low-count-star normal form is bounded
+  in the enumerated-Schreier reduction, so any surviving star obstruction
+  must be a large unique-gate packet.
 * Diagnostic 13.1m shows that high-excess first-pair starts are locally
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.
+* Warning 13.1n packages the construction-side reason: mirrored private
+  packets can satisfy Lemma 8.4c row-by-row, but every mirror later promoted
+  into the protected tail inherits new poisoned pair intervals from old
+  retained endpoints.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).

@@ -296,7 +296,7 @@ a long two-sum coverage interval, and a mixed reflection spike. One top
 example is `C={11,15,16}`, `D={8,9,13}`: `2(C∪D)` covers `[16,32]`, and
 the mixed center `24` has the three representations
 `11+13=15+9=16+8`. This shows the reduced obstruction is locally
-compatible. The enhanced output also reports the minimum greedy matching
+compatible. The enhanced output also reports the minimum exact matching
 sizes for the cross-residual graphs `C+C+D` and `D+D+C` across the covered
 interval; the top interval examples have `(0,0)`, so they do not satisfy
 the stronger matching criterion from Lemma 8.6j-7a.

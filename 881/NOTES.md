@@ -1827,6 +1827,56 @@ large matchings: if \(m-U\subset D\) and \(n=m+p\), then the edges
 \(\{p,u\}\) form a large star in the cross-residual graph, and
 certificate-freeness forbids non-star same-color pairs from using the same
 residual rows.
+Lemma 8.6j-7d closes one tempting escape inside this two-color setting:
+there is an absolute bound on a packet \(S\) with
+\[
+S+h\subset A,\qquad t-S\subset A,\qquad h\ne0,
+\]
+after the finite exceptional set is protected. Translation and reflection
+each flip colors except for \(O(1)\) elements; then \(s+h\) and \(t-s\)
+land in the same color and all sum to \(t+h\), violating Sidon if this
+happens for many \(s\). Thus the shifted-overlap branch from Corollary
+3.4t cannot be the surviving obstruction in a cofinite two-color
+certificate-free tail. The remaining two-color branch is unique-gate:
+large reflected packets whose rows \(s+d\) are uniquely represented by the
+gate pair.
+Corollary 13.1l.5 applies this directly to the enumerated-Schreier
+reduction. Once the first tail is cofinally two-colored, the
+shifted-overlap branch from Corollary 3.4t is bounded after discarding the
+finite exceptional set. Therefore every surviving low-count star in that
+route must be a unique-gate packet:
+\[
+t-S\subset A,\qquad r_{2,A}(s+d)=1\quad(s\in S),
+\]
+with \(|S|\gg A(w)\) outside every protected finite core.
+Hooke's two-color private-incidence check is now Lemma 8.6j-7e. For a
+finite deleted set \(F\), a fixed \(c\in F\), and one color \(C_i\), there
+is at most one \(a\in F\cap C_i\) for which the \(F+F\)-exception row
+\[
+w-a-c
+\]
+is a retained element of the same color \(C_i\). Two such rows would give
+a forbidden certificate
+\[
+b+(w-b-c)-a=w-a-c.
+\]
+Thus same-color exception incidences are only \(O(|F|)\). This is a real
+sharpening of Corollary 8.4c.1, but it still leaves color-flipping
+star-like exception windows, so it does not close the private-incidence
+obstruction by itself.
+Hubble's construction-side check is recorded as Warning 13.1n. A mirrored
+packet can meet Lemma 8.4c locally by coloring each retained padder
+\(e\) with a deleted element \(\chi(e)\in F\) and adding
+\[
+q_e=w-e-\chi(e).
+\]
+Surjectivity of \(\chi\) gives inclusion-minimal repairs after restoring
+single deleted vertices. The nonlocal debt is promotion: each \(q_e\)
+eventually becomes part of the protected tail, and Lemma 13.1h can poison
+all bounded witness ranges for pairs involving \(q_e\) through old retained
+endpoints. Therefore a viable mirrored-packet construction must build a
+hierarchy of fresh buffers; one self-contained block cannot protect its own
+mirrors indefinitely.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then
