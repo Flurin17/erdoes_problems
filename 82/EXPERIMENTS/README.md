@@ -50,6 +50,10 @@ Computational checks and generated data for Erdos Problem 82.
   bounded Hamming repair step for near-miss colorings and a full-modular
   sampling mode for higher dyadic lifts.  `--max-part-size` adds a size-excess
   penalty so score zero means the coloring is both modular and capped.
+- `capped_modular_partition.py`: exact-cover checker for capped modular
+  partitions that enumerates only subsets up to `--max-part-size`, avoiding
+  the `2^n` subset table used by `modular_partition.py`; includes
+  `--sample-random` for unrestricted capped checks such as `n=25,q=5`.
 - `cycle_block_signature.py`: enumerates finite signatures of cycle blocks
   for cactus-graph self-labelled mod-`4` coloring tests, recording marked
   articulation labels and their same-labelled degree contributions from the

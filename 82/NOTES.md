@@ -1212,3 +1212,13 @@ source of growth beyond Ramsey.
   `q=5,max_part_size=7` partition for the first random `n=25` mask that the
   short run initially left at score `3`.  These are heuristic successes, not
   certificates for all graphs.
+- 2026-05-31: Added `capped_modular_partition.py`, an exact checker that
+  enumerates only subsets up to the active cap.  This avoids the full `2^n`
+  subset table and makes exact `n=25,q=5,max_part_size=7` checks practical.
+  It exactly certifies a partition for the score-`1` random `n=25` mask
+  `626652738929200728164847407415762566548667066132033241140782947194049633914703368455711224`
+  with parts of sizes `7,7,7,2,2`, and a `100`-sample unrestricted random
+  sweep at `n=25,q=5,max_part_size=7` found no counterexample with no
+  node-limited instances.  A direct `n=36,q=6,max_part_size=8` random sweep is
+  still too slow because the candidate subset count through size `8` is much
+  larger.
