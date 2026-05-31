@@ -309,6 +309,26 @@ static bool shared_prime_budget_ok(u64 L, u64 p, uint32_t fixed_exp,
     return tau_leq_small(L, bound / forced_tau);
 }
 
+struct SharedPrime {
+    u64 p;
+    uint32_t fixed_exp;
+};
+
+static bool shared_primes_budget_ok(u64 L, const SharedPrime* primes, size_t prime_count,
+                                    uint32_t other_tau, uint32_t bound) {
+    uint32_t forced_tau = other_tau;
+    for (size_t i = 0; i < prime_count; ++i) {
+        uint32_t a = 0;
+        while (L % primes[i].p == 0) {
+            L /= primes[i].p;
+            ++a;
+        }
+        forced_tau *= primes[i].fixed_exp + a + 1;
+        if (forced_tau > bound) return false;
+    }
+    return tau_leq_small(L, bound / forced_tau);
+}
+
 static bool shift5_ok(u64 N) {
     // n-5 = 5(504N-1), and 504N-1 is 7 mod 8 before removing powers of 5.
     return power_prime_budget_ok(504 * N - 1, 5, 1, 1, 7);
@@ -352,6 +372,10 @@ static bool shift21_ok(u64 N) {
     return shared_prime_budget_ok(120 * N - 1, 7, 1, 2, 23);
 }
 
+static bool shift24_ok(u64 N) {
+    return shared_prime_budget_ok(105 * N - 1, 2, 3, 2, 26);
+}
+
 static bool shift28_ok(u64 N) {
     return shared_prime_budget_ok(90 * N - 1, 7, 1, 3, 30);
 }
@@ -364,12 +388,50 @@ static bool shift36_ok(u64 N) {
     return shared_prime_budget_ok(70 * N - 1, 3, 2, 3, 38);
 }
 
+static bool shift40_ok(u64 N) {
+    static const SharedPrime primes[] = {{2, 3}, {5, 1}};
+    return shared_primes_budget_ok(63 * N - 1, primes, 2, 1, 42);
+}
+
 static bool shift42_ok(u64 N) {
     return shared_prime_budget_ok(60 * N - 1, 7, 1, 4, 44);
 }
 
+static bool shift45_ok(u64 N) {
+    static const SharedPrime primes[] = {{3, 2}, {5, 1}};
+    return shared_primes_budget_ok(56 * N - 1, primes, 2, 1, 47);
+}
+
+static bool shift48_ok(u64 N) {
+    return shared_prime_budget_ok(105 * N - 2, 2, 3, 2, 50);
+}
+
+static bool shift56_ok(u64 N) {
+    static const SharedPrime primes[] = {{2, 3}, {7, 1}};
+    return shared_primes_budget_ok(45 * N - 1, primes, 2, 1, 58);
+}
+
 static bool shift60_ok(u64 N) {
     return shared_prime_budget_ok(42 * N - 1, 5, 1, 6, 62);
+}
+
+static bool shift72_ok(u64 N) {
+    static const SharedPrime primes[] = {{2, 3}, {3, 2}};
+    return shared_primes_budget_ok(35 * N - 1, primes, 2, 1, 74);
+}
+
+static bool shift84_ok(u64 N) {
+    return shared_prime_budget_ok(30 * N - 1, 7, 1, 6, 86);
+}
+
+static bool shift90_ok(u64 N) {
+    static const SharedPrime primes[] = {{3, 2}, {5, 1}};
+    return shared_primes_budget_ok(28 * N - 1, primes, 2, 2, 92);
+}
+
+static bool shift120_ok(u64 N) {
+    static const SharedPrime primes[] = {{2, 3}, {5, 1}};
+    return shared_primes_budget_ok(21 * N - 1, primes, 2, 2, 122);
 }
 
 static bool guaranteed_by_branch(uint32_t k, int branch) {
@@ -433,6 +495,11 @@ static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, ui
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }
+        if (k == 24) {
+            if (shift24_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
         if (k == 28) {
             if (shift28_ok(N)) continue;
             if (tau_out) *tau_out = tau64(n - k);
@@ -448,13 +515,53 @@ static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, ui
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }
+        if (k == 40) {
+            if (shift40_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
         if (k == 42) {
             if (shift42_ok(N)) continue;
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }
+        if (k == 45) {
+            if (shift45_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 48) {
+            if (shift48_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 56) {
+            if (shift56_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
         if (k == 60) {
             if (shift60_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 72) {
+            if (shift72_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 84) {
+            if (shift84_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 90) {
+            if (shift90_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 120) {
+            if (shift120_ok(N)) continue;
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }

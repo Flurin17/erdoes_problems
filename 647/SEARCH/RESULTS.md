@@ -323,6 +323,31 @@ first_fail_k = 22
 tau(n-22) = 32
 ```
 
+For the next interval, the residue filter was lifted through primes `23,29`
+with `k <= 1000`, giving 4,374 residue classes modulo `30808063`:
+
+```sh
+python3 SEARCH/residue_lift.py --k 1000 --add-primes 23,29 --format csv \
+  | tail -1 > /tmp/erdos647-residues-mod30808063-k1000.csv
+
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search128_new \
+  --modulus 30808063 \
+  --residue-file /tmp/erdos647-residues-mod30808063-k1000.csv \
+  --n-start 20000000000000000 \
+  --n-stop 40000000000000000 \
+  --outdir /tmp/erdos647-scan-2e16-4e16-lift23-29-k1000 \
+  --workers 6 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
+```
+
+This scan is in progress. A prior attempt over this interval using only the
+352 classes modulo `1062347` was stopped early because the `23,29` lift cuts
+the tested progression density from about `3.3134e-4` to `1.4198e-4`.
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms

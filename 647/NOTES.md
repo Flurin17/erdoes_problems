@@ -223,35 +223,47 @@ Thus if the shared prime does not divide the cofactor one gets
 cofactor must be prime. The search handles these by direct `tau`
 factorization rather than by prime-form sieving.
 
-For shifts `14 <= k <= 40`, no new global prime-form conditions are
+For shifts `14 <= k <= 120`, no additional global prime-only conditions are
 currently known. The fixed factor in `2520N-k` can share primes with the
 remaining linear form, so tempting forms such as `180N-1`, `168N-1`,
-`140N-1`, `126N-1`, and `105N-1` are not globally forced prime.
+`140N-1`, `126N-1`, and `105N-1` are not globally forced prime. The useful
+exact filter is instead to remove any shared prime powers from the remaining
+linear form and compare the residual divisor budget.
 
 Additional safe small-shift constraints, useful for hand-checking near
-misses but not currently used as sieve exclusions:
+misses and for avoiding unnecessary full factorizations:
 
 ```text
 k=7:  L=360N-1,  (r+2) tau(C) <= 9   for L=7^r C.
 k=18: L=140N-1,  2(r+3) tau(C) <= 20 for L=3^r C.
 k=20: L=126N-1,  3(r+2) tau(C) <= 22 for L=5^r C.
 k=21: L=120N-1,  2(r+2) tau(C) <= 23 for L=7^r C.
+k=24: L=105N-1,  2(r+4) tau(C) <= 26 for L=2^r C.
 k=28: L=90N-1,   3(r+2) tau(C) <= 30 for L=7^r C.
 k=30: L=84N-1,   4(r+2) tau(C) <= 32 for L=5^r C.
 k=36: L=70N-1,   3(r+3) tau(C) <= 38 for L=3^r C.
+k=40: L=63N-1,   (a+4)(b+2) tau(C) <= 42 for L=2^a 5^b C.
 k=42: L=60N-1,   4(r+2) tau(C) <= 44 for L=7^r C.
+k=45: L=56N-1,   (a+3)(b+2) tau(C) <= 47 for L=3^a 5^b C.
+k=48: L=105N-2,  2(r+4) tau(C) <= 50 for L=2^r C.
+k=56: L=45N-1,   (a+4)(b+2) tau(C) <= 58 for L=2^a 7^b C.
 k=60: L=42N-1,   6(r+2) tau(C) <= 62 for L=5^r C.
+k=72: L=35N-1,   (a+4)(b+3) tau(C) <= 74 for L=2^a 3^b C.
+k=84: L=30N-1,   6(r+2) tau(C) <= 86 for L=7^r C.
+k=90: L=28N-1,   2(a+3)(b+2) tau(C) <= 92 for L=3^a 5^b C.
+k=120: L=21N-1,  2(a+4)(b+2) tau(C) <= 122 for L=2^a 5^b C.
 ```
 
-Here `r` is the valuation at the displayed shared prime and `C` is the
-remaining cofactor.
+Here `r`, or `a,b`, denotes valuation at the displayed shared prime(s), and
+`C` is the remaining cofactor.
 
 The C++ tuple search now handles these exact low-budget shared-prime cases
-for `k=7,14,15,16,18,20,21,28,30,36,42,60` without full factorization when
-possible. The helper `tau_leq_small(C,T)` is exact for `T <= 5`: it permits
-`C=1`, primes, prime squares, prime cubes, fourth powers of primes, and
-semiprimes as allowed by the divisor budget, so it does not make the invalid
-"prime-only" simplification.
+for `k=7,14,15,16,18,20,21,24,28,30,36,40,42,45,48,56,60,72,84,90,120`
+without full factorization when possible. The helper `tau_leq_small(C,T)` is
+exact for `T <= 5`: it permits `C=1`, primes, prime squares, prime cubes,
+fourth powers of primes, and semiprimes as allowed by the divisor budget, so
+it does not make the invalid "prime-only" simplification. For residual
+budgets above 5 it falls back to the exact factorization routine.
 
 ## Search Results So Far
 
@@ -342,6 +354,10 @@ semiprimes as allowed by the divisor budget, so it does not make the invalid
   The deepest near miss failed at `k=22`:
   `N = 10182590254890053`, `n = 25660127442322933560`,
   `tau(n-22) = 32`.
+- Lifting the same forced-smooth residue filter through primes `23,29` with
+  `k <= 1000` gives 4,374 residue classes modulo `30808063`, density
+  approximately `1.41975819772e-4`. This is the current search modulus for
+  the range `2*10^16 <= N < 4*10^16`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a

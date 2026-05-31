@@ -476,6 +476,27 @@ static bool shared_prime_budget_ok(u128 L, u128 p, uint32_t fixed_exp,
     return tau_leq_small(L, bound / forced_tau);
 }
 
+struct SharedPrime {
+    u128 p;
+    uint32_t fixed_exp;
+};
+
+static bool shared_primes_budget_ok(u128 L, const SharedPrime* primes, size_t prime_count,
+                                    uint32_t other_tau, uint32_t bound) {
+    if (L == 0) return false;
+    uint32_t forced_tau = other_tau;
+    for (size_t i = 0; i < prime_count; ++i) {
+        uint32_t a = 0;
+        while (L % primes[i].p == 0) {
+            L /= primes[i].p;
+            ++a;
+        }
+        forced_tau *= primes[i].fixed_exp + a + 1;
+        if (forced_tau > bound) return false;
+    }
+    return tau_leq_small(L, bound / forced_tau);
+}
+
 static bool shift5_ok(u128 N) {
     u128 L = 0;
     return coeff_minus_one(504, N, L) && power_prime_budget_ok(L, 5, 1, 1, 7);
@@ -528,6 +549,11 @@ static bool shift21_ok(u128 N) {
     return coeff_minus_one(120, N, L) && shared_prime_budget_ok(L, 7, 1, 2, 23);
 }
 
+static bool shift24_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(105, N, L) && shared_prime_budget_ok(L, 2, 3, 2, 26);
+}
+
 static bool shift28_ok(u128 N) {
     u128 L = 0;
     return coeff_minus_one(90, N, L) && shared_prime_budget_ok(L, 7, 1, 3, 30);
@@ -543,14 +569,62 @@ static bool shift36_ok(u128 N) {
     return coeff_minus_one(70, N, L) && shared_prime_budget_ok(L, 3, 2, 3, 38);
 }
 
+static bool shift40_ok(u128 N) {
+    u128 L = 0;
+    static const SharedPrime primes[] = {{2, 3}, {5, 1}};
+    return coeff_minus_one(63, N, L) && shared_primes_budget_ok(L, primes, 2, 1, 42);
+}
+
 static bool shift42_ok(u128 N) {
     u128 L = 0;
     return coeff_minus_one(60, N, L) && shared_prime_budget_ok(L, 7, 1, 4, 44);
 }
 
+static bool shift45_ok(u128 N) {
+    u128 L = 0;
+    static const SharedPrime primes[] = {{3, 2}, {5, 1}};
+    return coeff_minus_one(56, N, L) && shared_primes_budget_ok(L, primes, 2, 1, 47);
+}
+
+static bool shift48_ok(u128 N) {
+    u128 L = 0;
+    if (!checked_mul(105, N, L) || L < 3) return false;
+    L -= 2;
+    return shared_prime_budget_ok(L, 2, 3, 2, 50);
+}
+
+static bool shift56_ok(u128 N) {
+    u128 L = 0;
+    static const SharedPrime primes[] = {{2, 3}, {7, 1}};
+    return coeff_minus_one(45, N, L) && shared_primes_budget_ok(L, primes, 2, 1, 58);
+}
+
 static bool shift60_ok(u128 N) {
     u128 L = 0;
     return coeff_minus_one(42, N, L) && shared_prime_budget_ok(L, 5, 1, 6, 62);
+}
+
+static bool shift72_ok(u128 N) {
+    u128 L = 0;
+    static const SharedPrime primes[] = {{2, 3}, {3, 2}};
+    return coeff_minus_one(35, N, L) && shared_primes_budget_ok(L, primes, 2, 1, 74);
+}
+
+static bool shift84_ok(u128 N) {
+    u128 L = 0;
+    return coeff_minus_one(30, N, L) && shared_prime_budget_ok(L, 7, 1, 6, 86);
+}
+
+static bool shift90_ok(u128 N) {
+    u128 L = 0;
+    static const SharedPrime primes[] = {{3, 2}, {5, 1}};
+    return coeff_minus_one(28, N, L) && shared_primes_budget_ok(L, primes, 2, 2, 92);
+}
+
+static bool shift120_ok(u128 N) {
+    u128 L = 0;
+    static const SharedPrime primes[] = {{2, 3}, {5, 1}};
+    return coeff_minus_one(21, N, L) && shared_primes_budget_ok(L, primes, 2, 2, 122);
 }
 
 static bool guaranteed_by_branch(uint32_t k, int branch) {
@@ -615,6 +689,11 @@ static uint32_t first_failing_shift(u128 n, u128 N, int branch, uint32_t limit,
             if (tau_out) *tau_out = tau128(n - (u128)k);
             return k;
         }
+        if (k == 24) {
+            if (shift24_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
         if (k == 28) {
             if (shift28_ok(N)) continue;
             if (tau_out) *tau_out = tau128(n - (u128)k);
@@ -630,13 +709,53 @@ static uint32_t first_failing_shift(u128 n, u128 N, int branch, uint32_t limit,
             if (tau_out) *tau_out = tau128(n - (u128)k);
             return k;
         }
+        if (k == 40) {
+            if (shift40_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
         if (k == 42) {
             if (shift42_ok(N)) continue;
             if (tau_out) *tau_out = tau128(n - (u128)k);
             return k;
         }
+        if (k == 45) {
+            if (shift45_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 48) {
+            if (shift48_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 56) {
+            if (shift56_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
         if (k == 60) {
             if (shift60_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 72) {
+            if (shift72_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 84) {
+            if (shift84_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 90) {
+            if (shift90_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 120) {
+            if (shift120_ok(N)) continue;
             if (tau_out) *tau_out = tau128(n - (u128)k);
             return k;
         }
