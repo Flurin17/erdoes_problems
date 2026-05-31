@@ -148,6 +148,15 @@ The alternating-deletion warning in `PROOF.md` uses another small window,
 three-sum hole at `14`, with the terminal interval containing only the
 deleted point `8`, and the shifted two-sum domination still holds.
 
+`private_sum_matrix.py` checks the extra necessary condition from Lemma
+8.4c on this alternating-deletion window, on the first Schreier seed, and
+on the P6 pair-edge escape. For each retained padder `e` below a hole
+witness it prints which deleted elements `f` satisfy both
+`w-e-f in C` and `e+f notin 2C`, except when `w-e` is already a
+deleted-pair sum. It also prints `nu_f(e+f)`, the maximum number of
+disjoint two-sum representations of `e+f` avoiding `f`, for the matching
+capacity obstruction in Lemma 8.4d.
+
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
 \[

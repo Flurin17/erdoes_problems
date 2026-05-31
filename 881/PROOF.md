@@ -2652,6 +2652,203 @@ one has \(9\notin3(A_0\setminus F)\), but restoring any one element of
 \(F\) repairs the hole. Thus an inclusion-minimal collective hole need not
 have any bad two-element subhole.
 
+## Lemma 8.4c: Holes force private deleted-retained sums
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+order-2 threshold \(N_0\). Let \(F\subset A\) be finite, put
+\[
+C=A\setminus F,
+\]
+and suppose
+\[
+w\notin3C.
+\]
+Then every retained element \(e\in C\) with \(w-e\ge N_0\) satisfies
+\[
+w-e\notin2C. \tag{1}
+\]
+Moreover, if
+\[
+w-e=f+a,\qquad f\in F,\quad a\in C, \tag{2}
+\]
+then
+\[
+e+f\notin2C. \tag{3}
+\]
+Consequently, if \(e\in C\), \(w-e\ge N_0\), and
+\[
+w-e\notin F+F,
+\]
+then there is some \(f\in F\) such that
+\[
+w-e-f\in C,\qquad e+f\notin2C. \tag{4}
+\]
+Equivalently, if
+\[
+e+F\subseteq2C
+\]
+and \(w-e\ge N_0\), then any three-fold hole \(w\notin3C\) forces
+\[
+w-e\in F+F. \tag{5}
+\]
+
+Proof. If \(w-e\in2C\), then adding \(e\in C\) gives
+\[
+w\in3C,
+\]
+contrary to the hypothesis. This proves (1).
+
+Now assume (2). If \(e+f\in2C\), say \(e+f=c+d\) with
+\[
+c,d\in C,
+\]
+then
+\[
+w=e+f+a=c+d+a\in3C,
+\]
+again a contradiction. Hence (3) holds.
+
+For the consequence, \(w-e\ge N_0\) gives a two-term representation of
+\(w-e\) from \(A\). By (1) it cannot use only elements of \(C\). If
+\(w-e\notin F+F\), at least one representation has exactly one summand in
+\(F\) and one summand in \(C\), say
+\[
+w-e=f+a,\qquad f\in F,\quad a\in C.
+\]
+Then \(w-e-f=a\in C\), and (3) gives \(e+f\notin2C\). Statement (5) is the
+contrapositive of (4). \(\square\)
+
+This is a necessary condition on any genuine collective hole, not a
+sufficient one. It rules out arithmetizations of the abstract Schreier
+model in which the retained tail is too absorptive after deleting \(F\):
+if a large set of possible padders \(T\subset C\) satisfies
+\[
+T+F\subseteq2C,
+\]
+then every \(e\in T\) below the witness must have \(w-e\in F+F\). Thus a
+hole cannot be protected against a whole interval of retained padders by
+ordinary shifted domination alone; it must also supply a private-sum
+incidence from most retained padders to the deleted set. In finite-stage
+language, a reflected-Schreier construction would have to color each
+relevant retained padder \(e\) by some deleted element \(f\in F\) with
+\[
+w-e-f\in A_s\setminus F,\qquad
+e+f\notin2(A_s\setminus F),
+\]
+except for the exceptional \(F+F\) values. This is the arithmetic
+condition missing from the purely abstract model in Warning 10.3c.
+
+## Lemma 8.4d: Private colors have low matching capacity
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite of size \(r\),
+and put
+\[
+C=A\setminus F.
+\]
+For \(f\in F\) and \(s\in\mathbb N\), let
+\[
+\nu_f(s)
+\]
+be the maximum number of pairwise vertex-disjoint two-term representations
+of \(s\) from \(A\) that do not use \(f\). Here a representation
+\(s=x+y\) uses the vertices \(\{x,y\}\), with a double representation
+\(s=2x\) using the single vertex \(x\).
+
+If
+\[
+t+f\notin2C,
+\]
+then
+\[
+\nu_f(t+f)<r. \tag{1}
+\]
+Consequently, in the setting of Lemma 8.4c, for every finite
+\[
+T\subset C,\qquad w-T\subset[N_0,\infty),
+\]
+if
+\[
+E_2=\{t\in T:w-t\in F+F\},
+\]
+then
+\[
+T\setminus E_2
+\subseteq
+\bigcup_{f\in F}
+\{t\in T:w-t-f\in C,\ \nu_f(t+f)<r\}. \tag{2}
+\]
+In particular,
+\[
+|T\setminus E_2|
+\le
+\sum_{f\in F}
+\left|\{t\in T:w-t-f\in C,\ \nu_f(t+f)<r\}\right|. \tag{3}
+\]
+
+Proof. Suppose \(t+f\) has \(r\) pairwise vertex-disjoint two-term
+representations from \(A\), none using \(f\). Since \(t+f\notin2C\), every
+one of these representations must use at least one vertex from \(F\).
+Because the representations avoid \(f\), each must use a vertex from
+\[
+F\setminus\{f\}.
+\]
+Pairwise vertex-disjointness lets any fixed vertex of \(F\setminus\{f\}\)
+occur in at most one representation, but
+\[
+|F\setminus\{f\}|=r-1.
+\]
+This cannot hit \(r\) disjoint representations. Hence (1) holds.
+
+For (2), apply Lemma 8.4c to each
+\[
+t\in T\setminus E_2.
+\]
+It gives a color \(f\in F\) such that
+\[
+w-t-f\in C,\qquad t+f\notin2C.
+\]
+The first part and (1) give membership in the displayed union. Inequality
+(3) follows by counting the union with multiplicity. \(\square\)
+
+This converts the private-color condition into a matching-capacity
+obstruction. A Schreier edge of rank \(r\) can protect a retained test
+point \(t\) through color \(f\) only when the cross-sum \(t+f\) has fewer
+than \(r\) disjoint two-term representations avoiding \(f\). Thus any
+unbounded-rank reflected-Schreier counterexample must arrange a large
+supply of low-matching cross-sums, after removing the exceptional
+\(F+F\)-rows.
+
+Two cautions are important. First, Lemma 8.4d gives a cover, not a
+matching. A single deleted element can privately color many retained
+points. For instance,
+\[
+C=\{1,2,98,99\},\qquad F=\{7\},\qquad w=107
+\]
+has \(107\notin3C\), while both retained points \(1\) and \(2\) are served
+by the same deleted color:
+\[
+107-1=7+99,\qquad 107-2=7+98,
+\]
+and
+\[
+1+7,\ 2+7\notin2C.
+\]
+Second, the exceptional rows \(w-t\in F+F\) cannot simply be ignored. If
+\[
+F=\{R+1,\ldots,R+r\},
+\]
+then
+\[
+F+F=[2R+2,2R+2r],
+\]
+so a witness \(w=2R+2r+q\) can make
+\[
+w-(F+F)=[q,q+2r-2],
+\]
+an interval of length comparable to \(r\). This is exactly the scale of
+the early Schreier prefix. A positive proof through Lemma 8.4d must
+control both the low-matching rows and the \(F+F\) exception window.
+
 ## Lemma 8.4a: Collective holes force a retained gap
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -5257,6 +5454,43 @@ have no compatible witnesses. The surviving obstruction is therefore the
 simultaneous closure of many reflected terminal windows, not just a single
 pair-edge inequality.
 
+Lemma 8.4c gives the exact row condition behind this simultaneous-closure
+pressure. For a finite stage \(S\), edge \(F\), retained set
+\[
+C=S\setminus F,
+\]
+covered interval \([N,H]\subseteq2S\), and candidate witness \(w\le H\),
+every active retained padder
+\[
+e\in C,\qquad w-e\ge N,\qquad w-e\notin F+F
+\]
+must have at least one private color
+\[
+f\in F,\qquad w-e-f\in C,\qquad e+f\notin2C. \tag{7}
+\]
+The diagnostic script `EXPERIMENTS/private_sum_matrix.py` prints these
+exact colors for the alternating-deletion window, the first Schreier seed,
+and the P6 pair-edge escape. In the escape above, \(F=\{10,38\}\) and
+\(w=58\), every active row has a color:
+\[
+\begin{array}{c|c}
+e&\text{allowable colors}\\ \hline
+1,2,15,19&38\\
+4,8,30,40,43,44&10\\
+5,18&10\text{ or }38.
+\end{array}
+\]
+Thus the new necessary condition does not refute the first pair-edge
+escape. It refutes only the naive lift in which the retained tail absorbs
+all sums \(T+F\) back into \(2C\). Once the fillers \(40,43,44\) are
+protected, the later Schreier edges have to satisfy their own row
+conditions and their own inclusion-minimal repairs; this is where the
+bounded search fails. A viable reflected-Schreier construction must
+therefore carry, for every first-completed edge \(F\), not only a witness
+\(w_F\), but also a full private-color incidence matrix satisfying (7),
+with all added mirrors and fillers either kept in a fixed finite
+exceptional set or assigned their own later barrier witnesses.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets
@@ -5993,6 +6227,17 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   surviving deleted element is used in a three-term repair after the other
   deleted elements are restored. The finite example following it shows that
   such a minimal collective hole need not contain a bad pair subhole.
+* Lemma 8.4c adds a second necessary condition for collective holes: every
+  retained padder below the witness either leaves \(w-e\) as a deleted-pair
+  sum or has a private deleted-retained sum \(e+f\notin2(A\setminus F)\).
+  This rules out direct Schreier lifts whose retained tail absorbs
+  \(T+F\) back into \(2(A\setminus F)\).
+* Lemma 8.4d converts private colors into a rank-sensitive low-matching
+  obstruction: if \(|F|=r\), a color \(f\) can serve \(t\) only when
+  \(t+f\) has fewer than \(r\) disjoint two-term representations avoiding
+  \(f\). The notes after it record why this is only a capacity obstruction,
+  not a Hall matching theorem, and why \(F+F\) exception rows matter at
+  Schreier scale.
 * Warning 8.5 records that bounded-width barriers do not automatically
   reduce to one fixed uniformity, and that abstract barriers need not have
   bounded width on any infinite tail.
@@ -6094,7 +6339,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \(k=2\) counterexample.
 * Lemma 13.1f extracts finite forbidden windows for stage witnesses. In the
   P5 Schreier seed, the new pair edge has only one low-excess escape, and
-  the full P6 failure comes from simultaneous higher-rank edge closure.
+  the full P6 failure comes from simultaneous higher-rank edge closure. The
+  private-color diagnostic after it records the exact Lemma 8.4c incidence
+  matrix required of any reflected-Schreier lift.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).
