@@ -96,6 +96,9 @@ Computational checks and generated data for Erdos Problem 82.
   must be an induced matching.  This is often faster than exact-cover subset
   enumeration on fixed hard masks and supports exhaustive even-graph prefixes
   with `--limit` plus per-instance `--node-limit`.
+- `matching_slot_fast.cpp`: C++ exact checker for the same matching-slot
+  target on small even graphs.  It is intended to make the full labelled
+  `n=8` even-graph sweep reproducible.
 - `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus

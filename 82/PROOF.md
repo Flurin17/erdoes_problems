@@ -3734,9 +3734,10 @@ the direct coloring checker `EXPERIMENTS/matching_slot_search.py` verify this
 candidate for all even graphs on at most `7` vertices, the known connected
 first-lift hard masks on `13` and `14` vertices, `K_9`, and the `16`-vertex
 modular-OCT counterexample above.  An independent subagent audit also checked
-all `2097152` labelled even graphs on `8` vertices with a temporary C++
-checker.  Larger random exact-cover probes on even graphs with `14`, `16`,
-and `18` vertices also found no counterexample, although dense random
+all `2097152` labelled even graphs on `8` vertices; this sweep is reproducible
+with `EXPERIMENTS/matching_slot_fast.cpp`.  Larger random exact-cover probes
+on even graphs with `14`, `16`, and `18` vertices also found no
+counterexample, although dense random
 instances can be search-hard and timed out probes are not treated as
 evidence.
 

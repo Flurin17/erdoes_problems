@@ -1878,7 +1878,10 @@ source of growth beyond Ramsey.
   bipartite.
 - 2026-05-31: Independent subagent audit of the matching-slot first-lift
   target found no counterexample in a stronger sweep: all `2,097,152`
-  labelled even graphs on `8` vertices passed using a temporary C++ checker;
+  labelled even graphs on `8` vertices passed.  Added
+  `matching_slot_fast.cpp` to make this exact sweep reproducible, and verified
+  it locally with `g++ -O3 -std=c++17` followed by
+  `/tmp/matching_slot_fast --n 8`;
   random even samples also passed at `n=10` (`200/200`), `n=12` (`100/100`),
   `n=14` (`50/50`), `n=16` (`20/20`), `n=18` (`50/50`), and `n=20`
   (`19/20` certified, one node-limit skip).  The same audit checked complete
