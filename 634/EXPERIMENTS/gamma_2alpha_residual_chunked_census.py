@@ -42,6 +42,25 @@ def classify(
     raise ValueError(mode)
 
 
+def residual_geometry_key(survivor, demand, radicand: int):
+    """Canonical labeled residual-segment key for quotient experiments."""
+    exact.RADICAND = radicand
+    shell = exact.place_boundary_shell(survivor, demand, radicand)
+    outer = exact.outer_vertices(survivor, radicand)
+    if shell is None or outer is None:
+        return ("not-quadratic",)
+    integer_shell, integer_outer, scale = exact.kscale_shell(shell, outer)
+    unique_or_status = exact.kunique_tiles_or_overlap(integer_shell)
+    if unique_or_status == "proper-overlap":
+        return ("proper-overlap",)
+    residual_labels = exact.kresidual_segments_with_labels(unique_or_status, integer_outer)
+    return (
+        "residual",
+        scale,
+        tuple(sorted((segment, label) for segment, label in residual_labels.items())),
+    )
+
+
 class LazyLocalCoverChecker:
     def __init__(self, survivor, radicand: int) -> None:
         self.survivor = survivor
@@ -110,6 +129,12 @@ def main() -> None:
     parser.add_argument("--outside-local-cover", action="store_true")
     parser.add_argument("--local-cover-mode", choices=("eager", "lazy"), default="eager")
     parser.add_argument("--mode", choices=("coarse", "refined"), default="coarse")
+    parser.add_argument("--cache-diagnostics-by", choices=("none", "residual-key"), default="none")
+    parser.add_argument(
+        "--verify-cache-hits",
+        action="store_true",
+        help="still classify residual-key cache hits and report status conflicts",
+    )
     parser.add_argument("--skip-generated", type=int, default=0)
     parser.add_argument("--max-generated", type=int, default=10000)
     parser.add_argument("--progress-every", type=int, default=1000)
@@ -137,6 +162,10 @@ def main() -> None:
     exhausted = True
     covered = 0
     diagnosed = 0
+    classify_calls = 0
+    cache_hits = 0
+    residual_key_statuses: dict[object, set[str]] = {}
+    residual_key_cache: dict[object, str] = {}
     counts: Counter[str] = Counter()
     started = time.monotonic()
 
@@ -163,7 +192,24 @@ def main() -> None:
         if local_checker is not None and local_checker.first_overlap(demand) is not None:
             covered += 1
         else:
-            status = classify(survivor, demand, radicand, mode=args.mode)
+            key = (
+                residual_geometry_key(survivor, demand, radicand)
+                if args.cache_diagnostics_by == "residual-key"
+                else None
+            )
+            cached_status = residual_key_cache.get(key) if key is not None else None
+            if cached_status is not None and not args.verify_cache_hits:
+                status = cached_status
+                cache_hits += 1
+            else:
+                status = classify(survivor, demand, radicand, mode=args.mode)
+                classify_calls += 1
+                if cached_status is not None:
+                    cache_hits += 1
+                if key is not None and cached_status is None:
+                    residual_key_cache[key] = status
+            if key is not None:
+                residual_key_statuses.setdefault(key, set()).add(status)
             counts[status] += 1
             diagnosed += 1
 
@@ -187,6 +233,8 @@ def main() -> None:
         "outside_local_cover": args.outside_local_cover,
         "local_cover_mode": args.local_cover_mode if args.outside_local_cover else None,
         "mode": args.mode,
+        "cache_diagnostics_by": args.cache_diagnostics_by,
+        "verify_cache_hits": args.verify_cache_hits,
         "skip_generated": args.skip_generated,
         "max_generated": args.max_generated,
         "first_generated_index": first_generated_index,
@@ -199,6 +247,10 @@ def main() -> None:
         "generated_processed": generated_processed,
         "covered": covered,
         "diagnosed": diagnosed,
+        "classify_calls": classify_calls,
+        "cache_hits": cache_hits,
+        "unique_residual_keys": len(residual_key_statuses),
+        "mixed_status_residual_keys": sum(1 for statuses in residual_key_statuses.values() if len(statuses) > 1),
         "status_counts": dict(sorted(counts.items())),
     }
     print(json.dumps(result, indent=2, sort_keys=True), flush=True)

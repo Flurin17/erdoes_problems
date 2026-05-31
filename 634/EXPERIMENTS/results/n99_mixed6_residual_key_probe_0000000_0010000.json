@@ -1,0 +1,36 @@
+{
+  "cache_diagnostics_by": "residual-key",
+  "cache_hits": 0,
+  "classify_calls": 8029,
+  "covered": 1971,
+  "diagnosed": 8029,
+  "elapsed_seconds": 109.819585,
+  "exhausted": false,
+  "first_generated_index": 1,
+  "generated_per_second": 91.05844,
+  "generated_processed": 10000,
+  "generated_seen": 10000,
+  "last_generated_index": 10000,
+  "local_cover_mode": "lazy",
+  "max_generated": 10000,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_status_residual_keys": 0,
+  "mode": "refined",
+  "n": 99,
+  "outside_local_cover": true,
+  "radicand": 1,
+  "resume_skip_generated": 10000,
+  "skip_generated": 0,
+  "status_counts": {
+    "corner-label-violation": 6285,
+    "split-corner-label-obstruction": 1744
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "unique_residual_keys": 8029,
+  "verify_cache_hits": false
+}

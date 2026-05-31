@@ -192,7 +192,10 @@ Current components:
   residual status counts over generated-shell slices. It supports coarse mode
   using the quadratic shell classifier and refined mode using the
   pinch/split-component diagnostic, with either eager or lazy local-cover
-  checking. A first sanity chunk for `N=63`, mixed exactly `6`, outside the
+  checking. It also has an experimental residual-segment-key diagnostic cache;
+  on the first `10000` generated `N=99` mixed-`6` shells this key is too fine,
+  with `8029` unique residual keys for `8029` outside-cover shells and no cache
+  hits. A first sanity chunk for `N=63`, mixed exactly `6`, outside the
   local cover, processed `2000` generated shells:
   `970` were local-cover hits, and the `1030` diagnosed shells split as
   `838` corner-label violations and `192` non-simple residual graphs. Extending
@@ -219,7 +222,12 @@ Current components:
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and
   `N=99`; every probed representative falls into one of the exact residual
-  obstruction statuses. Its `--group-by profile` mode instead groups by
+  obstruction statuses. Its `--group-by word` mode groups by side-label word
+  triples and now emits summary JSON. In a first `N=99` mixed-`6` 100k-prefix
+  probe, up to two representatives per word group found no mixed-status groups
+  among `5600` touched groups; an analogous `N=63` mixed-`8` 20k-prefix probe
+  found no mixed-status word groups among `320` touched groups. Its
+  `--group-by profile` mode instead groups by
   c-position, mixed-position, and tested-local-label profiles. This is evidence
   for the grouped proof target, not a complete count.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs

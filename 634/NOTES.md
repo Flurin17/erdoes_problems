@@ -163,7 +163,13 @@ The tile triangle is not required to be similar to the large triangle unless exp
   hits, and the `80332` outside-cover shells split as `62456` corner-label
   violations and `17876` split-corner-label obstructions. This supports the
   obstruction vocabulary but makes full raw `99` mixed-`6` chunking
-  impractical without a quotient.
+  impractical without a quotient. A residual-segment-geometry key is not that
+  quotient: on the first `10000` generated `99` mixed-`6` shells, all `8029`
+  outside-cover shells had distinct residual keys. Side-label word triples look
+  more promising empirically but remain unproved: in a `99` mixed-`6` 100k
+  prefix, up to two representatives per word group found no mixed-status groups among
+  `5600` touched word groups; in a `63` mixed-`8` 20k prefix, the same test
+  found no mixed-status groups among `320` touched word groups.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

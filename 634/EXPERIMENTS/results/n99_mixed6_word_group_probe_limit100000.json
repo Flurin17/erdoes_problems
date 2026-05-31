@@ -1,0 +1,26 @@
+{
+  "covered": 19668,
+  "diagnosed": 11160,
+  "endpoint_groups": 20,
+  "generated": 100000,
+  "group_by": "word",
+  "groups": 5600,
+  "limit": 100000,
+  "local_cover_mode": "lazy",
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_status_groups": 0,
+  "n": 99,
+  "per_group": 2,
+  "status_signatures": {
+    "{\"corner-label-violation\": 1}": 16,
+    "{\"corner-label-violation\": 2}": 3792,
+    "{\"split-corner-label-obstruction\": 1}": 24,
+    "{\"split-corner-label-obstruction\": 2}": 1768
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ]
+}

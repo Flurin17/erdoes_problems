@@ -1,0 +1,24 @@
+{
+  "covered": 15520,
+  "diagnosed": 640,
+  "endpoint_groups": 30,
+  "generated": 20000,
+  "group_by": "word",
+  "groups": 320,
+  "limit": 20000,
+  "local_cover_mode": "lazy",
+  "max_total_mixed": 8,
+  "min_total_mixed": 8,
+  "mixed_status_groups": 0,
+  "n": 63,
+  "per_group": 2,
+  "status_signatures": {
+    "{\"corner-label-violation\": 2}": 272,
+    "{\"split-corner-label-obstruction\": 2}": 48
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ]
+}

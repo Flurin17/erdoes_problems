@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -24,6 +25,7 @@ from gamma_2alpha_residual_capped_census import (  # noqa: E402
     LocalCoverChecker,
     classify_shell,
 )
+from gamma_2alpha_residual_chunked_census import LazyLocalCoverChecker  # noqa: E402
 
 
 def edge_text(edge: PlacedEdge) -> str:
@@ -47,8 +49,28 @@ def profile_key(demand, needed_positions: dict[str, tuple[int, ...]]) -> str:
     )
 
 
+def label_word(path: tuple[PlacedEdge, ...]) -> str:
+    return "".join(edge.side for edge in path)
+
+
+def word_key(demand) -> str:
+    return (
+        f"L={label_word(demand.left_path)} "
+        f"R={label_word(demand.right_path)} "
+        f"B={label_word(demand.base_path)}"
+    )
+
+
 def mixed(path: tuple[PlacedEdge, ...]) -> int:
     return sum((left.side == "c") != (right.side == "c") for left, right in zip(path, path[1:]))
+
+
+def make_local_checker(survivor, radicand: int, mode: str):
+    if mode == "eager":
+        return LocalCoverChecker(survivor, radicand)
+    if mode == "lazy":
+        return LazyLocalCoverChecker(survivor, radicand)
+    raise ValueError(mode)
 
 
 def main() -> None:
@@ -59,9 +81,12 @@ def main() -> None:
     parser.add_argument("--per-group", type=int, default=3)
     parser.add_argument("--limit", type=int, default=250000)
     parser.add_argument("--top", type=int, default=30)
-    parser.add_argument("--group-by", choices=("endpoint", "profile"), default="endpoint")
+    parser.add_argument("--group-by", choices=("endpoint", "profile", "word"), default="endpoint")
+    parser.add_argument("--local-cover-mode", choices=("eager", "lazy"), default="eager")
+    parser.add_argument("--json-out", type=Path)
     args = parser.parse_args()
 
+    results = []
     for n in args.n:
         survivors = refined_survivors_for_n(n)
         print(f"N={n}: {len(survivors)} refined gamma=2alpha survivor(s)", flush=True)
@@ -70,7 +95,7 @@ def main() -> None:
             if radicand is None:
                 print("  exact quadratic classifier unavailable", flush=True)
                 continue
-            local_checker = LocalCoverChecker(survivor, radicand)
+            local_checker = make_local_checker(survivor, radicand, args.local_cover_mode)
             needed_positions = {
                 "L": tuple(sorted({pair.side_position for pair in local_checker.active_pairs if pair.side == "L"})),
                 "R": tuple(sorted({pair.side_position for pair in local_checker.active_pairs if pair.side == "R"})),
@@ -132,11 +157,12 @@ def main() -> None:
                                                     if local_checker.first_overlap(demand) is not None:
                                                         covered += 1
                                                         continue
-                                                    key = (
-                                                        group_key(demand)
-                                                        if args.group_by == "endpoint"
-                                                        else profile_key(demand, needed_positions)
-                                                    )
+                                                    if args.group_by == "endpoint":
+                                                        key = group_key(demand)
+                                                    elif args.group_by == "profile":
+                                                        key = profile_key(demand, needed_positions)
+                                                    else:
+                                                        key = word_key(demand)
                                                     if sum(group_counts[key].values()) >= args.per_group:
                                                         if args.group_by == "endpoint":
                                                             group_done = True
@@ -155,8 +181,42 @@ def main() -> None:
                 f"{args.group_by}_groups={len(group_counts)}",
                 flush=True,
             )
+            status_signatures = Counter(tuple(sorted(counts.items())) for counts in group_counts.values())
+            mixed_status_groups = sum(1 for counts in group_counts.values() if len(counts) > 1)
+            print(
+                f"  mixed_status_groups={mixed_status_groups} "
+                f"status_signatures={len(status_signatures)}",
+                flush=True,
+            )
+            for signature, count in status_signatures.most_common(args.top):
+                print(f"    {count} groups with {dict(signature)}", flush=True)
             for key, counts in sorted(group_counts.items())[: args.top]:
                 print(f"    {dict(sorted(counts.items()))}: {key}", flush=True)
+            results.append(
+                {
+                    "n": n,
+                    "tile": survivor.candidate.tile,
+                    "min_total_mixed": args.min_total_mixed,
+                    "max_total_mixed": args.max_total_mixed,
+                    "per_group": args.per_group,
+                    "limit": args.limit,
+                    "group_by": args.group_by,
+                    "local_cover_mode": args.local_cover_mode,
+                    "generated": min(generated, args.limit),
+                    "covered": covered,
+                    "diagnosed": diagnosed,
+                    "endpoint_groups": endpoint_groups,
+                    "groups": len(group_counts),
+                    "mixed_status_groups": mixed_status_groups,
+                    "status_signatures": {
+                        json.dumps(dict(signature), sort_keys=True): count
+                        for signature, count in sorted(status_signatures.items())
+                    },
+                }
+            )
+    if args.json_out is not None:
+        payload = results[0] if len(results) == 1 else results
+        args.json_out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
 
 
 if __name__ == "__main__":

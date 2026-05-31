@@ -2272,6 +2272,19 @@ split-corner-label obstructions. It is stored as
 `647.8s` runtime for this prefix makes a full raw `N=99` mixed-`6` pass
 impractical without a quotient.
 
+Two quotient probes calibrate what kind of quotient is plausible. A
+residual-segment geometry key is too fine: in the first `10000` generated
+`N=99` mixed-`6` shells, all `8029` outside-cover shells had distinct residual
+keys and no cache hits
+(`EXPERIMENTS/results/n99_mixed6_residual_key_probe_0000000_0010000.json`).
+By contrast, side-label word triples remain empirically status-stable in the
+sampled representative tests: a `100000`-generated-shell `N=99` mixed-`6`
+prefix touched `5600` word groups with up to two representatives per group and
+found no mixed-status group, and a `20000`-generated-shell `N=63` mixed-`8`
+prefix touched `320` word groups with the same result. These are stored as
+`EXPERIMENTS/results/n99_mixed6_word_group_probe_limit100000.json` and
+`EXPERIMENTS/results/n63_mixed8_word_group_probe_limit20000.json`.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`
