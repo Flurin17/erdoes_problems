@@ -1014,6 +1014,47 @@ four-part partition:
 with residues respectively `0,2,2,0` modulo `4`.  Hence a connected
 first-lift theorem, if true, must allow at least four parts.
 
+Residue flexibility is also essential; even connected first-lift examples
+cannot be forced into zero-residue parts.
+
+**Computational Proposition: Connected Zero-Residue First Lift Is False.**
+There is a connected even graph on `10` vertices that cannot be partitioned
+into four induced subgraphs whose internal degrees are all `0 mod 4`, although
+it can be partitioned into three induced `4`-modular subgraphs with flexible
+residues.
+
+Proof.  In the edge ordering used by `EXPERIMENTS/regular_induced.py`, take
+the mask
+
+```text
+22114857535095.
+```
+
+The graph has degree sequence
+
+```text
+(6,4,6,4,2,4,4,6,2,2),
+```
+
+so it is connected and even.  The exact partition checker verifies that the
+minimum number of zero-residue modulo-`4` parts is `5`, by
+
+```text
+python3 82/EXPERIMENTS/modular_partition.py 10 22114857535095 \
+  --modulus 4 --find-min-colors 6 --required-residue 0
+```
+
+It also verifies that the flexible minimum is `3`, with one partition having
+residues `(1,2,0)`, by
+
+```text
+python3 82/EXPERIMENTS/modular_partition.py 10 22114857535095 \
+  --modulus 4 --find-min-colors 4 --diagnostics
+```
+
+Thus the connected coarse-lift theorem, if true, must use nonzero residues and
+cannot be reduced to a zero-residue coloring theorem.  QED.
+
 There is also a compactness-style universal-slot reformulation for fixed part
 count.  Fix a source residue `a mod q` and an integer `B`.  If every
 `q`-modular graph with source residue `a` has some `B`-part `2q`-modular
@@ -1073,6 +1114,43 @@ independent set has size `4`, the largest induced matching has `4` vertices,
 and a 2-regular induced subgraph is a union of whole cycle components, with
 sizes only `4`, `5`, or `9`.  This obstruction does not scale in sparse
 regular graphs by the sparse-host lemma below.
+
+The stronger exact endpoint is false even without assuming the host is regular.
+
+**Computational Proposition: Exact `2q` Host Extraction Is False.**  For
+`q=4`, there is a `4`-modular graph on `q^2=16` vertices whose largest regular
+induced subgraph has order `7<2q`.
+
+Proof.  In the edge ordering used by `EXPERIMENTS/regular_induced.py`, take
+the mask
+
+```text
+840252375412894364828623063537651415.
+```
+
+The graph has `64` edges out of `binom(16,2)=120`, so it lies in the
+middle-density range rather than in the sparse or co-sparse easy cases.  Its
+degree sequence consists of four vertices of degree `5` and twelve vertices of
+degree `9`; hence all degrees are congruent to `1 mod 4` and the whole graph is
+`4`-modular with only two ordinary degree levels.
+
+The exact regular-induced-subgraph checker gives
+
+```text
+python3 82/EXPERIMENTS/regular_induced.py 16 \
+  --mask 840252375412894364828623063537651415 --modulus 4
+```
+
+with output
+
+```text
+max_regular_order=7
+max_4_modular_order=16.
+```
+
+Thus one cannot strengthen the terminal host theorem to guarantee a regular
+induced subgraph on `2q` vertices.  The viable terminal target remains the
+weaker asymptotic demand `omega((log q)^2)`.  QED.
 
 There is also a clean weighted hard core obtained from twin blowups.
 
@@ -4322,6 +4400,83 @@ This is still far too weak to prove `G(k)<=2^{o(k)}` by itself, because it is
 `2^{O(k log k)}`.  Its value is structural: any repeated-degree minimal host
 has a bounded outside obstruction depending only on the repeated class size,
 not on the ambient graph.
+
+The same argument improves when the trace vectors span low dimension.
+
+## Lemma 17A: Low-Rank Steinitz Bound For Minimal Trace Obstructions
+
+In the setting of Lemma 12, let `rho` be the real dimension of the span of the
+difference trace vectors `v_b` from Lemma 17, and put `d=k-1`.  Then
+
+```text
+|B| <= max { rho d, (d+2rho+3)^rho }.
+```
+
+Proof.  If `rho=0`, then every `v_b` is zero, contradicting the minimality
+condition from Lemma 12 unless `B` is empty.  Assume `rho>=1`.
+
+Choose `rho` coordinate projections on `R^d` whose restriction to the span of
+the vectors `v_b` is injective.  This is possible by choosing pivot coordinates
+from any rank-`rho` coordinate submatrix.  Let
+
+```text
+w_b in Z^rho
+```
+
+be the projected vector.  Since the projection is injective on the span, a
+nonempty submultiset of the `w_b` sums to zero if and only if the corresponding
+submultiset of the `v_b` sums to zero.  By Lemma 12, no such nonempty zero-sum
+submultiset exists.
+
+Let
+
+```text
+T = sum_{b in B} w_b,       m=|B|.
+```
+
+The projected total satisfies `||T||_infty<=d` by Lemma 15, and each `w_b` has
+infinity norm at most `1`.  If `m<rho d`, we are done.  Otherwise define
+
+```text
+u_b = w_b - T/m.
+```
+
+The vectors `u_b` sum to zero and have infinity norm at most
+`1+d/m<=1+1/rho`.  By the Steinitz rearrangement lemma in dimension `rho`, the
+`u_b` can be ordered so that every centered partial sum `Q_j` has infinity norm
+at most
+
+```text
+rho(1+d/m) <= rho+1.
+```
+
+For the corresponding original projected partial sums
+
+```text
+P_j = sum_{i<=j} w_i = Q_j + (j/m)T,
+```
+
+each coordinate lies in an interval of length at most
+
+```text
+d + 2(rho+1).
+```
+
+Thus each coordinate has at most `d+2rho+3` integer values, so the `m+1`
+partial sums lie in a box containing at most `(d+2rho+3)^rho` lattice points.
+They are all distinct, since two equal partial sums would give a nonempty
+zero-sum block.  Therefore
+
+```text
+m+1 <= (d+2rho+3)^rho.
+```
+
+Combining this with the case `m<rho d` proves the displayed bound.  QED.
+
+This sharpens the message of Lemma 15A: large trace obstructions cannot hide in
+a low-dimensional subspace.  Any trace-based proof of the terminal host theorem
+must either force low rank from graph structure or exploit genuinely
+high-dimensional trace variation.
 
 ## Lemma 18: Separating Functional Bound For Trace Obstructions
 

@@ -1640,3 +1640,28 @@ source of growth beyond Ramsey.
   accepted `43` connected samples before the `3,000,000` attempt cap and
   likewise found no counterexample.  This supports connected `C=4` as the
   next first-lift target.
+- 2026-05-31: Added a connected zero-residue obstruction for the first lift.
+  The connected even `10`-vertex mask `22114857535095` has zero-residue
+  mod-`4` minimum partition count `5`, but flexible mod-`4` minimum count
+  `3` with residues `(1,2,0)`.  Thus any connected first-lift proof must use
+  flexible nonzero residues; it cannot reduce to a four-coloring by
+  zero-residue induced subgraphs.
+- 2026-05-31: Added a middle-density obstruction to exact terminal host
+  extraction.  For `q=4`, the `16`-vertex `4`-modular mask
+  `840252375412894364828623063537651415` has degree sequence consisting of
+  four `5`s and twelve `9`s, edge density `64/120`, and largest regular
+  induced subgraph of order only `7<2q`.  The terminal host route therefore
+  cannot aim for an exact regular `2q`-set even in two-level middle-density
+  hosts; the remaining viable target is still `omega((log q)^2)`.
+- 2026-05-31: Added a low-rank trace obstruction bound.  In Lemma 12's
+  minimal repeated-degree setting, if the difference trace vectors have real
+  span dimension `rho`, then
+  `|B| <= max{rho(k-1), (k-1+2rho+3)^rho}` by projecting to `rho` coordinates
+  and applying the centered Steinitz partial-sum argument.  This generalizes
+  the rank-one collapse: any large trace obstruction must be high-rank, not
+  merely high-multiplicity.
+- 2026-05-31: Targeted slot sampling for the strongest first-lift survivor
+  `(0,0,1,2)` found no counterexample in `50` random even graphs on `14`
+  vertices and `20` random even graphs on `16` vertices.  This remains weak
+  evidence only, but it keeps `(0,0,1,2)` as the most concrete first-lift
+  alignment target.
