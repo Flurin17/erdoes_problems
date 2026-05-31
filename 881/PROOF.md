@@ -5991,6 +5991,113 @@ multiplicity. In particular, an actual certificate-free counterexample
 would need the same large shifted representation spikes already forced by
 Corollary 3.4d; certificate-free coloring alone is not enough.
 
+## Lemma 8.6j-7: One-color shifted obstructions force mixed spikes
+
+Let \(A\subseteq\mathbb N\), and let \(C\subset A\) be infinite and
+certificate-free relative to \(A\). For each \(n\), define a graph
+\[
+G_n^C
+\]
+on the vertex set \(C\cap[1,n]\) as follows: put an edge with support
+\[
+\{c_1,c_2\}
+\]
+whenever
+\[
+c_1,c_2\in C,\qquad n-c_1-c_2\in A.
+\]
+Loops are allowed and use one vertex. If, for every \(q\), all sufficiently
+large \(n\) have a matching of size at least \(q\) in \(G_n^C\), then there
+is an infinite
+\[
+T\subset C
+\]
+such that
+\[
+2(C\setminus T)+A
+\]
+is cofinite.
+
+Consequently, if every infinite \(T\subset C\) makes
+\[
+2(C\setminus T)+A
+\]
+non-cofinite, then there is a fixed \(q\) and arbitrarily large \(n\) for
+which \(G_n^C\) has matching number \(<q\). For those \(n\), a set of at
+most \(2(q-1)\) vertices of \(C\) meets every edge. If in addition
+\[
+|E(G_n^C)|\to\infty
+\]
+along such \(n\), then there are vertices \(c_n\in C\) for which the mixed
+degree
+\[
+\left|\{c'\in C:\ n-c_n-c'\in A\setminus C\}\right|
+\]
+tends to infinity.
+
+Proof. The first assertion is the same sparse-deletion matching argument as
+Lemma 8.6j-6. Choose
+\[
+t_1<t_2<\cdots,\qquad t_i\in C,
+\]
+so fast that \(t_j\) is larger than a threshold after which every \(G_n^C\)
+has a matching of size at least \(j+2\). Put \(T=\{t_j:j\ge1\}\). For
+large \(n\), choose \(j\) with
+\[
+t_j\le n<t_{j+1}.
+\]
+The graph \(G_n^C\) has \(j+2\) disjoint edges. Future deleted elements are
+larger than \(n\), so they cannot occur in an edge support representing
+\(n\). The first \(j\) deleted elements meet at most \(j\) disjoint edges.
+Hence one edge \(\{c_1,c_2\}\) avoids \(T\), and by definition of
+\(G_n^C\),
+\[
+n=c_1+c_2+a,\qquad c_1,c_2\in C\setminus T,\quad a\in A.
+\]
+This proves cofiniteness of \(2(C\setminus T)+A\).
+
+The contrapositive gives the bounded-matching conclusion. Taking a maximal
+matching, the union of its edge supports is a transversal of size at most
+\(2(q-1)\).
+
+It remains to isolate the mixed spike. Since \(C\) is certificate-free,
+Warning 8.6j says that \(C\) is Sidon. Fix a vertex \(c\in C\). The edges
+incident to \(c\) whose residual summand also lies in \(C\) have the form
+\[
+n-c-c'=d,\qquad c',d\in C,
+\]
+or
+\[
+c'+d=n-c.
+\]
+Sidonicity gives at most one unordered pair \(\{c',d\}\), and hence at most
+two such edge supports incident to \(c\). Therefore all but at most two
+edges incident to \(c\) have residual summand in \(A\setminus C\).
+
+For the bounded-matching values of \(n\), let \(P_n\subset C\) be a
+transversal with \(|P_n|\le2(q-1)\). Since every edge is incident to
+\(P_n\), some \(c_n\in P_n\) has degree at least
+\[
+|E(G_n^C)|/(2q).
+\]
+Subtracting the at most two same-color-residual edges gives mixed degree at
+least
+\[
+|E(G_n^C)|/(2q)-2,
+\]
+which tends to infinity along any sequence with \(|E(G_n^C)|\to\infty\).
+\(\square\)
+
+This is the one-color version of the mixed-spike obstruction in Corollary
+8.6j-3. A certificate-free color can fail the shifted deletion
+\[
+2(C\setminus T)+A
+\]
+only if its own \(C+C+A\) representation graphs have bounded moving
+transversals; whenever those graphs have many edges, the bounded
+transversals force large \(C+(A\setminus C)\) degrees through a few moving
+vertices.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose
@@ -9697,6 +9804,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.6j-6 proves that this shifted Sidon-copy requirement fails for
   every quotient basis with bounded two-sum multiplicity: there is an
   infinite \(T\) for which \(2(S\setminus T)+S\) is cofinite.
+* Lemma 8.6j-7 gives the corresponding one-color graph alternative:
+  failure of the shifted deletion inside a certificate-free color forces
+  bounded moving transversals, and if the graphs have many edges those
+  transversals create mixed-color degree spikes.
 * Corollary 8.6k uses the Sidon bound to rule out fixed-rank large-excess
   barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\), while
   noting that sparse fixed-rank tails with bounded top excess are not ruled

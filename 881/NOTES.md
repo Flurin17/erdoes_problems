@@ -234,6 +234,11 @@ basis \(S\) has bounded two-sum multiplicity, then there is an infinite
 \(T\subset S\) with \(2(S\setminus T)+S\) cofinite. Therefore the
 certificate-free two-color construction from Warning 8.6j'' would need
 large shifted representation spikes, not merely Sidon sparsity.
+Lemma 8.6j-7 gives the one-color version: for a certificate-free color
+\(C\), either the graphs for \(C+C+A\) have unbounded matchings and one can
+delete an infinite \(T\subset C\) while keeping \(2(C\setminus T)+A\)
+cofinite, or bounded moving transversals force large mixed degrees
+\(C+(A\setminus C)\) through a few moving vertices.
 
 ## Trivial and Boundary Cases
 
