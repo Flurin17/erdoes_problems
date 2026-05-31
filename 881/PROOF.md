@@ -2876,6 +2876,121 @@ A\cap[1,w_i-N_0]\subseteq
 so \(|A\cap[1,w_i-N_0]|\) is bounded, contradicting the fact that an
 asymptotic basis of finite order must have an unbounded counting function.
 
+## Lemma 10.3b: Global terminal-gap normal form
+
+Let \(k\ge2\), let \(h=k+1\), and let \(A\subseteq\mathbb N\) be an
+asymptotic basis of order \(k\), with order-\(k\) threshold \(N_0\), and put
+\[
+m_0=\min A.
+\]
+Assume that no infinite \(B\subset A\) has \(A\setminus B\) an
+asymptotic basis of order \(h\). Then for every finite \(E\subset A\), every
+infinite \(X\subset A\setminus E\), and every \(L\), there are a finite
+nonempty set
+\[
+F\subset X
+\]
+and an integer \(w>L\) such that
+\[
+w\notin h(A\setminus F), \tag{1}
+\]
+and, writing \(f_0=\min F\),
+\[
+(A\setminus F)\cap
+\bigl(w-f_0-(k-1)m_0,\ w-N_0\bigr]=\varnothing. \tag{2}
+\]
+
+Moreover \(F\) may be chosen inclusion-minimal for the fixed witness \(w\).
+For such a minimal choice, every \(f\in F\) is active: there are
+\[
+c_{f,1},\ldots,c_{f,k}\in A\setminus F
+\]
+with
+\[
+w=f+c_{f,1}+\cdots+c_{f,k}, \tag{3}
+\]
+and hence
+\[
+f\le w-km_0. \tag{4}
+\]
+
+Proof. By Corollary 3.1c applied to the infinite set \(X\), there is a
+finite late-bad set \(F_0\subset X\). To ensure a large witness, first
+replace \(X\) by its infinite tail
+\[
+X'=\{x\in X:x>L+1\}
+\]
+and choose \(F_0\subset X'\). If \(A\setminus F_0\) is not an order-\(h\)
+basis, choose \(w>L\) with
+\[
+w\notin h(A\setminus F_0).
+\]
+If \(A\setminus F_0\) is an order-\(h\) basis but late-bad, then no
+threshold below \(\max F_0\) works; since \(\max F_0>L+1\), there is
+\[
+w\ge \max F_0-1>L
+\]
+with the same displayed nonrepresentation.
+
+Now shrink \(F_0\) inclusion-minimally while preserving this fixed
+nonrepresentation, and call the resulting set \(F\). This gives (1). The
+terminal gap (2) is Lemma 10.3 applied to \(F\) and \(w\).
+
+For \(f\in F\), minimality gives
+\[
+w\in h(A\setminus(F\setminus\{f\})).
+\]
+Since \(w\notin h(A\setminus F)\), every such representation must use at
+least one copy of \(f\). Taking one copy of \(f\) from the representation
+gives (3), with the remaining \(k\) summands outside \(F\). Inequality (4)
+follows because each remaining summand is at least \(m_0\). \(\square\)
+
+Thus any counterexample to the broad deletion theorem must contain
+arbitrarily far, inside every infinite tail and away from every finite
+protected core, finite active barriers whose deletion creates a genuine
+order-\((k+1)\) hole and a terminal retained gap. This is the rigorous form
+of the high-rank obstruction suggested by the finite experiments.
+
+## Warning 10.3c: Compactness and random deletion do not see additive structure
+
+The broad deletion theorem cannot be proved from finite-deletion robustness
+or compactness alone. There is an abstract representation-system model with
+arbitrarily long good finite deletion prefixes but no infinite good
+deletion.
+
+Let \(U=\mathbb N\), fix \(h=k+1\), and let \(\mathcal S\) be the Schreier
+barrier
+\[
+\mathcal S=\{F\subset U:\ F\text{ finite and } |F|=\min F\}.
+\]
+Every infinite \(B\subset U\) contains infinitely many members of
+\(\mathcal S\): if \(b=\min B\), take the first \(b\) elements of \(B\) to
+obtain one member, then repeat in the tail beyond it.
+
+For each \(F\in\mathcal S\), create a special target \(w_F>\max F\), all
+chosen distinct. Declare the \(h\)-term representation edges of \(w_F\) to
+be exactly
+\[
+\{f\}\cup R,\qquad f\in F,\quad
+R\subset U\setminus F,\quad |R|=h-1.
+\]
+All ordinary targets are declared to have every \(h\)-element subset of
+\(U\) as a representation.
+
+Then the full set \(U\) represents every target. If \(D\subset U\) is
+finite, only the special targets with \(F\subset D\) fail after deleting
+\(D\), so finite deletions are eventually harmless. But if \(B\subset U\)
+is infinite, then \(B\) contains infinitely many \(F\in\mathcal S\); for
+each such \(F\), every representation of \(w_F\) uses an element of \(F\),
+so \(w_F\) is not represented from \(U\setminus B\). The witnesses are
+unbounded because \(w_F>\max F\).
+
+This model is not additive and is not a counterexample to Erdős Problem
+#881. Its role is diagnostic: a proof must use arithmetic information from
+the genuine \(kA\)-coverage and shifted representation constraints. Pure
+Zorn, compactness, finite-prefix, or independent random-deletion arguments
+can be defeated by Schreier-type finite barriers.
+
 ## Lemma 10.4: Bounded higher-excess barriers force lower-sumset reflection
 
 Let \(k\ge2\), and let \(A\subseteq\mathbb N\) be an asymptotic basis of
@@ -3974,6 +4089,13 @@ domination for many old elements.
 * Lemma 10.3 strengthens this for all orders: a finite
   order-\((k+1)\) hole after deleting \(F\) forces a terminal retained gap
   below the witness, starting at \(w-\min F-(k-1)\min A\).
+* Lemma 10.3b combines the broad deletion reduction, the late-bad barrier
+  formulation, and Lemma 10.3: every counterexample must have active
+  inclusion-minimal finite terminal-gap barriers in every infinite tail,
+  away from every finite protected core.
+* Warning 10.3c gives an abstract Schreier-barrier representation model
+  showing why compactness, Zorn, finite-prefix, and independent random
+  deletion arguments need genuine additive input.
 * Lemma 10.4 records the higher-order analogue of bounded second-excess
   barriers: they force large reflected subpatterns into lower sumsets
   \((k-1)A\), which becomes full recurrence only when \(k=2\).

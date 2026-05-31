@@ -67,6 +67,26 @@ terminal-gap lemmas below, genuine late-bad holes must delete all retained
 negative shape is therefore an unbounded finite-barrier construction, not
 ordinary essential elements or a few sparse gaps.
 
+Lemma 10.3b packages this as a normal form: in any counterexample, for every
+finite protected core \(E\), every infinite tail \(X\subset A\setminus E\),
+and every bound \(L\), there is an inclusion-minimal finite
+\[
+F\subset X
+\]
+and \(w>L\) with \(w\notin(k+1)(A\setminus F)\). Every \(f\in F\) is active
+in a repair after the other elements of \(F\) are restored, and
+\(A\setminus F\) has the terminal gap forced by Lemma 10.3. This is the
+current precise target for a negative construction.
+
+Warning 10.3c explains why a purely compactness, Zorn, or random-deletion
+proof is unlikely to work without arithmetic input. An abstract Schreier
+barrier representation model has arbitrarily long good finite deletion
+prefixes and finite deletions are eventually harmless, but every infinite
+deletion contains infinitely many finite barriers and therefore fails. The
+missing step is to prove that such a representation model cannot be
+arithmetized inside a genuine asymptotic basis, or to realize it by a staged
+construction.
+
 ## Trivial and Boundary Cases
 
 ### \(k=1\)
