@@ -1044,6 +1044,14 @@ This table records only values/families classified by the current proof file.
 | `66` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `69` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `70` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
+| `78` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `86` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `87` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `88` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
+| `91` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `93` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `94` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `95` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1555,6 +1563,38 @@ encoded boundary-integrality filters for their outer-angle shapes.
 Therefore `N=66`, `N=69`, and `N=70` have no survivor in any source case and
 are classified negative in this workspace.
 
+## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
+
+The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,
+`94`, and `95`. None is in the elementary positive forms, so the
+commensurable-angle, similar/reptile, and right-tile isosceles branches are
+removed. For the seven squarefree values, Beeson's `gamma=2alpha` branch is
+removed by the squarefree obstruction; for `N=88`, the local Lemma 11.14
+enumeration returns no `gamma=2alpha` boundary-arithmetic candidate.
+
+The exact equilateral boundary-length scan returns no candidates for `78`,
+`86`, `87`, `88`, `91`, `93`, and `94`. For `N=95`, it returns exactly two
+`2pi/3` candidates:
+
+```text
+N=95: (19,80,91), L=380, and its a,b swap.
+```
+
+Both `95` candidates have zero compatible full boundary cycles in the
+equilateral `2pi/3` boundary-star check.
+
+For all eight values, the isosceles `gamma=2pi/3` filter gives no candidates.
+The exact non-isosceles `gamma=2pi/3` filter gives no candidates except at
+`N=88`, where the sole `(3,5,7)` candidate has zero feasible full boundary
+endpoint cycles. In the `3alpha+2beta=pi` branch,
+the stronger isosceles-`alpha+beta` filter returns no survivors; the only raw
+root outside that row occurs for `N=94` in the triquadratic case and fails the
+encoded boundary-integrality filter.
+
+Therefore `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
+have no survivor in any source case and are classified negative in this
+workspace.
+
 ## Open/Unresolved Ledger
 
 - `19` is listed as open in the source corpus, but the workspace now records a
@@ -1567,7 +1607,8 @@ are classified negative in this workspace.
 - The first composite negative values beyond Beeson's `7` and `11`
   obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
   `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`,
-  `57`, `62`, `66`, `69`, and `70`.
+  `57`, `62`, `66`, `69`, `70`, `78`, `86`, `87`, `88`, `91`, `93`, `94`, and
+  `95`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1590,13 +1631,13 @@ are classified negative in this workspace.
   negative.
 - The current gap scan with primitive equilateral side bound `250` reports
   `60` and `63` as open with `gamma=2alpha` boundary-arithmetic survivors, and
-  `76`, `78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as
-  open with no survivor in the other currently encoded filters. The same scan
+  `76`, `92`, and `99` as open with gamma-branch survivors. The same scan
   formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
   `35`, `38`, `39`, `42`, `46`, `51`, `55`, `56`, `57`, `62`, `66`, `69`,
-  and `70`, which are now removed by the composite benchmarks above. The
-  remaining values are not negative theorems until their source-row arithmetic
-  eliminations are written out.
+  `70`, `78`, `86`, `87`, `88`, `91`, `93`, `94`, and `95`, which are now
+  removed by the composite benchmarks above. The remaining values are not
+  negative theorems until their `gamma=2alpha` survivor eliminations are
+  written out.
 - For the `gamma=2alpha` branch, Beeson records a finite boundary-enumeration
   algorithm and says that after the possible `N=45` boundary tiling the next
   values left open are `63,64,72`. This appears to remove the last branch for

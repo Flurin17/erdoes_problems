@@ -62,6 +62,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
+- `n = 78`, `n = 86`, `n = 87`, `n = 88`, `n = 91`, `n = 93`, `n = 94`, and `n = 95`
+  impossible in this workspace: these squarefree composite counts are outside
+  the elementary positive forms except for non-squarefree `88`, whose
+  `gamma=2alpha` enumeration is empty; exact equilateral scans are empty
+  except for two `95` candidates, and those fail the boundary-star check.
 - Primes `p = 4r + 3` are explicitly not proved impossible in the source
   corpus. Beeson says this is a hope, not even labelled a conjecture in his
   slides. This workspace now records a derived proof of the prime obstruction,
@@ -156,6 +161,31 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 68 | positive | `2^2+8^2` |
 | 69 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 70 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 71 | negative in this workspace | prime `3 mod 4` source reduction |
+| 72 | positive | `2*6^2` |
+| 73 | positive | `3^2+8^2` |
+| 74 | positive | `5^2+7^2` |
+| 75 | positive | `3*5^2` |
+| 76 | not classified here | encoded filters empty, but `gamma=2alpha` isosceles branch is not excluded by squarefree obstruction |
+| 77 | positive | Beeson `3alpha+2beta=pi` table |
+| 78 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 79 | negative in this workspace | prime `3 mod 4` source reduction |
+| 80 | positive | `4^2+8^2` |
+| 81 | positive | square family |
+| 82 | positive | `1^2+9^2` |
+| 83 | negative in this workspace | prime `3 mod 4` source reduction |
+| 84 | positive | Beeson `3alpha+2beta=pi` table |
+| 85 | positive | `2^2+9^2` |
+| 86 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 87 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 88 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 89 | positive | `5^2+8^2` |
+| 90 | positive | `3^2+9^2` |
+| 91 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 92 | not classified here | encoded filters empty, but `gamma=2alpha` isosceles branch is not excluded by squarefree obstruction |
+| 93 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 94 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 95 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 
 Important distinction: "positive square class" and "smallest representative" are different. A construction of `15m^2` for all large `m` proves positive infinitely many `n` with squarefree kernel `15`, but it does not prove `n=15`.
 
@@ -189,8 +219,8 @@ Important distinction: "positive square class" and "smallest representative" are
    most unresolved values below `100`, while `60` and `63` now have explicit
    `gamma=2alpha` boundary-arithmetic survivors. Values
    `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-   `55`, `56`, `57`, `62`, `66`, `69`, and `70` now upgraded from dashboard
-   evidence to proof entries.
+   `55`, `56`, `57`, `62`, `66`, `69`, `70`, `78`, `86`, `87`, `88`, `91`,
+   `93`, `94`, and `95` now upgraded from dashboard evidence to proof entries.
    The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha

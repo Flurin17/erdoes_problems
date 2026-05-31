@@ -154,6 +154,8 @@ def workspace_negative_reason(n: int) -> str | None:
         return "negative by the 57/62 composite benchmark in PROOF.md"
     if n in {66, 69, 70}:
         return "negative by the 66/69/70 composite benchmark in PROOF.md"
+    if n in {78, 86, 87, 88, 91, 93, 94, 95}:
+        return "negative by the 78/86/87/88/91/93/94/95 composite benchmark in PROOF.md"
     if n == 22:
         return "negative by the N=22 composite benchmark in PROOF.md"
     return None

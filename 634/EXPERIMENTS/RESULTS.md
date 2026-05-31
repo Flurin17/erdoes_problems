@@ -15,9 +15,10 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`, and
-`N=70` certificates are now promoted in `PROOF.md`. The explicit encoded
-survivors in `100..250` remain the isosceles-`alpha+beta`
+`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`,
+`N=70`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
+certificates are now promoted in `PROOF.md`. The explicit encoded survivors in
+`100..250` remain the isosceles-`alpha+beta`
 `3alpha+2beta=pi` candidates at
 `132,156,175,189,198,204,224,228,240`.
 
@@ -325,6 +326,38 @@ Therefore `PROOF.md` treats `56`, `66`, `69`, and `70` as classified negative
 values, while `60` remains open because of its surviving `gamma=2alpha`
 boundary-arithmetic candidate.
 
+## `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` Exact Filter Certificate
+
+The remaining squarefree no-survivor rows below `100` were rerun with exact
+equilateral arithmetic:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 78
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 86
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 87
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 88
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 91
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 93
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 94
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 95
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 95 19 80
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 95 80 19
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 88
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_nonisosceles_boundary.py
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py 78 86 87 88 91 93 94 95 --json
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_isosceles_filter.py 78 86 87 88 91 93 94 95
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_nonisosceles_exact.py 78 86 87 88 91 93 94 95
+```
+
+The exact equilateral scan is empty for `78`, `86`, `87`, `88`, `91`, `93`, and
+`94`. For `95` it leaves `(19,80,91)` and its swap in the `2pi/3` model, and
+both have zero compatible full boundary cycles. The non-equilateral
+`gamma=2pi/3` filters are empty except for the `88` candidate `(3,5,7)`, which
+has zero feasible full boundary endpoint cycles. The `gamma=2alpha`
+enumeration is empty for `88`, and the `3alpha+2beta` survivors are empty
+after the strong isosceles-`alpha+beta` and boundary-integrality filters.
+Therefore `PROOF.md` treats all eight values as classified negative.
+
 ## Elementary Certificate Checks
 
 Command:
@@ -462,23 +495,23 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,62,66,69,70:
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,62,66,69,70,78,86,87,88,91,93,94,95:
   negative by workspace composite benchmarks
 
 60,63:
   open with a gamma=2alpha boundary-arithmetic survivor
 
-76,78,86,87,88,91,92,93,94,95,99:
-  open with no survivor in the currently encoded filters
+76,92,99:
+  open with a gamma=2alpha boundary-arithmetic survivor
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
 the source reductions is still incomplete. After the `N=14`, `N=15`, `N=21`,
 `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`,
-`N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`, and `N=70` source-row audits,
-the current open ledger removes those values from the scanner's unresolved
-list.
+`N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`, `N=70`, `N=78`, `N=86`,
+`N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` source-row audits, the current
+open ledger removes those values from the scanner's unresolved list.
 
 ## Equilateral Boundary-Length Checks
 
