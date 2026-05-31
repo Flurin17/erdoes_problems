@@ -156,10 +156,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 57 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 58 | positive | `3^2+7^2` |
 | 59 | negative in this workspace | prime `3 mod 4` source reduction |
-| 60 | negative in this workspace | source case split plus Beeson `gamma=2alpha` boundary-enumeration computation in `PROOF.md` |
+| 60 | negative in this workspace | source case split plus local `gamma=2alpha` base endpoint/Lemma 11.17 obstruction |
 | 61 | positive | `5^2+6^2` |
 | 62 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
-| 63 | not classified here | encoded filters empty, but Beeson lists this as a left-open `gamma=2alpha` possibility after `45` |
+| 63 | not classified here | refined `gamma=2alpha` survivor remains |
 | 64 | positive | square family |
 | 65 | positive | `1^2+8^2` |
 | 66 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
@@ -172,7 +172,7 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 73 | positive | `3^2+8^2` |
 | 74 | positive | `5^2+7^2` |
 | 75 | positive | `3*5^2` |
-| 76 | not classified here | encoded filters empty, but `gamma=2alpha` isosceles branch is not excluded by squarefree obstruction |
+| 76 | negative in this workspace | source case split plus local `gamma=2alpha` base endpoint/Lemma 11.17 obstruction |
 | 77 | positive | Beeson `3alpha+2beta=pi` table |
 | 78 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 79 | negative in this workspace | prime `3 mod 4` source reduction |
@@ -188,7 +188,7 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 89 | positive | `5^2+8^2` |
 | 90 | positive | `3^2+9^2` |
 | 91 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
-| 92 | not classified here | encoded filters empty, but `gamma=2alpha` isosceles branch is not excluded by squarefree obstruction |
+| 92 | negative in this workspace | source case split plus local `gamma=2alpha` base endpoint/Lemma 11.17 obstruction |
 | 93 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 94 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 95 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
@@ -222,12 +222,12 @@ Important distinction: "positive square class" and "smallest representative" are
    source split and non-isosceles `gamma=2pi/3` endpoint checks, this now gives
    negative workspace proofs for both counts.
    The composite dashboard currently shows no surviving encoded candidates for
-   most unresolved values below `100`, while `63`, `76`, `92`, and `99` now have explicit
+   most unresolved values below `100`, while `63` and `99` still have refined
    `gamma=2alpha` boundary-arithmetic survivors. Values
    `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-   `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `78`, `86`, `87`, `88`,
-   `91`, `93`, `94`, and `95` now upgraded from dashboard evidence to proof
-   entries.
+   `55`, `56`, `57`, `60`, `62`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
+   `88`, `91`, `92`, `93`, `94`, and `95` now upgraded from dashboard
+   evidence to proof entries.
    The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha
