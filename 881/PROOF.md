@@ -8128,6 +8128,43 @@ barrier on the protected tail, for example a Schreier-type family, with
 frozen witnesses for every barrier edge and with all cross-edge poisoning
 controlled.
 
+## Warning 10.3i: Interval cuts are not themselves a barrier
+
+The preceding interval classification also rules out a naive
+Schreier-indexed block construction. Suppose a construction uses disjoint
+finite blocks \(J_s\) and, in each block, a nonempty coverage-compatible
+terminal cut
+\[
+F_s\subset J_s,\qquad |F_s|\ge2,
+\]
+whose deletion creates a local witness. Then the family
+\[
+\{F_s:s\ge1\}
+\]
+is not a deletion barrier on \(\bigcup_s F_s\): choose one element
+\[
+x_s\in F_s
+\]
+from each block and put \(B=\{x_s:s\ge1\}\). The set \(B\) is infinite but
+contains no whole \(F_s\).
+
+The same obstruction applies to finitely many threshold cuts per block. If
+\(\mathcal F_s\) is a finite family of proper subsets of a block \(J_s\)
+and no member is a singleton forced by the construction, one can choose
+points in the blocks recursively so that the infinite selector avoids
+containing every member of every \(\mathcal F_s\). Thus block-local
+terminal cuts must be tied together by a genuine cross-block finite-set
+barrier.
+
+Consequently, an interval-gadget counterexample has an additional coding
+burden beyond Lemma 10.3h. It must assign witnesses to a barrier family on
+individual elements of \(A\), not merely to large threshold cuts inside
+separate intervals. In a Schreier-type attempt, the construction must make
+the arithmetic hole work for every finite Schreier edge, even though such
+edges are arbitrary finite subsets of the protected enumeration; a single
+interval block supplies only the rigid prefix/suffix cuts from Lemma
+10.3h.
+
 ## Warning 10.3c: Compactness and random deletion do not see additive structure
 
 The broad deletion theorem cannot be proved from finite-deletion robustness

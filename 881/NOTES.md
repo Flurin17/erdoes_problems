@@ -211,6 +211,11 @@ Disjoint copies of the interval gadget are insufficient: an infinite
 deletion can take one protected point from each block and avoid containing
 any whole block-level \(F\). A negative construction would still need a
 Schreier-type or comparable unbounded barrier on the protected tail.
+Warning 10.3i sharpens this: interval threshold cuts are local terminal-gap
+objects, not deletion barriers by themselves. A genuine interval-gadget
+counterexample would have to code arbitrary Schreier edges, or another
+unbounded finite-set barrier, into arithmetic holes; a single block only
+supports the rigid prefix/suffix cuts classified by Lemma 10.3h.
 
 Proposition 3.1f proves both finite-core stability and the desired infinite
 deletion under a tail-syndetic subset hypothesis. This blocks all
