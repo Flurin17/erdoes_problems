@@ -3650,6 +3650,16 @@ the barrier shape suggested by Reduction 0: a negative construction may
 need genuinely high-rank finite edges rather than singleton or pair
 private witnesses.
 
+The script `EXPERIMENTS/collective_rank_search.py` gives an integer-window
+analogue. Its first rank-3 example is the interval
+\[
+A=\{1,2,\ldots,9\},
+\]
+where every singleton and pair deletion still covers \([9,21]\) by
+three-fold sums, but several triple deletions create holes in that window.
+This is an endpoint artefact rather than a construction, but it supplies a
+finite test bed for any proposed high-rank barrier mechanism.
+
 ## Attempt 14: The affine finite-booster construction is not verified
 
 The 2026-05-03 comment on the problem page links a proposed negative

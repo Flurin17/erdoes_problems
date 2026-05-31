@@ -69,6 +69,16 @@ deletions create holes. This models the remaining \(k=2\) finitely-bad
 case, where any obstruction must be genuinely collective rather than
 one-point.
 
+`collective_rank_search.py` searches the same finite-window analogue at a
+chosen rank. With `--rank 3`, the first small example is
+\[
+A=\{1,2,\ldots,9\}
+\]
+on the window \([9,21]\): every singleton and pair deletion still covers
+the window at order \(3\), but several triple deletions create holes. This
+is mostly an endpoint artefact, yet it gives a quick test bed for
+high-rank collective barriers.
+
 `finite_barrier_hypergraph.py` builds the finite residue hypergraph of
 deletions \(F\subset S\) for which \((k+1)(S\setminus F)\) is not the whole
 group. The default run reports the minimal pair barrier
