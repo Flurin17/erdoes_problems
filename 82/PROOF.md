@@ -794,6 +794,76 @@ degree levels, so at least one level has size about `q`; the challenge is to
 combine many such repeated-degree levels well enough to beat the ordinary
 `Theta(log q)` Ramsey extraction from a single level.
 
+The degree-level structure has an exact trace form.  Let `H` be `q`-modular,
+write
+
+```text
+deg_H(v)=a+q lambda(v)
+```
+
+with integer degree level `lambda(v)`, and for `S subset V(H)` put
+`P=V(H)\S` and `tau_P(v)=deg_P(v)`.
+
+**Lemma: Degree-Level Trace Characterization.**  For `S subset V(H)`:
+
+1. `H[S]` is regular if and only if `tau_P(v)-q lambda(v)` is constant on
+   `S`.
+2. `H[S]` is `q`-modular if and only if `tau_P(v)` is constant modulo `q` on
+   `S`.
+3. `H[S]` is `2q`-modular if and only if
+   `tau_P(v)-q lambda(v)` is constant modulo `2q` on `S`.
+
+Proof.  For every `v in S`,
+
+```text
+deg_{H[S]}(v)=deg_H(v)-deg_P(v)=a+q lambda(v)-tau_P(v).
+```
+
+Equality of these degrees, congruence modulo `q`, and congruence modulo `2q`
+are exactly the three displayed conditions.  QED.
+
+Thus a multi-level regular induced subgraph is precisely a trace-balanced face:
+if two vertices lie in levels differing by `j`, their outside traces must
+differ by `jq` for regularity, or by `jq` modulo `2q` for a `2q`-modular
+witness.  In particular, if `|P|<q`, then a regular `H[S]` cannot meet two
+distinct original degree levels, and a `2q`-modular `H[S]` cannot meet both
+parities of degree levels.
+
+Repeated degree levels alone are not enough, because a single level may induce
+an arbitrary graph.
+
+**Lemma: Leaf Completion Obstruction For Degree-Level Pigeonholes.**  Let
+`X` be any graph on vertices `x_1,...,x_s`, let `q>=1`, and choose integers
+`ell_i` such that
+
+```text
+1+q ell_i >= deg_X(x_i)
+```
+
+for every `i`.  There is a graph `H` containing `X` as an induced subgraph on
+`{x_1,...,x_s}` such that every vertex of `H` has degree congruent to `1`
+modulo `q`, and
+
+```text
+deg_H(x_i)=1+q ell_i.
+```
+
+Proof.  For each `i`, add
+
+```text
+1+q ell_i-deg_X(x_i)
+```
+
+new leaves adjacent only to `x_i`.  Then the degree of `x_i` in the resulting
+graph is `1+q ell_i`, while every new leaf has degree `1`.  All degrees are
+congruent to `1` modulo `q`, and the original vertices still induce `X`.
+QED.
+
+Consequently, even a degree level of size `q` can have completely arbitrary
+internal structure.  Any proof of the `q`-modular host theorem must use global
+trace balance against the rest of the host, not only pigeonhole a large degree
+level or apply Ramsey theory inside one level.
+
 The terminal-window lift has a rigid endpoint shape.
 
 **Lemma: Shape Of Near-Terminal Dyadic Witnesses.**  Let `|S|=2q+r` with
@@ -816,12 +886,32 @@ Thus a nonregular terminal-window witness with
 `o(q/(log q)^2)`, while its high-degree vertices have complement-degree
 `r-1-d=o(q/(log q)^2)` inside `S`.
 
+Such a terminal-window witness already contains the regular subgraph size
+needed in the weaker host theorem.  If `L` and `U` are the degree-`d` and
+degree-`d+2q` classes in `G[S]`, then one of them has size at least `q`.  If
+`|L|>=q`, the graph `G[L]` has maximum degree at most `d<=r-1`, so it contains
+an independent set of size at least `|L|/(r+1)>=q/(r+1)`.  If `|U|>=q`, then
+the complement of `G[U]` has maximum degree at most `r-1-d`, so `G[U]`
+contains a clique of size at least `|U|/(r-d)>=q/(r+1)`.  Thus when
+`r=o(q/(log q)^2)`, either case gives a regular induced subgraph of order
+`omega((log q)^2)`.  This is the same numerical extraction as Lemma 2A, but
+viewed through the low/high degree split.
+
 The same terminal-window demand is already strong on regular graphs.  Every
 regular graph is `q`-modular for every `q`, so the lift would imply that every
 regular graph on at least `q^2` vertices contains an induced subgraph of order
 `2q+o(q/(log q)^2)` of the rigid low/high form above, and in particular the
 exact `r=0` version asks for a regular induced subgraph on exactly `2q`
 vertices.
+
+The exact `r=0` regular-host statement is false at small `q`: for `q=3`, the
+2-regular graph `C_4 union C_5` has `q^2=9` vertices and no regular induced
+subgraph on exactly `2q=6` vertices.  A regular induced subgraph of a
+2-regular graph is `0`-, `1`-, or `2`-regular; in `C_4 union C_5`, the largest
+independent set has size `4`, the largest induced matching has `4` vertices,
+and a 2-regular induced subgraph is a union of whole cycle components, with
+sizes only `4`, `5`, or `9`.  This obstruction does not scale in sparse
+regular graphs by the sparse-host lemma below.
 
 There is also a clean weighted hard core obtained from twin blowups.
 
@@ -896,6 +986,35 @@ with constant outside trace, which generic regular or twin-free graphs need
 not provide.  A terminal-window proof likely needs swaps, weighted
 corrections, or a nonlocal linearization of the dyadic degree bit rather than
 simple deletion absorption.
+
+There are elementary positive regimes for the regular-host hard core.
+
+**Lemma: Sparse Regular Hosts Give Linear Regular Subgraphs.**  If `G` is
+`d`-regular on `q^2` vertices and `d<=Cq`, then `G` contains an induced
+`1`-regular subgraph on at least `q/(2C)` vertices, up to harmless rounding.
+The complement gives the same conclusion when the complement degree is at
+most `Cq`.
+
+Proof.  If `d=0`, any `2q` vertices form an independent set.  Otherwise,
+greedily build an induced matching.  When an edge `uv` is chosen, delete every
+edge with an endpoint in `N[u] union N[v]`; at most `2d^2` edges are deleted.
+Since `G` has `q^2 d/2` edges, the greedy process chooses at least
+
+```text
+(q^2 d/2)/(2d^2) = q^2/(4d) >= q/(4C)
+```
+
+edges.  Their endpoints induce a `1`-regular subgraph on at least `q/(2C)`
+vertices.  Applying the same argument to the complement handles co-sparse
+regular hosts.  QED.
+
+In particular, very sparse or very dense regular graphs are not obstructions
+to an `Omega(q)` terminal regular-host theorem.  Dense random-like regular
+graphs also look poor as obstructions heuristically: a fixed `2q`-set in a
+dense random regular graph is regular with probability roughly
+`(2q)^{-q+O(q)}`, while there are `binom(q^2,2q)=q^{2q+O(q)}` such sets.
+This leaves regular twin blowups and other highly structured medium-density
+regular graphs as the most plausible terminal exact-size obstruction class.
 
 ## Conditional Proposition: Terminal-Size Modular Partitions Would Suffice
 

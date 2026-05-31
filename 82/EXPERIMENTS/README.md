@@ -136,6 +136,10 @@ Computational checks and generated data for Erdos Problem 82.
 - `regular_terminal_sample.py`: samples switched circulant regular graphs on
   `q^2` vertices and checks, by fixed-size subset enumeration, whether they
   contain a regular induced subgraph on exactly `2q` vertices.
+- `q_modular_host_sample.py`: samples full `q`-modular host graphs and
+  measures their largest regular induced subgraph, testing the weaker
+  terminal target that every `q`-modular graph on at least `q^2` vertices
+  should contain a regular induced subgraph of size `omega((log q)^2)`.
 - `multipartite_modular.py`: exact integer model for modular
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts

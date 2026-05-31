@@ -1543,3 +1543,19 @@ source of growth beyond Ramsey.
   nonregular `q`-modular graph with about `q` degree levels, each level having
   average size about `q`; the needed improvement is to combine repeated-degree
   levels to beat the `Theta(log q)` Ramsey extraction from one level.
+- 2026-05-31: Refined the nonregular `q`-modular host target with an exact
+  trace characterization.  If `deg_H(v)=a+q lambda(v)` and
+  `P=V(H)\\S`, then `H[S]` is regular iff
+  `deg_P(v)-q lambda(v)` is constant on `S`; it is `2q`-modular iff the same
+  quantity is constant modulo `2q`.  Thus multi-level regularity is a
+  trace-balanced face condition.  Repeated degree levels alone are too weak:
+  a leaf-completion construction embeds any prescribed graph `X` into a
+  `q`-modular host while prescribing the `q`-degree levels of the original
+  vertices.  Also recorded that sparse or co-sparse regular hosts are easy:
+  a `d`-regular graph on `q^2` vertices with `d<=Cq` has an induced matching
+  of size at least `q/(4C)`, hence a linear-size regular induced subgraph.
+- 2026-05-31: Added `q_modular_host_sample.py` to sample full `q`-modular
+  hosts and measure the largest regular induced subgraph.  For `q=4`, bounded
+  rejection samples found best regular orders `7` on `n=16` (`11` checked) and
+  `9` on `n=20` (`3` checked).  Acceptance is low and this is only a sanity
+  check, but it supports the new terminal host target in small cases.
