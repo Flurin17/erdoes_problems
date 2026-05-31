@@ -73,7 +73,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   positive-area overlaps after merging the two duplicate base-corner tiles,
   leaving residual tile areas `42` and `74`. The residual boundary graph is a
   clean 46-cycle of area `74` tile areas for `99`, but has degree-1 and
-  degree-4 junctions for `63`.
+  degree-4 junctions for `63`. The current `99` shell witness is eliminated by
+  residual corner labels: nine forced single-angle residual corners have
+  incompatible adjacent full-side labels.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
@@ -273,7 +275,9 @@ Important distinction: "positive square class" and "smallest representative" are
    than only counting labels consumed by local fans. A boundary-shell residual
    search is now the most concrete next construction/obstruction route; `99`
    is the cleaner first target because the residual shell boundary is a single
-   simple cycle in the current floating model.
+   simple cycle in the current floating model. The first corner-label pass
+   rules out the displayed minimum-transition shell, but not yet all possible
+   boundary orderings.
 
 ## Current Diophantine Status for `n=19`
 

@@ -98,6 +98,11 @@ Current components:
 - `gamma_2alpha_residual_boundary.py`: residual boundary graph extractor for
   the boundary shell. It splits shell edges at T-junctions, separates outer
   boundary atoms from residual atoms, and can write an SVG diagnostic.
+- `gamma_2alpha_residual_corner_labels.py`: immediate residual-corner label
+  check for the current transition-demand shell. For the displayed `N=99`
+  shell, every residual segment is a full indecomposable tile side, but nine
+  forced single-angle corners have incompatible adjacent side labels; this
+  rules out that shell witness, not every possible boundary ordering.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

@@ -1793,6 +1793,16 @@ For `N=63`, the same extraction has degree-1 and degree-4 junctions, so a
 residual search there must model a network domain rather than only a simple
 polygon.
 
+For the displayed `N=99` shell, the residual cycle has a stronger immediate
+failure: its `46` residual atoms are all full indecomposable tile sides
+(`12` of length `b=11`, `18` of length `a=25`, and `16` of length `c=30`).
+Among the residual vertices, `20` are forced single-angle corners
+(`9 alpha` and `11 beta`), but `9` of those have adjacent full-side labels that
+are not the side-label pair incident to the forced angle. Hence this particular
+minimum-transition boundary shell cannot be extended to a tiling. Since other
+boundary orders for the same arithmetic survivor are not yet exhausted, this is
+a shell-witness obstruction rather than a proof that `N=99` is impossible.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

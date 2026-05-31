@@ -981,6 +981,28 @@ nonnegative sum of tile angles, with histogram
 alpha+beta+2gamma: 1, alpha+2beta+2gamma: 6}` under the lexicographically
 least representation.
 
+Adding side labels to that residual cycle rules out the displayed
+transition-demand shell as an extendable tiling:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_residual_corner_labels.py 63 99
+```
+
+```text
+N=63: residual is not a simple cycle; corner-label check skipped.
+N=99: residual segments=46; length histogram={11.0: 12, 25.0: 18, 30.0: 16};
+      decomposable residual full-side atoms=0;
+      forced single-angle corners=20; angle histogram={alpha: 9, beta: 11};
+      label violations=9.
+```
+
+At each violation the residual angle is uniquely one tile angle, and the two
+adjacent residual boundary atoms are full indecomposable tile sides whose
+labels are not the two side labels incident to that tile angle. This eliminates
+the current minimum-transition shell witness. It is not yet a proof that
+`N=99` is impossible, because the finite set of other angle-compatible boundary
+orders for the same arithmetic survivor has not been exhausted by this check.
+
 ## Zhang Constructive Families
 
 Command:
