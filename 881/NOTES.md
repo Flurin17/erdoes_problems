@@ -1822,6 +1822,13 @@ Corollary 8.6g.1 packages the fixed-rank list version: if every finite test
 could be colored by \(r\) moving endpoints so that each endpoint fiber is
 certificate-free and has an unbounded reflected center, compactness would
 produce \(r\) recurrent Sidon colors, contradicting Lemma 8.6g''''.2.
+For variable rank this gives only a quantitative necessary condition. If a
+coherent \(q\)-color recurrent Sidon compactification covers a finite test
+set \(T\), Lemma 8.6g''''.2 gives \(|T|\le q^2\). Hence ranks
+\(q=o(\sqrt{|T|})\) cannot work, but Schreier-scale barriers with
+\(q\approx |T|\) can keep splitting the active prefix into singleton or
+bounded fibers and avoid any fixed recurrent color with many points. The
+next obstruction must force color reuse in such variable-rank barriers.
 The shape is still finite-quotient compatible:
 in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
 \(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the

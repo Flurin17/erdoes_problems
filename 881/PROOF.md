@@ -5983,6 +5983,20 @@ remaining fixed-rank obstruction would have to fail the full-list
 hypothesis above while still avoiding a single finite certificate-density
 test.
 
+For variable rank, the same argument gives only a rank lower bound when a
+coherent finite-color compactification exists. If \(q\) recurrent Sidon
+colors cover a finite test set \(T\), Lemma 8.6g''''.2 gives
+\[
+|T|\le q^2.
+\]
+Thus any variable-rank list-color barrier of this type must use
+\[
+q\ge\sqrt{|T|}.
+\]
+Schreier-scale barriers can evade this estimate by assigning singleton or
+bounded fibers to the active prefix, so a final argument must force color
+reuse rather than only finite colorability.
+
 ## Lemma 8.6h: Progressions force certificate density
 
 Let \(A\subseteq\mathbb N\) and let
