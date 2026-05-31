@@ -1241,6 +1241,64 @@ argument should replace the independent binomial variables above by
 conditional hypergeometric variables with variance `Theta(|S|-i)`.  This is
 currently an obstruction lemma to prove, not an established fact.
 
+**Conditional Proposition: Fixed-Degree Anti-Concentration Refutes The
+Universal Witness Target.**  Let `psi(q)->infinity` along dyadic `q`, and put
+
+```text
+N=q^3,        d_-=(N-q)/2,        d_+=(N+q)/2.
+```
+
+Let `G_q` be uniformly sampled from all labelled graphs on a fixed partition
+`V=L union H`, `|L|=|H|=N/2`, in which vertices of `L` have degree `d_-` and
+vertices of `H` have degree `d_+`.  Suppose that, uniformly for all fixed
+sets `S subset V` with
+
+```text
+|S| >= N psi(q)/q,
+```
+
+one has
+
+```text
+P(G_q[S] is 2q-modular) <= exp(o(|S|)) (2q)^-(|S|-1).
+```
+
+Then for all sufficiently large dyadic `q` there exists a connected
+`q`-modular graph on `N` vertices with no induced `2q`-modular subgraph of
+order at least `N psi(q)/q`.
+
+Proof.  Every graph in the model is `q`-modular because its two degree values
+differ by exactly `q`.  Let `K=N psi(q)/q`.  By the assumed
+anti-concentration and the union bound, the expected number of induced
+`2q`-modular sets of order at least `K` is at most
+
+```text
+sum_{k>=K} binom(N,k) exp(o(k)) (2q)^-(k-1).
+```
+
+For `k>=K`,
+
+```text
+binom(N,k) (2q)^-(k-1)
+    <= 2q (eN/(2qk))^k
+    <= 2q (e/(2psi(q)))^k.
+```
+
+Since `psi(q)->infinity`, the displayed sum tends to `0`.  Hence with
+positive probability `G_q` has no such large `2q`-modular induced subgraph.
+Choose one such graph `G`.
+
+If `G` is connected, we are done.  If `G` is disconnected, then
+`complement(G)` is connected.  Complementing preserves `q`-modularity of the
+whole graph, since degrees change from `d` to `N-1-d`, and it preserves
+target-modularity of every induced set: inside a set `S`, degrees change from
+`e_v` to `|S|-1-e_v`, so equality of residues modulo `2q` is unchanged.
+Thus `complement(G)` is the desired connected example.  QED.
+
+This proposition explains why the witness-or-regular dichotomy above is the
+right replacement target.  The anti-concentration hypothesis is plausible in
+the dense fixed-degree model but remains unproved here.
+
 ## Conditional Proposition: A Witness-Or-Regular Dyadic Dichotomy Suffices
 
 Let `psi(q)` be an eventually nondecreasing function on dyadic integers and
@@ -1387,6 +1445,21 @@ or even just `Phi(N,q) >= max{rho(N),psi(q)}` in the parameter range
 `N=q^3`, `psi(q)=omega((log q)^2)`.  This bounded-spread problem is far weaker
 than the full dichotomy but is a useful local test for the random obstruction
 model.
+
+The target should remain scale-sensitive.  An unqualified bound
+`Phi(N,s)>=N/poly(s)` would give a linear-size regular induced subgraph for
+fixed `s`; dense random graphs with two adjacent prescribed degrees are a
+plausible obstruction to such a strong statement.  The terminal-scale form
+needed here is much weaker:
+
+```text
+Phi(N,q) >= N/q^{1+o(1)}       when q >= N^{1/3+o(1)},
+```
+
+or any substitute that beats both `rho(N)` and `psi(q)` in the dyadic
+dichotomy.  Small exact and sampled spread-one data do not yet refute even
+linear behavior, but the completion lemmas above show that a proof cannot use
+degree levels alone.
 
 The connected formulation still cannot demand too few parts.  The first
 dyadic lift already has a connected example requiring four flexible parts.

@@ -1762,3 +1762,35 @@ source of growth beyond Ramsey.
   For `q=4,n=7`, all `1184` full `4`-modular graphs had matching regular and
   `8`-modular maxima, as expected below the terminal size where `8`-modularity
   forces actual regularity.
+- 2026-05-31: Checked a tempting modulo-zero partition side route.  Tiny
+  exhaustive sweeps show that every full `3`-modular graph on `6` vertices
+  partitions into three induced `3`-modular zero-residue parts, and every full
+  `4`-modular graph on `6` vertices partitions into four induced
+  `4`-modular zero-residue parts.  This does not solve the dyadic lift:
+  partitioning into `q`-modular zero-residue parts does not control the new
+  bit needed for induced `2q`-modularity, and the first-lift obstructions
+  already show that naive two-part lifting fails.
+- 2026-05-31: Sampled the baseline `4 -> 8` flexible partition problem.
+  Twenty accepted full `4`-modular graphs on `10` vertices all partitioned
+  into at most three induced `8`-modular parts (`10` were already
+  `8`-modular, `4` needed two parts, `6` needed three).  This is only small
+  evidence for an `O(q)` baseline partition theorem; it gives no logarithmic
+  saving by itself.
+- 2026-05-31: Refined the bounded-spread target after subagent review.  A
+  fixed-spread linear theorem is probably too optimistic because dense random
+  adjacent-degree graphs should locally resemble `G(k,1/2)` on induced
+  `k`-sets.  The useful terminal-scale target is only
+  `Phi(N,q)>=N/q^{1+o(1)}` for `q>=N^{1/3+o(1)}`, or any bound beating
+  `max{rho(N),psi(q)}` in the witness-or-regular dichotomy.  Adjacent-degree
+  exact samples did not show a small-scale collapse: for degrees `10,11` on
+  `n=22`, three connected samples had maximum regular orders `11,12,13`; for
+  degrees `11,12` on `n=24`, two connected samples had maximum regular orders
+  `13,14`.
+- 2026-05-31: Formalized the conditional counterexample to the universal
+  log-saving witness theorem.  In the two-degree model with `N=q^3` and degree
+  values `(N-q)/2,(N+q)/2`, a fixed-degree anti-concentration estimate
+  `P(G[S] is 2q-modular)<=exp(o(|S|))(2q)^-(|S|-1)` for
+  `|S|>=N psi(q)/q` would make the expected number of large witnesses tend to
+  zero.  Connectivity is harmless: if the sampled witness-free graph is
+  disconnected, its complement is connected, remains `q`-modular, and has the
+  same target-modular induced sets.
