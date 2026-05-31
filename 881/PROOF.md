@@ -6489,6 +6489,113 @@ graphs \(C+C+D\) and \(D+D+C\). The almost-cross-color recurrence from
 Lemma 8.6g''' naturally produces star-shaped families in these graphs; the
 remaining difficulty is to force disjoint supports rather than stars.
 
+## Lemma 8.6j-7b: Cross-residual stars are low-count stars
+
+Let
+\[
+A=C\cup D\cup E
+\]
+be a disjoint union, where \(E\) is finite and \(C,D\) are
+certificate-free relative to \(A\). Then there is a constant \(Q_E\) such
+that for every same-color pair
+\[
+x,y\in C\quad\text{or}\quad x,y\in D
+\]
+one has
+\[
+r_{2,A}(x+y)\le Q_E. \tag{1}
+\]
+Consequently, if for some \(n\) and \(p\in C\) there are many
+\[
+c\in C
+\]
+with
+\[
+n-p-c\in D\cup E,
+\]
+then \(p\) is a low-count star gate in the sense of Corollary 3.4n:
+\[
+c\mapsto c+p
+\]
+has uniformly bounded two-sum representation count on that reflected
+packet.
+
+Proof. Consider \(x,y\in C\); the proof for \(D\) is identical. Since
+\(C\) is certificate-free, it is Sidon by Warning 8.6j, so there is at most
+one unordered representation of \(x+y\) from \(C+C\). Since \(D\) is Sidon,
+there is at most one unordered representation from \(D+D\). By Lemma
+8.6j',
+\[
+(C+C)\cap(C+D)=\varnothing,
+\]
+so there is no mixed \(C+D\) representation of \(x+y\). The only remaining
+representations use at least one element of the finite set \(E\), and there
+are \(O_E(1)\) of those. This proves (1).
+
+If \(n-p-c\in D\cup E\), then with
+\[
+w=n,\qquad d=p,\qquad a=c
+\]
+the reflected row has
+\[
+w-d-a\in A
+\]
+and (1) gives \(r_{2,A}(a+d)\le Q_E\). \(\square\)
+
+Thus the bipartite Sidon obstruction has not escaped the earlier
+low-count-star normal form. Its bounded-transversal branch is precisely a
+moving same-color star whose rows have bounded two-sum multiplicity. The
+unresolved point is still global: prove that such stars cannot remain
+fresh outside every finite protected core, or build a critical-density
+construction where they do.
+
+## Warning 8.6j-7c: Cross-color recurrence naturally gives stars
+
+The almost-cross-color recurrence in Lemma 8.6g''' does not by itself
+trigger the matching criterion in Lemma 8.6j-7a. Let
+\[
+A=C\cup D
+\]
+with \(C\) certificate-free, let \(U\subset C\) be finite, and suppose a
+large center \(m\) satisfies
+\[
+m-U\subset D.
+\]
+Fix an anchor \(p\in C\) and put
+\[
+n=m+p.
+\]
+Then for each \(u\in U\) the cross-residual graph \(H_n^C\) contains the
+edge
+\[
+\{p,u\},
+\]
+because
+\[
+n-p-u=m-u\in D.
+\]
+Thus recurrence supplies arbitrarily large degrees at the moving gate
+\(p\), but these edges all meet \(p\) and need not contain a large
+matching.
+
+Moreover, certificate-freeness reinforces this star shape for the same
+residual rows. If \(x,y\in C\setminus\{p\}\) and
+\[
+n-x-y=m-u,
+\]
+then
+\[
+x+y-p=u\in A,
+\]
+so \(p,x,y\) would form a forbidden certificate in \(C\). Equivalently, the
+same reflected residual \(m-u\) cannot also be supplied by a non-star
+same-color pair avoiding \(p\).
+
+This explains why the current reduction stops at the fresh low-count star
+branch rather than at the matching criterion. Cofinite order-2 coverage and
+separate recurrence produce many cross-residual edges, but they do not
+force those edges to be disjoint.
+
 ## Warning 8.6j-8: Cross reflections give moving, not fixed, certificates
 
 The mixed-spike structure has a tempting but invalid shortcut to Corollary
@@ -10896,6 +11003,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.6j-7a gives the direct cross-residual matching criterion:
   arbitrarily large matchings in \(C+C+(A\setminus C)\) representation
   graphs allow a sparse deletion from \(C\) that leaves an order-3 basis.
+* Lemma 8.6j-7b identifies the complementary star branch with the existing
+  low-count-star normal form: same-color rows in a two-color
+  certificate-free tail have uniformly bounded representation count.
+* Warning 8.6j-7c explains why separate recurrence does not force the
+  matching branch: it naturally creates high-degree moving stars, and
+  certificate-freeness blocks non-star same-residual edges.
 * Warning 8.6j-8 explains why the resulting cross-color reflected packets
   do not directly trigger Corollary 2.3c: the moving certificate value is
   the natural deleted mirror.

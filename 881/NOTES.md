@@ -1788,6 +1788,18 @@ if the graphs of representations \(n=c_1+c_2+d\), with
 eventually, then a sparse deletion from \(C\) leaves an order-3 basis. A
 counterexample must therefore keep these cross-residual graphs star-like
 or bounded-transversal on infinitely many targets.
+Lemma 8.6j-7b identifies those stars with the earlier low-count-star
+normal form: in a two-color certificate-free tail, same-color sums have
+uniformly bounded two-sum multiplicity, because same-color representations
+are Sidon, mixed representations are separated, and only finitely many
+exceptional summands remain. Thus a star \(n=p+c+d\) with fixed
+\(p,c\in C\) and \(d\in D\cup E\) is exactly a reflected low-count star
+with gate \(p\).
+Warning 8.6j-7c explains why separate recurrence does not upgrade this to
+large matchings: if \(m-U\subset D\) and \(n=m+p\), then the edges
+\(\{p,u\}\) form a large star in the cross-residual graph, and
+certificate-freeness forbids non-star same-color pairs from using the same
+residual rows.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then
