@@ -552,9 +552,28 @@ with tile `(5,16,19)`, `N=46` with tile `(7,8,13)`, and so on.
 
 ### Other Isosceles Outer-Triangle Subcases
 
-Beeson's isosceles-triangle paper reduces non-equilateral isosceles outer
+Beeson’s isosceles-triangle paper reduces non-equilateral isosceles outer
 triangles, aside from the reptile case, to right-tile, `gamma=2alpha`,
 `gamma=2pi/3`, and `3alpha+2beta=pi` templates.
+
+The right-tile branch is complete for counts. Beeson's Theorem 7.8 gives the
+possibilities
+
+```text
+N is a square,
+N is twice a square,
+N = 6k^2,
+N is an even sum of two squares.
+```
+
+Equivalently for the small-value obstructions used here, the right-tile
+isosceles branch is contained in `square`, `sum of two squares`, and `6k^2`.
+Thus `N=22` is excluded in this branch because `22` is not a square, not a sum
+of two squares, and not `6k^2`.
+
+For the `gamma=2alpha` branch, Beeson proves rationality and then Theorem 11.7:
+`N` is not squarefree. This excludes `N=22` and every prime count in this
+branch.
 
 For prime `N=19`:
 
@@ -1007,8 +1026,8 @@ BLZ Problem #633 outer-triangle classes to the #634 case filters below.
 |---|---|---|
 | similar/reptile | classified by Snover-Waiveris-Williams | none for this subcase |
 | commensurable-angle source table | closed by Beeson's NoSevenTiling Table 3 and Theorem 3, with forms `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | none for this branch |
-| right-tile isosceles | recorded arithmetic restrictions | source dependence remains |
-| isosceles `gamma=2alpha` | squarefree obstruction recorded | complete composite formula not reconstructed |
+| right-tile isosceles | source-backed count forms from Beeson Theorem 7.8 | none for small-value obstructions using these forms |
+| isosceles `gamma=2alpha` | source-backed non-squarefree obstruction from Beeson Theorem 11.7 | complete positive composite formula not reconstructed |
 | isosceles `gamma=2pi/3` | ruled out in the rational nondegenerate case by boundary-transition lemma | audit interaction with every source-reduced equilateral/degenerate exception |
 | `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected boundary-star eliminations and a generic boundary-integrality filter for supported outer shapes | isosceles-`alpha+beta` composite survivors remain after Beeson's stronger source filter; not a complete composite classification |
 | non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; endpoint boundary-star eliminations for `21`, `30`, `55`, `88`, `105`, `120`, `143`, and the later `100..250` BLZ survivors | no explicit encoded survivor remains below `250`; a general composite obstruction is not yet proved |

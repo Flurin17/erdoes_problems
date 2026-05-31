@@ -159,14 +159,17 @@ Needed statement:
 Current evidence:
 
 - This is summarized from Beeson's isosceles paper.
+- `PROOF.md` now records the right-tile count forms from Theorem 7.8 and the
+  `gamma=2alpha` non-squarefree obstruction from Theorem 11.7.
 - `gamma=2pi/3` has a local boundary-transition obstruction.
-- Right-tile and `gamma=2alpha` composite formulas are used only as recorded
-  source restrictions.
+- The `gamma=2pi/3` arithmetic filter is encoded from Lemma 12.9 and Theorem
+  12.10.
 
 Impact:
 
-- The dashboard can remove isosceles candidates, but `PROOF.md` still marks the
-  composite formulas as source-dependent.
+- The right-tile and `gamma=2alpha` rows are now source-backed enough for
+  small-value obstructions such as `N=22`; the remaining isosceles gap is exact
+  composite completeness in the `gamma=2pi/3` and `3alpha+2beta=pi` rows.
 
 ### 3. Equilateral Rational/Integer Side Model
 

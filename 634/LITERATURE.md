@@ -248,10 +248,11 @@ Theorem 12.10 states that this subcase has no candidates for `N < 33`. For
 `37` candidate by a geometric argument, but leaves `71` as the next prime case
 to consider.
 
-The same paper records other isosceles subcase obstructions useful for `N=19`:
-right-tile isosceles counts are squares, even sums of squares, or `6m^2`, and
-the `gamma=2alpha` isosceles template has non-squarefree `N`, hence no prime
-`N`.
+The same paper records other isosceles subcase obstructions useful for small
+values. Theorem 7.8 gives a complete count classification for isosceles tilings
+by a right triangle: `N` is a square, twice a square, `6k^2`, or an even sum of
+two squares. Theorem 11.7 proves that in the `gamma=2alpha` isosceles template,
+`N` is not squarefree; in particular no prime count occurs there.
 
 ### TriangleTiling4
 
