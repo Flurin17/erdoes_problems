@@ -575,6 +575,15 @@ x+y=s+d,\qquad x,y,s\in S,
 \]
 has only \(O(|S|)\) unordered solutions. So the remaining obstruction is a
 large reflected packet that is sparse for a translated Schur equation.
+Corollary 3.4s splits the rows of a star-gated minimal hole: each row
+\(a+d\) is either uniquely represented by the gate pair \(\{a,d\}\), or
+some other deleted element \(f\) gives a shifted overlap
+\[
+a+d-f\in A.
+\]
+With bounded \(|F|\), a positive proportion of the rows fall into one of
+these two alternatives. This isolates the next branches: unpinned unique
+rows versus moving shifted-overlap packets.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all

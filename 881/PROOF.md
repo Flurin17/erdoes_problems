@@ -2269,6 +2269,75 @@ If every large reflected packet outside some finite core forced
 superlinear internal solutions of this equation for every fresh \(d\), then
 Corollary 3.4r would contradict the counterexample normal form.
 
+## Corollary 3.4s: Star rows are unique or create shifted overlaps
+
+Keep the hypotheses and notation of Corollary 3.4i. Thus
+\[
+F\subset A,\qquad C=A\setminus F,\qquad w\notin3C,
+\]
+and the gate \(d\in F\) has many retained repairs
+\[
+w=d+a+b,\qquad a,b\in C.
+\]
+Let \(S\subset C\) be the set of retained summands appearing in these
+repairs:
+\[
+S=\{a\in C:\ w-d-a\in C\}.
+\]
+Then for every \(a\in S\), either
+\[
+r_{2,A}(a+d)=1, \tag{1}
+\]
+with the unique representation \(a+d=a+d\), or there is an element
+\[
+f\in F\setminus\{d\}
+\]
+such that
+\[
+a+d-f\in A. \tag{2}
+\]
+Consequently, if \(|F|\le q\), then either at least \(|S|/2\) elements of
+\(S\) satisfy the unique-private alternative (1), or some
+\[
+f\in F\setminus\{d\}
+\]
+satisfies (2) for at least
+\[
+\frac{|S|}{2(q-1)}
+\]
+elements of \(S\).
+
+Proof. Fix \(a\in S\). Corollary 3.4h gives
+\[
+a+d\notin2C.
+\]
+Therefore every two-term representation of \(a+d\) from \(A\) uses an
+element of \(F\). One such representation is the trivial gate
+representation
+\[
+a+d=a+d.
+\]
+If this is the only unordered representation, then (1) holds. Otherwise
+take a different representation. It cannot use \(d\), because a
+representation of \(a+d\) using \(d\) has the forced complementary summand
+\(a\), giving the same unordered pair. Hence it uses some
+\[
+f\in F\setminus\{d\},
+\]
+and the complementary summand is \(a+d-f\in A\), proving (2).
+
+The final assertion is just pigeonhole. If fewer than half of the elements
+of \(S\) are unique-private, then more than \(|S|/2\) elements satisfy (2)
+for one of at most \(q-1\) choices of \(f\). \(\square\)
+
+Thus the fresh low-count star branch splits again. Either the counterexample
+has large reflected packets whose rows are genuinely unique for the moving
+gate, or it has large reflected packets that are simultaneously shifted
+back into \(A\) by one of the moving differences \(d-f\). A positive proof
+must rule out both the unpinned unique-row case and the moving shifted-overlap
+case, or show that one of them forces the recurrent certificates from
+Corollary 2.3c.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -7402,6 +7471,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the center after one finite core, then the desired deletion exists.
 * Corollary 3.4r packages the surviving obstruction as a large reflected
   packet \(S\) with only \(O(|S|)\) solutions to \(x+y=s+d\) inside \(S\).
+* Corollary 3.4s splits star rows into unique-private rows for the moving
+  gate or shifted-overlap rows coming from another deleted vertex.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
