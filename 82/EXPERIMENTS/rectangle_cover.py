@@ -56,12 +56,13 @@ def find_cover(
     vector = normalize(vector)
     chosen: dict[tuple[tuple[int, ...], int], tuple[int, int]] = {}
     nodes = 0
+    branches = 0
 
     @lru_cache(maxsize=None)
     def rec(state: tuple[int, ...], left: int) -> bool:
-        nonlocal nodes
+        nonlocal nodes, branches
         nodes += 1
-        if node_limit is not None and nodes > node_limit:
+        if node_limit is not None and nodes + branches > node_limit:
             raise SearchLimitExceeded
         if not state:
             return True
@@ -71,6 +72,9 @@ def find_cover(
             return False
 
         for indices, height in candidates(state, cap):
+            branches += 1
+            if node_limit is not None and nodes + branches > node_limit:
+                raise SearchLimitExceeded
             next_state = subtract_rectangle(state, indices, height)
             if rec(next_state, left - 1):
                 chosen[(state, left)] = (len(indices), height)
@@ -96,7 +100,7 @@ def find_cover(
                     break
         else:
             raise AssertionError("stored rectangle no longer reconstructs")
-    return cover, nodes
+    return cover, nodes + branches
 
 
 def integer_partitions(total: int, max_part: int | None = None):
@@ -118,12 +122,13 @@ def exhaustive(
     progress_every: int | None,
 ) -> None:
     nodes = 0
+    branches = 0
 
     @lru_cache(maxsize=None)
     def rec(state: tuple[int, ...], left: int) -> bool:
-        nonlocal nodes
+        nonlocal nodes, branches
         nodes += 1
-        if node_limit is not None and nodes > node_limit:
+        if node_limit is not None and nodes + branches > node_limit:
             raise SearchLimitExceeded
         if not state:
             return True
@@ -133,6 +138,9 @@ def exhaustive(
             return False
 
         for indices, height in candidates(state, cap):
+            branches += 1
+            if node_limit is not None and nodes + branches > node_limit:
+                raise SearchLimitExceeded
             next_state = subtract_rectangle(state, indices, height)
             if rec(next_state, left - 1):
                 return True
@@ -148,22 +156,26 @@ def exhaustive(
                 print(f"checked={checked}")
                 print(f"unknown_vector={','.join(map(str, vector))}")
                 print("result=unknown_node_limit")
+                print(f"nodes={nodes}")
+                print(f"branches={branches}")
                 print(f"cache_info={rec.cache_info()}")
                 return
             if not cover_exists:
                 print(f"checked={checked}")
                 print(f"counterexample={','.join(map(str, vector))}")
                 print(f"nodes={nodes}")
+                print(f"branches={branches}")
                 print(f"cache_info={rec.cache_info()}")
                 return
             if progress_every is not None and checked % progress_every == 0:
                 print(
                     f"progress checked={checked} total={total} "
-                    f"nodes={nodes} cache={rec.cache_info().currsize}",
+                    f"nodes={nodes} branches={branches} cache={rec.cache_info().currsize}",
                     flush=True,
                 )
     print(f"checked={checked}")
     print(f"nodes={nodes}")
+    print(f"branches={branches}")
     print(f"cache_info={rec.cache_info()}")
     print("counterexample=none")
 

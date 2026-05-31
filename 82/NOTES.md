@@ -1299,3 +1299,12 @@ source of growth beyond Ramsey.
   clique case.  `PROOF.md` now records this as Lemma 14A.4, pruning the
   single-trace route: future trace progress must combine multiple trace
   classes or use more internal structure.
+- 2026-05-31: Updated `rectangle_cover.py` so its search limit counts both
+  cached DP states and candidate branches.  This prevents long q=8 sweeps from
+  spending minutes inside one high-branching state without producing a useful
+  stopping certificate.  With `(bins,cap,max_total)=(8,10,64)` and limit
+  `5,000,000`, the sweep reached `1,807,286` integer partitions and stopped at
+  the unknown vector
+  `(6,6,6,6,5,4,3,2,2,2,1,1,1,1,1,1,1,1,1,1)`.  A direct fixed-vector check
+  covers it in `8` rectangles:
+  `6^1, 6^1, 6^1, 6^1, 5^1, 3^2, 1^10, 1^7`.
