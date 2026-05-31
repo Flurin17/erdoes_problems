@@ -1490,3 +1490,10 @@ source of growth beyond Ramsey.
   unit-height rectangle.  Barrier: support sizes and slack prevent a
   distinct-height-only lemma; near terminal slack forces sparse-special
   certificates mostly down to one, two, or three dense lifted rectangles.
+- 2026-05-31: Added `reservoir_certificate.py`, a fixed-vector checker for
+  the binary reservoir certificate.  On
+  `q=30`, `((q-3)(q+2),8,7,6,5,4,3,2,1)` it finds a valid certificate with
+  residual tail `(8,6,6,4,4,2,2,0)`, deleted mass `4`, active bits
+  `2,4,8`, support counts `4,4,1`, and zero global slack.  This gives a
+  second explicit repair of the rectangle-only staircase obstruction and
+  provides a way to test future sparse-special lemmas directly.
