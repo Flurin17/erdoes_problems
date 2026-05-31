@@ -1035,6 +1035,8 @@ This table records only values/families classified by the current proof file.
 | `38` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `39` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `42` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `46` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
+| `51` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1368,6 +1370,47 @@ side lengths.
 Therefore `N=38`, `N=39`, and `N=42` have no survivor in any source case, and
 all three are classified negative in this workspace.
 
+## Composite Benchmark: `N=46` and `N=51`
+
+The values `46` and `51` are removed by the same source case split. Neither
+count is a square, a sum of two positive squares, `2m^2`, `3m^2`, or `6m^2`,
+so the similar/reptile, commensurable-angle, and right-tile isosceles branches
+are removed. Both are squarefree, so the `gamma=2alpha` isosceles branch is
+removed.
+
+The exact equilateral boundary-length equations give no candidates for either
+count, and the exact non-isosceles `gamma=2pi/3` product formulas give no
+candidates for either count.
+
+In the isosceles `gamma=2pi/3` branch, `N=51` has no arithmetic candidate.
+`N=46` has exactly one arithmetic candidate:
+
+```text
+c^2=a^2+ab+b^2,        (a,b,c)=(7,8,13),
+m=4,        outer equal side X=52,        outer base Y=92.
+```
+
+This candidate is ruled out by the same boundary-transition lemma for rational
+nondegenerate isosceles `gamma=2pi/3` tilings.
+
+In the `3alpha+2beta=pi` template, `N=46` has six
+isosceles-`alpha+beta` roots rejected by Beeson's stronger Section 11.4 filter,
+plus one triquadratic root:
+
+```text
+M=2,        (a,b,c)=(10,21,25),
+outer sides=(92,105,125),        outer angles=(2alpha,beta,alpha+beta).
+```
+
+`EXPERIMENTS/beeson_3alpha2beta_boundary.py` finds `6`, `2`, and `2` oriented
+side paths on the three sides and zero full boundary cycles compatible with the
+corner stars. For `N=51`, all seven raw `3alpha+2beta=pi` roots are
+isosceles-`alpha+beta` roots and all seven fail Beeson's stronger Section 11.4
+filter.
+
+Therefore `N=46` and `N=51` have no survivor in any source case, and both are
+classified negative in this workspace.
+
 ## Open/Unresolved Ledger
 
 - `19` is listed as open in the source corpus, but the workspace now records a
@@ -1379,7 +1422,7 @@ all three are classified negative in this workspace.
   positive, while primes `3 mod 4` greater than `3` are negative.
 - The first composite negative values beyond Beeson's `7` and `11`
   obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
-  `30`, followed by `33`, `35`, `38`, `39`, and `42`.
+  `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, and `51`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1401,13 +1444,13 @@ all three are classified negative in this workspace.
   obstruction with the other source filters to classify `21` and `30`
   negative.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `46`, `51`, `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`,
-  `78`, `86`, `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with
-  no survivor in the currently encoded
+  `55`, `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`,
+  `87`, `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor
+  in the currently encoded
   filters. The same scan formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
-  `35`, `38`, `39`, and `42`, which are now removed by the composite benchmarks
-  above. The remaining values are not negative theorems until their source-row
-  arithmetic eliminations are written out.
+  `35`, `38`, `39`, `42`, `46`, and `51`, which are now removed by the
+  composite benchmarks above. The remaining values are not negative theorems
+  until their source-row arithmetic eliminations are written out.
 - In the range `100..250`, the current encoded survivor list has shrunk to
   `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`, and `240`. All are
   `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4

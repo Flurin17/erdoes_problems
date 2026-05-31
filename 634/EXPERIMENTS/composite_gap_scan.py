@@ -122,7 +122,7 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
 
     if n in {7, 11}:
         return "negative", ["Beeson no-7/no-11 theorem"]
-    if n in {14, 15, 21, 30, 33, 35, 38, 39, 42}:
+    if n in {14, 15, 21, 30, 33, 35, 38, 39, 42, 46, 51}:
         return "negative", ["workspace composite benchmark; exact source-row eliminations"]
     if n == 22:
         return "negative", ["workspace N=22 composite benchmark; exact source-row eliminations"]

@@ -249,12 +249,13 @@ Impact:
 
 The following unresolved values below `100` have no survivor in the currently
 encoded filters. The values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`,
-`39`, and `42` formerly appeared in this list, but are now classified negative
-in `PROOF.md` after writing out the source-row arithmetic eliminations:
+`39`, `42`, `46`, and `51` formerly appeared in this list, but are now
+classified negative in `PROOF.md` after writing out the source-row arithmetic
+eliminations:
 
 ```text
-46, 51, 55, 56, 57, 60, 62, 63, 66, 69, 70, 76, 78,
-86, 87, 88, 91, 92, 93, 94, 95, 99
+55, 56, 57, 60, 62, 63, 66, 69, 70, 76, 78, 86, 87,
+88, 91, 92, 93, 94, 95, 99
 ```
 
 The remaining values should remain recorded as "open/no encoded survivor" until
