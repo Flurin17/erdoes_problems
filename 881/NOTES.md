@@ -1562,6 +1562,9 @@ same higher-rank edges fail:
 \{15,18,37\},\quad \{15,19,37\},\quad
 \{15,30,37\},\quad \{18,19,30,37\}.
 \]
+The first three are fully poisoned in the covered interval after deleting
+the edge; the rank-four edge has candidates but lacks inclusion-minimal
+repair for some deleted vertex.
 Treating the fillers as protected adds pair-link failures from \(10\) to
 the fillers. Thus high excess shifts the obstruction upward rather than
 removing it.

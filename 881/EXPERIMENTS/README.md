@@ -306,9 +306,12 @@ core vertices `(10,15,18,19,30,37)` already have no supported order even
 when the fillers are delayed: the failed edges are `(15,18,37)`,
 `(15,19,37)`, `(15,30,37)`, and `(18,19,30,37)`. Treating the fillers as
 protected adds more failures; in the first extension the lower endpoint
-`10` has failed pair links to every filler. This is the finite version of
-the Corollary 13.1l pressure: high first-pair excess is possible locally,
-but it does not resolve the next prefix-link level.
+`10` has failed pair links to every filler. The rank-three core failures
+are fully poisoned in the covered interval after deleting the edge, while
+the rank-four edge has candidates that fail inclusion-minimal repair. This
+is the finite version of the Corollary 13.1l pressure: high first-pair
+excess is possible locally, but it does not resolve the next prefix-link
+level.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

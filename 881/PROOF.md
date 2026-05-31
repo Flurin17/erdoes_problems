@@ -10123,6 +10123,17 @@ already have no supported order: both displayed extensions fail at
 \{15,18,37\},\quad \{15,19,37\},\quad
 \{15,30,37\},\quad \{18,19,30,37\}.
 \]
+For the three rank-three edges
+\[
+\{15,18,37\},\quad \{15,19,37\},\quad \{15,30,37\},
+\]
+the failure is complete poisoning: every candidate in the covered interval
+already lies in
+\[
+3(A\setminus F).
+\]
+The rank-four edge has non-poisoned candidates, but they fail
+inclusion-minimal repair for one of the deleted vertices.
 Promoting the fillers only adds further pair-link failures; in the first
 extension, \(10\) has failed pair links to every filler
 \[
