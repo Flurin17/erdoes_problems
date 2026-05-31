@@ -1337,6 +1337,16 @@ source of growth beyond Ramsey.
   `q=9` and `(93,4,2,1)` with `9` bins for `q=10`.  Pivot: prove the full
   multipartite bin target (rectangles plus special bins), not the
   rectangle-only target.
+- 2026-05-31: Added `multipartite_bin_cover.py`, an exact checker for the full
+  complete-multipartite bin system: rectangles `r 1_I` plus special
+  `(q+1,1)` bins.  It verifies the repaired rectangle counterexamples directly
+  and exhaustively checks the full target for `q=5`, `q=6`, and, after adding
+  single-class and unit-layer pruning, `q=7`.  A node-limited `q=8` sweep
+  reached `8,931,197` integer partitions and stopped at the high-branching
+  unknown vector
+  `(9,8,7,6,6,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)`;
+  a direct fixed-vector check covers it in `8` bins.  Candidate ordering still
+  needs optimization before larger exhaustive full-bin sweeps are useful.
 - 2026-05-31: Added an alternative dyadic conditional that avoids both the
   `q+2` one-shot target and pointwise polylog-saving partitions.  It suffices
   to prove a coarse largest-witness lift, namely every `q`-modular graph on
