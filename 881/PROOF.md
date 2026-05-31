@@ -382,6 +382,121 @@ e+\sigma(D)\in(r+1)P\subset(r+1)C.
 Thus the hypothesis of Lemma 2.2 holds with \(t=e\), so \(C=A\setminus B\)
 is an asymptotic basis of order \(k+1\). \(\square\)
 
+## Lemma 2.3b: A fixed recurrent certificate tuple is enough
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\). Suppose
+there are elements
+\[
+e,y_1,\ldots,y_k\in A,\qquad y_i\ne e,
+\]
+such that:
+
+1. the finite set
+   \[
+   R=\{e,y_1,\ldots,y_k\}
+   \]
+   is reflection-recurrent in \(A\), meaning that for every \(L\) there is
+   \(m>L\) with
+   \[
+   m-R\subset A;
+   \]
+2. for every \(d=1,\ldots,k\), there is \(x_d\in A\) satisfying
+   \[
+   y_1+\cdots+y_d=(d-1)e+x_d. \tag{1}
+   \]
+
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(k+1\).
+
+Proof. This is the second half of Theorem 2.3 with the initial
+certificates supplied in advance. Initialize the empty-multiset
+certificates by
+\[
+Y(\varnothing,d)=(y_1,\ldots,y_d),\qquad X(\varnothing,d)=(x_d)
+\]
+for \(d=1,\ldots,k\), and put \(e,x_1,\ldots,x_k\) into the protected set
+\(P\). Identity (1) is exactly the certificate identity
+\[
+\sigma(\varnothing)+y_1+\cdots+y_d=(d-1)e+\sum_{x\in X(\varnothing,d)}x.
+\]
+
+Now run the deletion recursion from Theorem 2.3. At each stage the set of
+\(Y\)-entries appearing in all current certificates is a subset of
+\(\{y_1,\ldots,y_k\}\). This is true initially, and the propagation rule in
+Theorem 2.3 defines each new \(Y(S',d)\) as a prefix of an older
+\(Y(S,\ell+d)\). Therefore the only recurrence needed at any stage is the
+fixed recurrence of
+\[
+R=\{e,y_1,\ldots,y_k\}.
+\]
+Choose the recurrent center \(m\) sufficiently large and outside the
+finite set of values that would make the new deleted element or any new
+protected mirror collide with the already deleted set.
+
+The certificate propagation and the repair identity
+\[
+e+\sigma(D)\in(|D|+1)(A\setminus B),\qquad 1\le |D|\le k,
+\]
+are then identical to Theorem 2.3. Lemma 2.2 gives that \(A\setminus B\)
+is an order-\((k+1)\) basis. \(\square\)
+
+For \(k=2\), the criterion says the remaining finitely-bad case would be
+resolved by a recurrent triple \(e,y_1,y_2\in A\) with
+\[
+y_1+y_2-e\in A.
+\]
+Thus Lemma 8.6c would close the bounded-width large-excess branch if its
+large recurrent clusters could always be chosen to contain this certificate
+pattern. The current obstruction is precisely the possibility that all
+available recurrent clusters are certificate-free.
+
+## Corollary 2.3c: Fixed triple criterion for \(k=2\)
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Suppose
+there are elements
+\[
+e,y_1,y_2,x\in A,\qquad y_1\ne e,\quad y_2\ne e,
+\]
+such that
+\[
+x=y_1+y_2-e
+\]
+and the triple
+\[
+R=\{e,y_1,y_2\}
+\]
+is reflection-recurrent in \(A\). Then there is an infinite \(B\subset A\)
+such that \(A\setminus B\) is an asymptotic basis of order \(3\).
+
+Proof. This is Lemma 2.3b for \(k=2\), with \(x_1=y_1\) and
+\(x_2=x\). Equivalently, one can see it directly from Lemma 8.2a. Choose
+recurrent centers
+\[
+m_j\to\infty,\qquad m_j-R\subset A,
+\]
+recursively avoiding the finitely many collisions with previously deleted
+and protected elements, and put
+\[
+b_j=m_j-e.
+\]
+Keep protected
+\[
+e,y_1,y_2,x,\qquad m_j-y_1,\ m_j-y_2\quad(j\ge1),
+\]
+and set \(C=A\setminus\{b_j:j\ge1\}\). Then
+\[
+b_j+e=m_j=y_1+(m_j-y_1)\in2C,
+\]
+\[
+2b_j+e=2m_j-e=x+(m_j-y_1)+(m_j-y_2)\in3C,
+\]
+and for \(i<j\),
+\[
+b_i+b_j+e=(m_j-y_1)+x+(m_i-y_2)\in3C.
+\]
+These are exactly the one-deleted and two-deleted repair identities in
+Lemma 8.2a. Hence \(C\) is an order-3 basis. \(\square\)
+
 ## Lemma 2.4: Tail reflection-recurrence is enough
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\). Suppose
@@ -4389,6 +4504,12 @@ new-design problem, not as a small non-greedy search miss.
   padder may absorb any multiset of at most \(k\) deleted summands.
 * Theorem 2.3 proves that finite reflection-recurrence gives a good infinite
   deletion in every order, using balanced repair certificates.
+* Lemma 2.3b isolates the exact fixed-data version: one recurrent
+  certificate tuple \(e,y_1,\ldots,y_k\), satisfying the balanced affine
+  identities, is already enough for the protected-reservoir deletion.
+* Corollary 2.3c records the direct \(k=2\) fixed-triple version:
+  recurrence of \(\{e,y_1,y_2\}\) plus \(y_1+y_2-e\in A\) gives a good
+  order-3 deletion.
 * Lemma 2.4 shows that reflection-recurrence only on a tail of \(A\) is
   enough, because the certificate construction can be initialized entirely
   in that tail.

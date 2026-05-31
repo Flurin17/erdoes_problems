@@ -275,6 +275,32 @@ holds for every deleted multiset of size at most \(k\). Thus if an
 asymptotic order-\(k\) basis is finitely reflection-recurrent, it has the
 desired infinite deletion for order \(k+1\).
 
+Lemma 2.3b isolates the fixed-data form of that argument. It is enough to
+find one recurrent certificate tuple
+\[
+e,y_1,\ldots,y_k\in A
+\]
+such that
+\[
+y_1+\cdots+y_d=(d-1)e+x_d,\qquad x_d\in A,\quad 1\le d\le k.
+\]
+For \(k=2\), this reduces to finding recurrent \(e,y_1,y_2\) with
+\[
+y_1+y_2-e\in A.
+\]
+Thus large recurrent clusters from Lemma 8.6c would finish the bounded-width
+large-excess branch if one of them necessarily contained this certificate
+pattern. The remaining obstruction can be phrased as certificate-free
+recurrent clusters.
+Corollary 2.3c writes the \(k=2\) case directly via Lemma 8.2a: choosing
+deleted elements \(b_j=m_j-e\) from recurrent centers for
+\(\{e,y_1,y_2\}\), the identities
+\[
+b_j+e\in2C,\qquad 2b_j+e\in3C,\qquad b_i+b_j+e\in3C
+\]
+come from the protected mirrors \(m_j-y_1,m_j-y_2\) and
+\(x=y_1+y_2-e\).
+
 Lemma 2.4 shows that the same conclusion follows from reflection-recurrence
 on a tail \(A\cap(D,\infty)\). The certificate construction can initialize
 the fixed padder and all \(Y\)-entries above \(D\), and later stages only
