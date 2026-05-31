@@ -95,6 +95,9 @@ Current components:
   boundary-adjacent tile shell from a transition-demand witness. It merges the
   two duplicated base-corner tiles and checks for remaining positive-area
   overlaps; it is a seed for residual search, not an existence proof.
+- `gamma_2alpha_residual_boundary.py`: residual boundary graph extractor for
+  the boundary shell. It splits shell edges at T-junctions, separates outer
+  boundary atoms from residual atoms, and can write an SVG diagnostic.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

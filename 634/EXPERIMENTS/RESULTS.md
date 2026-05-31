@@ -957,6 +957,24 @@ N=99: boundary edges=27, duplicate corner pairs=2,
 Thus the next constructive or obstructive check should be a residual polygon or
 global side-line network search seeded by this boundary shell.
 
+The residual boundary graph extractor splits those shell edges at all shell
+vertices:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_residual_boundary.py 63 99
+```
+
+```text
+N=63: unique shell tiles=21; atoms=62; residual segments=52;
+      residual degree histogram={1: 2, 2: 27, 4: 12}.
+N=99: unique shell tiles=25; atoms=74; residual segments=46;
+      residual degree histogram={2: 46}.
+```
+
+Thus `N=99` gives a clean simple residual boundary cycle in this shell model,
+whereas `N=63` still has junctions that require a network-domain exact-cover
+model rather than a simple-polygon-only model.
+
 ## Zhang Constructive Families
 
 Command:

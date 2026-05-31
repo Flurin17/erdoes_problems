@@ -71,7 +71,8 @@ The tile triangle is not required to be similar to the large triangle unless exp
   minima `(39,35,31)` inside `(56,54,56)` for `63`, and `(48,34,40)` inside
   `(92,86,92)` for `99`. The floating boundary-shell placement has no proper
   positive-area overlaps after merging the two duplicate base-corner tiles,
-  leaving residual tile areas `42` and `74`.
+  leaving residual tile areas `42` and `74`. The residual boundary graph is a
+  clean 46-cycle for `99`, but has degree-1 and degree-4 junctions for `63`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
@@ -269,7 +270,9 @@ Important distinction: "positive square class" and "smallest representative" are
    stronger all-straight-boundary fan inventory still leaves side-incidence
    slack, so the next obstruction has to use placement/order information rather
    than only counting labels consumed by local fans. A boundary-shell residual
-   search is now the most concrete next construction/obstruction route.
+   search is now the most concrete next construction/obstruction route; `99`
+   is the cleaner first target because the residual shell boundary is a single
+   simple cycle in the current floating model.
 
 ## Current Diophantine Status for `n=19`
 
