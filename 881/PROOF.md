@@ -6431,6 +6431,112 @@ lower sumset \((k-r)A\), and only a fraction of the original finite pattern
 is controlled. This is why Theorem 2.3 does not by itself resolve the
 infinitely-bad case in higher order.
 
+## Lemma 10.2b: Late one-point thresholds force full lower-sumset recurrence
+
+Let \(k\ge2\), and let \(A\subseteq\mathbb N\) be an asymptotic basis of
+order \(k\), with threshold \(N_0\) and \(m_0=\min A\). Suppose there are
+infinitely many \(b\in A\) such that
+\[
+A\setminus\{b\}
+\]
+is an asymptotic basis of order \(k+1\), but has no order-\((k+1)\)
+threshold below \(b\). Then for every finite
+\[
+T\subset A
+\]
+and every \(L\), there are \(b\in A\setminus T\), an integer \(w_b\), and
+\[
+d_b=w_b-b>L
+\]
+such that
+\[
+d_b-T\subseteq(k-1)A. \tag{1}
+\]
+Moreover, for \(k=2\), \(A\) is finitely reflection-recurrent and hence has
+an infinite deletion whose complement is an order-3 basis.
+
+Proof. For each such \(b\), choose
+\[
+w_b\ge b-1,\qquad w_b\notin(k+1)(A\setminus\{b\}),
+\]
+which is possible because \(b-1\) is not a threshold for
+\(A\setminus\{b\}\). Put
+\[
+d_b=w_b-b.
+\]
+We first show that \(d_b\) is unbounded along these \(b\)'s.
+
+Suppose instead that \(d_b\le D\) for infinitely many \(b\to\infty\), and
+put
+\[
+D_*=\max\{D+(k-1)m_0,\ N_0\}.
+\]
+Let
+\[
+C_b=A\setminus\{b\}.
+\]
+If \(e\in C_b\), \(w_b-e\ge N_0\), and
+\[
+e>d_b-(k-1)m_0,
+\]
+then every \(k\)-term representation of \(w_b-e\) from \(A\) must use
+\(b\), because otherwise adding \(e\) would represent \(w_b\) from
+\((k+1)C_b\). But any \(k\)-term representation using \(b\) has sum at
+least
+\[
+b+(k-1)m_0,
+\]
+whereas
+\[
+w_b-e=b+d_b-e<b+(k-1)m_0.
+\]
+Thus no such \(e\) exists. In particular,
+\[
+C_b\cap(D_*,\ w_b-N_0]=\varnothing. \tag{2}
+\]
+
+Choose \(b\) in the infinite bounded-\(d_b\) sequence so large that there
+is an integer \(n\) with
+\[
+kD_*<n<
+\min\{b+(k-1)m_0,\ w_b-N_0+(k-1)m_0\}. \tag{3}
+\]
+Such \(n\)'s can be chosen arbitrarily large as \(b\to\infty\). We claim
+that \(n\notin kA\), contradicting that \(A\) is an order-\(k\) basis.
+
+Indeed, any \(k\)-term representation of \(n\) using \(b\) has sum at least
+\[
+b+(k-1)m_0>n
+\]
+by (3). A representation avoiding \(b\) cannot use a term in the interval
+\((D_*,w_b-N_0]\) by (2). If it uses a term \(>w_b-N_0\), then its total is
+at least
+\[
+w_b-N_0+1+(k-1)m_0>n
+\]
+by (3). Hence every term in a representation avoiding \(b\) would have to
+be at most \(D_*\), giving total at most \(kD_*<n\), again impossible. This
+proves that \(d_b\) is unbounded.
+
+Now fix finite \(T\subset A\) and \(L\). Choose one of the late elements
+\[
+b\notin T
+\]
+with
+\[
+d_b>L+\max T
+\]
+and \(w_b-\max T\ge N_0\). For every \(t\in T\), the number \(w_b-t\) has a
+\(k\)-term representation from \(A\). Every such representation must use at
+least one copy of \(b\), or else adding \(t\in A\setminus\{b\}\) would put
+\(w_b\) in \((k+1)(A\setminus\{b\})\). Removing one copy of \(b\) from such
+a representation gives
+\[
+w_b-t-b=d_b-t\in(k-1)A.
+\]
+This proves (1). When \(k=2\), (1) is finite reflection-recurrence in
+\(A\), so Theorem 8.2 gives the final assertion. \(\square\)
+
 ## Warning 10.2a: The \(k=3\) one-point split
 
 For \(k=3\), Corollary 10.2 has two distinct alternatives. For every finite
@@ -8662,6 +8768,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 10.2 says infinitely many one-point failures in general order
   force only fractional recurrence into lower sumsets; for \(k=2\) this
   becomes full reflection-recurrence.
+* Lemma 10.2b proves the delayed-threshold analogue: late one-point
+  deletions force full recurrence into \((k-1)A\), which again becomes
+  usable reflection-recurrence only for \(k=2\).
 * Lemma 10.1 records the finite-vertex-cover obstruction for collective
   holes after finite deletions.
 * Lemma 10.3 strengthens this for all orders: a finite

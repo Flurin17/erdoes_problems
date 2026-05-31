@@ -1381,6 +1381,22 @@ fraction is all of \(T\), giving the reflection-recurrence used in Theorem
 8.2. For \(k>2\), this is weaker than the finite reflection-recurrence
 needed by Theorem 2.3.
 
+Lemma 10.2b gives the matching delayed-threshold version. If infinitely
+many one-point deletions are eventually order-\((k+1)\) bases but have no
+threshold below the deleted element, then the shifted centers
+\[
+d_b=w_b-b
+\]
+are unbounded and every finite \(T\subset A\) has arbitrarily large
+translates
+\[
+d_b-T\subseteq(k-1)A.
+\]
+For \(k=2\) this is genuine reflection-recurrence and closes by Theorem
+8.2. For \(k>2\) it lands in a lower sumset, so delayed finite-core
+stability still leaves the same budget mismatch as the bad-one-point
+case.
+
 For \(k=3\), the split is explicit: bad one-point deletions reflect a
 half-sized subset either into \(A\) or into \(2A\). The first case can feed
 Lemma 2.3b if the reflected half contains a fixed order-3 certificate tuple;
