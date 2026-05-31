@@ -1148,3 +1148,11 @@ source of growth beyond Ramsey.
   capped search for `n=10,q=3,max_part_size=4` evaluated `61` masks with no
   unknowns and found best minimum color count `3`, again no counterexample to
   the terminal-size target.
+- 2026-05-31: Optimized capped exact-cover checks in `modular_partition.py`
+  by indexing allowed modular subsets by pivot vertex whenever
+  `--max-part-size` is active.  This made terminal-size searches more useful:
+  `500` random `n=10,q=4,max_part_size=5` samples had no counterexample; local
+  unrestricted searches found best minimum capped color count `4` for
+  `n=13`, `n=14`, and `n=15` with no unknowns in the completed runs.  No
+  terminal-size obstruction has appeared yet, but `n=16,q=4` remains too slow
+  for the current exact search.

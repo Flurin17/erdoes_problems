@@ -42,6 +42,8 @@ def find_partition(
     full = (1 << n) - 1
     modular = [False] * (1 << n)
     modular[0] = True
+    indexed_choices = max_part_size is not None
+    by_pivot: list[list[int]] | None = [[] for _ in range(n)] if indexed_choices else None
     for subset in range(1, 1 << n):
         residue = residue_on(graph_mask, subset, modulus, pc)
         size = subset.bit_count()
@@ -52,6 +54,15 @@ def find_partition(
         ) and (
             max_part_size is None or size <= max_part_size
         )
+        if modular[subset] and by_pivot is not None:
+            rest = subset
+            while rest:
+                bit = rest & -rest
+                by_pivot[bit.bit_length() - 1].append(subset)
+                rest ^= bit
+    if by_pivot is not None:
+        for choices_for_pivot in by_pivot:
+            choices_for_pivot.sort(key=lambda item: (item.bit_count(), item), reverse=True)
 
     choices: dict[tuple[int, int], int] = {}
     nodes = 0
@@ -69,15 +80,32 @@ def find_partition(
             return False
 
         pivot = remaining & -remaining
-        sub = remaining
-        while sub:
-            branches += 1
-            if node_limit is not None and nodes + branches > node_limit:
-                raise SearchLimitExceeded
-            if (sub & pivot) and modular[sub] and rec(remaining ^ sub, colors_left - 1):
-                choices[(remaining, colors_left)] = sub
-                return True
-            sub = (sub - 1) & remaining
+        pivot_index = pivot.bit_length() - 1
+        if by_pivot is not None:
+            candidate_iterable = by_pivot[pivot_index]
+        else:
+            candidate_iterable = None
+
+        if candidate_iterable is not None:
+            for sub in candidate_iterable:
+                branches += 1
+                if node_limit is not None and nodes + branches > node_limit:
+                    raise SearchLimitExceeded
+                if sub & ~remaining:
+                    continue
+                if rec(remaining ^ sub, colors_left - 1):
+                    choices[(remaining, colors_left)] = sub
+                    return True
+        else:
+            sub = remaining
+            while sub:
+                branches += 1
+                if node_limit is not None and nodes + branches > node_limit:
+                    raise SearchLimitExceeded
+                if (sub & pivot) and modular[sub] and rec(remaining ^ sub, colors_left - 1):
+                    choices[(remaining, colors_left)] = sub
+                    return True
+                sub = (sub - 1) & remaining
         return False
 
     if not rec(full, colors):
