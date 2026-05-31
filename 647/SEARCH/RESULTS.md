@@ -257,6 +257,33 @@ first_fail_k = 20
 tau(n-20) = 72
 ```
 
+The first 128-bit scan continued with the original 41 residue classes:
+
+```sh
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search128_new \
+  --n-start 7320136537186331 \
+  --n-stop 10000000000000000 \
+  --outdir /tmp/erdos647-scan-u64-1e16 \
+  --workers 4 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
+```
+
+Aggregate output:
+
+```text
+prime_tuples=501242 quick_pass=0
+BRANCH_COUNTS A=106940 B=394302
+FIRST_FAIL_COUNTS 5:440986 7:38229 9:19525 10:2200 11:198 13:69 14:28 15:7
+```
+
+Interpretation: no branch tuple with
+`7320136537186331 <= N < 10^16` passed direct checks through
+`k <= 5000`; no tuple in this range survived past `k=15`.
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms

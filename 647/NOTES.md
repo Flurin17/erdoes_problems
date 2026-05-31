@@ -320,6 +320,16 @@ semiprimes as allowed by the divisor budget, so it does not make the invalid
   The deepest near miss failed at `k=20`:
   `N = 3602115923026621`, `n = 9077332126027084920`,
   `tau(n-20) = 72`.
+- The first 128-bit scan over
+  `7320136537186331 <= N < 10^16` found 501,242 branch prime tuples and
+  no value passing direct checks through `k <= 5000`. Aggregated first
+  failures were:
+
+```text
+5:440986 7:38229 9:19525 10:2200 11:198 13:69 14:28 15:7
+```
+
+  No tuple in this range survived past `k=15`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a
