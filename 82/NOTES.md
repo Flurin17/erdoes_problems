@@ -1275,3 +1275,13 @@ source of growth beyond Ramsey.
   counterexample.  This is currently the strongest evidence that the
   complete-multipartite `q+2` target may hold even without special `(q+1,1)`
   bins.
+- 2026-05-31: Began the `q=8` rectangle-only sweep
+  `(bins,cap,max_total)=(8,10,64)`.  With an `8,000,000` shared-state limit,
+  the checker reached `6,224,263` integer partitions and stopped at an
+  unknown vector
+  `(14,4,4,3,3,3,3,3,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1)`.  A direct fixed-vector
+  check covers that vector in `8` rectangles:
+  `10^1, 4^2, 4^1, 3^3, 3^2, 2^5, 2^3, 1^7`.  A larger `12,000,000`-state
+  sweep was killed after several minutes without producing a counterexample
+  or final output; progress reporting should be added before the next long
+  sweep.
