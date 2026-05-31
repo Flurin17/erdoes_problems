@@ -213,6 +213,46 @@ constructions `112`, `126`, and `153`; `153` is also a sum of two squares, while
 
 ## Negative Results
 
+### Global Source Case Split
+
+The proof ledger uses the following published reductions as theorem-level
+inputs.
+
+First, Snover-Waiveris-Williams classify the similar/reptile case; the count
+forms are recorded in the next subsection.
+
+Second, Beeson's NoSevenTiling records Laczkovich's commensurable-angle list
+and adds the possible congruent-tile counts. If all tile angles are rational
+multiples of `pi`, every tiling has one of the following count forms:
+
+```text
+m^2,        a^2+b^2,        2m^2,        3m^2,        6m^2.
+```
+
+Third, when not all tile angles are rational multiples of `pi`, Beeson's Table
+4 gives the finite complementary list:
+
+```text
+similar to the outer triangle,
+equilateral with alpha = pi/3,
+isosceles/right-tile gamma = pi/2,
+isosceles gamma = 2alpha,
+(2alpha,beta,alpha+beta) with 3alpha+2beta = pi,
+(2alpha,alpha,2beta) with 3alpha+2beta = pi,
+isosceles with 3alpha+2beta = pi,
+isosceles gamma = 2pi/3,
+(alpha,2alpha,3beta) with gamma = 2pi/3,
+(alpha,2beta,2alpha+beta) with gamma = 2pi/3,
+(alpha,alpha+beta,alpha+2beta) with gamma = 2pi/3,
+(2alpha,2beta,alpha+beta) with gamma = 2pi/3,
+equilateral with gamma = 2pi/3.
+```
+
+This is now the global table against which the rest of the obstructions are
+organized. The remaining gaps are not in the existence of a finite source case
+split; they are in the exact count restrictions for several composite
+incommensurable rows.
+
 ### Similar/Reptile Case
 
 By Snover-Waiveris-Williams, if the tile is similar to the outer triangle, then
@@ -1056,11 +1096,11 @@ notation of that section, no candidate survives the requirements involving
 condition, and the necessary boundary decompositions after reserving the two
 forced `c` edges.
 
-Therefore, conditional on the global source-reduction bridge and the exact
-source hypotheses encoded above, `N=22` has no survivor in any current
-case. This is the next best composite proof target, but it is not yet listed in
-the classified table because the bridge from arbitrary tilings to exactly these
-encoded cases is still under reconstruction.
+Therefore, conditional on the exact row-by-row source hypotheses encoded above,
+`N=22` has no survivor in any current case. This is the next best composite
+proof target, but it is not yet listed in the classified table because the
+composite count restrictions for several incommensurable source rows are still
+under reconstruction.
 
 ## Open/Unresolved Ledger
 

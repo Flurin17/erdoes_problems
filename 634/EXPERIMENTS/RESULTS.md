@@ -66,9 +66,10 @@ This returns a BLZ square-class witness `(3,5,7)` in the
 only by the boundary-integrality product upgrade to
 `N=(b+2a)(a+b)m^2`.
 
-Interpretation: under the source-reduction bridge stated in `PROOF.md`,
-`N=22` has no encoded survivor. The theorem-level gap is still the global
-bridge from arbitrary tilings to these exact source cases.
+Interpretation: under the row-by-row source hypotheses stated in `PROOF.md`,
+`N=22` has no encoded survivor. The theorem-level gap is now the exact
+composite count restriction for each incommensurable source row, not the
+existence of the finite source case split itself.
 
 ## Elementary Certificate Checks
 

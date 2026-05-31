@@ -126,26 +126,27 @@ once the relevant source-reduction hypotheses are accepted:
 
 ## Missing Bridges
 
-### 1. Full Laczkovich/Beeson Angle Reduction
+### 1. Incommensurable Source-Row Count Restrictions
 
 Needed statement:
 
-> Every non-square tiling by congruent triangles falls into the finite list of
-> cases encoded by the workspace: commensurable table, similar/reptile,
-> equilateral `pi/3` or `2pi/3`, isosceles reductions, `3alpha+2beta=pi`, and
-> non-isosceles `gamma=2pi/3`.
+> Each incommensurable row in Beeson's Table 4 has exactly the count
+> restrictions encoded by the corresponding workspace filter.
 
 Current evidence:
 
-- `LITERATURE.md` summarizes this from Beeson/Laczkovich sources.
-- The BLZ #633 outer-triangle row map is now recorded above, but the exact
-  Laczkovich/Beeson angle-template reduction for #634 tile-count analysis is
-  not reconstructed in `PROOF.md`.
+- `PROOF.md` now records the source-level global split: Snover-Waiveris-
+  Williams for the similar case, Beeson's Table 3/Theorem 3 for the
+  commensurable branch, and Beeson's Table 4 for the incommensurable finite
+  list.
+- The BLZ #633 outer-triangle row map is recorded above as a second organizing
+  map, but it classifies outer-triangle similarity classes rather than #634
+  tile counts.
 
 Impact:
 
-- Without this bridge, small values with no encoded survivors are not yet
-  negative.
+- Without row-by-row count restrictions for the incommensurable cases, small
+  values with no encoded survivors are not yet negative.
 
 ### 2. Isosceles Composite Reductions
 
@@ -297,9 +298,9 @@ the Type I side-label configuration and non-similar `gamma=2pi/3`,
 
 ## Next Best Work
 
-1. Reconstruct the exact incommensurable Laczkovich/Beeson reduction theorem in
-   `PROOF.md`, beyond the BLZ outer-triangle row map. The commensurable branch
-   is now closed by Beeson's Table 3/Theorem 3.
+1. Formalize the count restrictions row-by-row for Beeson's incommensurable
+   Table 4. The global finite case split and the commensurable branch are now
+   recorded in `PROOF.md`.
 2. Continue auditing Turturean's April 2026 prime-count draft against the local
    prime proof. The Beeson IV locality check is provisionally favorable; the
    remaining task is to verify the draft's base-corner setup lemmas and width
