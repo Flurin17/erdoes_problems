@@ -1230,3 +1230,12 @@ source of growth beyond Ramsey.
   partitions, with no node limits.  The first hard local-search `n=36` mask
   was also exactly partitioned into part sizes `8,8,8,8,3,1`.  This provides
   stronger evidence for a `q+2` one-shot target, though still no proof.
+- 2026-05-31: A read-only subagent found and checked the clean `q+2`
+  terminal extraction lemma.  If `H` is `q`-modular and `|H|<=q+2`, then
+  either `H` is regular or `|H|=q+2` and `H` is exactly `K_{1,q+1}` or
+  `K_{q+1} union K_1`; deleting one vertex always leaves a regular induced
+  subgraph.  Consequently, a universal `q+2` capped modular partition theorem
+  would imply `F(n)>=floor(sqrt n)-1`, far stronger than the stated
+  conjecture.  The next clean finite target is the complete-multipartite
+  arithmetic theorem: every class-size vector of total at most `q^2` should
+  pack into at most `q` valid bins of size at most `q+2`.

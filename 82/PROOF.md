@@ -309,6 +309,37 @@ The omitted case `s=1` is covered by Lemma 2 and gives regularity of all of
 with loss comparable to `q`, because such an argument need not produce a
 `q`-modular witness with small excess over `q`.
 
+## Lemma 2B: `q+2` Modular Sets Are One Vertex From Regular
+
+Let `q>=2`, and let `H` be a `q`-modular graph on `m<=q+2` vertices.  Then
+`H` contains a regular induced subgraph on at least `m-1` vertices.
+
+More precisely, either `H` is regular, or `m=q+2` and `H` is isomorphic to
+one of
+
+```text
+K_{1,q+1},          K_{q+1} union K_1.
+```
+
+Proof.  If `m<=q+1`, Lemma 2 says that `H` is regular.  Assume then that
+`m=q+2`.  The degrees of `H` lie in `[0,q+1]` and are all congruent to some
+residue `r mod q`.
+
+If `2<=r<=q-1`, the only possible degree in `[0,q+1]` with residue `r` is
+`r`, so `H` is regular.  If `r=0`, the only possible degrees are `0` and `q`.
+If both occur, a degree-`q` vertex has exactly one non-neighbor, while a
+degree-`0` vertex is nonadjacent to every other vertex.  Hence there can be
+only one degree-`0` vertex, and all other vertices have degree `q` and form a
+clique.  Thus `H=K_{q+1} union K_1`.  If only one of the two degree values
+occurs, `H` is regular.
+
+The residue `r=1` is the complement of the previous case: the possible
+degrees are `1` and `q+1`, and if both occur then `H` is the star
+`K_{1,q+1}`.  Again, if only one degree value occurs, `H` is regular.
+
+In each nonregular case, deleting the exceptional vertex leaves respectively
+`K_{q+1}` or an independent set on `q+1` vertices.  QED.
+
 ## Lemma 3: Gallai Parity Witness
 
 Every graph on `n` vertices contains an induced subgraph on at least
@@ -800,6 +831,28 @@ It would be enough to partition into `ceil(sqrt n)` modular parts whose sizes
 exceed `q` by `o(q/log n)`.  Conversely, partitions with part sizes as large
 as `2q` would not feed this argument, because Lemma 2A may then give only a
 constant-size homogeneous subset inside the largest modular part.
+
+## Conditional Proposition: `q+2` Modular Partitions Would Suffice
+
+Suppose that every graph on `n` vertices admits, for `q=ceil(sqrt(n))`, a
+partition of its vertex set into at most `q` induced `q`-modular subgraphs,
+each of order at most `q+2`.  Then
+
+```text
+F(n) >= floor(sqrt(n))-1.
+```
+
+Proof.  Let `P` be a largest part.  Since there are at most `q` parts,
+
+```text
+|P| >= n/q >= floor(sqrt(n)).
+```
+
+By Lemma 2B, `G[P]` contains a regular induced subgraph on at least
+`|P|-1 >= floor(sqrt(n))-1` vertices.  QED.
+
+Thus the `q+2` capped target would be much stronger than Problem 82: it would
+give polynomial growth at essentially the best possible `sqrt(n)` scale.
 
 ## Conditional Corollary: Constant Dyadic Partitions Give Polynomial Growth
 
