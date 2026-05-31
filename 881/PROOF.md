@@ -773,6 +773,10 @@ such that
 w=q_f f+c_{f,1}+\cdots+c_{f,h-q_f}. \tag{2}
 \]
 When \(q_f=h\), no \(c\)-terms appear.
+In particular,
+\[
+q_f f+(h-q_f)m_0\le w. \tag{3}
+\]
 
 Proof. Replace \(X\) by its infinite tail
 \[
@@ -814,7 +818,8 @@ for every \(f\in F\), while \(w\notin h(A\setminus F)\). Hence each such
 representation uses at least one copy of \(f\). Let \(q_f\) be the number
 of copies of \(f\) in one such representation. All remaining summands avoid
 \(F\), because the representation lies in \(A\setminus(F\setminus\{f\})\).
-This gives (2). \(\square\)
+This gives (2), and (3) follows because every remaining summand is at least
+\(m_0\). \(\square\)
 
 Thus if finite-core finite-deletion stability is true, any counterexample
 must be a pure delayed-threshold counterexample: finite deletions outside
@@ -2020,6 +2025,10 @@ Then:
    w=q_f f+c_{f,1}+\cdots+c_{f,3-q_f};
    \]
    when \(q_f=3\), no \(c\)-terms appear;
+   moreover
+   \[
+   q_f f+(3-q_f)m_0\le w;
+   \]
 3. for every retained element \(e\in A\setminus F'\) with
    \(w-e\ge N_0\), the set \(F'\) meets every two-term representation of
    \(w-e\) from \(A\).
@@ -2038,7 +2047,8 @@ in one such representation. The other summands avoid \(F'\), so
 w=q_f f+c_{f,1}+\cdots+c_{f,3-q_f},
 \qquad c_{f,i}\in A\setminus F',
 \]
-which proves (2). Since \(q_f\ge1\), (1) follows.
+which proves (2). The multiplicity bound in (2) follows because every
+remaining summand is at least \(m_0\). Since \(q_f\ge1\), (1) follows.
 
 For (3), let \(e\in A\setminus F'\) and \(w-e\ge N_0\). If
 \[
@@ -3147,6 +3157,10 @@ with
 w=q_f f+c_{f,1}+\cdots+c_{f,h-q_f}. \tag{3}
 \]
 When \(q_f=h\), no \(c\)-terms appear.
+In particular,
+\[
+q_f f+(h-q_f)m_0\le w. \tag{4}
+\]
 
 Proof. By Corollary 3.1c applied to the infinite set \(X\), there is a
 finite late-bad set \(F_0\subset X\). To ensure a large witness, first
@@ -3177,7 +3191,8 @@ w\in h(A\setminus(F\setminus\{f\})).
 Since \(w\notin h(A\setminus F)\), every such representation must use at
 least one copy of \(f\). Let \(q_f\) be the number of copies of \(f\) in
 one such representation. All other summands avoid \(F\), because the
-representation lies in \(A\setminus(F\setminus\{f\})\). This gives (3).
+representation lies in \(A\setminus(F\setminus\{f\})\). This gives (3),
+and (4) follows because every remaining summand is at least \(m_0\).
 \(\square\)
 
 Thus any counterexample to the broad deletion theorem must contain

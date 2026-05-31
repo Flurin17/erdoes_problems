@@ -805,6 +805,9 @@ so every deleted element is genuinely used when the other deleted elements
 are restored. Also \(f\le w\), and the reflected-cover domination from
 Lemma 8.4 still holds. After Corollary 8.3b this minimal hole has size at
 least two, once witnesses are chosen above the fixed low threshold.
+The multiplicity matters: \(q_f=1\) recovers the stronger old estimate
+\(f\le w-2\min A\), while \(q_f\ge2\) forces the restored element to lie at
+most about halfway up to the witness.
 
 This normal form does not reduce the problem to pair barriers. The finite
 toy model
