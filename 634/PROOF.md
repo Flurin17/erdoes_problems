@@ -2182,6 +2182,14 @@ corner-label-violation:   34,292
 not-simple-cycle:         26,604
 ```
 
+Extending further through generated shell `500000` gives
+
+```text
+local-cover hits:        358,826
+corner-label-violation:   61,534
+not-simple-cycle:         79,640
+```
+
 These are still prefix counts in the deterministic enumeration, not sampled
 estimates and not complete stratum counts.
 

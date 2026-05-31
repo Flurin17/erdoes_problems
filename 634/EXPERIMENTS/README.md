@@ -197,6 +197,8 @@ Current components:
   counts are `52430` local-cover hits, `28326` corner-label violations, and
   `19244` non-simple residual graphs. Through generated shell `200000`, lazy
   local-cover mode gives cumulative counts `139104`, `34292`, and `26604`.
+  Through generated shell `500000`, the cumulative counts are `358826`,
+  `61534`, and `79640`.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and

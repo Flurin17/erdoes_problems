@@ -152,11 +152,10 @@ def main() -> None:
 
         if local_checker is not None and local_checker.first_overlap(demand) is not None:
             covered += 1
-            continue
-
-        status = classify(survivor, demand, radicand, mode=args.mode)
-        counts[status] += 1
-        diagnosed += 1
+        else:
+            status = classify(survivor, demand, radicand, mode=args.mode)
+            counts[status] += 1
+            diagnosed += 1
 
         if args.progress_every and generated_processed % args.progress_every == 0:
             elapsed = time.monotonic() - started
