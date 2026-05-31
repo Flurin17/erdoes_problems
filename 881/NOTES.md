@@ -1256,6 +1256,12 @@ center. A finite test set with no such large certificate-free subset then
 gives a good deletion. Hence a surviving front section must have unbounded
 excess past every bounded moving depth, or it must keep large fractional
 certificate-free subsets at every such depth.
+Corollary 8.5a.4 rules out the coherent list-color version of that escape:
+if all finite tests can be split into certificate-free fibers indexed only
+by the fixed node and the first \(j-1\) moving endpoints, compactness gives
+finitely many recurrent Sidon colors, impossible by Lemma 8.6g''''.2.
+Thus a surviving front must make the endpoint palette escape to unbounded
+section depth, not merely use many tests with bounded-depth colors.
 
 There is a positive Ramsey reduction once bounded width is supplied by
 arithmetic. Lemma 8.5a says that if every infinite subset contains a

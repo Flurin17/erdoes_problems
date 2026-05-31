@@ -5445,6 +5445,64 @@ moving endpoint, or every finite test has a large
 \((|\Delta|+j)^{-1}\)-fraction certificate-free subset. This is the
 section-level analogue of Lemma 8.2c'''.
 
+### Corollary 8.5a.4: Bounded-depth section list-coloring is impossible
+
+Keep \(A,\Delta,D,j\) as in Lemma 8.5a.3. It is impossible that for every
+finite nonempty
+\[
+T\subset A\cap(D,\infty)\setminus\Delta
+\]
+and every \(M\), there are
+\[
+g_1<\cdots<g_r,\qquad r\ge j,
+\]
+a witness \(w\), and a coloring of \(T\) by the finite label set
+\[
+\Lambda=\Delta\cup\{1,\ldots,j-1\}
+\]
+such that:
+
+1. every label has a large center:
+   \[
+   w-f>M\quad(f\in\Delta),\qquad w-g_\ell>M\quad(1\le\ell<j);
+   \]
+2. if \(t\) receives label \(f\in\Delta\), then
+   \[
+   w-t-f\in A;
+   \]
+   and if \(t\) receives label \(\ell\in\{1,\ldots,j-1\}\), then
+   \[
+   w-t-g_\ell\in A;
+   \]
+3. every label fiber is certificate-free relative to \(A\).
+
+Proof. If \(\Lambda=\varnothing\), there is no coloring of a nonempty
+\(T\). Otherwise enumerate
+\[
+A\cap(D,\infty)\setminus\Delta=\{a_1,a_2,\ldots\}
+\]
+and apply the hypothesis to \(T_n=\{a_1,\ldots,a_n\}\) with \(M=n\). By
+compactness of the finite product \(\Lambda^{\mathbb N}\), pass to a
+subsequence on which each fixed \(a_i\) has a stable label. Let
+\[
+C_\lambda\qquad(\lambda\in\Lambda)
+\]
+be the stable fibers. Every \(C_\lambda\) is certificate-free, hence Sidon.
+
+If \(U\subset C_\lambda\) is finite, then for all sufficiently large stages
+all elements of \(U\) lie in the \(\lambda\)-fiber. If \(\lambda=f\in
+\Delta\), the centers \(w_n-f\) tend to infinity and reflect \(U\) into
+\(A\). If \(\lambda=\ell\), the centers \(w_n-g_{n,\ell}\) do the same.
+Thus every nonempty stable fiber is reflection-recurrent in \(A\).
+Lemma 8.6g''''.2 forbids a finite Sidon coloring of an infinite set by
+recurrent nonempty fibers. This contradiction proves the corollary.
+\(\square\)
+
+Therefore the large certificate-free subsets allowed by Lemma 8.5a.3
+cannot be coherently assigned to finitely many bounded-depth endpoint
+slots across all finite tests. A surviving variable-rank front must make
+the relevant color palette itself escape to unbounded section depth.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -11918,6 +11976,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   excess to the \(j\)-th moving endpoint, then every finite test has a
   \(1/(|\Delta|+j)\)-fraction reflected by one center; certificate density
   then gives a good deletion.
+* Corollary 8.5a.4 rules out coherent bounded-depth endpoint list-coloring:
+  finite section-depth palettes compact to recurrent Sidon colors, again
+  impossible by Lemma 8.6g''''.2.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.
