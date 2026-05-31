@@ -62,6 +62,50 @@ shows that, unless there is already a clique or independent set of order
 `k`, both `alpha(G)` and `omega(G)` are at least `delta k`.  Since cliques
 and independent sets are regular, this proves the claimed reduction.  QED.
 
+## Lemma 0B: Split Graphs Give No Non-Ramsey Regularity
+
+Let `G` be a split graph with a vertex partition `V(G)=A union B`, where
+`A` is a clique and `B` is an independent set.  Then every regular induced
+subgraph of `G` is either a clique or an independent set.
+
+Proof.  Let `S` induce a regular graph, and write
+
+```text
+X = S cap A,      Y = S cap B,      x=|X|,      y=|Y|.
+```
+
+If `X` or `Y` is empty, then `S` is respectively independent or a clique, so
+assume both are nonempty.  Since vertices of `X` already have `x-1` neighbors
+inside the clique `X`, a common degree `D` on `S` has the form
+
+```text
+D = x-1+p,
+```
+
+where every vertex of `X` has exactly `p` neighbors in `Y`.  Every vertex of
+`Y` has all its neighbors in `X`, so it has common degree `D<=x`.  Hence
+`p<=1`.
+
+If `p=0`, then `D=x-1`.  Counting edges between `X` and `Y` gives
+
+```text
+0 = yD = y(x-1),
+```
+
+so `x=1`; then `S` is independent.  If `p=1`, then `D=x`, so every vertex of
+`Y` is adjacent to all vertices of `X`.  Counting cross edges gives
+
+```text
+x = yx,
+```
+
+and hence `y=1`; then `S` is a clique.  QED.
+
+Thus Proposition 0A's linear clique and independent set reduction is not by
+itself a source of extra regularity: the cross edges between one clique and
+one independent set may form a split graph, and in split graphs regular
+induced subgraphs are exactly the ordinary homogeneous induced subgraphs.
+
 ## Reconstructed Known Bound: Bollobas Upper Bound
 
 The literature records a construction, attributed first to Bollobas and then

@@ -1059,3 +1059,17 @@ source of growth beyond Ramsey.
   candidate slot multisets, checks `592` source-`2` graphs and leaves `25`,
   and has no source-`1` or source-`3` graphs because odd source residue is
   incompatible with the even degree sum on an odd number of vertices.
+- 2026-05-31: A larger read-only `4 -> 8` source-residue slot audit found no
+  four-slot obstruction.  After `1000` accepted `n=10` samples in each source
+  residue (`seed=3000+a`), survivor counts among clique-passing slots were
+  `7,8,8,6` for residues `0,1,2,3`.  Three simple multisets survived all four
+  source residues in that audit: `(0,0,2,2)`, `(0,1,2,2)`, and `(0,1,2,3)`;
+  the natural aligned multiset `(0,1,2,3)` also passes all source clique tests
+  and remained alive in those samples.  This remains computational evidence
+  only, and it should not be extrapolated to higher moduli without new input.
+- 2026-05-31: Added the split-graph barrier.  If `V=A union B` with `A` a
+  clique and `B` independent, then every regular induced subgraph is already a
+  clique or an independent set.  Therefore the reduction to graphs with linear
+  clique number and linear independence number cannot be exploited merely by
+  taking one large clique and one large independent set and analyzing their
+  arbitrary cross-incidence pattern; more global structure is needed.
