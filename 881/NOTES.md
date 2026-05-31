@@ -404,9 +404,8 @@ fragile pattern in Example 13.2.
 ### Barrier target
 
 A counterexample need not assign a private witness to each single deleted
-element. It would be enough to find a fixed \(q\), an infinite core
-\(P\subset A\), and a family of finite sets \(F\subset P\) with witnesses
-\(w_F\) such that
+element. It would be enough to find an infinite core \(P\subset A\) and a
+family of finite nonempty sets \(F\subset P\) with witnesses \(w_F\) such that
 \[
 w_F\notin (k+1)(A\setminus F).
 \]
@@ -422,17 +421,19 @@ For \(k=2\) and \(q=2\), this means all relevant two-sum graphs must have
 the pair \(F\) as a vertex cover. This is a much stronger demand than
 ordinary pairwise uniqueness.
 
-More generally, one needs a finite-uniform hypergraph \(\mathcal F\) on an
-infinite core \(P\), together with a witness map \(F\mapsto w_F\), such that
+More generally, one needs a hypergraph \(\mathcal F\) with finite nonempty
+edges on an infinite core \(P\), together with a witness map
+\(F\mapsto w_F\), such that
 for every infinite \(X\subset P\) and every \(L\) there is
 \[
 F\in\mathcal F,\qquad F\subset X,\qquad w_F>L.
 \]
 Equivalently, for each \(L\), the subhypergraph of edges with \(w_F>L\)
 has no infinite independent set.
-Taking \(\mathcal F=[P]^q\) is the strongest version, but not necessary.
-This unbounded-barrier condition is the correct combinatorial form of a
-finite-barrier counterexample.
+Taking \(\mathcal F=[P]^q\) for a fixed \(q\) is a strong bounded-rank
+version, but not necessary. Schreier-type barriers may have unbounded edge
+size. This unbounded-barrier condition is the correct combinatorial form of
+a finite-barrier counterexample.
 
 ## Finite Gadget Observations
 
@@ -641,11 +642,12 @@ private. Any infinite deletion hits infinitely many finite stages and hence
 misses infinitely many such witnesses at order 3.
 
 Proposition 13.1b records the correct weaker version. Singleton protection
-can be replaced by a finite-uniform stage-barrier system, but it must be
-unbounded: every infinite deletion must contain protected finite sets with
-arbitrarily large witnesses. This weaker version proves failure at order
-3; strong minimality at order 2 then has to be proved separately unless the
-protected finite sets are singletons for all but finitely many elements.
+can be replaced by a finite-edge stage-barrier system, with no uniform bound
+on edge size, but it must be unbounded: every infinite deletion must contain
+protected finite sets with arbitrarily large witnesses. This weaker version
+proves failure at order 3; strong minimality at order 2 then has to be
+proved separately unless the protected finite sets are singletons for all
+but finitely many elements.
 
 No suitable infinite sequence of stages is known. Example 13.2 shows that
 isolated stages do exist: for even \(a\),

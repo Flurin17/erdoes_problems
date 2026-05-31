@@ -897,8 +897,9 @@ while retaining the order-\(k\) basis property.
 ## Counterexample Reduction 2: Unbounded finite barriers
 
 A more flexible counterexample would follow from a cofinite infinite set
-\(P\subset A\), a finite-uniform hypergraph \(\mathcal F\) on \(P\), and
-witnesses \(w_F\) indexed by \(F\in\mathcal F\), satisfying:
+\(P\subset A\), a hypergraph \(\mathcal F\) on \(P\) whose edges are finite
+nonempty sets, and witnesses \(w_F\) indexed by \(F\in\mathcal F\),
+satisfying:
 
 1. for every \(F\in\mathcal F\),
    \[
@@ -3417,8 +3418,8 @@ and every element added after stage \(s\) is larger than \(N_s\). Let
 \[
 A=\bigcup_s A_s.
 \]
-Suppose further that there is a finite-uniform hypergraph
-\(\mathcal F\) on \(A\) and, for every \(F\in\mathcal F\), a stage
+Suppose further that there is a hypergraph \(\mathcal F\) on \(A\), all of
+whose edges are finite nonempty sets, and, for every \(F\in\mathcal F\), a stage
 \(s(F)\) and a witness \(w_F\) such that
 \[
 F\subset A_{s(F)},\qquad w_F\le N_{s(F)},\qquad
@@ -3476,8 +3477,8 @@ and every element added after stage \(s\) is larger than \(N_s\). Let
 \[
 A=\bigcup_s A_s.
 \]
-Suppose further that there is a finite-uniform hypergraph
-\(\mathcal F\) on \(A\) and, for every \(F\in\mathcal F\), a stage
+Suppose further that there is a hypergraph \(\mathcal F\) on \(A\), all of
+whose edges are finite nonempty sets, and, for every \(F\in\mathcal F\), a stage
 \(s(F)\) and a witness \(w_F\) such that
 \[
 F\subset A_{s(F)},\qquad w_F\le N_{s(F)},\qquad
@@ -3518,9 +3519,11 @@ an order-\(k\) basis and nonempty, padding would make it an order-\((k+1)\)
 basis; if it is empty or finite, it is not an asymptotic basis. Thus it is
 not an order-\(k\) basis either. \(\square\)
 
-For \(k=2\), this is Proposition 13.1b. For \(k=3\), the robust-booster
-pair-stage searches are attempts to realize this criterion with
-\(\mathcal F\) consisting of cross-stage pairs.
+For \(k=2\), this is Proposition 13.1b. Unlike the earlier finite-uniform
+formulation, this version also covers Schreier-type barriers whose edge
+sizes are unbounded. For \(k=3\), the robust-booster pair-stage searches are
+attempts to realize this criterion with \(\mathcal F\) consisting of
+cross-stage pairs.
 
 ## Lemma 13.1d: Positive-summand buffer needed for any staged construction
 
