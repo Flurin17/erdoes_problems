@@ -5337,6 +5337,114 @@ sections. The missing arithmetic step is to show that the private-incidence
 normal form survives passage to a section strongly enough to run an
 induction, rather than merely producing selector-avoidable full cuts.
 
+### Lemma 8.5a.3: Bounded section-depth excess gives fractional recurrence
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+order-2 threshold \(N_0\). Fix a finite set
+\[
+\Delta\subset A,
+\]
+a number \(D\ge0\), and an integer \(j\ge1\). Suppose that for every finite
+nonempty
+\[
+T\subset A\cap(D,\infty)\setminus\Delta
+\]
+and every \(L\), there are distinct
+\[
+g_1<\cdots<g_r,\qquad r\ge j,
+\]
+in
+\[
+A\setminus(T\cup\Delta)
+\]
+and a witness \(w\) such that, with
+\[
+F=\Delta\cup\{g_1,\ldots,g_r\},
+\]
+one has
+\[
+w-\max T\ge N_0,\qquad
+w-f>L\quad(f\in\Delta\cup\{g_1,\ldots,g_{j-1}\}), \tag{1}
+\]
+\[
+w\le g_j+D, \tag{2}
+\]
+and
+\[
+w\notin3(A\setminus F). \tag{3}
+\]
+Then for every finite nonempty \(T\subset A\cap(D,\infty)\setminus\Delta\)
+and every \(L_0\), there are a subset
+\[
+U\subset T,\qquad |U|\ge\frac{|T|}{|\Delta|+j},
+\]
+and a center \(m>L_0\) such that
+\[
+m-U\subset A. \tag{4}
+\]
+
+If, in addition, there is a finite
+\[
+T_0\subset A\cap(D,\infty)\setminus\Delta
+\]
+such that every \(U\subset T_0\) with
+\[
+|U|\ge\frac{|T_0|}{|\Delta|+j}
+\]
+contains a certificate triple
+\[
+e,y_1,y_2\in U,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A,
+\]
+then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. Fix \(T\) and \(L_0\), and apply the hypothesis with
+\[
+L>L_0+\max T.
+\]
+For each \(t\in T\), choose a two-term representation
+\[
+w-t=a_t+a'_t,\qquad a_t,a'_t\in A,
+\]
+which exists because \(w-t\ge N_0\). By (3), every such representation
+meets \(F\). It cannot use any \(g_\ell\) with \(\ell\ge j\), because
+\[
+w-t-g_\ell\le g_j+D-t-g_\ell\le D-t<0.
+\]
+Thus each \(t\in T\) has a representation using one of the at most
+\[
+|\Delta|+j-1\le |\Delta|+j
+\]
+colors in
+\[
+\Delta\cup\{g_1,\ldots,g_{j-1}\}.
+\]
+Choose one such color for each \(t\). By pigeonhole, some color \(f\) is
+chosen on a subset \(U\subset T\) with
+\[
+|U|\ge |T|/(|\Delta|+j).
+\]
+For \(t\in U\),
+\[
+w-t=f+c_t
+\]
+with \(c_t\in A\). Hence the center
+\[
+m=w-f
+\]
+satisfies \(m-U\subset A\), and (1) gives \(m>L_0\).
+
+For the final assertion, apply the first part to \(T_0\) with \(L_0\to
+\infty\). Every resulting \(U\) contains a certificate triple, and since
+\(T_0\) is finite one fixed certificate triple is reflected by arbitrarily
+large centers. Corollary 2.3c gives the desired deletion. \(\square\)
+
+Thus a variable-rank front section can survive only if, for every bounded
+depth \(j\), either its witnesses have unbounded excess over the \(j\)-th
+moving endpoint, or every finite test has a large
+\((|\Delta|+j)^{-1}\)-fraction certificate-free subset. This is the
+section-level analogue of Lemma 8.2c'''.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -11805,6 +11913,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.5a.2 supplies the basic recursive tool: proper sections of a
   front are fronts on the tail. The missing step is preserving the
   arithmetic private-incidence normal form under this descent.
+* Lemma 8.5a.3 supplies the corresponding arithmetic bounded-depth tool:
+  if a fixed front node plus the first \(j\) moving endpoints have bounded
+  excess to the \(j\)-th moving endpoint, then every finite test has a
+  \(1/(|\Delta|+j)\)-fraction reflected by one center; certificate density
+  then gives a good deletion.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.

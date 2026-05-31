@@ -1248,6 +1248,14 @@ and \(s\) is a proper node, then the section
 \(\mathcal F_s=\{G:s\cup G\in\mathcal F\}\) is again a front on the tail.
 The missing arithmetic step is to make the private-incidence and terminal
 gap normal forms descend through these sections.
+Lemma 8.5a.3 adds the first arithmetic section tool. If a fixed node
+\(\Delta\) and the first \(j\) moving endpoints of a section always carry
+witnesses within bounded excess of the \(j\)-th moving endpoint, then a
+\((|\Delta|+j)^{-1}\)-fraction of every finite test set is reflected by one
+center. A finite test set with no such large certificate-free subset then
+gives a good deletion. Hence a surviving front section must have unbounded
+excess past every bounded moving depth, or it must keep large fractional
+certificate-free subsets at every such depth.
 
 There is a positive Ramsey reduction once bounded width is supplied by
 arithmetic. Lemma 8.5a says that if every infinite subset contains a
