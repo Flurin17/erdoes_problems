@@ -50,6 +50,17 @@ should contain a co-infinite order-\((k+1)\) subbasis. A negative
 construction need not separately verify the stated minimality; it follows
 from blocking order \(k+1\).
 
+There is one immediate positive split. If \(A\) contains a co-infinite
+order-\(k\) subbasis \(P\), then choose any infinite
+\[
+B\subset A\setminus P.
+\]
+The complement \(A\setminus B\) contains \(P\), hence remains an order-\(k\)
+basis and therefore is an order-\((k+1)\) basis by monotonicity. Thus the
+only hard case of the broader theorem is exactly the original
+infinite-deletion-minimal case: every co-infinite order-\(k\) subbasis has
+already been ruled out.
+
 The equivalent threshold form is: there should be an increasing sequence
 \[
 b_1<b_2<\cdots

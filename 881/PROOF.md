@@ -50,6 +50,20 @@ C\subset A
 \]
 which is an order-\((k+1)\) basis.
 
+There is an immediate easy case. If \(A\) contains a co-infinite subset
+\[
+P\subset A
+\]
+which is still an order-\(k\) basis, then choose any infinite
+\[
+B\subset A\setminus P.
+\]
+The set \(A\setminus B\) contains \(P\), so it is an order-\(k\) basis and
+hence, by monotonicity, an order-\((k+1)\) basis. Thus the only hard case of
+the broader theorem is precisely the case where every infinite deletion
+destroys the order-\(k\) basis property, i.e. the minimality hypothesis from
+the original problem.
+
 The original minimality assumption is not available as extra leverage in a
 proof by contradiction: assuming that no good infinite deletion exists
 already implies it. Conversely, any counterexample to the broader deletion
@@ -4037,6 +4051,10 @@ domination for many old elements.
   is redundant for counterexamples. The problem is equivalent to the broader
   assertion that every order-\(k\) asymptotic basis has an infinite deletion
   that remains order \(k+1\).
+* The co-infinite order-\(k\) subbasis split in Reduction 0 handles every
+  basis containing a co-infinite order-\(k\) subbasis. Hence the only
+  remaining hard case of the broad theorem is the original
+  infinite-deletion-minimal case.
 * Theorem 1 is independent and resolves \(k=1\).
 * Lemma 2 would imply the desired conclusion if an infinite \(B\) satisfying
   the two absorption hypotheses can be forced.
