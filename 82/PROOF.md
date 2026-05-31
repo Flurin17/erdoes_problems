@@ -4645,6 +4645,35 @@ Thus it is false that every spread-`1` graph contains a regular induced
 subgraph on at least half its vertices.  Any bounded-spread theorem useful for
 Problem 82 must have a weaker, but still asymptotically strong, lower bound.
 
+There is an elementary easy regime for bounded-spread graphs.
+
+**Lemma 11A: Sparse Or Co-Sparse Bounded-Spread Graphs.**  Let `G` be an
+`n`-vertex graph whose degrees lie in an interval of length `s`.  If
+`delta(G)<=D`, then `G` has an independent set of order at least
+
+```text
+n/(D+s+1).
+```
+
+If `delta(complement(G))<=D`, then `G` has a clique of order at least the
+same quantity.  In either case `G` contains a regular induced subgraph of
+order at least `n/(D+s+1)`.
+
+Proof.  If `delta(G)<=D`, then every degree of `G` is at most `D+s`, so the
+greedy/Caro--Wei bound gives
+
+```text
+alpha(G) >= n/(D+s+1).
+```
+
+An independent set is a regular induced subgraph.  Applying the same argument
+to the complement gives the clique statement.  QED.
+
+Thus a putative bound such as `Phi(n,s)>=n/poly(s)` is already true unless
+both `G` and its complement have minimum degree larger than a polynomial in
+`s`.  The hard bounded-spread regime is therefore medium-density and
+near-regular, consistent with the adjacent-degree random samples.
+
 ## Lemma 12: Minimal Repeated-Degree Host Obstruction
 
 Let `H` be an induced subgraph of `G` containing a set

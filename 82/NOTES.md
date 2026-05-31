@@ -1898,3 +1898,11 @@ source of growth beyond Ramsey.
   `R_0=(0,1,2,4)`, `R_1=(0,0,2,2)`, `R_2=(0,0,1,2)`,
   `R_3=(0,0,1,3)`.  This supports the dyadic witness side but not a direct
   higher-modulus regular-slot escape.
+- 2026-05-31: Added a bounded-spread easy-regime lemma.  If an `n`-vertex
+  graph has degree spread at most `s` and either its minimum degree or the
+  minimum degree of its complement is at most `D`, then it has a regular
+  induced subgraph of order at least `n/(D+s+1)` by the greedy/Caro--Wei
+  independent-set bound applied to the graph or its complement.  Therefore
+  any counterexample to an `n/poly(s)` bounded-spread theorem must be
+  medium-density with both graph and complement minimum degree polynomially
+  larger than `s`.
