@@ -573,6 +573,38 @@ Thus the dyadic partition target need not reach `q^alpha` parts for a fixed
 `alpha<1`; even a sufficiently strong polylogarithmic saving over the naive
 `q`-part scale would settle the problem.
 
+## Conditional Proposition: Terminal-Size Modular Partitions Would Suffice
+
+Suppose that every graph on `n` vertices admits, for
+`q=ceil(sqrt(n))`, a partition of its vertex set into at most `q` induced
+subgraphs, each of which is `q`-modular and has order at most `q+1`.  Then
+
+```text
+F(n) >= floor(sqrt(n)).
+```
+
+Proof.  Let
+
+```text
+V(G)=P_1 union ... union P_t,    t<=q,
+```
+
+be such a partition.  By Lemma 2, each nonempty `G[P_i]` is regular, since
+`|P_i|<=q+1` and `P_i` is `q`-modular.  One part has size at least
+
+```text
+n/t >= n/q >= floor(sqrt(n)).
+```
+
+That part is a regular induced subgraph of the required order.  QED.
+
+This is a one-shot alternative to dyadic lifting.  It is much stronger than
+an unrestricted theorem saying that `q` modular parts suffice: without the
+terminal size bound, the partition may place almost all vertices in one large
+`q`-modular part, which is not necessarily regular.  Exact equal-size
+versions are false even for small parameters, but the weaker cap
+`|P_i|<=q+1` remains a plausible finite target in the current small checks.
+
 ## Conditional Corollary: Constant Dyadic Partitions Give Polynomial Growth
 
 For powers of two `q>=2`, suppose every `q`-modular induced subgraph can be

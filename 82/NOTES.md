@@ -1117,3 +1117,12 @@ source of growth beyond Ramsey.
   `alpha<k`, `omega<k`, and no such long hole.  Current elementary recursions
   in the workspace only give `2^{O(k log k)}`, so this identifies another
   exact quantitative gap.
+- 2026-05-31: Added a one-shot terminal-size modular partition criterion.  If
+  every `n`-vertex graph can be partitioned, for `q=ceil(sqrt n)`, into at
+  most `q` induced `q`-modular parts each of size at most `q+1`, then Lemma 2
+  makes every part regular and the largest part has order at least
+  `floor(sqrt n)`.  Exact equal-size balanced partitions are false, but the
+  relaxed cap `q+1` survived quick checks: the `n=9,q=3` balanced
+  counterexample mask `30931749293` has a three-part mod-`3` partition with
+  sizes `4,4,1`, and `200` random `n=10,q=3` samples with max part size `4`
+  showed no counterexample.
