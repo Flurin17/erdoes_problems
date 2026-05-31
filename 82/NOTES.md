@@ -1995,3 +1995,11 @@ source of growth beyond Ramsey.
   choice `(0,0,2,4)` fails by eight classes, on
   `(7,7,7,7,7,15,15,15)`; this does not yet refute four-slot source `1`
   families because the full eight-class candidate search was too expensive.
+- 2026-05-31: Replaced `source_slot_finder.py`'s inner complete-multipartite
+  check with a legal-bin generator, avoiding the product over all count
+  vectors.  Verified it against the slower `multipartite_modular.py` DP on
+  small sizes and slot families.  With the faster checker, the `8 -> 16`
+  four-slot search through eight classes of size at most `16` completed for
+  source residues `1,2,4,5,6,7`: survivor counts were `3,2,3,12,3,8`
+  respectively.  Source `0` remained broad (`40` survivors after `80` of
+  `88` vectors); source `3` was still slow under this naive candidate loop.

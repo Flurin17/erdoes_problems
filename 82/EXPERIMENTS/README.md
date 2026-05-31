@@ -195,7 +195,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `source_slot_finder.py`: enumerates source-residue fixed slot multisets and
   filters them through the complete multipartite integer model.  It applies
   the dyadic clique subset-sum test by default, then keeps only slot families
-  that partition all generated source-residue multipartite size vectors.
+  that partition all generated source-residue multipartite size vectors.  Its
+  checker generates only legal modular bins, so it is faster than the general
+  product-count DP in `multipartite_modular.py` on larger class counts.
 - `twin_blowup_modular.py`: exact weighted congruence model for graphs with a
   bounded number of twin classes, allowing each class to be a clique or an
   independent set and each pair of classes to be complete or empty.

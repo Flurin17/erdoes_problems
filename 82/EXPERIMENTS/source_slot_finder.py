@@ -7,8 +7,6 @@ import argparse
 from functools import lru_cache
 from itertools import combinations_with_replacement
 
-import multipartite_modular as mm
-
 
 def slot_weight(residue: int, modulus: int) -> int:
     value = (residue + 1) % modulus
@@ -55,12 +53,94 @@ def source_vectors(
     out: list[tuple[int, ...]] = []
     for classes in range(1, max_classes + 1):
         for sizes in combinations_with_replacement(range(1, max_size + 1), classes):
-            if not mm.full_is_modular(sizes, source_modulus):
+            if len({size % source_modulus for size in sizes}) > 1:
                 continue
             if source_degree_residue(sizes, source_modulus) != source_residue % source_modulus:
                 continue
             out.append(sizes)
     return out
+
+
+def legal_bins_by_residue(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    slots: tuple[int, ...],
+) -> dict[int, list[tuple[int, ...]]]:
+    slot_set = set(slots)
+    bins: dict[int, set[tuple[int, ...]]] = {slot: set() for slot in slot_set}
+
+    # A bin meeting a single multipartite class is independent, regardless of
+    # how many vertices it takes from that class.
+    if 0 in slot_set:
+        for index, size in enumerate(sizes):
+            for count in range(1, size + 1):
+                vector = [0] * len(sizes)
+                vector[index] = count
+                bins[0].add(tuple(vector))
+
+    # A bin meeting at least two classes is target-modular exactly when all
+    # positive class intersections are congruent modulo the target modulus.
+    for count_residue in range(target_modulus):
+        choices: list[list[int]] = []
+        for size in sizes:
+            first = count_residue if count_residue else target_modulus
+            choices.append(list(range(first, size + 1, target_modulus)))
+
+        current = [0] * len(sizes)
+
+        def rec(index: int, positive: int, total: int) -> None:
+            if index == len(sizes):
+                if positive >= 2:
+                    residue = (total - count_residue) % target_modulus
+                    if residue in slot_set:
+                        bins[residue].add(tuple(current))
+                return
+            rec(index + 1, positive, total)
+            for count in choices[index]:
+                current[index] = count
+                rec(index + 1, positive + 1, total + count)
+                current[index] = 0
+
+        rec(0, 0, 0)
+
+    out = {residue: list(values) for residue, values in bins.items()}
+    for residue in out:
+        out[residue].sort(key=lambda item: (sum(item), item), reverse=True)
+    return out
+
+
+def can_slot_partition_fast(
+    sizes: tuple[int, ...],
+    target_modulus: int,
+    slots: tuple[int, ...],
+) -> bool:
+    slots = tuple(sorted(slots))
+    choices = legal_bins_by_residue(sizes, target_modulus, slots)
+
+    def remove_slot(state: tuple[int, ...], residue: int) -> tuple[int, ...]:
+        out = list(state)
+        out.remove(residue)
+        return tuple(out)
+
+    @lru_cache(maxsize=None)
+    def rec(remaining: tuple[int, ...], state: tuple[int, ...]) -> bool:
+        if all(value == 0 for value in remaining):
+            return True
+        if not state:
+            return False
+        pivot = next(i for i, value in enumerate(remaining) if value)
+        for residue in sorted(set(state)):
+            next_state = remove_slot(state, residue)
+            for choice in choices[residue]:
+                if choice[pivot] == 0:
+                    continue
+                if all(choice[i] <= remaining[i] for i in range(len(sizes))):
+                    nxt = tuple(remaining[i] - choice[i] for i in range(len(sizes)))
+                    if rec(nxt, next_state):
+                        return True
+        return False
+
+    return rec(sizes, slots)
 
 
 def main() -> None:
@@ -100,7 +180,7 @@ def main() -> None:
 
     @lru_cache(maxsize=None)
     def can_partition(sizes: tuple[int, ...], slots: tuple[int, ...]) -> bool:
-        return mm.can_slot_partition(sizes, args.target_modulus, slots)
+        return can_slot_partition_fast(sizes, args.target_modulus, slots)
 
     survivors = list(candidates)
     killed_by: dict[tuple[int, ...], tuple[int, ...]] = {}

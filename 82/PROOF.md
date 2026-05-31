@@ -3833,8 +3833,17 @@ source-sensitive as the modulus grows.
 The displayed choices should not be mistaken for stable conjectural families.
 For instance, the source-residue `1` choice `(0,0,2,4)` passes the six-class
 check but fails when the class-size vector `(7,7,7,7,7,15,15,15)` is included.
-No exhaustive eight-class search over all four-slot source-residue `1`
-families has been completed.
+Using the faster legal-bin generator in `EXPERIMENTS/source_slot_finder.py`,
+the full eight-class search for source residue `1` leaves three other
+four-slot families:
+
+```text
+(0,0,1,9),   (0,0,9,10),   (0,1,8,9).
+```
+
+The analogous eight-class searches also leave small survivor lists for source
+residues `2,4,5,6,7`; source residue `0` has many survivors, and source
+residue `3` remained the slowest in this naive candidate loop.
 
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
