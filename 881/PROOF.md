@@ -6990,6 +6990,29 @@ points from a dense tail; their witnesses must sit immediately after actual
 long gaps of \(A\), while still satisfying the active-repair and
 vertex-cover constraints.
 
+The script `EXPERIMENTS/actual_gap_barrier_search.py` records a small
+finite-window model of this genuine-gap normal form. With default bounds it
+finds
+\[
+S=\{1,2,4,5,6\},
+\]
+whose two-sums cover through \(12\). Deleting
+\[
+F=\{4,5\}
+\]
+creates the inclusion-minimal three-fold hole
+\[
+w=11,
+\]
+and the terminal window
+\[
+(11-4-1,\ 11-2]=(6,9]
+\]
+contains no element of \(S\). This example is only local: it shows that the
+genuine-gap condition is not itself inconsistent with finite order-2
+coverage, but it says nothing about iterating such barriers in an infinite
+basis.
+
 ## Warning 10.3c: Compactness and random deletion do not see additive structure
 
 The broad deletion theorem cannot be proved from finite-deletion robustness
@@ -9014,7 +9037,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   away from every finite protected core.
 * Corollary 10.3d shows that if the stronger finite-core finite-deletion
   stability target fails, those terminal windows can be made genuine long
-  gaps of \(A\) itself.
+  gaps of \(A\) itself; `actual_gap_barrier_search.py` records a small
+  finite-window model.
 * Warning 10.3c gives an abstract Schreier-barrier representation model
   showing why compactness, Zorn, finite-prefix, and independent random
   deletion arguments need genuine additive input.

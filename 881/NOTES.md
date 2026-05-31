@@ -139,6 +139,13 @@ there are active finite barriers whose terminal windows are actual long
 gaps of \(A\), not just gaps after deleting \(F\). Thus any refutation of
 finite-core stability must live in the sparse regime and place its
 finite-barrier witnesses immediately after genuine long \(A\)-gaps.
+The diagnostic script `actual_gap_barrier_search.py` finds a small local
+model:
+\[
+S=\{1,2,4,5,6\},\quad F=\{4,5\},\quad w=11,
+\]
+where \(2S\) covers through \(12\), \(w\notin3(S\setminus F)\) minimally,
+and the terminal window \((6,9]\) is an actual \(S\)-gap.
 
 Proposition 3.1f proves both finite-core stability and the desired infinite
 deletion under a tail-syndetic subset hypothesis. This blocks all
