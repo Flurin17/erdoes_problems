@@ -110,7 +110,13 @@ def integer_partitions(total: int, max_part: int | None = None):
             yield (first,) + rest
 
 
-def exhaustive(max_total: int, bins: int, cap: int, node_limit: int | None) -> None:
+def exhaustive(
+    max_total: int,
+    bins: int,
+    cap: int,
+    node_limit: int | None,
+    progress_every: int | None,
+) -> None:
     nodes = 0
 
     @lru_cache(maxsize=None)
@@ -150,6 +156,12 @@ def exhaustive(max_total: int, bins: int, cap: int, node_limit: int | None) -> N
                 print(f"nodes={nodes}")
                 print(f"cache_info={rec.cache_info()}")
                 return
+            if progress_every is not None and checked % progress_every == 0:
+                print(
+                    f"progress checked={checked} total={total} "
+                    f"nodes={nodes} cache={rec.cache_info().currsize}",
+                    flush=True,
+                )
     print(f"checked={checked}")
     print(f"nodes={nodes}")
     print(f"cache_info={rec.cache_info()}")
@@ -163,6 +175,7 @@ def main() -> None:
     parser.add_argument("--cap", type=int, required=True)
     parser.add_argument("--max-total", type=int)
     parser.add_argument("--node-limit", type=int)
+    parser.add_argument("--progress-every", type=int)
     args = parser.parse_args()
 
     if args.vector:
@@ -179,7 +192,13 @@ def main() -> None:
 
     if args.max_total is None:
         parser.error("provide --vector or --max-total")
-    exhaustive(args.max_total, args.bins, args.cap, args.node_limit)
+    exhaustive(
+        args.max_total,
+        args.bins,
+        args.cap,
+        args.node_limit,
+        args.progress_every,
+    )
 
 
 if __name__ == "__main__":
