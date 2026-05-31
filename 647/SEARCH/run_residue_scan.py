@@ -71,15 +71,23 @@ def ceil_div(a: int, b: int) -> int:
     return -((-a) // b)
 
 
-def parse_residues(text: str | None) -> list[int]:
+def parse_residue_text(text: str) -> list[int]:
+    values: list[int] = []
+    for raw_line in text.splitlines():
+        line = raw_line.split("#", 1)[0]
+        for part in line.replace(",", " ").split():
+            values.append(int(part))
+    return values
+
+
+def parse_residues(text: str | None, path: Path | None) -> list[int]:
+    if text is not None and path is not None:
+        raise ValueError("use at most one of --residues and --residue-file")
+    if path is not None:
+        return parse_residue_text(path.read_text(encoding="utf-8"))
     if text is None:
         return list(DEFAULT_RESIDUES)
-    values: list[int] = []
-    for part in text.replace("\n", ",").split(","):
-        stripped = part.strip()
-        if stripped:
-            values.append(int(stripped))
-    return values
+    return parse_residue_text(text)
 
 
 def x_range_for_residue(n_start: int, n_stop: int, modulus: int, residue: int) -> tuple[int, int]:
@@ -215,6 +223,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--n-stop", type=int, required=True, help="exclusive upper N bound")
     parser.add_argument("--modulus", type=int, default=46189)
     parser.add_argument("--residues", help="comma-separated residue list; default is the 41-class list")
+    parser.add_argument("--residue-file", type=Path, help="file containing residues as CSV or whitespace")
     parser.add_argument("--outdir", type=Path, required=True)
     parser.add_argument("--workers", type=int, default=max(1, os.cpu_count() or 1))
     parser.add_argument("--segment", type=int, default=10_000_000)
@@ -236,7 +245,10 @@ def main() -> int:
     if args.workers < 1:
         raise SystemExit("--workers must be positive")
 
-    residues = parse_residues(args.residues)
+    try:
+        residues = parse_residues(args.residues, args.residue_file)
+    except OSError as exc:
+        raise SystemExit(f"could not read residue file: {exc}") from exc
     jobs = []
     for residue in residues:
         start, count = x_range_for_residue(args.n_start, args.n_stop, args.modulus, residue)

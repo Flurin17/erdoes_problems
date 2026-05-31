@@ -12,6 +12,8 @@ Problem 647.
 - `verify_candidate.py`: independent factorization-based verifier for a
   proposed `n`.
 - `residue_classes.cpp`: experimental small-modulus residue filter.
+- `residue_lift.py`: lifts the 41-class filter through extra small primes
+  using the forced-smooth obstruction.
 - `run_residue_scan.py`: launches and aggregates one `prime_tuple_search`
   job per residue class over an exact half-open range of `N` values.
 
@@ -88,6 +90,22 @@ python3 SEARCH/run_residue_scan.py \
   --sieve-limit 10000 \
   --quick-shift 5000 \
   --report-survive 15
+```
+
+For larger searches, a safe one-prime lift through 23 gives 352 residues
+modulo `1062347`:
+
+```sh
+python3 SEARCH/residue_lift.py --k 200 --add-primes 23 --format csv \
+  | tail -1 > /tmp/erdos647-residues-mod1062347.csv
+
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search128 \
+  --modulus 1062347 \
+  --residue-file /tmp/erdos647-residues-mod1062347.csv \
+  --n-start 10000000000000000 \
+  --n-stop 20000000000000000 \
+  --outdir /tmp/erdos647-scan-1e16-2e16-lift23
 ```
 
 ## Restrictive Subsearch
