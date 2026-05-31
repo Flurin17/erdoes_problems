@@ -4286,6 +4286,97 @@ witness, hence also an order-2-private witness. In the more general
 barrier form, order-2 minimality must be supplied separately or by a second
 unbounded barrier for two-term representations.
 
+## Proposition 13.1b-Schreier: A sharpened unbounded-rank stage target
+
+The only counterexample route not addressed by the fixed-rank restrictions
+above is an unbounded-rank barrier. The following criterion isolates what a
+Schreier-type construction would have to achieve in the \(k=2\) case.
+
+Let
+\[
+P=\{p_1<p_2<\cdots\}
+\]
+be an infinite subset of the final set, and let
+\[
+\mathcal S=\{F\subset P:\ |F|=\operatorname{index}(\min F)+1\}
+\]
+be the Schreier barrier on \(P\). Suppose there are increasing finite sets
+\[
+A_0\subset A_1\subset A_2\subset\cdots
+\]
+and increasing ceilings
+\[
+C_s\to\infty,\qquad R_s\to\infty
+\]
+such that, for all sufficiently large \(s\):
+
+1. all elements added after stage \(s\) are larger than \(R_s\);
+2. with \(m_0=\min A_0\),
+   \[
+   R_s+m_0\le C_s; \tag{1}
+   \]
+3. the new coverage interval satisfies
+   \[
+   [C_{s-1}+1,C_s]\subseteq2A_s; \tag{2}
+   \]
+4. every Schreier edge \(F\in\mathcal S\) first completed by stage \(s\)
+   has a frozen witness
+   \[
+   C_{s-1}<w_F\le R_s,\qquad w_F\notin3(A_s\setminus F); \tag{3}
+   \]
+5. each such hole is inclusion-minimal:
+   \[
+   w_F\in3(A_s\setminus(F\setminus\{f\}))\qquad(f\in F); \tag{4}
+   \]
+6. and it satisfies the genuine shifted-domination condition: for every
+   retained
+   \[
+   e\in A_s\setminus F,\qquad w_F-e\ge C_{s-1}+1,
+   \]
+   every two-term representation of \(w_F-e\) from \(A_s\) meets \(F\).
+
+Then
+\[
+A=\bigcup_s A_s
+\]
+is an asymptotic basis of order \(2\), and for every infinite
+\[
+B\subset P
+\]
+the set \(A\setminus B\) is not an asymptotic basis of order \(3\).
+Consequently \(A\setminus B\) is not an order-2 basis either.
+
+Proof. The coverage intervals (2) imply that \(A\) is an order-2 basis.
+Let \(B\subset P\) be infinite and \(L\) arbitrary. The Schreier family
+\(\mathcal S\) is an unbounded barrier on \(P\): after discarding finitely
+many elements of \(B\), if \(p_i\) is the least remaining element, the first
+\(i+1\) elements of the remaining tail form a member of \(\mathcal S\), and
+the corresponding completion stages tend to infinity. Hence choose
+\[
+F\in\mathcal S,\qquad F\subset B,\qquad w_F>L.
+\]
+Let \(s=s(F)\) be the stage at which \(F\) was completed. Since all later
+elements are \(>R_s\ge w_F\), no later positive summand can occur in a
+three-term representation of \(w_F\). Thus (3) persists:
+\[
+w_F\notin3(A\setminus F).
+\]
+Because \(F\subset B\), we have \(A\setminus B\subseteq A\setminus F\), so
+\[
+w_F\notin3(A\setminus B).
+\]
+The witnesses can be chosen arbitrarily large, so \(A\setminus B\) is not
+an order-3 basis. If it were an order-2 basis, padding by any retained
+element would make it an order-3 basis; if it is finite, it is not an
+asymptotic basis. Hence it is not an order-2 basis. \(\square\)
+
+Conditions (4)--(6) are not needed for the formal implication, but they are
+the arithmetic compatibility checks any credible construction must pass:
+they make the local holes match the minimal active-barrier normal form from
+Lemma 8.4b and the shifted vertex-cover condition from Lemma 10.1. The
+criterion is not ruled out by the fixed-rank lemmas because edge sizes in
+\(\mathcal S\) tend to infinity on tails.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets
@@ -5048,6 +5139,10 @@ new-design problem, not as a small non-greedy search miss.
 * Proposition 13.1b replaces singleton stage protection by an unbounded
   finite-barrier system, while noting that order-2 minimality then needs a
   separate proof.
+* Proposition 13.1b-Schreier sharpens the remaining unbounded-rank target:
+  a Schreier barrier with frozen witnesses, coverage buffer,
+  inclusion-minimal activity, and shifted two-sum domination would produce a
+  \(k=2\) counterexample.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).

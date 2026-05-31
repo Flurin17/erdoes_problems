@@ -1091,6 +1091,19 @@ witnesses \(w-b\) are also impossible in a genuine counterexample; any
 surviving pair construction must place its witnesses far above the larger
 deleted element.
 
+Proposition 13.1b-Schreier records the remaining unbounded-rank target. One
+would build a tail \(P=\{p_i\}\) and protect the Schreier barrier
+\[
+\{F\subset P:|F|=\operatorname{index}(\min F)+1\}.
+\]
+Every newly completed Schreier edge must get a frozen witness below a lock
+ceiling \(R_s\), while the stage still covers a later interval up to
+\(C_s\) with \(R_s+\min A\le C_s\). The local holes should also be
+inclusion-minimal and satisfy the shifted two-sum domination from Lemma
+10.1. This criterion is not ruled out by the fixed-rank lemmas, because
+edge sizes go to infinity on tails; the open burden is finite-gadget
+existence with coverage, frozen witnesses, and domination all at once.
+
 There is also a more local witness obstruction. If \(w=a+p\in2A\) is meant
 to remain outside \(3(A\setminus\{a\})\), then
 \[
