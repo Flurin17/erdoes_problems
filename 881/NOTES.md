@@ -1555,10 +1555,16 @@ it finds \(p=37,w=69\) with fillers
 \{40,41,44,51,54,55,58\},
 \]
 and \(p=37,w=80\) with a larger filler set. Both give a local pair-private
-hole for \(\{10,37\}\), but treating the fillers as protected makes the
-complete-prefix-link test fail; in the first case \(10\) has no good pair
-link to any filler. Thus high excess shifts the obstruction into a delayed
-filler hierarchy rather than removing it.
+hole for \(\{10,37\}\), but even delaying the fillers does not make the
+six core vertices \(\{10,15,18,19,30,37\}\) support a Schreier order. The
+same higher-rank edges fail:
+\[
+\{15,18,37\},\quad \{15,19,37\},\quad
+\{15,30,37\},\quad \{18,19,30,37\}.
+\]
+Treating the fillers as protected adds pair-link failures from \(10\) to
+the fillers. Thus high excess shifts the obstruction upward rather than
+removing it.
 
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining

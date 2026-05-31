@@ -10113,8 +10113,18 @@ using fillers
 In both cases the two-sum coverage reaches the witness, and the pair edge
 \(\{10,37\}\) has the required local witness. But when all numerical
 fillers at least \(10\) are treated as protected vertices, the
-complete-prefix-link test has no supported order. In the first extension,
-the lower endpoint \(10\) already has failed pair links to every filler
+complete-prefix-link test has no supported order. Even if those fillers are
+delayed, the core vertices
+\[
+\{10,15,18,19,30,37\}
+\]
+already have no supported order: both displayed extensions fail at
+\[
+\{15,18,37\},\quad \{15,19,37\},\quad
+\{15,30,37\},\quad \{18,19,30,37\}.
+\]
+Promoting the fillers only adds further pair-link failures; in the first
+extension, \(10\) has failed pair links to every filler
 \[
 40,41,44,51,54,55,58.
 \]

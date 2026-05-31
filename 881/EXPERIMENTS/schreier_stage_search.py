@@ -333,6 +333,7 @@ def find_pair_edge_extension(
 def pair_edge_search(max_p: int, max_u: int, max_nodes: int, max_found: int) -> None:
     """Search high-excess pair holes for the P5 seed edge {10,p}."""
     seed = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30}
+    old_vertices = (10, 15, 18, 19, 30)
     lower = 10
     found = 0
     checked = 0
@@ -355,6 +356,13 @@ def pair_edge_search(max_p: int, max_u: int, max_nodes: int, max_found: int) -> 
             elements = base | set(fillers)
             coverage = cover_end(elements, 2, w)
             vertices = tuple(x for x in sorted(elements) if x >= lower)
+            core_vertices = (*old_vertices, p)
+            core_order = supported_order(elements, core_vertices, coverage)
+            core_failures = [
+                edge
+                for edge in schreier_edges(list(core_vertices))
+                if witnesses_for_edges(elements, [edge], coverage) is None
+            ]
             order = supported_order(elements, vertices, coverage)
             lower_pair_failures = [
                 q
@@ -368,6 +376,8 @@ def pair_edge_search(max_p: int, max_u: int, max_nodes: int, max_found: int) -> 
                 "w=", w,
                 "fillers=", list(fillers),
                 "coverage=", coverage,
+                "core_order=", core_order,
+                "core_failures=", core_failures[:8],
                 "order=", order,
                 "lower_pair_failures=", lower_pair_failures[:8],
                 "nodes=", nodes,
