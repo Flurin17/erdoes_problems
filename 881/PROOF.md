@@ -5263,6 +5263,40 @@ combinatorics to the first-prefix-link structure of Lemma 13.1j. A final
 argument must either extract additional arithmetic structure from the
 finite holes, or handle higher front ranks directly.
 
+There are even simpler unbounded fronts whose rank is controlled by a later
+point rather than by the first point. On
+\[
+P=\{2,3,4,\ldots\}
+\]
+define
+\[
+\mathcal B_2
+=\{\{x_1<\cdots<x_m\}\subset P:\ m=x_2\}.
+\]
+Every infinite
+\[
+X=\{x_1<x_2<x_3<\cdots\}\subset P
+\]
+contains the edge
+\[
+\{x_1,\ldots,x_{x_2}\}\in\mathcal B_2.
+\]
+But fixing the first point does not fix the edge size; the second point
+does. Thus no thinning can make this front look like the complete
+first-prefix-link criterion from Lemma 13.1j.
+
+The correct abstract target is therefore a recursive front analysis. For a
+front \(\mathcal F\) and a finite initial segment \(s\), consider the
+section
+\[
+\mathcal F_s=\{G:\ s\cup G\in\mathcal F,\ \max s<\min G\}.
+\]
+A proof that rules out variable-rank barriers must show that admissible
+arithmetic holes either descend to a lower-rank section with the same
+private-incidence structure, or produce a finite recurrent
+certificate-free coloring, already impossible by Lemma 8.6g''''.2. Pure
+combinatorics alone does not provide that descent.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -11724,7 +11758,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   infinite tail.
 * Warning 8.5a.1 shows that the closed first-Schreier target is not a
   universal model for unbounded barriers: second-order Schreier fronts are
-  still barriers but contain no pair-level first-prefix links on any tail.
+  still barriers but contain no pair-level first-prefix links on any tail;
+  the second-element front shows rank may be controlled by later points.
+  The remaining abstract target is recursive front-section descent plus
+  arithmetic input.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.

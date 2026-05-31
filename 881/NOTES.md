@@ -1234,6 +1234,15 @@ first-Schreier blocks, is still a barrier on every infinite tail but has no
 two-element edges. Hence no tail contains the complete first-prefix pair
 links from Lemma 13.1j. Closing the enumerated-Schreier route does not
 automatically close arbitrary variable-rank fronts.
+The side-agent front check adds an even simpler example:
+\[
+\mathcal B_2=\{\{x_1<\cdots<x_m\}\subset\{2,3,\ldots\}:m=x_2\}.
+\]
+Every infinite set contains its first \(x_2\) elements as an edge, but the
+second point controls the rank, so fixing the first point does not give
+complete first-prefix links. The right remaining combinatorial target is a
+recursive section analysis of fronts, not a direct reduction to the first
+Schreier barrier.
 
 There is a positive Ramsey reduction once bounded width is supplied by
 arithmetic. Lemma 8.5a says that if every infinite subset contains a
@@ -1846,6 +1855,12 @@ and fibers tiny, but then any proper subedge that leaves one neighborhood
 element retained repairs the witness. Such full neighborhood cuts are
 avoidable by an infinite selector unless additional cross-block coding
 turns them into a genuine barrier.
+The abstract \(\mathcal B_2\) front shows what that coding would have to
+look like: full neighborhood cuts whose ranks are controlled by a later
+selected point. Locally one can assign singleton neighborhoods
+\(N_{e_f}=\{f\}\) and mirrors \(q_f=w-e_f-f\), but order-2 coverage must
+then be reserved so no retained element outside \(F\) covers any shifted
+row \(w-e_f\). Promoted mirrors create the same demand recursively.
 The shape is still finite-quotient compatible:
 in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
 \(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the
