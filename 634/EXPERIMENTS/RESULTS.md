@@ -897,8 +897,8 @@ exactly four `c`/non-`c` transitions. For `63` and `99` the minimum witnesses
 use side-label words
 
 ```text
-N=63: L=baabccb, R=abbbbbbc, B=baaabbccc.
-N=99: L=baabbbccb, R=abbbbbbbbbbc, B=baaabbccc.
+N=63: L=baabccb, R=aabbbcc, B=baaabbccc.
+N=99: L=baabbbccb, R=aabbbbbcc, B=baaabbccc.
 ```
 
 Thus the remaining gamma obstruction has to be global: locally, four overhang

@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gamma_2alpha_boundary import (  # noqa: E402
     RefinedGamma2AlphaSurvivor,
     refined_survivors_for_n,
-    side_representations,
+    viable_free_x_representations,
     viable_x_representations,
 )
 from gamma_2alpha_endpoint_automaton import (  # noqa: E402
@@ -132,7 +132,7 @@ def options_by_rep(reps: tuple[Triple, ...]) -> dict[Triple, tuple[PathOption, .
 def best_demand_for_survivor(survivor: RefinedGamma2AlphaSurvivor) -> BoundaryDemand | None:
     candidate = survivor.candidate
     bounded_x = viable_x_representations(candidate)
-    free_x = side_representations(candidate.x, candidate.tile, require_qr=True)
+    free_x = viable_free_x_representations(candidate)
 
     bounded_options = options_by_rep(bounded_x)
     free_options = options_by_rep(free_x)

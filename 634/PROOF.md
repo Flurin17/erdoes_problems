@@ -1745,8 +1745,8 @@ transitions suffice. In particular the benchmark rows have angle-compatible
 boundary side-label words
 
 ```text
-N=63: L=baabccb,     R=abbbbbbc,       B=baaabbccc.
-N=99: L=baabbbccb,   R=abbbbbbbbbbc,   B=baaabbccc.
+N=63: L=baabccb,     R=aabbbcc,        B=baaabbccc.
+N=99: L=baabbbccb,   R=aabbbbbcc,      B=baaabbccc.
 ```
 
 Each of the four mixed transitions must be supplied by an interior overhang ray.
