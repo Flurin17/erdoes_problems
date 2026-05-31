@@ -229,6 +229,11 @@ that bound prevents \(b\) from coloring the shifted rows. In both regimes,
 one finite test set with no large certificate-free subset forces a recurrent
 certificate triple and hence a good deletion. Thus fixed-core singleton
 delay has the same certificate-free escape as fixed-rank barriers.
+Lemma 8.6j-6 closes the simplest Sidon-copy escape: if a quotient order-2
+basis \(S\) has bounded two-sum multiplicity, then there is an infinite
+\(T\subset S\) with \(2(S\setminus T)+S\) cofinite. Therefore the
+certificate-free two-color construction from Warning 8.6j'' would need
+large shifted representation spikes, not merely Sidon sparsity.
 
 ## Trivial and Boundary Cases
 

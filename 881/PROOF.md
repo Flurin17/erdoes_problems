@@ -5896,6 +5896,101 @@ have to form shifted vertex-cover barriers for the graphs
 where \(\rho(m)\) denotes the unique two-term representation of \(m\) from
 \(S\), when it exists.
 
+## Lemma 8.6j-6: Bounded-multiplicity quotient bases satisfy the shifted deletion
+
+Let \(S\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Suppose its unordered two-term representation function
+is bounded:
+\[
+r_{2,S}(m)\le R\qquad(m\in\mathbb N).
+\]
+Then there is an infinite
+\[
+T\subset S
+\]
+such that
+\[
+2(S\setminus T)+S
+\]
+is cofinite.
+
+Proof. For each large \(n\), form a graph \(G_n\) on the vertex set
+\[
+S\cap[1,n].
+\]
+For every
+\[
+s\in S\cap[1,n-N_0],
+\]
+choose one unordered representation
+\[
+n-s=a_s+b_s,\qquad a_s,b_s\in S,
+\]
+and add the support edge
+\[
+E_s=\{a_s,b_s\}
+\]
+to \(G_n\). Distinct \(s\)'s give distinct support edges, since the same
+support would have the same sum \(a_s+b_s=n-s\). Therefore
+\[
+|E(G_n)|=|S\cap[1,n-N_0]|\to\infty. \tag{1}
+\]
+
+The maximum degree of \(G_n\) is bounded in terms of \(R\). Fix a vertex
+\[
+x\in S.
+\]
+If \(x\in E_s\), then for some \(y\in S\),
+\[
+x+y+s=n,
+\]
+or
+\[
+y+s=n-x. \tag{2}
+\]
+There are at most \(R\) unordered pairs \(\{y,s\}\subset S\) satisfying
+(2), and each such unordered pair can produce at most two choices of the
+third summand \(s\). Hence
+\[
+\Delta(G_n)\le2R. \tag{3}
+\]
+By the greedy matching bound, \(G_n\) has a matching of size at least
+\[
+\frac{|E(G_n)|}{4R}.
+\]
+Thus, for every \(q\), all sufficiently large \(n\) have \(q\) pairwise
+disjoint support edges.
+
+Choose
+\[
+t_1<t_2<\cdots,\qquad t_i\in S,
+\]
+recursively so fast that \(t_j\) is larger than a threshold after which
+every \(G_n\) has a matching of size at least \(j+2\). Put
+\[
+T=\{t_j:j\ge1\}.
+\]
+Let \(n\) be large, and choose \(j\) with
+\[
+t_j\le n<t_{j+1}.
+\]
+Then \(G_n\) has a matching of \(j+2\) disjoint support edges. Future
+deleted elements \(t_{j+1},t_{j+2},\ldots\) are larger than \(n\), so they
+cannot lie in any support edge for a representation of \(n\). The first
+\(j\) deleted elements meet at most \(j\) of the disjoint support edges.
+Therefore at least one matched edge \(E_s=\{a_s,b_s\}\) avoids all of
+\(T\). For this edge,
+\[
+n=a_s+b_s+s,\qquad a_s,b_s\in S\setminus T,\quad s\in S.
+\]
+Thus all sufficiently large \(n\) lie in \(2(S\setminus T)+S\). \(\square\)
+
+Consequently, the Sidon-copy construction in Warning 8.6j'' cannot be a
+counterexample when the quotient Sidon basis has bounded two-sum
+multiplicity. In particular, an actual certificate-free counterexample
+would need the same large shifted representation spikes already forced by
+Corollary 3.4d; certificate-free coloring alone is not enough.
+
 ## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
 
 Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose
@@ -9599,6 +9694,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   by Corollary 3.4b. The exact failed counterexample condition is the
   stronger shifted requirement \(2(S\setminus T)+S\) non-cofinite after
   every infinite deletion \(T\subset S\).
+* Lemma 8.6j-6 proves that this shifted Sidon-copy requirement fails for
+  every quotient basis with bounded two-sum multiplicity: there is an
+  infinite \(T\) for which \(2(S\setminus T)+S\) is cofinite.
 * Corollary 8.6k uses the Sidon bound to rule out fixed-rank large-excess
   barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\), while
   noting that sparse fixed-rank tails with bounded top excess are not ruled
