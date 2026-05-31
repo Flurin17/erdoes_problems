@@ -262,6 +262,12 @@ delayed pair window \(S=\{1,2,3,5,6,7\},F=\{5,7\}\), but not in the
 rank-three delayed window or in the alternating pair-hole window, even when
 all deletion orderings are tried. Other rank-three windows do have bridge
 data, so the failure is geometric rather than a rank-only obstruction.
+The same negative result holds for the current Schreier test windows: the
+first seed pair \(\{1,4\}\), first seed triple \(\{2,3,4\}\), tail P5 pair
+\(\{10,30\}\), and P6 pair-edge escape \(\{10,38\}\) have no moving-anchor
+bridge data in their displayed finite row sets, even after reordering the
+deletion. This rules out using Lemma 8.2a' as the local repair mechanism
+for the surviving Schreier/P6 finite obstruction.
 Corollary 3.4r explains the likely bottleneck: in a counterexample the
 large reflected packets can be forced to have only bounded representation
 counts in the translated rows \(s+d\), exactly the rows a bridge repair

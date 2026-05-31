@@ -88,6 +88,18 @@ def main() -> None:
             ("delayed-pair", {1, 2, 3, 5, 6, 7}, (5, 7)),
             ("delayed-rank3", {1, 2, 3, 4, 5, 6, 7, 8}, (4, 5, 6)),
             ("alternating-hole", {1, 2, 3, 6, 7, 8}, (6, 8)),
+            ("first-schreier-pair", {1, 2, 3, 4, 8}, (1, 4)),
+            ("first-schreier-triple", {1, 2, 3, 4, 8}, (2, 3, 4)),
+            (
+                "tail-p5-pair",
+                {1, 2, 4, 5, 8, 10, 15, 18, 19, 30},
+                (10, 30),
+            ),
+            (
+                "p6-pair-escape",
+                {1, 2, 4, 5, 8, 10, 15, 18, 19, 30, 38, 40, 43, 44},
+                (10, 38),
+            ),
         ]
         for name, elements, deletion in examples:
             if args.all_orders:

@@ -3591,6 +3591,24 @@ Thus the bridge route is a real positive mechanism, and high rank alone
 does not defeat it, but it is not a complete explanation of all collective
 finite holes.
 
+The same diagnostic includes the finite windows that remain active in the
+Schreier-stage investigation. It finds no bridge data, even after all
+deletion orderings are tried, for the first Schreier seed pair
+\[
+S=\{1,2,3,4,8\},\qquad F=\{1,4\},
+\]
+for the first Schreier seed triple \(F=\{2,3,4\}\) in the same \(S\), for
+the tail P5 pair
+\[
+S=\{1,2,4,5,8,10,15,18,19,30\},\qquad F=\{10,30\},
+\]
+and for the P6 pair-edge escape
+\[
+S=\{1,2,4,5,8,10,15,18,19,30,38,40,43,44\},\qquad F=\{10,38\}.
+\]
+So Lemma 8.2a' records an important repair pattern, but it does not absorb
+the surviving Schreier/P6 finite obstructions by itself.
+
 ## Warning 8.2b: Fixed-center greedy absorption has star obstructions
 
 Lemma 8.2a suggests a direct greedy proof for \(k=2\): fix a retained

@@ -216,7 +216,11 @@ rank-three delayed example or for the alternating-deletion pair hole, even
 with `--all-orders`, so the bridge identity is a genuine positive mechanism
 but not automatic. The same `--all-orders` mode does find unrelated
 rank-three windows with bridge data, showing that rank alone is not the
-failure.
+failure. The named examples also include the first Schreier seed edge
+`\{1,4\}`, the first Schreier seed triple `\{2,3,4\}`, the tail P5 pair
+`\{10,30\}`, and the P6 pair-edge escape `\{10,38\}`; none has bridge data,
+even after all deletion orderings are tried. Thus the moving-anchor bridge
+route does not by itself break the remaining Schreier/P6 obstruction.
 
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds
