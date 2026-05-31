@@ -3081,6 +3081,92 @@ For pair barriers, this says every finite test set has a certificate-free
 half-subset. This is much stronger than the existence of the recurrent
 certificate-free clusters in Warning 8.6c'.
 
+## Lemma 8.6h: Progressions force certificate density
+
+Let \(A\subseteq\mathbb N\) and let
+\[
+P=\{a,a+d,\ldots,a+(L-1)d\}\subset A
+\]
+be an \(L\)-term arithmetic progression. If \(S\subset P\) is
+certificate-free, meaning that there are no
+\[
+e,y_1,y_2\in S,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A,
+\]
+then
+\[
+|S|\le2.
+\]
+
+Proof. Identify \(P\) with the index interval \(\{0,\ldots,L-1\}\). If
+\[
+i<j
+\]
+are two indices in \(S\), then certificate-freeness with
+\[
+e=i,\qquad y_1=y_2=j
+\]
+forces
+\[
+2j-i\ge L, \tag{1}
+\]
+because otherwise the corresponding progression element lies in \(P\subset
+A\). Similarly, using
+\[
+e=j,\qquad y_1=y_2=i
+\]
+forces
+\[
+2i-j<0. \tag{2}
+\]
+If \(S\) had three indices \(i<j<k\), then (1) applied to \(i<j\) gives
+\[
+j\ge L/2,
+\]
+while (2) applied to \(j<k\) gives
+\[
+k>2j\ge L,
+\]
+contradicting \(k\le L-1\). Hence \(|S|\le2\). \(\square\)
+
+Therefore, for a fixed rank \(r\), any order-2 basis containing an
+arithmetic progression of length \(>2r\) satisfies the finite-test-set
+hypothesis in Lemma 8.6g with \(T_0=P\). Large-excess fixed-rank barriers
+cannot persist in such a basis.
+
+## Warning 8.6i: Certificate density is not a finite quotient fact
+
+Lemma 8.6h does not follow from residue-level order-2 coverage alone. For
+every \(r\ge2\), let
+\[
+G=\mathbb Z/(2r+1)\mathbb Z,\qquad
+A_0=\{1,2,\ldots,r+1\}\subset G.
+\]
+Then
+\[
+2A_0=G,
+\]
+since the sums cover the residues \(2,3,\ldots,2r+2\), which are all
+residues modulo \(2r+1\). But \(A_0\) can be partitioned into \(r\)
+certificate-free classes:
+\[
+C_0=\{1,r+1\},\qquad C_j=\{j+1\}\quad(1\le j\le r-1).
+\]
+Singleton classes are trivial. In \(C_0\), the only possible nontrivial
+certificate values are
+\[
+(r+1)+(r+1)-1\equiv0,\qquad 1+1-(r+1)\equiv r+2
+\pmod {2r+1},
+\]
+and neither residue lies in \(A_0\).
+
+Thus every finite \(T\subset A_0\) has a certificate-free subset of size at
+least \(|T|/r\), by taking the largest color-class intersection. This is
+only a finite residue obstruction: a naive periodic integer lift introduces
+many representatives of the same residue, and those representatives can
+create integer certificates. It shows that the certificate-free alternative
+in Lemma 8.6g cannot be eliminated by a purely quotient-level
+\(2A=G\) argument.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -4916,6 +5002,10 @@ new-design problem, not as a small non-greedy search miss.
 * Lemma 8.6g uses that vertex-cover condition: fixed-rank large-excess
   barriers plus one finite test set with no large certificate-free subset
   force a recurrent certificate triple and hence a good deletion.
+* Lemma 8.6h supplies such finite test sets when \(A\) contains long
+  arithmetic progressions; Warning 8.6i shows the corresponding
+  certificate-density statement is not a finite quotient consequence of
+  residue-level order-2 coverage.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.

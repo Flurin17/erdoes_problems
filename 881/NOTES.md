@@ -993,6 +993,17 @@ opposite property: every finite \(T\subset A\) has a subset of size at
 least \(|T|/r\) containing no such certificate triple. For pair barriers,
 that means every finite test set has a certificate-free half-subset.
 
+Lemma 8.6h supplies the finite test set whenever \(A\) contains a long
+arithmetic progression. An \(L\)-term progression has certificate-free
+subsets of size at most \(2\): for two selected indices \(i<j\), avoiding
+the certificates \(2j-i\) and \(2i-j\) forces \(j\ge L/2\) and \(j<2i\);
+three selected indices are impossible. Hence fixed-rank large-excess
+barriers cannot persist in bases with progressions longer than \(2r\).
+Warning 8.6i records that this is not a residue-level consequence of
+\(2A=G\): in \(\mathbb Z/(2r+1)\mathbb Z\), the set
+\(\{1,\ldots,r+1\}\) is a 2-basis but can be partitioned into \(r\)
+certificate-free classes.
+
 Lemma 8.6a closes a broader delayed-barrier branch. If every infinite tail
 contains finite barriers \(F=\{f_1<\cdots<f_r\}\) whose witness lies within
 a bounded distance of the second-smallest element \(f_2\), then all test
