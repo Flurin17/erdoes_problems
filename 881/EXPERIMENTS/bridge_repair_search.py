@@ -17,7 +17,7 @@ enough.
 from __future__ import annotations
 
 import argparse
-from itertools import combinations
+from itertools import combinations, permutations
 
 
 def sums2(elements: set[int]) -> set[int]:
@@ -54,6 +54,17 @@ def bridge_data(
     return out
 
 
+def bridge_data_any_order(
+    elements: set[int],
+    deletion: tuple[int, ...],
+) -> list[tuple[tuple[int, ...], int, list[tuple[int, int, int]]]]:
+    out: list[tuple[tuple[int, ...], int, list[tuple[int, int, int]]]] = []
+    for ordered_deletion in permutations(deletion):
+        for t, rows in bridge_data(elements, ordered_deletion):
+            out.append((ordered_deletion, t, rows))
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-value", type=int, default=22)
@@ -65,6 +76,11 @@ def main() -> None:
         action="store_true",
         help="check the named finite delayed-barrier examples",
     )
+    parser.add_argument(
+        "--all-orders",
+        action="store_true",
+        help="try every ordering of each finite deletion",
+    )
     args = parser.parse_args()
 
     if args.examples:
@@ -74,13 +90,17 @@ def main() -> None:
             ("alternating-hole", {1, 2, 3, 6, 7, 8}, (6, 8)),
         ]
         for name, elements, deletion in examples:
-            data = bridge_data(elements, deletion)
+            if args.all_orders:
+                all_data = bridge_data_any_order(elements, deletion)
+                data = [(order, t, rows) for order, t, rows in all_data]
+            else:
+                data = [(deletion, t, rows) for t, rows in bridge_data(elements, deletion)]
             print(name)
             print("  S=", sorted(elements), "F=", deletion)
             if not data:
                 print("  no bridge data")
-            for t, rows in data[: args.limit]:
-                print("  t=", t, "rows=", rows)
+            for order, t, rows in data[: args.limit]:
+                print("  order=", order, "t=", t, "rows=", rows)
         return
 
     found = 0
@@ -91,13 +111,17 @@ def main() -> None:
                     continue
                 elements = set(tuple_s)
                 for deletion in combinations(tuple_s, args.rank):
-                    data = bridge_data(elements, deletion)
+                    if args.all_orders:
+                        all_data = bridge_data_any_order(elements, deletion)
+                        data = [(order, t, rows) for order, t, rows in all_data]
+                    else:
+                        data = [(deletion, t, rows) for t, rows in bridge_data(elements, deletion)]
                     if not data:
                         continue
                     print("finite bridge repair data")
                     print("S=", sorted(elements), "F=", deletion)
-                    for t, rows in data[:3]:
-                        print("  t=", t, "rows=", rows)
+                    for order, t, rows in data[:3]:
+                        print("  order=", order, "t=", t, "rows=", rows)
                     found += 1
                     if found >= args.limit:
                         return

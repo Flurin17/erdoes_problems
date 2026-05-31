@@ -3521,7 +3521,7 @@ protected reservoir recursively from finite reflection-recurrence.
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
 threshold \(N_0\). Let
 \[
-B=\{b_1<b_2<\cdots\}\subset A,
+B=\{b_1,b_2,\ldots\}\subset A,
 \qquad C=A\setminus B.
 \]
 Suppose there is a fixed retained element \(t\in C\) such that for every
@@ -3581,8 +3581,14 @@ and the alternating pair-hole window
 \[
 S=\{1,2,3,6,7,8\},\qquad F=\{6,8\}
 \]
-have no such bridge data in the finite set. The bridge route is therefore a
-real positive mechanism, but not a complete explanation of all collective
+have no such bridge data in the finite set, even after trying all orderings
+of \(F\). The `--all-orders` search also finds rank-three windows with
+bridge data, such as
+\[
+S=\{1,2,3,4,5,6,7\},\qquad F=\{1,3,4\}.
+\]
+Thus the bridge route is a real positive mechanism, and high rank alone
+does not defeat it, but it is not a complete explanation of all collective
 finite holes.
 
 ## Warning 8.2b: Fixed-center greedy absorption has star obstructions

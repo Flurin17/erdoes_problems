@@ -212,8 +212,11 @@ pair window
 S=\{1,2,3,5,6,7\},\qquad F=\{5,7\},
 \]
 namely `t=1` and rows `(5,3,3),(7,2,6)`. It finds no bridge data for the
-rank-three delayed example or for the alternating-deletion pair hole, so
-the bridge identity is a genuine positive mechanism but not automatic.
+rank-three delayed example or for the alternating-deletion pair hole, even
+with `--all-orders`, so the bridge identity is a genuine positive mechanism
+but not automatic. The same `--all-orders` mode does find unrelated
+rank-three windows with bridge data, showing that rank alone is not the
+failure.
 
 `schreier_stage_search.py` looks for the first finite analogue of the
 Schreier-stage criterion. It finds

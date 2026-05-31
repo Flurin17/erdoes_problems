@@ -259,7 +259,9 @@ with a fixed padder \(t\), moving anchors \(e_j\), and deleted elements
 packets this asks for the extra bridge value \(q_j=t+m_j-2e_j\in C\).
 The diagnostic `bridge_repair_search.py` finds this bridge in the finite
 delayed pair window \(S=\{1,2,3,5,6,7\},F=\{5,7\}\), but not in the
-rank-three delayed window or in the alternating pair-hole window.
+rank-three delayed window or in the alternating pair-hole window, even when
+all deletion orderings are tried. Other rank-three windows do have bridge
+data, so the failure is geometric rather than a rank-only obstruction.
 Corollary 3.4r explains the likely bottleneck: in a counterexample the
 large reflected packets can be forced to have only bounded representation
 counts in the translated rows \(s+d\), exactly the rows a bridge repair
