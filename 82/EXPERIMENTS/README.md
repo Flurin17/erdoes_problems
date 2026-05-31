@@ -146,7 +146,8 @@ Computational checks and generated data for Erdos Problem 82.
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic
   witness conjectures on dense `q`-modular graphs that are usually not already
-  `2q`-modular.
+  `2q`-modular.  Use `--on-the-fly` to avoid the exponential incident-table
+  precompute and scan larger exact subset spaces.
 - `multipartite_modular.py`: exact integer model for modular
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts

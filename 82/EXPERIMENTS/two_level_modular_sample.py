@@ -11,8 +11,8 @@ from __future__ import annotations
 
 import argparse
 import random
+from itertools import combinations
 
-import modular_partition
 import regular_induced as ri
 
 
@@ -82,9 +82,61 @@ def mask_from_edges(edges: set[tuple[int, int]], pc: ri.Precomp) -> int:
     return mask
 
 
+def mask_from_edges_by_order(edges: set[tuple[int, int]], n: int) -> int:
+    edge_index = {edge: idx for idx, edge in enumerate(combinations(range(n), 2))}
+    mask = 0
+    for edge in edges:
+        mask |= 1 << edge_index[edge]
+    return mask
+
+
+def adjacency_from_edges(edges: set[tuple[int, int]], n: int) -> list[int]:
+    adjacency = [0] * n
+    for u, v in edges:
+        adjacency[u] |= 1 << v
+        adjacency[v] |= 1 << u
+    return adjacency
+
+
+def is_connected_adjacency(adjacency: list[int], n: int) -> bool:
+    if n <= 1:
+        return True
+    seen = 1
+    stack = [0]
+    while stack:
+        vertex = stack.pop()
+        unseen = adjacency[vertex] & ~seen
+        while unseen:
+            bit = unseen & -unseen
+            seen |= bit
+            stack.append(bit.bit_length() - 1)
+            unseen ^= bit
+    return seen == (1 << n) - 1
+
+
+def max_modular_order_on_the_fly(adjacency: list[int], n: int, modulus: int) -> int:
+    for size in range(n, 0, -1):
+        for vertices in combinations(range(n), size):
+            subset = 0
+            for vertex in vertices:
+                subset |= 1 << vertex
+            first: int | None = None
+            ok = True
+            for vertex in vertices:
+                residue = (adjacency[vertex] & subset).bit_count() % modulus
+                if first is None:
+                    first = residue
+                elif residue != first:
+                    ok = False
+                    break
+            if ok:
+                return size
+    return 0
+
+
 def sample(args: argparse.Namespace) -> None:
     rng = random.Random(args.seed)
-    pc = ri.precompute(args.n)
+    pc = None if args.on_the_fly else ri.precompute(args.n)
     high = args.low_degree + args.q
     degree_sequence = [args.low_degree] * args.low_count + [high] * (args.n - args.low_count)
     if len(degree_sequence) != args.n:
@@ -105,11 +157,17 @@ def sample(args: argparse.Namespace) -> None:
         if edges is None:
             continue
         edges = randomize_by_swaps(edges, args.n, args.swaps, rng)
-        graph_mask = mask_from_edges(edges, pc)
-        if args.connected_only and not modular_partition.is_connected_graph(args.n, graph_mask, pc):
+        adjacency = adjacency_from_edges(edges, args.n)
+        if args.connected_only and not is_connected_adjacency(adjacency, args.n):
             continue
         accepted += 1
-        value = ri.max_modular_order(graph_mask, 2 * args.q, pc)
+        if args.on_the_fly:
+            graph_mask = mask_from_edges_by_order(edges, args.n)
+            value = max_modular_order_on_the_fly(adjacency, args.n, 2 * args.q)
+        else:
+            assert pc is not None
+            graph_mask = mask_from_edges(edges, pc)
+            value = ri.max_modular_order(graph_mask, 2 * args.q, pc)
         histogram[value] = histogram.get(value, 0) + 1
         if value < best_value:
             best_value = value
@@ -126,6 +184,8 @@ def sample(args: argparse.Namespace) -> None:
     print(f"swaps={args.swaps}")
     if args.connected_only:
         print("connected_only=True")
+    if args.on_the_fly:
+        print("on_the_fly=True")
     print(f"best_max_{2 * args.q}_modular_order={best_value if accepted else 'NA'}")
     print(f"best_mask={best_mask}")
     print("histogram=max_target_modular_order:count")
@@ -144,6 +204,11 @@ def main() -> None:
     parser.add_argument("--swaps", type=int, default=5000)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--connected-only", action="store_true")
+    parser.add_argument(
+        "--on-the-fly",
+        action="store_true",
+        help="avoid the exponential incident-table precompute for larger n",
+    )
     args = parser.parse_args()
     if args.low_count is None:
         args.low_count = args.n // 2

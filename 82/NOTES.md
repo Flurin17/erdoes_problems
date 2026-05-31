@@ -1705,3 +1705,7 @@ source of growth beyond Ramsey.
   samples and `8/20` in five samples after degree-preserving swaps.  These small
   tests do not refute the logarithmic-saving target, but they show randomized
   two-level hosts are a useful hard model for future larger heuristic searches.
+- 2026-05-31: Added `--on-the-fly` to `two_level_modular_sample.py` so exact
+  maximum target-modular order can be scanned without the large incident-table
+  precompute.  A connected `n=24`, `q=8`, degree-level `5,13` sample with
+  `8000` swaps had largest `16`-modular witness `9`, ratio `0.375`.
