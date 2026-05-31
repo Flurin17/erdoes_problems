@@ -15,9 +15,9 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, and `N=55` certificates are now promoted in
-`PROOF.md`. The explicit encoded survivors in `100..250` remain the
-isosceles-`alpha+beta` `3alpha+2beta=pi` candidates at
+`N=42`, `N=46`, `N=51`, `N=55`, `N=57`, and `N=62` certificates are now
+promoted in `PROOF.md`. The explicit encoded survivors in `100..250` remain
+the isosceles-`alpha+beta` `3alpha+2beta=pi` candidates at
 `132,156,175,189,198,204,224,228,240`.
 
 ## `N=14` and `N=15` Exact Filter Certificate
@@ -253,6 +253,28 @@ non-isosceles `gamma=2pi/3` filter leaves one candidate, `(39,16,49)` at scale
 endpoint cycles. Therefore `PROOF.md` treats `55` as a classified negative
 value.
 
+## `N=57` and `N=62` Exact Filter Certificate
+
+The next two squarefree composite no-survivor rows were rerun exactly:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 57
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 62
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_3alpha2beta_filter.py 57 62 --json
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py 57 62 --json
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_isosceles_filter.py 57 62
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2pi3_nonisosceles_exact.py 57 62
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/composite_case_dashboard.py 57 62 --equilateral-side-bound 250
+```
+
+The exact equilateral scan returns zero boundary-length candidates for both
+values. The `gamma=2pi/3` isosceles and non-isosceles filters also return zero
+candidates. In the `3alpha+2beta=pi` branch, `57` has seven raw rational roots
+and `62` has eight. The stronger isosceles-`alpha+beta` filter rejects all
+seven roots for `57` and seven of the eight roots for `62`; the remaining
+`62` triquadratic root `(42,13,49)` is removed by boundary-integrality.
+Therefore `PROOF.md` treats `57` and `62` as classified negative values.
+
 ## Elementary Certificate Checks
 
 Command:
@@ -279,7 +301,8 @@ The script includes:
 
 - elementary positive families;
 - Beeson negatives `7` and `11`;
-- workspace composite obstructions through `42` recorded in `PROOF.md`;
+- workspace composite obstructions through `62` recorded in `PROOF.md`,
+  with gaps such as `56` and `60` still explicitly unresolved;
 - workspace prime obstructions for primes `3 mod 4`;
 - recorded sufficient Beeson `3alpha+2beta=pi` constructions, including table
   entries `28,44,48,77,84` and the triquadratic sufficient values
@@ -389,19 +412,19 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55:
+14,15,21,22,30,33,35,38,39,42,46,51,55,57,62:
   negative by workspace composite benchmarks
 
-56,57,60,62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
+56,60,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
   open with no survivor in the currently encoded filters
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
 the source reductions is still incomplete. After the `N=14`, `N=15`, `N=21`,
-`N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`, and
-`N=55` source-row audits, the current open ledger removes those values from the
-scanner's unresolved list.
+`N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`,
+`N=55`, `N=57`, and `N=62` source-row audits, the current open ledger removes
+those values from the scanner's unresolved list.
 
 ## Equilateral Boundary-Length Checks
 

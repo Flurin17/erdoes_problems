@@ -53,6 +53,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
 - `n = 55` impossible in this workspace: exact equilateral `pi/3` candidates
   and the one non-isosceles `gamma=2pi/3` candidate fail boundary-star checks,
   and the `3alpha+2beta` raw roots fail Beeson's Section 11.4 filter.
+- `n = 57` and `n = 62` impossible in this workspace: both are squarefree
+  composite counts outside the elementary positive forms; exact equilateral,
+  `gamma=2pi/3`, and `3alpha+2beta` source-row filters leave no survivor.
 - Primes `p = 4r + 3` are explicitly not proved impossible in the source
   corpus. Beeson says this is a hope, not even labelled a conjecture in his
   slides. This workspace now records a derived proof of the prime obstruction,
@@ -133,6 +136,12 @@ The tile triangle is not required to be similar to the large triangle unless exp
 | 54 | positive | `6*3^2` |
 | 55 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 | 56 | not classified here | encoded filters empty, but `gamma=2alpha` isosceles branch is not excluded by squarefree obstruction |
+| 57 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
+| 58 | positive | `3^2+7^2` |
+| 59 | negative in this workspace | prime `3 mod 4` source reduction |
+| 60 | not classified here | encoded filters empty, but `gamma=2alpha` isosceles branch is not excluded by squarefree obstruction |
+| 61 | positive | `5^2+6^2` |
+| 62 | negative in this workspace | source case split plus exact composite benchmark in `PROOF.md` |
 
 Important distinction: "positive square class" and "smallest representative" are different. A construction of `15m^2` for all large `m` proves positive infinitely many `n` with squarefree kernel `15`, but it does not prove `n=15`.
 
@@ -165,7 +174,8 @@ Important distinction: "positive square class" and "smallest representative" are
    The composite dashboard currently shows no surviving encoded candidates
    through the unresolved values below `100` checked in `RESULTS.md`, with
    `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, `42`, `46`, `51`,
-   and `55` now upgraded from dashboard evidence to proof entries. The newer
+   `55`, `57`, and `62` now upgraded from dashboard evidence to proof entries.
+   The newer
    eliminations beyond `30` include a generic `3alpha+2beta` boundary-integrality
    filter for supported triquadratic, isosceles-beta, and isosceles-alpha
    outer shapes; `46` and `56` by triquadratic boundary-star checks; and

@@ -282,6 +282,16 @@ by a right triangle: `N` is a square, twice a square, `6k^2`, or an even sum of
 two squares. Theorem 11.7 proves that in the `gamma=2alpha` isosceles template,
 `N` is not squarefree; in particular no prime count occurs there.
 
+For composite counts in the same `gamma=2alpha` branch, Lemma 11.14 gives a
+finite boundary-enumeration algorithm: for a fixed `N`, enumerate coprime
+parameters `(k,m)`, form integer sides `(a,b,c)=(k^2,m^2-k^2,mk)`, reject
+wrong squarefree parts and nonintegral area-derived boundary lengths `X,Y`,
+then enumerate boundary decompositions of `X` and `Y`. Theorem 11.18 uses this
+enumeration plus Lemma 11.17 to prove `N >= 45`, and then notes that after
+`45` the next possibilities left open are `63,64,72`. This is a strong source
+lead for `N=56`, `60`, `66`, `69`, and `70`, but the workspace has not yet
+reproduced the per-`N` enumeration certificates.
+
 ### TriangleTiling4
 
 Beeson's Triangle Tiling IV supplies the local "suspicious edge" machinery used

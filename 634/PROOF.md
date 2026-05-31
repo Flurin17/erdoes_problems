@@ -1038,6 +1038,8 @@ This table records only values/families classified by the current proof file.
 | `46` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
 | `51` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | `55` | negative in this workspace | published source case split plus exact arithmetic and boundary-star elimination in the composite benchmark below |
+| `57` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
+| `62` | negative in this workspace | published source case split plus exact arithmetic elimination in the composite benchmark below |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -1058,7 +1060,7 @@ BLZ Problem #633 outer-triangle classes to the #634 case filters below.
 | similar/reptile | classified by Snover-Waiveris-Williams | none for this subcase |
 | commensurable-angle source table | closed by Beeson's NoSevenTiling Table 3 and Theorem 3, with forms `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | none for this branch |
 | right-tile isosceles | source-backed count forms from Beeson Theorem 7.8 | none for small-value obstructions using these forms |
-| isosceles `gamma=2alpha` | source-backed non-squarefree obstruction from Beeson Theorem 11.7 | complete positive composite formula not reconstructed |
+| isosceles `gamma=2alpha` | source-backed non-squarefree obstruction from Beeson Theorem 11.7; Beeson Lemma 11.14/Theorem 11.18 give a finite boundary enumeration and state that after `45` the next left-open values are `63,64,72` | complete positive composite formula and per-`N` enumeration certificates not reconstructed |
 | isosceles `gamma=2pi/3` | ruled out in the rational nondegenerate case by boundary-transition lemma | audit interaction with every source-reduced equilateral/degenerate exception |
 | `3alpha+2beta=pi` | necessary rational equations encoded; several sufficient cases encoded; selected boundary-star eliminations and a generic boundary-integrality filter for supported outer shapes | isosceles-`alpha+beta` composite survivors remain after Beeson's stronger source filter; not a complete composite classification |
 | non-isosceles `gamma=2pi/3` | exact arithmetic formulas encoded; prime obstruction proved; endpoint boundary-star eliminations for `21`, `30`, `55`, `88`, `105`, `120`, `143`, and the later `100..250` BLZ survivors | no explicit encoded survivor remains below `250`; a general composite obstruction is not yet proved |
@@ -1447,6 +1449,37 @@ isosceles-`alpha+beta` roots; all seven fail Beeson's stronger Section 11.4
 filter. Therefore `N=55` has no survivor in any source case and is classified
 negative in this workspace.
 
+## Composite Benchmark: `N=57` and `N=62`
+
+The next squarefree composite rows with no encoded survivor are `57` and `62`.
+Neither value is a square, a sum of two positive squares, `2m^2`, `3m^2`, or
+`6m^2`, so the commensurable-angle, similar/reptile, and right-tile isosceles
+count forms do not apply. Since both are squarefree, Beeson's
+`gamma=2alpha` isosceles branch is also removed.
+
+The exact equilateral boundary-length scan returns no candidates:
+
+```text
+N=57: 0 exact equilateral boundary-length candidate(s), side-edge cap 57
+N=62: 0 exact equilateral boundary-length candidate(s), side-edge cap 62
+```
+
+The isosceles `gamma=2pi/3` arithmetic filter gives no candidates for either
+value, and the exact non-isosceles `gamma=2pi/3` product formulas also give no
+candidates.
+
+In the `3alpha+2beta=pi` branch, Beeson's necessary equations leave seven raw
+roots for `N=57`, all in the isosceles-`alpha+beta` case; all seven fail
+Beeson's stronger Section 11.4 filter. For `N=62`, the necessary equations
+leave eight raw roots. Seven are isosceles-`alpha+beta` roots and fail the same
+stronger filter; the remaining triquadratic root has tile sides `(42,13,49)`
+and outer-angle case `(2a,b,a+b)`, but the sine-law outer side ratio cannot be
+scaled to integral boundary side lengths at area ratio `62`, giving a boundary
+integrality obstruction.
+
+Therefore `N=57` and `N=62` have no survivor in any source case and are
+classified negative in this workspace.
+
 ## Open/Unresolved Ledger
 
 - `19` is listed as open in the source corpus, but the workspace now records a
@@ -1458,7 +1491,8 @@ negative in this workspace.
   positive, while primes `3 mod 4` greater than `3` are negative.
 - The first composite negative values beyond Beeson's `7` and `11`
   obstructions now recorded in this workspace are `14`, `15`, `21`, `22`, and
-  `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, `51`, and `55`.
+  `30`, followed by `33`, `35`, `38`, `39`, `42`, `46`, `51`, `55`, `57`,
+  and `62`.
 - An April 2026 external draft by David Turturean independently claims the same
   prime dichotomy. Its proof uses a different final obstruction for primes
   `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
@@ -1480,13 +1514,20 @@ negative in this workspace.
   obstruction with the other source filters to classify `21` and `30`
   negative.
 - The current gap scan with primitive equilateral side bound `250` reports
-  `56`, `57`, `60`, `62`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`,
-  `88`, `91`, `92`, `93`, `94`, `95`, and `99` as open with no survivor in
+  `56`, `60`, `63`, `66`, `69`, `70`, `76`, `78`, `86`, `87`, `88`, `91`,
+  `92`, `93`, `94`, `95`, and `99` as open with no survivor in
   the currently encoded
   filters. The same scan formerly listed `14`, `15`, `21`, `22`, `30`, `33`,
-  `35`, `38`, `39`, `42`, `46`, `51`, and `55`, which are now removed by the
-  composite benchmarks above. The remaining values are not negative theorems
-  until their source-row arithmetic eliminations are written out.
+  `35`, `38`, `39`, `42`, `46`, `51`, `55`, `57`, and `62`, which are now
+  removed by the composite benchmarks above. The remaining values are not
+  negative theorems until their source-row arithmetic eliminations are written
+  out.
+- For the `gamma=2alpha` branch, Beeson records a finite boundary-enumeration
+  algorithm and says that after the possible `N=45` boundary tiling the next
+  values left open are `63,64,72`. This appears to remove the last branch for
+  `56`, `60`, `66`, `69`, and `70`, but this proof file still requires either
+  a reproduced enumeration certificate or an explicit decision to cite that
+  computation as a black-box source result before promoting those values.
 - In the range `100..250`, the current encoded survivor list has shrunk to
   `132`, `156`, `175`, `189`, `198`, `204`, `224`, `228`, and `240`. All are
   `3alpha+2beta` isosceles-`alpha+beta` survivors of Beeson's Section 11.4
