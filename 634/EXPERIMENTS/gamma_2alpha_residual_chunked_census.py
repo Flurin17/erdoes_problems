@@ -132,6 +132,9 @@ def main() -> None:
     local_checker = make_local_checker(survivor, radicand, args.local_cover_mode) if args.outside_local_cover else None
     generated_seen = 0
     generated_processed = 0
+    first_generated_index: int | None = None
+    last_generated_index: int | None = None
+    exhausted = True
     covered = 0
     diagnosed = 0
     counts: Counter[str] = Counter()
@@ -143,12 +146,19 @@ def main() -> None:
         max_total_mixed=args.max_total_mixed,
         dedupe=True,
     ):
-        generated_seen += 1
-        if generated_seen <= args.skip_generated:
+        candidate_index = generated_seen + 1
+        if candidate_index <= args.skip_generated:
+            generated_seen = candidate_index
             continue
         if generated_processed >= args.max_generated:
+            exhausted = False
             break
+
+        generated_seen = candidate_index
         generated_processed += 1
+        if first_generated_index is None:
+            first_generated_index = generated_seen
+        last_generated_index = generated_seen
 
         if local_checker is not None and local_checker.first_overlap(demand) is not None:
             covered += 1
@@ -167,6 +177,7 @@ def main() -> None:
                 flush=True,
             )
 
+    elapsed = time.monotonic() - started
     result = {
         "n": args.n,
         "tile": survivor.candidate.tile,
@@ -178,6 +189,12 @@ def main() -> None:
         "mode": args.mode,
         "skip_generated": args.skip_generated,
         "max_generated": args.max_generated,
+        "first_generated_index": first_generated_index,
+        "last_generated_index": last_generated_index,
+        "resume_skip_generated": generated_seen,
+        "exhausted": exhausted,
+        "elapsed_seconds": round(elapsed, 6),
+        "generated_per_second": round(generated_processed / elapsed, 6) if elapsed else None,
         "generated_seen": generated_seen,
         "generated_processed": generated_processed,
         "covered": covered,
