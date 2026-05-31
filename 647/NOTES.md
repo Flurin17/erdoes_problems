@@ -308,6 +308,18 @@ semiprimes as allowed by the divisor budget, so it does not make the invalid
 ```
 
   No tuple in this range survived past `k=15`.
+- The final unsigned-64-bit scan over
+  `3*10^15 <= N < 7320136537186331` found 886,846 branch prime tuples and
+  no value passing direct checks through `k <= 5000`. Aggregated first
+  failures were:
+
+```text
+5:779139 7:68367 9:34486 10:4284 11:360 13:139 14:48 15:16 16:4 18:2 20:1
+```
+
+  The deepest near miss failed at `k=20`:
+  `N = 3602115923026621`, `n = 9077332126027084920`,
+  `tau(n-20) = 72`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a

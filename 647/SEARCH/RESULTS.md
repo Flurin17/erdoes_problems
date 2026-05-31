@@ -220,6 +220,43 @@ FIRST_FAIL_COUNTS 5:425531 7:37720 9:19745 10:2480 11:231 13:81 14:27 15:9
 Interpretation: no branch tuple with `10^15 <= N < 3*10^15` passed direct
 checks through `k=5000`; no tuple in this range survived past `k=15`.
 
+The final unsigned-64-bit range was scanned with the same 41 residue
+classes. This command covers
+`3*10^15 <= N < 7320136537186331`, i.e. all remaining `N` for which
+`2520N` fits in an unsigned 64-bit integer:
+
+```sh
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search \
+  --n-start 3000000000000000 \
+  --n-stop 7320136537186331 \
+  --outdir /tmp/erdos647-scan-3e15-u64 \
+  --workers 4 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
+```
+
+Aggregate output:
+
+```text
+prime_tuples=886846 quick_pass=0
+BRANCH_COUNTS A=190308 B=696538
+FIRST_FAIL_COUNTS 5:779139 7:68367 9:34486 10:4284 11:360 13:139 14:48 15:16 16:4 18:2 20:1
+```
+
+Interpretation: no branch tuple with
+`3*10^15 <= N < 7320136537186331` passed direct checks through
+`k <= 5000`. The deepest near miss in the range was
+
+```text
+N = 3602115923026621
+n = 9077332126027084920
+first_fail_k = 20
+tau(n-20) = 72
+```
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms
