@@ -4464,6 +4464,22 @@ with two-sum coverage through \(25\) and all twelve Schreier edges among
 the first six protected points carrying minimal dominated holes. Thus the
 failure to extend the first seed is not by itself a proof of local
 impossibility; early choices matter substantially.
+The more relevant tail-protected mode also finds examples. With
+`--protected-count 4 --min-protected 10 --max-value 30 --max-size 10`, it
+finds
+\[
+A_2=\{1,2,4,5,8,10,15,18,19\}
+\]
+with protected tail \(\{10,15,18,19\}\), two-sum coverage through \(30\),
+and minimal dominated holes
+\[
+\{10,15\}\mapsto19,\quad
+\{10,18\}\mapsto30,\quad
+\{10,19\}\mapsto29,\quad
+\{15,18,19\}\mapsto27.
+\]
+So the local finite obstruction persists even when the protected Schreier
+points are separated from the small coverage core.
 
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 

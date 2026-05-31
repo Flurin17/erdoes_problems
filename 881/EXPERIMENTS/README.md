@@ -131,6 +131,11 @@ The direct mode can also search for more protected points. With
 `--protected-count 6 --max-value 17 --max-size 9`, it finds
 \(\{1,2,4,5,6,8,14,16,17\}\), with all twelve Schreier edges among the
 first six protected points carrying minimal dominated holes.
+The `--min-protected` option forces the protected Schreier points away from
+the small coverage core. With
+`--protected-count 4 --min-protected 10 --max-value 30 --max-size 10`, the
+script finds \(\{1,2,4,5,8,10,15,18,19\}\), protected tail
+\(\{10,15,18,19\}\), and coverage through \(30\).
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

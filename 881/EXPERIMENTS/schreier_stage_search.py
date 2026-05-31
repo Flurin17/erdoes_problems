@@ -100,7 +100,23 @@ def witnesses_for_edges(
     return data
 
 
-def search_protected(max_value: int, max_size: int, protected_count: int) -> None:
+def choose_protected(
+    elements: set[int],
+    protected_count: int,
+    min_protected: int | None,
+) -> list[int]:
+    ordered = sorted(elements)
+    if min_protected is None:
+        return ordered[:protected_count]
+    return [x for x in ordered if x >= min_protected][:protected_count]
+
+
+def search_protected(
+    max_value: int,
+    max_size: int,
+    protected_count: int,
+    min_protected: int | None,
+) -> None:
     for candidate_max in range(8, max_value + 1):
         for size in range(protected_count + 1, min(candidate_max, max_size) + 1):
             for tuple_a in combinations(range(1, candidate_max + 1), size):
@@ -108,7 +124,9 @@ def search_protected(max_value: int, max_size: int, protected_count: int) -> Non
                 coverage = cover_end(elements, 2, 3 * candidate_max)
                 if coverage < candidate_max:
                     continue
-                protected = sorted(elements)[:protected_count]
+                protected = choose_protected(elements, protected_count, min_protected)
+                if len(protected) < protected_count:
+                    continue
                 edges = (
                     first_schreier_edges(protected)
                     if protected_count == 4
@@ -150,13 +168,19 @@ def main() -> None:
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
     parser.add_argument("--protected-count", type=int, default=4)
+    parser.add_argument("--min-protected", type=int)
     parser.add_argument("--max-new", type=int, default=4)
     parser.add_argument("--max-candidate", type=int, default=35)
     args = parser.parse_args()
     if args.extend_first:
         extend_first(args.max_new, args.max_candidate)
     else:
-        search_protected(args.max_value, args.max_size, args.protected_count)
+        search_protected(
+            args.max_value,
+            args.max_size,
+            args.protected_count,
+            args.min_protected,
+        )
 
 
 if __name__ == "__main__":
