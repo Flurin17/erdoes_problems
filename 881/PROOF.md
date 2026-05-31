@@ -1711,6 +1711,99 @@ are all low-count for the translates \(a+d\), except for the bounded
 deleted-pair exception window. This is the current sharpest form of the
 mass-escape obstruction.
 
+## Corollary 3.4i: Star gates may be made collective and minimal
+
+Work in the remaining \(k=2\) case after Corollary 8.3b. Thus there is a
+finite set \(E_*\subset A\) such that every
+\[
+a\in A\setminus E_*
+\]
+has \(A\setminus\{a\}\) as an order-3 basis with some threshold below
+\(a\). Suppose \(A\) is still a counterexample to the desired order-3
+deletion conclusion.
+
+Then for every finite \(E\supset E_*\) there are constants
+\[
+q_E,\eta_E>0
+\]
+and arbitrarily large \(w\) for which one can find a finite set
+\[
+F\subset A\setminus E,\qquad 2\le |F|\le q_E,
+\]
+and a gate \(d\in F\), such that:
+
+1. \(F\) is inclusion-minimal for the hole
+   \[
+   w\notin3(A\setminus F);
+   \]
+2. every \(f\in F\) is active in the sense of Lemma 8.4b;
+3. writing \(C=A\setminus F\), the gate \(d\) has at least
+   \[
+   \eta_E A(w)
+   \]
+   unordered retained repairs
+   \[
+   w-d=a+b,\qquad a,b\in C. \tag{1}
+   \]
+
+Consequently the gate is not a singleton order-3 obstruction: since
+\[
+w=d+a+b\ge d+2\min A>d
+\]
+for every repair in (1), and the singleton threshold for
+\(A\setminus\{d\}\) is below \(d\), the witness \(w\) has a three-term
+representation from \(A\setminus\{d\}\). Every such representation must use
+at least one element of \(F\setminus\{d\}\).
+
+Proof. Repeat the proof of Corollary 3.4g with the protected core \(E\).
+It gives arbitrarily large \(w\) and a bounded transversal
+\[
+D_0\subset A\setminus E,\qquad |D_0|\le q_E',
+\]
+for the hypergraph \(\mathcal H_E(w)\), so
+\[
+w\notin3(A\setminus D_0).
+\]
+Shrink \(D_0\) to an inclusion-minimal subset \(F\) with
+\[
+w\notin3(A\setminus F).
+\]
+Since \(F\subset A\setminus E_*\), Corollary 8.3b rules out
+\(|F|=1\), and Lemma 8.4b gives the activity of every element of \(F\).
+
+Every edge of \(\mathcal H_E(w)\) meets \(F\); otherwise it would give a
+three-term representation of \(w\) from \(A\setminus F\), except for the
+impossible case in which all outside-\(E\) summands are absent, which is
+excluded by taking \(w\) larger than every three-term sum from \(E\). The
+edge-count lower bound used in Corollary 3.4g is unchanged, and
+\[
+|F|\le |D_0|\le q_E'.
+\]
+Hence some \(d\in F\) lies in \(\gg_E A(w)\) edges.
+
+Discard the \(O_E(1)\) edges that also contain another element of
+\(F\setminus\{d\}\), and discard the \(O(1)\) edges whose only
+representatives use \(d\) with multiplicity at least two. The same support
+counting as in Corollary 3.4g leaves \(\eta_E A(w)\) distinct unordered
+pairs \(\{a,b\}\subset A\setminus F\) with \(w=d+a+b\), after decreasing
+\(\eta_E\) and increasing the lower bound on \(w\) if necessary. Taking
+\[
+q_E=q_E'
+\]
+proves (1).
+
+For the final assertion, choose one retained repair \(w=d+a+b\). Then
+\[
+w>d.
+\]
+The singleton threshold for \(A\setminus\{d\}\) is \(<d\), so
+\[
+w\in3(A\setminus\{d\}).
+\]
+If a representation of \(w\) from \(A\setminus\{d\}\) avoided all of
+\(F\setminus\{d\}\), it would lie in \(3(A\setminus F)\), contradicting
+the hole. \(\square\)
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6813,6 +6906,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 3.4h feeds those star-gated repairs back into Lemma 8.4c:
   except for deleted-pair rows, the retained summands in the repairs are
   private low-count rows for the same deleted gate.
+* Corollary 3.4i strengthens this after the singleton-exceptional core is
+  protected: the star gate can be chosen inside an inclusion-minimal
+  collective hole of bounded size, so every deleted vertex is active and
+  individually order-3-good.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

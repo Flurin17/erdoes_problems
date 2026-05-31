@@ -500,6 +500,18 @@ satisfies \(a+d\notin2(A\setminus D)\) and has low two-sum count
 \(\nu_d(a+d)<|D|\), except when \(w-a\in D+D\). Thus a moving-star
 counterexample must carry a large reflected set of low-count private rows
 for the same moving gate.
+Corollary 3.4i strengthens the star-gate normal form in the remaining
+\(k=2\) case. After the finite singleton-exceptional set is protected, the
+bounded deletion set can be shrunk to an inclusion-minimal collective hole
+\[
+w\notin3(A\setminus F),\qquad 2\le |F|\le q_E,
+\]
+while preserving a gate \(d\in F\) with \(\gg_E A(w)\) retained repairs.
+Thus the moving star is not merely a maximal-matching artifact: it lives
+inside a minimal collective barrier whose every deleted element is active
+and individually order-3-good. Since \(w>d\) for every retained repair, the
+singleton deletion \(A\setminus\{d\}\) represents \(w\); every such
+singleton repair must use another element of \(F\setminus\{d\}\).
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
