@@ -904,6 +904,26 @@ N=99: L=baabbbccb, R=aabbbbbcc, B=baaabbccc.
 Thus the remaining gamma obstruction has to be global: locally, four overhang
 rays suffice to support the boundary transitions.
 
+The side-incidence inventory diagnostic makes the same point at all straight
+boundary vertices, not only the mixed ones:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary_fan_inventory.py 63 99 --show-transitions
+```
+
+It gives the following Pareto-minimal lower bounds for the side incidences
+consumed by local boundary fans:
+
+```text
+N=63: boundary=(7,9,7), interior=(56,54,56),
+      fan-inventory min=(39,35,31), slack=(17,19,25).
+N=99: boundary=(7,13,7), interior=(92,86,92),
+      fan-inventory min=(48,34,40), slack=(44,52,52).
+```
+
+So a pure side-incidence lower bound from the boundary fans does not close the
+benchmark survivors.
+
 ## Zhang Constructive Families
 
 Command:

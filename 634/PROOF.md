@@ -1753,6 +1753,20 @@ Each of the four mixed transitions must be supplied by an interior overhang ray.
 This again points away from a purely local boundary obstruction and toward a
 global side-matching or graph-embedding obstruction.
 
+The stronger local fan-inventory diagnostic gives no contradiction either.  It
+enumerates overhang-aware fans at every straight boundary vertex in the displayed
+boundary words and sums the side incidences consumed by their interior rays:
+
+```text
+N=63: boundary=(7,9,7), interior=(56,54,56),
+      fan-inventory min=(39,35,31), slack=(17,19,25).
+N=99: boundary=(7,13,7), interior=(92,86,92),
+      fan-inventory min=(48,34,40), slack=(44,52,52).
+```
+
+Thus the remaining obstruction, if these rows are impossible, must use more than
+the local boundary-fan side-count lower bound.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

@@ -86,6 +86,11 @@ Current components:
 - `gamma_2alpha_boundary_transition_demand.py`: dynamic program minimizing the
   number of outer-boundary `c`/non-`c` transitions required by a refined
   `gamma=2alpha` boundary survivor.
+- `gamma_2alpha_boundary_fan_inventory.py`: overhang-aware inventory diagnostic
+  for the straight boundary fans in a transition-demand witness. It sums the
+  side incidences forced by those local fans and currently shows that the
+  `N=63` and `N=99` benchmark survivors are not eliminated by this counting
+  lower bound.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

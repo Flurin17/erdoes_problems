@@ -67,7 +67,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   are eliminated locally, and the final `gamma=2alpha` boundary patterns are
   the current benchmark survivors. Local overhang fans using `ca | bbb` for
   `63` and `ca | bbbbb` for `99` show that the strict side-label fan diagnostic
-  is not enough.
+  is not enough. The boundary-fan side-incidence inventory also has slack:
+  minima `(39,35,31)` inside `(56,54,56)` for `63`, and `(48,34,40)` inside
+  `(92,86,92)` for `99`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
@@ -259,7 +261,10 @@ Important distinction: "positive square class" and "smallest representative" are
    boundary-survivor count `N=9(2t+1)`.
    The current boundary DP finds that every active gamma survivor below `250`
    needs only four outer-boundary `c`/non-`c` transitions, so any obstruction
-   must account for four overhang rays globally.
+   must account for four overhang rays globally. For the benchmark rows, the
+   stronger all-straight-boundary fan inventory still leaves side-incidence
+   slack, so the next obstruction has to use placement/order information rather
+   than only counting labels consumed by local fans.
 
 ## Current Diophantine Status for `n=19`
 
