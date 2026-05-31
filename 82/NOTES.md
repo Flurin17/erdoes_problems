@@ -1937,3 +1937,9 @@ source of growth beyond Ramsey.
   source `3` with `(0,0,1,3)` checked `129`.  Without the fixed source
   residue filter, the same slot multisets can be killed by irrelevant source
   classes, so this option is needed for correct dyadic-source calibration.
+- 2026-05-31: Added two small positive classes for the first-lift
+  matching-slot target.  Every even graph of maximum degree at most `2`
+  works by putting odd cycles into the residue-`2` slot and bipartitioning
+  the remaining even cycles; complete even graphs work by putting all vertices
+  into the zero slot or the residue-`2` slot according as `n` is `1` or
+  `3 mod 4`.

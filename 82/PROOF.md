@@ -3774,6 +3774,27 @@ irrelevant counterexamples from other source classes.
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
 
+Two elementary graph classes satisfy the stronger matching-slot target.
+
+**Lemma: The Matching-Slot Target Holds For Maximum Degree At Most Two.**
+Let `G` be an even graph with maximum degree at most `2`.  Then `G` has a
+partition `A,B,C,D` such that `A` and `B` have internal degree `0 mod 4`,
+`C` is exactly `1`-regular, and `D` has internal degree `2 mod 4`.
+
+Proof.  Such a graph is a disjoint union of isolated vertices and cycles.
+Put every odd cycle wholly into `D`; each of its vertices has internal degree
+`2`.  The remaining graph is a disjoint union of isolated vertices and even
+cycles, hence is bipartite.  Put the two sides of a bipartition into `A` and
+`B`, and take `C=empty`.  Then `A` and `B` are independent, and the displayed
+partition has the required residues.  QED.
+
+**Lemma: Complete Even Graphs Satisfy The Matching-Slot Target.**  If `K_n`
+is even, equivalently `n` is odd, then `K_n` has a matching-slot partition.
+
+Proof.  If `n congruent 1 mod 4`, put all vertices in one zero slot, since
+`K_n` has degree `n-1 congruent 0 mod 4`.  If `n congruent 3 mod 4`, put all
+vertices in `D`, since `n-1 congruent 2 mod 4`.  QED.
+
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
 `r` lies in the bipartite residual.
