@@ -4,7 +4,7 @@
 Checks whether tau(n-k) <= k+2 over a finite window.  With no explicit
 --shift-limit, the script computes B = max_{m < n} tau(m) by enumerating
 highly-composite exponent vectors, then checks the sufficient window
-1 <= k <= B-1.
+1 <= k <= B-2.
 """
 
 from __future__ import annotations
@@ -202,7 +202,7 @@ def checked_limit_for(n: int, requested_shift_limit: int | None) -> tuple[int, s
         return min(requested_shift_limit, n - 1), "explicit"
 
     max_tau, arg = max_tau_leq(n - 1)
-    checked = min(n - 1, max(0, max_tau - 1))
+    checked = min(n - 1, max(0, max_tau - 2))
     print(f"BOUND n={n} max_tau={max_tau} arg={arg} checked_limit={checked}")
     return checked, "full"
 

@@ -27,11 +27,12 @@ This is only restrictive for `m` close to `n`.
 
 ## Source Summary
 
-Direct page `/647`:
+Direct page `/647`, read from the site on 2026-05-31:
 
 - Problem: let `tau(n)` count positive divisors. Is there an `n > 24`
   such that `max_{m < n} (m + tau(m)) <= n + 2`?
 - Status on the site: open and "verifiable"; prize listed as `$44`.
+- The page was last edited 2026-04-07 and showed 9 comments.
 - The page attributes the problem to Erdos and Selfridge.
 - The page states that `n = 24` works.
 - The page states that `n + 2` is best possible, because
@@ -201,17 +202,49 @@ conditions and then verify all shifts directly.
 The next obstructions in direct verification are often at `k=14,15,16`:
 
 ```text
-k=14: n-14 = 14(180N-1), so tau(180N-1) <= 4.
-k=15: n-15 = 15(168N-1), so tau(168N-1) <= 4.
+k=14: n-14 = 14(180N-1).
+k=15: n-15 = 15(168N-1).
 ```
 
-These allow semiprime cofactors, so they are handled by direct `tau`
+These formulas are only globally true away from shared factors:
+`7 | 180N-1` can occur for `k=14`, and `5 | 168N-1` can occur for
+`k=15`. The safe conditions are:
+
+```text
+k=14: with 180N-1 = 7^r C and 7 not dividing C,
+      2(r+2) tau(C) <= 16.
+
+k=15: with 168N-1 = 5^r C and 5 not dividing C,
+      2(r+2) tau(C) <= 17.
+```
+
+Thus if the shared prime does not divide the cofactor one gets
+`tau(180N-1) <= 4` or `tau(168N-1) <= 4`; if `r=1,2`, the remaining
+cofactor must be prime. The search handles these by direct `tau`
 factorization rather than by prime-form sieving.
 
 For shifts `14 <= k <= 40`, no new global prime-form conditions are
 currently known. The fixed factor in `2520N-k` can share primes with the
 remaining linear form, so tempting forms such as `180N-1`, `168N-1`,
 `140N-1`, `126N-1`, and `105N-1` are not globally forced prime.
+
+Additional safe small-shift constraints, useful for hand-checking near
+misses but not currently used as sieve exclusions:
+
+```text
+k=7:  L=360N-1,  (r+2) tau(C) <= 9   for L=7^r C.
+k=18: L=140N-1,  2(r+3) tau(C) <= 20 for L=3^r C.
+k=20: L=126N-1,  3(r+2) tau(C) <= 22 for L=5^r C.
+k=21: L=120N-1,  2(r+2) tau(C) <= 23 for L=7^r C.
+k=28: L=90N-1,   3(r+2) tau(C) <= 30 for L=7^r C.
+k=30: L=84N-1,   4(r+2) tau(C) <= 32 for L=5^r C.
+k=36: L=70N-1,   3(r+3) tau(C) <= 38 for L=3^r C.
+k=42: L=60N-1,   4(r+2) tau(C) <= 44 for L=7^r C.
+k=60: L=42N-1,   6(r+2) tau(C) <= 62 for L=5^r C.
+```
+
+Here `r` is the valuation at the displayed shared prime and `C` is the
+remaining cofactor.
 
 ## Search Results So Far
 
@@ -252,11 +285,12 @@ by enumerating exponent vectors
 with nonincreasing exponents. This gives the exact maximum possible divisor
 count below `n` without sieving up to `n`.
 
-It is enough to verify `tau(n-k) <= k+2` for `1 <= k <= B-1`. For
-`k >= B`, one has
+It is enough to verify `tau(n-k) <= k+2` for every positive `k` with
+`k+2 < B`; the scripts check the slightly larger range `1 <= k <= B-2`.
+For `k+2 >= B`, one has
 
 ```text
-n-k + tau(n-k) <= n-k+B <= n.
+tau(n-k) <= B <= k+2.
 ```
 
 The final certificate should list `B`, a witness attaining `B`, every

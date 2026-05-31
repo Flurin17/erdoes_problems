@@ -16,16 +16,24 @@ Let
 B = max_{m < n} tau(m).
 ```
 
-Then for all `k >= B`,
+Then for all `k` with `k+2 >= B`,
 
 ```text
-n-k + tau(n-k) <= n-k+B <= n.
+tau(n-k) <= B <= k+2.
 ```
 
 So a finite certificate only needs to verify shifts
 
 ```text
-1 <= k <= B-1.
+1 <= k <= B-3.
+```
+
+Equivalently, it is enough to check all positive `k` with `k+2 < B`.
+The implemented verifiers check the slightly larger range `1 <= k <= B-2`.
+For every unlisted shift one has `k+2 >= B`, hence
+
+```text
+tau(n-k) <= B <= k+2.
 ```
 
 The verifier computes `B` independently by enumerating nonincreasing
@@ -41,7 +49,7 @@ candidate data:
 n
 B = max_{m<n} tau(m)
 witnesses attaining B
-factorization of n-k for 1 <= k <= B-1
+factorization of n-k for 1 <= k <= B-2
 tau(n-k) for each checked k
 max_{m<n}(m+tau(m))
 all m attaining the maximum
