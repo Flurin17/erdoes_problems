@@ -14,6 +14,7 @@ import argparse
 import random
 import sys
 from collections import Counter
+from math import lcm
 from pathlib import Path
 
 
@@ -22,6 +23,7 @@ import gamma_2alpha_quadratic_shell_census as exact  # noqa: E402
 from gamma_2alpha_boundary import refined_survivors_for_n  # noqa: E402
 from gamma_2alpha_boundary import RefinedGamma2AlphaSurvivor  # noqa: E402
 from gamma_2alpha_boundary_transition_demand import BoundaryDemand, path_labels  # noqa: E402
+from gamma_2alpha_overlap_cover import DEFAULT_PAIR_TEXT, parse_pair, side_tile_polygon  # noqa: E402
 from gamma_2alpha_random_shell_search import mixed_transitions, weighted_valid_demands  # noqa: E402
 
 
@@ -56,6 +58,61 @@ def first_exact_overlap(
     return None
 
 
+def local_cover_overlap(
+    survivor: RefinedGamma2AlphaSurvivor,
+    demand: BoundaryDemand,
+    radicand: int,
+) -> tuple[str, str] | None:
+    pairs = tuple(
+        pair
+        for pair in (parse_pair(text) for text in DEFAULT_PAIR_TEXT)
+        if pair.side_position <= len(demand.left_path)
+        and pair.base_position <= len(demand.base_path)
+    )
+    if not pairs:
+        return None
+    exact.RADICAND = radicand
+    q_polygons: list[exact.QPolygon] = []
+    labels: list[tuple[str, str]] = []
+    for pair in pairs:
+        side_path = demand.left_path if pair.side == "L" else demand.right_path
+        side_polygon = side_tile_polygon(
+            survivor,
+            side_name=pair.side,
+            path=side_path,
+            position=pair.side_position,
+            radicand=radicand,
+        )
+        base_polygon = side_tile_polygon(
+            survivor,
+            side_name="B",
+            path=demand.base_path,
+            position=pair.base_position,
+            radicand=radicand,
+        )
+        q_polygons.extend((side_polygon, base_polygon))
+        labels.append((f"{pair.side}{pair.side_position}", f"B{pair.base_position}"))
+    scale = 1
+    for polygon in q_polygons:
+        for point in polygon:
+            for value in point:
+                if exact.RADICAND == 1:
+                    scale = lcm(scale, (value.rational + value.radical).denominator)
+                else:
+                    scale = lcm(scale, value.rational.denominator, value.radical.denominator)
+    scaled = [tuple(exact.kscale_point(point, scale) for point in polygon) for polygon in q_polygons]
+    for index, (left_label, right_label) in enumerate(labels):
+        left = scaled[2 * index]
+        right = scaled[2 * index + 1]
+        if exact.kbbox_disjoint(exact.kbbox(left), exact.kbbox(right)):
+            continue
+        if exact.ksame_triangle(left, right):
+            continue
+        if exact.kpositive_overlap(left, right):
+            return left_label, right_label
+    return None
+
+
 def print_example(label: str, demand: BoundaryDemand) -> None:
     print(
         f"    {label}: L={path_labels(demand.left_path)} "
@@ -73,6 +130,11 @@ def main() -> None:
     parser.add_argument("--max-total-mixed", type=int)
     parser.add_argument("--top", type=int, default=20)
     parser.add_argument("--show-examples", action="store_true")
+    parser.add_argument(
+        "--outside-local-cover",
+        action="store_true",
+        help="only keep sampled shells not removed by the default local overlap cover",
+    )
     parser.add_argument(
         "--classify-non-overlap",
         action="store_true",
@@ -101,7 +163,12 @@ def main() -> None:
             position_counts: Counter[tuple[str, str]] = Counter()
             mixed_counts: Counter[int] = Counter()
             examples: dict[str, BoundaryDemand] = {}
+            kept = 0
             for demand in demands:
+                if args.outside_local_cover:
+                    if local_cover_overlap(survivor, demand, radicand) is not None:
+                        continue
+                    kept += 1
                 overlap = first_exact_overlap(survivor, demand, radicand)
                 if overlap is None:
                     if args.classify_non_overlap:
@@ -122,7 +189,10 @@ def main() -> None:
                 mixed_counts[demand.mixed_transitions] += 1
                 examples.setdefault(f"overlap {pair}", demand)
 
-            print(f"  valid-weighted samples={len(demands)} from {args.samples} attempts")
+            if args.outside_local_cover:
+                print(f"  valid-weighted samples outside local cover={kept} from {len(demands)} valid samples/{args.samples} attempts")
+            else:
+                print(f"  valid-weighted samples={len(demands)} from {args.samples} attempts")
             print(f"  status counts={dict(sorted(status_counts.items()))}")
             print(f"  overlap side-pair counts={dict(sorted(pair_counts.items()))}")
             print(f"  overlap mixed counts={dict(sorted(mixed_counts.items()))}")

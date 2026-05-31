@@ -1890,6 +1890,15 @@ Expanding the tested positions to the full nearby base-corner bands
 does not increase these counts, so the remaining shells avoid this entire
 local overlap band rather than only the sampled hotspot positions.
 
+Sampling directly outside this local-overlap cover gives no evidence for a
+different overlap mechanism. In a seed-`20260602`, `50000`-attempt
+valid-weighted run with the local-cover hits discarded, the `N=63` remainder
+sample had `3243` shells and split as `1747` residual corner-label violations
+and `1496` non-simple residual graphs. The `N=99` remainder sample had `14106`
+shells and split as `8512` residual corner-label violations and `5594`
+non-simple residual graphs. No proper overlaps appeared in either remainder
+sample.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`

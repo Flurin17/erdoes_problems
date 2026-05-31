@@ -127,7 +127,8 @@ Current components:
   seed-`20260601`, `50000`-sample run, proper overlaps concentrate at
   base/equal-side pairs such as `L2` with `B8` and the symmetric right-base
   positions, with no new first-overlap positions beyond the current local pair
-  set.
+  set. The `--outside-local-cover` option conditions samples on avoiding the
+  default local overlap cover before running the residual checks.
 - `gamma_2alpha_overlap_cover.py`: exact count-only version of the local
   overlap-position diagnostic. For the sampled local pairs
   `L2-B8,R6-B2,R5-B3,R8-B2,R7-B2,L2-B7,R7-B3,L3-B7,R6-B4`, it covers
