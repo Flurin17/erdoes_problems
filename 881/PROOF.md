@@ -7360,6 +7360,152 @@ w-c=x+y\ge a+m.
 This contradicts \(c>w-a-m\). Therefore (1) holds, and (2) is just (1)
 rewritten with \(c\) fixed. \(\square\)
 
+## Lemma 13.1g: Minimal stage holes have an exact repair intersection
+
+Let \(S\subset\mathbb N\) be finite, let \(F\subset S\) be nonempty, put
+\[
+C=S\setminus F,
+\]
+and suppose
+\[
+w\notin3C. \tag{1}
+\]
+Then \(F\) is inclusion-minimal for the hole \(w\), meaning that
+\[
+w\in3(S\setminus(F\setminus\{f\}))\qquad(f\in F), \tag{2}
+\]
+if and only if, for every \(f\in F\),
+\[
+w\in (f+2C)\cup(2f+C)\cup\{3f\}. \tag{3}
+\]
+
+Proof. Restoring only \(f\) changes the retained set from \(C\) to
+\[
+C\cup\{f\}.
+\]
+Because \(w\notin3C\), a three-term representation of \(w\) from
+\[
+C\cup\{f\}
+\]
+must use at least one copy of \(f\). According to whether it uses one, two,
+or three copies of \(f\), this is exactly the alternatives
+\[
+w\in f+2C,\qquad w\in2f+C,\qquad w=3f.
+\]
+Thus (2) is equivalent to (3) for each \(f\in F\). \(\square\)
+
+Therefore a candidate witness for a finite Schreier edge must lie not only
+outside \(3C\) and outside the forbidden terminal windows from Lemma
+13.1f, but also in the repair intersection
+\[
+\bigcap_{f\in F}\bigl((f+2C)\cup(2f+C)\cup\{3f\}\bigr).
+\]
+The P6 diagnostics below use precisely this extra intersection: some
+candidate values survive the terminal windows but fail because at least one
+deleted vertex has no restored repair.
+
+## Lemma 13.1h: Retained endpoints poison candidate intervals
+
+Let \(S\subset\mathbb N\) be finite, let
+\[
+E=\{a,q\}\subset S,
+\]
+put \(C=S\setminus E\), and suppose \(p\in C\). If integers \(R\ge q\)
+and \(q-p\le R-p\) satisfy
+\[
+[q-p,\ R-p]\subseteq2C, \tag{1}
+\]
+then
+\[
+[q,R]\subseteq3C. \tag{2}
+\]
+In particular, no pair edge \(E\) can have a witness in the interval
+\([q,R]\).
+
+Proof. For every \(v\in[q,R]\), condition (1) gives
+\[
+v-p\in2C.
+\]
+Since \(p\in C\),
+\[
+v=p+(v-p)\in C+2C=3C.
+\]
+This proves (2), and therefore every \(v\in[q,R]\) is poisoned as a
+candidate witness for deleting \(E\). \(\square\)
+
+This lemma explains one recurring failure mode in the finite Schreier
+searches. When a first pair-edge witness forces new retained fillers, an
+old retained endpoint can combine with the current two-sum buffer to make
+all small candidates for the next pair edge already lie in \(3C\). The
+loophole is equally clear: a construction would have to break the interval
+\([q-p,R-p]\) after deleting the new pair, or push the new protected point
+beyond the poisoned range.
+
+## Lemma 13.1i: Low-excess pair holes force private mirrors
+
+Let \(S\subset\mathbb N\) be finite, let \(a<p\) be elements of \(S\), put
+\[
+F=\{a,p\},\qquad C=S\setminus F,
+\]
+and suppose
+\[
+[N,H]\subseteq2S,\qquad w=p+u\le H,\qquad w\notin3C. \tag{1}
+\]
+Let \(e\in C\) satisfy
+\[
+w-e\ge N,\qquad w-e\notin F+F. \tag{2}
+\]
+Then at least one of the following alternatives holds:
+\[
+u-e\in C,\qquad e+p\notin2C, \tag{3}
+\]
+or
+\[
+p+u-a-e\in C,\qquad e+a\notin2C. \tag{4}
+\]
+In particular, if (4) holds and \(e<u-a\), then the mirror
+\[
+q=p+u-a-e
+\]
+is a new element of \(C\) larger than \(p\).
+
+Proof. Since \(w-e\in[N,H]\), choose a two-term representation
+\[
+w-e=s_1+s_2,\qquad s_i\in S.
+\]
+If both \(s_i\) lay in \(C\), then \(w=e+s_1+s_2\in3C\), contrary to
+(1). Thus the representation meets \(F\). Because \(w-e\notin F+F\), it
+meets \(F\) in exactly one element.
+
+If the representation uses \(p\), then
+\[
+w-e-p=u-e\in C.
+\]
+If also \(e+p\in2C\), then
+\[
+w=(u-e)+(e+p)\in C+2C=3C,
+\]
+contradiction. Hence (3) holds.
+
+If the representation uses \(a\), then
+\[
+w-e-a=p+u-a-e\in C.
+\]
+If also \(e+a\in2C\), then
+\[
+w=(p+u-a-e)+(e+a)\in C+2C=3C,
+\]
+again a contradiction. Hence (4) holds. The final assertion is immediate
+from \(e<u-a\). \(\square\)
+
+Thus a low-excess pair witness is not only a terminal-gap object. Each
+active retained row must be assigned a private color, and the lower color
+can force new retained mirrors beyond the moving endpoint \(p\). If those
+mirrors are later included in the protected tail, Lemma 13.1h can poison
+their first candidate intervals; the open question is whether a sparse
+hierarchical construction can route these mirrors without losing the
+two-sum coverage buffer.
+
 Consequently, if a first-completed Schreier edge \(F\) with
 \[
 a=\min F,\qquad y=\max F
@@ -8466,6 +8612,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the full P6 failure comes from simultaneous higher-rank edge closure. The
   private-color diagnostic after it records the exact Lemma 8.4c incidence
   matrix required of any reflected-Schreier lift.
+* Lemma 13.1g adds the exact inclusion-minimal repair intersection for
+  finite stage holes.
+* Lemma 13.1h records the retained-endpoint poison interval that kills
+  whole ranges of pair-edge witness candidates.
+* Lemma 13.1i records the low-excess private-mirror closure: pair holes
+  force active rows to choose endpoint colors, and the lower endpoint can
+  generate new retained mirrors above the moving endpoint.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).

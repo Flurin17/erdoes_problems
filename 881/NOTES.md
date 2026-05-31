@@ -1303,6 +1303,22 @@ is not ruled out by the fixed-rank lemmas, because edge sizes go to
 infinity on tails; the open burden is finite-gadget existence with coverage,
 frozen witnesses, unboundedness, and domination all at once.
 
+The Schreier diagnostics now have several exact finite tests. Lemma 13.1f
+gives the terminal forbidden windows. Lemma 13.1g says an inclusion-minimal
+hole must also lie in
+\[
+\bigcap_{f\in F}\bigl((f+2C)\cup(2f+C)\cup\{3f\}\bigr),
+\]
+where \(C=S\setminus F\). Lemma 13.1h records the retained-endpoint poison
+interval: if \(p\in C\) and \([q-p,R-p]\subset2C\), then every candidate
+for the pair edge \(\{a,q\}\) in \([q,R]\) already lies in \(3C\). For
+low-excess pair holes, Lemma 13.1i makes the private-color closure explicit:
+each active row is colored by one endpoint, and the lower endpoint can force
+new mirrors above the moving endpoint. These tests explain the P6 search
+stall without proving a global obstruction; a surviving construction would
+have to route the forced mirrors around the poisoned intervals while keeping
+the two-sum coverage buffer.
+
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining
 \(k=2\) counterexample must have, inside every infinite tail, an
