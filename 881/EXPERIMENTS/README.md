@@ -191,7 +191,10 @@ because the new higher-rank edges involving `38` have no compatible
 witnesses. Thus the P6 stall is a simultaneous-closure obstruction, not
 just a single pair-edge obstruction.
 Run `schreier_stage_search.py --p6-pair-diagnostic` to reproduce this
-low-excess pair-edge calculation and the protected-filler failure.
+low-excess pair-edge calculation and the protected-filler failure. The same
+diagnostic now classifies first candidate failures as poisoned witnesses,
+absorbed private-color rows, missing reflected rows, or missing
+inclusion-minimal repairs.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

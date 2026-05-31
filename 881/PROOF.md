@@ -5491,6 +5491,24 @@ therefore carry, for every first-completed edge \(F\), not only a witness
 with all added mirrors and fillers either kept in a fixed finite
 exceptional set or assigned their own later barrier witnesses.
 
+The enhanced `--p6-pair-diagnostic` output separates the first failures
+into poisoned candidate witnesses, missing reflected rows, absorbed rows
+\(e+f\in2C\), and missing inclusion-minimal repairs. For the pair-edge
+escape above, the early new protected edges
+\[
+\{10,40\},\quad \{10,43\},\quad \{10,44\}
+\]
+already fail because their first possible witnesses lie in \(3C\). The
+higher-rank edge
+\[
+\{18,19,30,38\}
+\]
+has non-poisoned candidates \(w=39\) and \(w=41\), but those candidates are
+not inclusion-minimal: restoring all single deleted vertices does not
+repair the hole. This confirms that the P6 stall is not one local
+pair-edge condition; it is simultaneous private-color closure plus
+minimal-repair closure across the new protected fillers.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets

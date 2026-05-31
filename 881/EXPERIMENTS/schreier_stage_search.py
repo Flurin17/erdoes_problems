@@ -58,6 +58,71 @@ def dominates(elements: set[int], deletion: tuple[int, ...], witness: int, thres
     return True
 
 
+def private_colors(
+    elements: set[int],
+    deletion: tuple[int, ...],
+    witness: int,
+    retained: int,
+) -> list[int]:
+    removed = set(deletion)
+    kept = elements - removed
+    two_kept = {a + b for a in kept for b in kept}
+    return [
+        f
+        for f in deletion
+        if witness - retained - f in kept and retained + f not in two_kept
+    ]
+
+
+def candidate_failure(
+    elements: set[int],
+    deletion: tuple[int, ...],
+    witness: int,
+    threshold: int,
+) -> str:
+    removed = set(deletion)
+    kept = elements - removed
+    if witness in hsum(kept, 3, witness):
+        return "poisoned"
+
+    missing_repairs = [
+        f
+        for f in deletion
+        if witness not in hsum(elements - (removed - {f}), 3, witness)
+    ]
+    if missing_repairs:
+        return f"repair-missing:{missing_repairs}"
+
+    pair_deleted = {a + b for a in removed for b in removed}
+    for e in sorted(kept):
+        if witness - e < threshold or witness - e in pair_deleted:
+            continue
+        reflected = [f for f in deletion if witness - e - f in kept]
+        if not reflected:
+            return f"no-reflection:e={e}"
+        colors = private_colors(elements, deletion, witness, e)
+        if not colors:
+            return f"absorbed:e={e},f={reflected}"
+
+    return "ok"
+
+
+def diagnose_edge_candidates(
+    elements: set[int],
+    edge: tuple[int, ...],
+    coverage: int,
+    threshold: int = 2,
+) -> list[tuple[str, int]]:
+    first_by_reason: dict[str, int] = {}
+    for w in range(max(edge), coverage + 1):
+        reason = candidate_failure(elements, edge, w, threshold)
+        key = reason.split(":", 1)[0]
+        first_by_reason.setdefault(reason if key == "repair-missing" else key, w)
+        if reason == "ok":
+            break
+    return sorted((reason, w) for reason, w in first_by_reason.items())
+
+
 def first_schreier_edges(protected: list[int]) -> list[tuple[int, ...]]:
     """Edges completed by the first four protected points."""
     if len(protected) < 4:
@@ -291,6 +356,13 @@ def p6_pair_diagnostic() -> None:
         print("  protected=", protected, "coverage_end=", coverage)
         print("  failed edge count=", len(failed_edges))
         print("  first failed edges=", failed_edges[:12])
+        print("  first candidate failure types:")
+        sample_edges = list(failed_edges[:8])
+        special = (18, 19, 30, 38)
+        if special in failed_edges and special not in sample_edges:
+            sample_edges.append(special)
+        for edge in sample_edges:
+            print(f"    {edge}: {diagnose_edge_candidates(elements, edge, coverage)}")
 
 
 def main() -> None:
