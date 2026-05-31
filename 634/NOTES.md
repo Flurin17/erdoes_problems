@@ -151,7 +151,12 @@ The tile triangle is not required to be similar to the large triangle unless exp
   `207888` residual corner-label violations, `58224` pinch-sector
   obstructions, and `149728` split-corner-label obstructions. This closes the
   mixed-exactly-`6` finite shell stratum for `63`; higher mixed counts still
-  need a structural cutoff or a broader exact pass.
+  need a structural cutoff or a broader exact pass. First recorded
+  high-mixed certificate slices for `63`, outside the local cover, remain
+  within the same obstruction vocabulary: among the first `1000` diagnosed
+  shells at mixed `8`, `904` are corner-label violations and `96` are
+  split-corner-label obstructions; at mixed `10` and `12`, each first slice has
+  `838` corner-label violations and `162` pinch-sector obstructions.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

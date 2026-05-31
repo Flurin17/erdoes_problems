@@ -228,7 +228,13 @@ Current components:
   graph/pinch/sector/split profiles for non-simple residual graphs. A first
   mixed-`6` outside-cover slice of `50` diagnosed shells gives `17`
   corner-label certificate types for `N=63` and `18` for `N=99`; this is
-  order-biased calibration, not a proof.
+  order-biased calibration, not a proof. The probe now supports lazy
+  local-cover filtering, generated-shell skips, and JSON output. Recorded
+  `N=63` high-mixed outside-cover slices of `1000` diagnosed shells each show
+  only the existing exact obstruction statuses: mixed `8` has `904`
+  corner-label violations and `96` split-corner-label obstructions, while
+  mixed `10` and mixed `12` each have `838` corner-label violations and `162`
+  pinch-sector obstructions.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

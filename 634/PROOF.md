@@ -2251,6 +2251,17 @@ split-corner-label obstruction. This closes the mixed-exactly-`6` finite shell
 stratum for `N=63`; it does not yet supply a structural cutoff for all higher
 mixed-transition boundary orders.
 
+Recorded high-mixed certificate probes for `N=63` show the same obstruction
+vocabulary beyond mixed `6`, though only as order-biased evidence. In the first
+`1000` outside-cover diagnosed shells at mixed `8`, the refined statuses are
+`904` corner-label violations and `96` split-corner-label obstructions. In the
+first `1000` outside-cover diagnosed shells at each of mixed `10` and `12`, the
+refined statuses are `838` corner-label violations and `162` pinch-sector
+obstructions. These are stored as
+`EXPERIMENTS/results/n63_mixed8_certificate_slice_0000000_limit1000.json`,
+`EXPERIMENTS/results/n63_mixed10_certificate_slice_0000000_limit1000.json`, and
+`EXPERIMENTS/results/n63_mixed12_certificate_slice_0000000_limit1000.json`.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`
