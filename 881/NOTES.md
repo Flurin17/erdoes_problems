@@ -433,6 +433,17 @@ then greedy matching plus Lemma 3.2 gives the desired infinite deletion.
 Thus any counterexample must have bounded-transversal structure, not merely
 few representations.
 
+Corollary 3.4b gives an important positive class: if the original
+order-\(k\) representation function of \(A\) is uniformly bounded, then the
+desired infinite deletion exists. The proof pads each \(k\)-term
+representation of \(n-e\) by \(e\). This gives \(\gg |A\cap[1,n]|\)
+order-\((k+1)\) representations of \(n\), while a fixed vertex \(x\) can
+occur in only \(O(1)\) of them because removing \(x\) leaves a bounded
+number of \(k\)-term representations of \(n-x\). Hence the edge/degree
+ratio tends to infinity. For \(k=2\), this rules out Sidon-type or
+unique-representation thin bases as counterexamples; any remaining sparse
+counterexample must have unbounded two-sum multiplicity somewhere.
+
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
 shifted targets \(n-c\), as \(c\) ranges through retained elements of \(A\).

@@ -1283,6 +1283,71 @@ core. A counterexample must therefore have large integers whose
 representation hypergraphs are not merely small, but efficiently covered by
 bounded vertex sets.
 
+## Corollary 3.4b: Bounded representation functions give a good deletion
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\), with
+order-\(k\) threshold \(N_0\). Suppose there is a constant \(R\) such that
+every integer has at most \(R\) unordered \(k\)-term representations from
+\(A\), counted as multisets. Then there is an infinite
+\[
+B\subset A
+\]
+such that \(A\setminus B\) is an asymptotic basis of order \(k+1\).
+
+Proof. We verify Proposition 3.4 with \(E=\varnothing\). Let \(n\) be
+large. For each
+\[
+e\in A\cap[1,n-N_0],
+\]
+choose one \(k\)-term representation of \(n-e\) from \(A\), and append
+\(e\). This gives at least
+\[
+|A\cap[1,n-N_0]|
+\]
+distinguished \((k+1)\)-term representations of \(n\). When the
+distinguished summand is forgotten, any one \((k+1)\)-term multiset can
+arise from at most \(k+1\) choices of the distinguished occurrence. Hence
+there are at least
+\[
+\frac{|A\cap[1,n-N_0]|}{k+1} \tag{1}
+\]
+distinct \((k+1)\)-term multisets representing \(n\).
+
+Passing from multisets to support sets loses only a constant depending on
+\(k\): a support of size at most \(k+1\) carries at most
+\[
+C_k=\binom{2k+1}{k+1}
+\]
+multiplicity patterns of total size \(k+1\). Thus the representation
+hypergraph \(\mathcal H_\varnothing(n)\) has at least
+\[
+\frac{|A\cap[1,n-N_0]|}{(k+1)C_k} \tag{2}
+\]
+edges.
+
+On the other hand, fix a vertex \(x\in A\). Every multiset representation
+of \(n\) using \(x\), after removing one occurrence of \(x\), gives a
+\(k\)-term multiset representation of \(n-x\). By hypothesis there are at
+most \(R\) such multisets. Therefore the degree of \(x\) in
+\(\mathcal H_\varnothing(n)\) is at most \(R\), so
+\[
+\Delta_\varnothing(n)\le R. \tag{3}
+\]
+
+Since \(A\) is infinite, \(|A\cap[1,n-N_0]|\to\infty\). Equations (2) and
+(3) imply
+\[
+\frac{|\mathcal H_\varnothing(n)|}{\Delta_\varnothing(n)}\to\infty.
+\]
+Proposition 3.4 gives an infinite deletion preserving order \(k+1\).
+\(\square\)
+
+For \(k=2\), this covers Sidon-type and unique-representation order-2
+bases. In particular, any counterexample in the remaining sparse regime
+must have unbounded two-term representation function; it cannot be a
+purely near-unique Raikov-Stöhr-style basis with only bounded
+representation multiplicity.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6356,6 +6421,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   terminal-gap holes outside any prescribed finite protected core.
 * Proposition 3.4 proves the conclusion for bases with sufficiently
   redundant \((k+1)\)-representations.
+* Corollary 3.4b applies this to bounded order-\(k\) representation
+  functions. Any order-\(k\) basis whose \(k\)-term representation counts
+  are uniformly bounded has a good infinite deletion; in particular, a
+  \(k=2\) counterexample cannot be a bounded-representation/Sidon-type thin
+  basis.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
