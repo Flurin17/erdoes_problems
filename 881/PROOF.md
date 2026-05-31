@@ -7190,13 +7190,121 @@ For (2), apply the separate reflection-recurrence of \(C_i\) from Lemma
 8.6g'' with \(m>\max(L,2\max U)\). Then \(m-U\subset A=C_i\cup C_{1-i}\),
 and (1) says at most one mirror lies in \(C_i\). \(\square\)
 
-Thus the compactified pair obstruction is essentially bipartite. Large
-finite pieces of either color must recur with almost all mirrors landing in
-the opposite color, producing arbitrarily large mixed representation
-clusters. The remaining gap is to upgrade this unbounded mixed clustering
-to the linear-scale mixed spikes required by Corollary 8.6j-3, or to show
-that such an almost-bipartite recurrent Sidon structure can actually be
-arithmetized.
+Thus the compactified pair obstruction is essentially bipartite. In fact,
+the integer Sidon condition now gives a contradiction, not merely a
+stronger necessary condition.
+
+## Lemma 8.6g'''': Two Sidon colors cannot support recurrence
+
+Let
+\[
+A=C\cup D\cup E
+\]
+be a disjoint union, where \(E\) is finite, and suppose both \(C\) and
+\(D\) are Sidon. If
+\[
+|C|\ge3,
+\]
+then \(C\) is not reflection-recurrent in \(A\). More precisely, for any
+three distinct
+\[
+u_1,u_2,u_3\in C,
+\]
+there are not arbitrarily large \(m\) such that
+\[
+m-u_1,\quad m-u_2,\quad m-u_3\in A. \tag{1}
+\]
+
+Proof. Suppose such centers \(m\) exist. Take them larger than
+\[
+2\max\{u_1,u_2,u_3\}+\max(E\cup\{0\}).
+\]
+For each such \(m\), at most one of the three mirrors
+\[
+m-u_1,\quad m-u_2,\quad m-u_3
+\]
+lies in \(C\): two mirrors in \(C\) would give two distinct same-color
+representations
+\[
+u_i+(m-u_i)=u_j+(m-u_j)
+\]
+with \(m>2\max\{u_1,u_2,u_3\}\), contradicting Sidonicity of \(C\).
+None lies in \(E\), so at least two lie in \(D\). Among the
+three unordered
+pairs
+\[
+\{u_i,u_j\}\qquad(1\le i<j\le3),
+\]
+one pair occurs for two distinct centers \(m\ne n\); say
+\[
+m-u_i,\ m-u_j,\ n-u_i,\ n-u_j\in D.
+\]
+Then \(D\) has the same-color two-sum collision
+\[
+(m-u_i)+(n-u_j)=(m-u_j)+(n-u_i). \tag{2}
+\]
+The unordered pairs in (2) are distinct because \(m\ne n\) and
+\(u_i\ne u_j\). This contradicts Sidonicity of \(D\). \(\square\)
+
+Consequently an infinite set \(A\) cannot be partitioned, up to a finite
+exceptional set, into two certificate-free color classes that are both
+reflection-recurrent in \(A\): at least one class contains three elements,
+and certificate-free sets are Sidon. Therefore the persistent list-colorable
+pair-barrier hypothesis of Lemma 8.6g'' is impossible.
+
+### Corollary 8.6g''''.1: Cross-reflected packets have size at most two
+
+Let
+\[
+A=C\cup D\cup E
+\]
+be a disjoint union, where \(E\) is finite and both \(C\) and \(D\) are
+Sidon. Suppose \(D\) is reflection-recurrent in \(A\). If
+\[
+S\subset C,\qquad t-S\subset D,
+\]
+then
+\[
+|S|\le2. \tag{1}
+\]
+
+Proof. Put
+\[
+U=t-S\subset D.
+\]
+Choose a recurrence center \(m\) for \(U\) so large that
+\[
+m>t,\qquad m>2\max U,\qquad m-\min U>\max(E\cup\{0\}).
+\]
+Then
+\[
+m-U\subset A\setminus E=C\cup D.
+\]
+Since \(D\) is Sidon, at most one \(u\in U\) can have \(m-u\in D\);
+otherwise
+\[
+u+(m-u)=v+(m-v)
+\]
+would be a nontrivial same-color collision in \(D\). Hence for all but at
+most one \(s\in S\),
+\[
+m-(t-s)=s+(m-t)\in C.
+\]
+Let
+\[
+h=m-t\ne0.
+\]
+A Sidon set \(C\) contains at most one pair \(s,s+h\) with \(s\in S\):
+two distinct such \(s,s'\) would give
+\[
+s+(s'+h)=s'+(s+h),
+\]
+a nontrivial same-color collision in \(C\). Thus \(|S|-1\le1\), proving
+(1). \(\square\)
+
+This corollary is the packet-level form of Lemma 8.6g'''': finite windows
+may contain large cross-reflected Sidon packets, but such a packet cannot
+coexist with recurrence of the target color in the integer setting.
 
 ## Warning 8.6g'''a: Bipartite recurrent colors are quotient-compatible
 
@@ -7228,10 +7336,11 @@ reflects the two colors across each other:
 \[
 3-C=D,\qquad 3-D=C.
 \]
-Thus finite residue data can exhibit exactly the bipartite recurrent
-Sidon-like shape left by Lemma 8.6g'''. Any contradiction must use integer
-lifting, growth, threshold, or barrier information beyond residue-level
-coverage.
+Thus finite residue data can exhibit the one-center, two-point shadow of
+the bipartite shape from Lemma 8.6g'''. Lemma 8.6g'''' explains why this
+does not lift to an infinite integer obstruction: recurrence supplies
+arbitrarily many centers for a three-point test set, and two such centers
+force an ordinary Sidon collision.
 
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
@@ -10162,10 +10271,32 @@ representations to each target. Corollary 8.6j-3 would then give the
 desired infinite deletion, contradicting that \(A\) is a counterexample.
 \(\square\)
 
-Thus the enumerated-Schreier route is forced all the way to the critical
-order-2 density scale. It cannot be implemented in a denser basis, and in
-the critical case it must create large mixed two-sum spikes between two
-recurrent Sidon-like tail colors.
+## Corollary 13.1l.3a: The enumerated-Schreier first tail is impossible
+
+No \(k=2\) counterexample can be realized by the enumerated-Schreier target
+of Variant 13.1b-enum.
+
+Proof. Corollary 13.1l.3 would give an infinite cofinite tail
+\[
+P_1=C_0\cup C_1
+\]
+where both colors are certificate-free, hence Sidon, and both colors are
+reflection-recurrent in \(A\). Put
+\[
+E=A\setminus P_1.
+\]
+Since \(P_1\) is infinite, one of \(C_0,C_1\) contains at least three
+elements. Lemma 8.6g'''' forbids that color from being
+reflection-recurrent in
+\[
+A=C_0\cup C_1\cup E.
+\]
+This contradicts Corollary 13.1l.3. \(\square\)
+
+Thus the enumerated-Schreier route is closed at the first-tail level. The
+finite bipartite windows below remain useful diagnostics for local
+obstructions, but they cannot be promoted to an infinite recurrent
+two-color tail in the integers.
 
 ### Diagnostic 13.1l.4: Bipartite Sidon windows are locally compatible
 
@@ -10353,6 +10484,9 @@ This leaves two different unique-row mechanisms. In the same-color branch,
 the rows \(s+d\) are same-color Sidon sums with no opposite-color
 two-sum collision. In the mixed branch, they are mixed sums of degree one
 in the bipartite representation graph.
+In the actual cofinite recurrent two-color setting of Corollary 13.1l.3,
+Corollary 8.6g''''.1 bounds either subbranch by \(2\); the split remains a
+useful finite diagnostic, not a viable infinite escape.
 
 ### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
 
@@ -11394,14 +11528,19 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.6g'' compactifies the surviving list-colorable pair obstruction:
   if it persists for every finite test set, then \(A\) has a global
   two-coloring into certificate-free classes, and each color is separately
-  reflection-recurrent in \(A\). Together with Corollary 8.6j-3, any such
-  counterexample must also have mixed two-color representation spikes
-  comparable to \(A(X)\) along an unbounded sequence.
+  reflection-recurrent in \(A\).
 * Lemma 8.6g''' adds that these recurrent colors must reflect almost across
   colors: same-color mirrors would create nontrivial Sidon collisions.
-* Warning 8.6g'''a shows this bipartite recurrent color shape is
-  finite-quotient compatible, so it cannot be ruled out by residue coverage
-  alone.
+* Lemma 8.6g'''' turns that almost-cross-color recurrence into an integer
+  contradiction: two recurrence centers for the same three source points
+  force a Sidon collision in the opposite color. Hence the persistent
+  list-colorable pair obstruction from Lemma 8.6g'' is impossible.
+* Corollary 8.6g''''.1 is the packet-level version: a cross-reflected
+  packet \(S\subset C\), \(t-S\subset D\), has size at most two when the
+  target Sidon color \(D\) is recurrent.
+* Warning 8.6g'''a shows only the finite quotient shadow of this shape:
+  one center can swap two two-point colors modulo \(6\), but this does not
+  lift to arbitrarily many integer centers for a three-point test set.
 * Lemma 8.6h supplies such finite test sets when \(A\) contains long
   arithmetic progressions; Warning 8.6i shows the corresponding
   certificate-density statement is not a finite quotient consequence of
@@ -11583,6 +11722,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
+* Corollary 13.1l.3a applies Lemma 8.6g'''' to that cofinite two-color
+  tail, closing the enumerated-Schreier counterexample route at the
+  first-tail level.
 * Diagnostic 13.1l.4 records finite integer windows with exactly this
   bipartite certificate-free and mixed-spike shape. Its unique-star output
   also shows that the remaining unique-gate branch is locally compatible.
@@ -11592,7 +11734,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   must be a large unique-gate packet.
 * Corollary 13.1l.6 splits that packet by color into same-color unique rows
   and mixed degree-one rows, after discarding only \(O(1)\) non-flipping
-  reflected rows.
+  reflected rows; Corollary 8.6g''''.1 bounds both subbranches in the
+  cofinite recurrent setting.
 * Diagnostic 13.1m shows that high-excess first-pair starts are locally
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.

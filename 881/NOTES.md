@@ -1803,12 +1803,23 @@ The same-color Sidon property also forces almost-cross-color recurrence:
 if \(U\) lies in one color and \(m>2\max U\), at most one mirror \(m-u\)
 can lie in that same color, otherwise \(u+(m-u)=v+(m-v)\) is a nontrivial
 same-color collision. Hence each recurrent color must reflect finite
-patterns almost entirely into the other color. The surviving structure is
-therefore close to a bipartite complementing system with large mixed
-representation clusters. This is still finite-quotient compatible:
+patterns almost entirely into the other color. The key new observation is
+Lemma 8.6g'''': two different recurrence centers for the same three-point
+test set then force a Sidon collision in the opposite color. Thus an
+infinite integer basis cannot have a cofinite two-color certificate-free
+tail with both colors reflection-recurrent. This closes the
+enumerated-Schreier first-tail route in Corollary 13.1l.3a.
+Corollary 8.6g''''.1 gives the packet version: if \(S\subset C\),
+\(t-S\subset D\), and \(D\) is recurrent, then \(|S|\le2\). A recurrence
+center for \(t-S\) shifts all but one element of \(S\) by a fixed nonzero
+\(h\) inside \(C\), which a Sidon set cannot do twice.
+The shape is still finite-quotient compatible:
 in \(\mathbb Z/6\mathbb Z\), \(A=\{0,1,2,3\}\) splits into
 \(\{0,2\}\cup\{1,3\}\), both colors are certificate-free, \(2A\) is the
 whole group, and the center \(3\) swaps the two colors by reflection.
+The quotient example has only a one-center/two-point shadow; it does not
+survive the integer recurrence demand for arbitrarily many centers on a
+three-point test.
 Lemma 8.6j-7a records the matching route that would close one color:
 if the graphs of representations \(n=c_1+c_2+d\), with
 \(c_i\in C\) and \(d\in D\cup E\), have arbitrarily large matchings
@@ -1888,15 +1899,15 @@ d=16,\quad t=24,\quad S=\{9,11,13,15,16\},
 \]
 with \(24-S\subset A\) and every \(s+16\) uniquely represented in \(2A\).
 Thus Corollary 13.1l.5 narrows the infinite obstruction to unique-gate
-packets, but that branch remains finitely compatible.
+packets under the now-impossible cofinite two-color tail; as a finite
+diagnostic, that branch remains locally compatible.
 Corollary 13.1l.6 splits that remaining branch by color. Since reflection
 through \(t\) flips colors except for \(O(1)\) Sidon exceptions, a large
 unique-gate packet has a positive subpacket in one of two forms:
 same-color unique rows \(s+d\) with \(s,d\) in one color and \(t-s\) in the
-other, or mixed degree-one rows \(s+d\) with \(s\) opposite \(d\). The next
-unresolved target is to rule out both subbranches globally, or to build a
-staged construction that alternates between them without triggering the
-promoted-mirror poison intervals.
+other, or mixed degree-one rows \(s+d\) with \(s\) opposite \(d\). Lemma
+8.6g'''' rules out this entire cofinite recurrent two-color setting before
+those subbranches can become an infinite construction.
 
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then
