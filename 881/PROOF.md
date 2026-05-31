@@ -2672,6 +2672,37 @@ witness, hence also an order-2-private witness. In the more general
 barrier form, order-2 minimality must be supplied separately or by a second
 unbounded barrier for two-term representations.
 
+## Lemma 13.1d: Positive-summand buffer needed for any staged construction
+
+Let \(A_s\subset\mathbb N\) be a finite stage, let \(m=\min A_s\), and let
+\(N_s\) be a declared endpoint. Suppose every element added after stage
+\(s\) is larger than \(N_s\). If the final union \(A\) is to be an
+asymptotic basis of order \(k\), then the current stage must already cover
+the immediate buffer
+\[
+[N_s+1,\ N_s+(k-1)m]\subset kA_s
+\]
+for all sufficiently large \(s\).
+
+Proof. If
+\[
+n\le N_s+(k-1)m,
+\]
+then any \(k\)-term representation of \(n\) that uses a later element is at
+least
+\[
+(N_s+1)+(k-1)m>n,
+\]
+because all summands are positive and every old or later summand is at
+least \(m\). Hence every eventual \(k\)-term representation of such \(n\)
+must already lie in \(kA_s\). \(\square\)
+
+For the \(k=2\) stage criteria this requires a one-point buffer beyond the
+declared endpoint; for the possible \(k=3\) adjacent-order route it requires
+a two-point buffer when \(m=1\). This explains why endpoint witnesses in
+Examples 13.2 and in the finite \(k=3\) searches do not immediately
+iterate.
+
 ## Proposition 13.1c: Cross-stage pair barriers would give a counterexample
 
 Suppose there are increasing finite sets
@@ -2864,6 +2895,47 @@ linked staged construction, the old coverage block already supplies exactly
 this kind of shifted two-sum coverage for the interval where the next
 \(p_s\) is prescribed.
 
+## Attempt 15: Adjacent-order minimality for \(k=3\)
+
+A possible negative route for \(k\ge3\) is to construct an asymptotic
+order-\(k\) basis \(A\) that is ordinary minimal as an order-\((k+1)\)
+basis. This would imply the desired no-answer only if the order-\((k+1)\)
+private elements are cofinite in \(A\), or if they are replaced by an
+unbounded finite-barrier family. Indeed, if \(P\subset A\) is the set of
+elements having unbounded one-point order-\((k+1)\) witnesses, then every
+infinite \(B\subset A\) meets \(P\) infinitely often if and only if
+\(A\setminus P\) is finite.
+
+The experiment `EXPERIMENTS/adjacent_stage_search.py` tests the first
+nontrivial case \(k=3\). Starting from
+\[
+A_0=\{1,2,3\},
+\]
+the greedy singleton search finds local stages
+\[
+\{1,2,3\}\to\{1,2,3,6\}\to\{1,2,3,6,14\},
+\]
+with order-4 private witnesses \(13\) for \(6\) and \(22\) for \(14\).
+These are endpoint-style stages: after the second stage, three-sum coverage
+extends only to \(23\), leaving at most the two-point buffer required by
+Lemma 13.1d.
+
+Searching with the buffer imposed finds only short chains in small ranges,
+for example
+\[
+\{1,2,3\}\cup\{4,11\},\qquad
+\{1,2,3\}\cup\{7,10\},
+\]
+and then a second stage such as adjoining \(23\). No third buffered
+singleton stage was found within the tested bounds. This is finite evidence
+only, but it reinforces the structural obstruction from Lemma 10.3:
+singleton order-4 holes force terminal retained gaps, so cofinally many
+singletons with bounded excess cannot coexist with order-3 coverage.
+
+The more plausible \(k=3\) negative route is therefore the same as in the
+remaining \(k=2\) case: unbounded collective barriers, such as cross-stage
+pairs, rather than cofinite singleton private witnesses.
+
 ## Dependency Graph
 
 * Theorem 1 is independent and resolves \(k=1\).
@@ -2989,6 +3061,9 @@ this kind of shifted two-sum coverage for the interval where the next
   separate proof.
 * Proposition 13.1c gives a concrete pair-barrier stage criterion: protecting
   every old-new pair would already produce a \(k=2\) counterexample.
+* Lemma 13.1d records the positive-summand buffer condition that every
+  staged construction must satisfy before moving all future elements past
+  the declared endpoint.
 * Example 13.2 gives an isolated stage satisfying the local conditions, but
   explains why endpoint witnesses do not provide the buffer needed for an
   iteration.
@@ -2996,3 +3071,6 @@ this kind of shifted two-sum coverage for the interval where the next
   not a verified counterexample: local affine avoidance does not prove the
   shifted domination forced by existing order-\(k\) coverage, and for
   \(k=2\) the claimed singleton-private pattern contradicts Theorem 8.2.
+* Attempt 15 records the adjacent-order minimality route for \(k=3\); small
+  buffered singleton searches stall, pointing again toward collective
+  finite barriers as the only viable negative mechanism.
