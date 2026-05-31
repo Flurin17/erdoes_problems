@@ -5463,6 +5463,38 @@ with the critical \(A(X)\asymp\sqrt X\) counting scale, so it is not by
 itself a contradiction, but it is stronger than the Sidon bound and rules
 out many naive cross-sum constructions.
 
+## Corollary 8.6j-3: Certificate-free counterexamples need mixed spikes
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), and
+suppose
+\[
+A=C_1\cup\cdots\cup C_r
+\]
+is a finite coloring into certificate-free classes. For \(i<j\), write
+\[
+R_{ij}(X)=\max_{n\le X}|\{(c_i,c_j)\in C_i\times C_j:\ c_i+c_j=n\}|.
+\]
+If
+\[
+\max_{i<j} R_{ij}(X)=o(A(X)),
+\]
+then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(3\). In particular, a remaining \(k=2\)
+counterexample with a finite certificate-free coloring must have mixed-color
+two-sum representation spikes comparable to \(A(X)\).
+
+Proof. By Warning 8.6j, each \(C_i\) is Sidon, so every same-color equation
+\[
+c+c'=n,\qquad c,c'\in C_i,
+\]
+has at most one unordered representation. Therefore the full two-sum
+representation count of \(A\) below \(X\) is bounded by
+\[
+r+\sum_{i<j}R_{ij}(X).
+\]
+Under the displayed hypothesis this is \(o(A(X))\). Corollary 3.4c gives
+the desired infinite deletion. \(\square\)
+
 ## Warning 8.6j'': Certificate-density would rule out Sidon bases
 
 The certificate-free obstruction is at least as hard as the classical Sidon
@@ -8202,6 +8234,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   thin order-2 bases.
 * Lemma 8.6j' strengthens this: each certificate-free color has its
   same-color sums disjoint from its mixed sums with the rest of \(A\).
+* Corollary 8.6j-3 connects certificate-free colorings back to the
+  representation-count criteria: if all mixed-color two-sum counts are
+  sublinear relative to \(A(X)\), Corollary 3.4c gives a good deletion.
+  Hence any certificate-free counterexample needs large mixed spikes.
 * Warning 8.6j'' shows that a universal certificate-density theorem would
   reach the Sidon-basis frontier. A hypothetical Sidon order-2 basis can be
   copied into two certificate-free residue classes, although the resulting

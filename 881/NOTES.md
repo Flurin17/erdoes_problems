@@ -1449,6 +1449,19 @@ So a two-color certificate-free order-2 basis would need mixed sums
 separated from both same-color sumsets, in addition to the Sidon-type
 sparsity of each color.
 
+This also forces any certificate-free counterexample to have mixed-color
+representation spikes. If
+\[
+A=C_1\cup\cdots\cup C_r
+\]
+is certificate-free colored and every mixed count
+\[
+|\{(c_i,c_j):c_i+c_j=n\}|
+\]
+is \(o(A(X))\) uniformly for \(n\le X\), then same-color sums contribute
+only \(O_r(1)\) because the colors are Sidon, and Corollary 3.4c gives a
+good deletion.
+
 This route reaches the Sidon-basis frontier. If \(S\) were a Sidon
 asymptotic basis of order \(2\), then
 \[
