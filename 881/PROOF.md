@@ -2997,6 +2997,90 @@ representation graphs below the witness. Any proof that only selects an
 infinite deletion to avoid complete terminal windows is vulnerable to the
 local-isolation pattern in Warning 8.6e.
 
+## Lemma 8.6g: Large-excess barriers force certificates unless large subsets are certificate-free
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+order-2 threshold \(N_0\). Suppose there is an integer \(r\ge1\) with the
+following property: for every finite \(T\subset A\) and every \(L\), there
+are a finite set
+\[
+F\subset A\setminus T,\qquad |F|=r,
+\]
+and a witness \(w\) such that
+\[
+w-\max F>L,\qquad w-\max T\ge N_0,\qquad
+w\notin3(A\setminus F). \tag{1}
+\]
+Suppose further that there is a finite \(T_0\subset A\) such that every
+subset
+\[
+U\subset T_0,\qquad |U|\ge |T_0|/r,
+\]
+contains elements \(e,y_1,y_2\in U\) with
+\[
+y_1\ne e,\qquad y_2\ne e,\qquad y_1+y_2-e\in A. \tag{2}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(3\).
+
+Proof. We prove that a certificate triple as in Corollary 2.3c is
+reflection-recurrent. Fix \(L_0\). Apply the large-excess hypothesis to
+the finite set \(T_0\), with
+\[
+L>\max\{L_0+\max T_0,\ \max T_0+N_0\}.
+\]
+This gives \(F\subset A\setminus T_0\), \(|F|=r\), and \(w\) satisfying
+(1). For each \(t\in T_0\), the integer \(w-t\) is at least \(N_0\), so
+choose a two-term representation
+\[
+w-t=a_t+a'_t,\qquad a_t,a'_t\in A.
+\]
+By Lemma 10.1, every such representation meets \(F\). Choose one element
+\[
+f_t\in F
+\]
+that appears in the chosen representation. For some \(f\in F\), the color
+class
+\[
+U=\{t\in T_0:f_t=f\}
+\]
+has size at least \(|T_0|/r\). By hypothesis, choose
+\[
+e,y_1,y_2\in U,\qquad y_1+y_2-e\in A,\qquad y_1,y_2\ne e.
+\]
+For every \(t\in U\), the chosen representation has the form
+\[
+w-t=f+c_t
+\]
+with \(c_t\in A\), hence
+\[
+(w-f)-t=c_t\in A.
+\]
+Thus the center
+\[
+m=w-f
+\]
+reflects \(\{e,y_1,y_2\}\) into \(A\). Since \(f\le\max F\),
+\[
+m=w-f\ge w-\max F>L_0+\max T_0,
+\]
+so these reflecting centers are arbitrarily large as \(L_0\to\infty\).
+
+There are only finitely many triples in \(T_0\). Along an unbounded
+sequence of \(L_0\)'s, one same triple \(e,y_1,y_2\) satisfying (2) occurs.
+That triple is reflection-recurrent in \(A\). Corollary 2.3c gives the
+desired infinite deletion. \(\square\)
+
+Consequently, any large-excess fixed-rank barrier counterexample must have
+a strong certificate-free property: every finite test set \(T\subset A\)
+has a subset of size at least \(|T|/r\) containing no triple
+\[
+e,y_1,y_2,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A.
+\]
+For pair barriers, this says every finite test set has a certificate-free
+half-subset. This is much stronger than the existence of the recurrent
+certificate-free clusters in Warning 8.6c'.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -3248,6 +3332,50 @@ Thus the local inference from a genuine pair hole to one-center
 reflection-recurrence is false. A positive proof must use the global
 barrier/minimality hypotheses across all infinite deletions, not only the
 local data from a single pair.
+
+## Example 8.7e: Complete minimal pair holes can be certificate-free
+
+The fixed-triple criterion in Corollary 2.3c also cannot be forced from
+active minimal pair holes alone. In the finite group
+\[
+G=\mathbb Z/13\mathbb Z,
+\]
+put
+\[
+P=\{0,1,3\},\qquad R=\{7,8,9\},\qquad A_0=P\cup R.
+\]
+Then
+\[
+2A_0=G.
+\]
+The set \(P\) is certificate-free relative to \(A_0\): if
+\[
+e,y_1,y_2\in P,\qquad y_1,y_2\ne e,
+\]
+then
+\[
+y_1+y_2-e\notin A_0.
+\]
+
+Nevertheless every pair in \(P\) is an inclusion-minimal three-fold hole:
+\[
+3\notin3(A_0\setminus\{0,1\}),\qquad
+7\notin3(A_0\setminus\{0,3\}),\qquad
+6\notin3(A_0\setminus\{1,3\}).
+\]
+Restoring either endpoint repairs the corresponding hole. For instance
+\[
+3=0+0+3=1+1+1,\qquad
+7=0+0+7=1+3+3,\qquad
+6=1+9+9=0+3+3.
+\]
+Thus the active-multiplicity normal form from Lemma 8.4b is locally
+compatible with complete pair barriers that contain no certificate triple.
+
+This is only a finite residue model, not an integer counterexample. Its
+role is diagnostic: a proof of Lemma 8.6g's certificate-free alternative
+must use the global infinite-barrier structure, not merely inclusion
+minimality, activity, or residue-level two-sum coverage.
 
 ## Example 8.8: Finite-center repairs need coherence
 
@@ -4785,9 +4913,14 @@ new-design problem, not as a small non-greedy search miss.
   Proposition 3.1f, ordinary \(A\)-gaps already mimic the terminal windows
   from Lemma 8.4a; the unresolved obstruction is the shifted two-sum
   vertex-cover condition, not gap existence.
+* Lemma 8.6g uses that vertex-cover condition: fixed-rank large-excess
+  barriers plus one finite test set with no large certificate-free subset
+  force a recurrent certificate triple and hence a good deletion.
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.
+* Example 8.7e shows that even complete inclusion-minimal pair holes with
+  active repairs can be certificate-free in a finite residue model.
 * Example 8.8 shows that finite-center repair conditions need coherence:
   repairing different deleted patterns with different retained centers does
   not by itself imply an order-3 basis after deletion.

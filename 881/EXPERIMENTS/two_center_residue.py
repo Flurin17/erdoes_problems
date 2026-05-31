@@ -14,7 +14,8 @@ single-integer privacy as explained by Lemma 6.1 in PROOF.md.
 
 The script also checks the complete pair-barrier warning from Example 8.7b
 and the Z/5Z finite-center incoherence example from Example 8.8 in
-PROOF.md.
+PROOF.md. Finally it checks the Z/13Z certificate-free complete pair-hole
+model from Example 8.7e.
 """
 
 from __future__ import annotations
@@ -136,9 +137,44 @@ def check_complete_pair_barrier() -> None:
     )
 
 
+def check_certificate_free_pair_holes() -> None:
+    mod = 13
+    p_set = {0, 1, 3}
+    a_set = p_set | {7, 8, 9}
+    group = set(range(mod))
+    pair_holes = {
+        (0, 1): 3,
+        (0, 3): 7,
+        (1, 3): 6,
+    }
+
+    certificate_free = all(
+        (y1 + y2 - e) % mod not in a_set
+        for e in p_set
+        for y1 in p_set
+        for y2 in p_set
+        if y1 != e and y2 != e
+    )
+    minimal_repairs = {}
+    for pair, hole in pair_holes.items():
+        pair_set = set(pair)
+        retained = a_set - pair_set
+        minimal_repairs[pair] = (
+            hole not in hsum(retained, 3, mod)
+            and all(hole in hsum(a_set - (pair_set - {f}), 3, mod) for f in pair_set)
+        )
+
+    print("certificate-free complete pair holes mod", mod)
+    print("A=", sorted(a_set), "P=", sorted(p_set))
+    print("2A whole group:", hsum(a_set, 2, mod) == group)
+    print("P certificate-free:", certificate_free)
+    print("minimal pair holes:", minimal_repairs)
+
+
 def main() -> None:
     check_two_center_cover()
     check_complete_pair_barrier()
+    check_certificate_free_pair_holes()
     check_finite_center_incoherence()
 
 

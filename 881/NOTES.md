@@ -983,6 +983,16 @@ Thus the remaining obstruction is not the existence of terminal gaps; it is
 the shifted two-sum vertex-cover condition attached to genuine
 nonrepresentations.
 
+Lemma 8.6g gives a conditional way to exploit that vertex-cover condition.
+If fixed-rank large-excess barriers exist and some finite test set \(T_0\)
+has no large certificate-free subset, then a pigeonhole over the barrier
+vertices reflects a certificate triple \(e,y_1,y_2\) with
+\(y_1+y_2-e\in A\). Corollary 2.3c then gives a good order-3 deletion.
+Therefore a fixed-rank large-excess counterexample must satisfy a strong
+opposite property: every finite \(T\subset A\) has a subset of size at
+least \(|T|/r\) containing no such certificate triple. For pair barriers,
+that means every finite test set has a certificate-free half-subset.
+
 Lemma 8.6a closes a broader delayed-barrier branch. If every infinite tail
 contains finite barriers \(F=\{f_1<\cdots<f_r\}\) whose witness lies within
 a bounded distance of the second-smallest element \(f_2\), then all test
@@ -1027,6 +1037,17 @@ two reflected centers split the three tail residue classes. A finite
 three-residue test set has no one-center reflection. Thus a positive proof
 must use global barrier/minimality over all infinite deletions, not just
 local pair-hole structure.
+
+Example 8.7e adds that active minimal pair holes do not force certificate
+triples. In \(\mathbb Z/13\mathbb Z\),
+\[
+A_0=\{0,1,3,7,8,9\}
+\]
+has \(2A_0=G\), the subset \(P=\{0,1,3\}\) is certificate-free
+\((y_1+y_2-e\notin A_0)\), yet every pair in \(P\) is an
+inclusion-minimal 3-fold hole after deletion. Thus Lemma 8.4b's activity
+normal form is still locally compatible with the certificate-free
+alternative in Lemma 8.6g.
 
 Example 8.8 gives a second finite warning: even if every deleted singleton
 or pair pattern is repairable by one of finitely many retained centers, the
