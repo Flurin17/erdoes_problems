@@ -217,5 +217,6 @@ Computational checks and generated data for Erdos Problem 82.
 - `trace_multiset_bound.py`: bounded multiplicity search for zero-sum-free
   trace multisets with small total imbalance and optional graphical
   compensation; `--trace-cone` restricts the support to the actual signed
-  indicator vectors arising from graph traces relative to a base vertex.
+  indicator vectors arising from graph traces relative to a base vertex and
+  reports the incidence, cancellation mass, and L1 imbalance from Lemma 15B.
   Larger runs should use tight caps because subset-sum sets grow quickly.

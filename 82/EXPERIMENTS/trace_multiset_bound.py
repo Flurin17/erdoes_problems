@@ -84,6 +84,24 @@ def has_graphical_compensator(k: int, total: Vector) -> bool:
     return False
 
 
+def trace_cone_stats(counts: list[int], support: list[Vector]) -> tuple[int, int, int]:
+    positive = [0] * len(support[0])
+    negative = [0] * len(support[0])
+    for count, v in zip(counts, support):
+        if not count:
+            continue
+        if all(x >= 0 for x in v):
+            for i, value in enumerate(v):
+                positive[i] += count * value
+        elif all(x <= 0 for x in v):
+            for i, value in enumerate(v):
+                negative[i] += count * (-value)
+    incidence = sum(positive) + sum(negative)
+    cancellation = sum(min(p, n) for p, n in zip(positive, negative))
+    imbalance_l1 = sum(abs(p - n) for p, n in zip(positive, negative))
+    return incidence, cancellation, imbalance_l1
+
+
 def extend_sums(
     sums: set[Vector], v: Vector, count: int, max_subset_sums: int | None
 ) -> set[Vector] | None:
@@ -168,6 +186,11 @@ def search(
     print(f"search_nodes={nodes}")
     print(f"best_size={best_size}")
     print("best_total=" + ",".join(map(str, best_total)))
+    if trace_cone and best_counts:
+        incidence, cancellation, imbalance_l1 = trace_cone_stats(best_counts, support)
+        print(f"best_trace_incidence={incidence}")
+        print(f"best_cancellation_mass={cancellation}")
+        print(f"best_imbalance_l1={imbalance_l1}")
     if best_counts:
         example = []
         for count, v in zip(best_counts, support):

@@ -2024,3 +2024,11 @@ source of growth beyond Ramsey.
   `compensated_spread.py` to sample `p=1/2` by default; a quick
   `m=7,trials=20` check accepted `4` templates and found best regular order
   `8` on `n=14`.
+- 2026-05-31: Added Lemma 15B for the signed trace cone.  If all outside
+  trace difference vectors in a minimal repeated-degree host have the same
+  sign, then the total-imbalance bound gives `|B| <= (k-1)^2`; more generally
+  `|B| <= (k-1)^2 + 2C`, where `C` is the coordinate-wise cancellation mass
+  between positive and negative trace types.  Updated `trace_multiset_bound.py`
+  to report incidence, cancellation mass, and L1 imbalance for `--trace-cone`
+  examples.  This isolates the remaining hard trace case as large mixed-sign
+  cancellation, not one-sided trace counting.

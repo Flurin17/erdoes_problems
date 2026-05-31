@@ -5284,6 +5284,81 @@ most `k-1`.  These examples show that even Lemma 15 does not immediately give
 a subexponential trace count; a proof would need still more input, such as
 multiplicity recursion or constraints from the internal graph on `A`.
 
+The signed-indicator form gives one small but useful sharpening: large trace
+obstructions must use genuine cancellation between positive and negative
+trace types.
+
+**Lemma 15B: Large Trace-Cone Obstructions Need Mixed-Sign Cancellation.**
+In the setting of Lemma 12A, put `d=k-1` and write each outside trace
+difference vector as `sigma_b 1_{S_b}`, where
+`sigma_b in {+1,-1}` and `emptyset != S_b subset {1,...,d}`.  For each
+coordinate `j`, let
+
+```text
+p_j = |{b : sigma_b=+1 and j in S_b}|,
+n_j = |{b : sigma_b=-1 and j in S_b}|.
+```
+
+Then
+
+```text
+sum_j |p_j-n_j| <= d^2.
+```
+
+Moreover, if
+
+```text
+C = sum_j min(p_j,n_j)
+```
+
+is the total coordinate-wise cancellation mass, then
+
+```text
+|B| <= d^2 + 2C.
+```
+
+In particular, if all trace vectors have the same sign, then `|B|<=d^2`.
+
+Proof.  By Lemma 15, the total difference vector
+
+```text
+T = sum_{b in B} sigma_b 1_{S_b}
+```
+
+has `||T||_infty <= d`; its `j`th coordinate is `p_j-n_j`.  Hence
+
+```text
+sum_j |p_j-n_j| <= d * d = d^2.
+```
+
+Let
+
+```text
+I = sum_b |S_b| = sum_j (p_j+n_j)
+```
+
+be the total trace incidence.  Since every `S_b` is nonempty, `|B|<=I`.
+For each coordinate,
+
+```text
+p_j+n_j = |p_j-n_j| + 2 min(p_j,n_j).
+```
+
+Summing over `j` gives
+
+```text
+|B| <= I = sum_j |p_j-n_j| + 2C <= d^2 + 2C.
+```
+
+If all trace vectors have the same sign, then `C=0`, proving the final claim.
+QED.
+
+Thus any superquadratic minimal repeated-degree obstruction is not merely a
+large one-sided set system; it must contain many positive and negative traces
+that cancel on the same coordinates while still avoiding an exactly balanced
+nonempty submultiset.  This identifies the remaining trace problem as a
+structured cancellation problem rather than a pure trace-counting problem.
+
 One genuinely low-dimensional trace obstruction does collapse.
 
 ## Lemma 15A: Rank-One Trace Obstructions Are Small
