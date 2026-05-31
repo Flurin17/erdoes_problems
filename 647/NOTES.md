@@ -330,6 +330,18 @@ semiprimes as allowed by the divisor budget, so it does not make the invalid
 ```
 
   No tuple in this range survived past `k=15`.
+- A lifted scan through prime `23` used 352 residue classes modulo
+  `1062347`. Over `10^16 <= N < 2*10^16`, it found 917,450 branch prime
+  tuples and no value passing direct checks through `k <= 5000`.
+  Aggregated first failures were:
+
+```text
+5:801083 7:74718 9:36482 10:4519 11:438 13:142 14:50 15:14 16:3 22:1
+```
+
+  The deepest near miss failed at `k=22`:
+  `N = 10182590254890053`, `n = 25660127442322933560`,
+  `tau(n-22) = 32`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a

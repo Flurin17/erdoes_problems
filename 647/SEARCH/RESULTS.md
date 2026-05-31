@@ -284,6 +284,45 @@ Interpretation: no branch tuple with
 `7320136537186331 <= N < 10^16` passed direct checks through
 `k <= 5000`; no tuple in this range survived past `k=15`.
 
+For the next range, the 41 classes were safely lifted through the prime
+`23`, giving 352 residue classes modulo `1062347`:
+
+```sh
+python3 SEARCH/residue_lift.py --k 200 --add-primes 23 --format csv \
+  | tail -1 > /tmp/erdos647-residues-mod1062347.csv
+
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search128_new \
+  --modulus 1062347 \
+  --residue-file /tmp/erdos647-residues-mod1062347.csv \
+  --n-start 10000000000000000 \
+  --n-stop 20000000000000000 \
+  --outdir /tmp/erdos647-scan-1e16-2e16-lift23 \
+  --workers 6 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
+```
+
+Aggregate output:
+
+```text
+prime_tuples=917450 quick_pass=0
+BRANCH_COUNTS A=193613 B=723837
+FIRST_FAIL_COUNTS 5:801083 7:74718 9:36482 10:4519 11:438 13:142 14:50 15:14 16:3 22:1
+```
+
+Interpretation: no branch tuple with `10^16 <= N < 2*10^16` passed direct
+checks through `k <= 5000`. The deepest near miss in the range was
+
+```text
+N = 10182590254890053
+n = 25660127442322933560
+first_fail_k = 22
+tau(n-22) = 32
+```
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms
