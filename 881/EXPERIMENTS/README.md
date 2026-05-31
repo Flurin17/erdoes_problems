@@ -280,6 +280,10 @@ the P5 seed. It checks all \(p_6\le80\) with at most one delayed filler
 through `120`, precomputing which protected subsets have witnesses and then
 testing all enumeration orders. It finds no extension; after `p6=38`, no
 candidate passes the coverage filter.
+The same mode now uses Lemma 13.1j-style lazy prefix-link pruning. With
+`--max-p6 55 --max-extra 2 --max-extra-value 95`, it checks `14912`
+coverage-passing candidates with up to two delayed fillers and still finds
+no arbitrary-order P6 extension.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

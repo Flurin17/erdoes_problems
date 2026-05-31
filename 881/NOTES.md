@@ -1490,6 +1490,9 @@ Lemma 13.1j abstracts the ordering test: an enumerated Schreier stage
 requires complete prefix links in the good-subset hypergraphs. In the P6
 escape, the pair link forces \(10\) to be first, and the triple link then
 has no possible second vertex.
+With lazy prefix-link pruning, the same search checks \(14912\) candidates
+for \(p_6\le55\) with up to two delayed fillers through \(95\), again
+finding no arbitrary-order P6 extension.
 
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining

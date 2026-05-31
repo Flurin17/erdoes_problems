@@ -462,16 +462,34 @@ def supported_order(
     vertices: tuple[int, ...],
     coverage: int,
 ) -> tuple[int, ...] | None:
-    good: set[frozenset[int]] = set()
-    for rank in range(2, len(vertices) + 1):
-        for subset in combinations(vertices, rank):
-            if witnesses_for_edges(elements, [subset], coverage) is not None:
-                good.add(frozenset(subset))
+    cache: dict[frozenset[int], bool] = {}
 
-    for order in permutations(vertices):
-        if all(frozenset(edge) in good for edge in schreier_edges_in_order(order)):
-            return order
-    return None
+    def good(edge: frozenset[int]) -> bool:
+        if edge not in cache:
+            cache[edge] = (
+                witnesses_for_edges(elements, [tuple(sorted(edge))], coverage)
+                is not None
+            )
+        return cache[edge]
+
+    def search(prefix: tuple[int, ...], remaining: tuple[int, ...]) -> tuple[int, ...] | None:
+        position = len(prefix) + 1
+        for vertex in remaining:
+            tail = tuple(x for x in remaining if x != vertex)
+            if position <= len(tail):
+                if not all(
+                    good(frozenset((vertex, *rest)))
+                    for rest in combinations(tail, position)
+                ):
+                    continue
+                result = search((*prefix, vertex), tail)
+                if result is not None:
+                    return result
+            else:
+                return (*prefix, vertex, *tail)
+        return None
+
+    return search(tuple(), vertices)
 
 
 def p6_enum_search(max_p6: int, max_extra_count: int, max_extra_value: int) -> None:

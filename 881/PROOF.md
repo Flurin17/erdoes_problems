@@ -9369,6 +9369,13 @@ subsets that have witnesses, and then tests all enumeration orders. It
 finds no extension. In that range only \(p_6\le38\) pass the coverage
 filter; larger \(p_6\)'s already outrun the available two-sum coverage with
 one delayed filler.
+After replacing the order test by Lemma 13.1j-style lazy prefix-link
+pruning, the same mode also checks
+`--max-p6 55 --max-extra 2 --max-extra-value 95`. It finds no extension
+among \(14912\) coverage-passing candidates with up to two delayed fillers.
+Thus the first P6 obstruction is not removed by one or two small delayed
+fillers; any continuation must use a more global placement of \(p_6\) and
+its support fillers.
 
 ## Lemma 13.1j: Enumerated Schreier stages require complete prefix links
 
