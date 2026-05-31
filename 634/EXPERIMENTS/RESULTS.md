@@ -969,11 +969,17 @@ N=63: unique shell tiles=21; atoms=62; residual segments=52;
       residual degree histogram={1: 2, 2: 27, 4: 12}.
 N=99: unique shell tiles=25; atoms=74; residual segments=46;
       residual degree histogram={2: 46}.
+      simple residual cycle area=9768=74 tile areas.
 ```
 
 Thus `N=99` gives a clean simple residual boundary cycle in this shell model,
 whereas `N=63` still has junctions that require a network-domain exact-cover
-model rather than a simple-polygon-only model.
+model rather than a simple-polygon-only model. The `N=99` residual cycle also
+passes the next local angle test: every residual boundary angle is a
+nonnegative sum of tile angles, with histogram
+`{gamma: 4, beta: 11, beta+3gamma: 10, 2beta+2gamma: 5, alpha: 9,
+alpha+beta+2gamma: 1, alpha+2beta+2gamma: 6}` under the lexicographically
+least representation.
 
 ## Zhang Constructive Families
 

@@ -1787,9 +1787,11 @@ cannot be just immediate boundary-shell overlap.
 
 Splitting the shell edges at T-junctions leaves a clean simple residual
 boundary cycle for `N=99` in the floating model: `46` residual segments and all
-`46` residual vertices of degree `2`. For `N=63`, the same extraction has
-degree-1 and degree-4 junctions, so a residual search there must model a
-network domain rather than only a simple polygon.
+`46` residual vertices of degree `2`, with area `9768`, exactly `74` tile
+areas. Each residual boundary angle is still a nonnegative sum of tile angles.
+For `N=63`, the same extraction has degree-1 and degree-4 junctions, so a
+residual search there must model a network domain rather than only a simple
+polygon.
 
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 

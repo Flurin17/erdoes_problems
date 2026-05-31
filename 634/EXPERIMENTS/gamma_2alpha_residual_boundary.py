@@ -9,6 +9,7 @@ boundary atoms.  It is a preparatory step for residual exact-cover searches.
 from __future__ import annotations
 
 import argparse
+import math
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -22,6 +23,7 @@ from gamma_2alpha_boundary_shell import (  # noqa: E402
     intersection_area,
     outer_vertices,
     place_boundary_shell,
+    signed_area,
     tile_area_from_sides,
 )
 from gamma_2alpha_boundary_transition_demand import best_demand_for_survivor  # noqa: E402
@@ -186,6 +188,73 @@ def component_summaries(segments: list[SegmentKey]) -> tuple[Counter[int], list[
     return degree_histogram, components
 
 
+def simple_cycle(segments: list[SegmentKey]) -> list[tuple[float, float]] | None:
+    graph: dict[tuple[float, float], list[tuple[float, float]]] = defaultdict(list)
+    for start, end in segments:
+        graph[start].append(end)
+        graph[end].append(start)
+    if not graph or any(len(neighbors) != 2 for neighbors in graph.values()):
+        return None
+
+    start = min(graph)
+    cycle = [start]
+    previous: tuple[float, float] | None = None
+    current = start
+    while True:
+        first, second = graph[current]
+        following = first if first != previous else second
+        if following == start:
+            break
+        cycle.append(following)
+        previous, current = current, following
+        if len(cycle) > len(graph):
+            return None
+    if len(cycle) != len(graph):
+        return None
+    if signed_area(tuple(cycle)) < 0:
+        cycle.reverse()
+    return cycle
+
+
+def angle_combo_histogram(
+    cycle: list[tuple[float, float]],
+    sides: tuple[int, int, int],
+) -> Counter[tuple[int, int, int] | None]:
+    a, b, c = sides
+    angles = (
+        math.acos((b * b + c * c - a * a) / (2 * b * c)),
+        math.acos((a * a + c * c - b * b) / (2 * a * c)),
+        math.acos((a * a + b * b - c * c) / (2 * a * b)),
+    )
+
+    def vector(left: Point, right: Point) -> Point:
+        return (right[0] - left[0], right[1] - left[1])
+
+    def interior_angle(index: int) -> float:
+        incoming = vector(cycle[index - 1], cycle[index])
+        outgoing = vector(cycle[index], cycle[(index + 1) % len(cycle)])
+        turn = math.atan2(cross(incoming, outgoing), dot(incoming, outgoing))
+        value = math.pi - turn
+        return value + 2 * math.pi if value < 0 else value
+
+    out: Counter[tuple[int, int, int] | None] = Counter()
+    for index in range(len(cycle)):
+        target = interior_angle(index)
+        matches: list[tuple[int, int, int]] = []
+        for alpha_count in range(8):
+            for beta_count in range(8):
+                for gamma_count in range(8):
+                    value = (
+                        alpha_count * angles[0]
+                        + beta_count * angles[1]
+                        + gamma_count * angles[2]
+                    )
+                    if abs(value - target) < 1e-6:
+                        matches.append((alpha_count, beta_count, gamma_count))
+        out[min(matches) if matches else None] += 1
+    return out
+
+
 def write_svg(
     path: Path,
     outer: tuple[Point, Point, Point],
@@ -255,6 +324,17 @@ def main() -> None:
             )
             print(f"  residual degree histogram={dict(sorted(degree_histogram.items()))}")
             print(f"  residual components={components}")
+            cycle = simple_cycle(residual)
+            if cycle is not None:
+                cycle_area = abs(signed_area(tuple(cycle)))
+                print(
+                    f"  simple residual cycle: vertices={len(cycle)}, "
+                    f"area={cycle_area:.12g}, tile-area units={cycle_area / tile_area:.12g}"
+                )
+                print(
+                    "  residual angle-combo histogram="
+                    f"{dict(sorted(angle_combo_histogram(cycle, survivor.candidate.tile).items(), key=str))}"
+                )
             if args.svg_dir is not None:
                 args.svg_dir.mkdir(parents=True, exist_ok=True)
                 path = args.svg_dir / f"gamma_2alpha_residual_{n}.svg"
