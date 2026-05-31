@@ -1496,6 +1496,16 @@ is certificate-free colored and every mixed count
 is \(o(A(X))\) uniformly for \(n\le X\), then same-color sums contribute
 only \(O_r(1)\) because the colors are Sidon, and Corollary 3.4c gives a
 good deletion.
+For two colors, a mixed spike at \(m\) is equivalently a reflected packet
+\[
+P_m=\{c\in C:m-c\in D\},
+\]
+and it carries the difference translate
+\[
+m+(P_m-P_m)\subset C+D.
+\]
+Thus any surviving spike is a large Sidon packet with its difference set
+embedded in the mixed support.
 
 For large-excess pair barriers, the precise certificate obstruction is
 list-valued. Given a pair hole \(\{x,y\}\) at \(w\), with endpoint centers

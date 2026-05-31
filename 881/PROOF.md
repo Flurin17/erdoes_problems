@@ -5503,6 +5503,38 @@ representation-spike criterion still applies because each color is Sidon:
 same-color sums contribute only \(O(1)\) representations per color, so any
 large total multiplicity must come from mixed sums.
 
+## Lemma 8.6j-4: Mixed spikes are reflected difference packets
+
+Let
+\[
+A=C\cup D.
+\]
+For \(m\in C+D\), put
+\[
+P_m=\{c\in C:m-c\in D\}.
+\]
+Then the mixed representation multiplicity of \(m\) is \(|P_m|\), and
+\[
+m+(P_m-P_m)\subseteq C+D. \tag{1}
+\]
+If \(C\) is certificate-free relative to \(A\), then \(P_m\) is a Sidon
+set.
+
+Proof. Each mixed representation of \(m\) is uniquely determined by its
+\(C\)-summand \(c\in P_m\), with \(D\)-summand \(m-c\). This proves the
+multiplicity assertion. If \(c,c'\in P_m\), then
+\[
+m+c-c'=c+(m-c')\in C+D,
+\]
+which proves (1). Finally \(P_m\subset C\), and certificate-free subsets
+are Sidon by Warning 8.6j. \(\square\)
+
+Thus the mixed spikes required by Corollary 8.6j-3 are not arbitrary
+high-multiplicity events. They are large Sidon packets whose difference
+translates sit inside the mixed support. This matches the almost-cross-color
+recurrence in Lemma 8.6g''': large reflected packets from one color into
+the other automatically generate large mixed difference packets.
+
 ## Corollary 8.6j-3: Certificate-free counterexamples need mixed spikes
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), and
@@ -8813,6 +8845,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   same-color sums disjoint from its mixed sums with the rest of \(A\).
 * Warning 8.6j-2 records the limit of that separation: in two colors, the
   two same-color sumsets may still overlap.
+* Lemma 8.6j-4 identifies mixed representation spikes with reflected Sidon
+  difference packets in the mixed support.
 * Corollary 8.6j-3 connects certificate-free colorings back to the
   representation-count criteria: if all mixed-color two-sum counts are
   sublinear relative to \(A(X)\), Corollary 3.4c gives a good deletion.
