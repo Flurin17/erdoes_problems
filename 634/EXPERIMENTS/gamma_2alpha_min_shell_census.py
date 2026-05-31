@@ -26,8 +26,9 @@ from gamma_2alpha_boundary import (  # noqa: E402
     viable_x_representations,
 )
 from gamma_2alpha_boundary_shell import (  # noqa: E402
+    DisjointSet,
+    intersection_area,
     outer_vertices,
-    overlap_report,
     place_boundary_shell,
     signed_area,
     tile_area_from_sides,
@@ -38,7 +39,7 @@ from gamma_2alpha_boundary_transition_demand import (  # noqa: E402
     path_options,
 )
 from gamma_2alpha_endpoint_automaton import alpha_corner, apex_corner  # noqa: E402
-from gamma_2alpha_residual_boundary import simple_cycle, unique_shell_tiles  # noqa: E402
+from gamma_2alpha_residual_boundary import simple_cycle  # noqa: E402
 from gamma_2alpha_residual_corner_labels import (  # noqa: E402
     ANGLE_SIDES,
     angle_combos,
@@ -65,11 +66,18 @@ class ShellResult:
 def classify_shell(survivor: RefinedGamma2AlphaSurvivor, demand: BoundaryDemand) -> ShellResult:
     shell = place_boundary_shell(survivor, demand)
     tile_area = tile_area_from_sides(survivor.candidate.tile)
-    _unique_count, _duplicates, proper = overlap_report(shell, tile_area)
-    if proper:
-        return ShellResult("proper-overlap", 0, 0)
+    disjoint = DisjointSet(len(shell))
+    duplicate_threshold = tile_area * (1 - 1e-7)
+    overlap_threshold = tile_area * 1e-9
+    for left in range(len(shell)):
+        for right in range(left + 1, len(shell)):
+            shared = intersection_area(shell[left].polygon, shell[right].polygon)
+            if shared >= duplicate_threshold:
+                disjoint.union(left, right)
+            elif shared > overlap_threshold:
+                return ShellResult("proper-overlap", 0, 0)
 
-    unique = unique_shell_tiles(shell, tile_area)
+    unique = tuple(tile for index, tile in enumerate(shell) if disjoint.find(index) == index)
     outer = outer_vertices(survivor)
     residual_labels = residual_segments_with_labels(unique, outer, digits=7, eps=1e-7)
     cycle = simple_cycle(list(residual_labels))

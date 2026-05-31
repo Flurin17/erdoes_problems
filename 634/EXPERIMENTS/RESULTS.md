@@ -1059,6 +1059,27 @@ This suggests that the endpoint-minimal obstruction pattern is not just an
 artifact of selecting one representative per endpoint pair, although it remains
 non-exhaustive.
 
+The low-overhang space with total mixed count at most `4` is small enough to
+enumerate exactly:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_low_mixed_shell_census.py 63 99 --max-total-mixed 4 --show-examples
+```
+
+```text
+N=63: exact boundary shells with total mixed <= 4: 11040;
+      status counts={not-simple-cycle: 11040}.
+N=99: exact boundary shells with total mixed <= 4: 63000;
+      status counts={corner-label-violation: 20520,
+                     not-simple-cycle: 42480}.
+```
+
+This deterministically eliminates the low-overhang shell regime under the
+current floating shell classifier. It is still not a full proof for `63` or
+`99`: higher-mixed boundary orders remain, and the floating geometric predicates
+would need exact-arithmetic replacement before the shell census can be promoted
+to a rigorous obstruction.
+
 ## Zhang Constructive Families
 
 Command:

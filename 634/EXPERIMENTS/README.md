@@ -113,6 +113,10 @@ Current components:
   candidate extensions or stress-testing the endpoint-minimal census, but it is
   not an impossibility proof. The `--max-total-mixed` option stratifies the
   sampler into low-overhang boundary shells.
+- `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
+  boundary shells whose total `c`/non-`c` transition count is at most a cap. For
+  the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`
+  shells for `N=99`.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

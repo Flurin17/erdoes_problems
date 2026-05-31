@@ -1826,6 +1826,15 @@ also found no survivor: with seed `12345` and `20000` attempts, it produced
 distinct `N=99` shells, all with non-simple residual boundary or residual
 corner-label violations.
 
+The total-mixed-`<=4` shell space has now been enumerated deterministically.
+There are exactly `11040` such boundary shells for `N=63`, and every one has a
+non-simple residual boundary graph. There are exactly `63000` such boundary
+shells for `N=99`; `42480` have non-simple residual boundary graphs and `20520`
+have residual corner-label violations. This closes the low-overhang shell
+regime computationally, but still leaves higher-mixed boundary orders and the
+need to replace floating shell predicates by exact arithmetic before promoting
+the census to a proof-level obstruction.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

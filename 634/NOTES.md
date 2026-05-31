@@ -285,6 +285,9 @@ Important distinction: "positive square class" and "smallest representative" are
    `648` for `99`), but this is evidence rather than an exhaustive certificate.
    A stratified low-overhang run with total mixed count at most `4` found
    `189` unique `63` shells and `143` unique `99` shells, again with no pass.
+   The full low-overhang census is now deterministic: all `11040` shells for
+   `63` have non-simple residual boundary, and all `63000` shells for `99` have
+   non-simple residual boundary or residual corner-label violations.
 
 ## Current Diophantine Status for `n=19`
 
