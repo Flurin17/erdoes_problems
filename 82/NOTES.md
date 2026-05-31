@@ -2160,3 +2160,10 @@ source of growth beyond Ramsey.
   support-size-`2` trace vectors.  Therefore any superpolynomial trace
   obstruction must involve supports of size at least `3` or nontrivial mixing
   between support sizes.
+- 2026-05-31: Mixed support-size `1/2` trace searches are still hard.  With
+  `d=3`, `--max-weight 2`, and multiplicity cap `4`, the bounded search hit
+  the `100000` node cap with a size-`13` zero-sum-free example of total
+  `(0,3,-3)` using both pair supports and singleton compensators:
+  `4*(1,1,0), 3*(0,-1,-1), 2*(0,1,0), 4*(-1,0,0)`.  This is not a validated
+  extremal obstruction, but it confirms that the mixed support case is not
+  captured by the pure singleton and pure pair lemmas.
