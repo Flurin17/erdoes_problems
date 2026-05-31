@@ -1431,6 +1431,14 @@ and satisfy the shifted two-sum domination from Lemma 10.1. This criterion
 is not ruled out by the fixed-rank lemmas, because edge sizes go to
 infinity on tails; the open burden is finite-gadget existence with coverage,
 frozen witnesses, unboundedness, and domination all at once.
+The numerical order on \(P\) is only one version of this target. Variant
+13.1b-enum in `PROOF.md` allows an arbitrary enumeration of a cofinite
+protected set, as long as witnesses are unbounded in every infinite set of
+enumeration indices. This keeps open a delayed-promotion route for repair
+fillers: a filler with small numerical value need not become an early
+Schreier vertex immediately. When it is eventually promoted, Corollary
+13.1h.1 still forces shifted two-sum gaps against all old retained
+endpoints.
 
 The Schreier diagnostics now have several exact finite tests. Lemma 13.1f
 gives the terminal forbidden windows. Lemma 13.1g says an inclusion-minimal

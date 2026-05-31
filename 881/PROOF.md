@@ -8797,6 +8797,42 @@ Lemma 8.4b and the shifted vertex-cover condition from Lemma 10.1. The
 criterion is not ruled out by the fixed-rank lemmas because edge sizes in
 \(\mathcal S\) tend to infinity on tails.
 
+### Variant 13.1b-enum: The Schreier order need not be the value order
+
+The formal barrier implication above does not require the Schreier order to
+be the numerical order on \(P\). Let
+\[
+P=\{u_1,u_2,\ldots\}
+\]
+be any enumeration of a cofinite subset of the final set, and define
+\[
+\mathcal S_{\rm enum}
+=\{\{u_i\}\cup G:\ G\subset\{u_j:j>i\},\ |G|=i\}.
+\]
+If the stage construction assigns persistent witnesses \(w_F\) to the
+edges \(F\in\mathcal S_{\rm enum}\), and these witnesses are unbounded in
+every infinite set of enumeration indices, then the proof of Proposition
+13.1b is unchanged. Every infinite \(B\subset P\) has a least enumeration
+index \(i\), and then contains an edge of \(\mathcal S_{\rm enum}\) with
+first vertex \(u_i\); the unbounded-witness hypothesis supplies such edges
+above any prescribed \(L\).
+
+This matters for the finite diagnostics below. The current
+`schreier_stage_search.py` tests the value-ordered target
+\[
+p_1<p_2<\cdots,
+\]
+so repair fillers larger than a new protected point are immediately
+promoted into later protected vertices and must already carry their own
+Schreier edges. An enumerated barrier could, in principle, delay those
+fillers in the barrier order even though their numerical values are small.
+That does not remove the arithmetic burden; when a delayed filler \(q\) is
+eventually promoted, Corollary 13.1h.1 still requires a witness outside all
+shifted sets \(p+2(A_s\setminus\{a,q\})\) from the old retained endpoints
+\(p\). Thus the P6 failure rules out the immediate value-ordered promotion
+route, while the delayed-enumeration route remains a separate construction
+problem.
+
 The script `EXPERIMENTS/schreier_stage_search.py` verifies that the first
 finite Schreier pattern is not locally inconsistent. It finds
 \[
