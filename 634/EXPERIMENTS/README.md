@@ -146,7 +146,8 @@ Current components:
   profiles for the outside-cover mass. The oriented fan profile is useful as a
   negative calibration: at mixed exactly `6`, it gives `120224` profile groups
   for `N=63` and `1080609` for `N=99`, so boundary-only fan signatures are too
-  fine for manual casework.
+  fine for manual casework. Raw side-label word triples are also too fine:
+  `40560` groups for `N=63` and `418260` for `N=99` at mixed exactly `6`.
 - `gamma_2alpha_residual_failure_causes.py`: exact valid-weighted sampler for
   the residual failures after optional local-overlap-cover filtering. It
   refines `not-simple-cycle` into residual graph degree/component profiles,

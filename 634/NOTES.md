@@ -116,7 +116,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   the other direction: the mixed-`6` outside-cover remainder has `120224`
   fan-profile groups for `63` and `1080609` for `99`. The next promising
   quotient should use residual obstruction certificates rather than boundary
-  profiles alone. A first residual-certificate probe on `50` mixed-`6`
+  profiles alone; raw label-word triples are also too fine, with `40560`
+  mixed-`6` groups for `63` and `418260` for `99`. A first
+  residual-certificate probe on `50` mixed-`6`
   outside-cover shells gives only corner-label violations but already splits
   into `17` certificate types for `63` and `18` for `99`, so even the residual
   proof likely needs a structural forced-corner lemma rather than a tiny

@@ -117,6 +117,14 @@ def profile_signature(left: PathProfile, right: PathProfile, base: PathProfile) 
     return f"L[{profile_text(left)}] R[{profile_text(right)}] B[{profile_text(base)}]"
 
 
+def label_word(path: BoundaryPath) -> str:
+    return "".join(edge.side for edge in path)
+
+
+def word_signature(left: str, right: str, base: str) -> str:
+    return f"L={left} R={right} B={base}"
+
+
 def overlap(left: KPolygon, right: KPolygon) -> bool:
     if exact.kbbox_disjoint(exact.kbbox(left), exact.kbbox(right)):
         return False
@@ -172,6 +180,7 @@ def inventory_n(
         polygons = {key: kscale_polygon(polygon, scale) for key, polygon in q_polygons.items()}
         overlap_cache: dict[tuple[KPolygon, KPolygon], bool] = {}
         good_profile_cache: dict[tuple[str, tuple[BoundaryPath, ...], tuple[KPolygon, ...]], Counter[PathProfile]] = {}
+        good_word_cache: dict[tuple[str, tuple[BoundaryPath, ...], tuple[KPolygon, ...]], Counter[str]] = {}
 
         base_positions = needed_positions["B"]
 
@@ -213,11 +222,36 @@ def inventory_n(
             good_profile_cache[key] = out
             return out
 
+        def side_good_words(
+            side_name: str,
+            paths: tuple[BoundaryPath, ...],
+            feature: tuple[KPolygon, ...],
+        ) -> Counter[str]:
+            key = (side_name, paths, feature)
+            cached = good_word_cache.get(key)
+            if cached is not None:
+                return cached
+            relevant = tuple(pair for pair in active_pairs if pair.side == side_name)
+            out: Counter[str] = Counter()
+            for path in paths:
+                bad = any(
+                    overlaps_cached(
+                        polygons[(side_name, pair.side_position, path)],
+                        base_polygon(feature, pair.base_position),
+                    )
+                    for pair in relevant
+                )
+                if not bad:
+                    out[label_word(path)] += 1
+            good_word_cache[key] = out
+            return out
+
         total_by_mixed: Counter[int] = Counter()
         uncovered_by_mixed: Counter[int] = Counter()
         covered_by_mixed: Counter[int] = Counter()
         uncovered_by_split: Counter[tuple[int, int, int]] = Counter()
         uncovered_by_endpoint_group: Counter[str] = Counter()
+        uncovered_by_word_profile: Counter[str] = Counter()
         uncovered_by_c_profile: Counter[str] = Counter()
         total_groups = 0
         uncovered_groups = 0
@@ -262,6 +296,17 @@ def inventory_n(
                                     uncovered_by_c_profile[
                                         profile_signature(left_profile, right_profile, base_profile)
                                     ] += multiplicity * left_count * right_count
+                    for (feature, base_word), multiplicity in Counter(
+                        (base_feature(path), label_word(path))
+                        for path in base_paths_for_key
+                    ).items():
+                        left_words = side_good_words("L", left_paths, feature)
+                        right_words = side_good_words("R", right_paths, feature)
+                        for left_word, left_count in left_words.items():
+                            for right_word, right_count in right_words.items():
+                                uncovered_by_word_profile[
+                                    word_signature(left_word, right_word, base_word)
+                                ] += multiplicity * left_count * right_count
                     if uncovered:
                         uncovered_groups += 1
                         uncovered_by_mixed[total_mixed] += uncovered
@@ -289,6 +334,17 @@ def inventory_n(
             print(f"    {split}: {format_count(count)}")
         print("  top outside-cover endpoint/mixed groups:")
         for signature, count in uncovered_by_endpoint_group.most_common(top):
+            print(f"    {format_count(count)}: {signature}")
+        print("  top outside-cover label-word profiles:")
+        word_total = sum(uncovered_by_word_profile.values())
+        word_top_total = sum(count for _signature, count in uncovered_by_word_profile.most_common(top))
+        word_top_percent = 100 * word_top_total / word_total if word_total else 0.0
+        print(
+            f"    word_groups={len(uncovered_by_word_profile)} "
+            f"top_{top}_mass={format_count(word_top_total)} "
+            f"of {format_count(word_total)} ({word_top_percent:.2f}%)"
+        )
+        for signature, count in uncovered_by_word_profile.most_common(top):
             print(f"    {format_count(count)}: {signature}")
         print("  top outside-cover c/mixed/test/fan profiles:")
         profile_total = sum(uncovered_by_c_profile.values())

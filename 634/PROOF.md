@@ -2124,6 +2124,10 @@ N=99:  1,080,609 fan-profile groups over 5,867,040 shells;
 Thus the next useful quotient is unlikely to be a boundary-word profile alone;
 it should group by residual obstruction certificates or derive a structural
 reason why the residual corner/pinch/split obstructions must occur.
+The raw side-label word triples give the same negative calibration: for mixed
+exactly `6`, there are `40560` outside-cover label-word triples for `N=63` and
+`418260` for `N=99`, with the top six triples covering only `162` and `324`
+shells respectively.
 
 The residual-certificate probe
 `EXPERIMENTS/gamma_2alpha_residual_certificate_probe.py` starts that next
