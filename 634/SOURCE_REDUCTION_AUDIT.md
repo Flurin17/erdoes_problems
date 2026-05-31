@@ -197,9 +197,9 @@ Current evidence:
 Impact:
 
 - The generic boundary-integrality obstruction now removes all supported
-  `3alpha+2beta=pi` survivors below `250`; the remaining `3alpha+2beta`
-  survivors in the `100..250` scan are all in the isosceles-`alpha+beta`
-  source-filter branch. This is still conditional on the full
+  `3alpha+2beta=pi` branches below `250` except the isosceles-`alpha+beta`
+  source-filter branch. The remaining `3alpha+2beta` survivors in the
+  `100..250` scan are all in that branch. This is still conditional on the full
   `3alpha+2beta=pi` source setup.
 
 ### 6. Composite Non-Isosceles `gamma=2pi/3` Completeness
@@ -258,10 +258,23 @@ at the count level, but this is not yet an ordering or matching obstruction.
    `PROOF.md`, beyond the BLZ outer-triangle row map.
 2. Reconstruct the commensurable-angle table rows used in Beeson's `7` and `11`
    proofs.
-3. Formalize the source rationality theorem feeding the equilateral
+3. Audit Turturean's April 2026 prime-count draft against the local prime
+   proof. The main point to verify is its witness-level use of Beeson IV Lemma
+   12 at the residual isosceles base corners. If accepted, use the draft to
+   replace the current source-reduction-dependent prime obstruction with a
+   cleaner theorem-level prime classification. This does not close the
+   composite classification gap.
+4. For a first theorem-level composite test case, target `N=22`. Among the
+   currently unresolved values below `100`, it has the cleanest local profile:
+   no exact equilateral candidates, no isosceles or non-isosceles
+   `gamma=2pi/3` candidates, and only four `3alpha+2beta=pi`
+   isosceles-`alpha+beta` raw candidates, all rejected by Beeson's stronger
+   Section 11.4 filter. This still needs the global reduction bridge before it
+   can be promoted from "no encoded survivor" to a negative theorem.
+5. Formalize the source rationality theorem feeding the equilateral
    rational/integer normalization lemma.
-4. Build a corner-capped ordering/matching obstruction for the remaining
+6. Build a corner-capped ordering/matching obstruction for the remaining
    `3alpha+2beta` isosceles-`alpha+beta` survivors, using `N=48` as the
    positive regression case.
-5. Continue extending local boundary/integrality eliminations to larger
+7. Continue extending local boundary/integrality eliminations to larger
    composite survivors as they appear.

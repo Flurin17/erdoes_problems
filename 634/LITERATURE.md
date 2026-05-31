@@ -17,6 +17,10 @@ after their exact hypotheses are recorded.
 - Beeson-Laczkovich-Zhang, "Solution of Erdos Problem 633", arXiv:2604.03609.
 - Beeson related papers cited by Zhang and BLZ:
   `TriangleTilingEquilateral.pdf`, `IsoscelesTilings.pdf`, `TriangleTiling3.pdf`.
+- David Turturean, "Triangle Dissections into a Prime Number of Congruent
+  Triangles", GitHub draft `davidturturean/erdos-634`, April 2026. This is a
+  useful outside draft for the prime-count subproblem, not a published source
+  in the corpus above.
 
 ## Erdős Problems Page #634
 
@@ -40,6 +44,9 @@ Its additional text records the following state of knowledge.
   `N = m^2`, `m^2+k^2`, or `3m^2`.
 - The page summarizes Zhang's construction: for integers `a >= b`, sufficiently
   large `n` makes `n^2 ab` occur.
+- As accessed on 2026-05-31, the page status is still `OPEN`, and it explicitly
+  says the case `19` is not known on the site. The page also warns that status
+  may lag the literature or comments.
 
 Important correction/note: the #634 page text says Zhang tiles with side lengths
 `a,b,sqrt(a^2+b^2+2+ab)`. Zhang's paper uses the law-of-cosines condition
@@ -315,3 +322,35 @@ Zhang's conjectures:
 - Analogous exactness conjectures are made for the `pi/3` and related families.
 
 These are new infinite positive families, not a complete solution of #634.
+
+## Turturean Prime-Count Draft
+
+David Turturean's April 2026 draft, "Triangle Dissections into a Prime Number of
+Congruent Triangles", claims the complete prime-count dichotomy:
+
+```text
+prime p occurs iff p = 2, p = 3, or p == 1 (mod 4).
+```
+
+The draft's `N=19` proof imports published reductions from Snover-Waiveris-
+Williams, Laczkovich, and Beeson's Triangle Tiling I-IV series to reduce to the
+remaining non-isosceles `120` degree tile with primitive integer sides
+`c^2=a^2+ab+b^2`. It then proves supporting-line integrality for outer sides,
+derives five possible `120` degree outer-triangle side families, and eliminates
+four of them for prime `N` by denominator/copimality arguments. The final
+family forces an isosceles outer triangle with `a+2b=p` or `2a+b=p`.
+
+For `p=19`, that last family is eliminated because it would require `3` to be a
+quadratic residue modulo `19`, which it is not. For all primes `p == 7 (mod
+12)`, the same quadratic-residue obstruction applies. For primes `p == 11 (mod
+12)`, the draft parametrizes the surviving integer side triples and uses a
+witness-level form of Beeson's Triangle Tiling IV suspicious-edge lemma plus a
+width bound in the isosceles triangle to force an internal segment longer than
+can fit. The critical interpretive point is that the draft applies Beeson's
+Lemma 12 at base corners of the residual isosceles triangle; this extension
+needs to be checked directly against Beeson IV before being imported as a local
+theorem.
+
+Workspace status: this draft should be treated as an external, unrefereed
+prime-only solution until independently checked. It does not attempt the
+all-integer classification requested by Problem #634.

@@ -35,6 +35,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   assuming the source case reductions summarized in `PROOF.md`.
 - `p = 19` is the benchmark case listed as open in the source corpus; this
   workspace now records a derived obstruction ruling it out.
+- A 2026 external GitHub draft by David Turturean claims a full prime-count
+  dichotomy matching the workspace prime ledger. Keep this separate from the
+  published source corpus until independently checked.
 - Beeson's isosceles `gamma=2pi/3` arithmetic filter is now fully removed by a
   local boundary-transition lemma: an outer base side with `alpha` corners at
   both ends cannot be tiled by full tile sides once the side labels in the

@@ -1,5 +1,22 @@
 # Experiment Results
 
+## Verification Rerun on 2026-05-31
+
+The following commands were rerun successfully from the repository root:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/positive_constructions.py
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/small_family_coverage.py
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/composite_case_dashboard.py 14 15 21 22 30 --equilateral-side-bound 250
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/beeson_isosceles_alpha_plus_beta_filter.py --counts 132 156 175 189 198 204 224 228 240
+```
+
+The rerun agrees with the status already recorded below: elementary certificates
+pass, `14`, `15`, `21`, `22`, and `30` have no surviving encoded candidates, and
+the explicit encoded survivors in `100..250` remain the isosceles-`alpha+beta`
+`3alpha+2beta=pi` candidates at
+`132,156,175,189,198,204,224,228,240`.
+
 ## Elementary Certificate Checks
 
 Command:

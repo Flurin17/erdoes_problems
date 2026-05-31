@@ -947,7 +947,7 @@ This table records only values/families classified by the current proof file.
 | sufficiently large `m^2ab` for `c^2=a^2+ab+b^2` | positive | Zhang construction |
 | `7` | negative | Beeson |
 | `11` | negative | Beeson |
-| `19` | negative | source reductions + boundary integrality in remaining BLZ `gamma=2pi/3` cases |
+| `19` | negative in this workspace | Beeson/Laczkovich/SWW source reductions; equilateral and `3alpha+2beta` prime theorems; isosceles reductions; boundary-transition and BLZ `gamma=2pi/3` boundary-integrality arguments |
 | primes `p == 3 (mod 4)`, `p > 3` | negative | source reductions + non-isosceles product formulas + isosceles boundary-transition lemma |
 | similar-tile subcase | classified | Snover-Waiveris-Williams |
 | equilateral outer triangle with prime `N>3` | negative | Beeson |
@@ -982,6 +982,78 @@ right-triangle or `pi/3` rows may have the obvious similar-tile construction
 while still requiring a separate source reduction to rule out other congruent
 tile shapes and other counts.
 
+## Composite Benchmark: `N=22`
+
+The current filters make `22` the cleanest next composite target. The following
+is not yet promoted to a final negative theorem, because it still assumes the
+global Laczkovich/Beeson reduction bridge recorded in
+`SOURCE_REDUCTION_AUDIT.md`. Under that bridge, every non-square `22`-tiling
+falls into the encoded source cases below, and each encoded case is eliminated.
+
+The elementary and commensurable-count forms do not contain `22`:
+
+```text
+22 is not a square,
+22 is not a sum of two positive squares,
+22 is not 2m^2, 3m^2, or 6m^2.
+```
+
+Thus the similar/reptile, right-tile, and commensurable-angle table subcases are
+removed by their recorded arithmetic forms. The isosceles `gamma=2alpha`
+subcase is also removed by the recorded squarefree obstruction, since `22` is
+squarefree.
+
+The exact equilateral boundary-length equations give no candidates for `N=22`.
+In the rational `pi/3` or `2pi/3` equilateral models, an outer side must satisfy
+
+```text
+L^2 = 22ab,        L = xa + yb + zc,        0 < x+y+z <= 22,
+```
+
+with `c^2=a^2-ab+b^2` or `c^2=a^2+ab+b^2`. The exact rational-root enumeration
+over all side-edge triples finds none.
+
+The `gamma=2pi/3` isosceles arithmetic filter has no `N=22` candidates:
+
+```text
+c^2=a^2+ab+b^2,
+2b+a | 22,
+22b/(2b+a) is a square.
+```
+
+The exact non-isosceles `gamma=2pi/3` formulas likewise give no candidates in
+any of the four BLZ templates:
+
+```text
+22 = ((a+b)/b)m^2,
+22 = (a+2b)(b+2a)m^2,
+22 = (b+2a)(a+b)m^2,
+22 = 3(a+2b)(a+b)m^2.
+```
+
+It remains only to check the `3alpha+2beta=pi` template. Beeson's five final
+necessary equations leave four raw rational roots for `N=22`, all in the
+isosceles-`alpha+beta` branch:
+
+| M | s=a/c | primitive tile sides |
+|---:|---:|---|
+| 1 | `21/23` | `(483,88,529)` |
+| 2 | `9/13` | `(117,88,169)` |
+| 3 | `13/31` | `(403,792,961)` |
+| 4 | `3/19` | `(57,352,361)` |
+
+Beeson's stronger Section 11.4 filter for this branch rejects all four. In the
+notation of that section, no candidate survives the requirements involving
+`c=g^2`, `g*mu` integrality, square class `Nbc`, Lemma 46's squarefree-`b`
+condition, and the necessary boundary decompositions after reserving the two
+forced `c` edges.
+
+Therefore, conditional on the global source-reduction bridge and the exact
+source hypotheses encoded above, `N=22` has no survivor in any current
+case. This is the next best composite proof target, but it is not yet listed in
+the classified table because the bridge from arbitrary tilings to exactly these
+encoded cases is still under reconstruction.
+
 ## Open/Unresolved Ledger
 
 - `19` is listed as open in the source corpus, but the workspace now records a
@@ -991,6 +1063,13 @@ tile shapes and other counts.
   source case reductions summarized above.
 - The prime cases are now classified: `2`, `3`, and primes `1 mod 4` are
   positive, while primes `3 mod 4` greater than `3` are negative.
+- An April 2026 external draft by David Turturean independently claims the same
+  prime dichotomy. Its proof uses a different final obstruction for primes
+  `p == 11 (mod 12)`: after reducing to the remaining `120` degree tile family,
+  it parametrizes the isosceles survivor and applies a witness-level form of
+  Beeson's Triangle Tiling IV suspicious-edge lemma plus a width bound. This
+  draft is useful corroborating context for the prime subproblem, but it is not
+  a complete classification of all composite `n`.
 - Small non-prime values not covered by the positive families above are not
   classified here. The exact equilateral boundary-length scan gives a
   `2pi/3` candidate for `14` with tile `(7,8,13)` and outer side `28`, and the
