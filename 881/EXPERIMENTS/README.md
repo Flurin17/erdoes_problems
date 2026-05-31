@@ -265,6 +265,11 @@ intervals: after treating `40,43,44` as protected, each pair edge
 `3(A\setminus\{10,q\})`. The old retained endpoint `38` explains many of
 these values but leaves shifted two-sum gaps; the full poisoning uses the
 rest of the retained finite window.
+Run `schreier_stage_search.py --p6-order-diagnostic` to test the delayed
+enumeration variant on the same finite set. It tries all `6!` orders of the
+vertices `10,15,18,19,30,38`, with fillers `40,43,44` present but not among
+those six protected vertices. No order satisfies all Schreier edges; the
+best orders still have three failed edges involving `38`.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

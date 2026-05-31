@@ -9292,6 +9292,29 @@ three sums. Thus the first pair-edge escape is not usable in a cofinite
 protected tail unless the construction also supplies a separate mechanism
 for shielding the fillers' own pair edges.
 
+The delayed-enumeration loophole from Variant 13.1b-enum also fails for
+this exact finite set if only the fillers are delayed. The diagnostic
+`--p6-order-diagnostic` keeps
+\[
+\{40,43,44\}
+\]
+available as retained fillers but tests all \(6!\) enumeration orders of
+\[
+\{10,15,18,19,30,38\}.
+\]
+No order gives witnesses for all Schreier edges among these six vertices.
+The best orders still have three failed edges, for example
+\[
+(10,18,15,19,30,38)
+\]
+fails at
+\[
+\{18,15,38\},\qquad \{18,19,38\},\qquad \{15,19,30,38\}.
+\]
+Thus delaying the fillers alone does not repair the P6 finite obstruction;
+an enumerated-barrier construction would also have to alter the placement
+or witness scheme for the new vertex \(38\) itself.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets

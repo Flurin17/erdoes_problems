@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import argparse
 from functools import lru_cache
-from itertools import combinations
+from itertools import combinations, permutations
 
 
 def hsum(elements: set[int], h: int, cap: int) -> set[int]:
@@ -156,6 +156,10 @@ def schreier_edges(protected: list[int]) -> list[tuple[int, ...]]:
         for rest in combinations(tail, size - 1):
             out.append((first, *rest))
     return out
+
+
+def schreier_edges_in_order(order: tuple[int, ...]) -> list[tuple[int, ...]]:
+    return schreier_edges(list(order))
 
 
 def witnesses_for_edges(
@@ -397,11 +401,40 @@ def p6_pair_diagnostic() -> None:
                 )
 
 
+def p6_order_diagnostic() -> None:
+    """Try all enumeration orders for the six P6 protected vertices."""
+    elements = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30, 38, 40, 43, 44}
+    vertices = (10, 15, 18, 19, 30, 38)
+    coverage = cover_end(elements, 2, 3 * max(elements))
+    best: list[tuple[int, tuple[int, ...], list[tuple[int, ...]]]] = []
+    for order in permutations(vertices):
+        failed: list[tuple[int, ...]] = []
+        for edge in schreier_edges_in_order(order):
+            if witnesses_for_edges(elements, [edge], coverage) is None:
+                failed.append(edge)
+        if not failed:
+            print("P6 enumeration-order success")
+            print("  order=", order, "coverage_end=", coverage)
+            return
+        if not best or len(failed) < best[0][0]:
+            best = [(len(failed), order, failed)]
+        elif len(failed) == best[0][0] and len(best) < 5:
+            best.append((len(failed), order, failed))
+
+    print("no P6 enumeration order succeeds")
+    print("  elements=", sorted(elements), "coverage_end=", coverage)
+    print("  vertices=", vertices)
+    print("  best failures:")
+    for count, order, failed in best:
+        print("   ", "count=", count, "order=", order, "failed=", failed[:10])
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--extend-first", action="store_true")
     parser.add_argument("--tail-chain", action="store_true")
     parser.add_argument("--p6-pair-diagnostic", action="store_true")
+    parser.add_argument("--p6-order-diagnostic", action="store_true")
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
     parser.add_argument("--protected-count", type=int, default=4)
@@ -418,6 +451,8 @@ def main() -> None:
         check_tail_chain(args.max_p6, args.max_extra, args.max_extra_value)
     elif args.p6_pair_diagnostic:
         p6_pair_diagnostic()
+    elif args.p6_order_diagnostic:
+        p6_order_diagnostic()
     else:
         search_protected(
             args.max_value,

@@ -1468,6 +1468,12 @@ Thus the whole current candidate range for the pair edge \(\{10,q\}\) is
 poisoned. The retained endpoint \(38\) accounts for many, but not all, of
 these candidates; the full old retained window fills the remaining shifted
 two-sum gaps.
+The `--p6-order-diagnostic` mode tests the first delayed-enumeration
+loophole on this exact finite set: keep the fillers present but not among
+the first six protected vertices, and try all orders of
+\(\{10,15,18,19,30,38\}\). No order works; the best orders still have
+three failed edges, all involving the newly added \(38\). Thus delaying the
+fillers alone does not rescue the P6 escape.
 
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining
