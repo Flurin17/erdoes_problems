@@ -2221,11 +2221,27 @@ pinch-sector-obstruction:         21,816
 split-corner-label-obstruction:   57,824
 ```
 
-These prefix checks exactly agree with the independent count-only
-local-overlap cover and the earlier coarse prefix totals. They do not yet close
-the mixed-`6` stratum because the remaining generated shells still need the
-refined pinch-sector/split-component obstruction rather than only the coarse
-residual graph status.
+The full refined replay of all `1,356,640` generated shells in the stratum is
+now complete, with summary artifact
+`EXPERIMENTS/results/n63_mixed6_refined_summary.json`:
+
+```text
+total mixed-6 shells:            1,356,640
+local-cover hits:                  940,800
+outside-cover shells:              415,840
+corner-label-violation:            207,888
+pinch-sector-obstruction:           58,224
+split-corner-label-obstruction:    149,728
+```
+
+These refined totals exactly agree with the independent count-only
+local-overlap cover and the earlier full coarse totals, since
+`58,224 + 149,728 = 207,952`. Thus every `N=63` boundary shell with mixed
+transition count exactly `6` is eliminated by either a local overlap, a forced
+residual corner-label violation, a pinch-sector obstruction, or a
+split-corner-label obstruction. This closes the mixed-exactly-`6` finite shell
+stratum for `N=63`; it does not yet supply a structural cutoff for all higher
+mixed-transition boundary orders.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count

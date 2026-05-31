@@ -141,10 +141,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   through generated shell `500000` exactly refine that prefix: `358826`
   local-cover hits, `61534` corner-label violations, `21816` pinch-sector
   obstructions, and `57824` split-corner-label obstructions. The full
-  mixed-`6` `63` coarse
-  pass is now exact: `940800` local-cover hits, `207888` residual corner-label
-  violations, and `207952` non-simple residual graphs; the non-simple half
-  still needs the refined residual obstruction.
+  mixed-`6` `63` refined pass is now exact: `940800` local-cover hits,
+  `207888` residual corner-label violations, `58224` pinch-sector
+  obstructions, and `149728` split-corner-label obstructions. This closes the
+  mixed-exactly-`6` finite shell stratum for `63`; higher mixed counts still
+  need a structural cutoff or a broader exact pass.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

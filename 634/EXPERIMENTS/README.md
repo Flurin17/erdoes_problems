@@ -205,10 +205,11 @@ Current components:
   `79640`. The recorded refined chunks through generated shell `500000`
   exactly refine that prefix: `358826` local-cover hits, `61534`
   corner-label violations, `21816` pinch-sector obstructions, and `57824`
-  split-corner-label obstructions. The full mixed-`6` `N=63` coarse pass is
-  now exact:
-  `940800` local-cover hits, `207888` residual corner-label violations, and
-  `207952` non-simple residual graphs.
+  split-corner-label obstructions. The full mixed-`6` `N=63` refined pass is
+  now exact and stored in `results/n63_mixed6_refined_summary.json`:
+  `940800` local-cover hits, `207888` residual corner-label violations,
+  `58224` pinch-sector obstructions, and `149728`
+  split-corner-label obstructions.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and

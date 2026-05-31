@@ -1,0 +1,34 @@
+{
+  "chunks": [
+    "n63_mixed6_refined_chunk_0000000_0100000.json",
+    "n63_mixed6_refined_chunk_0100000_0300000.json",
+    "n63_mixed6_refined_chunk_0300000_0500000.json",
+    "n63_mixed6_refined_chunk_0500000_0800000.json",
+    "n63_mixed6_refined_chunk_0800000_1100000.json",
+    "n63_mixed6_refined_chunk_1100000_1356640.json"
+  ],
+  "covered": 940800,
+  "diagnosed": 415840,
+  "exhausted": true,
+  "generated_processed": 1356640,
+  "generated_seen": 1356640,
+  "last_generated_index": 1356640,
+  "local_cover_mode": "lazy",
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mode": "refined",
+  "n": 63,
+  "outside_local_cover": true,
+  "radicand": 5,
+  "status_counts": {
+    "corner-label-violation": 207888,
+    "pinch-sector-obstruction": 58224,
+    "split-corner-label-obstruction": 149728
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "total_mixed6_shells": 1356640
+}
