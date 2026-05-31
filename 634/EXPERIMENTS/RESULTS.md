@@ -16,9 +16,9 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`,
+`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`,
 `N=66`, `N=69`, `N=70`, `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`,
-`N=92`, `N=93`, `N=94`, and `N=95`
+`N=92`, `N=93`, `N=94`, `N=95`, and `N=99`
 certificates are now promoted in `PROOF.md`. In the `100..250`
 `3alpha+2beta` isosceles-`alpha+beta` branch, the boundary-order/nonfit check
 removes the former Section 11.4 survivor records at `132`, `156`, `175`,
@@ -291,9 +291,7 @@ PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 56
 The script reproduces Beeson Lemma 11.14's arithmetic enumeration. It returns
 zero `gamma=2alpha` candidates for `56`, `66`, `69`, and `70`; `60`, `63`,
 `64`, and `72` still have boundary-arithmetic candidates at this filter stage.
-The `60` candidate is closed by later local refinements below. The `63`
-candidate is isolated to one final boundary pattern, but remains open pending
-a clean-boundary promotion.
+The `60` and `63` candidates are closed by later local refinements below.
 
 The exact equilateral scans and boundary-star checks were also rerun:
 
@@ -395,14 +393,15 @@ N=99: 1 boundary-arithmetic candidate(s)
   tile=(25, 11, 30), X=165, Y=198: 0 endpoint witness(es) [fan]
 ```
 
-This fan check is not yet promoted to a proof-quality obstruction. The
-side-difference calculation rules out the simplest shifted-overhang rescue:
-for `(9,7,12)` the differences `2`, `3`, and `5` are all below the least tile
-side `7`; for `(25,11,30)` the differences `14`, `5`, and `19` are below
-`22=2*11` and none equals `11`. What is still missing is a clean-boundary or
-overhang-equivalence lemma proving that every non-strict boundary realization
-must reduce to such a side-difference segment. Accordingly `PROOF.md` now
-treats `63` and `99` as open, with one isolated `gamma=2alpha` pattern each.
+This fan check is promoted by the outer-boundary half-plane lemma recorded in
+`PROOF.md`: at a transition point on a straight outer side, a non-tangent tile
+side cannot pass through the boundary point without leaving the triangle, and a
+tangent pass-through would overlap the adjacent boundary side intervals. Thus
+the transition is a genuine fan even in a globally non-edge-to-edge tiling.
+The primitive equal-length overhangs `a+c=3b` for `N=63`, `a+c=5b` for `N=99`,
+and Beeson's calibration `a+c=2b` for `N=45` remain relevant to interior
+interfaces, but not to an outer-boundary transition. Therefore `PROOF.md`
+treats `63` and `99` as classified negative.
 
 ## `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95` Exact Filter Certificate
 
@@ -463,7 +462,8 @@ The script includes:
 - elementary positive families;
 - Beeson negatives `7` and `11`;
 - workspace composite obstructions below `100` recorded in `PROOF.md`,
-  including the local `gamma=2alpha` closures for `60`, `76`, and `92`;
+  including the local `gamma=2alpha` closures for `60`, `63`, `76`, `92`, and
+  `99`;
 - workspace prime obstructions for primes `3 mod 4`;
 - recorded sufficient Beeson `3alpha+2beta=pi` constructions, including table
   entries `28,44,48,77,84` and the triquadratic sufficient values
@@ -573,23 +573,40 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,66,69,70,76,78,86,87,88,91,92,93,94,95:
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,60,62,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
   negative by workspace composite benchmarks
-63,99:
-  open with one gamma=2alpha boundary candidate each
 ```
 
 Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
 the source reductions is still incomplete. After the `N=14`, `N=15`, `N=21`,
 `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`,
-`N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=66`, `N=69`, `N=70`,
+`N=55`, `N=56`, `N=57`, `N=60`, `N=62`, `N=63`, `N=66`, `N=69`, `N=70`,
 `N=76`, `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=92`, `N=93`, `N=94`,
-and `N=95`
+`N=95`, and `N=99`
 source-row audits, the current open ledger removes those values from the
-scanner's unresolved list. The same scan now keeps `63` and `99` visible
-because their isolated `gamma=2alpha` fan obstructions still need an
-arbitrary-boundary promotion.
+scanner's unresolved list.
+
+## Gamma=2alpha Primitive Overhang Calibration
+
+Command:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_overhang_components.py 45 63 99 --max-pieces 3 --allow-same-counts --limit 20
+```
+
+Result summary:
+
+```text
+N=45: smallest distinct-count primitive component is ac | bb, length 10.
+N=63: includes ac | bbb and bbb | ca, length 21.
+N=99: the <=3-piece list includes clean reorderings such as ac | ca;
+      the distinct-count primitive ac | bbbbb appears with max-pieces 6.
+```
+
+Interpretation: these overhang components calibrate non-strict interior
+interfaces. They are not outer-boundary transition rescues, because an outer
+side has only the interior half-plane available.
 
 ## Equilateral Boundary-Length Checks
 

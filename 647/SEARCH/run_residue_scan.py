@@ -222,6 +222,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--quick-shift", type=int, default=5000)
     parser.add_argument("--report-survive", type=int, default=15)
     parser.add_argument("--extra-arg", action="append", default=[], help="extra argument passed through verbatim")
+    parser.add_argument("--poll-interval", type=float, default=2.0)
+    parser.add_argument("--heartbeat", type=float, default=30.0, help="seconds between liveness lines")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--aggregate-only", action="store_true")
     return parser.parse_args()
@@ -259,6 +261,7 @@ def main() -> int:
     completed: list[Path] = []
     next_index = 0
     started = time.time()
+    last_heartbeat = started
     failed = False
 
     while next_index < len(jobs) or active:
@@ -291,7 +294,17 @@ def main() -> int:
             active.append((process, handle, residue, path, time.time()))
             print(f"START residue={residue} start={start} count={count}", flush=True)
 
-        time.sleep(2)
+        now = time.time()
+        if args.heartbeat > 0 and now - last_heartbeat >= args.heartbeat:
+            active_residues = ",".join(str(item[2]) for item in active)
+            print(
+                f"HEARTBEAT elapsed={now - started:.1f} completed={len(completed)}/{len(jobs)} "
+                f"active={len(active)} next={next_index} residues={active_residues}",
+                flush=True,
+            )
+            last_heartbeat = now
+
+        time.sleep(args.poll_interval)
         still_active = []
         for process, handle, residue, path, job_start in active:
             returncode = process.poll()

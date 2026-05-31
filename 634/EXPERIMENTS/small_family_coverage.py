@@ -8,8 +8,8 @@ This script deliberately avoids guessing. It marks only:
 - Zhang's sufficiently-large 2pi/3 family for primitive triples found in range;
 - Beeson negatives 7 and 11.
 - workspace composite obstructions 14, 15, 21, 22, 30, 33, 35, 38, 39, 42,
-  46, 51, 55, 56, 57, 60, 62, 66, 69, 70, 76, 78, 86, 87, 88, 91, 92,
-  93, 94, and 95;
+  46, 51, 55, 56, 57, 60, 62, 63, 66, 69, 70, 76, 78, 86, 87, 88, 91, 92,
+  93, 94, 95, and 99;
 - workspace prime obstructions from the source-reduction dashboard: primes
   `3 mod 4` are negative unless they survive Beeson's isosceles
   `gamma=2pi/3` prime filter; the surviving isosceles candidates are then
@@ -108,6 +108,7 @@ def classify(n: int, zhang: dict[int, str], beeson_sufficient: dict[int, str]) -
         57,
         60,
         62,
+        63,
         66,
         69,
         70,
@@ -121,6 +122,7 @@ def classify(n: int, zhang: dict[int, str], beeson_sufficient: dict[int, str]) -
         93,
         94,
         95,
+        99,
     }:
         return "negative: workspace composite benchmark"
     if n == 22:
