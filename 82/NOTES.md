@@ -1535,3 +1535,11 @@ source of growth beyond Ramsey.
   (`10` samples) found exact terminal regular subsets in every sample.  This
   is weak finite evidence only, but it suggests exact terminal failure is not
   easy to find in dense random-like regular hosts.
+- 2026-05-31: Added a weaker final dyadic target.  The terminal-window lift
+  can be replaced by a direct `q`-modular host theorem: after the same coarse
+  lifts, it is enough that every `q`-modular graph on at least `q^2` vertices
+  contain a regular induced subgraph of size `phi(q)=omega((log q)^2)`.
+  Since a regular host is already solved, the real terminal hard case is a
+  nonregular `q`-modular graph with about `q` degree levels, each level having
+  average size about `q`; the needed improvement is to combine repeated-degree
+  levels to beat the `Theta(log q)` Ramsey extraction from one level.

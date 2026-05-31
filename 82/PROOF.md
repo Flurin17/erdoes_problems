@@ -747,6 +747,53 @@ already `q`-modular host of size at least `q^2`.  The price is that the final
 window must have excess `o(q/(log q)^2)`, not merely a constant-factor
 overshoot.
 
+There is an even weaker terminal demand if the final step searches directly
+for regular subgraphs instead of first lifting from `q` to `2q`.
+
+## Conditional Proposition: Coarse Lifts Plus A `q`-Modular Host Theorem Suffice
+
+For powers of two `q>=2`, suppose there is a constant `D` such that every
+`q`-modular induced graph on `M` vertices contains a `2q`-modular induced
+subgraph on at least `M/(Dq)` vertices.  Suppose also that there is a function
+`phi(q)` with
+
+```text
+phi(q) = omega((log_2 q)^2)
+```
+
+such that every `q`-modular graph on at least `q^2` vertices contains a
+regular induced subgraph on at least `phi(q)` vertices.  Then
+`F(n)/log n -> infinity`.
+
+Proof.  Repeat the coarse-lift part of the previous conditional proposition.
+For `L=log_2 n`, set `t=floor(sqrt L)` and `q_i=2^i`.  Starting from Gallai's
+`2`-modular induced subgraph of order at least `n/2`, the coarse lift gives a
+`q_t`-modular induced subgraph `H_t` of order
+
+```text
+|H_t| >= n / (2 D^{t-1} 2^{t(t-1)/2}).
+```
+
+As before, this is larger than `q_t^2` for all sufficiently large `n`.
+Applying the `q`-modular host theorem to `H_t` yields a regular induced
+subgraph of order at least
+
+```text
+phi(q_t) = omega((log_2 q_t)^2)
+         = omega(t^2)
+         = omega(log n).
+```
+
+This proves the desired conclusion.  QED.
+
+This formulation identifies a weaker final target than the terminal-window
+lift.  Since a regular `q`-modular host is already solved by taking the whole
+host, the hard case is a nonregular `q`-modular graph whose degree levels are
+all congruent modulo `q`.  On `q^2` vertices there are only about `q` possible
+degree levels, so at least one level has size about `q`; the challenge is to
+combine many such repeated-degree levels well enough to beat the ordinary
+`Theta(log q)` Ramsey extraction from a single level.
+
 The terminal-window lift has a rigid endpoint shape.
 
 **Lemma: Shape Of Near-Terminal Dyadic Witnesses.**  Let `|S|=2q+r` with
