@@ -4,7 +4,9 @@
 This is an exact-arithmetic counterpart to the floating shell classifier used
 by `gamma_2alpha_low_mixed_shell_census.py`.  It applies only when the outer
 triangle and every boundary-adjacent tile placement have rational coordinates.
-The benchmark `N=99` survivor has this property.
+After rational placement, the classifier clears denominators and performs the
+residual geometry with integer predicates.  The benchmark `N=99` survivor has
+this property.
 """
 
 from __future__ import annotations
@@ -14,7 +16,7 @@ import sys
 from collections import Counter
 from dataclasses import dataclass
 from fractions import Fraction
-from math import isqrt
+from math import gcd, isqrt, lcm
 from pathlib import Path
 
 
@@ -31,6 +33,9 @@ from gamma_2alpha_random_shell_search import mixed_transitions  # noqa: E402
 FPoint = tuple[Fraction, Fraction]
 FPolygon = tuple[FPoint, ...]
 FSegment = tuple[FPoint, FPoint]
+IPoint = tuple[int, int]
+IPolygon = tuple[IPoint, ...]
+ISegment = tuple[IPoint, IPoint]
 SIDE_INDEX = {"a": 0, "b": 1, "c": 2}
 ANGLE_SIDES: dict[str, frozenset[str]] = {
     "alpha": frozenset(("b", "c")),
@@ -44,6 +49,13 @@ class RationalTile:
     label: str
     edge: PlacedEdge
     polygon: FPolygon
+
+
+@dataclass(frozen=True)
+class IntegerTile:
+    label: str
+    edge: PlacedEdge
+    polygon: IPolygon
 
 
 @dataclass(frozen=True)
@@ -269,6 +281,227 @@ def unique_tiles_or_overlap(tiles: tuple[RationalTile, ...], _tile_area: Fractio
     return tuple(tile for index, tile in enumerate(tiles) if disjoint.find(index) == index)
 
 
+def integer_scale(shell: tuple[RationalTile, ...], outer: tuple[FPoint, FPoint, FPoint]) -> int:
+    scale = 1
+    for point in (*outer, *(point for tile in shell for point in tile.polygon)):
+        scale = lcm(scale, point[0].denominator, point[1].denominator)
+    return scale
+
+
+def scale_point(point: FPoint, scale: int) -> IPoint:
+    scaled_x = point[0] * scale
+    scaled_y = point[1] * scale
+    assert scaled_x.denominator == 1 and scaled_y.denominator == 1
+    return (scaled_x.numerator, scaled_y.numerator)
+
+
+def scale_shell(shell: tuple[RationalTile, ...], outer: tuple[FPoint, FPoint, FPoint]) -> tuple[tuple[IntegerTile, ...], tuple[IPoint, IPoint, IPoint], int]:
+    scale = integer_scale(shell, outer)
+    return (
+        tuple(
+            IntegerTile(
+                label=tile.label,
+                edge=tile.edge,
+                polygon=tuple(scale_point(point, scale) for point in tile.polygon),
+            )
+            for tile in shell
+        ),
+        tuple(scale_point(point, scale) for point in outer),  # type: ignore[return-value]
+        scale,
+    )
+
+
+def isub(left: IPoint, right: IPoint) -> IPoint:
+    return (left[0] - right[0], left[1] - right[1])
+
+
+def idot(left: IPoint, right: IPoint) -> int:
+    return left[0] * right[0] + left[1] * right[1]
+
+
+def icross(left: IPoint, right: IPoint) -> int:
+    return left[0] * right[1] - left[1] * right[0]
+
+
+def inorm_sq(point: IPoint) -> int:
+    return idot(point, point)
+
+
+def isigned_area2(poly: IPolygon | tuple[IPoint, ...]) -> int:
+    return sum(icross(poly[index], poly[(index + 1) % len(poly)]) for index in range(len(poly)))
+
+
+def ibbox(poly: IPolygon) -> tuple[int, int, int, int]:
+    return (
+        min(point[0] for point in poly),
+        max(point[0] for point in poly),
+        min(point[1] for point in poly),
+        max(point[1] for point in poly),
+    )
+
+
+def ibbox_disjoint(left: tuple[int, int, int, int], right: tuple[int, int, int, int]) -> bool:
+    return left[1] <= right[0] or right[1] <= left[0] or left[3] <= right[2] or right[3] <= left[2]
+
+
+def iccw(poly: IPolygon) -> IPolygon:
+    return poly if isigned_area2(poly) > 0 else tuple(reversed(poly))
+
+
+def iseparated_or_touching(axis_poly: IPolygon, other: IPolygon) -> bool:
+    axis_poly = iccw(axis_poly)
+    for index in range(len(axis_poly)):
+        start = axis_poly[index]
+        end = axis_poly[(index + 1) % len(axis_poly)]
+        edge = isub(end, start)
+        if max(icross(edge, isub(point, start)) for point in other) <= 0:
+            return True
+    return False
+
+
+def ipositive_overlap(left: IPolygon, right: IPolygon) -> bool:
+    return not iseparated_or_touching(left, right) and not iseparated_or_touching(right, left)
+
+
+def isame_triangle(left: IPolygon, right: IPolygon) -> bool:
+    return frozenset(left) == frozenset(right)
+
+
+def iunique_tiles_or_overlap(tiles: tuple[IntegerTile, ...]) -> tuple[IntegerTile, ...] | str:
+    disjoint = DisjointSet(len(tiles))
+    boxes = tuple(ibbox(tile.polygon) for tile in tiles)
+    for left in range(len(tiles)):
+        for right in range(left + 1, len(tiles)):
+            if ibbox_disjoint(boxes[left], boxes[right]):
+                continue
+            if isame_triangle(tiles[left].polygon, tiles[right].polygon):
+                disjoint.union(left, right)
+            elif ipositive_overlap(tiles[left].polygon, tiles[right].polygon):
+                return "proper-overlap"
+    return tuple(tile for index, tile in enumerate(tiles) if disjoint.find(index) == index)
+
+
+def ipoint_on_segment(point: IPoint, start: IPoint, end: IPoint) -> bool:
+    direction = isub(end, start)
+    return icross(direction, isub(point, start)) == 0 and idot(isub(point, start), direction) >= 0 and idot(isub(point, end), direction) <= 0
+
+
+def isplit_segment(start: IPoint, end: IPoint, points: tuple[IPoint, ...]) -> tuple[ISegment, ...]:
+    direction = isub(end, start)
+    cuts = sorted(
+        {point for point in points if ipoint_on_segment(point, start, end)},
+        key=lambda point: idot(isub(point, start), direction),
+    )
+    return tuple((cuts[index], cuts[index + 1]) for index in range(len(cuts) - 1) if cuts[index] != cuts[index + 1])
+
+
+def isegment_key(start: IPoint, end: IPoint) -> ISegment:
+    return (start, end) if start <= end else (end, start)
+
+
+def isegment_on_outer(segment: ISegment, outer: tuple[IPoint, IPoint, IPoint]) -> bool:
+    start, end = segment
+    return any(
+        ipoint_on_segment(start, outer[index], outer[(index + 1) % 3])
+        and ipoint_on_segment(end, outer[index], outer[(index + 1) % 3])
+        for index in range(3)
+    )
+
+
+def iresidual_segments_with_labels(
+    tiles: tuple[IntegerTile, ...],
+    outer: tuple[IPoint, IPoint, IPoint],
+) -> dict[ISegment, str]:
+    all_points = tuple(point for tile in tiles for point in tile.polygon)
+    counts: Counter[ISegment] = Counter()
+    labels: dict[ISegment, str] = {}
+    for tile in tiles:
+        for index, label in enumerate(edge_labels_for_tile(tile)):
+            start = tile.polygon[index]
+            end = tile.polygon[(index + 1) % 3]
+            for atom_start, atom_end in isplit_segment(start, end, all_points):
+                key = isegment_key(atom_start, atom_end)
+                counts[key] += 1
+                labels[key] = label
+    return {
+        key: labels[key]
+        for key, count in counts.items()
+        if count == 1 and not isegment_on_outer(key, outer)
+    }
+
+
+def isimple_cycle(segments: list[ISegment]) -> list[IPoint] | None:
+    graph: dict[IPoint, list[IPoint]] = {}
+    for start, end in segments:
+        graph.setdefault(start, []).append(end)
+        graph.setdefault(end, []).append(start)
+    if not graph or any(len(neighbors) != 2 for neighbors in graph.values()):
+        return None
+    start = min(graph)
+    cycle = [start]
+    previous: IPoint | None = None
+    current = start
+    while True:
+        first, second = graph[current]
+        following = first if first != previous else second
+        if following == start:
+            break
+        cycle.append(following)
+        previous, current = current, following
+        if len(cycle) > len(graph):
+            return None
+    if len(cycle) != len(graph):
+        return None
+    if isigned_area2(tuple(cycle)) < 0:
+        cycle.reverse()
+    return cycle
+
+
+def iside_decomposable(segment: ISegment, sides: tuple[int, int, int], scale: int) -> bool:
+    length_sq = inorm_sq(isub(segment[1], segment[0]))
+    limit = isqrt(length_sq) // (scale * min(sides)) + 1
+    for a_count in range(limit + 1):
+        for b_count in range(limit + 1):
+            for c_count in range(limit + 1):
+                if a_count + b_count + c_count < 2:
+                    continue
+                length = scale * (a_count * sides[0] + b_count * sides[1] + c_count * sides[2])
+                if length * length == length_sq:
+                    return True
+    return False
+
+
+def isingle_angle_name(cycle: list[IPoint], index: int, sides: tuple[int, int, int]) -> str | None:
+    point = cycle[index]
+    previous = cycle[index - 1]
+    following = cycle[(index + 1) % len(cycle)]
+    first = isub(previous, point)
+    second = isub(following, point)
+    if icross(first, second) >= 0:
+        return None
+    first_length = isqrt(inorm_sq(first))
+    second_length = isqrt(inorm_sq(second))
+    if first_length * first_length != inorm_sq(first) or second_length * second_length != inorm_sq(second):
+        return None
+    a, b, c = sides
+    cosines = {
+        "alpha": (b * b + c * c - a * a, 2 * b * c),
+        "beta": (a * a + c * c - b * b, 2 * a * c),
+    }
+    value = idot(first, second)
+    for name, (numerator, denominator) in cosines.items():
+        common = gcd(numerator, denominator)
+        numerator //= common
+        denominator //= common
+        if value * denominator == first_length * second_length * numerator:
+            return name
+    return None
+
+
+def icycle_edge_key(cycle: list[IPoint], index: int) -> ISegment:
+    return isegment_key(cycle[index], cycle[(index + 1) % len(cycle)])
+
+
 def point_on_segment(point: FPoint, start: FPoint, end: FPoint) -> bool:
     direction = sub(end, start)
     return cross(direction, sub(point, start)) == 0 and dot(sub(point, start), direction) >= 0 and dot(sub(point, end), direction) <= 0
@@ -304,7 +537,7 @@ def segment_on_outer(segment: FSegment, outer: tuple[FPoint, FPoint, FPoint]) ->
     )
 
 
-def edge_labels_for_tile(tile: RationalTile) -> tuple[str, str, str]:
+def edge_labels_for_tile(tile: RationalTile | IntegerTile) -> tuple[str, str, str]:
     return (
         tile.edge.side,
         other_side(tile.edge, tile.edge.end),
@@ -417,32 +650,32 @@ def classify_rational_shell(
     demand: BoundaryDemand,
 ) -> RationalShellResult:
     shell = place_boundary_shell(survivor, demand)
-    tile_area = tile_area_from_sides(survivor.candidate.tile)
     outer = outer_vertices(survivor)
-    if shell is None or tile_area is None or outer is None:
+    if shell is None or outer is None:
         return RationalShellResult("not-rational")
-    unique_or_status = unique_tiles_or_overlap(shell, tile_area)
+    integer_shell, integer_outer, scale = scale_shell(shell, outer)
+    unique_or_status = iunique_tiles_or_overlap(integer_shell)
     if unique_or_status == "proper-overlap":
         return RationalShellResult("proper-overlap")
     unique = unique_or_status
     assert isinstance(unique, tuple)
-    residual_labels = residual_segments_with_labels(unique, outer)
-    cycle = simple_cycle(list(residual_labels))
+    residual_labels = iresidual_segments_with_labels(unique, integer_outer)
+    cycle = isimple_cycle(list(residual_labels))
     if cycle is None:
         return RationalShellResult("not-simple-cycle")
-    if any(side_decomposable(segment, survivor.candidate.tile) for segment in residual_labels):
+    if any(iside_decomposable(segment, survivor.candidate.tile, scale) for segment in residual_labels):
         return RationalShellResult("decomposable-residual-atom")
     forced = 0
     violations = 0
     for index in range(len(cycle)):
-        angle_name = single_angle_name(cycle, index, survivor.candidate.tile)
+        angle_name = isingle_angle_name(cycle, index, survivor.candidate.tile)
         if angle_name is None:
             continue
         forced += 1
         side_pair = frozenset(
             (
-                residual_labels[cycle_edge_key(cycle, index - 1)],
-                residual_labels[cycle_edge_key(cycle, index)],
+                residual_labels[icycle_edge_key(cycle, index - 1)],
+                residual_labels[icycle_edge_key(cycle, index)],
             )
         )
         if side_pair != ANGLE_SIDES[angle_name]:

@@ -288,10 +288,12 @@ Important distinction: "positive square class" and "smallest representative" are
    The full low-overhang census is now deterministic: all `11040` shells for
    `63` have non-simple residual boundary, and all `63000` shells for `99` have
    non-simple residual boundary or residual corner-label violations.
-   For `99`, a rational exact-arithmetic shell classifier agrees with the
-   floating classifier on all endpoint-minimal shells and on the first `1000`
-   low-mixed shells; the full rational low-mixed census still needs
-   optimization.
+   For `99`, the rational exact-arithmetic shell classifier now covers the full
+   `63000` low-mixed shells by clearing denominators and using integer geometry:
+   `42480` are non-simple residual cycles and `20520` have residual
+   corner-label violations. This is an exact low-overhang shell obstruction for
+   `99`, but higher-mixed boundary orders remain open, and the analogous `63`
+   low-overhang census still uses floating shell predicates.
 
 ## Current Diophantine Status for `n=19`
 

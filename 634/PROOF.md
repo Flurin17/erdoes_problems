@@ -1830,17 +1830,23 @@ The total-mixed-`<=4` shell space has now been enumerated deterministically.
 There are exactly `11040` such boundary shells for `N=63`, and every one has a
 non-simple residual boundary graph. There are exactly `63000` such boundary
 shells for `N=99`; `42480` have non-simple residual boundary graphs and `20520`
-have residual corner-label violations. This closes the low-overhang shell
-regime computationally, but still leaves higher-mixed boundary orders and the
-need to replace floating shell predicates by exact arithmetic before promoting
-the census to a proof-level obstruction.
+have residual corner-label violations.
 
-For `N=99`, that exact-arithmetic replacement is partially in place. The outer
-triangle and boundary-adjacent shell coordinates are rational, and the rational
-classifier agrees with the floating classifier on all `8` endpoint-minimal
-shells and on the first `1000` total-mixed-`<=4` shells. The full `63000`-shell
-rational census remains to be optimized before it can replace the floating
-low-overhang census.
+For `N=99`, the low-overhang shell elimination has now been rerun with exact
+arithmetic. The outer triangle and all boundary-adjacent shell coordinates are
+rational; after rational placement the classifier clears denominators and uses
+integer predicates for triangle overlap, residual segment splitting, simple
+cycle extraction, residual atom decomposability, and forced single-angle
+corner-label checks. The exact endpoint-minimal run has the same result as
+above (`6` corner-label violations and `2` non-simple residual cycles), and the
+full exact total-mixed-`<=4` run gives exactly the same `63000`-shell split:
+`42480` non-simple residual boundary graphs and `20520` residual corner-label
+violations.
+
+Thus the low-overhang shell regime is now exact for `N=99`, and remains a
+floating shell-level census for `N=63`. In either case it does not close the
+global problem, because higher-mixed boundary orders and arbitrary interior
+extensions still remain to be controlled.
 
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
