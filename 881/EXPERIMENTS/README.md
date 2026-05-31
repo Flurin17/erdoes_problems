@@ -86,6 +86,16 @@ declared endpoint to be at least the largest new element; this filters for
 genuinely local pair witnesses and is stronger than the proposition, which
 would also allow dormant new elements above the declared endpoint.
 
+`cross_stage_pair_dfs.py` performs a bounded depth-first search for the same
+criterion, so early greedy choices can be revisited. With its default small
+parameters it finds a non-greedy three-stage chain
+\[
+\{1,2\}\to\{1,2,4\}\to\{1,2,4,6,7\}\to\{1,2,4,6,7,8\},
+\]
+with endpoints \(4,7,15\), but no fourth stage in that bounded search.
+Thus the two-stage greedy stall was not conclusive; the next obstruction is
+simultaneous protection after several old elements are present.
+
 `reflection_certificate_verify.py` instantiates the balanced-certificate
 construction from Theorem 2.3 in the model \(A=\mathbb N\), and verifies
 for small parameters that every deleted multiset of size at most \(k\) has

@@ -3340,6 +3340,23 @@ cannot have \(w_{s,a,b}-b\) bounded on every infinite tail. Persistent pair
 barriers must have unbounded top excess, or else tail reflection-recurrence
 would give a good deletion.
 
+The greedy script `EXPERIMENTS/cross_stage_pair_search.py` finds
+\[
+\{1,2\}\to\{1,2,3\}\to\{1,2,3,5\}
+\]
+and then stalls. The bounded DFS script
+`EXPERIMENTS/cross_stage_pair_dfs.py` shows that this two-stage stall is
+partly a greedy artefact: it finds the non-greedy chain
+\[
+\{1,2\}\to\{1,2,4\}\to\{1,2,4,6,7\}
+   \to\{1,2,4,6,7,8\}
+\]
+with declared endpoints \(4,7,15\). The same default DFS bounds find no
+fourth stage. This is finite evidence only, but it locates the construction
+pressure more accurately: after several old elements are present, a new
+block must protect many old-new pairs simultaneously while still leaving
+the positive-summand coverage buffer from Lemma 13.1d.
+
 ## Proposition 13.1e: Cross-stage pairs in order \(k\)
 
 Let \(k\ge1\). Suppose there are increasing finite sets
