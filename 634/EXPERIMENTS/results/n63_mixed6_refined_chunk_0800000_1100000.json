@@ -1,0 +1,31 @@
+{
+  "covered": 203090,
+  "diagnosed": 96910,
+  "elapsed_seconds": 805.23171,
+  "exhausted": false,
+  "first_generated_index": 800001,
+  "generated_per_second": 372.563569,
+  "generated_processed": 300000,
+  "generated_seen": 1100000,
+  "last_generated_index": 1100000,
+  "local_cover_mode": "lazy",
+  "max_generated": 300000,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mode": "refined",
+  "n": 63,
+  "outside_local_cover": true,
+  "radicand": 5,
+  "resume_skip_generated": 1100000,
+  "skip_generated": 800000,
+  "status_counts": {
+    "corner-label-violation": 54266,
+    "pinch-sector-obstruction": 15016,
+    "split-corner-label-obstruction": 27628
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ]
+}
