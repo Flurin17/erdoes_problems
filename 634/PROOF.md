@@ -2099,8 +2099,13 @@ sixteen groups began with residual corner-label violations, two with
 pinch-sector obstructions, and two with split-corner-label obstructions. For
 `N=99`, one representative per group was checked: sixteen groups began with
 residual corner-label violations and four with split-corner-label obstructions.
-This is still only representative evidence; it does not prove that every shell
-inside a group has the same obstruction.
+A follow-up `N=99` probe with two representatives per group already gives mixed
+statuses in the two `(1,3,2)` endpoint groups, with one residual corner-label
+violation and one split-corner-label obstruction in each. Thus endpoint/mixed
+group alone is not a fine enough invariant; the next grouping must include
+c-position, mixed-position, or tested-local-label data. This is still only
+representative evidence; it does not prove that every shell inside a refined
+group has the same obstruction.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count

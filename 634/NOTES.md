@@ -110,7 +110,8 @@ The tile triangle is not required to be similar to the large triangle unless exp
   mixed-`6` endpoint groups in both rows, and every probed representative
   already has one of the exact residual obstruction statuses; the missing step
   is proving that those obstructions cover whole groups rather than selected
-  representatives.
+  representatives. A two-representative `99` probe shows mixed statuses inside
+  the `(1,3,2)` endpoint groups, so endpoint/mixed grouping alone is too coarse.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
