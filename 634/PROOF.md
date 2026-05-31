@@ -2090,6 +2090,18 @@ Thus the next exact proof attempt can target a finite set of endpoint/mixed
 boundary signatures, beginning with the symmetric `(2,1,3)`/`(1,2,3)` and
 central `(2,2,2)` cap-`6` groups, instead of the raw individual boundary words.
 
+The stratified probe
+`EXPERIMENTS/gamma_2alpha_residual_group_probe.py` confirms that these groups
+are not merely count artifacts. For mixed exactly `6`, it directly constructs
+outside-cover representatives in all `20` cap-`6` endpoint/mixed groups for
+each benchmark row. For `N=63`, two representatives per group were checked:
+sixteen groups began with residual corner-label violations, two with
+pinch-sector obstructions, and two with split-corner-label obstructions. For
+`N=99`, one representative per group was checked: sixteen groups began with
+residual corner-label violations and four with split-corner-label obstructions.
+This is still only representative evidence; it does not prove that every shell
+inside a group has the same obstruction.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`

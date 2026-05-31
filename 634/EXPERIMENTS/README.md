@@ -179,6 +179,12 @@ Current components:
   has `20520` and `42480`. Cap `6` is not yet fully residual-classified; the
   count-only local-overlap cover leaves `415840` mixed-`6` shells for `N=63`
   and `5867040` mixed-`6` shells for `N=99` outside the current local cover.
+- `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for
+  outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
+  representatives in all `20` cap-`6` endpoint groups for both `N=63` and
+  `N=99`; every probed representative falls into one of the exact residual
+  obstruction statuses. This is evidence for the grouped proof target, not a
+  complete count.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

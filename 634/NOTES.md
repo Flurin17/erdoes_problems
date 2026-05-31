@@ -106,7 +106,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   remainders by endpoint/mixed boundary signatures collapses them to `26`
   groups for each row; the largest cap-`6` targets are mixed splits
   `(2,1,3)`, `(1,2,3)`, and `(2,2,2)` for `63`, and `(2,2,2)`, `(2,1,3)`,
-  and `(1,2,3)` for `99`.
+  and `(1,2,3)` for `99`. A stratified representative probe reaches all `20`
+  mixed-`6` endpoint groups in both rows, and every probed representative
+  already has one of the exact residual obstruction statuses; the missing step
+  is proving that those obstructions cover whole groups rather than selected
+  representatives.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
