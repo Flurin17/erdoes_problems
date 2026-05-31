@@ -1348,6 +1348,52 @@ must have unbounded two-term representation function; it cannot be a
 purely near-unique Raikov-Stöhr-style basis with only bounded
 representation multiplicity.
 
+## Corollary 3.4c: Sublinear representation multiplicity is enough
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\), and let
+\[
+A(x)=|A\cap[1,x]|.
+\]
+For \(X\ge1\), define
+\[
+R_k(X)=\max_{m\le X} r_{k,A}(m),
+\]
+where \(r_{k,A}(m)\) is the number of unordered \(k\)-term multiset
+representations of \(m\) from \(A\). If
+\[
+R_k(X)=o(A(X)),
+\]
+then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(k+1\).
+
+Proof. Repeat the proof of Corollary 3.4b. For each large \(n\), the
+hypergraph \(\mathcal H_\varnothing(n)\) has
+\[
+|\mathcal H_\varnothing(n)|\gg_k A(n-N_0),
+\]
+because each \(e\in A\cap[1,n-N_0]\) pads a \(k\)-term representation of
+\(n-e\). A vertex \(x\) has degree at most
+\[
+r_{k,A}(n-x)\le R_k(n).
+\]
+Thus
+\[
+\frac{|\mathcal H_\varnothing(n)|}{\Delta_\varnothing(n)}
+\gg_k \frac{A(n-N_0)}{R_k(n)}\to\infty.
+\]
+Here \(A(n-N_0)=A(n)+O_{N_0}(1)\), since at most \(N_0\) integers lie in
+\((n-N_0,n]\).
+Proposition 3.4 applies. \(\square\)
+
+Consequently, a counterexample must have large representation spikes:
+\[
+R_k(X)\not=o(A(X)).
+\]
+For \(k=2\), a sparse critical-density counterexample would therefore need
+two-sum multiplicities comparable to the counting function along an
+unbounded sequence, while still supporting the private-color barriers from
+Proposition 8.4f.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -6426,6 +6472,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   are uniformly bounded has a good infinite deletion; in particular, a
   \(k=2\) counterexample cannot be a bounded-representation/Sidon-type thin
   basis.
+* Corollary 3.4c strengthens this from bounded multiplicity to
+  \(R_k(X)=o(A(X))\), where \(R_k(X)\) is the maximum \(k\)-term
+  representation count up to \(X\). Thus a counterexample needs
+  representation spikes comparable to its counting function.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.

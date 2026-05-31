@@ -444,6 +444,18 @@ ratio tends to infinity. For \(k=2\), this rules out Sidon-type or
 unique-representation thin bases as counterexamples; any remaining sparse
 counterexample must have unbounded two-sum multiplicity somewhere.
 
+Corollary 3.4c strengthens the same argument. Let
+\[
+R_k(X)=\max_{m\le X} r_{k,A}(m).
+\]
+If \(R_k(X)=o(A(X))\), then the edge/degree ratio of the padded
+order-\((k+1)\) representation hypergraphs still tends to infinity, so a
+good deletion exists. Hence a counterexample needs representation spikes
+with \(R_k(X)\) comparable to \(A(X)\) along an unbounded sequence. For
+\(k=2\), the remaining sparse obstruction is not just near-critical
+density; it must combine near-critical density with large two-sum
+multiplicity spikes and the private-color barrier normal form.
+
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all
 shifted targets \(n-c\), as \(c\) ranges through retained elements of \(A\).
