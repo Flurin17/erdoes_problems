@@ -1528,3 +1528,10 @@ source of growth beyond Ramsey.
   within the small search budget.  At `(128,4,64)` the bounded search reports
   `unknown`, not a failure.  Current evidence suggests random dense regular
   bases are not an immediate obstruction to the terminal twin-blowup target.
+- 2026-05-31: Added `regular_terminal_sample.py` for the regular-host hard
+  core of the terminal dyadic route.  It samples switched circulant regular
+  graphs on `q^2` vertices and directly enumerates `2q`-sets looking for a
+  regular induced subgraph.  Runs with `q=4` (`50` samples) and `q=5`
+  (`10` samples) found exact terminal regular subsets in every sample.  This
+  is weak finite evidence only, but it suggests exact terminal failure is not
+  easy to find in dense random-like regular hosts.
