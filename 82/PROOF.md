@@ -348,6 +348,33 @@ which has exponent `1` in `q`.  It cannot feed the sublinear-exponent
 partition proposition below.  The dyadic route must allow the lifted residue
 to depend on the part.
 
+## Lemma 4A.1: Complete Multipartite Graphs Have A Two-Part Dyadic Lift
+
+Let `q` be a positive integer.  If `G` is a complete multipartite graph whose
+degrees are all congruent modulo `q`, then `V(G)` can be partitioned into at
+most two induced subgraphs whose degrees are all congruent modulo `2q`.
+
+Proof.  Let the multipartite class sizes be `s_1,...,s_t`, and let
+`N=sum_i s_i`.  A vertex in class `i` has degree `N-s_i`.  Since all these
+degrees are congruent modulo `q`, all class sizes `s_i` are congruent modulo
+`q`.  Hence the class sizes have at most two residues modulo `2q`.
+
+Group whole multipartite classes according to their size residue modulo
+`2q`.  Consider one group, and suppose all class sizes in it are congruent to
+`r mod 2q`.  If the total size of the group is `M`, then a vertex in any
+class of this group has internal degree
+
+```text
+M - s_i congruent M-r mod 2q,
+```
+
+independent of `i`.  Thus each nonempty group is `2q`-modular, and there are
+at most two groups.  QED.
+
+By complementation, the same statement holds for disjoint unions of cliques.
+Thus neither complete multipartite graphs nor their complements can force a
+large number of parts in a residue-flexible dyadic lift.
+
 For the next dyadic step, exact enumeration shows that every `4`-modular graph
 on `6` or `7` vertices admits a partition into four induced `8`-modular
 parts.  This is tiny evidence, but it is consistent with the uniform

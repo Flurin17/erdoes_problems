@@ -1095,3 +1095,8 @@ source of growth beyond Ramsey.
   loss still leaves a regular witness of order `(log n)^{C/2-o(1)}`, which is
   `omega(log n)`.  This makes a near-linear but polylog-saving partition
   theorem a viable target.
+- 2026-05-31: Proved that complete multipartite graphs are never dyadic
+  partition obstructions: if such a graph is `q`-modular, all multipartite
+  class sizes are congruent modulo `q`; grouping whole classes by their two
+  possible residues modulo `2q` gives at most two induced `2q`-modular parts.
+  Complements give the same conclusion for disjoint unions of cliques.
