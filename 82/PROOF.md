@@ -178,6 +178,37 @@ holes and antiholes have length less than `k`.  The obstruction is therefore
 not imperfection itself, but controlling graphs whose imperfect witnesses are
 present only below the target scale.
 
+## Conditional Proposition 1B: A Long-Hole Chi-Bound Would Suffice
+
+For `k>=4`, let `X(k)` be the least number such that every graph with
+`omega(G)<k` and with no induced cycle of length at least `k` has
+`chi(G)<=X(k)`.  If
+
+```text
+X(k) = 2^{o(k)},
+```
+
+then `G(k)<=2^{o(k)}`.
+
+Proof.  Let `G` be a graph with no regular induced subgraph of order at least
+`k`.  Then `omega(G)<k` and `alpha(G)<k`, since cliques and independent sets
+are regular.  By Lemma 1, `G` has no induced cycle of length at least `k`.
+Therefore `chi(G)<=X(k)`.  Coloring `G` into `chi(G)` independent sets gives
+
+```text
+|V(G)| <= alpha(G) chi(G) < k X(k).
+```
+
+Thus every graph on at least `kX(k)` vertices contains a regular induced
+subgraph of order at least `k`, so `G(k)<=kX(k)=2^{o(k)}` under the assumed
+bound.  QED.
+
+This route is independent of modular lifting.  Known elementary induced-path
+or induced-matching recursions give only `2^{O(k log k)}`-type bounds in this
+workspace; to settle the problem through this proposition one would need a
+genuinely subexponential chi-bound for bounded-clique graphs with no long
+holes.
+
 ## Lemma 2: Modular Terminal Criterion
 
 Let `q` be a positive integer and let `S` be a vertex set with `|S| <= q`.  If

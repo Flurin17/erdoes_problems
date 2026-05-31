@@ -1105,3 +1105,9 @@ source of growth beyond Ramsey.
   regular induced subgraph, of order at least `sqrt(n)`.  Thus any
   exponential-scale counterexample is non-perfect; by SPGT it has odd holes or
   antiholes, but Lemma 1 already restricts all of them to length `<k`.
+- 2026-05-31: Added a non-modular conditional route: if graphs with
+  `omega<k` and no induced cycle of length at least `k` have chromatic number
+  `2^{o(k)}`, then Problem 82 follows because a counterexample has
+  `alpha<k`, `omega<k`, and no such long hole.  Current elementary recursions
+  in the workspace only give `2^{O(k log k)}`, so this identifies another
+  exact quantitative gap.
