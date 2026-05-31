@@ -109,6 +109,16 @@ It also checks the \(\mathbb Z/13\mathbb Z\) model from Example 8.7e, where
 a certificate-free three-point set supports complete inclusion-minimal pair
 holes.
 
+`pair_hole_residue_search.py` searches for the residue-level ingredients of
+Example 8.7d: a background set `R`, two exceptional residues `x,y`, a
+three-fold hole after deleting `x,y`, and two-center shifted domination. The
+first pattern is already modulo `5`:
+\[
+R=\{0,1\},\qquad x=2,\qquad y=3,\qquad h=4.
+\]
+This is a local diagnostic only; an integer or staged lift must still stop
+other old exceptional representatives from repairing the hole.
+
 `certificate_free_stats.py` computes the largest certificate-free subset in
 several finite integer-window examples. This is a diagnostic for Lemma
 8.6g: fixed-rank large-excess barriers can persist only if every finite

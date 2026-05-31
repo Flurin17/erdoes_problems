@@ -3628,6 +3628,56 @@ This is only a finite-window model, but it shows that certificate-free
 colorability is not immediately incompatible with local two-sum interval
 coverage.
 
+## Corollary 8.6k: Dense order-2 bases cannot support fixed-rank large-excess barriers
+
+Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose
+\[
+\frac{|A\cap[1,X]|}{\sqrt X}\to\infty. \tag{1}
+\]
+Then, for every fixed \(r\ge2\), the large-excess fixed-rank obstruction in
+Lemma 8.6g cannot persist. More precisely, for all sufficiently large
+\[
+X
+\]
+the finite test set
+\[
+T_X=A\cap[1,X]
+\]
+has the property that every subset
+\[
+U\subset T_X,\qquad |U|\ge |T_X|/r,
+\]
+contains a certificate triple
+\[
+e,y_1,y_2\in U,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A.
+\]
+Consequently, if a remaining \(k=2\) counterexample has fixed-rank
+large-excess barriers of rank \(r\), then (1) fails.
+
+Proof. If \(U\subset A\cap[1,X]\) is certificate-free, then Warning 8.6j
+says \(U\) is Sidon. The number of unordered two-sums from \(U\) is
+\[
+\binom{|U|+1}{2},
+\]
+and they all lie in \([2,2X]\), so
+\[
+|U|=O(\sqrt X). \tag{2}
+\]
+By (1), for fixed \(r\) and all large \(X\),
+\[
+|A\cap[1,X]|/r
+\]
+exceeds the implicit Sidon bound in (2). Hence no subset of \(T_X\) of size
+at least \(|T_X|/r\) can be certificate-free. Lemma 8.6g then rules out
+fixed-rank large-excess barriers of rank \(r\). \(\square\)
+
+This is a conditional density reduction, not a proof of the problem. A thin
+order-2 basis can have \(|A\cap[1,X]|=O(\sqrt X)\), exactly the scale at
+which Sidon-sized certificate-free sets are not contradictory. Thus the
+unresolved counterexample, if it exists, must either be near the critical
+order-2 density scale or use genuinely unbounded-rank barriers such as the
+Schreier target in Proposition 13.1b-Schreier.
+
 ## Example 8.7: Pair barriers can be genuinely two-centered
 
 Lemma 8.6 cannot be improved by a simple pigeonhole argument from pair
@@ -3879,6 +3929,54 @@ Thus the local inference from a genuine pair hole to one-center
 reflection-recurrence is false. A positive proof must use the global
 barrier/minimality hypotheses across all infinite deletions, not only the
 local data from a single pair.
+
+The script `EXPERIMENTS/pair_hole_residue_search.py` finds an even smaller
+residue shadow of the same mechanism:
+\[
+R=\{0,1\}\subset\mathbb Z/5\mathbb Z,\qquad x=2,\qquad y=3.
+\]
+Then
+\[
+2(R\cup\{x,y\})=\mathbb Z/5\mathbb Z,\qquad 4\notin3R,
+\]
+and the shifted domination for the hole residue \(4\) is two-centered:
+\[
+4-R\subset (x+R)\cup(y+R).
+\]
+This confirms that the residue ingredients for pair holes are cheap. The
+hard part is the integer or staged lift: in a thick lift, other
+representatives of the exceptional residues repair the hole, while in a
+stage construction old exceptional elements must also be dominated.
+
+There is a concrete reason the moving-phase cover model from Warning 8.7c
+does not combine with this residue pair-hole mechanism. In the
+\(R=\{0,1,4\}\pmod8\) model, \(3R\) misses only residue \(7\). If a
+candidate witness has residue \(3\alpha+7\) and a retained old element has
+residue outside \(\alpha+R\), then that old element plus two retained
+\(R\)-tail elements represents the witness. Hence a genuine pair hole of
+this residue type forces every other active old element into the same
+allowed translate \(\alpha+R\), while the deleted pair must lie outside it.
+For complete pair systems this finite residue separation already fails in
+small size: one cannot choose translates of \(\{0,1,4\}\pmod8\) that
+separate every pair from all other protected residues.
+
+Equivalently, in an ordered-group phase lift
+\[
+A_\theta=\{(n,\theta(n)+r):r\in R\},
+\]
+a genuine hole at a fixed first coordinate would require the phase sums
+\[
+\theta(a)+\theta(b)+\theta(c)
+\]
+to be constant modulo \(8\) over all active decompositions
+\[
+a+b+c=W.
+\]
+Comparing nearby decompositions such as \((a,b,c)\) and \((a+1,b-1,c)\)
+forces \(\theta\) to be affine on the active interval, destroying the
+moving-phase freedom used in Warning 8.7c. Thus two-center reflected-cover
+models do not by themselves yield additive pair holes; the missing input is
+again terminal-gap or shifted vertex-cover control.
 
 ## Example 8.7e: Complete minimal pair holes can be certificate-free
 
@@ -5819,6 +5917,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.6j says certificate-free color classes are Sidon, which gives
   only an \(O(\sqrt X)\) counting bound and therefore does not contradict
   thin order-2 bases.
+* Corollary 8.6k uses the Sidon bound to rule out fixed-rank large-excess
+  barriers in order-2 bases with \(|A\cap[1,X]|/\sqrt X\to\infty\).
 * Example 8.7 shows that pair barriers can be irreducibly multi-centered at
   the residue level, so Lemma 8.6 cannot be upgraded by a simple pigeonhole
   argument.
