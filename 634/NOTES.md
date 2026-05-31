@@ -102,7 +102,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   split-corner-label obstructions, while `99` has `20520` and `42480`.
   The exact local-overlap cover removes `940800` of the `1356640` mixed-`6`
   shells for `63` and `7941960` of the `13809000` mixed-`6` shells for `99`;
-  the outside-cover mixed-`6` remainders are still unclassified.
+  the outside-cover mixed-`6` remainders are still unclassified. Grouping those
+  remainders by endpoint/mixed boundary signatures collapses them to `26`
+  groups for each row; the largest cap-`6` targets are mixed splits
+  `(2,1,3)`, `(1,2,3)`, and `(2,2,2)` for `63`, and `(2,2,2)`, `(2,1,3)`,
+  and `(1,2,3)` for `99`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

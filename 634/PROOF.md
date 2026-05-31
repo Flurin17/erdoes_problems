@@ -2060,6 +2060,36 @@ types are exact for any individual shell, but the cap-`6` remainder still needs
 either a grouped count or a symbolic proof that all outside-cover shells fall
 into the corner-label, pinch-sector, or split-corner-label obstruction classes.
 
+The grouped inventory
+`EXPERIMENTS/gamma_2alpha_overlap_remainder_inventory.py` shows that this
+cap-`6` remainder is much smaller at the endpoint/mixed level than it is as raw
+side words: for each of `N=63` and `N=99`, the complete cap-`<=6` valid shell
+space uses `26` endpoint/mixed boundary groups, and all `26` groups have some
+outside-cover mass. The outside-cover mixed-split counts are:
+
+```text
+N=63:
+  (2,1,3): 111,600        (1,2,3): 111,600
+  (2,2,2):  51,840        (1,1,4):  37,440
+  (3,1,2):  19,200        (1,3,2):  19,200
+  (2,3,1):  17,280        (3,2,1):  17,280
+  (4,1,1):  15,200        (1,4,1):  15,200
+  lower cap-4 splits account for the remaining 11,040.
+
+N=99:
+  (2,2,2): 2,095,200
+  (2,1,3):   947,700      (1,2,3):   947,700
+  (2,3,1):   362,880      (3,2,1):   362,880
+  (3,1,2):   263,340      (1,3,2):   263,340
+  (4,1,1):   241,800      (1,4,1):   241,800
+  (1,1,4):   140,400
+  lower cap-4 splits account for the remaining 63,000.
+```
+
+Thus the next exact proof attempt can target a finite set of endpoint/mixed
+boundary signatures, beginning with the symmetric `(2,1,3)`/`(1,2,3)` and
+central `(2,2,2)` cap-`6` groups, instead of the raw individual boundary words.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`

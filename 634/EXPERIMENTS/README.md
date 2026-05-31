@@ -135,6 +135,15 @@ Current components:
   `276555680/295877600` boundary shells for `N=63` and
   `8012836776/11122617000` for `N=99` by local positive-area overlap tests;
   expanding to the full nearby base-corner bands gives the same counts.
+- `gamma_2alpha_overlap_remainder_inventory.py`: grouped count-only inventory
+  of the boundary shells outside the local overlap cover. At cap `6`, the
+  millions of outside-cover shells collapse to `26` endpoint/mixed boundary
+  groups for each benchmark row. For `N=63`, the largest outside-cover mixed
+  splits are `(2,1,3)` and `(1,2,3)`, each with `111600` shells, followed by
+  `(2,2,2)` with `51840`; for `N=99`, `(2,2,2)` contributes `2095200`, then
+  `(2,1,3)` and `(1,2,3)` contribute `947700` each. It also prints top
+  c-position, mixed-position, and tested-local-label profiles for the
+  outside-cover mass.
 - `gamma_2alpha_residual_failure_causes.py`: exact valid-weighted sampler for
   the residual failures after optional local-overlap-cover filtering. It
   refines `not-simple-cycle` into residual graph degree/component profiles,
