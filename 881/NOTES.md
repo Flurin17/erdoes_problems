@@ -553,6 +553,14 @@ finite protected core, a counterexample must have a fresh gate \(d\) and
 with \(w-d-a\in A\) and bounded full count \(r_{2,A}(a+d)\). This is a
 low-count star in the graph of bounded-representation two-sums, coupled to
 the reflected slice at \(w-d\).
+Corollary 3.4o is the corresponding positive criterion: if some finite core
+uniformly excludes such fresh low-count reflected stars, then the desired
+order-3 deletion exists. Warning 3.4p shows why this criterion is global:
+for any fixed finite core one can build a finite star gadget outside it,
+then add a later cofinite tail to get a harmless order-2 basis without
+destroying the low-count rows. A proof must use recurrence across every
+infinite tail or the minimal collective-hole structure, not only local
+order-2 coverage.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all

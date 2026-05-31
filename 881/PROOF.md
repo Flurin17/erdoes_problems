@@ -2065,6 +2065,114 @@ a genuinely new low-count star: one fresh center \(d\) has linearly many
 fresh reflected neighbours \(a\), and every cross-sum \(a+d\) has bounded
 two-term representation count in the full set \(A\).
 
+## Corollary 3.4o: Uniform exclusion of fresh low-count stars gives a good deletion
+
+Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose there
+is a finite set \(E_0\subset A\) such that for every \(Q\ge1\) and every
+\(\eta>0\) there is \(W\) with the following property: for all
+\[
+d\in A\setminus E_0,\qquad t+d>W,
+\]
+one has
+\[
+\left|\{a\in A\setminus E_0:\ t-a\in A\setminus E_0,
+        r_{2,A}(a+d)\le Q\}\right|
+   <\eta A(t+d). \tag{1}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(3\).
+
+Proof. Assume no such infinite deletion exists. Let \(E_*\) be the
+singleton-exceptional set from Corollary 8.3b, and put
+\[
+E=E_0\cup E_*.
+\]
+Corollary 3.4n supplies constants \(Q_E,\eta_E>0\) and arbitrarily large
+\[
+w=t+d
+\]
+with \(d\in A\setminus E\) for which
+\[
+\left|\{a\in A\setminus E:\ t-a\in A\setminus E,
+        r_{2,A}(a+d)\le Q_E\}\right|
+   \ge \eta_E A(t+d). \tag{2}
+\]
+The set counted in (2) is contained in the set counted in (1) with
+\[
+Q=Q_E,\qquad \eta=\eta_E.
+\]
+For \(w=t+d\) large enough this contradicts (1). \(\square\)
+
+This is the current clean analytic target for the remaining \(k=2\) case:
+prove a uniform reflected low-count star exclusion after deleting one
+finite core.
+
+## Warning 3.4p: Fresh low-count stars are locally compatible
+
+Corollary 3.4o requires genuinely global input. No finite-window argument
+from order-2 coverage alone can rule out the fresh low-count stars in
+Corollary 3.4n.
+
+Fix a finite core \(E\), an integer \(M\), and let
+\[
+R\ge\max E.
+\]
+Choose \(N\) so large that
+\[
+N>R+M,\qquad N^2>N+M.
+\]
+Put
+\[
+d=N,\qquad P=\{N^2+1,\ldots,N^2+M\},\qquad T=N^3,
+\]
+\[
+Q=T-P=\{T-p:p\in P\},\qquad w=d+T,
+\]
+and
+\[
+A_0=E\cup\{d\}\cup P\cup Q.
+\]
+For every \(a=p\in P\),
+\[
+w-d-a=T-p\in Q,
+\]
+so \(P\) is a reflected star around the fresh gate \(d\), entirely outside
+\(E\).
+
+Moreover, for each \(p=N^2+i\in P\), the sum
+\[
+d+p=N+N^2+i
+\]
+has exactly one unordered representation from \(A_0\), namely
+\[
+d+p.
+\]
+Indeed, any sum involving an element of \(Q\) is too large; \(P+P\) is too
+large because \(2N^2+2>N^2+N+M\); \(E+E\), \(E+d\), and \(d+d\) are too
+small; and \(E+P\) cannot hit \(d+p\), since
+\[
+e+(N^2+j)=N+(N^2+i)
+\]
+would give \(j-i=N-e\), impossible from \(|j-i|\le M-1\) and
+\[
+N-e\ge N-R>M.
+\]
+Thus
+\[
+r_{2,A_0}(d+p)=1\qquad(p\in P).
+\]
+
+Finally, adjoining the cofinite tail
+\[
+[W,\infty),\qquad W>w,
+\]
+produces a benign order-2 basis and does not change any of these low-count
+rows, since every new element is larger than the relevant sums \(d+p\). The
+resulting set has an obvious infinite deletion preserving order \(2\), and
+hence order \(3\). The construction only shows that the low-count star
+normal form is locally compatible; it does not satisfy the global
+late-barrier condition in every infinite tail.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -7188,6 +7296,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 3.4n makes the remaining unpinned obstruction explicit: outside
   every finite core, a fresh gate \(d\) has \(\gg_E A(w)\) fresh reflected
   neighbours \(a\) with \(r_{2,A}(a+d)\) bounded.
+* Corollary 3.4o is the matching positive criterion: a uniform exclusion of
+  fresh reflected low-count stars after one finite core gives a good
+  deletion.
+* Warning 3.4p gives finite local star gadgets outside any prescribed core,
+  showing that Corollary 3.4o needs global tail or minimal-hole input.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
