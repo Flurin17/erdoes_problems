@@ -638,6 +638,83 @@ Thus the dyadic partition target need not reach `q^alpha` parts for a fixed
 `alpha<1`; even a sufficiently strong polylogarithmic saving over the naive
 `q`-part scale would settle the problem.
 
+## Conditional Proposition: Coarse Lifts Plus One Terminal-Window Lift Suffice
+
+For powers of two `q>=2`, suppose there is a constant `D` and a function
+`s(q)` with
+
+```text
+s(q) = o(q / (log_2 q)^2)
+```
+
+such that the following two statements hold.
+
+1. Coarse dyadic lift: every `q`-modular induced graph on `M` vertices
+   contains a `2q`-modular induced subgraph on at least `M/(Dq)` vertices.
+2. Terminal-window lift: every `q`-modular induced graph on at least `q^2`
+   vertices contains a `2q`-modular induced subgraph `S` with
+
+```text
+2q <= |S| <= 2q+s(q).
+```
+
+Then `F(n)/log n -> infinity`.
+
+Proof.  Let `G` be an `n`-vertex graph, put `L=log_2 n`, and set
+`t=floor(sqrt L)`.  By Lemma 3, `G` has a `2`-modular induced subgraph
+`H_1` of order `m_1>=n/2`.  Write `q_i=2^i`.  Applying the coarse dyadic lift
+for `i=1,...,t-1` and retaining the guaranteed subgraph gives a
+`q_t`-modular induced subgraph `H_t` of order `m_t` satisfying
+
+```text
+m_t >= n / (2 D^{t-1} q_1 q_2 ... q_{t-1})
+    = n / (2 D^{t-1} 2^{t(t-1)/2}).
+```
+
+Since `t=floor(sqrt L)`, the base-`2` logarithm of the right hand side is
+
+```text
+L - t(t-1)/2 - O(t) = (1/2+o(1))L,
+```
+
+whereas
+
+```text
+log_2(q_t^2)=2t=O(sqrt L).
+```
+
+Thus, for all sufficiently large `n`, `m_t>=q_t^2`.  The terminal-window lift
+applied to `H_t` gives a `2q_t`-modular induced subgraph `S` with
+
+```text
+2q_t <= |S| <= 2q_t+s(q_t).
+```
+
+Put `Q=2q_t` and write `|S|=Q+r`, where `0<=r<=s(q_t)`.  If `r<=1`, Lemma 2
+makes `S` regular.  If `r>=2`, Lemma 2A, applied with modulus `Q`, gives a
+regular induced subgraph of `S` on at least `(Q+r)/(r+1)` vertices.  In all
+cases `G` contains a regular induced subgraph of order at least
+
+```text
+Q / (s(q_t)+1).
+```
+
+Because `s(q)=o(q/(log_2 q)^2)`, this lower bound is
+
+```text
+omega((log_2 q_t)^2).
+```
+
+Finally `(log_2 q_t)^2=t^2=(1+o(1))log_2 n`, so the regular induced subgraph
+has order `omega(log n)`.  This proves `F(n)/log n -> infinity`.  QED.
+
+This route is weaker than the `q+2` one-shot target in two ways.  The early
+dyadic steps need only produce one large `2q`-modular witness with the naive
+`O(q)` loss, and the size-controlled demand appears only once, inside an
+already `q`-modular host of size at least `q^2`.  The price is that the final
+window must have excess `o(q/(log q)^2)`, not merely a constant-factor
+overshoot.
+
 ## Conditional Proposition: Terminal-Size Modular Partitions Would Suffice
 
 Suppose that every graph on `n` vertices admits, for

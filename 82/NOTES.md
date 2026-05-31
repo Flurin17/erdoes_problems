@@ -1316,3 +1316,14 @@ source of growth beyond Ramsey.
   `(b-2)C+7` is not coverable.  The failed full-rectangle induction obstruction
   persists at `(C,b)=(7,3)` with vector `(5,4,4)`, so the next proof attempt
   should be an amortized exchange argument.
+- 2026-05-31: Added an alternative dyadic conditional that avoids both the
+  `q+2` one-shot target and pointwise polylog-saving partitions.  It suffices
+  to prove a coarse largest-witness lift, namely every `q`-modular graph on
+  `M` vertices has a `2q`-modular induced subgraph on at least `M/(Dq)`
+  vertices, plus a single terminal-window lift: every `q`-modular graph on at
+  least `q^2` vertices has a `2q`-modular induced subgraph of order between
+  `2q` and `2q+s(q)`, where `s(q)=o(q/(log q)^2)`.  After
+  `sqrt(log n)` coarse lifts, the retained `q`-modular host is still much
+  larger than `q^2`, and Lemma 2A extracts a regular set of size
+  `omega(log n)` from the terminal-window witness.  This separates the problem
+  into a naive-order dyadic lift and one near-terminal exact-size step.
