@@ -299,11 +299,15 @@ Beeson proves that if an equilateral triangle has an `N`-tiling and `N > 3`, the
 outer triangles only.
 
 The following normalization is the local proof behind the exact equilateral
-filters. Suppose the source reductions have put an equilateral outer-triangle
-tiling into one of the rational tile-side cases with a distinguished tile angle
-`gamma` equal to `pi/3` or `2pi/3`. Scale the tile so its sides adjacent to
-`gamma` are coprime positive integers `a,b`, and let `c` be the opposite side.
-The law of cosines gives
+filters. Laczkovich's equilateral classification, as quoted in Beeson's
+equilateral paper, leaves only five tile shapes: equilateral, `(pi/6,pi/6,2pi/3)`,
+`(pi/6,pi/2,pi/3)`, or an incommensurable tile with a distinguished angle
+`pi/3` or `2pi/3`. The first three have count forms `m^2`, `3m^2`, and `6m^2`.
+In the last two cases Laczkovich's 2012 theorem gives rational tile side ratios.
+
+Therefore, in either incommensurable equilateral case, scale the tile so its sides
+adjacent to the distinguished angle are coprime positive integers `a,b`, and let
+`c` be the opposite side. The law of cosines gives
 
 ```text
 c^2 = a^2-ab+b^2        when gamma=pi/3,
@@ -325,9 +329,8 @@ boundary tile sides on a fixed outer side,
 L = xa + yb + zc,        0 < x+y+z <= N.
 ```
 
-This proves that, once the source rationality hypothesis is accepted, every
-candidate in these equilateral `pi/3` and `2pi/3` cases lies in the finite
-integer-side model used below.
+Thus every candidate in the incommensurable equilateral `pi/3` and `2pi/3`
+cases lies in the finite integer-side model used below.
 
 For composite diagnostics, an equilateral outer triangle with a tile angle
 `gamma=2pi/3` and primitive integer sides `(a,b,c)` must satisfy

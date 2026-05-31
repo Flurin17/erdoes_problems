@@ -94,8 +94,8 @@ elimination, not a complete classification of that source case.
 |---|---|---|
 | Commensurable-angle table | `m^2`, `a^2+b^2`, `2m^2`, `3m^2`, `6m^2` | Complete for this branch by Beeson's NoSevenTiling Table 3 and Theorem 3. |
 | Similar/reptile | `m^2`, `a^2+b^2`, `3m^2` | Complete for this subcase by Snover-Waiveris-Williams. |
-| Equilateral `pi/3` tile model | Primitive integer sides `c^2=a^2-ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Exact arithmetic scan plus boundary-star eliminations for selected small candidates; source rationality bridge still open. |
-| Equilateral `2pi/3` tile model | Primitive integer sides `c^2=a^2+ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Exact arithmetic scan plus boundary-star eliminations for selected small candidates; source rationality bridge still open. |
+| Equilateral `pi/3` tile model | Primitive integer sides `c^2=a^2-ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Source rationality bridge closed by Laczkovich/Beeson; exact arithmetic scan plus boundary-star eliminations for selected small candidates. |
+| Equilateral `2pi/3` tile model | Primitive integer sides `c^2=a^2+ab+b^2`, outer side `L^2=Nab`, boundary length `L=xa+yb+zc`. | Source rationality bridge closed by Laczkovich/Beeson; exact arithmetic scan plus boundary-star eliminations for selected small candidates. |
 | Beeson `3alpha+2beta=pi`: triquadratic | `N/M^2=2/s^2-1`, with sufficient subfamily `N=2K^2-M^2` when `s=M/K` and `K|M^2`. | Necessary filter plus one sufficient family; generic boundary-integrality filter for candidates with irrational or nonintegral area-normalized outer sides; composites not complete. |
 | Beeson `3alpha+2beta=pi`: `(2alpha,alpha,2beta)` | `N/M^2=(2-s^2)(3-s^2)/((1-s)^2(2+s)^2)`, sufficient when reconstructed sides satisfy `c|a^2`. | Necessary filter plus one sufficient criterion; composites not complete. |
 | Beeson `3alpha+2beta=pi`: isosceles-beta | `N/M^2=(3-s^2)/(1+s)^2`. | Necessary diagnostic plus generic boundary-integrality filter, except listed source examples. |
@@ -119,12 +119,12 @@ once the relevant source-reduction hypotheses are accepted:
 | Commensurable-angle counts | closed by Beeson's NoSevenTiling Table 3 and Theorem 3 |
 | Prime obstruction for non-isosceles `gamma=2pi/3` | BLZ formulas plus local boundary-integrality product formulas |
 | Isosceles `gamma=2pi/3` obstruction | local boundary-transition lemma |
-| Exact equilateral boundary-length arithmetic | `equilateral_boundary_exact.py` finite rational-root enumeration |
+| Exact equilateral boundary-length arithmetic | source rationality plus `equilateral_boundary_exact.py` finite rational-root enumeration |
 | Equilateral `pi/3` and `2pi/3` local boundary checks | `equilateral_pi_boundary.py`, `equilateral_gamma_boundary.py` |
 | `3alpha+2beta=pi` boundary/integrality eliminations | `beeson_3alpha2beta_boundary.py` |
 | Selected non-isosceles `gamma=2pi/3` boundary eliminations | `gamma_2pi3_nonisosceles_boundary.py` |
 
-## Missing Bridges
+## Missing Bridges And Closed Checks
 
 ### 1. Incommensurable Source-Row Count Restrictions
 
@@ -171,9 +171,9 @@ Impact:
   small-value obstructions such as `N=22`; the remaining isosceles gap is exact
   composite completeness in the `gamma=2pi/3` and `3alpha+2beta=pi` rows.
 
-### 3. Equilateral Rational/Integer Side Model
+### Closed Check: Equilateral Rational/Integer Side Model
 
-Needed statement:
+Closed statement:
 
 > Every equilateral outer-triangle tiling in the relevant source cases either
 > is handled by Beeson's prime theorem/commensurable table or has rational tile
@@ -181,9 +181,9 @@ Needed statement:
 
 Current evidence:
 
-- This rationality statement is consistent with the Beeson/Zhang summaries and
-  with all encoded candidate searches.
-- Once rationality and the distinguished `pi/3` or `2pi/3` angle are accepted,
+- Beeson's equilateral paper quotes Laczkovich's equilateral classification and
+  rationality theorem for the incommensurable `pi/3` and `2pi/3` cases.
+- With rationality and the distinguished `pi/3` or `2pi/3` angle accepted,
   `PROOF.md` now derives the integer-side model
   `c^2=a^2±ab+b^2`, `L^2=Nab`, and `L=xa+yb+zc` with
   `0 < x+y+z <= N`.
@@ -192,10 +192,9 @@ Current evidence:
 Impact:
 
 - For `14`, `15`, `21`, `22`, and `30`, the exact equilateral model is fully
-  eliminated locally, but the source rationality/angle bridge to that model
-  remains to be formalized.
+  eliminated locally.
 
-### 4. Composite `3alpha+2beta=pi` Completeness
+### 3. Composite `3alpha+2beta=pi` Completeness
 
 Needed statement:
 
@@ -221,7 +220,7 @@ Impact:
   `100..250` scan are all in that branch. This is still conditional on the full
   `3alpha+2beta=pi` source setup.
 
-### 5. Composite Non-Isosceles `gamma=2pi/3` Completeness
+### 4. Composite Non-Isosceles `gamma=2pi/3` Completeness
 
 Needed statement:
 
@@ -316,12 +315,11 @@ the Type I side-label configuration and non-similar `gamma=2pi/3`,
    no exact equilateral candidates, no isosceles or non-isosceles
    `gamma=2pi/3` candidates, and only four `3alpha+2beta=pi`
    isosceles-`alpha+beta` raw candidates, all rejected by Beeson's stronger
-   Section 11.4 filter. This still needs the global reduction bridge before it
-   can be promoted from "no encoded survivor" to a negative theorem.
-4. Formalize the source rationality theorem feeding the equilateral
-   rational/integer normalization lemma.
-5. Build a corner-capped ordering/matching obstruction for the remaining
+   Section 11.4 filter. This now needs the remaining row-by-row composite
+   count restrictions before it can be promoted from "no encoded survivor" to a
+   negative theorem.
+4. Build a corner-capped ordering/matching obstruction for the remaining
    `3alpha+2beta` isosceles-`alpha+beta` survivors, using `N=48` as the
    positive regression case.
-6. Continue extending local boundary/integrality eliminations to larger
+5. Continue extending local boundary/integrality eliminations to larger
    composite survivors as they appear.

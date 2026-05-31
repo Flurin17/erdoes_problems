@@ -229,6 +229,34 @@ The paper notes that longer unpublished machinery would imply more prime
 non-existence statements, including all primes `3 mod 4`, but the short paper
 only establishes `7` and `11`.
 
+### TriangleTilingEquilateral
+
+Beeson's "Tiling an equilateral triangle" records Laczkovich's equilateral
+classification. A tile for an equilateral outer triangle is, up to angle order,
+one of:
+
+```text
+(pi/3,pi/3,pi/3),
+(pi/6,pi/6,2pi/3),
+(pi/6,pi/2,pi/3),
+(alpha,beta,pi/3) with alpha/pi irrational,
+(alpha,beta,2pi/3) with alpha/pi irrational.
+```
+
+The first three count forms are known: `m^2`, `3m^2`, and `6m^2`. For the last
+two incommensurable cases, Beeson quotes Laczkovich's 2012 theorem that the
+tile is rational. This is the source bridge for the workspace's exact
+equilateral integer-side model
+
+```text
+c^2=a^2-ab+b^2        or        c^2=a^2+ab+b^2,
+L^2=Nab,
+L=xa+yb+zc.
+```
+
+Beeson proves that in either incommensurable equilateral case `N` is not prime
+for `N > 3`, but the paper does not classify composite values.
+
 ### IsoscelesTilings
 
 Beeson's "Tilings of an isosceles triangle" treats non-equilateral isosceles
