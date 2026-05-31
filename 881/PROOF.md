@@ -2418,6 +2418,115 @@ inside \(A\). The unique-gate branch is the opposite extreme: the reflected
 packet is large, but every row \(s+d\) is represented only by the intended
 gate pair.
 
+## Warning 3.4u: Shifted-overlap packets are locally compatible
+
+The shifted-overlap branch in Corollary 3.4t also cannot be ruled out by a
+finite-window order-2 argument.
+
+Fix a finite core \(E\), a positive shift \(h\), and a positive integer
+\(M\). Choose a spacing
+\[
+L>2h
+\]
+and let
+\[
+R\ge\max(E\cup\{h\}).
+\]
+Choose \(N\) so large that
+\[
+N>(M-1)L+R+h
+\]
+and the following elementary separations hold:
+\[
+N^3-N^2-ML>N^2+ML+N+h, \tag{a}
+\]
+\[
+2(N^2+L)>N^2+ML+N+h, \tag{b}
+\]
+\[
+2(N+h)<N^2+L+N+h. \tag{c}
+\]
+Now put
+\[
+f=N,\qquad d=N+h,
+\]
+\[
+P=\{N^2+iL:1\le i\le M\},\qquad P_h=P+h,
+\]
+\[
+T=N^3,\qquad Q=T-P,\qquad w=d+T.
+\]
+Let
+\[
+A_0=E\cup\{f,d\}\cup P\cup P_h\cup Q.
+\]
+For every \(p\in P\),
+\[
+w-d-p=T-p\in Q
+\]
+and
+\[
+p+d=(p+h)+f. \tag{1}
+\]
+Thus \(P\) is a reflected packet around the fresh gate \(d\), and it is
+also shifted by \(h=d-f\) into \(A_0\).
+
+For \(N\) and \(L\) as above, the only unordered representations of
+\[
+p_i+d=N^2+iL+N+h\qquad(1\le i\le M)
+\]
+from \(A_0\) are
+\[
+p_i+d,\qquad (p_i+h)+f. \tag{2}
+\]
+Write \(p_i=N^2+iL\). A representation using an element of \(Q\) is too
+large by (a), because the least element of \(Q\) already exceeds the largest
+row \(p_i+d\). A representation using two elements of \(P\cup P_h\) is too
+large by (b), and a representation using only elements of
+\(E\cup\{f,d\}\) is too small by (c).
+
+It remains to check mixed representations. If
+\[
+e+p_j=p_i+d\qquad(e\in E,\ p_j\in P),
+\]
+then
+\[
+N=(j-i)L+e-h,
+\]
+contradicting \(N>(M-1)L+R+h\). If
+\[
+e+(p_j+h)=p_i+d,
+\]
+then
+\[
+N=(j-i)L+e,
+\]
+again impossible. The only representations using \(f\) or \(d\) and one
+packet element are the two displayed in (2): equations
+\[
+f+p_j=p_i+d,\qquad d+(p_j+h)=p_i+d
+\]
+would force \((j-i)L=h\) and \((j-i)L=-h\), respectively, which are
+impossible since \(L>2h\); while
+\[
+d+p_j=p_i+d,\qquad f+(p_j+h)=p_i+d
+\]
+force \(j=i\).
+
+Hence
+\[
+r_{2,A_0}(p+d)=2\qquad(p\in P),
+\]
+and every row lies in the shifted-overlap branch through the same
+\[
+f=d-h.
+\]
+Adjoining a cofinite tail \([W,\infty)\) with \(W>w\) makes a benign
+order-2 basis without changing these rows. Therefore the shifted-overlap
+branch, like the
+unique-gate branch in Warning 3.4p, requires global barrier input to rule
+out.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
