@@ -45,9 +45,11 @@ def main() -> None:
     parser.add_argument("--max-size", type=int, default=13)
     parser.add_argument("--max-rank", type=int, default=5)
     parser.add_argument("--min-gap", type=int, default=3)
+    parser.add_argument("--limit", type=int, default=1)
     args = parser.parse_args()
 
     threshold = 2
+    found = 0
     for max_value in range(8, args.max_value + 1):
         universe = range(1, max_value + 1)
         for size in range(5, min(max_value, args.max_size) + 1):
@@ -84,8 +86,11 @@ def main() -> None:
                                 "gap=", (gap_left, gap_right),
                                 "gap_length=", gap_right - gap_left,
                             )
-                            return
-    print("no actual terminal-gap barrier found within searched bounds")
+                            found += 1
+                            if found >= args.limit:
+                                return
+    if found == 0:
+        print("no actual terminal-gap barrier found within searched bounds")
 
 
 if __name__ == "__main__":
