@@ -1493,6 +1493,11 @@ has no possible second vertex.
 With lazy prefix-link pruning, the same search checks \(14912\) candidates
 for \(p_6\le55\) with up to two delayed fillers through \(95\), again
 finding no arbitrary-order P6 extension.
+A broader delayed-filler run with
+`--max-p6 45 --max-extra 3 --max-extra-value 75` checks \(89702\)
+coverage-passing candidates and again finds no arbitrary-order P6
+extension; after \(p_6=38\), no later candidate passes the coverage filter
+within those bounds.
 
 Lemma 8.2c' closes one fixed-prefix loophole: if a fixed lower endpoint
 \(d\) has genuinely pair-private witnesses

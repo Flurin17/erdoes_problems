@@ -9750,9 +9750,14 @@ After replacing the order test by Lemma 13.1j-style lazy prefix-link
 pruning, the same mode also checks
 `--max-p6 55 --max-extra 2 --max-extra-value 95`. It finds no extension
 among \(14912\) coverage-passing candidates with up to two delayed fillers.
-Thus the first P6 obstruction is not removed by one or two small delayed
-fillers; any continuation must use a more global placement of \(p_6\) and
-its support fillers.
+A wider delayed-filler run
+`--max-p6 45 --max-extra 3 --max-extra-value 75` checks \(89702\)
+coverage-passing candidates and again finds no extension; after
+\(p_6=38\), no later candidate passes the coverage filter within those
+bounds. Thus the first P6 obstruction is not removed by one or two small
+delayed fillers, nor by three delayed fillers in this smaller value range.
+Any continuation must use a more global placement of \(p_6\) and its
+support fillers.
 
 ## Lemma 13.1j: Enumerated Schreier stages require complete prefix links
 
@@ -11241,6 +11246,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   finite enumerated Schreier stages: the first vertex needs complete good
   pair links, the second needs complete good triple links on the remaining
   tail, and so on.
+* The bounded P6 enumeration search now also checks \(89702\) candidates
+  with up to three delayed fillers through \(75\), finding no extension
+  for \(p_6\le45\).
 * Corollary 13.1k applies Lemma 8.2c' to those first-prefix pair links:
   uniformly low-top-excess links in the finite-test sense would give a good
   deletion, so a counterexample must use unbounded excess, non-uniform

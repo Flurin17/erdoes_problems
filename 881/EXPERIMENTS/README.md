@@ -284,6 +284,11 @@ The same mode now uses Lemma 13.1j-style lazy prefix-link pruning. With
 `--max-p6 55 --max-extra 2 --max-extra-value 95`, it checks `14912`
 coverage-passing candidates with up to two delayed fillers and still finds
 no arbitrary-order P6 extension.
+A wider delayed-filler run,
+`schreier_stage_search.py --p6-enum-search --max-p6 45 --max-extra 3
+--max-extra-value 75`, checks `89702` coverage-passing candidates and also
+finds no arbitrary-order P6 extension. After `p6=38`, no later candidate
+passes the coverage filter under these bounds.
 Run `bipartite_sidon_window_search.py --max-value 16 --size 6 --limit 10`
 for a finite analogue of the bipartite recurrent-Sidon obstruction from
 Corollary 13.1l.3. It finds many windows with two certificate-free colors,
