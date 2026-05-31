@@ -154,9 +154,11 @@ Current components:
   the seed-`20260602`, `10000`-attempt outside-cover run the split is
   `250/43` for `N=63` and `895/218` for `N=99`. The exact split-cycle component
   diagnostic enumerates the two planar pairings at each degree-4 pinch and
-  checks component area, boundary-side upper bounds, and side-label parity; in
-  the same run, this exact component test does not remove the pure `aabc`
-  branch.
+  checks component area, boundary-side upper bounds, side-label parity, and
+  forced corner-label compatibility on each split component cycle. In the same
+  run, all locally fillable non-simple samples are reclassified as
+  `split-corner-label-obstruction`, leaving no sampled residual graph outside
+  the three exact residual obstruction statuses.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

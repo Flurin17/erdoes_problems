@@ -1956,23 +1956,36 @@ N=99:  895 pinch-sector-obstruction, 218 locally fillable not-simple-cycle.
 The same diagnostic now includes an exact split-cycle component check. At each
 degree-4 residual vertex it enumerates the two planar pairings of consecutive
 half-edges, traces the induced boundary cycles exactly, divides each component
-area by the exact scaled tile area, and applies the elementary component
-conditions:
+area by the exact scaled tile area, applies the elementary component
+conditions, and finally applies the same forced-corner label test to every
+split component cycle:
 
 ```text
 boundary label count for each side <= component tile count,
 boundary label count for each side == component tile count (mod 2).
 ```
 
-This test is useful but not decisive. In a seed-`20260602`, `10000`-attempt
-outside-cover run, pure one-pinch `aabc` non-simple shells have `2` planar
-pairing options and both pass the exact component test: `42` such `N=63`
-samples and `217` such `N=99` samples appear. The split test does reject many
-`accc`-containing pairings by side parity, non-integral component area, or too
-many boundary sides, but the `accc` branch is already better targeted by the
-local unfillable-sector diagnostic above. Thus the remaining finite target has
-split into two parts: make the `accc` sector obstruction exact, and find a
-stronger invariant for the locally fillable `aabc` split components.
+The area/parity part alone is not decisive: in the same run, pure one-pinch
+`aabc` non-simple shells have `2` planar pairing options and both pass those
+coarse component tests (`42` such `N=63` samples and `217` such `N=99`
+samples). However, every one of those locally fillable split options fails the
+exact split component forced-corner label test. Therefore the refined
+seed-`20260602`, `10000`-attempt outside-cover sample has no residual graph
+left in the generic `not-simple-cycle` bucket:
+
+```text
+N=63: corner-label-violation 340,
+      pinch-sector-obstruction 250,
+      split-corner-label-obstruction 43.
+
+N=99: corner-label-violation 1642,
+      pinch-sector-obstruction 895,
+      split-corner-label-obstruction 218.
+```
+
+This is still sampled evidence, not a proof for all outside-cover shells. The
+next proof-level step is to count or symbolically cover the outside-local-cover
+remainder by these three exact residual obstruction mechanisms.
 
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`

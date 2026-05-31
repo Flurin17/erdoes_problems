@@ -54,6 +54,7 @@ class ShellDiagnostic:
     pinch_sector_signatures: CounterTuple = ()
     split_options: int = 0
     split_component_pass_options: int = 0
+    split_corner_pass_options: int = 0
     split_failure_reasons: CounterTuple = ()
     forced_corners: int = 0
     label_violations: int = 0
@@ -398,10 +399,37 @@ def component_area_tiles(
     return rational
 
 
+def split_cycle_corner_violations(
+    vertices: list[exact.KPoint],
+    segments: list[exact.KSegment],
+    residual_labels: dict[exact.KSegment, str],
+    sides: tuple[int, int, int],
+    scale: int,
+) -> int:
+    if exact.ksign(exact.ksigned_area2(tuple(vertices))) < 0:
+        vertices = list(reversed(vertices))
+    segment_set = set(segments)
+    violations = 0
+    for index in range(len(vertices)):
+        angle_name = exact.ksingle_angle_name(vertices, index, sides, scale)
+        if angle_name is None:
+            continue
+        previous_edge = canonical_segment(vertices[index - 1], vertices[index])
+        next_edge = canonical_segment(vertices[index], vertices[(index + 1) % len(vertices)])
+        if previous_edge not in segment_set or next_edge not in segment_set:
+            continue
+        side_pair = frozenset((residual_labels[previous_edge], residual_labels[next_edge]))
+        if side_pair != exact.ANGLE_SIDES[angle_name]:
+            violations += 1
+    return violations
+
+
 def split_component_profile(
     residual_labels: dict[exact.KSegment, str],
     unique: tuple[exact.IntegerQuadraticTile, ...],
-) -> tuple[int, int, CounterTuple]:
+    sides: tuple[int, int, int],
+    scale: int,
+) -> tuple[int, int, int, CounterTuple]:
     graph: dict[exact.KPoint, list[tuple[exact.KPoint, str]]] = defaultdict(list)
     for (start, end), label in residual_labels.items():
         graph[start].append((end, label))
@@ -411,12 +439,13 @@ def split_component_profile(
     for vertex, neighbors in graph.items():
         options = possible_vertex_pairings(vertex, neighbors)
         if not options:
-            return 0, 0, (("unsupported-degree", 1),)
+            return 0, 0, 0, (("unsupported-degree", 1),)
         vertex_options.append((vertex, options))
 
     tile_area2 = kabs(exact.ksigned_area2(unique[0].polygon))
     total_options = 0
     pass_options = 0
+    corner_pass_options = 0
     failures: Counter[str] = Counter()
     for choices in product(*(options for _vertex, options in vertex_options)):
         total_options += 1
@@ -444,7 +473,15 @@ def split_component_profile(
                 break
         if option_ok:
             pass_options += 1
-    return total_options, pass_options, tuple(sorted(failures.items()))
+            split_corner_violations = sum(
+                split_cycle_corner_violations(vertices, segments, residual_labels, sides, scale)
+                for vertices, segments in cycles
+            )
+            if split_corner_violations:
+                failures["split-corner-label"] += 1
+            else:
+                corner_pass_options += 1
+    return total_options, pass_options, corner_pass_options, tuple(sorted(failures.items()))
 
 
 def segment_length(segment: exact.KSegment, scale: int):
@@ -508,7 +545,12 @@ def diagnose_shell(
         unique,
         survivor.candidate.tile,
     )
-    split_options, split_pass_options, split_failures = split_component_profile(residual_labels, unique)
+    split_options, split_pass_options, split_corner_pass_options, split_failures = split_component_profile(
+        residual_labels,
+        unique,
+        survivor.candidate.tile,
+        scale,
+    )
     non_full_atoms, wrong_full_label_atoms = full_atom_failures(residual_labels, survivor.candidate.tile, scale)
     parity_bad = (
         parity_mismatches(label_profile, remaining_tiles)
@@ -517,7 +559,14 @@ def diagnose_shell(
     )
     cycle = exact.ksimple_cycle(residual_segments)
     if cycle is None:
-        status = "pinch-sector-obstruction" if unfillable_sector_count else "not-simple-cycle"
+        if unfillable_sector_count:
+            status = "pinch-sector-obstruction"
+        elif split_pass_options == 0:
+            status = "split-component-obstruction"
+        elif split_corner_pass_options == 0:
+            status = "split-corner-label-obstruction"
+        else:
+            status = "not-simple-cycle"
         return ShellDiagnostic(
             status,
             remaining_tiles=remaining_tiles,
@@ -536,6 +585,7 @@ def diagnose_shell(
             pinch_sector_signatures=sector_profile,
             split_options=split_options,
             split_component_pass_options=split_pass_options,
+            split_corner_pass_options=split_corner_pass_options,
             split_failure_reasons=split_failures,
         )
 
@@ -558,6 +608,7 @@ def diagnose_shell(
             pinch_sector_signatures=sector_profile,
             split_options=split_options,
             split_component_pass_options=split_pass_options,
+            split_corner_pass_options=split_corner_pass_options,
             split_failure_reasons=split_failures,
         )
 
@@ -597,6 +648,7 @@ def diagnose_shell(
         pinch_sector_signatures=sector_profile,
         split_options=split_options,
         split_component_pass_options=split_pass_options,
+        split_corner_pass_options=split_corner_pass_options,
         split_failure_reasons=split_failures,
         forced_corners=forced,
         label_violations=violations,
@@ -672,6 +724,7 @@ def main() -> None:
             pinch_sector_shell_profiles: Counter[CounterTuple] = Counter()
             unfillable_sector_counts: Counter[tuple[int, int]] = Counter()
             split_pass_counts: Counter[tuple[int, int]] = Counter()
+            split_corner_pass_counts: Counter[tuple[int, int, int]] = Counter()
             split_failure_counts: Counter[str] = Counter()
             examples: dict[str, tuple[BoundaryDemand, ShellDiagnostic]] = {}
             kept = 0
@@ -696,7 +749,12 @@ def main() -> None:
                 ] += 1
                 examples.setdefault(detail.status, (demand, detail))
 
-                if detail.status in ("not-simple-cycle", "pinch-sector-obstruction"):
+                if detail.status in (
+                    "not-simple-cycle",
+                    "pinch-sector-obstruction",
+                    "split-component-obstruction",
+                    "split-corner-label-obstruction",
+                ):
                     graph_profiles[
                         (
                             detail.residual_edges,
@@ -716,6 +774,13 @@ def main() -> None:
                     for signature, count in detail.pinch_sector_signatures:
                         pinch_sector_counts[signature] += count
                     split_pass_counts[(detail.split_options, detail.split_component_pass_options)] += 1
+                    split_corner_pass_counts[
+                        (
+                            detail.split_options,
+                            detail.split_component_pass_options,
+                            detail.split_corner_pass_options,
+                        )
+                    ] += 1
                     for reason, count in detail.split_failure_reasons:
                         split_failure_counts[reason] += count
                 if detail.status == "corner-label-violation":
@@ -770,6 +835,9 @@ def main() -> None:
             print("  non-simple split component pass counts:")
             for (options, pass_options), count in sorted(split_pass_counts.items()):
                 print(f"    options={options}, pass={pass_options}: {count}")
+            print("  non-simple split corner-label pass counts:")
+            for (options, component_pass, corner_pass), count in sorted(split_corner_pass_counts.items()):
+                print(f"    options={options}, component_pass={component_pass}, corner_pass={corner_pass}: {count}")
             print("  non-simple split component failure reasons:")
             for reason, count in split_failure_counts.most_common(args.top):
                 print(f"    {reason}: {count}")

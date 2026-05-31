@@ -93,9 +93,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
   locally fillable non-simple graphs for `63`, and `895` plus `218` for `99`.
   An exact split-cycle
   component diagnostic now checks planar pairings, component areas, boundary
-  side-count bounds, and side parity; a seed-`20260602`, `10000`-attempt
-  outside-cover sample shows this coarse component invariant still permits the
-  pure `aabc` branch.
+  side-count bounds, side parity, and split component corner labels. The same
+  sample reclassifies all locally fillable non-simple residual graphs as
+  split-corner-label obstructions, leaving only exact residual obstruction
+  statuses in the sampled outside-cover remainder.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
