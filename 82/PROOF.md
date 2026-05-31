@@ -6292,6 +6292,53 @@ integer functional with `||a||_1=2^{o(k)}`.  The general determinant bounds for
 such separators are only exponential in `k log k`, so this remains an
 unproved route.
 
+Bounded support gives a better, but still insufficient, determinant bound.
+
+**Lemma 18A: Bounded-Support Separator Bound.**  In the setting of Lemma 12,
+suppose every trace difference vector `v_b` has support size at most `s`.
+Then there is an integer vector `a in Z^d`, `d=k-1`, such that
+
+```text
+a dot v_b >= 1       for every b in B,
+```
+
+and
+
+```text
+||a||_1 <= d s^{d/2}.
+```
+
+Consequently,
+
+```text
+|B| <= d^2 s^{d/2}.
+```
+
+Proof.  As in Corollary 15H, zero-sum-freeness and Gordan's alternative give
+a real vector `x` with `x dot v_b>0` for every `b`.  Scaling gives a feasible
+system
+
+```text
+v_b dot x >= 1,       b in B.
+```
+
+This rational polyhedron is nonempty and is defined by an integer matrix
+whose rows have Euclidean norm at most `sqrt s`.  By the standard basic
+feasible solution bound for rational linear inequalities, it contains a
+rational point whose denominators and numerators are bounded by the largest
+absolute determinant of a square submatrix of the coefficient matrix.  By
+Hadamard's inequality, every such determinant is at most `s^{d/2}`.  Clearing
+denominators gives an integer vector `a` satisfying all inequalities
+`a dot v_b>=1` and `||a||_infty<=s^{d/2}`.  Therefore
+`||a||_1<=d s^{d/2}`.
+
+Applying Lemma 18 gives `|B|<=d||a||_1<=d^2 s^{d/2}`.  QED.
+
+For fixed `s>=3` this is only `2^{O(d)}`, not `2^{o(d)}`.  Thus the cubic
+support-`<=2` argument uses special graph structure that is absent from the
+generic bounded-support determinant estimate.  The support-`3` trace layer is
+the first place where a genuinely new cancellation argument is needed.
+
 ## Conditional Proposition: Repeated-Degree / Bounded-Spread Bridge
 
 Let `E(r)` be the least integer `N` such that every `N`-vertex graph contains

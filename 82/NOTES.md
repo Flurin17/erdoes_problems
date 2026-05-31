@@ -2188,3 +2188,9 @@ source of growth beyond Ramsey.
   topological levels gives an integer separator `a` with `||a||_1<=d^2`.
   Lemma 18 then gives `|B|<=d^3`.  Thus any superpolynomial trace obstruction
   in the repeated-degree route must use trace supports of size at least `3`.
+- 2026-05-31: Added Lemma 18A, a generic bounded-support separator bound.  If
+  every trace difference has support size at most `s`, a basic feasible
+  solution plus Hadamard's determinant bound gives an integer separator with
+  `||a||_1<=d s^{d/2}`, hence `|B|<=d^2 s^{d/2}` by Lemma 18.  For fixed
+  `s>=3` this remains exponential in `d`, so support `3` is the first layer
+  requiring a new cancellation argument rather than determinant bounds.
