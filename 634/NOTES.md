@@ -69,7 +69,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   `63` and `ca | bbbbb` for `99` show that the strict side-label fan diagnostic
   is not enough. The boundary-fan side-incidence inventory also has slack:
   minima `(39,35,31)` inside `(56,54,56)` for `63`, and `(48,34,40)` inside
-  `(92,86,92)` for `99`.
+  `(92,86,92)` for `99`. The floating boundary-shell placement has no proper
+  positive-area overlaps after merging the two duplicate base-corner tiles,
+  leaving residual tile areas `42` and `74`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
@@ -258,13 +260,16 @@ Important distinction: "positive square class" and "smallest representative" are
    `204`, `207`, `224`, `228`, and `240`.
    A recurring subfamily has consecutive Lemma 11.14 parameters
    `(k,m)=(t,t+1)`, sides `(t^2,2t+1,t(t+1))`, relation `a+c=t b`, and
-   boundary-survivor count `N=9(2t+1)`.
+   boundary-survivor count `N=9(2t+1)`. Its boundary words are
+   `L=baa b^(t-2) ccb`, `R=aa b^t cc`, and `B=baaabbccc`, with boundary
+   counts `(7,2t+3,7)` and interior counts `(18t+2,16t+6,18t+2)`.
    The current boundary DP finds that every active gamma survivor below `250`
    needs only four outer-boundary `c`/non-`c` transitions, so any obstruction
    must account for four overhang rays globally. For the benchmark rows, the
    stronger all-straight-boundary fan inventory still leaves side-incidence
    slack, so the next obstruction has to use placement/order information rather
-   than only counting labels consumed by local fans.
+   than only counting labels consumed by local fans. A boundary-shell residual
+   search is now the most concrete next construction/obstruction route.
 
 ## Current Diophantine Status for `n=19`
 

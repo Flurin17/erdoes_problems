@@ -1767,6 +1767,24 @@ N=99: boundary=(7,13,7), interior=(92,86,92),
 Thus the remaining obstruction, if these rows are impossible, must use more than
 the local boundary-fan side-count lower bound.
 
+In the consecutive-parameter family, this failure of parity-only obstructions
+has a closed form. The boundary words are
+
+```text
+L = baa b^(t-2) ccb,      R = aa b^t cc,      B = baaabbccc,
+```
+
+with boundary side counts `(7,2t+3,7)` and interior side incidences
+`(18t+2,16t+6,18t+2)`. The four mixed transitions admit a balanced local fan
+frontier `(16,8,8)`, leaving the even slack `(18t-14,16t-2,18t-6)`.
+
+A floating boundary-shell placement check gives the first constructive-search
+seed. After merging the two duplicate base-corner tiles, the forced boundary
+shell has `21` unique tiles for `N=63` and `25` for `N=99`, with no remaining
+positive-area overlaps. The residual areas are respectively `42` and `74` tile
+areas. This is not an existence certificate, but it shows that the obstruction
+cannot be just immediate boundary-shell overlap.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

@@ -91,6 +91,10 @@ Current components:
   side incidences forced by those local fans and currently shows that the
   `N=63` and `N=99` benchmark survivors are not eliminated by this counting
   lower bound.
+- `gamma_2alpha_boundary_shell.py`: floating geometry placement of the
+  boundary-adjacent tile shell from a transition-demand witness. It merges the
+  two duplicated base-corner tiles and checks for remaining positive-area
+  overlaps; it is a seed for residual search, not an existence proof.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

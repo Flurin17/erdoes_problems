@@ -924,6 +924,39 @@ N=99: boundary=(7,13,7), interior=(92,86,92),
 So a pure side-incidence lower bound from the boundary fans does not close the
 benchmark survivors.
 
+For the recurring consecutive-parameter family, the four mixed-transition
+frontier already explains why parity-only obstructions fail.  With
+`(a,b,c)=(t^2,2t+1,t(t+1))` and `N=18t+9`, the displayed boundary words
+generalize to
+
+```text
+L = baa b^(t-2) ccb,      R = aa b^t cc,      B = baaabbccc.
+```
+
+The boundary side counts are `(7,2t+3,7)`, so the remaining interior side
+incidences are `(18t+2,16t+6,18t+2)`.  The four mixed boundary transitions have
+a balanced fan-incidence option `(16,8,8)`, leaving
+`(18t-14,16t-2,18t-6)`, all even and positive for the benchmark values.
+
+The boundary-shell placement diagnostic shows that even the forced boundary
+collar has no immediate overlap obstruction:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary_shell.py 63 99
+```
+
+```text
+N=63: boundary edges=23, duplicate corner pairs=2,
+      unique boundary-shell tiles=21, remaining tile areas=42,
+      proper positive-area overlaps=0.
+N=99: boundary edges=27, duplicate corner pairs=2,
+      unique boundary-shell tiles=25, remaining tile areas=74,
+      proper positive-area overlaps=0.
+```
+
+Thus the next constructive or obstructive check should be a residual polygon or
+global side-line network search seeded by this boundary shell.
+
 ## Zhang Constructive Families
 
 Command:
