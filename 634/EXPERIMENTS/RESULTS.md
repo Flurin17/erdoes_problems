@@ -1003,6 +1003,25 @@ the current minimum-transition shell witness. It is not yet a proof that
 `N=99` is impossible, because the finite set of other angle-compatible boundary
 orders for the same arithmetic survivor has not been exhausted by this check.
 
+The endpoint-minimal shell census broadens the check from the single displayed
+witness to all canonical representatives retained by the transition-demand
+path DP:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_min_shell_census.py 63 99 --show-examples
+```
+
+```text
+N=63: endpoint-minimal shell representatives=8;
+      status counts={not-simple-cycle: 6, proper-overlap: 2}.
+N=99: endpoint-minimal shell representatives=8;
+      status counts={corner-label-violation: 6, not-simple-cycle: 2}.
+```
+
+This rules out the canonical endpoint-minimal shell representatives. The
+remaining task is larger: enumerate or theoretically control the noncanonical
+boundary paths with the same side-count representations.
+
 ## Zhang Constructive Families
 
 Command:

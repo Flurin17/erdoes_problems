@@ -103,6 +103,10 @@ Current components:
   shell, every residual segment is a full indecomposable tile side, but nine
   forced single-angle corners have incompatible adjacent side labels; this
   rules out that shell witness, not every possible boundary ordering.
+- `gamma_2alpha_min_shell_census.py`: finite census over the canonical
+  endpoint-minimal boundary-shell representatives selected by the transition
+  demand path DP. For `N=63` and `N=99` there are eight representatives each,
+  and none passes the current overlap/simple-cycle/corner-label filters.
 - `isosceles_71_boundary.py`: boundary decompositions and side-to-side parity
   obstruction for the remaining prime `71` isosceles `gamma=2pi/3` candidate.
 - `isosceles_71_boundary_sequences.py`: exact boundary side-order/orientation

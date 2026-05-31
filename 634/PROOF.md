@@ -1803,6 +1803,15 @@ minimum-transition boundary shell cannot be extended to a tiling. Since other
 boundary orders for the same arithmetic survivor are not yet exhausted, this is
 a shell-witness obstruction rather than a proof that `N=99` is impossible.
 
+The same diagnostic has been lifted one level to the canonical endpoint-minimal
+representatives selected by the transition-demand path DP. For each of `N=63`
+and `N=99`, there are `8` such representatives. For `N=63`, `6` have non-simple
+residual boundary graphs and `2` have proper shell overlaps. For `N=99`, `6`
+have residual corner-label violations and `2` have non-simple residual boundary
+graphs. Thus the endpoint-minimal representatives are exhausted, but arbitrary
+noncanonical boundary orderings remain to be controlled before this can become
+an impossibility proof.
+
 ## Composite Benchmark: `N=78`, `N=86`, `N=87`, `N=88`, `N=91`, `N=93`, `N=94`, and `N=95`
 
 The next no-survivor rows below `100` are `78`, `86`, `87`, `88`, `91`, `93`,

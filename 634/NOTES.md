@@ -277,7 +277,10 @@ Important distinction: "positive square class" and "smallest representative" are
    is the cleaner first target because the residual shell boundary is a single
    simple cycle in the current floating model. The first corner-label pass
    rules out the displayed minimum-transition shell, but not yet all possible
-   boundary orderings.
+   boundary orderings. A finite census over the eight canonical
+   endpoint-minimal representatives for each of `63` and `99` also eliminates
+   those representatives by overlap, non-simple residual boundary, or residual
+   corner-label mismatch.
 
 ## Current Diophantine Status for `n=19`
 
