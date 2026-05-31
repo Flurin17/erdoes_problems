@@ -274,6 +274,117 @@ def check_tail_chain(max_p6: int, max_extra: int, max_extra_value: int) -> None:
     print("no tail P6 extension found within searched bounds")
 
 
+def find_pair_edge_extension(
+    seed: set[int],
+    lower: int,
+    p: int,
+    w: int,
+    max_nodes: int,
+) -> tuple[tuple[int, ...] | None, int]:
+    """Try to fill two-sum coverage up to w while preserving one pair hole."""
+    base = seed | {p}
+    edge = (lower, p)
+    filler_range = tuple(range(p + 1, w))
+    nodes = 0
+
+    @lru_cache(maxsize=None)
+    def dfs(frozen_fillers: tuple[int, ...]) -> tuple[int, ...] | None:
+        nonlocal nodes
+        nodes += 1
+        if nodes > max_nodes:
+            return None
+
+        fillers = set(frozen_fillers)
+        elements = base | fillers
+        if w in hsum(elements - set(edge), 3, w):
+            return None
+
+        coverage = cover_end(elements, 2, w)
+        if coverage >= w:
+            if minimal_hole(elements, edge, w) and dominates(elements, edge, w, 2):
+                return tuple(sorted(fillers))
+            return None
+
+        target = coverage + 1
+        additions: set[tuple[int, ...]] = set()
+        for t in elements:
+            q = target - t
+            if p < q < w and q not in elements:
+                additions.add((q,))
+        if target % 2 == 0:
+            q = target // 2
+            if p < q < w and q not in elements:
+                additions.add((q,))
+        for q1 in filler_range:
+            q2 = target - q1
+            if q1 <= q2 and p < q2 < w and q1 not in elements and q2 not in elements:
+                additions.add(tuple(sorted({q1, q2})))
+
+        for addition in sorted(additions, key=lambda item: (len(item), sum(item), item)):
+            next_fillers = tuple(sorted(fillers | set(addition)))
+            result = dfs(next_fillers)
+            if result is not None:
+                return result
+        return None
+
+    return dfs(tuple()), nodes
+
+
+def pair_edge_search(max_p: int, max_u: int, max_nodes: int, max_found: int) -> None:
+    """Search high-excess pair holes for the P5 seed edge {10,p}."""
+    seed = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30}
+    lower = 10
+    found = 0
+    checked = 0
+    skipped_poisoned = 0
+    print("P5 seed pair-edge extension search")
+    print("  seed=", sorted(seed), "lower=", lower)
+    print("  max_p=", max_p, "max_u=", max_u, "max_nodes=", max_nodes)
+
+    for p in range(31, max_p + 1):
+        for u in range(2, max_u + 1):
+            w = p + u
+            base = seed | {p}
+            if w in hsum(base - {lower, p}, 3, w):
+                skipped_poisoned += 1
+                continue
+            checked += 1
+            fillers, nodes = find_pair_edge_extension(seed, lower, p, w, max_nodes)
+            if fillers is None:
+                continue
+            elements = base | set(fillers)
+            coverage = cover_end(elements, 2, w)
+            vertices = tuple(x for x in sorted(elements) if x >= lower)
+            order = supported_order(elements, vertices, coverage)
+            lower_pair_failures = [
+                q
+                for q in vertices
+                if q != lower and witnesses_for_edges(elements, [(lower, q)], coverage) is None
+            ]
+            print(
+                "  extension:",
+                "p=", p,
+                "u=", u,
+                "w=", w,
+                "fillers=", list(fillers),
+                "coverage=", coverage,
+                "order=", order,
+                "lower_pair_failures=", lower_pair_failures[:8],
+                "nodes=", nodes,
+            )
+            found += 1
+            if found >= max_found:
+                print(
+                    "stopped after max_found",
+                    "checked=", checked,
+                    "skipped_poisoned=", skipped_poisoned,
+                )
+                return
+
+    print("no pair-edge extension found")
+    print("  checked=", checked, "skipped_poisoned=", skipped_poisoned)
+
+
 def p6_pair_diagnostic() -> None:
     """Diagnose the first new pair edge in the tail P5 seed."""
     seed = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30}
@@ -534,6 +645,7 @@ def main() -> None:
     parser.add_argument("--p6-pair-diagnostic", action="store_true")
     parser.add_argument("--p6-order-diagnostic", action="store_true")
     parser.add_argument("--p6-enum-search", action="store_true")
+    parser.add_argument("--pair-edge-search", action="store_true")
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
     parser.add_argument("--protected-count", type=int, default=4)
@@ -543,6 +655,9 @@ def main() -> None:
     parser.add_argument("--max-p6", type=int, default=120)
     parser.add_argument("--max-extra", type=int, default=3)
     parser.add_argument("--max-extra-value", type=int, default=151)
+    parser.add_argument("--max-u", type=int, default=80)
+    parser.add_argument("--max-nodes", type=int, default=50_000)
+    parser.add_argument("--max-found", type=int, default=5)
     args = parser.parse_args()
     if args.extend_first:
         extend_first(args.max_new, args.max_candidate)
@@ -554,6 +669,8 @@ def main() -> None:
         p6_order_diagnostic()
     elif args.p6_enum_search:
         p6_enum_search(args.max_p6, args.max_extra, args.max_extra_value)
+    elif args.pair_edge_search:
+        pair_edge_search(args.max_p6, args.max_u, args.max_nodes, args.max_found)
     else:
         search_protected(
             args.max_value,

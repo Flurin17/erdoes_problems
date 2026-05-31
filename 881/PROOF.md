@@ -9518,6 +9518,85 @@ enumeration vertex must support all later pair edges. Corollary 13.1k says
 that, in a genuine counterexample, those links must either have unbounded
 top excess on some tail, lose pair-private status when arbitrary finite
 test sets are avoided, or be replaced by a higher-rank prefix obstruction.
+The next corollary shows that the non-uniform escape is unavailable for
+infinitely many genuine rank-2 pair links.
+
+## Corollary 13.1l: First-prefix pair excess must diverge on tails
+
+Work in the \(k=2\) case, and suppose \(A\) is a counterexample to the
+desired order-3 deletion conclusion, with order-2 threshold \(N_0\). Fix
+\(d\in A\). Then for every constant \(D\ge0\), there are only finitely
+many \(p\in A\) for which there is a witness \(w\) satisfying
+\[
+p\le w\le p+D,\qquad w\notin3(A\setminus\{d,p\}). \tag{1}
+\]
+
+Equivalently, if an enumerated Schreier construction uses \(d\) as the
+first prefix vertex and supplies genuine pair-private witnesses to later
+vertices \(p\), then the minimal excess \(w-p\) of those pair witnesses
+must tend to infinity along every infinite later tail.
+
+Proof. If (1) holds for infinitely many \(p\), choose one such witness
+\(w_p\) for each of them. Since \(w_p\ge p\), these witnesses are
+unbounded on the infinite set of corresponding \(p\)'s. For any finite
+nonempty
+\[
+T\subset A\cap(\max\{D,d\},\infty)
+\]
+and any \(L\), choose \(p\notin T\cup\{d\}\) from that infinite set with
+\[
+w_p-\max T\ge N_0,\qquad w_p-d>L.
+\]
+Corollary 13.1k gives an infinite \(B\subset A\) such that \(A\setminus B\)
+is an order-3 basis, contradicting that \(A\) is a counterexample.
+\(\square\)
+
+### Diagnostic 13.1m: High-excess pair starts push the filler problem upward
+
+Corollary 13.1l does not say that a finite first-prefix pair edge must be
+low-excess impossible. The mode
+`schreier_stage_search.py --pair-edge-search` searches directly for
+extensions of the P5 seed
+\[
+S=\{1,2,4,5,8,10,15,18,19,30\}
+\]
+with a pair-private dominated hole for \(\{10,p\}\), allowing witnesses
+\[
+w=p+u
+\]
+well above the low-excess range. With
+`--max-p6 40 --max-u 60 --max-nodes 20000 --max-found 2`, it finds
+\[
+p=37,\quad u=32,\quad w=69,
+\]
+using fillers
+\[
+\{40,41,44,51,54,55,58\},
+\]
+and also
+\[
+p=37,\quad u=43,\quad w=80,
+\]
+using fillers
+\[
+\{40,41,51,52,55,62,65,66,69\}.
+\]
+In both cases the two-sum coverage reaches the witness, and the pair edge
+\(\{10,37\}\) has the required local witness. But when all numerical
+fillers at least \(10\) are treated as protected vertices, the
+complete-prefix-link test has no supported order. In the first extension,
+the lower endpoint \(10\) already has failed pair links to every filler
+\[
+40,41,44,51,54,55,58.
+\]
+
+Thus high excess repairs the first pair edge only by creating a larger
+debt: many fillers must be delayed in the Schreier enumeration, and
+Corollary 13.1l then applies again when any one of them is eventually
+promoted. This is still finite evidence, but it sharpens the remaining
+construction target. A viable enumerated-Schreier lift must build a
+hierarchy in which first-prefix pair excess diverges at each promoted
+level without the required fillers becoming an unlinked tail.
 
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
@@ -10601,6 +10680,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   uniformly low-top-excess links in the finite-test sense would give a good
   deletion, so a counterexample must use unbounded excess, non-uniform
   links, or higher-rank prefix obstructions.
+* Corollary 13.1l removes the non-uniform escape for rank-2 first-prefix
+  links: infinitely many bounded-excess pair witnesses for a fixed lower
+  endpoint already supply Corollary 13.1k's finite-test quantifier.
+* Diagnostic 13.1m shows that high-excess first-pair starts are locally
+  possible in the P5 seed, but only by adding fillers that immediately fail
+  the next complete-prefix-link test when promoted.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).

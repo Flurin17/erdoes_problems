@@ -1504,11 +1504,25 @@ sets, then \(w-d\) reflects the whole tail above \(\max\{D,d\}\). Indeed,
 for a test point \(t>D\), the moving endpoint \(b\) cannot occur in a
 two-sum representation of \(w-t\), so the fixed endpoint \(d\) must occur.
 Lemma 2.4 then gives a good deletion. Corollary 13.1k translates this to
-the enumerated Schreier route: the first prefix vertex cannot have
-uniformly low-top-excess pair links in a counterexample. Any viable
-Schreier lift must force unbounded top excess on a tail, fail this
-finite-test uniformity, or move into genuinely higher-rank prefix
-obstructions.
+the enumerated Schreier route, and Corollary 13.1l removes the apparent
+finite-test caveat: if a fixed prefix \(d\) has low-excess pair witnesses
+for infinitely many later vertices, any finite test can be avoided by
+taking a later witness. Hence, in a counterexample, for each fixed \(D\)
+only finitely many later pair links may have \(w-p\le D\). Any viable
+Schreier lift must make first-prefix pair excess diverge on every infinite
+tail, or move into genuinely higher-rank prefix obstructions.
+
+The new `--pair-edge-search` diagnostic confirms that high-excess first
+pair starts are locally possible but expensive. Starting from the P5 seed,
+it finds \(p=37,w=69\) with fillers
+\[
+\{40,41,44,51,54,55,58\},
+\]
+and \(p=37,w=80\) with a larger filler set. Both give a local pair-private
+hole for \(\{10,37\}\), but treating the fillers as protected makes the
+complete-prefix-link test fail; in the first case \(10\) has no good pair
+link to any filler. Thus high excess shifts the obstruction into a delayed
+filler hierarchy rather than removing it.
 
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining

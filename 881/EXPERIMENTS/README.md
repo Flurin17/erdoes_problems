@@ -284,6 +284,18 @@ The same mode now uses Lemma 13.1j-style lazy prefix-link pruning. With
 `--max-p6 55 --max-extra 2 --max-extra-value 95`, it checks `14912`
 coverage-passing candidates with up to two delayed fillers and still finds
 no arbitrary-order P6 extension.
+Run `schreier_stage_search.py --pair-edge-search --max-p6 40 --max-u 60
+--max-nodes 20000 --max-found 2` for the complementary high-excess
+first-pair diagnostic. It looks for pair-private dominated holes for
+`\{10,p\}` in the P5 seed while allowing witnesses `w=p+u` above the
+low-excess range. It finds extensions at `(p,u,w)=(37,32,69)` with fillers
+`{40,41,44,51,54,55,58}` and `(37,43,80)` with fillers
+`{40,41,51,52,55,62,65,66,69}`. Both have the local pair witness, but the
+complete-prefix-link test has no supported order after the fillers are
+treated as protected; in the first extension the lower endpoint `10` has
+failed pair links to every filler. This is the finite version of the
+Corollary 13.1l pressure: high first-pair excess is possible locally, but
+it pushes new pair-link debt onto the required fillers.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short
