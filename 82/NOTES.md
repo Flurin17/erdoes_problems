@@ -2145,3 +2145,9 @@ source of growth beyond Ramsey.
   with the quadratic bound.  Weight-`2` support searches already hit the
   subset-sum cap quickly, so the remaining trace obstruction is genuinely a
   mixed-sign support-hypergraph problem.
+- 2026-05-31: Added Lemma 15D for the next trace layer.  If every trace
+  difference has support size exactly `2`, the signed traces form a red/blue
+  multigraph on the repeated-degree coordinates; a balanced deletion is
+  exactly an alternating closed trail.  Thus the first nontrivial support
+  layer of the trace route reduces to bounding two-colored multigraphs with
+  small red-blue degree imbalance and no alternating closed trail.

@@ -5754,6 +5754,40 @@ The next hard case is therefore a genuinely mixed-sign hypergraph of trace
 supports, not merely many vertices that distinguish one repeated vertex at a
 time.
 
+**Lemma 15D: Two-Coordinate Trace Differences Are Alternating-Trail
+Obstructions.**  In the setting of Lemma 12A, suppose every outside trace
+difference has support of size exactly `2`.  Build a two-colored multigraph
+`L` on coordinate set `{1,...,d}` as follows: a vector `+1_{i,j}` is a red
+edge `ij`, and a vector `-1_{i,j}` is a blue edge `ij`, retaining
+multiplicities.  Then the minimality condition from Lemma 12 is equivalent to
+the assertion that `L` has no nonempty closed trail whose edge colors
+alternate red, blue, red, blue, ...
+
+Proof.  A nonempty submultiset of trace vectors has sum zero exactly when, in
+the corresponding colored submultigraph `L'`, every coordinate is incident
+with equally many red and blue selected edges.  If `L` contains an alternating
+closed trail, selecting the edges of that trail gives such an `L'`, hence a
+balanced deletion, contradicting Lemma 12.
+
+Conversely suppose a nonempty selected submultigraph `L'` has equal red and
+blue degree at every vertex.  Take a maximal alternating trail in `L'` with no
+repeated edge.  At every internal vertex of the trail, the number of used red
+and blue incidences is equal.  At the current terminal vertex, if the last
+used edge is red and the trail is not already closed, the used red incidence
+count exceeds the used blue incidence count by one.  Since the total red and
+blue degrees of this vertex in `L'` are equal, there is an unused blue edge
+available to continue the trail.  The same argument with colors interchanged
+applies after a blue edge.  Hence a maximal alternating trail can stop only by
+closing.  Its closed segment is a nonempty alternating closed trail.  Thus a
+balanced deletion exists if and only if an alternating closed trail exists.
+QED.
+
+Together with Lemma 15B, this says that any trace obstruction with
+two-coordinate supports is a two-colored multigraph with bounded red-blue
+degree imbalance and no alternating closed trail.  Proving a subexponential
+bound in this colored-graph model would eliminate the first nontrivial support
+layer of the trace route.
+
 One genuinely low-dimensional trace obstruction does collapse.
 
 ## Lemma 15A: Rank-One Trace Obstructions Are Small
