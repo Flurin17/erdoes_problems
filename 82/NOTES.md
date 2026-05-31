@@ -973,3 +973,29 @@ source of growth beyond Ramsey.
   the same complete value `4` for `k=4`; for `k=5`, a `200000` node partial
   search still finds an admissible family of size `8`, so the corrected
   spread filter alone does not collapse the trace obstruction.
+- 2026-05-31: Tested a homogeneous-trace amplification idea.  If `A` is an
+  independent set, `C_T` is a trace class into `A`, and `C_T` contains an
+  independent set `B` of size `s`, then choosing `s` vertices from `T` gives
+  an induced `K_{s,s}` when `|T|>=s`, while choosing `s` vertices from
+  `A\T` gives an independent set when `|A\T|>=s`.  This is a useful local
+  certificate, but it needs `|A|>=ceil(k/2)` to force a regular induced
+  subgraph of order at least `k` from one trace class.  Ramsey only provides
+  `|A|=Theta(log n)`, so the idea does not beat the Ramsey scale unless one
+  can combine many trace classes into a single balanced incidence structure.
+- 2026-05-31: Added the universal-slot equivalence for the first lift.  The
+  flexible statement "every even graph partitions into at most four
+  `4`-modular parts" is equivalent to the existence of one residue multiset
+  `R` of size four that works for every even graph.  The nontrivial direction
+  uses disjoint unions: if every slot multiset has a killer component, their
+  disjoint union is an even graph whose global partition would restrict to a
+  forbidden slot partition on one component.  This makes the current eight
+  surviving slot multisets decisive targets rather than merely stronger
+  variants.
+- 2026-05-31: Recorded a density-only DRC limitation.  A `t`-root DRC step in
+  a density-`p` graph guarantees only `N p^t` common-neighborhood scale from
+  density information alone, and this is tight for near-regular graphs.  Thus
+  even in the denser of `G` and its complement, keeping `k` leaves after
+  `t` roots needs `N >= k 2^t`; if the hereditary density window is sparse
+  with `p=Theta(1/k)`, it needs `N >= k^{t+1}`.  Any DRC route requiring
+  `Theta(k)` roots is therefore exponential or worse unless it carries extra
+  internal degree control on the leaves.

@@ -504,6 +504,40 @@ small random samples, while `EXPERIMENTS/disjoint_signature.py` found no
 small components whose feasible signatures are incompatible with common
 four-slot choices.  This remains experimental, not a proof.
 
+## Lemma 4E.1: Flexible First Lift Equals A Universal Slot
+
+For a residue multiset `R` of size four modulo `4`, say that an even graph
+`G` is `R`-slot-partitionable if `V(G)` has a partition into at most four
+induced `4`-modular subgraphs whose residue signature is a submultiset of
+`R`.
+
+The following statements are equivalent.
+
+1. Every even graph has a partition into at most four induced `4`-modular
+   subgraphs.
+2. There is a single residue multiset `R` of size four modulo `4` such that
+   every even graph is `R`-slot-partitionable.
+
+Proof.  The second statement clearly implies the first.  Conversely, suppose
+the first statement holds but no universal `R` exists.  There are only
+`binom(4+4-1,4)=35` residue multisets of size four modulo `4`.  For each such
+`R`, choose an even graph `G_R` that is not `R`-slot-partitionable.  The
+disjoint union
+
+```text
+G = disjoint union_R G_R
+```
+
+is even, so by the first statement it has a four-part `4`-modular partition.
+Pad the residue signature of this partition by arbitrary unused residues to a
+four-element residue multiset `R_0`.  Restricting the global partition to the
+component `G_{R_0}` gives an `R_0`-slot partition of `G_{R_0}`, contradicting
+the choice of `G_{R_0}`.  QED.
+
+Thus to prove the flexible first lift it is enough, and in fact necessary, to
+prove one universal four-slot theorem.  The current experimental survivor
+list for such a universal `R` is recorded in `NOTES.md`.
+
 ## Lemma 4F: Self-Labelled Modular Colorings
 
 Fix a positive integer `M`.  The following two statements are equivalent for
@@ -1619,6 +1653,52 @@ it is useful because it applies to every induced subgraph of a counterexample.
 Any density increment or dependent-random-choice route must exploit this
 window more efficiently than the direct Ramsey argument.
 
+## Lemma 9A: Density-Only DRC Cannot Beat The Exponential Scale
+
+Let `H` be an `N`-vertex graph and let `Gamma` be either `H` or its
+complement with edge density `p`.  A standard dependent-random-choice step
+with `t` sampled roots can guarantee, from density information alone, a common
+neighborhood of expected size at least
+
+```text
+N p^t.
+```
+
+This order is tight up to constants for near-regular density-`p` graphs.
+
+Proof.  Choose `t` roots independently and uniformly from `V(Gamma)`, with
+replacement, and let `X` be their common neighborhood.  Then
+
+```text
+E |X| = sum_{v in V(Gamma)} (deg_Gamma(v)/N)^t.
+```
+
+By convexity this is at least
+
+```text
+N (average_degree(Gamma)/N)^t = N p^t (1+O(1/N))^t,
+```
+
+depending on whether density is normalized by `N^2` or `binom(N,2)`.  In a
+regular or near-regular graph of density `p`, the same expression is also at
+most a constant multiple of `N p^t`, proving tightness for density-only
+information.  QED.
+
+Consequently, using the denser of a graph and its complement gives `p>=1/2`,
+so retaining even `k` common neighbors after `t` roots requires
+
+```text
+N >= k 2^t.
+```
+
+Using only the hereditary density lower bound of Lemma 9 can be much worse:
+in sparse induced subgraphs the available density may be only `p=Theta(1/k)`,
+forcing `N >= k^{t+1}` to retain `k` leaves.  Thus any DRC proof whose regular
+template needs `t=Theta(k)` specified root vertices already has exponential or
+worse size cost.  A successful DRC route must carry additional internal
+degree control on the leaf set; a large common neighborhood alone simply
+returns to Ramsey or to the original `G(k)` problem inside the leaves.
+
 ## Lemma 10: Equitable-Partition Cell Certificate
 
 Let `P={V_1,...,V_t}` be an equitable partition of `V(G)`, meaning that for
@@ -1759,6 +1839,37 @@ with Lemma 13 it shows why a direct "partition by traces and pigeonhole" proof
 cannot beat the Ramsey scale: a counterexample may have exponentially many
 trace classes, and each class is only controlled by the original unknown
 quantity `G(k)`.
+
+## Lemma 14A: Homogeneous Trace Amplification Certificate
+
+Let `A` be an independent set in `G`, let `T subset A`, and let
+
+```text
+C_T = {v in V(G)\A : N_G(v) cap A = T}.
+```
+
+If `C_T` contains an independent set `B` of size `s`, then:
+
+1. if `|T|>=s`, `G` contains an induced `s`-regular subgraph on `2s`
+   vertices;
+2. if `|A\T|>=s`, `G` contains an induced `0`-regular subgraph on `2s`
+   vertices.
+
+Proof.  In the first case choose `A' subset T` with `|A'|=s`.  The set
+`A' union B` induces the complete bipartite graph `K_{s,s}`, because `A` and
+`B` are independent and every vertex of `B` is adjacent to every vertex of
+`T`.  This graph is `s`-regular on `2s` vertices.
+
+In the second case choose `A' subset A\T` with `|A'|=s`.  There are no edges
+inside `A'`, no edges inside `B`, and no edges between `A'` and `B`, so the
+union is independent on `2s` vertices.  QED.
+
+The lemma is quantitatively limited as a standalone route.  To force a
+regular induced subgraph of order at least `k` from a single trace class one
+needs `s>=k/2`, hence an independent set `A` of order at least `k/2`.
+Ramsey's theorem supplies only `Theta(log n)` vertices in the inverse regime
+`n=2^{o(k)}`.  A trace-amplification proof would therefore need to combine
+many trace classes, not just one large class.
 
 ## Lemma 15: Total Trace Imbalance In A Repeated-Degree Host
 
