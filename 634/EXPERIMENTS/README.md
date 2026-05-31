@@ -189,6 +189,13 @@ Current components:
   obstruction statuses. Its `--group-by profile` mode instead groups by
   c-position, mixed-position, and tested-local-label profiles. This is evidence
   for the grouped proof target, not a complete count.
+- `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
+  the full residual diagnostic and groups shells by compact obstruction
+  certificates: forced-corner violation profiles for simple residual cycles and
+  graph/pinch/sector/split profiles for non-simple residual graphs. A first
+  mixed-`6` outside-cover slice of `50` diagnosed shells gives `17`
+  corner-label certificate types for `N=63` and `18` for `N=99`; this is
+  order-biased calibration, not a proof.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

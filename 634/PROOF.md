@@ -2125,6 +2125,17 @@ Thus the next useful quotient is unlikely to be a boundary-word profile alone;
 it should group by residual obstruction certificates or derive a structural
 reason why the residual corner/pinch/split obstructions must occur.
 
+The residual-certificate probe
+`EXPERIMENTS/gamma_2alpha_residual_certificate_probe.py` starts that next
+direction by running the full exact residual diagnostic and grouping by compact
+certificates: forced-angle/violation profiles for simple residual cycles and
+degree/pinch/sector/split profiles for non-simple residual graphs. In the first
+order-biased mixed-`6` outside-cover slice of `50` diagnosed shells, both
+benchmark rows are still entirely residual corner-label violations, but the
+certificates already split into `17` types for `N=63` and `18` types for
+`N=99`. This reinforces that a proof needs a structural residual-corner
+argument, not merely a small enumerated list of certificate strings.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`
