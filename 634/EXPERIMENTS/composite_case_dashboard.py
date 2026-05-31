@@ -25,6 +25,7 @@ from equilateral_area_candidates import candidates_for_n as equilateral_candidat
 from equilateral_boundary_exact import candidates_for_n as equilateral_exact_candidates
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
+from gamma_2alpha_boundary import survivors_for_n as gamma_2alpha_survivors
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
 from gamma_2pi3_nonisosceles_boundary import boundary_star_obstructed as gamma_boundary_obstructed
 from gamma_2pi3_nonisosceles_exact import candidates_for_n as gamma_nonisosceles_candidates
@@ -113,7 +114,12 @@ def right_tile_isosceles_status(n: int) -> str:
 def gamma_2alpha_status(n: int) -> str:
     if is_squarefree(n):
         return "ruled out because recorded counts are not squarefree"
-    return "not ruled out by squarefree test"
+    candidates = gamma_2alpha_survivors(n)
+    if not candidates:
+        return "ruled out by Lemma 11.14 boundary-arithmetic enumeration"
+    preview = ", ".join(f"sides={row.tile}, X={row.x}, Y={row.y}" for row in candidates[:2])
+    suffix = " ..." if len(candidates) > 2 else ""
+    return f"{len(candidates)} boundary-arithmetic candidate(s) remain: {preview}{suffix}"
 
 
 def gamma_prime_filter_survives(p: int) -> bool:
@@ -142,8 +148,12 @@ def workspace_negative_reason(n: int) -> str | None:
         return "negative by the 46/51 composite benchmark in PROOF.md"
     if n == 55:
         return "negative by the N=55 composite benchmark in PROOF.md"
+    if n == 56:
+        return "negative by the N=56 composite benchmark in PROOF.md"
     if n in {57, 62}:
         return "negative by the 57/62 composite benchmark in PROOF.md"
+    if n in {66, 69, 70}:
+        return "negative by the 66/69/70 composite benchmark in PROOF.md"
     if n == 22:
         return "negative by the N=22 composite benchmark in PROOF.md"
     return None

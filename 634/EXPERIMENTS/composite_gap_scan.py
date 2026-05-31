@@ -32,6 +32,8 @@ from equilateral_area_candidates import candidates_for_n as equilateral_candidat
 from equilateral_boundary_exact import candidates_for_n as equilateral_exact_candidates
 from equilateral_gamma_boundary import feasible_boundary as feasible_equilateral_gamma_boundary
 from equilateral_pi_boundary import feasible_boundary as feasible_equilateral_pi_boundary
+from gamma_2alpha_boundary import candidates_for_n as gamma_2alpha_candidates
+from gamma_2alpha_boundary import survivors_for_n as gamma_2alpha_survivors
 from gamma_2pi3_isosceles_filter import candidates_for_n as gamma_isosceles_candidates
 from gamma_2pi3_nonisosceles_boundary import boundary_star_obstructed as gamma_boundary_obstructed
 from gamma_2pi3_nonisosceles_exact import Candidate as GammaCandidate
@@ -47,6 +49,8 @@ class ScanRow:
     three_alpha_raw: int = 0
     three_alpha_survivors: int = 0
     gamma_iso_raw: int = 0
+    gamma_2alpha_raw: int = 0
+    gamma_2alpha_survivors: int = 0
     gamma_noniso_raw: int = 0
     gamma_noniso_survivors: int = 0
     equilateral_raw: int = 0
@@ -77,6 +81,16 @@ def is_prime(n: int) -> bool:
         if n % d == 0:
             return False
         d += 2
+    return True
+
+
+def is_squarefree(n: int) -> bool:
+    n = abs(n)
+    d = 2
+    while d * d <= n:
+        if n % (d * d) == 0:
+            return False
+        d += 1
     return True
 
 
@@ -122,7 +136,7 @@ def classified_reasons(n: int, zhang_side_bound: int) -> tuple[str, list[str]]:
 
     if n in {7, 11}:
         return "negative", ["Beeson no-7/no-11 theorem"]
-    if n in {14, 15, 21, 30, 33, 35, 38, 39, 42, 46, 51, 55, 57, 62}:
+    if n in {14, 15, 21, 30, 33, 35, 38, 39, 42, 46, 51, 55, 56, 57, 62, 66, 69, 70}:
         return "negative", ["workspace composite benchmark; exact source-row eliminations"]
     if n == 22:
         return "negative", ["workspace N=22 composite benchmark; exact source-row eliminations"]
@@ -213,6 +227,8 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
         n, equilateral_side_bound, equilateral_exact
     )
     gamma_iso = gamma_isosceles_candidates(n)
+    gamma_2alpha_raw = [] if is_squarefree(n) else list(gamma_2alpha_candidates(n))
+    gamma_2alpha_unresolved = [] if is_squarefree(n) else list(gamma_2alpha_survivors(n))
     gamma_raw, gamma_unresolved = gamma_survivors(n)
 
     reasons = []
@@ -222,6 +238,10 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
         reasons.append("non-isosceles gamma=2pi/3 survivor")
     if gamma_iso:
         reasons.append("isosceles gamma arithmetic candidate; boundary-transition lemma rules this template out")
+    if gamma_2alpha_unresolved:
+        preview = ", ".join(f"sides={row.tile}, X={row.x}, Y={row.y}" for row in gamma_2alpha_unresolved[:2])
+        suffix = " ..." if len(gamma_2alpha_unresolved) > 2 else ""
+        reasons.append(f"gamma=2alpha boundary candidate(s): {preview}{suffix}")
     if equilateral_unresolved:
         preview = ", ".join(
             f"{row.angle} sides={row.sides} L={row.outer_side}" for row in equilateral_unresolved[:2]
@@ -231,7 +251,7 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
     elif equilateral_raw:
         reasons.append("equilateral area candidates locally eliminated by boundary-star check")
 
-    if three_survivors or gamma_unresolved or equilateral_unresolved:
+    if three_survivors or gamma_unresolved or gamma_2alpha_unresolved or equilateral_unresolved:
         status = "open-with-encoded-survivor"
     else:
         status = "open-no-encoded-survivor"
@@ -244,6 +264,8 @@ def scan(n: int, zhang_side_bound: int, equilateral_side_bound: int, equilateral
         three_alpha_raw=len(three_raw),
         three_alpha_survivors=len(three_survivors),
         gamma_iso_raw=len(gamma_iso),
+        gamma_2alpha_raw=len(gamma_2alpha_raw),
+        gamma_2alpha_survivors=len(gamma_2alpha_unresolved),
         gamma_noniso_raw=len(gamma_raw),
         gamma_noniso_survivors=len(gamma_unresolved),
         equilateral_raw=len(equilateral_raw),
@@ -278,6 +300,7 @@ def main() -> None:
         counts = (
             f"3a2b={row.three_alpha_survivors}/{row.three_alpha_raw}, "
             f"eq={row.equilateral_survivors}/{row.equilateral_raw}, "
+            f"g2a={row.gamma_2alpha_survivors}/{row.gamma_2alpha_raw}, "
             f"gIso={row.gamma_iso_raw}, "
             f"gNonIso={row.gamma_noniso_survivors}/{row.gamma_noniso_raw}"
         )

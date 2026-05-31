@@ -289,8 +289,8 @@ wrong squarefree parts and nonintegral area-derived boundary lengths `X,Y`,
 then enumerate boundary decompositions of `X` and `Y`. Theorem 11.18 uses this
 enumeration plus Lemma 11.17 to prove `N >= 45`, and then notes that after
 `45` the next possibilities left open are `63,64,72`. This is a strong source
-lead for `N=56`, `60`, `66`, `69`, and `70`, but the workspace has not yet
-reproduced the per-`N` enumeration certificates.
+lead for `N=60`; the workspace now has a local Lemma 11.14 certificate showing
+no boundary-arithmetic candidate for `N=56`.
 
 ### TriangleTiling4
 

@@ -164,8 +164,9 @@ Current evidence:
 - Lemma 11.14 gives a complete finite boundary-enumeration algorithm for the
   `gamma=2alpha` branch, and Theorem 11.18 plus its following note say that
   after `N=45` the next possibilities left open are `63,64,72`. This would
-  remove the branch for `56`, `60`, `66`, `69`, and `70` if accepted as a
-  black-box computation.
+  remove the branch for `60` if accepted as a black-box computation; the local
+  script now reproduces the stronger fact that `56` has no Lemma 11.14
+  boundary-arithmetic candidate.
 - `gamma=2pi/3` has a local boundary-transition obstruction.
 - The `gamma=2pi/3` arithmetic filter is encoded from Lemma 12.9 and Theorem
   12.10.
@@ -173,11 +174,11 @@ Current evidence:
 Impact:
 
 - The right-tile and `gamma=2alpha` rows are now source-backed enough for
-  small-value obstructions such as `N=22`; the stronger `gamma=2alpha` finite
-  enumeration is the next target for composite values because it has not yet
-  been reproduced as a local certificate. The remaining isosceles gap also
-  includes exact composite completeness in the `gamma=2pi/3` and
-  `3alpha+2beta=pi` rows.
+  small-value obstructions such as `N=22` and `N=56`; the stronger
+  `gamma=2alpha` finite enumeration is still the next target for `N=60`,
+  because that value has a local boundary-arithmetic candidate. The remaining
+  isosceles gap also includes exact composite completeness in the
+  `gamma=2pi/3` and `3alpha+2beta=pi` rows.
 
 ### Closed Check: Equilateral Rational/Integer Side Model
 
@@ -255,15 +256,16 @@ Impact:
 
 ## Current Small-Value Status
 
-The following unresolved values below `100` have no survivor in the currently
-encoded filters. The values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`,
-`39`, `42`, `46`, `51`, `55`, `57`, and `62` formerly appeared in this list,
-but are now classified negative in `PROOF.md` after writing out the source-row
-arithmetic eliminations:
+The following unresolved values below `100` remain after the currently encoded
+filters. The values `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`,
+`42`, `46`, `51`, `55`, `56`, `57`, `62`, `66`, `69`, and `70` formerly
+appeared in this list, but are now classified negative in `PROOF.md` after
+writing out the source-row arithmetic eliminations. The values `60` and `63`
+now have explicit `gamma=2alpha` boundary-arithmetic survivors; the rest have
+no encoded survivor:
 
 ```text
-56, 60, 63, 66, 69, 70, 76, 78, 86, 87, 88, 91,
-92, 93, 94, 95, 99
+60, 63, 76, 78, 86, 87, 88, 91, 92, 93, 94, 95, 99
 ```
 
 The remaining values should remain recorded as "open/no encoded survivor" until

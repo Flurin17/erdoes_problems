@@ -15,9 +15,10 @@ The rerun agrees with the status already recorded below: elementary certificates
 pass, and `14`, `15`, `21`, `22`, `30`, `33`, `35`, `38`, `39`, and `42` have
 no surviving encoded candidates.
 The `N=14`, `N=15`, `N=21`, `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`,
-`N=42`, `N=46`, `N=51`, `N=55`, `N=57`, and `N=62` certificates are now
-promoted in `PROOF.md`. The explicit encoded survivors in `100..250` remain
-the isosceles-`alpha+beta` `3alpha+2beta=pi` candidates at
+`N=42`, `N=46`, `N=51`, `N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`, and
+`N=70` certificates are now promoted in `PROOF.md`. The explicit encoded
+survivors in `100..250` remain the isosceles-`alpha+beta`
+`3alpha+2beta=pi` candidates at
 `132,156,175,189,198,204,224,228,240`.
 
 ## `N=14` and `N=15` Exact Filter Certificate
@@ -275,6 +276,55 @@ seven roots for `57` and seven of the eight roots for `62`; the remaining
 `62` triquadratic root `(42,13,49)` is removed by boundary-integrality.
 Therefore `PROOF.md` treats `57` and `62` as classified negative values.
 
+## `N=56`, `N=66`, `N=69`, and `N=70` Exact Filter Certificate
+
+This batch adds the first local `gamma=2alpha` boundary-enumeration certificate:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/gamma_2alpha_boundary.py 56 60 63 64 66 69 70 72
+```
+
+The script reproduces Beeson Lemma 11.14's arithmetic enumeration. It returns
+zero `gamma=2alpha` candidates for `56`, `66`, `69`, and `70`; `60`, `63`,
+`64`, and `72` still have boundary-arithmetic candidates and remain separate
+work items.
+
+The exact equilateral scans and boundary-star checks were also rerun:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 56
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 60
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 66
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 69
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_boundary_exact.py 70
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 56 7 8
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 56 8 7
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 56 9 56
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 56 56 9
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 56 32 175
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 56 175 32
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 66 11 24
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 66 24 11
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 66 33 800
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 66 800 33
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_pi_boundary.py 66 11 96
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_pi_boundary.py 66 96 11
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 70 35 288
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_gamma_boundary.py 70 288 35
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_pi_boundary.py 70 7 40
+PYTHONDONTWRITEBYTECODE=1 python3 -B 634/EXPERIMENTS/equilateral_pi_boundary.py 70 40 7
+```
+
+`N=56` has six exact equilateral candidates, `N=66` has six, `N=69` has none,
+and `N=70` has four. Every listed `56`, `66`, and `70` candidate has zero
+compatible full boundary cycles. The non-equilateral `gamma=2pi/3` filters
+return zero candidates for all four promoted values, and the `3alpha+2beta`
+survivors are empty after the strong isosceles-`alpha+beta`, boundary-star, and
+boundary-integrality filters.
+Therefore `PROOF.md` treats `56`, `66`, `69`, and `70` as classified negative
+values, while `60` remains open because of its surviving `gamma=2alpha`
+boundary-arithmetic candidate.
+
 ## Elementary Certificate Checks
 
 Command:
@@ -301,8 +351,8 @@ The script includes:
 
 - elementary positive families;
 - Beeson negatives `7` and `11`;
-- workspace composite obstructions through `62` recorded in `PROOF.md`,
-  with gaps such as `56` and `60` still explicitly unresolved;
+- workspace composite obstructions through `70` recorded in `PROOF.md`,
+  with gaps such as `60` and `63` still explicitly unresolved;
 - workspace prime obstructions for primes `3 mod 4`;
 - recorded sufficient Beeson `3alpha+2beta=pi` constructions, including table
   entries `28,44,48,77,84` and the triquadratic sufficient values
@@ -412,10 +462,13 @@ python3 634/EXPERIMENTS/composite_gap_scan.py 14 15 21 22 30 33 35 38 39 42 46 5
 Current result summary:
 
 ```text
-14,15,21,22,30,33,35,38,39,42,46,51,55,57,62:
+14,15,21,22,30,33,35,38,39,42,46,51,55,56,57,62,66,69,70:
   negative by workspace composite benchmarks
 
-56,60,63,66,69,70,76,78,86,87,88,91,92,93,94,95,99:
+60,63:
+  open with a gamma=2alpha boundary-arithmetic survivor
+
+76,78,86,87,88,91,92,93,94,95,99:
   open with no survivor in the currently encoded filters
 ```
 
@@ -423,8 +476,9 @@ Interpretation: this scanner is a triage tool, not a proof engine. The
 `open-no-encoded-survivor` values are exactly where the local implementation of
 the source reductions is still incomplete. After the `N=14`, `N=15`, `N=21`,
 `N=22`, `N=30`, `N=33`, `N=35`, `N=38`, `N=39`, `N=42`, `N=46`, `N=51`,
-`N=55`, `N=57`, and `N=62` source-row audits, the current open ledger removes
-those values from the scanner's unresolved list.
+`N=55`, `N=56`, `N=57`, `N=62`, `N=66`, `N=69`, and `N=70` source-row audits,
+the current open ledger removes those values from the scanner's unresolved
+list.
 
 ## Equilateral Boundary-Length Checks
 
