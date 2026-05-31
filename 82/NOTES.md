@@ -1665,3 +1665,14 @@ source of growth beyond Ramsey.
   vertices and `20` random even graphs on `16` vertices.  This remains weak
   evidence only, but it keeps `(0,0,1,2)` as the most concrete first-lift
   alignment target.
+- 2026-05-31: Strengthened the main conditional reduction.  A connected
+  dyadic lift theorem with `B(q)=polylog(q)` parts would alone imply
+  `F(n) >= (log_2 n) log_2 log_2 n` for large `n`, without a separate terminal
+  host theorem.  Under a no-regular-`R` assumption, every induced subgraph has
+  fewer than `R` connected components; after each connected lift, choosing the
+  largest connected component costs only `R B(q)`.  Once
+  `q_i > R^2 B(q_i)`, the process cannot drop from above `R` to below `R`
+  before crossing the terminal threshold `|H_i|<=q_i+1`, where Lemma 2 gives a
+  forbidden regular subgraph.  With `R=(log n)log log n`, the initial
+  `O(log R)` setup losses are `2^{o(log n)}`, so the argument starts with
+  component size still above `R`.

@@ -975,6 +975,123 @@ partition theorem, and a connected `polylog(q)`-part theorem gives the
 `q polylog(q)` coarse lift allowed above.  The disjoint-union obstructions to
 fixed slots do not attack this connected formulation.
 
+In fact, the connected polylogarithmic theorem would by itself prove the full
+problem; the separate terminal host theorem is not needed if one uses the
+component bound available inside a counterexample.
+
+## Conditional Proposition: Connected Polylog Lifts Suffice
+
+Suppose there are constants `K,C` such that, for every dyadic `q=2^i`, every
+connected `q`-modular graph can be partitioned into at most
+
+```text
+B(q) <= K (log_2(2q))^C
+```
+
+induced `2q`-modular subgraphs.  Then
+
+```text
+F(n) >= (log_2 n) log_2 log_2 n
+```
+
+for all sufficiently large `n`.  In particular, `F(n)/log n -> infinity`.
+
+Proof.  Put `L=log_2 n` and
+
+```text
+R = floor(L log_2 L).
+```
+
+Assume for contradiction that an `n`-vertex graph `G` has no regular induced
+subgraph of order at least `R`.  Then every induced subgraph of `G` has fewer
+than `R` connected components, because choosing one vertex from each component
+would give an independent set.
+
+We construct connected dyadic-modular induced subgraphs `H_i` with moduli
+`q_i=2^i`.  Gallai's parity lemma gives a `2`-modular induced subgraph
+`W_1` on at least `n/2` vertices.  If `W_1` has at least `R` components, it
+contains an independent set of order `R`, contradiction.  Otherwise one
+component `H_1` has size
+
+```text
+m_1=|H_1| >= n/(2R).
+```
+
+Since components of a modular disjoint union inherit the same degree residue,
+`H_1` is connected and `2`-modular.
+
+Inductively, suppose `H_i` is connected and `q_i`-modular, with size
+`m_i`.  If `m_i<=q_i+1`, then Lemma 2 makes `H_i` regular; whenever
+`m_i>=R` this contradicts the choice of `G`.  If `m_i>q_i+1`, apply the
+connected lift hypothesis to partition `H_i` into at most `B(q_i)` induced
+`q_{i+1}`-modular subgraphs.  Each of these subgraphs has fewer than `R`
+connected components, and each component is again `q_{i+1}`-modular.  Choosing
+the largest component among all these pieces gives a connected
+`q_{i+1}`-modular induced subgraph `H_{i+1}` with
+
+```text
+m_{i+1} >= m_i/(R B(q_i)).
+```
+
+Let
+
+```text
+s = ceil(4 log_2 R).
+```
+
+For `i<s`, the product of the losses is
+
+```text
+R^s prod_{i<s} B(q_i)
+  <= 2^{O((log R)^2)}.
+```
+
+Since `R=L log_2 L`, we have `(log R)^2=o(L)`.  Hence
+
+```text
+m_s >= n / 2^{O((log R)^2)} > R
+```
+
+for all sufficiently large `n`, provided the construction reaches time `s`.
+If instead the construction enters the terminal case `m_i<=q_i+1` for some
+`i<s`, the analogous lower bound up to time `i` is even larger, so
+`m_i>R`; Lemma 2 then already gives the desired contradiction.  Thus, absent a
+contradiction, the construction reaches time `s` with `m_s>R`.
+
+Also, for every `i>=s`,
+
+```text
+q_i = 2^i > R^2 B(q_i)
+```
+
+once `n` is large.  Indeed this is true at `i=s`, where
+`q_s>=R^4` while `B(q_s)=O((log R)^C)`, and the ratio
+`2^i/(log_2(2q_i))^C` is increasing for all large `i`.
+
+We now prove by induction that, for every `i>=s` reached by the construction,
+`m_i>R` unless a contradiction has already occurred.  This holds at `i=s`.  If
+`m_i<=q_i+1`, then `H_i` is a regular induced subgraph of order at least `R`,
+contradiction.  Otherwise `m_i>q_i+1`, and the next step satisfies
+
+```text
+m_{i+1} >= m_i/(R B(q_i))
+        > q_i/(R B(q_i))
+        > R.
+```
+
+Thus the construction can never drop below size `R` after time `s` without
+first producing the forbidden regular induced subgraph.
+
+Finally take `i> L`.  Then `q_i=2^i>n>=m_i`, so `m_i<=q_i+1`.  The preceding
+paragraph gives `m_i>R`, and Lemma 2 makes `H_i` regular, contradiction.
+Therefore no such graph `G` exists, and every sufficiently large `n`-vertex
+graph contains a regular induced subgraph of order at least
+`(log_2 n)log_2 log_2 n`.  QED.
+
+This proposition makes the connected lift theorem the cleanest remaining
+target.  The earlier terminal host theorem is still useful as a separate route,
+but a connected `polylog(q)`-part dyadic lift would already settle Problem 82.
+
 The connected formulation still cannot demand too few parts.  The first
 dyadic lift already has a connected example requiring four flexible parts.
 
