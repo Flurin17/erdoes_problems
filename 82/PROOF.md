@@ -643,55 +643,82 @@ need.
 
 ## Proposition: The Strict Terminal-Size Target Is False
 
-Let `G` be the complete multipartite graph `K_{22,2,1}` with multipartite
-classes `A,B,C` of sizes `22,2,1`, respectively.  Put `q=5`.  Then `G` has no
-partition into at most five induced `5`-modular subgraphs of order at most
-`6=q+1`.
+For every integer `q>=5`, let `G` be the complete multipartite graph
+`K_{q^2-q+2,2,1}` with multipartite classes `A,B,C` of sizes
+
+```text
+|A|=q^2-q+2,      |B|=2,      |C|=1.
+```
+
+Then `n=|V(G)|=q^2-q+5` satisfies `ceil(sqrt n)=q`, but `G` has no partition
+into at most `q` induced `q`-modular subgraphs of order at most `q+1`.
 
 Proof.  In a complete multipartite graph, a selected set with class counts
-`(x,y,z)` induces a `5`-modular graph if either at most one of `x,y,z` is
-positive, or all positive counts are congruent modulo `5`.  Indeed, a vertex
+`(x,y,z)` induces a `q`-modular graph if either at most one of `x,y,z` is
+positive, or all positive counts are congruent modulo `q`.  Indeed, a vertex
 from a positive class with selected count `x_i` has induced degree
-`m-x_i`, where `m=x+y+z`; equality of these degrees modulo `5` is equivalent
-to equality of the positive selected class counts modulo `5`.
+`m-x_i`, where `m=x+y+z`; equality of these degrees modulo `q` is equivalent
+to equality of the positive selected class counts modulo `q`.
 
-Assume that a capped partition exists.  The total order is `25`, and every
-part has order at most `6`, so after deleting empty parts the partition has
-exactly five parts.  Consider the part containing the single vertex of `C`.
+Also, since
+
+```text
+(q-1)^2 < q^2-q+5 <= q^2
+```
+
+for `q>=5`, we have `ceil(sqrt n)=q`.
+
+Assume that a capped partition exists.  Consider the part containing the
+single vertex of `C`.
 Since this part has `z=1`, every other positive selected count in the same
-part must be congruent to `1` modulo `5`; the cap `x+y+z<=6` rules out a
-count `6` together with the `C` vertex.  Therefore the `C`-part is one of
+part must be congruent to `1` modulo `q`; the cap `x+y+z<=q+1` rules out a
+count `q+1` together with the `C` vertex.  Therefore the `C`-part is one of
 
 ```text
 (0,0,1), (1,0,1), (0,1,1), (1,1,1).
 ```
 
-It remains to cover the leftover vertices of `A` and `B` with at most four
+It remains to cover the leftover vertices of `A` and `B` with at most `q-1`
 parts.  With no `C` vertex left, a capped valid mixed part using both `A` and
 `B` has counts either `(1,1,0)` or `(2,2,0)`; otherwise it is contained in one
-class, and an `A`-only part covers at most six vertices of `A`.
+class, and an `A`-only part covers at most `q+1` vertices of `A`.
 
-If the `C`-part is `(0,0,1)`, the remainder is `(22,2,0)`.  The two vertices
+If the `C`-part is `(0,0,1)`, the remainder is
+`(q^2-q+2,2,0)`.  The two vertices
 of `B` can contribute at most two vertices of `A` through one mixed part
-`(2,2,0)`; the other three parts cover at most `18` vertices of `A`.  Thus at
-most `20<22` vertices of `A` can be covered.
+`(2,2,0)`; the other `q-2` parts cover at most `(q-2)(q+1)` vertices of
+`A`.  Thus at most
 
-If the `C`-part is `(0,1,1)`, the remainder is `(22,1,0)`.  The remaining
-vertex of `B` can contribute at most one vertex of `A` through a mixed part,
-and the other three parts cover at most `18` vertices of `A`; this covers at
-most `19<22` vertices of `A`.
+```text
+2 + (q-2)(q+1) = q^2-q < q^2-q+2
+```
 
-If the `C`-part is `(1,0,1)`, the remainder is `(21,2,0)`.  The same bound as
-in the first case covers at most `20<21` vertices of `A`.
+vertices of `A` can be covered.
 
-Finally, if the `C`-part is `(1,1,1)`, the remainder is `(21,1,0)`.  The same
-bound as in the second case covers at most `19<21` vertices of `A`.
+If the `C`-part is `(0,1,1)`, the remainder is
+`(q^2-q+2,1,0)`.  The remaining vertex of `B` can contribute at most one
+vertex of `A` through a mixed part, and the other `q-2` parts cover at most
+`(q-2)(q+1)` vertices of `A`; this covers at most
+
+```text
+1 + (q-2)(q+1) = q^2-q-1 < q^2-q+2
+```
+
+vertices of `A`.
+
+If the `C`-part is `(1,0,1)`, the remainder is
+`(q^2-q+1,2,0)`.  The same bound as in the first case covers at most
+`q^2-q < q^2-q+1` vertices of `A`.
+
+Finally, if the `C`-part is `(1,1,1)`, the remainder is
+`(q^2-q+1,1,0)`.  The same bound as in the second case covers at most
+`q^2-q-1 < q^2-q+1` vertices of `A`.
 
 All possibilities for the part containing `C` are impossible, so no such
 partition exists.  QED.
 
 The exact integer model in `EXPERIMENTS/multipartite_modular.py` independently
-checks this obstruction with
+checks the first case `q=5`, namely `K_{22,2,1}`, with
 
 ```text
 python3 EXPERIMENTS/multipartite_modular.py --target-modulus 5 --cap 5 --max-bin-size 6 --sizes 1,2,22

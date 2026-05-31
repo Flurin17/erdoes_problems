@@ -1176,11 +1176,22 @@ source of growth beyond Ramsey.
   sampled unrestricted random graphs through `n=14` plus complete
   multipartite/twin-blowup count models through small total size.  These
   checks found no obstruction below the later `n=25` multipartite example.
-- 2026-05-31: Refuted the strict terminal-size partition target.  The complete
-  multipartite graph `K_{22,2,1}` on `n=25`, with `q=ceil(sqrt 25)=5`, has no
-  partition into at most five induced `5`-modular parts of size at most
-  `q+1=6`.  The fixed checker confirms this via
+- 2026-05-31: Refuted the strict terminal-size partition target by an infinite
+  complete-multipartite family.  For every `q>=5`, the graph
+  `K_{q^2-q+2,2,1}` has order `n=q^2-q+5`, hence `ceil(sqrt n)=q`, but has no
+  partition into at most `q` induced `q`-modular parts of size at most
+  `q+1`.  The first case `q=5` is `K_{22,2,1}` on `n=25`; the fixed checker
+  confirms it via
   `multipartite_modular.py --target-modulus 5 --cap 5 --max-bin-size 6
   --sizes 1,2,22`, returning `min_bins=NA`; `PROOF.md` now contains a hand
   proof.  Therefore any one-shot route must use the small-excess relaxation or
   a different terminal extraction, not the exact `q+1` cap.
+- 2026-05-31: The strict terminal obstruction appears to be a one-unit cap
+  issue in the complete-multipartite model.  For `K_{22,2,1}`, cap `q+2=7`
+  gives `min_bins=4`; an exact sweep of complete multipartite graphs through
+  total size `25` with target modulus `5`, five parts, and max bin size `7`
+  found no failures.  Partial sweeps also found no `q+2` failures for
+  `q=6` through `5000` generated vectors with up to five classes and for
+  `q=7` through `5000` generated vectors with up to four classes, while the
+  strict `q+1` cap fails again for `q=6` on `K_{32,2,1}`.  This supports, but
+  does not prove, using small excess rather than terminal size.
