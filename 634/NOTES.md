@@ -130,7 +130,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   local-cover hits, `4077` corner-label violations, and `1024` non-simple
   residual graphs. Through generated shell `100000`, the cumulative exact
   coarse prefix counts are `52430` local-cover hits, `28326` corner-label
-  violations, and `19244` non-simple residual graphs.
+  violations, and `19244` non-simple residual graphs. Through generated shell
+  `200000`, lazy local-cover mode gives cumulative counts `139104`, `34292`,
+  and `26604`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

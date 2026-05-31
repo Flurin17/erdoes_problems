@@ -2172,6 +2172,16 @@ corner-label-violation:  28,326
 not-simple-cycle:        19,244
 ```
 
+Switching the same runner to lazy local-cover checks avoids the large
+precomputation cost for prefix chunks. Extending the prefix through generated
+shell `200000` gives
+
+```text
+local-cover hits:        139,104
+corner-label-violation:   34,292
+not-simple-cycle:         26,604
+```
+
 These are still prefix counts in the deterministic enumeration, not sampled
 estimates and not complete stratum counts.
 

@@ -19,7 +19,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import gamma_2alpha_quadratic_shell_census as exact  # noqa: E402
-from gamma_2alpha_boundary import refined_survivors_for_n  # noqa: E402
+from gamma_2alpha_boundary import refined_survivors_for_n, viable_free_x_representations, viable_x_representations  # noqa: E402
+from gamma_2alpha_overlap_cover import DEFAULT_PAIR_TEXT, parse_pair, side_tile_polygon, valid_pairs_for_lengths  # noqa: E402
 from gamma_2alpha_residual_capped_census import (  # noqa: E402
     LocalCoverChecker,
     classify_shell,
@@ -41,12 +42,73 @@ def classify(
     raise ValueError(mode)
 
 
+class LazyLocalCoverChecker:
+    def __init__(self, survivor, radicand: int) -> None:
+        self.survivor = survivor
+        self.radicand = radicand
+        pairs = tuple(parse_pair(text) for text in DEFAULT_PAIR_TEXT)
+        x_reps = viable_x_representations(survivor.candidate) + viable_free_x_representations(survivor.candidate)
+        base_reps = survivor.y_representations
+        max_x_len = max(sum(rep) for rep in x_reps)
+        max_base_len = max(sum(rep) for rep in base_reps)
+        self.active_pairs = valid_pairs_for_lengths(pairs, max_x_len, max_base_len)
+        self.polygon_cache = {}
+        self.overlap_cache = {}
+
+    def polygon(self, side_name: str, path, position: int):
+        key = (side_name, position, path)
+        cached = self.polygon_cache.get(key)
+        if cached is not None:
+            return cached
+        exact.RADICAND = self.radicand
+        polygon = side_tile_polygon(
+            self.survivor,
+            side_name=side_name,
+            path=path,
+            position=position,
+            radicand=self.radicand,
+        )
+        self.polygon_cache[key] = polygon
+        return polygon
+
+    def overlaps(self, left, right) -> bool:
+        if exact.qbbox_disjoint(exact.qbbox(left), exact.qbbox(right)):
+            return False
+        if exact.qsame_triangle(left, right):
+            return False
+        return exact.qpositive_overlap(left, right)
+
+    def first_overlap(self, demand) -> tuple[str, str] | None:
+        exact.RADICAND = self.radicand
+        for pair in self.active_pairs:
+            side_path = demand.left_path if pair.side == "L" else demand.right_path
+            key = (pair.side, pair.side_position, pair.base_position, side_path, demand.base_path)
+            cached = self.overlap_cache.get(key)
+            if cached is None:
+                side_polygon = self.polygon(pair.side, side_path, pair.side_position)
+                base_polygon = self.polygon("B", demand.base_path, pair.base_position)
+                cached = self.overlaps(side_polygon, base_polygon)
+                self.overlap_cache[key] = cached
+            if cached:
+                return f"{pair.side}{pair.side_position}", f"B{pair.base_position}"
+        return None
+
+
+def make_local_checker(survivor, radicand: int, mode: str):
+    if mode == "eager":
+        return LocalCoverChecker(survivor, radicand)
+    if mode == "lazy":
+        return LazyLocalCoverChecker(survivor, radicand)
+    raise ValueError(mode)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--min-total-mixed", type=int, default=6)
     parser.add_argument("--max-total-mixed", type=int, default=6)
     parser.add_argument("--outside-local-cover", action="store_true")
+    parser.add_argument("--local-cover-mode", choices=("eager", "lazy"), default="eager")
     parser.add_argument("--mode", choices=("coarse", "refined"), default="coarse")
     parser.add_argument("--skip-generated", type=int, default=0)
     parser.add_argument("--max-generated", type=int, default=10000)
@@ -67,7 +129,7 @@ def main() -> None:
     if radicand is None:
         raise SystemExit("exact quadratic classifier unavailable")
 
-    local_checker = LocalCoverChecker(survivor, radicand) if args.outside_local_cover else None
+    local_checker = make_local_checker(survivor, radicand, args.local_cover_mode) if args.outside_local_cover else None
     generated_seen = 0
     generated_processed = 0
     covered = 0
@@ -113,6 +175,7 @@ def main() -> None:
         "min_total_mixed": args.min_total_mixed,
         "max_total_mixed": args.max_total_mixed,
         "outside_local_cover": args.outside_local_cover,
+        "local_cover_mode": args.local_cover_mode if args.outside_local_cover else None,
         "mode": args.mode,
         "skip_generated": args.skip_generated,
         "max_generated": args.max_generated,

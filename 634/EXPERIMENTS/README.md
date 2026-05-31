@@ -186,15 +186,17 @@ Current components:
 - `gamma_2alpha_residual_chunked_census.py`: resumable chunk runner for exact
   residual status counts over generated-shell slices. It supports coarse mode
   using the quadratic shell classifier and refined mode using the
-  pinch/split-component diagnostic. A first sanity chunk for `N=63`, mixed
-  exactly `6`, outside the local cover, processed `2000` generated shells:
+  pinch/split-component diagnostic, with either eager or lazy local-cover
+  checking. A first sanity chunk for `N=63`, mixed exactly `6`, outside the
+  local cover, processed `2000` generated shells:
   `970` were local-cover hits, and the `1030` diagnosed shells split as
   `838` corner-label violations and `192` non-simple residual graphs. Extending
   through generated shell `10000` gives cumulative exact coarse counts:
   `4899` local-cover hits, `4077` corner-label violations, and `1024`
   non-simple residual graphs. Through generated shell `100000`, the cumulative
   counts are `52430` local-cover hits, `28326` corner-label violations, and
-  `19244` non-simple residual graphs.
+  `19244` non-simple residual graphs. Through generated shell `200000`, lazy
+  local-cover mode gives cumulative counts `139104`, `34292`, and `26604`.
 - `gamma_2alpha_residual_group_probe.py`: stratified exact residual probe for
   outside-cover endpoint/mixed groups. At mixed `6`, it finds outside-cover
   representatives in all `20` cap-`6` endpoint groups for both `N=63` and
