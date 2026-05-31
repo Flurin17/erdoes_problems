@@ -1827,10 +1827,13 @@ corner-label violations. This is diagnostic evidence only and is superseded, in
 the low-overhang regime, by the exact census below.
 
 The random sampler can now use the exact `Q(sqrt(d))` shell classifier. In an
-uncapped seed-`20260531` run with `10000` attempts, it produced `246` distinct
-`N=63` shells and `201` distinct `N=99` shells. All were removed by proper
-overlap, non-simple residual boundary, or residual corner-label violations; no
-sampled higher-mixed shell passed the current exact shell checks.
+uncapped seed-`6342026` run with `200000` attempts, it produced `5247`
+distinct `N=63` shells and `4270` distinct `N=99` shells. All were removed by
+proper overlap, non-simple residual boundary, or residual corner-label
+violations; no sampled higher-mixed shell passed the current exact shell
+checks. The `N=63` sample split as `176` corner-label violations, `149`
+non-simple residual graphs, and `4922` proper overlaps; the `N=99` sample split
+as `696`, `492`, and `3082` respectively.
 
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`

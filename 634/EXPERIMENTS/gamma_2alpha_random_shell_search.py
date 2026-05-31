@@ -269,6 +269,7 @@ def main() -> None:
     )
     parser.add_argument("--stop-on-pass", action="store_true")
     parser.add_argument("--show-examples", action="store_true")
+    parser.add_argument("--by-mixed", action="store_true", help="also print status counts grouped by total mixed transitions")
     parser.add_argument(
         "--exact-quadratic",
         action="store_true",
@@ -296,6 +297,7 @@ def main() -> None:
                 max_total_mixed=args.max_total_mixed,
             )
             counts: Counter[str] = Counter()
+            mixed_counts: dict[int, Counter[str]] = defaultdict(Counter)
             examples: dict[str, tuple[BoundaryDemand, ShellResult]] = {}
             suffix = ""
             if args.max_total_mixed is not None:
@@ -310,12 +312,16 @@ def main() -> None:
                 else:
                     result = exact_classifier(survivor, demand, radicand)
                 counts[result.status] += 1
+                mixed_counts[demand.mixed_transitions][result.status] += 1
                 examples.setdefault(result.status, (demand, result))
                 if args.stop_on_pass and result.status == "passes-corner-label-check":
                     print("  found shell passing current checks")
                     print_example(result.status, demand, result)
                     break
             print(f"  status counts={dict(sorted(counts.items()))}")
+            if args.by_mixed:
+                for mixed, statuses in sorted(mixed_counts.items()):
+                    print(f"    mixed={mixed}: {dict(sorted(statuses.items()))}")
             if args.show_examples:
                 for status, (demand, result) in sorted(examples.items()):
                     print_example(status, demand, result)
