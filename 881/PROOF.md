@@ -2052,6 +2052,168 @@ finite window does not construct an infinite obstruction, but it confirms
 that fixed-prefix star poisoning is compatible with genuine local two-sum
 coverage.
 
+## Lemma 8.2c: A pure fixed star forces tail recurrence
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Fix \(e,d\in A\). Suppose there are infinitely many
+\[
+b\in A
+\]
+such that
+\[
+e+d+b\notin3(A\setminus\{d,b\}). \tag{1}
+\]
+Then the tail
+\[
+A\cap(d+e,\infty)
+\]
+is reflection-recurrent: for every finite
+\[
+T\subset A\cap(d+e,\infty)
+\]
+and every \(L\), there is \(m>L\) with
+\[
+m-T\subset A.
+\]
+Consequently there is an infinite \(B\subset A\) such that \(A\setminus B\)
+is an order-3 basis.
+
+Proof. Fix finite \(T\subset A\cap(d+e,\infty)\) and \(L\). Choose \(b\)
+satisfying (1), with
+\[
+b+e>L,\qquad b+d+e-\max T\ge N_0,
+\]
+and \(b\notin T\). Put
+\[
+w=e+d+b.
+\]
+For each \(t\in T\), the integer \(w-t\) is at least \(N_0\), so it has a
+two-term representation from \(A\). If some representation avoided both
+\(d\) and \(b\), then adding the retained summand \(t\) would give
+\[
+w\in3(A\setminus\{d,b\}),
+\]
+contrary to (1). Hence every two-term representation of \(w-t\) uses \(d\)
+or \(b\). It cannot use \(b\), because the remaining summand would be
+\[
+w-t-b=d+e-t<0.
+\]
+Therefore a representation uses \(d\), and
+\[
+w-t=d+(b+e-t)
+\]
+with \(b+e-t\in A\). Thus
+\[
+m=b+e
+\]
+satisfies \(m-T\subset A\) and \(m>L\). Lemma 2.4 gives the desired
+infinite deletion. \(\square\)
+
+More generally, if a fixed finite prefix \(D\) and infinitely many
+candidates \(b\) satisfy
+\[
+e+d+b\notin3(A\setminus(D\cup\{b\}))
+\]
+for some \(d\in D\), the same proof gives only fractional recurrence: for
+each finite tail test set \(T\), the shifted representations of
+\[
+e+d+b-t
+\]
+must use one of the finitely many elements of \(D\), and pigeonholing gives
+a reflected subset of \(T\) of size at least \(|T|/|D|\). This falls back
+to the certificate-free recurrent-cluster obstruction after Lemma 8.6c,
+which is why the fixed-center greedy proof still does not close the
+remaining case.
+
+## Lemma 8.2d: Multi-center stars force certificates unless large subsets are certificate-free
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+threshold \(N_0\). Fix a finite nonempty set \(D\subset A\) and elements
+\[
+e,d_0\in A.
+\]
+Suppose that for every finite
+\[
+T\subset A\cap(d_0+e,\infty)
+\]
+and every \(L\), there is
+\[
+b\in A\setminus(D\cup T),\qquad b>L,
+\]
+such that, with
+\[
+w=e+d_0+b,
+\]
+one has
+\[
+w-\max T\ge N_0,\qquad w\notin3(A\setminus(D\cup\{b\})). \tag{1}
+\]
+If there is a finite
+\[
+T_0\subset A\cap(d_0+e,\infty)
+\]
+such that every subset
+\[
+U\subset T_0,\qquad |U|\ge |T_0|/|D|,
+\]
+contains a certificate triple
+\[
+x,y_1,y_2\in U,\qquad y_1\ne x,\quad y_2\ne x,\quad y_1+y_2-x\in A,
+\]
+then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. We show that a certificate triple in \(T_0\) is reflection-recurrent
+and then apply Corollary 2.3c. Let \(L_0\) be arbitrary. Apply the
+hypothesis with \(T=T_0\) and \(L\) so large that
+\[
+L+d_0+e-\max D>L_0+\max T_0.
+\]
+For each \(t\in T_0\), choose a two-term representation
+\[
+w-t=a_t+a'_t,\qquad a_t,a'_t\in A,
+\]
+possible because \(w-t\ge N_0\). By (1), every such representation meets
+\[
+D\cup\{b\}.
+\]
+It cannot use \(b\), since
+\[
+w-t-b=d_0+e-t<0.
+\]
+Choose one element \(f_t\in D\) used by the representation. Some
+\[
+f\in D
+\]
+is chosen on a subset
+\[
+U\subset T_0,\qquad |U|\ge |T_0|/|D|.
+\]
+For every \(t\in U\), the chosen representation has the form
+\[
+w-t=f+c_t,\qquad c_t\in A,
+\]
+so the center
+\[
+m=w-f=b+d_0+e-f
+\]
+reflects \(U\) into \(A\). The choice of \(L\) gives
+\[
+m>L_0+\max T_0.
+\]
+By the certificate-density hypothesis, choose
+\[
+x,y_1,y_2\in U,\qquad y_1,y_2\ne x,\qquad y_1+y_2-x\in A.
+\]
+There are only finitely many triples in \(T_0\), so along an unbounded
+sequence of \(L_0\)'s one same certificate triple recurs. Corollary 2.3c
+gives the desired infinite deletion. \(\square\)
+
+Thus a finite-prefix star obstruction can persist only in the same
+certificate-free regime as Lemma 8.6g: every finite test set in the relevant
+tail must contain a certificate-free subset of size at least
+\(|T|/|D|\).
+
 ## Theorem 8.2: Reflection-recurrence gives a good deletion for \(k=2\)
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -5500,6 +5662,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   Lemma 8.2a does not close the remaining \(k=2\) case: a finite prefix can
   create fixed-center or star-shaped old-new obstructions not covered by
   the singleton and cofinite-tail pair-barrier theorems.
+* Lemma 8.2c shows that a pure star around one fixed old element actually
+  forces tail reflection-recurrence; the unresolved greedy obstruction is
+  the finite-prefix multi-center version, which gives only fractional
+  recurrence.
+* Lemma 8.2d gives the matching certificate-forcing statement for
+  multi-center fixed-prefix stars; persistent star obstructions must again
+  live in the large certificate-free subset regime.
 * Theorem 8.2 proves that finite reflection-recurrence gives an infinite
   deletion preserving order 3.
 * Corollary 8.3 therefore resolves the \(k=2\) problem whenever infinitely
