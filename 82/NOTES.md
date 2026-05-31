@@ -2135,3 +2135,13 @@ source of growth beyond Ramsey.
   bounded five-class size-`8` check.  This reinforces that higher lifts need
   genuinely source-sensitive slots, even if `(0,0,2,2)` works for both
   parity source classes at the first lift.
+- 2026-05-31: Added `--max-weight` to `trace_multiset_bound.py` and recorded
+  Corollary 15C: if every trace difference in a minimal repeated-degree host
+  is supported on one coordinate, then `|B|<=(k-1)^2`.  The reason is that
+  `+e_j` and `-e_j` cannot both occur, since the pair would be a balanced
+  deletion; hence the coordinate-wise cancellation mass in Lemma 15B is zero.
+  Exact bounded searches with singleton supports and graphical compensation
+  complete for `d=3,4`, finding best sizes `6` and `12` under caps, consistent
+  with the quadratic bound.  Weight-`2` support searches already hit the
+  subset-sum cap quickly, so the remaining trace obstruction is genuinely a
+  mixed-sign support-hypergraph problem.

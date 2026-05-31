@@ -232,4 +232,5 @@ Computational checks and generated data for Erdos Problem 82.
   compensation; `--trace-cone` restricts the support to the actual signed
   indicator vectors arising from graph traces relative to a base vertex and
   reports the incidence, cancellation mass, and L1 imbalance from Lemma 15B.
+  `--max-weight W` restricts trace-difference supports to size at most `W`.
   Larger runs should use tight caps because subset-sum sets grow quickly.

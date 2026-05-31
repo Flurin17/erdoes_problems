@@ -5733,6 +5733,27 @@ that cancel on the same coordinates while still avoiding an exactly balanced
 nonempty submultiset.  This identifies the remaining trace problem as a
 structured cancellation problem rather than a pure trace-counting problem.
 
+**Corollary 15C: Singleton Trace Differences Are Small.**  In the setting of
+Lemma 12A, suppose every outside trace difference vector is supported on a
+single coordinate, so each vector is one of `+e_j` or `-e_j`.  Then
+
+```text
+|B| <= (k-1)^2.
+```
+
+Proof.  Put `d=k-1`.  For a fixed coordinate `j`, the multiset cannot contain
+both `+e_j` and `-e_j`, because that pair would have zero sum and deleting the
+corresponding two outside vertices would preserve equal degrees on `A`,
+contradicting Lemma 12.  Hence for every coordinate at least one of `p_j,n_j`
+is zero, so the cancellation mass `C=sum_j min(p_j,n_j)` from Lemma 15B is
+zero.  Lemma 15B gives `|B|<=d^2`.  QED.
+
+Thus a minimal repeated-degree host with more than quadratic many outside
+vertices must contain trace differences supported on at least two coordinates.
+The next hard case is therefore a genuinely mixed-sign hypergraph of trace
+supports, not merely many vertices that distinguish one repeated vertex at a
+time.
+
 One genuinely low-dimensional trace obstruction does collapse.
 
 ## Lemma 15A: Rank-One Trace Obstructions Are Small
