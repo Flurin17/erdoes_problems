@@ -2067,4 +2067,9 @@ source of growth beyond Ramsey.
   `a+q`; the remaining vertices split into a `q`-layer part of residue `0` or
   `q` and a `2q`-multiple layer of residue `0`.  Thus the slots
   `(0,a,q,a+q)` always work for complete multipartite graphs with source
-  residue `a`.  The arbitrary-graph version remains open.
+  residue `a`.
+- 2026-05-31: Refuted the arbitrary-graph version of the clean slots already
+  at `q=2`, source residue `1`.  The 8-vertex odd tree with mask `9954`, edge
+  set `02,06,07,12,14,15,23`, and degrees `3,3,3,1,1,1,1,1` has no
+  `(0,1,2,3)` mod-`4` slot partition.  Therefore the complete-multipartite
+  clean pattern cannot be the full dyadic fixed-slot theorem.

@@ -3927,6 +3927,45 @@ complete-multipartite checks and shows that complete multipartite graphs are
 not an obstruction to this clean fixed-slot dyadic lift.  It does not prove
 the corresponding fixed-slot theorem for arbitrary graphs.
 
+The arbitrary-graph version of this clean pattern is already false at the
+first dyadic lift.
+
+**Example: Clean Source Slots Fail For Odd Graphs.**  There is a graph whose
+degrees are all `1 mod 2` and whose vertex set cannot be partitioned into
+`4`-modular parts with residue signature `(0,1,2,3)`.
+
+Proof.  On vertices `0,...,7`, take the graph with edge set
+
+```text
+02, 06, 07, 12, 14, 15, 23.
+```
+
+In the edge ordering used by `EXPERIMENTS/regular_induced.py`, its mask is
+
+```text
+9954.
+```
+
+Its degrees are
+
+```text
+3,3,3,1,1,1,1,1,
+```
+
+so it has source residue `1 mod 2`.  The exact checker
+
+```text
+python3 EXPERIMENTS/slot_partition.py 8 --mask 9954 --slots 0,1,2,3
+```
+
+returns `slot_partition=no`.  Thus the clean source-residue slots
+`(0,a,q,a+q)` cannot be promoted directly from complete multipartite graphs
+to all graphs.  QED.
+
+This counterexample is useful calibration.  Source-residue dependence is
+necessary, but not sufficient; arbitrary graph lifts need more flexible slot
+families, additional parts, or a witness-or-regular alternative.
+
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
 
