@@ -2794,6 +2794,63 @@ These inequalities are weak for one trace class in isolation, but they give a
 checkable degree-window obstruction for any attempt to combine many trace
 classes over a large homogeneous set.
 
+## Lemma 14A.4: One-Trace Homogeneous Amplification Is Exhaustive
+
+Let `A` be independent, let `T subset A`, and let `B subset C_T` induce an
+`r`-regular graph on `b` vertices.  For any `X subset A`, write
+
+```text
+x = |X cap T|,       y = |X \ T|.
+```
+
+If `B union X` is regular and `B` and `X` are both nonempty, then either
+
+```text
+y=0 and x=b-r,
+```
+
+which is exactly Lemma 14A.1, or
+
+```text
+x=0 and r=0,
+```
+
+in which case `B union X` is independent.
+
+Proof.  Vertices of `B` have degree `r+x` in `G[B union X]`.  Vertices in
+`X cap T`, if any, have degree `b`, while vertices in `X\T`, if any, have
+degree `0`.  If both `x` and `y` are positive then regularity would force
+`b=0`, impossible.  If `y=0`, regularity forces `r+x=b`, i.e. `x=b-r`.  If
+`x=0`, regularity forces `r=0`, and then all vertices have degree `0`.  QED.
+
+The clique-base dual is as follows.  Let `A` be a clique, let `T subset A`,
+and let `B subset C_T` induce an `r`-regular graph on `b` vertices.  For
+`X subset A`, again put `x=|X cap T|` and `y=|X\T|`.  If `B union X` is
+regular and `B` and `X` are both nonempty, then either
+
+```text
+x=0 and y=r+1,
+```
+
+which is exactly Lemma 14A.2, or
+
+```text
+y=0 and r=b-1,
+```
+
+in which case `B union X` is a clique.
+
+Indeed, vertices of `B` have degree `r+x`; vertices in `X cap T` have degree
+`b+x+y-1`; and vertices in `X\T` have degree `x+y-1`.  If both `x` and `y`
+are positive, the two types of vertices in `X` differ by `b`, impossible.
+If `x=0`, regularity gives `r=y-1`.  If `y=0`, regularity gives `r=b-1`.
+QED.
+
+Consequently, a one-trace proof cannot be improved by mixing vertices from
+both `T` and its complement inside the same homogeneous base.  Any stronger
+trace argument must combine multiple trace classes or use additional
+structure inside the trace classes.
+
 ## Lemma 14B: Maximal Independent Trace Ramsey Bound
 
 Let `G` be a graph with no regular induced subgraph of order at least `k`,

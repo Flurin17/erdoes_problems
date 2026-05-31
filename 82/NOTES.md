@@ -1285,3 +1285,11 @@ source of growth beyond Ramsey.
   sweep was killed after several minutes without producing a counterexample
   or final output; progress reporting should be added before the next long
   sweep.
+- 2026-05-31: A read-only subagent proved that one-trace amplification over a
+  homogeneous base is exhaustive.  For an independent base, adding vertices
+  from both `T` and `A\T` to one regular trace-class witness cannot produce a
+  new regular graph; the only possibilities are Lemma 14A.1 or the trivial
+  independent-set case.  The clique-base dual gives Lemma 14A.2 or the trivial
+  clique case.  `PROOF.md` now records this as Lemma 14A.4, pruning the
+  single-trace route: future trace progress must combine multiple trace
+  classes or use more internal structure.
