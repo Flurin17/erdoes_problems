@@ -542,6 +542,11 @@ density in \(A(w)\). Thus a remaining counterexample needs genuinely
 unpinned bounded-count translate rows outside every finite protected core,
 in addition to terminal gaps, active repairs, and occurrence inside every
 infinite deletion tail.
+Corollary 3.4m turns this into a positive theorem for \(k=2\): any order-2
+basis with one finite pin set controlling all bounded-count large two-sums
+satisfies the desired order-3 deletion conclusion. The leftover sparse
+case must therefore have both large representation spikes and unpinned
+bounded-count rows after every finite core is protected.
 
 Lemma 3.5 sharpens this obstruction. A bounded transversal \(D\) for
 \((k+1)\)-representations of \(n\) is a finite order-\(k\) barrier for all

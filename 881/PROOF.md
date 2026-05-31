@@ -1971,6 +1971,47 @@ remaining counterexample would need genuinely unpinned bounded-count
 translate rows outside every finite protected core, together with the
 collective-hole structure from Corollaries 3.4i and 3.4j.
 
+## Corollary 3.4m: Finitely pinned low-count bases satisfy the \(k=2\) conclusion
+
+Let \(A\subseteq\mathbb N\) be an order-2 asymptotic basis. Suppose there
+is a finite set \(P\subset A\) such that for every \(Q\ge1\) there is
+\(N_Q\) with
+\[
+s>N_Q,\quad x,y\in A\setminus P,\quad s=x+y
+\quad\Longrightarrow\quad
+r_{2,A}(s)>Q. \tag{1}
+\]
+Then there is an infinite \(B\subset A\) such that
+\[
+A\setminus B
+\]
+is an asymptotic basis of order \(3\).
+
+Proof. Assume the contrary. By Corollary 8.3b there is a finite
+singleton-exceptional set \(E_*\). Put
+\[
+E=E_*\cup P.
+\]
+Corollary 3.4j gives constants \(Q_E,\eta_E>0\) and arbitrarily large
+\(w\) for which some \(d\in A\setminus E\) satisfies
+\[
+\left|\{a\in A:\ w-d-a\in A,\ r_{2,A}(a+d)\le Q_E\}\right|
+   \ge \eta_E A(w). \tag{2}
+\]
+But Lemma 3.4l, applied with \(Q=Q_E\), says that the left side of (2) is
+\[
+o(A(w))
+\]
+uniformly for all \(d\in A\setminus E\). This contradicts (2) along the
+arbitrarily large witnesses. \(\square\)
+
+This criterion covers bases whose low-representation sums are caused by
+finitely many permanent accelerators or residue pins. It does not cover
+thin bases with unpinned bounded representation counts, which are already
+handled separately by Corollary 3.4b. Any remaining \(k=2\) counterexample
+must combine large representation spikes with unpinned bounded-count
+translate rows after every finite set is protected.
+
 ## Lemma 3.5: Transversals are shifted finite barriers
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(E\subset A\) be
@@ -7088,6 +7129,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 3.4l shows that finitely pinned low-count rows cannot support the
   star obstruction after the pins are protected. A remaining counterexample
   must have unpinned bounded-count translate rows outside every finite core.
+* Corollary 3.4m gives the corresponding positive criterion for \(k=2\):
+  if one finite pin set accounts for all large bounded-count two-sums, then
+  the desired infinite deletion exists.
 * Lemma 3.5 identifies bounded transversals with shifted finite barriers
   and gives a local one-gate gadget showing why order-\(k\) coverage alone
   cannot force the protected-matching hypothesis.
