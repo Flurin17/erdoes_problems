@@ -12,6 +12,7 @@ This is deliberately a randomized diagnostic, not an impossibility proof.
 from __future__ import annotations
 
 import argparse
+import bisect
 import random
 import sys
 from collections import Counter, defaultdict
@@ -105,6 +106,13 @@ def by_mixed(paths: tuple[Path, ...]) -> dict[int, tuple[Path, ...]]:
     out: dict[int, list[Path]] = defaultdict(list)
     for path in paths:
         out[mixed_transitions(path)].append(path)
+    return {key: tuple(value) for key, value in out.items()}
+
+
+def by_endpoint_and_mixed(paths: tuple[Path, ...]) -> dict[tuple[PlacedEdge, PlacedEdge, int], tuple[Path, ...]]:
+    out: dict[tuple[PlacedEdge, PlacedEdge, int], list[Path]] = defaultdict(list)
+    for path in paths:
+        out[(path[0], path[-1], mixed_transitions(path))].append(path)
     return {key: tuple(value) for key, value in out.items()}
 
 
@@ -246,6 +254,116 @@ def sampled_demands(
     return tuple(demands)
 
 
+def weighted_valid_demands(
+    survivor: RefinedGamma2AlphaSurvivor,
+    *,
+    rng: random.Random,
+    samples: int,
+    max_total_mixed: int | None,
+) -> tuple[BoundaryDemand, ...]:
+    candidate = survivor.candidate
+    bounded_reps = viable_x_representations(candidate)
+    free_reps = viable_free_x_representations(candidate)
+    base_reps = survivor.y_representations
+    reps = set(bounded_reps + free_reps + base_reps)
+    indexes = {rep: by_endpoint_and_mixed(all_path_options(rep)) for rep in reps}
+    groups: list[
+        tuple[
+            int,
+            str,
+            Triple,
+            Triple,
+            Triple,
+            tuple[Path, ...],
+            tuple[Path, ...],
+            tuple[Path, ...],
+            int,
+        ]
+    ] = []
+
+    def add_groups(short_side: str, left_reps: tuple[Triple, ...], right_reps: tuple[Triple, ...]) -> None:
+        for left_rep in left_reps:
+            for right_rep in right_reps:
+                for base_rep in base_reps:
+                    left_index = indexes[left_rep]
+                    right_index = indexes[right_rep]
+                    base_index = indexes[base_rep]
+                    for (left_first, left_last, left_mixed), left_paths in left_index.items():
+                        for (right_first, right_last, right_mixed), right_paths in right_index.items():
+                            if not apex_corner(left_last, right_first):
+                                continue
+                            for (base_first, base_last, base_mixed), base_paths in base_index.items():
+                                total_mixed = left_mixed + right_mixed + base_mixed
+                                if max_total_mixed is not None and total_mixed > max_total_mixed:
+                                    continue
+                                if not alpha_corner(right_last, base_first):
+                                    continue
+                                if not alpha_corner(base_last, left_first):
+                                    continue
+                                weight = len(left_paths) * len(right_paths) * len(base_paths)
+                                groups.append(
+                                    (
+                                        weight,
+                                        short_side,
+                                        left_rep,
+                                        right_rep,
+                                        base_rep,
+                                        left_paths,
+                                        right_paths,
+                                        base_paths,
+                                        total_mixed,
+                                    )
+                                )
+
+    add_groups("left", bounded_reps, free_reps)
+    if bounded_reps != free_reps:
+        add_groups("right", free_reps, bounded_reps)
+    if not groups:
+        return ()
+
+    cumulative: list[int] = []
+    total = 0
+    for weight, *_rest in groups:
+        total += weight
+        cumulative.append(total)
+
+    demands: list[BoundaryDemand] = []
+    seen: set[tuple[tuple[tuple[str, str, str], ...], ...]] = set()
+    for _ in range(samples):
+        group = groups[bisect.bisect_right(cumulative, rng.randrange(total))]
+        (
+            _weight,
+            short_side,
+            left_rep,
+            right_rep,
+            base_rep,
+            left_paths,
+            right_paths,
+            base_paths,
+            total_mixed,
+        ) = group
+        left = rng.choice(left_paths)
+        right = rng.choice(right_paths)
+        base = rng.choice(base_paths)
+        key = (oriented_path_key(left), oriented_path_key(right), oriented_path_key(base))
+        if key in seen:
+            continue
+        seen.add(key)
+        demands.append(
+            BoundaryDemand(
+                short_side=short_side,
+                left_rep=left_rep,
+                right_rep=right_rep,
+                base_rep=base_rep,
+                mixed_transitions=total_mixed,
+                left_path=left,
+                right_path=right,
+                base_path=base,
+            )
+        )
+    return tuple(demands)
+
+
 def print_example(status: str, demand: BoundaryDemand, result: ShellResult) -> None:
     print(
         f"    {status}: forced={result.forced_corners}, "
@@ -271,6 +389,11 @@ def main() -> None:
     parser.add_argument("--show-examples", action="store_true")
     parser.add_argument("--by-mixed", action="store_true", help="also print status counts grouped by total mixed transitions")
     parser.add_argument(
+        "--valid-weighted",
+        action="store_true",
+        help="sample directly from valid endpoint/mixed groups, weighted by boundary-shell count",
+    )
+    parser.add_argument(
         "--exact-quadratic",
         action="store_true",
         help="classify sampled shells with the exact Q(sqrt(d)) classifier",
@@ -290,19 +413,16 @@ def main() -> None:
         survivors = refined_survivors_for_n(n)
         print(f"N={n}: {len(survivors)} refined gamma=2alpha survivor(s)")
         for survivor in survivors:
-            demands = sampled_demands(
-                survivor,
-                rng=rng,
-                samples=args.samples,
-                max_total_mixed=args.max_total_mixed,
-            )
+            sampler = weighted_valid_demands if args.valid_weighted else sampled_demands
+            demands = sampler(survivor, rng=rng, samples=args.samples, max_total_mixed=args.max_total_mixed)
             counts: Counter[str] = Counter()
             mixed_counts: dict[int, Counter[str]] = defaultdict(Counter)
             examples: dict[str, tuple[BoundaryDemand, ShellResult]] = {}
             suffix = ""
             if args.max_total_mixed is not None:
                 suffix = f" with total mixed <= {args.max_total_mixed}"
-            print(f"  sampled unique boundary cycles={len(demands)} from {args.samples} attempts{suffix}")
+            mode_text = "valid-weighted " if args.valid_weighted else ""
+            print(f"  {mode_text}sampled unique boundary cycles={len(demands)} from {args.samples} attempts{suffix}")
             radicand = field_radicand(survivor) if field_radicand is not None else None
             for demand in demands:
                 if exact_classifier is None:

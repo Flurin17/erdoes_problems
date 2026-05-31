@@ -1835,6 +1835,13 @@ checks. The `N=63` sample split as `176` corner-label violations, `149`
 non-simple residual graphs, and `4922` proper overlaps; the `N=99` sample split
 as `696`, `492`, and `3082` respectively.
 
+The sampler now also has a valid-weighted mode that samples directly from the
+corner-compatible endpoint/mixed classes. In a seed-`123` run with `5000`
+attempts for each benchmark row, every attempt produced a distinct valid shell.
+Again none passed: the `N=63` sample split as `169` corner-label violations,
+`150` non-simple residual graphs, and `4681` proper overlaps; the `N=99` sample
+split as `879`, `550`, and `3571` respectively.
+
 An earlier floating stratified low-overhang sample with total boundary mixed
 count at most `4` also found no survivor: with seed `12345` and `20000`
 attempts, it produced `189` distinct `N=63` shells and `143` distinct `N=99`

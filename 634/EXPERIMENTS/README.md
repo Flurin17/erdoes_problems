@@ -118,7 +118,9 @@ Current components:
   not an impossibility proof. The `--max-total-mixed` option stratifies the
   sampler into low-overhang boundary shells; `--exact-quadratic` reruns sampled
   shells through the exact `Q(sqrt(d))` classifier, and `--by-mixed` reports
-  status counts by total mixed-transition count.
+  status counts by total mixed-transition count. The `--valid-weighted` option
+  samples directly from corner-compatible endpoint/mixed classes, weighted by
+  the number of boundary shells they represent.
 - `gamma_2alpha_low_mixed_shell_census.py`: deterministic finite census of all
   boundary shells whose total `c`/non-`c` transition count is at most a cap. For
   the benchmark cap `4`, it enumerates `11040` shells for `N=63` and `63000`

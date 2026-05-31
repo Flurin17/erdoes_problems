@@ -285,7 +285,9 @@ Important distinction: "positive square class" and "smallest representative" are
    shells for `63`, `648` for `99`), but this is evidence rather than an
    exhaustive certificate. The exact `Q(sqrt(d))` sampler also found no pass in
    an uncapped seed-`6342026`, `200000`-attempt run (`5247` unique `63` shells,
-   `4270` unique `99` shells). A stratified low-overhang run with total mixed
+   `4270` unique `99` shells), or in a valid-weighted seed-`123`,
+   `5000`-attempt run that produced `5000` unique valid shells for each
+   benchmark row. A stratified low-overhang run with total mixed
    count at most `4` found `189` unique `63` shells and `143` unique `99`
    shells, again with no pass. The full low-overhang census is now exact: all `11040`
    shells for `63` are eliminated over `Q(sqrt(5))` (`6144` non-simple,
