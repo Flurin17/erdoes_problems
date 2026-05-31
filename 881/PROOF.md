@@ -9196,6 +9196,27 @@ repair the hole. This confirms that the P6 stall is not one local
 pair-edge condition; it is simultaneous private-color closure plus
 minimal-repair closure across the new protected fillers.
 
+The same diagnostic gives an exact finite obstruction for the protected
+fillers. In
+\[
+A=\{1,2,4,5,8,10,15,18,19,30,38,40,43,44\},
+\]
+with two-sum coverage through \(63\), each filler
+\[
+q\in\{40,43,44\}
+\]
+satisfies
+\[
+[q,63]\subseteq3(A\setminus\{10,q\}).
+\]
+Hence no witness inside the current covered window can certify the
+Schreier pair edge \(\{10,q\}\). The old retained endpoint \(38\) accounts
+for many of these poisoned candidates by Lemma 13.1h, but it leaves
+shifted two-sum gaps; the remaining old retained points fill those gaps in
+three sums. Thus the first pair-edge escape is not usable in a cofinite
+protected tail unless the construction also supplies a separate mechanism
+for shielding the fillers' own pair edges.
+
 ## Proposition 13.1b-general: General finite-stage barrier criterion
 
 Let \(k\ge1\). Suppose there are increasing finite sets

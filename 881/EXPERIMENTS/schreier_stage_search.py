@@ -22,6 +22,16 @@ def hsum(elements: set[int], h: int, cap: int) -> set[int]:
     return sums
 
 
+def missing_from_hsum_interval(
+    elements: set[int],
+    h: int,
+    lo: int,
+    hi: int,
+) -> list[int]:
+    sums = hsum(elements, h, hi)
+    return [x for x in range(lo, hi + 1) if x not in sums]
+
+
 def cover_end(elements: set[int], start: int, cap: int) -> int:
     sums = hsum(elements, 2, cap)
     x = start
@@ -363,6 +373,28 @@ def p6_pair_diagnostic() -> None:
             sample_edges.append(special)
         for edge in sample_edges:
             print(f"    {edge}: {diagnose_edge_candidates(elements, edge, coverage)}")
+        print("  protected-filler pair intervals:")
+        for q in fillers:
+            edge = (10, q)
+            c = elements - set(edge)
+            missing3 = missing_from_hsum_interval(c, 3, q, coverage)
+            endpoint_missing = missing_from_hsum_interval(c, 2, q - p, coverage - p)
+            endpoint_note = (
+                f"; retained {p} alone leaves first shifted gaps="
+                f"{endpoint_missing[:8]}"
+                if endpoint_missing
+                else f"; retained {p} already poisons the whole interval"
+            )
+            if missing3:
+                print(
+                    f"    {edge}: [q,{coverage}] has 3C gaps; "
+                    f"first gaps={missing3[:8]}{endpoint_note}"
+                )
+            else:
+                print(
+                    f"    {edge}: every candidate in [{q},{coverage}] "
+                    f"is already in 3C{endpoint_note}"
+                )
 
 
 def main() -> None:

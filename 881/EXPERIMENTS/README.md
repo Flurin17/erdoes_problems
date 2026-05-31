@@ -259,7 +259,12 @@ Run `schreier_stage_search.py --p6-pair-diagnostic` to reproduce this
 low-excess pair-edge calculation and the protected-filler failure. The same
 diagnostic now classifies first candidate failures as poisoned witnesses,
 absorbed private-color rows, missing reflected rows, or missing
-inclusion-minimal repairs.
+inclusion-minimal repairs. It also prints the exact protected-filler pair
+intervals: after treating `40,43,44` as protected, each pair edge
+`\{10,q\}` has every candidate witness in `[q,63]` already lying in
+`3(A\setminus\{10,q\})`. The old retained endpoint `38` explains many of
+these values but leaves shifted two-sum gaps; the full poisoning uses the
+rest of the retained finite window.
 
 `cross_stage_pair_search.py` searches for local stages satisfying the
 cross-stage pair-barrier criterion in Proposition 13.1c. It finds a short

@@ -1447,6 +1447,17 @@ new mirrors above the moving endpoint. These tests explain the P6 search
 stall without proving a global obstruction; a surviving construction would
 have to route the forced mirrors around the poisoned intervals while keeping
 the two-sum coverage buffer.
+The latest P6 diagnostic sharpens the first protected-filler failure. In
+the pair-edge escape \((p,w)=(38,58)\), the fillers are
+\(\{40,43,44\}\). Once they are treated as protected, each
+\(q\in\{40,43,44\}\) has
+\[
+[q,63]\subseteq3(A\setminus\{10,q\}).
+\]
+Thus the whole current candidate range for the pair edge \(\{10,q\}\) is
+poisoned. The retained endpoint \(38\) accounts for many, but not all, of
+these candidates; the full old retained window fills the remaining shifted
+two-sum gaps.
 
 The latest private-color normal form is Proposition 8.4f in `PROOF.md`.
 After the finite singleton-exceptional set is removed, every remaining
