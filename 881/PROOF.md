@@ -4383,6 +4383,11 @@ such that, for all sufficiently large \(s\):
    e\in A_s\setminus F,\qquad w_F-e\ge C_{s-1}+1,
    \]
    every two-term representation of \(w_F-e\) from \(A_s\) meets \(F\).
+7. the witnesses are unbounded along the Schreier barrier: for every
+   infinite \(B\subset P\) and every \(L\), there is
+   \[
+   F\in\mathcal S,\qquad F\subset B,\qquad w_F>L. \tag{5}
+   \]
 
 Then
 \[
@@ -4396,11 +4401,7 @@ the set \(A\setminus B\) is not an asymptotic basis of order \(3\).
 Consequently \(A\setminus B\) is not an order-2 basis either.
 
 Proof. The coverage intervals (2) imply that \(A\) is an order-2 basis.
-Let \(B\subset P\) be infinite and \(L\) arbitrary. The Schreier family
-\(\mathcal S\) is an unbounded barrier on \(P\): after discarding finitely
-many elements of \(B\), if \(p_i\) is the least remaining element, the first
-\(i+1\) elements of the remaining tail form a member of \(\mathcal S\), and
-the corresponding completion stages tend to infinity. Hence choose
+Let \(B\subset P\) be infinite and \(L\) arbitrary. By (5), choose
 \[
 F\in\mathcal S,\qquad F\subset B,\qquad w_F>L.
 \]
