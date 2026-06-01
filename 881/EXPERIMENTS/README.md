@@ -221,6 +221,13 @@ large-mass width/displacement split in Lemma 16.118, as well as the finite
 separated-pair inequality behind the clustered-profile reduction in
 Corollary 16.100.
 
+`height_coordinate_split.py` checks the finite inequality behind Corollary
+16.128: if the rank coordinate, tested interval endpoint, auxiliary count,
+auxiliary endpoint sum, and pre-asymptotic constant are all at most \(M\),
+then the geometric height \(\chi_{\rm geom}\) is at most \(7M\). It also
+samples finite packet families to verify that the high-height active mass is
+bounded by the union of the five coordinate-high masses.
+
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For
 \[

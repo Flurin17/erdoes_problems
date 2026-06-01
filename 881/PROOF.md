@@ -26026,6 +26026,8 @@ specific coordinate: rank/density scale, tested interval position/length,
 auxiliary profile count, auxiliary endpoint height, or the constants
 required before the robust-core estimates become linear.
 
+The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
+inequality and packet-mass inclusion behind Corollary 16.128.
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
