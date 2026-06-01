@@ -2239,13 +2239,15 @@ Example 8.5a.7z adds a small full product-window warning. The finite set
 A_0=\{1,3,4,5,8,10,11,12\}
 \]
 has \(2A_0\) covering \([4,24]\), every singleton and pair deletion remains
-three-fold covered on \([14,24]\), but the packets
+three-fold covered on \([14,23]\), but the packets
 \[
 \{4,10\},\quad \{5,11\},\quad \{8,12\}
 \]
 form a complete rank-three product cover by inclusion-minimal terminal-gap
-holes. Thus no purely local argument can rule out pair-free rank-three
-product covers; the obstruction must be global.
+holes with witnesses at most \(23\). The extra covered point \(24\) supplies
+the one-point buffer required by Lemma 13.1d for a \(k=2\) staged window.
+Thus no purely local argument can rule out pair-free rank-three product
+covers; the obstruction must be global.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

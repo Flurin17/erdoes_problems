@@ -7729,9 +7729,9 @@ Then
 \[
 [4,24]\subseteq2A_0.
 \]
-On the window
+On the witness window
 \[
-[14,24],
+[14,23],
 \]
 every singleton and every pair deletion from \(A_0\) still leaves full
 three-fold coverage. However the three two-point packets
@@ -7742,7 +7742,7 @@ support a complete rank-three product cover: for every selector
 \[
 (x_1,x_2,x_3)\in F_1\times F_2\times F_3
 \]
-there is a witness \(v\in[14,24]\) such that, with
+there is a witness \(v\in[14,23]\) such that, with
 \[
 F=\{x_1,x_2,x_3\},
 \]
@@ -7771,7 +7771,9 @@ F & v\\ \hline
 \]
 The diagnostic
 `EXPERIMENTS/product_rank3_terminal_cover.py` verifies these assertions
-directly.
+directly. The extra point \(24\in2A_0\) is the one-point positive-summand
+buffer that a staged \(k=2\) construction would need if this window were
+frozen below later elements.
 
 Thus even the pair-free product-cover form of the remaining obstruction is
 finite-window compatible. What is missing for a counterexample is not a

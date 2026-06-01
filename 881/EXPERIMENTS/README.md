@@ -185,9 +185,10 @@ of that abstract rank-three shape. For
 A=\{1,3,4,5,8,10,11,12\}
 \]
 and packets \(\{4,10\},\{5,11\},\{8,12\}\), every selector triple has an
-inclusion-minimal terminal-gap witness in \([14,24]\), while all singleton
+inclusion-minimal terminal-gap witness in \([14,23]\), while all singleton
 and pair deletions remain three-fold covered on that same window. This is
-the finite warning recorded as Example 8.5a.7z.
+the finite warning recorded as Example 8.5a.7z; the coverage point \(24\)
+is the one-point stage buffer from Lemma 13.1d.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

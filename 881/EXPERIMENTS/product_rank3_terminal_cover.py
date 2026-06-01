@@ -22,7 +22,7 @@ from itertools import combinations, product
 SET_A = {1, 3, 4, 5, 8, 10, 11, 12}
 BLOCKS = ((4, 10), (5, 11), (8, 12))
 ORDER2_THRESHOLD = 4
-WINDOW = (14, 24)
+WITNESS_WINDOW = (14, 23)
 
 
 def hsum(elements: set[int], order: int, cap: int) -> set[int]:
@@ -77,13 +77,13 @@ def terminal_gap(
 def selector_witnesses(
     elements: set[int],
     blocks: tuple[tuple[int, ...], ...],
-    window: tuple[int, int],
+    witness_window: tuple[int, int],
     order2_threshold: int,
 ) -> dict[tuple[int, ...], list[tuple[int, tuple[int, int]]]]:
     out: dict[tuple[int, ...], list[tuple[int, tuple[int, int]]]] = {}
     for selector in product(*blocks):
         witnesses: list[tuple[int, tuple[int, int]]] = []
-        for witness in range(window[0], window[1] + 1):
+        for witness in range(witness_window[0], witness_window[1] + 1):
             ok_gap, gap = terminal_gap(elements, selector, witness, order2_threshold)
             if ok_gap and minimal_hole(elements, selector, witness):
                 witnesses.append((witness, gap))
@@ -98,9 +98,11 @@ def main() -> None:
     if not covers(two_sums, ORDER2_THRESHOLD, two_end):
         raise AssertionError("order-2 coverage interval is inconsistent")
 
-    window_start, window_end = WINDOW
+    window_start, window_end = WITNESS_WINDOW
     if window_end > two_end:
         raise AssertionError("test window extends past two-sum coverage")
+    if two_end < window_end + min(SET_A):
+        raise AssertionError("positive-summand stage buffer is missing")
 
     lower_ok = True
     bad_lower: list[tuple[int, ...]] = []
@@ -110,7 +112,7 @@ def main() -> None:
                 lower_ok = False
                 bad_lower.append(deletion)
 
-    witnesses = selector_witnesses(SET_A, BLOCKS, WINDOW, ORDER2_THRESHOLD)
+    witnesses = selector_witnesses(SET_A, BLOCKS, WITNESS_WINDOW, ORDER2_THRESHOLD)
     missing = [selector for selector, data in witnesses.items() if not data]
     if bad_lower or missing:
         raise AssertionError(f"bad_lower={bad_lower} missing={missing}")
@@ -119,7 +121,8 @@ def main() -> None:
     print(f"A={sorted(SET_A)}")
     print(f"blocks={BLOCKS}")
     print(f"two_coverage=({ORDER2_THRESHOLD}, {two_end})")
-    print(f"test_window={WINDOW}")
+    print(f"witness_window={WITNESS_WINDOW}")
+    print(f"stage_buffer={two_end - window_end}")
     print(f"singleton_pair_harmless={lower_ok}")
     for selector, data in witnesses.items():
         print(f"selector={selector} witnesses={data}")
