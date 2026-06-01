@@ -4012,3 +4012,21 @@ source of growth beyond Ramsey.
   The structural equality target must therefore be broadened from
   regular-feedback partitions to spectral partitions with controlled low-part
   excess.
+- 2026-06-01: Checked the no-feedback equality graph
+  `10049161412571578` under all one-vertex extensions.  It has exactly `10`
+  equality extensions; all `10` still have spectral partitions and none have
+  regular-feedback partitions.  Their spectra are all `{0:6,1:2,2:4}`.  This
+  suggests a persistent equality family obtained by growing the independent
+  spectral part while keeping the same degree-`1` and degree-`2` witnesses,
+  and it reinforces that the right structural target is spectral partitions,
+  not forest-feedback partitions.  Added fixed-mask `--extension-profile` to
+  `spectrum_mass_critical.py` to make these counts reproducible.
+- 2026-06-01: Proved the persistence mechanism behind the no-feedback
+  equality obstruction.  Adding an isolated vertex increases only `s_0` by
+  one, so it preserves spectrum-mass equality.  It also cannot create a
+  regular-feedback partition with core degrees at least `2`, because the
+  isolated vertex must lie in the forest part and can be deleted from that
+  partition.  Therefore the mask `10049161412571578` generates an infinite
+  family of equality graphs with spectral partitions but no regular-feedback
+  partition.  This definitively retires the regular-feedback structural target
+  as a route to the full equality-extension lemma.

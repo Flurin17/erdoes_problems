@@ -12,7 +12,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `spectrum_mass_critical.py`: deletion-critical diagnostics for the same
   spectrum-mass parameter, including exact small-order histograms of
   `mu(G)-|G|`, the drops `mu(G)-mu(G-v)`, and the one-vertex extension test
-  for equality graphs.
+  for equality graphs.  Fixed-mask `--extension-profile` reports the
+  spectrum-mass histogram of all one-vertex extensions and whether equality
+  extensions retain spectral or feedback partitions.
 - `spectrum_partition.py`: checks whether a graph has a spectral partition,
   meaning one maximum induced `d`-regular witness for every positive spectrum
   entry, chosen disjointly so that the witnesses cover all vertices.

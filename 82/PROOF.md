@@ -14825,6 +14825,44 @@ The last command still finds a spectral partition with parts of degrees
 spectral partitions whose degree-`0` and degree-`1` pieces do not form a
 forest.
 
+This no-feedback equality example still satisfies the equality-extension
+pattern.  A direct check over all its one-vertex extensions shows that exactly
+ten extensions remain equality graphs; all ten retain spectral partitions and
+none have regular-feedback partitions.  Each has spectrum `{0:6,1:2,2:4}`.
+The verification command is
+
+```text
+python3 82/EXPERIMENTS/spectrum_mass_critical.py 11 --mask 10049161412571578 --extension-profile
+```
+
+**Lemma 28J.10a: Isolated Vertices Preserve Equality And No-Feedback
+Obstructions.**  Let `H^+` be obtained from a graph `H` by adding one isolated
+vertex.  Then
+
+```text
+s_0(H^+)=s_0(H)+1,        s_d(H^+)=s_d(H) for every d>=1.
+```
+
+Consequently, if `H` satisfies `sum_d s_d(H)=|V(H)|`, then
+`H^+` also satisfies equality.  Moreover, if `H` has no regular-feedback
+partition with core degrees at least `2`, then neither does `H^+`.
+
+Proof.  The first display is immediate.  A largest independent set gains the
+new isolated vertex, while a positive-degree regular induced subgraph cannot
+use that vertex, so the positive spectrum coordinates are unchanged.
+
+If `H^+` had a regular-feedback partition with core degrees at least `2`, the
+isolated vertex could not lie in any core part: inside any such part its
+degree would be `0`.  Hence it lies in the forest part.  Removing it from that
+forest part leaves a forest and gives a regular-feedback partition of `H`,
+contradiction.  QED.
+
+Thus the no-feedback equality graph with mask `10049161412571578` generates
+an infinite family of equality graphs with spectral partitions but no
+regular-feedback partition.  The feedback-partition program must therefore be
+replaced by a spectral-partition program rather than merely repaired by larger
+finite checks.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

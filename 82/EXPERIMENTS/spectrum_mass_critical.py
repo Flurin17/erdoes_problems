@@ -7,7 +7,9 @@ import argparse
 from collections import Counter
 
 import column_drop_census as cdc
+from regular_feedback_partition import feedback_partition
 from regular_spectrum_mass import spectrum_mass
+from spectrum_partition import spectral_partition
 
 
 def delete_vertex(adj: list[int], removed: int) -> list[int]:
@@ -140,6 +142,51 @@ def equality_extensions(n: int, limit: int | None) -> None:
         )
 
 
+def extension_profile(n: int, mask: int) -> None:
+    pc = cdc.precompute(n)
+    pc_plus = cdc.precompute(n + 1)
+    adj = cdc.adjacency(n, mask, pc)
+    mass, by_degree = spectrum_mass(adj, pc)
+    histogram: Counter[int] = Counter()
+    equality_count = 0
+    equality_spectral_partitions = 0
+    equality_feedback_partitions = 0
+    examples: list[tuple[int, int, dict[int, int], bool, bool]] = []
+
+    for column in range(1 << n):
+        extended = extend_mask(mask, n, column, pc, pc_plus)
+        extended_adj = cdc.adjacency(n + 1, extended, pc_plus)
+        extended_mass, extended_by_degree = spectrum_mass(extended_adj, pc_plus)
+        surplus = extended_mass - (n + 1)
+        histogram[surplus] += 1
+        if surplus == 0:
+            equality_count += 1
+            has_spectral = (
+                spectral_partition(extended_adj, pc_plus, extended_by_degree) is not None
+            )
+            has_feedback = feedback_partition(extended_adj, 2) is not None
+            equality_spectral_partitions += int(has_spectral)
+            equality_feedback_partitions += int(has_feedback)
+            if len(examples) < 10:
+                examples.append(
+                    (column, extended, extended_by_degree, has_spectral, has_feedback)
+                )
+
+    print(f"n={n}")
+    print(f"mask={mask}")
+    print(f"spectrum_mass={mass}")
+    print(f"by_degree={by_degree}")
+    print(f"extension_surplus_histogram={dict(sorted(histogram.items()))}")
+    print(f"equality_extensions={equality_count}")
+    print(f"equality_extensions_with_spectral_partition={equality_spectral_partitions}")
+    print(f"equality_extensions_with_feedback_partition={equality_feedback_partitions}")
+    for column, extended, extended_by_degree, has_spectral, has_feedback in examples:
+        print(
+            f"example column={column} mask={extended} by_degree={extended_by_degree} "
+            f"spectral_partition={has_spectral} feedback_partition={has_feedback}"
+        )
+
+
 def fixed(n: int, mask: int) -> None:
     pc = cdc.precompute(n)
     adj = cdc.adjacency(n, mask, pc)
@@ -159,11 +206,16 @@ def main() -> None:
     parser.add_argument("n", type=int)
     parser.add_argument("--mask", type=int)
     parser.add_argument("--equality-extensions", action="store_true")
+    parser.add_argument("--extension-profile", action="store_true")
     parser.add_argument("--limit", type=int)
     args = parser.parse_args()
 
     if args.equality_extensions:
         equality_extensions(args.n, args.limit)
+    elif args.extension_profile:
+        if args.mask is None:
+            parser.error("--extension-profile requires --mask")
+        extension_profile(args.n, args.mask)
     elif args.mask is None:
         exact(args.n)
     else:
