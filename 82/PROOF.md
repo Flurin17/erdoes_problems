@@ -15170,10 +15170,11 @@ The final assertion follows by applying the coordinatewise equivalence to
 every degree and using monotonicity: the sum can stay equal only when no
 coordinate drops.  QED.
 
-Thus Conditional Proposition 28J.10d.1 can be sharpened to a purely
-structural deletion target: every connected below-full graph should have a
-non-cut vertex outside the union of all essential spectrum coordinates.  On a
-defect-one graph this is exactly the same as a non-cut full-mass deletion.
+Thus, on a defect-one graph, Conditional Proposition 28J.10d.1 can be
+rephrased as a purely structural deletion target: find a non-cut vertex
+outside the union of all essential spectrum coordinates.  For graphs of
+larger defect, deleting such a vertex only preserves the current mass, so a
+separate argument is needed to rule out defect two.
 The diagnostic
 
 ```text
@@ -15188,6 +15189,68 @@ mass `13`.  The displayed fifteen-vertex extension has essential union
 `{13,14}` in the independence coordinate; deleting exactly those two vertices
 drops the mass to `13`, while many non-cut nonessential deletions keep mass
 `14`.
+
+**Conditional Proposition 28J.10d.1c: Deletion-Tight Graphs Would Prove
+Connected Defect One.**  Suppose every connected graph `G` with the property
+
+```text
+sum_d s_d(G-v)=sum_d s_d(G)
+```
+
+for every non-cut vertex `v` satisfies
+
+```text
+sum_d s_d(G) >= |V(G)|-1.
+```
+
+Then every connected graph satisfies the connected defect-one spectrum-mass
+bound, and Erdős Problem 82 follows with a polynomial bound.
+
+Proof.  Let `G` be a minimum-order connected counterexample to connected
+defect one, and write `n=|V(G)|`.  Then
+
+```text
+sum_d s_d(G) <= n-2.
+```
+
+For any non-cut vertex `v`, the graph `G-v` is connected on `n-1` vertices,
+so minimality gives
+
+```text
+sum_d s_d(G-v) >= n-2.
+```
+
+Monotonicity gives the reverse inequality
+
+```text
+sum_d s_d(G-v) <= sum_d s_d(G) <= n-2.
+```
+
+Thus equality holds throughout, for every non-cut vertex `v`.  The assumed
+deletion-tight hypothesis then gives
+
+```text
+sum_d s_d(G) >= n-1,
+```
+
+contradiction.  Conditional Corollary 28J.10d.1 gives the final implication
+for Erdős Problem 82.  QED.
+
+By Lemma 28J.10d.1b, the deletion-tight hypothesis is equivalent to saying
+that every non-cut vertex lies outside every essential spectrum coordinate.
+The known fourteen-vertex defect examples satisfy this condition strongly
+and have defect exactly one, so they are sharp test cases for this target
+rather than counterexamples to it.
+
+The command
+
+```text
+python3 82/EXPERIMENTS/defect_structure_scan.py 6 --essential-scan
+```
+
+checks this target exactly on connected labelled graphs with six vertices.
+It finds `660` graphs for which every non-cut vertex is nonessential; their
+mass histogram is `{7:360, 8:120, 9:180}`, so none has mass below `|G|-1`.
 
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then

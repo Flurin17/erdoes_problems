@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from itertools import combinations
 
 import column_drop_census as cdc
@@ -59,6 +60,13 @@ def essential_vertices_by_degree(
     return out
 
 
+def essential_vertex_union(
+    adj: list[int], pc: cdc.Precomp, by_degree: dict[int, int]
+) -> tuple[int, ...]:
+    essential = essential_vertices_by_degree(adj, pc, by_degree)
+    return tuple(sorted({v for vertices in essential.values() for v in vertices}))
+
+
 def fixed(n: int, mask: int) -> None:
     pc = cdc.precompute(n)
     adj = cdc.adjacency(n, mask, pc)
@@ -104,7 +112,7 @@ def fixed(n: int, mask: int) -> None:
         )
 
 
-def exact(n: int, max_examples: int) -> None:
+def exact(n: int, max_examples: int, essential_scan: bool) -> None:
     pc = cdc.precompute(n)
     pc_minus = cdc.precompute(n - 1) if n > 1 else None
     total = 1 << len(pc.edges)
@@ -115,6 +123,14 @@ def exact(n: int, max_examples: int) -> None:
     without_noncut_full = 0
     below_full_examples = []
     examples = []
+    no_noncut_nonessential_count = 0
+    below_full_no_noncut_nonessential_count = 0
+    no_noncut_nonessential_mass_hist: Counter[int] = Counter()
+    no_noncut_nonessential_examples = []
+    all_noncut_nonessential_count = 0
+    below_defect_one_all_noncut_nonessential_count = 0
+    all_noncut_nonessential_mass_hist: Counter[int] = Counter()
+    all_noncut_nonessential_examples = []
 
     for mask in range(total):
         adj = cdc.adjacency(n, mask, pc)
@@ -122,10 +138,35 @@ def exact(n: int, max_examples: int) -> None:
             continue
         connected_count += 1
         mass, by_degree = spectrum_mass(adj, pc)
+        cuts = set(cut_vertices(adj))
+
+        if essential_scan:
+            essential_union = set(essential_vertex_union(adj, pc, by_degree))
+            noncut_vertices = set(range(n)) - cuts
+            has_noncut_nonessential = bool(noncut_vertices - essential_union)
+            all_noncut_nonessential = not bool(noncut_vertices & essential_union)
+            if not has_noncut_nonessential:
+                no_noncut_nonessential_count += 1
+                no_noncut_nonessential_mass_hist[mass] += 1
+                if len(no_noncut_nonessential_examples) < max_examples:
+                    no_noncut_nonessential_examples.append(
+                        (mask, mass, by_degree, tuple(sorted(cuts)), tuple(sorted(essential_union)))
+                    )
+                if mass < n:
+                    below_full_no_noncut_nonessential_count += 1
+            if all_noncut_nonessential:
+                all_noncut_nonessential_count += 1
+                all_noncut_nonessential_mass_hist[mass] += 1
+                if len(all_noncut_nonessential_examples) < max_examples:
+                    all_noncut_nonessential_examples.append(
+                        (mask, mass, by_degree, tuple(sorted(cuts)), tuple(sorted(essential_union)))
+                    )
+                if mass < n - 1:
+                    below_defect_one_all_noncut_nonessential_count += 1
+
         if mass >= n:
             continue
         below_full_count += 1
-        cuts = set(cut_vertices(adj))
         has_noncut_full = False
         assert pc_minus is not None
         for v in range(n):
@@ -155,6 +196,36 @@ def exact(n: int, max_examples: int) -> None:
     print(f"below_full_without_noncut_full_deletion={below_full_without_noncut_full}")
     print(f"defect_one_count={defect_one_count}")
     print(f"without_noncut_full_deletion={without_noncut_full}")
+    print(f"essential_scan={essential_scan}")
+    if essential_scan:
+        print(f"no_noncut_nonessential_count={no_noncut_nonessential_count}")
+        print(
+            "below_full_no_noncut_nonessential_count="
+            f"{below_full_no_noncut_nonessential_count}"
+        )
+        print(
+            "no_noncut_nonessential_mass_histogram="
+            f"{dict(sorted(no_noncut_nonessential_mass_hist.items()))}"
+        )
+        print(f"all_noncut_nonessential_count={all_noncut_nonessential_count}")
+        print(
+            "below_defect_one_all_noncut_nonessential_count="
+            f"{below_defect_one_all_noncut_nonessential_count}"
+        )
+        print(
+            "all_noncut_nonessential_mass_histogram="
+            f"{dict(sorted(all_noncut_nonessential_mass_hist.items()))}"
+        )
+        for mask, mass, by_degree, cuts, essential_union in no_noncut_nonessential_examples:
+            print(
+                f"no_noncut_nonessential_example mask={mask} mass={mass} "
+                f"by_degree={by_degree} cuts={cuts} essential_union={essential_union}"
+            )
+        for mask, mass, by_degree, cuts, essential_union in all_noncut_nonessential_examples:
+            print(
+                f"all_noncut_nonessential_example mask={mask} mass={mass} "
+                f"by_degree={by_degree} cuts={cuts} essential_union={essential_union}"
+            )
     for mask, mass, by_degree in below_full_examples:
         print(f"below_full_example mask={mask} mass={mass} by_degree={by_degree}")
     for mask, by_degree in examples:
@@ -166,10 +237,11 @@ def main() -> None:
     parser.add_argument("n", type=int)
     parser.add_argument("--mask", type=int)
     parser.add_argument("--max-examples", type=int, default=10)
+    parser.add_argument("--essential-scan", action="store_true")
     args = parser.parse_args()
 
     if args.mask is None:
-        exact(args.n, args.max_examples)
+        exact(args.n, args.max_examples, args.essential_scan)
     else:
         fixed(args.n, args.mask)
 

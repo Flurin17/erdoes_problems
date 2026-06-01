@@ -4173,6 +4173,19 @@ source of growth beyond Ramsey.
   A fifteen-vertex defect extension `98404699529372860578279459` has
   essential union `{13,14}` only in the independence coordinate, and exactly
   those two deletions are the ones that drop the mass to `13`; many non-cut
-  nonessential deletions still keep mass `14`.  New proof target: prove that
-  every connected below-full graph has a non-cut vertex outside its essential
-  spectrum union.
+  nonessential deletions still keep mass `14`.  Correction/refinement: a
+  nonessential deletion only preserves the current mass, so it gives a
+  full-mass deletion only in defect-one graphs.  The stronger minimal
+  counterexample target is now: prove that every connected graph whose
+  non-cut deletions all preserve spectrum mass has `mu(G)>=|G|-1`.  A
+  smallest connected defect-two counterexample would necessarily have exactly
+  this deletion-tight property, while the known fourteen-vertex sharp
+  examples show the conclusion would be tight.
+- 2026-06-01: Extended `defect_structure_scan.py --essential-scan` to count
+  both sides of the essential-union condition.  Exact connected `n=6` has
+  `660` graphs where every non-cut vertex is nonessential, with mass
+  histogram `{7:360, 8:120, 9:180}`; none has mass below `n-1`.  This is
+  bounded evidence for Conditional Proposition 28J.10d.1c.  The same scan
+  also finds many full/surplus graphs where every non-cut vertex is
+  essential, confirming that the two extremal deletion behaviors are both
+  common away from the below-defect-one regime.
