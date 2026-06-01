@@ -1585,6 +1585,72 @@ large \(n\) have arbitrarily large matchings. Conversely, a counterexample
 must have infinitely many large \(n\) whose \((k+1)\)-representations admit
 bounded transversals outside every finite protected core.
 
+## Lemma 3.2a: Protected transversal criterion
+
+Let \(A\) be an asymptotic basis of order \(k\), and put \(h=k+1\). Suppose
+there is a finite set
+\[
+E\subset A
+\]
+such that for every \(r\ge1\) there is \(N_r\) with the following property:
+for every \(n\ge N_r\) and every set
+\[
+D\subset A\setminus E,\qquad |D|\le r,
+\]
+there is an \(h\)-term representation
+\[
+n=a_1+\cdots+a_h,\qquad a_i\in A,
+\]
+whose summands outside \(E\) avoid \(D\):
+\[
+\{a_1,\ldots,a_h\}\cap(A\setminus E)\cap D=\varnothing. \tag{1}
+\]
+Then there is an infinite
+\[
+B\subset A\setminus E
+\]
+such that \(A\setminus B\) is an asymptotic basis of order \(h\).
+
+Equivalently, using the hypergraph \(\mathcal H_E(n)\) from Corollary 3.3,
+the hypothesis says that the transversal number of \(\mathcal H_E(n)\)
+tends to infinity uniformly with \(n\).
+
+Proof. Choose
+\[
+b_1<b_2<\cdots,\qquad b_j\in A\setminus E,
+\]
+recursively so that
+\[
+b_j>N_j\qquad(j\ge1),
+\]
+and put
+\[
+B=\{b_j:j\ge1\}.
+\]
+Let \(n\) be sufficiently large, and choose \(j\) with
+\[
+b_j\le n<b_{j+1}.
+\]
+Then \(n\ge b_j>N_j\). Apply the hypothesis with
+\[
+D=\{b_1,\ldots,b_j\}.
+\]
+It gives an \(h\)-term representation of \(n\) whose outside-\(E\) summands
+avoid the first \(j\) deleted elements. The future deleted elements
+\[
+b_{j+1},b_{j+2},\ldots
+\]
+are all larger than \(n\), so none of them can occur in a positive-summand
+representation of \(n\). Since \(B\cap E=\varnothing\), the same
+representation lies in \(h(A\setminus B)\). Thus all sufficiently large
+\(n\) are represented from \(A\setminus B\). \(\square\)
+
+This criterion is the exact hypergraph form behind Lemma 3.2. Large
+matchings are only one way to force large transversal number. A
+counterexample must therefore have bounded outside-core hitting sets for
+the \((k+1)\)-representation hypergraphs on arbitrarily large targets, not
+merely bounded matchings.
+
 ## Corollary 3.3: Hypergraph transversal obstruction
 
 Assume that no infinite \(B\subset A\) has \(A\setminus B\) an
@@ -26914,6 +26980,9 @@ missing from ordinary minimal order-\(h\) bases.
   bounded runs of \(A\)-points eventually and unbounded complementary gaps.
 * Lemma 3.2 proves the theorem under an arbitrarily-large protected matching
   hypothesis for \((k+1)\)-representations.
+* Lemma 3.2a sharpens the same route to transversal number: matchings are
+  sufficient but not necessary; it is enough that every bounded outside-core
+  set fails to hit all large \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded
   moving transversals for representation hypergraphs.
 * Lemma 3.3a records the exact first-moment random-thinning criterion:

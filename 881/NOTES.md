@@ -835,6 +835,11 @@ chooses the next deleted element beyond the threshold for one more disjoint
 representation; among \(r+1\) disjoint representations, only \(r\) can be
 hit by the first \(r\) deleted elements.
 
+Lemma 3.2a records the exact transversal version. It is enough that, after
+protecting \(E\), every bounded set \(D\subset A\setminus E\) fails to hit
+all \((k+1)\)-representations of every sufficiently large \(n\). Large
+disjoint matchings imply this, but are stronger than necessary.
+
 Thus a counterexample must produce bounded moving transversals for
 \((k+1)\)-representations of infinitely many large integers, even after
 protecting any finite exceptional core.
