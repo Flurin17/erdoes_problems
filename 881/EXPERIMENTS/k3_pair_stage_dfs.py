@@ -5,6 +5,7 @@ This removes the modulo-10 booster restriction from
 ``robust_booster_pair_stage_search.py``.  A stage must:
 
 * extend 3-sum coverage with the two-point buffer from Lemma 13.1d;
+* pass the new-block frontier test from Lemma 13.1d.1;
 * give every old-new pair a local 4-sum witness below the declared endpoint.
 
 The search is intentionally small and diagnostic.  It is not a proof of
@@ -57,6 +58,17 @@ def pair_witnesses(
     return result
 
 
+def bootstraps_from_old(old: set[int], new_tuple: tuple[int, ...]) -> bool:
+    """Return whether each new point is 3-covered by old plus earlier new."""
+
+    current = set(old)
+    for point in new_tuple:
+        if point not in hsum(current, 3, point):
+            return False
+        current.add(point)
+    return True
+
+
 @dataclass(frozen=True)
 class Stage:
     old: tuple[int, ...]
@@ -85,6 +97,8 @@ def extensions(
     out: list[Stage] = []
     for size in range(1, max_new_size + 1):
         for new_tuple in combinations(candidates, size):
+            if not bootstraps_from_old(old, new_tuple):
+                continue
             new = set(new_tuple)
             elements = old | new
             cap = max(5 * max(elements) + 180, oldcov + slack + 180)
