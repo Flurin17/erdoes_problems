@@ -4269,3 +4269,17 @@ source of growth beyond Ramsey.
   `G(k)`.  Lemma 28J.10e.4 proves that regular-feedback partitions with
   distinct core degrees give `Q>=n^{3/2}/3`; if such a decomposition could be
   generalized beyond the known no-feedback obstructions, it would suffice.
+- 2026-06-01: Added the still more direct distinct-degree regular partition
+  lemma: any partition of `V(G)` into regular induced pieces of distinct
+  degrees gives `Q>=n^{3/2}/3`, because there are only `O(sqrt n)` possible
+  nonempty positive-degree parts of distinct feasible degrees.  The known
+  thirteen-, fourteen-, and fifteen-vertex spectrum defects do not have such
+  a partition in a quick exact check, matching the earlier failure of maximum
+  spectral partitions.
+- 2026-06-01: Added `distinct_regular_partition.py`.  It verifies that all
+  equality graphs through `n=7` have distinct-degree regular partitions
+  (`751/751` at `n=6`, `3781/3781` at `n=7`), while the known
+  thirteen-vertex equality graph `1584140989738554425379` and its fourteen-
+  and fifteen-vertex defect descendants do not.  Thus the obstruction to the
+  `Q>=n^{3/2}/3` decomposition route first appears exactly at the same
+  spectrum-defect family.

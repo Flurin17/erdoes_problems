@@ -15868,6 +15868,64 @@ partition theorem is false, but the lemma identifies the amount of square
 spectrum supplied by any successful decomposition into a forest plus
 distinct-degree regular cores.
 
+**Lemma 28J.10e.5: Distinct-Degree Regular Partitions Have Superlinear
+Square Spectrum.**  Suppose the vertices of `G` can be partitioned as
+
+```text
+V(G)=R_1 union ... union R_t,
+```
+
+where each `G[R_i]` is regular and the regular degrees of the nonempty parts
+are distinct.  Then, for `n=|V(G)|`,
+
+```text
+Q(G) >= n^{3/2}/3.
+```
+
+Proof.  Let the part degrees be `e_1,...,e_t`, and put `r_i=|R_i|`.  Since
+the degrees are distinct, the parts contribute in distinct spectrum
+coordinates, so
+
+```text
+Q(G) >= r_1^2+...+r_t^2 >= n^2/t.
+```
+
+There is at most one part of degree `0`.  Every positive-degree part of
+degree `e_i` has size at least `e_i+1`.  Hence, if there are `u` positive
+degree parts, then
+
+```text
+n >= 2+3+...+(u+1).
+```
+
+Thus `u+1 <= 3 sqrt(n)`, and `t<=u+1<=3sqrt(n)`, where the possible
+degree-`0` part accounts for the extra `1`.  Therefore
+
+```text
+Q(G) >= n^2/t >= n^{3/2}/3.
+```
+
+QED.
+
+The earlier spectral-partition target was a maximum-coordinate version of
+this lemma's hypothesis.  That stronger target is false for the
+thirteen-vertex equality graph `1584140989738554425379` and its defect
+extensions, so a decomposition proof would need a more flexible way to
+partition vertices into distinct-degree regular pieces, or a way to pay for
+the overlap left by failed partitions.
+
+The checker `EXPERIMENTS/distinct_regular_partition.py` searches for such
+partitions.  It verifies that all equality graphs through seven vertices have
+one, but the known thirteen-, fourteen-, and fifteen-vertex spectrum defects
+do not:
+
+```text
+python3 82/EXPERIMENTS/distinct_regular_partition.py 7 --equality-only
+python3 82/EXPERIMENTS/distinct_regular_partition.py 13 --mask 1584140989738554425379
+python3 82/EXPERIMENTS/distinct_regular_partition.py 14 --mask 429588619789184147001379
+python3 82/EXPERIMENTS/distinct_regular_partition.py 15 --mask 98404699529372860578279459
+```
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.
