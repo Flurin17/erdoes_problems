@@ -4375,3 +4375,10 @@ source of growth beyond Ramsey.
   `(log n)^{1+eta/(p+1)}` already suffices.  For `p=2`, new work is needed
   only when `alpha < (log n)^{3/2+eta/2}` and
   `omega < (log n)^{1+eta/3}` up to constants.
+- 2026-06-01: Added the polynomial chi-bound power-spectrum lemma.  If
+  `chi(G)<=K omega(G)^a`, then
+  `Phi_p(G)>=c_{p,a,K} n^{p(p+1)/(ap+p+1)}`; in particular perfect graphs
+  have `Q(G)>=c n^{6/5}`.  This makes any polynomially chi-bounded structural
+  subclass compatible with the fixed-power spectrum route, but it does not
+  address the unrestricted case without a structural reduction to such a
+  subclass.

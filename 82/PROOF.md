@@ -15983,6 +15983,76 @@ The first inequality is much weaker than the fixed-`C` Ramsey-core condition;
 the second says even a mildly superlogarithmic clique would already supply
 enough square spectrum through its many regular subcliques.
 
+**Lemma 28J.10e.0g: Polynomial Chi-Bounds Force Polynomial Fixed-Power
+Spectrum.**  Fix an integer `p>=1` and constants `K>=1`, `a>=0`.  If a graph
+`G` on `n>=1` vertices satisfies
+
+```text
+chi(G) <= K omega(G)^a,
+```
+
+then
+
+```text
+Phi_p(G) >= c_{p,a,K} n^{p(p+1)/(ap+p+1)}.
+```
+
+In particular, if `G` is perfect, then `K=a=1` is admissible and
+
+```text
+Phi_p(G) >= c_p n^{p(p+1)/(2p+1)}.
+```
+
+For the square spectrum this gives `Q(G)>=c n^{6/5}` on perfect graphs.
+
+Proof.  Put `w=omega(G)`.  A proper coloring using at most `K w^a` colors has
+a color class of size at least
+
+```text
+alpha(G) >= n/(K w^a).
+```
+
+Therefore
+
+```text
+Phi_p(G) >= s_0(G)^p >= K^{-p} n^p w^{-ap}.          (1)
+```
+
+On the other hand, a clique of order `w` contains a `d`-regular induced
+subgraph on `d+1` vertices for each `0<=d<=w-1`, so
+
+```text
+Phi_p(G) >= sum_{j=1}^w j^p >= w^{p+1}/(p+1).        (2)
+```
+
+Set
+
+```text
+T=n^{p/(ap+p+1)}.
+```
+
+If `w>=T`, then (2) gives
+
+```text
+Phi_p(G) >= (p+1)^{-1} n^{p(p+1)/(ap+p+1)}.
+```
+
+If `w<T`, then (1) gives
+
+```text
+Phi_p(G) >= K^{-p} n^p T^{-ap}
+          = K^{-p} n^{p(p+1)/(ap+p+1)}.
+```
+
+Taking `c_{p,a,K}=min((p+1)^{-1},K^{-p})` proves the claim.  Perfect graphs
+satisfy `chi(G)=omega(G)`, so the displayed specialization follows.  QED.
+
+This lemma turns any polynomial chi-bound for a structural subclass into a
+polynomial fixed-power spectrum lower bound on that subclass.  It therefore
+packages Lemma 1A in the spectrum language, but it does not by itself solve
+the unrestricted problem: the classes naturally obtained from excluding long
+regular witnesses are not known here to satisfy polynomial chi-bounds.
+
 The script `EXPERIMENTS/spectrum_power_search.py` was added to search this
 functional.  Exact labelled enumeration through seven vertices gives minimum
 `Q/n^2` equal to `29/49` at `n=7`.  The fourteen-vertex linear-mass
