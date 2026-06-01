@@ -3408,3 +3408,10 @@ source of growth beyond Ramsey.
   co-maximum degree at most `D`, giving a clique or independent set of size
   `|U|/(2(D+1))`, or `|U|/(D+1)` when all vertices are on one side.  This is
   the reusable local version of Lemma 26's averaging proof.
+- 2026-06-01: Used Lemma 26B to sharpen the exact-degree bucket bound in
+  Corollary 28D.2 from `16hP_h` to `4hP_h`.  Consequently the ordered
+  reductions improve to `G(h) <= 4hP_h C_drop(P_h,h)` and
+  `G(h) <= 4hP_h C_reg(P_h,h)`, while the polynomial pair-parameter
+  reduction improves to `G(h) <= 16 h^5 P_h^2`.  This is only a constant
+  improvement; the remaining proof target is still a subexponential bound for
+  one of the equivalent local/ordered parameters.

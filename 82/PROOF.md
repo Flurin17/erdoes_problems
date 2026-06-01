@@ -7518,7 +7518,7 @@ over every field.  Equivalently, if either rank is at most `r`, then
 
 Proof.  This is Corollary 7C applied to the induced subgraph on `B`.  QED.
 
-This is not a replacement for Corollary 28D.2's `16hP_h` degree-bucket bound,
+This is not a replacement for Corollary 28D.2's `4hP_h` degree-bucket bound,
 but it supplies an independent local obstruction: a large exact-degree bucket
 in a counterexample must be a high-rank bounded-spread graph.
 
@@ -11329,12 +11329,11 @@ inequality by a non-strict one.  QED.
 `G`, then
 
 ```text
-|U| <= 16hP.
+|U| <= 4hP.
 ```
 
-Proof.  If `|U|<h`, this is immediate.  Otherwise `G[U]` also has no regular
-induced subgraph on at least `h` vertices.  For distinct `u,v in U`, the two
-one-sided differences
+Proof.  If `|U|<=1`, this is immediate.  Fix `v in U`, and put
+`U'=U\{v}`.  For every `u in U'`, the two one-sided differences
 
 ```text
 N_G(u)\N_G(v),        N_G(v)\N_G(u)
@@ -11344,21 +11343,22 @@ have the same size, because `deg_G(u)=deg_G(v)`.  Lemma 28D says their common
 size is less than `P`.  Therefore
 
 ```text
-sigma_{G[U]}(u,v)
- <= |(N_G(u) triangle N_G(v))\{u,v}|
- <= 2P-2.
+|(N_G(u) triangle N_G(v))\{u,v}| <= 2P-2.
 ```
 
-Applying Lemma 26 to the graph `G[U]` gives
+Apply Lemma 26B with this reference vertex `v`, with `D=2P-2`, and with the
+set `U'`.  It gives a clique or independent set, hence a regular induced
+subgraph, of order at least
 
 ```text
-(|U|-1)/(8h)-1/2 <= 2P-2.
+(|U|-1)/(2(2P-1)).
 ```
 
-Hence
+Since `G` has no regular induced subgraph on at least `h` vertices, this
+quantity is less than `h`.  Hence
 
 ```text
-|U| <= 8h(2P-3/2)+1 <= 16hP.
+|U| <= h(4P-2) <= 4hP.
 ```
 
 QED.
@@ -11702,12 +11702,12 @@ independent set has order exactly `h-1`.  Hence
 every `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 16 h P C_drop(P,h).
+G(h) <= 4 h P C_drop(P,h).
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition its vertices into exact global degree classes.  By
-Corollary 28D.2, every nonempty degree class has size at most `16hP`.
+Corollary 28D.2, every nonempty degree class has size at most `4hP`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing global degree:
@@ -11740,10 +11740,10 @@ Multiplying the number of degree classes by the maximum degree-class size
 gives
 
 ```text
-|V(G)| <= 16hP (C_drop(P,h)-1) < 16hP C_drop(P,h).
+|V(G)| <= 4hP (C_drop(P,h)-1) < 4hP C_drop(P,h).
 ```
 
-Therefore every graph on at least `16hP C_drop(P,h)` vertices has a regular
+Therefore every graph on at least `4hP C_drop(P,h)` vertices has a regular
 induced subgraph on at least `h` vertices, proving the displayed bound for
 `G(h)`.  QED.
 
@@ -11946,12 +11946,12 @@ C_reg(P,h) <= C_drop(P,h).
 `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 16 h P C_reg(P,h).
+G(h) <= 4 h P C_reg(P,h).
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition `V(G)` into exact global degree classes.  By Corollary
-28D.2, every nonempty degree class has size at most `16hP`.
+28D.2, every nonempty degree class has size at most `4hP`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing degree.  As in Lemma 28E.6, Lemma 28D implies
@@ -11967,10 +11967,10 @@ than `C_reg(P,h)` nonempty degree classes.  Multiplying by the degree-class
 size bound gives
 
 ```text
-|V(G)| < 16hP C_reg(P,h).
+|V(G)| < 4hP C_reg(P,h).
 ```
 
-Therefore every graph on at least `16hP C_reg(P,h)` vertices contains a
+Therefore every graph on at least `4hP C_reg(P,h)` vertices contains a
 regular induced subgraph on at least `h` vertices.  QED.
 
 This is formally sharper than Lemma 28E.6.  It would prove Problem 82 under
@@ -11988,7 +11988,7 @@ subexponential scale as `G`.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 64 h^5 P_h^2.
+G(h) <= 16 h^5 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
@@ -11997,7 +11997,7 @@ Proof.  Let `P=P_h`, and suppose for contradiction that `G` is an `n`-vertex
 graph with no regular induced subgraph on at least `h` vertices, where
 
 ```text
-n > 64 h^5 P^2.
+n > 16 h^5 P^2.
 ```
 
 Partition the vertices by their exact degrees in `G`:
@@ -12006,7 +12006,7 @@ Partition the vertices by their exact degrees in `G`:
 V_d={v : deg_G(v)=d}.
 ```
 
-By Corollary 28D.2, every nonempty degree bucket has size at most `16hP`.
+By Corollary 28D.2, every nonempty degree bucket has size at most `4hP`.
 
 Let `b` be the number of nonempty buckets.  If
 
@@ -12049,13 +12049,13 @@ b <= 4P h^4.
 Combining the bucket count and bucket size bounds,
 
 ```text
-n <= b * 16hP <= 64 h^5 P^2,
+n <= b * 4hP <= 16 h^5 P^2,
 ```
 
 contradicting the assumed value of `n`.  This proves the displayed bound on
 `G(h)`.
 
-If `P_h=2^{o(h)}`, then the polynomial factor `64h^5` is also
+If `P_h=2^{o(h)}`, then the polynomial factor `16h^5` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
