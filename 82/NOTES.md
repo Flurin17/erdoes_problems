@@ -2460,3 +2460,14 @@ source of growth beyond Ramsey.
   mask `56205204850483501447`, with no regular `6`-set and all `19` remaining
   edges blocked by regular witnesses after deletion.  These are concrete
   small edge-extremal calibrations for Lemma 27F.
+- 2026-06-01: Added Lemma 27H and `pair_defect_witness.py`.  Lemma 27H is the
+  exact pair-role equation for witnesses where the chosen pair has degree
+  one below or one above all middle vertices.  It unifies the regular
+  pair-role criterion (Lemma 27C) with the two-defect witnesses forced in
+  edge-maximal and edge-minimal counterexamples.
+- 2026-06-01: Verified `pair_defect_witness.py` on both saturated masks.  In
+  the add-saturated mask `72413377920641400783`, witness
+  `{0,1,4,5,6,9}` at nonedge `0-5` has endpoint-minus-middle degree `-1`.
+  In the delete-saturated mask `56205204850483501447`, witness
+  `{0,1,6,8,10,11}` at edge `0-1` has endpoint-minus-middle degree `+1`.
+  Both satisfy the Lemma 27H role equations.

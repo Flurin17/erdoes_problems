@@ -7918,6 +7918,69 @@ remaining edge deletions create one, again with witnesses containing the
 deleted pair.  Thus both edge-extremal forms in Lemma 27F occur in small
 examples.
 
+## Lemma 27H: Pair-Role Equations For Two-Defect Witnesses
+
+Let `u,v` be two vertices in a graph `G`, and put `delta=1` if `uv in E(G)`
+and `delta=0` otherwise.  Let `M` be disjoint from `{u,v}` and partition `M`
+into four pair roles
+
+```text
+X=N(u)\N(v),              Y=N(v)\N(u),
+Z=N(u) cap N(v),          W=V(G)\({u,v} union N(u) union N(v)),
+```
+
+intersected with `M`.  Let `tau` be one of `-1,0,1`.  Then the induced graph
+on `{u,v} union M` has degree `D+tau` at both `u` and `v`, and degree `D` at
+every vertex of `M`, if and only if
+
+```text
+|X|=|Y|,
+D=delta+|X|+|Z|-tau,
+deg_M(x)=D-1       for x in X union Y,
+deg_M(z)=D-2       for z in Z,
+deg_M(w)=D         for w in W.
+```
+
+Proof.  The degrees of `u` and `v` in the full induced graph are
+
+```text
+delta+|X|+|Z|,       delta+|Y|+|Z|,
+```
+
+respectively.  They are equal exactly when `|X|=|Y|`, and requiring this
+common value to be `D+tau` gives the displayed formula for `D`.
+
+Every vertex in `X union Y` is adjacent to exactly one of `u,v`; every vertex
+in `Z` is adjacent to both; every vertex in `W` is adjacent to neither.
+Therefore a middle vertex has total degree `D` exactly when its degree inside
+`M` is respectively `D-1`, `D-2`, or `D`.  QED.
+
+The case `tau=0` is Lemma 27C.  The case `tau=-1` is the deficient endpoint
+form produced by adding a missing edge to an edge-maximal counterexample in
+Lemma 27F.  The case `tau=1` is the surplus endpoint form produced by
+deleting an edge from an edge-minimal counterexample.  The script
+`EXPERIMENTS/pair_defect_witness.py` checks these equations for fixed
+witnesses.
+
+For example, in the add-saturated mask `72413377920641400783`, adding the
+missing edge `0-5` creates a regular `6`-vertex witness.  Before adding the
+edge, the witness
+
+```text
+{0,1,4,5,6,9}
+```
+
+has endpoint degrees `3,3` at `0,5` and middle degrees all `4`, so
+`tau=-1`.  In the delete-saturated mask `56205204850483501447`, deleting the
+edge `0-1` creates a regular witness; before deletion, the witness
+
+```text
+{0,1,6,8,10,11}
+```
+
+has endpoint degrees `2,2` and middle degrees all `1`, so `tau=1`.  In both
+cases `pair_defect_witness.py` verifies the displayed pair-role equations.
+
 ## Lemma 28: Ramsey Bound For Pair-Difference Amplification
 
 Let `BR(p,q)` be the least integer `N` such that every bipartite graph with
