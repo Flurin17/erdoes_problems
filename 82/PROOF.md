@@ -9935,6 +9935,30 @@ homogeneous extraction by regular extraction may improve constants or small
 parameters in the degree-bucket representative argument, but it does not yet
 give a theorem-level improvement over Proposition 28F.
 
+One small exact lower calibration for the regular column-drop parameter is
+the following.  The inversion-free ordered graph on `10` vertices with suffix
+thresholds
+
+```text
+(1,2,6,6,8,8,10,10,10,10)
+```
+
+has largest regular induced subgraph of order `4`, verified by
+
+```text
+python3 82/EXPERIMENTS/no_inversion_regular.py 10 \
+  --thresholds 1,2,6,6,8,8,10,10,10,10
+```
+
+Thus
+
+```text
+C_reg(1,5)>10.
+```
+
+By contrast, Lemma 28E.5 gives `C_drop(1,5)=17`.  Closing even this finite gap
+requires using regular induced subgraphs beyond homogeneous sets.
+
 **Definition 28E.8: The Regular Column-Drop Parameter.**  For integers
 `P,h>=1`, let `C_reg(P,h)` be the least integer `m` such that every ordered
 graph on `m` vertices satisfying the column-drop condition

@@ -3011,3 +3011,9 @@ source of growth beyond Ramsey.
   recorded Dyson--McKay construction to get the stronger literature-dependent
   `P_h >= (9/652+o(1))h^2`.  Thus the parity cross-profile family remains
   useful for structure, but not for the best known magnitude lower bound.
+- 2026-06-01: Recorded a finite regular-column-drop lower example:
+  the inversion-free threshold graph on `10` vertices with thresholds
+  `(1,2,6,6,8,8,10,10,10,10)` has maximum regular induced order `4`, so
+  `C_reg(1,5)>10`.  The homogeneous value is `C_drop(1,5)=17`, leaving a
+  small finite test gap for whether regular extraction improves the ordered
+  representative step before asymptotic questions.
