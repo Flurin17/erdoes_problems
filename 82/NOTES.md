@@ -3784,3 +3784,16 @@ source of growth beyond Ramsey.
   `s_0=3, s_1=4` and `mu=7>=6` but no distinct-degree regular partition.
   Thus the spectrum-mass inequality, if true, is not just a partition theorem
   in disguise.
+- 2026-06-01: Added `regular_spectrum_mass.py` for faster exact, random, and
+  local-search checks of `mu(G)=sum_d s_d(G)`.  Exact enumeration of all
+  `2,097,152` labelled graphs on `7` vertices gives minimum `mu=7`, with
+  histogram starting `{7:3781, 8:23100, 9:198702, ...}`.  Local search found
+  no violations at `n=12` (`min_seen=13`) or `n=14` (`min_seen=16`), and
+  random sampling at `n=16` gave `min_seen=24`.  The spectrum-mass conjecture
+  remains plausible after these checks.
+- 2026-06-01: Refuted a tempting core-layer proof of spectrum mass.  The
+  statement "minimum degree at least `d` forces an induced `d`-regular
+  subgraph" is false: random search finds an `8`-vertex graph of minimum
+  degree at least `3`, mask `223701335`, degree sequence
+  `3,3,4,4,4,4,5,5`, with no induced `3`-regular subgraph.  Thus a proof of
+  `mu(G)>=n` cannot simply sum sizes of ordinary `d`-cores.

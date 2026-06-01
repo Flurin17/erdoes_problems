@@ -6,6 +6,9 @@ Computational checks and generated data for Erdos Problem 82.
   regular or modular induced subgraphs.
 - `regular_bitset.py`: memory-light fixed-mask regular induced subgraph
   verifier for larger individual graphs, avoiding all-subset precomputation.
+- `regular_spectrum_mass.py`: exact, sample, and local-search diagnostics for
+  the spectrum-mass parameter `mu(G)=sum_d s_d(G)`, where `s_d` is the largest
+  induced `d`-regular order.
 - `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
   ordered graph, including fixed-mask, explicit-column, lower-family, exact
   enumeration, and no-regular-`h` obstruction modes.
