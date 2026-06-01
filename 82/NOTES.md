@@ -3825,3 +3825,10 @@ source of growth beyond Ramsey.
   `s_0+s_1>=|F|` and `R` contributes `s_d>=|R|`, proving `mu(G)>=|G|`.  A
   broader spectrum-mass proof could try to find such regular feedback sets,
   or decompose a general feedback set into a small number of regular degrees.
+- 2026-06-01: Refuted a stronger 2-core version of spectrum mass.  It is
+  false that every graph of minimum degree at least `2` has
+  `sum_{d>=2}s_d(G)>=|G|`: exact checks already give violations at `n=4`,
+  for example mask `31` with spectrum summary `s_0=2,s_1=2,s_2=3`.  Thus the
+  low-degree spectrum terms `s_0,s_1` remain essential even inside the
+  2-core; the forest-fringe argument cannot simply be separated from a
+  high-degree core theorem.
