@@ -3759,3 +3759,12 @@ source of growth beyond Ramsey.
   marked side size is at least `h`.  Thus the balanced-pair difficulty is not
   the bipartite cross graph alone; it comes from side-internal regular
   spectra and cross-profile compensation interacting.
+- 2026-06-01: Revisited the dense-graph dependent-random-choice idea.  A
+  dense graph can force induced complete multipartite patterns with
+  logarithmic part sizes, and such patterns are regular when the parts are
+  equal.  However the random-graph first-moment threshold for an induced
+  complete `t`-partite graph with all parts of size `r` has total order
+  `tr=O(log n)` with a constant that does not grow with `t`.  Thus DRC aimed
+  only at homogeneous multipartite blow-ups cannot produce
+  `omega(log n)`; any dense-core proof must use genuinely nonhomogeneous
+  regular witnesses.
