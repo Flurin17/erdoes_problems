@@ -9936,24 +9936,24 @@ parameters in the degree-bucket representative argument, but it does not yet
 give a theorem-level improvement over Proposition 28F.
 
 One small exact lower calibration for the regular column-drop parameter is
-the following.  The inversion-free ordered graph on `10` vertices with suffix
-thresholds
+the following.  The ordered graph on `12` vertices with edge mask
 
 ```text
-(1,2,6,6,8,8,10,10,10,10)
+25366485577502803966
 ```
 
-has largest regular induced subgraph of order `4`, verified by
+has maximum column drop `0` and largest regular induced subgraph of order
+`4`, verified by
 
 ```text
-python3 82/EXPERIMENTS/no_inversion_regular.py 10 \
-  --thresholds 1,2,6,6,8,8,10,10,10,10
+python3 82/EXPERIMENTS/column_drop_census.py 12 \
+  --mask 25366485577502803966
 ```
 
 Thus
 
 ```text
-C_reg(1,5)>10.
+C_reg(1,5)>12.
 ```
 
 By contrast, Lemma 28E.5 gives `C_drop(1,5)=17`.  Closing even this finite gap

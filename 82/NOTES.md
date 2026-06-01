@@ -3012,8 +3012,11 @@ source of growth beyond Ramsey.
   `P_h >= (9/652+o(1))h^2`.  Thus the parity cross-profile family remains
   useful for structure, but not for the best known magnitude lower bound.
 - 2026-06-01: Recorded a finite regular-column-drop lower example:
-  the inversion-free threshold graph on `10` vertices with thresholds
-  `(1,2,6,6,8,8,10,10,10,10)` has maximum regular induced order `4`, so
-  `C_reg(1,5)>10`.  The homogeneous value is `C_drop(1,5)=17`, leaving a
-  small finite test gap for whether regular extraction improves the ordered
-  representative step before asymptotic questions.
+  `column_drop_census.py` found maximum-column-drop-`0` ordered graphs on
+  `10`, `11`, and `12` vertices with maximum regular induced order `4`.  The
+  strongest recorded mask is the `12`-vertex graph
+  `25366485577502803966`, giving `C_reg(1,5)>12`.  The homogeneous value is
+  `C_drop(1,5)=17`, leaving a small finite test gap for whether regular
+  extraction improves the ordered representative step before asymptotic
+  questions.  Searches at `13` and `14` vertices reached `100,000` nodes at
+  depth `8` without a certificate and were stopped.
