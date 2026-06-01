@@ -10708,7 +10708,8 @@ C_reg(1,5)>12.
 ```
 
 The dedicated suffix-threshold search
-`EXPERIMENTS/threshold_regular_dfs.py` closes this finite case.  For
+`EXPERIMENTS/threshold_regular_dfs.py` closes this finite case and the two
+previous nontrivial cases.  For
 `P=1`, the column-drop condition means exactly that each row's later
 neighborhood is a suffix, so when the ordered graph is built one column at a
 time, the next column is obtained from the previous one by turning on an
@@ -10735,6 +10736,15 @@ calibration with the `12`-vertex lower example gives
 ```text
 C_reg(1,5)=13.
 ```
+
+The same exact DFS gives
+
+```text
+C_reg(1,3)=5,       C_reg(1,4)=7.
+```
+
+The lower certificates are found at `n=4` for `h=3` and at `n=6` for `h=4`;
+the next orders are exhausted with status `unsat`.
 
 By contrast, Lemma 28E.5 gives `C_drop(1,5)=17`.  Thus even in the first
 nontrivial regular column-drop case, regular extraction improves the

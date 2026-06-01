@@ -3202,7 +3202,8 @@ source of growth beyond Ramsey.
   exhausts all `13`-vertex suffix-threshold graphs in `186020` search nodes
   with status `unsat`.  Together with the previous fixed-mask lower example,
   this gives the exact finite calibration `C_reg(1,5)=13`, improving on the
-  homogeneous value `C_drop(1,5)=17`.  This is finite evidence that regular
+  homogeneous value `C_drop(1,5)=17`.  The same DFS gives
+  `C_reg(1,3)=5` and `C_reg(1,4)=7`.  This is finite evidence that regular
   extraction in the representative ordered graph is genuinely stronger than
   chain-antichain extraction, but it does not yet provide an asymptotic
   improvement for Proposition 28F.
