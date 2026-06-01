@@ -3256,3 +3256,13 @@ source of growth beyond Ramsey.
   in `300` samples.  This is weak finite evidence that column conditioning
   does not create a large positive dependence in the dense balanced regime,
   but it is not a replacement for a switching proof.
+- 2026-06-01: Made the exact-degree bucket row-diameter obstruction explicit
+  as Corollary 28D.3: inside a counterexample, vertices of the same global
+  degree have adjacency rows at Hamming distance at most `2P_h-2` after
+  deleting the two vertex coordinates, and the same bound holds after
+  restricting to the bucket or to its complement.  Extended
+  `degree_bucket_profile.py` to report the global/internal/external bucket
+  diameters.  On the add-saturated `14`-vertex mask, the largest degree bucket
+  has diameters `4,4,2`; on the delete-saturated mask, the largest bucket has
+  diameters `6,4,4`.  Added the row-family example `r_i=e_0+e_i` to record
+  why small equal-weight diameter alone does not force low rank.

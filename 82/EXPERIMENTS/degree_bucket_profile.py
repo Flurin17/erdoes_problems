@@ -46,6 +46,26 @@ def complement_rows(rows: list[list[int]]) -> list[list[int]]:
     return [[0 if i == j else 1 - rows[i][j] for j in range(n)] for i in range(n)]
 
 
+def bucket_diameters(adj: list[int], vertices: list[int], n: int) -> tuple[int, int, int]:
+    bucket_mask = 0
+    for vertex in vertices:
+        bucket_mask |= 1 << vertex
+    full = (1 << n) - 1
+    outside_mask = full ^ bucket_mask
+
+    max_global = 0
+    max_internal = 0
+    max_external = 0
+    for i, u in enumerate(vertices):
+        for v in vertices[i + 1 :]:
+            pair_mask = full ^ (1 << u) ^ (1 << v)
+            diff = adj[u] ^ adj[v]
+            max_global = max(max_global, (diff & pair_mask).bit_count())
+            max_internal = max(max_internal, (diff & bucket_mask & pair_mask).bit_count())
+            max_external = max(max_external, (diff & outside_mask).bit_count())
+    return max_global, max_internal, max_external
+
+
 def print_profile(name: str, adj: list[int], rows: list[list[int]], n: int, primes: list[int]) -> None:
     full = (1 << n) - 1
     buckets: dict[int, list[int]] = defaultdict(list)
@@ -57,12 +77,16 @@ def print_profile(name: str, adj: list[int], rows: list[list[int]], n: int, prim
         vertices = buckets[degree]
         matrix = induced_matrix(rows, vertices)
         regular_order, regular_degree = max_regular_in_vertices(adj, vertices)
+        max_global, max_internal, max_external = bucket_diameters(adj, vertices, n)
         fields = [
             f"{name}_degree={degree}",
             f"size={len(vertices)}",
             "vertices=" + ",".join(map(str, vertices)),
             f"max_regular={regular_order}",
             f"regular_degree={regular_degree}",
+            f"max_global_sigma={max_global}",
+            f"max_internal_sigma={max_internal}",
+            f"max_external_sigma={max_external}",
         ]
         for p in primes:
             rank = rank_profile.rank_mod_p(matrix, p)

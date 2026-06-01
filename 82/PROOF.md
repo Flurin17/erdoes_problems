@@ -6803,12 +6803,26 @@ larger than `k 2^r`.
 The script `EXPERIMENTS/degree_bucket_profile.py` applies the same diagnostics
 to exact global degree buckets.  On the `14`-vertex add-saturated
 threshold-`7` mask, the largest bucket has degree `9`, size `6`, maximum
-regular order `4`, and `F_2` ranks `rank(A_B)=4`, `rank(A_B+I)=5`.  On the
-delete-saturated mask, the largest bucket has degree `3`, size `8`, maximum
-regular order `5`, and `F_2` ranks `6` and `7`.  These buckets are below or
-just above the threshold, so the rank obstruction is again only a calibration;
-larger examples would need the bucket size to exceed `k 2^r` before
-Corollary 7D forces a regular `k`-set.
+regular order `4`, `F_2` ranks `rank(A_B)=4`, `rank(A_B+I)=5`, and maximum
+row-difference diameters
+
+```text
+global=4, internal=4, external=2.
+```
+
+On the delete-saturated mask, the largest bucket has degree `3`, size `8`,
+maximum regular order `5`, `F_2` ranks `6` and `7`, and maximum
+row-difference diameters
+
+```text
+global=6, internal=4, external=4.
+```
+
+These buckets are below or just above the threshold, so the rank obstruction
+is again only a calibration; larger examples would need the bucket size to
+exceed `k 2^r` before Corollary 7D forces a regular `k`-set.  The small
+diameters are consistent with Corollary 28D.3, but the ranks show that small
+diameter is not by itself a low-rank certificate.
 
 ## Proposition 8: Ramsey-Core Reduction
 
@@ -10493,6 +10507,40 @@ Hence
 ```
 
 QED.
+
+**Corollary 28D.3: Exact Degree Buckets Have Small Row Diameter.**  Let
+`h>=3`, put `P=P_h`, and let `G` be a graph with no regular induced
+subgraph on at least `h` vertices.  If `U` is a set of vertices all having
+the same degree in `G`, then for every two distinct `u,v in U`,
+
+```text
+|(N_G(u) triangle N_G(v))\{u,v}| <= 2P-2.
+```
+
+Consequently the traces of the adjacency rows of vertices in `U`, restricted
+either to `U` or to `V(G)\U`, have pairwise Hamming distance at most
+`2P-2`.
+
+Proof.  As in Corollary 28D.2, the two one-sided differences
+`N_G(u)\N_G(v)` and `N_G(v)\N_G(u)` have the same size because
+`deg_G(u)=deg_G(v)`.  Lemma 28D says this common size is less than `P`.
+Since it is an integer, it is at most `P-1`.  Removing the possible
+coordinates `u` and `v` can only decrease the symmetric difference, so the
+displayed inequality follows.  Restricting coordinates to `U` or to its
+complement can only decrease Hamming distance.  QED.
+
+This row-diameter form is a useful local obstruction, but by itself it does
+not create the high-rank contradiction from Corollary 7D.  For every `m`,
+the `m` vectors
+
+```text
+r_i=e_0+e_i,        1<=i<=m,
+```
+
+all have Hamming weight `2`, pairwise Hamming distance `2`, and rank `m`
+over every field: in a linear relation, the `e_i` coordinate forces the
+coefficient of `r_i` to be zero for each `i`.  Thus equal weights and tiny
+diameter do not imply low rank without additional graph-theoretic structure.
 
 **Lemma 28E: Ordered Graphs With Few Inversions Have Large Homogeneous
 Sets.**  Let `H` be a graph whose vertices are linearly ordered as
