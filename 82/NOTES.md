@@ -3140,3 +3140,12 @@ source of growth beyond Ramsey.
   `3,5,5,7,9,9,11,13`.  This shows the rank obstruction is weak for
   near-threshold pieces and only useful when the piece is much larger than
   `k 2^r`.
+- 2026-06-01: Added Lemma 22A and `matching_conflict_profile.py`.  For any
+  matching `M` of size `m` in a counterexample with target `k`, the conflict
+  graph on matching edges has independence below `ceil(k/2)` and hence more
+  than `(m/2)(m/r-1)` conflict edges.  The same holds in the complement.  On
+  the `14`-vertex threshold-`7` add-saturated mask, a maximum matching in `G`
+  has complete conflict graph, while the complement matching has conflict
+  independence `2`; on the delete-saturated mask the graph/complement
+  conflict independences are `3` and `1`.  This is useful structure but still
+  near-threshold and far from a subexponential proof.

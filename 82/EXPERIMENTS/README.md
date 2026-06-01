@@ -320,6 +320,9 @@ Computational checks and generated data for Erdos Problem 82.
   from Lemma 27C for a supplied regular witness and optional pair.
 - `pair_role_signature.py`: scans largest regular witnesses for the number
   and sizes of nonempty pair roles, with an option to generate Paley graphs.
+- `matching_conflict_profile.py`: computes maximum matchings in a fixed graph
+  and its complement, then reports the conflict graph on matching edges.  This
+  calibrates Lemma 22A's induced-matching density obstruction.
 - `regular_witness.py`: prints one largest regular induced witness for a
   fixed graph mask, including degrees, witness edges, and optional split-side
   counts/profiles for structured examples.

@@ -8811,6 +8811,66 @@ edges, and a monochromatic submatching yields either an induced matching, a
 co-induced matching, or a large homogeneous endpoint set.  The resulting
 Ramsey bound is still `2^{O(k)}`, not `2^{o(k)}`.
 
+**Lemma 22A: Matching Conflict Graphs Are Dense.**  Let `G` have no regular
+induced subgraph on at least `k` vertices, and put
+
+```text
+r=ceil(k/2).
+```
+
+Let `M` be any matching in `G`, with `m` edges.  Define the conflict graph
+`C_M` on the edges of `M` by joining two matching edges when there is at least
+one edge of `G` between their endpoint pairs.  Then
+
+```text
+alpha(C_M) < r
+```
+
+and therefore
+
+```text
+e(C_M) > (m/2)(m/r - 1).
+```
+
+The same statement holds for any matching in the complement of `G`, with
+conflicts measured in the complement.
+
+Proof.  If `C_M` had an independent set of `r` matching edges, then those
+`r` edges would have no cross edges between them in `G`; they would induce an
+induced matching of size `r`, hence a `1`-regular induced subgraph on
+`2r>=k` vertices.  This contradicts Lemma 22.
+
+For the edge lower bound, let `d_bar=2e(C_M)/m` be the average degree of the
+conflict graph.  Caro--Wei gives
+
+```text
+alpha(C_M) >= m/(d_bar+1).
+```
+
+Since `alpha(C_M)<r`, we have `d_bar>m/r-1`, which is the displayed bound on
+`e(C_M)`.
+
+Applying the same argument in the complement of `G` proves the complement
+statement, because an induced matching in the complement gives a regular
+induced subgraph in `G` after complementing degrees.  QED.
+
+Thus large ordinary matchings in a counterexample must be highly entangled:
+most matched-edge pairs must have cross edges once the matching size is much
+larger than `k`.  This is stronger than merely excluding one induced matching,
+but still not enough by itself to beat the exponential Ramsey-scale matching
+pattern argument.
+
+The diagnostic script `EXPERIMENTS/matching_conflict_profile.py` computes this
+conflict graph for fixed masks.  On the `14`-vertex threshold-`7`
+add-saturated mask `765415324481232608887291903`, a maximum matching in `G`
+has `7` edges and complete conflict graph (`21` conflict edges, independence
+`1`), while a maximum matching in the complement has `6` edges, `7` conflict
+edges, and conflict independence `2`.  On the delete-saturated mask
+`88255234986600583676821506`, the corresponding graph/complement conflict
+independences are `3` and `1`.  Since `ceil(7/2)=4`, these finite examples
+fit the lemma but also show that the density lower bound can be quite far
+from tight near the target size.
+
 ## Proposition 23: Maximal Induced Matching Cover Bound
 
 Let `a,r,w` be positive integers.  Let `G` be a graph with
