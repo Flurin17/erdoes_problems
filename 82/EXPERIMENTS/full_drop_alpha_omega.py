@@ -26,6 +26,7 @@ def search(
         "best_columns": None,
         "best_mask": None,
         "best_by_omega": {},
+        "best_by_omega_first_degree": {},
     }
     start = monotonic()
 
@@ -56,6 +57,18 @@ def search(
             previous = best_by_omega.get(clique)
             if previous is None or independent < previous[0]:
                 best_by_omega[clique] = (
+                    independent,
+                    total,
+                    columns[:],
+                    cdc.columns_to_mask(columns, pc),
+                )
+            first_degree = adj[0].bit_count() if adj else 0
+            best_by_omega_first_degree = stats["best_by_omega_first_degree"]
+            assert isinstance(best_by_omega_first_degree, dict)
+            key = (clique, first_degree)
+            previous_fd = best_by_omega_first_degree.get(key)
+            if previous_fd is None or independent < previous_fd[0]:
+                best_by_omega_first_degree[key] = (
                     independent,
                     total,
                     columns[:],
@@ -100,6 +113,15 @@ def search(
         print(
             f"omega_bucket omega={omega} min_alpha={alpha} "
             f"min_sum={total} mask={mask} columns="
+            + ",".join(map(str, columns))
+        )
+    best_by_omega_first_degree = stats["best_by_omega_first_degree"]
+    assert isinstance(best_by_omega_first_degree, dict)
+    for omega, first_degree in sorted(best_by_omega_first_degree):
+        alpha, total, columns, mask = best_by_omega_first_degree[(omega, first_degree)]
+        print(
+            f"omega_first_degree_bucket omega={omega} first_degree={first_degree} "
+            f"min_alpha={alpha} min_sum={total} mask={mask} columns="
             + ",".join(map(str, columns))
         )
 

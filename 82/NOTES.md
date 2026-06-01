@@ -3552,3 +3552,10 @@ source of growth beyond Ramsey.
   side is triangle-free and contributes an independent set of half its order.
   Therefore `alpha(H)>=ceil((|V(H)|-3)/2)` whenever `omega(H)<=3`, and
   `alpha(H)+omega(H)>=ceil((|V(H)|+3)/2)` in this range.
+- 2026-06-01: Extended the full-drop `alpha+omega` census with
+  `omega_first_degree_bucket` output.  Re-running `n=8,9` shows that the next
+  tight fixed-clique case is `omega=4`: at `n=8`, first degrees `3,4,5,6`
+  attain `alpha=2`, while at `n=9` the only exact tight `omega=4` bucket has
+  first degree `6`.  Low first-degree induction is therefore not the main
+  obstruction for the next case; the proof needs to exploit the
+  near-complete-matching structure of a large first neighborhood.

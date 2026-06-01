@@ -12112,6 +12112,13 @@ omega=8: min_alpha=2
 omega=9: min_alpha=1.
 ```
 
+The same script now also reports first-degree refinements of these buckets.
+For example, at `n=8` the tight `omega=4`, `alpha=2` examples occur with
+first degree `3,4,5,6`, while at `n=9` the only tight `omega=4`,
+`alpha=2` bucket found by the exact enumeration has first degree `6`.  This
+suggests that the next fixed-clique case after Lemma 28D.5b.3 must handle
+large first neighborhoods rather than the low-degree induction cases.
+
 This is only finite calibration, but it supports the possibility that the
 current quadratic upper bound for `C_full(2,h)` is far from sharp.
 
