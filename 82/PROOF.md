@@ -1832,6 +1832,102 @@ Thus the one-row fixed-degree problem is reduced to bounding explicit
 Krawtchouk-type coefficients.  The script reports the maximum nontrivial
 Fourier bias `B` after computing the residue distribution directly.
 
+**Lemma: Central Hypergeometric Residue Mixing.**  Let `X` have the
+hypergeometric distribution obtained by drawing `m` elements from a
+`2m`-element population with exactly `m` marked elements.  Let `M>=2`, and
+let `zeta=exp(2 pi i/M)`.  For every `1<=j<M`,
+
+```text
+|E zeta^{jX}|
+ <= 2 sqrt(m) ((1+|cos(pi j/M)|)/2)^m.
+```
+
+Consequently, for an absolute constant `C`, if
+
+```text
+m >= C M^2 log M,
+```
+
+then
+
+```text
+max_r P(X congruent r mod M) <= (1+o_M(1))/M.
+```
+
+Proof.  Pair each marked element with one unmarked element.  For a selected
+`m`-set, let `Y` be the number of pairs from which exactly one element is
+selected.  Conditional on the pair-state pattern, the choices inside these
+`Y` split pairs are independent fair choices between marked and unmarked
+elements.  The unsplit pairs contribute a deterministic phase to
+`zeta^{jX}`, while each split pair contributes a factor with absolute value
+
+```text
+|(1+zeta^j)/2| = |cos(pi j/M)|.
+```
+
+Writing `t=|cos(pi j/M)|`, we get
+
+```text
+|E zeta^{jX}| <= E t^Y.
+```
+
+The probability generating function for `Y` is
+
+```text
+E t^Y = [x^m](1+2tx+x^2)^m / binom(2m,m),
+```
+
+because one pair contributes weight `1`, `2tx`, or `x^2` according as zero,
+one, or two of its elements are selected.  Evaluating the numerator
+polynomial at `x=1` gives
+
+```text
+[x^m](1+2tx+x^2)^m <= (2+2t)^m.
+```
+
+Using the elementary central-binomial lower bound
+
+```text
+binom(2m,m) >= 4^m/(2 sqrt(m))
+```
+
+gives the displayed Fourier estimate.
+
+For the residue bound, the roots-of-unity formula gives
+
+```text
+P(X congruent r mod M)
+ <= 1/M (1 + sum_{j=1}^{M-1} |E zeta^{jX}|).
+```
+
+Put `ell=min(j,M-j)`.  Since
+
+```text
+(1+|cos(pi j/M)|)/2 = cos^2(pi ell/(2M))
+```
+
+and `cos u <= exp(-2u^2/pi^2)` for `0<=u<=pi/2`, the Fourier estimate is at
+most
+
+```text
+2 sqrt(m) exp(-m ell^2/M^2).
+```
+
+Summing over `j` gives
+
+```text
+sum_{j=1}^{M-1} |E zeta^{jX}|
+ <= 4 sqrt(m) sum_{ell>=1} exp(-m ell^2/M^2).
+```
+
+If `m>=C M^2 log M` with `C` large enough, the last expression is `o_M(1)`.
+Substitution into the roots-of-unity bound proves the claim.  QED.
+
+This proves the desired one-row residue mixing in the balanced
+row-conditioned model.  It still does not handle the simultaneous column-sum
+conditioning in the true fixed two-degree graph model, but it replaces the
+first conditioning layer by a theorem rather than a numerical heuristic.
+
 For example,
 
 ```text

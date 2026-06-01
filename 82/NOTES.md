@@ -3224,3 +3224,12 @@ source of growth beyond Ramsey.
   Updated `hypergeom_residue.py` to print the maximum nontrivial Fourier
   bias; the balanced variance-`512` modulus-`32` example has bias about
   `5.2e-5`, while the variance-`56` example has bias about `0.34`.
+- 2026-06-01: Added a central hypergeometric residue-mixing lemma.  When
+  drawing `m` elements from `2m` with exactly `m` marked, pairing marked and
+  unmarked elements gives
+  `|E zeta^{jX}| <= 2 sqrt(m)((1+|cos(pi j/M)|)/2)^m`; hence residues are
+  `(1+o(1))/M`-uniform once `m >= C M^2 log M`.  This proves the first
+  fixed-row-sum conditioning layer in the balanced case, though the full
+  fixed two-degree graph model still needs simultaneous column-sum
+  conditioning.  `hypergeom_residue.py` now prints this central paired bound
+  when its parameters match the balanced case.

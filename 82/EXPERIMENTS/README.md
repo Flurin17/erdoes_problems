@@ -235,7 +235,8 @@ Computational checks and generated data for Erdos Problem 82.
   cross-degrees, modelling the first fixed-row-sum conditioning layer in the
   two-degree anti-concentration route.  It also reports the largest
   nontrivial Fourier bias of the residue distribution, matching the exact
-  roots-of-unity formula in `PROOF.md`.
+  roots-of-unity formula in `PROOF.md`; in the central balanced case it also
+  reports the paired central-hypergeometric Fourier bound.
 - `two_level_modular_sample.py`: generates connected graphs with two prescribed
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic

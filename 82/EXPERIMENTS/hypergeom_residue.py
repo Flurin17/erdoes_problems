@@ -39,6 +39,21 @@ def residue_distribution(
     return residues
 
 
+def central_pair_bound(population: int, marked: int, draws: int, modulus: int) -> float | None:
+    if population != 2 * marked or draws != marked:
+        return None
+    m = marked
+    if m == 0:
+        return None
+    root = math.sqrt(m)
+    best = 0.0
+    for frequency in range(1, modulus):
+        cosine = abs(math.cos(math.pi * frequency / modulus))
+        bound = 2.0 * root * ((1.0 + cosine) / 2.0) ** m
+        best = max(best, bound)
+    return best
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--population", type=int, required=True)
@@ -84,6 +99,11 @@ def main() -> None:
         fourier.append(abs(value))
     max_fourier = max(fourier, default=0.0)
     print(f"max_nontrivial_fourier_bias={max_fourier:.12g}")
+    central_bound = central_pair_bound(
+        args.population, args.marked, args.draws, args.modulus
+    )
+    if central_bound is not None:
+        print(f"central_pair_fourier_bound={central_bound:.12g}")
     if args.show:
         print(
             "distribution="
