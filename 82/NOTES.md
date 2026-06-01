@@ -4321,3 +4321,11 @@ source of growth beyond Ramsey.
   `{0:5,1:4,2:4}` and `Q=57`.  This kills the naive extension-induction hope
   for `Q`, even though random and isolated extensions of the later defects
   increase `Q` substantially.
+- 2026-06-01: Added a cut-vertex square-spectrum estimate.  If `x` is a cut
+  vertex and `C_i` are the components of `G-x`, then root-avoiding witnesses
+  give `Q(G)>=sum_i Q(C_i)`, while one vertex from each component gives
+  `Q(G)>=t^2`.  Therefore component bounds `Q(C_i)>=A|C_i|^{1+epsilon}`
+  imply the one-cut bound
+  `Q(G)>=cN^{1+epsilon/(epsilon+2)}` for `N=|G|-1`.  This handles the basic
+  rooted-bouquet danger but loses exponent, so a full cut reduction needs
+  sharper rooted-signature information.

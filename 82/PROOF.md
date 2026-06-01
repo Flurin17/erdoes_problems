@@ -16017,6 +16017,98 @@ python3 82/EXPERIMENTS/distinct_regular_partition.py 14 --mask 42958861978918414
 python3 82/EXPERIMENTS/distinct_regular_partition.py 15 --mask 98404699529372860578279459
 ```
 
+**Lemma 28J.10e.5a: Cut Vertices Preserve A Weaker Square Exponent.**  Let
+`G` be a graph, let `x` be a cut vertex, and let
+`C_1,...,C_t` be the connected components of `G-x`, with
+`n_i=|C_i|` and `N=n_1+...+n_t=|G|-1`.  Then
+
+```text
+Q(G) >= sum_{i=1}^t Q(C_i)
+```
+
+and
+
+```text
+Q(G) >= t^2.
+```
+
+Consequently, if for some `A>0` and `epsilon>0` every component `C_i`
+satisfies
+
+```text
+Q(C_i) >= A n_i^{1+epsilon},
+```
+
+then
+
+```text
+Q(G) >= c_{A,epsilon} N^{1+epsilon/(epsilon+2)}.
+```
+
+Proof.  For each degree `d`, choose in every component `C_i` a maximum
+`d`-regular induced subgraph.  Their union avoids the cut vertex and has no
+edges between distinct components, so it is again `d`-regular in `G`.  Hence
+
+```text
+s_d(G) >= sum_i s_d(C_i).
+```
+
+Squaring and summing over `d` gives
+
+```text
+Q(G) >= sum_d (sum_i s_d(C_i))^2
+     >= sum_i sum_d s_d(C_i)^2
+     = sum_i Q(C_i).
+```
+
+Also, taking one vertex from each component of `G-x` gives an independent
+set of order `t`, so `s_0(G)>=t` and hence `Q(G)>=t^2`.
+
+Under the displayed component hypothesis,
+
+```text
+Q(G) >= max { A sum_i n_i^{1+epsilon}, t^2 }.
+```
+
+For fixed `t` and fixed total `N`, convexity minimizes the sum
+`sum_i n_i^{1+epsilon}` when the `n_i` are as equal as possible; in
+particular
+
+```text
+sum_i n_i^{1+epsilon} >= N^{1+epsilon} t^{-epsilon}.
+```
+
+Put
+
+```text
+T=N^{(1+epsilon)/(2+epsilon)}.
+```
+
+If `t<=T`, then
+
+```text
+A N^{1+epsilon} t^{-epsilon}
+  >= A N^{1+epsilon} T^{-epsilon}
+  = A N^{1+epsilon/(2+epsilon)}.
+```
+
+If `t>=T`, then
+
+```text
+t^2 >= T^2 = N^{1+epsilon/(2+epsilon)}.
+```
+
+Thus the claimed bound holds with
+`c_{A,epsilon}=min(A,1)` after decreasing the constant to handle rounding.
+QED.
+
+This lemma explains why rooted bouquets are not automatically dangerous for
+the square-spectrum route: many branches force a large independence
+coordinate, while few large branches pass square-spectrum mass through
+root-avoiding witnesses.  The exponent loss also shows why a cut-vertex
+reduction must keep more structure than this crude one-cut estimate if the
+goal is a fixed global exponent.
+
 **Lemma 28J.10e.6: Deletion Drop Bound For Power Spectra.**  For `p>=1`,
 define
 
