@@ -6,6 +6,9 @@ Computational checks and generated data for Erdos Problem 82.
   regular or modular induced subgraphs.
 - `regular_bitset.py`: memory-light fixed-mask regular induced subgraph
   verifier for larger individual graphs, avoiding all-subset precomputation.
+- `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
+  ordered graph, including fixed-mask, explicit-column, lower-family, exact
+  enumeration, and no-regular-`h` obstruction modes.
 - `trace_bridge.py`: tests the degree-class bridge from repeated-degree data
   to regular induced subgraphs.
 - `trace_merge_search.py`: searches the one-trace regular merge criterion

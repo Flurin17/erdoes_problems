@@ -3696,3 +3696,18 @@ source of growth beyond Ramsey.
   large loss-independent sets, so the extremal obstruction is not explained
   just by dense loss graphs; the next target is to exploit either many loss
   edges or the rigid witness pattern of sparse loss graphs.
+- 2026-06-01: Added `full_drop_loss_graph.py` for reproducible loss-graph
+  diagnostics.  On the regular full-drop lower family, the loss graph has
+  `alpha(L)=2h-6`, `omega(L)=4`, and `11h-43` edges for `h=5..9`; thus the
+  loss-independent lemma gives only an `h-2` regular witness on this family.
+  Exhaustive obstruction-only enumerations for `h=5` give:
+
+  ```text
+  n=9:  no-regular-5 terminals=28,724, alpha(L) histogram {2:510, 3:5986, 4:13290, 5:8938}
+  n=10: no-regular-5 terminals=9,656,  alpha(L) histogram {2:304, 3:1840, 4:7512}
+  ```
+
+  Therefore a simple threshold such as `alpha(L)>=h` or
+  `alpha(L)>=2h-5` cannot be the fixed-`P=2` proof.  The loss graph may still
+  be useful as a dichotomy, but it must be combined with structural
+  information about how loss edges are witnessed in the original order.
