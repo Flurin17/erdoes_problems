@@ -8394,6 +8394,15 @@ all reported promotion tests are false:
 \texttt{singleton\_hole\_at\_witness=False},\qquad
 \texttt{pair\_hole\_at\_witness=False}.
 \]
+With the nearby scan
+```
+python3 881/EXPERIMENTS/selector_reflected_front_search.py --require-retained-mirrors --require-all-gates-active --promotion-radius 5
+```
+the strict retained-mirror candidates still have no singleton or pair holes
+within distance \(5\) of their witnesses. If the retained-mirror and
+all-gates-active restrictions are dropped, nearby pair holes do appear in
+the seed set, but only in the later \((10,11,12)\) selector cases and at
+new targets such as \(26,27,28\), not at the original terminal witnesses.
 This is expected because the seed window was chosen so that every singleton
 and pair deletion remains harmless on the witness window. It is still a
 useful check: Lemma 8.5a.7z.10 produces low-rank spike supports, but those
@@ -8484,7 +8493,7 @@ Then:
    \[
    w=f+u+(90N-h-u),\qquad u+f=g+(u+h)\qquad(u\in U);
    \]
-5. if \(1\in U\), the retained terminal interval
+5. the retained terminal interval
    \[
    (w-\min F-\min A_0,\ w-1]
    \]
@@ -8542,14 +8551,17 @@ coefficients, and none does. A sum of three middle terms has coefficient in
 \]
 which again never equals \(100N\). This proves \(w\notin3C\).
 
-Finally assume \(1\in U\), so \(\min A_0=1\) and \(\min F=g=10N\). The
-left endpoint of the terminal interval is
+Finally, \(\min A_0=\min U\) and \(\min F=g=10N\). The left endpoint of the
+terminal interval is
 \[
-w-g-1=90N-1.
+w-g-\min U=90N-\min U.
 \]
-Every high retained point is at most \(90N-h-1\le90N-2\), and all other
-retained points are far below. Hence the displayed terminal interval is
-disjoint from \(C\). \(\square\)
+Every high retained point is at most
+\[
+90N-h-\min U<90N-\min U,
+\]
+and all other retained points are far below. Hence the displayed terminal
+interval is disjoint from \(C\). \(\square\)
 
 Thus the nonpromotion obstruction can have arbitrarily large shifted fibers
 even in the terminal-gap normal form. The finite local data from Lemma

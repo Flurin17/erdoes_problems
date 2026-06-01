@@ -214,7 +214,9 @@ deleted-pair exception rows and is not already a full retained-mirror front.
 For each retained gate, the script also reports the unique-gate rows and
 fixed shifted-overlap rows from Lemma 8.5a.7z.10, plus whether those
 singleton or pair spike supports are already holes for the same witness.
-On the strict seed run, all such promotion flags are false.
+On the strict seed run, all such promotion flags are false; with
+`--promotion-radius 5`, the strict run still has no nearby singleton or
+pair holes.
 
 `spike_no_promotion_gadget.py` verifies a range-separated local gadget where
 a rank-three witness has a shifted-overlap spike on one deleted pair, but

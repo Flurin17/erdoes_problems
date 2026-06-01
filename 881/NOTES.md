@@ -2341,6 +2341,10 @@ It also tests same-witness promotion of those supports. In the strict seed
 run, all singleton and pair promotion flags are false, confirming that
 compression to low-rank spike supports is weaker than producing bad
 singleton or pair deletions.
+With `--promotion-radius 5`, the strict retained-mirror/all-gates-active
+seed still has no nearby low-rank holes; the broader unfiltered seed has
+nearby pair holes only in later \((10,11,12)\) selector cases, not at the
+original terminal witnesses.
 The script `spike_no_promotion_gadget.py` isolates the same point without
 the product-window clutter: a rank-three witness can contain a large
 shifted-overlap spike on a pair \(\{f,g\}\), but deleting \(\{f,g\}\) still

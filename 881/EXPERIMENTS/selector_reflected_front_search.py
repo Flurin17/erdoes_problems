@@ -116,6 +116,7 @@ def promotion_summary(
     elements: set[int],
     witness: int,
     branches: dict[int, dict[str, object]],
+    radius: int,
 ) -> dict[int, dict[str, object]]:
     out: dict[int, dict[str, object]] = {}
     for gate, data in branches.items():
@@ -126,14 +127,32 @@ def promotion_summary(
             gate_data["singleton_hole_at_witness"] = (
                 witness not in hsum(elements - {gate}, 3, witness)
             )
+            if radius:
+                gate_data["singleton_holes_near_witness"] = [
+                    target
+                    for target in range(witness - radius, witness + radius + 1)
+                    if target > 0 and target not in hsum(elements - {gate}, 3, target)
+                ]
         shifted_promotions: dict[int, bool] = {}
+        shifted_nearby: dict[int, list[int]] = {}
         for other, rows in shifted_rows.items():
             if rows:
                 shifted_promotions[other] = (
                     witness not in hsum(elements - {gate, other}, 3, witness)
                 )
+                if radius:
+                    shifted_nearby[other] = [
+                        target
+                        for target in range(witness - radius, witness + radius + 1)
+                        if target > 0
+                        and target not in hsum(
+                            elements - {gate, other}, 3, target
+                        )
+                    ]
         if shifted_promotions:
             gate_data["pair_hole_at_witness"] = shifted_promotions
+        if shifted_nearby:
+            gate_data["pair_holes_near_witness"] = shifted_nearby
         if gate_data:
             out[gate] = gate_data
     return out
@@ -147,6 +166,7 @@ def selector_candidates(
     require_retained_mirrors: bool,
     require_all_gates_active: bool,
     require_pair_harmless: bool,
+    promotion_radius: int,
 ) -> list[dict[str, object]]:
     out: list[dict[str, object]] = []
     for witness in range(witness_range[0], witness_range[1] + 1):
@@ -178,7 +198,9 @@ def selector_candidates(
                 "retained_counts": retained_counts,
                 "deleted_pair_rows": deleted_pair_rows,
                 "branch_summary": branches,
-                "promotion_summary": promotion_summary(elements, witness, branches),
+                "promotion_summary": promotion_summary(
+                    elements, witness, branches, promotion_radius
+                ),
             }
         )
     return out
@@ -201,6 +223,7 @@ def main() -> None:
     parser.add_argument("--require-retained-mirrors", action="store_true")
     parser.add_argument("--require-all-gates-active", action="store_true")
     parser.add_argument("--no-pair-harmless", action="store_true")
+    parser.add_argument("--promotion-radius", type=int, default=0)
     args = parser.parse_args()
 
     elements = set(parse_ints(args.prefix))
@@ -219,6 +242,7 @@ def main() -> None:
     print(f"require_retained_mirrors={args.require_retained_mirrors}")
     print(f"require_all_gates_active={args.require_all_gates_active}")
     print(f"require_pair_harmless={not args.no_pair_harmless}")
+    print(f"promotion_radius={args.promotion_radius}")
 
     missing: list[tuple[int, ...]] = []
     total = 0
@@ -232,6 +256,7 @@ def main() -> None:
                 args.require_retained_mirrors,
                 args.require_all_gates_active,
                 not args.no_pair_harmless,
+                args.promotion_radius,
             )
             total += len(candidates)
             if not candidates:
