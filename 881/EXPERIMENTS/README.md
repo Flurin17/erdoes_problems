@@ -748,3 +748,9 @@ windows.
 `interval_gate_profile.py` checks the interval-only inequality behind
 Corollary 16.59: the number of gate-dependent rows is at most twice the
 gate's distance from the central gate range `[a+2r,b-2r]`.
+
+`cross_interval_band_profile.py` checks the interval geometry behind
+Lemma 16.63 and Corollary 16.64. It enumerates separated, nested, and
+translated interval pairs and verifies that a shifted doubled band `2J-f`
+has at least the promised deep overlap with the tested interval whenever
+the gate lies in the corresponding forbidden range.

@@ -74,7 +74,11 @@ stay within distance \(\eta n/(4r)\) of the central range while covering an
 \(\eta\)-fraction of an \(n\)-point interval, then
 \(r^3+5r^2\ge\eta n\). The live escapes are now vanishing packet density,
 growing deletion rank on a real scale, or coordinated far gates across
-separated blocks.
+separated blocks. Lemma 16.63 and Corollary 16.64 begin the far-gate
+analysis: a dense packet in one interval is excluded whenever the doubled
+band of any retained interval elsewhere has deep overlap with the tested
+interval, so a staged construction must thread active gates through all
+cross-block overlap windows.
 
 ## Definitions
 
