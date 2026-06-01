@@ -3570,3 +3570,12 @@ source of growth beyond Ramsey.
   `alpha+omega>=ceil((n+3)/2)`.  This explains the tight `omega=4`,
   first-degree-six `n=9` census bucket and generalizes the four-neighbor
   `omega=3` case.
+- 2026-06-01: Added the corresponding maximal-odd-first-neighborhood lemma.
+  If the first vertex has `2s-1` neighbors and `omega<=s+1`, then the first
+  neighborhood is a complete multipartite graph with `s-1` parts of size `2`
+  and one singleton part.  A triangle among first-vertex nonneighbors would
+  have to miss the singleton and both endpoints of one paired part; comparing
+  the vertex missing the singleton with one endpoint of that pair violates the
+  `P=2` full-drop condition in one of the two possible orders.  Thus the
+  nonneighbor side is triangle-free, giving the same
+  `alpha+omega>=ceil((n+3)/2)` conclusion.

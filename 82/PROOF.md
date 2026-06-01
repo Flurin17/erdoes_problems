@@ -11929,6 +11929,100 @@ alpha(H)+omega(H)
 
 QED.
 
+**Lemma 28D.5b.5: Maximal Odd First Neighborhoods At `P=2`.**  Let `s>=1`,
+and let `H` be an ordered graph on `n` vertices satisfying the `P=2`
+full-drop condition.  Suppose that the first vertex `a` has exactly `2s-1`
+neighbors and that
+
+```text
+omega(H) <= s+1.
+```
+
+Then
+
+```text
+alpha(H)+omega(H) >= ceil((n+3)/2).
+```
+
+Proof.  Put `A=N(a)` and `B=V(H)\({a} union A)`.  The complement of `H[A]`
+has maximum degree at most `1`, and `omega(H[A])<=s`.  Since `|A|=2s-1`,
+this forces `complement(H[A])` to be a matching of size `s-1`, together with
+one unmatched vertex.  Thus `H[A]` is a complete `s`-partite graph with
+`s-1` parts of size `2` and one singleton part.  Write the paired parts as
+
+```text
+{p_1,q_1}, ..., {p_{s-1},q_{s-1}},
+```
+
+and write the singleton part as `{z}`.  The vertex `a` together with one
+vertex from each part is a clique of order `s+1`, so `omega(H)=s+1`.
+
+We claim that `H[B]` is triangle-free.  For `s=1` this is immediate from
+`omega(H)<=2`, so assume `s>=2`.  Suppose for contradiction that
+`T subset B` is a triangle.  Every vertex of `T` misses at most one vertex of
+`A`, by applying the full-drop condition to `a` and that vertex.
+
+If the common neighborhood
+
+```text
+C=A cap N(T)
+```
+
+intersected at least `s-1` of the `s` parts of `H[A]`, then `C` would contain
+a clique of order `s-1`, and this clique together with the triangle `T` would
+form a clique of order `s+2`, contradicting `omega(H)<=s+1`.  Hence the
+union of the vertices of `A` missed by members of `T` must cover at least two
+parts of `H[A]`.  It has size at most `3`, and only one part is a singleton,
+so it must consist of the singleton `z` and both endpoints of one paired part,
+say `{p_1,q_1}`.  Thus there are vertices `t_z,t_p in T` such that `t_z`
+misses `z` and `t_p` misses `p_1`.
+
+Now compare the ordered vertices `p_1` and `t_z`.  If `p_1<t_z`, then `p_1`
+is adjacent to both `a` and `z`, while `t_z` is adjacent to neither; both
+vertices are counted in
+
+```text
+(N(p_1)\N(t_z))\{p_1,t_z},
+```
+
+contradicting the `P=2` full-drop condition.  If `t_z<p_1`, then `t_z` is
+adjacent to both `q_1` and `t_p`, while `p_1` is adjacent to neither `q_1`
+nor `t_p`; both vertices are counted in
+
+```text
+(N(t_z)\N(p_1))\{t_z,p_1},
+```
+
+again a contradiction.  Therefore `H[B]` is triangle-free.
+
+By Lemma 28D.5b.1,
+
+```text
+alpha(H[B]) >= (|B|-1)/2.
+```
+
+Adding `a` gives
+
+```text
+alpha(H) >= 1+(|B|-1)/2,
+```
+
+and since `alpha(H)` is an integer, this is
+
+```text
+alpha(H) >= ceil((|B|+1)/2).
+```
+
+Since `n=|B|+2s`, the last displayed bound and `omega(H)=s+1` imply
+
+```text
+alpha(H)+omega(H)
+  >= ceil((|B|+1)/2)+s+1
+  = ceil((n+3)/2).
+```
+
+QED.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose
