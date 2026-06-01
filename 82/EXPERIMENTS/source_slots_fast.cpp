@@ -93,9 +93,9 @@ std::string candidate_string(const Candidate& cand) {
     return out.str();
 }
 
-int state_code(const Candidate& cand, int modulus) {
-    int pow5 = 1;
-    int code = 0;
+uint64_t state_code(const Candidate& cand, int modulus) {
+    uint64_t pow5 = 1;
+    uint64_t code = 0;
     for (int residue = 0; residue < modulus; ++residue) {
         int count = 0;
         for (int slot : cand) {
@@ -107,13 +107,13 @@ int state_code(const Candidate& cand, int modulus) {
     return code;
 }
 
-bool has_count(int code, int residue) {
+bool has_count(uint64_t code, int residue) {
     for (int i = 0; i < residue; ++i) code /= 5;
     return code % 5;
 }
 
-int remove_count(int code, int residue) {
-    int pow5 = 1;
+uint64_t remove_count(uint64_t code, int residue) {
+    uint64_t pow5 = 1;
     for (int i = 0; i < residue; ++i) pow5 *= 5;
     return code - pow5;
 }
@@ -185,17 +185,16 @@ class Checker {
     std::vector<int> residue;
     std::unordered_set<uint64_t> failed;
 
-    bool rec(int remaining, int code) {
+    bool rec(int remaining, uint64_t code) {
         if (remaining == 0) return true;
         if (code == 0) return false;
-        uint64_t key = (static_cast<uint64_t>(remaining) << 32)
-            | static_cast<uint64_t>(code);
+        uint64_t key = (static_cast<uint64_t>(remaining) << 48) | code;
         if (failed.find(key) != failed.end()) return false;
         int pivot = remaining & -remaining;
         int pivot_index = __builtin_ctz(static_cast<unsigned>(pivot));
         for (int r = 0; r < target_modulus; ++r) {
             if (!has_count(code, r)) continue;
-            int next_code = remove_count(code, r);
+            uint64_t next_code = remove_count(code, r);
             for (int sub : submasks_with_pivot[remaining]) {
                 if (!((sub >> pivot_index) & 1)) continue;
                 if (residue[sub] != r) continue;
@@ -299,7 +298,7 @@ int main(int argc, char** argv) {
         std::cerr << "invalid modulus or slot count\n";
         return 2;
     }
-    if (target_modulus > 12 || slot_count > 4) {
+    if (target_modulus > 16 || slot_count > 4) {
         std::cerr << "target modulus and slot count are intentionally capped\n";
         return 2;
     }

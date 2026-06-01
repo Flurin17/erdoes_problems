@@ -2850,3 +2850,11 @@ source of growth beyond Ramsey.
   clean complete-multipartite pattern `(0,a,4,a+4)` is again killed in
   sources `2` and `3`, confirming that the useful four-part lift is genuinely
   source-sensitive and irregular.
+- 2026-06-01: Extended `source_slots_fast.cpp` to use a `64`-bit slot-state
+  code, allowing target modulus `16`.  The recorded complete-multipartite
+  `8 -> 16` candidate family passes the exact `n=8` arbitrary-graph sweep in
+  every source residue, but this is only a sanity check: with `n=8`, any graph
+  whose degrees are all congruent modulo `8` is already regular by the
+  terminal modular criterion, so the pass has no real force for the next
+  dyadic lift.  Nontrivial arbitrary-graph evidence for `8 -> 16` must start
+  at `n>=9` or use structured larger models.
