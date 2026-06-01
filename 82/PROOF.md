@@ -8722,6 +8722,35 @@ this disjoint-union obstruction to the pair route, one must use
 nonhomogeneous regular spectrum entries rather than only cliques and
 independent sets.
 
+**Computational Example 28K: `D_spec(6)` Separates From The Full Pair
+Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
+labelled graphs on `M` vertices by their regular degree spectrum summaries.
+For `h=6`, it reports:
+
+```text
+python3 82/EXPERIMENTS/dspec_exact.py 5 --h 6
+python3 82/EXPERIMENTS/dspec_exact.py 6 --h 6
+```
+
+The first command finds a spectrum-disjoint obstruction at `M=5`; the second
+checks all `32768` labelled graphs on `6` vertices and finds no
+spectrum-disjoint pair obstruction.  Thus
+
+```text
+D_spec(6)=6.
+```
+
+By contrast, Computational Example 28C gives a marked two-part obstruction at
+`h=6, M=6`, verified by
+
+```text
+python3 82/EXPERIMENTS/balanced_pair_parameter_search.py --h 6 --m 6 --mode plus --mask 1680212686667006004
+```
+
+so `P_6>6=D_spec(6)`.  Therefore the full pair parameter has genuinely
+cross-component obstructions beyond disjoint-union spectrum separation,
+already at the first nontrivial calibrated value.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put
