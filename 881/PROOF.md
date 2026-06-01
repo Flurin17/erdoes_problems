@@ -16124,6 +16124,14 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   if \(d=w-p\in C\) and \(d+a\in2C\) for every old summand \(a\) that would
   make a one-new representation of the gap, then no finite retained batch
   can cover that gap safely.
+* Corollaries 8.5a.7z.12e''' and 8.5a.7z.12g sharpen the reflected wall:
+  once \(d\) is retained, only the deleted gates need separate reflection
+  checks, but at fixed deleted rank a whole retained-defect wall has size
+  at most \(|F+F|\).
+* Lemma 8.5a.7z.12h records the broader one-sided saturation wall seen in
+  nearby seed profiles, where \(d\) need not be retained but every one-new
+  repair and one side of every two-new split already hits \(w\) with a
+  retained pair.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample
