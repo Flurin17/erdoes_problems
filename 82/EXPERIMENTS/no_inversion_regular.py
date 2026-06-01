@@ -13,7 +13,7 @@ import argparse
 import random
 from dataclasses import dataclass
 from itertools import product
-from math import factorial, sqrt
+from math import exp, factorial, sqrt
 from time import monotonic
 
 
@@ -76,6 +76,20 @@ def max_homogeneous_order(adj: list[int], pc: Precomp) -> int:
 def evaluate(n: int, thresholds: tuple[int, ...], pc: Precomp) -> tuple[int, int]:
     adj = build_adjacency(n, thresholds)
     return max_regular_order(adj, pc), max_homogeneous_order(adj, pc)
+
+
+def mutate_thresholds(
+    n: int, thresholds: tuple[int, ...], rng: random.Random
+) -> tuple[int, ...]:
+    index = rng.randrange(n - 1)
+    values = list(thresholds)
+    values[index] = rng.randrange(index + 1, n + 1)
+    return tuple(values)
+
+
+def score(value: tuple[int, int]) -> tuple[int, int]:
+    regular, homogeneous = value
+    return regular, homogeneous
 
 
 def exact(n: int, progress: int) -> None:
@@ -174,21 +188,109 @@ def sample(n: int, samples: int, seed: int, progress: int) -> None:
         print(f"example thresholds={thresholds} max_homogeneous={homogeneous}")
 
 
+def hill_climb(
+    n: int,
+    restarts: int,
+    steps: int,
+    seed: int,
+    progress: int,
+    temperature: float,
+) -> None:
+    pc = precompute(n)
+    rng = random.Random(seed)
+    best_value = (n, n)
+    best_thresholds: tuple[int, ...] | None = None
+    start = monotonic()
+    evaluations = 0
+
+    for restart in range(1, restarts + 1):
+        current = random_thresholds(n, rng)
+        current_value = evaluate(n, current, pc)
+        evaluations += 1
+
+        if score(current_value) < score(best_value):
+            best_value = current_value
+            best_thresholds = current
+            print(
+                "new_best "
+                f"restart={restart} step=0 max_regular={best_value[0]} "
+                f"max_homogeneous={best_value[1]} thresholds={best_thresholds}",
+                flush=True,
+            )
+
+        for step in range(1, steps + 1):
+            candidate = mutate_thresholds(n, current, rng)
+            candidate_value = evaluate(n, candidate, pc)
+            evaluations += 1
+
+            accept = score(candidate_value) <= score(current_value)
+            if not accept and temperature > 0:
+                delta = candidate_value[0] - current_value[0]
+                accept = rng.random() < exp(-delta / temperature)
+
+            if accept:
+                current = candidate
+                current_value = candidate_value
+
+            if score(candidate_value) < score(best_value):
+                best_value = candidate_value
+                best_thresholds = candidate
+                print(
+                    "new_best "
+                    f"restart={restart} step={step} "
+                    f"max_regular={best_value[0]} "
+                    f"max_homogeneous={best_value[1]} "
+                    f"thresholds={best_thresholds}",
+                    flush=True,
+                )
+
+            if progress and step % progress == 0:
+                print(
+                    f"progress restart={restart}/{restarts} step={step}/{steps} "
+                    f"best_regular={best_value[0]} "
+                    f"elapsed={monotonic() - start:.1f}s",
+                    flush=True,
+                )
+
+    print(f"n={n}")
+    print(f"restarts={restarts}")
+    print(f"steps={steps}")
+    print(f"evaluations={evaluations}")
+    print(f"seed={seed}")
+    print(f"temperature={temperature}")
+    print(f"best_max_regular={best_value[0]}")
+    print(f"best_max_homogeneous={best_value[1]}")
+    print(f"sqrt_n={sqrt(n):.6f}")
+    print(f"best_thresholds={best_thresholds}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--exact", action="store_true")
     parser.add_argument("--samples", type=int, default=0)
+    parser.add_argument("--hill-climb", type=int, default=0, metavar="STEPS")
+    parser.add_argument("--restarts", type=int, default=1)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--progress", type=int, default=0)
+    parser.add_argument("--temperature", type=float, default=0.0)
     args = parser.parse_args()
 
     if args.exact:
         exact(args.n, args.progress)
     elif args.samples > 0:
         sample(args.n, args.samples, args.seed, args.progress)
+    elif args.hill_climb > 0:
+        hill_climb(
+            args.n,
+            args.restarts,
+            args.hill_climb,
+            args.seed,
+            args.progress,
+            args.temperature,
+        )
     else:
-        raise SystemExit("choose --exact or --samples N")
+        raise SystemExit("choose --exact, --samples N, or --hill-climb STEPS")
 
 
 if __name__ == "__main__":

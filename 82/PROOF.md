@@ -8857,11 +8857,19 @@ python3 82/EXPERIMENTS/no_inversion_regular.py 16 --samples 200 --seed 82016 --p
 ```
 
 with smallest sampled maximum regular orders `6` and `6`, respectively.
-These checks do not prove an upper construction, but they suggest that the
+The same script also has a threshold-mutation mode.  For example,
+
+```text
+python3 82/EXPERIMENTS/no_inversion_regular.py 16 --hill-climb 80 --restarts 3 --seed 816 --progress 40 --temperature 0.4
+python3 82/EXPERIMENTS/no_inversion_regular.py 20 --samples 100 --seed 8220 --progress 20
+```
+
+found examples with maximum regular orders `6` and `7`, respectively.  These
+checks do not prove an upper construction, but they suggest that the
 inversion-free step may at best improve the chain-antichain `sqrt(m)` bound by
-small constants.  A proof route that needs a power improvement inside
-Lemma 28E.1 should therefore first produce a structural reason not visible in
-the full class of inversion-free ordered graphs.
+small constants or logarithmic factors.  A proof route that needs a power
+improvement inside Lemma 28E.1 should therefore first produce a structural
+reason not visible in the full class of inversion-free ordered graphs.
 
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,

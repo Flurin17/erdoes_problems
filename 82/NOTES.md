@@ -2652,3 +2652,11 @@ source of growth beyond Ramsey.
   only binomial point-mass bounds and a union bound over all `t>=k`; it is not
   as sharp as the known `Theta(n^{2/3})` random-graph calibration but removes
   the arbitrary `epsilon` from Proposition 0E.
+- 2026-06-01: Added a hill-climb mode to `no_inversion_regular.py`.  It
+  mutates suffix-threshold sequences while exactly checking the largest
+  regular induced order.  Short runs give maximum regular order `6` at
+  `n=16`; a random `n=20` run with `100` samples found maximum regular order
+  `7`.  This is further evidence that inversion-free ordered graphs themselves
+  may have only `sqrt(n)`-scale regular induced subgraphs, so the sparse
+  inversion step in Proposition 28F is unlikely to yield a polynomial exponent
+  improvement without extra degree-bucket structure.
