@@ -16976,6 +16976,111 @@ labels; it is a cross-promoted large-fiber construction whose gates, row
 sets, and shifted overlaps must still evade the stable-palette closures
 from Corollaries 8.5a.7k--8.5a.7l and 8.5a.7z.13.
 
+### Corollary 13.1l.2l: Finite-prefix fixed-rank shells are impossible
+
+Work in the \(k=2\) counterexample setting. Fix a finite nonempty prefix
+\[
+\Delta\subset A,
+\]
+a rank
+\[
+r\ge1,
+\]
+and an infinite tail
+\[
+Y\subset A\setminus\Delta.
+\]
+It is impossible that, for every \(L\), all sufficiently late
+\[
+H=\{h_1<\cdots<h_r\}\in[Y]^r
+\]
+have a witness \(w>L\) such that
+\[
+F=\Delta\cup H
+\]
+is inclusion-minimal for \(w\) and
+\[
+w\notin3(A\setminus F). \tag{1}
+\]
+
+Proof. Suppose such a shell exists. First, the high-center alternative is
+impossible. Indeed, if for every finite nonempty
+\[
+T\subset A\setminus\Delta
+\]
+and every \(M\) there were admissible \(H,w\) with
+\[
+w-\max T\ge N_0,\qquad w-z>M\quad(z\in\Delta\cup H), \tag{2}
+\]
+then the endpoint lists
+\[
+L_w(t)=\{z\in\Delta\cup H:w-t-z\in A\}\qquad(t\in T)
+\]
+would be nonempty. If, on some fixed finite \(T_0\), every choice function
+from these lists had a fiber containing a certificate triple for
+arbitrarily large \(M\), one fixed triple and one fixed label position
+would recur with centers \(w-z\to\infty\), giving a good deletion by
+Corollary 2.3c. Otherwise the lists are choice-colorable into
+certificate-free fibers for every finite \(T\) and arbitrarily large
+centers. The fixed labels from \(\Delta\) together with the \(r\) ordered
+moving labels from \(H\) form a finite moving-label palette, contradicting
+Lemma 8.5a.6. Thus there are a finite nonempty \(T_*\) and \(M_*\) such
+that every sufficiently high admissible witness has
+\[
+\min_{z\in\Delta\cup H}(w-z)\le M_*. \tag{3}
+\]
+
+Choose the shell height \(L\) above
+\[
+\max T_*+N_0,\qquad \max\Delta+M_*.
+\]
+Then (3) is realized by a moving endpoint in \(H\). Color each sufficiently
+late \(H\) by the least index \(j\) with
+\[
+w-h_j\le M_*.
+\]
+Ramsey thinning and diagonalization over increasing heights give an
+infinite subtail and a fixed index \(j\) such that every sufficiently late
+\[
+H=\{h_1<\cdots<h_r\}
+\]
+has an admissible witness with
+\[
+w\le h_j+M_* \tag{4}
+\]
+and all fixed-prefix and earlier moving centers arbitrarily large. Taking
+the points of \(H\) with a large gap below \(h_j\), and using
+inclusion-minimality of \(h_j\) to get
+\[
+w-h_j\in2A,
+\]
+gives
+\[
+w-f>M\quad(f\in\Delta\cup\{h_1,\ldots,h_{j-1}\})
+\]
+for any prescribed \(M\).
+
+Now apply the endpoint-list argument at this fixed depth \(j\). For
+\[
+T\subset A\cap(M_*,\infty)\setminus\Delta,
+\]
+every representation of \(w-t\) must meet \(F\), and (4) rules out every
+endpoint \(h_\ell\) with \(\ell\ge j\). Hence the lists use only the finite
+palette
+\[
+\Delta\cup\{1,\ldots,j-1\}.
+\]
+As above, non-colorability gives a recurrent certificate and a good
+deletion; persistent certificate-free colorability contradicts Corollary
+8.5a.4. This contradiction proves the corollary. \(\square\)
+
+This is the finite-prefix version needed for cross-promoted star cuts. If
+successive promotions keep accumulating a finite fixed prefix while the
+next suffix rank is bounded, the resulting fixed-rank shell is already
+impossible. The only remaining cross-promoted branch must therefore make
+the active suffix rank unbounded at every finite prefix depth, or else
+drop some fixed prefix point and descend.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18847,6 +18952,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   large-private-fiber normal form: fixed-first unbounded-rank sections
   must produce arbitrarily large private reflected row sets for some active
   endpoint.
+* Corollary 13.1l.2l proves the finite-prefix fixed-rank shell closure
+  needed for cross-promoted star cuts: a finite fixed prefix plus bounded
+  suffix rank still collapses to recurrent certificates or the finite
+  moving-label obstruction.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

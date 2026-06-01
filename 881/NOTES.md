@@ -2681,6 +2681,13 @@ unbounded-rank section yields an inclusion-minimal trace with an active
 color \(f\) and \(M\) private reflected rows \(U\). Thus the remaining
 branch feeds back into the large-private-fiber normal form from
 Corollary 8.5a.7f.
+Corollary 13.1l.2l extends the fixed-rank shell closure from one fixed
+point to an arbitrary finite fixed prefix \(\Delta\). High-center
+witnesses compact to a finite moving-label Sidon palette; bounded endpoint
+debt stabilizes at a fixed ordered suffix position and is forbidden by the
+finite-prefix list-coloring Corollary 8.5a.4. Therefore cross-promotion
+cannot evade the Section 13 closure merely by carrying a finite fixed
+prefix forward.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
