@@ -2344,6 +2344,10 @@ gate pair \(q+p\). Thus every private singleton row bank has a
 half-density branch: many actual reflections, or many unique-gate
 translates. This is the \(k=3\) successor of the low-count star split in
 the \(k=2\) argument, but with the gate \(q\) still moving.
+Lemma 16.18 gives the exact collision-complete version. For each retained
+padder \(p\), either the reflected row \(d-p\) is \(q\)-dependent, giving
+\(d-q-p\in A\), or \(q+p\) is uniquely represented by the gate pair. If
+both failed, \(d-p\in2C\) and \(q+p\in2C\) would repair \(w\) in \(4C\).
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running

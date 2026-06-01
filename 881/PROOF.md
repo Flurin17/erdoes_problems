@@ -19778,6 +19778,64 @@ certificate or absorption pattern; a negative construction must keep both
 the reflected rows and the unique-gate rows moving beyond every finite
 test.
 
+### Lemma 16.18: The row-bank split is collision-complete
+
+Keep the hypotheses of Lemma 16.17. Define
+\[
+T_A=\{p\in T:d-p\notin2C\},\qquad
+T_U=\{p\in T:q+p\notin2C\}.
+\]
+Then
+\[
+T=T_A\cup T_U, \tag{1}
+\]
+\[
+d-q-T_A\subseteq A, \tag{2}
+\]
+and, for every \(p\in T_U\), the translate \(q+p\) has the unique
+unordered two-term representation
+\[
+q+p=q+p \tag{3}
+\]
+from \(A\). Consequently at least one of
+\[
+|T_A|\ge |T|/2,\qquad |T_U|\ge |T|/2 \tag{4}
+\]
+holds.
+
+Proof. Let \(p\in T\). Lemma 16.9 gives \(d-p\in2A\). If
+\[
+d-p\notin2C,
+\]
+then every two-term representation of \(d-p\) from \(A\) uses \(q\), and
+therefore \(d-q-p\in A\). This proves (2).
+
+If \(q+p\notin2C\), then the same argument as in Lemma 16.17 proves that
+the gate representation \(q+p\) is the unique two-term representation from
+\(A\), giving (3).
+
+It remains to prove (1). If some \(p\in T\) lay outside both \(T_A\) and
+\(T_U\), then
+\[
+d-p\in2C,\qquad q+p\in2C.
+\]
+Adding these two retained two-sums gives
+\[
+w=q+d=(q+p)+(d-p)\in4C,
+\]
+contradicting the privacy assumption. Thus every \(p\in T\) lies in
+\(T_A\cup T_U\). The half-density alternative (4) follows from
+\[
+|T|\le |T_A|+|T_U|.
+\]
+\(\square\)
+
+This is the exact finite-row form behind the collision scanner. A private
+singleton row bank can fail to be reflected only by making the corresponding
+gate translate uniquely represented; it can fail to be unique-gate only by
+making the reflected row \(q\)-dependent. The two failures cannot occur on
+the same retained padder.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20819,6 +20877,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.17 splits singleton row banks into two half-density branches:
   actual one-term reflected rows in \(A\), or unique two-sum translates
   pinned by the deleted gate.
+* Lemma 16.18 makes that split collision-complete: every retained padder
+  is in at least one of the reflected-row or unique-gate alternatives,
+  because otherwise the two retained two-sums repair the private witness.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
