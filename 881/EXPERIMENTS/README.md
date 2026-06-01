@@ -292,6 +292,11 @@ escape-set balance. For `--L 5 --N 20`, it reports
 `C=[1,2,3,4,5,20,21,22,23,24]`, `F=[11,30]`, first gap `p=11`, hole
 `w=54`, no old-row escapes, and high-sided split escape set `[6,7,8,9,10]`
 with no complementary pair.
+The safe-extension script now also prints `final_defect_origin`. In the
+greedy-safe upper-stop `2500` run, the final defect `3101` was added as the
+first retained filler; in the default run, the final defect `3494` was
+added at step `63`. This is the finite shadow of Lemma 8.5a.7z.12h.5:
+safe fillers become future retained defects unless a private gate remains.
 The reusable sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 prints the same no-safe-one/no-safe-two obstruction throughout that

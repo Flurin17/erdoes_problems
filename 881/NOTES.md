@@ -2486,6 +2486,12 @@ old-row escapes are absent, and the split escape set is
 E=\{L+1,\ldots,2L\}\subset(p/2,p),
 \]
 so it has no complementary pair.
+Lemma 8.5a.7z.12h.5 reframes successful safe fillers as future-defect
+debt. In the greedy-safe upper-stop \(2500\) run, the final defect
+\(3101\) was added as the first retained filler; in the default run the
+final defect \(3494\) was added at step \(63\). When the gap later reaches
+\(w-x\), the old safe filler \(x\) must still have some private gate
+\(x+f\notin2C\), or it becomes a reflected wall.
 The sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 shows the same no-safe-one/no-safe-two obstruction at every listed endpoint.

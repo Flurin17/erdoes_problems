@@ -687,6 +687,7 @@ def main() -> None:
     )
 
     final_gap = best.cover_end + 1
+    final_defect = witness - final_gap
     full = set(best.retained) | deleted
     blockers = sorted(
         candidate
@@ -718,6 +719,14 @@ def main() -> None:
     print(f"added_count={len(best.added)}")
     print(f"added_tail={best.added[-30:]}")
     print(f"next_gap={final_gap}")
+    if final_defect in state.retained:
+        final_defect_origin = "initial_retained"
+    elif final_defect in best.added:
+        final_defect_origin = f"added_at_{best.added.index(final_defect) + 1}"
+    else:
+        final_defect_origin = "not_retained"
+    print(f"final_defect={final_defect}")
+    print(f"final_defect_origin={final_defect_origin}")
     print(f"unsafe_blockers_for_next_gap={blockers[:30]}")
     print(f"unsafe_blocker_count={len(blockers)}")
     print(f"unsafe_reason_counts={reason_counts}")

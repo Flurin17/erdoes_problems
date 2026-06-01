@@ -9256,6 +9256,47 @@ C=\{1,2,3,4,5,20,21,22,23,24\},\quad F=\{11,30\},
 p=11,\quad d=43,\quad w=54,\quad E=\{6,7,8,9,10\}.
 \]
 
+### Lemma 8.5a.7z.12h.5: Safe fillers create future-defect debt
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C.
+\]
+Let \(x\in C\) and put
+\[
+p=w-x.
+\]
+Assume
+\[
+x+F\subseteq2C \tag{1}
+\]
+and
+\[
+p\notin F+F. \tag{2}
+\]
+Then
+\[
+p\notin2A,
+\]
+and no finite retained batch can cover \(p\) while preserving
+\[
+w\notin3C.
+\]
+
+Proof. This is Corollary 8.5a.7z.12g.1 with \(d=x\), followed by Corollary
+8.5a.7z.12e''' for the resulting gap \(p=w-x\). \(\square\)
+
+Thus a retained filler added safely below a fixed witness is not inert. If
+the stage later needs to cover the gap \(w-x\), it must keep a private
+deleted-gate incidence
+\[
+x+f\notin2C
+\]
+available for some \(f\in F\), or else change the active packet/witness
+before reaching that gap. Otherwise \(x\) becomes the retained defect of a
+reflected wall.
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -9389,6 +9430,23 @@ and their complements
 \]
 are already retained old points. The rest of the escape set lies above
 \(p/2\), where it cannot contain a complementary pair internally.
+Lemma 8.5a.7z.12h.5 gives the staging interpretation. In the endpoint
+\(2500\) greedy-safe run, the final defect
+\[
+d=3101
+\]
+was not part of the seed: it was the first retained filler added by the
+beam search. When the moving gap reached
+\[
+p=w-d=6899,
+\]
+the same filler had become a retained defect and satisfied
+\[
+d+\{1000,1007,2000\}\subset2C,
+\]
+so the reflected wall closed. In the default endpoint \(1500\) run, the
+same phenomenon occurs later: the final defect \(3494\) was added at step
+\(63\).
 The reusable sweep
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200
@@ -16496,6 +16554,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   genuine inclusion-minimal terminal hole do not balance the escape set:
   a two-interval model has \(E=\{L+1,\ldots,2L\}\) and no complementary
   pair for \(p=2L+1\).
+* Lemma 8.5a.7z.12h.5 records the future-defect debt of safe fillers:
+  once a retained filler \(x\) has \(x+F\subset2C\), the later gap
+  \(w-x\) is a reflected finite-batch wall unless the active packet or
+  witness changes first.
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.
