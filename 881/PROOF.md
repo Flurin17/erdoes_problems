@@ -24377,6 +24377,43 @@ a definite packet subpiece lies in one internal robust-core gap whose
 adjacent auxiliary intervals are linearly separated. This is the current
 bounded-rank, positive-density residual normal form.
 
+### Corollary 16.100: Clustered robust profiles reduce to endpoint escape
+
+Keep the hypotheses and notation of Corollary 16.99. Suppose, in addition,
+that for every label \(\lambda\in\mathcal B\) and every pair of auxiliary
+intervals
+\[
+K_i=[c_i,d_i]\cap\mathbb N,\qquad K_j=[c_j,d_j]\cap\mathbb N
+\]
+appearing in the same profile \(C_\lambda\), with \(c_i+d_i\le c_j+d_j\),
+one has
+\[
+(c_j+d_j)-(c_i+d_i)<\gamma n-C. \tag{1}
+\]
+Then the endpoint escape alternative of Corollary 16.99 must hold.
+
+Equivalently, if every endpoint of \(P\) lies in every profile
+\(C_\lambda\), and the auxiliary intervals inside each profile are
+clustered in the midpoint sense (1), then
+\[
+P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda\ne\varnothing.
+\]
+
+Proof. If endpoint escape failed, Corollary 16.99 would give a separated
+internal gap and two auxiliary intervals \(K_1,K_2\) in the same profile
+with
+\[
+(c_2+d_2)-(c_1+d_1)\ge |G|+\gamma n-C\ge\gamma n-C,
+\]
+contradicting (1). Hence endpoint escape is forced. The equivalent
+statement is the contrapositive. \(\square\)
+
+Thus bounded-complexity robust profiles that are internally clustered
+cannot support the residual internal-gap branch. Any robust-profile
+counterexample must either push packet endpoints out of the profile, use
+profiles whose auxiliary intervals split linearly far apart, let the
+profile complexity grow, or leave the fixed-rank positive-density regime.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25725,6 +25762,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   finite robust-profile exclusion of a packet gives either endpoint escape
   or a definite packet subpiece inside one internal gap, with adjacent
   auxiliary intervals linearly separated.
+* Corollary 16.100 records the clustered-profile corollary: if auxiliary
+  intervals inside each bounded-complexity profile have no linear midpoint
+  separation, only endpoint escape can remain.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

@@ -162,7 +162,9 @@ midpoint separation linear in the tested interval length. Corollary 16.99
 packages the bounded-complexity residual branch: finite robust-profile
 packet exclusion gives either endpoint escape or a definite subpacket
 inside one internal gap whose adjacent auxiliary intervals are linearly
-separated.
+separated. Corollary 16.100 records the clustered-profile consequence:
+without such linear midpoint separation inside a profile, finite robust
+exclusion reduces to endpoint escape.
 
 ## Definitions
 

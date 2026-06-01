@@ -28,6 +28,7 @@ def main() -> None:
     rng = Random(1697)
     checked = 0
     gap_checked = 0
+    clustered_checked = 0
     for n in range(8, 22):
         a = 100
         b = a + n - 1
@@ -76,10 +77,18 @@ def main() -> None:
                     assert gap >= 0
                     assert 2 * ((c2 + d2) - (c1 + d1)) == 2 * gap + rho1 + rho2
                     assert (c2 + d2) - (c1 + d1) >= gap + 1
+                    midpoint_gap = (c2 + d2) - (c1 + d1)
+                    if midpoint_gap <= max(rho1, rho2):
+                        # A crude finite shadow of Corollary 16.100:
+                        # adjacent separated cores need midpoint separation
+                        # at least the shorter linear-core scale.
+                        assert gap < midpoint_gap
                     gap_checked += 1
+                    clustered_checked += 1
     print("robust core gap geometry check passed")
     print(f"cores_checked={checked}")
     print(f"gaps_checked={gap_checked}")
+    print(f"clustered_pairs_checked={clustered_checked}")
 
 
 if __name__ == "__main__":

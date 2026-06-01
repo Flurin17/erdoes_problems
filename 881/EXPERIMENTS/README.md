@@ -209,7 +209,9 @@ profile-family check covers the finite pigeonhole alternative in Corollary
 `robust_core_gap_geometry.py` checks Lemma 16.97: the midpoint of a robust
 blocker core depends affinely on the midpoint of its auxiliary interval,
 and a gap between two robust-core components equals the corresponding
-auxiliary midpoint separation minus half the two core lengths.
+auxiliary midpoint separation minus half the two core lengths. It also
+checks the finite separated-pair inequality behind the clustered-profile
+reduction in Corollary 16.100.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For
