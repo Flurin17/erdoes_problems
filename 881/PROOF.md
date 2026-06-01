@@ -8380,6 +8380,28 @@ positive proof must promote such spike supports into recurrent certificates
 or genuine pair-cylinder debt; a counterexample must keep the resulting
 gates and shifts moving cofinally.
 
+### Diagnostic 8.5a.7z.11: Seed spike supports do not promote at the same witness
+
+The reflected-front diagnostic now reports, for each unique-gate or
+shifted-overlap branch from Lemma 8.5a.7z.10, whether the same witness is
+already a hole after deleting only the corresponding singleton or pair.
+On the strict seed run
+```
+python3 881/EXPERIMENTS/selector_reflected_front_search.py --require-retained-mirrors --require-all-gates-active
+```
+all reported promotion tests are false:
+\[
+\texttt{singleton\_hole\_at\_witness=False},\qquad
+\texttt{pair\_hole\_at\_witness=False}.
+\]
+This is expected because the seed window was chosen so that every singleton
+and pair deletion remains harmless on the witness window. It is still a
+useful check: Lemma 8.5a.7z.10 produces low-rank spike supports, but those
+supports do not automatically inherit the original terminal hole. The
+missing promotion step must therefore use recurrence across many witnesses,
+stable finite palettes, or an additional argument forcing the remaining
+active colors in \(F\setminus\{f,g\}\) to become irrelevant.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -15108,6 +15130,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   fixed pair of gates has many shifted-overlap rows. The unresolved
   promotion is from those spike supports to recurrent certificates or
   genuine late-bad pair debt.
+* Diagnostic 8.5a.7z.11 verifies on the seed window that this compression
+  does not imply same-witness singleton or pair holes.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

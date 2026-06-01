@@ -112,6 +112,33 @@ def branch_summary(
     return out
 
 
+def promotion_summary(
+    elements: set[int],
+    witness: int,
+    branches: dict[int, dict[str, object]],
+) -> dict[int, dict[str, object]]:
+    out: dict[int, dict[str, object]] = {}
+    for gate, data in branches.items():
+        unique_rows = data["unique_rows"]
+        shifted_rows = data["shifted_rows"]
+        gate_data: dict[str, object] = {}
+        if unique_rows:
+            gate_data["singleton_hole_at_witness"] = (
+                witness not in hsum(elements - {gate}, 3, witness)
+            )
+        shifted_promotions: dict[int, bool] = {}
+        for other, rows in shifted_rows.items():
+            if rows:
+                shifted_promotions[other] = (
+                    witness not in hsum(elements - {gate, other}, 3, witness)
+                )
+        if shifted_promotions:
+            gate_data["pair_hole_at_witness"] = shifted_promotions
+        if gate_data:
+            out[gate] = gate_data
+    return out
+
+
 def selector_candidates(
     elements: set[int],
     selector: tuple[int, ...],
@@ -142,6 +169,7 @@ def selector_candidates(
         deleted_pair_rows = [
             point for point, row in rows.items() if row["deleted_pair"]
         ]
+        branches = branch_summary(elements, selector, rows)
         out.append(
             {
                 "witness": witness,
@@ -149,7 +177,8 @@ def selector_candidates(
                 "rows": rows,
                 "retained_counts": retained_counts,
                 "deleted_pair_rows": deleted_pair_rows,
-                "branch_summary": branch_summary(elements, selector, rows),
+                "branch_summary": branches,
+                "promotion_summary": promotion_summary(elements, witness, branches),
             }
         )
     return out

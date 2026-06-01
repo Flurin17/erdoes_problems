@@ -2337,6 +2337,10 @@ late-bad pair debt.
 The reflected-front script now reports these branches explicitly for each
 candidate by listing usable rows, unique rows, and fixed shifted-overlap
 rows for every retained gate.
+It also tests same-witness promotion of those supports. In the strict seed
+run, all singleton and pair promotion flags are false, confirming that
+compression to low-rank spike supports is weaker than producing bad
+singleton or pair deletions.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

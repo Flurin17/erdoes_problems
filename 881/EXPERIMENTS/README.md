@@ -212,7 +212,9 @@ remain; adding `--require-all-gates-active` leaves three selector triples.
 Thus the local product cover in Example 8.5a.7z relies substantially on
 deleted-pair exception rows and is not already a full retained-mirror front.
 For each retained gate, the script also reports the unique-gate rows and
-fixed shifted-overlap rows from Lemma 8.5a.7z.10.
+fixed shifted-overlap rows from Lemma 8.5a.7z.10, plus whether those
+singleton or pair spike supports are already holes for the same witness.
+On the strict seed run, all such promotion flags are false.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
