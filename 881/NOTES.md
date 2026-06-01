@@ -2427,6 +2427,11 @@ repair also repairs \(w\). The scale-\(100\), beam-\(8\), pair-batch run
 prints this certificate with \(d=3494\) and all \(1034\) one-point
 candidates reflected into \(2C\). Coarse coverage past a fixed fraction of
 \(w\) is not enough by itself; the blocker is the reflected condition.
+With `--avoid-reflected-blockers`, the same scale-\(100\), beam-\(8\) run
+still reaches only \(6503\). At the stopping step, the script reports
+\(128\) raw extensions and \(0\) surviving after the reflected-blocker
+filter. So the finite profile does not merely end at a bad reflected state;
+the available local safe moves all enter one.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed

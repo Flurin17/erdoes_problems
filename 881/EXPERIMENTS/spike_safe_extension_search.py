@@ -152,6 +152,20 @@ def reflected_next_gap_blocker(
     }
 
 
+def has_reflected_next_gap_blocker(
+    state: State,
+    deleted: set[int],
+    witness: int,
+) -> bool:
+    gap = state.cover_end + 1
+    certificate = reflected_next_gap_blocker(state, deleted, witness, gap)
+    return (
+        bool(certificate["defect_retained"])
+        and certificate["one_point_candidate_count"]
+        == certificate["one_point_reflected_blocked_count"]
+    )
+
+
 def add_retained_batch(
     state: State,
     deleted: set[int],
@@ -286,6 +300,7 @@ def main() -> None:
     parser.add_argument("--beam", type=int, default=8)
     parser.add_argument("--steps", type=int, default=400)
     parser.add_argument("--allow-pairs", action="store_true")
+    parser.add_argument("--avoid-reflected-blockers", action="store_true")
     args = parser.parse_args()
 
     cap = args.cap if args.cap is not None else 100 * args.scale
@@ -294,23 +309,36 @@ def main() -> None:
     beam = [state]
     best = state
     stalled_at: int | None = None
+    last_raw_extension_count = 0
+    last_filtered_extension_count = 0
 
     for step in range(1, args.steps + 1):
         next_beam: list[State] = []
         for item in beam:
-            next_beam.extend(
-                candidate_extensions(
-                    item,
-                    deleted,
-                    witness,
-                    cap,
-                    max(args.beam * 2, 1),
-                    args.allow_pairs,
-                )
+            raw_extensions = candidate_extensions(
+                item,
+                deleted,
+                witness,
+                cap,
+                max(args.beam * 2, 1),
+                args.allow_pairs,
             )
+            last_raw_extension_count += len(raw_extensions)
+            if args.avoid_reflected_blockers:
+                raw_extensions = [
+                    extension
+                    for extension in raw_extensions
+                    if not has_reflected_next_gap_blocker(
+                        extension, deleted, witness
+                    )
+                ]
+            last_filtered_extension_count += len(raw_extensions)
+            next_beam.extend(raw_extensions)
         if not next_beam:
             stalled_at = step
             break
+        last_raw_extension_count = 0
+        last_filtered_extension_count = 0
         dedup: dict[tuple[int, tuple[int, ...]], State] = {}
         for item in next_beam:
             key = (item.cover_end, item.added[-8:])
@@ -348,10 +376,13 @@ def main() -> None:
     print(f"witness={witness}")
     print(f"target={target} cap={cap} beam={args.beam} steps={args.steps}")
     print(f"allow_pairs={args.allow_pairs}")
+    print(f"avoid_reflected_blockers={args.avoid_reflected_blockers}")
     print(f"initial_cover={state.cover_end}")
     print(f"best_cover={best.cover_end}")
     print(f"reached_target={best.cover_end >= target}")
     print(f"stalled_at_step={stalled_at}")
+    print(f"last_raw_extension_count={last_raw_extension_count}")
+    print(f"last_filtered_extension_count={last_filtered_extension_count}")
     print(f"added_count={len(best.added)}")
     print(f"added_tail={best.added[-30:]}")
     print(f"next_gap={final_gap}")

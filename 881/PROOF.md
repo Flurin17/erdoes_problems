@@ -8935,6 +8935,17 @@ d+a\in2C.
 \]
 Thus two-new representations are blocked by \(d\in C\), while one-new
 representations are blocked by the reflected two-sum condition.
+The optional blocker-avoidance mode
+```
+python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --avoid-reflected-blockers
+```
+filters out any state whose next gap already has the reflected certificate
+of Lemma 8.5a.7z.12e''. It reaches essentially the same place, covering only
+through \(6503\). At the stopping step there are \(128\) raw safe one- or
+two-point extensions, but all \(128\) are filtered because they create a
+reflected next-gap blocker. The current unfiltered next gap still has safe
+two-point batches; the obstruction is that taking any locally best next
+move appears to enter the reflected-blocker regime.
 
 By Lemma 8.5a.7z.12e', the absence of both one-point and two-point safe
 gap-fillers means that no finite retained batch can cover that particular
@@ -8951,6 +8962,13 @@ small coordinated moves do not obviously evade this pressure. The
 finite-batch reduction sharpens the last-step obstruction, but a genuine
 staged counterexample could still reach a different state before the stall,
 change the active gate packet, or use a different cross-window design.
+
+The blocker-avoidance run narrows that escape: it is not enough merely to
+avoid ending at a reflected blocker; at least in this finite profile, the
+available next safe moves themselves generate reflected blockers. A
+successful stage would need more global foresight, a different filler
+geometry, or moving active witnesses rather than a local safe-band
+extension.
 
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
