@@ -3752,3 +3752,10 @@ source of growth beyond Ramsey.
   `G(h)<=2h^3P_h^2` to `G(h)<=8h^2P_h^2`.  This is a real simplification of
   the ordered reduction, but the subexponential bottleneck remains exactly
   `P_h=2^{o(h)}`.
+- 2026-06-01: Checked whether the marked-pair obstruction has a useful
+  bipartite core by making both marked sides independent.  That specialization
+  is trivial in the wrong direction: one whole side is already an independent
+  regular induced subgraph, so the first alternative holds as soon as the
+  marked side size is at least `h`.  Thus the balanced-pair difficulty is not
+  the bipartite cross graph alone; it comes from side-internal regular
+  spectra and cross-profile compensation interacting.
