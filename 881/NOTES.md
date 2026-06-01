@@ -58,6 +58,10 @@ Lemma 16.52 and Corollary 16.53 make this quantitative: after deleting at
 most \(r\) active colors from an \(n\)-point interval, a retained run of
 length at least \(\lceil(n-r)/(r+1)\rceil\) gives a concrete gate-exclusion
 band.
+Lemma 16.54 strengthens the interval geometry: the central band
+\([2a+2r,2b-2r]\) remains in the retained two-sumset. Corollaries
+16.55--16.56 turn that into a central forbidden gate range for
+gate-dependent interval packets.
 
 ## Definitions
 

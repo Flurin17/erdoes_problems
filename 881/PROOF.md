@@ -21719,6 +21719,136 @@ some long retained run left after deleting \(F\). For bounded rank, that
 run has length comparable to \(|I|/(r+1)\), so a packet occupying almost all
 of \(I\) forces each active gate outside a long forbidden interval.
 
+### Lemma 16.54: Finite interval deletions leave a central two-sum band
+
+Let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length
+\[
+n=b-a+1,
+\]
+and let \(F\subset I\) have \(|F|\le r\). Put
+\[
+C=I\setminus F.
+\]
+If \(n>2r\), then
+\[
+[2a+2r,\ 2b-2r]\cap\mathbb N\subseteq2C. \tag{1}
+\]
+
+Proof. Fix
+\[
+t\in[2a+2r,\ 2b-2r].
+\]
+The number of ordered pairs
+\[
+(x,y)\in I^2,\qquad x+y=t,
+\]
+is
+\[
+N(t)=\min(b,t-a)-\max(a,t-b)+1.
+\]
+For \(t\le a+b\), this is \(t-2a+1\), while for \(t\ge a+b\), it is
+\[
+2b-t+1.
+\]
+The displayed range for \(t\) gives
+\[
+N(t)\ge2r+1.
+\]
+Each deleted point \(z\in F\) occurs in at most two ordered pairs
+\[
+(z,t-z),\qquad(t-z,z).
+\]
+Thus the deleted points destroy at most \(2|F|\le2r\) ordered
+representations. At least one ordered representation remains with both
+coordinates in \(C\), so \(t\in2C\). \(\square\)
+
+The script `EXPERIMENTS/interval_central_sum_band.py` exhaustively checks
+this band inclusion for small intervals and deletion ranks.
+
+### Corollary 16.55: Central two-sum bands exclude gate rows
+
+Let
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+have length \(n\), let \(F\subset A\) satisfy
+\[
+|F\cap I|\le r,
+\]
+and put
+\[
+C=A\setminus F.
+\]
+Assume \(n>2r\), and let
+\[
+U\subset I\setminus F,\qquad f\in F,
+\]
+satisfy
+\[
+f+u\notin2C\qquad(u\in U). \tag{1}
+\]
+Then
+\[
+U\cap[2a+2r-f,\ 2b-2r-f]=\varnothing. \tag{2}
+\]
+Consequently
+\[
+|U|\le
+\left|I\setminus[2a+2r-f,\ 2b-2r-f]\right|. \tag{3}
+\]
+
+Proof. Lemma 16.54 applied to the interval deletion \(F\cap I\) gives
+\[
+[2a+2r,\ 2b-2r]\subseteq2(I\setminus F)\subseteq2C.
+\]
+If \(u\) lay in the interval in (2), then
+\[
+f+u\in[2a+2r,\ 2b-2r]\subseteq2C,
+\]
+contradicting (1). This proves (2), and (3) follows from
+\(U\subset I\). \(\square\)
+
+### Corollary 16.56: Large interval gate packets force far active colors
+
+Keep the hypotheses of Corollary 16.55. Let \(M\ge0\) be an integer. If
+\[
+|U|>2M,
+\]
+then
+\[
+f<a+2r-M
+\quad\text{or}\quad
+f>b-2r+M. \tag{1}
+\]
+Equivalently, if
+\[
+a+2r-M\le f\le b-2r+M,
+\]
+then every gate-dependent packet \(U\subset I\) has size at most \(2M\).
+
+Proof. If
+\[
+a+2r-M\le f\le b-2r+M,
+\]
+then the forbidden interval in Corollary 16.55 contains
+\[
+[a+M,\ b-M]\cap\mathbb N.
+\]
+Only the first \(M\) and last \(M\) positions of \(I\) can remain, and in
+particular no more than \(2M\) positions remain. Corollary 16.55 gives
+\(|U|\le2M\). Taking the contrapositive proves (1). \(\square\)
+
+Thus the far-gate branch is also sharply constrained by ordinary interval
+two-sum coverage. Once only boundedly many active colors are deleted from a
+long interval, the central two-sum band is retained; any gate whose
+translate sends many rows into that band is impossible. A large bounded-rank
+interval packet must place its active color outside the corresponding
+central gate range, not merely outside the original interval.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22902,6 +23032,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   of length at least \(\lceil(n-r)/(r+1)\rceil\) inside any \(n\)-point
   interval. Corollary 16.53 uses that run to give a quantitative exclusion
   band for every finite-palette gate packet over the interval.
+* Lemma 16.54 gives the stronger central two-sum version: deleting at most
+  \(r\) points from an interval leaves the band
+  \([2a+2r,2b-2r]\) inside the retained two-sumset. Corollaries
+  16.55--16.56 translate this into a central gate exclusion range for
+  gate-dependent interval packets.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
