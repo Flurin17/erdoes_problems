@@ -300,6 +300,10 @@ Computational checks and generated data for Erdos Problem 82.
 - `degree_variance_identity.py`: verifies the pair-expanded identity for the
   total squared degree variance over all `h`-vertex induced subgraphs.  This
   supports the diversity-counting route in Lemma 25.
+- `degree_bucket_profile.py`: groups vertices of a fixed mask by exact global
+  degree and reports each bucket's size, largest regular induced subgraph, and
+  adjacency/shifted ranks.  This calibrates Corollary 7D and the degree-bucket
+  reductions around Proposition 28F.
 - `edge_perturbation_witness.py`: inspects regular induced witnesses created
   by adding a missing edge or deleting an existing edge, supporting the
   edge-extremal defect-witness lemma.  It also reports witness order and

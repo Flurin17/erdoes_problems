@@ -6463,6 +6463,25 @@ counterexample into degree buckets, trace classes, pair-role middle graphs, or
 ordered representatives must either keep those induced pieces high-rank in
 both senses or find the desired regular subgraph inside one piece.
 
+**Corollary 7D: Exact Degree Buckets Are Locally High-Rank Or Small.**  Let
+`G` have no regular induced subgraph on at least `k` vertices, and let `B` be
+an exact global degree class of size `b>=k`.  Then the adjacency matrix
+`A_B` of `G[B]` satisfies
+
+```text
+rank(A_B) > log_2(b/k),
+rank(A_B+I) > log_2(b/k)
+```
+
+over every field.  Equivalently, if either rank is at most `r`, then
+`b<2^r k`.
+
+Proof.  This is Corollary 7C applied to the induced subgraph on `B`.  QED.
+
+This is not a replacement for Corollary 28D.2's `16hP_h` degree-bucket bound,
+but it supplies an independent local obstruction: a large exact-degree bucket
+in a counterexample must be a high-rank bounded-spread graph.
+
 The script `EXPERIMENTS/subset_rank_profile.py` calibrates how weak this
 obstruction is near the threshold.  On the `14`-vertex add-saturated
 threshold-`7` mask `765415324481232608887291903`, the minimum `F_2` ranks of
@@ -6489,6 +6508,16 @@ rank profiles are
 Thus small counterexamples may contain threshold-sized induced pieces of very
 low rank; Corollary 7C becomes strong only for pieces whose order is much
 larger than `k 2^r`.
+
+The script `EXPERIMENTS/degree_bucket_profile.py` applies the same diagnostics
+to exact global degree buckets.  On the `14`-vertex add-saturated
+threshold-`7` mask, the largest bucket has degree `9`, size `6`, maximum
+regular order `4`, and `F_2` ranks `rank(A_B)=4`, `rank(A_B+I)=5`.  On the
+delete-saturated mask, the largest bucket has degree `3`, size `8`, maximum
+regular order `5`, and `F_2` ranks `6` and `7`.  These buckets are below or
+just above the threshold, so the rank obstruction is again only a calibration;
+larger examples would need the bucket size to exceed `k 2^r` before
+Corollary 7D forces a regular `k`-set.
 
 ## Proposition 8: Ramsey-Core Reduction
 

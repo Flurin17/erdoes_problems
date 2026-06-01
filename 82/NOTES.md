@@ -3156,3 +3156,11 @@ source of growth beyond Ramsey.
   graphs have average degree at least `(1+o(1))n/k` when `n/k -> infinity`.
   A matching route must therefore use the growing-density conflict graph, not
   only the absence of a single induced matching.
+- 2026-06-01: Added Corollary 7D and `degree_bucket_profile.py`.  Exact global
+  degree buckets in a counterexample inherit the hereditary rank obstruction:
+  a bucket of size `b` has both `rank(A_B)` and `rank(A_B+I)` above
+  `log_2(b/k)` over every field.  On the `14`-vertex add-saturated mask the
+  largest bucket has size `6`, max regular order `4`, and `F_2` ranks `4,5`;
+  on the delete-saturated mask the largest bucket has size `8`, max regular
+  order `5`, and ranks `6,7`.  The diagnostic confirms this is a large-bucket
+  obstruction, not a near-threshold explanation.
