@@ -6217,6 +6217,54 @@ Optimizing the displayed lower bound over `t` gives only `Omega(log n)`.
 Thus neighborhood diversity alone cannot prove the target; it must be coupled
 with a stronger statement about the quotient or with a way to use class sizes.
 
+## Lemma 7A: Low Adjacency Rank Gives A Large Regular Class
+
+Let `A_G` be the adjacency matrix of an `n`-vertex graph `G`, viewed over any
+field, and suppose
+
+```text
+rank(A_G) = r.
+```
+
+Then
+
+```text
+reg(G) >= n/2^r.
+```
+
+Consequently, if `G` has no regular induced subgraph on at least `k` vertices,
+then
+
+```text
+rank(A_G) > log_2(n/k)
+```
+
+over every field.
+
+Proof.  Choose `r` pivot columns for the row space of `A_G`.  Projection to
+these coordinates is injective on the row space: if two row vectors have the
+same projected coordinates, their difference is a row-space vector whose pivot
+coordinates are all zero, and hence it is the zero vector.
+
+Every row of `A_G` is a `0`-`1` vector, so there are at most `2^r` possible
+projections to the pivot coordinates.  Therefore at least `n/2^r` vertices
+have identical full adjacency rows.  If `u` and `v` are two distinct vertices
+with identical adjacency rows, then comparing the coordinate `u` gives
+
+```text
+A_G(u,u)=A_G(v,u).
+```
+
+The left side is `0`, while `A_G(v,u)=A_G(u,v)`.  Hence `u` and `v` are
+nonadjacent.  Thus a whole row class is an independent set, and is therefore a
+regular induced subgraph.  The final assertion is the contrapositive.  QED.
+
+This isolates another easy regime: a counterexample on `n` vertices with
+target `k` must have adjacency rank larger than `log_2(n/k)` over every
+field.  The bound is not by itself stronger than Ramsey in the hard range, but
+it rules out any proof route that tries to hide all structure inside a
+low-rank adjacency model.
+
 ## Proposition 8: Ramsey-Core Reduction
 
 For `C>0`, call an `n`-vertex graph `C`-Ramsey if it has no clique and no

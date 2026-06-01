@@ -3064,3 +3064,10 @@ source of growth beyond Ramsey.
   bottleneck explicitly: row/column congruence on one side alone is weaker
   than the full independent-edge heuristic and must be supplemented by
   additional constraints or by a fixed-degree conditioning transfer.
+- 2026-06-01: Added Lemma 7A, the low-rank easy case.  If the adjacency matrix
+  has rank `r` over any field, then at most `2^r` distinct adjacency rows occur,
+  so some identical-row class has size at least `n/2^r`; identical rows form an
+  independent set.  Hence a graph with no regular induced subgraph on `k`
+  vertices has adjacency rank greater than `log_2(n/k)` over every field.  This
+  is not a solution, but it records that any hard counterexample must be
+  high-rank in every characteristic.
