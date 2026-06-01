@@ -9096,6 +9096,18 @@ batch. It prints the stronger one-sided saturation certificate from Lemma
 Thus Lemma 8.5a.7z.12e'' captures the cleanest wall, not the whole
 pair-saturation obstruction measured by Lemmas 8.5a.7z.12e' and
 8.5a.7z.12h.
+The reusable sweep
+```
+python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200
+```
+shows the transition is not isolated: every listed endpoint has
+\[
+\texttt{safe\_one}=0,\qquad \texttt{safe\_two}=0,
+\]
+all one-point reflected counts saturated, and the one-sided two-point split
+ratio saturated. The retained-defect flag switches from false to true near
+the endpoint \(3100\), but the finite-batch obstruction is present on both
+sides of that switch.
 The optional blocker-avoidance mode
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --avoid-reflected-blockers

@@ -419,35 +419,24 @@ def candidate_extensions(
     return extensions[:max_candidates]
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--scale", type=int, default=100)
-    parser.add_argument("--target", type=int, default=None)
-    parser.add_argument("--cap", type=int, default=None)
-    parser.add_argument("--beam", type=int, default=8)
-    parser.add_argument("--steps", type=int, default=400)
-    parser.add_argument("--allow-pairs", action="store_true")
-    parser.add_argument("--avoid-reflected-blockers", action="store_true")
-    parser.add_argument("--upper-stop", type=int, default=None)
-    parser.add_argument(
-        "--upper-policy",
-        choices=("interval", "greedy-safe"),
-        default="interval",
-    )
-    args = parser.parse_args()
-
-    cap = args.cap if args.cap is not None else 100 * args.scale
-    target = args.target if args.target is not None else 100 * args.scale
-    state, deleted, witness, metadata = seed_state(
-        cap, args.scale, args.upper_stop, args.upper_policy
-    )
+def run_beam_search(
+    state: State,
+    deleted: set[int],
+    witness: int,
+    cap: int,
+    target: int,
+    beam_size: int,
+    steps: int,
+    allow_pairs: bool,
+    avoid_reflected_blockers: bool,
+) -> tuple[State, int | None, int, int]:
     beam = [state]
     best = state
     stalled_at: int | None = None
     last_raw_extension_count = 0
     last_filtered_extension_count = 0
 
-    for step in range(1, args.steps + 1):
+    for step in range(1, steps + 1):
         next_beam: list[State] = []
         for item in beam:
             raw_extensions = candidate_extensions(
@@ -455,11 +444,11 @@ def main() -> None:
                 deleted,
                 witness,
                 cap,
-                max(args.beam * 2, 1),
-                args.allow_pairs,
+                max(beam_size * 2, 1),
+                allow_pairs,
             )
             last_raw_extension_count += len(raw_extensions)
-            if args.avoid_reflected_blockers:
+            if avoid_reflected_blockers:
                 raw_extensions = [
                     extension
                     for extension in raw_extensions
@@ -483,11 +472,112 @@ def main() -> None:
             dedup.values(),
             key=lambda item: (item.cover_end, -len(item.added)),
             reverse=True,
-        )[: args.beam]
+        )[:beam_size]
         if beam[0].cover_end > best.cover_end:
             best = beam[0]
         if best.cover_end >= target:
             break
+
+    return best, stalled_at, last_raw_extension_count, last_filtered_extension_count
+
+
+def print_upper_stop_sweep(args: argparse.Namespace, cap: int, target: int) -> None:
+    print(
+        "upper_stop\tinitial\tbest\tgap\tstalled\td_retained\t"
+        "reflected\tone_sided\tsplits\tsafe_one\tsafe_two"
+    )
+    for upper_stop in args.sweep_upper_stops:
+        state, deleted, witness, _metadata = seed_state(
+            cap, args.scale, upper_stop, args.upper_policy
+        )
+        best, stalled_at, _raw_count, _filtered_count = run_beam_search(
+            state,
+            deleted,
+            witness,
+            cap,
+            target,
+            args.beam,
+            args.steps,
+            args.allow_pairs,
+            args.avoid_reflected_blockers,
+        )
+        gap = best.cover_end + 1
+        reflected = reflected_next_gap_blocker(best, deleted, witness, gap)
+        saturated = one_sided_pair_saturation_blocker(best, deleted, witness, gap)
+        safe_one_count = count_safe_one_point_gap_extensions(
+            best, deleted, witness, gap
+        )
+        safe_two_count = count_safe_two_point_gap_batches(
+            best, deleted, witness, gap
+        )
+        reflected_ratio = (
+            f"{reflected['one_point_reflected_blocked_count']}/"
+            f"{reflected['one_point_candidate_count']}"
+        )
+        split_ratio = (
+            f"{saturated['two_point_split_saturated_count']}/"
+            f"{saturated['two_point_split_count']}"
+        )
+        print(
+            "\t".join(
+                str(item)
+                for item in (
+                    upper_stop,
+                    state.cover_end,
+                    best.cover_end,
+                    gap,
+                    stalled_at,
+                    reflected["defect_retained"],
+                    reflected_ratio,
+                    saturated["blocks_all_one_and_two_point_repairs"],
+                    split_ratio,
+                    safe_one_count,
+                    safe_two_count,
+                )
+            )
+        )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--scale", type=int, default=100)
+    parser.add_argument("--target", type=int, default=None)
+    parser.add_argument("--cap", type=int, default=None)
+    parser.add_argument("--beam", type=int, default=8)
+    parser.add_argument("--steps", type=int, default=400)
+    parser.add_argument("--allow-pairs", action="store_true")
+    parser.add_argument("--avoid-reflected-blockers", action="store_true")
+    parser.add_argument("--upper-stop", type=int, default=None)
+    parser.add_argument(
+        "--upper-policy",
+        choices=("interval", "greedy-safe"),
+        default="interval",
+    )
+    parser.add_argument("--sweep-upper-stops", type=int, nargs="+")
+    args = parser.parse_args()
+
+    cap = args.cap if args.cap is not None else 100 * args.scale
+    target = args.target if args.target is not None else 100 * args.scale
+    if args.sweep_upper_stops:
+        print_upper_stop_sweep(args, cap, target)
+        return
+
+    state, deleted, witness, metadata = seed_state(
+        cap, args.scale, args.upper_stop, args.upper_policy
+    )
+    best, stalled_at, last_raw_extension_count, last_filtered_extension_count = (
+        run_beam_search(
+            state,
+            deleted,
+            witness,
+            cap,
+            target,
+            args.beam,
+            args.steps,
+            args.allow_pairs,
+            args.avoid_reflected_blockers,
+        )
+    )
 
     final_gap = best.cover_end + 1
     full = set(best.retained) | deleted
