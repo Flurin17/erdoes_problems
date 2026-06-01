@@ -3647,3 +3647,9 @@ source of growth beyond Ramsey.
   `0,0,1,2,0,0,56,120,255,255` and `max_regular=4`.  The exhaustive
   `n=11` DFS terminates in `65,904` nodes with `result=False`, giving the
   finite computational value `C_full^reg(2,5)=11`.
+- 2026-06-01: Probed the next regular full-drop value.  DFS finds
+  `P=2` full-drop graphs on `11` and `12` vertices with no regular induced
+  subgraph of order `6`; the `n=12` certificate has columns
+  `0,0,1,2,0,0,0,120,248,504,1023,1023` and `max_regular=5`, giving
+  `C_full^reg(2,6)>12`.  A direct `n=13,h=6` search did not finish quickly
+  and needs a better search strategy or structural proof.

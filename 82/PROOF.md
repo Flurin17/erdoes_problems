@@ -12479,6 +12479,28 @@ The `n=10` certificate has columns
 with `max_full_drop=1`, `clique_number=4`, `independence_number=4`, and
 `max_regular=4`.
 
+For the next order, the command
+
+```text
+python3 82/EXPERIMENTS/full_drop_census.py 12 --p 2 --search-regular-h 6 --max-nodes 300000 --progress 100000
+```
+
+finds a `P=2` full-drop ordered graph on `12` vertices with no regular
+induced subgraph of order `6`, proving computationally that
+
+```text
+C_full^reg(2,6)>12.
+```
+
+One certificate has columns
+
+```text
+0,0,1,2,0,0,0,120,248,504,1023,1023,
+```
+
+with `max_full_drop=1`, `clique_number=5`, `independence_number=5`, and
+`max_regular=5`.
+
 The helper `EXPERIMENTS/full_drop_alpha_omega.py` tests a stronger possible
 `P=2` theorem, suggested by Lemma 28D.5b:
 
