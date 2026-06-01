@@ -20092,6 +20092,63 @@ remaining positive route. A proof must use the global iteration and
 threshold constraints of singleton barriers, not just the existence of
 balanced certificates inside the tested rows.
 
+### Lemma 16.24: Late rows above a singleton center are gate-independent
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\)
+and minimum \(m_0\). Fix \(q\in A\), put \(C=A\setminus\{q\}\), and suppose
+\[
+w=q+d\notin4C. \tag{1}
+\]
+Let
+\[
+T\subset C
+\]
+be finite and satisfy
+\[
+w-p\ge N_0,\qquad p>d-q-m_0 \qquad(p\in T). \tag{2}
+\]
+Then
+\[
+(T+q-T)\cap A\subset\{q\}. \tag{3}
+\]
+
+More generally, if the same witness is known to lie below a declared bound
+\[
+w\le W, \tag{4}
+\]
+then every finite
+\[
+T\subset\{p\in C:\ p>W-2q-m_0,\ w-p\ge N_0\}
+\]
+satisfies (3).
+
+Proof. The first assertion is Lemma 16.19 followed by Corollary 16.22.
+Indeed, condition (2) puts every \(p\in T\) above the secondary-center
+threshold
+\[
+d-q-m_0.
+\]
+Lemma 16.19 therefore says that every \(p\in T\) lies in the unique-gate
+branch:
+\[
+q+p\notin2C.
+\]
+Corollary 16.22 applied with \(U=T\) gives (3).
+
+For the declared-bound version, (4) gives
+\[
+d-q=w-2q\le W-2q.
+\]
+Thus \(p>W-2q-m_0\) implies \(p>d-q-m_0\), and the first assertion applies.
+\(\square\)
+
+In particular, if a finite stage declares all witnesses below \(W\), then
+any target \(q>W/2\) has no reflected rows at all in the active retained
+range: every retained padder below the threshold cut is forced into a
+\(q\)-independent unique-gate packet. This is the additive pressure that a
+bridge block must evade when it tries to protect elements near the top of
+the same declaration window.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21157,6 +21214,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \([1,L]\cup\{2L\}\) has a full \(q\)-independent unique-gate packet on
   \([1,L]\). The obstruction to this local model is its failure to
   iterate, not a finite certificate contradiction.
+* Lemma 16.24 packages the bounded-window consequence: if
+  \(w=q+d\le W\) is a singleton private witness, then every active retained
+  row above \(W-2q-\min A\) is forced into a \(q\)-independent unique-gate
+  packet. In particular targets above \(W/2\) impose independence on their
+  whole active retained range.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

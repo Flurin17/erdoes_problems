@@ -2393,6 +2393,15 @@ Example 16.23 calibrates this obstruction with the interval-marker seed:
 though \(U\) contains the balanced certificate \(1,2,2,2\). Thus balanced
 certificates alone do not kill the bounded-center unique-gate branch; the
 real obstruction is the non-iteration bridge gap from Lemma 16.10.
+Lemma 16.24 turns bounded declaration windows into a sharper constraint:
+if a singleton witness \(w=q+d\le W\), then every active retained row above
+\[
+W-2q-\min A
+\]
+is forced into a \(q\)-independent unique-gate packet. Targets above
+\(W/2\) therefore make essentially their entire active retained range
+gate-independent. This is the finite additive pressure a bridge block must
+evade while also covering the next three-sum interval.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
