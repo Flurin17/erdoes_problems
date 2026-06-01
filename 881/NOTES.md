@@ -13,12 +13,14 @@ is whether the \(k=2\) finite-prefix active-trace closure has an analogue
 for \((k+1)\)-term barriers, or whether a robust staged higher-order
 collective barrier can be lifted to an infinite counterexample.
 
-The latest \(k=3\) checkpoint is Corollary 16.127 in `PROOF.md`. After the
+The latest \(k=3\) checkpoint is Corollary 16.130 in `PROOF.md`. After the
 nonsingleton handoff is packetized with \(\sum_s1/|P_s|<\infty\), a
-product-covering high-density linear-core branch must either move through
-unbounded concrete profile height, or pay width-heavy/midpoint-displacement
-packet-position cost; bounded-height menus cannot hide in countably many
-active labels. The earlier handoff begins at Corollaries 16.35--16.36:
+product-covering high-density linear-core branch must fall into one of
+seven named residuals: rank growth, critical-density degeneration,
+tested-interval height, auxiliary count, auxiliary endpoint height,
+width-heavy residual, or midpoint-displacement residual. Bounded-height
+menus cannot hide in countably many active labels. The earlier handoff
+begins at Corollaries 16.35--16.36:
 after singleton late-bad bridge fillers are exhausted, the obstruction can
 be made into an actual nonsingleton prefix-front of inclusion-minimal active
 order-\(4\) traces, but bounded ordered-depth rows in this front reflect
@@ -244,6 +246,10 @@ count, auxiliary endpoint height, or the pre-asymptotic constants.
 Corollary 16.129 further splits the pre-asymptotic constants: that branch
 is either true rank growth or degeneration of the linear-core density
 margin toward the critical value \(1/2\).
+Corollary 16.130 packages the reciprocal-summable linear-core normal form:
+rank growth, critical-density degeneration, tested-interval height,
+auxiliary count, auxiliary endpoint height, width-heavy residual, or
+midpoint-displacement residual.
 The Attempt 16 residual summary has been updated accordingly: after
 reciprocal-summable packetization, bounded-height countable menus must pay
 linear packet-position cost.

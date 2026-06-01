@@ -26101,6 +26101,64 @@ mechanism. It records either true growth of the deletion-rank scale or
 linear-core densities tending down to the critical value \(1/2\), where
 the robust cores cease to have a uniform linear lower bound.
 
+### Corollary 16.130: Reciprocal-summable linear-core normal form
+
+Keep the setting of Corollaries 16.120--16.129, and use the
+reciprocal-summable packetization supplied by Lemma 16.35a. If the assigned
+high-density linear-core branch product-covers every selector tail, then at
+least one of the following seven alternatives holds.
+
+1. **Rank growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:r_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{1}
+   \]
+2. **Critical-density degeneration.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:\Theta_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{2}
+   \]
+3. **Tested-interval height growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:b_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{3}
+   \]
+4. **Auxiliary-count growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:m_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{4}
+   \]
+5. **Auxiliary-endpoint growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:S_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{5}
+   \]
+6. **Joint width-heavy residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   W_s>T_\lambda/2}}
+   \beta_{\lambda,s}=\infty. \tag{6}
+   \]
+7. **Joint midpoint-displacement residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   \Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+   \beta_{\lambda,s}=\infty. \tag{7}
+   \]
+
+Proof. Corollary 16.125 gives either the width-heavy residual (6), the
+midpoint-displacement residual (7), or the unbounded-height alternative of
+Corollary 16.127. In the last case, Corollary 16.128 gives rank growth,
+tested-interval height growth, auxiliary-count growth, auxiliary-endpoint
+growth, or pre-asymptotic constant growth. Corollary 16.129 splits the
+pre-asymptotic constant branch into rank growth or critical-density
+degeneration. These are exactly alternatives (1)--(7). \(\square\)
+
+Thus, after the packet normalization, there is no remaining vague
+countable-menu residual. The \(k=3\) high-density linear-core obstruction
+must occur in one named coordinate or in the explicit packet-position
+residual.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
 inequality and packet-mass inclusion behind Corollary 16.128, and the
 bounded-rank/bounded-margin estimate used in Corollary 16.129.
@@ -27544,6 +27602,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.129 shows that the pre-asymptotic-constant coordinate itself
   is rank growth or degeneration of the linear-core density margin toward
   \(1/2\).
+* Corollary 16.130 packages the reciprocal-summable high-density
+  linear-core normal form into seven named residual branches: rank growth,
+  critical-density degeneration, tested-interval height, auxiliary count,
+  auxiliary endpoint height, width-heavy residual, or
+  midpoint-displacement residual.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
