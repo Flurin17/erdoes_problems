@@ -8781,6 +8781,43 @@ w=x+c_1+c_2,\qquad w=2x+c,\qquad w=3x
 \]
 with \(c,c_1,c_2\in C\). These are excluded exactly by (2). \(\square\)
 
+### Lemma 8.5a.7z.12e': Next-gap finite batches reduce to one or two points
+
+Let \(C,F,A,w,p\) be as in Lemma 8.5a.7z.12e, with
+\[
+p\notin2A,\qquad w\notin3C.
+\]
+Suppose \(S\subset\mathbb N\setminus A\) is finite and
+\[
+p\in2(A\cup S),\qquad w\notin3(C\cup S). \tag{1}
+\]
+Then either:
+
+1. there is \(x\in S\) such that \(x\) is a one-point safe extension
+   covering \(p\), as in Lemma 8.5a.7z.12e; or
+2. there are \(x,y\in S\), possibly equal only if the representation uses
+   two copies of the same new value, such that
+   \[
+   x+y=p,\qquad w\notin3(C\cup\{x,y\}). \tag{2}
+   \]
+
+Consequently, if neither a one-point safe extension nor a two-point safe
+batch exists for the next gap \(p\), then no finite retained batch can cover
+\(p\) while preserving \(w\notin3C\).
+
+Proof. Since \(p\notin2A\), any representation of \(p\) from \(A\cup S\)
+uses at least one point of \(S\). If it uses exactly one new point \(x\),
+then \(p=x+a\) for some \(a\in A\). The second part of (1) implies
+\[
+w\notin3(C\cup\{x\}),
+\]
+so Lemma 8.5a.7z.12e applies. If the representation uses two new points
+\(x,y\), then \(x+y=p\), and again (1) implies (2), because
+\[
+C\cup\{x,y\}\subset C\cup S.
+\]
+This proves the dichotomy and the final assertion. \(\square\)
+
 ### Diagnostic 8.5a.7z.12f: Safe extension stalls below the witness
 
 The script `spike_safe_extension_search.py` applies Lemma 8.5a.7z.12e to
@@ -8811,14 +8848,20 @@ to \(6501\), stalling at \(6502\) with the same obstruction type. At scale
 again far below the witness \(20000\); the next gap has \(2061\) unsafe
 one-point blockers and no safe two-point batch.
 
+By Lemma 8.5a.7z.12e', the absence of both one-point and two-point safe
+gap-fillers means that no finite retained batch can cover that particular
+next gap while preserving the witness. Thus the finite stall is not merely a
+greedy artefact at the final step; escaping it requires reaching a different
+state earlier, changing the active packet, or abandoning this local spike
+layout.
+
 This is finite evidence, not a proof. Its value is that it identifies the
 local pressure precisely: once safe fillers make \(2C\) dense near the
 complements of the next possible gap-fillers, the witness-free condition
-blocks every one-point retained extension. A genuine staged counterexample
-would therefore need to add coordinated batches of fillers, change the
-active gate packet, or use a different cross-window design; extending a
-single safe band greedily is not enough to freeze the witness below a
-stage endpoint.
+blocks every one-point retained extension. The finite-batch reduction
+sharpens the last-step obstruction, but a genuine staged counterexample
+could still reach a different state before the stall, change the active
+gate packet, or use a different cross-window design.
 
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
@@ -15803,7 +15846,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   obstruction: one-point retained fillers that would cover the next gap
   may all lie in \(w-2C\), so each would repair the protected witness; in
   the tested scaled profiles even two-point batches do not cover the stalled
-  gap safely.
+  gap safely, which by Lemma 8.5a.7z.12e' blocks every finite batch at that
+  final state.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample
