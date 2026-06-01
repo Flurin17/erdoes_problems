@@ -2448,6 +2448,23 @@ Together with the local-overlap cover, this closes the `N=63`
 mixed-exactly-`8` finite boundary-shell stratum. Higher mixed levels for the
 same survivor still need a structural cutoff or analogous exact quotient pass.
 
+The first calibration of that analogous pass is positive but expensive. For
+`N=63` mixed `10`, the profile quotient has `5649112` groups over `9122560`
+outside-cover shells. An exact replay of the first `10000` groups checks all
+`13846` outside-cover realizations with no mixed-status profile group and no
+count mismatch:
+
+```text
+corner-label-violation: 10,446
+pinch-sector-obstruction: 3,400
+```
+
+The artifacts are
+`EXPERIMENTS/results/n63_mixed10_profile_quotient_first10000.json` and
+`EXPERIMENTS/results/n63_mixed10_profile_exhaustive_first10000.json`. The
+exact replay took `2553s`, so a full mixed-`10` closure should first improve
+the cached profile-replay path or find a structural cutoff.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`

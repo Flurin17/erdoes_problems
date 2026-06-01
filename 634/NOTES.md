@@ -212,6 +212,12 @@ The tile triangle is not required to be similar to the large triangle unless exp
   pinch-sector obstructions, and `666928` split-corner-label obstructions.
   Together with the local-overlap cover, this closes the `63`
   mixed-exactly-`8` finite shell stratum; mixed `10` and `12` remain open.
+  For `63` mixed `10`, the same profile quotient has `5649112` groups over
+  `9122560` outside-cover shells. The first `10000` groups have an exact
+  replay certificate over all `13846` realizations, with no mixed-status group
+  or count mismatch and split `10446` corner-label violations plus `3400`
+  pinch-sector obstructions. The `2553s` runtime for this small exact prefix
+  makes optimization of the profile-replay path the next computational need.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

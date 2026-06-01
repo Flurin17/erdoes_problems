@@ -275,6 +275,14 @@ Current components:
   pinch-sector obstructions, and `666928` split-corner-label obstructions.
   Together with the local-overlap cover, this closes the `N=63`
   mixed-exactly-`8` finite shell stratum.
+  For `N=63` mixed `10`, the same profile quotient has `5649112` groups over
+  `9122560` outside-cover shells. The first `10000` groups have now been
+  replayed exhaustively, checking all `13846` realizations with no
+  mixed-status profile group or count mismatch; the split is `10446`
+  corner-label violations and `3400` pinch-sector obstructions. This is a
+  positive stability calibration, but the `2553s` runtime for only `10000`
+  groups shows that broad mixed-`10` exact replay needs a faster cached or
+  more selective profile-replay path.
   A generated-shell prefix probe over the first `100000` shells also found no
   mixed-status profile group among `10560` touched groups.
 - `gamma_2alpha_word_invariance_probe.py`: exhaustive fixed-word tester for
