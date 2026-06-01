@@ -2434,3 +2434,9 @@ source of growth beyond Ramsey.
   `q -> 2q` partition theorem with at most `b(q)` parts must have both
   `chi(G)>b(q)` and `chi(complement(G))>b(q)`.  The dyadic hard core is
   simultaneously high-chromatic and high-cochromatic, not just modular.
+- 2026-06-01: Added fixed-mask mode to `first_lift_chromatic.py`.  The
+  recorded `3`-part first-lift obstruction masks on `14` and `16` vertices
+  have `chi=chi(complement)=5` and still admit four-part `4`-modular
+  partitions.  A later `14`-vertex local-search mask has
+  `chi=5, chi(complement)=4`, so Lemma 3B already explains why it cannot
+  obstruct the four-part theorem.

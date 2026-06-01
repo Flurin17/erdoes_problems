@@ -116,6 +116,16 @@ def sample_even(n: int, trials: int, seed: int) -> None:
         print(f"failure_mask={graph_mask} chi={chi} chi_complement={chi_bar}")
 
 
+def fixed_mask(n: int, graph_mask: int) -> None:
+    pc = ri.precompute(n)
+    chi, chi_bar, p4 = graph_stats(n, graph_mask, pc)
+    print(f"n={n}")
+    print(f"mask={graph_mask}")
+    print(f"chi={chi}")
+    print(f"chi_complement={chi_bar}")
+    print(f"has_4_part_4_modular_partition={p4}")
+
+
 def exhaustive_even(n: int, limit: int | None) -> None:
     pc = ri.precompute(n)
     checked = 0
@@ -151,11 +161,14 @@ def main() -> None:
     parser.add_argument("n", type=int)
     parser.add_argument("--sample-even", type=int, default=0)
     parser.add_argument("--exhaustive-even", action="store_true")
+    parser.add_argument("--mask", type=int)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
 
-    if args.sample_even:
+    if args.mask is not None:
+        fixed_mask(args.n, args.mask)
+    elif args.sample_even:
         sample_even(args.n, args.sample_even, args.seed)
     elif args.exhaustive_even:
         exhaustive_even(args.n, args.limit)

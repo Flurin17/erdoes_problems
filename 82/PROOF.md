@@ -2890,6 +2890,25 @@ high-chromatic case is `chi(G)=chi(complement(G))=5`, which is the `n=10`
 finite search target recorded in the experiments.  This is only a pruning
 lemma for the first dyadic lift; it does not prove the lift.
 
+The fixed-mask mode of `EXPERIMENTS/first_lift_chromatic.py` confirms that
+the recorded `3`-part first-lift obstructions lie at or near this chromatic
+boundary.  The masks
+
+```text
+2354908367450303302346343845       (n=14),
+543363196844712283609173823066425664       (n=16)
+```
+
+both have `chi(G)=chi(complement(G))=5` and do admit four-part
+`4`-modular partitions.  The later local-search mask
+
+```text
+1918387482888137124737399075       (n=14)
+```
+
+has `chi(G)=5` and `chi(complement(G))=4`, so the chromatic certificate itself
+already explains why it cannot obstruct the four-part first lift.
+
 ## Lemma 4: Local Congruence Criterion For Dyadic Partitions
 
 Before using the local criterion, it is useful to dispose of a natural

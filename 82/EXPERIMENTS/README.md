@@ -69,7 +69,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `first_lift_chromatic.py`: tests the chromatic pruning lemma for the first
   dyadic lift by sampling or enumerating even graphs, filtering for
   `chi(G),chi(complement(G)) >= 5`, and then running the exact four-part
-  `4`-modular partition check.
+  `4`-modular partition check.  It can also inspect a fixed mask with
+  `--mask`.
 - `search_modular_partition.py`: local search over even graphs, using
   triangle flips to preserve parity, for examples with high first-lift modular
   partition color number.  Node-limited exact searches are reported as
