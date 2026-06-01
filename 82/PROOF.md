@@ -6757,6 +6757,16 @@ cells in structured graphs, but random-like graphs typically refine to
 singletons.  Thus this is another useful certificate that does not address the
 hard `C`-Ramsey core by itself.
 
+The helper `EXPERIMENTS/equitable_partition.py` now has a fixed-mask mode for
+this certificate.  On the `14`-vertex threshold-`7` add-saturated mask
+`765415324481232608887291903`, color refinement gives `6` cells with largest
+cell size `4`, while the true maximum regular induced order is `6`.  On the
+delete-saturated mask `88255234986600583676821506`, and on the
+`C_reg(1,5)>12` mask `25366485577502803966`, color refinement is discrete
+even though their maximum regular induced orders are respectively `6` and
+`4`.  Thus this certificate explains only the structured part of the finite
+examples and misses regular witnesses in rigid examples.
+
 ## Lemma 10A: Automorphism Orbits Are Regular
 
 Let a group `Gamma` act on a graph `G` by automorphisms.  Then every orbit of

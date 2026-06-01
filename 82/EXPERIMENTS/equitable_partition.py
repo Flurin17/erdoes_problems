@@ -67,13 +67,30 @@ def sample(n: int, trials: int, seed: int) -> None:
     print(f"min_max_cell={min(s for _, _, s in records)}")
 
 
+def inspect(n: int, mask: int) -> None:
+    pc = ri.precompute(n)
+    cells = equitable_cells(mask, pc)
+    regular = ri.max_regular_order(mask, pc)
+    print(f"n={n}")
+    print(f"mask={mask}")
+    print(f"num_cells={len(cells)}")
+    print(f"max_cell={max(len(cell) for cell in cells)}")
+    print(f"max_regular={regular}")
+    for cell in sorted(cells, key=lambda c: (-len(c), c)):
+        print("cell size={} vertices={}".format(len(cell), ",".join(map(str, cell))))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
+    parser.add_argument("--mask", type=int)
     parser.add_argument("--sample", type=int, default=100)
     parser.add_argument("--seed", type=int, default=1)
     args = parser.parse_args()
-    sample(args.n, args.sample, args.seed)
+    if args.mask is not None:
+        inspect(args.n, args.mask)
+    else:
+        sample(args.n, args.sample, args.seed)
 
 
 if __name__ == "__main__":

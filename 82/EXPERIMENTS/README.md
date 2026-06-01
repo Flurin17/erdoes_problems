@@ -23,7 +23,8 @@ Computational checks and generated data for Erdos Problem 82.
   capped bin model with rectangles plus special `(q+1,1)` bins.  This is the
   arithmetic target that remains after the rectangle-only theorem is refuted.
 - `equitable_partition.py`: computes color-refinement/equitable-partition
-  cells and the regular-subgraph certificate from the largest cell.
+  cells and the regular-subgraph certificate from the largest cell.  It has a
+  fixed-mask mode via `--mask` for inspecting recorded examples.
 - `degree_spread.py`: filters or samples graphs with bounded degree spread or
   few degree values to test additive near-regularity as a bridge; also verifies
   recorded graph masks with `--mask`.

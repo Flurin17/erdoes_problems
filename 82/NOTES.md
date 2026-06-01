@@ -3190,3 +3190,9 @@ source of growth beyond Ramsey.
   for `q=8`, the minimum maximum regular order is `8`, attained by patterns
   `1,2,4,8`.  Therefore a matching proof cannot rely only on Ramsey extracting
   a monochromatic cross-pattern submatching.
+- 2026-06-01: Added fixed-mask mode to `equitable_partition.py`.  On the
+  `14`-vertex add-saturated mask, color refinement gives `6` cells with
+  largest cell size `4`, below the true maximum regular order `6`.  On the
+  delete-saturated mask and the `C_reg(1,5)>12` mask, color refinement is
+  discrete.  This confirms that equitable-cell certificates explain only part
+  of the structured examples and miss regular witnesses in rigid examples.
