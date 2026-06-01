@@ -2712,3 +2712,13 @@ source of growth beyond Ramsey.
   `A_4 cap A_5 cap A_6 cap A_7=empty`, while deleting one element from
   `A_4` leaves at least two.  Thus the rank/column-drop route cannot assume a
   small per-column correction to an inversion-free threshold graph.
+- 2026-06-01: Added a conditional minimal-counterexample lemma for the
+  first-lift matching-slot target.  If the rooted zero-slot and edge-rooted
+  good-pattern strengthenings hold below a smallest counterexample, then that
+  counterexample is connected, has no cut vertex, and every degree-`2` vertex
+  lies in a triangle.  This packages the existing lobe-gluing and
+  degree-`2` suppression lemmas into the exact structural reduction needed
+  for a possible induction.  Also rebuilt `matching_slot_fast.cpp` and checked
+  the `n=9` edge-rooted range `2000000 <= bits < 2100000`, covering another
+  `50000` edge-containing even graphs with no counterexample; the larger
+  two-million-bit range was too slow for an interactive checkpoint.

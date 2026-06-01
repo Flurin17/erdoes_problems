@@ -4657,7 +4657,49 @@ sanity check, the `n=8` edge-rooted sweep splits into two adjacent free-edge
 bit ranges, each checking `524288` edge-containing even graphs with no
 counterexample, and the first `n=9` chunk
 `0 <= bits < 524288` checks `262144` edge-containing even graphs with no
-counterexample.  No proof is currently known.
+counterexample.  A later chunk
+
+```text
+/tmp/matching_slot_fast --n 9 --good-edge 0:1 --start 2000000 --limit 2100000
+```
+
+checks another `50000` edge-containing even graphs with no counterexample.
+No proof is currently known.
+
+**Conditional Lemma: Shape Of A Minimal Matching-Slot Counterexample.**
+Suppose that the rooted zero-slot matching candidate and the edge-rooted
+good-pattern matching candidate hold for every even graph with fewer vertices
+than a vertex-minimal counterexample `G` to the unrooted matching-slot target.
+Then `G` is connected, has no cut vertex, and every degree-`2` vertex of `G`
+has adjacent neighbors.
+
+Proof.  If `G` were disconnected, then each connected component would be an
+even graph with fewer vertices than `G`.  The rooted zero-slot candidate on
+each nontrivial component implies an ordinary matching-slot certificate for
+that component; isolated vertices are put in a zero slot.  Taking the union
+of the component certificates gives a certificate for `G`, because there are
+no edges between components and the residue requirements are checked inside
+each component.  This contradicts the choice of `G`, so `G` is connected.
+
+If `G` had a cut vertex, Lemma "Cut-Vertex Reduction From Rooted Zero-Slot
+Lobes" would apply, again using the rooted zero-slot candidate on the smaller
+lobes, and would give an unrooted matching-slot certificate for `G`.  Hence
+`G` has no cut vertex.
+
+Finally let `v` be a degree-`2` vertex with distinct nonadjacent neighbors
+`x,y`.  Form the smaller graph
+
+```text
+G' = G - v + xy.
+```
+
+The graph `G'` is even: the only affected remaining vertices are `x` and `y`,
+and each loses one incident edge to `v` and gains the edge `xy`.  By the
+edge-rooted good-pattern candidate applied to the rooted edge `xy` in `G'`,
+there is a matching-slot certificate of `G'` in one of the two good endpoint
+patterns.  Lemma "Direct Lifts Across Degree-`2` Suppression" then lifts that
+certificate to a matching-slot certificate of `G`, a contradiction.  Thus the
+neighbors of every degree-`2` vertex in `G` must be adjacent.  QED.
 
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
