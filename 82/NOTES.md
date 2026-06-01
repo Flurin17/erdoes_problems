@@ -4258,3 +4258,8 @@ source of growth beyond Ramsey.
   `Q>=n^2/4`.  These lemmas give the square route more proved coverage, but
   they do not yet address repeated-degree feedback partitions with many
   distinct core degrees or the rooted bouquet obstructions.
+- 2026-06-01: Added sample mode to `spectrum_power_search.py` for larger
+  square-spectrum probes.  Connected samples found minimum normalized
+  `Q/n^2` values `190/18^2≈0.586` over `80` graphs at `n=18` and
+  `249/20^2=0.6225` over `40` graphs at `n=20`; these random graphs are far
+  from the structured rooted-bouquet ratio `57/196≈0.291`.

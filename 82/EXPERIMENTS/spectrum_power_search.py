@@ -73,6 +73,49 @@ def exact(n: int, power: int, connected_only: bool) -> None:
         print(f"example mask={mask} power_sum={value} by_degree={by_degree}")
 
 
+def sample(
+    n: int,
+    power: int,
+    trials: int,
+    seed: int,
+    connected_only: bool,
+) -> None:
+    rng = random.Random(seed)
+    pc = cdc.precompute(n)
+    bits = len(pc.edges)
+    best = 10**100
+    best_example: tuple[int, int, dict[int, int]] | None = None
+    histogram: Counter[int] = Counter()
+    checked = 0
+    attempts = 0
+
+    while checked < trials:
+        attempts += 1
+        mask = rng.getrandbits(bits)
+        adj = cdc.adjacency(n, mask, pc)
+        if connected_only and not is_connected(adj):
+            continue
+        checked += 1
+        _, by_degree = spectrum_mass(adj, pc)
+        value = power_value(by_degree, power)
+        histogram[value] += 1
+        if value < best:
+            best = value
+            best_example = (mask, value, by_degree)
+
+    print(f"n={n}")
+    print(f"trials={trials}")
+    print(f"attempts={attempts}")
+    print(f"connected_only={connected_only}")
+    print(f"power={power}")
+    print(f"min_seen={best}")
+    print(f"normalized={best / (n**power)}")
+    print(f"histogram={dict(sorted(histogram.items()))}")
+    if best_example is not None:
+        mask, value, by_degree = best_example
+        print(f"best_example mask={mask} power_sum={value} by_degree={by_degree}")
+
+
 def local_search(
     n: int,
     power: int,
@@ -156,6 +199,7 @@ def main() -> None:
     parser.add_argument("n", type=int)
     parser.add_argument("--power", type=int, default=2)
     parser.add_argument("--mask", type=int)
+    parser.add_argument("--sample", type=int, default=0)
     parser.add_argument("--local-steps", type=int, default=0)
     parser.add_argument("--restarts", type=int, default=1)
     parser.add_argument("--seed", type=int, default=1)
@@ -168,6 +212,8 @@ def main() -> None:
 
     if args.mask is not None:
         fixed(args.n, args.mask, args.power)
+    elif args.sample:
+        sample(args.n, args.power, args.sample, args.seed, args.connected_only)
     elif args.local_steps:
         local_search(
             args.n,
