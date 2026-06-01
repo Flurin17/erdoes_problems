@@ -15199,6 +15199,13 @@ version of this shortcut also fails: residue accelerators create
 \((k+1)\)-term repairs involving the accelerator, while thick integer lifts
 replace a deleted representative by another representative except near
 block endpoints.
+Proposition 11.1 gives the cofinite-lattice version of the same warning:
+if the non-accelerator component is cofinite in a lattice and every residue
+has a \((k+1)\)-term repair using at least two component terms, then a
+sparse deletion inside that component remains an order-\((k+1)\) basis.
+Thus any finite-accelerator counterexample must use a sparse component with
+shifted witnesses robust against all accelerator sums, or a residue class
+whose \((k+1)\)-term repairs are forced to use at most one component term.
 
 Therefore a finite-accelerator counterexample would need an
 \(F\)-robust minimal basis \(M\): every infinite deletion would have to
