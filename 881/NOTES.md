@@ -2164,6 +2164,13 @@ cross-packet edge. Thus a counterexample cannot be a disjoint union of
 fresh private packets; it must wire selected colors from different packets
 into new late-bad edges.
 
+Corollary 8.5a.7s packages this as a product-selector barrier. For each
+witness threshold \(L\), the realized selector edges project to a
+non-singleton weak barrier on the packet indices, but the arithmetic demand
+is stronger than the index shadow: every product selector must contain an
+actual realized bad edge, not merely have an index set belonging to an
+abstract front.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
@@ -2171,6 +2178,7 @@ inside every finite test, or have retained shifted overlaps while keeping
 the shift moving or shift-independent inside every finite test. It must do
 this cofinally outside every finite palette and finite row/mirror core while
 also preventing unbounded reflection centers on any fixed finite-palette
-violation. A proof must turn one of these cross-packet escape patterns into
-a recurrent certificate triple; a counterexample must stage these escaping
-fibers while preserving the late-bad barrier for every infinite deletion.
+violation. A proof must turn one of these product-selector escape patterns
+into a recurrent certificate triple; a counterexample must stage these
+escaping fibers while preserving the late-bad barrier for every infinite
+deletion.
