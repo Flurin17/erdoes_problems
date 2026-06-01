@@ -7823,6 +7823,68 @@ proof that starts from an already-found regular witness and then tries to
 select a pair with at most three nonempty roles is false.  Pair-role
 absorption must allow all four roles, or it must find a different witness.
 
+## Lemma 27F: Edge-Extremal Counterexamples Have Two-Defect Witnesses
+
+Fix `k`, and let `G` be a graph with no regular induced subgraph on at least
+`k` vertices.
+
+1. Suppose `G` is edge-maximal with this property: adding any missing edge to
+   `G` creates a regular induced subgraph on at least `k` vertices.  Then for
+   every nonedge `uv` of `G`, there is a set `S` containing `u,v`, with
+   `|S|>=k`, such that in `G[S]` the vertices `u` and `v` have one common
+   degree `D-1`, while every vertex of `S\{u,v}` has degree `D`.
+
+2. Suppose `G` is edge-minimal with this property: deleting any existing edge
+   from `G` creates a regular induced subgraph on at least `k` vertices.  Then
+   for every edge `uv` of `G`, there is a set `S` containing `u,v`, with
+   `|S|>=k`, such that in `G[S]` the vertices `u` and `v` have one common
+   degree `D+1`, while every vertex of `S\{u,v}` has degree `D`.
+
+Proof.  For (1), let `G^+=G+uv`.  By edge-maximality, `G^+` contains a
+regular induced subgraph `G^+[S]` of order at least `k`.  If `S` did not
+contain both `u` and `v`, then `G[S]=G^+[S]`, giving a forbidden regular
+induced subgraph in `G`.  Thus `u,v in S`.  Let the common degree in
+`G^+[S]` be `D`.  Passing from `G^+[S]` to `G[S]` deletes exactly the edge
+`uv`, so the degrees of `u` and `v` drop by one and all other degrees are
+unchanged.
+
+The proof of (2) is identical with `G^-=G-uv`: the regular witness in `G^-`
+must contain both endpoints, and restoring the edge raises only the degrees
+of `u` and `v` by one.  QED.
+
+In the edge-maximal case, the witness is a shifted version of the pair-role
+equations from Lemma 27C.  With respect to the nonedge `uv`, write
+`S\{u,v}=X union Y union Z union W` for the one-sided, common-neighbor, and
+common-nonneighbor roles.  The equality of the two deficient endpoint degrees
+forces `|X|=|Y|`; if their common degree is `D-1`, then the middle vertices
+must have internal degrees
+
+```text
+D-1 on X union Y,       D-2 on Z,       D on W.
+```
+
+Thus an edge-maximal counterexample contains a large two-defect
+profile-absorption witness at every missing edge.  The edge-minimal case gives
+the complementary surplus version at every present edge.  This reframes
+edge-extremal counterexamples as graphs saturated with near-regular induced
+subgraphs, rather than as graphs with no regularity structure at all.
+
+The script `EXPERIMENTS/edge_perturbation_witness.py` inspects this mechanism
+for fixed masks.  On the `12`-vertex compensated template from Example 11C,
+which has maximum regular induced order `5`, the threshold-`6` checks report
+that `17` of the `33` missing-edge additions and `17` of the `33` edge
+deletions create a regular induced subgraph on at least `6` vertices; every
+reported witness contains the perturbed pair.  The commands are
+
+```text
+python3 82/EXPERIMENTS/edge_perturbation_witness.py 12 --mask 72400984189589100935 --threshold 6 --mode add
+python3 82/EXPERIMENTS/edge_perturbation_witness.py 12 --mask 72400984189589100935 --threshold 6 --mode delete
+```
+
+This graph is not asserted to be edge-extremal; the computation is only a
+sanity check that the two-defect witnesses appear naturally near small
+bounded-spread examples.
+
 ## Lemma 28: Ramsey Bound For Pair-Difference Amplification
 
 Let `BR(p,q)` be the least integer `N` such that every bipartite graph with

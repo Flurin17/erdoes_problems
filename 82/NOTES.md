@@ -2440,3 +2440,16 @@ source of growth beyond Ramsey.
   partitions.  A later `14`-vertex local-search mask has
   `chi=5, chi(complement)=4`, so Lemma 3B already explains why it cannot
   obstruct the four-part theorem.
+- 2026-06-01: Added Lemma 27F and `edge_perturbation_witness.py`.  An
+  edge-maximal counterexample has, at every missing edge, a large induced
+  subgraph where exactly the two endpoints are one degree deficient; an
+  edge-minimal counterexample has the dual surplus witness at every edge.
+  This connects extremal counterexamples to the pair-role/profile absorption
+  framework: adding or deleting one edge creates a regular witness, so before
+  the perturbation the graph is saturated with two-defect near-regular
+  witnesses.
+- 2026-06-01: Ran `edge_perturbation_witness.py` on the `12`-vertex
+  compensated template with threshold `6`.  Although the graph is not claimed
+  edge-extremal, `17/33` missing-edge additions and `17/33` edge deletions
+  already create regular witnesses of order at least `6`; every listed
+  witness contains the perturbed pair, matching Lemma 27F's mechanism.

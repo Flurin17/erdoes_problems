@@ -258,6 +258,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `degree_variance_identity.py`: verifies the pair-expanded identity for the
   total squared degree variance over all `h`-vertex induced subgraphs.  This
   supports the diversity-counting route in Lemma 25.
+- `edge_perturbation_witness.py`: inspects regular induced witnesses created
+  by adding a missing edge or deleting an existing edge, supporting the
+  edge-extremal defect-witness lemma.
 - `pair_difference_template.py`: searches the two-pole amplification template
   from Lemma 27, where equal-sized homogeneous subsets of
   `N(u)\N(v)` and `N(v)\N(u)` combine with `u,v` to form a regular induced
