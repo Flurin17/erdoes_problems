@@ -16787,6 +16787,103 @@ stage must become part of later active traces often enough that every
 infinite selector contains an entire active trace. This is the precise
 cross-block wiring requirement left by Target 13.1l.2k.
 
+### Lemma 13.1l.2k.4: Sparse fixed-prefix tails force large fibers
+
+Let \(A\subseteq\mathbb N\) be an order-\(2\) basis with threshold \(N_0\).
+Fix
+\[
+d\in A,\qquad D\ge0,
+\]
+and a function
+\[
+\Phi:\mathbb N_{\ge1}\to\mathbb N.
+\]
+Then there is an infinite set
+\[
+B=\{b_1<b_2<\cdots\}\subset A\cap(d,\infty)
+\]
+with the following property. No finite nonempty
+\[
+H\subset B,\qquad r=|H|,
+\]
+with
+\[
+F=\{d\}\cup H,\qquad C=A\setminus F,
+\]
+has a witness \(w\) satisfying:
+
+1. \(w\notin3C\);
+2. \(w\ge\max H-D\);
+3. the active retained rows
+   \[
+   R(F,w)=\{e\in C:\ e\le w-N_0,\ w-e\notin F+F\}
+   \]
+   admit a private-color assignment
+   \[
+   \chi:R(F,w)\to F
+   \]
+   with
+   \[
+   w-e-\chi(e)\in C,\qquad e+\chi(e)\notin2C
+   \]
+   for every \(e\in R(F,w)\), and with every fiber satisfying
+   \[
+   |\chi^{-1}(f)|\le\Phi(r)\qquad(f\in F).
+   \]
+
+Proof. If such \(F,w,\chi\) exist, every element
+\[
+e\in A\cap[1,w-N_0]
+\]
+falls into one of three classes:
+
+* \(e\in F\), giving at most \(r+1\) choices;
+* \(e\in C\) and \(w-e\in F+F\), giving at most
+  \[
+  |F+F|\le (r+1)(r+2)/2
+  \]
+  choices;
+* \(e\in R(F,w)\), giving at most
+  \[
+  (r+1)\Phi(r)
+  \]
+  choices by the fiber bound.
+
+Hence
+\[
+A(w-N_0)\le r+1+\frac{(r+1)(r+2)}2+(r+1)\Phi(r). \tag{1}
+\]
+Choose \(b_r\in A\cap(d,\infty)\) strictly increasing and so far out that
+\[
+A(b_r-D-N_0)>
+r+1+\frac{(r+1)(r+2)}2+(r+1)\Phi(r) \tag{2}
+\]
+for every \(r\ge1\). This is possible because \(A(x)\to\infty\).
+
+If \(H\subset B\) has size \(r\), then
+\[
+\max H\ge b_r.
+\]
+Condition (2) for the witness gives
+\[
+w-N_0\ge b_r-D-N_0.
+\]
+Together with (2), this contradicts the capacity bound (1). \(\square\)
+
+In a \(k=2\) counterexample, apply this lemma inside the fixed-first
+section. Any sufficiently late inclusion-minimal trace
+\[
+F=\{d\}\cup H,\qquad H\subset B,
+\]
+has \(w\ge\max H-1\) by the terminal normal form, and Lemma 8.4c supplies
+private colors for all rows outside the \(F+F\) exception set. Therefore,
+for every prescribed rank function \(\Phi\), some active color in
+\(\{d\}\cup H\) must serve more than \(\Phi(|H|)\) retained rows. The
+singleton-label star cuts from Diagnostic 13.1l.2k.2 are consequently not
+iterable inside a sparse selector tail; a surviving cross-promoted
+construction must create large private fibers attached to a fixed or moving
+active endpoint.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18650,6 +18747,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.2k.3 records that such star cuts are selector-avoidable
   when placed independently in disjoint blocks; a counterexample needs
   cross-block promotion of labels into later active traces.
+* Lemma 13.1l.2k.4 gives the fixed-prefix sparse-tail analogue of Lemma
+  8.5a.7e': in a sparse suffix selector, every fixed-prefix trace must
+  have a private-color fiber larger than any prescribed function of its
+  suffix rank.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

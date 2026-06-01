@@ -2669,6 +2669,12 @@ independent fixed-first star cuts in disjoint suffix blocks are not a weak
 section barrier, because a deletion containing \(d\) can still select one
 suffix point per block. Any genuine counterexample must cross-promote
 labels/endpoints between blocks.
+Lemma 13.1l.2k.4 imports the sparse-deletion counting pressure into the
+fixed-prefix section: after choosing a sufficiently sparse suffix tail,
+no fixed-prefix active trace can have all private-color fibers bounded by a
+prescribed function of its suffix rank. Thus the singleton-label star cuts
+are local only; an iterable construction must produce large private fibers
+despite unbounded rank.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
