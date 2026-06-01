@@ -3778,3 +3778,9 @@ source of growth beyond Ramsey.
   degree have combined mass below `h^2`.  This would not settle the full
   marked-pair parameter, because cross-profile compensation remains, but it
   would close the pure disjoint-spectrum obstruction.
+- 2026-06-01: Refuted the stronger possible proof route that every graph
+  partitions into regular induced subgraphs of distinct degrees.  Exact
+  search finds a `6`-vertex counterexample, mask `659`, with spectrum summary
+  `s_0=3, s_1=4` and `mu=7>=6` but no distinct-degree regular partition.
+  Thus the spectrum-mass inequality, if true, is not just a partition theorem
+  in disguise.
