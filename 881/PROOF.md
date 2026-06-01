@@ -18274,6 +18274,25 @@ sizes \(6,\ldots,12\); it still finds no continuation. This is heuristic
 evidence that the lift needs a more global block design or collective
 barriers, not a proof of impossibility.
 
+The companion diagnostic `EXPERIMENTS/robust_residue_patterns.py` shows
+that this residue obstruction is not isolated to \(k=3\). With default
+bounds it finds, for example,
+\[
+k=4,\qquad G=\mathbb Z/6\mathbb Z,\qquad S=\{0,1\},\qquad f=3,
+\]
+where
+\[
+5S=G,\qquad 4(S\cup\{f\})=G,
+\]
+but deleting either residue in \(S\) leaves a five-fold hole even with the
+booster retained. The same two-residue modulo-\(6\) pattern recurs for
+\(k=5,6,7\), with the parity of the missing residues changing with \(k\).
+Thus the higher-order obstruction is genuinely lower-sumset/residue-level:
+finite residues can protect adjacent-order holes once \(k\ge3\). The
+unresolved part is still the integer lift, where deleting one integer does
+not delete its whole residue class and central quotient representations
+replace the missing representative.
+
 The cross-stage pair version has slightly more traction. The script
 `EXPERIMENTS/robust_booster_pair_stage_search.py` starts from the same
 \(C_0=\{1,3,20,21\}\), first adds \(23\), and then adds \(30,31\). At each

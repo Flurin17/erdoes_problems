@@ -2048,6 +2048,18 @@ force an individual representative of residue \(0,1\), or \(3\) to be used
 in a witness while preserving order-3 coverage with the booster and the
 positive-summand buffer from Lemma 13.1d.
 
+The broader script `robust_residue_patterns.py` finds analogous finite
+booster patterns for higher orders. For \(k=4\), already
+\[
+S=\{0,1\}\subset\mathbb Z/6\mathbb Z,\qquad f=3
+\]
+has \(5S=G\), \(4(S\cup\{f\})=G\), and five-fold holes after deleting either
+residue in \(S\). Similar modulo-\(6\) two-residue patterns appear for
+\(k=5,6,7\). These examples explain why the \(k=2\) proof does not simply
+generalize: once mirrors may live in lower sumsets, the residue layer has
+real adjacent-order private holes. The missing issue is elementwise
+integer lifting, not residue arithmetic.
+
 The stage search has one nontrivial finite lift:
 \[
 C_0=\{1,3,20,21\},\quad f=5,\quad C_1=C_0\cup\{30,31\}.
