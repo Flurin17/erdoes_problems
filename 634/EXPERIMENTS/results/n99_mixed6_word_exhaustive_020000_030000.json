@@ -1,0 +1,94 @@
+{
+  "classification_mode": "exhaustive",
+  "classified_groups": 10000,
+  "classified_weight": 171240,
+  "classified_words": 10000,
+  "elapsed_seconds": 2315.871403,
+  "endpoint_groups": 20,
+  "example_words": {
+    "corner-label-violation": [
+      {
+        "multiplicity": 21,
+        "statuses": {
+          "corner-label-violation": 21
+        },
+        "word": "L=baabbbccb R=aabbbbbcc B=bcaaabbcc"
+      }
+    ],
+    "pinch-sector-obstruction": [
+      {
+        "multiplicity": 9,
+        "statuses": {
+          "pinch-sector-obstruction": 9
+        },
+        "word": "L=bbababccb R=abbabbbcc B=bbaccaabc"
+      }
+    ],
+    "split-corner-label-obstruction": [
+      {
+        "multiplicity": 21,
+        "statuses": {
+          "split-corner-label-obstruction": 21
+        },
+        "word": "L=baabbbccb R=aabbbbbcc B=bbaccabac"
+      }
+    ]
+  },
+  "first_classified_group_index": 20001,
+  "first_classified_word_index": 20001,
+  "last_classified_group_index": 30000,
+  "last_classified_word_index": 30000,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_example_words": [],
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "profile_groups": null,
+  "quotient": "word",
+  "quotient_groups": 418260,
+  "radicand": 1,
+  "reps_per_group": 1,
+  "reps_per_word": 1,
+  "skip_classified_groups": 20000,
+  "skip_classified_words": 20000,
+  "status_group_counts": {
+    "corner-label-violation": 3180,
+    "pinch-sector-obstruction": 880,
+    "split-corner-label-obstruction": 5940
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 16}": 60,
+    "{\"corner-label-violation\": 18}": 240,
+    "{\"corner-label-violation\": 19}": 120,
+    "{\"corner-label-violation\": 21}": 540,
+    "{\"corner-label-violation\": 24}": 540,
+    "{\"corner-label-violation\": 27}": 540,
+    "{\"corner-label-violation\": 30}": 360,
+    "{\"corner-label-violation\": 36}": 240,
+    "{\"corner-label-violation\": 39}": 180,
+    "{\"corner-label-violation\": 9}": 360,
+    "{\"pinch-sector-obstruction\": 9}": 880,
+    "{\"split-corner-label-obstruction\": 12}": 360,
+    "{\"split-corner-label-obstruction\": 13}": 60,
+    "{\"split-corner-label-obstruction\": 15}": 1080,
+    "{\"split-corner-label-obstruction\": 18}": 540,
+    "{\"split-corner-label-obstruction\": 21}": 1080,
+    "{\"split-corner-label-obstruction\": 24}": 540,
+    "{\"split-corner-label-obstruction\": 27}": 540,
+    "{\"split-corner-label-obstruction\": 3}": 1620,
+    "{\"split-corner-label-obstruction\": 9}": 120
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 76140,
+    "pinch-sector-obstruction": 7920,
+    "split-corner-label-obstruction": 87180
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_count_mismatches": [],
+  "word_groups": 418260
+}

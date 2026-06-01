@@ -2319,26 +2319,28 @@ is independent of the endpoint orientations realizing those words.
 
 The word-quotient runner now also supports an exhaustive interval mode that
 classifies every oriented realization in selected word groups rather than a
-bounded representative set. In the first `10000` `N=99` mixed-`6` word groups,
-all `114540` outside-cover realizations agree with their word-group status, and
+bounded representative set. In the first `30000` `N=99` mixed-`6` word groups,
+all `427320` outside-cover realizations agree with their word-group status, and
 the exact realization counts match the word-quotient multiplicities. The
 weighted totals in this consecutive block are:
 
 ```text
-corner-label-violation:          65,940
-pinch-sector-obstruction:        12,960
-split-corner-label-obstruction:  35,640
+corner-label-violation:          201,780
+pinch-sector-obstruction:         30,780
+split-corner-label-obstruction:  194,760
 ```
 
 The interval artifacts are
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_first1000.json`,
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_001000_002000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_002000_005000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_005000_010000.json`.
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_001000_002000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_002000_005000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_005000_010000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_010000_020000.json`, and
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_020000_030000.json`.
 The verifier `EXPERIMENTS/gamma_2alpha_word_exhaustive_summary.py` checks these
 as a contiguous prefix with no gaps, no overlaps, no mixed-status words, and no
 word-count mismatches; its current summary is
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_summary_000001_010000.json`.
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_summary_000001_030000.json`.
 
 Higher-representative stress tests support the same lemma. With up to `8`
 representatives per word group, the first `2000` word groups and the late
