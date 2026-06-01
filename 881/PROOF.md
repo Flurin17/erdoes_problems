@@ -6881,13 +6881,143 @@ with range separation, again makes \(U\) certificate-free relative to
 
 The diagnostic `fiber_palette_independence.py` verifies this with
 \[
-U=(1,2,4,8,16),\qquad N=260,\qquad F=(260,520),\qquad w=2600.
+U=(1,2,4,8,16),\qquad N=260,\qquad F=(260,520),\qquad
+w=2600,\qquad m=2340.
 \]
 It reports \(w\notin3C\), both single-color repairs, private rows for
 \(f\), full uniqueness \(r_{2,S}(u+f)=1\) for every \(u\), and
 certificate-freeness of \(U\). Thus Lemma 8.5a.7j and Corollary
 8.5a.7k are genuinely finite-palette obstructions: a moving unique gate can
 still carry an arbitrarily large local private fiber.
+
+### Corollary 8.5a.7n: Fixed finite palettes have bounded bad centers
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\) which is
+a counterexample to the desired order-3 deletion conclusion.
+
+First fix a finite gate palette
+\[
+P\subset A
+\]
+and a finite test set
+\[
+T_0\subset A\setminus P.
+\]
+Then there is \(L_*(P,T_0)\) such that no
+\[
+m>L_*(P,T_0)
+\]
+admits data
+\[
+f\in P,\qquad U\subset T_0
+\]
+with
+\[
+m-U\subset A,\qquad r_{2,A}(u+f)=1\ (u\in U),\qquad |U|>\beta_f(T_0),
+\tag{1}
+\]
+where \(\beta_f(T_0)\) is defined in Corollary 8.5a.7k.
+
+Second fix a finite shift palette
+\[
+H\subset\mathbb Z\setminus\{0\}
+\]
+and a finite test set
+\[
+T_0\subset A.
+\]
+Then there is \(L_*(H,T_0)\) such that no
+\[
+m>L_*(H,T_0)
+\]
+admits data
+\[
+h\in H,\qquad U\subset T_0
+\]
+with
+\[
+m-U\subset A,\qquad U+h\subset A,\qquad |U|>\gamma_h(T_0), \tag{2}
+\]
+where \(\gamma_h(T_0)\) is defined in Corollary 8.5a.7l.
+
+Proof. If the first assertion failed, then for every \(L\) there would be
+data satisfying (1) with \(m>L\). Corollary 8.5a.7k would give an infinite
+\[
+B\subset A
+\]
+such that \(A\setminus B\) is an order-3 basis, contradicting the
+counterexample assumption. The second assertion is identical, using
+Corollary 8.5a.7l. \(\square\)
+
+Therefore any recurring finite test in a counterexample has only three
+ways to avoid a recurrent certificate: the reflection centers stay bounded,
+the relevant gate or shift leaves every fixed finite palette, or the
+reflected fiber stays inside the appropriate certificate-free independence
+number. Example 8.5a.7m realizes the second option locally for the
+unique-gate branch.
+
+### Corollary 8.5a.7o: Forced fibers avoid prescribed palettes
+
+Work in the remaining \(k=2\) counterexample case. Let
+\[
+E,P\subset A
+\]
+be finite, let
+\[
+H\subset\mathbb Z\setminus\{0\}
+\]
+be finite, and let \(M,L_0\) be given. Then the data in Corollary
+8.5a.7f.1 may be chosen so that, in addition,
+\[
+F\subset A\setminus(E\cup P) \tag{1}
+\]
+and
+\[
+(F-F)\cap H=\varnothing. \tag{2}
+\]
+In particular, in the unique-gate branch the gate \(f\) lies outside the
+prescribed palette \(P\), while in the shifted-overlap branch the shift
+\[
+h=f-g
+\]
+lies outside the prescribed shift palette \(H\).
+
+Proof. Repeat the proof of Corollary 8.5a.7f.1, but build the sparse set
+\[
+B=\{b_1<b_2<\cdots\}
+\]
+with two extra recursive restrictions. At step \(r\), choose
+\[
+b_r\in A\setminus(E\cup P)
+\]
+above \(L_0+1\), so far out that the rank-controlled capacity inequality
+from Lemma 8.5a.7e' holds for
+\[
+\Phi(r)=rM+\frac{r(r+1)}2,
+\]
+and avoiding the finite set
+\[
+\{b_i+h,\ b_i-h:\ 1\le i<r,\ h\in H\}. \tag{3}
+\]
+This is possible because \(A\) is infinite and only finitely many values
+are forbidden at each step. The resulting \(B\) still has the
+rank-controlled sparse-deletion property, and it also satisfies
+\[
+(B-B)\cap H=\varnothing. \tag{4}
+\]
+
+Apply Corollary 3.1c to this infinite \(B\), shrink the resulting late-bad
+set for its fixed witness, and then run the proof of Corollary 8.5a.7f.1.
+The output finite set \(F\) is a subset of \(B\), so (1)--(2) follow from
+the construction of \(B\). The final assertions are immediate from
+\(f,g\in F\). \(\square\)
+
+Thus not only are fixed finite palettes unable to support recurrent
+oversized fibers; in a genuine counterexample the forced finite bad edges
+can be found after deleting any prescribed gate palette and after avoiding
+any prescribed finite set of deleted-color differences. The remaining
+moving-parameter escape is therefore cofinal in the gate and shift
+parameters.
 
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
@@ -6921,13 +7051,19 @@ must be independent for the shift \(h=f-g\), and Lemma 8.5a.7j gives the
 analogous gate-difference independence for unique-gate fibers. Corollaries
 8.5a.7k--8.5a.7l then rule out any recurrence over fixed finite palettes of
 gates or shifts unless the reflected fibers stay inside the corresponding
-certificate-free independence numbers. The precise missing step is to show
-that both moving-palette escapes are impossible under the global late-bad
-barrier hypothesis, or to construct a staged basis in which the fibers
-\(U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all escape
-while maintaining order-2 coverage and promoted-edge barriers. This is now
-the active form of the certificate-free obstruction; it is stronger than
-mobile injectivity and weaker than finite recurrent Sidon coloring.
+certificate-free independence numbers. Corollary 8.5a.7n sharpens this
+inside a counterexample: for each fixed finite test and finite gate or shift
+palette, the oversized recurrent fibers have bounded reflection centers.
+Corollary 8.5a.7o adds the cofinal form: the forced bad edges may be chosen
+outside any finite gate palette and avoiding any finite set of shifts among
+their deleted colors. The precise missing step is to show that these
+bounded-center, cofinally moving-palette, or independence-number escapes are
+impossible under the global late-bad barrier hypothesis, or to construct a
+staged basis in which the fibers \(U\), centers \(m\), shifts \(h\), and
+active colors \(f,g\) all escape while maintaining order-2 coverage and
+promoted-edge barriers. This is now the active form of the certificate-free
+obstruction; it is stronger than mobile injectivity and weaker than finite
+recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -13514,10 +13650,18 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Example 8.5a.7m shows the same for the unique-gate branch: by moving the
   gate into a fresh range, a large private fiber can have
   \(r_{2,A}(u+f)=1\) for every row and still be certificate-free.
+* Corollary 8.5a.7n records the counterexample consequence: over any fixed
+  finite test and finite gate or shift palette, oversized unique-gate or
+  shifted-overlap fibers can occur only at bounded reflection centers.
+* Corollary 8.5a.7o strengthens the moving-palette conclusion: when
+  extracting the forced large fiber, the deleted edge can be chosen outside
+  any prescribed finite gate palette and with its pairwise deleted-color
+  differences avoiding any prescribed finite shift palette.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
-  shifted-overlap branch must escape every fixed finite palette and every
-  fixed certificate-rich test set without losing the late-bad barrier.
+  shifted-overlap branch must escape every fixed finite palette cofinally,
+  every fixed certificate-rich test set, or every unbounded recurrent center
+  set without losing the late-bad barrier.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

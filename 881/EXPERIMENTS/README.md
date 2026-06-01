@@ -161,7 +161,8 @@ also checks the shifted-overlap toy window \(\{1,2,3,10\}\), where rows
 \(\{1,2\}\) with shift \(1\) fail shift-independence and therefore contain
 the certificate \(1,2,2\). It also verifies the moving unique-gate packet
 from Example 8.5a.7m, including the local hole, both repairs, private rows,
-full uniqueness \(r_{2,A}(u+f)=1\), gate-independence, and
+the unbounded reflection center \(m=w-f\), full uniqueness
+\(r_{2,A}(u+f)=1\), gate-independence, and
 certificate-freeness of \(U\). This supports Lemmas 8.5a.7i--8.5a.7l and
 the local-compatibility warning in Example 8.5a.7m.
 

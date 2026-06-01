@@ -110,6 +110,7 @@ def moving_unique_gate_packet() -> dict[str, object]:
         "U": test,
         "N": n,
         "w": w,
+        "m": w - f,
         "F": tuple(sorted(deleted)),
         "w_notin_3C": w not in three_sums(retained),
         "repairs": {

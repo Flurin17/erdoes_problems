@@ -2117,11 +2117,36 @@ fresh gate \(f=N\), mirrors \(q_u=9N-u\), and a second repair color
 repairs through every \(u\in U\), and every sum \(u+f\) has the unique full
 representation \(u+f\). The moving gate makes gate-independence automatic.
 
+Corollary 8.5a.7n turns the finite-palette criteria into a bounded-center
+constraint for actual counterexamples. Fix a finite test \(T_0\). If
+oversized unique-gate fibers over a finite gate palette, or oversized
+shifted-overlap fibers over a finite shift palette, recur with unbounded
+reflection centers \(m\), then a certificate triple in \(T_0\) recurs and
+Corollary 2.3c gives a good deletion. Hence every surviving recurrence
+over a fixed finite test must either keep the center bounded, move the
+gate/shift out of every finite palette, or stay inside the appropriate
+certificate-free independence number.
+
+Corollary 8.5a.7o gives the cofinal palette-avoidance version. In the
+counterexample extraction, the sparse deletion set \(B\) can be chosen not
+only outside a finite core \(E\), but outside any prescribed finite gate
+palette \(P\), and with
+\[
+(B-B)\cap H=\varnothing
+\]
+for any prescribed finite shift palette \(H\subset\mathbb Z\setminus\{0\}\).
+The resulting finite bad edge \(F\subset B\) inherits these exclusions, so
+the unique gate avoids \(P\), and any shifted-overlap difference \(f-g\)
+avoids \(H\). Thus moving gates and moving shifts are not merely possible;
+they are cofinally forced by the remaining counterexample hypothesis.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
 inside every finite test, or have retained shifted overlaps while keeping
-the shift moving or shift-independent inside every finite test. A proof
-must turn one of these escape patterns into a recurrent certificate triple;
-a counterexample must stage these escaping fibers while preserving the
+the shift moving or shift-independent inside every finite test. It must do
+this cofinally outside every finite palette while also preventing unbounded
+reflection centers on any fixed finite-palette violation. A proof must turn
+one of these escape patterns into a recurrent certificate triple; a
+counterexample must stage these escaping fibers while preserving the
 late-bad barrier for every infinite deletion.
