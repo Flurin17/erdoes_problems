@@ -2980,3 +2980,11 @@ source of growth beyond Ramsey.
   `min_colors=4` with part sizes `7,5,6,4`.  This shows that the connected
   flexible dyadic lift cannot have a three-part theorem at `q=8`, matching
   the first-lift four-part calibration at `q=2`.
+- 2026-06-01: The same two-degree `8 -> 16` sampling pattern remains
+  four-part, not five-part, in the next two tested sizes.  A connected
+  `24`-vertex sample with degree sequence `7^12,15^12` has largest
+  `16`-modular witness `8` and `min_colors=4` with part sizes `8,4,7,5`.
+  A connected `26`-vertex sample with degree sequence `8^13,16^13` has
+  largest `16`-modular witness `9` and `min_colors=4` with part sizes
+  `9,6,5,6`.  Thus these dense two-degree probes calibrate the lower bound
+  at four parts but do not currently suggest a five-part obstruction.
