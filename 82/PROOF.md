@@ -7481,6 +7481,81 @@ pair-difference proof must replace the internal Ramsey extraction in `A` and
 `B`, or the bipartite Ramsey extraction between them, by a more efficient use
 of counterexample structure.
 
+## Conditional Proposition 28A: Balanced Pair-Difference Spread Bound
+
+For `h>=3`, put `r=ceil((h-2)/2)`.  Define `P_h^+` to be the least integer
+`M` with the following property: for every graph `H` whose vertex set is the
+disjoint union of two marked sets `A,B` of size `M`, either `H` has a regular
+induced subgraph on at least `h` vertices, or there are sets `X subset A`,
+`Y subset B` with
+`|X|=|Y|=r` such that `H[X union Y]` is `r`-regular.
+
+Define `P_h^-` similarly, with "`H[X union Y]` is `(r-1)`-regular" replacing
+"`r`-regular", and put
+
+```text
+P_h=max(P_h^+,P_h^-).
+```
+
+If every graph with degree spread at most `s` and with
+
+```text
+n > 8h^{3/2}s,
+n > 16h^2(2P_h+s)
+```
+
+vertices is considered, then it contains a regular induced subgraph on at
+least `h` vertices.
+
+Proof.  Let `G` be an `n`-vertex graph of degree spread at most `s`, and
+suppose for contradiction that `G` has no regular induced subgraph on
+`h` vertices.
+
+Fix a pair `u,v`, and set
+
+```text
+A=N(u)\N(v),       B=N(v)\N(u).
+```
+
+If `uv` is an edge and `min(|A|,|B|)>=P_h^+`, choose marked subsets
+`A_0 subset A` and `B_0 subset B` of size `P_h^+`.  Applying the definition
+of `P_h^+` to `G[A_0 union B_0]`, the first alternative is impossible, so we
+obtain `X subset A_0`, `Y subset B_0` of size `r` such that
+`G[X union Y]` is `r`-regular.  Lemma 27A then gives a regular induced
+subgraph of `G` on `2r+2>=h` vertices, a contradiction.  Hence in the edge
+case `min(|A|,|B|)<P_h^+`.
+
+The nonedge case is identical using `P_h^-` and the `(r-1)`-regular middle
+graph in Lemma 27A.  Therefore every pair satisfies
+
+```text
+min(|A|,|B|)<P_h.
+```
+
+Since
+
+```text
+sigma(u,v)=|A|+|B|
+          =2 min(|A|,|B|)+| |A|-|B| |,
+```
+
+and `||A|-|B||=|deg_G(u)-deg_G(v)|<=s`, every pair has
+
+```text
+sigma(u,v)<2P_h+s.
+```
+
+Lemma 25 now applies with `D=2P_h+s`.  The two displayed lower bounds on `n`
+contradict the necessary inequality for a graph with no regular induced
+`h`-set.  QED.
+
+Thus a subexponential bound for the balanced pair parameters `P_h^+` and
+`P_h^-` would immediately replace the Ramsey quantity `T_h` in bounded-spread
+arguments.  This still would not by itself prove the full conjecture, because
+one also needs a way to reduce arbitrary counterexamples to a useful
+bounded-spread regime; it isolates the exact local improvement required from
+the pair-difference route.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

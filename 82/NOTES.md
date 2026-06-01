@@ -2353,3 +2353,10 @@ source of growth beyond Ramsey.
   same mask.  On the `n=12` compensated sample, however, the best balanced
   pair extension has order `4` while the true maximum is `5`; profile
   absorption is still genuinely broader.
+- 2026-06-01: Added Conditional Proposition 28A.  The new parameters
+  `P_h^+` and `P_h^-` measure the exact balanced middle-regular theorem
+  needed to replace the Ramsey quantity `T_h` in the pair-difference spread
+  argument.  If `P_h=2^{o(h)}`, then every degree-spread-`s` graph with
+  `n >> h^{3/2}s + h^2(P_h+s)` has a regular induced `h`-set.  This isolates
+  the remaining local pair-difference target, while leaving the separate
+  global problem of reducing arbitrary counterexamples to bounded spread.
