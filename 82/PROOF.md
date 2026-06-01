@@ -4777,6 +4777,36 @@ This is only finite evidence, but it identifies a plausible boundary
 signature for handling degree-`2` triangles in a minimal-counterexample
 induction.
 
+**Conditional Lemma: Triangle Boundary Eliminates Degree Two.**  Suppose that
+the rooted zero-slot matching candidate, the edge-rooted good-pattern
+candidate, and the triangle-nonedge boundary condition above hold for every
+even graph with fewer vertices than a vertex-minimal counterexample `G` to
+the unrooted matching-slot target.  Then `G` has minimum degree at least `4`.
+
+Proof.  By the previous conditional minimal-counterexample lemma, `G` is
+connected, has no cut vertex, and every degree-`2` vertex has adjacent
+neighbors.  Since `G` is connected, a degree-`0` vertex can occur only when
+`G` has one vertex, which is trivially covered by a zero slot.  Thus a
+nontrivial minimal counterexample has no degree-`0` vertices.
+
+It remains to exclude a degree-`2` vertex `v`.  Let its adjacent neighbors be
+`x,y`; the edge `xy` is present by the previous conditional lemma.  Form
+
+```text
+G' = G - v - xy.
+```
+
+The graph `G'` is even, because `x` and `y` each lose exactly two incident
+edges, namely the edge to `v` and the edge `xy`, while all other vertex
+degrees are unchanged.  It has fewer vertices than `G`, and `x,y` are
+nonadjacent in `G'`.  By the triangle-nonedge boundary condition applied to
+the rooted nonedge `xy` in `G'`, there is a matching-slot certificate of
+`G'` satisfying either the direct boundary pattern or the one-endpoint
+zero-to-matching recoloring repair.  The direct triangular suppression lemma
+and the subsequent recoloring repair lift this certificate to `G`, a
+contradiction.  Hence no degree-`2` vertex exists.  All degrees in an even
+graph are even, so the minimum degree is at least `4`.  QED.
+
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
 `r` lies in the bipartite residual.

@@ -2751,3 +2751,12 @@ source of growth beyond Ramsey.
   counterexample.  This makes the triangular degree-`2` boundary condition a
   serious candidate for a minimal-counterexample induction rather than just a
   Python-scale observation.
+- 2026-06-01: Added the conditional consequence of the triangle boundary:
+  assuming the rooted zero-slot, edge-rooted, and triangle-nonedge
+  strengthenings below a smallest matching-slot counterexample, that
+  counterexample has minimum degree at least `4`.  The proof suppresses
+  non-triangular degree-`2` vertices by adding the neighbor edge, and
+  triangular degree-`2` vertices by deleting the triangle edge and using the
+  richer nonedge boundary.  Next action: search for a reducible configuration
+  in even graphs of minimum degree at least `4`, or formulate a higher-degree
+  boundary signature.
