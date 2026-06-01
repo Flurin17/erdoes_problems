@@ -25329,6 +25329,91 @@ linear-core obstruction must keep nonsummable total error in the concrete
 quantities from Lemma 16.114: packet width, packet-center displacement, and
 profile midpoint placement.
 
+### Lemma 16.118: Large center-far mass forces width or displacement
+
+Keep the notation of Corollary 16.115. Fix
+\[
+0<\varepsilon\le1.
+\]
+If, for some \(\lambda\) and \(s\),
+\[
+\beta_{\lambda,s}\ge\varepsilon, \tag{1}
+\]
+and
+\[
+\varepsilon |P_s|>2, \tag{2}
+\]
+then every auxiliary interval \(K_{\lambda,i}\) in the profile satisfies
+\[
+\Delta_{\lambda,i,s}
+\ge T_\lambda-W_s+\varepsilon |P_s|-2. \tag{3}
+\]
+In particular, if
+\[
+W_s\le {T_\lambda\over2}
+\qquad\text{and}\qquad
+\varepsilon |P_s|>2, \tag{4}
+\]
+then every auxiliary midpoint in the profile is linearly displaced from the
+packet center:
+\[
+\Delta_{\lambda,i,s}> {T_\lambda\over2}\qquad(i). \tag{5}
+\]
+
+Proof. Since
+\[
+\beta_{\lambda,s}=\min_i\beta_{\lambda,i,s},
+\]
+condition (1) implies
+\[
+\beta_{\lambda,i,s}\ge\varepsilon \tag{6}
+\]
+for every \(i\).
+
+Fix \(i\). If \(T_\lambda\le\Delta_{\lambda,i,s}\), then
+\[
+\Delta_{\lambda,i,s}\ge T_\lambda.
+\]
+Also \(P_s\subseteq J_s=[u_s,v_s]\cap\mathbb N\) implies
+\[
+W_s=v_s-u_s\ge |P_s|-1\ge\varepsilon |P_s|-1,
+\]
+so
+\[
+T_\lambda\ge T_\lambda-W_s+\varepsilon |P_s|-2.
+\]
+Thus (3) holds in this case.
+
+It remains to consider \(T_\lambda>\Delta_{\lambda,i,s}\). Then the middle
+case in the definition of \(\beta_{\lambda,i,s}\) applies. From (6),
+\[
+{\max\{0,\ W_s-(T_\lambda-\Delta_{\lambda,i,s})\}+2\over |P_s|}
+\ge\varepsilon.
+\]
+Hence
+\[
+\max\{0,\ W_s-T_\lambda+\Delta_{\lambda,i,s}\}
+\ge\varepsilon |P_s|-2,
+\]
+and the right side is positive by (2). Therefore
+\[
+W_s-T_\lambda+\Delta_{\lambda,i,s}
+\ge\varepsilon |P_s|-2
+\]
+and rearranging gives (3).
+
+Under (4), (3) gives
+\[
+\Delta_{\lambda,i,s}
+\ge T_\lambda-{T_\lambda\over2}+\varepsilon |P_s|-2
+> {T_\lambda\over2},
+\]
+which is (5). \(\square\)
+
+Thus a nonsummable \(\beta\)-residual has only two local sources. Either
+the active packet occupies a positive portion of the tested scale, or the
+assigned auxiliary midpoints stay linearly away from the packet center.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26729,6 +26814,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.117 gives the countable-menu analogue: joint summability of
   the packet-position upper bounds on a tail removes the high-density
   linear-core branch.
+* Lemma 16.118 localizes large packet-position error: after excluding tiny
+  packet mass artefacts, it forces either large packet width or linear
+  auxiliary-midpoint displacement.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

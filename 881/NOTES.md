@@ -205,6 +205,8 @@ requires nonsummable packet-position error for one fixed profile.
 Corollary 16.117 extends this to countable assigned menus: if the joint
 packet-position upper bounds are summable on some tail, the high-density
 linear-core branch is selector-avoidable.
+Lemma 16.118 splits any large normalized packet-position error into packet
+width or auxiliary-midpoint displacement.
 
 ## Definitions
 

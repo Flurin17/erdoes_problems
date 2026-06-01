@@ -217,7 +217,8 @@ endpoint outside a core pays the predicted doubled-coordinate distance
 from the auxiliary midpoint. It also checks the endpoint-proximal
 contrapositive used in Corollary 16.105, the centered-packet criterion in
 Corollary 16.107, the center-far interval bound from Lemma 16.114, and the
-finite separated-pair inequality behind the clustered-profile reduction in
+large-mass width/displacement split in Lemma 16.118, as well as the finite
+separated-pair inequality behind the clustered-profile reduction in
 Corollary 16.100.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
