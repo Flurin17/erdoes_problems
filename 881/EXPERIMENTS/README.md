@@ -258,7 +258,8 @@ the witness with no safe one- or two-point way to cover the final gap.
 The script also prints a reflected next-gap blocker certificate. In the
 scale `100`, beam-`8`, `--allow-pairs` run, `d=w-p=3494` is retained and
 all `1034` one-point candidates satisfy `d+a in 2C`, so Lemma
-8.5a.7z.12e'' blocks every finite batch at that final gap.
+8.5a.7z.12e'' blocks every finite batch at that final gap. The explicit
+flag is `no_finite_batch_by_12e_prime=True`.
 With `--avoid-reflected-blockers`, the scale `100`, beam-`8` run reaches
 only `6503`; at the stopping step it has `128` raw extensions and `0`
 surviving the reflected-blocker filter. This tests the escape of avoiding

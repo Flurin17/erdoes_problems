@@ -8934,7 +8934,12 @@ and all \(1034\) one-point candidates \(x=p-a\) satisfy
 d+a\in2C.
 \]
 Thus two-new representations are blocked by \(d\in C\), while one-new
-representations are blocked by the reflected two-sum condition.
+representations are blocked by the reflected two-sum condition. The script
+prints
+\[
+\texttt{no\_finite\_batch\_by\_12e\_prime=True}
+\]
+for this state.
 The optional blocker-avoidance mode
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --avoid-reflected-blockers
@@ -8944,8 +8949,12 @@ of Lemma 8.5a.7z.12e''. It reaches essentially the same place, covering only
 through \(6503\). At the stopping step there are \(128\) raw safe one- or
 two-point extensions, but all \(128\) are filtered because they create a
 reflected next-gap blocker. The current unfiltered next gap still has safe
-two-point batches; the obstruction is that taking any locally best next
-move appears to enter the reflected-blocker regime.
+one-point and two-point repairs, so
+\[
+\texttt{no\_finite\_batch\_by\_12e\_prime=False}
+\]
+there. The obstruction is that taking any available next safe move appears
+to enter the reflected-blocker regime.
 
 By Lemma 8.5a.7z.12e', the absence of both one-point and two-point safe
 gap-fillers means that no finite retained batch can cover that particular

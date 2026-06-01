@@ -122,6 +122,43 @@ def safe_two_point_gap_batches(
     return batches
 
 
+def count_safe_two_point_gap_batches(
+    state: State,
+    deleted: set[int],
+    witness: int,
+    gap: int,
+) -> int:
+    full = set(state.retained) | deleted
+    count = 0
+    for first in range(1, gap // 2 + 1):
+        second = gap - first
+        if first in full or second in full:
+            continue
+        if first == second:
+            continue
+        if safe_batch(state.retained, state.retained_pair_sums, (first, second), witness):
+            count += 1
+    return count
+
+
+def count_safe_one_point_gap_extensions(
+    state: State,
+    deleted: set[int],
+    witness: int,
+    gap: int,
+) -> int:
+    full = set(state.retained) | deleted
+    raw_candidates = {gap - old for old in full if gap - old > 0}
+    if gap % 2 == 0:
+        raw_candidates.add(gap // 2)
+    raw_candidates -= full
+    return sum(
+        1
+        for candidate in raw_candidates
+        if safe_to_add(state.retained, state.retained_pair_sums, candidate, witness)
+    )
+
+
 def reflected_next_gap_blocker(
     state: State,
     deleted: set[int],
@@ -393,8 +430,18 @@ def main() -> None:
     two_batches = safe_two_point_gap_batches(
         best, deleted, witness, final_gap, limit=20
     )
+    safe_one_count = count_safe_one_point_gap_extensions(
+        best, deleted, witness, final_gap
+    )
+    safe_two_count = count_safe_two_point_gap_batches(
+        best, deleted, witness, final_gap
+    )
+    no_finite_batch = safe_one_count == 0 and safe_two_count == 0
+    print(f"safe_one_point_extension_count={safe_one_count}")
+    print(f"safe_two_point_batch_count={safe_two_count}")
     print(f"safe_two_point_batches_for_next_gap={two_batches}")
     print(f"safe_two_point_batch_count_reported={len(two_batches)}")
+    print(f"no_finite_batch_by_12e_prime={no_finite_batch}")
     print(
         "reflected_next_gap_blocker="
         f"{reflected_next_gap_blocker(best, deleted, witness, final_gap)}"

@@ -2427,6 +2427,8 @@ repair also repairs \(w\). The scale-\(100\), beam-\(8\), pair-batch run
 prints this certificate with \(d=3494\) and all \(1034\) one-point
 candidates reflected into \(2C\). Coarse coverage past a fixed fraction of
 \(w\) is not enough by itself; the blocker is the reflected condition.
+The script now prints `no_finite_batch_by_12e_prime=True` for that terminal
+state, making the Lemma 8.5a.7z.12e' certificate explicit.
 With `--avoid-reflected-blockers`, the same scale-\(100\), beam-\(8\) run
 still reaches only \(6503\). At the stopping step, the script reports
 \(128\) raw extensions and \(0\) surviving after the reflected-blocker
