@@ -2444,6 +2444,8 @@ So a fixed deleted packet can create only finitely many retained-complement
 blockers above the order-2 threshold; a global obstruction must either keep
 moving the packet \(F\), grow its rank, or use the private-incidence escape
 \(w-d=f+c\) with \(d+f\notin2C\).
+Corollary 8.5a.7z.12g.1 records that this private incidence is not optional:
+if \(d\in C\), \(p=w-d=f+c\), and \(d+f\in2C\), then \(w\in3C\).
 The script now prints `no_finite_batch_by_12e_prime=True` for that terminal
 state, making the Lemma 8.5a.7z.12e' certificate explicit.
 The seed-geometry scan in the same script varies the upper retained band.

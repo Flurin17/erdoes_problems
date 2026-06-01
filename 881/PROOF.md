@@ -8944,6 +8944,48 @@ T.
 \]
 The final assertion is Corollary 8.5a.7z.12e''' with \(d=w-p\). \(\square\)
 
+### Corollary 8.5a.7z.12g.1: Retained-defect gaps require private gates
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C.
+\]
+Let
+\[
+d\in C,\qquad p=w-d.
+\]
+If
+\[
+p=f+c,\qquad f\in F,\quad c\in C, \tag{1}
+\]
+then necessarily
+\[
+d+f\notin2C. \tag{2}
+\]
+Consequently, if
+\[
+d+F\subseteq2C \tag{3}
+\]
+and
+\[
+p\notin F+F, \tag{4}
+\]
+then
+\[
+p\notin2A.
+\]
+
+Proof. If (1) holds and \(d+f=c_1+c_2\) with \(c_1,c_2\in C\), then
+\[
+w=d+p=d+f+c=c_1+c_2+c\in3C,
+\]
+contrary to the hypothesis. This proves (2).
+
+For the consequence, \(p\notin C+C\), since otherwise \(w=d+p\in3C\). The
+condition (3) and the first part rule out \(p\in F+C\), while (4) rules out
+\(p\in F+F\). Hence \(p\notin2A\). \(\square\)
+
 ### Lemma 8.5a.7z.12h: One-sided pair-saturation blockers
 
 Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
@@ -9161,6 +9203,15 @@ w-x\in2C. \tag{1}
 \]
 These \(x\)'s are ordinary gaps of the current stage, not retained rows, so
 Corollary 8.4c.1 and Lemma 8.5a.7z.10 do not apply directly.
+On the other hand, Corollary 8.5a.7z.12g.1 shows that any moving-packet
+attempt to cover a retained-defect gap \(p=w-d\) through a deleted gate
+\[
+p=f+c
+\]
+must prebuild a private incidence
+\[
+d+f\notin2C.
+\]
 
 Thus the next local-to-global target is:
 
@@ -16173,6 +16224,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   once \(d\) is retained, only the deleted gates need separate reflection
   checks, but at fixed deleted rank a whole retained-defect wall has size
   at most \(|F+F|\).
+* Corollary 8.5a.7z.12g.1 isolates the moving-packet escape: a retained
+  defect \(d=w-p\) can be covered through a deleted gate \(p=f+c\) only if
+  \(d+f\notin2C\), so every such escape needs private gate incidences.
 * Lemma 8.5a.7z.12h records the broader one-sided saturation wall seen in
   nearby seed profiles, where \(d\) need not be retained but every one-new
   repair and one side of every two-new split already hits \(w\) with a
