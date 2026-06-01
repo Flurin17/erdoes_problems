@@ -2338,3 +2338,18 @@ source of growth beyond Ramsey.
   side and `|V|-1-d_V(j)+x_U(j)=D` on the `B` side.  This makes the remaining
   bounded-spread task a concrete cut-degree system over the base graph and
   the compensating bipartite graph.
+- 2026-06-01: Added Lemma 27A and `balanced_pair_extension.py`.  The
+  homogeneous pair template was too Ramsey-expensive; the exact local
+  condition is broader.  For a pair `u,v`, equal-sized subsets of
+  `N(u)\N(v)` and `N(v)\N(u)` extend with `u,v` whenever their union is
+  regular of degree `r` in the edge case or `r-1` in the nonedge case.  This
+  reframes large neighborhood-symmetric-difference arguments as balanced
+  half-degree regularity inside the one-sided difference graph.
+- 2026-06-01: The balanced pair-extension checker recovers the maximum
+  order-`10` witness in the compensated spread-one `n=20` sample: pair
+  `16,19` is a nonedge, `X={8,10,14,17}`, `Y={0,2,3,6}`, and `G[X union Y]`
+  is `3`-regular, so Lemma 27A gives a `4`-regular graph on `10` vertices.
+  The older homogeneous pair-template search reaches only order `6` on the
+  same mask.  On the `n=12` compensated sample, however, the best balanced
+  pair extension has order `4` while the true maximum is `5`; profile
+  absorption is still genuinely broader.

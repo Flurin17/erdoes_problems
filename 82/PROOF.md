@@ -7324,6 +7324,81 @@ does not immediately improve the Ramsey scale: finding the displayed
 homogeneous pattern inside `A` and `B` is itself a Ramsey-type problem unless
 additional structure is available.
 
+## Lemma 27A: Balanced Pair-Difference Extension
+
+Let `u,v` be two vertices of a graph `G`, put
+
+```text
+A=N(u)\N(v),       B=N(v)\N(u),
+```
+
+and let `delta=1` if `uv in E(G)` and `delta=0` otherwise.  Suppose there are
+sets `X subset A` and `Y subset B` with `|X|=|Y|=r` such that
+`G[X union Y]` is `(r-1+delta)`-regular.  Then
+
+```text
+G[{u,v} union X union Y]
+```
+
+is `(r+delta)`-regular on `2r+2` vertices.
+
+Proof.  The vertices `u` and `v` have degrees `r+delta` in the displayed
+induced subgraph: each sees exactly its own one-sided set, and they also see
+each other precisely when `delta=1`.  Every vertex of `X` is adjacent to `u`
+and not to `v`, and every vertex of `Y` is adjacent to `v` and not to `u`.
+Since `G[X union Y]` is `(r-1+delta)`-regular, each vertex of
+`X union Y` has total degree
+
+```text
+1 + (r-1+delta) = r+delta
+```
+
+after `u` and `v` are added.  QED.
+
+Lemma 27 is the homogeneous special case: when `uv` is an edge, an induced
+`K_{r,r}` between independent `X,Y` is `r`-regular on `X union Y`; when `uv`
+is a nonedge, the disjoint union of two `r`-cliques is `(r-1)`-regular.  Thus
+the real pair-difference target is not necessarily a homogeneous bipartite
+pattern, but a balanced regular induced subgraph of degree exactly one below
+or equal to half its order inside the one-sided difference graph.
+
+**Computational Example 27B: Balanced Pair Extension Can Recover A Missed
+Witness.**  On the compensated spread-one graph with `n=20` and mask
+
+```text
+869050638646044852707838394808533153088750733938973226828
+```
+
+the homogeneous search from Lemma 27 finds only a regular induced subgraph of
+order `6`, even though the true maximum regular induced order is `10`.  The
+broader Lemma 27A search finds an order-`10` witness.  The relevant pair is
+the nonedge `16,19`; with
+
+```text
+X={8,10,14,17},       Y={0,2,3,6},
+```
+
+the induced graph on `X union Y` is `3`-regular, and adjoining `16,19`
+produces a `4`-regular induced graph on
+
+```text
+{0,2,3,6,8,10,14,16,17,19}.
+```
+
+The verification commands are
+
+```text
+python3 82/EXPERIMENTS/pair_difference_template.py 20 --mask 869050638646044852707838394808533153088750733938973226828
+python3 82/EXPERIMENTS/balanced_pair_extension.py 20 --mask 869050638646044852707838394808533153088750733938973226828
+```
+
+This example shows that the Ramsey bottleneck in Lemma 28 is partly an
+artifact of forcing the middle graph to be homogeneous.  However, Lemma 27A
+is still not exhaustive: on the `12`-vertex compensated template from
+Example 11C, the best balanced pair extension has order `4`, while the true
+maximum regular induced order is `5`.  Full profile absorption remains the
+larger target.
+
 ## Lemma 28: Ramsey Bound For Pair-Difference Amplification
 
 Let `BR(p,q)` be the least integer `N` such that every bipartite graph with

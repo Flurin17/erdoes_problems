@@ -251,6 +251,9 @@ Computational checks and generated data for Erdos Problem 82.
   from Lemma 27, where equal-sized homogeneous subsets of
   `N(u)\N(v)` and `N(v)\N(u)` combine with `u,v` to form a regular induced
   subgraph.
+- `balanced_pair_extension.py`: searches the broader Lemma 27A criterion,
+  where equal-sized one-sided difference subsets only need to induce the
+  required regular graph between themselves, not a homogeneous template.
 - `regular_witness.py`: prints one largest regular induced witness for a
   fixed graph mask, including degrees, witness edges, and optional split-side
   counts/profiles for structured examples.
