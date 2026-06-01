@@ -2387,6 +2387,12 @@ unique-gate half-packet for a deleted gate \(q\), then
 Thus the remaining singleton escape is not merely "many unique sums";
 it is a moving \(q\)-independent halfset over each balanced finite test,
 unless the tests themselves have large balanced-certificate-free halfsets.
+Example 16.23 calibrates this obstruction with the interval-marker seed:
+\([1,L]\cup\{2L\}\) has the full dense test \(U=[1,L]\) as a
+\(q\)-independent unique-gate packet for \(q=2L\) and \(w=4L+2\), even
+though \(U\) contains the balanced certificate \(1,2,2,2\). Thus balanced
+certificates alone do not kill the bounded-center unique-gate branch; the
+real obstruction is the non-iteration bridge gap from Lemma 16.10.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running

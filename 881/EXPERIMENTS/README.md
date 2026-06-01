@@ -706,3 +706,8 @@ subset has a certificate. For the prepared row-bank set
 that sparse prepared blocks can evade the reflected-branch finite test.
 Corollary 16.22 then says the surviving unique-gate rows should be read as
 a moving gate-independent packet, not just as isolated two-sum accidents.
+
+`unique_gate_interval_marker.py` verifies Example 16.23 for several
+interval-marker sizes. It checks that `[1,L] union {2L}` has a full
+unique-gate, gate-independent packet on `[1,L]` with private witness
+`4L+2`, while `[1,L]` still contains the balanced certificate `1,2,2,2`.

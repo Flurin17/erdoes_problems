@@ -20025,6 +20025,73 @@ the bounded threshold. Thus the singleton branch has been reduced from
 generic private row banks to moving gate-independent packets, unless the
 finite tests themselves contain large balanced-certificate-free halfsets.
 
+### Example 16.23: Dense tests still allow bounded-center unique-gate packets
+
+The gate-independence normal form is not contradicted by balanced
+certificate density alone. Let \(L\ge4\),
+\[
+A_L=[1,L]\cup\{2L\},\qquad q=2L,\qquad d=2L+2,\qquad w=q+d=4L+2,
+\]
+and put
+\[
+U=[1,L]\subset A_L\setminus\{q\}.
+\]
+Then
+\[
+[3,5L]\subseteq3A_L,\qquad w\notin4(A_L\setminus\{q\}), \tag{1}
+\]
+and for every \(p\in U\),
+\[
+w-p\in3A_L,\qquad q+p\notin2(A_L\setminus\{q\}). \tag{2}
+\]
+Moreover
+\[
+(U+q-U)\cap A_L=\{q\}. \tag{3}
+\]
+Thus \(U\) is a full unique-gate, \(q\)-independent packet even though
+the dense set \(U\) contains the balanced \(k=3\) certificate
+\[
+e=1,\qquad y_1=y_2=y_3=2,
+\]
+for which
+\[
+y_1+y_2-e=3\in A_L,\qquad
+y_1+y_2+y_3-2e=4\in A_L.
+\]
+
+Proof. The coverage and privacy assertions in (1) are exactly the
+interval-marker calculation from Lemma 16.10:
+\[
+3[1,L]=[3,3L],\quad 2L+2[1,L]=[2L+2,4L],\quad
+4L+[1,L]=[4L+1,5L],
+\]
+and
+\[
+4(A_L\setminus\{q\})=4[1,L]=[4,4L],
+\]
+so \(w=4L+2\) is private after deleting \(q\). For \(p\in[1,L]\),
+\[
+w-p\in[3L+2,4L+1]\subset[3,5L]\subseteq3A_L.
+\]
+Also
+\[
+2(A_L\setminus\{q\})=2[1,L]=[2,2L],
+\]
+whereas \(q+p\in[2L+1,3L]\), proving the unique-gate condition (2).
+Finally
+\[
+U+q-U=[L+1,3L-1],
+\]
+whose intersection with \([1,L]\cup\{2L\}\) is exactly \(\{2L\}\). This
+proves (3). \(\square\)
+
+This example is only local. Lemma 16.10 proves that the same one-marker
+interval construction cannot iterate: the next marker would need to cover
+the bridge interval \([x+3L+1,2x]\). Its role here is to calibrate the
+remaining positive route. A proof must use the global iteration and
+threshold constraints of singleton barriers, not just the existence of
+balanced certificates inside the tested rows.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21085,6 +21152,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \((U+q-U)\cap A\subset\{q\}\). The remaining singleton escape is
   therefore moving \(q\)-independent arithmetic, or large
   balanced-certificate-free halfsets in every finite test.
+* Example 16.23 shows that balanced certificate density alone does not
+  rule out unique-gate packets: the interval-marker seed
+  \([1,L]\cup\{2L\}\) has a full \(q\)-independent unique-gate packet on
+  \([1,L]\). The obstruction to this local model is its failure to
+  iterate, not a finite certificate contradiction.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
