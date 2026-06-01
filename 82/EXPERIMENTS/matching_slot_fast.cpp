@@ -369,6 +369,30 @@ uint64_t even_graph_mask(int n, uint64_t bits) {
     return graph_mask;
 }
 
+bool degree_bounds_ok(
+    int n,
+    uint64_t graph_mask,
+    int min_degree,
+    int max_degree
+) {
+    if (min_degree <= 0 && max_degree >= n - 1) return true;
+    std::array<int, 10> degrees{};
+    int edge = 0;
+    for (int u = 0; u < n; ++u) {
+        for (int v = u + 1; v < n; ++v) {
+            if ((graph_mask >> edge) & 1) {
+                ++degrees[u];
+                ++degrees[v];
+            }
+            ++edge;
+        }
+    }
+    for (int v = 0; v < n; ++v) {
+        if (degrees[v] < min_degree || degrees[v] > max_degree) return false;
+    }
+    return true;
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -377,6 +401,8 @@ int main(int argc, char** argv) {
     uint64_t limit = 0;
     uint64_t progress_every = 262144;
     bool progress = false;
+    int min_degree = 0;
+    int max_degree = -1;
     RootMode root_mode = RootMode::None;
     std::optional<std::pair<int, int>> root_pair;
     for (int i = 1; i < argc; ++i) {
@@ -389,6 +415,10 @@ int main(int argc, char** argv) {
             limit = std::stoull(argv[++i]);
         } else if (arg == "--progress-every" && i + 1 < argc) {
             progress_every = std::stoull(argv[++i]);
+        } else if (arg == "--min-degree" && i + 1 < argc) {
+            min_degree = std::stoi(argv[++i]);
+        } else if (arg == "--max-degree" && i + 1 < argc) {
+            max_degree = std::stoi(argv[++i]);
         } else if (arg == "--good-edge" && i + 1 < argc) {
             if (root_mode != RootMode::None) {
                 std::cerr << "only one rooted endpoint option is allowed\n";
@@ -444,12 +474,18 @@ int main(int argc, char** argv) {
                       << " [--limit L] [--good-edge u:v]"
                       << " [--good-nonedge u:v]"
                       << " [--triangle-nonedge u:v] [--progress]"
-                      << " [--progress-every P]\n";
+                      << " [--progress-every P]"
+                      << " [--min-degree D] [--max-degree D]\n";
             return 2;
         }
     }
     if (n < 1 || n > 10) {
         std::cerr << "supported range: 1 <= n <= 10\n";
+        return 2;
+    }
+    if (max_degree < 0) max_degree = n - 1;
+    if (min_degree < 0 || max_degree > n - 1 || min_degree > max_degree) {
+        std::cerr << "invalid degree bounds\n";
         return 2;
     }
     if (root_pair) {
@@ -491,6 +527,7 @@ int main(int argc, char** argv) {
                 continue;
             }
         }
+        if (!degree_bounds_ok(n, graph_mask, min_degree, max_degree)) continue;
         ++checked;
         checker.compute_valid_subsets(graph_mask);
         if (!checker.has_partition(root_mode, root_pair)) {
@@ -524,6 +561,8 @@ int main(int argc, char** argv) {
     }
     std::cout << "bit_start=" << start << "\n";
     std::cout << "bit_stop=" << stop << "\n";
+    if (min_degree != 0) std::cout << "min_degree=" << min_degree << "\n";
+    if (max_degree != n - 1) std::cout << "max_degree=" << max_degree << "\n";
     std::cout << "checked=" << checked << "\n";
     std::cout << "no_counterexample_seen\n";
     return 0;

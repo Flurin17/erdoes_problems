@@ -2760,3 +2760,12 @@ source of growth beyond Ramsey.
   richer nonedge boundary.  Next action: search for a reducible configuration
   in even graphs of minimum degree at least `4`, or formulate a higher-degree
   boundary signature.
+- 2026-06-01: Added `--min-degree` and `--max-degree` filters to
+  `matching_slot_fast.cpp` and used them to probe the post-reduction
+  matching-slot regime.  The full `n=8` minimum-degree-`4` sweep checks
+  `188790` even graphs; an `n=9` prefix with `0 <= bits < 10000000` checks
+  `181088`; the same prefix with the rooted `--triangle-nonedge 0:1` boundary
+  checks `81996`; and an `n=10` range
+  `1234567890 <= bits < 1235567890` checks `23124`.  None produce a
+  counterexample.  This is finite evidence only, but it confirms that the new
+  low-degree reductions are testing a nonempty high-minimum-degree regime.

@@ -4807,6 +4807,21 @@ and the subsequent recoloring repair lift this certificate to `G`, a
 contradiction.  Hence no degree-`2` vertex exists.  All degrees in an even
 graph are even, so the minimum degree is at least `4`.  QED.
 
+The fast checker now supports this post-reduction regime directly through
+`--min-degree`.  The commands
+
+```text
+/tmp/matching_slot_fast --n 8 --min-degree 4
+/tmp/matching_slot_fast --n 9 --min-degree 4 --limit 10000000
+/tmp/matching_slot_fast --n 9 --min-degree 4 --triangle-nonedge 0:1 --limit 10000000
+/tmp/matching_slot_fast --n 10 --min-degree 4 --start 1234567890 --limit 1235567890
+```
+
+respectively check `188790`, `181088`, `81996`, and `23124` filtered even
+graphs with no counterexample.  These are finite calibrations of the
+minimum-degree-four regime left by the conditional reductions, not proof of
+the matching-slot target.
+
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
 `r` lies in the bipartite residual.

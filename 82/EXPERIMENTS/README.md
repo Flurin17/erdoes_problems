@@ -130,7 +130,9 @@ Computational checks and generated data for Erdos Problem 82.
   `--triangle-nonedge u:v` for the richer triangular boundary pattern that
   distinguishes the two zero slots.  Use `--start` and `--limit` to split the
   free-edge bit range into reproducible chunks, and
-  `--progress --progress-every N` for long runs.
+  `--progress --progress-every N` for long runs.  Use `--min-degree D` or
+  `--max-degree D` to restrict the enumerated even graphs to the degree range
+  relevant after minimal-counterexample reductions.
 - `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus
