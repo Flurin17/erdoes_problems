@@ -271,6 +271,106 @@ for all sufficiently large `k`.  Hence some `N`-vertex graph has no regular
 induced subgraph on at least `k` vertices, proving `G(k)>N`.  This gives the
 claimed polynomial lower bound after adjusting the absolute constant.  QED.
 
+The same elementary conditioning argument gives the usual homogeneous-random
+scale up to an arbitrarily small power loss.
+
+**Proposition 0E: A Self-Contained `G(n,1/2)` Lower Bound.**  For every
+`epsilon>0` there is a constant `c_epsilon>0` such that, for all sufficiently
+large `k`,
+
+```text
+G(k) > c_epsilon k^{3/2-epsilon}.
+```
+
+Equivalently, the homogeneous random graph construction gives
+`F(n) <= n^{2/3+o(1)}` along an unbounded sequence of `n`.
+
+Proof.  It is enough to consider `0<epsilon<1/4`; larger values follow by
+decreasing `epsilon`.  Put `delta=epsilon`, and let `G` be sampled from
+`G(N,1/2)`.
+
+Fix a `t`-vertex set `T`, with `t>=k`, and split it as
+
+```text
+T=A union B,       |B|=ceil(delta t),       |A|=t-|B|.
+```
+
+Condition on all edges of `G[T]` except the edges between `A` and `B`.  For
+each `a in A`, write
+
+```text
+X_a=deg(a,B).
+```
+
+The random variables `X_a`, `a in A`, are independent
+`Bin(|B|,1/2)` variables.  After the conditioning, the rest of the degree of
+`a` in `T` is a fixed integer `c_a`.  If `G[T]` is regular, then the shifted
+variables
+
+```text
+X_a+c_a,        a in A,
+```
+
+are all equal.  If
+
+```text
+p_b=max_j Pr[Bin(b,1/2)=j],        b=|B|,
+```
+
+then, for arbitrary integer offsets `c_a`,
+
+```text
+Pr[X_a+c_a is constant over A] <= p_b^{|A|-1}.
+```
+
+Indeed, sum over the value taken by one distinguished shifted variable; each
+other shifted variable has every point mass at most `p_b`.
+
+The central-binomial bound gives
+
+```text
+p_b <= 3/sqrt(b) <= (3/sqrt(delta)) t^{-1/2}.
+```
+
+For all sufficiently large `t`, because `|B|=ceil(delta t)` and
+`delta<1/4`,
+
+```text
+|A|-1 >= (1-2delta)t.
+```
+
+Therefore, with `C_delta=3/sqrt(delta)`,
+
+```text
+Pr[G[T] is regular] <= (C_delta t^{-1/2})^{(1-2delta)t}.
+```
+
+The expected number of regular induced subgraphs of order exactly `t` is at
+most
+
+```text
+binom(N,t) (C_delta t^{-1/2})^{(1-2delta)t}
+ <= ( e C_delta N / t^{3/2-delta} )^t,
+```
+
+after increasing `C_delta` harmlessly to absorb the exponent
+`1-2delta`.  Choose
+
+```text
+N <= (2eC_delta)^{-1} k^{3/2-delta}.
+```
+
+Since `t>=k`, the last displayed expectation is at most `2^{-t}`.  Summing
+over all `t>=k` gives total expectation less than `1` for large `k`.
+Therefore some graph on `N` vertices has no regular induced subgraph of order
+at least `k`, proving
+
+```text
+G(k)>N >= c_epsilon k^{3/2-epsilon}
+```
+
+after adjusting constants and returning to `delta=epsilon`.  QED.
+
 ## Lemma 1: Hole / Antihole Reduction
 
 Let `k >= 4`.  If `G` has no regular induced subgraph of order at least `k`,

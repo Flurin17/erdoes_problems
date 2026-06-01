@@ -2637,3 +2637,12 @@ source of growth beyond Ramsey.
   than the known quadratic Dyson--McKay lower construction, but it replaces
   one purely literature-cited paragraph with a local probabilistic
   reconstruction in the workspace.
+- 2026-06-01: Strengthened the self-contained homogeneous-random construction
+  to Proposition 0E: for every `epsilon>0`,
+  `G(k)>c_epsilon k^{3/2-epsilon}`.  The improvement is the same conditioning
+  argument with an unbalanced split `T=A union B`, `|B|=epsilon |T|`: the
+  cross-degrees from almost all vertices into `B` are independent binomials,
+  and a fixed `t`-set is regular with probability at most
+  `(C_epsilon t^{-1/2})^{(1-2epsilon)t}`.  This reconstructs the easy side of
+  the `G(n,1/2)` calibration locally, though it still points in the opposite
+  direction from the desired upper bound.
