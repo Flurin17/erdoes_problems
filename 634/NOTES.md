@@ -182,9 +182,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   obstructions. To turn this into a proof closure for `99` mixed `6`, the next
   missing lemma is that the side-label word triple determines the refined
   residual obstruction status. The word-quotient runner now has an exhaustive
-  interval mode; in the first `70000` `99` mixed-`6` word groups, all `999036`
-  outside-cover oriented realizations match the word-group status with no count
-  mismatches. Stress tests with up to `8` representatives per
+  interval mode; in the first `110000` `99` mixed-`6` word groups, all
+  `1731160` outside-cover oriented realizations match the word-group status
+  with no count mismatches. Stress tests with up to `8` representatives per
   word found no mixed-status word among the first `2000` word groups or among
   word groups `350001..352000`. A targeted full enumeration of one heaviest
   `99` mixed-`6` outside-cover word group (multiplicity `54`) found all `54`
