@@ -106,7 +106,10 @@ rank-only robust core may be empty: retained intervals whose blocker windows
 cover the active palette rule out dense bounded-rank packets. Corollary
 16.75 isolates the majority-color case: if one active color carries density
 above \(1/2\), it must avoid robust cores directly, without the density loss
-from pigeonholing over the palette.
+from pigeonholing over the palette. Lemma 16.76 and Corollary 16.77 record
+the complementary no-majority normal form: a dense bounded palette with no
+large individual color fiber yields two distinct positive-density
+gate-dependent fibers, so the remaining branch is genuinely two-color.
 
 ## Definitions
 

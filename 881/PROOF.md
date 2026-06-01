@@ -22936,6 +22936,113 @@ bounded-rank interval obstruction must either split its density among many
 colors, keep every color below majority density, or place a majority color
 outside all such robust cores.
 
+### Lemma 16.76: No-majority dense palettes have two sizeable colors
+
+Let \(I\) be a finite set with \(|I|=n\), let \(P\) be a finite index set
+with
+\[
+2\le |P|\le r,
+\]
+and let
+\[
+U_f\subset I\qquad(f\in P).
+\]
+Fix \(0<\theta<\eta\le1\). If
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n \tag{1}
+\]
+and
+\[
+|U_f|<\theta n\qquad(f\in P), \tag{2}
+\]
+then there are distinct \(f,g\in P\) such that
+\[
+|U_f|\ge{\eta n\over r},\qquad
+|U_g|\ge{(\eta-\theta)n\over r-1}. \tag{3}
+\]
+
+Proof. Choose \(f\in P\) with \(|U_f|\) maximal. Since
+\[
+\sum_{h\in P}|U_h|\ge\left|\bigcup_{h\in P}U_h\right|\ge\eta n,
+\]
+we have
+\[
+|U_f|\ge{\eta n\over |P|}\ge{\eta n\over r}. \tag{4}
+\]
+By (2),
+\[
+\sum_{h\in P\setminus\{f\}}|U_h|
+\ge \eta n-|U_f|
+> \eta n-\theta n=(\eta-\theta)n.
+\]
+Hence some \(g\ne f\) satisfies
+\[
+|U_g|\ge {(\eta-\theta)n\over |P|-1}
+\ge {(\eta-\theta)n\over r-1}.
+\]
+Together with (4), this proves (3). \(\square\)
+
+### Corollary 16.77: No-majority bounded-rank packets give two gate fibers
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Fix \(r\ge2\) and
+\[
+0<\theta<\eta\le1.
+\]
+There is \(N=N(r,\eta,\theta)\) such that the following holds whenever
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+has length \(n\ge N\).
+
+Let \(F\subset A\) satisfy \(1\le|F|\le r\), let \(P\subset F\) have
+\[
+2\le |P|\le r,
+\]
+and for each \(f\in P\) let \(U_f\subset I\) satisfy the hypotheses of
+Corollary 16.45 for the active color \(f\), with witness parameter
+sufficiently large for the fixed interval \(I\) and rank bound \(r\).
+Assume
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n \tag{1}
+\]
+and
+\[
+|U_f|<\theta n\qquad(f\in P). \tag{2}
+\]
+Then there are distinct \(f,g\in P\) such that their gate-dependent
+subpackets
+\[
+U_{h,{\rm gate}}=\{u\in U_h:h+u\notin2(A\setminus F)\}\qquad(h\in P)
+\]
+satisfy
+\[
+|U_{f,{\rm gate}}|\ge{\eta n\over2r},\qquad
+|U_{g,{\rm gate}}|\ge{(\eta-\theta)n\over2(r-1)}. \tag{3}
+\]
+
+Proof. Let
+\[
+B_r={r(r+1)\over2}+2r.
+\]
+Choose \(N\) so large that for \(n\ge N\),
+\[
+B_r\le{\eta n\over2r}
+\quad\text{and}\quad
+B_r\le{(\eta-\theta)n\over2(r-1)}. \tag{4}
+\]
+Lemma 16.76 gives distinct \(f,g\in P\) with
+\[
+|U_f|\ge{\eta n\over r},\qquad
+|U_g|\ge{(\eta-\theta)n\over r-1}. \tag{5}
+\]
+Corollary 16.45 leaves at most \(B_r\) rows of each \(U_h\) outside the
+corresponding gate-dependent subpacket. Combining this with (4) and (5)
+gives (3). \(\square\)
+
+The finite script `EXPERIMENTS/density_split_check.py` checks Lemma 16.76
+on small universes by enumerating subset families.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24202,6 +24309,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.75 records the stronger majority-color route: a single
   active color carrying density \(>1/2\) avoids robust cores directly,
   without the \(1/r\) density loss from palette pigeonholing.
+* Lemma 16.76 and Corollary 16.77 make the complementary no-majority branch
+  explicit: a dense bounded palette whose individual color fibers all stay
+  below a chosen threshold must contain two distinct positive-density
+  gate-dependent fibers. The remaining non-majority obstruction is therefore
+  at least a two-color gate-shadow problem.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
