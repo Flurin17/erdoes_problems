@@ -4691,6 +4691,21 @@ source-`0` five-slot evidence rules out a universal four-slot theorem, but it
 does not rule out a connected four-part flexible `4 -> 8` theorem, which is
 the formulation relevant to the coarse-lift propositions above.
 
+Even three flexible parts are surprisingly robust in the small source-specific
+checks, though they are false in general by Computational Proposition 4E.4
+and its connected-complement corollary.  The exact `n=8` and `n=9` source-`0`
+sweeps both have flexible three-part `8`-modular partitions for every checked
+graph.  The exact `n=9` source-`2` sweep also passes with three flexible
+parts.  Deterministic `n=10` random probes with `50,000,000` sampled internal
+graphs find no three-part counterexample in any source residue modulo `4`;
+the accepted counts in source residues `0,1,2,3` are respectively
+`96,849`, `96,006`, `35,389`, and `35,450`.  A connected, minimum-degree-`4`
+source-`0` probe on `n=12` also passes with three flexible parts, checking
+`8894` accepted graphs.  These data suggest that the connected three-part
+obstruction is larger or more structured than the current random source
+models, and that a connected four-part `4 -> 8` theorem remains a plausible
+local target.
+
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
 slot multisets by the source-residue clique subset-sum test and then checks

@@ -2953,3 +2953,13 @@ source of growth beyond Ramsey.
   connected/minimum-degree-`4` source-`0` graphs on `n=12` (`seed=7120`).
   Conclusion: the five-slot universal-signature obstruction does not refute
   the connected flexible coarse-lift route.
+- 2026-06-01: Calibrated flexible three-part `4 -> 8` checks.  Despite the
+  known connected `50`-vertex complement obstruction to a general three-part
+  theorem, all small source-specific tests passed: exact source-`0` sweeps on
+  `n=8` and `n=9`, the exact source-`2` sweep on `n=9`, and deterministic
+  `n=10` random probes in source residues `0,1,2,3` with accepted counts
+  `96,849`, `96,006`, `35,389`, and `35,450`.  A connected/minimum-degree-`4`
+  source-`0` random probe on `n=12` also passed with `8894` accepted graphs.
+  This supports the interpretation that the three-part obstruction is a
+  structured alignment phenomenon, while a connected four-part `4 -> 8` lift
+  remains a plausible local target.
