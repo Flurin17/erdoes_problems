@@ -2433,17 +2433,17 @@ generated-shell prefix probe over the first `100000` `N=63` mixed-`8` shells
 touched `10560` profile groups, again with no mixed-status group; see
 `EXPERIMENTS/results/n63_mixed8_profile_group_probe_limit100000.json`.
 The same runner can now exhaustively replay selected profile groups. On the
-first `40000` profile groups it checks all `97032` outside-cover realizations,
+first `100000` profile groups it checks all `214666` outside-cover realizations,
 with no mixed-status profile group and no count mismatch:
 
 ```text
-corner-label-violation:          69,966
-pinch-sector-obstruction:        17,580
-split-corner-label-obstruction:   9,486
+corner-label-violation:         158,982
+pinch-sector-obstruction:        22,500
+split-corner-label-obstruction:  33,184
 ```
 
 The exact profile replay intervals are summarized by
-`EXPERIMENTS/results/n63_mixed8_profile_exhaustive_summary_000001_040000.json`.
+`EXPERIMENTS/results/n63_mixed8_profile_exhaustive_summary_000001_100000.json`.
 This does not close the stratum, but it gives a plausible quotient after raw
 side-label words fail.
 

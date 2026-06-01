@@ -1,0 +1,34 @@
+{
+  "classified_weight": 214666,
+  "classified_words": 100000,
+  "contiguous_prefix": true,
+  "covered_first": 1,
+  "covered_last": 100000,
+  "files": [
+    "n63_mixed8_profile_exhaustive_first100000.json"
+  ],
+  "gaps": [],
+  "intervals": [
+    {
+      "file": "n63_mixed8_profile_exhaustive_first100000.json",
+      "first": 1,
+      "last": 100000
+    }
+  ],
+  "mixed_status_words": 0,
+  "n": 63,
+  "outside_cover_shells": 3382720,
+  "overlaps": [],
+  "quotient_groups": 1493568,
+  "status_weight_counts": {
+    "corner-label-violation": 158982,
+    "pinch-sector-obstruction": 22500,
+    "split-corner-label-obstruction": 33184
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "word_count_mismatches": []
+}
