@@ -3381,3 +3381,9 @@ source of growth beyond Ramsey.
   one-row `(1+small)/M` bounds.  This closes the configuration-model version
   of the residue route; the remaining simple-graph issue is exactly the
   simplicity-distortion switching bound already isolated.
+- 2026-06-01: Tightened the configuration-to-simple transfer lemma so it
+  applies to configuration events whose restriction to simple configurations
+  is the desired simple-graph event.  This matters for residue counts because
+  the configuration event counts row stubs hitting columns in `Y_0`; under
+  simplicity this equals the distinct-neighbor count, but outside `Simp` it is
+  a multiplicity count.

@@ -2306,17 +2306,18 @@ that the configuration is simple.  Conditional on `Simp`, the resulting
 simple bipartite graph is uniform among all simple bipartite graphs with the
 prescribed degree sequences.
 
-Consequently, for any event `E` determined by the simple underlying graph,
-if
+Consequently, let `E_conf` be any event in the configuration model and
+`E_simple` an event in the uniform simple model such that, on `Simp`,
+`E_conf` is exactly the pullback of `E_simple`.  If
 
 ```text
-P_conf(Simp | E) <= K P_conf(Simp),
+P_conf(Simp | E_conf) <= K P_conf(Simp),
 ```
 
 then
 
 ```text
-P_simple(E) <= K P_conf(E).
+P_simple(E_simple) <= K P_conf(E_conf).
 ```
 
 Proof.  Every simple bipartite graph with the prescribed degree sequence is
@@ -2335,39 +2336,42 @@ uniform simple model.
 For the inequality,
 
 ```text
-P_simple(E)=P_conf(E | Simp)
-           =P_conf(E) P_conf(Simp | E)/P_conf(Simp)
-           <= K P_conf(E).
+P_simple(E_simple)=P_conf(E_conf | Simp)
+                  =P_conf(E_conf) P_conf(Simp | E_conf)/P_conf(Simp)
+                  <= K P_conf(E_conf).
 ```
 
 QED.
 
 **Corollary: Simplicity Distortion Is The Biregular Switching Target.**  In
 the setting of the previous lemma, fix `X_0={x_1,...,x_a}`, `Y_0`, a modulus
-`M`, and shifts `c_i`.  Let `E` be the event that
+`M`, and shifts `c_i`.  Let `E_simple` be the simple-graph event that
 
 ```text
 c_1+|N(x_1) cap Y_0| = ... =
 c_a+|N(x_a) cap Y_0|       mod M.
 ```
 
-Assume that in the configuration model
+Let `E_conf` be the corresponding configuration event with
+`|N(x_i) cap Y_0|` replaced by the number of row stubs of `x_i` matched to
+column stubs belonging to vertices of `Y_0`.  Assume that in the
+configuration model
 
 ```text
-P_conf(E) <= eta^(a-1)
+P_conf(E_conf) <= eta^(a-1)
 ```
 
 and that the simplicity event has distortion at most `K` on this residue
 event:
 
 ```text
-P_conf(Simp | E) <= K P_conf(Simp).
+P_conf(Simp | E_conf) <= K P_conf(Simp).
 ```
 
 Then the uniform simple model satisfies
 
 ```text
-P_simple(E) <= K eta^(a-1).
+P_simple(E_simple) <= K eta^(a-1).
 ```
 
 In particular, a switching theorem giving `K=exp(o(a))` together with
@@ -2375,10 +2379,10 @@ In particular, a switching theorem giving `K=exp(o(a))` together with
 bound to the simple biregular model at the exponential scale needed in the
 first-moment obstruction.
 
-Proof.  This is the conditioning-transfer lemma applied to the row-residue
-event `E`.  Under `Simp`, stub hits in columns of `Y_0` are exactly distinct
-neighbor hits in `Y_0`, so `E` is the same event in the configuration and
-simple graph languages.  QED.
+Proof.  Under `Simp`, a row has at most one edge to each column vertex, so
+stub hits in columns of `Y_0` are exactly distinct neighbor hits in `Y_0`.
+Thus `E_conf` pulls back `E_simple` on the simple configurations, and the
+conditioning-transfer lemma applies.  QED.
 
 The helper `EXPERIMENTS/biregular_residue_sample.py` probes this remaining
 dependence by sampling simple regular bipartite graphs with degree-preserving
