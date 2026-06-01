@@ -4382,6 +4382,13 @@ source of growth beyond Ramsey.
   subclass compatible with the fixed-power spectrum route, but it does not
   address the unrestricted case without a structural reduction to such a
   subclass.
+- 2026-06-01: Added the direct homogeneous chi-bound lemma.  If
+  `chi(G)<=K omega(G)^a`, then
+  `reg(G)>=K^{-1/(a+1)} n^{1/(a+1)}` by comparing the clique number with the
+  largest color class.  Thus any hereditary polynomially chi-bounded
+  structural reduction would prove a polynomial lower bound for regular
+  induced subgraphs; the obstruction is finding such a reduction in the
+  unrestricted problem.
 - 2026-06-01: Added the repair-subcube view of one-vertex stagnation.  Each
   almost-regular repair set `T` forbids the subcube of columns satisfying
   `C cap T=L(T)`, and stagnant columns are exactly the complement of the

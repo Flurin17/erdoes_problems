@@ -553,6 +553,53 @@ holes and antiholes have length less than `k`.  The obstruction is therefore
 not imperfection itself, but controlling graphs whose imperfect witnesses are
 present only below the target scale.
 
+## Lemma 1A.1: Polynomial Chi-Bounds Are Polynomially Easy
+
+Fix constants `K>=1` and `a>=0`.  If a graph `G` on `n>=1` vertices satisfies
+
+```text
+chi(G) <= K omega(G)^a,
+```
+
+then
+
+```text
+reg(G) >= c_{K,a} n^{1/(a+1)}.
+```
+
+Consequently, every hereditary class with a polynomial chi-bound satisfies
+`F_C(n) >= n^{epsilon}` for some `epsilon>0`, and hence satisfies the
+Erdős Problem 82 conclusion inside that class.
+
+Proof.  Put `w=omega(G)`.  Coloring `G` with at most `K w^a` colors gives an
+independent set of size at least
+
+```text
+n/(K w^a).
+```
+
+Thus
+
+```text
+reg(G) >= max(w, n/(K w^a)).
+```
+
+If `w>=n^{1/(a+1)}/K^{1/(a+1)}`, the first term gives the result.  Otherwise
+the second term gives
+
+```text
+reg(G) >= n/(K (n^{1/(a+1)}/K^{1/(a+1)})^a)
+        = K^{-1/(a+1)} n^{1/(a+1)}.
+```
+
+Taking `c_{K,a}=K^{-1/(a+1)}` proves the claim.  QED.
+
+Lemma 1A is the special case `K=a=1` for perfect graphs.  The point of the
+general form is diagnostic: any attempted structural reduction to a
+polynomially chi-bounded class would prove much more than `omega(log n)`.
+The known long-hole reductions in this workspace do not currently provide
+such a polynomial chi-bound with parameters independent of the target scale.
+
 ## Conditional Proposition 1B: A Long-Hole Chi-Bound Would Suffice
 
 For `k>=4`, let `X(k)` be the least number such that every graph with
