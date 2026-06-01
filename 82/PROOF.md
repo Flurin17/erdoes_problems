@@ -15129,6 +15129,48 @@ counterexample.  A minimal counterexample to the connected defect-one target
 with a leaf would therefore have to arise from a defect-one graph `H` and a
 neighbor `u` for which deleting `u` lowers spectrum mass.
 
+**Conditional Proposition 28J.10d.3: Defect Extensions Would Prove Connected
+Defect One.**  Suppose the following one-vertex extension statement holds:
+
+```text
+If H is connected and sum_d s_d(H)=|V(H)|-1, then every connected graph G
+obtained from H by adding one new vertex satisfies sum_d s_d(G)>=|V(H)|.
+```
+
+Then every connected graph `G` satisfies
+
+```text
+sum_d s_d(G) >= |V(G)|-1.
+```
+
+Consequently, by Conditional Corollary 28J.10d.1, Erdős Problem 82 follows
+with a polynomial bound.
+
+Proof.  We induct on `n=|V(G)|`.  The statement is trivial for `n=1`.  Let
+`G` be connected on `n+1` vertices.  Every connected graph on at least two
+vertices has a vertex `z` that is not a cut vertex, so `H=G-z` is connected.
+By induction,
+
+```text
+sum_d s_d(H) >= n-1.
+```
+
+If the left hand side is at least `n`, then monotonicity gives
+`sum_d s_d(G)>=n`, which is the desired bound for an `(n+1)`-vertex connected
+graph.  Otherwise integrality gives
+
+```text
+sum_d s_d(H)=n-1=|V(H)|-1.
+```
+
+The assumed defect-extension statement applies to the connected one-vertex
+extension from `H` to `G`, giving `sum_d s_d(G)>=n`.  This completes the
+induction.  Conditional Corollary 28J.10d.1 gives the final claim.  QED.
+
+The verified fourteen-vertex defect graphs satisfy this extension target in
+all tested one-vertex extensions: the worst extensions have mass exactly
+`|H|`, not below it.
+
 **Conditional Corollary 28J.10e: Quadratic Square-Spectrum Mass Would
 Suffice.**  Define
 

@@ -4093,6 +4093,13 @@ source of growth beyond Ramsey.
   `15` vertices, all with `mu=14=15-1`, and no extension with `mu<=13`.
   This keeps the connected defect-one target alive after the sharp
   minimum-degree-`2` obstruction.
+- 2026-06-01: Isolated the connected defect-extension induction.  It is enough
+  to prove: if `H` is connected and `mu(H)=|H|-1`, then every connected
+  one-vertex extension `G` of `H` has `mu(G)>=|H|`.  The proof deletes a
+  non-cut vertex from a hypothetical connected graph and applies induction;
+  if the deletion has mass at least its order, monotonicity finishes, and
+  otherwise the deletion is a connected defect-one graph.  Together with the
+  component reduction, this would prove `G(k)=O(k^2)`.
 - 2026-06-01: Added the square-spectrum route.  Let
   `Q(G)=sum_d s_d(G)^2`.  If `Q(G)>=c|G|^2` for some absolute `c>0`, then
   for two `M`-vertex graphs failing the spectrum match at threshold `h`, each
