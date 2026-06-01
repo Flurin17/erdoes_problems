@@ -10451,6 +10451,51 @@ obstruction is subtler because Corollary 28D.3 controls rows of bucket
 vertices in the ambient graph, while the induced bucket itself may still
 interact with a large and varying exterior.
 
+**Lemma 26B: Local Row-Ball Homogeneous Set.**  Let `v` be a vertex of `G`,
+and let `U subset V(G)\{v}` be such that
+
+```text
+|(N(u) triangle N(v))\{u,v}| <= D       for every u in U.
+```
+
+Then `G[U]` contains a clique or independent set, and hence a regular induced
+subgraph, of order at least
+
+```text
+|U| / (2(D+1)).
+```
+
+If, in addition, all vertices of `U` are either adjacent to `v` or all
+nonadjacent to `v`, then the lower bound improves to
+
+```text
+|U|/(D+1).
+```
+
+Proof.  Partition
+
+```text
+U_A=U cap N(v),       U_B=U \ N(v).
+```
+
+For `u in U_A`, every nonneighbor of `u` inside `U_A` contributes to
+`(N(u) triangle N(v))\{u,v}`, because `v` is adjacent to all of `U_A`.
+Thus the complement of `G[U_A]` has maximum degree at most `D`, and `G[U_A]`
+contains a clique of order at least `|U_A|/(D+1)`.
+
+For `u in U_B`, every neighbor of `u` inside `U_B` contributes to the same
+symmetric difference, because `v` is adjacent to none of `U_B`.  Thus
+`G[U_B]` has maximum degree at most `D`, and it contains an independent set
+of order at least `|U_B|/(D+1)`.
+
+One of `U_A,U_B` has size at least `|U|/2`, giving the first bound.  If all
+of `U` lies in one side, the factor `2` is not needed.  QED.
+
+Lemma 26 is the average form of this local cleaning step: it finds a vertex
+`v` with a large row-ball `U` by averaging and Markov's inequality.  The local
+form can be applied directly when a proof route produces many vertices whose
+rows are close to one reference row.
+
 ## Lemma 27: Pair-Difference Amplification Template
 
 Let `u,v` be two vertices of a graph `G`, and put

@@ -3402,3 +3402,9 @@ source of growth beyond Ramsey.
   graphs of bounded row diameter are linearly easy, so the exact-degree bucket
   difficulty comes from ambient/exterior variation rather than from small
   internal row diameter alone.
+- 2026-06-01: Extracted Lemma 26B, a local row-ball cleaning lemma.  If many
+  vertices have rows within distance `D` of one reference vertex, then after
+  splitting by adjacency to the reference, one side has maximum degree or
+  co-maximum degree at most `D`, giving a clique or independent set of size
+  `|U|/(2(D+1))`, or `|U|/(D+1)` when all vertices are on one side.  This is
+  the reusable local version of Lemma 26's averaging proof.
