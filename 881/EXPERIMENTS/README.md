@@ -206,12 +206,13 @@ so missing packet points concentrate in one gap by pigeonhole. Its sampled
 profile-family check covers the finite pigeonhole alternative in Corollary
 16.99.
 
-`robust_core_gap_geometry.py` checks Lemma 16.97: the midpoint of a robust
-blocker core depends affinely on the midpoint of its auxiliary interval,
-and a gap between two robust-core components equals the corresponding
-auxiliary midpoint separation minus half the two core lengths. It also
-checks the finite separated-pair inequality behind the clustered-profile
-reduction in Corollary 16.100.
+`robust_core_gap_geometry.py` checks Lemmas 16.97 and 16.102: the midpoint
+of a robust blocker core depends affinely on the midpoint of its auxiliary
+interval, a gap between two robust-core components equals the corresponding
+auxiliary midpoint separation minus half the two core lengths, and an
+endpoint outside a core pays the predicted doubled-coordinate distance
+from the auxiliary midpoint. It also checks the finite separated-pair
+inequality behind the clustered-profile reduction in Corollary 16.100.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For

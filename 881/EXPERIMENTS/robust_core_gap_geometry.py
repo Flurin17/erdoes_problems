@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Check affine geometry of robust blocker cores.
 
-This verifies Lemma 16.97 on finite parameter ranges: robust-core midpoint
-depends only on the auxiliary interval midpoint, and gaps between two cores
-measure auxiliary midpoint separation.
+This verifies Lemmas 16.97 and 16.102 on finite parameter ranges:
+robust-core midpoint depends only on the auxiliary interval midpoint, gaps
+between two cores measure auxiliary midpoint separation, and endpoint
+escape from a core has the predicted midpoint-distance cost.
 """
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ def core(a: int, b: int, c: int, d: int, r: int, m_delta: int) -> tuple[int, int
 def main() -> None:
     rng = Random(1697)
     checked = 0
+    endpoint_checked = 0
     gap_checked = 0
     clustered_checked = 0
     for n in range(8, 22):
@@ -43,6 +45,11 @@ def main() -> None:
                             continue
                         left, right = value
                         assert left + right == 2 * (c + d) - a - b
+                        rho = right - left + 1
+                        for p in (left - 3, left - 1, right + 1, right + 3):
+                            assert p < left or p > right
+                            assert abs(2 * p + a + b - 2 * (c + d)) >= rho + 1
+                            endpoint_checked += 1
                         intervals.append((left, right, c, d))
                         checked += 1
                 intervals.sort()
@@ -87,6 +94,7 @@ def main() -> None:
                     clustered_checked += 1
     print("robust core gap geometry check passed")
     print(f"cores_checked={checked}")
+    print(f"endpoint_escape_checked={endpoint_checked}")
     print(f"gaps_checked={gap_checked}")
     print(f"clustered_pairs_checked={clustered_checked}")
 

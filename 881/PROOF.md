@@ -24453,6 +24453,101 @@ packet endpoints to escape. A non-endpoint robust-profile obstruction must
 draw auxiliary intervals whose midpoint diameter grows linearly with the
 tested interval.
 
+### Lemma 16.102: Endpoint escape has midpoint-distance cost
+
+Fix an interval
+\[
+I=[a,b]\cap\mathbb N
+\]
+and parameters \(r,\delta\). Let
+\[
+K=[c,d]\cap\mathbb N
+\]
+be an auxiliary interval whose robust core
+\[
+R_K(\delta,I;r)=[L,U]\cap\mathbb N
+\]
+is nonempty, and put
+\[
+\rho=|R_K(\delta,I;r)|=U-L+1.
+\]
+If \(p\in\mathbb N\) satisfies
+\[
+p\notin R_K(\delta,I;r),
+\]
+then
+\[
+\left|2p+a+b-2(c+d)\right|\ge \rho+1. \tag{1}
+\]
+
+Proof. By Lemma 16.97(1),
+\[
+L+U=2(c+d)-a-b. \tag{2}
+\]
+If \(p<L\), then
+\[
+2(c+d)-a-b-2p=L+U-2p
+=(U-L)+2(L-p)
+=\rho-1+2(L-p)\ge\rho+1.
+\]
+If \(p>U\), the same calculation with signs reversed gives
+\[
+2p+a+b-2(c+d)=2p-L-U
+=(U-L)+2(p-U)\ge\rho+1.
+\]
+These two cases exhaust \(p\notin[L,U]\). \(\square\)
+
+Thus endpoint escape from a robust core is not merely a qualitative
+failure of containment. In doubled coordinates, the active endpoint must
+move past the auxiliary interval midpoint by at least half the robust-core
+length.
+
+### Corollary 16.103: Linear robust cores force linear endpoint distance
+
+Fix \(r\ge1\) and \(1/2<\delta\le1\). Let \(I=[a,b]\cap\mathbb N\) have
+length \(n\), and let
+\[
+K=[c,d]\cap\mathbb N
+\]
+be an auxiliary interval whose robust core \(R_K(\delta,I;r)\) is nonempty.
+If \(r=1\), put
+\[
+\gamma=2\delta-1.
+\]
+If \(r\ge2\), assume
+\[
+|K|\le { (2\delta-1)(r+1)\over4(r-1)}\,n, \tag{1}
+\]
+and put
+\[
+\gamma={2\delta-1\over2}.
+\]
+Then there is \(C=C(r)\) such that every
+\[
+p\notin R_K(\delta,I;r)
+\]
+satisfies
+\[
+\left|2p+a+b-2(c+d)\right|\ge \gamma n-C. \tag{2}
+\]
+
+Proof. Corollary 16.72 gives
+\[
+|R_K(\delta,I;r)|\ge\gamma n-C'
+\]
+with \(C'\) depending only on \(r\). Lemma 16.102 gives
+\[
+\left|2p+a+b-2(c+d)\right|\ge |R_K(\delta,I;r)|+1
+\ge \gamma n-(C'-1).
+\]
+Increase the constant if necessary and call it \(C\). \(\square\)
+
+Consequently, the endpoint-escape alternative in Corollaries
+16.99--16.101 also has a linear long-range cost whenever the escaping
+profile contains a linear robust core. In the bounded-rank,
+positive-density regime, endpoints cannot slip past robust profiles at
+bounded distance from the corresponding auxiliary midpoint.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25808,6 +25903,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.101 restates this as an auxiliary-diameter criterion: a
   non-endpoint finite robust exclusion needs one profile whose auxiliary
   midpoint diameter is linear in the tested interval.
+* Lemma 16.102 translates endpoint escape into the same auxiliary geometry:
+  an endpoint outside one robust core is linearly separated from that
+  auxiliary midpoint in doubled coordinates by the core length.
+* Corollary 16.103 combines this with Corollary 16.72: when the escaping
+  robust core has linear length, endpoint escape also has a linear
+  midpoint-distance cost.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

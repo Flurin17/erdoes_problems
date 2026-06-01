@@ -167,6 +167,9 @@ without such linear midpoint separation inside a profile, finite robust
 exclusion reduces to endpoint escape. Corollary 16.101 packages this as an
 auxiliary-diameter condition: non-endpoint finite robust exclusion needs a
 profile whose auxiliary midpoint diameter is linear in the tested interval.
+Lemma 16.102 and Corollary 16.103 quantify the remaining endpoint branch:
+escaping a linear robust core forces the active endpoint to be linearly far
+from the auxiliary midpoint in doubled coordinates.
 
 ## Definitions
 
