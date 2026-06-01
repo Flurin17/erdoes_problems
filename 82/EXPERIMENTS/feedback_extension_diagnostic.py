@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import random
 from collections import Counter
 
 import column_drop_census as cdc
@@ -199,6 +200,79 @@ def scan(
         )
 
 
+def sample(
+    n: int,
+    min_degree: int,
+    samples: int,
+    seed: int,
+    max_columns: int | None,
+) -> None:
+    rng = random.Random(seed)
+    pc = cdc.precompute(n)
+    pc_plus = cdc.precompute(n + 1)
+    bits = len(pc.edges)
+    attempts = 0
+    graphs_with_partition = 0
+    graphs_with_degree2 = 0
+    extensions_checked = 0
+    failures: list[tuple[int, int, dict[int, int], dict[int, int]]] = []
+
+    while graphs_with_degree2 < samples:
+        attempts += 1
+        mask = rng.getrandbits(bits)
+        adj = cdc.adjacency(n, mask, pc)
+        _, by_degree = spectrum_mass(adj, pc)
+        partition = feedback_partition(adj, min_degree)
+        if partition is None:
+            continue
+        graphs_with_partition += 1
+        forest, core_parts = partition
+        if not any(degree == 2 for degree, _ in core_parts):
+            continue
+        graphs_with_degree2 += 1
+
+        forest_size = forest.bit_count()
+        used_degrees = {0, 1}
+        core_sizes: dict[int, int] = {}
+        for degree, subset in core_parts:
+            used_degrees.add(degree)
+            core_sizes[degree] = subset.bit_count()
+
+        all_columns = list(range(1 << n))
+        if max_columns is not None and max_columns < len(all_columns):
+            columns = rng.sample(all_columns, max_columns)
+        else:
+            columns = all_columns
+        for column in columns:
+            extended = extend_mask(mask, n, column, pc, pc_plus)
+            ext_adj = cdc.adjacency(n + 1, extended, pc_plus)
+            _, ext_by_degree = spectrum_mass(ext_adj, pc_plus)
+            passes, _ = criterion_status(
+                ext_by_degree, forest_size, core_sizes, used_degrees
+            )
+            extensions_checked += 1
+            if not passes:
+                failures.append((mask, column, by_degree, ext_by_degree))
+                break
+        if failures:
+            break
+
+    print(f"n={n}")
+    print(f"min_degree={min_degree}")
+    print(f"samples_requested={samples}")
+    print(f"seed={seed}")
+    print(f"attempts={attempts}")
+    print(f"graphs_with_feedback_partition={graphs_with_partition}")
+    print(f"graphs_with_degree2_core={graphs_with_degree2}")
+    print(f"extensions_checked={extensions_checked}")
+    print(f"criterion_failure_found={bool(failures)}")
+    for mask, column, by_degree, ext_by_degree in failures[:10]:
+        print(
+            f"failure mask={mask} column={column} "
+            f"by_degree={by_degree} ext_by_degree={ext_by_degree}"
+        )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
@@ -206,10 +280,20 @@ def main() -> None:
     parser.add_argument("--min-degree", type=int, default=2)
     parser.add_argument("--max-columns", type=int)
     parser.add_argument("--scan", action="store_true")
+    parser.add_argument("--sample", type=int, default=0)
     parser.add_argument("--equality-only", action="store_true")
     parser.add_argument("--max-graphs", type=int)
+    parser.add_argument("--seed", type=int, default=1)
     args = parser.parse_args()
-    if args.scan:
+    if args.sample:
+        sample(
+            args.n,
+            args.min_degree,
+            args.sample,
+            args.seed,
+            args.max_columns,
+        )
+    elif args.scan:
         scan(
             args.n,
             args.min_degree,

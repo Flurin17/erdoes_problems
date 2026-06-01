@@ -3978,3 +3978,12 @@ source of growth beyond Ramsey.
   without a collision-criterion failure.  This is evidence for the stronger
   conjecture that Lemma 28J.5e's alternatives may always cover degree-`2`
   feedback-core extensions, not only equality examples.
+- 2026-06-01: Added randomized sample mode to
+  `feedback_extension_diagnostic.py` for larger feedback-core graphs.  The
+  probes
+  `python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 8 --sample 20 --min-degree 2 --seed 82`
+  and
+  `python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 10 --sample 10 --min-degree 2 --seed 83 --max-columns 256`
+  checked `5120` and `2560` one-vertex extensions respectively, again with
+  no collision-criterion failure.  These are not proof, but they support
+  treating Lemma 28J.5e's alternatives as a serious theorem target.
