@@ -2560,6 +2560,13 @@ whose section bounds are finite for each first point and diverge only as the
 first point moves. The open arithmetic issue is to show that the active
 trace/private-color statistic relevant here survives section descent and, in
 the shell case, really has the first-prefix structure handled in Section 13.
+Lemma 8.5a.8b sharpens the shell case: if every fixed first section has a
+finite rank bound but remains a barrier with unbounded witnesses, Ramsey
+thinning produces a generalized complete prefix-link shell. There is an
+infinite sequence \(a_i\) and finite ranks \(r_i\) such that \(a_i\) links to
+every sufficiently late \(r_i\)-subset of the tail. The first Schreier shell
+is only the special case \(r_i=i\); the remaining arithmetic problem is to
+exclude or realize these moving-rank prefix links.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

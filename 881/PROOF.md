@@ -10140,6 +10140,93 @@ first point. The remaining arithmetic task is to convert that shell into
 one of the Section 13 first-prefix configurations, or to show that the
 conversion can fail in a genuine order-\(2\) basis.
 
+### Lemma 8.5a.8b: Bounded first sections thin to generalized prefix links
+
+Let \(P\subset\mathbb N\) be infinite. For finite
+\[
+F\subset P
+\]
+and integers \(w\), let \(\mathcal P(F,w)\) be any property. Suppose that
+for every \(a\in P\) there is a finite rank bound
+\[
+q(a)\ge1
+\]
+such that for every infinite
+\[
+Y\subset P\cap(a,\infty)
+\]
+and every \(L\), there are
+\[
+G\subset Y,\qquad 1\le |G|\le q(a),
+\]
+and \(w>L\) with
+\[
+\mathcal P(\{a\}\cup G,w). \tag{1}
+\]
+Then there are an infinite sequence
+\[
+Q=\{a_1<a_2<\cdots\}\subset P
+\]
+and ranks
+\[
+1\le r_i\le q(a_i)
+\]
+such that, for every \(i\) and every \(L\), there is \(J_i(L)>i\) with the
+following property: every
+\[
+H\in[\{a_j:j\ge J_i(L)\}]^{r_i}
+\]
+has a witness \(w>L\) satisfying
+\[
+\mathcal P(\{a_i\}\cup H,w). \tag{2}
+\]
+
+Proof. We use the proof of Lemma 8.5a in each first section, allowing rank
+\(1\). For a fixed \(a\), fixed \(L\), and \(1\le s\le q(a)\), color
+\[
+[Y]^s
+\]
+according to whether some \(w>L\) satisfies \(\mathcal P(\{a\}\cup H,w)\).
+The hypothesis says the union over \(s\le q(a)\) has no infinite independent
+set. The same induction on \(q(a)\) as in Lemma 8.5a gives an infinite
+\[
+Y_L\subset Y
+\]
+and a rank \(s(L)\le q(a)\) such that every \(s(L)\)-subset of \(Y_L\) has a
+witness \(>L\). Apply this successively for \(L=1,2,\ldots\), each time
+inside the infinite set obtained at the previous step, to get nested
+infinite sets. Diagonalizing through those nested sets and passing to an
+infinite subsequence on which \(s(L)\) is constant gives an infinite
+\[
+Y(a)\subset Y
+\]
+and a rank \(r(a)\le q(a)\) such that, for every \(L\), all sufficiently late
+\[
+r(a)\text{-subsets of }Y(a)
+\]
+have witnesses \(>L\).
+
+Now build \(Q\) recursively. Choose \(a_1\in P\). Apply the preceding
+paragraph to the section above \(a_1\), obtaining an infinite tail \(Y(a_1)\)
+and rank \(r_1\). Choose
+\[
+a_2\in Y(a_1),
+\]
+apply the section argument inside the tail of \(Y(a_1)\) above \(a_2\), and
+continue. At stage \(i\), the future sequence is chosen inside the tail
+where the section conclusion for \(a_i\) holds. Therefore, for each fixed
+\(i\), all sufficiently late \(r_i\)-subsets of the final sequence \(Q\)
+have the required witnesses \(>L\), proving (2). \(\square\)
+
+Thus the no-section-descent case is not an arbitrary weak barrier. After
+thinning, it has complete prefix links of finite but moving ranks \(r_i\):
+the first point \(a_i\) is linked to every sufficiently late \(r_i\)-subset
+of the remaining tail. The first Schreier shell is the special case
+\(r_i=i\). The remaining arithmetic gap is to rule out these generalized
+prefix-link shells when the witnesses are genuine order-\(3\) holes with
+the private-color normal form, or to build a staged basis realizing such
+moving ranks.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -17017,6 +17104,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   obstruction statistic either descends to a one-point section or becomes a
   first-coordinate shell with finite section bounds diverging along the
   first coordinate.
+* Lemma 8.5a.8b turns bounded first-coordinate section barriers into
+  generalized complete prefix-link shells: after thinning, each first point
+  \(a_i\) links to every sufficiently late \(r_i\)-subset of the remaining
+  tail, for some finite moving rank \(r_i\).
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
