@@ -4733,6 +4733,21 @@ weaker than the false three-slot `(0,0,2)` target.  The latter is exactly the
 case `C=empty`; the mask `225409983` above shows that an induced edge may be
 needed.
 
+Equivalently, every even graph `G` should satisfy one of the following two
+alternatives:
+
+1. `V(G)` has a partition into two `0 mod 4` parts and one `2 mod 4` part;
+2. there is an edge `uv` such that `V(G)\{u,v}` has a partition into two
+   `0 mod 4` parts and one `2 mod 4` part.
+
+Indeed, if a one-edge matching-slot certificate has `C=empty`, then the first
+alternative holds.  If `C={u,v}`, then `uv` is an edge and the remaining slots
+`A,B,D` form a `(0,0,2)` partition of `G-\{u,v}`; edges from `u` or `v` to
+the other slots are irrelevant because they are cross-slot edges.  Conversely,
+either displayed alternative gives a matching-slot certificate by taking
+`C=empty` or `C={u,v}`.  Thus the one-edge candidate is a deletion-of-one-edge
+endpoint version of the three-slot `(0,0,2)` problem.
+
 The checker `EXPERIMENTS/matching_slot_fast.cpp` supports this strengthening
 with `--max-c-vertices 2`.  It verifies the full labelled `n=8` even-graph
 sweep, split into eight adjacent chunks of `262144` free-edge masks:
