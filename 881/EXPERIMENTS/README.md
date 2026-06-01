@@ -248,8 +248,9 @@ extensions from the same profile at scale `100`. With beam `8`, coverage
 extends from `3000` to `6488` and stalls at `6489`; with beam `32`, it
 extends only to `6501`. The next-gap candidates are unsafe almost entirely
 because each candidate plus an existing retained pair sums to the witness.
-The scale `200` run gives the same ratio, reaching `12947` below witness
-`20000`.
+It also checks two-point batches for the stalled next gap and finds none in
+the scale `100` and `200` runs. The scale `200` run gives the same ratio,
+reaching `12947` below witness `20000`.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

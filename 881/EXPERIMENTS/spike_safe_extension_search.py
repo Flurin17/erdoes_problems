@@ -74,6 +74,53 @@ def unsafe_reasons(
     return reasons
 
 
+def safe_batch(
+    retained: frozenset[int],
+    retained_pair_sums: frozenset[int],
+    batch: tuple[int, ...],
+    witness: int,
+) -> bool:
+    if len(set(batch)) != len(batch):
+        return False
+    if any(not safe_to_add(retained, retained_pair_sums, item, witness) for item in batch):
+        return False
+    retained_set = set(retained)
+    for i, first in enumerate(batch):
+        for second in batch[i:]:
+            if witness - first - second in retained_set:
+                return False
+    for i, first in enumerate(batch):
+        for j in range(i, len(batch)):
+            second = batch[j]
+            for third in batch[j:]:
+                if first + second + third == witness:
+                    return False
+    return True
+
+
+def safe_two_point_gap_batches(
+    state: State,
+    deleted: set[int],
+    witness: int,
+    gap: int,
+    limit: int,
+) -> list[tuple[int, int]]:
+    full = set(state.retained) | deleted
+    batches: list[tuple[int, int]] = []
+    for first in range(1, gap // 2 + 1):
+        second = gap - first
+        if first in full or second in full:
+            continue
+        if first == second:
+            continue
+        batch = (first, second)
+        if safe_batch(state.retained, state.retained_pair_sums, batch, witness):
+            batches.append(batch)
+            if len(batches) >= limit:
+                break
+    return batches
+
+
 def add_retained(
     state: State,
     deleted: set[int],
@@ -253,6 +300,11 @@ def main() -> None:
     print(f"unsafe_blocker_count={len(blockers)}")
     print(f"unsafe_reason_counts={reason_counts}")
     print(f"unsafe_blocker_examples={blocker_examples[:20]}")
+    two_batches = safe_two_point_gap_batches(
+        best, deleted, witness, final_gap, limit=20
+    )
+    print(f"safe_two_point_batches_for_next_gap={two_batches}")
+    print(f"safe_two_point_batch_count_reported={len(two_batches)}")
 
     if any(witness - retained in best.retained_pair_sums for retained in best.retained):
         raise AssertionError("witness repaired in retained three-sum")

@@ -2406,9 +2406,11 @@ a filler that covers a current two-sum gap \(p\) must be of the form
 At scale \(100\), beam \(8\) extends full two-sum coverage from \(3000\) to
 \(6488\) and stalls at \(6489\); beam \(32\) reaches only \(6501\). The
 next-gap candidates are all unsafe because they lie in \(w-2C\), with a
-few also hitting \(w-2x\in C\). Scale \(200\) gives the same ratio,
-reaching \(12947<20000\). This is evidence that greedy safe bands hit
-complement-pair saturation well below the witness.
+few also hitting \(w-2x\in C\). The script also tests two-point batches
+\(x+y=p\) for the stalled gap and finds none at scales \(100\) and \(200\).
+Scale \(200\) gives the same ratio, reaching \(12947<20000\). This is
+evidence that greedy safe bands hit complement-pair saturation well below
+the witness.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed

@@ -8784,8 +8784,10 @@ with \(c,c_1,c_2\in C\). These are excluded exactly by (2). \(\square\)
 ### Diagnostic 8.5a.7z.12f: Safe extension stalls below the witness
 
 The script `spike_safe_extension_search.py` applies Lemma 8.5a.7z.12e to
-the safe filler profile from Diagnostic 8.5a.7z.12c. To keep the beam
-search finite, its default scale is \(N=100\), with the same rows
+the safe filler profile from Diagnostic 8.5a.7z.12c. It also checks whether
+the stalled next gap can be covered by a safe two-point batch \(x+y=p\).
+To keep the beam search finite, its default scale is \(N=100\), with the
+same rows
 \[
 U=\{1,4,9,16,25,36\},
 \]
@@ -8800,12 +8802,14 @@ w=10000.
 The initial safe filler profile has full two-sum coverage through \(3000\).
 With beam \(8\), the one-point extension search keeps \(w\notin3C\) and
 extends coverage only to \(6488\), then stalls at the next gap \(6489\).
-It reports \(1031\) possible blockers for that next gap, all unsafe because
-the candidate lies in \(w-2C\); \(16\) also have the double-candidate
-obstruction \(w-2x\in C\). With beam \(32\), the best endpoint improves
-only to \(6501\), stalling at \(6502\) with the same obstruction type.
-At scale \(N=200\), beam \(8\) similarly extends coverage from \(6000\) to
-\(12947\), again far below the witness \(20000\).
+It reports \(1031\) possible one-point blockers for that next gap, all
+unsafe because the candidate lies in \(w-2C\); \(16\) also have the
+double-candidate obstruction \(w-2x\in C\). It finds no safe two-point
+batch for the next gap. With beam \(32\), the best endpoint improves only
+to \(6501\), stalling at \(6502\) with the same obstruction type. At scale
+\(N=200\), beam \(8\) similarly extends coverage from \(6000\) to \(12947\),
+again far below the witness \(20000\); the next gap has \(2061\) unsafe
+one-point blockers and no safe two-point batch.
 
 This is finite evidence, not a proof. Its value is that it identifies the
 local pressure precisely: once safe fillers make \(2C\) dense near the
@@ -15797,7 +15801,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   compressed-spike dichotomy of Lemma 8.5a.7z.10.
 * Lemma 8.5a.7z.12e and Diagnostic 8.5a.7z.12f isolate the next local
   obstruction: one-point retained fillers that would cover the next gap
-  may all lie in \(w-2C\), so each would repair the protected witness.
+  may all lie in \(w-2C\), so each would repair the protected witness; in
+  the tested scaled profiles even two-point batches do not cover the stalled
+  gap safely.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample
