@@ -4774,6 +4774,39 @@ The analogous family `(0,a,4,a+4)` also passes the `4 -> 8` checks.  In fact
 this clean pattern is forced by a simple layer argument for every complete
 multipartite graph, without a class-size cap.
 
+For the flexible part-count formulation, complete multipartite graphs satisfy
+an even stronger theorem.
+
+**Lemma: Complete Multipartite Flexible Two-Part Lift.**  Let `q` be a
+positive integer and let `H` be a complete multipartite graph whose vertex
+degrees are all congruent modulo `q`.  Then `V(H)` can be partitioned into at
+most two induced `2q`-modular subgraphs.
+
+Proof.  Let the multipartite class sizes be `s_1,...,s_t`, and let
+`N=sum_i s_i`.  A vertex in class `i` has degree `N-s_i`.  Since all degrees
+are congruent modulo `q`, all class sizes are congruent modulo `q`.
+
+There are therefore at most two possible residues for the class sizes modulo
+`2q`: say `r` and `r+q`.  Let `A` be the union of all classes whose size is
+`r mod 2q`, and let `B` be the union of all classes whose size is
+`r+q mod 2q`, omitting either set if it is empty.
+
+Consider one of these two induced subgraphs, say on a union `U` of whole
+classes whose sizes are all congruent to `c mod 2q`.  If `U` meets class `i`,
+then every vertex in that class has internal degree
+
+```text
+|U|-s_i congruent |U|-c mod 2q.
+```
+
+This residue is independent of the class `i`, so `H[U]` is `2q`-modular.
+Thus `A` and `B` give the required partition.  QED.
+
+This lemma explains why complete multipartite graphs have not obstructed the
+connected flexible coarse-lift route: their apparent fixed-slot complexity is
+only a residue-alignment issue.  The obstruction from Computational
+Proposition 4E.4 is not complete multipartite.
+
 **Lemma: Complete Multipartite Clean Source Slots.**  Let `q` be a positive
 integer and let `H` be a complete multipartite graph whose class sizes are all
 congruent modulo `q`.  Suppose every vertex degree of `H` is congruent to

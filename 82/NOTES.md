@@ -2963,3 +2963,10 @@ source of growth beyond Ramsey.
   This supports the interpretation that the three-part obstruction is a
   structured alignment phenomenon, while a connected four-part `4 -> 8` lift
   remains a plausible local target.
+- 2026-06-01: Proved a stronger flexible complete-multipartite lift.  If a
+  complete multipartite graph is `q`-modular, then all class sizes are
+  congruent modulo `q`; grouping whole classes by their size modulo `2q`
+  partitions the graph into at most two induced `2q`-modular subgraphs.  This
+  supersedes the earlier three-part fixed-slot complete-multipartite lemma
+  for the flexible part-count route and shows that complete multipartite
+  graphs are not an obstruction to connected flexible coarse lifts.
