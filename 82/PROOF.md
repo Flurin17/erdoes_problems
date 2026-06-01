@@ -8437,6 +8437,49 @@ If `P_h=2^{o(h)}`, then the polynomial factor `320h^8` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
+**Lemma 28G: The Balanced Pair Parameter Has The Same Subexponential Scale As
+`G`.**  For every `h>=3`,
+
+```text
+G(ceil(h/2)) <= P_h <= ceil(G(h)/2).
+```
+
+Consequently,
+
+```text
+P_h=2^{o(h)}    iff    G(h)=2^{o(h)}.
+```
+
+Proof.  The upper bound is immediate from the definition of `G(h)`: if
+`M>=ceil(G(h)/2)`, then any graph on two marked parts of size `M` has at
+least `G(h)` vertices, and therefore already satisfies the first alternative
+in the definition of `P_h`.
+
+For the lower bound, put `k=ceil(h/2)` and let `J` be a graph on
+`G(k)-1` vertices with no regular induced subgraph on at least `k` vertices.
+Let `H` be the disjoint union of two copies of `J`, with one copy marked as
+`A` and the other as `B`.  Then `H` has no regular induced subgraph on at
+least `h` vertices: if `S=S_A union S_B` were regular in the disjoint union,
+then each nonempty `S_A,S_B` would induce a regular graph of the same degree,
+and if `|S|>=h`, at least one of `S_A,S_B` would have order at least
+`ceil(h/2)=k`, contradicting the choice of `J`.
+
+Now let `r=ceil((h-2)/2)`.  Since there are no edges between `A` and `B`, no
+sets `X subset A`, `Y subset B` with `|X|=|Y|=r` can make
+`H[X union Y]` `r`-regular: every vertex has at most `r-1` possible neighbors
+inside its own side and none across the cut.  Thus the plus version of the
+balanced pair property fails for side size `G(k)-1`, so
+`P_h^+>=G(k)`.  By Lemma 28B, `P_h=P_h^+`, proving the lower bound.
+
+If `G(h)=2^{o(h)}`, the displayed upper bound gives `P_h=2^{o(h)}`.  The
+reverse implication is Proposition 28F.  QED.
+
+This lemma clarifies the role of the pair route.  It does not make the
+problem easier by changing the exponential scale: the local parameter is
+subexponentially equivalent to `G`.  The gain is structural.  Proposition 28F
+shows that controlling the marked two-part obstruction automatically controls
+all global counterexamples with only a polynomial loss.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

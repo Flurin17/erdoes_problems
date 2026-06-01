@@ -2494,3 +2494,8 @@ source of growth beyond Ramsey.
   inversion lemma on bucket representatives to force a large clique or
   independent set if there are too many buckets.  This isolates the remaining
   main target as the local statement `P_h=2^{o(h)}`.
+- 2026-06-01: Added Lemma 28G.  The local balanced pair parameter satisfies
+  `G(ceil(h/2)) <= P_h <= ceil(G(h)/2)`, so `P_h=2^{o(h)}` is actually
+  equivalent to the original inverse conjecture.  Proposition 28F is still
+  useful because it proves a polynomial global reduction from arbitrary
+  counterexamples to the marked two-part obstruction.
