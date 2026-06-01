@@ -2178,6 +2178,20 @@ each packet in that finite window contains a realized late-bad edge with
 witness \(>L\). This is now the finite combinatorial target for any
 negative construction.
 
+Lemma 8.5a.7u adds the selector-cylinder count for those finite windows.
+If a family of partial selector edges covers
+\[
+\prod_{j\in J}F_j,
+\]
+then
+\[
+\sum_G\prod_{j\in\sigma(G)}|F_j|^{-1}\ge1.
+\]
+Thus, when every packet has at least \(m\) choices, avoiding all supports
+below rank \(q\) costs at least \(m^q\) realized bad edges in the same
+finite window. In particular, finite product covers must either expose
+low-rank arithmetic edges or pay a large high-rank edge count.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent

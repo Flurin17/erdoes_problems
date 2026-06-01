@@ -10,6 +10,7 @@ selector in a finite product of blocks.
 
 from __future__ import annotations
 
+from fractions import Fraction
 from itertools import product
 from typing import Iterable
 
@@ -47,6 +48,28 @@ def selector_relevant_edges(blocks: tuple[Block, ...], edges: Iterable[Edge]) ->
     return relevant
 
 
+def edge_support(blocks: tuple[Block, ...], edge: Edge) -> frozenset[int]:
+    owner = vertex_blocks(blocks)
+    return frozenset(owner[vertex] for vertex in edge)
+
+
+def cover_weight(blocks: tuple[Block, ...], edges: Iterable[Edge]) -> Fraction:
+    relevant = selector_relevant_edges(blocks, edges)
+    block_sizes = tuple(len(block) for block in blocks)
+    total = Fraction(0, 1)
+    for edge in relevant:
+        denominator = 1
+        for block_index in edge_support(blocks, edge):
+            denominator *= block_sizes[block_index]
+        total += Fraction(1, denominator)
+    return total
+
+
+def support_sizes(blocks: tuple[Block, ...], edges: Iterable[Edge]) -> list[int]:
+    relevant = selector_relevant_edges(blocks, edges)
+    return sorted(len(edge_support(blocks, edge)) for edge in relevant)
+
+
 def uncovered_selectors(
     blocks: tuple[Block, ...],
     edges: Iterable[Edge],
@@ -75,6 +98,8 @@ def report(name: str, blocks: tuple[Block, ...], edges: Iterable[Edge]) -> None:
     edge_tuple = tuple(edges)
     print(name)
     print(f"first_covered_prefix={first_covered_prefix(blocks, edge_tuple)}")
+    print(f"cover_weight={cover_weight(blocks, edge_tuple)}")
+    print(f"support_sizes={support_sizes(blocks, edge_tuple)}")
     print(f"uncovered_selectors={uncovered_selectors(blocks, edge_tuple)}")
 
 

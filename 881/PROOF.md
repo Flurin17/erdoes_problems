@@ -7325,6 +7325,82 @@ arbitrarily late thresholds and inside every infinite packet tail, some
 finite packet window must already be completely wired so that every product
 choice of one deleted color contains a realized arithmetic late-bad edge.
 
+### Lemma 8.5a.7u: Product covers force low-rank edges or many edges
+
+Let
+\[
+J
+\]
+be finite, and let
+\[
+F_j\qquad(j\in J)
+\]
+be finite nonempty blocks. Let \(\mathcal H\) be a family of finite sets
+\[
+G\subset\bigcup_{j\in J}F_j
+\]
+such that every \(G\in\mathcal H\) meets each block in at most one point,
+and suppose \(\mathcal H\) covers the product:
+for every selector
+\[
+y_j\in F_j\qquad(j\in J),
+\]
+there is \(G\in\mathcal H\) with
+\[
+G\subset\{y_j:j\in J\}. \tag{1}
+\]
+For \(G\in\mathcal H\), put
+\[
+\sigma(G)=\{j\in J:\ G\cap F_j\ne\varnothing\}.
+\]
+Then
+\[
+\sum_{G\in\mathcal H}\prod_{j\in\sigma(G)}\frac1{|F_j|}\ge1. \tag{2}
+\]
+Consequently, if
+\[
+|F_j|\ge m\qquad(j\in J)
+\]
+and every \(G\in\mathcal H\) has
+\[
+|\sigma(G)|\ge q,
+\]
+then
+\[
+|\mathcal H|\ge m^q. \tag{3}
+\]
+
+Proof. The product of the blocks has size
+\[
+T=\prod_{j\in J}|F_j|.
+\]
+A fixed edge \(G\) is contained in exactly
+\[
+\prod_{j\in J\setminus\sigma(G)}|F_j|
+\]
+selectors. Since the sets of selectors covered by the edges of
+\(\mathcal H\) cover the whole product, the union bound gives
+\[
+T\le \sum_{G\in\mathcal H}\prod_{j\in J\setminus\sigma(G)}|F_j|.
+\]
+Dividing by \(T\) gives (2). If \(|F_j|\ge m\) and
+\(|\sigma(G)|\ge q\), then each summand in (2) is at most \(m^{-q}\), so
+\[
+1\le |\mathcal H|m^{-q},
+\]
+which proves (3). \(\square\)
+
+Applied to the finite windows from Corollary 8.5a.7t, this says that a
+counterexample has only two product-cover options. Either some finite
+window contains low-rank promoted bad edges, especially pair edges when
+\(|\sigma(G)|=2\), or avoiding all supports below \(q\) requires at least
+\(m^q\) realized arithmetic late-bad edges in that one finite window, where
+\[
+m=\min_{j\in J}|F_j|.
+\]
+Thus a construction cannot hide the promoted-edge debt in a small number of
+high-rank cross-packet constraints.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7367,12 +7443,13 @@ avoid any prescribed finite row core, and Corollary 8.5a.7q does the same
 for the retained mirror set \(m-U\). The precise missing step is to show
 that these bounded-center, cofinally moving-palette, moving-row/mirror, or
 independence-number escapes are impossible under the cross-packet selector
-obligation of Corollaries 8.5a.7r--8.5a.7t, or to construct a staged basis
-in which the fibers \(U\), mirrors \(m-U\), centers \(m\), shifts \(h\), and
-active colors \(f,g\) all escape while maintaining order-2 coverage and
-arbitrarily late finite product covers of promoted cross-packet edges. This
-is now the active form of the certificate-free obstruction; it is stronger
-than mobile injectivity and weaker than finite recurrent Sidon coloring.
+obligation of Corollaries 8.5a.7r--8.5a.7t and the counting pressure of
+Lemma 8.5a.7u, or to construct a staged basis in which the fibers \(U\),
+mirrors \(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all
+escape while maintaining order-2 coverage and arbitrarily late finite
+product covers of promoted cross-packet edges. This is now the active form
+of the certificate-free obstruction; it is stronger than mobile injectivity
+and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -13983,6 +14060,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.7t adds a compactness consequence: inside every infinite
   packet tail and for every witness threshold, some finite packet window is
   already completely product-covered by realized cross-packet bad edges.
+* Lemma 8.5a.7u adds the finite selector-cylinder count: a complete product
+  cover has total weight at least \(1\), so avoiding supports below rank
+  \(q\) in packets of size at least \(m\) requires at least \(m^q\) realized
+  bad edges in the same finite window.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

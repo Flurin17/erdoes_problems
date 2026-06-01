@@ -172,8 +172,10 @@ cross-packet edges, it reports selectors choosing one vertex per block that
 contain no edge. Local block cuts are uncovered, complete bipartite wiring
 between two blocks covers every selector, and sparse wiring leaves explicit
 escaping selectors. It also reports the first finite prefix that is already
-product-covered, matching the finite compactness target in Corollary
-8.5a.7t.
+product-covered, the relevant support sizes, and the selector-cylinder
+cover weight \(\sum_G\prod_{j\in\sigma(G)}|F_j|^{-1}\), matching the
+finite compactness target in Corollary 8.5a.7t and the union-bound pressure
+in Lemma 8.5a.7u.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
