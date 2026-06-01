@@ -2536,3 +2536,8 @@ source of growth beyond Ramsey.
   obstructions at `M=5`, but none at `M=6`.  Since the marked pair checker
   has `P_6>6`, the full pair parameter has cross-component obstructions
   beyond disjoint-union spectrum separation.
+- 2026-06-01: Added `marked_pair_profile.py`.  On the `P_6>6` marked
+  obstruction, the two sides have `18` same-degree regular spectrum pairs of
+  total size at least `6`, but no regular union; every candidate is destroyed
+  by nonconstant cross-degree profiles.  This isolates the next local
+  obstruction after `D_spec`.

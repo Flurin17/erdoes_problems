@@ -8751,6 +8751,30 @@ so `P_6>6=D_spec(6)`.  Therefore the full pair parameter has genuinely
 cross-component obstructions beyond disjoint-union spectrum separation,
 already at the first nontrivial calibrated value.
 
+The helper `EXPERIMENTS/marked_pair_profile.py` inspects this cross-component
+mechanism.  On the same `P_6` obstruction, with the first six vertices as
+`A` and the last six as `B`, it reports
+
+```text
+side_compatible_pairs=18
+regular_unions=0
+left_spectrum=0:3 1:4 2:4
+right_spectrum=0:3 1:2 2:4
+```
+
+Thus the two sides have many same-degree regular spectrum pairs whose orders
+sum to at least `6`; these would create regular subgraphs in the disjoint
+union.  The cross edges destroy all of them by making the cross-degree
+profiles nonconstant.  The verification command is
+
+```text
+python3 82/EXPERIMENTS/marked_pair_profile.py 12 --mask 1680212686667006004 --split 6 --h 6
+```
+
+This identifies the next local obstacle after spectrum matching: even when
+same-degree side witnesses exist, one must find such witnesses whose
+cross-degree profiles compensate rather than split.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put
