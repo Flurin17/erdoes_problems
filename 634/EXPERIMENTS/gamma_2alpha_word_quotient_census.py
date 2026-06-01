@@ -34,7 +34,7 @@ from gamma_2alpha_overlap_cover import (  # noqa: E402
     valid_pairs_for_lengths,
 )
 from gamma_2alpha_overlap_remainder_inventory import label_word, word_signature  # noqa: E402
-from gamma_2alpha_residual_capped_census import classify_shell  # noqa: E402
+from gamma_2alpha_residual_capped_census import classify_shell, demand_key  # noqa: E402
 
 
 BoundaryPath = tuple
@@ -59,6 +59,13 @@ def add_rep(reps: list[BoundaryDemand], demand: BoundaryDemand, limit: int) -> N
         reps.append(demand)
 
 
+def parse_word_signature(signature: str) -> tuple[str, str, str]:
+    parts = signature.split()
+    if len(parts) != 3 or not all(part[1] == "=" for part in parts):
+        raise ValueError(signature)
+    return parts[0][2:], parts[1][2:], parts[2][2:]
+
+
 def census_survivor(
     survivor,
     *,
@@ -67,6 +74,7 @@ def census_survivor(
     reps_per_word: int,
     skip_classified_words: int,
     max_classified_words: int,
+    classification_mode: str,
     progress_every: int,
     example_words_per_status: int,
 ) -> dict:
@@ -90,6 +98,13 @@ def census_survivor(
         rep: paths_by_endpoint_and_mixed(rep)
         for rep in set(bounded_reps + free_reps + base_reps)
     }
+    paths_by_rep_and_word = {}
+    for rep, index in indexes.items():
+        by_word: dict[str, list[BoundaryPath]] = defaultdict(list)
+        for group in index.values():
+            for path in group:
+                by_word[label_word(path)].append(path)
+        paths_by_rep_and_word[rep] = {word: tuple(paths) for word, paths in by_word.items()}
     x_paths = tuple(path for rep in x_reps for group in indexes[rep].values() for path in group)
     base_paths_all = tuple(path for rep in base_reps for group in indexes[rep].values() for path in group)
     needed_positions = {
@@ -135,6 +150,15 @@ def census_survivor(
             overlap_cache[key] = value
         return value
 
+    def demand_covered(demand: BoundaryDemand) -> bool:
+        for pair in active_pairs:
+            side_path = demand.left_path if pair.side == "L" else demand.right_path
+            side_polygon = polygons[(pair.side, pair.side_position, side_path)]
+            base_polygon_value = polygons[("B", pair.base_position, demand.base_path)]
+            if overlaps_cached(side_polygon, base_polygon_value):
+                return True
+        return False
+
     def side_good_words(
         side_name: str,
         paths: tuple[BoundaryPath, ...],
@@ -172,6 +196,56 @@ def census_survivor(
     orientations = [("left", bounded_reps, free_reps)]
     if bounded_reps != free_reps:
         orientations.append(("right", free_reps, bounded_reps))
+
+    def classify_word_exhaustively(signature: str) -> Counter[str]:
+        left_word, right_word, base_word = parse_word_signature(signature)
+        statuses: Counter[str] = Counter()
+        seen_demands = set()
+        for short_side, left_reps, right_reps in orientations:
+            for left_rep in left_reps:
+                left_paths = paths_by_rep_and_word[left_rep].get(left_word, ())
+                if not left_paths:
+                    continue
+                for right_rep in right_reps:
+                    right_paths = paths_by_rep_and_word[right_rep].get(right_word, ())
+                    if not right_paths:
+                        continue
+                    for base_rep in base_reps:
+                        base_paths = paths_by_rep_and_word[base_rep].get(base_word, ())
+                        if not base_paths:
+                            continue
+                        for left_path in left_paths:
+                            left_mixed = mixed(left_path)
+                            for right_path in right_paths:
+                                if not apex_corner(left_path[-1], right_path[0]):
+                                    continue
+                                right_mixed = mixed(right_path)
+                                for base_path in base_paths:
+                                    total_mixed = left_mixed + right_mixed + mixed(base_path)
+                                    if not min_total_mixed <= total_mixed <= max_total_mixed:
+                                        continue
+                                    if not alpha_corner(right_path[-1], base_path[0]):
+                                        continue
+                                    if not alpha_corner(base_path[-1], left_path[0]):
+                                        continue
+                                    demand = BoundaryDemand(
+                                        short_side=short_side,
+                                        left_rep=left_rep,
+                                        right_rep=right_rep,
+                                        base_rep=base_rep,
+                                        mixed_transitions=total_mixed,
+                                        left_path=left_path,
+                                        right_path=right_path,
+                                        base_path=base_path,
+                                    )
+                                    key = demand_key(demand)
+                                    if key in seen_demands:
+                                        continue
+                                    seen_demands.add(key)
+                                    if demand_covered(demand):
+                                        continue
+                                    statuses[classify_shell(survivor, demand, radicand).status] += 1
+        return statuses
 
     started = time.monotonic()
     for short_side, left_reps, right_reps in orientations:
@@ -244,6 +318,7 @@ def census_survivor(
     example_words: dict[str, list[dict[str, object]]] = defaultdict(list)
     mixed_example_words: list[dict[str, object]] = []
     mixed_status_words = 0
+    word_count_mismatches: list[dict[str, object]] = []
     classified_words = 0
     classified_weight = 0
     for word_index, (signature, multiplicity) in enumerate(word_counts.items(), start=1):
@@ -251,10 +326,28 @@ def census_survivor(
             continue
         if classified_words >= max_classified_words:
             break
-        statuses = Counter(
-            classify_shell(survivor, demand, radicand).status
-            for demand in word_reps[signature]
-        )
+        if classification_mode == "representative":
+            statuses = Counter(
+                classify_shell(survivor, demand, radicand).status
+                for demand in word_reps[signature]
+            )
+            status_weights = Counter({next(iter(statuses)): multiplicity})
+            word_weight = multiplicity
+        elif classification_mode == "exhaustive":
+            statuses = classify_word_exhaustively(signature)
+            status_weights = statuses
+            word_weight = sum(statuses.values())
+            if word_weight != multiplicity:
+                word_count_mismatches.append(
+                    {
+                        "word": signature,
+                        "expected": multiplicity,
+                        "actual": word_weight,
+                        "statuses": dict(sorted(statuses.items())),
+                    }
+                )
+        else:
+            raise ValueError(classification_mode)
         if len(statuses) > 1:
             mixed_status_words += 1
             if example_words_per_status and len(mixed_example_words) < example_words_per_status:
@@ -265,9 +358,9 @@ def census_survivor(
                         "statuses": dict(sorted(statuses.items())),
                     }
                 )
-        representative_status = next(iter(statuses))
+        representative_status = next(iter(statuses)) if len(statuses) == 1 else "mixed-status"
         status_group_counts[representative_status] += 1
-        status_weight_counts[representative_status] += multiplicity
+        status_weight_counts.update(status_weights)
         status_signatures[tuple(sorted(statuses.items()))] += 1
         if example_words_per_status and len(example_words[representative_status]) < example_words_per_status:
             example_words[representative_status].append(
@@ -278,7 +371,7 @@ def census_survivor(
                 }
             )
         classified_words += 1
-        classified_weight += multiplicity
+        classified_weight += word_weight
         if progress_every and classified_words % progress_every == 0:
             elapsed = time.monotonic() - started
             print(
@@ -297,6 +390,7 @@ def census_survivor(
         "word_groups": len(word_counts),
         "reps_per_word": reps_per_word,
         "skip_classified_words": skip_classified_words,
+        "classification_mode": classification_mode,
         "classified_words": classified_words,
         "first_classified_word_index": skip_classified_words + 1 if classified_words else None,
         "last_classified_word_index": skip_classified_words + classified_words if classified_words else None,
@@ -310,6 +404,7 @@ def census_survivor(
         },
         "example_words": dict(sorted(example_words.items())),
         "mixed_example_words": mixed_example_words,
+        "word_count_mismatches": word_count_mismatches,
         "elapsed_seconds": round(time.monotonic() - started, 6),
     }
 
@@ -322,6 +417,7 @@ def main() -> None:
     parser.add_argument("--reps-per-word", type=int, default=1)
     parser.add_argument("--skip-classified-words", type=int, default=0)
     parser.add_argument("--max-classified-words", type=int, default=10000)
+    parser.add_argument("--classification-mode", choices=("representative", "exhaustive"), default="representative")
     parser.add_argument("--progress-every", type=int, default=0)
     parser.add_argument("--example-words-per-status", type=int, default=0)
     parser.add_argument("--json-out", type=Path)
@@ -351,6 +447,7 @@ def main() -> None:
                 reps_per_word=args.reps_per_word,
                 skip_classified_words=args.skip_classified_words,
                 max_classified_words=args.max_classified_words,
+                classification_mode=args.classification_mode,
                 progress_every=args.progress_every,
                 example_words_per_status=args.example_words_per_status,
             )
