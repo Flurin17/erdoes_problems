@@ -5527,6 +5527,41 @@ show that `T` need not be small; the useful question is whether one can always
 make the surviving trace-equalized set substantially larger than the Ramsey
 scale.
 
+**Lemma 11H: Bounded-Spread Deletion And Modular Certificates.**  Let `G` be
+a graph, let `d` be an integer, and write
+
+```text
+deg_G(v)=d+epsilon(v)
+```
+
+on a vertex set `S`, with no restriction on the integer offsets
+`epsilon(v)`.  Put `T=V(G)\S`.  Then:
+
+1. `G[S]` is regular if and only if `deg_G(v,T)-epsilon(v)` is constant over
+   `v in S`;
+2. for a positive integer `q`, the induced graph `G[S]` is `q`-modular if and
+   only if `deg_G(v,T)-epsilon(v)` is constant modulo `q` over `v in S`.
+
+Consequently, if the modular condition in (2) holds and `|S|<=q+1`, then
+`G[S]` is regular.
+
+Proof.  For every `v in S`,
+
+```text
+deg_{G[S]}(v)=deg_G(v)-deg_G(v,T)
+             =d+epsilon(v)-deg_G(v,T).
+```
+
+Equality of these induced degrees is exactly equality of
+`deg_G(v,T)-epsilon(v)`, and congruence modulo `q` is exactly congruence of
+the same quantities modulo `q`.  The final assertion is Lemma 2.  QED.
+
+This is the common algebra behind the bounded-spread and modular programs.
+The deletion set `T` plays the role of an absorber whose trace vector cancels
+the ambient degree offsets on the surviving vertices.  For exact regularity
+the cancellation is over the integers; for dyadic lifting it is cancellation
+modulo the current modulus.
+
 ## Lemma 12: Minimal Repeated-Degree Host Obstruction
 
 Let `H` be an induced subgraph of `G` containing a set

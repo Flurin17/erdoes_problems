@@ -2504,3 +2504,9 @@ source of growth beyond Ramsey.
   when `deg(v,V\S)-epsilon(v)` is constant on `S`.  This turns the spread-one
   route into an offset-trace deletion problem and gives a precise certificate
   to inspect in compensated examples.
+- 2026-06-01: Added Lemma 11H, the bounded-spread/modular version of the same
+  deletion identity.  If `deg_G(v)=d+epsilon(v)` on `S`, then `G[S]` is
+  regular, respectively `q`-modular, exactly when
+  `deg(v,V\S)-epsilon(v)` is constant, respectively constant modulo `q`, on
+  `S`.  This identifies bounded-spread regularization and dyadic modular
+  lifting as the same offset-trace cancellation problem over different rings.
