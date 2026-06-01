@@ -10746,6 +10746,25 @@ C_reg(1,3)=5,       C_reg(1,4)=7.
 The lower certificates are found at `n=4` for `h=3` and at `n=6` for `h=4`;
 the next orders are exhausted with status `unsat`.
 
+For the next value, the same script quickly finds a `13`-vertex lower
+certificate:
+
+```text
+python3 82/EXPERIMENTS/threshold_regular_dfs.py 13 --h 6 --progress 0
+```
+
+with threshold sequence
+
+```text
+2,4,6,8,9,13,13,13,11,10,13,12,13
+```
+
+and maximum regular induced order `5`.  Thus
+
+```text
+C_reg(1,6)>13.
+```
+
 By contrast, Lemma 28E.5 gives `C_drop(1,5)=17`.  Thus even in the first
 nontrivial regular column-drop case, regular extraction improves the
 homogeneous column-drop bound.  The improvement is finite and does not yet

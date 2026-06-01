@@ -3203,9 +3203,10 @@ source of growth beyond Ramsey.
   with status `unsat`.  Together with the previous fixed-mask lower example,
   this gives the exact finite calibration `C_reg(1,5)=13`, improving on the
   homogeneous value `C_drop(1,5)=17`.  The same DFS gives
-  `C_reg(1,3)=5` and `C_reg(1,4)=7`.  This is finite evidence that regular
-  extraction in the representative ordered graph is genuinely stronger than
-  chain-antichain extraction, but it does not yet provide an asymptotic
+  `C_reg(1,3)=5` and `C_reg(1,4)=7`, and quickly finds a `13`-vertex lower
+  certificate for `h=6`, so `C_reg(1,6)>13`.  This is finite evidence that
+  regular extraction in the representative ordered graph is genuinely stronger
+  than chain-antichain extraction, but it does not yet provide an asymptotic
   improvement for Proposition 28F.
 - 2026-06-01: Extended the high-minimum-degree matching-slot calibration by
   checking the `n=9` free-edge range `[10000000,11000000)` with
