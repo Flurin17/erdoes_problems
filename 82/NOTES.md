@@ -3119,3 +3119,10 @@ source of growth beyond Ramsey.
   while variance about `56` gives `1.70` times uniform.  This supports the
   expected `M^2`-scale residue-mixing threshold but leaves the harder
   row-and-column-sum conditioning problem untouched.
+- 2026-06-01: Added Lemma 7B, the shifted-rank twin certificate.  If
+  `rank(A+I)=r` over any field, then identical rows of `A+I` form a clique, so
+  `reg(G)>=n/2^r`; every counterexample must have both `rank(A)` and
+  `rank(A+I)` greater than `log_2(n/k)` over every field.  Updated
+  `rank_profile.py` to print shifted ranks for every requested prime.  The
+  recorded finite masks remain high-rank in this shifted sense, so they are
+  not clique-twin collapse artifacts.

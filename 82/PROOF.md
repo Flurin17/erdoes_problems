@@ -6401,6 +6401,45 @@ field.  The bound is not by itself stronger than Ramsey in the hard range, but
 it rules out any proof route that tries to hide all structure inside a
 low-rank adjacency model.
 
+## Lemma 7B: Low Shifted Adjacency Rank Gives A Large Clique
+
+Let `A_G` be the adjacency matrix of an `n`-vertex graph `G`, viewed over any
+field, and suppose
+
+```text
+rank(A_G+I) = r.
+```
+
+Then
+
+```text
+reg(G) >= n/2^r.
+```
+
+Consequently, if `G` has no regular induced subgraph on at least `k` vertices,
+then
+
+```text
+rank(A_G+I) > log_2(n/k)
+```
+
+over every field.
+
+Proof.  Apply the pivot-column argument from Lemma 7A to the rows of
+`A_G+I`.  Since those rows are also `0`-`1` vectors, at most `2^r` distinct
+rows occur, so some row class has size at least `n/2^r`.
+
+If two distinct vertices `u,v` have identical rows in `A_G+I`, compare the
+coordinate `u`.  The `u`-row has value `1` at coordinate `u`, while the
+`v`-row has value `A_G(v,u)`.  Hence `A_G(u,v)=1`.  Thus every row class of
+`A_G+I` is a clique, and is therefore a regular induced subgraph.  The final
+assertion is the contrapositive.  QED.
+
+Combining Lemmas 7A and 7B, a hard counterexample must have both `A_G` and
+`A_G+I` of rank larger than `log_2(n/k)` over every field.  This is still a
+weak condition in the Ramsey-scale range, but it excludes both independent
+and clique twin-collapse models by the same linear-algebra certificate.
+
 ## Proposition 8: Ramsey-Core Reduction
 
 For `C>0`, call an `n`-vertex graph `C`-Ramsey if it has no clique and no

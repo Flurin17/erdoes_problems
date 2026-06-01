@@ -105,14 +105,15 @@ def main() -> None:
     print(f"max_identical_row_class={max(row_counts.values(), default=0)}")
     for p in primes:
         rank = rank_mod_p(rows, p)
+        shifted_rank = rank_mod_p(shifted_rows(rows, 1, p), p)
         print(f"rank_mod_{p}={rank}")
         print(f"nullity_mod_{p}={args.n - rank}")
+        print(f"rank_mod_{p}_A_plus_I={shifted_rank}")
+        print(f"nullity_mod_{p}_A_plus_I={args.n - shifted_rank}")
+        print(f"low_shifted_rank_clique_bound_mod_{p}={args.n / (2 ** shifted_rank):.6g}")
         if p == 2:
             print(f"low_rank_independent_bound={args.n / (2 ** rank):.6g}")
             print(f"kernel_even_witness_bound={args.n - rank}")
-            shifted_rank = rank_mod_p(shifted_rows(rows, 1, p), p)
-            print(f"rank_mod_2_A_plus_I={shifted_rank}")
-            print(f"nullity_mod_2_A_plus_I={args.n - shifted_rank}")
             print(f"kernel_odd_witness_bound={args.n - shifted_rank}")
 
     if args.regular:
