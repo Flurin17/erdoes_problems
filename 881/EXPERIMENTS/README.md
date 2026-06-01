@@ -720,14 +720,13 @@ the seed fails before a reusable moving row-bank forms.
 13.1e with `k=3`, without the modulo-10 booster restriction. With default
 bounds it finds depth-four chains such as
 `[1,2,3,4] -> +7 -> +17 -> +27 -> +37`, with endpoints
-`15,26,36,46` and coverage through `18,28,38,48`. The tempting periodic
-continuation by `47` fails the pair-witness condition, and a bounded
-three-point search through candidate `120` finds no next stage. A later
-one-step rerun from the same depth-four seed with slack `80`, candidate
-values through `140`, and block size at most `3` also finds no extension.
-A targeted rerun from the same seed found no singleton extension through
-candidate `400`, and no block extension of size at most `3` through
-candidate `260` with slack up to `220`.
+`15,26,36,46` and coverage through `18,28,38,48`; the tempting periodic
+continuation by `47` fails the pair-witness condition. The `--depth5` mode
+finds a longer nonperiodic chain
+`[1,2,3] -> +7 -> +10 -> +23 -> +36 -> +46`, with endpoints
+`9,17,35,43,61` and coverage through `13,24,37,50,63`. A bounded depth-six
+rerun with slack `55`, candidate values through `130`, increments of size
+at most `2`, and branch limit `600` found no sixth stage.
 
 `singleton_high_excess_stage_search.py` tests the stricter Lemma 16.9
 singleton target: every new `b` needs `w notin 4(A\\{b})` and

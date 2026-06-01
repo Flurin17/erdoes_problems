@@ -13,6 +13,7 @@ existence or nonexistence of stages.
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from itertools import combinations
 
@@ -171,6 +172,19 @@ def search(
 
 
 if __name__ == "__main__":
+    if "--depth5" in sys.argv:
+        search(
+            {1, 2, 3},
+            base=3,
+            endpoint=3,
+            depth=5,
+            slack=40,
+            max_new_size=2,
+            max_candidate=90,
+            branch_limit=300,
+        )
+        raise SystemExit
+
     for start, base, endpoint in [
         ({1, 2, 3}, 3, 3),
         ({1, 2, 3, 4}, 3, 4),

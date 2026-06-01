@@ -21228,7 +21228,7 @@ seen in the robust-booster searches. Any counterexample along this route
 would need a non-greedy or larger-block high-excess design, not just a
 single prepared marker at each stage.
 
-### Diagnostic 16.8: General \(k=3\) pair stages reach depth four
+### Diagnostic 16.8: General \(k=3\) pair stages reach depth five
 
 The robust-booster pair search is not the only finite source of \(k=3\)
 pair barriers. The script `EXPERIMENTS/k3_pair_stage_dfs.py` removes the
@@ -21268,11 +21268,39 @@ again found no extension. A further targeted rerun found no singleton
 extension through candidate \(400\), and no block extension of size at most
 \(3\) through candidate \(260\) even with slack \(220\).
 
+That depth-four stall is not a proof obstruction. A wider run,
+```
+python3 881/EXPERIMENTS/k3_pair_stage_dfs.py --depth5
+```
+finds the nonperiodic five-stage chain
+\[
+\{1,2,3\}
+\to\{1,2,3,7\}
+\to\{1,2,3,7,10\}
+\to\{1,2,3,7,10,23\}
+\to\{1,2,3,7,10,23,36\}
+\to\{1,2,3,7,10,23,36,46\},
+\]
+with declared endpoints
+\[
+9,\ 17,\ 35,\ 43,\ 61
+\]
+and coverage through
+\[
+13,\ 24,\ 37,\ 50,\ 63.
+\]
+A bounded depth-six rerun from the same start, with slack \(55\), candidate
+values through \(130\), increments of size at most \(2\), and branch limit
+\(600\), still found no sixth stage.
+
 This diagnostic is important in both directions. It shows that \(k=3\)
 cross-stage pair barriers are not merely an artefact of the robust residue
-booster seed; unrestricted integer stages have more room. But the first
-visible pattern collapses exactly when it becomes eventually periodic, in
-line with Proposition 7.1 and the finite-core/periodic repair results.
+booster seed; unrestricted integer stages have more room, and small
+nonperiodic branches survive longer than the first periodic pattern. But
+the currently found branches still exhaust their endpoint/buffer room under
+bounded continuation searches, so an infinite construction would need a
+genuinely scalable block design rather than the visible small-stage
+patterns.
 
 ### Lemma 16.9: Singleton-new holes have exact \(2A\)-row normal form
 
