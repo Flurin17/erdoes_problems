@@ -377,12 +377,25 @@ static bool shift24_ok(u64 N) {
     return shared_prime_budget_ok(105 * N - 1, 2, 3, 2, 26);
 }
 
+static bool shift27_ok(u64 N) {
+    return shared_prime_budget_ok(280 * N - 3, 3, 2, 1, 29);
+}
+
 static bool shift28_ok(u64 N) {
     return shared_prime_budget_ok(90 * N - 1, 7, 1, 3, 30);
 }
 
 static bool shift30_ok(u64 N) {
     return shared_prime_budget_ok(84 * N - 1, 5, 1, 4, 32);
+}
+
+static bool shift32_ok(u64 N) {
+    return shared_prime_budget_ok(315 * N - 4, 2, 3, 1, 34);
+}
+
+static bool shift35_ok(u64 N) {
+    static const SharedPrime primes[] = {{5, 1}, {7, 1}};
+    return shared_primes_budget_ok(72 * N - 1, primes, 2, 1, 37);
 }
 
 static bool shift36_ok(u64 N) {
@@ -501,6 +514,11 @@ static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, ui
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }
+        if (k == 27) {
+            if (shift27_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
         if (k == 28) {
             if (shift28_ok(N)) continue;
             if (tau_out) *tau_out = tau64(n - k);
@@ -508,6 +526,16 @@ static uint32_t first_failing_shift(u64 n, u64 N, int branch, uint32_t limit, ui
         }
         if (k == 30) {
             if (shift30_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 32) {
+            if (shift32_ok(N)) continue;
+            if (tau_out) *tau_out = tau64(n - k);
+            return k;
+        }
+        if (k == 35) {
+            if (shift35_ok(N)) continue;
             if (tau_out) *tau_out = tau64(n - k);
             return k;
         }

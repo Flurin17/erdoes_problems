@@ -555,6 +555,13 @@ static bool shift24_ok(u128 N) {
     return coeff_minus_one(105, N, L) && shared_prime_budget_ok(L, 2, 3, 2, 26);
 }
 
+static bool shift27_ok(u128 N) {
+    u128 L = 0;
+    if (!checked_mul(280, N, L) || L < 3) return false;
+    L -= 3;
+    return shared_prime_budget_ok(L, 3, 2, 1, 29);
+}
+
 static bool shift28_ok(u128 N) {
     u128 L = 0;
     return coeff_minus_one(90, N, L) && shared_prime_budget_ok(L, 7, 1, 3, 30);
@@ -563,6 +570,19 @@ static bool shift28_ok(u128 N) {
 static bool shift30_ok(u128 N) {
     u128 L = 0;
     return coeff_minus_one(84, N, L) && shared_prime_budget_ok(L, 5, 1, 4, 32);
+}
+
+static bool shift32_ok(u128 N) {
+    u128 L = 0;
+    if (!checked_mul(315, N, L) || L < 4) return false;
+    L -= 4;
+    return shared_prime_budget_ok(L, 2, 3, 1, 34);
+}
+
+static bool shift35_ok(u128 N) {
+    u128 L = 0;
+    static const SharedPrime primes[] = {{5, 1}, {7, 1}};
+    return coeff_minus_one(72, N, L) && shared_primes_budget_ok(L, primes, 2, 1, 37);
 }
 
 static bool shift36_ok(u128 N) {
@@ -695,6 +715,11 @@ static uint32_t first_failing_shift(u128 n, u128 N, int branch, uint32_t limit,
             if (tau_out) *tau_out = tau128(n - (u128)k);
             return k;
         }
+        if (k == 27) {
+            if (shift27_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
         if (k == 28) {
             if (shift28_ok(N)) continue;
             if (tau_out) *tau_out = tau128(n - (u128)k);
@@ -702,6 +727,16 @@ static uint32_t first_failing_shift(u128 n, u128 N, int branch, uint32_t limit,
         }
         if (k == 30) {
             if (shift30_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 32) {
+            if (shift32_ok(N)) continue;
+            if (tau_out) *tau_out = tau128(n - (u128)k);
+            return k;
+        }
+        if (k == 35) {
+            if (shift35_ok(N)) continue;
             if (tau_out) *tau_out = tau128(n - (u128)k);
             return k;
         }
