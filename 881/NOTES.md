@@ -115,6 +115,9 @@ interval. Corollary 16.79 packages the density \(>1/2\) bounded-rank
 normal form: either a majority color escapes robust cores, or two active
 colors are linearly far from the interval. Lemma 16.80 and Corollary 16.81
 split the latter case into large palette spread or two same-side far gates.
+Corollaries 16.82--16.83 then constrain same-side clustered pairs with the
+common-band blocker: absent enough pair spread, one extreme color must
+escape the relevant blocker window.
 
 ## Definitions
 

@@ -23232,6 +23232,117 @@ length, or two positive-density gate fibers sit on the same side of the
 interval. The former is a genuine palette-spread escape; the latter can be
 attacked by same-side blocker windows.
 
+### Corollary 16.82: Same-side clustered pairs must escape blocker windows
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite, and put
+\[
+C=A\setminus F.
+\]
+Let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length \(n\), and let
+\[
+J=[\alpha,\beta]\cap\mathbb N\subset C
+\]
+have length \(\ell\). Let \(f<g\) be two active colors in \(F\), put
+\[
+s=g-f,
+\]
+and let
+\[
+U_f,U_g\subset I\cap C
+\]
+satisfy
+\[
+f+u\notin2C\quad(u\in U_f),\qquad
+g+u\notin2C\quad(u\in U_g). \tag{1}
+\]
+Fix \(0<\eta\le1\), and put
+\[
+M_\eta=\lfloor(1-\eta)n\rfloor+1. \tag{2}
+\]
+If
+\[
+|U_f\cup U_g|\ge\eta n \tag{3}
+\]
+and
+\[
+s\le2\ell-1-M_\eta, \tag{4}
+\]
+then
+\[
+f<2\alpha-b+M_\eta-1
+\quad\text{or}\quad
+g>2\beta-a-M_\eta+1. \tag{5}
+\]
+Equivalently, if the pair \(\{f,g\}\) is contained in the blocker window
+\[
+[2\alpha-b+M_\eta-1,\ 2\beta-a-M_\eta+1],
+\]
+and has span satisfying (4), then the two gate packets cannot cover an
+\(\eta\)-fraction of \(I\).
+
+Proof. This is Corollary 16.66 applied to the palette \(P=\{f,g\}\).
+\(\square\)
+
+### Corollary 16.83: Same-side bounded-rank pairs need spread or blocker escape
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Fix \(r\ge2\) and \(0<\eta\le1\).
+There is \(N=N(r,\eta)\) such that the following holds whenever
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+has length \(n\ge N\).
+
+Let \(F\subset A\) satisfy \(1\le|F|\le r\), let \(f<g\) be points of
+\(F\), and let \(U_f,U_g\subset I\) satisfy the hypotheses of Corollary
+16.45 for their respective active colors, with witness parameter
+sufficiently large for the fixed interval \(I\) and rank bound \(r\). Let
+\[
+J=[\alpha,\beta]\cap\mathbb N\subset A\setminus F
+\]
+have length \(\ell\). Put
+\[
+\delta={\eta\over2},\qquad
+M_\delta=\lfloor(1-\delta)n\rfloor+1.
+\]
+If
+\[
+|U_f\cup U_g|\ge\eta n, \tag{1}
+\]
+then at least one of the following holds:
+\[
+g-f>2\ell-1-M_\delta, \tag{2}
+\]
+\[
+f<2\alpha-b+M_\delta-1, \tag{3}
+\]
+or
+\[
+g>2\beta-a-M_\delta+1. \tag{4}
+\]
+
+Proof. Choose \(N\) so large that
+\[
+2B_r\le{\eta n\over2}\qquad(n\ge N),
+\]
+where \(B_r=r(r+1)/2+2r\). Removing the at most \(B_r\) row-dependent
+exceptions from each \(U_f,U_g\), the union of the two gate-dependent
+subpackets still has size at least
+\[
+{\eta n\over2}=\delta n.
+\]
+Corollary 16.82 applied at density \(\delta\) gives the alternatives
+(2)--(4). \(\square\)
+
+Thus a same-side two-color branch is also sharply constrained. If two
+same-side active colors are clustered relative to a retained interval, then
+their positive-density gate packets force one extreme color outside the
+corresponding blocker window.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24512,6 +24623,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.80 and Corollary 16.81 split that two-far-gate branch: either
   the active palette has diameter comparable to the tested interval length,
   or two positive-density gate fibers lie on the same side of the interval.
+* Corollaries 16.82--16.83 apply the common-band blocker to same-side
+  clustered pairs: if the pair does not spread across the doubled retained
+  interval, then a dense two-color packet forces an extreme color outside
+  the blocker window.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
