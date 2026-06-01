@@ -103,7 +103,10 @@ active colors of a bounded-rank interval packet lie in a robust core, the
 packet cannot have fixed positive density in the tested interval. Corollary
 16.74 records the actual-window version for low-density cases where the
 rank-only robust core may be empty: retained intervals whose blocker windows
-cover the active palette rule out dense bounded-rank packets.
+cover the active palette rule out dense bounded-rank packets. Corollary
+16.75 isolates the majority-color case: if one active color carries density
+above \(1/2\), it must avoid robust cores directly, without the density loss
+from pigeonholing over the palette.
 
 ## Definitions
 

@@ -22868,6 +22868,74 @@ belong to
 \]
 contradicting (3). \(\square\)
 
+### Corollary 16.75: Majority-color packets avoid robust cores
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Fix \(r\ge1\) and
+\[
+{1\over2}<\theta\le1.
+\]
+Put
+\[
+\delta={\theta+1/2\over2}. \tag{1}
+\]
+There is \(N=N(r,\theta)\) such that the following holds whenever
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+has length \(n\ge N\).
+
+Let \(F\subset A\) satisfy \(1\le|F|\le r\), let \(f\in F\), and let
+\[
+K=[c,d]\cap\mathbb N\subset A
+\]
+have length \(m\). Define
+\[
+\ell_0=\left\lceil {m-r\over r+1}\right\rceil,
+\qquad
+M_\delta=\lfloor(1-\delta)n\rfloor+1,
+\]
+and assume
+\[
+M_\delta\le2\ell_0-1. \tag{2}
+\]
+If \(U\subset I\) satisfies the hypotheses of Corollary 16.45 for the
+active color \(f\), with witness parameter sufficiently large for the fixed
+interval \(I\) and rank bound \(r\), and
+\[
+|U|\ge\theta n, \tag{3}
+\]
+then
+\[
+f\notin R_K(\delta,I;r). \tag{4}
+\]
+
+Proof. Let
+\[
+B_r={r(r+1)\over2}+2r.
+\]
+Choose \(N\) so large that
+\[
+B_r\le(\theta-\delta)n\qquad(n\ge N). \tag{5}
+\]
+By Corollary 16.45, all but at most \(B_r\) rows of \(U\) lie in the
+gate-dependent packet
+\[
+U_{\rm gate}=\{u\in U:f+u\notin2(A\setminus F)\}.
+\]
+Using (3) and (5),
+\[
+|U_{\rm gate}|\ge |U|-B_r\ge\delta n.
+\]
+Lemma 16.69 applied to \(U_{\rm gate}\) gives (4). \(\square\)
+
+Combining this with Corollary 16.72, a fixed-rank single-color packet of
+density \(>1/2\) cannot keep its active color inside the linear robust core
+created by any sufficiently short auxiliary interval. The remaining
+bounded-rank interval obstruction must either split its density among many
+colors, keep every color below majority density, or place a majority color
+outside all such robust cores.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24131,6 +24199,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   finite-window form: if actual retained intervals supply blocker windows
   covering the active palette, then bounded-rank interval packets using
   that palette cannot be dense.
+* Corollary 16.75 records the stronger majority-color route: a single
+  active color carrying density \(>1/2\) avoids robust cores directly,
+  without the \(1/r\) density loss from palette pigeonholing.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
