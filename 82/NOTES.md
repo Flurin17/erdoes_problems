@@ -4093,6 +4093,14 @@ source of growth beyond Ramsey.
   `15` vertices, all with `mu=14=15-1`, and no extension with `mu<=13`.
   This keeps the connected defect-one target alive after the sharp
   minimum-degree-`2` obstruction.
+- 2026-06-01: Began batch testing the connected defect-extension target on
+  the eight known fourteen-vertex defect graphs.  The first two masks,
+  `391219392115868279640099` and `429588619789184147001379`, both have
+  minimum extension mass `14`; the displayed minimizer in each run is the
+  disconnected isolated-vertex extension (`column=0`), and connected
+  extensions also stay at defect at most one in the full profile runs.
+  The longer symmetric batch was stopped after these two checks to avoid
+  spending more time on computation before extracting a structural proof.
 - 2026-06-01: Isolated the connected defect-extension induction.  It is enough
   to prove: if `H` is connected and `mu(H)=|H|-1`, then every connected
   one-vertex extension `G` of `H` has `mu(G)>=|H|`.  The proof deletes a
