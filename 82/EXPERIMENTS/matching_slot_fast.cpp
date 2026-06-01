@@ -15,6 +15,12 @@
 
 namespace {
 
+enum class RootMode {
+    None,
+    Edge,
+    Nonedge,
+};
+
 int edge_index(int n, int a, int b) {
     if (a > b) std::swap(a, b);
     int idx = 0;
@@ -104,12 +110,15 @@ class Checker {
         }
     }
 
-    bool has_partition(std::optional<std::pair<int, int>> good_edge) {
+    bool has_partition(
+        RootMode root_mode,
+        std::optional<std::pair<int, int>> root_pair
+    ) {
         for (auto& table : memo) {
             for (auto& row : table) row.fill(-1);
         }
         std::array<int, 4> counts{2, 1, 1, 0};
-        return rec(full, state_code(counts), 4, 4, good_edge);
+        return rec(full, state_code(counts), 4, 4, root_mode, root_pair);
     }
 
   private:
@@ -126,12 +135,17 @@ class Checker {
         int code,
         int first_residue,
         int second_residue,
-        std::optional<std::pair<int, int>> good_edge
+        RootMode root_mode,
+        std::optional<std::pair<int, int>> root_pair
     ) {
         if (remaining == 0) {
-            if (!good_edge) return true;
+            if (root_mode == RootMode::None) return true;
+            bool different_nonzero_split =
+                first_residue != second_residue
+                && !(first_residue < 2 && second_residue < 2);
+            if (root_mode == RootMode::Nonedge) return different_nonzero_split;
             return (first_residue == 2 && second_residue == 2)
-                || (first_residue != second_residue);
+                || different_nonzero_split;
         }
         if (code == 0) return false;
         int endpoint_code = first_residue * 5 + second_residue;
@@ -145,11 +159,18 @@ class Checker {
                 if (r == 1 && !exact_matching[sub]) continue;
                 int next_first = first_residue;
                 int next_second = second_residue;
-                if (good_edge) {
-                    if ((sub >> good_edge->first) & 1) next_first = r;
-                    if ((sub >> good_edge->second) & 1) next_second = r;
+                if (root_pair) {
+                    if ((sub >> root_pair->first) & 1) next_first = r;
+                    if ((sub >> root_pair->second) & 1) next_second = r;
                 }
-                if (rec(remaining ^ sub, next_code, next_first, next_second, good_edge)) {
+                if (rec(
+                        remaining ^ sub,
+                        next_code,
+                        next_first,
+                        next_second,
+                        root_mode,
+                        root_pair
+                    )) {
                     saved = 1;
                     return true;
                 }
@@ -193,7 +214,8 @@ int main(int argc, char** argv) {
     uint64_t limit = 0;
     uint64_t progress_every = 262144;
     bool progress = false;
-    std::optional<std::pair<int, int>> good_edge;
+    RootMode root_mode = RootMode::None;
+    std::optional<std::pair<int, int>> root_pair;
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
         if (arg == "--n" && i + 1 < argc) {
@@ -205,13 +227,34 @@ int main(int argc, char** argv) {
         } else if (arg == "--progress-every" && i + 1 < argc) {
             progress_every = std::stoull(argv[++i]);
         } else if (arg == "--good-edge" && i + 1 < argc) {
+            if (root_mode != RootMode::None) {
+                std::cerr << "only one rooted endpoint option is allowed\n";
+                return 2;
+            }
             std::string text = argv[++i];
             size_t sep = text.find(':');
             if (sep == std::string::npos) {
                 std::cerr << "--good-edge expects u:v\n";
                 return 2;
             }
-            good_edge = {
+            root_mode = RootMode::Edge;
+            root_pair = {
+                std::stoi(text.substr(0, sep)),
+                std::stoi(text.substr(sep + 1)),
+            };
+        } else if (arg == "--good-nonedge" && i + 1 < argc) {
+            if (root_mode != RootMode::None) {
+                std::cerr << "only one rooted endpoint option is allowed\n";
+                return 2;
+            }
+            std::string text = argv[++i];
+            size_t sep = text.find(':');
+            if (sep == std::string::npos) {
+                std::cerr << "--good-nonedge expects u:v\n";
+                return 2;
+            }
+            root_mode = RootMode::Nonedge;
+            root_pair = {
                 std::stoi(text.substr(0, sep)),
                 std::stoi(text.substr(sep + 1)),
             };
@@ -219,7 +262,8 @@ int main(int argc, char** argv) {
             progress = true;
         } else {
             std::cerr << "usage: matching_slot_fast [--n N] [--start S]"
-                      << " [--limit L] [--good-edge u:v] [--progress]"
+                      << " [--limit L] [--good-edge u:v]"
+                      << " [--good-nonedge u:v] [--progress]"
                       << " [--progress-every P]\n";
             return 2;
         }
@@ -228,17 +272,17 @@ int main(int argc, char** argv) {
         std::cerr << "supported range: 1 <= n <= 10\n";
         return 2;
     }
-    if (good_edge) {
+    if (root_pair) {
         if (
-            good_edge->first < 0 || good_edge->first >= n
-            || good_edge->second < 0 || good_edge->second >= n
-            || good_edge->first == good_edge->second
+            root_pair->first < 0 || root_pair->first >= n
+            || root_pair->second < 0 || root_pair->second >= n
+            || root_pair->first == root_pair->second
         ) {
-            std::cerr << "--good-edge endpoints must be distinct vertices in range\n";
+            std::cerr << "rooted endpoints must be distinct vertices in range\n";
             return 2;
         }
-        if (good_edge->first > good_edge->second) {
-            std::swap(good_edge->first, good_edge->second);
+        if (root_pair->first > root_pair->second) {
+            std::swap(root_pair->first, root_pair->second);
         }
     }
 
@@ -255,17 +299,20 @@ int main(int argc, char** argv) {
     uint64_t checked = 0;
     for (uint64_t bits = start; bits < stop; ++bits) {
         uint64_t graph_mask = even_graph_mask(n, bits);
-        if (good_edge) {
-            int idx = edge_index(n, good_edge->first, good_edge->second);
-            if (((graph_mask >> idx) & 1) == 0) continue;
+        if (root_pair) {
+            int idx = edge_index(n, root_pair->first, root_pair->second);
+            bool present = ((graph_mask >> idx) & 1) != 0;
+            if (root_mode == RootMode::Edge && !present) continue;
+            if (root_mode == RootMode::Nonedge && present) continue;
         }
         ++checked;
         checker.compute_valid_subsets(graph_mask);
-        if (!checker.has_partition(good_edge)) {
+        if (!checker.has_partition(root_mode, root_pair)) {
             std::cout << "n=" << n << "\n";
-            if (good_edge) {
-                std::cout << "good_edge=" << good_edge->first << ":"
-                          << good_edge->second << "\n";
+            if (root_pair) {
+                std::cout
+                    << (root_mode == RootMode::Edge ? "good_edge=" : "good_nonedge=")
+                    << root_pair->first << ":" << root_pair->second << "\n";
             }
             std::cout << "checked_before_counterexample=" << checked << "\n";
             std::cout << "counterexample_mask=" << graph_mask << "\n";
@@ -282,9 +329,10 @@ int main(int argc, char** argv) {
         }
     }
     std::cout << "n=" << n << "\n";
-    if (good_edge) {
-        std::cout << "good_edge=" << good_edge->first << ":"
-                  << good_edge->second << "\n";
+    if (root_pair) {
+        std::cout
+            << (root_mode == RootMode::Edge ? "good_edge=" : "good_nonedge=")
+            << root_pair->first << ":" << root_pair->second << "\n";
     }
     std::cout << "bit_start=" << start << "\n";
     std::cout << "bit_stop=" << stop << "\n";

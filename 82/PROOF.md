@@ -4701,6 +4701,45 @@ patterns.  Lemma "Direct Lifts Across Degree-`2` Suppression" then lifts that
 certificate to a matching-slot certificate of `G`, a contradiction.  Thus the
 neighbors of every degree-`2` vertex in `G` must be adjacent.  QED.
 
+**Lemma: Direct Lifts Across Triangular Degree-`2` Suppression.**  Let `G` be
+an even graph, let `v` be a degree-`2` vertex whose neighbors `x,y` are
+adjacent, and let
+
+```text
+G' = G - v - xy.
+```
+
+Suppose `G'` has a matching-slot certificate in which `x` and `y` lie in
+different slots and are not split between the two zero slots `A` and `B`.
+Then `G` has a matching-slot certificate.
+
+Proof.  In passing from `G'` to `G`, we add the edge `xy` and the new vertex
+`v` adjacent to both `x` and `y`.  Since `x` and `y` lie in different slots,
+the new edge `xy` is a cross-slot edge and does not change any same-slot
+degree.  Since the endpoint slots are not exactly `A` and `B`, at least one
+zero slot is unused by the two endpoints.  Put `v` in such an unused zero
+slot.  Then the two edges incident with `v` are also cross-slot edges, so the
+same-slot degrees of `x` and `y` remain unchanged, while `v` has same-slot
+degree `0`.  All slot conditions are preserved.  QED.
+
+The corresponding universal nonedge-rooted endpoint statement is false.  In
+the empty graph on at least two vertices, every vertex in any matching-slot
+certificate must lie in one of the two zero slots: an isolated vertex cannot
+lie in the exact matching slot `C` or in the residue-`2` slot `D`.  Therefore
+two prescribed nonadjacent vertices cannot be placed in different slots
+without being split between `A` and `B`.  The new checker option
+`--good-nonedge` verifies this obstruction immediately:
+
+```text
+python3 82/EXPERIMENTS/matching_slot_search.py 7 --exhaustive-even --good-nonedge 0:1
+/tmp/matching_slot_fast --n 8 --good-nonedge 0:1
+```
+
+both report the empty graph, `mask=0`, as the first counterexample.  Thus
+triangular degree-`2` suppression cannot be handled by a direct rooted
+endpoint condition alone; it requires a recoloring argument or a richer
+boundary signature.
+
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
 `r` lies in the bipartite residual.

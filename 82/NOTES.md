@@ -2722,3 +2722,13 @@ source of growth beyond Ramsey.
   the `n=9` edge-rooted range `2000000 <= bits < 2100000`, covering another
   `50000` edge-containing even graphs with no counterexample; the larger
   two-million-bit range was too slow for an interactive checkpoint.
+- 2026-06-01: Added `--good-nonedge` to the matching-slot checkers to test
+  the direct triangular degree-`2` suppression pattern.  The direct lift is
+  valid if, after deleting the degree-`2` vertex and the edge between its
+  adjacent neighbors, the two boundary vertices lie in different slots and
+  are not split between the two zero slots.  However the universal nonedge
+  rooted candidate is false: the empty graph (`mask=0`) is already a
+  counterexample, since all isolated vertices must lie in zero slots.  Thus
+  degree-`2` triangles require a recoloring argument or a richer boundary
+  signature, not just the edge-rooted pattern used for suppressible
+  non-triangular degree-`2` vertices.

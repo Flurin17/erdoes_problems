@@ -119,13 +119,15 @@ Computational checks and generated data for Erdos Problem 82.
   with `--limit` plus per-instance `--node-limit`.  Use `--force-color v:c`
   to test rooted variants, e.g. forcing a specified root into a zero slot.
   Use `--good-edge u:v` to require the endpoints of an existing edge to be in
-  a pattern that lifts across degree-`2` suppression.
+  a pattern that lifts across degree-`2` suppression, and `--good-nonedge u:v`
+  to test the direct triangular-suppression endpoint pattern for a nonedge.
 - `matching_slot_fast.cpp`: C++ exact checker for the same matching-slot
   target on small even graphs.  It is intended to make the full labelled
   `n=8` even-graph sweep reproducible, and also supports `--good-edge u:v`
-  for the edge-rooted degree-`2` suppression strengthening.  Use `--start`
-  and `--limit` to split the free-edge bit range into reproducible chunks,
-  and `--progress --progress-every N` for long runs.
+  and `--good-nonedge u:v` for the rooted degree-`2` suppression
+  strengthenings.  Use `--start` and `--limit` to split the free-edge bit
+  range into reproducible chunks, and `--progress --progress-every N` for long
+  runs.
 - `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus
