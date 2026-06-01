@@ -131,7 +131,9 @@ tail, an infinite selector avoids that entire branch. Thus a surviving
 vanishing-density route must maintain nonsummable selector mass on every
 tail, or move to growing rank. Corollary 16.88 specializes this to robust
 cores: the active-color proportions escaping all assigned robust-core
-profiles must have tail sum at least \(1\) on every packet tail.
+profiles must have tail sum at least \(1\) on every packet tail. Corollary
+16.89 adds that a finite menu of such profiles forces one profile to have
+divergent escape proportion along the packet sequence.
 
 ## Definitions
 

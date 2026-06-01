@@ -23730,6 +23730,34 @@ from all available robust cores be tail-summable: then a selector chooses
 inside every robust core simultaneously and defeats all bounded-rank
 positive-density interval packets assigned to those profiles.
 
+### Corollary 16.89: Finite profile menus force a persistent escape profile
+
+In Corollary 16.88, suppose the profile set \(\mathcal A\) is finite, say
+\[
+|\mathcal A|=M.
+\]
+Then at least one profile \(\alpha\in\mathcal A\) satisfies
+\[
+\sum_{s\ge1}{|E_{\alpha,s}|\over |P_s|}=\infty. \tag{1}
+\]
+More quantitatively, for every tail index \(t\),
+\[
+\max_{\alpha\in\mathcal A}
+\sum_{s\ge t}{|E_{\alpha,s}|\over |P_s|}\ge {1\over M}. \tag{2}
+\]
+
+Proof. Equation (2) follows immediately from (3) in Corollary 16.88:
+if every profile had tail escape sum \(<1/M\), the sum over the \(M\)
+profiles would be \(<1\). If all profile sums in (1) were finite, then
+their tails would tend to \(0\); since there are only finitely many
+profiles, the maximum tail sum in (2) would also tend to \(0\), a
+contradiction. \(\square\)
+
+Thus any bounded-rank positive-density construction using only a fixed
+finite menu of robust-core tests must nominate one test whose active-color
+escape proportion is not summable across the packet tail. A finite menu
+cannot spread the selector debt into vanishing summable errors.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25036,6 +25064,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   bounded-rank trace is assigned to a robust-core profile, then the
   one-coordinate active-color escape proportions from those cores must have
   tail sum at least \(1\) on every packet tail.
+* Corollary 16.89 sharpens this for finite profile menus: one robust-core
+  profile must have divergent escape proportion across the packet sequence.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
