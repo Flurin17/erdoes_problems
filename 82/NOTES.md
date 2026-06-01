@@ -4069,6 +4069,14 @@ source of growth beyond Ramsey.
   component would contribute at least half its order, so globally
   `mu(G)>=|G|/2`.  This positive-linear mass bound gives `D_spec(h)=O(h^2)`
   and hence `G(k)=O(k^2)`.
+- 2026-06-01: Proved the leaf extension inequality.  If `G` is obtained from
+  `H` by adding a leaf adjacent to `u`, then
+  `mu(G)>=max(mu(H), 1+mu(H-u))`.  Thus a deletion-tight defect-one graph
+  remains within the connected defect-one target after adding a leaf.  A
+  minimal connected counterexample with a leaf would have to come from a
+  defect-one graph whose spectrum mass drops when the leaf-neighbor is
+  deleted.  This focuses the connected target on either minimum-degree-`2`
+  graphs with `mu<n`, or non-deletion-tight defect-one graphs.
 - 2026-06-01: Added the square-spectrum route.  Let
   `Q(G)=sum_d s_d(G)^2`.  If `Q(G)>=c|G|^2` for some absolute `c>0`, then
   for two `M`-vertex graphs failing the spectrum match at threshold `h`, each

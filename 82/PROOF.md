@@ -15073,6 +15073,46 @@ Thus the disconnected repeated-copy obstruction in Lemma 28J.10d does not
 kill the spectrum-mass route.  It only changes the target from global
 additive defect to connected additive defect.
 
+**Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
+graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then
+
+```text
+sum_d s_d(G) >= max { sum_d s_d(H), 1 + sum_d s_d(H-u) }.
+```
+
+Proof.  The first lower bound is monotonicity: every induced regular witness
+in `H` is still an induced regular witness in `G`.
+
+For the second lower bound, let `I` be a maximum independent set in `H-u`.
+Then `I union {z}` is independent in `G`, because `z` is adjacent only to
+`u`.  Hence
+
+```text
+s_0(G) >= 1+s_0(H-u).
+```
+
+For every degree `d>=1`, any induced `d`-regular witness in `H-u` is still an
+induced `d`-regular witness in `G`, so
+
+```text
+s_d(G) >= s_d(H-u).
+```
+
+Adding these inequalities over all `d` gives
+`sum_d s_d(G) >= 1+sum_d s_d(H-u)`.  QED.
+
+Consequently, if `H` is a defect-one graph and `H-u` has the same spectrum
+mass as `H`, then adding a leaf at `u` preserves connected defect one:
+
+```text
+sum_d s_d(G) >= 1+sum_d s_d(H)=|V(G)|-1.
+```
+
+This explains the persistent leaf extensions of the fourteen-vertex
+counterexample.  A minimal counterexample to the connected defect-one target
+with a leaf would therefore have to arise from a defect-one graph `H` and a
+neighbor `u` for which deleting `u` lowers spectrum mass.
+
 **Conditional Corollary 28J.10e: Quadratic Square-Spectrum Mass Would
 Suffice.**  Define
 

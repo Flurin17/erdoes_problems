@@ -48,7 +48,11 @@ def is_connected(adj: list[int]) -> bool:
     return seen == (1 << n) - 1
 
 
-def exact(n: int, progress: int, connected_only: bool) -> None:
+def min_degree_at_least(adj: list[int], threshold: int) -> bool:
+    return all(row.bit_count() >= threshold for row in adj)
+
+
+def exact(n: int, progress: int, connected_only: bool, min_degree: int) -> None:
     pc = cdc.precompute(n)
     total = 1 << len(pc.edges)
     histogram: Counter[int] = Counter()
@@ -60,6 +64,8 @@ def exact(n: int, progress: int, connected_only: bool) -> None:
     for mask in range(total):
         adj = cdc.adjacency(n, mask, pc)
         if connected_only and not is_connected(adj):
+            continue
+        if min_degree and not min_degree_at_least(adj, min_degree):
             continue
         checked += 1
         mass, by_degree = spectrum_mass(adj, pc)
@@ -79,6 +85,7 @@ def exact(n: int, progress: int, connected_only: bool) -> None:
     print(f"n={n}")
     print(f"labelled_graphs={total}")
     print(f"connected_only={connected_only}")
+    print(f"min_degree_filter={min_degree}")
     print(f"checked_graphs={checked}")
     print(f"min_spectrum_mass={best}")
     print(f"violates_mu_ge_n={best < n}")
@@ -87,7 +94,7 @@ def exact(n: int, progress: int, connected_only: bool) -> None:
         print(f"example mask={mask} by_degree={by_degree}")
 
 
-def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
+def sample(n: int, trials: int, seed: int, connected_only: bool, min_degree: int) -> None:
     rng = random.Random(seed)
     pc = cdc.precompute(n)
     bits = len(pc.edges)
@@ -102,6 +109,8 @@ def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
         adj = cdc.adjacency(n, mask, pc)
         if connected_only and not is_connected(adj):
             continue
+        if min_degree and not min_degree_at_least(adj, min_degree):
+            continue
         mass, by_degree = spectrum_mass(adj, pc)
         histogram[mass] += 1
         if mass < best:
@@ -112,6 +121,7 @@ def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
     print(f"trials={trials}")
     print(f"attempts={attempts}")
     print(f"connected_only={connected_only}")
+    print(f"min_degree_filter={min_degree}")
     print(f"min_seen={best}")
     print(f"violates_mu_ge_n={best < n}")
     print(f"histogram={dict(sorted(histogram.items()))}")
@@ -127,6 +137,7 @@ def local_search(
     seed: int,
     connected_only: bool,
     start_mask: int | None,
+    min_degree: int,
 ) -> None:
     rng = random.Random(seed)
     pc = cdc.precompute(n)
@@ -140,11 +151,13 @@ def local_search(
         else:
             mask = rng.getrandbits(bits)
         adj = cdc.adjacency(n, mask, pc)
-        if connected_only:
+        if connected_only or min_degree:
             attempts = 0
-            while not is_connected(adj):
+            while (connected_only and not is_connected(adj)) or (
+                min_degree and not min_degree_at_least(adj, min_degree)
+            ):
                 if restart == 0 and start_mask is not None:
-                    raise ValueError("start mask is not connected")
+                    raise ValueError("start mask does not satisfy filters")
                 attempts += 1
                 if attempts > 10_000:
                     raise RuntimeError("failed to sample a connected starting graph")
@@ -165,6 +178,8 @@ def local_search(
             candidate = mask ^ (1 << bit)
             candidate_adj = cdc.adjacency(n, candidate, pc)
             if connected_only and not is_connected(candidate_adj):
+                continue
+            if min_degree and not min_degree_at_least(candidate_adj, min_degree):
                 continue
             candidate_value, candidate_by_degree = spectrum_mass(candidate_adj, pc)
             if candidate_value <= value or rng.random() < temperature:
@@ -188,6 +203,7 @@ def local_search(
     print(f"steps={steps}")
     print(f"restarts={restarts}")
     print(f"connected_only={connected_only}")
+    print(f"min_degree_filter={min_degree}")
     print(f"min_seen={global_best}")
     print(f"violates_mu_ge_n={global_best < n}")
     if global_example is not None:
@@ -215,6 +231,7 @@ def main() -> None:
     parser.add_argument("--local-steps", type=int, default=0)
     parser.add_argument("--restarts", type=int, default=1)
     parser.add_argument("--connected-only", action="store_true")
+    parser.add_argument("--min-degree", type=int, default=0)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--progress", type=int, default=0)
     parser.add_argument("--start-mask", type=int)
@@ -230,11 +247,12 @@ def main() -> None:
             args.seed,
             args.connected_only,
             args.start_mask,
+            args.min_degree,
         )
     elif args.sample:
-        sample(args.n, args.sample, args.seed, args.connected_only)
+        sample(args.n, args.sample, args.seed, args.connected_only, args.min_degree)
     else:
-        exact(args.n, args.progress, args.connected_only)
+        exact(args.n, args.progress, args.connected_only, args.min_degree)
 
 
 if __name__ == "__main__":
