@@ -3832,3 +3832,10 @@ source of growth beyond Ramsey.
   low-degree spectrum terms `s_0,s_1` remain essential even inside the
   2-core; the forest-fringe argument cannot simply be separated from a
   high-degree core theorem.
+- 2026-06-01: Proved the spectrum-mass inequality for split graphs.  Given a
+  split partition `A union B` with `A` a clique and `B` independent, the
+  independent side gives `s_0>=|B|`, while the clique side gives
+  `s_d>=d+1` for every `1<=d<|A|`; these terms already sum to at least
+  `|A|+|B|` except for the one-clique-vertex case, which is handled by either
+  total independence or one edge.  Thus split graphs remain easy for the
+  spectrum-mass route despite being a barrier for mixed regular witnesses.

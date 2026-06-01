@@ -14092,6 +14092,34 @@ cycle.  The cycle is induced, since a chord would create a second cycle, so
 `C` is an induced `2`-regular subgraph.  Removing `V(C)` leaves a forest
 `F`, so Lemma 28J.4 applies with `R=V(C)` and `d=2`.  QED.
 
+**Lemma 28J.6: Split Graphs Satisfy Spectrum Mass.**  If `G` is a split
+graph, then
+
+```text
+sum_d s_d(G) >= |V(G)|.
+```
+
+Proof.  Fix a split partition `V(G)=A union B`, where `A` is a clique and
+`B` is independent.  Put `a=|A|` and `b=|B|`.  The independent side gives
+
+```text
+s_0(G) >= b.
+```
+
+If `a>=2`, then for every `1<=d<=a-1`, the clique `A` contains a clique of
+order `d+1`, hence an induced `d`-regular subgraph of order `d+1`.  Therefore
+
+```text
+sum_d s_d(G) >= b + sum_{d=1}^{a-1} (d+1)
+              = b + (a-1)(a+2)/2
+              >= b+a.
+```
+
+If `a=0`, then `G` is independent and `s_0(G)=|V(G)|`.  If `a=1` and the
+single vertex of `A` has no neighbor in `B`, then again `G` is independent.
+If `a=1` and there is an edge, then `s_1(G)>=2`, while `s_0(G)>= b`, so the
+spectrum mass is at least `b+2>=b+1=|V(G)|`.  QED.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.
