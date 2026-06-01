@@ -21043,6 +21043,48 @@ finite-palette avoidance into a density or coverage contradiction, or show
 that a counterexample can stage these avoided difference translates without
 breaking order-\(3\) coverage.
 
+### Lemma 16.40: Retained intervals crush finite-palette gates
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite, put
+\[
+C=A\setminus F,
+\]
+and fix \(f\in F\). Let \(U\subset C\) be finite and suppose
+\[
+(U+f-U)\cap A\subseteq F. \tag{1}
+\]
+If there is \(u_0\in U\) such that
+\[
+f+U-u_0\subseteq A, \tag{2}
+\]
+then
+\[
+|U|\le |F|. \tag{3}
+\]
+In particular, if \(u_0=\min U\) and
+\[
+[f,\ f+\max U-\min U]\subseteq A, \tag{4}
+\]
+then (3) holds.
+
+Proof. By (1) and (2),
+\[
+f+U-u_0\subseteq F.
+\]
+The map
+\[
+u\mapsto f+u-u_0
+\]
+is injective on \(U\), so \(|U|\le |F|\). If (4) holds with
+\(u_0=\min U\), then \(f+U-u_0\) lies in the interval in (4), and hence
+in \(A\); this is (2). \(\square\)
+
+Thus a large gate-dependent packet cannot sit inside a block whose
+differences from one row are absorbed by an actual interval of \(A\) above
+the gate. Any counterexample using the finite-palette gate branch must keep
+the translates \(f+U-u_0\) outside the retained set for every possible row
+anchor \(u_0\), except at the finitely many active colors in \(F\).
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22186,6 +22228,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   packet is independent modulo the finite deleted palette,
   \((U+f-U)\cap A\subseteq F\). This is the nonsingleton replacement for
   the singleton unique-gate condition of Corollary 16.22.
+* Lemma 16.40 gives the first finite-palette gate pressure: if one anchored
+  translate \(f+U-u_0\) lies in \(A\), then finite-palette independence
+  injects \(U\) into \(F\). Large gate packets must therefore avoid retained
+  intervals above the gate.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

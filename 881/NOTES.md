@@ -30,6 +30,9 @@ palette recovers an actual \(A\)-reflected \(k=3\) certificate tuple.
 Lemma 16.39 identifies the gate-dependent alternative as finite-palette
 independence: \(U+f-U\) may hit the deleted active palette, but it must
 avoid the retained set.
+Lemma 16.40 records the first interval pressure on that branch: if one
+anchored translate \(f+U-u_0\) lies inside \(A\), then \(U\) injects into
+the finite active palette.
 
 ## Definitions
 
