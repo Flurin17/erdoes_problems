@@ -25881,6 +25881,63 @@ visible packet-position cost at the scale of its assigned interval tests;
 otherwise the only surviving escape is to make the active profile
 complexity unbounded.
 
+### Corollary 16.127: A concrete height for profile complexity
+
+In the diagonal robust-profile setting of Corollary 16.90, write a label as
+\[
+\lambda=(q,\alpha),
+\]
+where
+\[
+I_\lambda=[a_\lambda,b_\lambda]\cap\mathbb N,\qquad
+\mathcal K_\lambda=\{[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N:
+1\le i\le m_\lambda\}.
+\]
+Let \(r_\lambda=q\), let \(n_\lambda=|I_\lambda|\), and let
+\(\gamma_\lambda,D_\lambda\) be the constants used in Corollary 16.106.
+Define
+\[
+\chi_{\rm geom}(\lambda)=
+q+a_\lambda+b_\lambda+n_\lambda+m_\lambda
++\sum_{i=1}^{m_\lambda}(c_{\lambda,i}+d_{\lambda,i})
++\left\lceil \max\left\{0,{2D_\lambda\over\gamma_\lambda}\right\}\right\rceil.
+\tag{1}
+\]
+Then \(\chi_{\rm geom}\) has finite sublevel sets. Consequently, under the
+reciprocal-summable packet normalization, any product-covering
+high-density linear-core branch satisfies at least one of the following:
+
+1. for every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:
+        \chi_{\rm geom}(\lambda)>M\}|\over |P_s|}=\infty; \tag{2}
+   \]
+2. the joint width-heavy residual of Corollary 16.125 holds;
+3. the joint midpoint-displacement residual of Corollary 16.125 holds.
+
+In the bounded-\(\chi_{\rm geom}\) case, the labels for which
+\[
+n_\lambda\ge {2D_\lambda\over\gamma_\lambda}
+\]
+are identified by the explicit final term in (1); on those labels,
+Corollary 16.126 converts the residual into linear-scale packet-position
+cost.
+
+Proof. If \(\chi_{\rm geom}(\lambda)\le M\), then \(q\), \(a_\lambda\),
+\(b_\lambda\), \(m_\lambda\), and every auxiliary endpoint
+\(c_{\lambda,i},d_{\lambda,i}\) are bounded by \(M\). There are only
+finitely many such integer profiles, and hence only finitely many labels.
+Thus \(\chi_{\rm geom}\) is a valid complexity function for Corollary
+16.125, which gives the displayed trichotomy. The final assertion is the
+definition of the last summand in (1) together with Corollary 16.126.
+\(\square\)
+
+Thus the remaining unbounded-complexity alternative can be read
+geometrically: the active certificates must push out in rank/density scale,
+tested interval location or length, number of auxiliary intervals, auxiliary
+endpoint height, or the constants needed before the linear-core estimate
+has reached its asymptotic range.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27310,6 +27367,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   reciprocal-summable packet normalization, every surviving bounded-profile
   linear-core branch must pay width-heavy or midpoint-displacement cost,
   and this cost is linear once the tested intervals dominate their constants.
+* Corollary 16.127 gives a concrete geometric profile height with finite
+  sublevel sets, making the unbounded-complexity alternative mean growth in
+  rank/density scale, tested interval data, auxiliary interval count or
+  endpoints, or the constants preceding the linear range.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

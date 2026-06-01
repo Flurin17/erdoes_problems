@@ -230,6 +230,9 @@ Corollary 16.126 says that any bounded-complexity linear-core branch under
 that normalization must pay the width-heavy or midpoint-displacement cost;
 if the tested intervals are past their profile constants, this cost is
 linear in the tested interval length.
+Corollary 16.127 supplies a concrete geometric height for the profile labels,
+so the unbounded-complexity branch means rank/density scale, tested interval
+data, auxiliary interval count/endpoints, or asymptotic constants must grow.
 
 ## Definitions
 
