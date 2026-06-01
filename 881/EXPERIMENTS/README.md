@@ -678,3 +678,9 @@ if a private witness `w=q+d` has a retained padder `p` with `q+p in 2C`,
 then the forced row `d-p` must be `q`-dependent, so `d-q-p in A`.
 Diagnostics that print b-dependent rows are therefore also printing
 one-term reflected rows.
+
+Lemma 16.16 records the adjacent-block obstruction for old fillers. If a
+later block starts above `4 max(S)`, then any private order-4 witness for
+an old target below the two-new range is just `p + z` with one new `p` and
+an old three-sum private hole `z` for that target. New high blocks cannot
+create such singleton protection from scratch in the one-new range.

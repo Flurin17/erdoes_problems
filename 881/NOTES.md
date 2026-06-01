@@ -2327,6 +2327,13 @@ bounded two-sum count, or creates actual one-term reflected rows. The next
 positive target is to show that one of these alternatives stabilizes on a
 finite test set; the next negative target is to move both alternatives
 between stages without producing a recurrent certificate.
+Lemma 16.16 blocks a tempting repair for the unprotected fillers in
+Diagnostic 16.12. If a later block begins above \(4\max S\), then any
+order-\(4\) singleton witness for an old \(q\) below the two-new range must
+use exactly one new element \(p\), so the tail \(w-p\) was already a
+three-term private hole for \(q\) in the old stage. A high block cannot
+promote an old filler by adjacent one-new translation unless that filler
+was already protected one order lower.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

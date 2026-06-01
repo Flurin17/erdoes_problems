@@ -19666,6 +19666,58 @@ to the one-term value \(d-q-p\in A\). A moving singleton counterexample
 must keep both alternatives from stabilizing into the finite
 reflection-recurrence criteria of Theorem 2.3.
 
+### Lemma 16.16: High blocks cannot one-new promote old fillers
+
+Let \(S\subset\mathbb N\) be finite, let \(q\in S\), and let
+\[
+P\subset\mathbb N
+\]
+be finite and nonempty with
+\[
+x=\min P>4\max S.
+\]
+Put
+\[
+A'=S\cup P,\qquad C=A'\setminus\{q\}.
+\]
+Suppose
+\[
+4\max S<w<2x+\min S \tag{1}
+\]
+and
+\[
+w\in4A'\setminus4C. \tag{2}
+\]
+Then there is \(p\in P\) such that
+\[
+w-p\in3S\setminus3(S\setminus\{q\}). \tag{3}
+\]
+In particular, the old stage \(S\) already had a three-term private hole
+for \(q\), namely \(w-p\).
+
+Proof. Since \(w\in4A'\) and \(w>4\max S\), no four-term representation of
+\(w\) from \(A'\) can use only elements of \(S\). Since \(w<2x+\min S\),
+no such representation can use two elements of \(P\). Hence every
+four-term representation of \(w\) from \(A'\) uses exactly one element
+\(p\in P\), and the other three summands lie in \(S\). Thus
+\[
+w-p\in3S.
+\]
+If \(w-p\in3(S\setminus\{q\})\), then this same retained three-term
+representation, together with the retained element \(p\), gives
+\[
+w\in4C,
+\]
+contradicting (2). Therefore (3) holds. \(\square\)
+
+This rules out a basic delayed-filler repair strategy. A later high block
+cannot create an adjacent one-new singleton witness for an old filler \(q\)
+unless \(q\) already had a lower-order private three-sum hole in the old
+stage. To protect genuinely unprotected fillers, a staged construction must
+either use witnesses in the two-new range, where the positive buffer and
+Lemma 16.14 poisoning become active, or use collective barriers rather than
+singleton promotion.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20701,6 +20753,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.15 sharpens the row-bank collision test: if \(q+p\in2C\), then
   privacy forces the row \(d-p\) to be \(q\)-dependent, giving a genuine
   one-term reflected row \(d-q-p\in A\).
+* Lemma 16.16 shows that later high blocks cannot one-new promote an old
+  unprotected filler: any adjacent private witness translates an old
+  three-sum private hole for that filler.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
