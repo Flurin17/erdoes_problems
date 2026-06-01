@@ -120,7 +120,14 @@ def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
         print(f"best_example mask={mask} by_degree={by_degree}")
 
 
-def local_search(n: int, steps: int, restarts: int, seed: int, connected_only: bool) -> None:
+def local_search(
+    n: int,
+    steps: int,
+    restarts: int,
+    seed: int,
+    connected_only: bool,
+    start_mask: int | None,
+) -> None:
     rng = random.Random(seed)
     pc = cdc.precompute(n)
     bits = len(pc.edges)
@@ -128,17 +135,30 @@ def local_search(n: int, steps: int, restarts: int, seed: int, connected_only: b
     global_example: tuple[int, dict[int, int]] | None = None
 
     for restart in range(restarts):
-        mask = rng.getrandbits(bits)
+        if restart == 0 and start_mask is not None:
+            mask = start_mask
+        else:
+            mask = rng.getrandbits(bits)
         adj = cdc.adjacency(n, mask, pc)
         if connected_only:
             attempts = 0
             while not is_connected(adj):
+                if restart == 0 and start_mask is not None:
+                    raise ValueError("start mask is not connected")
                 attempts += 1
                 if attempts > 10_000:
                     raise RuntimeError("failed to sample a connected starting graph")
                 mask = rng.getrandbits(bits)
                 adj = cdc.adjacency(n, mask, pc)
         value, by_degree = spectrum_mass(adj, pc)
+        if value < global_best:
+            global_best = value
+            global_example = (mask, by_degree)
+            print(
+                f"new_best restart={restart} step=start "
+                f"mass={value} mask={mask} by_degree={by_degree}",
+                flush=True,
+            )
         temperature = 0.02
         for step in range(steps):
             bit = rng.randrange(bits)
@@ -197,12 +217,20 @@ def main() -> None:
     parser.add_argument("--connected-only", action="store_true")
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--progress", type=int, default=0)
+    parser.add_argument("--start-mask", type=int)
     args = parser.parse_args()
 
     if args.mask is not None:
         fixed(args.n, args.mask)
     elif args.local_steps:
-        local_search(args.n, args.local_steps, args.restarts, args.seed, args.connected_only)
+        local_search(
+            args.n,
+            args.local_steps,
+            args.restarts,
+            args.seed,
+            args.connected_only,
+            args.start_mask,
+        )
     elif args.sample:
         sample(args.n, args.sample, args.seed, args.connected_only)
     else:

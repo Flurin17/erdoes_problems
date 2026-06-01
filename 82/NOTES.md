@@ -4044,3 +4044,20 @@ source of growth beyond Ramsey.
   equality-extension lemma are false; the remaining viable spectrum route is
   to prove a weaker lower bound such as
   `mu(G)>=c(log |G|)^{2+eta}`, or to replace `mu` by a stronger functional.
+- 2026-06-01: Isolated the sharpened spectrum target `mu(G)>=|G|-1`.  This
+  would still imply `D_spec(h)<=floor((h-1)^2/2)+2` and therefore
+  `G(k)<2k^2`, so the original problem would follow.  The known
+  fourteen-vertex graph `391219392115868279640099` is tight for this target,
+  and adding isolated vertices preserves the one-unit deficit.  Its full
+  one-vertex extension profile has `40` further linear-mass violations on
+  `15` vertices, all with `mu=14=15-1`; no extension with `mu<=13` appeared.
+  Thus the next induction target is: every graph with `mu=|G|-1` has every
+  one-vertex extension satisfying `mu>=|G|`.
+- 2026-06-01: Refined the previous entry: the global `mu(G)>=|G|-1` target
+  is false for disconnected graphs.  For a disjoint union of `t` identical
+  copies of any graph `H`, each spectrum coordinate scales exactly:
+  `s_d(tH)=t s_d(H)`.  Therefore `t` copies of the fourteen-vertex
+  counterexample have `14t` vertices and spectrum mass `13t`.  A connected
+  defect-one theorem could still imply a positive-density global theorem
+  because the first known connected deficit has size `14`, but the clean
+  target is now `mu(G)>=c|G|` for an absolute constant `c>0`.

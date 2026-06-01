@@ -14932,6 +14932,104 @@ equality-extension lemma are false.  Future spectrum arguments must target a
 weaker lower bound, such as the superquadratic polylogarithmic bound in
 Conditional Corollary 28J.1c, or a different spectrum functional.
 
+**Conditional Corollary 28J.10c: Defect-One Spectrum Mass Still Suffices.**
+Suppose every graph `J` satisfies
+
+```text
+sum_d s_d(J) >= |V(J)|-1.
+```
+
+Then
+
+```text
+D_spec(h) <= floor((h-1)^2/2)+2,
+```
+
+and consequently
+
+```text
+G(k) <= floor((2k-1)^2/2)+2 < 2k^2
+```
+
+for every `k>=2`.  In particular Erdős Problem 82 follows.
+
+Proof.  Let `M=floor((h-1)^2/2)+2`, and let `J_1,J_2` be two graphs on
+`M` vertices.  If either graph has a regular induced subgraph on at least
+`h` vertices, then the first alternative in `D_spec(h)` holds.
+
+Otherwise only degrees `0,...,h-2` can contribute.  If the spectrum-matching
+alternative fails, then for every such degree `d`,
+
+```text
+s_d(J_1)+s_d(J_2) <= h-1.
+```
+
+Summing gives
+
+```text
+sum_d s_d(J_1)+sum_d s_d(J_2) <= (h-1)^2.
+```
+
+The assumed defect-one lower bound gives
+
+```text
+sum_d s_d(J_1)+sum_d s_d(J_2) >= 2M-2 > (h-1)^2,
+```
+
+a contradiction.  Hence the spectrum-matching alternative holds.  This proves
+the displayed bound on `D_spec(h)`.  Applying Corollary 28I with `h=2k` gives
+the displayed bound on `G(k)`.  QED.
+
+The fourteen-vertex graph in Counterexample 28J.10b shows that the
+defect-one hypothesis is the strongest possible version of this specific
+linear spectrum-mass strategy.  The next target is therefore
+
+```text
+sum_d s_d(G) >= |V(G)|-1                 (Defect-One Spectrum Mass).
+```
+
+The known counterexample and its isolated-vertex extensions meet this bound
+with equality, and the all-extension profile of the fourteen-vertex example
+produces more defect-one graphs but no defect-two graph.
+
+**Lemma 28J.10d: Defect Scales Under Repeated Components.**  If `tG` denotes
+the disjoint union of `t` copies of a graph `G`, then for every degree `d`,
+
+```text
+s_d(tG)=t s_d(G).
+```
+
+Consequently
+
+```text
+sum_d s_d(tG)=t sum_d s_d(G).
+```
+
+Proof.  Any induced `d`-regular subgraph of `tG` restricts in each component
+copy either to the empty set or to an induced `d`-regular subgraph of that
+copy.  Hence its order is at most `t s_d(G)`.  Conversely, taking a maximum
+`d`-regular witness in each copy and uniting the `t` witnesses gives an
+induced `d`-regular subgraph of `tG` of order `t s_d(G)`.  This proves the
+first display, and summing over `d` gives the second.  QED.
+
+Applying this to the fourteen-vertex graph in Counterexample 28J.10b gives
+an infinite family with
+
+```text
+|V(tG)|=14t,        sum_d s_d(tG)=13t.
+```
+
+Thus the global defect-one target in Conditional Corollary 28J.10c is false
+for disconnected graphs.  The remaining viable linear spectrum target is a
+positive-density statement
+
+```text
+sum_d s_d(G) >= c |V(G)|
+```
+
+for some absolute `c>0`; this would also imply Erdős Problem 82 by the same
+argument as Conditional Corollary 28J.1b with `delta=1`.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.
