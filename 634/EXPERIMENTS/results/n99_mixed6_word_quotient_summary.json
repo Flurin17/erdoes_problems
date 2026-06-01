@@ -1,0 +1,34 @@
+{
+  "chunks": [
+    "n99_mixed6_word_quotient_first10000.json",
+    "n99_mixed6_word_quotient_010000_020000.json",
+    "n99_mixed6_word_quotient_020000_050000.json",
+    "n99_mixed6_word_quotient_050000_100000.json",
+    "n99_mixed6_word_quotient_100000_150000.json",
+    "n99_mixed6_word_quotient_150000_200000.json",
+    "n99_mixed6_word_quotient_200000_250000.json",
+    "n99_mixed6_word_quotient_250000_300000.json",
+    "n99_mixed6_word_quotient_300000_350000.json",
+    "n99_mixed6_word_quotient_350000_418260.json"
+  ],
+  "classified_weight": 5867040,
+  "classified_words": 418260,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "radicand": 1,
+  "representative_status_weight_counts": {
+    "corner-label-violation": 2338380,
+    "pinch-sector-obstruction": 775440,
+    "split-corner-label-obstruction": 2753220
+  },
+  "reps_per_word": 2,
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_groups": 418260
+}

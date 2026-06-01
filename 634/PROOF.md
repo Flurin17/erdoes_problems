@@ -2300,19 +2300,22 @@ split-corner-label-obstruction:  149,728
 ```
 
 For `N=99` mixed `6`, the same counter finds `418260` outside-cover word groups
-over `5867040` outside-cover shells. The first `350000` classified word groups
-cover cumulative weight `4974600` and again show no mixed-status word group.
-These results are recorded in
-`EXPERIMENTS/results/n63_mixed6_word_quotient_full.json`,
-`EXPERIMENTS/results/n99_mixed6_word_quotient_first10000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_010000_020000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_020000_050000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_050000_100000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_100000_150000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_150000_200000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_200000_250000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_250000_300000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_quotient_300000_350000.json`.
+over `5867040` outside-cover shells. All `418260` word groups have now been
+representative-classified with up to two representatives per word group, with
+no mixed-status word group. The representative weighted totals are:
+
+```text
+corner-label-violation:        2,338,380
+pinch-sector-obstruction:        775,440
+split-corner-label-obstruction: 2,753,220
+```
+
+The summary is recorded in
+`EXPERIMENTS/results/n99_mixed6_word_quotient_summary.json`, with interval
+artifacts for the disjoint word ranges. This would close the `N=99`
+mixed-`6` outside-cover stratum if one proves the word-invariance lemma: for
+fixed side-label word triple `(L,R,B)`, the refined residual obstruction status
+is independent of the endpoint orientations realizing those words.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count

@@ -3,6 +3,8 @@
   "classified_words": 10000,
   "elapsed_seconds": 147.529105,
   "endpoint_groups": 20,
+  "first_classified_word_index": 1,
+  "last_classified_word_index": 10000,
   "max_total_mixed": 6,
   "min_total_mixed": 6,
   "mixed_status_words": 0,
@@ -10,6 +12,7 @@
   "outside_cover_shells": 5867040,
   "radicand": 1,
   "reps_per_word": 2,
+  "skip_classified_words": 0,
   "status_group_counts": {
     "corner-label-violation": 5680,
     "pinch-sector-obstruction": 1440,

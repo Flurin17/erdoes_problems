@@ -237,10 +237,13 @@ Current components:
   mixed-status word group and weighted totals exactly matching the full refined
   census: `207888` corner-label violations, `58224` pinch-sector obstructions,
   and `149728` split-corner-label obstructions. For `N=99` mixed `6`, it
-  counts `418260` word groups over `5867040` outside-cover shells; the first
-  `350000` classified word groups cover cumulative weight `4974600` with no
-  mixed-status word group. The runner supports `--skip-classified-words` for
-  disjoint classification intervals.
+  counts `418260` word groups over `5867040` outside-cover shells; all word
+  groups have now been representative-classified with up to two representatives
+  per word and no mixed-status word group. The representative weighted totals
+  are `2338380` corner-label violations, `775440` pinch-sector obstructions,
+  and `2753220` split-corner-label obstructions, recorded in
+  `results/n99_mixed6_word_quotient_summary.json`. The runner supports
+  `--skip-classified-words` for disjoint classification intervals.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and
