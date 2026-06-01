@@ -153,6 +153,14 @@ odd deletion has a mobile-injective hole, but the high-window pair-link
 graph has no universal first vertex, so Lemma 13.1j cannot start. It also
 verifies the large one-color fiber packet from Example 8.5a.7g.
 
+`fiber_palette_independence.py` checks the finite graph constraints behind
+the current large-fiber reduction. On the bipartite six-point window
+\(\{8,9,11,13,15,16\}\), it verifies that the unique rows for the gate
+\(16\) are independent in the gate-difference graph \(u+16-v\in A\). It
+also checks the shifted-overlap toy window \(\{1,2,3,10\}\), where rows
+\(\{1,2\}\) with shift \(1\) fail shift-independence and therefore contain
+the certificate \(1,2,2\). This supports Lemmas 8.5a.7i--8.5a.7l.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole

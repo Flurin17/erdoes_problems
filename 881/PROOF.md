@@ -38,7 +38,10 @@ fibers or \(F+F\)-exception mass at ambient scale. The rank-controlled
 variant Lemma 8.5a.7e' and Corollary 8.5a.7f.1 sharpen this: those large
 fibers may be forced into either a unique-gate branch or a fixed retained
 shifted-overlap branch. Lemma 8.5a.7i adds that certificate-free shifted
-fibers must be independent for their own shift.
+fibers must be independent for their own shift, while Lemma 8.5a.7j and
+Corollaries 8.5a.7k--8.5a.7l rule out fixed finite gate or shift palettes
+unless the recurring fibers remain inside the corresponding independence
+numbers.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
@@ -6611,6 +6614,154 @@ surviving shifted-overlap counterexample must either move the shift \(h\),
 or keep every fixed-\(h\) reflected fiber inside \(h\)-independent subsets
 of all finite tests.
 
+### Lemma 8.5a.7j: Unique-gate fibers are gate-independent
+
+Let \(A\subseteq\mathbb N\), let \(f\in A\), and let
+\[
+U\subset A\setminus\{f\}
+\]
+be finite. Suppose
+\[
+r_{2,A}(u+f)=1\qquad(u\in U), \tag{1}
+\]
+with the unique unordered representation of \(u+f\) being the gate pair
+\[
+u+f.
+\]
+Then
+\[
+(U+f-U)\cap A\subset\{f\}. \tag{2}
+\]
+Equivalently, for distinct \(u,v\in U\),
+\[
+u+f-v\notin A. \tag{3}
+\]
+
+Proof. If \(u,v\in U\) are distinct and
+\[
+x=u+f-v\in A,
+\]
+then
+\[
+u+f=v+x
+\]
+is an unordered two-term representation of \(u+f\) from \(A\). It is not
+the same unordered pair as \(\{u,f\}\): equality would force either
+\(v=u\), or \(v=f\), both impossible because \(v\ne u\) and
+\(U\cap\{f\}=\varnothing\). Thus (1) fails. \(\square\)
+
+Thus the unique-gate branch also has an independence graph. For finite
+\[
+T\subset A\setminus\{f\},
+\]
+write
+\[
+\iota_f(T)=\max\{|S|:\ S\subset T,\ (S+f-S)\cap A\subset\{f\}\}.
+\]
+Every unique-gate fiber inside \(T\) has size at most \(\iota_f(T)\).
+
+### Corollary 8.5a.7k: Finite gate palettes collapse to certificates
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Fix a
+finite gate palette
+\[
+P\subset A
+\]
+and a finite test set
+\[
+T_0\subset A\setminus P.
+\]
+For \(f\in P\), define
+\[
+\beta_f(T_0)=\max\left\{|S|:\ \substack{
+S\subset T_0,\ S\text{ certificate-free relative to }A,\\
+(S+f-S)\cap A\subset\{f\}}\right\}. \tag{1}
+\]
+Suppose that for every \(L\) there are
+\[
+f\in P,\qquad U\subset T_0,\qquad m>L
+\]
+such that
+\[
+m-U\subset A,\qquad r_{2,A}(u+f)=1\ (u\in U),\qquad |U|>\beta_f(T_0).
+\tag{2}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. By Lemma 8.5a.7j, each set \(U\) in (2) is \(f\)-independent:
+\[
+(U+f-U)\cap A\subset\{f\}.
+\]
+Since \(|U|>\beta_f(T_0)\), the definition of \(\beta_f(T_0)\) forces
+\(U\) to contain a certificate triple
+\[
+e,y_1,y_2\in U,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A. \tag{3}
+\]
+The center \(m\) reflects this triple into \(A\), because
+\[
+m-U\subset A.
+\]
+Let \(L\to\infty\). There are only finitely many choices of \(f\in P\) and
+only finitely many triples inside \(T_0\). Hence one certificate triple
+(3) is reflected by arbitrarily large centers. Corollary 2.3c gives the
+desired infinite deletion. \(\square\)
+
+### Corollary 8.5a.7l: Finite shifted palettes collapse to certificates
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Fix a
+finite set of nonzero shifts
+\[
+H\subset\mathbb Z\setminus\{0\}
+\]
+and a finite test set
+\[
+T_0\subset A.
+\]
+For \(h\in H\), define
+\[
+\gamma_h(T_0)=\max\left\{|S|:\ \substack{
+S\subset T_0,\ S+h\subset A,\ S\text{ certificate-free relative to }A,\\
+S\cap(S-h)=\varnothing}\right\}. \tag{1}
+\]
+Suppose that for every \(L\) there are
+\[
+h\in H,\qquad U\subset T_0,\qquad m>L
+\]
+such that
+\[
+m-U\subset A,\qquad U+h\subset A,\qquad |U|>\gamma_h(T_0). \tag{2}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+Proof. Fix data as in (2). If
+\[
+U\cap(U-h)\ne\varnothing,
+\]
+then Lemma 8.5a.7i produces a certificate triple inside \(U\). If
+\[
+U\cap(U-h)=\varnothing,
+\]
+then (2) and the definition of \(\gamma_h(T_0)\) imply that \(U\) is not
+certificate-free, so again \(U\) contains a certificate triple
+\[
+e,y_1,y_2\in U,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A. \tag{3}
+\]
+The center \(m\) reflects the triple by \(m-U\subset A\). Since \(H\) and
+\(T_0\) are finite, one certificate triple recurs along arbitrarily large
+centers as \(L\to\infty\). Corollary 2.3c gives the desired deletion.
+\(\square\)
+
+Corollaries 8.5a.7k--8.5a.7l are finite-palette no-go results. A surviving
+large-fiber counterexample cannot keep unique gates in a fixed finite
+palette while exceeding the corresponding \(\beta_f\)-independence numbers,
+and it cannot keep shifted overlaps in a fixed finite shift palette while
+exceeding the corresponding \(\gamma_h\)-independence numbers. Thus both
+branches must move their parameters, or else every recurring finite test
+must have large subsets that are simultaneously certificate-free and
+independent for the relevant gate or shift.
+
 ### Example 8.5a.7g: Large one-color private fibers are locally compatible
 
 The conclusion of Corollary 8.5a.7f is still only a global obstruction, not
@@ -6703,8 +6854,12 @@ one of two more rigid forms: either \(u+f\) is uniquely represented in the
 full basis for all \(u\in U\), or a fixed retained shifted overlap
 \(U+f-g\subset A\setminus F\) appears for a second deleted color \(g\).
 Lemma 8.5a.7i adds that, if the shifted fiber is also certificate-free, it
-must be independent for the shift \(h=f-g\). The precise missing step is to
-show that both rigid escapes are impossible under the global late-bad
+must be independent for the shift \(h=f-g\), and Lemma 8.5a.7j gives the
+analogous gate-difference independence for unique-gate fibers. Corollaries
+8.5a.7k--8.5a.7l then rule out any recurrence over fixed finite palettes of
+gates or shifts unless the reflected fibers stay inside the corresponding
+certificate-free independence numbers. The precise missing step is to show
+that both moving-palette escapes are impossible under the global late-bad
 barrier hypothesis, or to construct a staged basis in which the fibers
 \(U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all escape
 while maintaining order-2 coverage and promoted-edge barriers. This is now
@@ -13281,13 +13436,22 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   fibers are independent for their own shift. Hence a fixed-shift reflected
   fiber that is too large inside a finite \(h\)-linked test set gives a
   recurrent certificate triple and a good deletion.
+* Lemma 8.5a.7j gives the analogous independence graph for unique-gate
+  fibers: if \(r_{2,A}(u+f)=1\) on \(U\), then no two distinct rows satisfy
+  \(u+f-v\in A\). Thus unique-gate fibers are independent in the
+  gate-difference graph.
+* Corollaries 8.5a.7k--8.5a.7l package the finite-palette consequence:
+  recurring reflected fibers using only fixed finite gate or shift palettes
+  either stay inside the corresponding certificate-free independence
+  numbers, or produce a recurrent certificate triple and hence a good
+  deletion.
 * Example 8.5a.7g shows that these large fibers are locally compatible:
   a range-separated two-color packet can make one active color carry an
   arbitrarily large certificate-free private fiber.
 * Target 8.5a.7h identifies the current live obstruction: large private
-  fibers in the unique-gate or shift-independent shifted-overlap branches
-  must escape every fixed certificate-rich test set without compacting to
-  recurrent Sidon colors or losing the late-bad barrier.
+  fibers in the gate-independent unique branch or shift-independent
+  shifted-overlap branch must escape every fixed finite palette and every
+  fixed certificate-rich test set without losing the late-bad barrier.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

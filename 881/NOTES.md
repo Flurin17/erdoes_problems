@@ -2096,10 +2096,25 @@ Indeed, \(u,u+h\in U\) and \(U+h\subset A\) would give the certificate
 e=u,\qquad y_1=y_2=u+h,\qquad y_1+y_2-e=u+2h\in A.
 \]
 
+Lemma 8.5a.7j gives the unique-gate analogue. If \(r_{2,A}(u+f)=1\) for
+all \(u\in U\), then \(U\) is independent in the gate-difference graph:
+\[
+(U+f-U)\cap A\subset\{f\}.
+\]
+Otherwise \(u+f=v+(u+f-v)\) would be a second two-term representation of
+\(u+f\).
+
+Corollaries 8.5a.7k--8.5a.7l package these as finite-palette no-go
+criteria. Recurring reflected fibers over a fixed finite gate palette or a
+fixed finite shift palette either stay inside the corresponding
+certificate-free independence numbers, or they contain a certificate triple
+that recurs by reflection and triggers Corollary 2.3c.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
-unique full two-sum gates, or have retained shifted overlaps while keeping
-the shift moving or keeping every fixed-shift fiber independent inside all
-finite tests. A proof must turn one of these escape patterns into a
-recurrent certificate triple; a counterexample must stage these escaping
-fibers while preserving the late-bad barrier for every infinite deletion.
+unique full two-sum gates while keeping the gate moving or gate-independent
+inside every finite test, or have retained shifted overlaps while keeping
+the shift moving or shift-independent inside every finite test. A proof
+must turn one of these escape patterns into a recurrent certificate triple;
+a counterexample must stage these escaping fibers while preserving the
+late-bad barrier for every infinite deletion.
