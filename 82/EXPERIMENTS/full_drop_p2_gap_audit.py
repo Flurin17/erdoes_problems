@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 from collections import defaultdict
+from itertools import combinations
 from time import monotonic
 
 import column_drop_census as cdc
@@ -40,6 +41,33 @@ def clique_independent_on_subset(
     return clique, independent
 
 
+def first_neighborhood_parts(adj: list[int], a_neighbors: list[int]) -> list[tuple[int, ...]]:
+    seen: set[int] = set()
+    parts: list[tuple[int, ...]] = []
+    for x in a_neighbors:
+        if x in seen:
+            continue
+        part = [x]
+        seen.add(x)
+        for y in a_neighbors:
+            if y in seen:
+                continue
+            if not ((adj[x] >> y) & 1):
+                part.append(y)
+                seen.add(y)
+                break
+        parts.append(tuple(part))
+    return parts
+
+
+def clique_vertices_of_order(adj: list[int], vertices: list[int], order: int) -> list[tuple[int, ...]]:
+    out: list[tuple[int, ...]] = []
+    for combo in combinations(vertices, order):
+        if all((adj[u] >> v) & 1 for u, v in combinations(combo, 2)):
+            out.append(combo)
+    return out
+
+
 def audit(n: int, progress: int, max_terminals: int | None) -> None:
     if n < 1:
         raise SystemExit("n must be positive")
@@ -54,6 +82,8 @@ def audit(n: int, progress: int, max_terminals: int | None) -> None:
         "max_induction_gap_example": None,
         "max_actual_gap": -10**9,
         "max_actual_gap_example": None,
+        "part_rule_violations": 0,
+        "singleton_order_violations": 0,
         "uncovered_buckets": defaultdict(int),
         "gap_buckets": defaultdict(int),
     }
@@ -88,7 +118,46 @@ def audit(n: int, progress: int, max_terminals: int | None) -> None:
 
                 b_mask = full_mask & ~1 & ~adj[0]
                 b_size = b_mask.bit_count()
+                a_vertices = [v for v in range(1, n) if (adj[0] >> v) & 1]
+                b_vertices = [v for v in range(1, n) if not ((adj[0] >> v) & 1)]
                 omega_b, alpha_b = clique_independent_on_subset(adj, pc, b_mask)
+                parts = first_neighborhood_parts(adj, a_vertices)
+                max_cliques = clique_vertices_of_order(adj, b_vertices, omega_b)
+                for clique in max_cliques:
+                    covered_parts = []
+                    for part in parts:
+                        if all(
+                            any(not ((adj[t] >> x) & 1) for t in clique)
+                            for x in part
+                        ):
+                            covered_parts.append(part)
+                    size_two_covered = [part for part in covered_parts if len(part) == 2]
+                    if size_two_covered and len(covered_parts) > 1:
+                        stats["part_rule_violations"] = (
+                            int(stats["part_rule_violations"]) + 1
+                        )
+                        print(
+                            "part_rule_violation columns="
+                            + ",".join(map(str, columns))
+                            + f" clique={clique} covered={covered_parts}",
+                            flush=True,
+                        )
+                        return True
+                    singleton_parts = [part for part in covered_parts if len(part) == 1]
+                    for (x,), (y,) in combinations(singleton_parts, 2):
+                        tx = next(t for t in clique if not ((adj[t] >> x) & 1))
+                        ty = next(t for t in clique if not ((adj[t] >> y) & 1))
+                        if not (tx < y and ty < x):
+                            stats["singleton_order_violations"] = (
+                                int(stats["singleton_order_violations"]) + 1
+                            )
+                            print(
+                                "singleton_order_violation columns="
+                                + ",".join(map(str, columns))
+                                + f" clique={clique} x={x} y={y} tx={tx} ty={ty}",
+                                flush=True,
+                            )
+                            return True
                 induction_lower = 1 + target(b_size) + (omega - omega_b)
                 gap = target(n) - induction_lower
                 gap_buckets = stats["gap_buckets"]
@@ -146,6 +215,8 @@ def audit(n: int, progress: int, max_terminals: int | None) -> None:
     print(f"uncovered={stats['uncovered']}")
     print(f"max_induction_gap={stats['max_induction_gap']}")
     print(f"max_actual_gap={stats['max_actual_gap']}")
+    print(f"part_rule_violations={stats['part_rule_violations']}")
+    print(f"singleton_order_violations={stats['singleton_order_violations']}")
     example = stats["max_induction_gap_example"]
     if example is not None:
         alpha, omega, first_degree, omega_b, alpha_b, columns = example

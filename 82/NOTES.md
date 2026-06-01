@@ -3623,3 +3623,8 @@ source of growth beyond Ramsey.
   missing them, then `t_x<y` and `t_y<x`; otherwise the singleton vertex loses
   both `a` and the other singleton to the later clique vertex.  Thus multiple
   covered singleton parts force a rigid alternating order pattern.
+- 2026-06-01: Extended `full_drop_p2_gap_audit.py` to verify the new covered
+  part restrictions during exact enumeration.  Runs at `n=8` and `n=9` report
+  `part_rule_violations=0` and `singleton_order_violations=0`, matching
+  Lemmas 28D.5b.9 and 28D.5b.10 while still finding no
+  `alpha+omega` violations.

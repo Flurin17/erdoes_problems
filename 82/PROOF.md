@@ -12481,6 +12481,14 @@ that a full proof of the `P=2` alpha-plus-omega conjecture should show that
 the first-vertex nonneighbor side cannot itself be extremal in precisely the
 cases where the naive induction is one short.
 
+The same audit also verifies Lemmas 28D.5b.9 and 28D.5b.10 on these exact
+censuses: both runs report
+
+```text
+part_rule_violations=0
+singleton_order_violations=0.
+```
+
 This is only finite calibration, but it supports the possibility that the
 current quadratic upper bound for `C_full(2,h)` is far from sharp.
 
