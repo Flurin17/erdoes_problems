@@ -2322,6 +2322,12 @@ The terminal-cover diagnostic now prints the finite gate-option maps
 \(e\mapsto\{f\in F:v-e-f\in A\setminus F\}\), along with deleted-pair
 exceptions, for the small rank-three product window, so this bookkeeping is
 checked on the local model.
+The new `selector_reflected_front_search.py` makes the stricter retained
+mirror requirement explicit: on Example 8.5a.7z the ordinary terminal cover
+still covers all eight selector triples, but `--require-retained-mirrors`
+leaves only four candidates, and `--require-all-gates-active` leaves only
+three. Thus a genuine reflected-front counterexample needs more than the
+local terminal product cover; it must control the \(F+F\) exception rows.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

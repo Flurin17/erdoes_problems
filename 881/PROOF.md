@@ -8249,6 +8249,40 @@ finite overlap. Conversely, a counterexample would have to supply a finite
 extension lemma producing this data while keeping singleton and pair
 deletions harmless and freezing all older witnesses below later stages.
 
+### Diagnostic 8.5a.7z.9: The seed product cover is not a retained-mirror front
+
+The script `EXPERIMENTS/selector_reflected_front_search.py` tests the
+reflected-front bookkeeping in Target 8.5a.7z.8 on fixed finite windows.
+For Example 8.5a.7z, the default run finds terminal gate-map candidates for
+all eight selector triples:
+```
+python3 881/EXPERIMENTS/selector_reflected_front_search.py
+```
+However, if every old padder row is required to have a retained mirror,
+```
+python3 881/EXPERIMENTS/selector_reflected_front_search.py --require-retained-mirrors
+```
+only four candidates remain, and the missing selectors are
+\[
+(4,5,12),\ (10,5,8),\ (10,5,12),\ (10,11,8),\ (10,11,12).
+\]
+Adding the requirement that every deleted gate be active through retained
+mirrors,
+```
+python3 881/EXPERIMENTS/selector_reflected_front_search.py --require-retained-mirrors --require-all-gates-active
+```
+leaves only three selector triples.
+
+Thus Example 8.5a.7z is a terminal product-cover warning, not yet a finite
+model of the stricter reflected-front skeleton. Several of its selector
+witnesses rely essentially on rows with
+\[
+w-e\in F+F,
+\]
+so an iterable reflected-front construction would need either ranks large
+enough to absorb these \(F+F\) exception rows or additional retained mirrors
+that do not repair the private holes.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -14965,9 +14999,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   transversal constraints alone cannot produce an escaping selector against
   fully selector-specific rank-three fronts.
 * Target 8.5a.7z.8 isolates that last route: a counterexample must stage a
-  selector-specific reflected front whose old padders are assigned to
-  moving deleted gates and retained mirrors without creating recurrent
-  finite palettes, pair cylinders, or stable shifted spikes.
+  selector-specific reflected front whose old padders are either \(F+F\)
+  exceptions or are assigned to moving deleted gates and retained mirrors
+  without creating recurrent finite palettes, pair cylinders, or stable
+  shifted spikes.
+* Diagnostic 8.5a.7z.9 shows that the seed terminal product cover is not
+  yet such a retained-mirror front: strict retained-mirror requirements
+  leave only a few selector triples.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

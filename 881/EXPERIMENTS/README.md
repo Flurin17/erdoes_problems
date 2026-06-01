@@ -204,6 +204,14 @@ window. The bounded run
 `--max-value 30 --max-fillers 2` checks `20961` candidates and finds no
 extension, recording Diagnostic 8.5a.7z.2.
 
+`selector_reflected_front_search.py` tests the stricter reflected-front
+bookkeeping from Target 8.5a.7z.8 on fixed finite windows. On the seed
+window, the default run finds terminal gate-map candidates for all eight
+selector triples. With `--require-retained-mirrors`, only four candidates
+remain; adding `--require-all-gates-active` leaves three selector triples.
+Thus the local product cover in Example 8.5a.7z relies substantially on
+deleted-pair exception rows and is not already a full retained-mirror front.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole
