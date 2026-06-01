@@ -178,6 +178,9 @@ point survives.
 Corollary 16.106 removes the common-tested-interval restriction, so finite
 selector certificates assembled from a countable menu of interval tests
 still expose a long-range witness in one selected profile.
+Corollary 16.107 translates endpoint proximity into a packet-center
+criterion: a narrow packet cannot be excluded by profiles that are both
+internally midpoint-clustered and centered near that packet.
 
 ## Definitions
 

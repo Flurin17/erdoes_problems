@@ -6,7 +6,9 @@ robust-core midpoint depends only on the auxiliary interval midpoint, gaps
 between two cores measure auxiliary midpoint separation, and endpoint
 escape from a core has the predicted midpoint-distance cost. It also checks
 the contrapositive used by Corollary 16.105: points whose doubled midpoint
-distance is below the endpoint-escape threshold lie inside the core.
+distance is below the endpoint-escape threshold lie inside the core. The
+same calculation checks the centered-packet criterion behind Corollary
+16.107.
 """
 
 from __future__ import annotations
@@ -31,6 +33,7 @@ def main() -> None:
     rng = Random(1697)
     checked = 0
     proximal_checked = 0
+    centered_packet_checked = 0
     endpoint_checked = 0
     gap_checked = 0
     clustered_checked = 0
@@ -53,6 +56,17 @@ def main() -> None:
                             assert left <= p <= right
                             assert abs(2 * p + a + b - 2 * (c + d)) <= rho - 1
                             proximal_checked += 1
+                        for p_minus, p_plus in (
+                            (left, right),
+                            (left, (left + right) // 2),
+                            ((left + right) // 2, right),
+                        ):
+                            width = p_plus - p_minus
+                            center_distance = abs(
+                                p_minus + p_plus + a + b - 2 * (c + d)
+                            )
+                            assert center_distance + width <= rho - 1
+                            centered_packet_checked += 1
                         for p in (left - 3, left - 1, right + 1, right + 3):
                             assert p < left or p > right
                             assert abs(2 * p + a + b - 2 * (c + d)) >= rho + 1
@@ -102,6 +116,7 @@ def main() -> None:
     print("robust core gap geometry check passed")
     print(f"cores_checked={checked}")
     print(f"endpoint_proximal_checked={proximal_checked}")
+    print(f"centered_packet_checked={centered_packet_checked}")
     print(f"endpoint_escape_checked={endpoint_checked}")
     print(f"gaps_checked={gap_checked}")
     print(f"clustered_pairs_checked={clustered_checked}")
