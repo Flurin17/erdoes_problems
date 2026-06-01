@@ -9,6 +9,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `regular_spectrum_mass.py`: exact, sample, and local-search diagnostics for
   the spectrum-mass parameter `mu(G)=sum_d s_d(G)`, where `s_d` is the largest
   induced `d`-regular order.
+- `spectrum_power_search.py`: exact and local-search diagnostics for power
+  sums `sum_d s_d(G)^p`, especially the square-spectrum functional
+  `sum_d s_d(G)^2` used in the current polynomial-bound conditional route.
 - `spectrum_mass_critical.py`: deletion-critical diagnostics for the same
   spectrum-mass parameter, including exact small-order histograms of
   `mu(G)-|G|`, the drops `mu(G)-mu(G-v)`, and the one-vertex extension test

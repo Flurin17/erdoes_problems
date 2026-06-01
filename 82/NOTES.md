@@ -4061,6 +4061,14 @@ source of growth beyond Ramsey.
   defect-one theorem could still imply a positive-density global theorem
   because the first known connected deficit has size `14`, but the clean
   target is now `mu(G)>=c|G|` for an absolute constant `c>0`.
+- 2026-06-01: Strengthened the component lemma from superadditivity to exact
+  additivity: for connected components `G_i`, one has
+  `s_d(disjoint union_i G_i)=sum_i s_d(G_i)` for every degree `d`.  Therefore
+  the connected defect-one target `mu(C)>=|C|-1` is still enough for the full
+  problem: singleton components contribute exactly one, and every larger
+  component would contribute at least half its order, so globally
+  `mu(G)>=|G|/2`.  This positive-linear mass bound gives `D_spec(h)=O(h^2)`
+  and hence `G(k)=O(k^2)`.
 - 2026-06-01: Added the square-spectrum route.  Let
   `Q(G)=sum_d s_d(G)^2`.  If `Q(G)>=c|G|^2` for some absolute `c>0`, then
   for two `M`-vertex graphs failing the spectrum match at threshold `h`, each

@@ -14147,7 +14147,7 @@ finite values of `n`.  QED.
 `s_d` as in Corollary 28J.1,
 
 ```text
-s_d(G) >= sum_{i=1}^t s_d(G_i)        for every d,
+s_d(G) = sum_{i=1}^t s_d(G_i)        for every d,
 ```
 
 and therefore
@@ -14168,9 +14168,15 @@ Proof.  For a fixed degree `d`, choose in each component `G_i` an induced
 `d`-regular subgraph of order `s_d(G_i)`, omitting components with
 `s_d(G_i)=0`.  The union of these vertex sets induces the disjoint union of
 `d`-regular graphs, hence is itself `d`-regular, and has order
-`sum_i s_d(G_i)`.  This proves the first display.  Summing over `d` gives the
-second.  If the desired inequality holds for connected graphs, applying it to
-each component and then using superadditivity gives it for `G`.  QED.
+`sum_i s_d(G_i)`, so `s_d(G)>=sum_i s_d(G_i)`.
+
+Conversely, if `S` induces a `d`-regular subgraph of `G`, then for every
+component `G_i`, the intersection `S cap V(G_i)` is either empty or induces a
+`d`-regular subgraph of `G_i`.  Hence
+`|S cap V(G_i)|<=s_d(G_i)` for every `i`, and `|S|<=sum_i s_d(G_i)`.  Taking
+the maximum over `S` gives the reverse inequality.  This proves equality.
+Summing over `d` gives the second display.  If the desired inequality holds
+for connected graphs, applying it to each component gives it for `G`.  QED.
 
 **Lemma 28J.3: Forests Satisfy Spectrum Mass.**  If `F` is a forest on `n`
 vertices, then
@@ -15029,6 +15035,43 @@ sum_d s_d(G) >= c |V(G)|
 
 for some absolute `c>0`; this would also imply Erdős Problem 82 by the same
 argument as Conditional Corollary 28J.1b with `delta=1`.
+
+**Conditional Corollary 28J.10d.1: Connected Defect-One Spectrum Mass
+Suffices.**  Suppose every connected graph `C` satisfies
+
+```text
+sum_d s_d(C) >= |V(C)|-1.
+```
+
+Then every graph `G` satisfies
+
+```text
+sum_d s_d(G) >= |V(G)|/2.
+```
+
+Consequently `D_spec(h)=O(h^2)`, `G(k)=O(k^2)`, and Erdős Problem 82 follows.
+
+Proof.  Let `G_1,...,G_t` be the connected components of `G`.  By the exact
+component formula in Lemma 28J.2,
+
+```text
+sum_d s_d(G)=sum_i sum_d s_d(G_i).
+```
+
+If `|G_i|=1`, then `sum_d s_d(G_i)=1`.  If `|G_i|>=2`, the connected
+defect-one hypothesis gives
+
+```text
+sum_d s_d(G_i) >= |G_i|-1 >= |G_i|/2.
+```
+
+Summing over components gives `sum_d s_d(G)>=|G|/2`.  Conditional Corollary
+28J.1b, with `delta=1` and constant `1/2`, then gives `D_spec(h)=O(h^2)` and
+`G(k)=O(k^2)`.  QED.
+
+Thus the disconnected repeated-copy obstruction in Lemma 28J.10d does not
+kill the spectrum-mass route.  It only changes the target from global
+additive defect to connected additive defect.
 
 **Conditional Corollary 28J.10e: Quadratic Square-Spectrum Mass Would
 Suffice.**  Define
