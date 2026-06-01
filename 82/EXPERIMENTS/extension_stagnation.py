@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""Fast one-vertex extension stagnation test for the regular spectrum.
+
+For a fixed graph G on n vertices, an extension column C is spectrum-stagnant
+if adding a new vertex with neighborhood C does not increase any coordinate
+s_d(G).  The test avoids recomputing spectra of all extensions.  For each old
+subset T, it characterizes the columns that make T plus the new vertex
+regular and marks those that would improve a spectrum coordinate.
+"""
+
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+
+import column_drop_census as cdc
+from regular_spectrum_mass import is_connected, spectrum_mass
+from spectrum_mass_critical import extend_mask
+
+
+def vertices(mask: int, n: int) -> tuple[int, ...]:
+    return tuple(v for v in range(n) if (mask >> v) & 1)
+
+
+def submasks(mask: int):
+    sub = mask
+    while True:
+        yield sub
+        if sub == 0:
+            break
+        sub = (sub - 1) & mask
+
+
+def regular_extension_patterns(
+    adj: list[int],
+    subset: int,
+) -> list[tuple[int, int]]:
+    """Return pairs (degree, required_column_on_subset).
+
+    The returned pattern means that a new extension column C makes
+    subset union {new vertex} degree-regular of the returned degree exactly
+    when C & subset equals required_column_on_subset.
+    """
+    if subset == 0:
+        return [(0, 0)]
+    n = len(adj)
+    degs = {
+        v: (adj[v] & subset).bit_count()
+        for v in range(n)
+        if (subset >> v) & 1
+    }
+    candidates = set(degs.values())
+    candidates.update(d + 1 for d in degs.values())
+    out: list[tuple[int, int]] = []
+    for degree in sorted(candidates):
+        if degree < 0:
+            continue
+        low = 0
+        ok = True
+        for v, old_degree in degs.items():
+            if old_degree == degree - 1:
+                low |= 1 << v
+            elif old_degree == degree:
+                pass
+            else:
+                ok = False
+                break
+        if ok and low.bit_count() == degree:
+            out.append((degree, low))
+    return out
+
+
+def stagnant_columns(n: int, mask: int) -> tuple[list[int], Counter[tuple[int, int]]]:
+    pc = cdc.precompute(n)
+    adj = cdc.adjacency(n, mask, pc)
+    _mass, by_degree = spectrum_mass(adj, pc)
+    total_columns = 1 << n
+    forbidden = bytearray(total_columns)
+    reason_counts: Counter[tuple[int, int]] = Counter()
+    full = total_columns - 1
+
+    for subset in range(0, total_columns):
+        order = subset.bit_count() + 1
+        for degree, required in regular_extension_patterns(adj, subset):
+            if order <= by_degree.get(degree, 0):
+                continue
+            free = full ^ subset
+            for outside in submasks(free):
+                column = required | outside
+                if not forbidden[column]:
+                    forbidden[column] = 1
+                    reason_counts[(degree, order)] += 1
+
+    return [column for column, value in enumerate(forbidden) if not value], reason_counts
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("n", type=int)
+    parser.add_argument("--mask", type=int, required=True)
+    parser.add_argument("--limit", type=int, default=20)
+    parser.add_argument("--print-extended-masks", action="store_true")
+    args = parser.parse_args()
+
+    pc = cdc.precompute(args.n)
+    adj = cdc.adjacency(args.n, args.mask, pc)
+    mass, by_degree = spectrum_mass(adj, pc)
+    columns, reason_counts = stagnant_columns(args.n, args.mask)
+    pc_plus = cdc.precompute(args.n + 1)
+
+    print(f"n={args.n}")
+    print(f"mask={args.mask}")
+    print(f"connected={is_connected(adj)}")
+    print(f"spectrum_mass={mass}")
+    print(f"by_degree={by_degree}")
+    print(f"total_columns={1 << args.n}")
+    print(f"stagnant_column_count={len(columns)}")
+    print(f"stagnant_columns={columns[:args.limit]}")
+    print(
+        "forbidden_reason_counts="
+        + ",".join(
+            f"degree={degree}:order={order}:columns={count}"
+            for (degree, order), count in sorted(reason_counts.items())
+        )
+    )
+    if args.print_extended_masks:
+        for column in columns[: args.limit]:
+            extended = extend_mask(args.mask, args.n, column, pc, pc_plus)
+            print(f"stagnant column={column} extended_mask={extended}")
+
+
+if __name__ == "__main__":
+    main()

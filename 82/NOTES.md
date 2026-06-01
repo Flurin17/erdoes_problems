@@ -4341,3 +4341,11 @@ source of growth beyond Ramsey.
   `Q(G)>=sum_i Q(C_i)`, `Q(G)>=t^2`, and total separated regular witness
   mass `R` gives `Q>=R^{3/2}/3`.  This is relevant because the first sharp
   defects have 2-cuts even when they have no cut vertex.
+- 2026-06-01: Added the one-vertex spectrum-increase column characterization
+  and `extension_stagnation.py`.  A new column increases coordinate `s_q`
+  exactly when some old subset `T` has all internal degrees in `{q-1,q}`,
+  the new vertex is joined exactly to the `q-1` vertices of `T`, and the
+  number of such joined vertices is `q`.  The script reproduces the eight
+  stagnant columns from the thirteen-vertex obstruction and then verifies
+  that each of the eight resulting fourteen-vertex stagnant extensions has
+  zero further stagnant one-vertex extension columns.

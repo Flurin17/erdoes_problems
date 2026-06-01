@@ -16245,6 +16245,49 @@ average square-spectrum deletion drop.  The known defect examples are
 consistent with this: most nonessential deletions preserve all large spectrum
 coordinates.
 
+**Lemma 28J.10e.6a: One-Vertex Spectrum-Increase Columns.**  Let `G` be a
+graph on vertex set `V`, and let `H` be obtained from `G` by adding a new
+vertex `z` whose neighborhood in `G` is `C subset V`.  Fix an integer `q>=0`.
+Then `H` has an induced `q`-regular subgraph containing `z` and having order
+larger than `s_q(G)` if and only if there is a subset `T subset V` such that,
+writing degrees inside `G[T]`,
+
+```text
+deg_{G[T]}(v) in {q-1,q}       for every v in T,
+{v in T : deg_{G[T]}(v)=q-1} = C cap T,
+|C cap T|=q,
+|T|+1>s_q(G).
+```
+
+Consequently a one-vertex extension leaves every spectrum coordinate
+unchanged if and only if no such pair `(q,T)` exists.
+
+Proof.  Suppose first that `S` is a `q`-regular induced subgraph of `H`
+containing `z`, and put `T=S\{z}`.  The degree of `z` inside `H[S]` is
+`|C cap T|`, so `|C cap T|=q`.  For a vertex `v in T`, its degree in
+`H[S]` is
+
+```text
+deg_{G[T]}(v)+1_{v in C}.
+```
+
+This equals `q` exactly when `deg_{G[T]}(v)=q-1` for vertices of
+`C cap T`, and `deg_{G[T]}(v)=q` for vertices of `T\C`.  If `|S|>s_q(G)`,
+then `|T|+1>s_q(G)`, giving the displayed conditions.
+
+Conversely, if the displayed conditions hold, then in `H[T union {z}]` the
+new vertex has degree `q`, vertices of `C cap T` have their old degree
+`q-1` raised to `q`, and vertices of `T\C` keep old degree `q`.  Thus
+`T union {z}` induces a `q`-regular subgraph of order `|T|+1>s_q(G)`, so the
+degree-`q` spectrum coordinate increases.  The final assertion follows
+because any coordinate increase in a one-vertex extension must be witnessed
+by a regular induced subgraph containing the new vertex.  QED.
+
+The script `EXPERIMENTS/extension_stagnation.py` implements this lemma by
+iterating over the old subsets `T` and marking all extension columns that
+would increase at least one spectrum coordinate.  This is much faster than
+recomputing the full regular spectrum of every one-vertex extension.
+
 **Computational Example 28J.10e.7: Square Spectrum Can Stagnate Under
 Extensions.**  The thirteen-vertex equality graph
 
@@ -16277,12 +16320,20 @@ masks
 The commands are
 
 ```text
+python3 82/EXPERIMENTS/extension_stagnation.py 13 \
+  --mask 1584140989738554425379 --print-extended-masks
+
 python3 82/EXPERIMENTS/spectrum_power_search.py 13 \
   --mask 1584140989738554425379 --extension-profile --max-columns 8192
 
 python3 82/EXPERIMENTS/spectrum_mass_critical.py 13 \
   --mask 1584140989738554425379 --extension-profile
 ```
+
+The fast stagnation test also checks all eight displayed fourteen-vertex
+stagnant extensions and finds no further stagnant extension column from any
+of them.  Thus this finite stagnant branch stops after one step, even though
+one-step stagnation is real.
 
 Thus a square-spectrum induction cannot require every one-vertex extension
 of a sharp graph to increase `Q`.  Any successful extension argument must use

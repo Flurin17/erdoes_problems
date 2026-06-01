@@ -13,6 +13,11 @@ Computational checks and generated data for Erdos Problem 82.
 - `spectrum_power_search.py`: exact and local-search diagnostics for power
   sums `sum_d s_d(G)^p`, especially the square-spectrum functional
   `sum_d s_d(G)^2` used in the current polynomial-bound conditional route.
+- `extension_stagnation.py`: fast one-vertex extension stagnation test for
+  the full regular spectrum.  It uses the two-consecutive-degree
+  characterization of old subsets `T` to mark all extension columns that
+  increase some coordinate `s_d`, avoiding full spectrum recomputation for
+  every extension.
 - `spectrum_mass_critical.py`: deletion-critical diagnostics for the same
   spectrum-mass parameter, including exact small-order histograms of
   `mu(G)-|G|`, the drops `mu(G)-mu(G-v)`, and the one-vertex extension test
