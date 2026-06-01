@@ -5882,6 +5882,73 @@ last-gated front obstruction must make the number of genuinely used moving
 labels grow without bound, or else keep at least one required label center
 bounded on a fixed finite test.
 
+### Warning 8.5a.7: Mobile injective colors evade finite palettes
+
+Lemma 8.5a.6 still does not close unbounded active traces. A front can
+avoid every finite moving-label palette by assigning different protected
+test points to different moving active endpoints.
+
+Consider the first Schreier front on
+\[
+P=\{2,3,\ldots\},
+\qquad
+\mathcal S_1=\{\{x_1<\cdots<x_m\}\subset P:m=x_1\}.
+\]
+Given a finite protected test
+\[
+T=\{t_1,\ldots,t_M\},
+\]
+choose a front edge
+\[
+F=\{f_1<\cdots<f_r\}\in\mathcal S_1
+\]
+with \(r>M\), and declare the whole edge \(F\) to be the active trace.
+Color
+\[
+t_i\mapsto f_i\qquad(1\le i\le M).
+\]
+Every color fiber is a singleton, hence certificate-free. The terminal
+point \(f_r\) is active but need not color any protected test point, so
+Corollary 8.5a.5 does not apply. No fixed finite palette is used as \(M\)
+varies, so Lemma 8.5a.6 does not apply either.
+
+This is only a formal incidence model: it does not construct an additive
+basis, witnesses, or private sums. It shows that the remaining obstruction
+must force either color reuse on some finite palette, or a genuine
+arithmetic contradiction for mobile injective active colors.
+
+The model also explains why naive section induction can fail. Once the
+first point \(f_1=r\) of a Schreier edge is fixed, the section has bounded
+length \(r-1\); the unboundedness comes entirely from moving the first
+point. Thus no fixed proper section inherits the full "all finite tests"
+mobile-color obstruction.
+
+### Target 8.5a.8: Trace-section dichotomy
+
+The remaining recursive target is the following dichotomy for prefix-fronts
+with active traces \(\tau(S)\ni\max S\).
+
+Assume bounded-depth finite palettes, finite moving-label palettes, and
+pure terminal gating have all been ruled out by Lemmas 8.5a.3--8.5a.6.
+If finite protected tests are still colorable by active trace elements at
+unbounded depth, then one should prove that either:
+
+1. a proper prefix section \(\mathcal F_s\) inherits the same active-trace
+   private-color obstruction, with induced traces
+   \[
+   \tau_s(G)=\tau(s\cup G)\setminus s;
+   \]
+2. after thinning, all unboundedness is first-coordinate coded: for each
+   fixed first point \(a\), the section \(\mathcal F_{\{a\}}\) has bounded
+   active nonterminal depth, and the bound tends to infinity only as
+   \(a\to\infty\).
+
+The second alternative is an enumerated-Schreier shell rather than a new
+front-rank phenomenon. A final positive proof would combine this dichotomy
+with the enumerated-Schreier obstruction results in Section 13. A
+counterexample would have to realize the mobile injective coloring
+arithmetically while evading that shell analysis.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -12383,6 +12450,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   palette of moving labels with unbounded reflection centers and
   certificate-free fibers gives finitely many recurrent Sidon colors,
   impossible by Lemma 8.6g''''.2.
+* Warning 8.5a.7 records the remaining mobile-injective escape: protected
+  test points may be assigned to distinct moving active endpoints, so no
+  finite palette or pure terminal recurrence appears.
+* Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
+  recursive front strategy: either the mobile active-color obstruction
+  descends to a proper section, or it is first-coordinate Schreier-coded and
+  must be handled by the Section 13 shell analysis.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.
