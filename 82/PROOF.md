@@ -16340,6 +16340,38 @@ of a sharp graph to increase `Q`.  Any successful extension argument must use
 multi-step structure, essential-root signatures, or a lower bound that
 survives these finite stagnant extensions.
 
+**Computational Example 28J.10e.8: Spectrum Stagnation Can Chain.**  The
+fact that the thirteen-vertex stagnant branch stops after one step is not a
+general theorem.  The chain-census mode of
+`EXPERIMENTS/extension_stagnation.py` checks whether a graph has a stagnant
+one-vertex extension that itself has a stagnant one-vertex extension.
+
+The exact five-vertex census reports
+
+```text
+graphs_with_stagnation=782,
+stagnant_extension_edges=5412,
+two_step_stagnation_graphs=97.
+```
+
+The command is
+
+```text
+python3 82/EXPERIMENTS/extension_stagnation.py 5 --chain-census
+```
+
+A bounded prefix of the six-vertex census also finds many two-step examples:
+
+```text
+python3 82/EXPERIMENTS/extension_stagnation.py 6 \
+  --chain-census --max-graphs 2000
+```
+
+reports `982` two-step examples among the first `2000` labelled graphs.
+Therefore a square-spectrum induction cannot rely on the blanket shortcut
+"stagnant extensions never iterate."  The finite stopping seen in the
+thirteen-vertex obstruction is special structure, not a universal mechanism.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

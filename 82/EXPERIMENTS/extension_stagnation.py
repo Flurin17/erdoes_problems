@@ -94,13 +94,62 @@ def stagnant_columns(n: int, mask: int) -> tuple[list[int], Counter[tuple[int, i
     return [column for column, value in enumerate(forbidden) if not value], reason_counts
 
 
+def chain_census(n: int, max_graphs: int | None, max_examples: int) -> None:
+    pc = cdc.precompute(n)
+    pc_plus = cdc.precompute(n + 1)
+    total = 1 << len(pc.edges)
+    checked = 0
+    graphs_with_stagnation = 0
+    stagnant_edges = 0
+    two_step_graphs = 0
+    examples: list[tuple[int, int, int, list[int]]] = []
+
+    for mask in range(total):
+        checked += 1
+        columns, _reason_counts = stagnant_columns(n, mask)
+        if columns:
+            graphs_with_stagnation += 1
+            stagnant_edges += len(columns)
+        for column in columns:
+            extended = extend_mask(mask, n, column, pc, pc_plus)
+            next_columns, _next_reasons = stagnant_columns(n + 1, extended)
+            if next_columns:
+                two_step_graphs += 1
+                if len(examples) < max_examples:
+                    examples.append((mask, column, extended, next_columns[:10]))
+                break
+        if max_graphs is not None and checked >= max_graphs:
+            break
+
+    print(f"n={n}")
+    print(f"labelled_graphs={total}")
+    print(f"checked_graphs={checked}")
+    print(f"graphs_with_stagnation={graphs_with_stagnation}")
+    print(f"stagnant_extension_edges={stagnant_edges}")
+    print(f"two_step_stagnation_graphs={two_step_graphs}")
+    for mask, column, extended, next_columns in examples:
+        print(
+            f"two_step_example mask={mask} column={column} "
+            f"extended_mask={extended} next_columns={next_columns}"
+        )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
-    parser.add_argument("--mask", type=int, required=True)
+    parser.add_argument("--mask", type=int)
+    parser.add_argument("--chain-census", action="store_true")
+    parser.add_argument("--max-graphs", type=int)
+    parser.add_argument("--max-examples", type=int, default=5)
     parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--print-extended-masks", action="store_true")
     args = parser.parse_args()
+
+    if args.chain_census:
+        chain_census(args.n, args.max_graphs, args.max_examples)
+        return
+    if args.mask is None:
+        parser.error("--mask is required unless --chain-census is used")
 
     pc = cdc.precompute(args.n)
     adj = cdc.adjacency(args.n, args.mask, pc)

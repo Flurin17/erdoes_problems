@@ -17,7 +17,8 @@ Computational checks and generated data for Erdos Problem 82.
   the full regular spectrum.  It uses the two-consecutive-degree
   characterization of old subsets `T` to mark all extension columns that
   increase some coordinate `s_d`, avoiding full spectrum recomputation for
-  every extension.
+  every extension.  `--chain-census` checks whether stagnant extensions can
+  iterate in exact labelled graph prefixes.
 - `spectrum_mass_critical.py`: deletion-critical diagnostics for the same
   spectrum-mass parameter, including exact small-order histograms of
   `mu(G)-|G|`, the drops `mu(G)-mu(G-v)`, and the one-vertex extension test

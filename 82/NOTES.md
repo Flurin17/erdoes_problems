@@ -4349,3 +4349,10 @@ source of growth beyond Ramsey.
   stagnant columns from the thirteen-vertex obstruction and then verifies
   that each of the eight resulting fourteen-vertex stagnant extensions has
   zero further stagnant one-vertex extension columns.
+- 2026-06-01: Added `--chain-census` to `extension_stagnation.py` and refuted
+  the shortcut "spectrum-stagnant extensions never chain."  Exact `n=5` has
+  `782` graphs with at least one stagnant extension and `97` graphs with a
+  stagnant extension that again has a stagnant extension.  A prefix of `2000`
+  labelled `n=6` graphs already contains `982` two-step examples.  Thus the
+  one-step stopping of the thirteen-vertex obstruction branch is special, not
+  a universal induction mechanism.
