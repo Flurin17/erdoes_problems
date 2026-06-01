@@ -2471,3 +2471,8 @@ source of growth beyond Ramsey.
   In the delete-saturated mask `56205204850483501447`, witness
   `{0,1,6,8,10,11}` at edge `0-1` has endpoint-minus-middle degree `+1`.
   Both satisfy the Lemma 27H role equations.
+- 2026-06-01: Added Corollary 27I.  A two-defect witness of order `m>=k` in a
+  counterexample has average degree `D+2tau/m`, so Caro--Wei applied to the
+  witness and its complement forces
+  `D+2tau/m+1>m/k` and `m-D-2tau/m>m/k`.  Therefore large edge-extremal
+  defect witnesses are necessarily medium-density, not sparse or co-sparse.

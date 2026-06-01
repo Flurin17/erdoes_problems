@@ -7981,6 +7981,49 @@ edge `0-1` creates a regular witness; before deletion, the witness
 has endpoint degrees `2,2` and middle degrees all `1`, so `tau=1`.  In both
 cases `pair_defect_witness.py` verifies the displayed pair-role equations.
 
+**Corollary 27I: Large Two-Defect Witnesses Are Medium-Degree.**  Let `G`
+have no regular induced subgraph on at least `k` vertices.  Suppose
+`S` has order `m>=k` and satisfies the conclusion of Lemma 27H for some
+`tau in {-1,0,1}`: two distinguished vertices have degree `D+tau` in `G[S]`,
+and all other vertices have degree `D`.  Then
+
+```text
+D + 2tau/m + 1 > m/k,
+m - D - 2tau/m > m/k.
+```
+
+In particular, if `m/k -> infinity`, then the middle degree `D` is neither
+`o(m/k)` nor `m-o(m/k)`.
+
+Proof.  The average degree of `G[S]` is
+
+```text
+bar d = D + 2tau/m.
+```
+
+Since `G[S]` has no independent set of order `k`, the Caro--Wei bound gives
+
+```text
+k > alpha(G[S]) >= m/(bar d+1),
+```
+
+which is the first inequality.  Applying the same argument to
+`complement(G[S])`, whose average degree is `m-1-bar d`, and using that a
+clique of order `k` in `G[S]` is also a forbidden regular induced subgraph,
+gives
+
+```text
+k > alpha(complement(G[S]))
+  >= m/(m-bar d),
+```
+
+which is the second inequality.  QED.
+
+Thus edge-extremal saturation cannot be exploited only through very sparse or
+very dense defect witnesses: any witness substantially larger than the target
+order is automatically in the same medium-density regime that appears in the
+bounded-spread and variance routes.
+
 ## Lemma 28: Ramsey Bound For Pair-Difference Amplification
 
 Let `BR(p,q)` be the least integer `N` such that every bipartite graph with
