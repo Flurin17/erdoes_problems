@@ -2732,3 +2732,13 @@ source of growth beyond Ramsey.
   degree-`2` triangles require a recoloring argument or a richer boundary
   signature, not just the edge-rooted pattern used for suppressible
   non-triangular degree-`2` vertices.
+- 2026-06-01: Added the richer `--triangle-nonedge` boundary test.  Besides
+  the direct different-slot pattern, it allows the endpoints to be split
+  between the two zero slots when one endpoint is isolated from both its own
+  zero slot and the matching slot; then that endpoint and the new degree-`2`
+  vertex can be moved into the matching slot after triangular suppression is
+  reversed.  This condition passes all even graphs on `7` vertices for rooted
+  nonedge `0:1` (`16384` checked), and the first `1000` checked `n=8` cases.
+  A larger Python `n=8` prefix was too slow for the checkpoint.  Next action:
+  if this boundary condition remains plausible, port it to the C++ checker or
+  search directly for a minimal failure.

@@ -121,6 +121,8 @@ Computational checks and generated data for Erdos Problem 82.
   Use `--good-edge u:v` to require the endpoints of an existing edge to be in
   a pattern that lifts across degree-`2` suppression, and `--good-nonedge u:v`
   to test the direct triangular-suppression endpoint pattern for a nonedge.
+  Use `--triangle-nonedge u:v` for the richer triangular boundary pattern
+  that also permits a one-endpoint zero-to-matching recoloring repair.
 - `matching_slot_fast.cpp`: C++ exact checker for the same matching-slot
   target on small even graphs.  It is intended to make the full labelled
   `n=8` even-graph sweep reproducible, and also supports `--good-edge u:v`

@@ -50,6 +50,7 @@ def find_assignment(
     forced_colors: dict[int, int] | None = None,
     good_edge: tuple[int, int] | None = None,
     good_nonedge: tuple[int, int] | None = None,
+    triangle_nonedge: tuple[int, int] | None = None,
 ) -> tuple[list[int] | None, int, bool]:
     if pc is None:
         pc = ri.precompute(n)
@@ -118,6 +119,24 @@ def find_assignment(
                 c1, c2 = assignment[first], assignment[second]
                 if not (c1 != c2 and {c1, c2} != {0, 1}):
                     return False
+            if triangle_nonedge is not None:
+                first, second = triangle_nonedge
+                c1, c2 = assignment[first], assignment[second]
+                direct = c1 != c2 and {c1, c2} != {0, 1}
+
+                def zero_recolorable(vertex: int) -> bool:
+                    color = assignment[vertex]
+                    if color not in (0, 1):
+                        return False
+                    same_zero = (adj[vertex] & color_masks[color]).bit_count()
+                    same_matching = (adj[vertex] & color_masks[2]).bit_count()
+                    return same_zero == 0 and same_matching == 0
+
+                zero_split_repair = {c1, c2} == {0, 1} and (
+                    zero_recolorable(first) or zero_recolorable(second)
+                )
+                if not (direct or zero_split_repair):
+                    return False
             return verify_assignment(adj, assignment)
         vertex = order[position]
         colors = (forced_colors[vertex],) if vertex in forced_colors else (0, 3, 1, 2)
@@ -161,6 +180,7 @@ def check_mask(
     forced_colors: dict[int, int] | None,
     good_edge: tuple[int, int] | None,
     good_nonedge: tuple[int, int] | None,
+    triangle_nonedge: tuple[int, int] | None,
 ) -> None:
     assignment, nodes, limited = find_assignment(
         n,
@@ -169,6 +189,7 @@ def check_mask(
         forced_colors=forced_colors,
         good_edge=good_edge,
         good_nonedge=good_nonedge,
+        triangle_nonedge=triangle_nonedge,
     )
     print(f"n={n}")
     print(f"mask={graph_mask}")
@@ -176,6 +197,8 @@ def check_mask(
         print(f"good_edge={good_edge[0]}:{good_edge[1]}")
     if good_nonedge is not None:
         print(f"good_nonedge={good_nonedge[0]}:{good_nonedge[1]}")
+    if triangle_nonedge is not None:
+        print(f"triangle_nonedge={triangle_nonedge[0]}:{triangle_nonedge[1]}")
     print(f"nodes={nodes}")
     if limited:
         print("matching_slot=unknown")
@@ -195,6 +218,7 @@ def exhaustive_even(
     forced_colors: dict[int, int] | None,
     good_edge: tuple[int, int] | None,
     good_nonedge: tuple[int, int] | None,
+    triangle_nonedge: tuple[int, int] | None,
 ) -> None:
     pc = ri.precompute(n)
     edge_index = {edge: index for index, edge in enumerate(pc.edges)}
@@ -209,8 +233,19 @@ def exhaustive_even(
             edge = tuple(sorted(good_nonedge))
             if ((graph_mask >> edge_index[edge]) & 1) != 0:
                 continue
+        if triangle_nonedge is not None:
+            edge = tuple(sorted(triangle_nonedge))
+            if ((graph_mask >> edge_index[edge]) & 1) != 0:
+                continue
         assignment, _nodes, hit_limit = find_assignment(
-            n, graph_mask, pc, node_limit, forced_colors, good_edge, good_nonedge
+            n,
+            graph_mask,
+            pc,
+            node_limit,
+            forced_colors,
+            good_edge,
+            good_nonedge,
+            triangle_nonedge,
         )
         if hit_limit:
             limited += 1
@@ -229,6 +264,8 @@ def exhaustive_even(
         print(f"good_edge={good_edge[0]}:{good_edge[1]}")
     if good_nonedge is not None:
         print(f"good_nonedge={good_nonedge[0]}:{good_nonedge[1]}")
+    if triangle_nonedge is not None:
+        print(f"triangle_nonedge={triangle_nonedge[0]}:{triangle_nonedge[1]}")
     print(f"checked={checked}")
     print(f"limited={limited}")
     print("no_counterexample_seen")
@@ -242,6 +279,7 @@ def sample_even(
     forced_colors: dict[int, int] | None,
     good_edge: tuple[int, int] | None,
     good_nonedge: tuple[int, int] | None,
+    triangle_nonedge: tuple[int, int] | None,
 ) -> None:
     rng = random.Random(seed)
     pc = ri.precompute(n)
@@ -260,8 +298,19 @@ def sample_even(
             edge = tuple(sorted(good_nonedge))
             if ((graph_mask >> edge_index[edge]) & 1) != 0:
                 continue
+        if triangle_nonedge is not None:
+            edge = tuple(sorted(triangle_nonedge))
+            if ((graph_mask >> edge_index[edge]) & 1) != 0:
+                continue
         assignment, _nodes, hit_limit = find_assignment(
-            n, graph_mask, pc, node_limit, forced_colors, good_edge, good_nonedge
+            n,
+            graph_mask,
+            pc,
+            node_limit,
+            forced_colors,
+            good_edge,
+            good_nonedge,
+            triangle_nonedge,
         )
         if hit_limit:
             limited += 1
@@ -275,6 +324,8 @@ def sample_even(
                 print(f"good_edge={good_edge[0]}:{good_edge[1]}")
             if good_nonedge is not None:
                 print(f"good_nonedge={good_nonedge[0]}:{good_nonedge[1]}")
+            if triangle_nonedge is not None:
+                print(f"triangle_nonedge={triangle_nonedge[0]}:{triangle_nonedge[1]}")
             print(f"checked_before_counterexample={checked}")
             print(f"limited={limited}")
             print(f"counterexample_mask={graph_mask}")
@@ -286,6 +337,8 @@ def sample_even(
         print(f"good_edge={good_edge[0]}:{good_edge[1]}")
     if good_nonedge is not None:
         print(f"good_nonedge={good_nonedge[0]}:{good_nonedge[1]}")
+    if triangle_nonedge is not None:
+        print(f"triangle_nonedge={triangle_nonedge[0]}:{triangle_nonedge[1]}")
     print(f"checked={checked}")
     print(f"limited={limited}")
     print("no_counterexample_seen")
@@ -314,9 +367,18 @@ def main() -> None:
         "--good-nonedge",
         help="require nonadjacent endpoints u:v to be in a triangle-suppression-good pattern",
     )
+    parser.add_argument(
+        "--triangle-nonedge",
+        help="allow the direct pattern or a one-endpoint zero-to-matching recoloring repair",
+    )
     args = parser.parse_args()
-    if args.good_edge is not None and args.good_nonedge is not None:
-        parser.error("--good-edge and --good-nonedge are mutually exclusive")
+    rooted_options = [
+        args.good_edge is not None,
+        args.good_nonedge is not None,
+        args.triangle_nonedge is not None,
+    ]
+    if sum(rooted_options) > 1:
+        parser.error("rooted endpoint options are mutually exclusive")
     forced_colors: dict[int, int] = {}
     for item in args.force_color:
         vertex_text, color_text = item.split(":", 1)
@@ -329,6 +391,10 @@ def main() -> None:
     if args.good_nonedge is not None:
         first_text, second_text = args.good_nonedge.split(":", 1)
         good_nonedge = (int(first_text), int(second_text))
+    triangle_nonedge = None
+    if args.triangle_nonedge is not None:
+        first_text, second_text = args.triangle_nonedge.split(":", 1)
+        triangle_nonedge = (int(first_text), int(second_text))
     if args.mask is not None:
         check_mask(
             args.n,
@@ -337,6 +403,7 @@ def main() -> None:
             forced_colors,
             good_edge,
             good_nonedge,
+            triangle_nonedge,
         )
     elif args.exhaustive_even:
         exhaustive_even(
@@ -346,6 +413,7 @@ def main() -> None:
             forced_colors,
             good_edge,
             good_nonedge,
+            triangle_nonedge,
         )
     elif args.sample_even:
         sample_even(
@@ -356,6 +424,7 @@ def main() -> None:
             forced_colors,
             good_edge,
             good_nonedge,
+            triangle_nonedge,
         )
     else:
         raise SystemExit("use --mask, --exhaustive-even, or --sample-even")

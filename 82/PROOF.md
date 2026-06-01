@@ -4740,6 +4740,34 @@ triangular degree-`2` suppression cannot be handled by a direct rooted
 endpoint condition alone; it requires a recoloring argument or a richer
 boundary signature.
 
+There is a slightly richer direct repair that covers this empty-graph
+obstruction.  Keep the notation of the triangular suppression lemma.  Suppose
+`G'` has a matching-slot certificate in which `x` and `y` are split between
+the two zero slots.  If one endpoint, say `y`, has no neighbor in its own
+zero slot and no neighbor in the matching slot `C`, then the certificate also
+lifts to `G`: move `y` into `C`, put the new vertex `v` into `C`, and leave
+all other vertices fixed.  The edge `xy` is still a cross-slot edge.  The new
+edge `vy` gives both `v` and `y` exactly one same-`C` neighbor, while the edge
+`vx` is cross-slot.  No old zero-slot or matching-slot degree is changed,
+because `y` had no neighbors in those two affected slots.
+
+This suggests the following richer nonedge-rooted boundary condition for the
+triangle case: either the direct different-slot condition of the previous
+lemma holds, or the endpoints are split between `A` and `B` and one endpoint
+is isolated from both its own zero slot and `C`.  The Python checker option
+`--triangle-nonedge` tests exactly this condition.  It verifies all even
+graphs on at most `7` vertices for the rooted nonedge `0:1`, and a prefix of
+`1000` checked even graphs on `8` vertices:
+
+```text
+python3 82/EXPERIMENTS/matching_slot_search.py 7 --exhaustive-even --triangle-nonedge 0:1
+python3 82/EXPERIMENTS/matching_slot_search.py 8 --exhaustive-even --triangle-nonedge 0:1 --limit 1000
+```
+
+This is only finite evidence, but it identifies a plausible boundary
+signature for handling degree-`2` triangles in a minimal-counterexample
+induction.
+
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which
 `r` lies in the bipartite residual.
