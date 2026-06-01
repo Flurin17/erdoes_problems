@@ -3078,3 +3078,9 @@ source of growth beyond Ramsey.
   component orders `13` and `14` for `h=10` found no obstruction, with best
   same-degree totals `10` and `11`.  This keeps the spectrum obstruction
   useful as finite calibration, but gives no asymptotic separation.
+- 2026-06-01: Added Lemma 3A and `EXPERIMENTS/rank_profile.py`.  The lemma says
+  that `F_2`-nullity `nu` gives an induced even-degree subgraph on at least
+  `nu` vertices.  The rank-profile checks show the recorded finite masks are
+  not low-rank artifacts: the `C_reg(1,5)>12` mask has full rank modulo
+  `2,3,5`, while the new spectrum masks have distinct adjacency rows and
+  rank at least `8/10` or `10/12` modulo `2`.

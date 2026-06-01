@@ -630,6 +630,33 @@ This is a strong source of `2`-modular witnesses.  The unresolved difficulty is
 to lift a large `2^i`-modular witness to a large `2^{i+1}`-modular witness
 with subexponential total loss.
 
+## Lemma 3A: GF(2)-Nullity Gives A Large Even Witness
+
+Let `A_G` be the adjacency matrix of an `n`-vertex graph `G` over `F_2`, and
+let
+
+```text
+nu = dim ker A_G.
+```
+
+Then `G` contains an induced subgraph on at least `nu` vertices in which every
+degree is even.
+
+Proof.  Let `K=ker A_G`.  Choose `nu` coordinate positions on which the
+projection `K -> F_2^nu` is an isomorphism.  This is possible by taking pivot
+coordinates from a row-reduced basis of `K`.  Therefore there is a vector
+`x in K` whose projection to these coordinates is the all-one vector.  Its
+support `S` has size at least `nu`.
+
+Since `A_G x=0`, every vertex of `G`, and in particular every vertex of `S`,
+has an even number of neighbors in `S`.  Thus `G[S]` has all degrees even.
+QED.
+
+This is weaker than Gallai's theorem unless the nullity is large, but it gives
+a useful linear-algebra diagnostic for parity-based constructions: low
+`F_2`-rank forces a large `2`-modular witness before any Gallai partitioning is
+used.
+
 ## Conditional Proposition: Interval Polynomial-Loss Dyadic Lifting Would Suffice
 
 For a power of two `q`, call a vertex set `S` `q`-modular if all degrees in
