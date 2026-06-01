@@ -7610,6 +7610,27 @@ not controlled by its second-smallest deleted color. This removes the
 bounded-second-excess route of Lemma 8.6a from the pair-free selector
 tail and leaves only genuinely large-spread high-rank barriers.
 
+Warning: this large-spread high-rank shape is locally compatible. The
+interval construction in Proposition 10.3g has
+\[
+F=\{X+2M,\ldots,X+2M+\lfloor(M-1)/2\rfloor\},
+\qquad
+w=3X+5M,
+\]
+so the second excess is
+\[
+w-(X+2M+1)=2X+3M-1.
+\]
+Lemma 10.3h shows that, inside the same covered interval-block model, every
+coverage-compatible terminal-gap deletion has rank at least
+\[
+\lceil M/2\rceil.
+\]
+Thus Corollary 8.5a.7x identifies a genuine global barrier problem, not a
+finite-window contradiction. A proof must still use the cross-packet
+product demand, recurrence, or stage iteration; a counterexample would have
+to code these large interval-like cuts into an unbounded selector barrier.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,

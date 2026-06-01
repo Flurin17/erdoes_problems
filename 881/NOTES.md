@@ -2216,6 +2216,13 @@ give tail reflection-recurrence from that selector reservoir. Therefore,
 for every \(D\), the counterexample must produce a rank-\(\ge3\) edge
 \(\{g_1<g_2<\cdots\}\) with witness \(v>g_2+D\).
 
+This is still only a global obstruction. Proposition 10.3g and Lemma 10.3h
+show that interval half-cuts locally realize exactly this large-spread
+high-rank profile: no coverage-compatible pair deletions, rank at least
+\(\lceil M/2\rceil\), and second excess on the order of \(M\). The missing
+ingredient is not a finite-window contradiction but a way to prevent such
+cuts from being wired into a cross-packet selector barrier.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
