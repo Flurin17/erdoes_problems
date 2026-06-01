@@ -3126,3 +3126,9 @@ source of growth beyond Ramsey.
   `rank_profile.py` to print shifted ranks for every requested prime.  The
   recorded finite masks remain high-rank in this shifted sense, so they are
   not clique-twin collapse artifacts.
+- 2026-06-01: Added Corollary 7C, the hereditary rank obstruction.  If
+  `reg(G)<k`, then every induced subgraph `G[U]` with `|U|=u>=k` has both
+  `rank(A_U)` and `rank(A_U+I)` greater than `log_2(u/k)` over every field.
+  Thus any large low-rank degree bucket, trace class, pair-role middle graph,
+  or ordered representative subgraph would itself force the desired regular
+  induced subgraph.

@@ -34,6 +34,11 @@ Finite lemmas suitable for formalization:
 - Binary parity-split equation: in an even graph, same-color degree parity for
   a two-coloring `x` is `A*x` over `F_2`; parity constant on both sides iff
   `A*x = a*1 + b*x`.
+- Low-rank row-class certificates: if the adjacency matrix has rank `r` over
+  a field, then there are at most `2^r` distinct `0`-`1` rows, and one row
+  class is an independent set; if `A+I` has rank `r`, one shifted-row class is
+  a clique.  The hereditary version applies to every induced subgraph of a
+  counterexample.
 - Hierarchical-lift obstruction example: the recorded `n=14` mask has a
   `4`-part first lift but no lift obtained by first taking a binary
   parity-pattern split and then splitting each side into two `4`-modular

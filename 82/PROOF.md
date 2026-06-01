@@ -6440,6 +6440,29 @@ Combining Lemmas 7A and 7B, a hard counterexample must have both `A_G` and
 weak condition in the Ramsey-scale range, but it excludes both independent
 and clique twin-collapse models by the same linear-algebra certificate.
 
+**Corollary 7C: Hereditary Rank Obstruction In Counterexamples.**  Let `G`
+have no regular induced subgraph on at least `k` vertices.  Then for every
+vertex set `U` with `u=|U|>=k`, the adjacency matrix `A_U` of `G[U]` satisfies
+
+```text
+rank(A_U) > log_2(u/k),
+rank(A_U+I) > log_2(u/k)
+```
+
+over every field.
+
+Equivalently, every induced subgraph `G[U]` has fewer than `2^r k` vertices
+whenever either `rank(A_U)<=r` or `rank(A_U+I)<=r`.
+
+Proof.  Since every regular induced subgraph of `G[U]` is a regular induced
+subgraph of `G`, the induced graph `G[U]` also has no regular induced subgraph
+on at least `k` vertices.  Apply Lemmas 7A and 7B to `G[U]`.  QED.
+
+This local form is often the useful one: any proposed proof that decomposes a
+counterexample into degree buckets, trace classes, pair-role middle graphs, or
+ordered representatives must either keep those induced pieces high-rank in
+both senses or find the desired regular subgraph inside one piece.
+
 ## Proposition 8: Ramsey-Core Reduction
 
 For `C>0`, call an `n`-vertex graph `C`-Ramsey if it has no clique and no
