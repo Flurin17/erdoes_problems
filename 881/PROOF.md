@@ -25066,6 +25066,138 @@ geometric sharpening. A construction may use infinitely many moving
 profiles, but the pointwise center-far portions of the active packets must
 remain nonsummable on every tail.
 
+### Corollary 16.113: Finite menus force persistent pointwise center-far mass
+
+Keep the hypotheses of Corollary 16.112, and suppose all labels are drawn
+from one fixed finite menu
+\[
+\Lambda.
+\]
+Then at least one label \(\lambda\in\Lambda\) satisfies
+\[
+\sum_s {|H_{\lambda,s}|\over |P_s|}=\infty. \tag{1}
+\]
+More quantitatively, for every tail index \(t\),
+\[
+\max_{\lambda\in\Lambda}
+\sum_{s\ge t}{|H_{\lambda,s}|\over |P_s|}
+\ge {1\over|\Lambda|}. \tag{2}
+\]
+
+Proof. Corollary 16.112 gives
+\[
+\sum_{\lambda\in\Lambda}\sum_{s\ge t}
+{|H_{\lambda,s}|\over |P_s|}\ge1
+\]
+on every tail. This implies (2). If every series in (1) converged, then,
+because \(\Lambda\) is finite, the maximum tail sum in (2) would tend to
+\(0\), a contradiction. \(\square\)
+
+Thus the finite-menu high-density linear-core residual cannot be hidden by
+switching profiles finitely often. One fixed assigned test must miss a
+positive amount of active packet mass on arbitrarily late tails.
+
+### Lemma 16.114: A centered core bounds pointwise center-far mass
+
+Let
+\[
+P\subseteq J=[u,v]\cap\mathbb N
+\]
+be finite and nonempty, and put
+\[
+W=v-u,\qquad C_J=u+v.
+\]
+Fix integers \(a,b,c,d\), and put
+\[
+M=2(c+d)-a-b.
+\]
+Let \(T>0\), and define
+\[
+H(P;M,T)=\{p\in P:|2p-M|\ge T\}. \tag{1}
+\]
+Write
+\[
+\Delta=|C_J-M|.
+\]
+If
+\[
+T>W+\Delta, \tag{2}
+\]
+then
+\[
+H(P;M,T)=\varnothing. \tag{3}
+\]
+In general, if \(T>\Delta\), then
+\[
+|H(P;M,T)|
+\le \max\{0,\ W-(T-\Delta)\}+2. \tag{4}
+\]
+
+Consequently, in the notation of Corollary 16.112, if \(P_s\subseteq
+[u_s,v_s]\cap\mathbb N\) and one auxiliary interval
+\[
+K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
+\]
+in the profile \(\lambda\) has
+\[
+M_{\lambda,i}=2(c_{\lambda,i}+d_{\lambda,i})
+              -a_\lambda-b_\lambda,
+\]
+then \(H_{\lambda,s}\) is bounded by (3)--(4) with
+\[
+M=M_{\lambda,i},\qquad
+T=\gamma_\lambda n_\lambda-D_\lambda,\qquad
+W=v_s-u_s,\qquad
+\Delta=|u_s+v_s-M_{\lambda,i}|. \tag{5}
+\]
+
+Proof. For \(p\in J\),
+\[
+|2p-M|\le |2p-C_J|+|C_J-M|\le W+\Delta.
+\]
+If (2) holds, this is always \(<T\), proving (3).
+
+Now assume \(T>\Delta\), and put
+\[
+R=T-\Delta>0.
+\]
+If
+\[
+|2p-C_J|<R,
+\]
+then \(|2p-M|<T\), so \(p\notin H(P;M,T)\). Hence \(H(P;M,T)\) is
+contained in the two endpoint pieces of \(J\) outside the centered real
+interval
+\[
+\left({C_J-R\over2},\,{C_J+R\over2}\right).
+\]
+Since this real interval has the same center as \(J\) and length \(R\), the
+total real length of the two outside pieces is at most
+\[
+\max\{0,W-R\}.
+\]
+Each endpoint piece contains at most its real length plus one integer
+point. Therefore
+\[
+|H(P;M,T)|\le |H(J;M,T)|
+\le \max\{0,W-R\}+2
+=\max\{0,\ W-(T-\Delta)\}+2,
+\]
+which is (4).
+
+For the final statement, membership in \(H_{\lambda,s}\) requires the
+center-far inequality for every auxiliary interval in the profile. Thus
+\[
+H_{\lambda,s}\subseteq H(P_s;M_{\lambda,i},
+\gamma_\lambda n_\lambda-D_\lambda)
+\]
+for each chosen \(i\), and the preceding bounds apply. \(\square\)
+
+This estimate turns the pointwise center-far mass condition into an
+ordinary packet-position condition. A fixed profile can carry substantial
+mass on a late packet only if the packet interval is wide at the tested
+scale, or its center is far from every auxiliary midpoint of that profile.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26453,6 +26585,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.112 returns to selector mass in the linear-core branch: the
   pointwise center-far subsets of the active packets must have nonsummable
   one-coordinate mass on every tail.
+* Corollary 16.113 is the finite-menu pointwise analogue: one fixed profile
+  has divergent pointwise center-far mass.
+* Lemma 16.114 gives the first direct size estimate for that mass: a single
+  centered core bounds the center-far part by packet width plus center
+  displacement error.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

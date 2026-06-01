@@ -193,6 +193,10 @@ menu is selector-avoidable.
 Corollary 16.112 restores a pointwise selector-mass criterion in the
 linear-core branch: the pointwise center-far portions of packets must have
 nonsummable one-coordinate mass on every tail.
+Corollary 16.113 gives the finite-menu version: one fixed profile has
+divergent pointwise center-far mass. Lemma 16.114 then bounds that mass
+from a single centered core in terms of packet width and center
+displacement.
 
 ## Definitions
 
