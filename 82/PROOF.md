@@ -11757,6 +11757,107 @@ alpha(H) >= 1+ceil(|B|/2).
 
 Since `n=|B|+5`, the right side is `ceil((n-3)/2)`.  QED.
 
+**Lemma 28D.5b.3: The `omega<=3` Case At `P=2`.**  Let `H` be an ordered
+graph on `n` vertices satisfying the `P=2` full-drop condition.  If
+`omega(H)<=3`, then
+
+```text
+alpha(H) >= ceil((n-3)/2).
+```
+
+Consequently,
+
+```text
+alpha(H)+omega(H) >= ceil((n+3)/2).
+```
+
+Proof.  The displayed independence bound is proved by induction on `n`, with
+the empty graph allowed and the assertion trivial for `n<=3`.  Let `a` be the
+first vertex of a nonempty graph `H`, put
+
+```text
+A=N(a),        B=V(H)\({a} union A),
+```
+
+and write `d=|A|`.  As in Lemma 28D.5, the complement of `H[A]` has maximum
+degree at most `1`.  Since `omega(H)<=3`, the graph `H[A]` is triangle-free:
+otherwise a triangle in `A` would extend with `a` to a `4`-clique.  Therefore
+`d<=4`, because a graph on at least five vertices whose complement has maximum
+degree at most `1` contains a triangle.
+
+If `d<=2`, then `H[B]` inherits the `P=2` full-drop condition and still has
+clique number at most `3`.  Since we are past the trivial cases `n<=3`, the
+set `B` is nonempty.  By induction and the trivial bound
+`alpha(H[B])>=1`,
+
+```text
+alpha(H[B]) >= max(1, ceil((|B|-3)/2)).
+```
+
+The vertex `a` is nonadjacent to every vertex of `B`, so
+
+```text
+alpha(H) >= 1+max(1, ceil((|B|-3)/2)) >= ceil((n-3)/2),
+```
+
+where the last inequality uses `n=|B|+d+1` and `d<=2`.
+
+If `d=4`, Lemma 28D.5b.2 gives the required bound.  It remains to handle
+`d=3`.  In this case `H[A]` is a path of length two: write its nonadjacent
+leaves as `x,y`, and its center as `z`.
+
+We first show that `H[B]` is triangle-free.  Suppose instead that
+`T subset B` is a triangle.  Since `a` is first, every vertex of `T` is
+adjacent to at least two vertices of `A`.  If some vertex of `A` were adjacent
+to all three vertices of `T`, that vertex together with `T` would form a
+`4`-clique.  Hence each vertex of `A` is missed by some member of `T`.  As
+`|A|=|T|=3` and every member of `T` misses at most one vertex of `A`, the
+missed vertices are all distinct.  Let `t_z in T` be the vertex missing
+`z`, and let `t_x in T` be the vertex missing `x`.
+
+Now compare the two ordered vertices `x` and `t_z`.  If `x<t_z`, then
+`x` is adjacent to both `a` and `z`, while `t_z` is adjacent to neither; both
+`a` and `z` are counted in
+
+```text
+(N(x)\N(t_z))\{x,t_z},
+```
+
+contradicting the `P=2` full-drop condition.  If `t_z<x`, then `t_z` is
+adjacent to both `y` and `t_x`, while `x` is adjacent to neither `y` nor
+`t_x`; both vertices are counted in
+
+```text
+(N(t_z)\N(x))\{t_z,x},
+```
+
+again a contradiction.  Thus `H[B]` is triangle-free.
+
+Lemma 28D.5b.1 applied to `H[B]` gives
+
+```text
+alpha(H[B]) >= (|B|-1)/2.
+```
+
+Adding `a` to an independent set in `B` gives
+
+```text
+alpha(H) >= 1+(|B|-1)/2 = (|B|+1)/2.
+```
+
+Since now `n=|B|+4`, this is at least `ceil((n-3)/2)`.  This completes the
+induction and proves the independence bound.
+
+For the final assertion, if `omega(H)<=2`, Lemma 28D.5b.1 already gives
+`alpha(H)+omega(H)>=(n+3)/2`.  If `omega(H)=3`, then the independence bound
+just proved gives
+
+```text
+alpha(H)+omega(H) >= ceil((n-3)/2)+3 = ceil((n+3)/2).
+```
+
+QED.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose

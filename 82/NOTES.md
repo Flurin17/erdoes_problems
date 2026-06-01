@@ -3541,3 +3541,14 @@ source of growth beyond Ramsey.
   giving `alpha >= ceil((n-3)/2)`.  This still falls short of the full
   `alpha+omega >= ceil((n+3)/2)` conjecture by one vertex in the
   `omega=3` bucket, but it isolates the largest possible first degree.
+- 2026-06-01: Closed the full `omega<=3`, `P=2` full-drop case.  The induction
+  uses the first vertex `a`.  Its neighborhood has complement maximum degree
+  at most `1` and no triangle, hence has size at most `4`.  Degrees `0,1,2`
+  follow by induction on the nonneighbors of `a`; degree `4` is the
+  `K_{2,2}` case above.  In degree `3`, the neighborhood is a path `x-z-y`;
+  any triangle among nonneighbors would have one vertex missing each of
+  `x,y,z`, and comparing the vertex missing `z` with the leaf `x` violates
+  the full-drop condition in one order or the other.  Thus the nonneighbor
+  side is triangle-free and contributes an independent set of half its order.
+  Therefore `alpha(H)>=ceil((|V(H)|-3)/2)` whenever `omega(H)<=3`, and
+  `alpha(H)+omega(H)>=ceil((|V(H)|+3)/2)` in this range.
