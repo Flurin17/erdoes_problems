@@ -134,7 +134,9 @@ Computational checks and generated data for Erdos Problem 82.
   `--max-degree D` to restrict the enumerated even graphs to the degree range
   relevant after minimal-counterexample reductions; add
   `--mixed-degree-residue` to keep only graphs with both degree residues
-  `0` and `2` modulo `4`.
+  `0` and `2` modulo `4`.  Use `--max-c-vertices D` to test the stronger
+  variant where the induced matching slot has at most `D` vertices; `D=2`
+  asks whether one matching edge is always enough.
 - `slot_profile.py`: optimizes a fixed-slot partition by minimizing the number
   of vertices outside a chosen residue, useful for testing whether
   `(0,0,1,2)` first-lift partitions can be proved by a small-defect plus

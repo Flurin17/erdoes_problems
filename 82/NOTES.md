@@ -2826,3 +2826,15 @@ source of growth beyond Ramsey.
   already gives a disjoint-union source-`2 mod 4` obstruction to any universal
   three-part `4 -> 8` theorem.  These checks therefore support only the
   four-part dyadic route, not a renewed three-part conjecture.
+- 2026-06-01: Added `--max-c-vertices` to `matching_slot_fast.cpp` and tested
+  the sharper one-edge matching-slot candidate: every even graph should have a
+  matching-slot certificate with `C` empty or one induced edge.  The case
+  `C=empty` is false by the `(0,0,2)` obstruction at mask `225409983`, but
+  `|C|<=2` passes the full labelled `n=8` sweep, split into eight chunks of
+  `262144` parity-generated even graphs each (`2097152` total).  It also
+  passes two `n=9` prefix chunks with `0 <= bits < 2000000`, and the
+  high-minimum-degree mixed-residue prefix selected by
+  `--min-degree 4 --mixed-degree-residue --limit 10000000`, checking `173715`
+  filtered graphs.  This suggests a sharper structural target: a proof may
+  only need to justify a single induced-edge correction before solving the
+  residual `(0,0,2)` split.

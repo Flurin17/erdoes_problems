@@ -4722,6 +4722,47 @@ python3 82/EXPERIMENTS/matching_multipartite.py --max-classes 7 --max-size 10 --
 check `417`, `508`, and `459` even complete multipartite size vectors,
 respectively, with no counterexample.
 
+The data currently support a sharper matching-slot strengthening.
+
+**One-Edge Matching-Slot Candidate.**  Every even graph has a matching-slot
+partition `A,B,C,D` in which the induced matching slot `C` is either empty or
+a single edge.
+
+This candidate is strictly stronger than the matching-slot target and strictly
+weaker than the false three-slot `(0,0,2)` target.  The latter is exactly the
+case `C=empty`; the mask `225409983` above shows that an induced edge may be
+needed.
+
+The checker `EXPERIMENTS/matching_slot_fast.cpp` supports this strengthening
+with `--max-c-vertices 2`.  It verifies the full labelled `n=8` even-graph
+sweep, split into eight adjacent chunks of `262144` free-edge masks:
+
+```text
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --limit 262144
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --start 262144 --limit 524288
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --start 524288 --limit 786432
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --start 786432 --limit 1048576
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --start 1048576 --limit 1310720
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --start 1310720 --limit 1572864
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --start 1572864 --limit 1835008
+/tmp/matching_slot_fast --n 8 --max-c-vertices 2 --start 1835008
+```
+
+Each command checks `262144` even graphs and finds no counterexample, for a
+total of `2097152` labelled even graphs.  Initial `n=9` probes also find no
+counterexample:
+
+```text
+/tmp/matching_slot_fast --n 9 --max-c-vertices 2 --limit 1000000
+/tmp/matching_slot_fast --n 9 --max-c-vertices 2 --start 1000000 --limit 2000000
+/tmp/matching_slot_fast --n 9 --max-c-vertices 2 --min-degree 4 --mixed-degree-residue --limit 10000000
+```
+
+These respectively check `1000000`, `1000000`, and `173715` filtered even
+graphs.  The last command is the high-minimum-degree, mixed-degree-residue
+regime left by the conditional reductions.  This is finite evidence only, but
+the one-edge version is a sharper target for future structural arguments.
+
 The following rooted form is stronger and is the right object for cut-vertex
 induction.
 

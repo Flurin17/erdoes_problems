@@ -125,16 +125,17 @@ class Checker {
 
     bool has_partition(
         RootMode root_mode,
-        std::optional<std::pair<int, int>> root_pair
+        std::optional<std::pair<int, int>> root_pair,
+        int max_c_vertices
     ) {
         if (root_mode == RootMode::TriangleNonedge) {
-            return has_triangle_partition(root_pair);
+            return has_triangle_partition(root_pair, max_c_vertices);
         }
         for (auto& table : memo) {
             for (auto& row : table) row.fill(-1);
         }
         std::array<int, 4> counts{2, 1, 1, 0};
-        return rec(full, state_code(counts), 4, 4, root_mode, root_pair);
+        return rec(full, state_code(counts), 4, 4, root_mode, root_pair, max_c_vertices);
     }
 
   private:
@@ -148,7 +149,10 @@ class Checker {
     std::array<int, 10> adjacency{};
     std::unordered_set<uint64_t> triangle_failed;
 
-    bool has_triangle_partition(std::optional<std::pair<int, int>> root_pair) {
+    bool has_triangle_partition(
+        std::optional<std::pair<int, int>> root_pair,
+        int max_c_vertices
+    ) {
         if (!root_pair) return false;
         triangle_failed.clear();
         return rec_triangle(
@@ -160,7 +164,8 @@ class Checker {
             true,
             true,
             true,
-            *root_pair
+            *root_pair,
+            max_c_vertices
         );
     }
 
@@ -198,7 +203,8 @@ class Checker {
         bool second_zero_clean,
         bool first_c_clean,
         bool second_c_clean,
-        std::pair<int, int> root_pair
+        std::pair<int, int> root_pair,
+        int max_c_vertices
     ) {
         if (remaining == 0) {
             bool direct =
@@ -237,6 +243,13 @@ class Checker {
             for (int sub : submasks_with_pivot[remaining]) {
                 if (residue[sub] != target_residue) continue;
                 if (target_residue == 1 && !exact_matching[sub]) continue;
+                if (
+                    target_residue == 1
+                    && max_c_vertices >= 0
+                    && __builtin_popcount(static_cast<unsigned>(sub)) > max_c_vertices
+                ) {
+                    continue;
+                }
 
                 int next_first_slot = first_slot;
                 int next_second_slot = second_slot;
@@ -283,7 +296,8 @@ class Checker {
                         next_second_zero_clean,
                         next_first_c_clean,
                         next_second_c_clean,
-                        root_pair
+                        root_pair,
+                        max_c_vertices
                     )) {
                     return true;
                 }
@@ -299,7 +313,8 @@ class Checker {
         int first_residue,
         int second_residue,
         RootMode root_mode,
-        std::optional<std::pair<int, int>> root_pair
+        std::optional<std::pair<int, int>> root_pair,
+        int max_c_vertices
     ) {
         if (remaining == 0) {
             if (root_mode == RootMode::None) return true;
@@ -320,6 +335,13 @@ class Checker {
             for (int sub : submasks_with_pivot[remaining]) {
                 if (residue[sub] != r) continue;
                 if (r == 1 && !exact_matching[sub]) continue;
+                if (
+                    r == 1
+                    && max_c_vertices >= 0
+                    && __builtin_popcount(static_cast<unsigned>(sub)) > max_c_vertices
+                ) {
+                    continue;
+                }
                 int next_first = first_residue;
                 int next_second = second_residue;
                 if (root_pair) {
@@ -332,7 +354,8 @@ class Checker {
                         next_first,
                         next_second,
                         root_mode,
-                        root_pair
+                        root_pair,
+                        max_c_vertices
                     )) {
                     saved = 1;
                     return true;
@@ -415,6 +438,7 @@ int main(int argc, char** argv) {
     bool progress = false;
     int min_degree = 0;
     int max_degree = -1;
+    int max_c_vertices = -1;
     bool require_mixed_degree_residue = false;
     RootMode root_mode = RootMode::None;
     std::optional<std::pair<int, int>> root_pair;
@@ -432,6 +456,8 @@ int main(int argc, char** argv) {
             min_degree = std::stoi(argv[++i]);
         } else if (arg == "--max-degree" && i + 1 < argc) {
             max_degree = std::stoi(argv[++i]);
+        } else if (arg == "--max-c-vertices" && i + 1 < argc) {
+            max_c_vertices = std::stoi(argv[++i]);
         } else if (arg == "--mixed-degree-residue") {
             require_mixed_degree_residue = true;
         } else if (arg == "--good-edge" && i + 1 < argc) {
@@ -491,6 +517,7 @@ int main(int argc, char** argv) {
                       << " [--triangle-nonedge u:v] [--progress]"
                       << " [--progress-every P]"
                       << " [--min-degree D] [--max-degree D]"
+                      << " [--max-c-vertices D]"
                       << " [--mixed-degree-residue]\n";
             return 2;
         }
@@ -502,6 +529,10 @@ int main(int argc, char** argv) {
     if (max_degree < 0) max_degree = n - 1;
     if (min_degree < 0 || max_degree > n - 1 || min_degree > max_degree) {
         std::cerr << "invalid degree bounds\n";
+        return 2;
+    }
+    if (max_c_vertices < -1) {
+        std::cerr << "invalid --max-c-vertices\n";
         return 2;
     }
     if (root_pair) {
@@ -554,13 +585,16 @@ int main(int argc, char** argv) {
         }
         ++checked;
         checker.compute_valid_subsets(graph_mask);
-        if (!checker.has_partition(root_mode, root_pair)) {
+        if (!checker.has_partition(root_mode, root_pair, max_c_vertices)) {
             std::cout << "n=" << n << "\n";
             if (root_pair) {
                 if (root_mode == RootMode::Edge) std::cout << "good_edge=";
                 else if (root_mode == RootMode::Nonedge) std::cout << "good_nonedge=";
                 else std::cout << "triangle_nonedge=";
                 std::cout << root_pair->first << ":" << root_pair->second << "\n";
+            }
+            if (max_c_vertices >= 0) {
+                std::cout << "max_c_vertices=" << max_c_vertices << "\n";
             }
             std::cout << "checked_before_counterexample=" << checked << "\n";
             std::cout << "counterexample_mask=" << graph_mask << "\n";
@@ -587,6 +621,7 @@ int main(int argc, char** argv) {
     std::cout << "bit_stop=" << stop << "\n";
     if (min_degree != 0) std::cout << "min_degree=" << min_degree << "\n";
     if (max_degree != n - 1) std::cout << "max_degree=" << max_degree << "\n";
+    if (max_c_vertices >= 0) std::cout << "max_c_vertices=" << max_c_vertices << "\n";
     if (require_mixed_degree_residue) std::cout << "mixed_degree_residue=True\n";
     std::cout << "checked=" << checked << "\n";
     std::cout << "no_counterexample_seen\n";
