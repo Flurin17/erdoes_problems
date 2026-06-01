@@ -187,6 +187,9 @@ after paying the packet width.
 Corollary 16.109 plugs this into the selector barrier: in the high-density
 linear-core branch, every sufficiently late packet must nominate such a
 center-far assigned profile.
+Corollaries 16.110--16.111 handle finite assigned menus: one profile must
+be center-far for infinitely many packets, so an eventually centered finite
+menu is selector-avoidable.
 
 ## Definitions
 

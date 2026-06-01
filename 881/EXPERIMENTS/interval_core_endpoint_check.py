@@ -3,7 +3,10 @@
 
 For a finite packet P and interval cores C_i, if the common intersection of
 the C_i misses P, then some C_i misses min(P) or max(P).  The script
-exhausts small universes and core families.
+exhausts small universes and core families.  It also checks the finite
+shadow of Corollary 16.108: if a family of interval-union profiles misses a
+packet, then one profile has no single interval component containing both
+packet endpoints.
 """
 
 from __future__ import annotations
@@ -100,12 +103,28 @@ def profile_gap_bound_holds(
     )
 
 
+def profile_has_centered_core(
+    packet: tuple[int, ...],
+    profile: tuple[tuple[int, int], ...],
+) -> bool:
+    lo, hi = packet[0], packet[-1]
+    return any(contains(core, lo) and contains(core, hi) for core in profile)
+
+
+def profile_center_far_witness(
+    packet: tuple[int, ...],
+    profiles: tuple[tuple[tuple[int, int], ...], ...],
+) -> bool:
+    return any(not profile_has_centered_core(packet, profile) for profile in profiles)
+
+
 def main() -> None:
     rng = Random(881)
     checked = 0
     union_checked = 0
     gap_count_checked = 0
     profile_checked = 0
+    center_profile_checked = 0
     for n in range(2, 8):
         all_intervals = intervals(n)
         universe = tuple(range(n))
@@ -167,12 +186,15 @@ def main() -> None:
             )
             if common_profile_misses(packet, profiles):
                 assert profile_gap_bound_holds(packet, profiles), (n, packet, profiles)
+                assert profile_center_far_witness(packet, profiles), (n, packet, profiles)
+                center_profile_checked += 1
             profile_checked += 1
     print("interval core endpoint check passed")
     print(f"total_checked={checked}")
     print(f"union_gap_checked={union_checked}")
     print(f"gap_count_checked={gap_count_checked}")
     print(f"profile_checked={profile_checked}")
+    print(f"center_profile_checked={center_profile_checked}")
 
 
 if __name__ == "__main__":

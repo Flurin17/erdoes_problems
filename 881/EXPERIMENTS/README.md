@@ -204,7 +204,9 @@ internal gap across the packet span. The same script checks Corollary
 16.96: a union of \(m\) interval cores has at most \(m-1\) internal gaps,
 so missing packet points concentrate in one gap by pigeonhole. Its sampled
 profile-family check covers the finite pigeonhole alternative in Corollary
-16.99.
+16.99 and the centered-core contrapositive behind Corollary 16.108: if
+several interval-union profiles miss a packet jointly, one profile has no
+single component containing both packet endpoints.
 
 `robust_core_gap_geometry.py` checks Lemmas 16.97 and 16.102: the midpoint
 of a robust blocker core depends affinely on the midpoint of its auxiliary

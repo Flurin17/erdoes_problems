@@ -24929,6 +24929,83 @@ packetwise cost that no longer mentions individual selected colors. Every
 late packet must nominate an assigned interval test whose auxiliary
 midpoints all miss the packet center after the packet width is charged.
 
+### Corollary 16.110: Finite menus force persistent center-far debt
+
+Keep the packet notation of Corollary 16.109, but suppose all finite witness
+families
+\[
+\mathcal B_s
+\]
+are drawn from one fixed finite menu
+\[
+\Lambda
+\]
+of profiles satisfying the hypotheses of Corollary 16.106. For
+\(\lambda\in\Lambda\), let
+\[
+\mathcal S_\lambda
+\]
+be the set of packet indices \(s\) for which \(\lambda\) is center-far for
+\(P_s\), meaning that every auxiliary interval
+\[
+K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
+\]
+in the profile satisfies
+\[
+\left|p_s^-+p_s^+ + a_\lambda+b_\lambda
+      -2(c_{\lambda,i}+d_{\lambda,i})\right|
+      +w_s
+\ge \gamma_\lambda n_\lambda-D_\lambda. \tag{1}
+\]
+If the assigned robust-core branch product-covers every selector tail, then
+\[
+\bigcup_{\lambda\in\Lambda}\mathcal S_\lambda
+\]
+contains all sufficiently large packet indices. Consequently at least one
+\(\lambda\in\Lambda\) has \(\mathcal S_\lambda\) infinite.
+
+More quantitatively, if \(|\Lambda|=M\), then for every \(N\) and every
+sufficiently large starting index \(t\), some \(\lambda\in\Lambda\) is
+center-far for at least
+\[
+\left\lceil {N\over M}\right\rceil
+\]
+of the packets \(P_t,P_{t+1},\ldots,P_{t+N-1}\).
+
+Proof. Corollary 16.109 says that every sufficiently late packet index
+\(s\) has some
+\[
+\lambda_s\in\mathcal B_s\subseteq\Lambda
+\]
+which is center-far for \(P_s\). This proves the cofinite cover by the
+sets \(\mathcal S_\lambda\). The infinitude and finite-window bound are
+the pigeonhole principle. \(\square\)
+
+Thus a bounded-rank high-density construction cannot use a fixed finite
+robust-profile menu and spread the center-far cost into dust. If the menu
+is finite, one actual interval test must be geometrically far from
+infinitely many active packets.
+
+### Corollary 16.111: Eventually centered finite menus are selector-avoidable
+
+Keep the hypotheses of Corollary 16.110. Suppose that for every
+\(\lambda\in\Lambda\), all sufficiently large packet indices fail the
+center-far condition (1); equivalently, each profile \(\lambda\) has at
+least one robust core centered over every sufficiently late packet \(P_s\)
+in the sense of Corollary 16.107. Then the assigned robust-core branch
+does not product-cover every selector tail.
+
+Proof. If the branch did product-cover every selector tail, Corollary
+16.110 would make the finite union of the sets \(\mathcal S_\lambda\)
+cofinite. But each \(\mathcal S_\lambda\) is finite by hypothesis, so their
+finite union is finite, a contradiction. \(\square\)
+
+This is the finite-menu selector form of the centered-core criterion. Once
+all assigned tests are eventually centered on the active packets, the
+robust-core branch cannot be the obstruction; any surviving construction
+must either move through infinitely many different profiles, grow profile
+complexity, or leave the high-density linear-core regime.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26310,6 +26387,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.109 plugs the center-far residual back into the selector
   barrier: in the high-density linear-core branch, every sufficiently late
   packet must carry one center-far assigned profile.
+* Corollaries 16.110--16.111 record the finite-menu consequence: one fixed
+  profile must be center-far on infinitely many packets, and an eventually
+  centered finite menu cannot product-cover selector tails.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
