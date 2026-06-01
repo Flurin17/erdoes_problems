@@ -2418,6 +2418,17 @@ candidates in a window \(I\) are exactly
 with the strict high-excess inequality imposed afterward. So the bridge
 problem is a shifted-cover problem, not a matter of finding represented
 values.
+Lemma 16.26 separates the one-gate local example from simultaneous block
+protection. A single external gate can have a dense independent row set, as
+in Example 16.23, but if many targets \(q\) inside one finite block are
+gate-independent over the same retained rows \(P\), then the unordered
+two-sums from pairs meeting those targets are all distinct:
+\[
+|Q|(|P|-|Q|)+\binom{|Q|}{2}\le 2(\max P-\min P)+1.
+\]
+So a same-window bridge block must either be Sidon-scale, protect only a
+sparse subset of its own elements, or arrange that the active row ranges do
+not overlap.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running

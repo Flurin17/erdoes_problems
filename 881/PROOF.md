@@ -20196,6 +20196,80 @@ enough, but the same retained elements shift \(3C\) across the candidate
 windows for later promoted fillers. The interval-marker and prepared-marker
 diagnostics are both instances of this exact criterion.
 
+### Lemma 16.26: Simultaneous gate-independent targets are Sidon-scale
+
+Let \(P\subset\mathbb N\) be finite, and let \(Q\subset P\). Suppose that
+for every \(q\in Q\),
+\[
+\bigl((P\setminus\{q\})+q-(P\setminus\{q\})\bigr)\cap P\subset\{q\}. \tag{1}
+\]
+Put
+\[
+m=|P|,\qquad t=|Q|,\qquad D=\max P-\min P.
+\]
+Then
+\[
+t(m-t)+\binom t2\le 2D+1. \tag{2}
+\]
+In particular, if \(m\ge2\) and \(t\ge m/2\), then
+\[
+{3m^2\over8}-{m\over4}\le 2D+1. \tag{3}
+\]
+
+Proof. Consider the unordered two-element subsets of \(P\) that meet
+\(Q\). There are
+\[
+t(m-t)+\binom t2
+\]
+of them. We claim that their sums are all distinct.
+
+Suppose two distinct such pairs have the same sum. Choose one pair and
+write it as
+\[
+\{q,p\},\qquad q\in Q,\quad p\in P\setminus\{q\}.
+\]
+Let the other pair be \(\{r,s\}\). If \(q\in\{r,s\}\), then equality of
+sums forces the other endpoint to be \(p\), so the two pairs were the same,
+contrary to choice. Thus \(r,s\in P\setminus\{q\}\). From
+\[
+q+p=r+s
+\]
+we get
+\[
+p+q-r=s\in P.
+\]
+Also \(r\ne p\), since \(r=p\) would imply \(s=q\). Therefore (1) fails
+for this \(q\). This contradiction proves the claim.
+
+All these distinct sums lie in the interval
+\[
+[2\min P,2\max P],
+\]
+which has \(2D+1\) integer points. This proves (2). If \(m\ge2\) and
+\(t\ge m/2\), then
+\[
+t(m-t)+\binom t2
+=tm-{t^2\over2}-{t\over2}
+\]
+is at least its value at \(t=m/2\) on the interval \(m/2\le t\le m\), namely
+\[
+{3m^2\over8}-{m\over4}.
+\]
+This gives (3). \(\square\)
+
+Combined with Lemma 16.24, this gives a concrete obstruction to protecting
+many elements of one finite bridge block in the same bounded declaration
+window. If a set \(Q\) of targets all have singleton witnesses below
+\(W\), and a common retained block \(P\) lies above each threshold
+\[
+W-2q-\min A,
+\]
+then \(P\) must obey the Sidon-scale bound (2). Thus a bridge block that
+is dense enough to cover a long interval by translates cannot also make a
+positive proportion of its own elements late-row gate-independent, unless
+the protected targets or the active row ranges escape this common-window
+configuration.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21271,6 +21345,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   an interval \(I\) are precisely
   \((I\cap4S)\setminus\bigcup_{p\in S\setminus\{q\}}(p+3(S\setminus\{q\}))\),
   with the high-excess inequality imposed afterward.
+* Lemma 16.26 separates the one-gate and many-target cases: if many targets
+  in one finite block are simultaneously gate-independent over the same
+  active rows, then all unordered sums from pairs meeting those targets are
+  distinct, giving the Sidon-scale bound
+  \(t(m-t)+\binom t2\le2(\max P-\min P)+1\).
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
