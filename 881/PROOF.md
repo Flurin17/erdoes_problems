@@ -16157,14 +16157,78 @@ section list-coloring forbidden by Corollary 8.5a.4, with
 \]
 The contradiction proves the corollary. \(\square\)
 
-Combining Corollaries 13.1l.2b--13.1l.2f, a fixed first point and fixed
+## Corollary 13.1l.2f.1: Variable-rank bounded depth is impossible
+
+Work in the \(k=2\) counterexample setting. Fix
+\[
+d\in A,\qquad j\ge1,\qquad D\ge d,
+\]
+and let \(Y\subset A\setminus\{d\}\) be infinite. It is impossible that for
+every finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and every \(M\), there are an integer
+\[
+r\ge j,
+\]
+a set
+\[
+H=\{h_1<\cdots<h_r\}\subset Y\setminus T,
+\]
+and a witness \(w\) such that
+\[
+w-\max T\ge N_0,\qquad
+w-\max\{d,h_1,\ldots,h_{j-1}\}>M,\qquad
+w\le h_j+D, \tag{1}
+\]
+and
+\[
+w\notin3(A\setminus(\{d\}\cup H)). \tag{2}
+\]
+
+Proof. The proof of Corollary 13.1l.2f did not use the total rank \(r\)
+except to ensure that the endpoints
+\[
+h_1,\ldots,h_{j-1},h_j
+\]
+exist. For \(t\in T\), every representation of \(w-t\) must meet
+\[
+\{d\}\cup H,
+\]
+and (1) rules out every endpoint \(h_\ell\) with \(\ell\ge j\) because
+\[
+w-t-h_\ell\le h_j+D-t-h_\ell\le D-t<0.
+\]
+Thus all endpoint lists use the same finite palette
+\[
+\{d,1,\ldots,j-1\},
+\]
+independent of \(r\). The recurrent-certificate alternative and the
+finite-depth list-coloring contradiction from Corollary 8.5a.4 are
+therefore identical to the proof of Corollary 13.1l.2f. \(\square\)
+
+Thus, in the unbounded-rank fixed-first branch of Target 13.1l.2k, no
+bounded ordered depth can keep bounded endpoint excess. For every fixed
+\[
+j,D,
+\]
+a surviving construction must eventually have witnesses with
+\[
+w-h_j>D
+\]
+whenever the earlier endpoints are far below the witness. Equivalently,
+the active endpoint that remains close to the witness, if one exists, must
+move to unbounded ordered depth inside the suffix.
+
+Combining Corollaries 13.1l.2b--13.1l.2f.1, a fixed first point and fixed
 rank cannot support a full inclusion-minimal generalized prefix-link shell
 in a \(k=2\) counterexample. High-center witnesses are forbidden by
 13.1l.2a; bounded active endpoint debt stabilizes by 13.1l.2d; and the
-resulting fixed-depth endpoint lists are forbidden by 13.1l.2f. Hence the
-only remaining prefix-front escape is genuine active-trace descent before a
-fixed full packet is obtained, or unbounded rank/section depth escaping
-every fixed first-section rank.
+resulting fixed-depth endpoint lists are forbidden by 13.1l.2f--13.1l.2f.1.
+Hence the only remaining prefix-front escape is genuine active-trace
+descent before a fixed full packet is obtained, or unbounded rank/section
+depth escaping every fixed first-section rank.
 
 ## Lemma 13.1l.2g: Nonminimal prefix links descend to active traces
 
@@ -18555,6 +18619,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   endpoint rows use only the finite palette of earlier labels, so they
   either force a recurrent certificate or violate Corollary 8.5a.4's
   finite moving-label obstruction.
+* Corollary 13.1l.2f.1 extends this to variable total rank at fixed
+  ordered depth: a surviving unbounded-rank fixed-first trace must push any
+  endpoint-close debt to unbounded suffix depth.
 * Lemma 13.1l.2g handles nonminimal fixed-rank prefix links: after Ramsey
   thinning the inclusion-minimal active trace has a fixed position pattern;
   if it contains the fixed first point it reblocks to a smaller full active

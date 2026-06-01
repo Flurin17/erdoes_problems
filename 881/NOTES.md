@@ -2612,6 +2612,12 @@ choice has a certificate fiber, a fixed certificate recurs; if the rows can
 always be split into certificate-free fibers, Corollary 8.5a.4 forbids the
 finite moving-label palette. Therefore a fixed first point and fixed rank
 cannot support a full inclusion-minimal generalized prefix-link shell.
+Corollary 13.1l.2f.1 observes that the total rank was irrelevant here:
+for any fixed ordered depth \(j\), variable-rank traces with
+\(w\le h_j+D\) are still forbidden by the same finite palette
+\(\{d,h_1,\ldots,h_{j-1}\}\). Hence any surviving unbounded-rank
+fixed-first trace must push bounded endpoint debt to unbounded ordered
+depth.
 Lemma 13.1l.2g handles nonminimal prefix links: Ramsey thinning fixes the
 position pattern of the inclusion-minimal subhole. If the fixed first point
 remains active, sparse reblocking turns the pattern into a full active
