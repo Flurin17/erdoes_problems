@@ -5543,6 +5543,44 @@ arithmetic means, or else construct them coherently. Bounded-depth section
 arguments such as Lemma 8.5a.3 and Corollary 8.5a.4 do not cover this
 abstract pattern.
 
+### Lemma 8.5a.2p: Prefix-front sections are prefix-fronts
+
+Let \(P\) be an infinite ordered set. Call \(\mathcal F\) a
+**prefix-front** on \(P\) if every infinite
+\[
+X=\{x_1<x_2<\cdots\}\subset P
+\]
+has a unique initial segment in \(\mathcal F\). No inclusion-antichain
+condition is assumed.
+
+Let \(s\subset P\) be a finite initial segment of some member of
+\(\mathcal F\), and suppose no initial segment of \(s\) lies in
+\(\mathcal F\). Put
+\[
+P_s=\{p\in P:p>\max s\}
+\]
+and
+\[
+\mathcal F_s=\{G\subset P_s:s\cup G\in\mathcal F\}.
+\]
+Then \(\mathcal F_s\) is a prefix-front on \(P_s\).
+
+Proof. Let \(Y\subset P_s\) be infinite. The set \(s\cup Y\), ordered
+increasingly, has a unique initial segment \(H\in\mathcal F\). By the
+hypothesis on \(s\), the set \(H\) cannot be a proper initial segment of
+\(s\). Since \(s\) itself is an initial segment of some prefix-front member, the
+unique initial segment \(H\) must extend all of \(s\), so
+\[
+H=s\cup G
+\]
+for a finite initial segment \(G\) of \(Y\). Thus \(G\in\mathcal F_s\).
+If \(Y\) had two initial segments \(G_1,G_2\in\mathcal F_s\), then
+\[
+s\cup G_1,\qquad s\cup G_2
+\]
+would be two initial segments of \(s\cup Y\) in \(\mathcal F\), contrary to
+uniqueness. \(\square\)
+
 ### Lemma 8.5a.2: Front sections are fronts
 
 Let \(P\) be an infinite ordered set, and let \(\mathcal F\) be a front on
@@ -12266,6 +12304,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   3.1c.2 does not give pure section descent: a second-element front can
   carry pair active traces \(\{x_2,\max S\}\) while all filler rows are
   last-gated at unbounded depth.
+* Lemma 8.5a.2p extends the section operation to prefix-fronts, which is
+  the actual object produced by Lemma 3.1c.1; no inclusion-antichain
+  property is needed for recursive prefix analysis.
 * Lemma 8.5a.2 supplies the basic recursive tool: proper sections of a
   front are fronts on the tail. The missing step is preserving the
   arithmetic private-incidence normal form under this descent.
