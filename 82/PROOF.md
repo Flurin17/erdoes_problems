@@ -8564,6 +8564,61 @@ subexponentially equivalent to `G`.  The gain is structural.  Proposition 28F
 shows that controlling the marked two-part obstruction automatically controls
 all global counterexamples with only a polynomial loss.
 
+**Lemma 28H: Spectrum-Disjoint Disjoint-Union Lower Bounds For `P_h`.**  Let
+`J_1,J_2` be two graphs on the same number `M` of vertices.  Suppose:
+
+1. neither `J_i` has a regular induced subgraph on at least `h` vertices;
+2. there are no regular induced subgraphs `R_i subset J_i` of the same degree
+   with
+
+```text
+|R_1|+|R_2| >= h.
+```
+
+Then `P_h>M`.
+
+Proof.  Form a graph `H` by taking the disjoint union of `J_1` and `J_2`,
+and mark the two components as `A` and `B`.  Because there are no edges
+between `A` and `B`, no balanced sets `X subset A`, `Y subset B` with
+`|X|=|Y|=r=ceil((h-2)/2)` can make `H[X union Y]` `r`-regular: every vertex
+has at most `r-1` possible neighbors inside its own marked side.
+
+It remains to check that `H` has no regular induced subgraph on at least
+`h` vertices.  A regular induced subgraph of a disjoint union is either
+contained in one component, excluded by (1), or is a disjoint union of
+regular induced subgraphs of the two components with the same degree.  The
+latter case is excluded by (2).  Therefore `H` fails both alternatives in the
+definition of `P_h^+` at side size `M`, so `P_h^+>M`.  Lemma 28B gives
+`P_h=P_h^+`, hence `P_h>M`.  QED.
+
+Lemma 28G is the special case where both `J_i` have no regular induced
+subgraph of order at least `ceil(h/2)`.  Lemma 28H shows that larger local
+lower bounds may be possible by separating the regular degree spectra of the
+two marked components, not only by making each component hard below half the
+target order.  The script `EXPERIMENTS/regular_spectrum.py` computes these
+spectra and checks the condition in (2) for fixed masks.
+
+For example, with `h=6` and component order `M=5`, the masks
+
+```text
+478,       35
+```
+
+have regular spectra
+
+```text
+1:0 2:0 2:1 3:2,
+1:0 2:0 2:1 3:0,
+```
+
+respectively.  The only order-`3` regular subgraphs have different degrees,
+so no same-degree pair reaches total order `6`.  Lemma 28H therefore gives a
+disjoint-union proof of `P_6>5`, verified by
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum.py 5 --h 6 --mask-a 478 --mask-b 35
+```
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

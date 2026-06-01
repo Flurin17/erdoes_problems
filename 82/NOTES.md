@@ -2510,3 +2510,10 @@ source of growth beyond Ramsey.
   `deg(v,V\S)-epsilon(v)` is constant, respectively constant modulo `q`, on
   `S`.  This identifies bounded-spread regularization and dyadic modular
   lifting as the same offset-trace cancellation problem over different rings.
+- 2026-06-01: Added Lemma 28H and `regular_spectrum.py`.  A disjoint union of
+  two marked components is a `P_h` obstruction whenever the two components
+  have no regular `h`-set and their large regular induced subgraphs have
+  disjoint degree spectra.  This strengthens the simple lower construction in
+  Lemma 28G, which only used components with no regular set of order
+  `ceil(h/2)`.  The masks `478` and `35` give a spectrum-disjoint
+  disjoint-union proof of `P_6>5`.
