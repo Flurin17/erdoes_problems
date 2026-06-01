@@ -17139,6 +17139,33 @@ section that does not drop some fixed prefix point, the suffix ranks must
 be unbounded on every tail. This is the abstract front-theoretic core left
 after the fixed-rank and star-cut reductions.
 
+### Diagnostic 13.1l.2m.1: The remaining abstract shape is higher-front rank
+
+The script `EXPERIMENTS/front_barrier_diagnostics.py` records the finite
+shadow of this last abstract possibility. On the ordered set
+\[
+\{2,3,\ldots\},
+\]
+let
+\[
+\mathcal B_2=\{\{x_1<\cdots<x_m\}:m=x_2\}.
+\]
+Every infinite tail has an initial segment in \(\mathcal B_2\), but fixing
+only the first point does not bound the suffix rank; the second point
+controls the edge size. The diagnostic on
+\[
+(2,3,\ldots,12)
+\]
+finds no finite barrier failure at the tested length and no first-Schreier
+subbarrier on tails of sizes \(3,\ldots,6\).
+
+Thus Corollary 13.1l.2m is sharp as a front-theoretic statement. A final
+positive proof cannot rely on abstract prefix-front combinatorics alone:
+it must use additive structure from the large private fibers, terminal
+gaps, or two-sum coverage to rule out higher-front rank such as
+\(\mathcal B_2\), or else build a genuine integer construction realizing
+that higher-front wiring.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -19017,6 +19044,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.2m extracts the abstract consequence: every surviving
   finite-prefix section that keeps its prefix must have unbounded moving
   suffix rank on every tail.
+* Diagnostic 13.1l.2m.1 identifies the remaining abstract shape with
+  higher-front rank, exemplified by the second-element front; the final
+  step must use additive structure beyond prefix-front combinatorics.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
