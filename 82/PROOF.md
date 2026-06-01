@@ -16109,6 +16109,68 @@ root-avoiding witnesses.  The exponent loss also shows why a cut-vertex
 reduction must keep more structure than this crude one-cut estimate if the
 goal is a fixed global exponent.
 
+**Lemma 28J.10e.5b: Separated Regular Pieces Give Superlinear Square
+Spectrum In Their Total Witness Mass.**  Suppose `U_1,...,U_t` are pairwise
+disjoint vertex sets in `G` with no edges between distinct `U_i`.  For each
+`i`, suppose `G[U_i]` contains an induced `d_i`-regular subgraph of order
+`r_i>=1`.  Put
+
+```text
+R=r_1+...+r_t.
+```
+
+Then
+
+```text
+Q(G) >= (1/3) R^{3/2}
+```
+
+for all `R>=1`.
+
+Proof.  For each degree `d`, let
+
+```text
+L_d=sum_{i: d_i=d} r_i.
+```
+
+Because there are no edges between distinct `U_i`, the union of all chosen
+`d`-regular witnesses with `d_i=d` is again an induced `d`-regular subgraph
+of `G`.  Hence `s_d(G)>=L_d`, and so
+
+```text
+Q(G) >= sum_d L_d^2.
+```
+
+Let `B` be the number of degrees with `L_d>0`.  By Cauchy's inequality,
+
+```text
+sum_d L_d^2 >= R^2/B.
+```
+
+It remains to bound `B`.  There is at most one used degree equal to `0`.  If
+`u` positive degrees are used, then for each such degree `d` one of the
+chosen witnesses has order at least `d+1`.  These witnesses are distinct for
+distinct values of `d_i`, and therefore
+
+```text
+R >= 2+3+...+(u+1).
+```
+
+Thus `B<=u+1<=3 sqrt(R)` for all `R>=1`.  Combining the last two displays
+gives
+
+```text
+Q(G) >= R^2/(3 sqrt(R)) = R^{3/2}/3.
+```
+
+QED.
+
+This is the separated analogue of Lemma 28J.10e.5.  The known
+distinct-degree partition obstruction is serious only because arbitrary
+partition parts may have cross edges; for components, or for root-avoiding
+pieces across a cut vertex, repeated degrees add constructively in the same
+spectrum coordinate.
+
 **Lemma 28J.10e.6: Deletion Drop Bound For Power Spectra.**  For `p>=1`,
 define
 

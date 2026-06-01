@@ -4329,3 +4329,9 @@ source of growth beyond Ramsey.
   `Q(G)>=cN^{1+epsilon/(epsilon+2)}` for `N=|G|-1`.  This handles the basic
   rooted-bouquet danger but loses exponent, so a full cut reduction needs
   sharper rooted-signature information.
+- 2026-06-01: Added the separated-piece square lemma.  If pairwise separated
+  vertex sets carry regular witnesses of total order `R`, then same-degree
+  witnesses can be unioned and the number of used positive degrees is
+  `O(sqrt R)`, giving `Q>=R^{3/2}/3`.  This explains why repeated regular
+  degrees are harmless across components; the difficult partition
+  obstructions require cross edges between repeated-degree pieces.
