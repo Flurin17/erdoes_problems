@@ -4382,3 +4382,12 @@ source of growth beyond Ramsey.
   subclass compatible with the fixed-power spectrum route, but it does not
   address the unrestricted case without a structural reduction to such a
   subclass.
+- 2026-06-01: Added the repair-subcube view of one-vertex stagnation.  Each
+  almost-regular repair set `T` forbids the subcube of columns satisfying
+  `C cap T=L(T)`, and stagnant columns are exactly the complement of the
+  union of these repair subcubes.  Disjoint repair sets give the bound
+  `2^n exp(-sum 2^{-|T_i|})`.  On the thirteen-vertex obstruction there are
+  `346` distinct repair subcubes and only `8` stagnant columns, but a greedy
+  disjoint packing has weight only `3/8`; the covering strength in the sharp
+  example is therefore strongly overlapping, not explained by disjoint
+  constraints alone.

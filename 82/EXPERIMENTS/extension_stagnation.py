@@ -11,6 +11,7 @@ regular and marks those that would improve a spectrum coordinate.
 from __future__ import annotations
 
 import argparse
+import math
 from collections import Counter
 
 import column_drop_census as cdc
@@ -94,8 +95,80 @@ def stagnant_columns(n: int, mask: int) -> tuple[list[int], Counter[tuple[int, i
     return [column for column, value in enumerate(forbidden) if not value], reason_counts
 
 
+def repair_constraints(
+    n: int, mask: int
+) -> tuple[dict[int, int], list[tuple[int, int, int, int]]]:
+    """Return all subcube constraints whose violation increases the spectrum.
+
+    Each tuple is (degree, subset, required_column_on_subset, new_order).
+    A column C violates this constraint exactly when C & subset equals
+    required_column_on_subset; then subset plus the new vertex is a larger
+    regular witness for the returned degree.
+    """
+    pc = cdc.precompute(n)
+    adj = cdc.adjacency(n, mask, pc)
+    _mass, by_degree = spectrum_mass(adj, pc)
+    constraints: list[tuple[int, int, int, int]] = []
+    total_columns = 1 << n
+
+    for subset in range(total_columns):
+        order = subset.bit_count() + 1
+        for degree, required in regular_extension_patterns(adj, subset):
+            if order <= by_degree.get(degree, 0):
+                continue
+            constraints.append((degree, subset, required, order))
+
+    return by_degree, constraints
+
+
 def square_value(by_degree: dict[int, int]) -> int:
     return sum(order * order for order in by_degree.values())
+
+
+def repair_profile(n: int, mask: int, max_examples: int) -> None:
+    by_degree, constraints = repair_constraints(n, mask)
+    distinct_subcubes = {
+        (subset, required) for _degree, subset, required, _order in constraints
+    }
+    by_degree_order: Counter[tuple[int, int]] = Counter(
+        (degree, order) for degree, _subset, _required, order in constraints
+    )
+    by_subset_size: Counter[int] = Counter(
+        subset.bit_count() for _degree, subset, _required, _order in constraints
+    )
+
+    greedy: list[tuple[int, int, int, int]] = []
+    used = 0
+    weight = 0.0
+    for item in sorted(
+        constraints, key=lambda x: (x[1].bit_count(), x[0], x[1], x[2])
+    ):
+        _degree, subset, _required, _order = item
+        if subset & used:
+            continue
+        greedy.append(item)
+        used |= subset
+        weight += 2.0 ** (-subset.bit_count())
+
+    columns, _reason_counts = stagnant_columns(n, mask)
+    disjoint_upper = (1 << n) * math.exp(-weight)
+    print(f"n={n}")
+    print(f"mask={mask}")
+    print(f"by_degree={by_degree}")
+    print(f"square={square_value(by_degree)}")
+    print(f"stagnant_column_count={len(columns)}")
+    print(f"total_repair_constraints={len(constraints)}")
+    print(f"distinct_forbidden_subcubes={len(distinct_subcubes)}")
+    print(f"constraints_by_degree_order={dict(sorted(by_degree_order.items()))}")
+    print(f"constraints_by_subset_size={dict(sorted(by_subset_size.items()))}")
+    print(f"greedy_disjoint_constraints={len(greedy)}")
+    print(f"greedy_disjoint_weight={weight}")
+    print(f"greedy_disjoint_stagnant_upper={disjoint_upper}")
+    for degree, subset, required, order in greedy[:max_examples]:
+        print(
+            f"greedy_constraint degree={degree} order={order} "
+            f"subset={subset} required={required} subset_size={subset.bit_count()}"
+        )
 
 
 def chain_census(n: int, max_graphs: int | None, max_examples: int) -> None:
@@ -162,6 +235,7 @@ def main() -> None:
     parser.add_argument("n", type=int)
     parser.add_argument("--mask", type=int)
     parser.add_argument("--chain-census", action="store_true")
+    parser.add_argument("--repair-profile", action="store_true")
     parser.add_argument("--max-graphs", type=int)
     parser.add_argument("--max-examples", type=int, default=5)
     parser.add_argument("--limit", type=int, default=20)
@@ -173,6 +247,10 @@ def main() -> None:
         return
     if args.mask is None:
         parser.error("--mask is required unless --chain-census is used")
+
+    if args.repair_profile:
+        repair_profile(args.n, args.mask, args.max_examples)
+        return
 
     pc = cdc.precompute(args.n)
     adj = cdc.adjacency(args.n, args.mask, pc)

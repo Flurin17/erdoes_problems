@@ -16531,6 +16531,60 @@ degree-`q` spectrum coordinate increases.  The final assertion follows
 because any coordinate increase in a one-vertex extension must be witnessed
 by a regular induced subgraph containing the new vertex.  QED.
 
+**Corollary 28J.10e.6b: Stagnant Columns Are A Repair-Subcube
+Complement.**  Let `G` have vertex set `V`, `|V|=n`.  For each integer `q`
+let `R_q` be the family of subsets `T subset V` such that, in `G[T]`,
+
+```text
+deg_{G[T]}(v) in {q-1,q} for every v in T,
+|{v in T: deg_{G[T]}(v)=q-1}|=q,
+|T|+1>s_q(G).
+```
+
+For `T in R_q`, put
+
+```text
+L_q(T)={v in T: deg_{G[T]}(v)=q-1}.
+```
+
+Then the stagnant extension columns are exactly
+
+```text
+{0,1}^V \ setminus
+  union_{q,T in R_q} {C subset V: C cap T = L_q(T)}.
+```
+
+Consequently, if `T_1,...,T_m` are pairwise disjoint members of
+`union_q R_q` and `|T_i|=t_i`, then the number of stagnant columns is at most
+
+```text
+2^n prod_{i=1}^m (1-2^{-t_i})
+  <= 2^n exp(-sum_{i=1}^m 2^{-t_i}).
+```
+
+In particular, if the `T_i` are pairwise disjoint and all have size at most
+`r`, then the number of stagnant columns is at most
+
+```text
+2^n exp(-m 2^{-r}).
+```
+
+Proof.  Lemma 28J.10e.6a says that a column `C` increases the degree-`q`
+spectrum coordinate if and only if `C cap T=L_q(T)` for at least one
+`T in R_q`.  Taking the complement over all `q` gives the displayed
+description of stagnant columns.  For pairwise disjoint `T_i`, the events
+`C cap T_i=L(T_i)` are independent under a uniformly random column `C`, and
+each has probability `2^{-t_i}`.  Thus the probability that none occurs is
+`prod_i(1-2^{-t_i})`, which is at most
+`exp(-sum_i 2^{-t_i})`.  Multiplying by `2^n` proves the counting bounds.
+QED.
+
+This converts the extension problem into a covering problem in the hypercube
+of columns.  A large supply of disjoint small repair sets makes stagnant
+extensions rare; the remaining difficulty is that sharp low-`Q` examples have
+many overlapping repair sets, so disjointness alone loses most of the
+available covering strength.
+
 The script `EXPERIMENTS/extension_stagnation.py` implements this lemma by
 iterating over the old subsets `T` and marking all extension columns that
 would increase at least one spectrum coordinate.  This is much faster than
@@ -16577,6 +16631,26 @@ python3 82/EXPERIMENTS/spectrum_power_search.py 13 \
 python3 82/EXPERIMENTS/spectrum_mass_critical.py 13 \
   --mask 1584140989738554425379 --extension-profile
 ```
+
+The repair-subcube profile is
+
+```text
+python3 82/EXPERIMENTS/extension_stagnation.py 13 \
+  --mask 1584140989738554425379 --repair-profile --max-examples 8
+```
+
+It finds `346` distinct repair subcubes covering all but the eight stagnant
+columns.  The profile by subset size is
+
+```text
+{3: 18, 4: 111, 5: 170, 6: 38, 7: 7, 8: 2}.
+```
+
+However, a greedy disjoint packing finds only three size-`3` constraints,
+with disjoint weight `3/8`.  The disjoint bound from Corollary
+28J.10e.6b therefore gives only about `5630` possible stagnant columns,
+where the truth is `8`.  The useful covering in this example is highly
+overlapping.
 
 The fast stagnation test also checks all eight displayed fourteen-vertex
 stagnant extensions and finds no further stagnant extension column from any
