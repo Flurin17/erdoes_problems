@@ -556,6 +556,48 @@ The repair identities and the final application of Lemma 2.2 are unchanged
 from Theorem 2.3. Hence the constructed infinite deletion leaves an
 order-\((k+1)\) basis. \(\square\)
 
+## Corollary 2.5: Thick bases have good deletions
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\). Suppose
+that \(A\) contains arbitrarily long intervals arbitrarily far out: for
+every \(D,L\) there is an integer \(x>D\) such that
+\[
+[x,x+L]\cap\mathbb N\subset A. \tag{1}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(k+1\).
+
+Proof. We verify the tail reflection-recurrence hypothesis of Lemma 2.4
+with any fixed \(D\). Let
+\[
+T\subset A\cap(D,\infty)
+\]
+be finite and nonempty, and put
+\[
+L_T=\max T-\min T.
+\]
+Given any lower bound \(R\), choose \(x>R+\max T\) with
+\[
+[x,x+L_T]\subset A.
+\]
+Set
+\[
+m=x+\max T.
+\]
+Then \(m>R\), and for every \(t\in T\),
+\[
+m-t=x+(\max T-t)\in[x,x+L_T]\subset A.
+\]
+Thus \(m-T\subset A\) for arbitrarily large \(m\). Lemma 2.4 applies and
+gives the required infinite deletion. \(\square\)
+
+Hence any counterexample must be sparse in the strong sense that, after
+passing to every tail, its elements do not contain arbitrarily long
+ordinary intervals. This is independent of the syndetic-tail positive case:
+bounded gaps and arbitrarily long solid intervals are different ways to
+obtain the reflection or terminal-gap contradiction needed for a good
+deletion.
+
 ## Lemma 3: Late finite-deletion reservoir criterion
 
 Let \(h=k+1\). Suppose \(R\subseteq A\) is infinite and has the following
@@ -26734,6 +26776,9 @@ missing from ordinary minimal order-\(h\) bases.
 * Lemma 2.4 shows that reflection-recurrence only on a tail of \(A\) is
   enough, because the certificate construction can be initialized entirely
   in that tail.
+* Corollary 2.5 applies this to thick bases: arbitrarily long intervals
+  arbitrarily far out give tail reflection-recurrence and hence a good
+  deletion in every order.
 * Lemma 2.1 reformulates the strong minimality hypothesis as a finite
   barrier property for order-\(k\) representations.
 * Warning 3.0 explains why finite deletability alone is insufficient without

@@ -735,6 +735,16 @@ on a tail \(A\cap(D,\infty)\). The certificate construction can initialize
 the fixed padder and all \(Y\)-entries above \(D\), and later stages only
 reflect that fixed finite tail set.
 
+Corollary 2.5 records the immediate thick-set consequence. If \(A\)
+contains arbitrarily long intervals arbitrarily far out, then every finite
+tail test \(T\) reflects into one such interval by taking
+\[
+m=x+\max T.
+\]
+Thus thick asymptotic bases have the desired infinite deletion in every
+order. A counterexample must therefore have neither a tail-syndetic subset
+from Proposition 3.1f nor arbitrarily long solid intervals.
+
 ### Late finite-deletion reservoir lemma
 
 Let \(h=k+1\). Suppose there is an infinite \(R\subseteq A\) such that for
