@@ -3289,3 +3289,11 @@ source of growth beyond Ramsey.
   maximum Fourier bias is `5.15e-5`.  In the off-balance
   `2048,256,1024,32` run it gives `Lambda=64` and a useless bound `12.22`,
   matching the observed lack of residue mixing at that scale.
+- 2026-06-01: Added the configuration-to-simple conditioning transfer lemma.
+  Conditioning the bipartite configuration model on simplicity gives the
+  uniform simple model, and any event `E` transfers with multiplicative cost
+  `P(Simp|E)/P(Simp)`.  For residue anti-concentration this isolates the
+  precise dense switching target: prove that equal-row-residue events distort
+  the simplicity probability by at most `exp(o(a))`, where `a` is the number
+  of tested rows.  Combined with configuration prefix mixing, this would give
+  the desired simple-biregular anti-concentration at the first-moment scale.

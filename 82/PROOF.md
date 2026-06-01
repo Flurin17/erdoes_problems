@@ -2195,6 +2195,87 @@ the first few rows, the remaining column capacities are no longer uniform,
 and one needs a switching or martingale argument proving that enough rows
 still have near-hypergeometric residue mixing on the tested set.
 
+**Lemma: Configuration-To-Simple Conditioning Transfer.**  Fix bipartite
+degree sequences on left side `X` and right side `Y`, and sample the
+bipartite configuration model with these degrees.  Let `Simp` be the event
+that the configuration is simple.  Conditional on `Simp`, the resulting
+simple bipartite graph is uniform among all simple bipartite graphs with the
+prescribed degree sequences.
+
+Consequently, for any event `E` determined by the simple underlying graph,
+if
+
+```text
+P_conf(Simp | E) <= K P_conf(Simp),
+```
+
+then
+
+```text
+P_simple(E) <= K P_conf(E).
+```
+
+Proof.  Every simple bipartite graph with the prescribed degree sequence is
+represented by exactly
+
+```text
+prod_{x in X} d_x!  prod_{y in Y} c_y!
+```
+
+configurations: the row stubs incident with each `x` may be permuted
+arbitrarily among its neighbors, and likewise the column stubs incident with
+each `y`.  This number depends only on the degree sequences, not on the
+simple graph.  Therefore the configuration model conditioned on `Simp` is the
+uniform simple model.
+
+For the inequality,
+
+```text
+P_simple(E)=P_conf(E | Simp)
+           =P_conf(E) P_conf(Simp | E)/P_conf(Simp)
+           <= K P_conf(E).
+```
+
+QED.
+
+**Corollary: Simplicity Distortion Is The Biregular Switching Target.**  In
+the setting of the previous lemma, fix `X_0={x_1,...,x_a}`, `Y_0`, a modulus
+`M`, and shifts `c_i`.  Let `E` be the event that
+
+```text
+c_1+|N(x_1) cap Y_0| = ... =
+c_a+|N(x_a) cap Y_0|       mod M.
+```
+
+Assume that in the configuration model
+
+```text
+P_conf(E) <= eta^(a-1)
+```
+
+and that the simplicity event has distortion at most `K` on this residue
+event:
+
+```text
+P_conf(Simp | E) <= K P_conf(Simp).
+```
+
+Then the uniform simple model satisfies
+
+```text
+P_simple(E) <= K eta^(a-1).
+```
+
+In particular, a switching theorem giving `K=exp(o(a))` together with
+`eta=(1+o_M(1))/M` would transfer the configuration-model prefix mixing
+bound to the simple biregular model at the exponential scale needed in the
+first-moment obstruction.
+
+Proof.  This is the conditioning-transfer lemma applied to the row-residue
+event `E`.  Under `Simp`, stub hits in columns of `Y_0` are exactly distinct
+neighbor hits in `Y_0`, so `E` is the same event in the configuration and
+simple graph languages.  QED.
+
 The helper `EXPERIMENTS/biregular_residue_sample.py` probes this remaining
 dependence by sampling simple regular bipartite graphs with degree-preserving
 switches and comparing equal-residue probabilities against the independent
