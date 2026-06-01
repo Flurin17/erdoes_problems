@@ -76,7 +76,10 @@ whose anchored shadows through \(g=2\) all have size at most \(2\).
 Warning 3.4d.22 gives the corresponding finite caution for the nonsingleton
 branch: \(A_1=\{1,2,3,4,5,7\}\) contains parallel copies
 \(\{1,3,5\}\) and \(\{3,5,7\}\), while the cross-shadow is trapped in
-\(\{2,4\}\).
+\(\{2,4\}\). Corollary 3.4d.23 gives the current exact \(k=3\) packet
+target: after one finite core, excluding both large unique-gate packets and
+large bounded-palette parallel-copy packets proves the desired order-\(4\)
+deletion.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

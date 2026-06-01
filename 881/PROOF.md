@@ -3772,6 +3772,80 @@ nonsingleton branch cannot be excluded by finite coverage alone; an
 asymptotic proof must exploit the fact that such packets would have to
 occur outside every finite core and at unbounded scales.
 
+### Corollary 3.4d.23: Excluding the two active-packet branches proves \(k=3\)
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) asymptotic basis. Suppose
+there is a finite set
+\[
+P\subset A
+\]
+with the following property. For every \(q\ge1\) there is \(M(q)\) such
+that neither of the following configurations exists.
+
+1. A unique-gate packet outside \(P\):
+   \[
+   g\in A\setminus P,\qquad U\subset A\setminus(P\cup\{g\}),
+   \]
+   with
+   \[
+   |U|\ge M(q)
+   \]
+   and
+   \[
+   (U+g-U)\cap A\subset\{g\}. \tag{1}
+   \]
+2. A nonsingleton parallel-copy packet outside \(P\): a finite set
+   \[
+   F\subset A\setminus P,\qquad 2\le |F|\le q,
+   \]
+   distinct \(f,g\in F\), and sets
+   \[
+   U,V\subset A\setminus(P\cup F)
+   \]
+   with
+   \[
+   |U|=|V|\ge M(q),\qquad V=U+g-f, \tag{2}
+   \]
+   such that
+   \[
+   (U+g-U)\cap A\subset F,\qquad (V+f-V)\cap A\subset F. \tag{3}
+   \]
+
+Then there is an infinite
+\[
+B\subset A
+\]
+such that
+\[
+A\setminus B
+\]
+is an order-\(4\) asymptotic basis.
+
+Proof. Suppose no such \(B\) exists. Apply Corollary 3.4d.20 with
+\[
+E=P.
+\]
+It gives constants \(q_P,c_P>0\) and arbitrarily large witnesses in one of
+the two alternatives there. Along those witnesses the packet size tends to
+infinity, since \(A(w)\to\infty\). Choose a witness whose packet size is at
+least \(M(q_P)\).
+
+If the singleton unique-gate alternative of Corollary 3.4d.20 occurs, then
+its conclusion is exactly forbidden configuration (1). If the nonsingleton
+alternative occurs, then its finite active palette \(F\) has
+\[
+2\le |F|\le q_P
+\]
+and the self-shadow containments from Corollary 3.4d.20 give (3), so it is
+forbidden configuration (2). Both cases contradict the hypothesis.
+\(\square\)
+
+Thus the remaining \(k=3\) problem has a precise packet-exclusion target:
+after protecting one finite core, prove that large unique-gate packets and
+large bounded-palette parallel-copy packets cannot both persist. Corollary
+3.4d.19 is a stronger one-line sufficient condition, but Corollary
+3.4d.23 is closer to the actual normal form forced by a counterexample.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -28808,6 +28882,10 @@ missing from ordinary minimal order-\(h\) bases.
   nonsingleton branch: \(\{1,2,3,4,5,7\}\) contains parallel copies
   \(\{1,3,5\}\) and \(\{3,5,7\}\) with cross-shadow trapped in
   \(\{2,4\}\), while still covering \([8,16]\) by three sums.
+* Corollary 3.4d.23 packages the exact branch-exclusion target for \(k=3\):
+  if one finite core rules out all sufficiently large unique-gate packets
+  and all sufficiently large bounded-palette parallel-copy packets, then a
+  good order-\(4\) deletion exists.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
