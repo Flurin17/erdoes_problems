@@ -26584,6 +26584,76 @@ at the tested scale, endpoint escape becomes midpoint displacement; if the
 escape is not endpoint-based, then some active profile already has
 auxiliary midpoint diameter linear in its tested interval scale.
 
+### Corollary 16.137: Sublinear auxiliary location forces endpoint debt
+
+Keep the setting of Corollary 16.136. Fix integers
+\[
+R,H\ge1,
+\]
+and suppose an active label \(\lambda\) satisfies
+\[
+r_\lambda\le R,\qquad \Theta_\lambda\le H. \tag{1}
+\]
+Put
+\[
+D_*=\max\{D(r):1\le r\le R\},
+\]
+where \(D(r)\) is the rank constant used in Corollary 16.106. Let
+\[
+0<\theta<{1\over4H}. \tag{2}
+\]
+Then there is \(N_*=N_*(R,H,\theta)\) such that, whenever
+\[
+n_\lambda\ge N_*,
+\qquad
+E_\lambda=\max_i d_{\lambda,i}\le \theta n_\lambda, \tag{3}
+\]
+the auxiliary-diameter origin (2) of Corollary 16.136 is impossible for
+\(\lambda\). Consequently, in any finite packet certificate satisfying
+(1)--(3) for every active label, Corollary 16.136 supplies an
+endpoint-distance origin. If the supplied label also has
+\[
+W_s\le {T_\lambda\over3},
+\]
+then it is strongly midpoint-displaced:
+\[
+\Delta_{\lambda,i,s}>{T_\lambda\over2}\qquad(i). \tag{4}
+\]
+
+Proof. From \(\Theta_\lambda\le H\) and the definitions used in Corollary
+16.129,
+\[
+\gamma_\lambda\ge {1\over2H},\qquad D_\lambda\le D_* . \tag{5}
+\]
+Since every auxiliary endpoint is at most \(E_\lambda\),
+\[
+\operatorname{diam}_{\rm mid}(\lambda)
+\le 2E_\lambda
+\le 2\theta n_\lambda. \tag{6}
+\]
+On the other hand,
+\[
+T_\lambda=\gamma_\lambda n_\lambda-D_\lambda
+\ge {n_\lambda\over2H}-D_* . \tag{7}
+\]
+By (2), the coefficient \(1/(2H)-2\theta\) is positive. Choose
+\[
+N_*>{D_*\over 1/(2H)-2\theta}.
+\]
+Then (6)--(7) give
+\[
+\operatorname{diam}_{\rm mid}(\lambda)<T_\lambda,
+\]
+so the auxiliary-diameter origin of Corollary 16.136 cannot hold for this
+label. The remaining conclusions are exactly Corollary 16.136. \(\square\)
+
+Thus a long tested interval with bounded rank and density bounded away from
+\(1/2\) cannot use an internally separated robust profile unless the
+auxiliary intervals themselves move linearly far out. If the auxiliary
+profile stays in a sublinear initial region, the product-covering debt must
+come from endpoint escape, hence from midpoint displacement on packets that
+are narrow at the tested scale.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
 inequality and packet-mass inclusion behind Corollary 16.128, the
 bounded-rank/bounded-margin estimate used in Corollary 16.129, the
@@ -28147,6 +28217,10 @@ missing from ordinary minimal order-\(h\) bases.
   robust-profile geometry: endpoint escape gives midpoint displacement on
   packets narrow at the tested scale, while non-endpoint internal-gap escape
   forces auxiliary midpoint diameter at least the linear-core scale.
+* Corollary 16.137 shows that, under bounded rank and density separated
+  from \(1/2\), this diameter origin requires auxiliary endpoints linear in
+  the tested interval length; sublinear auxiliary profiles force endpoint
+  debt instead.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
