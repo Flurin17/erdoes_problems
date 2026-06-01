@@ -2357,6 +2357,13 @@ a shifted-overlap spike \(U+f-g\subset A\) while every pair deletion inside
 But it also has a macroscopic two-sum coverage gap: if \(B=\max U+h\), then
 no element below \(9N\) lies outside \([1,B]\), so \(2A_0\) misses
 \((2B,10N)\). It is a local obstruction to promotion, not a stage gadget.
+The companion script `spike_interval_filler_pressure.py` checks the most
+direct filler route: adding a retained low interval \([1,R]\). In the
+minimal-repair default gadget, \(R=5003\) is still harmless, while
+\(R=5004\) repairs the witness by \(5004+5004+89992=100000\), exactly when
+the interval two-sum first covers \(f+\min U\). Thus a stage cannot simply
+bridge the low two-sum gap with a long retained interval reaching the
+private spike sums.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed

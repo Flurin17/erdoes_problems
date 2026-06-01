@@ -51,7 +51,7 @@ def main() -> None:
 
     mirrors = {90 * scale - shift - row for row in rows}
     shifted = {row + shift for row in rows}
-    repairs = {30 * scale, 60 * scale, 37 * scale, 43 * scale}
+    repairs = {37 * scale, 43 * scale}
     retained = rows | shifted | mirrors | repairs
     elements = retained | deleted
 

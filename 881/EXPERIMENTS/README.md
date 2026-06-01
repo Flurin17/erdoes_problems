@@ -223,6 +223,11 @@ a rank-three witness has a shifted-overlap spike on one deleted pair, but
 every pair deletion is harmless at that same witness because the remaining
 active color repairs it. This records Diagnostic 8.5a.7z.12; Example
 8.5a.7z.12a gives the corresponding arbitrary-size finite construction.
+`spike_interval_filler_pressure.py` then adds retained low-interval fillers
+to the same gadget. In the default instance, radius `5003` still does not
+repair the witness, while radius `5004` does via
+`5004+5004+89992=100000`; this is the first point where the interval's
+two-sum coverage reaches the private spike sum \(f+\min U\).
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

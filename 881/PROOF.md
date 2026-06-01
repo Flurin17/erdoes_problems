@@ -8476,8 +8476,7 @@ F=\{f,g,k\},
 \]
 and
 \[
-C=U\cup(U+h)\cup\{90N-h-u:u\in U\}
-  \cup\{30N,37N,43N,60N\}.
+C=U\cup(U+h)\cup\{90N-h-u:u\in U\}\cup\{37N,43N\}.
 \]
 Let
 \[
@@ -8518,9 +8517,9 @@ It remains to check that \(w\notin3C\). Let
 B=\max U+h.
 \]
 The set \(C\) is contained in the union of the low interval \([1,B]\), the
-four middle points
+two middle points
 \[
-30N,\quad37N,\quad43N,\quad60N,
+37N,\quad43N,
 \]
 and the high interval
 \[
@@ -8536,18 +8535,17 @@ by the choice of \(N\). Thus no representation of \(w\) uses a high term.
 
 Without high terms, a sum with at most one middle term is less than
 \[
-60N+2B<61N.
+43N+2B<44N.
 \]
 A sum with two middle terms has middle-part coefficient in
 \[
-\{60,67,73,74,80,86,90,97,103,120\}N.
+\{74,80,86\}N.
 \]
 Adding one low term cannot reach \(100N\), because the only positive gap
 below \(100N\) that is smaller than \(N\) would have to occur among these
 coefficients, and none does. A sum of three middle terms has coefficient in
 \[
-\{90,97,103,104,110,111,116,117,120,123,
-  127,129,133,134,140,146,150,157,163,180\}N,
+\{111,117,123,129\}N,
 \]
 which again never equals \(100N\). This proves \(w\notin3C\).
 
@@ -8583,6 +8581,43 @@ reaching the first deleted gate. The example only disproves a local
 promotion lemma; a counterexample stage would still have to add enough
 coverage fillers to bridge such gaps without repairing the protected
 rank-three witnesses or creating stable finite-palette spikes.
+
+### Diagnostic 8.5a.7z.12b: Low-interval fillers repair private sums
+
+The simplest way to fill the gap (2) is also immediately dangerous. In the
+notation of Example 8.5a.7z.12a, suppose a retained low interval
+\[
+[1,R]
+\]
+is adjoined to \(C\). If
+\[
+2R\ge f+u
+\]
+for some \(u\in U\), then \(w\) is repaired without any deleted gate. Indeed
+choose \(a,b\in[1,R]\) with \(a+b=f+u\). The retained mirror
+\[
+w-f-u=90N-h-u
+\]
+belongs to \(C\), so
+\[
+w=a+b+(w-f-u).
+\]
+In particular, the first private spike row \(u_0=\min U\) is repaired as
+soon as
+\[
+R\ge \left\lceil{f+u_0\over2}\right\rceil.
+\]
+
+The script `spike_interval_filler_pressure.py` verifies this threshold in
+the default finite instance \(N=1000,h=7,U=\{1,4,9,16,25,36\}\). With the
+minimal middle repair packet \(\{37N,43N\}\), \(R=5003\) leaves the witness
+unrepaired, while \(R=5004\) gives
+\[
+100000=5004+5004+89992.
+\]
+Thus the no-promotion spike gadget cannot be turned into a stage merely by
+adding a long retained interval through the first private sums; such
+fillers repair the very witness they are meant to protect.
 
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
@@ -15407,6 +15442,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   rank-three holes can carry shifted-overlap spikes of any finite size
   while all pair deletions inside the active triple remain harmless at the
   same witness.
+* Diagnostic 8.5a.7z.12b shows that the most direct coverage filler,
+  adjoining a retained low interval, repairs the protected witness exactly
+  when its two-sum interval reaches a private spike sum.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample
