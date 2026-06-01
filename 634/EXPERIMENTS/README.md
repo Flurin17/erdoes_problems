@@ -246,11 +246,11 @@ Current components:
   `results/n99_mixed6_word_quotient_summary.json`. The runner supports
   `--skip-classified-words` for disjoint classification intervals.
   Its `--classification-mode exhaustive` option checks every oriented
-  realization of each selected word group; in the first `1000` `N=99`
-  mixed-`6` word groups, all `12780` outside-cover realizations match the
+  realization of each selected word group; in the first `2000` `N=99`
+  mixed-`6` word groups, all `24120` outside-cover realizations match the
   word-group status with no count mismatches.
-  Stress tests with up to `8` representatives per word found no mixed-status
-  word among the first `2000` word groups or among word groups
+  Stress tests with up to `8` representatives per word also found no
+  mixed-status word among the first `2000` word groups or among word groups
   `350001..352000`. A full targeted enumeration of a heaviest `N=99`
   mixed-`6` outside-cover word group of multiplicity `54` found all `54`
   realizations have status `corner-label-violation`.

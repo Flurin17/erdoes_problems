@@ -1,0 +1,102 @@
+{
+  "classification_mode": "exhaustive",
+  "classified_groups": 1000,
+  "classified_weight": 11340,
+  "classified_words": 1000,
+  "elapsed_seconds": 113.74789,
+  "endpoint_groups": 20,
+  "example_words": {
+    "corner-label-violation": [
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "corner-label-violation": 18
+        },
+        "word": "L=bccaabbbb R=aabbbbbcc B=baaacbbcc"
+      },
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "corner-label-violation": 18
+        },
+        "word": "L=bccaabbbb R=ababbbbcc B=baaacbbcc"
+      }
+    ],
+    "pinch-sector-obstruction": [
+      {
+        "multiplicity": 9,
+        "statuses": {
+          "pinch-sector-obstruction": 9
+        },
+        "word": "L=bbaabbccb R=aabbbbbcc B=baaaccbbc"
+      },
+      {
+        "multiplicity": 9,
+        "statuses": {
+          "pinch-sector-obstruction": 9
+        },
+        "word": "L=bbaabbccb R=ababbbbcc B=baaaccbbc"
+      }
+    ],
+    "split-corner-label-obstruction": [
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "split-corner-label-obstruction": 18
+        },
+        "word": "L=bbccabbab R=abbbbabcc B=baaacbbcc"
+      },
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "split-corner-label-obstruction": 18
+        },
+        "word": "L=bbccabbab R=abbbbbacc B=baaacbbcc"
+      }
+    ]
+  },
+  "first_classified_group_index": 1001,
+  "first_classified_word_index": 1001,
+  "last_classified_group_index": 2000,
+  "last_classified_word_index": 2000,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_example_words": [],
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "profile_groups": null,
+  "quotient": "word",
+  "quotient_groups": 418260,
+  "radicand": 1,
+  "reps_per_group": 1,
+  "reps_per_word": 1,
+  "skip_classified_groups": 1000,
+  "skip_classified_words": 1000,
+  "status_group_counts": {
+    "corner-label-violation": 600,
+    "pinch-sector-obstruction": 200,
+    "split-corner-label-obstruction": 200
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 12}": 240,
+    "{\"corner-label-violation\": 15}": 60,
+    "{\"corner-label-violation\": 18}": 60,
+    "{\"corner-label-violation\": 9}": 240,
+    "{\"pinch-sector-obstruction\": 9}": 200,
+    "{\"split-corner-label-obstruction\": 12}": 180,
+    "{\"split-corner-label-obstruction\": 18}": 20
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 7020,
+    "pinch-sector-obstruction": 1800,
+    "split-corner-label-obstruction": 2520
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_count_mismatches": [],
+  "word_groups": 418260
+}

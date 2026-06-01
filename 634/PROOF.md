@@ -2319,12 +2319,13 @@ is independent of the endpoint orientations realizing those words.
 
 The word-quotient runner now also supports an exhaustive interval mode that
 classifies every oriented realization in selected word groups rather than a
-bounded representative set. In the first `1000` `N=99` mixed-`6` word groups,
-all `12780` outside-cover realizations agree with their word-group status, and
+bounded representative set. In the first `2000` `N=99` mixed-`6` word groups,
+all `24120` outside-cover realizations agree with their word-group status, and
 the exact realization counts match the word-quotient multiplicities; see
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_first1000.json`.
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_first1000.json` and
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_001000_002000.json`.
 
-Two higher-representative stress tests support the same lemma. With up to `8`
+Higher-representative stress tests support the same lemma. With up to `8`
 representatives per word group, the first `2000` word groups and the late
 interval `350001..352000` again have no mixed-status word group. These are
 stored as
