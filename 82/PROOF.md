@@ -11625,6 +11625,60 @@ has order at most `t+2=h-1`.  Hence `H_t` has no clique or independent set of
 order `h`, while it has `4h-7` vertices and satisfies the `P=2` full-drop
 condition.  This proves `C_full(2,h)>4h-7`.  QED.
 
+**Lemma 28D.5b.1: Triangle-Free `P=2` Full-Drop Graphs Are Half
+Independent.**  Let `H` be an ordered graph on `n` vertices satisfying the
+`P=2` full-drop condition.  If `H` is triangle-free, then
+
+```text
+alpha(H) >= (n-1)/2.
+```
+
+Consequently, if `omega(H)<=2`, then
+
+```text
+alpha(H)+omega(H) >= (n+3)/2.
+```
+
+Proof.  We prove the first assertion by induction on `n`; the empty graph is
+also allowed in the induction, with independence number `0`.  Let `a` be the
+first vertex in the order, and put `A=N_H(a)`.  As in Lemma 28D.5 with
+`P=2`, the set `A` is a clique: every nonneighbor inside `A` would be a lost
+neighbor of `a`, and the one lost neighbor `u` itself is already present in
+`N(a)\N(u)`.  Since `H` is triangle-free, `|A|<=1`.
+
+Let
+
+```text
+B=V(H)\({a} union A).
+```
+
+Then `a` is nonadjacent to every vertex of `B`, and `H[B]` is again
+triangle-free and satisfies the inherited `P=2` full-drop condition.  By
+induction,
+
+```text
+alpha(H[B]) >= (|B|-1)/2.
+```
+
+Adding `a` to an independent set in `B` gives
+
+```text
+alpha(H) >= 1+(|B|-1)/2 = (|B|+1)/2.
+```
+
+If `A` is empty, then `n=|B|+1`, and this lower bound is `n/2`.  If `A` has
+one vertex, then `n=|B|+2`, and the lower bound is `(n-1)/2`.  In both cases
+`alpha(H)>=(n-1)/2`.
+
+If `omega(H)=1`, then `H` is independent and the final assertion is trivial.
+If `omega(H)=2`, the first assertion gives
+
+```text
+alpha(H)+omega(H) >= (n-1)/2+2 = (n+3)/2.
+```
+
+QED.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose

@@ -3500,3 +3500,10 @@ source of growth beyond Ramsey.
   `best_alpha=4`, `best_omega=2`.  Thus the conjectured bound
   `alpha+omega >= ceil((n+3)/2)` survives one more exact level, but the
   extremal is no longer just the ordered matching family.
+- 2026-06-01: Proved the triangle-free case of the `P=2` full-drop
+  `alpha+omega` conjecture.  In a `P=2` full-drop graph, the first
+  neighborhood is a clique; if the graph is triangle-free, the first vertex
+  has at most one neighbor.  Inducting on the nonneighbors of the first
+  vertex gives `alpha(H)>=(n-1)/2`, and hence
+  `alpha(H)+omega(H)>=(n+3)/2` whenever `omega(H)<=2`.  This explains the
+  low-clique extremals from the `n=8,9` exact census.
