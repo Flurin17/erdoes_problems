@@ -190,6 +190,14 @@ and pair deletions remain three-fold covered on that same window. This is
 the finite warning recorded as Example 8.5a.7z; the coverage point \(24\)
 is the one-point stage buffer from Lemma 13.1d.
 
+`product_rank3_extension_search.py` starts from that window and tries to add
+a fourth two-point packet, optionally with fillers. It requires every three
+of the four packets to have complete selector-triple terminal-gap witnesses,
+while all singleton and pair deletions remain harmless on the witness
+window. The bounded run
+`--max-value 30 --max-fillers 2` checks `20961` candidates and finds no
+extension, recording Diagnostic 8.5a.7z.2.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole

@@ -7815,6 +7815,36 @@ form a genuine cross-window front or weak barrier on packet indices. This
 is the same global demand already encoded abstractly in Corollary
 8.5a.7s, now applied to the concrete local model of Example 8.5a.7z.
 
+### Diagnostic 8.5a.7z.2: The first fourth-packet extension search fails
+
+The script `EXPERIMENTS/product_rank3_extension_search.py` tests the next
+finite staging question for Example 8.5a.7z. Starting from
+\[
+A_0=\{1,3,4,5,8,10,11,12\}
+\]
+and packets
+\[
+\{4,10\},\qquad \{5,11\},\qquad \{8,12\},
+\]
+it tries to add a fourth two-point packet, together with a bounded number of
+extra fillers, and requires:
+
+1. all singleton and pair deletions remain three-fold covered on the
+   witness window;
+2. every choice of three of the four packets and one point from each has an
+   inclusion-minimal terminal-gap witness;
+3. the two-sum coverage has the one-point buffer required by Lemma 13.1d.
+
+With
+```
+python3 881/EXPERIMENTS/product_rank3_extension_search.py --max-value 30 --max-fillers 2
+```
+the search checks \(20961\) candidates and finds no extension. This is only
+bounded finite evidence. Its significance is that the first iteration
+pressure appears immediately when one asks a rank-three product window to
+coexist with all four possible three-packet subwindows while preserving
+pair-harmlessness.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7870,9 +7900,11 @@ one must construct a staged basis in which the fibers \(U\), mirrors
 while maintaining order-2 coverage and arbitrarily late finite product
 covers whose pair subfamilies are selector-avoidable and whose high-rank
 edges are minimal large-spread terminal cuts whose supports form a genuine
-cross-window weak barrier rather than disjoint local gadgets. This is now
-the active form of the certificate-free obstruction; it is stronger than
-mobile injectivity and weaker than finite recurrent Sidon coloring.
+cross-window weak barrier rather than disjoint local gadgets. Diagnostic
+8.5a.7z.2 shows that even the first bounded fourth-packet extension of the
+small local model is nontrivial. This is now the active form of the
+certificate-free obstruction; it is stronger than mobile injectivity and
+weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14507,6 +14539,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.5a.7z.1 notes that disjoint repetitions of such rank-three
   windows do not form a weak barrier: an infinite packet set can keep at
   most two indices from each window and avoid all rank-\(\ge3\) supports.
+* Diagnostic 8.5a.7z.2 records a bounded failed extension search: no fourth
+  two-point packet with up to two fillers through \(30\) extends the small
+  rank-three product terminal window while preserving all three-packet
+  product requirements and pair-harmlessness.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

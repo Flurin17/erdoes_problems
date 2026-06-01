@@ -2256,6 +2256,15 @@ finite window and avoid every rank-\(\ge3\) support. Therefore any negative
 construction has to wire these terminal-cut supports across windows into a
 true weak barrier/front on packet indices.
 
+The first bounded extension search is negative. The script
+`product_rank3_extension_search.py --max-value 30 --max-fillers 2` starts
+from Example 8.5a.7z, tries to add a fourth two-point packet plus at most
+two fillers, and asks every three of the four packets to support a complete
+rank-three terminal product window while all singleton and pair deletions
+remain harmless. It checks \(20961\) candidates and finds no extension.
+This is finite evidence only, but it points to the simultaneous
+cross-window closure burden.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
