@@ -19932,6 +19932,53 @@ Lemma 16.19, the only remaining singleton escape is a moving unique-gate
 packet, or reflected packets contained inside large certificate-free
 subsets of every finite test.
 
+### Corollary 16.21: Singleton counterexamples force unique-gate half-packets
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Let \(T_0\subset A\) be finite and
+satisfy the balanced half-certificate hypothesis of Corollary 16.20.
+Then there is \(L_0\) such that the following cannot occur for any
+\(L\ge L_0\):
+
+* \(q\in A\), \(w=q+d\notin4(A\setminus\{q\})\);
+* \(w-p\ge N_0\) for every \(p\in T_0\), where \(N_0\) is an order-\(3\)
+  threshold for \(A\);
+* with \(C=A\setminus\{q\}\) and
+  \[
+  T_A=\{p\in T_0:d-p\notin2C\},
+  \]
+  one has
+  \[
+  d-q>L,\qquad |T_A|\ge |T_0|/2. \tag{1}
+  \]
+
+Consequently, every sufficiently large-secondary-center singleton row bank
+over \(T_0\) has a unique-gate half-packet:
+\[
+\bigl|\{p\in T_0:q+p\notin2(A\setminus\{q\})\}\bigr|\ge |T_0|/2. \tag{2}
+\]
+
+Proof. If the forbidden data existed for arbitrarily large \(L\), then
+Lemma 16.18 would give
+\[
+d-q-T_A\subset A
+\]
+with \(|T_A|\ge |T_0|/2\) and \(d-q\to\infty\). Corollary 16.20 would
+therefore produce an infinite deletion whose complement is an order-\(4\)
+basis, contrary to the hypothesis on \(A\). This proves the first
+assertion. For \(L\ge L_0\), Lemma 16.18 gives the cover
+\[
+T_0=T_A\cup T_U,\qquad T_U=\{p\in T_0:q+p\notin2C\}.
+\]
+Since \(|T_A|<|T_0|/2\), the half-packet bound (2) follows. \(\square\)
+
+This is a usable singleton-branch normal form. Once a finite balanced
+certificate test has been found, any surviving singleton private witnesses
+with large secondary center must present many unique-gate translates
+\(q+p\). If the secondary center is not large, Lemma 16.19 already gives
+unique-gate rows on late tests. Thus the unresolved singleton escape is
+not generic row-bank recurrence; it is moving unique-gate arithmetic.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20983,6 +21030,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   finite test with no balanced certificate-free halfset give a fixed
   recurrent \(k=3\) certificate tuple and therefore a good order-\(4\)
   deletion.
+* Corollary 16.21 turns this around inside a hypothetical \(k=3\)
+  counterexample: over every finite balanced certificate test, large
+  secondary-center singleton row banks must contain a unique-gate
+  half-packet.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

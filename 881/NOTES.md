@@ -2373,6 +2373,12 @@ certificate. On the prepared row-bank set
 the largest certificate-free subset has size \(6\), for instance
 \(\{2,4,8,20,28,33\}\), so the Corollary 16.20 finite-test hypothesis is
 not automatic in sparse prepared blocks.
+Corollary 16.21 records the contrapositive normal form for a hypothetical
+\(k=3\) counterexample: over any finite test with the balanced
+half-certificate property, sufficiently large-secondary-center singleton
+row banks must have at least half their rows in the unique-gate branch.
+Together with Lemma 16.19 for bounded secondary centers, this isolates
+moving unique-gate packets as the remaining singleton obstruction.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
