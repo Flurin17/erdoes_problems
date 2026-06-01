@@ -210,6 +210,9 @@ width or auxiliary-midpoint displacement.
 Corollary 16.119 removes the tiny-packet artefact for finite menus when
 \(\sum_s1/|P_s|\) is finite: survival then forces nonsummable width-heavy
 or midpoint-displacement packets for one fixed profile.
+Corollaries 16.120--16.121 repeat this for countable menus using only the
+finite active label family \(\mathcal B_s\) in each packet; the small
+artefact is controlled by \(\sum_s|\mathcal B_s|/|P_s|\).
 
 ## Definitions
 

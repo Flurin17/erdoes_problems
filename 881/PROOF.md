@@ -25477,6 +25477,116 @@ must either keep seeing packets with large interval width at the assigned
 scale, or keep every auxiliary midpoint in one fixed profile linearly away
 from the packet center on a nonsummable set of packets.
 
+### Corollary 16.120: Active countable menus have packet-position mass
+
+Work in the setting of Corollary 16.109. For each sufficiently large
+packet index \(s\), keep the finite witness family
+\[
+\mathcal B_s
+\]
+from Corollary 16.93, and define
+\[
+\beta^*_{\lambda,s}=
+\begin{cases}
+\beta_{\lambda,s}, & \lambda\in\mathcal B_s,\\
+0, & \lambda\notin\mathcal B_s,
+\end{cases} \tag{1}
+\]
+where \(\beta_{\lambda,s}\) is the packet-position upper bound from
+Corollary 16.115. If the assigned high-density linear-core branch
+product-covers every selector tail, then for every tail index \(t\),
+\[
+\sum_{\lambda}\sum_{s\ge t}\beta^*_{\lambda,s}\ge1. \tag{2}
+\]
+Consequently, if for some tail \(t\)
+\[
+\sum_{\lambda}\sum_{s\ge t}\beta^*_{\lambda,s}<1, \tag{3}
+\]
+then that branch is selector-avoidable on the tail.
+
+Proof. In Corollary 16.112, the pointwise cover of \(P_s\) is obtained
+using only labels in \(\mathcal B_s\):
+\[
+P_s\subseteq\bigcup_{\lambda\in\mathcal B_s}H_{\lambda,s}.
+\]
+Therefore the one-coordinate cylinders with nonempty active labels
+\[
+(\{s\},H_{\lambda,s})\qquad(\lambda\in\mathcal B_s)
+\]
+already catch every selector tail. Lemma 16.114 gives
+\[
+{|H_{\lambda,s}|\over |P_s|}\le\beta^*_{\lambda,s}
+\]
+for active labels and gives zero contribution for inactive labels by
+definition. Applying Lemma 8.5a.7u' to the active one-coordinate cylinders
+gives (2). The final statement is the contrapositive. \(\square\)
+
+This removes an artefact of the countable menu. Only profiles actually used
+in the finite packet certificate should contribute to the position-error
+mass; unused profiles are assigned zero cost.
+
+### Corollary 16.121: Active countable residual splits into width or displacement
+
+Keep the setting of Corollary 16.120, and assume
+\[
+T_\lambda>0
+\]
+for every active label. Suppose the active finite certificates satisfy
+\[
+\sum_s {|\mathcal B_s|\over |P_s|}<\infty. \tag{1}
+\]
+If the assigned high-density linear-core branch product-covers every
+selector tail, then at least one of the following joint alternatives holds.
+
+1. **Joint width-heavy residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   W_s>T_\lambda/2}}
+   \beta_{\lambda,s}=\infty. \tag{2}
+   \]
+2. **Joint midpoint-displacement residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   \Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+   \beta_{\lambda,s}=\infty. \tag{3}
+   \]
+
+Proof. By Corollary 16.120,
+\[
+\sum_\lambda\sum_s\beta^*_{\lambda,s}=\infty. \tag{4}
+\]
+The active-label small-packet contribution is summable:
+\[
+\sum_\lambda\sum_{\substack{s:\lambda\in\mathcal B_s\\
+\beta_{\lambda,s}|P_s|\le2}}
+\beta_{\lambda,s}
+\le
+\sum_s {2|\mathcal B_s|\over |P_s|}<\infty. \tag{5}
+\]
+Removing these pairs from (4), the active pairs with
+\[
+\lambda\in\mathcal B_s,\qquad \beta_{\lambda,s}|P_s|>2
+\]
+still have divergent \(\beta\)-sum. If the width-heavy sum (2) is finite,
+then the remaining divergent subseries has
+\[
+W_s\le {T_\lambda\over2}
+\qquad\text{and}\qquad
+\beta_{\lambda,s}|P_s|>2.
+\]
+Lemma 16.118, applied with \(\varepsilon=\beta_{\lambda,s}\), gives
+\[
+\Delta_{\lambda,i,s}>{T_\lambda\over2}
+\qquad(i)
+\]
+on that remaining divergent subseries, which is (3). \(\square\)
+
+Thus the countable-menu linear-core residual has the same concrete shape
+as the finite-menu residual once the active labels per packet are
+sufficiently sparse relative to packet size: either large packet width or
+linear auxiliary-midpoint displacement must occur with nonsummable active
+mass.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26883,6 +26993,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.119 removes the tiny-packet artefact under
   \(\sum_s1/|P_s|<\infty\): finite-menu survival then forces one fixed
   profile to have nonsummable width-heavy or midpoint-displacement packets.
+* Corollaries 16.120--16.121 give the active-countable version: unused
+  profiles contribute zero, and if \(\sum_s|\mathcal B_s|/|P_s|<\infty\)
+  then countable-menu survival forces nonsummable active width-heavy or
+  midpoint-displacement mass.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
