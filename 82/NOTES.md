@@ -4223,3 +4223,14 @@ source of growth beyond Ramsey.
   removable without a rooted-signature argument.  Next separator target:
   prove a linear lower bound for the rooted signature convolution in Lemma
   28J.10d.1e, or find a rooted block family with density below `13/14`.
+- 2026-06-01: Added `rooted_bouquet_density.py` and Lemma 28J.10d.1e.1.
+  For a rooted block `(H,r)`, the asymptotic coefficient of
+  `s_d(B_t(H,r))` is the larger of the best root-avoiding `d`-regular
+  witness and the best root-degree-zero partial rooted witness, with the
+  latter allowed only when the final root degree `d` can be supplied by
+  finitely many positive partial-root branches.  Exact connected `n=6` gives
+  minimum coefficient `5=n-1`; the fifteen-vertex rooted defect at root `13`
+  gives coefficient `13` on `14` new vertices.  Random connected samples at
+  `n=10,12,14` found minimum ratios `11/9`, `13/11`, and `19/13`,
+  respectively, so no sampled rooted block beats the current `13/14`
+  bouquet density.

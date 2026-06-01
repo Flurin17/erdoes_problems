@@ -15317,6 +15317,88 @@ with partial root degrees summing to `d` glue to a `d`-regular induced
 subgraph of `G`, and any two root-avoiding witnesses glue disjointly.  Hence
 the displayed maximum is also a lower bound.  QED.
 
+**Lemma 28J.10d.1e.1: Asymptotic Spectrum Of A Rooted Bouquet.**  Let
+`(H,r)` be a rooted graph, and let `B_t(H,r)` be the graph obtained by
+identifying the root vertices of `t` disjoint copies of `H`.
+
+Use the notation `a_d^0(H,r)` and `a_{d,p}^1(H,r)` from Lemma 28J.10d.1e.
+Say that `d` is root-reachable if either `d=0`, or `d` is a sum of positive
+integers `p` for which `a_{d,p}^1(H,r)>0`.  Define
+
+```text
+c_d(H,r)=max(a_d^0(H,r), a_{d,0}^1(H,r)-1)
+```
+
+when `d` is root-reachable, and
+
+```text
+c_d(H,r)=a_d^0(H,r)
+```
+
+otherwise.  Then, for every fixed `d`,
+
+```text
+s_d(B_t(H,r)) = t c_d(H,r) + O_H(1).
+```
+
+Consequently,
+
+```text
+sum_d s_d(B_t(H,r))
+  = t sum_d c_d(H,r) + O_H(1),
+```
+
+and
+
+```text
+|V(B_t(H,r))|=t(|V(H)|-1)+1.
+```
+
+Proof.  Fix `d`.  If a `d`-regular witness in `B_t(H,r)` avoids the common
+root, then it splits into `t` root-avoiding witnesses, one in each copy, so
+its order is at most `t a_d^0(H,r)`.  This bound is attained by taking a
+maximum root-avoiding witness in every copy.
+
+Now consider a witness containing the common root.  Its intersection with
+each copy is a rooted partial witness of target non-root degree `d`, with
+some partial root degree `p_i`, and the final root degree condition is
+
+```text
+p_1+...+p_t=d.
+```
+
+Thus at most `d` copies have positive partial root degree, while all other
+copies have partial root degree `0`.  These zero-partial copies contribute at
+most `a_{d,0}^1(H,r)-1` new vertices each after the shared root is identified.
+The positive-partial copies contribute only `O_H(1)` total vertices because
+`d` and `H` are fixed.  Hence every root-containing witness has order at most
+
+```text
+t(a_{d,0}^1(H,r)-1)+O_H(1).
+```
+
+Such a linear term is attainable exactly when the required final root degree
+`d` is root-reachable: take zero-partial witnesses in all but `O_d(1)` copies
+and use the finitely many positive partial-root witnesses to make the root
+degree sum equal to `d`.  Combining the root-avoiding and root-containing
+cases gives the formula for `s_d`.
+
+Finally, no regular witness in `B_t(H,r)` can have degree exceeding
+`|V(H)|-1`, unless it is empty, because any non-root vertex has all its
+neighbors inside one copy of `H`.  Therefore summing the fixed-degree
+asymptotics over `d=0,...,|V(H)|-1` proves the spectrum-mass formula.  The
+order formula is immediate from identifying `t` roots into one vertex.  QED.
+
+The script
+
+```text
+python3 82/EXPERIMENTS/rooted_bouquet_density.py
+```
+
+computes the coefficients `c_d(H,r)`.  Exact connected enumeration at
+`n=6` gives minimum coefficient `5=n-1`, while the rooted fifteen-vertex
+defect block below has coefficient `13` on `14` new vertices.
+
 **Computational Counterexample 28J.10d.1f: Connected Defect One Is False.**
 The connected defect-one hypothesis in Conditional Corollary 28J.10d.1 is
 false.  Let `H` be the fifteen-vertex connected defect graph with mask
