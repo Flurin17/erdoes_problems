@@ -3563,7 +3563,117 @@ remaining problem is now an additive expansion question: does order-\(3\)
 basishood force anchored-shadow expansion after deleting one finite core,
 or can a sparse basis sustain these moving anti-expanding packets forever?
 
-### Warning 3.4d.20: Finite windows do not force anchored-shadow expansion
+### Corollary 3.4d.20: Active pair packets split into unique or parallel-copy packets
+
+Assume that \(A\) is an order-\(3\) basis and that no infinite deletion
+from \(A\) remains an order-\(4\) basis. Let \(E\subset A\) be finite. Then
+there are constants
+\[
+q_E,\qquad c_E>0,
+\]
+and arbitrarily large witnesses satisfying one of the following two
+alternatives.
+
+1. **Singleton unique-gate packet.** There are
+   \[
+   g\in A\setminus E,\qquad U\subset A\setminus(E\cup\{g\}),
+   \]
+   with
+   \[
+   |U|\ge c_EA(w)^{1/3},
+   \]
+   such that, for every \(u\in U\), the only two-term representation of
+   \(g+u\) from \(A\) is the pair
+   \[
+   \{g,u\}.
+   \]
+   Equivalently,
+   \[
+   g+u\notin2(A\setminus\{g\})\qquad(u\in U), \tag{1}
+   \]
+   and
+   \[
+   (U+g-U)\cap A\subset\{g\}. \tag{2}
+   \]
+2. **Nonsingleton parallel-copy packet.** There are distinct
+   \[
+   f,g\in A\setminus E,
+   \]
+   a finite set
+   \[
+   F\subset A\setminus E,\qquad f,g\in F,\qquad |F|\le q_E,
+   \]
+   and sets
+   \[
+   U,V\subset A\setminus(E\cup F)
+   \]
+   with
+   \[
+   |U|=|V|\ge c_EA(w)^{1/3}, \tag{3}
+   \]
+   such that
+   \[
+   V=U+g-f, \tag{4}
+   \]
+   and
+   \[
+   (U+g-U)\cap A\subset F, \tag{5}
+   \]
+   \[
+   (V+f-U)\cap A\subset F. \tag{6}
+   \]
+
+Proof. Start from Corollary 3.4d.18. It gives \(F,g,U\) with
+\[
+g\in F,\qquad |F|\le q_E,\qquad |U|\gg_E A(w)^{1/3},
+\]
+and
+\[
+g+u\notin2(A\setminus F)\qquad(u\in U), \tag{8}
+\]
+\[
+g+u-f\in A\qquad(u\in U,\ f\in F), \tag{9}
+\]
+\[
+(U+g-U)\cap A\subset F. \tag{10}
+\]
+
+If \(F=\{g\}\), then (8) is exactly (1). Since \(u\ne g\), any two-term
+representation of \(g+u\) that uses \(g\) has the other summand equal to
+\(u\). Hence (1) says that the displayed representation is the only
+two-term representation from \(A\). Equation (2) is (10).
+
+Assume now that \(|F|\ge2\), and choose
+\[
+f\in F\setminus\{g\}.
+\]
+Put
+\[
+V=U+g-f.
+\]
+By (9), \(V\subset A\), and the translation is injective, so \(|V|=|U|\).
+For \(v=u+g-f\in V\) and \(u_0\in U\),
+\[
+v+f-u_0=g+u-u_0.
+\]
+Thus (10) gives
+\[
+(V+f-U)\cap A\subset F,
+\]
+which is (6), while (5) is again (10). Since \(E\cup F\) is finite and the
+maps \(u\mapsto u\) and \(u\mapsto u+g-f\) are injective, deleting from
+\(U\) the points for which \(u\in E\cup F\) or \(u+g-f\in E\cup F\)
+removes at most \(O_E(1)\) points. Along arbitrarily large witnesses this
+loss is absorbed into \(c_E\), so the displayed lower bound in (3) still
+holds after decreasing \(c_E\). \(\square\)
+
+Thus the remaining \(k=3\) obstruction is not an arbitrary sparse packet.
+It is either a moving unique-gate packet, or it carries at least two
+parallel retained copies whose cross-shadows are still trapped in one
+bounded active palette. This is the \(k=3\) analogue of the singleton versus
+nonsingleton split used in the completed \(k=2\) proof.
+
+### Warning 3.4d.21: Finite windows do not force anchored-shadow expansion
 
 Corollary 3.4d.19 needs asymptotic input. A finite order-\(3\) covering
 window may still contain a sizeable sparse anchored-shadow packet.
@@ -28621,7 +28731,11 @@ missing from ordinary minimal order-\(h\) bases.
 * Corollary 3.4d.19 gives the corresponding positive criterion: if one
   finite core forces anchored-shadow expansion for all sufficiently large
   finite packets \(U\subset A\), then a good order-\(4\) deletion exists.
-* Warning 3.4d.20 gives a finite-window caution for that criterion:
+* Corollary 3.4d.20 splits those active pair packets into a singleton
+  unique-gate branch and a nonsingleton branch with two parallel retained
+  copies whose cross-shadows are trapped in one bounded active palette.
+* Warning 3.4d.21 gives a finite-window caution for the anchored-shadow
+  criterion:
   \(\{1,2,3,4,7\}\) covers \([8,16]\) by three sums but has a four-point
   packet whose anchored shadows through \(2\) all have size at most \(2\).
 * Warning 3.4e shows that large moving representation spikes do not by

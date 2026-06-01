@@ -24,6 +24,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
   as in Warning 3.4d.17.
 * bounded two-sum palettes shrink to active pair barriers containing the
   gate, as used in Corollary 3.4d.18.
+* active pair packets split into singleton unique-gate packets or
+  nonsingleton parallel-copy packets, as used in Corollary 3.4d.20.
 """
 
 from __future__ import annotations
@@ -325,6 +327,62 @@ def check_pair_packet_minimal_shrink(A: tuple[int, ...], D: tuple[int, ...]) -> 
     return checked
 
 
+def minimal_pair_barrier(
+    A: tuple[int, ...], D: tuple[int, ...], gate: int, u: int
+) -> tuple[int, ...] | None:
+    target = gate + u
+    for size in range(1, len(D) + 1):
+        for F in combinations(D, size):
+            F_set = set(F)
+            C = tuple(a for a in A if a not in F_set)
+            if not reps(C, 2, target):
+                return F
+    return None
+
+
+def check_pair_packet_split(A: tuple[int, ...], D: tuple[int, ...]) -> int:
+    D_set = set(D)
+    outside = tuple(a for a in A if a not in D_set)
+    A_set = set(A)
+    packets: dict[tuple[int, tuple[int, ...]], list[int]] = {}
+
+    for gate in D:
+        for u in outside:
+            target = gate + u
+            if reps(outside, 2, target):
+                continue
+            F = minimal_pair_barrier(A, D, gate, u)
+            assert F is not None
+            assert gate in F
+            packets.setdefault((gate, F), []).append(u)
+
+    checked = 0
+    for (gate, F), packet in packets.items():
+        F_set = set(F)
+        C = tuple(a for a in A if a not in F_set)
+        if len(F) == 1:
+            for u in packet:
+                all_reps = reps(A, 2, gate + u)
+                assert len(all_reps) == 1
+                assert set(all_reps[0]) == {gate, u}
+                assert not reps(C, 2, gate + u)
+                checked += 1
+            continue
+
+        for f in F:
+            if f == gate:
+                continue
+            parallel = [gate + u - f for u in packet]
+            assert all(v in A_set for v in parallel)
+            for v in parallel:
+                for u0 in packet:
+                    x = v + f - u0
+                    if x in A_set:
+                        assert x in F_set
+            checked += len(packet)
+    return checked
+
+
 def main() -> None:
     check_triple_shadow_not_pair_example()
     sets_checked = 0
@@ -337,6 +395,7 @@ def main() -> None:
     pair_barrier_reflection_checked = 0
     active_lower_shadow_checked = 0
     pair_packet_shrink_checked = 0
+    pair_packet_split_checked = 0
     universe = range(1, 10)
     for size in range(4, 8):
         for A_raw in combinations(universe, size):
@@ -353,6 +412,7 @@ def main() -> None:
                     pair_barrier_reflection_checked += check_pair_barrier_reflection(A, D)
                     active_lower_shadow_checked += check_active_lower_shadow(A, D)
                     pair_packet_shrink_checked += check_pair_packet_minimal_shrink(A, D)
+                    pair_packet_split_checked += check_pair_packet_split(A, D)
             for core_size in range(0, min(3, size) + 1):
                 for core in combinations(A, core_size):
                     lower_hypergraph_checked += check_lower_hypergraph_equivalence(A, core)
@@ -367,6 +427,7 @@ def main() -> None:
     print(f"pair_barrier_reflection_checked={pair_barrier_reflection_checked}")
     print(f"active_lower_shadow_checked={active_lower_shadow_checked}")
     print(f"pair_packet_shrink_checked={pair_packet_shrink_checked}")
+    print(f"pair_packet_split_checked={pair_packet_split_checked}")
 
 
 if __name__ == "__main__":

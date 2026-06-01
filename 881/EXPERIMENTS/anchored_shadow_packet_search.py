@@ -3,7 +3,7 @@
 
 This is a diagnostic for Corollary 3.4d.19.  It shows that local finite
 three-sum coverage does not by itself force anchored-shadow expansion.
-The default search reproduces Warning 3.4d.20.
+The default search reproduces Warning 3.4d.21.
 """
 
 from __future__ import annotations
