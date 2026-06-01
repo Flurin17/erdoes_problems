@@ -12327,13 +12327,77 @@ Thus every induced subgraph has a vertex of degree at most `P(omega-1)`, so
 `P(omega-1)+1` colors, and the largest color class is an independent set of
 the displayed order.  QED.
 
+**Lemma 28D.5e: Two-Ended Linear Full-Drop Bound.**  For every `P>=1` and
+`h>=2`,
+
+```text
+C_full(P,h) <= 4P(h-2)+2.
+```
+
+Proof.  Let `H` be a `P`-full-drop ordered graph on
+`v_1<...<v_n` with no clique or independent set of order `h`.  We prove
+
+```text
+n <= 4P(h-2)+1.
+```
+
+Fix an index `i`, and work in the suffix induced by
+`{v_i,v_{i+1},...,v_n}`.  Let `A_i` be the later neighbors of `v_i`.  For
+each `x in A_i`, every nonneighbor of `x` inside `A_i` is an element of
+
+```text
+(N(v_i)\N(x))\{v_i,x},
+```
+
+computed inside the suffix, and hence there are at most `P-1` such
+nonneighbors.  Thus the complement of `H[A_i]` has maximum degree at most
+`P-1`, so it is colorable with at most `P` colors.  A color class is a clique
+in `H[A_i]`; if such a clique had order `h-1`, adjoining `v_i` would give a
+clique of order `h`.  Hence
+
+```text
+|A_i| <= P(h-2).
+```
+
+Now work in the prefix induced by `{v_1,...,v_i}`.  Let `D_i` be the earlier
+nonneighbors of `v_i`.  For any earlier vertex `x`, its neighbors in `D_i`
+are contained in
+
+```text
+(N(x)\N(v_i))\{x,v_i},
+```
+
+computed inside the prefix.  Therefore every vertex of the prefix has at
+most `P-1` neighbors in `D_i`, and in particular `H[D_i]` has maximum degree
+at most `P-1`.  Greedy coloring gives an independent set in `H[D_i]` of size
+at least `|D_i|/P`; if such an independent set had order `h-1`, adjoining
+`v_i` would give an independent set of order `h`.  Therefore
+
+```text
+|D_i| <= P(h-2).
+```
+
+Count ordered pairs `v_i<v_j`.  Edge pairs are counted by the later-neighbor
+sets `A_i`, and nonedge pairs are counted by the earlier-nonneighbor sets
+`D_j`.  Hence
+
+```text
+binom(n,2) <= sum_i |A_i| + sum_i |D_i|
+            <= 2nP(h-2).
+```
+
+For `n>=1`, this gives `(n-1)/2 <= 2P(h-2)`, so
+`n<=4P(h-2)+1`.  Thus every `P`-full-drop ordered graph on at least
+`4P(h-2)+2` vertices contains a clique or independent set of order `h`.
+QED.
+
 **Corollary 28D.6: Global Reduction Through Full-Drop Ordering.**  For every
 `h>=3`, with `P=P_h`,
 
 ```text
 G(h) <= 2P(h-1) C_full(P,h)
-     <= 2P(h-1)(P(h-1)(h-2)+h)
-     <= 2h^3P^2.
+     <= 2P(h-1)(4P(h-2)+2)
+     <= 8h^2P^2.
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
@@ -12370,7 +12434,7 @@ degree-class size bound gives
 ```
 
 The first displayed inequality follows from the definition of `G(h)`, the
-second from Lemma 28D.5, and the final coarse bound from `h>=3` and `P>=1`.
+second from Lemma 28D.5e, and the final coarse bound from `h>=3` and `P>=1`.
 QED.
 
 **Definition 28D.6a: The Regular Full-Drop Parameter.**  For integers
@@ -13498,13 +13562,13 @@ subexponential scale as `G`.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 2 h^3 P_h^2.
+G(h) <= 8 h^2 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
 
 Proof.  This is the final inequality of Corollary 28D.6.  If
-`P_h=2^{o(h)}`, then the polynomial factor `2h^3` is also
+`P_h=2^{o(h)}`, then the polynomial factor `8h^2` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
@@ -14432,7 +14496,7 @@ quickly collapse back to the original problem inside one profile class.
 No complete proof yet.  The strongest current reduction in this workspace is
 
 ```text
-G(h) <= 2h^3 P_h^2,
+G(h) <= 8h^2 P_h^2,
 ```
 
 where `P_h` is the balanced marked-pair parameter from Lemma 28B.  Lemma 28G

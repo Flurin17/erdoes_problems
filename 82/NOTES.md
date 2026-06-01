@@ -3742,3 +3742,13 @@ source of growth beyond Ramsey.
   `reg(H)>=max(reg(H[C]),ceil(|D|/2))`.  The missing step for the conjectured
   `C_full^reg(2,h)<=2h+1` is to exploit the disjoint cross-neighborhoods from
   `D` into `C` to extend near-threshold witnesses in `C`.
+- 2026-06-01: Found a two-ended linear upper bound for the full-drop
+  homogeneous parameter.  In a `P`-full-drop ordered graph with no clique or
+  independent set of order `h`, every vertex has at most `P(h-2)` later
+  neighbors by the first-vertex argument in its suffix, and at most `P(h-2)`
+  earlier nonneighbors by the last-vertex argument in its prefix.  Counting
+  every ordered pair as either an edge of the first type or a nonedge of the
+  second gives `C_full(P,h)<=4P(h-2)+2`.  The global reduction improves from
+  `G(h)<=2h^3P_h^2` to `G(h)<=8h^2P_h^2`.  This is a real simplification of
+  the ordered reduction, but the subexponential bottleneck remains exactly
+  `P_h=2^{o(h)}`.
