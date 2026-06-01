@@ -41,6 +41,9 @@ test \(T\subset A\).
 Corollary 16.43 packages the bounded-rank normal form: over a
 certificate-dense finite test, all but a bounded number of rows must lie in
 that gate-shadow branch.
+Lemma 16.44 and Corollary 16.45 make this concrete for interval tests:
+every three-point subset of an interval has a \(k=3\) certificate, so only
+\(|F+F|+2|F|\) rows can stay in the row-dependent branch at bounded rank.
 
 ## Definitions
 

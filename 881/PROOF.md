@@ -21246,6 +21246,97 @@ counterexample must therefore make the gate-shadow packet move away from
 all dense old pieces of \(A\), use tests with large certificate-free
 subsets, or escape bounded rank/depth.
 
+### Lemma 16.44: Intervals have \(k=3\) certificate threshold three
+
+Let
+\[
+I=[a,L]\cap\mathbb N
+\]
+be a nonempty interval, and suppose \(A\) contains \(I\). Every subset
+\[
+V\subset I,\qquad |V|\ge3,
+\]
+contains a \(k=3\) certificate tuple
+\[
+e,y_1,y_2,y_3\in V,\qquad y_i\ne e,
+\]
+with
+\[
+y_1+y_2-e\in A,\qquad y_1+y_2+y_3-2e\in A. \tag{1}
+\]
+
+Proof. It is enough to prove the claim for a three-point subset
+\[
+\{a_0<b_0<c_0\}\subset V.
+\]
+Put
+\[
+d=b_0-a_0,\qquad h=c_0-b_0.
+\]
+Choose
+\[
+e=b_0,\qquad y_1=a_0,\qquad y_2=c_0.
+\]
+Then
+\[
+y_1+y_2-e=a_0+h\in[a_0,c_0]\subset I. \tag{2}
+\]
+If
+\[
+a_0+h-d\ge1,
+\]
+take \(y_3=a_0\). Then
+\[
+y_1+y_2+y_3-2e=a_0+h-d,
+\]
+and this value is at most \(a_0+h<c_0\), hence lies in \(I\).
+
+If instead
+\[
+a_0+h-d\le0,
+\]
+then \(d\ge a_0+h>h\). Since \(c_0=a_0+d+h\le L\), we get
+\[
+a_0+2h\le a_0+d+h=c_0,
+\]
+and in particular
+\[
+a_0+2h\le c_0\le L.
+\]
+Take \(y_3=c_0\). Then
+\[
+y_1+y_2+y_3-2e=a_0+2h\in I.
+\]
+In both cases (1) holds. \(\square\)
+
+### Corollary 16.45: Interval tests force bounded-rank gate shadows
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Let \(T_0\subset A\) be an interval.
+Fix \(r\ge1\). Then there is \(L_0\) such that the conclusion of Corollary
+16.43 holds for \(T_0\) with
+\[
+s=3,\qquad R_F=|F+F|+2|F|. \tag{1}
+\]
+In particular, if \(|F|\le r\), then all but at most
+\[
+{r(r+1)\over2}+2r \tag{2}
+\]
+rows of \(U\) lie in the finite-palette gate-shadow branch.
+
+Proof. Lemma 16.44 says that every three-point subset of \(T_0\) contains
+the \(k=3\) certificate tuple required by Corollary 16.38. Apply Corollary
+16.43 with \(s=3\). Since
+\[
+|F+F|\le {|F|(|F|+1)\over2},
+\]
+the uniform bound (2) follows from (1). \(\square\)
+
+Thus interval row tests leave very little room for bounded-rank
+row-dependent debt. A bounded-rank nonsingleton obstruction over an
+interval must put almost every tested row into the finite-palette gate
+branch, where Corollary 16.42 forbids aligned copies of the same interval.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22405,6 +22496,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   certificate-dense finite test, every bounded-rank packet beyond the
   finite row-dependent allowance is forced into the gate-shadow branch and
   inherits the anchored-copy bound.
+* Lemma 16.44 proves that intervals are certificate-dense at the strongest
+  useful finite scale: every three-point subset of an interval contains a
+  \(k=3\) certificate tuple. Corollary 16.45 therefore specializes the
+  bounded-rank normal form to interval tests, leaving only
+  \(|F+F|+2|F|\) row-dependent exceptions before the gate-shadow branch
+  takes over.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
