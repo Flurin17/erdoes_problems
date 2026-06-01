@@ -65,6 +65,15 @@ def max_homogeneous(adj: list[int], pc: Precomp) -> tuple[int, str, tuple[int, .
     return 1, "single", (0,)
 
 
+def max_regular(adj: list[int], pc: Precomp) -> tuple[int, int, tuple[int, ...]]:
+    for size, entries in pc.subsets_by_size:
+        for subset, vertices in entries:
+            degree = (adj[vertices[0]] & subset).bit_count()
+            if all((adj[v] & subset).bit_count() == degree for v in vertices[1:]):
+                return size, degree, vertices
+    return 1, 0, (0,)
+
+
 def clique_ranks(adj: list[int], n: int) -> list[int]:
     ranks = [1] * n
     for v in range(n):
@@ -145,6 +154,22 @@ def creates_homogeneous(
     return False
 
 
+def creates_regular(adj: list[int], k: int, regular_order: int, column: int) -> bool:
+    for order in range(regular_order, k + 2):
+        for previous in combinations(range(k), order - 1):
+            subset = sum(1 << v for v in previous)
+            new_degree = (column & subset).bit_count()
+            ok = True
+            for v in previous:
+                degree = (adj[v] & subset).bit_count() + ((column >> v) & 1)
+                if degree != new_degree:
+                    ok = False
+                    break
+            if ok:
+                return True
+    return False
+
+
 def legal_new_column(adj: list[int], k: int, column: int, p: int) -> bool:
     for j in range(k):
         earlier_neighbors_of_j = adj[j] & ((1 << j) - 1)
@@ -156,7 +181,8 @@ def legal_new_column(adj: list[int], k: int, column: int, p: int) -> bool:
 def search_dfs(
     n: int,
     p: int,
-    homogeneous_order: int,
+    forbidden_order: int,
+    forbidden_kind: str,
     adj: list[int],
     columns: list[int],
     nodes: list[int],
@@ -174,9 +200,13 @@ def search_dfs(
     k = len(columns)
     candidates = []
     for column in range(1 << k):
-        if legal_new_column(adj, k, column, p) and not creates_homogeneous(
-            adj, k, column, homogeneous_order
-        ):
+        if not legal_new_column(adj, k, column, p):
+            continue
+        if forbidden_kind == "homogeneous":
+            forbidden = creates_homogeneous(adj, k, column, forbidden_order)
+        else:
+            forbidden = creates_regular(adj, k, forbidden_order, column)
+        if not forbidden:
             candidates.append(column)
     candidates.sort(key=lambda x: (abs(x.bit_count() - k / 2), x))
 
@@ -189,7 +219,8 @@ def search_dfs(
         result = search_dfs(
             n,
             p,
-            homogeneous_order,
+            forbidden_order,
+            forbidden_kind,
             next_adj,
             columns + [column],
             nodes,
@@ -253,6 +284,7 @@ def fixed(n: int, mask: int) -> None:
     pc = precompute(n)
     adj = adjacency(n, mask, pc)
     homogeneous, kind, vertices = max_homogeneous(adj, pc)
+    regular, regular_degree, regular_vertices = max_regular(adj, pc)
     clique = clique_ranks(adj, n)
     independent = independent_ranks(adj, n)
     print(f"n={n}")
@@ -261,18 +293,31 @@ def fixed(n: int, mask: int) -> None:
     print(f"max_homogeneous={homogeneous}")
     print(f"homogeneous_kind={kind}")
     print("homogeneous_vertices=" + ",".join(map(str, vertices)))
+    print(f"max_regular={regular}")
+    print(f"regular_degree={regular_degree}")
+    print("regular_vertices=" + ",".join(map(str, regular_vertices)))
     print("clique_ranks=" + ",".join(map(str, clique)))
     print(f"clique_rank_histogram={histogram(clique)}")
     print("independent_ranks=" + ",".join(map(str, independent)))
     print(f"independent_rank_histogram={histogram(independent)}")
 
 
-def search(n: int, p: int, homogeneous_order: int, max_nodes: int, progress: int) -> None:
+def search(
+    n: int,
+    p: int,
+    forbidden_order: int,
+    forbidden_kind: str,
+    max_nodes: int,
+    progress: int,
+) -> None:
     nodes = [0]
-    result = search_dfs(n, p, homogeneous_order, [], [], nodes, max_nodes, progress)
+    result = search_dfs(
+        n, p, forbidden_order, forbidden_kind, [], [], nodes, max_nodes, progress
+    )
     print(f"n={n}")
     print(f"P={p}")
-    print(f"homogeneous_order={homogeneous_order}")
+    print(f"forbidden_kind={forbidden_kind}")
+    print(f"forbidden_order={forbidden_order}")
     print(f"nodes={nodes[0]}")
     print(f"max_nodes={max_nodes}")
     print(f"result={result}")
@@ -280,6 +325,7 @@ def search(n: int, p: int, homogeneous_order: int, max_nodes: int, progress: int
         pc = precompute(n)
         adj = columns_to_adjacency(result)
         homogeneous, kind, vertices = max_homogeneous(adj, pc)
+        regular, regular_degree, regular_vertices = max_regular(adj, pc)
         clique = clique_ranks(adj, n)
         independent = independent_ranks(adj, n)
         print("columns=" + ",".join(map(str, result)))
@@ -288,6 +334,9 @@ def search(n: int, p: int, homogeneous_order: int, max_nodes: int, progress: int
         print(f"max_homogeneous={homogeneous}")
         print(f"homogeneous_kind={kind}")
         print("homogeneous_vertices=" + ",".join(map(str, vertices)))
+        print(f"max_regular={regular}")
+        print(f"regular_degree={regular_degree}")
+        print("regular_vertices=" + ",".join(map(str, regular_vertices)))
         print("clique_ranks=" + ",".join(map(str, clique)))
         print(f"clique_rank_histogram={histogram(clique)}")
         print("independent_ranks=" + ",".join(map(str, independent)))
@@ -299,6 +348,7 @@ def main() -> None:
     parser.add_argument("n", type=int)
     parser.add_argument("--p", type=int, default=1)
     parser.add_argument("--search-h", type=int)
+    parser.add_argument("--search-regular-h", type=int)
     parser.add_argument("--mask", type=int)
     parser.add_argument("--max-nodes", type=int, default=1_000_000)
     parser.add_argument("--progress", type=int, default=0)
@@ -306,8 +356,20 @@ def main() -> None:
     if args.p < 1:
         raise SystemExit("--p must be positive")
 
+    if args.search_h is not None and args.search_regular_h is not None:
+        raise SystemExit("use at most one of --search-h and --search-regular-h")
+
     if args.search_h is not None:
-        search(args.n, args.p, args.search_h, args.max_nodes, args.progress)
+        search(args.n, args.p, args.search_h, "homogeneous", args.max_nodes, args.progress)
+    elif args.search_regular_h is not None:
+        search(
+            args.n,
+            args.p,
+            args.search_regular_h,
+            "regular",
+            args.max_nodes,
+            args.progress,
+        )
     elif args.mask is None:
         exact(args.n, args.p, args.progress)
     else:

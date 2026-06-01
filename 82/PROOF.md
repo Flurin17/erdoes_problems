@@ -9917,6 +9917,24 @@ search certificate proves the stronger finite lower calibration
 C_drop(2,4) > 12.
 ```
 
+The same fixed-mask inspection also reports a regular induced subgraph of
+order `6` in this ordered graph.  Thus this homogeneous column-drop
+obstruction is not a regular obstruction for the representative step in the
+global problem.  To separate these notions, `column_drop_census.py` has a
+regular-aware search mode:
+
+```text
+python3 82/EXPERIMENTS/column_drop_census.py 10 --p 1 --search-regular-h 5
+python3 82/EXPERIMENTS/column_drop_census.py 12 --p 1 --search-regular-h 6
+python3 82/EXPERIMENTS/column_drop_census.py 13 --p 2 --search-regular-h 5
+```
+
+These produce ordered graphs with maximum column drop respectively `0,0,1`
+and largest regular induced orders `4,5,4`.  The data suggest that replacing
+homogeneous extraction by regular extraction may improve constants or small
+parameters in the degree-bucket representative argument, but it does not yet
+give a theorem-level improvement over Proposition 28F.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 

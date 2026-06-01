@@ -2988,3 +2988,13 @@ source of growth beyond Ramsey.
   largest `16`-modular witness `9` and `min_colors=4` with part sizes
   `9,6,5,6`.  Thus these dense two-degree probes calibrate the lower bound
   at four parts but do not currently suggest a five-part obstruction.
+- 2026-06-01: Extended `column_drop_census.py` to report maximum regular
+  induced order and to search ordered column-drop graphs with no regular
+  induced subgraph above a threshold (`--search-regular-h`).  The old
+  `C_drop(2,4)>12` homogeneous certificate actually has a regular induced
+  subgraph of order `6`, so homogeneous column-drop obstructions are not
+  automatically regular obstructions.  Regular-aware searches produced
+  maximum-column-drop `0` examples on `10` and `12` vertices with largest
+  regular orders `4` and `5`, and a maximum-column-drop `1` example on `13`
+  vertices with largest regular order `4`.  This is only a calibration: no
+  improved global reduction beyond Proposition 28F is proved.
