@@ -26615,6 +26615,99 @@ produce unbounded witnesses surviving all shifted repairs (2). That is not
 a separate shortcut; it is another form of the unresolved collective
 finite-barrier construction in Propositions 13.1b-general and 13.1e.
 
+### Proposition 17.1: Finite accelerators require shifted finite barriers
+
+Let \(h=k+1\). Let
+\[
+A=M\sqcup F
+\]
+where \(F\) is finite. Suppose that no infinite deletion
+\[
+B\subset M
+\]
+leaves
+\[
+A\setminus B=(M\setminus B)\cup F
+\]
+as an asymptotic basis of order \(h\). Then for every infinite
+\[
+B\subset M
+\]
+and every \(L\), there are an integer \(w>L\) and a finite set
+\[
+E\subset B
+\]
+such that, for every \(r=0,1,\ldots,h\) and every accelerator sum
+\[
+\sigma\in rF,
+\]
+one has
+\[
+w-\sigma\notin (h-r)(M\setminus E). \tag{1}
+\]
+Equivalently,
+\[
+w\notin\bigcup_{r=0}^h\bigl(rF+(h-r)(M\setminus E)\bigr)
+=h\bigl((M\setminus E)\cup F\bigr). \tag{2}
+\]
+
+Conversely, if the conclusion above holds for every infinite
+\(B\subset M\) and every \(L\), then no infinite \(B\subset M\) leaves
+\((M\setminus B)\cup F\) as an order-\(h\) asymptotic basis.
+
+Proof. Fix an infinite \(B\subset M\) and \(L\). By hypothesis,
+\[
+(M\setminus B)\cup F
+\]
+is not an order-\(h\) basis, so there is \(w>L\) with
+\[
+w\notin h((M\setminus B)\cup F). \tag{3}
+\]
+Since \(F\) is finite, the left side of (3) expands as
+\[
+h((M\setminus B)\cup F)
+=\bigcup_{r=0}^h\bigl(rF+(h-r)(M\setminus B)\bigr). \tag{4}
+\]
+Thus, for every \(r\) and \(\sigma\in rF\),
+\[
+w-\sigma\notin (h-r)(M\setminus B). \tag{5}
+\]
+Let
+\[
+E=B\cap[1,w].
+\]
+If \(w-\sigma\le0\), then (1) is automatic because all summands are
+positive. If \(w-\sigma>0\), every positive summand in a representation of
+\(w-\sigma\) is at most \(w-\sigma\le w\). Hence every representation from
+\(M\) of \(w-\sigma\) that avoids \(E\) also avoids all of \(B\). Equation
+(5) gives (1), and (2) is just the finite expansion again.
+
+For the converse, suppose some infinite \(B\subset M\) made
+\((M\setminus B)\cup F\) an order-\(h\) basis with threshold \(N\). Choose
+\(L>N\). The asserted shifted finite barrier gives \(E\subset B\) and
+\[
+w>L
+\]
+with
+\[
+w\notin h((M\setminus E)\cup F).
+\]
+But
+\[
+(M\setminus B)\cup F\subseteq (M\setminus E)\cup F,
+\]
+so the larger set \((M\setminus E)\cup F\) contains the order-\(h\) basis
+\((M\setminus B)\cup F\), and must represent every \(w>N\). This
+contradiction proves the converse. \(\square\)
+
+Thus any finite-accelerator negative construction must be robust not only
+against deleting infinitely many elements of \(M\), but against every
+finite list of accelerator shifts at once. In finite-stage language, the
+deleted set \(E\) must be a simultaneous transversal for the shifted
+representation hypergraphs of all \(w-\sigma\) with
+\(\sigma\in rF\), \(0\le r\le h\). This is exactly the extra condition
+missing from ordinary minimal order-\(h\) bases.
+
 ## Dependency Graph
 
 * Reduction 0 shows that the stated infinite-deletion minimality hypothesis
@@ -28013,3 +28106,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
   barrier problem.
+* Proposition 17.1 makes that warning exact: a finite-accelerator
+  counterexample is equivalent, on the non-accelerator component, to
+  unbounded finite barriers that simultaneously hit every shifted
+  representation hypergraph \(w-\sigma\) for all accelerator sums
+  \(\sigma\in rF\).

@@ -1214,6 +1214,17 @@ cannot give modularly protected order-\((k+1)\) private witnesses. Any such
 counterexample would have to rely on size/uniqueness constraints, not merely
 residue classes.
 
+Proposition 17.1 in `PROOF.md` records the exact infinite version of this
+warning. If \(A=M\sqcup F\) with finite accelerator set \(F\), then a
+finite-accelerator counterexample requires the non-accelerator component
+\(M\) to produce unbounded finite barriers that simultaneously block every
+shifted target
+\[
+w-\sigma,\qquad \sigma\in rF,\quad 0\le r\le k+1.
+\]
+Ordinary minimality of \(M\) at order \(k+1\) only blocks the unshifted
+case \(\sigma=0\), so it is not enough.
+
 ## Failed Counterexample Route: direct-sum digits
 
 The formal direct-sum version of a Raikov-Stöhr construction also fails as a
