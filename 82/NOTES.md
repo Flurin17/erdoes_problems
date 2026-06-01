@@ -4110,6 +4110,16 @@ source of growth beyond Ramsey.
   corresponding worst count is `39`, all with mass `14`.  Broader connected
   local searches found no defect-two example: an `n=14` search reached
   `mu=14`, and an `n=16` search only reached `mu=21`.
+- 2026-06-01: Added a `--vertex-connectivity` filter to
+  `regular_spectrum_mass.py` and tested the next structural refinement.  The
+  sharp connected defect graph `429588619789184147001379` has no cut vertex
+  but has a two-vertex cut `(2,5)`; the thirteen-vertex predecessor
+  `1584140989738554425379` has the same first two-cut.  Exact labelled
+  enumeration of `3`-connected graphs on `7` vertices gives minimum `mu=9`,
+  and a `3`-connected local search at `n=14` found minimum `mu=16`.  This
+  suggests a possible decomposition route: prove `mu(G)>=|G|` for
+  `3`-connected graphs, and prove that gluing across two-vertex cuts loses
+  at most one unit per connected graph rather than per block.
 - 2026-06-01: Isolated the connected defect-extension induction.  It is enough
   to prove: if `H` is connected and `mu(H)=|H|-1`, then every connected
   one-vertex extension `G` of `H` has `mu(G)>=|H|`.  The proof deletes a

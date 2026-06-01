@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import random
 from collections import Counter
+from itertools import combinations
 from time import monotonic
 
 import column_drop_census as cdc
@@ -52,7 +53,68 @@ def min_degree_at_least(adj: list[int], threshold: int) -> bool:
     return all(row.bit_count() >= threshold for row in adj)
 
 
-def exact(n: int, progress: int, connected_only: bool, min_degree: int) -> None:
+def connected_after_deleting(adj: list[int], deleted: tuple[int, ...]) -> bool:
+    n = len(adj)
+    deleted_mask = 0
+    for v in deleted:
+        deleted_mask |= 1 << v
+    remaining = ((1 << n) - 1) & ~deleted_mask
+    if remaining == 0 or remaining & (remaining - 1) == 0:
+        return True
+    start_bit = remaining & -remaining
+    seen = start_bit
+    stack = [start_bit.bit_length() - 1]
+    while stack:
+        v = stack.pop()
+        unseen_neighbors = adj[v] & remaining & ~seen
+        while unseen_neighbors:
+            bit = unseen_neighbors & -unseen_neighbors
+            w = bit.bit_length() - 1
+            seen |= bit
+            stack.append(w)
+            unseen_neighbors ^= bit
+    return seen == remaining
+
+
+def vertex_connectivity_at_least(adj: list[int], threshold: int) -> bool:
+    if threshold <= 1:
+        return is_connected(adj)
+    n = len(adj)
+    if n <= threshold:
+        return False
+    if min(row.bit_count() for row in adj) < threshold:
+        return False
+    for size in range(threshold):
+        for deleted in combinations(range(n), size):
+            if not connected_after_deleting(adj, deleted):
+                return False
+    return True
+
+
+def passes_filters(
+    adj: list[int],
+    connected_only: bool,
+    min_degree: int,
+    vertex_connectivity: int,
+) -> bool:
+    if connected_only and not is_connected(adj):
+        return False
+    if min_degree and not min_degree_at_least(adj, min_degree):
+        return False
+    if vertex_connectivity and not vertex_connectivity_at_least(
+        adj, vertex_connectivity
+    ):
+        return False
+    return True
+
+
+def exact(
+    n: int,
+    progress: int,
+    connected_only: bool,
+    min_degree: int,
+    vertex_connectivity: int,
+) -> None:
     pc = cdc.precompute(n)
     total = 1 << len(pc.edges)
     histogram: Counter[int] = Counter()
@@ -63,9 +125,7 @@ def exact(n: int, progress: int, connected_only: bool, min_degree: int) -> None:
 
     for mask in range(total):
         adj = cdc.adjacency(n, mask, pc)
-        if connected_only and not is_connected(adj):
-            continue
-        if min_degree and not min_degree_at_least(adj, min_degree):
+        if not passes_filters(adj, connected_only, min_degree, vertex_connectivity):
             continue
         checked += 1
         mass, by_degree = spectrum_mass(adj, pc)
@@ -86,6 +146,7 @@ def exact(n: int, progress: int, connected_only: bool, min_degree: int) -> None:
     print(f"labelled_graphs={total}")
     print(f"connected_only={connected_only}")
     print(f"min_degree_filter={min_degree}")
+    print(f"vertex_connectivity_filter={vertex_connectivity}")
     print(f"checked_graphs={checked}")
     print(f"min_spectrum_mass={best}")
     print(f"violates_mu_ge_n={best < n}")
@@ -94,7 +155,14 @@ def exact(n: int, progress: int, connected_only: bool, min_degree: int) -> None:
         print(f"example mask={mask} by_degree={by_degree}")
 
 
-def sample(n: int, trials: int, seed: int, connected_only: bool, min_degree: int) -> None:
+def sample(
+    n: int,
+    trials: int,
+    seed: int,
+    connected_only: bool,
+    min_degree: int,
+    vertex_connectivity: int,
+) -> None:
     rng = random.Random(seed)
     pc = cdc.precompute(n)
     bits = len(pc.edges)
@@ -107,9 +175,7 @@ def sample(n: int, trials: int, seed: int, connected_only: bool, min_degree: int
         attempts += 1
         mask = rng.getrandbits(bits)
         adj = cdc.adjacency(n, mask, pc)
-        if connected_only and not is_connected(adj):
-            continue
-        if min_degree and not min_degree_at_least(adj, min_degree):
+        if not passes_filters(adj, connected_only, min_degree, vertex_connectivity):
             continue
         mass, by_degree = spectrum_mass(adj, pc)
         histogram[mass] += 1
@@ -122,6 +188,7 @@ def sample(n: int, trials: int, seed: int, connected_only: bool, min_degree: int
     print(f"attempts={attempts}")
     print(f"connected_only={connected_only}")
     print(f"min_degree_filter={min_degree}")
+    print(f"vertex_connectivity_filter={vertex_connectivity}")
     print(f"min_seen={best}")
     print(f"violates_mu_ge_n={best < n}")
     print(f"histogram={dict(sorted(histogram.items()))}")
@@ -138,6 +205,7 @@ def local_search(
     connected_only: bool,
     start_mask: int | None,
     min_degree: int,
+    vertex_connectivity: int,
 ) -> None:
     rng = random.Random(seed)
     pc = cdc.precompute(n)
@@ -151,10 +219,10 @@ def local_search(
         else:
             mask = rng.getrandbits(bits)
         adj = cdc.adjacency(n, mask, pc)
-        if connected_only or min_degree:
+        if connected_only or min_degree or vertex_connectivity:
             attempts = 0
-            while (connected_only and not is_connected(adj)) or (
-                min_degree and not min_degree_at_least(adj, min_degree)
+            while not passes_filters(
+                adj, connected_only, min_degree, vertex_connectivity
             ):
                 if restart == 0 and start_mask is not None:
                     raise ValueError("start mask does not satisfy filters")
@@ -177,9 +245,9 @@ def local_search(
             bit = rng.randrange(bits)
             candidate = mask ^ (1 << bit)
             candidate_adj = cdc.adjacency(n, candidate, pc)
-            if connected_only and not is_connected(candidate_adj):
-                continue
-            if min_degree and not min_degree_at_least(candidate_adj, min_degree):
+            if not passes_filters(
+                candidate_adj, connected_only, min_degree, vertex_connectivity
+            ):
                 continue
             candidate_value, candidate_by_degree = spectrum_mass(candidate_adj, pc)
             if candidate_value <= value or rng.random() < temperature:
@@ -204,6 +272,7 @@ def local_search(
     print(f"restarts={restarts}")
     print(f"connected_only={connected_only}")
     print(f"min_degree_filter={min_degree}")
+    print(f"vertex_connectivity_filter={vertex_connectivity}")
     print(f"min_seen={global_best}")
     print(f"violates_mu_ge_n={global_best < n}")
     if global_example is not None:
@@ -232,6 +301,7 @@ def main() -> None:
     parser.add_argument("--restarts", type=int, default=1)
     parser.add_argument("--connected-only", action="store_true")
     parser.add_argument("--min-degree", type=int, default=0)
+    parser.add_argument("--vertex-connectivity", type=int, default=0)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--progress", type=int, default=0)
     parser.add_argument("--start-mask", type=int)
@@ -248,11 +318,25 @@ def main() -> None:
             args.connected_only,
             args.start_mask,
             args.min_degree,
+            args.vertex_connectivity,
         )
     elif args.sample:
-        sample(args.n, args.sample, args.seed, args.connected_only, args.min_degree)
+        sample(
+            args.n,
+            args.sample,
+            args.seed,
+            args.connected_only,
+            args.min_degree,
+            args.vertex_connectivity,
+        )
     else:
-        exact(args.n, args.progress, args.connected_only, args.min_degree)
+        exact(
+            args.n,
+            args.progress,
+            args.connected_only,
+            args.min_degree,
+            args.vertex_connectivity,
+        )
 
 
 if __name__ == "__main__":

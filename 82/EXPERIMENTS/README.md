@@ -8,7 +8,8 @@ Computational checks and generated data for Erdos Problem 82.
   verifier for larger individual graphs, avoiding all-subset precomputation.
 - `regular_spectrum_mass.py`: exact, sample, and local-search diagnostics for
   the spectrum-mass parameter `mu(G)=sum_d s_d(G)`, where `s_d` is the largest
-  induced `d`-regular order.
+  induced `d`-regular order.  It supports connected, minimum-degree, and
+  vertex-connectivity filters for testing structural reductions.
 - `spectrum_power_search.py`: exact and local-search diagnostics for power
   sums `sum_d s_d(G)^p`, especially the square-spectrum functional
   `sum_d s_d(G)^2` used in the current polynomial-bound conditional route.
