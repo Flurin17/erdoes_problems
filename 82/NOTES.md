@@ -2320,3 +2320,9 @@ source of growth beyond Ramsey.
   `complement(F)`, because the two sides induce exactly those graphs.  Thus
   the template is a calibration for bounded-spread methods, not by itself a
   new lower-bound construction beyond the original problem on a side.
+- 2026-06-01: Added profile histograms to `regular_witness.py` and
+  `profile_absorption_search.py`, and recorded Lemma 31.  In any split
+  `D`-regular witness, all internal/cross profiles lie on `a+b=D`, so there
+  are at most `D+1` profile classes per side and one class has size at least
+  a `1/(D+1)` fraction of that side.  This is only a compression: equal
+  profile relative to the whole side does not make the profile class regular.

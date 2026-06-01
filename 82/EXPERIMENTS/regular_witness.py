@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from itertools import combinations
 
 import regular_induced as ri
@@ -86,6 +87,20 @@ def main() -> None:
                 for v in left
             )
         )
+        left_hist = Counter(
+            (
+                degree_to_set(args.mask, v, left, index),
+                degree_to_set(args.mask, v, right, index),
+            )
+            for v in left
+        )
+        print(
+            "left_profile_hist="
+            + ",".join(
+                f"{internal}+{cross}:{count}"
+                for (internal, cross), count in sorted(left_hist.items())
+            )
+        )
         print(
             "right_profile="
             + ",".join(
@@ -93,6 +108,20 @@ def main() -> None:
                 f"+{degree_to_set(args.mask, v, left, index)}"
                 f"={degree_to_set(args.mask, v, vertices, index)}"
                 for v in right
+            )
+        )
+        right_hist = Counter(
+            (
+                degree_to_set(args.mask, v, right, index),
+                degree_to_set(args.mask, v, left, index),
+            )
+            for v in right
+        )
+        print(
+            "right_profile_hist="
+            + ",".join(
+                f"{internal}+{cross}:{count}"
+                for (internal, cross), count in sorted(right_hist.items())
             )
         )
 

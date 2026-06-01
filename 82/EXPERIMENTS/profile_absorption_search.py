@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from itertools import combinations
 
 import regular_induced as ri
@@ -111,6 +112,16 @@ def search(graph_mask: int, n: int, split: int, min_each_side: int) -> None:
     print("right_vertices=" + ",".join(map(str, vertices_from_mask(y_mask, n))))
     print("left_profile=" + ",".join(x_profile))
     print("right_profile=" + ",".join(y_profile))
+    left_hist = Counter(item.split(":", 1)[1].rsplit("=", 1)[0] for item in x_profile)
+    right_hist = Counter(item.split(":", 1)[1].rsplit("=", 1)[0] for item in y_profile)
+    print(
+        "left_profile_hist="
+        + ",".join(f"{profile}:{count}" for profile, count in sorted(left_hist.items()))
+    )
+    print(
+        "right_profile_hist="
+        + ",".join(f"{profile}:{count}" for profile, count in sorted(right_hist.items()))
+    )
     print(f"verified_regular={ri.is_regular_on(graph_mask, union_mask, pc) if size else False}")
     print(f"global_max_regular_order={ri.max_regular_order(graph_mask, pc)}")
 

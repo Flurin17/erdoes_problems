@@ -7442,6 +7442,36 @@ varying residual demands, so a proof must either find such demand-realizing
 cross subgraphs efficiently or prove that a counterexample has a large
 regular witness elsewhere.
 
+## Lemma 31: Profile-Class Pigeonhole In A Split Witness
+
+Let `G[X union Y]` be `D`-regular.  For each `x in X`, record its profile
+
+```text
+p(x)=(deg_{G[X]}(x), |N(x) cap Y|),
+```
+
+and define profiles on `Y` analogously.  Then every profile lies on the line
+
+```text
+a+b=D.
+```
+
+Consequently there are at most `D+1` possible profiles on each side.  In
+particular, `X` contains a subset of size at least `|X|/(D+1)` all of whose
+vertices have the same internal degree into `X` and the same cross-degree into
+`Y`; the same holds for `Y`.
+
+Proof.  The equation `a+b=D` is exactly Lemma 29.  Since both entries are
+nonnegative integers, there are at most `D+1` possibilities.  The pigeonhole
+principle gives the final assertion.  QED.
+
+This is a weak but useful compression of profile absorption.  If a large
+regular witness has small degree `D`, then one side contains a large
+single-profile class.  The difficulty is that equal total internal degree
+into `X` is weaker than regularity inside the profile class itself, so this
+does not by itself reduce profile absorption to the pair-template or
+trace-class arguments.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an
