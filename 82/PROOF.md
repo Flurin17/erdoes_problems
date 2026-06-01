@@ -12050,6 +12050,50 @@ Thus `d` is either `2omega-2` or `2omega-3`.  In the first case apply
 Lemma 28D.5b.4 with `s=omega-1`; in the second case apply Lemma 28D.5b.5
 with the same value of `s`.  QED.
 
+**Lemma 28D.5b.7: First-Neighborhood Part Covering At `P=2`.**  Let `H` be
+an ordered graph satisfying the `P=2` full-drop condition, let `a` be its
+first vertex, and put
+
+```text
+A=N(a),        B=V(H)\({a} union A),        omega=omega(H).
+```
+
+Let `P_1,...,P_r` be the parts of `A` induced by the connected components of
+`complement(H[A])`; each part has size `1` or `2`, and `H[A]` is complete
+multipartite with these parts.  If `T subset B` is a clique of order `t`, and
+
+```text
+M_T={x in A : x is nonadjacent to some vertex of T},
+```
+
+then:
+
+1. `|M_T|<=t`;
+2. `M_T` contains all vertices of at least `r+t-omega` of the parts
+   `P_i` (with this assertion void when `r+t<=omega`).
+
+Proof.  The part decomposition is just the statement that the complement of
+`H[A]` has maximum degree at most `1`, proved in Lemma 28D.5.  For every
+`b in B`, the full-drop condition applied to `a<b` gives `|A\N(b)|<=1`;
+therefore the union of the missed sets over the `t` vertices of `T` has size
+at most `t`.  This proves (1).
+
+Let `C=A\M_T` be the common neighborhood of `T` inside `A`.  A clique in
+`H[C]` is obtained by choosing one vertex from every part `P_i` that
+intersects `C`, because all edges between different parts are present.  If
+`M_T` fully contains fewer than `r+t-omega` parts, then `C` intersects more
+than `omega-t` parts, so `C` contains a clique of order greater than
+`omega-t`.  Together with the clique `T`, this would give a clique in `H` of
+order greater than `omega`, a contradiction.  Thus `M_T` fully contains at
+least `r+t-omega` parts.  QED.
+
+This lemma isolates the remaining obstruction in the `P=2` full-drop
+`alpha+omega` problem.  When `r=omega-1`, taking `t=2` already forces every
+edge in `B` to miss both endpoints of one size-two part; this is the bipartite
+mechanism in Lemma 28D.5b.4.  When `r<=omega-2`, edges in `B` may be
+unconstrained by the first neighborhood, and a different source of one extra
+independent vertex is needed to close the induction.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose
@@ -12310,6 +12354,31 @@ first degree `3,4,5,6`, while at `n=9` the only tight `omega=4`,
 `alpha=2` bucket found by the exact enumeration has first degree `6`.  This
 suggests that the next fixed-clique case after Lemma 28D.5b.3 must handle
 large first neighborhoods rather than the low-degree induction cases.
+
+The script `EXPERIMENTS/full_drop_p2_gap_audit.py` audits the complementary
+question after Lemma 28D.5b.3 and Corollary 28D.5b.6: among graphs not already
+covered by `omega<=3` or by high first degree, how far can the simple
+induction on the nonneighbors of the first vertex fall short?  Exact runs
+
+```text
+python3 82/EXPERIMENTS/full_drop_p2_gap_audit.py 8
+python3 82/EXPERIMENTS/full_drop_p2_gap_audit.py 9 --progress 200000
+```
+
+again find no violation of
+
+```text
+alpha(H)+omega(H) >= ceil((|V(H)|+3)/2).
+```
+
+The theorem-level lower bound obtained by applying only the conjectured
+inequality to the first-vertex nonneighbor side is short by at most one in
+both exact audits (`max_induction_gap=1`).  However, using the actual
+`alpha` of that nonneighbor side closes the gap in all enumerated cases:
+`max_actual_gap=0` at `n=8` and `max_actual_gap=-1` at `n=9`.  This suggests
+that a full proof of the `P=2` alpha-plus-omega conjecture should show that
+the first-vertex nonneighbor side cannot itself be extremal in precisely the
+cases where the naive induction is one short.
 
 This is only finite calibration, but it supports the possibility that the
 current quadratic upper bound for `C_full(2,h)` is far from sharp.

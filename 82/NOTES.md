@@ -3585,3 +3585,20 @@ source of growth beyond Ramsey.
   `alpha+omega>=ceil((n+3)/2)` bound holds.  The unresolved `P=2` cases are
   therefore those where each available first vertex falls at least two below
   the extremal degree allowed by its clique number.
+- 2026-06-01: Added `full_drop_p2_gap_audit.py` to quantify the remaining
+  `P=2` induction gap.  Exact audits at `n=8,9` find no violations of
+  `alpha+omega>=ceil((n+3)/2)`.  The theorem-level induction on the
+  first-vertex nonneighbor side can be short by at most one in these cases,
+  while the actual nonneighbor side has enough independence to close the
+  bound (`max_actual_gap=0` at `n=8`, `-1` at `n=9`).  This suggests the next
+  target: prove that the nonneighbor side cannot be simultaneously extremal
+  when it is large enough to create the one-unit induction deficit.
+- 2026-06-01: Extracted a general first-neighborhood part-covering lemma for
+  `P=2`.  If the first neighborhood has complement-matching parts
+  `P_1,...,P_r` and `T` is a clique of order `t` among nonneighbors of the
+  first vertex, then the vertices of the first neighborhood missed by `T`
+  have size at most `t` but must fully cover at least `r+t-omega` parts.
+  This is the common mechanism behind the maximal even/odd first-neighborhood
+  lemmas.  It also explains why the low-degree residual cases are harder:
+  when `r<=omega-2`, single edges in the nonneighbor side need not be
+  constrained by the first neighborhood.
