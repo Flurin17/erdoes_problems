@@ -7070,6 +7070,62 @@ palette, and the retained rows avoid any prescribed finite row core. The
 remaining obstruction must therefore recur only through moving finite tests
 or through parameters that move cofinally.
 
+### Corollary 8.5a.7q: Forced private packets avoid finite mirror cores
+
+Work in the remaining \(k=2\) counterexample case. Let
+\[
+E_{\rm del},E_{\rm row},E_{\rm mir},P\subset A
+\]
+be finite, let
+\[
+H\subset\mathbb Z\setminus\{0\}
+\]
+be finite, and let \(M,L_0\) be given. Then the data in Corollary
+8.5a.7f.1 may be chosen so that
+\[
+F\subset A\setminus(E_{\rm del}\cup P),\qquad (F-F)\cap H=\varnothing,
+\tag{1}
+\]
+\[
+U\subset A\setminus(F\cup E_{\rm row}),\qquad |U|=M, \tag{2}
+\]
+and, with \(m=w-f\),
+\[
+m-U\subset A\setminus(F\cup E_{\rm mir}). \tag{3}
+\]
+Again the same unique-gate or shifted-overlap alternative from Corollary
+8.5a.7f.1 holds on \(U\).
+
+Proof. Apply Corollary 8.5a.7p with
+\[
+M'=M+|E_{\rm mir}|
+\]
+in place of \(M\), and with the same finite sets \(E_{\rm del}\),
+\(E_{\rm row}\), \(P\), and \(H\). This gives a set \(U'\) of size \(M'\)
+avoiding \(E_{\rm row}\), with
+\[
+m-U'\subset A\setminus F.
+\]
+For a fixed center \(m\), the map
+\[
+u\mapsto m-u
+\]
+is injective. Hence at most \(|E_{\rm mir}|\) elements \(u\in U'\) have
+\[
+m-u\in E_{\rm mir}.
+\]
+Discard those rows and choose any \(M\)-element subset of the remainder.
+All required private and branch conditions are inherited by subsets.
+\(\square\)
+
+Consequently a counterexample supplies arbitrarily large completely fresh
+private packets: after any finite stage one can find a late-bad edge whose
+deleted colors, retained private rows, and retained mirrors all avoid the
+old stage, while the deleted-color differences avoid any prescribed finite
+shift palette. A construction of a negative answer would have to wire these
+fresh packets into later barrier edges; independent fresh packets alone are
+selector-avoidable by Warning 8.5a.7d.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7108,14 +7164,15 @@ palette, the oversized recurrent fibers have bounded reflection centers.
 Corollary 8.5a.7o adds the cofinal form: the forced bad edges may be chosen
 outside any finite gate palette and avoiding any finite set of shifts among
 their deleted colors. Corollary 8.5a.7p also lets the retained fiber rows
-avoid any prescribed finite row core. The precise missing step is to show
-that these bounded-center, cofinally moving-palette, moving-row, or
+avoid any prescribed finite row core, and Corollary 8.5a.7q does the same
+for the retained mirror set \(m-U\). The precise missing step is to show
+that these bounded-center, cofinally moving-palette, moving-row/mirror, or
 independence-number escapes are impossible under the global late-bad barrier
 hypothesis, or to construct a staged basis in which the fibers \(U\),
-centers \(m\), shifts \(h\), and active colors \(f,g\) all escape while
-maintaining order-2 coverage and promoted-edge barriers. This is now the
-active form of the certificate-free obstruction; it is stronger than mobile
-injectivity and weaker than finite recurrent Sidon coloring.
+mirrors \(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all
+escape while maintaining order-2 coverage and promoted-edge barriers. This
+is now the active form of the certificate-free obstruction; it is stronger
+than mobile injectivity and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -13712,11 +13769,15 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.7p adds row-core avoidance: after increasing the requested
   fiber size by a finite amount, the retained fiber \(U\) may also be chosen
   outside any prescribed finite set of old rows.
+* Corollary 8.5a.7q adds mirror-core avoidance: the retained mirror set
+  \(m-U\) can simultaneously be kept outside any prescribed finite old
+  mirror core.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
-  every fixed certificate-rich test set, every finite row core, or every
-  unbounded recurrent center set without losing the late-bad barrier.
+  every fixed certificate-rich test set, every finite row or mirror core,
+  or every unbounded recurrent center set without losing the late-bad
+  barrier.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

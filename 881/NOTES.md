@@ -2146,13 +2146,22 @@ any prescribed finite row core: ask first for \(M+|E_{\rm row}|\) rows and
 discard the finitely many that land in \(E_{\rm row}\). Thus both the
 deleted active colors and the retained private rows can be made fresh.
 
+Corollary 8.5a.7q makes the whole private packet fresh. Since the map
+\[
+u\mapsto m-u
+\]
+is injective, one can also ask for \(|E_{\rm mir}|\) extra rows and discard
+the rows whose mirrors \(m-u\) land in a prescribed finite mirror core.
+Thus the deleted colors \(F\), retained rows \(U\), and retained mirrors
+\(m-U\) can all be chosen outside the current finite stage.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
 inside every finite test, or have retained shifted overlaps while keeping
 the shift moving or shift-independent inside every finite test. It must do
-this cofinally outside every finite palette and finite row core while also
-preventing unbounded reflection centers on any fixed finite-palette
+this cofinally outside every finite palette and finite row/mirror core while
+also preventing unbounded reflection centers on any fixed finite-palette
 violation. A proof must turn one of these escape patterns into a recurrent
 certificate triple; a counterexample must stage these escaping fibers while
 preserving the late-bad barrier for every infinite deletion.
