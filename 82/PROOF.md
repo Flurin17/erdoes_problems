@@ -11622,6 +11622,74 @@ has order at most `t+2=h-1`.  Hence `H_t` has no clique or independent set of
 order `h`, while it has `4h-7` vertices and satisfies the `P=2` full-drop
 condition.  This proves `C_full(2,h)>4h-7`.  QED.
 
+**Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
+`P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
+`P`-full-drop condition, and suppose
+
+```text
+alpha(R), omega(R) <= s,        s>=P.
+```
+
+Then for every `h>=s+2`,
+
+```text
+C_full(P,h) > 2P(h-s-1)+q.
+```
+
+Proof.  Put `t=h-s-1`.  We construct an ordered graph `H` on
+`2Pt+q` vertices.
+
+The first block `L` is a disjoint union of `t` cliques of order `P`, ordered
+clique by clique.  The middle block is a copy of `R` with its given order.
+The final block `T` is a complete `t`-partite graph with all parts of size
+`P`, again ordered part by part.  Join every vertex of `R` to every vertex of
+`T`, and add no edges between `L` and `R union T`.
+
+We check the full-drop condition.  Inside `L`, an earlier vertex can lose at
+most the other `P-1` vertices of its own clique when compared with a later
+vertex.  From `L` to any later block the same bound holds, because vertices
+outside `L` have no neighbors in `L`.  Inside `R` the condition holds by
+hypothesis.  From `R` to `T`, a vertex of `R` is adjacent to all of `T`, while
+a top vertex is nonadjacent only to the other `P-1` vertices in its own top
+part; all vertices of `R` are common neighbors.  Inside `T`, two vertices in
+the same part have the same external neighborhood, and two vertices in
+different parts differ in the earlier-to-later direction only on the later
+vertex's `P-1` part-mates.  Thus every earlier-later loss has size less than
+`P`.
+
+Now bound homogeneous sets.  The left block has clique number `P` and
+independence number `t`.  The joined component `R join T` has
+
+```text
+omega(R join T) <= omega(R)+t <= s+t = h-1,
+```
+
+and
+
+```text
+alpha(R join T)=max(alpha(R), alpha(T)) <= max(s,P)=s.
+```
+
+Since `H` is the disjoint union of `L` and `R join T`, its clique number is at
+most `h-1`, and its independence number is at most
+
+```text
+t+s=h-1.
+```
+
+Therefore `H` satisfies the `P`-full-drop condition, has `2Pt+q` vertices,
+and has no clique or independent set of order `h`.  This proves the
+displayed lower bound.  QED.
+
+Taking `R=K_P`, `q=s=P`, gives the explicit general lower bound
+
+```text
+C_full(P,h) > 2P(h-P-1)+P        for h>=P+2.
+```
+
+For `P=2`, the `5`-cycle core in Lemma 28D.5b improves the additive constant
+from this clique-core construction.
+
 **Corollary 28D.6: Global Reduction Through Full-Drop Ordering.**  For every
 `h>=3`, with `P=P_h`,
 

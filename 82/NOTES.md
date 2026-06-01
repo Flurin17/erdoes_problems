@@ -3471,3 +3471,11 @@ source of growth beyond Ramsey.
   match the earlier DFS certificates.  These are not regular-column-drop
   lower examples: the same graphs can have regular induced subgraphs larger
   than `h`.
+- 2026-06-01: Generalized the `P=2` full-drop lower construction.  If a
+  `P`-full-drop core `R` has `q` vertices and
+  `max(alpha(R),omega(R),P)<=s`, then adjoining a left block of `h-s-1`
+  disjoint `P`-cliques and a right block of `h-s-1` complete multipartite
+  parts of size `P`, with `R` joined to the right block, gives
+  `C_full(P,h)>2P(h-s-1)+q`.  In particular `R=K_P` yields
+  `C_full(P,h)>2P(h-P-1)+P`.  This explains the linear-in-`h` lower behavior
+  of the full-drop subproblem for every fixed `P`.
