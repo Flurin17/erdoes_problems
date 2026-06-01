@@ -3501,6 +3501,68 @@ counterexample supplies enough mass to extract a common active two-sum
 barrier after all. Thus the live \(k=3\) obstruction is a moving family of
 fresh finite-palette independent pair packets outside every protected core.
 
+### Corollary 3.4d.19: Anchored-shadow expansion implies the \(k=3\) conclusion
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) asymptotic basis. Suppose
+there is a finite set
+\[
+P\subset A
+\]
+with the following property: for every \(q\ge1\) there is \(M(q)\) such
+that, whenever
+\[
+g\in A\setminus P,\qquad U\subset A\setminus P,\qquad |U|\ge M(q),
+\]
+there exists \(u_0\in U\) for which
+\[
+\left|(g+U-u_0)\cap(A\setminus P)\right|>q. \tag{1}
+\]
+Then there is an infinite
+\[
+B\subset A
+\]
+such that
+\[
+A\setminus B
+\]
+is an order-\(4\) asymptotic basis.
+
+Proof. Suppose not. Apply Corollary 3.4d.18 with \(E=P\). It gives a
+constant \(q_P\) and, along arbitrarily large witnesses, a gate
+\[
+g\in A\setminus P
+\]
+and a set
+\[
+U\subset A\setminus P
+\]
+with \(|U|\to\infty\), together with a finite palette
+\[
+F\subset A\setminus P,\qquad |F|\le q_P,
+\]
+such that for every \(u_0\in U\),
+\[
+(g+U-u_0)\cap A\subset F. \tag{2}
+\]
+Intersecting (2) with \(A\setminus P\) gives
+\[
+\left|(g+U-u_0)\cap(A\setminus P)\right|\le |F|\le q_P
+\qquad(u_0\in U). \tag{3}
+\]
+Choose a witness with
+\[
+|U|\ge M(q_P).
+\]
+The anchored-shadow expansion hypothesis supplies \(u_0\in U\) for which
+the left side of (3) is \(>q_P\), a contradiction. \(\square\)
+
+Thus a \(k=3\) counterexample must contain arbitrarily large finite packets
+outside every protected core whose every anchored translate \(g+U-u_0\)
+has only bounded intersection with the unprotected part of \(A\). The
+remaining problem is now an additive expansion question: does order-\(3\)
+basishood force anchored-shadow expansion after deleting one finite core,
+or can a sparse basis sustain these moving anti-expanding packets forever?
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -28522,6 +28584,9 @@ missing from ordinary minimal order-\(h\) bases.
   to recover a stronger global \(k=3\) target: every counterexample has
   common active two-sum barrier packets after shrinking the bounded deleted
   palette.
+* Corollary 3.4d.19 gives the corresponding positive criterion: if one
+  finite core forces anchored-shadow expansion for all sufficiently large
+  finite packets \(U\subset A\), then a good order-\(4\) deletion exists.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

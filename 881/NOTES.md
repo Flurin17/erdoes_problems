@@ -62,6 +62,10 @@ repaired by \(2p+2p\). Corollary 3.4d.18 then records the stronger global
 normal form for \(k=3\): despite that local warning, every actual
 counterexample still yields common active two-sum barrier packets after
 shrinking the bounded deletion set from the sparse-shadow normal form.
+Corollary 3.4d.19 turns this into a positive criterion: if, after one
+finite core is protected, every sufficiently large finite \(U\subset A\)
+has an anchored translate \(g+U-u_0\) meeting the unprotected part of \(A\)
+in arbitrarily many points, then the desired order-\(4\) deletion exists.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the
