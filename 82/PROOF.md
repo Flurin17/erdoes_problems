@@ -6463,6 +6463,33 @@ counterexample into degree buckets, trace classes, pair-role middle graphs, or
 ordered representatives must either keep those induced pieces high-rank in
 both senses or find the desired regular subgraph inside one piece.
 
+The script `EXPERIMENTS/subset_rank_profile.py` calibrates how weak this
+obstruction is near the threshold.  On the `14`-vertex add-saturated
+threshold-`7` mask `765415324481232608887291903`, the minimum `F_2` ranks of
+`A_U` over `u`-vertex induced subgraphs for `u=7,...,14` are
+
+```text
+2,2,4,4,6,8,8,10,
+```
+
+and the corresponding shifted ranks of `A_U+I` are
+
+```text
+3,3,5,5,7,7,9,11.
+```
+
+On the delete-saturated mask `88255234986600583676821506`, the respective
+rank profiles are
+
+```text
+2,4,4,6,8,10,12,14,
+3,5,5,7,9,9,11,13.
+```
+
+Thus small counterexamples may contain threshold-sized induced pieces of very
+low rank; Corollary 7C becomes strong only for pieces whose order is much
+larger than `k 2^r`.
+
 ## Proposition 8: Ramsey-Core Reduction
 
 For `C>0`, call an `n`-vertex graph `C`-Ramsey if it has no clique and no

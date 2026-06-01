@@ -333,6 +333,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `rank_profile.py`: reports distinct adjacency rows, modular adjacency
   ranks, shifted `A+I` ranks, binary kernel even-witness bounds, and binary
   `A+I` odd-witness bounds for fixed graph masks.
+- `subset_rank_profile.py`: enumerates induced subsets of a fixed mask and
+  reports the minimum ranks of `A_U` and `A_U+I` by subset order, calibrating
+  the hereditary rank obstruction from Corollary 7C.
 - `no_inversion_regular.py`: exact census and random sampling for ordered
   inversion-free graphs, encoded by suffix thresholds.  This calibrates the
   ordered-graph subproblem in Lemma 28E.1 by comparing the largest guaranteed

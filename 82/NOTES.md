@@ -3132,3 +3132,11 @@ source of growth beyond Ramsey.
   Thus any large low-rank degree bucket, trace class, pair-role middle graph,
   or ordered representative subgraph would itself force the desired regular
   induced subgraph.
+- 2026-06-01: Added `subset_rank_profile.py` to enumerate minimum ranks of
+  induced subsets.  On the `14`-vertex threshold-`7` add-saturated mask, the
+  minimum `F_2` ranks of `A_U` for orders `7..14` are
+  `2,2,4,4,6,8,8,10`; shifted ranks are `3,3,5,5,7,7,9,11`.  On the
+  delete-saturated mask the profiles are `2,4,4,6,8,10,12,14` and
+  `3,5,5,7,9,9,11,13`.  This shows the rank obstruction is weak for
+  near-threshold pieces and only useful when the piece is much larger than
+  `k 2^r`.
