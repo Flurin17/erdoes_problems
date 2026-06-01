@@ -3479,3 +3479,8 @@ source of growth beyond Ramsey.
   `C_full(P,h)>2P(h-s-1)+q`.  In particular `R=K_P` yields
   `C_full(P,h)>2P(h-P-1)+P`.  This explains the linear-in-`h` lower behavior
   of the full-drop subproblem for every fixed `P`.
+- 2026-06-01: Extended `full_drop_census.py` fixed/search output with
+  separate clique and independence numbers, not just the maximum homogeneous
+  order.  On the `P=2,h=5` certificate mask `146393211167096786919426`, the
+  enhanced output reports `clique_number=4` and `independence_number=4`,
+  matching the lower-construction proof exactly.

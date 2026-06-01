@@ -37,6 +37,33 @@ def legal_new_column_full(adj: list[int], k: int, column: int, p: int) -> bool:
     return True
 
 
+def max_clique_independent(
+    adj: list[int], pc: cdc.Precomp
+) -> tuple[int, tuple[int, ...], int, tuple[int, ...]]:
+    clique = 1
+    clique_vertices = (0,)
+    independent = 1
+    independent_vertices = (0,)
+    for size, entries in pc.subsets_by_size:
+        if size <= clique and size <= independent:
+            break
+        for subset, vertices in entries:
+            degree = (adj[vertices[0]] & subset).bit_count()
+            if size > independent and degree == 0 and all(
+                (adj[v] & subset).bit_count() == 0 for v in vertices[1:]
+            ):
+                independent = size
+                independent_vertices = vertices
+            if size > clique and degree == size - 1 and all(
+                (adj[v] & subset).bit_count() == size - 1 for v in vertices[1:]
+            ):
+                clique = size
+                clique_vertices = vertices
+            if size <= clique and size <= independent:
+                break
+    return clique, clique_vertices, independent, independent_vertices
+
+
 def exact(n: int, p: int, progress: int) -> None:
     pc = cdc.precompute(n)
     total = 1 << len(pc.edges)
@@ -99,6 +126,9 @@ def fixed(n: int, mask: int) -> None:
     pc = cdc.precompute(n)
     adj = cdc.adjacency(n, mask, pc)
     homogeneous, kind, homogeneous_vertices = cdc.max_homogeneous(adj, pc)
+    clique_number, clique_vertices, independence_number, independent_vertices = (
+        max_clique_independent(adj, pc)
+    )
     regular, regular_degree, regular_vertices = cdc.max_regular(adj, pc)
     clique = cdc.clique_ranks(adj, n)
     independent = cdc.independent_ranks(adj, n)
@@ -109,6 +139,10 @@ def fixed(n: int, mask: int) -> None:
     print(f"max_homogeneous={homogeneous}")
     print(f"homogeneous_kind={kind}")
     print("homogeneous_vertices=" + ",".join(map(str, homogeneous_vertices)))
+    print(f"clique_number={clique_number}")
+    print("clique_vertices=" + ",".join(map(str, clique_vertices)))
+    print(f"independence_number={independence_number}")
+    print("independent_vertices=" + ",".join(map(str, independent_vertices)))
     print(f"max_regular={regular}")
     print(f"regular_degree={regular_degree}")
     print("regular_vertices=" + ",".join(map(str, regular_vertices)))
@@ -197,6 +231,9 @@ def search(
         pc = cdc.precompute(n)
         adj = cdc.columns_to_adjacency(result)
         homogeneous, kind, homogeneous_vertices = cdc.max_homogeneous(adj, pc)
+        clique_number, clique_vertices, independence_number, independent_vertices = (
+            max_clique_independent(adj, pc)
+        )
         regular, regular_degree, regular_vertices = cdc.max_regular(adj, pc)
         print("columns=" + ",".join(map(str, result)))
         print(f"mask={cdc.columns_to_mask(result, pc)}")
@@ -204,6 +241,10 @@ def search(
         print(f"max_homogeneous={homogeneous}")
         print(f"homogeneous_kind={kind}")
         print("homogeneous_vertices=" + ",".join(map(str, homogeneous_vertices)))
+        print(f"clique_number={clique_number}")
+        print("clique_vertices=" + ",".join(map(str, clique_vertices)))
+        print(f"independence_number={independence_number}")
+        print("independent_vertices=" + ",".join(map(str, independent_vertices)))
         print(f"max_regular={regular}")
         print(f"regular_degree={regular_degree}")
         print("regular_vertices=" + ",".join(map(str, regular_vertices)))
