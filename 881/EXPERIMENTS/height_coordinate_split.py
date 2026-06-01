@@ -11,6 +11,9 @@ set inclusion behind the pigeonhole step.
 
 It also checks the finite inequality behind Corollary 16.129: with rank and
 linear-core density margin bounded, the pre-asymptotic constant K is bounded.
+Finally, it checks the finite decompositions behind Corollary 16.131:
+bounded start and length bound the tested interval endpoint, while bounded
+auxiliary count and location bound the auxiliary endpoint sum.
 """
 
 from __future__ import annotations
@@ -131,14 +134,37 @@ def check_constant_margin_split(limit: int = 12) -> int:
     return checked
 
 
+def check_height_decompositions(limit: int = 20) -> int:
+    checked = 0
+    for a_bound in range(1, limit + 1):
+        for n_bound in range(1, limit + 1):
+            for a_start in range(1, 2 * limit + 1):
+                for n_len in range(1, 2 * limit + 1):
+                    b_end = a_start + n_len - 1
+                    if b_end > a_bound + n_bound - 1:
+                        assert a_start > a_bound or n_len > n_bound
+                    checked += 1
+    for count_bound in range(1, limit + 1):
+        for endpoint_bound in range(1, limit + 1):
+            for count in range(1, 2 * limit + 1):
+                for endpoint in range(1, 2 * limit + 1):
+                    s_aux = 2 * count * endpoint
+                    if s_aux > 2 * count_bound * endpoint_bound:
+                        assert count > count_bound or endpoint > endpoint_bound
+                    checked += 1
+    return checked
+
+
 def main() -> None:
     inclusion_checked = check_inclusion()
     packet_checked = check_weighted_packet_shadow()
     constant_margin_checked = check_constant_margin_split()
+    height_decomposition_checked = check_height_decompositions()
     print("height coordinate split checks passed")
     print(f"inclusion_checked={inclusion_checked}")
     print(f"packet_shadow_checked={packet_checked}")
     print(f"constant_margin_checked={constant_margin_checked}")
+    print(f"height_decomposition_checked={height_decomposition_checked}")
 
 
 if __name__ == "__main__":

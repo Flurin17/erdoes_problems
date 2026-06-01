@@ -26159,9 +26159,157 @@ countable-menu residual. The \(k=3\) high-density linear-core obstruction
 must occur in one named coordinate or in the explicit packet-position
 residual.
 
+### Corollary 16.131: Height coordinates split into length and location
+
+Keep the notation of Corollary 16.130. For each label put
+\[
+E_\lambda=\max_{1\le i\le m_\lambda}d_{\lambda,i}.
+\]
+
+If the tested-interval height branch
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:b_\lambda>M\}|\over |P_s|}
+=\infty
+\qquad(M\ge1) \tag{1}
+\]
+holds, then at least one of the following alternatives holds.
+
+1. **Tested-interval length growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:n_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{2}
+   \]
+2. **Tested-interval location growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:a_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{3}
+   \]
+
+Likewise, if the auxiliary-endpoint-sum branch
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:S_\lambda>M\}|\over |P_s|}
+=\infty
+\qquad(M\ge1) \tag{4}
+\]
+holds, then at least one of the following alternatives holds.
+
+3. **Auxiliary-count growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:m_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{5}
+   \]
+4. **Auxiliary-location growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:E_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{6}
+   \]
+
+Proof. Suppose (1) holds but neither (2) nor (3) holds. Then there are
+thresholds \(N_*,A_*\) such that the active masses of
+\[
+\{\lambda:n_\lambda>N_*\},\qquad
+\{\lambda:a_\lambda>A_*\}
+\]
+are finite. On the complement of these two finite-mass exceptional
+families,
+\[
+b_\lambda=a_\lambda+n_\lambda-1\le A_*+N_*-1.
+\]
+Thus the active mass of
+\[
+\{\lambda:b_\lambda>A_*+N_*-1\}
+\]
+is finite, contradicting (1). Hence (2) or (3) holds.
+
+The auxiliary proof is identical. If (4) holds but neither (5) nor (6)
+holds, choose thresholds \(M_*,E_*\) such that the active masses of
+\[
+\{\lambda:m_\lambda>M_*\},\qquad
+\{\lambda:E_\lambda>E_*\}
+\]
+are finite. Outside these exceptions, every auxiliary interval has
+\[
+c_{\lambda,i}+d_{\lambda,i}\le2E_*,
+\]
+and there are at most \(M_*\) of them, so
+\[
+S_\lambda\le2M_*E_*.
+\]
+This makes the active mass of
+\[
+\{\lambda:S_\lambda>2M_*E_*\}
+\]
+finite, contradicting (4). Hence (5) or (6) holds. \(\square\)
+
+Thus the residual height branches can be read in ordinary geometric terms:
+tested intervals either become long or move far out, and auxiliary endpoint
+growth either comes from increasing profile complexity or from auxiliary
+intervals whose locations move far out.
+
+### Corollary 16.132: Expanded linear-core residual normal form
+
+Keep the setting of Corollary 16.130. If the assigned high-density
+linear-core branch product-covers every selector tail under the
+reciprocal-summable packetization, then at least one of the following eight
+alternatives holds.
+
+1. **Rank growth.**
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:r_\lambda>M\}|\over |P_s|}
+   =\infty\qquad(M\ge1).
+   \]
+2. **Critical-density degeneration.**
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:\Theta_\lambda>M\}|\over |P_s|}
+   =\infty\qquad(M\ge1).
+   \]
+3. **Tested-interval length growth.**
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:n_\lambda>M\}|\over |P_s|}
+   =\infty\qquad(M\ge1).
+   \]
+4. **Tested-interval location growth.**
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:a_\lambda>M\}|\over |P_s|}
+   =\infty\qquad(M\ge1).
+   \]
+5. **Auxiliary-count growth.**
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:m_\lambda>M\}|\over |P_s|}
+   =\infty\qquad(M\ge1).
+   \]
+6. **Auxiliary-location growth.**
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:E_\lambda>M\}|\over |P_s|}
+   =\infty\qquad(M\ge1).
+   \]
+7. **Joint width-heavy residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   W_s>T_\lambda/2}}\beta_{\lambda,s}=\infty.
+   \]
+8. **Joint midpoint-displacement residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   \Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+   \beta_{\lambda,s}=\infty.
+   \]
+
+Proof. Corollary 16.130 gives rank growth, critical-density degeneration,
+tested-interval height growth, auxiliary-count growth,
+auxiliary-endpoint-sum growth, width-heavy residual, or
+midpoint-displacement residual. Corollary 16.131 splits tested-interval
+height into length or location growth, and splits auxiliary-endpoint-sum
+growth into auxiliary-count growth or auxiliary-location growth. \(\square\)
+
+This is the current end of the high-density linear-core reduction. Any
+remaining \(k=3\) counterexample must realize one of these eight explicit
+residuals, rather than a diffuse countable-profile menu.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
-inequality and packet-mass inclusion behind Corollary 16.128, and the
-bounded-rank/bounded-margin estimate used in Corollary 16.129.
+inequality and packet-mass inclusion behind Corollary 16.128, the
+bounded-rank/bounded-margin estimate used in Corollary 16.129, and the
+height-coordinate decompositions in Corollary 16.131.
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26178,12 +26326,11 @@ at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
 reciprocal-summable packetization removes the recurrent-label artefact, so
 the countable-menu escape has also been forced into concrete geometry. The
-remaining escape must therefore either make the packet density vanish, make
-the geometric profile height from Corollary 16.127 unbounded, produce
-linear width-heavy or midpoint-displacement packet-position cost in the
-linear-core profiles, use auxiliary profiles whose midpoint diameter is
-linear in their tested interval, or maintain nonsummable robust-core escape
-mass across the packet selector tail.
+remaining escape must therefore either make the packet density vanish,
+realize one of the eight residuals in Corollary 16.132, use auxiliary
+profiles whose midpoint diameter is linear in their tested interval, or
+maintain nonsummable robust-core escape mass across the packet selector
+tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 
@@ -27607,6 +27754,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   critical-density degeneration, tested-interval height, auxiliary count,
   auxiliary endpoint height, width-heavy residual, or
   midpoint-displacement residual.
+* Corollary 16.131 splits the two height coordinates into length/location
+  branches: tested intervals get long or move out, and auxiliary endpoint
+  growth comes from auxiliary-count growth or auxiliary-location growth.
+* Corollary 16.132 packages the expanded high-density linear-core normal
+  form into eight fully split residual branches.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

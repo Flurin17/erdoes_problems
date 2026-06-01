@@ -13,11 +13,11 @@ is whether the \(k=2\) finite-prefix active-trace closure has an analogue
 for \((k+1)\)-term barriers, or whether a robust staged higher-order
 collective barrier can be lifted to an infinite counterexample.
 
-The latest \(k=3\) checkpoint is Corollary 16.130 in `PROOF.md`. After the
+The latest \(k=3\) checkpoint is Corollary 16.132 in `PROOF.md`. After the
 nonsingleton handoff is packetized with \(\sum_s1/|P_s|<\infty\), a
 product-covering high-density linear-core branch must fall into one of
-seven named residuals: rank growth, critical-density degeneration,
-tested-interval height, auxiliary count, auxiliary endpoint height,
+eight named residuals: rank growth, critical-density degeneration,
+tested-interval length/location growth, auxiliary count/location growth,
 width-heavy residual, or midpoint-displacement residual. Bounded-height
 menus cannot hide in countably many active labels. The earlier handoff
 begins at Corollaries 16.35--16.36:
@@ -250,6 +250,11 @@ Corollary 16.130 packages the reciprocal-summable linear-core normal form:
 rank growth, critical-density degeneration, tested-interval height,
 auxiliary count, auxiliary endpoint height, width-heavy residual, or
 midpoint-displacement residual.
+Corollary 16.131 splits the two height coordinates further: tested intervals
+either grow in length or move out, and auxiliary endpoint-sum growth either
+comes from auxiliary-count growth or auxiliary-location growth.
+Corollary 16.132 packages the expanded linear-core normal form into the
+eight fully split residual branches.
 The Attempt 16 residual summary has been updated accordingly: after
 reciprocal-summable packetization, bounded-height countable menus must pay
 linear packet-position cost.

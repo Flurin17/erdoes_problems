@@ -228,7 +228,10 @@ then the geometric height \(\chi_{\rm geom}\) is at most \(7M\). It also
 samples finite packet families to verify that the high-height active mass is
 bounded by the union of the five coordinate-high masses. The same script
 checks the finite bound used in Corollary 16.129: bounded rank and bounded
-linear-core density margin force a bounded pre-asymptotic constant.
+linear-core density margin force a bounded pre-asymptotic constant. It also
+checks the elementary decompositions used in Corollary 16.131, where tested
+interval height splits into length/location and auxiliary endpoint-sum
+height splits into count/location.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For
