@@ -282,7 +282,10 @@ retained but lies in `2C`, and `2311` old rows satisfy `d+a in 2C`.
 The `shadow_escape_set_summary` output records the equivalent escape-set
 form from Corollary 8.5a.7z.12h.2: there are no old-row escapes, the split
 escape set has `2312` points but no complementary pair summing to `6900`,
-and the half-candidate is saturated.
+and the half-candidate is saturated. Only `2` escape points lie below
+`p/2`; their complements are already in the old set. This is the finite
+instance of Warning 8.5a.7z.12h.3, so escape-set size alone cannot force a
+safe split.
 The reusable sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 prints the same no-safe-one/no-safe-two obstruction throughout that

@@ -331,12 +331,25 @@ def shadow_escape_set_summary(
         for first in split_escape_set
         if first < gap - first and gap - first in split_escape_lookup
     ]
+    low_split_escapes = [item for item in split_escape_set if 2 * item < gap]
+    low_complement_in_full = [
+        item for item in low_split_escapes if gap - item in full
+    ]
+    low_complement_absorbed = [
+        item
+        for item in low_split_escapes
+        if gap - item not in full and gap - item not in split_escape_lookup
+    ]
     half_candidate = gap % 2 == 0 and gap // 2 not in full
     return {
         "defect": defect,
         "old_row_escape_count": len(old_row_escapes),
         "old_row_escape_examples": old_row_escapes[:20],
         "split_escape_set_count": len(split_escape_set),
+        "low_split_escape_count": len(low_split_escapes),
+        "low_complement_in_full_count": len(low_complement_in_full),
+        "low_complement_absorbed_count": len(low_complement_absorbed),
+        "low_split_escape_examples": low_split_escapes[:20],
         "split_escape_examples": split_escape_set[:20],
         "split_escape_tail": split_escape_set[-20:],
         "complementary_escape_pair_count": len(complementary_pairs),

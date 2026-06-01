@@ -9143,6 +9143,39 @@ w-y\in2C,\qquad w-x\in2C
 holds, and the two-point repair is unsafe. The case \(x=y\) is the
 one-point double repair already handled. \(\square\)
 
+### Warning 8.5a.7z.12h.3: Large escape sets need not contain complementary pairs
+
+Corollary 8.5a.7z.12h.2 cannot be closed by a cardinality lower bound on
+the split escape set alone. Any set
+\[
+E\subset(p/2,p)
+\]
+has no two distinct elements summing to \(p\), regardless of its size.
+More generally, if \(E\subset[1,p-1]\setminus A\) has no complementary
+pair, then every low escape
+\[
+z\in E,\qquad z<p/2,
+\]
+has its complement \(p-z\) blocked in exactly one of two ways:
+\[
+p-z\in A
+\]
+or
+\[
+p-z\notin A,\qquad d+p-z\in2C.
+\]
+
+Thus a proof must force low escape mass whose complements are not already
+old elements and are not absorbed by \(2C\). It is not enough to show that
+the escape set is large.
+
+Proof. If \(z\in E\), \(z<p/2\), and \(p-z\notin A\), then the absence of a
+complementary pair in \(E\) forces \(p-z\notin E\). By the definition of
+\[
+E=\{y\in[1,p-1]\setminus A:d+y\notin2C\},
+\]
+this is exactly \(d+p-z\in2C\). \(\square\)
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -9265,6 +9298,17 @@ the opposite side: there are no old-row escapes, the split escape set has
 \]
 points but no complementary pair summing to \(6900\), and the half-candidate
 \(3450\) is saturated.
+Warning 8.5a.7z.12h.3 explains why this is locally easy: only two escape
+points lie below \(p/2=3450\), namely
+\[
+2600,\quad 3200,
+\]
+and their complements
+\[
+4300,\quad 3700
+\]
+are already retained old points. The rest of the escape set lies above
+\(p/2\), where it cannot contain a complementary pair internally.
 The reusable sweep
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200
@@ -16365,6 +16409,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   two-point repair requires a complementary pair inside
   \(\{z\notin A:d+z\notin2C\}\), and a safe old-summand repair requires an
   old row \(a\) with \(d+a\notin2C\).
+* Warning 8.5a.7z.12h.3 records that large escape sets alone are harmless:
+  they may lie almost entirely above \(p/2\), with the few low escapes
+  having complements already in \(A\) or absorbed by \(2C\).
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.
