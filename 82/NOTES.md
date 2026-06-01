@@ -2630,3 +2630,10 @@ source of growth beyond Ramsey.
   unlikely to yield more than a constant-factor improvement over the current
   chain-antichain `sqrt(m)` fallback without additional structure from the
   degree-bucket representatives.
+- 2026-06-01: Added Proposition 0D, a fully self-contained random-graph lower
+  construction proving `G(k)>c k^{5/4}`.  The proof conditions on half of a
+  fixed `t`-set and uses the central binomial bound to show a fixed `t`-set is
+  regular with probability at most `(3/sqrt(t))^{t/2-2}`.  This is far weaker
+  than the known quadratic Dyson--McKay lower construction, but it replaces
+  one purely literature-cited paragraph with a local probabilistic
+  reconstruction in the workspace.

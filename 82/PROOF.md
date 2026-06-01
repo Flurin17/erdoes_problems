@@ -174,6 +174,103 @@ F(n) <= C sqrt(n).
 This is an upper bound on the guaranteed value `F(n)` and is compatible with
 the target `F(n)=omega(log n)`.
 
+## Proposition 0D: A Self-Contained Random Lower Construction
+
+There is an absolute constant `c>0` such that
+
+```text
+G(k) > c k^{5/4}
+```
+
+for all sufficiently large `k`.
+
+Equivalently, for infinitely many `n`,
+
+```text
+F(n) <= C n^{4/5}.
+```
+
+This is much weaker than the Bollobas--AKS--Dyson--McKay constructions above,
+but it is a completely local reconstruction showing why polynomial-size bad
+graphs are easy to obtain.
+
+Proof.  Let `N` be chosen later and take `G` from `G(N,1/2)`.  Fix a set
+`T` of `t` vertices, where `t>=k`, and split it as
+
+```text
+T=A union B,       |A|=floor(t/2),       |B|=ceil(t/2).
+```
+
+Condition on all edges inside `A`.  For each `a in A`, the number
+
+```text
+X_a=deg(a,B)
+```
+
+is an independent `Bin(|B|,1/2)` random variable.  If `G[T]` is regular, then
+the quantities
+
+```text
+deg_{G[A]}(a)+X_a,        a in A,
+```
+
+are all equal.  Thus, for any fixed internal degrees
+`c_a=deg_{G[A]}(a)`, regularity forces the independent variables `X_a+c_a`
+to be all equal.
+
+Let
+
+```text
+p_b=max_j Pr[Bin(b,1/2)=j],        b=|B|.
+```
+
+For arbitrary integer offsets `c_a`,
+
+```text
+Pr[X_a+c_a is constant over A]
+ <= p_b^{|A|-1},
+```
+
+because after singling out one vertex of `A` and summing over the common
+value, every other factor is at most `p_b`.  The elementary central-binomial
+bound gives `p_b <= 3/sqrt(t)` for all `t>=2`, since `b>=t/2`.  Since
+`|A|-1>=t/2-2`, for all sufficiently large `t`,
+
+```text
+Pr[G[T] is regular] <= (3/sqrt(t))^{t/2-2}.
+```
+
+The expected number of regular induced subgraphs of order exactly `t` is at
+most
+
+```text
+binom(N,t) (3/sqrt(t))^{t/2-2}
+ <= (t/9) (e sqrt(3) N / t^{5/4})^t.
+```
+
+Choose
+
+```text
+N <= (20 e sqrt(3))^{-1} k^{5/4}.
+```
+
+Then for every `t>=k`,
+
+```text
+e sqrt(3) N / t^{5/4} <= 1/20,
+```
+
+and the expected number of regular induced subgraphs of order at least `k` is
+at most
+
+```text
+sum_{t=k}^N (t/9) 20^{-t} < 1
+```
+
+for all sufficiently large `k`.  Hence some `N`-vertex graph has no regular
+induced subgraph on at least `k` vertices, proving `G(k)>N`.  This gives the
+claimed polynomial lower bound after adjusting the absolute constant.  QED.
+
 ## Lemma 1: Hole / Antihole Reduction
 
 Let `k >= 4`.  If `G` has no regular induced subgraph of order at least `k`,
