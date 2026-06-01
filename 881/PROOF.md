@@ -13349,6 +13349,64 @@ Using such a mirror in the repair identities costs two retained summands,
 which exhausts the one extra summand available when passing from order
 \(3\) to order \(4\).
 
+### Warning 10.2d: \(2A\)-recurrence need not compress to \(A\)-recurrence
+
+The obstruction in Corollary 10.2c is not just the parity example from
+Warning 10.2b'. For every \(q\ge3\), let
+\[
+A_q=q\mathbb N\cup\{1,2,\ldots,q-1\}.
+\]
+Then \(A_q\) is an asymptotic basis of order \(2\), hence also of order
+\(3\), and
+\[
+2A_q
+\]
+is cofinite. Consequently, for every finite \(T\subset A_q\), all
+sufficiently large \(d\) have
+\[
+d-T\subset2A_q. \tag{1}
+\]
+However \(A_q\) is not finitely reflection-recurrent in \(A_q\). Indeed,
+for \(T=\{1,2\}\), if
+\[
+m-1,\ m-2\in A_q
+\]
+and \(m\) is large, then both \(m-1\) and \(m-2\) must be divisible by
+\(q\), impossible.
+
+Nor is there a fixed finite catalyst \(c\) that compresses (1) to
+\[
+d-T-c\subset A_q
+\]
+for all large \(d\) and \(T=\{1,2\}\). For large values membership in
+\(A_q\) means congruence \(0\pmod q\), so this would require
+\[
+d-1-c\equiv d-2-c\equiv0\pmod q,
+\]
+again impossible.
+
+Thus lower-sumset recurrence is genuinely weaker than the reflection
+recurrence used by Theorem 2.3. The modular finite catalysts can repair
+each shifted residue separately in \(2A_q\), but they do not provide a
+single \(A_q\)-valued reflected pattern.
+
+This warning is not a counterexample to the problem. For instance, when
+\[
+q=3,\qquad A_3=3\mathbb N\cup\{1,2\},
+\]
+deleting
+\[
+B=6\mathbb N
+\]
+leaves
+\[
+C=\{1,2\}\cup\{6j+3:j\ge0\},
+\]
+and \(C\) is an order-\(4\) basis by residues modulo \(6\): four copies of
+\(\{1,2,3\}\) represent every residue modulo \(6\), and the \(3\)-residue
+class is cofinite in \(C\). The example only shows that a proof must use
+more than raw \(2A\)-mirror recurrence.
+
 ## Lemma 10.1: Finite deletion holes force vertex-cover domination
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\) with

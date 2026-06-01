@@ -1721,6 +1721,12 @@ arbitrarily large centers \(d\) with
 d-T\subset2A,
 \]
 but they do not force \(d-T\subset A\).
+Warning 10.2d shows this cannot be repaired by a generic compression
+argument: \(A_q=q\mathbb N\cup\{1,\ldots,q-1\}\) has cofinite \(2A_q\) but
+no large reflection center for \(\{1,2\}\) in \(A_q\), and no fixed
+catalyst translates both shifts into \(A_q\). These modular finite-catalyst
+models still have good sparse deletions, so they only block this proof
+route.
 
 For \(k=3\), the split is explicit: bad one-point deletions reflect a
 half-sized subset either into \(A\) or into \(2A\). The first case can feed
