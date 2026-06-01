@@ -3149,3 +3149,10 @@ source of growth beyond Ramsey.
   independence `2`; on the delete-saturated mask the graph/complement
   conflict independences are `3` and `1`.  This is useful structure but still
   near-threshold and far from a subexponential proof.
+- 2026-06-01: Added Corollary 22B.  Since unmatched vertices of a maximal
+  matching are independent, every `n`-vertex counterexample with target `k`
+  has matchings of size greater than `(n-k)/2` in both `G` and `complement(G)`.
+  Combining this with Lemma 22A, maximum-matching conflict graphs in both
+  graphs have average degree at least `(1+o(1))n/k` when `n/k -> infinity`.
+  A matching route must therefore use the growing-density conflict graph, not
+  only the absence of a single induced matching.

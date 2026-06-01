@@ -8871,6 +8871,46 @@ independences are `3` and `1`.  Since `ceil(7/2)=4`, these finite examples
 fit the lemma but also show that the density lower bound can be quite far
 from tight near the target size.
 
+**Corollary 22B: Large Matchings Are Densely Conflicted.**  Let `G` be an
+`n`-vertex graph with no regular induced subgraph on at least `k` vertices,
+and put `r=ceil(k/2)`.  Then both `G` and its complement contain matchings of
+size
+
+```text
+m > (n-k)/2.
+```
+
+For any maximum matching `M` in either graph, the corresponding conflict graph
+has
+
+```text
+e(C_M) > (m/2)(m/r - 1).
+```
+
+In particular, if `n/k -> infinity`, then these conflict graphs have average
+degree at least `(1+o(1)) n/k`.
+
+Proof.  Let `M` be a maximal matching in `G`, and let `U` be the vertices not
+covered by `M`.  If two vertices of `U` were adjacent, the matching would not
+be maximal.  Thus `U` is independent.  Since an independent set of order `k`
+is a forbidden regular induced subgraph, `|U|<k`, and so
+
+```text
+|M|=(n-|U|)/2 > (n-k)/2.
+```
+
+The same argument in the complement gives a matching of this size there,
+because a clique of order `k` in `G` is also forbidden.  Applying Lemma 22A to
+a maximum matching gives the displayed conflict-edge bound.  The final
+average-degree statement uses `m>(n-k)/2` and `r=ceil(k/2)`.  QED.
+
+This corollary is still a density statement about an auxiliary graph, not a
+direct regular-subgraph construction.  Its value is to isolate a concrete
+place where a future proof could try to exploit more than the mere absence of
+an induced matching: for large counterexamples, every maximum matching in both
+`G` and its complement is forced into a conflict graph with growing average
+degree.
+
 ## Proposition 23: Maximal Induced Matching Cover Bound
 
 Let `a,r,w` be positive integers.  Let `G` be a graph with
