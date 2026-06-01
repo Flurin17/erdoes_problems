@@ -726,7 +726,11 @@ finds a longer nonperiodic chain
 `[1,2,3] -> +7 -> +10 -> +23 -> +36 -> +46`, with endpoints
 `9,17,35,43,61` and coverage through `13,24,37,50,63`. A bounded depth-six
 rerun with slack `55`, candidate values through `130`, increments of size
-at most `2`, and branch limit `600` found no sixth stage.
+at most `2`, and branch limit `600` found no sixth stage. From the
+depth-five terminal seed, targeted checks found no singleton extension
+through candidate `400`, no size-2 extension through candidate `260`, no
+size-3 extension through candidate `180`, and no random size-4 through
+size-8 extension in 5000 trials per size over candidates `62..243`.
 
 `singleton_high_excess_stage_search.py` tests the stricter Lemma 16.9
 singleton target: every new `b` needs `w notin 4(A\\{b})` and

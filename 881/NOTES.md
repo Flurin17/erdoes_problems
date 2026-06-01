@@ -2654,7 +2654,10 @@ with endpoints \(9,17,35,43,61\); a bounded depth-six rerun still finds no
 next stage. Thus unrestricted pair barriers are locally stronger than the
 robust-booster seed, and nonperiodic branches survive longer than the first
 periodic-looking pattern, but the tested continuations still run into
-buffer exhaustion.
+buffer exhaustion. Lemma 13.1d.1 isolates one source of this pressure: the
+first point of every new block must already lie in the old three-fold
+coverage frontier, and later block points can only bootstrap from earlier
+new points.
 Lemma 16.9 records the exact singleton-new normal form. If
 \(w=b+d\notin4(A\setminus\{b\})\), then every retained padder below the
 threshold cut forces \(d-p\in2A\) and \(p\le d-2m_0\), giving a terminal

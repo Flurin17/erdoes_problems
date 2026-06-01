@@ -20021,6 +20021,53 @@ a two-point buffer when \(m=1\). This explains why endpoint witnesses in
 Examples 13.2 and in the finite \(k=3\) searches do not immediately
 iterate.
 
+### Lemma 13.1d.1: New blocks must start inside the old coverage frontier
+
+Let \(k\ge2\). Suppose
+\[
+A_s=A_{s-1}\cup P_s
+\]
+is a finite stage extension, where all elements are positive and
+\[
+P_s=\{p_1<\cdots<p_t\}
+\]
+lies above the previous endpoint. If the declared new endpoint satisfies
+\[
+N_s\ge p_j
+\]
+and
+\[
+[N_{s-1}+1,N_s]\subset kA_s,
+\]
+then
+\[
+p_j\in k\bigl(A_{s-1}\cup\{p_1,\ldots,p_{j-1}\}\bigr). \tag{1}
+\]
+In particular the first new element must already lie in the old \(k\)-fold
+sumset:
+\[
+p_1\in kA_{s-1}. \tag{2}
+\]
+
+Proof. Since \(p_j\le N_s\), the coverage hypothesis gives a representation
+\[
+p_j=a_1+\cdots+a_k,\qquad a_i\in A_s. \tag{3}
+\]
+No summand in (3) can be \(p_j\) or any later new element. Indeed, if
+some \(a_i\ge p_j\), then, because all summands are positive and \(k\ge2\),
+\[
+a_1+\cdots+a_k\ge p_j+(k-1)\min A_s>p_j,
+\]
+contradicting (3). Hence every summand in (3) belongs to
+\(A_{s-1}\cup\{p_1,\ldots,p_{j-1}\}\), proving (1). Taking \(j=1\) gives
+(2). \(\square\)
+
+Thus a staged counterexample cannot place its next private block after the
+old coverage frontier and hope that the new block covers its own first
+point. Later points in the same block may bootstrap from earlier new
+points, but the block must begin inside the old \(k\)-sum interval. This is
+the endpoint pressure visible in the finite \(k=3\) pair-stage searches.
+
 ## Proposition 13.1c: Cross-stage pair barriers would give a counterexample
 
 Suppose there are increasing finite sets
@@ -21291,7 +21338,10 @@ and coverage through
 \]
 A bounded depth-six rerun from the same start, with slack \(55\), candidate
 values through \(130\), increments of size at most \(2\), and branch limit
-\(600\), still found no sixth stage.
+\(600\), still found no sixth stage. Targeted checks from the depth-five
+terminal seed found no singleton extension through candidate \(400\), no
+extension of size at most \(3\) in the tested deterministic ranges, and no
+random extension of sizes \(4,\ldots,8\) in \(5000\) trials per size.
 
 This diagnostic is important in both directions. It shows that \(k=3\)
 cross-stage pair barriers are not merely an artefact of the robust residue
@@ -29850,6 +29900,10 @@ missing from ordinary minimal order-\(h\) bases.
 * Lemma 13.1d records the positive-summand buffer condition that every
   staged construction must satisfy before moving all future elements past
   the declared endpoint.
+* Lemma 13.1d.1 adds the complementary frontier condition: within a new
+  finite block, each new point must already be covered by the old stage
+  plus earlier points of that same block; in particular the first new point
+  must lie in the old \(k\)-fold coverage frontier.
 * Proposition 13.1e extends the cross-stage pair criterion to every order
   \(k\); the robust \(k=3\) booster-pair experiments are finite searches for
   this criterion.
