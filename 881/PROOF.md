@@ -18508,6 +18508,61 @@ second moves, but the tested branches still have no third extension. This
 keeps the robust-booster pair route open only as a genuinely large-block or
 new-design problem, not as a small non-greedy search miss.
 
+### Target 16.2: Moving-core domination is the remaining \(k=3\) lift
+
+After Lemma 16.0, a \(k=3\) negative construction cannot have one finite
+core \(C\) and one infinite marker set \(M\) whose tail coverage is
+\[
+M+2C.
+\]
+The only residue-booster lift still compatible with the stage criterion is
+a moving-core collective barrier. A sufficient form is already Proposition
+13.1e with \(k=3\): construct finite stages \(A_s\), increments
+\[
+P_s=A_s\setminus A_{s-1},
+\]
+and endpoints \(N_s\to\infty\) such that future elements are larger than
+\(N_s\),
+\[
+[N_{s-1}+1,N_s]\subseteq3A_s
+\]
+with the positive-summand buffer from Lemma 13.1d, and for every old-new
+pair
+\[
+a\in A_{s-1},\qquad b\in P_s
+\]
+there is a frozen witness
+\[
+w_{s,a,b}\le N_s,\qquad
+w_{s,a,b}\notin4(A_s\setminus\{a,b\}). \tag{1}
+\]
+
+For such a witness, Lemma 10.1 says that every retained padder \(p\) with
+\[
+w_{s,a,b}-p\ge N_0
+\]
+has all three-term representations of \(w_{s,a,b}-p\) meeting
+\[
+\{a,b\}. \tag{2}
+\]
+Thus the moving-core lift is not merely a coverage problem. It must build
+large finite blocks in which each new \(b\) simultaneously makes
+\(\{a,b\}\) a vertex cover for the relevant three-representation
+hypergraphs for many old \(a\)'s and many retained padders \(p\). The
+third-stage robust-booster failure in Diagnostic 16.1 is exactly a finite
+shadow of (2): candidate new points extend \(3A_s\)-coverage, but fail the
+old-pair domination requirements.
+
+The next dichotomy to prove is therefore:
+
+* either the moving core is sufficiently reusable that finite deletions are
+  eventually repaired at order \(4\), generalizing Lemma 16.0 from a fixed
+  finite \(2C\) to the moving two-core actually used in the stages;
+* or the stages contain an unbounded finite vertex-cover domination system
+  of the form (2). Such a system would be the genuine higher-order analogue
+  of the \(k=2\) active-trace barriers, and is the remaining candidate
+  counterexample mechanism.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly

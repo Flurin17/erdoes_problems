@@ -2126,6 +2126,17 @@ that every infinite deletion fails at order \(k+1\), and hence fails at
 order \(k\) by padding. Thus the robust \(k=3\) booster-pair search is not
 just a local curiosity: it is a finite attempt at a complete negative
 answer.
+Target 16.2 sharpens what remains after Lemma 16.0: a \(k=3\)
+counterexample must either build reusable moving two-cores whose finite
+deletions are not eventually repaired by two retained markers plus the
+two-core, or else build an unbounded cross-stage pair domination system.
+For each old-new pair \(\{a,b\}\), the witness \(w\) must make \(\{a,b\}\)
+vertex-cover all relevant three-term representation hypergraphs of
+\[
+w-p
+\]
+over a cofinal retained padder set. This is the current precise moving-core
+construction target.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 
