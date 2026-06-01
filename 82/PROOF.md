@@ -11787,13 +11787,15 @@ alpha(H)+omega(H) >= (|V(H)|+3)/2
 ```
 
 for every `P=2` full-drop ordered graph `H`.  Exact DFS enumeration at
-`n=8`,
+`n=8` and `n=9`,
 
 ```text
 python3 82/EXPERIMENTS/full_drop_alpha_omega.py 8 --p 2 --progress 20000
+python3 82/EXPERIMENTS/full_drop_alpha_omega.py 9 --p 2 --progress 100000
 ```
 
-checks all `58,604` ordered graphs satisfying the condition and reports
+check respectively all `58,604` and `366,012` ordered graphs satisfying the
+condition.  The `n=8` run reports
 
 ```text
 best_alpha=4,       best_omega=2,       best_sum=6.
@@ -11805,9 +11807,15 @@ The extremal columns are
 0,0,0,0,1,2,4,8,
 ```
 
-that is, a matching of size `4` ordered with all left endpoints first.  This
-is only finite calibration, but it supports the possibility that the current
-quadratic upper bound for `C_full(2,h)` is far from sharp.
+that is, a matching of size `4` ordered with all left endpoints first.  The
+`n=9` run also has `best_sum=6`, with extremal columns
+
+```text
+0,0,1,2,0,0,16,48,96.
+```
+
+This is only finite calibration, but it supports the possibility that the
+current quadratic upper bound for `C_full(2,h)` is far from sharp.
 
 **Lemma 28E: Ordered Graphs With Few Inversions Have Large Homogeneous
 Sets.**  Let `H` be a graph whose vertices are linearly ordered as

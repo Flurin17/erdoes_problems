@@ -3494,3 +3494,9 @@ source of growth beyond Ramsey.
   with extremal columns `0,0,0,0,1,2,4,8` (a matching of size `4`).  This is
   finite support only; no general proof of the linear `P=2` upper bound is
   recorded yet.
+- 2026-06-01: Ran the same full-drop `alpha+omega` census at `P=2,n=9`.
+  It checks all `366,012` terminal ordered graphs, again finds `best_sum=6`,
+  and reports extremal columns `0,0,1,2,0,0,16,48,96` with
+  `best_alpha=4`, `best_omega=2`.  Thus the conjectured bound
+  `alpha+omega >= ceil((n+3)/2)` survives one more exact level, but the
+  extremal is no longer just the ordered matching family.
