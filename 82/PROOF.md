@@ -8181,6 +8181,37 @@ one also needs a way to reduce arbitrary counterexamples to a useful
 bounded-spread regime; it isolates the exact local improvement required from
 the pair-difference route.
 
+**Lemma 28B: The Two Balanced Pair Parameters Are Complement-Dual.**  For
+every `h>=3`,
+
+```text
+P_h^+ = P_h^-.
+```
+
+Proof.  Put `r=ceil((h-2)/2)`.  We show `P_h^- <= P_h^+`; the reverse
+inequality is identical.  Let `M=P_h^+`, and let `H` be any graph whose vertex
+set is the disjoint union of two marked sets `A,B` of size `M`.  Apply the
+definition of `P_h^+` to the complement graph `bar H`, with the same marked
+sets.  If `bar H` contains a regular induced subgraph on at least `h`
+vertices, then its complement inside the same vertex set is a regular induced
+subgraph of `H` on the same order.  Otherwise there are sets
+`X subset A`, `Y subset B`, with `|X|=|Y|=r`, such that
+`bar H[X union Y]` is `r`-regular.  Since `|X union Y|=2r`, the graph
+`H[X union Y]` is
+
+```text
+(2r-1-r) = r-1
+```
+
+regular.  This is exactly the second alternative in the definition of
+`P_h^-`.  Hence `P_h^- <= P_h^+`, and complementing again gives equality.
+QED.
+
+Thus the local pair-difference problem has only one parameter.  We may write
+`P_h` for this common value when no confusion is possible.  The unresolved
+quantitative target is to prove `P_h=2^{o(h)}` or to replace `P_h` by an even
+more efficient non-Ramsey extraction from the two one-sided difference sets.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

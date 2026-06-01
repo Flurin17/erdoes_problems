@@ -2476,3 +2476,8 @@ source of growth beyond Ramsey.
   witness and its complement forces
   `D+2tau/m+1>m/k` and `m-D-2tau/m>m/k`.  Therefore large edge-extremal
   defect witnesses are necessarily medium-density, not sparse or co-sparse.
+- 2026-06-01: Added Lemma 28B.  The balanced pair-difference parameters
+  `P_h^+` and `P_h^-` are equal by complementation: an `r`-regular balanced
+  middle graph on `2r` vertices becomes an `(r-1)`-regular balanced middle
+  graph in the complement.  The pair route therefore has one local parameter
+  `P_h`, not two asymmetric targets.
