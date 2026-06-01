@@ -193,6 +193,12 @@ carry a product-selector barrier if their tail masses are summable, and
 one-coordinate robust-core escape cylinders must eventually cover whole
 packets.
 
+`interval_core_endpoint_check.py` exhausts the finite interval fact behind
+Corollary 16.94: if a finite packet is missed by the common intersection of
+single-interval robust cores, then at least one core misses the packet's
+minimum or maximum. This supports the endpoint-escape normal form for
+single-auxiliary-interval robust profiles.
+
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For
 \[

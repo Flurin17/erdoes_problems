@@ -145,7 +145,10 @@ common assigned robust core for infinitely many packets avoids the entire
 assigned bounded-rank dense branch. Corollary 16.93 adds finite
 witnessing: for each sufficiently late packet, finitely many assigned
 robust-core profiles, at most the packet size, already have empty common
-intersection on that packet.
+intersection on that packet. Corollary 16.94 handles the single-core
+subcase: for interval cores, such finite exclusion forces the minimum or
+maximum of the packet to escape one of the cores, so interior-only
+avoidance requires multi-core disconnected profiles.
 
 ## Definitions
 

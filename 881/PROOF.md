@@ -24012,6 +24012,51 @@ no more than the packet size, already exclude every active color in that
 packet. The remaining geometric problem is therefore finite per packet,
 even if the global menu of assigned profiles is countable.
 
+### Corollary 16.94: Single-core exclusions force endpoint escape
+
+Keep the hypotheses of Corollary 16.93, and suppose that every profile
+appearing in the finite witness family \(\mathcal B_s\) has a single
+auxiliary interval. Thus each corresponding robust core
+\[
+C_{\lambda}\qquad(\lambda\in\mathcal B_s)
+\]
+is itself an interval, where \(\lambda\) denotes either a diagonal label
+\((q,\alpha)\) or, in the fixed-\((r,\eta)\) setting, a profile
+\(\alpha\). Let
+\[
+p_s^-=\min P_s,\qquad p_s^+=\max P_s.
+\]
+If
+\[
+P_s\cap\bigcap_{\lambda\in\mathcal B_s}C_\lambda=\varnothing, \tag{1}
+\]
+then there is a label \(\lambda\in\mathcal B_s\) such that
+\[
+p_s^-\notin C_\lambda\quad\text{or}\quad p_s^+\notin C_\lambda. \tag{2}
+\]
+Consequently, in the single-core robust-profile branch, every sufficiently
+late packet has a lower or upper endpoint escaping one of the finitely many
+assigned robust cores.
+
+Proof. Suppose (2) fails. Then both endpoints \(p_s^-\) and \(p_s^+\) lie
+in every interval \(C_\lambda\). Since intervals are convex in
+\(\mathbb N\), each \(C_\lambda\) contains the whole integer interval
+\[
+[p_s^-,p_s^+]\cap\mathbb N,
+\]
+and hence contains \(P_s\). Therefore
+\[
+P_s\subseteq\bigcap_{\lambda\in\mathcal B_s}C_\lambda,
+\]
+contradicting (1). \(\square\)
+
+Thus a single-auxiliary-interval robust explanation cannot hide the
+selector debt in the interior of a clustered active packet. It must push
+at least one packet endpoint outside a robust core. The only way to avoid
+this endpoint normal form is to use multi-core profiles whose robust-core
+unions are disconnected, or to abandon the bounded-rank positive-density
+branch.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25339,6 +25384,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   branch product-covers selector tails, every sufficiently late packet has
   a finite subfamily of assigned robust profiles, of size at most the packet
   size, whose common core misses the whole packet.
+* Corollary 16.94 reduces the single-core version to endpoint escape:
+  finite intersections of interval cores can miss a packet only if some
+  core misses the packet minimum or maximum.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
