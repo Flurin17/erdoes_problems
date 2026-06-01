@@ -28,6 +28,10 @@ def reps3(elements: set[int], target: int) -> list[tuple[int, int, int]]:
     return out
 
 
+def repairs_after_adding(retained: set[int], x: int, witness: int) -> bool:
+    return bool(reps3(retained | {x}, witness))
+
+
 def build(rank: int, start: int) -> tuple[set[int], set[int], set[int], int]:
     if rank < 1:
         raise ValueError("rank must be positive")
@@ -73,6 +77,22 @@ def main() -> None:
     while cover in two:
         cover += 1
     print("two_sum_initial_coverage_end=", cover - 1)
+
+    suffix_start = args.start + 1
+    gap_candidates = [
+        x
+        for x in range(2 * args.rank + 1, suffix_start)
+        if x not in a_set
+    ]
+    unsafe = [
+        x
+        for x in gap_candidates
+        if repairs_after_adding(retained, x, witness)
+    ]
+    print("gap_candidate_count=", len(gap_candidates))
+    print("unsafe_gap_fillers=", unsafe)
+    if unsafe:
+        print("unsafe_interval=", (unsafe[0], unsafe[-1]))
 
 
 if __name__ == "__main__":

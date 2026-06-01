@@ -2646,7 +2646,11 @@ C=[2,2r]\cup\{N+2r\},\quad F=\{1\}\cup\{N+1,\ldots,N+r\}
 \]
 has the witness \(w=N+2r+2\), with \(w\notin3C\) and every endpoint of
 \(F\) active. The obstruction is not inclusion-minimality but global
-coverage: \(2A\) has a large gap before the suffix.
+coverage: \(2A\) has a large gap before the suffix, and every filler
+\[
+x\in[N-2r+2,N]
+\]
+would repair the witness because \(w-x\in2[2,2r]\).
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

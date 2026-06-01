@@ -16574,10 +16574,27 @@ initial two-sum coverage ends at
 \[
 4r,
 \]
-leaving a large gap before the suffix \(H\). Thus a proof of Target
-13.1l.2k must use global order-\(2\) coverage, recurrence across sections,
-or selector pressure; it cannot use only the local fact that a fixed first
-point belongs to arbitrarily large inclusion-minimal holes.
+leaving a large gap before the suffix \(H\). Moreover, the final part of
+that gap is poisoned. If one tries to add a retained filler
+\[
+x\in[N-2r+2,N],
+\]
+then
+\[
+w-x\in[2r+2,4r]\subset2\{2,\ldots,2r\},
+\]
+so
+\[
+w\in3(C\cup\{x\}).
+\]
+Thus the very fillers that would naturally help cover the interval just
+before \(H\) by two-sums also repair the protected witness.
+
+This identifies the actual burden in Target 13.1l.2k. A proof must use
+global order-\(2\) coverage, recurrence across sections, or selector
+pressure to show that the required coverage fillers cannot always be routed
+around these poisoned intervals; it cannot use only the local fact that a
+fixed first point belongs to arbitrarily large inclusion-minimal holes.
 
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
