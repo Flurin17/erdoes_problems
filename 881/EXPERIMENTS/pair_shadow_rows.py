@@ -99,6 +99,15 @@ def classify_candidate(
     return "repaired_other"
 
 
+def is_non_singleton_pair_witness(A: set[int], a: int, b: int, w: int) -> bool:
+    cap = max(4 * max(A), w) + 20
+    return (
+        w in hsum(A, 4, cap)
+        and w not in hsum(A - {a, b}, 4, cap)
+        and w in hsum(A - {b}, 4, cap)
+    )
+
+
 def scan_third_stage() -> None:
     old = {1, 3, 5, 20, 21, 23, 30, 31}
     threshold = 22
@@ -117,6 +126,63 @@ def scan_third_stage() -> None:
             for w in witness_range:
                 buckets[classify_candidate(A, a, b, w, threshold)].append(w)
             print("  old a=", a, buckets)
+
+
+def row_load(A: set[int], choices: dict[int, int], b: int, threshold: int) -> None:
+    """Report batched row load after choosing one witness for each old a."""
+
+    by_witness: dict[int, int] = {}
+    for a, w in sorted(choices.items()):
+        by_witness.setdefault(w, a)
+    selected = {a: w for w, a in sorted(by_witness.items())}
+    multiplicity: dict[int, int] = {}
+    total_rows = 0
+    empty_rows = 0
+    for a, w in sorted(selected.items()):
+        rows, _ = row_data(A, a, b, w, threshold)
+        if not rows:
+            empty_rows += 1
+        total_rows += len(rows)
+        for _, target, _ in rows:
+            multiplicity[target] = multiplicity.get(target, 0) + 1
+    print(
+        "  row-load",
+        "endpoints=",
+        len(choices),
+        "distinct_witnesses=",
+        len(selected),
+        "selected=",
+        selected,
+        "total_rows=",
+        total_rows,
+        "union_rows=",
+        len(multiplicity),
+        "max_overlap=",
+        max(multiplicity.values(), default=0),
+        "empty_rows=",
+        empty_rows,
+    )
+
+
+def scan_non_singleton_row_load() -> None:
+    """Track Corollary 16.6b row load in the robust-booster third stage."""
+
+    old = {1, 3, 5, 20, 21, 23, 30, 31}
+    threshold = 22
+    witness_range = range(41, 48)
+    for b in (41, 43):
+        A = old | {b}
+        choices = {}
+        for a in sorted(old):
+            found = [
+                w
+                for w in witness_range
+                if is_non_singleton_pair_witness(A, a, b, w)
+            ]
+            if found:
+                choices[a] = found[0]
+        print("non-singleton row load b=", b, "choices=", choices)
+        row_load(A, choices, b, threshold)
 
 
 def scan_row_burdens() -> None:
@@ -174,6 +240,8 @@ def main() -> None:
     scan_third_stage()
     print()
     scan_row_burdens()
+    print()
+    scan_non_singleton_row_load()
 
 
 if __name__ == "__main__":

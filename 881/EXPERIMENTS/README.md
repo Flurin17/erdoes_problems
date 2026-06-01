@@ -615,3 +615,10 @@ The same script also searches the non-singleton-new subcase, requiring
 witnesses to remain in `4(A\\{b})`. Its first seed is `old=[1,2,3,6]`,
 endpoint `7`, new point `9`, declared endpoint `19`, and coverage through
 `21`; the greedy non-singleton chain stalls at the next stage.
+
+`pair_shadow_rows.py` also reports Corollary 16.6b row-load statistics for
+the robust-booster third-stage candidates. For `b=41` and `b=43`, only old
+endpoints `5,20,30` have non-singleton pair witnesses in the checked
+window; after selecting one endpoint per distinct witness value, the
+reflected rows have no overlap. This supports the current diagnosis that
+the seed fails before a reusable moving row-bank forms.

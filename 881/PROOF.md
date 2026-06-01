@@ -18795,6 +18795,18 @@ most old-pair witness candidates are rejected by a missing old-gate shadow
 row, and the high candidates for larger old endpoints are rejected by the
 terminal gap. The few remaining rejected candidates have ordinary
 four-term repairs not detected by this necessary test.
+Its row-load mode also applies Corollary 16.6b to the non-singleton
+fragment of this failed stage. For both \(b=41\) and \(b=43\), only the old
+endpoints
+\[
+5,\ 20,\ 30
+\]
+have non-singleton pair witnesses in the checked window; after choosing one
+endpoint for each distinct witness value, two witnesses remain. The
+reflected rows have total size \(5\) for \(b=41\) and \(6\) for \(b=43\),
+with union size equal to total size and maximum overlap \(1\). Thus this
+small seed does not exhibit a reusable high-overlap row bank; it fails
+before enough old endpoints even enter the non-singleton branch.
 
 ### Corollary 16.5: Pair witnesses impose reflected two-sum rows
 
@@ -18939,6 +18951,78 @@ Corollary 10.2c. If singleton-\(b\) witnesses are eventually absent, then
 each new point must carry linearly many different pair witnesses against
 the old stage, and each distinct witness brings its own Corollary 16.5
 terminal-gap and reflected-row burden.
+
+### Corollary 16.6b: Batched non-singleton witnesses carry row load
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\)
+and minimum \(m_0\). Fix
+\[
+b\in A
+\]
+and a finite set
+\[
+O\subset A\setminus\{b\}.
+\]
+For each \(a\in O\), suppose there is a non-singleton pair witness
+\[
+w_a\notin4(A\setminus\{a,b\}),\qquad
+w_a\in4(A\setminus\{b\}). \tag{1}
+\]
+Put
+\[
+d_a=w_a-a
+\]
+and
+\[
+T_a=\{p\in A\setminus\{a,b\}:
+d_a-(b-a)-2m_0<p\le d_a-2m_0,\ w_a-p\ge N_0\}. \tag{2}
+\]
+Then there is a set
+\[
+O'\subset O,\qquad |O'|\ge\left\lceil{|O|\over4}\right\rceil, \tag{3}
+\]
+such that the witness values \(w_a\), \(a\in O'\), are distinct and
+\[
+d_a-T_a\subseteq2(A\setminus\{b\}) \qquad(a\in O'). \tag{4}
+\]
+
+Moreover, for \(X\subset O'\), define the reflected-row multiplicity
+\[
+\mu_X=\max_r |\{a\in X:r\in d_a-T_a\}|.
+\]
+If \(\mu_X\ge1\), then
+\[
+\left|2(A\setminus\{b\})\cap\bigcup_{a\in X}(d_a-T_a)\right|
+\ge {1\over\mu_X}\sum_{a\in X}|T_a|. \tag{5}
+\]
+
+Proof. Choose \(O'\) by selecting one endpoint \(a\) for each distinct
+witness value occurring among the \(w_a\)'s. Lemma 16.6 says that any fixed
+non-singleton witness value can serve at most four endpoints, so (3)
+follows. For each \(a\in O'\), Corollary 16.5 gives (4), because \(T_a\)
+is exactly the threshold-restricted old-gate row set.
+
+For (5), count incidences
+\[
+(a,r),\qquad a\in X,\quad r\in d_a-T_a.
+\]
+There are \(\sum_{a\in X}|T_a|\) such incidences, and each reflected value
+\(r\) is counted at most \(\mu_X\) times. Since all reflected values lie in
+\(2(A\setminus\{b\})\) by (4), the displayed lower bound follows.
+\(\square\)
+
+This is still only a necessary condition. The rows in (4) give
+\[
+w_a=a+p+x+y,
+\]
+with \(x,y\in A\setminus\{b\}\), and therefore still use the deleted old
+gate \(a\). For the actual pair deletion \(\{a,b\}\), they certify the
+domination of the shifted targets \(w_a-p\), not a repair of \(w_a\). The
+next possible positive obstruction is therefore a finite-window or
+bounded-overlap theorem: if the non-singleton rows cannot be made empty by
+high excess, then a stage must place a large amount of row load inside
+\(2(A\setminus\{b\})\), and one would need to show that sufficiently large
+overlap creates a reusable finite row bank covered by Lemma 16.0a.
 
 ### Diagnostic 16.7: High-excess singleton pair stages are locally compatible
 
@@ -20010,14 +20094,15 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the third stage because singleton candidates \(41,43\) extend coverage but
   fail simultaneous pair witnesses against many old elements; the obstruction
   is domination, not coverage alone.
-* Target 16.2 and Lemmas 16.3--16.6a isolate the current \(k=3\)
+* Target 16.2 and Lemmas 16.3--16.6b isolate the current \(k=3\)
   moving-core target: after finite-core marker coverage is ruled out, every
   old-new pair witness must either be eventually repaired or force old-gate
   \(2A\)-shadow rows \(w-a-p\in2(A\setminus\{b\})\) across the interval
   where the new endpoint \(b\) is too large to participate; the finite
   prefilter rejects most robust-booster third-stage candidates by missing
   shadow rows, and after excluding singleton-new holes each new point needs
-  linearly many distinct witnesses against the old stage.
+  linearly many distinct witnesses and reflected row load against the old
+  stage.
 * Diagnostic 16.7 shows the high-excess escape is locally compatible:
   \(\{1,2,3,4\}\) can add \(8\) with high-excess pair witnesses for all old
   endpoints and a two-point buffer, but the greedy singleton chain stalls

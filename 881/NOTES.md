@@ -2203,6 +2203,19 @@ singleton-\(b\) holes. The second branch is exactly where the known
 Corollary 16.6a makes this quantitative: after excluding singleton-\(b\)
 holes, a new point needs at least \(\lceil |A_{\rm old}|/4\rceil\) distinct
 witness values to dominate the old stage.
+Corollary 16.6b batches the accompanying row load: choosing one old
+endpoint for each distinct non-singleton witness leaves
+\(\lceil |O|/4\rceil\) rows \(d_a-T_a\subset2(A\setminus\{b\})\), and a
+bounded-overlap hypothesis forces their union in \(2(A\setminus\{b\})\) to
+have size proportional to \(\sum |T_a|\). This is not yet a repair theorem,
+because every row still repairs only after restoring the deleted old gate
+\(a\).
+The updated `pair_shadow_rows.py` reports these row-load statistics for the
+robust-booster third-stage candidates. For \(b=41,43\), only old endpoints
+\(5,20,30\) enter the non-singleton branch in the checked witness window;
+after selecting one endpoint per witness value, the row union has no
+overlap. The seed therefore fails before producing the high-overlap row
+bank that might feed a Lemma 16.0a-style repair.
 The new `high_excess_pair_seed_search.py` shows that the high-excess escape
 is locally compatible outside the modulo-\(10\) booster seed. It finds
 \[
