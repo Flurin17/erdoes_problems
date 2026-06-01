@@ -21283,30 +21283,23 @@ y_1+y_2-e=a_0+h\in[a_0,c_0]\subset I. \tag{2}
 \]
 If
 \[
-a_0+h-d\ge1,
+h\ge d,
 \]
 take \(y_3=a_0\). Then
 \[
 y_1+y_2+y_3-2e=a_0+h-d,
 \]
-and this value is at most \(a_0+h<c_0\), hence lies in \(I\).
+which lies in \([a_0,c_0]\), hence in \(I\).
 
 If instead
 \[
-a_0+h-d\le0,
+h<d,
 \]
-then \(d\ge a_0+h>h\). Since \(c_0=a_0+d+h\le L\), we get
-\[
-a_0+2h\le a_0+d+h=c_0,
-\]
-and in particular
-\[
-a_0+2h\le c_0\le L.
-\]
-Take \(y_3=c_0\). Then
+take \(y_3=c_0\). Then
 \[
 y_1+y_2+y_3-2e=a_0+2h\in I.
 \]
+Indeed \(a_0\le a_0+2h<c_0\), since \(h<d\).
 In both cases (1) holds. \(\square\)
 
 ### Corollary 16.45: Interval tests force bounded-rank gate shadows
