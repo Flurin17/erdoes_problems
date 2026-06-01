@@ -207,6 +207,9 @@ packet-position upper bounds are summable on some tail, the high-density
 linear-core branch is selector-avoidable.
 Lemma 16.118 splits any large normalized packet-position error into packet
 width or auxiliary-midpoint displacement.
+Corollary 16.119 removes the tiny-packet artefact for finite menus when
+\(\sum_s1/|P_s|\) is finite: survival then forces nonsummable width-heavy
+or midpoint-displacement packets for one fixed profile.
 
 ## Definitions
 

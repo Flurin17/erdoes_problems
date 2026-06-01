@@ -25414,6 +25414,69 @@ Thus a nonsummable \(\beta\)-residual has only two local sources. Either
 the active packet occupies a positive portion of the tested scale, or the
 assigned auxiliary midpoints stay linearly away from the packet center.
 
+### Corollary 16.119: Finite-menu position error splits into width or displacement
+
+Keep the finite-menu setting of Corollary 16.116, and assume
+\[
+T_\lambda>0\qquad(\lambda\in\Lambda).
+\]
+Assume also that the active packet sizes satisfy
+\[
+\sum_s {1\over |P_s|}<\infty. \tag{1}
+\]
+If the assigned high-density linear-core branch product-covers every
+selector tail, then there is a profile \(\lambda\in\Lambda\) such that at
+least one of the following alternatives holds.
+
+1. **Width-heavy residual.**
+   \[
+   \sum_{\substack{s:\\ W_s>T_\lambda/2}}\beta_{\lambda,s}=\infty. \tag{2}
+   \]
+2. **Midpoint-displacement residual.**
+   \[
+   \sum_{\substack{s:\\
+   \Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+   \beta_{\lambda,s}=\infty. \tag{3}
+   \]
+
+Proof. By Corollary 16.116, choose \(\lambda\in\Lambda\) such that
+\[
+\sum_s\beta_{\lambda,s}=\infty. \tag{4}
+\]
+By (1),
+\[
+\sum_s {2\over |P_s|}<\infty,
+\]
+so the subseries over indices with
+\[
+\beta_{\lambda,s}|P_s|\le2
+\]
+is finite. Removing those indices from (4), we still have
+\[
+\sum_{\substack{s:\\ \beta_{\lambda,s}|P_s|>2}}
+\beta_{\lambda,s}=\infty. \tag{5}
+\]
+If (2) fails, then deleting the width-heavy indices from (5) still leaves
+a divergent subseries over indices with
+\[
+W_s\le {T_\lambda\over2}
+\qquad\text{and}\qquad
+\beta_{\lambda,s}|P_s|>2.
+\]
+Lemma 16.118, applied with \(\varepsilon=\beta_{\lambda,s}\), gives
+\[
+\Delta_{\lambda,i,s}>{T_\lambda\over2}
+\qquad(i)
+\]
+for every index in this remaining divergent subseries. This is (3).
+\(\square\)
+
+Thus, after the packet sizes are large enough on average, a finite-menu
+linear-core obstruction cannot be maintained by tiny normalized errors. It
+must either keep seeing packets with large interval width at the assigned
+scale, or keep every auxiliary midpoint in one fixed profile linearly away
+from the packet center on a nonsummable set of packets.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26817,6 +26880,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.118 localizes large packet-position error: after excluding tiny
   packet mass artefacts, it forces either large packet width or linear
   auxiliary-midpoint displacement.
+* Corollary 16.119 removes the tiny-packet artefact under
+  \(\sum_s1/|P_s|<\infty\): finite-menu survival then forces one fixed
+  profile to have nonsummable width-heavy or midpoint-displacement packets.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
