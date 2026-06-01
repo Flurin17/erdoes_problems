@@ -3330,3 +3330,9 @@ source of growth beyond Ramsey.
   twin blowups reduce to a weighted version of the original problem; Ramsey's
   `F(m)>=c log m` only recovers a logarithmic worst-case bound, so a full proof
   still needs non-Ramsey input on the quotient layers.
+- 2026-06-01: Added a twin-blowup stability corollary.  If a nondecreasing
+  lower bound `phi(m)=omega(log m)` holds for all quotient graphs, then it
+  holds uniformly for all independent twin blowups: the Ferrers profile
+  `a_t=#{i:s_i>=t}` satisfies `sum_t a_t=n`, and
+  `max_t t phi(a_t)=omega(log n)`.  Thus weighted twin blowups preserve any
+  eventual solution rather than creating an independent obstruction.

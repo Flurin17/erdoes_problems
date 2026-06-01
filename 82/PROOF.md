@@ -2995,6 +2995,78 @@ proof of Problem 82 by itself.  It does show that any sublogarithmic-looking
 blowup obstruction must already encode hard quotient graphs across many
 weight levels.
 
+**Corollary: Superlog Lower Bounds Are Stable Under Twin Blowups.**  Let
+`phi` be a nondecreasing function on positive integers with `phi(m)>=1` and
+
+```text
+phi(m)/log m -> infinity.
+```
+
+Suppose that every graph on `m` vertices has a regular induced subgraph on at
+least `phi(m)` vertices.  Then every independent twin blowup `G` on `n`
+vertices satisfies
+
+```text
+reg(G)/log n -> infinity
+```
+
+uniformly over all choices of quotient graph and cluster sizes.
+
+Proof.  Let `a_t=|{i:s_i>=t}|` be the Ferrers profile of the cluster sizes,
+so
+
+```text
+n=sum_{t>=1} a_t.
+```
+
+By the preceding lemma,
+
+```text
+reg(G) >= W := max_{t>=1} t phi(a_t),
+```
+
+where terms with `a_t=0` are ignored.  We show that `W/log n -> infinity`
+for every Ferrers profile.
+
+Fix `A>0`.  Choose `epsilon>0` so small that `epsilon A<1/3`.  Since
+`phi(m)/log m -> infinity`, there is `m_0` such that
+
+```text
+log m <= epsilon phi(m)       for all m>=m_0.
+```
+
+For every `t` with `a_t>=m_0`,
+
+```text
+a_t <= exp(epsilon phi(a_t)) <= exp(epsilon W/t).
+```
+
+For `a_t<m_0` we use the trivial bound `a_t<=m_0`.  Also, whenever `a_t>0`,
+we have `t<=W` because `phi(a_t)>=1`.  Therefore
+
+```text
+n <= m_0 W + sum_{1<=t<=W} exp(epsilon W/t)
+   <= m_0 W + W exp(epsilon W).
+```
+
+If `W<=A log n`, then the last expression is at most
+
+```text
+m_0 A log n + A log n * n^{epsilon A},
+```
+
+which is smaller than `n` for all sufficiently large `n`, because
+`epsilon A<1`.  This contradiction shows that `W>A log n` for all large `n`.
+Since `A` was arbitrary, `W/log n -> infinity`, and hence
+`reg(G)/log n -> infinity`.  QED.
+
+This closure result is deliberately circular: taking `phi=F` would be exactly
+the desired theorem on the quotient layers.  Its value is diagnostic.  Any
+attempted counterexample built only by replacing quotient vertices with twin
+clusters would have to contain the original hard problem in the quotient
+sequence itself; the blowup weights cannot be the source of a new
+Ramsey-scale obstruction.
+
 Finally, a purely deletion-based absorption proof has a strong trace
 restriction.
 
