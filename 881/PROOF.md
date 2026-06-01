@@ -6377,6 +6377,71 @@ produce arbitrarily large private reflected fibers while also preventing
 those fibers from compacting to a recurrent certificate triple or to a
 finite recurrent Sidon coloring.
 
+### Example 8.5a.7g: Large one-color private fibers are locally compatible
+
+The conclusion of Corollary 8.5a.7f is still only a global obstruction, not
+a local contradiction. A single active color can carry an arbitrarily large
+certificate-free private fiber in a finite range-separated packet.
+
+Let
+\[
+U=\{u_1,\ldots,u_M\}
+\]
+be a finite Sidon set, for instance powers of \(2\). Choose \(N\) much
+larger than every element of \(U\), and put
+\[
+w=10N,\qquad f=N,\qquad g=N+1,\qquad t=3N.
+\]
+For \(u\in U\), define
+\[
+q_u=9N-u,
+\]
+and put
+\[
+q_g=6N-1.
+\]
+Let
+\[
+F=\{f,g\},\qquad
+C=U\cup\{q_u:u\in U\}\cup\{t,q_g\},\qquad S=C\cup F.
+\]
+By range separation,
+\[
+w\notin3C. \tag{1}
+\]
+Restoring \(f\) repairs \(w\) through every \(u\in U\):
+\[
+w=f+u+q_u, \tag{2}
+\]
+and restoring \(g\) repairs \(w\) through
+\[
+w=g+t+q_g. \tag{3}
+\]
+Thus \(F\) is inclusion-minimal for the witness \(w\).
+
+The color \(f\) serves the whole fiber \(U\), since
+\[
+w-u-f=q_u\in C \qquad(u\in U), \tag{4}
+\]
+while
+\[
+u+f=N+u\notin2C. \tag{5}
+\]
+Again this follows from range separation: \(2C\) lies near \(0,3N,6N,9N,
+12N,15N,18N\), not in the interval \(N+U\). The fiber \(U\) is
+certificate-free relative to \(S\), because any certificate value
+\[
+u_i+u_j-u_k
+\]
+with \(u_i,u_j\ne u_k\) is below \(N\), and the Sidon property of \(U\)
+prevents it from landing back in \(U\); it cannot land in the other ranges
+of \(S\).
+
+Thus large private fibers can be locally certificate-free and
+range-separated. A proof must use their forced recurrence across all finite
+tails, or the promotion of their active colors into later barriers, rather
+than a one-stage contradiction.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
@@ -12935,6 +13000,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   remaining counterexamples have arbitrarily large private reflected
   fibers \(U\) for a single active color, with \(m-U\subset A\) and
   \(U+f\) still excluded from \(2(A\setminus F)\).
+* Example 8.5a.7g shows that these large fibers are locally compatible:
+  a range-separated two-color packet can make one active color carry an
+  arbitrarily large certificate-free private fiber.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

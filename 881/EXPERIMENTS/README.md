@@ -150,7 +150,8 @@ the fact that each moving color gates both an old row and its retained
 mirror while the two-point fiber remains certificate-free. The final block
 checks the parity interval examples: for ranks at least four the collective
 odd deletion has a mobile-injective hole, but the high-window pair-link
-graph has no universal first vertex, so Lemma 13.1j cannot start.
+graph has no universal first vertex, so Lemma 13.1j cannot start. It also
+verifies the large one-color fiber packet from Example 8.5a.7g.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

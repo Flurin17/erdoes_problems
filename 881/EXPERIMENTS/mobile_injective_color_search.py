@@ -182,6 +182,49 @@ def parity_block_pair_links(r: int) -> dict[str, object]:
     }
 
 
+def verify_large_fiber_packet(size: int) -> dict[str, object]:
+    U = tuple(2**i for i in range(size))
+    big_n = 10 * max(U) + 100
+    w = 10 * big_n
+    f = big_n
+    g = big_n + 1
+    t = 3 * big_n
+    mirrors = tuple(9 * big_n - u for u in U)
+    q_g = 6 * big_n - 1
+    F = (f, g)
+    C = tuple(sorted(U + mirrors + (t, q_g)))
+    S = tuple(sorted(C + F))
+    two_C = sums_k(C, 2, 2 * w)
+    three_C = sums_k(C, 3, w)
+    S_set = set(S)
+
+    private_fiber = [
+        (u, w - u - f, (u + f) not in two_C)
+        for u in U
+    ]
+    repairs = {
+        "restore_f": all(w == f + u + (9 * big_n - u) for u in U),
+        "restore_g": w == g + t + q_g,
+    }
+    certificate_free_U = True
+    for e in U:
+        for y1 in U:
+            for y2 in U:
+                if y1 != e and y2 != e and y1 + y2 - e in S_set:
+                    certificate_free_U = False
+
+    return {
+        "U": U,
+        "N": big_n,
+        "w": w,
+        "F": F,
+        "w_notin_3C": w not in three_C,
+        "repairs": repairs,
+        "private_fiber": private_fiber,
+        "certificate_free_U": certificate_free_U,
+    }
+
+
 def search(max_value: int, max_size: int, min_match: int, limit: int) -> list[dict[str, object]]:
     results: list[dict[str, object]] = []
     universe = tuple(range(1, max_value + 1))
@@ -247,6 +290,12 @@ def main() -> None:
         print("collective_witness=", summary["collective_witness"])
         print("high_pair_links=", summary["high_pair_links"])
         print("universal_pair_link_vertices=", summary["universal_pair_link_vertices"])
+
+    large_fiber = verify_large_fiber_packet(5)
+    print()
+    print("large one-color fiber packet check")
+    for key, value in large_fiber.items():
+        print(f"{key}={value}")
 
 
 if __name__ == "__main__":
