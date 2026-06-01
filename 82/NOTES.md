@@ -3604,8 +3604,8 @@ source of growth beyond Ramsey.
   constrained by the first neighborhood.
 - 2026-06-01: Derived a precise residual condition from the part-covering
   lemma.  If the one-step induction on the first-vertex nonneighbor side is
-  too weak to prove `alpha+omega>=ceil((n+3)/2)`, then every maximum clique in
-  that nonneighbor side must fully miss at least one complement-matching part
-  of the first neighborhood.  The next possible proof route is to use such a
-  fully missed part to manufacture the one extra independent vertex that the
-  induction lacks.
+  short by `D>0` in proving `alpha+omega>=ceil((n+3)/2)`, then every maximum
+  clique in that nonneighbor side must fully miss at least `D`
+  complement-matching parts of the first neighborhood.  The next possible
+  proof route is to use these fully missed parts to manufacture the extra
+  independent vertices that the induction lacks.
