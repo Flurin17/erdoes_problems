@@ -25263,6 +25263,24 @@ packets, every auxiliary midpoint in that profile is too far from the
 packet center, or the packet interval is too wide relative to the tested
 scale and packet size.
 
+### Corollary 16.116: Finite-menu survival needs nonsummable packet-position error
+
+Keep the notation of Corollary 16.115. If the assigned high-density
+linear-core branch product-covers every selector tail, then there is
+\[
+\lambda\in\Lambda
+\]
+such that
+\[
+\sum_s\beta_{\lambda,s}=\infty. \tag{1}
+\]
+
+Equivalently, after passing to any finite assigned profile menu, the
+remaining linear-core obstruction must make one fixed profile either
+center-far or packet-width-large with nonsummable normalized frequency.
+
+Proof. This is the contrapositive of Corollary 16.115. \(\square\)
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26658,6 +26676,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.115 converts the estimate into a finite-menu selector
   criterion: if those upper bounds are summable for every fixed profile,
   the high-density linear-core menu is avoidable.
+* Corollary 16.116 states the resulting residual sharply: finite-menu
+  survival forces nonsummable packet-position error for one fixed profile.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

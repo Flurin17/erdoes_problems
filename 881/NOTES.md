@@ -200,6 +200,8 @@ displacement.
 Corollary 16.115 packages the consequence: if those packet-position upper
 bounds are summable for every profile in a finite assigned menu, that
 finite-menu linear-core branch is selector-avoidable.
+Corollary 16.116 states the residual contrapositively: finite-menu survival
+requires nonsummable packet-position error for one fixed profile.
 
 ## Definitions
 
