@@ -2194,3 +2194,11 @@ source of growth beyond Ramsey.
   `||a||_1<=d s^{d/2}`, hence `|B|<=d^2 s^{d/2}` by Lemma 18.  For fixed
   `s>=3` this remains exponential in `d`, so support `3` is the first layer
   requiring a new cancellation argument rather than determinant bounds.
+- 2026-06-01: Added Example 18B and `support3_separator.py`.  There are
+  support-`3` signed-indicator systems with total imbalance at most `2` that
+  are zero-sum-free but force every integer separator to have Fibonacci-size
+  coefficients.  This is only a trace-cone calibration, not a graph-host
+  obstruction, but it rules out proving the support-`3` layer by a uniform
+  small-separator theorem alone.  Next target: use graphical compensation or
+  multiplicity constraints from the repeated-degree host to get cancellation
+  beyond what the abstract cone sees.

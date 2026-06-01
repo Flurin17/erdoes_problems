@@ -6339,6 +6339,89 @@ support-`<=2` argument uses special graph structure that is absent from the
 generic bounded-support determinant estimate.  The support-`3` trace layer is
 the first place where a genuinely new cancellation argument is needed.
 
+The determinant estimate is not merely wasteful in a superficial way: support
+`3` trace systems can force exponentially large separating coefficients.
+
+**Example 18B: Support-Three Separators Can Be Exponential.**  For every
+`t>=2`, there is a zero-sum-free signed-indicator multiset in dimension
+`d=2t+2`, with every support of size at most `3` and total vector of
+infinity norm at most `2`, such that every integer separator
+`a` satisfying `a dot v>=1` for all vectors in the multiset has
+`||a||_infty >= F_t`, where `F_t` is the Fibonacci sequence with
+`F_0=F_1=1`.
+
+Proof.  Use coordinates
+
+```text
+p_0,...,p_t, n_0,...,n_t.
+```
+
+Take the following trace vectors:
+
+```text
+ e_{p_i}                         for 0<=i<=t,
+-e_{n_i}                         for 0<=i<=t,
+ e_{p_i}+e_{n_{i-1}}+e_{n_{i-2}}  for 2<=i<=t,
+-(e_{n_i}+e_{p_i}+e_{p_{i-1}})    for 1<=i<=t.
+```
+
+All supports have size at most `3`.  The total vector has every coordinate in
+`{-2,-1,0,1}` by direct counting: each interior coordinate appears once as a
+singleton and is cancelled by the adjacent triple constraints, with only the
+end coordinates missing one adjacent cancellation.
+
+The system is zero-sum-free because it has a strict real separator.  For
+example, choose positive numbers `P_i,N_i` recursively by
+
+```text
+P_0=P_1=N_0=1,       N_1=P_1+P_0+1,
+P_i=N_{i-1}+N_{i-2}+1  for i>=2,
+N_i=P_i+P_{i-1}+1      for i>=2,
+```
+
+and set
+
+```text
+x_{p_i}=P_i,       x_{n_i}=-N_i.
+```
+
+Then every displayed trace vector has positive dot product with `x`, so no
+nonempty nonnegative integer combination can sum to zero.
+
+Now let `a` be any integer separator with `a dot v>=1` on all displayed
+vectors.  The singleton constraints force
+
+```text
+a_{p_i}=:P'_i >= 1,        -a_{n_i}=:N'_i >= 1.
+```
+
+The triple constraints force, for `i>=2`,
+
+```text
+P'_i >= N'_{i-1}+N'_{i-2}+1,
+```
+
+and, for `i>=1`,
+
+```text
+N'_i >= P'_i+P'_{i-1}+1.
+```
+
+In particular `P'_0,P'_1>=1`, and for every `i>=3`,
+
+```text
+P'_i >= P'_{i-1}+P'_{i-2}.
+```
+
+Thus `P'_t>=F_t`, proving `||a||_infty>=F_t`.  QED.
+
+This example is not claimed to be a full repeated-degree host obstruction:
+it records only the trace-cone, zero-sum-free, small-total-imbalance
+phenomenon.  Its purpose is to show that Lemma 18 cannot handle the
+support-`3` layer by a uniform small-separator theorem.  Any successful trace
+argument at support `3` must use additional structure, such as graphical
+compensation or multiplicity/degree information from the ambient graph.
+
 ## Conditional Proposition: Repeated-Degree / Bounded-Spread Bridge
 
 Let `E(r)` be the least integer `N` such that every `N`-vertex graph contains
