@@ -8598,6 +8598,24 @@ two marked components, not only by making each component hard below half the
 target order.  The script `EXPERIMENTS/regular_spectrum.py` computes these
 spectra and checks the condition in (2) for fixed masks.
 
+There is a simple explicit instance of this spectrum separation.  For every
+`h>=5`,
+
+```text
+D_spec(h) >= h,       P_h >= h.
+```
+
+Indeed, take `M=h-1`, let `J_1` be the disjoint union of one edge and
+`h-3` isolated vertices, and let `J_2=K_{h-1}`.  Neither graph has `h`
+vertices.  In `J_1`, the largest `0`-regular induced subgraph has order
+`h-2`, the largest `1`-regular induced subgraph has order `2`, and no regular
+induced subgraph has degree at least `2`.  In `J_2`, the largest regular
+subgraph of degree `d` has order `d+1`.  Thus the largest same-degree total
+orders are `h-1` for `d=0`, `4` for `d=1`, and at most `h-1` for all other
+degrees.  Since `h>=5`, no same-degree pair has total order at least `h`.
+Lemma 28H gives `P_h>h-1`, and the definition of `D_spec` gives
+`D_spec(h)>h-1`.
+
 For example, with `h=6` and component order `M=5`, the masks
 
 ```text

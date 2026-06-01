@@ -2531,6 +2531,10 @@ source of growth beyond Ramsey.
   contain `ceil(h/2)`-cliques of the same degree.  This is still exponential,
   so a subexponential spectrum-matching proof must use nonhomogeneous regular
   spectrum entries.
+- 2026-06-01: Added a simple explicit spectrum-separation construction:
+  `K_2 union (h-3)K_1` paired with `K_{h-1}` gives `D_spec(h)>=h` and
+  `P_h>=h` for every `h>=5`.  The exact `h=6` checker found this mechanism
+  as masks `1` and `1023`.
 - 2026-06-01: Added `dspec_exact.py` and Computational Example 28K.  Exact
   labelled enumeration gives `D_spec(6)=6`: there are spectrum-disjoint
   obstructions at `M=5`, but none at `M=6`.  Since the marked pair checker
