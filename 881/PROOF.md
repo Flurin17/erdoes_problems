@@ -9083,6 +9083,66 @@ and the only nonautomatic old summands are the deleted ones \(a\in F\).
 The second alternative is precisely an absorbed translate by a center not
 available as a retained row. \(\square\)
 
+### Corollary 8.5a.7z.12h.2: Escape-set form of one-sided saturation
+
+Keep the notation of Lemma 8.5a.7z.12h.1. Define the old-row escape set
+\[
+R=\{a\in A:p-a>0,\ p-a\notin A,\ d+a\notin2C\}
+\]
+and the split escape set
+\[
+E=\{z\in[1,p-1]\setminus A:d+z\notin2C\}.
+\]
+Assume:
+
+1. \(R=\varnothing\);
+2. there are no \(x<y\) in \(E\) with \(x+y=p\);
+3. if \(p\) is even and \(p/2\notin A\), then at least one of
+   \[
+   d+p/2\in2C,\qquad d\in C,\qquad 3p/2=w \tag{1}
+   \]
+   holds.
+
+Then no finite retained batch \(S\subset\mathbb N\setminus A\) can satisfy
+\[
+p\in2(A\cup S),\qquad w\notin3(C\cup S).
+\]
+
+Proof. By Lemma 8.5a.7z.12e', it is enough to rule out one-point repairs
+and two-point repairs of \(p\).
+
+A one-point repair using an old summand has the form
+\[
+p=x+a,\qquad a\in A,\quad x=p-a\notin A.
+\]
+Since \(R=\varnothing\), it has \(d+a\in2C\), equivalently
+\[
+w-x=d+a\in2C,
+\]
+so it repairs the witness and is unsafe. The only one-point repair not of
+this form is the double repair \(p=x+x\). If it exists, then \(x=p/2\notin
+A\), and condition (3) is exactly one of the three obstructions
+\[
+w-x\in2C,\qquad w-2x\in C,\qquad 3x=w
+\]
+from Lemma 8.5a.7z.12e.
+
+Finally, a two-point repair has
+\[
+x+y=p,\qquad x,y\notin A.
+\]
+If \(x<y\), condition (2) says at least one of \(x,y\) is not in \(E\), so
+one of
+\[
+d+x\in2C,\qquad d+y\in2C
+\]
+holds. Equivalently, one of
+\[
+w-y\in2C,\qquad w-x\in2C
+\]
+holds, and the two-point repair is unsafe. The case \(x=y\) is the
+one-point double repair already handled. \(\square\)
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -9198,6 +9258,13 @@ d+a\in2C
 for the associated one-new candidates \(p-a\). Of these rows, \(2308\) are
 retained and \(3\) are the deleted gates. The obstruction is therefore a
 large external translate absorbed into \(2C\), not a retained-defect wall.
+The escape-set summary of Corollary 8.5a.7z.12h.2 says the same thing from
+the opposite side: there are no old-row escapes, the split escape set has
+\[
+2312
+\]
+points but no complementary pair summing to \(6900\), and the half-candidate
+\(3450\) is saturated.
 The reusable sweep
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200
@@ -16294,6 +16361,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.5a.7z.12h.1 rewrites the one-point part exactly as external
   translate absorption \(d+T\subseteq2C\) for the old summand rows whose
   candidates \(p-a\) are outside the current set.
+* Corollary 8.5a.7z.12h.2 gives the complementary escape-set form: a safe
+  two-point repair requires a complementary pair inside
+  \(\{z\notin A:d+z\notin2C\}\), and a safe old-summand repair requires an
+  old row \(a\) with \(d+a\notin2C\).
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.

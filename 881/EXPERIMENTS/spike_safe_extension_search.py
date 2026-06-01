@@ -302,6 +302,55 @@ def shadow_translation_summary(
     }
 
 
+def shadow_escape_set_summary(
+    state: State,
+    deleted: set[int],
+    witness: int,
+    gap: int,
+) -> dict[str, object]:
+    full = set(state.retained) | deleted
+    defect = witness - gap
+    old_row_escapes = []
+    for old in sorted(full):
+        candidate = gap - old
+        if (
+            candidate > 0
+            and candidate not in full
+            and defect + old not in state.retained_pair_sums
+        ):
+            old_row_escapes.append((old, candidate))
+
+    split_escape_set = [
+        item
+        for item in range(1, gap)
+        if item not in full and defect + item not in state.retained_pair_sums
+    ]
+    split_escape_lookup = set(split_escape_set)
+    complementary_pairs = [
+        (first, gap - first)
+        for first in split_escape_set
+        if first < gap - first and gap - first in split_escape_lookup
+    ]
+    half_candidate = gap % 2 == 0 and gap // 2 not in full
+    return {
+        "defect": defect,
+        "old_row_escape_count": len(old_row_escapes),
+        "old_row_escape_examples": old_row_escapes[:20],
+        "split_escape_set_count": len(split_escape_set),
+        "split_escape_examples": split_escape_set[:20],
+        "split_escape_tail": split_escape_set[-20:],
+        "complementary_escape_pair_count": len(complementary_pairs),
+        "complementary_escape_pair_examples": complementary_pairs[:20],
+        "half_candidate": half_candidate,
+        "half_candidate_saturated": (
+            half_candidate and defect + gap // 2 in state.retained_pair_sums
+        ),
+        "half_candidate_double_defect_retained": (
+            half_candidate and defect in state.retained
+        ),
+    }
+
+
 def add_retained_batch(
     state: State,
     deleted: set[int],
@@ -686,6 +735,10 @@ def main() -> None:
     print(
         "shadow_translation_summary="
         f"{shadow_translation_summary(best, deleted, witness, final_gap)}"
+    )
+    print(
+        "shadow_escape_set_summary="
+        f"{shadow_escape_set_summary(best, deleted, witness, final_gap)}"
     )
 
     if any(witness - retained in best.retained_pair_sums for retained in best.retained):
