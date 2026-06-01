@@ -23909,6 +23909,57 @@ infinitely many packets contain a color lying in all assigned robust cores
 at the relevant scales, a selector can choose such colors and avoid the
 entire assigned branch.
 
+### Corollary 16.92: Common robust-core selectors avoid assigned dense debt
+
+Keep the notation of Corollary 16.90. Suppose there is an infinite set
+\[
+S\subset\mathbb N
+\]
+and choices
+\[
+x_s\in P_s\qquad(s\in S)
+\]
+such that, for every \(s\in S\),
+\[
+x_s\in\bigcap_{q\ge1}\ \bigcap_{\alpha\in\mathcal A_q} C_{\alpha,q}.
+\tag{1}
+\]
+Then the selected tail
+\[
+X=\{x_s:s\in S\}
+\]
+contains no trace from \(\mathcal G_{\rm bd}\). In particular,
+\(\mathcal G_{\rm bd}\) does not product-cover every selector tail.
+
+The fixed-\((r,\eta)\) analogue is: if infinitely many packets contain
+chosen colors
+\[
+x_s\in P_s\cap\bigcap_{\alpha\in\mathcal A}C_\alpha,
+\]
+then the selector formed by those colors avoids every trace in the
+assigned fixed-\((r,\eta)\) robust-core branch.
+
+Proof. Suppose \(G\in\mathcal G_{\rm bd}\) were contained in \(X\). Let
+\[
+q=q(G),\qquad \alpha=\alpha(G),\qquad P_G\subseteq G
+\]
+be the data assigned in Corollary 16.90. Since \(G\subset X\), every active
+color in \(P_G\) is one of the selected \(x_s\), and by (1) lies in
+\(C_{\alpha,q}\). Hence
+\[
+P_G\subset C_{\alpha,q}.
+\]
+Corollary 16.86, with rank bound \(q\) and density threshold \(1/q\), then
+contradicts the assigned density \(\ge1/q\). Therefore no such \(G\)
+exists. The fixed-\((r,\eta)\) proof is identical, using the cores
+\(C_\alpha\) from Corollary 16.88. \(\square\)
+
+Thus the robust-core branch has an exact selector obstruction: after all
+assigned interval tests are fixed, a surviving product-selector barrier
+requires the common robust-core intersection to miss every sufficiently
+late packet point. If even one color per infinitely many packets remains
+inside all assigned cores, those colors form an escaping selector.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25229,6 +25280,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   robust-core branch: every sufficiently late packet must be covered
   pointwise by robust-core escape conditions, or a selector can stay inside
   all assigned cores and avoid that branch.
+* Corollary 16.92 gives the direct common-core selector criterion: if
+  infinitely many packets retain one color in every assigned robust core,
+  those colors avoid all assigned bounded-rank positive-density traces.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

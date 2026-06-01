@@ -140,6 +140,9 @@ whole bounded-rank positive-density interval-packet branch. Lemma
 8.5a.7u'' and Corollary 16.91 sharpen the robust-core case because those
 cylinders are one-coordinate: a product-covering robust-core explanation
 must eventually cover every color in every packet by some escape condition.
+Corollary 16.92 records the contrapositive selector form: one color in the
+common assigned robust core for infinitely many packets avoids the entire
+assigned bounded-rank dense branch.
 
 ## Definitions
 
