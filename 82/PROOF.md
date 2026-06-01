@@ -12373,6 +12373,44 @@ The first displayed inequality follows from the definition of `G(h)`, the
 second from Lemma 28D.5, and the final coarse bound from `h>=3` and `P>=1`.
 QED.
 
+**Definition 28D.6a: The Regular Full-Drop Parameter.**  For integers
+`P,h>=1`, let `C_full^reg(P,h)` be the least integer `m` such that every
+ordered graph on `m` vertices satisfying the `P`-full-drop condition contains
+a regular induced subgraph on at least `h` vertices.
+
+Since every clique and every independent set is regular,
+
+```text
+C_full^reg(P,h) <= C_full(P,h).
+```
+
+**Corollary 28D.6b: Global Reduction Through Regular Full-Drop.**  For every
+`h>=3`, with `P=P_h`,
+
+```text
+G(h) <= 2P(h-1) C_full^reg(P,h).
+```
+
+Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
+vertices.  As in Corollary 28D.6, each exact global degree class has size at
+most `2P(h-1)`, and one representative from each nonempty degree class,
+ordered by increasing degree, satisfies the `P`-full-drop condition.
+
+If the representative graph had at least `C_full^reg(P,h)` vertices, it would
+contain a regular induced subgraph on at least `h` representatives.  The same
+vertex set induces the same regular graph in `G`, contradiction.  Therefore
+there are fewer than `C_full^reg(P,h)` nonempty degree classes, and
+
+```text
+|V(G)| < 2P(h-1) C_full^reg(P,h).
+```
+
+The displayed upper bound for `G(h)` follows.  QED.
+
+This regular full-drop parameter is the natural home for Lemma 28D.5b.11:
+covered singleton parts may give a large regular witness even when they do
+not immediately improve the homogeneous `alpha+omega` bound.
+
 **Computational Calibration 28D.7: Small Full-Drop Values.**  The script
 `EXPERIMENTS/full_drop_census.py` exactly enumerates small ordered graphs
 satisfying the full-drop condition and reuses the regular-witness checker.
@@ -12412,6 +12450,31 @@ case `n=17`, always with maximum full drop `1` and maximum homogeneous order
 `h-1`.  These examples may contain regular induced subgraphs larger than
 `h`; they calibrate the homogeneous full-drop parameter, not the regular
 column-drop parameter.
+
+The regular full-drop parameter from Definition 28D.6a is genuinely distinct
+from the homogeneous one.  The commands
+
+```text
+python3 82/EXPERIMENTS/full_drop_census.py 8 --p 2 --search-regular-h 5 --max-nodes 200000 --progress 50000
+python3 82/EXPERIMENTS/full_drop_census.py 9 --p 2 --search-regular-h 5 --max-nodes 200000 --progress 50000
+python3 82/EXPERIMENTS/full_drop_census.py 10 --p 2 --search-regular-h 5 --max-nodes 500000 --progress 100000
+```
+
+find `P=2` full-drop ordered graphs with no regular induced subgraph of order
+`5` on `8`, `9`, and `10` vertices, respectively.  Thus
+
+```text
+C_full^reg(2,5)>10.
+```
+
+The `n=10` certificate has columns
+
+```text
+0,0,1,2,0,0,56,120,255,255,
+```
+
+with `max_full_drop=1`, `clique_number=4`, `independence_number=4`, and
+`max_regular=4`.
 
 The helper `EXPERIMENTS/full_drop_alpha_omega.py` tests a stronger possible
 `P=2` theorem, suggested by Lemma 28D.5b:

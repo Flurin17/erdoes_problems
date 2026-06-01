@@ -3637,3 +3637,11 @@ source of growth beyond Ramsey.
   can cover `ceil(h/2)` singleton parts.  This may be more useful for the
   original regular problem than for the auxiliary homogeneous
   `alpha+omega` conjecture.
+- 2026-06-01: Added the regular full-drop parameter `C_full^reg(P,h)`, the
+  least ordered full-drop size forcing a regular induced subgraph of order
+  `h`.  The same degree-class representative proof gives
+  `G(h)<=2P_h(h-1)C_full^reg(P_h,h)`, formally capturing regular witnesses
+  that are not homogeneous.  Small DFS searches find `P=2` full-drop graphs
+  on `8`, `9`, and `10` vertices with no regular induced subgraph of order
+  `5`, so `C_full^reg(2,5)>10`; the `n=10` certificate has columns
+  `0,0,1,2,0,0,56,120,255,255` and `max_regular=4`.
