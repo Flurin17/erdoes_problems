@@ -368,6 +368,9 @@ budgets above 5 it falls back to the exact factorization routine.
   gives 1,122,290 residue classes modulo `35336848261`, density approximately
   `3.17598e-5`. A dry run for `8*10^16 <= N < 1.6*10^17` gives 274 batched
   jobs with `--batch-size 4096` and total `X` count `2540781207701`.
+- Extending that same `37` lift to the scan's full quick-check range
+  `k <= 5000` removes only one more residue: 1,122,289 residue classes, dry-run
+  total `X` count `2540778943775` over `8*10^16 <= N < 1.6*10^17`.
 - The complete `23,29,31` lifted scan over
   `2*10^16 <= N < 4*10^16` found 532,062 branch prime tuples and no value
   passing direct checks through `k <= 5000`. Aggregated first failures were:

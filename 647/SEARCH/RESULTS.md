@@ -421,6 +421,21 @@ The resulting CSV is stored as
 total `X` count `2540781207701`, comparable to the active
 `4*10^16 <= N < 8*10^16` scan.
 
+Repeating the `37` lift with `k <= 5000`, matching the search program's
+direct quick-check range, removes only one additional residue:
+
+```text
+LIFT prime=23 modulus=1062347 count=352 density=0.000331342
+LIFT prime=29 modulus=30808063 count=4374 density=0.000141976
+LIFT prime=31 modulus=955049953 count=59128 density=6.19109e-05
+LIFT prime=37 modulus=35336848261 count=1122289 density=3.17597e-05
+RESULT modulus=35336848261 count=1122289
+```
+
+The stricter CSV is stored as
+`/tmp/erdos647-residues-mod35336848261-k5000.csv`; the next-range dry run has
+the same 274 batch jobs and total `X` count `2540778943775`.
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms
