@@ -121,6 +121,15 @@ def main() -> None:
     print()
     report("complete cross-packet wiring", blocks, complete_cross_edges)
 
+    complete_rank3_edges = [
+        frozenset((a, b, c))
+        for a in blocks[0]
+        for b in blocks[1]
+        for c in blocks[2]
+    ]
+    print()
+    report("complete rank-3 product wiring", blocks, complete_rank3_edges)
+
     sparse_cross_edges = [
         frozenset(("a0", "b0")),
         frozenset(("b1", "c1")),

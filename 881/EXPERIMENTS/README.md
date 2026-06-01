@@ -175,7 +175,9 @@ escaping selectors. It also reports the first finite prefix that is already
 product-covered, the relevant support sizes, and the selector-cylinder
 cover weight \(\sum_G\prod_{j\in\sigma(G)}|F_j|^{-1}\), matching the
 finite compactness target in Corollary 8.5a.7t and the union-bound pressure
-in Lemma 8.5a.7u.
+in Lemma 8.5a.7u. The complete rank-3 product wiring example is the
+abstract pair-free product cover left after Corollaries 8.5a.7v--8.5a.7x:
+it covers every selector with weight \(1\), but only at support rank \(3\).
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
