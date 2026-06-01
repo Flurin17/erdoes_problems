@@ -3791,6 +3791,13 @@ source of growth beyond Ramsey.
   no violations at `n=12` (`min_seen=13`) or `n=14` (`min_seen=16`), and
   random sampling at `n=16` gave `min_seen=24`.  The spectrum-mass conjecture
   remains plausible after these checks.
+- 2026-06-01: Proved spectrum mass is superadditive over connected
+  components, so proving `mu(G)>=|V(G)|` reduces to connected graphs.  Added
+  `--connected-only` to `regular_spectrum_mass.py`.  Exact connected
+  enumeration at `n=7` checks `1,866,256` connected labelled graphs and still
+  has minimum `mu=7`; connected equality occurs, for example at mask `125`
+  with degree sequence `1,1,1,1,1,2,5` and spectrum summary `s_0=5,s_1=2`.
+  Thus the connected target is not stronger by an additive constant.
 - 2026-06-01: Refuted a tempting core-layer proof of spectrum mass.  The
   statement "minimum degree at least `d` forces an induced `d`-regular
   subgraph" is false: random search finds an `8`-vertex graph of minimum

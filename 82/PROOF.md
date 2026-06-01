@@ -13975,6 +13975,36 @@ sum_d s_d + sum_d t_d >= 2M > (h-1)^2,
 contradiction.  Therefore some degree `d` has `s_d+t_d>=h`, which is exactly
 the spectrum-matching alternative.  QED.
 
+**Lemma 28J.2: Spectrum Mass Is Superadditive Over Components.**  Let
+`G_1,...,G_t` be the connected components of a graph `G`.  With
+`s_d` as in Corollary 28J.1,
+
+```text
+s_d(G) >= sum_{i=1}^t s_d(G_i)        for every d,
+```
+
+and therefore
+
+```text
+sum_d s_d(G) >= sum_{i=1}^t sum_d s_d(G_i).
+```
+
+Consequently, to prove the spectrum-mass inequality
+
+```text
+sum_d s_d(G) >= |V(G)|
+```
+
+for all graphs, it is enough to prove it for connected graphs.
+
+Proof.  For a fixed degree `d`, choose in each component `G_i` an induced
+`d`-regular subgraph of order `s_d(G_i)`, omitting components with
+`s_d(G_i)=0`.  The union of these vertex sets induces the disjoint union of
+`d`-regular graphs, hence is itself `d`-regular, and has order
+`sum_i s_d(G_i)`.  This proves the first display.  Summing over `d` gives the
+second.  If the desired inequality holds for connected graphs, applying it to
+each component and then using superadditivity gives it for `G`.  QED.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.
