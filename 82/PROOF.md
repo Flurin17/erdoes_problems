@@ -2211,6 +2211,62 @@ The shifts absorb the already fixed degrees inside `X_0`, so equality of the
 `Z_i` is exactly the one-sided modular condition needed for the row degrees in
 `X_0 union Y_0`.  QED.
 
+**Corollary: Configuration-Model Multirow Residue Anti-Concentration.**  In
+the bipartite configuration model with prescribed row degrees, fix rows
+`x_1,...,x_a`, a marked set of column vertices `Y_0`, a modulus `M`, and
+shifts `c_i in Z/MZ`.  Reveal the stubs of `x_1,...,x_a` in this order.  Let
+`N_i` be the number of unmatched column stubs and `K_i` the number of those
+stubs that lie in columns of `Y_0` immediately before row `x_i` is exposed,
+and let `d_i` be the degree of row `x_i`.  Suppose that for some `A>0`, every
+positive-probability prefix history and every `i=2,...,a` satisfy
+
+```text
+Lambda_i :=
+min(K_i,N_i-K_i) (d_i/N_i)(1-d_i/N_i)
+    >= C_A M^2 log(N_i M).
+```
+
+Let
+
+```text
+eta_i = sup (1+(N_iM)^(-A))/M,
+```
+
+where the supremum is over all allowed prefix histories before row `x_i`.
+Then
+
+```text
+P(c_1+|N(x_1) cap Y_0| = ... =
+  c_a+|N(x_a) cap Y_0| mod M)
+ <= prod_{i=2}^a eta_i.
+```
+
+In particular, if every prefix history has `N_iM >= L` and the displayed
+paired-mass condition holds, the right side is at most
+
+```text
+((1+L^(-A))/M)^(a-1).
+```
+
+Proof.  Conditional on any prefix history, row `x_i` chooses a uniform
+`d_i`-subset of the remaining `N_i` column stubs.  Its number of hits in
+`Y_0` is therefore hypergeometric with marked count `K_i`.  The paired-mass
+assumption and the configuration-prefix hypergeometric corollary give, for
+every residue `r`,
+
+```text
+P(c_i+|N(x_i) cap Y_0| congruent r mod M | history)
+ <= (1+(N_iM)^(-A))/M.
+```
+
+Apply the sequential residue anti-concentration lemma, allowing the bound
+`eta` to vary with `i` and multiplying the resulting conditional bounds.
+QED.
+
+This completes the anti-concentration argument in the configuration model
+under an explicit remaining-stub mass condition.  The only missing step for
+simple biregular graphs is the simplicity-distortion transfer stated below.
+
 **Lemma: Single-Row Column Conditioning Is Harmless In Biregular Graphs.**
 Let `B` be sampled uniformly from all simple `d`-regular bipartite graphs with
 left side `X` and right side `Y`, where `|X|=|Y|=N`.  Fix `x in X` and

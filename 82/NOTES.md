@@ -3373,3 +3373,11 @@ source of growth beyond Ramsey.
   modular-decomposition regime: a substitution tree can only remain hard if
   large modules are sparse at every internal Ramsey scale, or the quotient is
   itself a hard instance.
+- 2026-06-01: Added a configuration-model multirow residue
+  anti-concentration corollary.  If every selected row exposure has enough
+  remaining paired marked/unmarked stub mass
+  `min(K_i,N_i-K_i)(d_i/N_i)(1-d_i/N_i) >= C M^2 log(N_iM)`, then equal shifted
+  residues across `a` rows have probability at most the product of the
+  one-row `(1+small)/M` bounds.  This closes the configuration-model version
+  of the residue route; the remaining simple-graph issue is exactly the
+  simplicity-distortion switching bound already isolated.
