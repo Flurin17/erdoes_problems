@@ -21975,6 +21975,10 @@ f>b-2r+D,
 contradicting (3). Hence (2) holds. The final assertion is the case
 \(D=0\). \(\square\)
 
+The script `EXPERIMENTS/interval_gate_profile.py` exhaustively checks the
+interval-only version of (2), before adding the bounded row-dependent
+allowance \(B_r\), on small translated intervals.
+
 The bounded-rank nonsingleton interval obstruction is now forced into a
 long-range regime. Positive-density row packets over an interval cannot be
 served by a finite active palette near that interval: after the bounded

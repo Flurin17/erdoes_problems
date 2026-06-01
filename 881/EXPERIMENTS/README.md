@@ -741,3 +741,10 @@ block inside `[x,2x-2]` covering `[x+13,2x]` cannot have a simultaneous
 gate-independent half-packet over its own rows. It also reports the
 bounded-staggered Corollary 16.33 tests for `1`, `2`, and `4` witness
 windows.
+
+`interval_central_sum_band.py` checks Lemma 16.54: after deleting at most
+`r` points from an interval `[a,b]`, the central band
+`[2a+2r,2b-2r]` remains inside the retained two-sumset. The companion
+`interval_gate_profile.py` checks the interval-only inequality behind
+Corollary 16.59: the number of gate-dependent rows is at most twice the
+gate's distance from the central gate range `[a+2r,b-2r]`.
