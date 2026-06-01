@@ -92,6 +92,39 @@ def max_template(mask: int, pc: ri.Precomp) -> tuple[int, tuple[int, ...]]:
     return best
 
 
+def difference_stats(mask: int, pc: ri.Precomp) -> tuple[int, int, tuple[int, int]]:
+    index = edge_index(pc)
+    max_sigma = 0
+    max_balanced = 0
+    max_pair = (0, 0)
+    for u, v in combinations(range(pc.n), 2):
+        a_size = 0
+        b_size = 0
+        for w in range(pc.n):
+            if w in (u, v):
+                continue
+            uw = has_edge(mask, u, w, index)
+            vw = has_edge(mask, v, w, index)
+            if uw and not vw:
+                a_size += 1
+            elif vw and not uw:
+                b_size += 1
+        sigma = a_size + b_size
+        balanced = min(a_size, b_size)
+        if sigma > max_sigma:
+            max_sigma = sigma
+        if balanced > max_balanced:
+            max_balanced = balanced
+            max_pair = (u, v)
+    return max_sigma, max_balanced, max_pair
+
+
+def degree_spread(mask: int, pc: ri.Precomp) -> int:
+    full = (1 << pc.n) - 1
+    degrees = [(mask & pc.incident[full][v]).bit_count() for v in range(pc.n)]
+    return max(degrees) - min(degrees)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
@@ -110,16 +143,24 @@ def main() -> None:
         masks = [rng.getrandbits(len(pc.edges)) for _ in range(count)]
 
     best = (0, 0, ())
+    best_stats = (0, 0, (0, 0), 0)
     for mask in masks:
         size, subset = max_template(mask, pc)
         if size > best[0]:
             best = (size, mask, subset)
+            max_sigma, max_balanced, max_pair = difference_stats(mask, pc)
+            best_stats = (max_sigma, max_balanced, max_pair, degree_spread(mask, pc))
 
     size, mask, subset = best
+    max_sigma, max_balanced, max_pair, spread = best_stats
     print(f"n={args.n}")
     print(f"graphs_checked={len(masks)}")
     print(f"best_template_order={size}")
     print(f"best_mask={mask}")
+    print(f"degree_spread={spread}")
+    print(f"max_pair_sigma={max_sigma}")
+    print(f"max_balanced_difference={max_balanced}")
+    print(f"max_balanced_pair={max_pair[0]},{max_pair[1]}")
     print("best_subset=" + ",".join(map(str, subset)))
     if subset:
         subset_mask = sum(1 << v for v in subset)

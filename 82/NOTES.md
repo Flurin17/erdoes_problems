@@ -2274,3 +2274,14 @@ source of growth beyond Ramsey.
   of order at least `h`.  Combined with Lemma 25 this gives only a
   Ramsey-scale bounded-spread theorem, so the pair-difference route needs a
   non-Ramsey extraction from the two one-sided difference sets.
+- 2026-06-01: Extended `pair_difference_template.py` to report maximum
+  symmetric difference and maximum balanced one-sided difference.  This is
+  the measurable bottleneck in Lemma 28: large balanced difference with small
+  template order indicates a pseudorandom two-sided obstruction, while small
+  balanced difference means the pair route has little raw material.
+  On mask `2416`, the maximum balanced difference is `2` and the best
+  template order is `4`.  On the compensated spread-one `n=20` sample, the
+  maximum balanced difference is `7` and maximum symmetric difference is `15`,
+  but the best pair template has order only `6` while the true maximum regular
+  order is `10`; the two-sided difference sets are already behaving too
+  irregularly for the local template to capture the full witness.
