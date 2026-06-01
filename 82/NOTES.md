@@ -2481,3 +2481,9 @@ source of growth beyond Ramsey.
   middle graph on `2r` vertices becomes an `(r-1)`-regular balanced middle
   graph in the complement.  The pair route therefore has one local parameter
   `P_h`, not two asymmetric targets.
+- 2026-06-01: Added `balanced_pair_parameter_search.py` and Computational
+  Example 28C.  Exact fixed-mask checks give small local obstructions
+  `P_6>5` and `P_7>6` for the balanced pair parameter.  A 2000-sample
+  calibration at `h=6, M=6` found no obstruction in either complement-dual
+  mode, so the local parameter may still be small, but it is not eliminated
+  by a trivial size-`h-1` argument.
