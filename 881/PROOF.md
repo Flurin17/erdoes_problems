@@ -2976,9 +2976,13 @@ a finite set
 \[
 F\subset A\setminus E,\qquad 1\le |F|\le q_E,
 \]
-a constant shift \(\tau\), and a set
+a multiset \(S\) from \(A\setminus E\), a constant shift
 \[
-U\subset A\setminus E
+\tau=\sigma(S),\qquad |S|=\ell-1,
+\]
+and a set
+\[
+U\subset A\setminus(E\cup F)
 \]
 such that
 \[
@@ -2990,7 +2994,8 @@ and for every \(u\in U\):
    \[
    t_u=\tau+u
    \]
-   has an \(\ell\)-term representation from \(A\setminus E\);
+   has the \(\ell\)-term representation \(S\cup\{u\}\) from
+   \(A\setminus E\);
 2. \(F\) is inclusion-minimal for the lower-order hole
    \[
    t_u\notin \ell(A\setminus F); \tag{2}
@@ -3132,6 +3137,74 @@ Without that extra recurrence, the obstruction is still highly structured:
 outside every finite protected core there must be fresh finite palettes
 whose translates \(U+g-F\) all lie in \(A\), while the same palettes cover
 every two-sum representation of the corresponding centers.
+
+### Corollary 3.4d.15: Active barriers have lower-sumset shadows
+
+In the notation of Corollary 3.4d.13, for every \(u\in U\) the finite set
+\(F\) is an inclusion-minimal vertex cover of the \(\ell\)-term
+representation hypergraph of
+\[
+t_u=\tau+u.
+\]
+Moreover:
+
+1. the explicit deleted representation forces
+   \[
+   \operatorname{supp}(S)\cap F\ne\varnothing; \tag{1}
+   \]
+2. every active barrier point has a lower-sumset shadow,
+   \[
+   t_u-f\in(\ell-1)(A\setminus(F\setminus\{f\}))
+   \qquad(f\in F); \tag{2}
+   \]
+3. hence
+   \[
+   U+\tau-F\subset(\ell-1)A. \tag{3}
+   \]
+
+If \(g\) is any element of \(\operatorname{supp}(S)\cap F\), then (2) is
+explicit for \(f=g\):
+\[
+t_u-g=(\sigma(S)-g)+u
+\]
+is represented by the multiset obtained from \(S\) by deleting one
+occurrence of \(g\), together with \(u\).
+
+Proof. The assertion that \(F\) covers every \(\ell\)-term representation
+of \(t_u\) is exactly
+\[
+t_u\notin\ell(A\setminus F),
+\]
+and inclusion-minimality is part of Corollary 3.4d.13.
+
+The multiset \(S\cup\{u\}\) is an \(\ell\)-term representation of \(t_u\)
+from \(A\setminus E\). Since \(u\notin F\), this representation must meet
+the cover \(F\) through its \(S\)-part, proving (1).
+
+Fix \(f\in F\). Activity gives an \(\ell\)-term representation of \(t_u\)
+from
+\[
+A\setminus(F\setminus\{f\}).
+\]
+Because \(F\) covers all \(\ell\)-term representations of \(t_u\), that
+representation must use \(f\). Removing one occurrence of \(f\) leaves an
+\((\ell-1)\)-term representation of \(t_u-f\) from
+\[
+A\setminus(F\setminus\{f\}),
+\]
+which proves (2). Equation (3) follows immediately from
+\[
+t_u-f=\tau+u-f.
+\]
+For \(g\in\operatorname{supp}(S)\cap F\), the displayed explicit
+representation is just \(S\cup\{u\}\) with one occurrence of \(g\) removed.
+\(\square\)
+
+Thus every lower-order active barrier casts a coherent translate shadow one
+order lower. The unresolved higher-order issue is whether these shadows can
+be iterated until they either produce the reflected two-sum packets of
+Corollary 3.4d.14, or supply enough protected lower-order repairs to build
+the deletion promised by Lemma 2.2.
 
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 

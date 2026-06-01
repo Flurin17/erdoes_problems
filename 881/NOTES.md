@@ -48,7 +48,10 @@ made into one common inclusion-minimal active finite barrier across a large
 translate packet \(t_u=\tau+u\). Corollary 3.4d.14 specializes the
 two-term branch: the active barrier is an inclusion-minimal two-sum vertex
 cover \(F\), the deleted gate \(g\) lies in \(F\), and every packet center
-\(g+u\) reflects the whole finite palette \(F\) back into \(A\).
+\(g+u\) reflects the whole finite palette \(F\) back into \(A\). Corollary
+3.4d.15 records the all-\(\ell\) shadow: every active lower-order barrier
+has \(U+\tau-F\subset(\ell-1)A\), with at least one deleted gate from the
+original multiset lying in \(F\).
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

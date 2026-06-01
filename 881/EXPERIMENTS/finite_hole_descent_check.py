@@ -18,6 +18,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
   barriers, as used in Corollary 3.4d.13.
 * minimal two-sum barriers reflect every barrier vertex, as used in
   Corollary 3.4d.14.
+* active lower-order barriers have lower-sumset shadows after removing one
+  active barrier vertex, as used in Corollary 3.4d.15.
 """
 
 from __future__ import annotations
@@ -239,6 +241,32 @@ def check_pair_barrier_reflection(A: tuple[int, ...], F: tuple[int, ...]) -> int
     return checked
 
 
+def check_active_lower_shadow(A: tuple[int, ...], F: tuple[int, ...]) -> int:
+    checked = 0
+    F_set = set(F)
+    for length in range(2, 5):
+        for target in range(1, length * max(A) + 1):
+            if not reps(A, length, target):
+                continue
+            if reps(tuple(a for a in A if a not in F_set), length, target):
+                continue
+
+            active = True
+            for f in F:
+                restored = tuple(a for a in A if a not in (F_set - {f}))
+                if not reps(restored, length, target):
+                    active = False
+                    break
+            if not active:
+                continue
+
+            for f in F:
+                restored = tuple(a for a in A if a not in (F_set - {f}))
+                assert reps(restored, length - 1, target - f)
+            checked += 1
+    return checked
+
+
 def main() -> None:
     sets_checked = 0
     decomposition_checked = 0
@@ -248,6 +276,7 @@ def main() -> None:
     lower_hypergraph_checked = 0
     minimal_barrier_checked = 0
     pair_barrier_reflection_checked = 0
+    active_lower_shadow_checked = 0
     universe = range(1, 10)
     for size in range(4, 8):
         for A_raw in combinations(universe, size):
@@ -262,6 +291,7 @@ def main() -> None:
                     sparse_shadow_checked += check_sparse_shadow(A, D)
                     minimal_barrier_checked += check_minimal_barrier_extraction(A, D)
                     pair_barrier_reflection_checked += check_pair_barrier_reflection(A, D)
+                    active_lower_shadow_checked += check_active_lower_shadow(A, D)
             for core_size in range(0, min(3, size) + 1):
                 for core in combinations(A, core_size):
                     lower_hypergraph_checked += check_lower_hypergraph_equivalence(A, core)
@@ -274,6 +304,7 @@ def main() -> None:
     print(f"lower_hypergraph_checked={lower_hypergraph_checked}")
     print(f"minimal_barrier_checked={minimal_barrier_checked}")
     print(f"pair_barrier_reflection_checked={pair_barrier_reflection_checked}")
+    print(f"active_lower_shadow_checked={active_lower_shadow_checked}")
 
 
 if __name__ == "__main__":
