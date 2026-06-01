@@ -238,3 +238,6 @@ Computational checks and generated data for Erdos Problem 82.
   from Example 18B, including support sizes, total imbalance, the explicit
   strict separator, and the Fibonacci lower bounds forced on every integer
   separator.
+- `separator_gap.py`: verifies the four-vector support-`<=2` example showing
+  that deletion-minimality, which forbids only `0/1` zero subfamilies, does
+  not imply the strict cone separation used in conditional separator bounds.

@@ -2181,16 +2181,25 @@ source of growth beyond Ramsey.
   half-edges.  The remaining support-`<=2` trace problem is therefore to
   bound colored graphs with half-edges, small red-blue degree imbalance at
   every coordinate, and no such alternating trail.
-- 2026-05-31: Closed the entire support-`<=2` trace layer with Corollary 15H.
-  Since a zero-sum-free trace multiset admits a real separating functional,
-  support-one/two inequalities reduce to signs and comparisons of coordinate
-  magnitudes.  The comparison graph is acyclic, so replacing magnitudes by
-  topological levels gives an integer separator `a` with `||a||_1<=d^2`.
-  Lemma 18 then gives `|B|<=d^3`.  Thus any superpolynomial trace obstruction
-  in the repeated-degree route must use trace supports of size at least `3`.
-- 2026-05-31: Added Lemma 18A, a generic bounded-support separator bound.  If
-  every trace difference has support size at most `s`, a basic feasible
-  solution plus Hadamard's determinant bound gives an integer separator with
+- 2026-06-01: Repaired the support-`<=2` trace layer proof in Corollary 15H
+  by an alternating-trail digraph argument.  The ordinary support-two traces
+  form an acyclic state digraph; singleton traces are added as half-edge arcs
+  after deleting at most one exceptional copy of each half-edge type.  The
+  augmented acyclic digraph has state imbalance `O(d)`, so path decomposition
+  gives `|B|<=4d^3`.  Thus any superpolynomial trace obstruction in the
+  repeated-degree route must use trace supports of size at least `3`.
+- 2026-06-01: Audited the separator step that had been used for Corollary
+  15H and Lemma 18A.  Deletion-minimality forbids only `0/1` zero
+  subfamilies and does not imply cone separation: `separator_gap.py` verifies
+  that `e_1, -1_{1,2}, -1_{1,3}, 1_{2,3}` has no zero subfamily but satisfies
+  the positive dependence `2e_1-1_{1,2}-1_{1,3}+1_{2,3}=0`.  Lemma 18A is now
+  explicitly conditional on a strict separator; the support-`<=2` proof no
+  longer uses one.
+- 2026-06-01: Recast Lemma 18A as a conditional bounded-support separator
+  bound.
+  If every trace difference has support size at most `s` and the trace
+  multiset admits a strict separator, a basic feasible solution plus
+  Hadamard's determinant bound gives an integer separator with
   `||a||_1<=d s^{d/2}`, hence `|B|<=d^2 s^{d/2}` by Lemma 18.  For fixed
   `s>=3` this remains exponential in `d`, so support `3` is the first layer
   requiring a new cancellation argument rather than determinant bounds.
