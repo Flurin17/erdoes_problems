@@ -2416,6 +2416,13 @@ default bounds, the best size-\(6\) eligible block
 has strict witnesses only for \(19\) and \(39\), and only \(39\) is in the
 common-row pressure range of Corollary 16.29. The finite search therefore
 does not merely miss full protection; it sees most bridge fillers deferred.
+Corollary 16.31 explains what this means globally. For any infinite supply
+of deferred fillers in a hypothetical counterexample, either infinitely
+many become singleton late-bad at later windows, returning to the singleton
+row-bank analysis, or after thinning they carry a nonsingleton late-bad
+prefix-front. Thus sparse same-window protection is not a self-contained
+escape; it is a handoff to staggered singleton windows or collective
+cross-window barriers.
 Corollary 16.25 packages the exact finite criterion behind these searches:
 for a finite stage \(S\) and target \(q\), the private order-\(4\)
 candidates in a window \(I\) are exactly

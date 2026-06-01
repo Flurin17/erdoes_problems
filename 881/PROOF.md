@@ -20488,6 +20488,50 @@ construction target is not an ordinary bridge block, but a mechanism for
 staggering the future witness windows of the deferred fillers while still
 maintaining the order-\(3\) coverage buffer.
 
+### Corollary 16.31: Deferred fillers force singleton recurrence or a nonsingleton front
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Let
+\[
+X\subset A
+\]
+be infinite. Then one of the following alternatives holds:
+
+1. infinitely many \(x\in X\) have singleton late-bad deletions at order
+   \(4\), i.e. \(\{x\}\) is late-bad in the sense of Corollary 3.1b with
+   \(h=4\);
+2. there is an infinite
+   \[
+   Y\subset X
+   \]
+   such that the order-\(4\) late-bad subsets of \(Y\) form a nonsingleton
+   weak barrier. Equivalently, every infinite \(Z\subset Y\) contains a
+   finite late-bad set \(F\subset Z\) with \(|F|\ge2\). Passing to the
+   prefix-front supplied by Lemma 3.1c.1 gives a nonsingleton late-bad
+   prefix-front on \(Y\).
+
+Proof. Let \(\mathcal L_4\) be the family of order-\(4\) late-bad finite
+sets. By Corollary 3.1c, \(\mathcal L_4\) is a weak barrier on \(A\).
+If alternative 1 fails, then only finitely many elements of \(X\) are
+singleton late-bad. Remove them and call the remaining infinite set \(Y\).
+For every infinite \(Z\subset Y\), Corollary 3.1c gives a finite
+\[
+F\subset Z,\qquad F\in\mathcal L_4.
+\]
+No singleton subset of \(Y\) lies in \(\mathcal L_4\), by construction, so
+\(|F|\ge2\). Thus the restricted late-bad family is a nonsingleton weak
+barrier on \(Y\). Lemma 3.1c.1 turns it into a prefix-front, and its
+members are still late-bad. Since each contains a nonsingleton late-bad
+subset, every front member has size at least \(2\). \(\square\)
+
+Consequently, deferred bridge fillers cannot simply disappear from the
+problem. Along any infinite supply of deferred fillers, either the
+singleton analysis recurs at later windows, or the construction has entered
+the nonsingleton active-trace/front regime. This is exactly the dichotomy
+left by the interval-marker diagnostics: same-window singleton protection
+is sparse, so an infinite counterexample must pay either with repeated
+staggered singleton windows or with collective cross-window barriers.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21587,6 +21631,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the best size-\(6\) block protects only two elements, and only one lies
   in the common-row pressure range. The finite obstruction is immediate
   deferred filler protection, not lack of four-sum representation.
+* Corollary 16.31 routes deferred fillers back into the global barrier
+  structure: any infinite deferred set either has infinitely many singleton
+  late-bad elements, so the singleton analysis recurs at later windows, or
+  contains a nonsingleton late-bad prefix-front.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
