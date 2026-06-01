@@ -3847,6 +3847,13 @@ source of growth beyond Ramsey.
   counterexample: `regular_spectrum_mass.py` gives `n=18` random
   `min_seen=31`, `n=18` local-search `min_seen=27`, and `n=20` random
   `min_seen=36`.
+- 2026-06-01: Added the weaker spectrum-mass bridge.  It is enough to prove
+  `mu(G)>=|G|^delta` for any fixed `delta>0`: then two `M`-vertex graphs have
+  combined spectrum mass at least `2M^delta`, while failure of
+  `D_spec(h)` bounds their combined mass by `(h-1)^2`; hence
+  `D_spec(h)=O_delta(h^{2/delta})` and `G(k)=O_delta(k^{2/delta})`.  Thus a
+  polynomial lower bound on spectrum mass would already solve the original
+  problem, even if the conjectural linear bound fails.
 - 2026-06-01: Exact connected `n=7` spectrum-mass data show that all
   connected equality cases `mu(G)=|G|` are trees (`630` labelled examples).
   Connected non-trees on `7` vertices have `mu>=9=|G|+2`, with the minimum

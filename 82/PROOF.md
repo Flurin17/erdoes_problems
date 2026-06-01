@@ -14005,6 +14005,53 @@ D_spec(2k) <= floor((2k-1)^2/2)+1 < 2k^2.
 Thus `G(k)=O(k^2)`, which is much stronger than `G(k)=2^{o(k)}` and hence is
 equivalent to `F(n)/log n -> infinity`.  QED.
 
+**Conditional Corollary 28J.1b: Any Power Spectrum-Mass Bound Would
+Suffice.**  Suppose there are constants `delta>0` and `N_0` such that every
+graph `J` on `N>=N_0` vertices satisfies
+
+```text
+sum_d s_d(J) >= N^delta.
+```
+
+Then
+
+```text
+G(k) = O_delta(k^{2/delta}).
+```
+
+In particular Erdős Problem 82 follows.
+
+Proof.  Let `M>=N_0`, and let `J_1,J_2` be two `M`-vertex graphs.  If either
+graph has a regular induced subgraph of order at least `h`, the first
+alternative in `D_spec(h)` holds.  Otherwise all contributing regular degrees
+are in `0,...,h-2`.  If the spectrum-matching alternative fails, then
+`s_d(J_1)+s_d(J_2)<=h-1` for every such `d`, and hence
+
+```text
+sum_d s_d(J_1)+sum_d s_d(J_2) <= (h-1)^2.
+```
+
+The assumed lower bound gives the opposite inequality
+
+```text
+sum_d s_d(J_1)+sum_d s_d(J_2) >= 2M^delta.
+```
+
+Thus the spectrum-matching alternative must hold whenever
+`2M^delta>(h-1)^2`.  Therefore
+
+```text
+D_spec(h) <= O_delta(h^{2/delta}).
+```
+
+Using Corollary 28I with `h=2k` gives
+
+```text
+G(k) <= D_spec(2k) = O_delta(k^{2/delta}).
+```
+
+QED.
+
 **Lemma 28J.2: Spectrum Mass Is Superadditive Over Components.**  Let
 `G_1,...,G_t` be the connected components of a graph `G`.  With
 `s_d` as in Corollary 28J.1,
