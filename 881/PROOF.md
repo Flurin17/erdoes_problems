@@ -23102,6 +23102,72 @@ many-color escape. It must produce at least two active colors at linear
 distance from the tested interval, each carrying a positive-density
 finite-palette gate shadow.
 
+### Corollary 16.79: Dense bounded-rank interval packets have a two-way normal form
+
+Fix \(r\ge2\) and \(1/2<\eta\le1\), and put
+\[
+\theta={\eta+1/2\over2},\qquad
+\delta={\theta+1/2\over2}. \tag{1}
+\]
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. There is \(N=N(r,\eta)\) such that
+the following holds whenever
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+has length \(n\ge N\).
+
+Let \(F\subset A\) satisfy \(1\le|F|\le r\), let \(P\subset F\) be nonempty,
+and let
+\[
+K=[c,d]\cap\mathbb N\subset A
+\]
+be an auxiliary interval. Define
+\[
+\ell_0=\left\lceil {m-r\over r+1}\right\rceil,\qquad m=d-c+1,
+\]
+and
+\[
+M_\delta=\lfloor(1-\delta)n\rfloor+1.
+\]
+Assume
+\[
+M_\delta\le2\ell_0-1. \tag{2}
+\]
+For each \(f\in P\), let \(U_f\subset I\) satisfy the hypotheses of
+Corollary 16.45 for the active color \(f\), with witness parameter
+sufficiently large for the fixed interval \(I\) and rank bound \(r\). If
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n, \tag{3}
+\]
+then at least one of the following alternatives holds.
+
+1. There is \(f\in P\) such that
+\[
+|U_f|\ge\theta n
+\quad\text{and}\quad
+f\notin R_K(\delta,I;r). \tag{4}
+\]
+2. There are distinct \(f,g\in P\) such that
+\[
+D_I(f;r)\ge{\eta n\over4r},\qquad
+D_I(g;r)\ge{(\eta-\theta)n\over4(r-1)}. \tag{5}
+\]
+
+In particular, in the second alternative both active colors are a linear
+distance outside the tested interval, as quantified in Corollary 16.78.
+
+Proof. If some \(f\in P\) satisfies \(|U_f|\ge\theta n\), Corollary 16.75
+gives
+\[
+f\notin R_K(\delta,I;r),
+\]
+after increasing \(N\) to meet its threshold. This is alternative 1.
+
+Otherwise \(|U_f|<\theta n\) for all \(f\in P\). Since \(\theta<\eta\),
+condition (3) forces \(|P|\ge2\). Corollary 16.78, again after increasing
+\(N\), gives alternative 2. \(\square\)
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24376,6 +24442,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.78 adds the interval geometry to that two-color branch:
   those two positive-density gate fibers force two active colors a linear
   distance outside the tested interval.
+* Corollary 16.79 packages the bounded-rank dense interval normal form for
+  densities \(>1/2\): either a majority color escapes every relevant robust
+  core, or two active colors are linearly far from the tested interval.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

@@ -111,7 +111,9 @@ the complementary no-majority normal form: a dense bounded palette with no
 large individual color fiber yields two distinct positive-density
 gate-dependent fibers, so the remaining branch is genuinely two-color.
 Corollary 16.78 adds that both colors are linearly far from the tested
-interval.
+interval. Corollary 16.79 packages the density \(>1/2\) bounded-rank
+normal form: either a majority color escapes robust cores, or two active
+colors are linearly far from the interval.
 
 ## Definitions
 
