@@ -2411,11 +2411,22 @@ few also hitting \(w-2x\in C\). The script also tests two-point batches
 Scale \(200\) gives the same ratio, reaching \(12947<20000\). This is
 evidence that greedy safe bands hit complement-pair saturation well below
 the witness.
+With `--allow-pairs`, safe two-point batches can be used earlier in the
+beam. They help only slightly: scale \(100\), beam \(32\), reaches \(6578\),
+and scale \(200\), beam \(8\), reaches \(12980\), with the same final
+no-safe-one/two-point gap obstruction.
 Lemma 8.5a.7z.12e' explains why the two-point check is enough for that
 final gap: any finite batch that covers a new two-sum gap contains either a
 one-new-point representation or a two-new-point representation of the gap,
 and adding more retained points cannot remove a three-sum repair of the
 witness.
+Lemma 8.5a.7z.12e'' identifies the exact certificate behind the stall:
+if \(d=w-p\in C\) and \(d+a\in2C\) for every old summand \(a\) that could
+pair with a new point to cover \(p\), then every one-new or two-new gap
+repair also repairs \(w\). The scale-\(100\), beam-\(8\), pair-batch run
+prints this certificate with \(d=3494\) and all \(1034\) one-point
+candidates reflected into \(2C\). Coarse coverage past a fixed fraction of
+\(w\) is not enough by itself; the blocker is the reflected condition.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed

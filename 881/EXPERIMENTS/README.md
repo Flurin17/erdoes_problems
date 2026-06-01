@@ -251,6 +251,14 @@ because each candidate plus an existing retained pair sums to the witness.
 It also checks two-point batches for the stalled next gap and finds none in
 the scale `100` and `200` runs. The scale `200` run gives the same ratio,
 reaching `12947` below witness `20000`.
+With `--allow-pairs`, the search may use safe two-point batches earlier in
+the beam. This improves the scale `100` beam-`32` endpoint to `6578` and
+the scale `200` beam-`8` endpoint to `12980`, but both still stall below
+the witness with no safe one- or two-point way to cover the final gap.
+The script also prints a reflected next-gap blocker certificate. In the
+scale `100`, beam-`8`, `--allow-pairs` run, `d=w-p=3494` is retained and
+all `1034` one-point candidates satisfy `d+a in 2C`, so Lemma
+8.5a.7z.12e'' blocks every finite batch at that final gap.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

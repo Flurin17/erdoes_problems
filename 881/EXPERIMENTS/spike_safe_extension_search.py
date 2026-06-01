@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Try to extend safe spike fillers toward a frozen witness.
 
-Starting from the safe filler profile, greedily adds retained fillers so that
-the full set A=C union F has a longer initial two-sum interval, while the
-protected witness stays outside 3C.  This is a finite diagnostic for the
-stage obstruction after Corollary 8.5a.7z.12d, not a construction.
+Starting from the safe filler profile, greedily adds retained fillers or
+optional two-point retained batches so that the full set A=C union F has a
+longer initial two-sum interval, while the protected witness stays outside
+3C.  This is a finite diagnostic for the stage obstruction after Corollary
+8.5a.7z.12d, not a construction.
 """
 
 from __future__ import annotations
@@ -121,40 +122,82 @@ def safe_two_point_gap_batches(
     return batches
 
 
-def add_retained(
+def reflected_next_gap_blocker(
     state: State,
     deleted: set[int],
-    candidate: int,
+    witness: int,
+    gap: int,
+) -> dict[str, object]:
+    full = set(state.retained) | deleted
+    defect = witness - gap
+    one_point_candidates: list[tuple[int, int]] = []
+    unblocked: list[tuple[int, int, int]] = []
+    for old in sorted(full):
+        candidate = gap - old
+        if candidate <= 0 or candidate in full:
+            continue
+        one_point_candidates.append((old, candidate))
+        reflected_target = defect + old
+        if reflected_target not in state.retained_pair_sums:
+            unblocked.append((old, candidate, reflected_target))
+    return {
+        "defect": defect,
+        "defect_retained": defect in state.retained,
+        "one_point_candidate_count": len(one_point_candidates),
+        "one_point_reflected_blocked_count": (
+            len(one_point_candidates) - len(unblocked)
+        ),
+        "one_point_unblocked_examples": unblocked[:20],
+        "two_new_pairs_blocked_by_defect": defect in state.retained,
+    }
+
+
+def add_retained_batch(
+    state: State,
+    deleted: set[int],
+    batch: tuple[int, ...],
     cap: int,
 ) -> State:
     retained = set(state.retained)
-    full = retained | deleted
     new_retained_pairs = set(state.retained_pair_sums)
     new_full_pairs = set(state.full_pair_sums)
 
-    for old in retained:
-        total = old + candidate
-        if total <= cap:
-            new_retained_pairs.add(total)
-            new_full_pairs.add(total)
-    double = 2 * candidate
-    if double <= cap:
-        new_retained_pairs.add(double)
-        new_full_pairs.add(double)
-    for old in deleted:
-        total = old + candidate
-        if total <= cap:
-            new_full_pairs.add(total)
+    for candidate in batch:
+        for old in retained:
+            total = old + candidate
+            if total <= cap:
+                new_retained_pairs.add(total)
+                new_full_pairs.add(total)
+        for old in deleted:
+            total = old + candidate
+            if total <= cap:
+                new_full_pairs.add(total)
 
-    retained.add(candidate)
+    for index, first in enumerate(batch):
+        for second in batch[index:]:
+            total = first + second
+            if total <= cap:
+                new_retained_pairs.add(total)
+                new_full_pairs.add(total)
+
+    retained.update(batch)
     new_cover = cover_end(new_full_pairs, 2, cap)
     return State(
         retained=frozenset(retained),
         full_pair_sums=frozenset(new_full_pairs),
         retained_pair_sums=frozenset(new_retained_pairs),
         cover_end=new_cover,
-        added=state.added + (candidate,),
+        added=state.added + batch,
     )
+
+
+def add_retained(
+    state: State,
+    deleted: set[int],
+    candidate: int,
+    cap: int,
+) -> State:
+    return add_retained_batch(state, deleted, (candidate,), cap)
 
 
 def seed_state(cap: int, scale: int) -> tuple[State, set[int], int, dict[str, object]]:
@@ -209,6 +252,7 @@ def candidate_extensions(
     witness: int,
     cap: int,
     max_candidates: int,
+    allow_pairs: bool,
 ) -> list[State]:
     full = set(state.retained) | deleted
     gap = state.cover_end + 1
@@ -222,6 +266,14 @@ def candidate_extensions(
         if safe_to_add(state.retained, state.retained_pair_sums, candidate, witness)
     ]
     extensions = [add_retained(state, deleted, candidate, cap) for candidate in safe]
+    if allow_pairs:
+        gap_batches = safe_two_point_gap_batches(
+            state, deleted, witness, gap, limit=max_candidates
+        )
+        extensions.extend(
+            add_retained_batch(state, deleted, batch, cap)
+            for batch in gap_batches
+        )
     extensions.sort(key=lambda item: (item.cover_end, -len(item.retained)), reverse=True)
     return extensions[:max_candidates]
 
@@ -233,6 +285,7 @@ def main() -> None:
     parser.add_argument("--cap", type=int, default=None)
     parser.add_argument("--beam", type=int, default=8)
     parser.add_argument("--steps", type=int, default=400)
+    parser.add_argument("--allow-pairs", action="store_true")
     args = parser.parse_args()
 
     cap = args.cap if args.cap is not None else 100 * args.scale
@@ -247,7 +300,12 @@ def main() -> None:
         for item in beam:
             next_beam.extend(
                 candidate_extensions(
-                    item, deleted, witness, cap, max(args.beam * 2, 1)
+                    item,
+                    deleted,
+                    witness,
+                    cap,
+                    max(args.beam * 2, 1),
+                    args.allow_pairs,
                 )
             )
         if not next_beam:
@@ -289,6 +347,7 @@ def main() -> None:
     print(f"deleted={sorted(deleted)}")
     print(f"witness={witness}")
     print(f"target={target} cap={cap} beam={args.beam} steps={args.steps}")
+    print(f"allow_pairs={args.allow_pairs}")
     print(f"initial_cover={state.cover_end}")
     print(f"best_cover={best.cover_end}")
     print(f"reached_target={best.cover_end >= target}")
@@ -305,6 +364,10 @@ def main() -> None:
     )
     print(f"safe_two_point_batches_for_next_gap={two_batches}")
     print(f"safe_two_point_batch_count_reported={len(two_batches)}")
+    print(
+        "reflected_next_gap_blocker="
+        f"{reflected_next_gap_blocker(best, deleted, witness, final_gap)}"
+    )
 
     if any(witness - retained in best.retained_pair_sums for retained in best.retained):
         raise AssertionError("witness repaired in retained three-sum")

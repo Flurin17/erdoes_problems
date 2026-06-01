@@ -8818,13 +8818,84 @@ C\cup\{x,y\}\subset C\cup S.
 \]
 This proves the dichotomy and the final assertion. \(\square\)
 
+### Lemma 8.5a.7z.12e'': Reflected next-gap blockers
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C.
+\]
+Let
+\[
+p\notin2A,\qquad d=w-p.
+\]
+Assume that
+\[
+d\in C \tag{1}
+\]
+and that for every \(a\in A\) such that
+\[
+x=p-a>0,\qquad x\notin A,
+\]
+one has
+\[
+d+a\in2C. \tag{2}
+\]
+Then no finite retained batch
+\[
+S\subset\mathbb N\setminus A
+\]
+can satisfy both
+\[
+p\in2(A\cup S)
+\]
+and
+\[
+w\notin3(C\cup S).
+\]
+
+Proof. Suppose such an \(S\) existed. By Lemma 8.5a.7z.12e', either there
+is a one-point safe extension \(x\in S\) covering \(p\), or there is a
+two-point safe batch \(x,y\in S\) with \(x+y=p\).
+
+In the first case, \(p=x+a\) for some \(a\in A\), with \(x=p-a>0\) and
+\(x\notin A\). By (2), write
+\[
+d+a=c_1+c_2,\qquad c_1,c_2\in C.
+\]
+Then
+\[
+w=p+d=x+a+d=x+c_1+c_2\in3(C\cup\{x\}),
+\]
+contradicting safety. In the second case, (1) gives
+\[
+w=p+d=x+y+d\in3(C\cup\{x,y\}),
+\]
+again contradicting safety. Therefore no such \(S\) exists. \(\square\)
+
+The hypothesis is intentionally reflected, not merely metric. A coarse
+coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
+for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
+\[
+w\notin3C,\qquad 2C=[2,2L],
+\]
+so coverage reaches asymptotic ratio \(2/3\) of \(w\), but the next gap
+\[
+p=2L+1
+\]
+has the safe one-point filler \(x=L+1\), since
+\[
+w-x=2L+3\notin2C,\qquad w-2x=L+2\notin C,\qquad 3x\ne w.
+\]
+
 ### Diagnostic 8.5a.7z.12f: Safe extension stalls below the witness
 
 The script `spike_safe_extension_search.py` applies Lemma 8.5a.7z.12e to
-the safe filler profile from Diagnostic 8.5a.7z.12c. It also checks whether
-the stalled next gap can be covered by a safe two-point batch \(x+y=p\).
-To keep the beam search finite, its default scale is \(N=100\), with the
-same rows
+the safe filler profile from Diagnostic 8.5a.7z.12c. It checks whether the
+stalled next gap can be covered by a safe two-point batch \(x+y=p\), and
+optionally allows such two-point batches as moves earlier in the beam
+search. To keep the beam search finite, its default scale is \(N=100\), with
+the same rows
 \[
 U=\{1,4,9,16,25,36\},
 \]
@@ -8847,6 +8918,23 @@ to \(6501\), stalling at \(6502\) with the same obstruction type. At scale
 \(N=200\), beam \(8\) similarly extends coverage from \(6000\) to \(12947\),
 again far below the witness \(20000\); the next gap has \(2061\) unsafe
 one-point blockers and no safe two-point batch.
+Allowing two-point batches earlier improves the endpoint only modestly:
+beam \(8\) reaches \(6505\), and beam \(32\) reaches \(6578\). Both runs
+again stall with all one-point blockers lying in \(w-2C\) and no safe
+two-point batch for the final gap. At scale \(N=200\), allowing pair
+batches with beam \(8\) reaches \(12980<20000\), again with the same final
+obstruction.
+The scale-\(100\), beam-\(8\), pair-batch run also prints the exact
+reflected blocker certificate from Lemma 8.5a.7z.12e'':
+\[
+d=w-p=3494\in C,
+\]
+and all \(1034\) one-point candidates \(x=p-a\) satisfy
+\[
+d+a\in2C.
+\]
+Thus two-new representations are blocked by \(d\in C\), while one-new
+representations are blocked by the reflected two-sum condition.
 
 By Lemma 8.5a.7z.12e', the absence of both one-point and two-point safe
 gap-fillers means that no finite retained batch can cover that particular
@@ -8858,10 +8946,11 @@ layout.
 This is finite evidence, not a proof. Its value is that it identifies the
 local pressure precisely: once safe fillers make \(2C\) dense near the
 complements of the next possible gap-fillers, the witness-free condition
-blocks every one-point retained extension. The finite-batch reduction
-sharpens the last-step obstruction, but a genuine staged counterexample
-could still reach a different state before the stall, change the active
-gate packet, or use a different cross-window design.
+blocks every one-point retained extension. Allowing pair batches shows that
+small coordinated moves do not obviously evade this pressure. The
+finite-batch reduction sharpens the last-step obstruction, but a genuine
+staged counterexample could still reach a different state before the stall,
+change the active gate packet, or use a different cross-window design.
 
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
@@ -15848,6 +15937,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the tested scaled profiles even two-point batches do not cover the stalled
   gap safely, which by Lemma 8.5a.7z.12e' blocks every finite batch at that
   final state.
+* Lemma 8.5a.7z.12e'' packages the exact reflected blocker certificate:
+  if \(d=w-p\in C\) and \(d+a\in2C\) for every old summand \(a\) that would
+  make a one-new representation of the gap, then no finite retained batch
+  can cover that gap safely.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample
