@@ -5,7 +5,8 @@
 // choosing all edges not incident with the last vertex and then adding the
 // unique parity-correction edges to the last vertex.  For each graph it checks
 // whether each residue-slot multiset admits an exact cover by induced
-// 4-modular parts using those slots.
+// 4-modular parts using those slots.  Candidate multisets may have between
+// one and four slots.
 
 #include <algorithm>
 #include <array>
@@ -17,7 +18,7 @@
 #include <tuple>
 #include <vector>
 
-using Candidate = std::array<int, 4>;
+using Candidate = std::vector<int>;
 
 namespace {
 
@@ -46,7 +47,9 @@ std::vector<Candidate> all_candidates(int modulus) {
     for (int a = 0; a < modulus; ++a) {
         for (int b = a; b < modulus; ++b) {
             for (int c = b; c < modulus; ++c) {
-                for (int d = c; d < modulus; ++d) out.push_back({a, b, c, d});
+                for (int d = c; d < modulus; ++d) {
+                    out.push_back(Candidate{a, b, c, d});
+                }
             }
         }
     }
@@ -62,18 +65,17 @@ std::vector<Candidate> parse_candidates(const std::string& text, int modulus) {
         if (block.empty()) continue;
         std::stringstream items(block);
         std::string item;
-        Candidate cand{0, 0, 0, 0};
-        int idx = 0;
+        Candidate cand;
         while (std::getline(items, item, ',')) {
             if (item.empty()) continue;
-            if (idx >= 4) {
+            if (cand.size() >= 4) {
                 std::cerr << "candidate has more than four slots: " << block << "\n";
                 std::exit(2);
             }
-            cand[idx++] = std::stoi(item) % modulus;
+            cand.push_back(std::stoi(item) % modulus);
         }
-        if (idx != 4) {
-            std::cerr << "candidate must have four slots: " << block << "\n";
+        if (cand.empty()) {
+            std::cerr << "candidate must have at least one slot: " << block << "\n";
             std::exit(2);
         }
         std::sort(cand.begin(), cand.end());
@@ -84,7 +86,7 @@ std::vector<Candidate> parse_candidates(const std::string& text, int modulus) {
 
 std::string candidate_string(const Candidate& cand) {
     std::ostringstream out;
-    for (int i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < cand.size(); ++i) {
         if (i) out << ",";
         out << cand[i];
     }
@@ -255,7 +257,7 @@ int main(int argc, char** argv) {
             progress = true;
         } else {
             std::cerr << "usage: universal_slots_fast [--n N] [--modulus 4]"
-                      << " [--candidates a,b,c,d;...] [--degree-parity 0|1]"
+                      << " [--candidates a,b[,c[,d]];...] [--degree-parity 0|1]"
                       << " [--odd-parts] [--progress]\n";
             return 2;
         }

@@ -4113,6 +4113,64 @@ with mask `148580`.  The same mask is accepted by
 python3 EXPERIMENTS/slot_partition.py 7 --mask 148580 --slots 0,0,2,2.
 ```
 
+The other natural three-slot simplification, keeping the two zero slots but
+using only one residue-`2` slot, is also false.
+
+**Computational Counterexample: The Three-Slot `(0,0,2)` Strengthening Is
+False.**  There is an even graph on `8` vertices with no `(0,0,2)` modular
+partition.
+
+Proof.  In the edge order used by `EXPERIMENTS/regular_induced.py`, take the
+mask
+
+```text
+225409983.
+```
+
+The edge set is
+
+```text
+01, 02, 03, 04, 05, 06, 12, 13, 14, 16, 17,
+23, 24, 26, 27, 34, 35, 37, 45, 47, 57, 67.
+```
+
+The degree sequence is
+
+```text
+6,6,6,6,6,4,4,6,
+```
+
+so the graph is even.  The exact fixed-slot checker, now allowing candidate
+multisets with fewer than four slots, gives
+
+```text
+/tmp/universal_slots_fast --n 8 --degree-parity 0 --candidates 0,0,2
+```
+
+and reports `slots=0,0,2 bad=225409983`.  Direct verification with
+
+```text
+python3 82/EXPERIMENTS/slot_partition.py 8 --mask 225409983 --slots 0,0,2
+```
+
+returns `slot_partition=no`.
+
+This graph is not a counterexample to the matching-slot target.  The command
+
+```text
+python3 82/EXPERIMENTS/matching_slot_search.py 8 --mask 225409983
+```
+
+finds the certificate
+
+```text
+A={0,1,2,3,4},  B={5},  C={6,7},  D=empty.
+```
+
+Here `A` is a `K_5`, hence zero-residue modulo `4`; `B` is independent; and
+`C` is the induced edge `67`.  Thus the exact matching slot repairs a genuine
+three-slot obstruction.  QED.
+
 The strongest-looking surviving candidate is `R=(0,0,1,2)`, because it has
 two zero slots and one slot for each nonzero parity class.  The next lemma
 records an equivalent form that replaces the two zero slots by a cut

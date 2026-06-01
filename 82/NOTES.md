@@ -2796,3 +2796,11 @@ source of growth beyond Ramsey.
   through several bounded searches, including `5` classes of size `10`,
   `6` classes with total size at most `30`, and `7` classes with total size at
   most `28`.
+- 2026-06-01: Tested the cleaner three-slot target `(0,0,2)` for even
+  graphs.  Exhaustive Python checks through `7` vertices saw no obstruction,
+  but after extending `universal_slots_fast.cpp` to accept one-to-four-slot
+  candidates, the full `n=8` even sweep kills `(0,0,2)` at mask `225409983`.
+  The graph has degree sequence `6,6,6,6,6,4,4,6`; it has no `(0,0,2)`
+  partition, but the matching-slot checker immediately certifies it with
+  `A={0,1,2,3,4}`, `B={5}`, `C={6,7}`, and `D=empty`.  Thus the exact
+  induced-matching correction is not merely cosmetic.

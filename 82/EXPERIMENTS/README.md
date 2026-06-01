@@ -161,9 +161,10 @@ Computational checks and generated data for Erdos Problem 82.
   question.  It is intended for the full labelled fixed-degree-parity sweep
   on `n=8`, where the Python exact-cover loop is too slow.  Use
   `--degree-parity 0` for even graphs and `--degree-parity 1` for odd-degree
-  graphs.  The optional `--odd-parts` flag requires every nonempty part in
-  the slot partition to have odd cardinality, useful for testing complement
-  reductions.
+  graphs.  Candidate multisets supplied with `--candidates` may have between
+  one and four slots.  The optional `--odd-parts` flag requires every
+  nonempty part in the slot partition to have odd cardinality, useful for
+  testing complement reductions.
 - `slot_local_search.py`: simulated-annealing heuristic for fixed residue-slot
   colorings.  It directly scores a coloring against prescribed residues and
   is useful for larger exploratory searches where exact slot DP is too slow;
