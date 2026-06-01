@@ -9291,6 +9291,46 @@ remaining edge deletions create one, again with witnesses containing the
 deleted pair.  Thus both edge-extremal forms in Lemma 27F occur in small
 examples.
 
+The same saturation check extends to the spread-one `14`-vertex threshold-`7`
+mask
+
+```text
+146294004578047919044267715.
+```
+
+Greedy edge-addition saturation gives
+
+```text
+765415324481232608887291903,
+```
+
+with no regular induced subgraph of order at least `7`; all `18` remaining
+missing-edge additions create such a witness, and all reported witnesses
+contain the added pair.  Greedy edge-deletion saturation gives
+
+```text
+88255234986600583676821506,
+```
+
+with no regular induced subgraph of order at least `7`; all `19` remaining
+edge deletions create such a witness, again containing the deleted pair.  The
+verification commands are
+
+```text
+python3 82/EXPERIMENTS/edge_saturate.py 14 \
+  --mask 146294004578047919044267715 --threshold 7 --mode add
+python3 82/EXPERIMENTS/edge_saturate.py 14 \
+  --mask 146294004578047919044267715 --threshold 7 --mode delete
+python3 82/EXPERIMENTS/regular_bitset.py 14 \
+  --mask 765415324481232608887291903 --threshold 7
+python3 82/EXPERIMENTS/regular_bitset.py 14 \
+  --mask 88255234986600583676821506 --threshold 7
+python3 82/EXPERIMENTS/edge_perturbation_witness.py 14 \
+  --mask 765415324481232608887291903 --threshold 7 --mode add
+python3 82/EXPERIMENTS/edge_perturbation_witness.py 14 \
+  --mask 88255234986600583676821506 --threshold 7 --mode delete
+```
+
 ## Lemma 27H: Pair-Role Equations For Two-Defect Witnesses
 
 Let `u,v` be two vertices in a graph `G`, and put `delta=1` if `uv in E(G)`

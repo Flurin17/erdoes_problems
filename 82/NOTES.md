@@ -3084,3 +3084,10 @@ source of growth beyond Ramsey.
   not low-rank artifacts: the `C_reg(1,5)>12` mask has full rank modulo
   `2,3,5`, while the new spectrum masks have distinct adjacency rows and
   rank at least `8/10` or `10/12` modulo `2`.
+- 2026-06-01: Extended edge-extremal saturation calibration to the known
+  spread-one `14`-vertex threshold-`7` mask.  Greedy add-saturation gives mask
+  `765415324481232608887291903` with `18/18` missing-edge additions blocked by
+  regular witnesses containing the added pair.  Greedy delete-saturation gives
+  mask `88255234986600583676821506` with `19/19` edge deletions blocked by
+  witnesses containing the deleted pair.  This supports the two-defect
+  framework beyond the first `12`-vertex threshold-`6` calibration.
