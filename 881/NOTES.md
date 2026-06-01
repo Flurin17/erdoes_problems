@@ -2140,13 +2140,19 @@ the unique gate avoids \(P\), and any shifted-overlap difference \(f-g\)
 avoids \(H\). Thus moving gates and moving shifts are not merely possible;
 they are cofinally forced by the remaining counterexample hypothesis.
 
+Corollary 8.5a.7p closes a small quantifier gap in the phrase "outside
+every finite core." The large fiber \(U\) itself can also be forced outside
+any prescribed finite row core: ask first for \(M+|E_{\rm row}|\) rows and
+discard the finitely many that land in \(E_{\rm row}\). Thus both the
+deleted active colors and the retained private rows can be made fresh.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
 inside every finite test, or have retained shifted overlaps while keeping
 the shift moving or shift-independent inside every finite test. It must do
-this cofinally outside every finite palette while also preventing unbounded
-reflection centers on any fixed finite-palette violation. A proof must turn
-one of these escape patterns into a recurrent certificate triple; a
-counterexample must stage these escaping fibers while preserving the
-late-bad barrier for every infinite deletion.
+this cofinally outside every finite palette and finite row core while also
+preventing unbounded reflection centers on any fixed finite-palette
+violation. A proof must turn one of these escape patterns into a recurrent
+certificate triple; a counterexample must stage these escaping fibers while
+preserving the late-bad barrier for every infinite deletion.
