@@ -228,6 +228,13 @@ to the same gadget. In the default instance, radius `5003` still does not
 repair the witness, while radius `5004` does via
 `5004+5004+89992=100000`; this is the first point where the interval's
 two-sum coverage reaches the private spike sum \(f+\min U\).
+`spike_safe_filler_profile.py` adds the maximal harmless low band and a
+second retained band above all private spike sums. After removing the
+single middle-packet complement `14000`, the full set has continuous
+two-sum coverage through `30000`, while the retained set still misses all
+private spike sums and does not repair the witness `100000`. This shows
+that the initial coverage gap in Example 8.5a.7z.12a can be bridged
+locally; the remaining stage obstruction is freezing the much later witness.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

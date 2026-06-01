@@ -8619,6 +8619,49 @@ Thus the no-promotion spike gadget cannot be turned into a stage merely by
 adding a long retained interval through the first private sums; such
 fillers repair the very witness they are meant to protect.
 
+### Diagnostic 8.5a.7z.12c: The first coverage gap is bridgeable
+
+The previous diagnostic should not be overread. The first two-sum coverage
+gap in Example 8.5a.7z.12a can be bridged locally without repairing the
+protected witness, as long as the retained fillers stay out of the private
+two-sums and out of the middle-packet complements of \(w\).
+
+The script `spike_safe_filler_profile.py` verifies this in the same finite
+instance \(N=1000,h=7,U=\{1,4,9,16,25,36\}\). It adjoins to the retained
+set the low band
+\[
+[1,5003]
+\]
+and the upper band
+\[
+[10044,15000]\setminus\{14000\}.
+\]
+The low band stops just before its two-sum interval reaches the first
+private spike sum \(10008\). The upper band starts just after the last
+private spike sum \(10043\). The point \(14000\) is removed because
+\[
+100000=43000+43000+14000.
+\]
+With these fillers, the full set \(C\cup F\) has continuous two-sum
+coverage from \(2\) through \(30000\), while the retained two-sumset still
+misses every private spike sum
+\[
+10008,10011,10016,10023,10032,10043,
+\]
+and
+\[
+100000\notin3C.
+\]
+
+Thus the local no-promotion gadget is not defeated merely by asking for
+some initial order-2 coverage. What remains missing from a genuine stage is
+the frozen-witness requirement: the declared coverage endpoint must pass
+the witness, or later elements below \(w\) may repair it. Once one tries to
+cover that far, every retained filler \(e\le w-N_0\) forces the shifted
+target \(w-e\) to be covered only through deleted gates, returning exactly
+to the reflected-front and compressed-spike obligations of Lemma
+8.5a.7z.10.
+
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
 Work in the remaining \(k=2\) counterexample case. Fix a finite row test
@@ -8693,10 +8736,12 @@ the following escape conditions must hold simultaneously:
 3. **No disjoint local windows:** the active supports cannot live in
    disjoint finite windows, by Warning 8.5a.7z.1; they must form a genuine
    cross-window front on packet indices.
-4. **Coverage without repair:** the extra retained fillers needed for
-   order-2 stage coverage must bridge the large two-sum gaps seen in
-   Example 8.5a.7z.12a without entering the terminal gaps, repairing the
-   protected witnesses, or creating stable compressed spikes.
+4. **Coverage without terminal repair:** the extra retained fillers needed
+   for order-2 stage coverage must do more than bridge the initial two-sum
+   gaps from Example 8.5a.7z.12a and Diagnostic 8.5a.7z.12c. They must
+   push the declared endpoint past the protected witnesses without entering
+   the terminal gaps, repairing those witnesses, or creating stable
+   compressed spikes.
 
 Thus the final problem is no longer a local terminal-hole problem. It is a
 global recurrence-versus-staging problem for moving compressed spikes: prove
@@ -15445,6 +15490,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 8.5a.7z.12b shows that the most direct coverage filler,
   adjoining a retained low interval, repairs the protected witness exactly
   when its two-sum interval reaches a private spike sum.
+* Diagnostic 8.5a.7z.12c shows that the initial coverage gap can still be
+  bridged locally by safe retained bands; the unresolved burden is pushing
+  coverage past the witness while keeping every shifted terminal target
+  gated by deleted colors.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample
