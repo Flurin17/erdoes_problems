@@ -65,6 +65,13 @@ def rank_mod_p(rows: list[list[int]], p: int) -> int:
     return rank
 
 
+def shifted_rows(rows: list[list[int]], shift: int, p: int) -> list[list[int]]:
+    matrix = [[entry % p for entry in row] for row in rows]
+    for index in range(min(len(matrix), len(matrix[0]) if matrix else 0)):
+        matrix[index][index] = (matrix[index][index] + shift) % p
+    return matrix
+
+
 def max_regular_order(adj: list[int], n: int) -> tuple[int, int | None]:
     for order in range(n, 0, -1):
         witness, degree, _checks = regular_bitset.find_regular_order(
@@ -103,6 +110,10 @@ def main() -> None:
         if p == 2:
             print(f"low_rank_independent_bound={args.n / (2 ** rank):.6g}")
             print(f"kernel_even_witness_bound={args.n - rank}")
+            shifted_rank = rank_mod_p(shifted_rows(rows, 1, p), p)
+            print(f"rank_mod_2_A_plus_I={shifted_rank}")
+            print(f"nullity_mod_2_A_plus_I={args.n - shifted_rank}")
+            print(f"kernel_odd_witness_bound={args.n - shifted_rank}")
 
     if args.regular:
         adj = regular_bitset.build_adjacency(args.n, args.mask)

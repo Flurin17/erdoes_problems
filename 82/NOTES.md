@@ -3096,3 +3096,11 @@ source of growth beyond Ramsey.
   order histogram is `7:17,8:1`; on the delete-saturated mask it is
   `7:12,8:7`.  Thus the small saturated examples are mostly threshold-tight,
   with only limited larger defect witnesses.
+- 2026-06-01: Added Lemma 3B, the binary eigenspace parity certificate.  If
+  `nu_lambda=dim ker(A+lambda I)` over `F_2`, then some induced subgraph on at
+  least `nu_lambda` vertices has all degrees congruent to `lambda mod 2`.
+  Updated `rank_profile.py` to report `rank_mod_2_A_plus_I` and the odd-source
+  witness bound.  On the recorded `C_reg(1,5)>12` mask both binary eigenspaces
+  have nullity `0`; on the `14`-vertex add/delete saturated masks the
+  `A+I` nullities are `3` and `1`.  Thus the finite obstruction masks are not
+  explained by a large binary eigenspace.

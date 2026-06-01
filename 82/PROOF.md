@@ -657,6 +657,42 @@ a useful linear-algebra diagnostic for parity-based constructions: low
 `F_2`-rank forces a large `2`-modular witness before any Gallai partitioning is
 used.
 
+## Lemma 3B: Binary Eigenspaces Give Parity-Modular Witnesses
+
+Let `A_G` be the adjacency matrix of an `n`-vertex graph `G` over `F_2`.  For
+`lambda in F_2`, put
+
+```text
+nu_lambda = dim ker(A_G + lambda I).
+```
+
+Then `G` contains an induced subgraph on at least `nu_lambda` vertices in
+which every degree is congruent to `lambda modulo 2`.
+
+Proof.  Let `K=ker(A_G+lambda I)`.  As in Lemma 3A, choose `nu_lambda`
+coordinate positions on which projection from `K` is an isomorphism, and take
+`x in K` whose projection to these coordinates is the all-one vector.  Let
+
+```text
+S={v : x_v=1}.
+```
+
+Then `|S|>=nu_lambda`.  For every `v in S`, the `v`-coordinate of
+`A_G x = lambda x` gives
+
+```text
+deg_{G[S]}(v) congruent lambda mod 2,
+```
+
+because over `F_2` the indicator vector of `S` is exactly `x`.  Hence `G[S]`
+has the claimed parity-modular source residue.  QED.
+
+Lemma 3A is the case `lambda=0`.  The `lambda=1` case is useful for diagnostics
+because it gives a large odd induced subgraph whenever `A_G+I` has large
+kernel.  Thus a graph that avoids large parity-modular witnesses from linear
+algebra must have both binary eigenspaces small, even though Gallai still
+always supplies a large even witness by a nonlinear partition argument.
+
 ## Conditional Proposition: Interval Polynomial-Loss Dyadic Lifting Would Suffice
 
 For a power of two `q`, call a vertex set `S` `q`-modular if all degrees in

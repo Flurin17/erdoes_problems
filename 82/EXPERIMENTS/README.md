@@ -299,7 +299,8 @@ Computational checks and generated data for Erdos Problem 82.
   supports the diversity-counting route in Lemma 25.
 - `edge_perturbation_witness.py`: inspects regular induced witnesses created
   by adding a missing edge or deleting an existing edge, supporting the
-  edge-extremal defect-witness lemma.
+  edge-extremal defect-witness lemma.  It also reports witness order and
+  degree histograms for all successful perturbations.
 - `edge_saturate.py`: greedily adds or deletes edges while preserving absence
   of a threshold-size regular induced subgraph, producing small edge-maximal
   or edge-minimal examples for perturbation checks.
@@ -326,6 +327,9 @@ Computational checks and generated data for Erdos Problem 82.
   for disjoint-union obstructions to the balanced pair parameter.  In random
   sampling mode, `regular_spectrum.py` also reports the sampled pair with the
   smallest maximum same-degree total when no obstruction is found.
+- `rank_profile.py`: reports distinct adjacency rows, modular adjacency
+  ranks, binary kernel even-witness bounds, and binary `A+I` odd-witness
+  bounds for fixed graph masks.
 - `no_inversion_regular.py`: exact census and random sampling for ordered
   inversion-free graphs, encoded by suffix thresholds.  This calibrates the
   ordered-graph subproblem in Lemma 28E.1 by comparing the largest guaranteed
