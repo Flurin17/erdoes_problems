@@ -2573,6 +2573,15 @@ every endpoint in the linked tail set. Otherwise endpoint-list choices either
 produce a recurrent certificate triple directly or compactify to the finite
 moving-label Sidon coloring forbidden by Lemma 8.5a.6. Thus any surviving
 prefix-link shell must carry bounded-center debt at some moving endpoint.
+Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
+than first Schreier: the P6 stalled window has no Schreier-compatible order
+but does have a generalized order
+\[
+(10,38,15,18,19,30)
+\]
+with ranks \((1,4,2,2,1)\). This success disappears with one unit of tail
+slack, so finite near-terminal cuts should not be mistaken for an iterable
+infinite shell.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

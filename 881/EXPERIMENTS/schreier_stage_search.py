@@ -14,6 +14,14 @@ from functools import lru_cache
 from itertools import combinations, permutations
 
 
+def parse_int_set(value: str) -> set[int]:
+    return {int(part) for part in value.split(",") if part}
+
+
+def parse_int_tuple(value: str) -> tuple[int, ...]:
+    return tuple(int(part) for part in value.split(",") if part)
+
+
 def hsum(elements: set[int], h: int, cap: int) -> set[int]:
     sums = {0}
     ordered = tuple(sorted(elements))
@@ -613,6 +621,97 @@ def supported_order(
     return search(tuple(), vertices)
 
 
+def generalized_prefix_order(
+    elements: set[int],
+    vertices: tuple[int, ...],
+    coverage: int,
+    min_tail_slack: int,
+) -> tuple[tuple[int, ...], tuple[int, ...]] | None:
+    cache: dict[frozenset[int], bool] = {}
+
+    def good(edge: frozenset[int]) -> bool:
+        if edge not in cache:
+            cache[edge] = (
+                witnesses_for_edges(elements, [tuple(sorted(edge))], coverage)
+                is not None
+            )
+        return cache[edge]
+
+    def rank_options(vertex: int, tail: tuple[int, ...]) -> list[int]:
+        max_rank = len(tail) - min_tail_slack
+        if max_rank < 1:
+            return []
+        options: list[int] = []
+        for rank in range(1, max_rank + 1):
+            if all(
+                good(frozenset((vertex, *rest)))
+                for rest in combinations(tail, rank)
+            ):
+                options.append(rank)
+        return options
+
+    def search(
+        prefix: tuple[int, ...],
+        ranks: tuple[int, ...],
+        remaining: tuple[int, ...],
+    ) -> tuple[tuple[int, ...], tuple[int, ...]] | None:
+        if not remaining:
+            return prefix, ranks
+        for vertex in remaining:
+            tail = tuple(x for x in remaining if x != vertex)
+            options = rank_options(vertex, tail)
+            if not options:
+                if len(tail) <= min_tail_slack:
+                    return (*prefix, vertex, *tail), ranks
+                continue
+            for rank in options:
+                result = search((*prefix, vertex), (*ranks, rank), tail)
+                if result is not None:
+                    return result
+        return None
+
+    return search(tuple(), tuple(), vertices)
+
+
+def general_prefix_diagnostic(
+    elements: set[int],
+    vertices: tuple[int, ...],
+    min_tail_slack: int,
+) -> None:
+    coverage = cover_end(elements, 2, 3 * max(elements))
+    first_options: dict[int, list[int]] = {}
+    for vertex in vertices:
+        tail = tuple(x for x in vertices if x != vertex)
+        options: list[int] = []
+        max_rank = len(tail) - min_tail_slack
+        for rank in range(1, max_rank + 1):
+            edges = [(vertex, *rest) for rest in combinations(tail, rank)]
+            if witnesses_for_edges(elements, edges, coverage) is not None:
+                options.append(rank)
+        first_options[vertex] = options
+
+    general = generalized_prefix_order(
+        elements,
+        vertices,
+        coverage,
+        min_tail_slack,
+    )
+    schreier = supported_order(elements, vertices, coverage)
+    print("generalized prefix-link diagnostic")
+    print("  elements=", sorted(elements))
+    print("  vertices=", vertices)
+    print("  coverage_end=", coverage)
+    print("  min_tail_slack=", min_tail_slack)
+    print("  first_rank_options=", first_options)
+    print("  first_schreier_order=", schreier)
+    if general is None:
+        print("  generalized_shell=None")
+    else:
+        order, ranks = general
+        print("  generalized_shell_order=", order)
+        print("  ranks=", ranks)
+
+
 def p6_enum_search(max_p6: int, max_extra_count: int, max_extra_value: int) -> None:
     """Bounded search for a P6 extension with arbitrary enumeration order."""
     seed = {1, 2, 4, 5, 8, 10, 15, 18, 19, 30}
@@ -656,6 +755,7 @@ def main() -> None:
     parser.add_argument("--p6-order-diagnostic", action="store_true")
     parser.add_argument("--p6-enum-search", action="store_true")
     parser.add_argument("--pair-edge-search", action="store_true")
+    parser.add_argument("--general-prefix-diagnostic", action="store_true")
     parser.add_argument("--max-value", type=int, default=23)
     parser.add_argument("--max-size", type=int, default=10)
     parser.add_argument("--protected-count", type=int, default=4)
@@ -668,6 +768,12 @@ def main() -> None:
     parser.add_argument("--max-u", type=int, default=80)
     parser.add_argument("--max-nodes", type=int, default=50_000)
     parser.add_argument("--max-found", type=int, default=5)
+    parser.add_argument("--min-tail-slack", type=int, default=0)
+    parser.add_argument(
+        "--diagnostic-elements",
+        default="1,2,4,5,8,10,15,18,19,30,38,40,43,44",
+    )
+    parser.add_argument("--diagnostic-vertices", default="10,15,18,19,30,38")
     args = parser.parse_args()
     if args.extend_first:
         extend_first(args.max_new, args.max_candidate)
@@ -681,6 +787,12 @@ def main() -> None:
         p6_enum_search(args.max_p6, args.max_extra, args.max_extra_value)
     elif args.pair_edge_search:
         pair_edge_search(args.max_p6, args.max_u, args.max_nodes, args.max_found)
+    elif args.general_prefix_diagnostic:
+        general_prefix_diagnostic(
+            parse_int_set(args.diagnostic_elements),
+            parse_int_tuple(args.diagnostic_vertices),
+            args.min_tail_slack,
+        )
     else:
         search_protected(
             args.max_value,

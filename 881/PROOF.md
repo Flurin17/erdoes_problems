@@ -15365,6 +15365,46 @@ condition has no solution. Thus the finite obstruction is not merely that
 one unlucky value order fails; the supported-subset hypergraph has no
 Schreier-compatible prefix links at all.
 
+### Diagnostic 13.1j.1: Arbitrary prefix ranks can bypass finite Schreier stalls
+
+The generalized shell from Lemma 8.5a.8b is weaker than the first-Schreier
+schedule tested in Lemma 13.1j. The mode
+`schreier_stage_search.py --general-prefix-diagnostic` checks whether a
+finite protected window has an ordering
+\[
+v_1,\ldots,v_n
+\]
+and ranks \(\rho_i\) such that each \(v_i\) links to every
+\(\rho_i\)-subset of its remaining tail.
+
+On the P6 stalled window
+\[
+A=\{1,2,4,5,8,10,15,18,19,30,38,40,43,44\},
+\]
+with protected vertices
+\[
+(10,15,18,19,30,38),
+\]
+the first-Schreier order still fails, but with no tail slack the generalized
+test succeeds:
+\[
+\text{order}=(10,38,15,18,19,30),\qquad
+\rho=(1,4,2,2,1).
+\]
+The rank \(4\) link at the second prefix uses the entire remaining tail
+\[
+\{15,18,19,30\}.
+\]
+When the diagnostic requires even one unused tail vertex after every prefix
+link,
+\[
+\texttt{--min-tail-slack 1},
+\]
+the same finite window has no generalized shell. Thus arbitrary finite ranks
+can hide finite stalls by using near-terminal tail cuts. The infinite
+problem must distinguish genuine moving-rank prefix links, with tail slack
+cofinally, from such finite end-of-tail artefacts.
+
 ## Corollary 13.1k: First-prefix low-excess links force a good deletion
 
 Work in the \(k=2\) case, and let \(A\) be an asymptotic basis of order
