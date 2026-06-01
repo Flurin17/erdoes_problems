@@ -6066,6 +6066,47 @@ a promotion principle showing that the colors used in such packets become
 future barrier vertices with their own witnesses; a counterexample attempt
 must pay exactly this promoted-color debt.
 
+The same separation occurs in a small covered additive window. Let
+\[
+A_0=\{1,2,3,4,5,8\},\qquad F=\{2,4,8\},\qquad C=A_0\setminus F=\{1,3,5\}.
+\]
+Then
+\[
+[2,13]\subseteq2A_0,
+\]
+and
+\[
+10\notin3C
+\]
+by parity. The hole is inclusion-minimal:
+\[
+10=2+3+5=4+1+5=8+1+1
+\]
+after restoring \(2,4,8\), respectively. The private row-color graph has
+the perfect matching
+\[
+1\mapsto8,\qquad 3\mapsto4,\qquad 5\mapsto2,
+\]
+and the rows satisfy
+\[
+1+8=9,\qquad3+4=7,\qquad5+2=7,
+\]
+none of which lies in
+\[
+2C=\{2,4,6,8,10\}.
+\]
+
+However the active colors \(F=\{2,4,8\}\) do not support a Schreier order
+inside the covered window. The pair \(\{2,4\}\) has a high-window witness
+\[
+8\notin3(A_0\setminus\{2,4\}),
+\]
+but deleting \(\{2,8\}\) or \(\{4,8\}\) leaves three-sum coverage from
+\(\max\{2,8\}-1=7\) and \(\max\{4,8\}-1=7\) through \(13\). Thus no vertex
+has pair links to both other vertices, so Lemma 13.1j's first prefix-link
+condition fails for every ordering of \(F\), despite the mobile-injective
+private coloring of the collective hole.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
