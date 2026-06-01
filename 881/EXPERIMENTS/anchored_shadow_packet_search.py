@@ -4,7 +4,8 @@
 This is a diagnostic for Corollaries 3.4d.19--3.4d.20.  It shows that
 local finite three-sum coverage does not by itself force anchored-shadow
 expansion, and that the parallel-copy branch is locally compatible with
-finite coverage.  The default search reproduces Warnings 3.4d.21--3.4d.22.
+finite coverage.  The default run checks the scalable thickened templates
+from Warnings 3.4d.21--3.4d.22 and then rediscovers their base windows.
 """
 
 from __future__ import annotations
@@ -30,6 +31,84 @@ def shadow_bound(values: tuple[int, ...], gate: int, packet: tuple[int, ...]) ->
         len({gate + u - anchor for u in packet} & value_set)
         for anchor in packet
     )
+
+
+def scaled(base: tuple[int, ...], factor: int) -> tuple[int, ...]:
+    return tuple(factor * value for value in base)
+
+
+def thickened(base: tuple[int, ...], factor: int) -> tuple[int, ...]:
+    return tuple(
+        value
+        for base_value in base
+        for value in range(factor * base_value, factor * base_value + factor)
+    )
+
+
+def check_thickened_templates(max_factor: int = 7) -> None:
+    anchored_base = (1, 2, 3, 4, 7)
+    anchored_packet = (1, 3, 4, 7)
+    anchored_shadows = [
+        (2, 4),
+        (2, 3),
+        (1, 2),
+        (2,),
+    ]
+
+    parallel_base = (1, 2, 3, 4, 5, 7)
+    parallel_u = (1, 3, 5)
+    parallel_v = (3, 5, 7)
+    palette = (2, 4)
+
+    for factor in range(1, max_factor + 1):
+        values = thickened(anchored_base, factor)
+        value_set = set(values)
+        gate = 2 * factor
+        packet = scaled(anchored_packet, factor)
+        assert covers_window(values, 8 * factor, 16 * factor)
+        shadows = [
+            tuple(sorted({gate + u - anchor for u in packet} & value_set))
+            for anchor in packet
+        ]
+        assert shadows == [scaled(shadow, factor) for shadow in anchored_shadows]
+
+        values = thickened(parallel_base, factor)
+        value_set = set(values)
+        f = 2 * factor
+        g = 4 * factor
+        packet_u = scaled(parallel_u, factor)
+        packet_v = scaled(parallel_v, factor)
+        assert covers_window(values, 8 * factor, 16 * factor)
+        assert packet_v == tuple(u + g - f for u in packet_u)
+        trapped = scaled(palette, factor)
+        assert (
+            tuple(
+                sorted(
+                    {u + g - anchor for u in packet_u for anchor in packet_u}
+                    & value_set
+                )
+            )
+            == trapped
+        )
+        assert (
+            tuple(
+                sorted(
+                    {v + f - anchor for v in packet_v for anchor in packet_v}
+                    & value_set
+                )
+            )
+            == trapped
+        )
+        assert (
+            tuple(sorted({v + f - u for v in packet_v for u in packet_u} & value_set))
+            == trapped
+        )
+        assert (
+            tuple(sorted({u + g - v for u in packet_u for v in packet_v} & value_set))
+            == trapped
+        )
+
+    print(f"thickened templates verified through p={max_factor}")
 
 
 def find_anchored_shadow_packet() -> None:
@@ -96,6 +175,7 @@ def find_parallel_copy_packet() -> None:
 
 
 def main() -> None:
+    check_thickened_templates()
     find_anchored_shadow_packet()
     find_parallel_copy_packet()
 

@@ -3708,29 +3708,36 @@ singleton versus nonsingleton split used in the completed \(k=2\) proof.
 Corollary 3.4d.19 needs asymptotic input. A finite order-\(3\) covering
 window may still contain a sizeable sparse anchored-shadow packet.
 
-Let
+For every \(p\ge1\), let
 \[
-A_0=\{1,2,3,4,7\}.
+A_{0,p}=\bigcup_{a\in\{1,2,3,4,7\}}[ap,ap+p-1].
 \]
 Then
 \[
-[8,16]\subset3A_0.
+[8p,16p]\subset3A_{0,p}.
 \]
+Indeed, each base representation \(m=a+b+c\) with
+\(m\in[8,16]\) thickens to an interval
+\([mp,mp+3p-3]\), and consecutive such intervals overlap or touch.
 Take
 \[
-g=2,\qquad U=\{1,3,4,7\}\subset A_0.
+g=2p,\qquad U=p\{1,3,4,7\}\subset A_{0,p}.
 \]
 For the four anchors \(u_0\in U\), the intersections
 \[
-(g+U-u_0)\cap A_0
+(g+U-u_0)\cap A_{0,p}
 \]
 are respectively
 \[
-\{2,4\},\qquad \{2,3\},\qquad \{1,2\},\qquad \{2\}.
+p\{2,4\},\qquad p\{2,3\},\qquad p\{1,2\},\qquad \{2p\}.
 \]
 Thus every anchored shadow has size at most \(2\), even though \(U\) has
-four points and \(3A_0\) covers a full finite interval of length \(9\).
+four points and \(3A_{0,p}\) covers a full finite interval of length
+\(8p+1\).
 
+Thus the same local obstruction occurs at arbitrarily large finite integer
+scales. The thickening is essential: the pure dilation \(p\{1,2,3,4,7\}\)
+would only cover the multiples of \(p\).
 This does not threaten Corollary 3.4d.19, whose hypothesis is a uniform
 tail expansion property after one finite core. It does show that the
 criterion cannot be proved by looking only at one finite covered window;
@@ -3740,32 +3747,37 @@ threshold argument.
 ### Warning 3.4d.22: Parallel-copy packets are locally compatible with coverage
 
 The nonsingleton branch of Corollary 3.4d.20 is also not a finite-window
-contradiction. Let
+contradiction. For every \(p\ge1\), let
 \[
-A_1=\{1,2,3,4,5,7\}.
+A_{1,p}=\bigcup_{a\in\{1,2,3,4,5,7\}}[ap,ap+p-1].
 \]
 Again
 \[
-[8,16]\subset3A_1.
+[8p,16p]\subset3A_{1,p}.
 \]
+The same interval-overlap argument applies.
 Take
 \[
-f=2,\qquad g=4,\qquad U=\{1,3,5\},\qquad V=\{3,5,7\}.
+f=2p,\qquad g=4p,\qquad U=p\{1,3,5\},\qquad V=p\{3,5,7\}.
 \]
 Then
 \[
-V=U+g-f=U+2,
+V=U+g-f=U+2p,
 \]
-and
+and all four self- and cross-shadows are trapped in the two-point palette:
 \[
-(U+g-U)\cap A_1=\{2,4\}.
+(U+g-U)\cap A_{1,p}=p\{2,4\}.
 \]
-Equivalently,
 \[
-(V+f-U)\cap A_1=\{2,4\}.
+(V+f-U)\cap A_{1,p}=p\{2,4\}.
+\]
+\[
+(V+f-V)\cap A_{1,p}=p\{2,4\},\qquad
+(U+g-V)\cap A_{1,p}=p\{2,4\}.
 \]
 Thus a finite order-\(3\) covering window can contain two parallel retained
-copies whose cross-shadow is trapped in the two-point palette \(\{f,g\}\).
+copies whose self-shadows and cross-shadows are trapped in the two-point
+palette \(\{f,g\}\), at arbitrarily large finite scales.
 
 As with Warning 3.4d.21, this is only a local model. It shows that the
 nonsingleton branch cannot be excluded by finite coverage alone; an
@@ -28874,14 +28886,16 @@ missing from ordinary minimal order-\(h\) bases.
   unique-gate branch and a nonsingleton branch with two parallel retained
   copies whose self-shadows and cross-shadows are trapped in one bounded
   active palette.
-* Warning 3.4d.21 gives a finite-window caution for the anchored-shadow
-  criterion:
-  \(\{1,2,3,4,7\}\) covers \([8,16]\) by three sums but has a four-point
-  packet whose anchored shadows through \(2\) all have size at most \(2\).
-* Warning 3.4d.22 gives the analogous finite-window caution for the
-  nonsingleton branch: \(\{1,2,3,4,5,7\}\) contains parallel copies
-  \(\{1,3,5\}\) and \(\{3,5,7\}\) with cross-shadow trapped in
-  \(\{2,4\}\), while still covering \([8,16]\) by three sums.
+* Warning 3.4d.21 gives a scalable finite-window caution for the
+  anchored-shadow criterion: the thickened dilation
+  \(\bigcup_{a\in\{1,2,3,4,7\}}[ap,ap+p-1]\) covers \([8p,16p]\) by three
+  sums but has a four-point packet whose anchored shadows through \(2p\)
+  all have size at most \(2\).
+* Warning 3.4d.22 gives the analogous scalable finite-window caution for
+  the nonsingleton branch: the thickened \(\{1,2,3,4,5,7\}\) dilation
+  contains parallel copies \(p\{1,3,5\}\) and \(p\{3,5,7\}\) with
+  self-shadows and cross-shadows trapped in \(p\{2,4\}\), while still
+  covering \([8p,16p]\) by three sums.
 * Corollary 3.4d.23 packages the exact branch-exclusion target for \(k=3\):
   if one finite core rules out all sufficiently large unique-gate packets
   and all sufficiently large bounded-palette parallel-copy packets, then a
