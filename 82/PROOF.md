@@ -11642,9 +11642,8 @@ alpha(H)+omega(H) >= (n+3)/2.
 Proof.  We prove the first assertion by induction on `n`; the empty graph is
 also allowed in the induction, with independence number `0`.  Let `a` be the
 first vertex in the order, and put `A=N_H(a)`.  As in Lemma 28D.5 with
-`P=2`, the set `A` is a clique: every nonneighbor inside `A` would be a lost
-neighbor of `a`, and the one lost neighbor `u` itself is already present in
-`N(a)\N(u)`.  Since `H` is triangle-free, `|A|<=1`.
+`P=2`, the complement of `H[A]` has maximum degree at most `1`.  Since `H` is
+triangle-free, `A` is independent.  Therefore `|A|<=2`.
 
 Let
 
@@ -11652,9 +11651,9 @@ Let
 B=V(H)\({a} union A).
 ```
 
-Then `a` is nonadjacent to every vertex of `B`, and `H[B]` is again
-triangle-free and satisfies the inherited `P=2` full-drop condition.  By
-induction,
+Then `a` is nonadjacent to every vertex of `B`.  If `|A|<=1`, the graph
+`H[B]` is again triangle-free and satisfies the inherited `P=2` full-drop
+condition.  By induction,
 
 ```text
 alpha(H[B]) >= (|B|-1)/2.
@@ -11667,8 +11666,33 @@ alpha(H) >= 1+(|B|-1)/2 = (|B|+1)/2.
 ```
 
 If `A` is empty, then `n=|B|+1`, and this lower bound is `n/2`.  If `A` has
-one vertex, then `n=|B|+2`, and the lower bound is `(n-1)/2`.  In both cases
-`alpha(H)>=(n-1)/2`.
+one vertex, then `n=|B|+2`, and the lower bound is `(n-1)/2`.
+
+It remains to handle `|A|=2`; write `A={x,y}`.  For every `b in B`, the
+comparison of `a` with the later vertex `b` gives
+
+```text
+|(N(a)\N(b))\{a,b}| <= 1.
+```
+
+Since `N(a)=A` and neither `x` nor `y` is one of the excluded endpoints, the
+vertex `b` is adjacent to at least one of `x,y`.  Put
+
+```text
+X=N(x) cap B,        Y=B\X.
+```
+
+Every vertex in `X` is adjacent to `x`, so `X` is independent because `H` is
+triangle-free.  Every vertex in `Y` is not adjacent to `x`, hence is adjacent
+to `y`, so `Y` is independent for the same reason.  Thus `H[B]` is bipartite
+with parts `X,Y`, and has an independent set of order at least `|B|/2`.
+Adding `a` to this independent set gives
+
+```text
+alpha(H) >= 1+|B|/2 = (n-1)/2.
+```
+
+All cases prove `alpha(H)>=(n-1)/2`.
 
 If `omega(H)=1`, then `H` is independent and the final assertion is trivial.
 If `omega(H)=2`, the first assertion gives
