@@ -34,7 +34,10 @@ moving active colors into future barrier vertices without creating
 recurrent finite palettes or poisoned promoted-pair intervals. Lemma
 8.5a.7e further rules out bounded-fiber mobile packets on a sparse
 deletion, so any surviving obstruction must force unbounded private-color
-fibers or \(F+F\)-exception mass at ambient scale.
+fibers or \(F+F\)-exception mass at ambient scale. The rank-controlled
+variant Lemma 8.5a.7e' and Corollary 8.5a.7f.1 sharpen this: those large
+fibers may be forced into either a unique-gate branch or a fixed retained
+shifted-overlap branch.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
@@ -6305,6 +6308,53 @@ sparse deletions: it must create unbounded private-color fibers, or use
 deleted-pair exceptions \(F+F\) at rank comparable to the ambient counting
 function.
 
+### Lemma 8.5a.7e': Sparse deletion avoids rank-controlled fiber bounds
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+order-2 threshold \(N_0\). Fix \(D\ge0\), and let
+\[
+\Phi:\mathbb N_{\ge1}\to\mathbb N
+\]
+be any function. Then there is an infinite set
+\[
+B=\{b_1<b_2<\cdots\}\subset A
+\]
+with the following property. No finite nonempty
+\[
+F\subset B,\qquad r=|F|,
+\]
+has a witness \(w\) satisfying conditions (1)--(3) of Lemma 8.5a.7e with
+every private-color fiber bounded by
+\[
+|\chi^{-1}(f)|\le\Phi(r)\qquad(f\in F). \tag{1}
+\]
+
+Proof. The same capacity count gives the sharper rank-dependent bound
+\[
+A(w-N_0)\le r+|F+F|+r\Phi(r)
+   \le r+\frac{r(r+1)}2+r\Phi(r). \tag{2}
+\]
+Choose \(b_r\in A\) strictly increasing, and far enough out that
+\[
+A(b_r-D-N_0)>
+   r+\frac{r(r+1)}2+r\Phi(r) \tag{3}
+\]
+for every \(r\ge1\). If \(F\subset B\) has size \(r\), then
+\[
+\max F\ge b_r.
+\]
+Thus any witness with \(w\ge\max F-D\) satisfies
+\[
+w-N_0\ge b_r-D-N_0,
+\]
+and (3) contradicts (2). \(\square\)
+
+This functional version removes a remaining loophole in Lemma 8.5a.7e:
+the fiber bound may grow arbitrarily with the rank of the deleted edge.
+Consequently, a counterexample cannot merely hide behind fibers of size
+\(O(|F|)\), or \(O(|F|^C)\), or any other prescribed rank function after a
+sufficiently sparse deletion.
+
 ### Corollary 8.5a.7f: Counterexamples force large private fibers
 
 Work in the remaining \(k=2\) case, and suppose \(A\) is a counterexample
@@ -6377,6 +6427,128 @@ produce arbitrarily large private reflected fibers while also preventing
 those fibers from compacting to a recurrent certificate triple or to a
 finite recurrent Sidon coloring.
 
+### Corollary 8.5a.7f.1: Large private fibers split into two branches
+
+Work in the remaining \(k=2\) counterexample case. Then for every finite
+\[
+E\subset A
+\]
+and every \(M,L_0\), there are:
+
+* a finite set \(F\subset A\setminus E\);
+* a witness \(w>L_0\) with
+  \[
+  w\notin3(A\setminus F),\qquad w\ge\max F-1;
+  \]
+* an active color \(f\in F\);
+* a set
+  \[
+  U\subset A\setminus F,\qquad |U|=M;
+  \]
+
+such that, with
+\[
+m=w-f,
+\]
+one has
+\[
+m-U\subset A\setminus F \tag{1}
+\]
+and
+\[
+u+f\notin2(A\setminus F)\qquad(u\in U), \tag{2}
+\]
+and one of the following alternatives holds.
+
+**Unique-gate branch.**
+\[
+r_{2,A}(u+f)=1\qquad(u\in U), \tag{3}
+\]
+where \(r_{2,A}\) counts unordered two-term representations from \(A\);
+the unique representation is \(u+f=u+f\).
+
+**Shifted-overlap branch.** There is a fixed
+\[
+g\in F\setminus\{f\}
+\]
+such that
+\[
+U+f-g\subset A\setminus F. \tag{4}
+\]
+
+Proof. Apply Lemma 8.5a.7e' with \(D=1\), with
+\[
+\Phi(r)=rM+\frac{r(r+1)}2,
+\]
+and with the sparse set chosen inside \(A\setminus E\) and above
+\(L_0+1\). As in Corollary 8.5a.7f, Corollary 3.1c gives a finite
+late-bad set \(F_0\) inside this sparse set; after shrinking for its fixed
+witness \(w\), Lemma 8.4c supplies a private-color assignment on the active
+retained rows. If every color fiber had size at most
+\[
+rM+\frac{r(r+1)}2,
+\]
+where \(r=|F|\), this would contradict Lemma 8.5a.7e'. Hence some
+\[
+f\in F
+\]
+has a private fiber \(U_0\) of size
+\[
+|U_0|>rM+\frac{r(r+1)}2. \tag{5}
+\]
+For every \(u\in U_0\),
+\[
+w-u-f\in A\setminus F,\qquad u+f\notin2(A\setminus F). \tag{6}
+\]
+
+Discard the rows with
+\[
+u+f\in F+F.
+\]
+There are at most
+\[
+|F+F|\le\frac{r(r+1)}2
+\]
+such rows, so the remaining set \(U_1\subset U_0\) has
+\[
+|U_1|>rM. \tag{7}
+\]
+
+Split the rows \(u\in U_1\) according to the full two-sum representations
+of \(u+f\) in \(A\). The trivial representation \(u+f=u+f\) uses the
+deleted color \(f\). If it is the only unordered representation, call
+\(u\) unique. Otherwise choose another unordered representation of
+\(u+f\). It cannot lie wholly in \(A\setminus F\), by (6). It also cannot
+use \(f\), because the complementary summand would have to be \(u\), giving
+the same unordered pair. Therefore it uses some
+\[
+g\in F\setminus\{f\}
+\]
+and the complementary summand is \(u+f-g\in A\). Since \(u\in U_1\), this
+complementary summand cannot lie in \(F\); otherwise \(u+f\in F+F\). Hence
+\[
+u+f-g\in A\setminus F. \tag{8}
+\]
+
+If at least \(M\) elements of \(U_1\) are unique, choose those elements for
+\(U\), and the unique-gate branch holds. Otherwise fewer than \(M\)
+elements are unique, so by (7) more than
+\[
+(r-1)M
+\]
+elements have a shifted-overlap witness \(g\in F\setminus\{f\}\). If
+\(r=1\), this is impossible, so the unique branch must already hold. If
+\(r\ge2\), the pigeonhole principle gives one fixed \(g\in F\setminus\{f\}\)
+serving at least \(M\) rows. Taking those rows for \(U\) gives
+(1)--(2) and (4). \(\square\)
+
+Thus the unbounded-fiber obstruction is not amorphous. In every finite
+tail it has arbitrarily large subfibers whose private sums \(u+f\) are
+either genuinely unique in the full basis \(A\), or all shifted back into
+\(A\setminus F\) by the same deleted difference \(f-g\). The former branch
+resembles the low-representation packets of Section 3; the latter is the
+first rank-free form of promoted active-color recurrence.
+
 ### Example 8.5a.7g: Large one-color private fibers are locally compatible
 
 The conclusion of Corollary 8.5a.7f is still only a global obstruction, not
@@ -6444,9 +6616,9 @@ than a one-stage contradiction.
 
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
-After Corollary 8.5a.7f and Example 8.5a.7g, the remaining \(k=2\)
-problem can be stated more sharply. In every tail and outside every finite
-core, a counterexample must produce arbitrarily large sets
+After Corollaries 8.5a.7f--8.5a.7f.1 and Example 8.5a.7g, the remaining
+\(k=2\) problem can be stated more sharply. In every tail and outside every
+finite core, a counterexample must produce arbitrarily large sets
 \[
 U
 \]
@@ -6464,12 +6636,17 @@ of \(T_0\) contains a certificate triple, then repeated occurrences of
 deletion by Corollary 2.3c. Therefore a surviving counterexample must make
 these large private fibers escape every fixed certificate-rich test set.
 
-The precise missing step is to show that this escape is impossible under
-the global late-bad barrier hypothesis, or to construct a staged basis in
-which the fibers \(U\), centers \(m\), and active colors \(f\) all escape
-while maintaining order-2 coverage and promoted-edge barriers. This is now
-the active form of the certificate-free obstruction; it is stronger than
-mobile injectivity and weaker than finite recurrent Sidon coloring.
+Corollary 8.5a.7f.1 further says that these escaping fibers may be taken in
+one of two more rigid forms: either \(u+f\) is uniquely represented in the
+full basis for all \(u\in U\), or a fixed retained shifted overlap
+\(U+f-g\subset A\setminus F\) appears for a second deleted color \(g\). The
+precise missing step is to show that both rigid escapes are impossible
+under the global late-bad barrier hypothesis, or to construct a staged
+basis in which the fibers \(U\), centers \(m\), and active colors \(f,g\)
+all escape while maintaining order-2 coverage and promoted-edge barriers.
+This is now the active form of the certificate-free obstruction; it is
+stronger than mobile injectivity and weaker than finite recurrent Sidon
+coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -13025,16 +13202,25 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   rank-\(r\) private coloring serves at most \(L\) rows per active color.
   Thus a genuine counterexample must force unbounded private-color fibers
   or \(F+F\)-exception mass at ambient scale.
+* Lemma 8.5a.7e' strengthens this to arbitrary rank-controlled bounds
+  \(\Phi(|F|)\), so sparse deletion also avoids packets whose color fibers
+  are only polynomial, exponential, or otherwise prescribed functions of
+  the deleted rank.
 * Corollary 8.5a.7f turns this into a positive structural demand:
   remaining counterexamples have arbitrarily large private reflected
   fibers \(U\) for a single active color, with \(m-U\subset A\) and
   \(U+f\) still excluded from \(2(A\setminus F)\).
+* Corollary 8.5a.7f.1 splits those fibers into two rank-free branches:
+  after passing to a large subfiber, either \(u+f\) has unique full
+  representation for every row, or all rows have the same retained shifted
+  overlap \(U+f-g\subset A\setminus F\) with another deleted color \(g\).
 * Example 8.5a.7g shows that these large fibers are locally compatible:
   a range-separated two-color packet can make one active color carry an
   arbitrarily large certificate-free private fiber.
 * Target 8.5a.7h identifies the current live obstruction: large private
-  fibers must escape every fixed certificate-rich test set without
-  compacting to recurrent Sidon colors or losing the late-bad barrier.
+  fibers in the unique-gate or shifted-overlap branches must escape every
+  fixed certificate-rich test set without compacting to recurrent Sidon
+  colors or losing the late-bad barrier.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and
