@@ -25823,6 +25823,64 @@ nonsummable active subseries.
 By Lemma 16.35a this normalization is available in the \(k=3\)
 nonsingleton-front setting before the selector reductions are applied.
 
+### Corollary 16.126: Bounded-complexity linear-core barriers pay position cost
+
+Keep the notation and hypotheses of Corollary 16.125. Suppose that, for
+some \(M\), all sufficiently late packet certificates satisfy
+\[
+\mathcal B_s\subseteq\Lambda_{\le M}. \tag{1}
+\]
+If the assigned high-density linear-core branch product-covers every
+selector tail, then at least one of the following alternatives holds.
+
+1. **Joint width-heavy residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   W_s>T_\lambda/2}}
+   \beta_{\lambda,s}=\infty. \tag{2}
+   \]
+2. **Joint midpoint-displacement residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   \Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+   \beta_{\lambda,s}=\infty. \tag{3}
+   \]
+
+If, in addition, every label in \(\Lambda_{\le M}\) satisfies
+\[
+n_\lambda\ge {2D_\lambda\over\gamma_\lambda}, \tag{4}
+\]
+then the corresponding divergent residual is linear scale:
+\[
+W_s>{\gamma_\lambda n_\lambda\over4} \tag{5}
+\]
+on the width-heavy pairs, or
+\[
+\Delta_{\lambda,i,s}>{\gamma_\lambda n_\lambda\over4}
+\qquad\text{for every }i \tag{6}
+\]
+on the midpoint-displacement pairs.
+
+Proof. Under (1), the unbounded-complexity alternative of Corollary 16.125
+is impossible, because
+\[
+|\mathcal B_s\setminus\Lambda_{\le M}|=0
+\]
+for all sufficiently large \(s\). Hence Corollary 16.125 gives (2) or (3).
+If (4) also holds, Corollary 16.123 converts the relevant inequalities
+\[
+W_s>{T_\lambda\over2}
+\qquad\text{or}\qquad
+\Delta_{\lambda,i,s}>{T_\lambda\over2}
+\]
+into (5) or (6). \(\square\)
+
+Thus a bounded-complexity high-density linear-core obstruction cannot hide
+in the countable menu once the packets have been normalized. It must create
+visible packet-position cost at the scale of its assigned interval tests;
+otherwise the only surviving escape is to make the active profile
+complexity unbounded.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27248,6 +27306,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.125 removes the recurrent-label branch when the packet
   reciprocals are summable, leaving only unbounded complexity or the two
   linear-scale packet-position residuals.
+* Corollary 16.126 specializes this to bounded-complexity menus: under the
+  reciprocal-summable packet normalization, every surviving bounded-profile
+  linear-core branch must pay width-heavy or midpoint-displacement cost,
+  and this cost is linear once the tested intervals dominate their constants.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

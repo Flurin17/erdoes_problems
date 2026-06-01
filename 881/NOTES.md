@@ -226,6 +226,10 @@ linear-scale packet-position residuals.
 Lemma 16.35a justifies that normalization in the \(k=3\) nonsingleton
 front: the active front can be partitioned into packets of prescribed
 sizes, e.g. \(|P_s|=s^2\), while preserving selector-front coverage.
+Corollary 16.126 says that any bounded-complexity linear-core branch under
+that normalization must pay the width-heavy or midpoint-displacement cost;
+if the tested intervals are past their profile constants, this cost is
+linear in the tested interval length.
 
 ## Definitions
 
