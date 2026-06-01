@@ -2508,6 +2508,11 @@ source of growth beyond Ramsey.
   clique or independent set larger than `sqrt(s)`.  Using exact degree
   buckets, rather than length-`P_h` buckets and a parity subfamily, reduces
   the number of buckets to `O(P_h h^4)` and the bucket size to `32hP_h`.
+- 2026-06-01: Improved the exact-degree bucket part directly with
+  Corollary 28D.2, giving `G(h) <= 64 h^5 P_h^2`.  Inside one global degree
+  class, Lemma 28D bounds every inherited symmetric difference by `2P_h-2`;
+  Lemma 26 then gives the sharper bucket-size bound `16hP_h` without using
+  the bounded-spread corollary.
 - 2026-06-01: Added Lemma 28G.  The local balanced pair parameter satisfies
   `G(ceil(h/2)) <= P_h <= ceil(G(h)/2)`, so `P_h=2^{o(h)}` is actually
   equivalent to the original inverse conjecture.  Proposition 28F is still
