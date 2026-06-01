@@ -2245,3 +2245,10 @@ source of growth beyond Ramsey.
   `bar sigma=Omega(n/h)`, much stronger than the `Omega(n/h^2)` supplied by
   Corollary 25A.  The variance route must therefore use more than average
   neighborhood diversity.
+- 2026-06-01: Measured the compensated spread-one sample on `n=20` from
+  `compensated_spread.py` with `degree_variance_identity.py`.  The graph has
+  maximum regular induced order `10`; for `h=11`, the variance identity gives
+  degree-difference term `84` and neighborhood symmetric-difference term
+  `1800`, i.e. average symmetric difference about `9.47`, essentially the
+  random-like `n/2` scale.  This supports the conclusion that hard
+  bounded-spread examples, if any, live in the high-diversity regime.
