@@ -53,8 +53,9 @@ itself lift to singleton integer privacy.
 
 `anchored_shadow_packet_search.py` searches finite order-3 covering windows
 for large packets whose anchored shadows stay small. The default run
-reproduces Warning 3.4d.21, showing that Corollary 3.4d.19 needs global
-tail expansion rather than one-window coverage.
+reproduces Warnings 3.4d.21--3.4d.22, showing that Corollaries
+3.4d.19--3.4d.20 need global tail expansion rather than one-window
+coverage.
 
 `rep_hypergraph_stats.py` computes finite representation-hypergraph edge
 counts, maximum degrees, and greedy matching sizes for sample models. It is

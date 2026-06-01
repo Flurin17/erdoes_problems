@@ -3707,6 +3707,41 @@ criterion cannot be proved by looking only at one finite covered window;
 one needs global recurrence, density growth across many windows, or a
 threshold argument.
 
+### Warning 3.4d.22: Parallel-copy packets are locally compatible with coverage
+
+The nonsingleton branch of Corollary 3.4d.20 is also not a finite-window
+contradiction. Let
+\[
+A_1=\{1,2,3,4,5,7\}.
+\]
+Again
+\[
+[8,16]\subset3A_1.
+\]
+Take
+\[
+f=2,\qquad g=4,\qquad U=\{1,3,5\},\qquad V=\{3,5,7\}.
+\]
+Then
+\[
+V=U+g-f=U+2,
+\]
+and
+\[
+(U+g-U)\cap A_1=\{2,4\}.
+\]
+Equivalently,
+\[
+(V+f-U)\cap A_1=\{2,4\}.
+\]
+Thus a finite order-\(3\) covering window can contain two parallel retained
+copies whose cross-shadow is trapped in the two-point palette \(\{f,g\}\).
+
+As with Warning 3.4d.21, this is only a local model. It shows that the
+nonsingleton branch cannot be excluded by finite coverage alone; an
+asymptotic proof must exploit the fact that such packets would have to
+occur outside every finite core and at unbounded scales.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -28738,6 +28773,10 @@ missing from ordinary minimal order-\(h\) bases.
   criterion:
   \(\{1,2,3,4,7\}\) covers \([8,16]\) by three sums but has a four-point
   packet whose anchored shadows through \(2\) all have size at most \(2\).
+* Warning 3.4d.22 gives the analogous finite-window caution for the
+  nonsingleton branch: \(\{1,2,3,4,5,7\}\) contains parallel copies
+  \(\{1,3,5\}\) and \(\{3,5,7\}\) with cross-shadow trapped in
+  \(\{2,4\}\), while still covering \([8,16]\) by three sums.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

@@ -72,6 +72,10 @@ retained copies whose cross-shadows are trapped in one bounded palette.
 Warning 3.4d.21 records a finite caution: \(A_0=\{1,2,3,4,7\}\) covers
 \([8,16]\) by three sums but has a four-point packet \(U=\{1,3,4,7\}\)
 whose anchored shadows through \(g=2\) all have size at most \(2\).
+Warning 3.4d.22 gives the corresponding finite caution for the nonsingleton
+branch: \(A_1=\{1,2,3,4,5,7\}\) contains parallel copies
+\(\{1,3,5\}\) and \(\{3,5,7\}\), while the cross-shadow is trapped in
+\(\{2,4\}\).
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

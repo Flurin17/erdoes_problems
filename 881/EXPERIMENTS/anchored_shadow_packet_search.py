@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Search finite order-3 windows for sparse anchored-shadow packets.
 
-This is a diagnostic for Corollary 3.4d.19.  It shows that local finite
-three-sum coverage does not by itself force anchored-shadow expansion.
-The default search reproduces Warning 3.4d.21.
+This is a diagnostic for Corollaries 3.4d.19--3.4d.20.  It shows that
+local finite three-sum coverage does not by itself force anchored-shadow
+expansion, and that the parallel-copy branch is locally compatible with
+finite coverage.  The default search reproduces Warnings 3.4d.21--3.4d.22.
 """
 
 from __future__ import annotations
@@ -31,7 +32,7 @@ def shadow_bound(values: tuple[int, ...], gate: int, packet: tuple[int, ...]) ->
     )
 
 
-def main() -> None:
+def find_anchored_shadow_packet() -> None:
     for end_base in range(8, 21):
         window = (end_base, 2 * end_base)
         values_range = range(1, end_base + 1)
@@ -53,6 +54,50 @@ def main() -> None:
                                 print(f"shadow_bound={bound}")
                                 return
     raise SystemExit("no packet found in default bounds")
+
+
+def find_parallel_copy_packet() -> None:
+    for end_base in range(8, 26):
+        window = (end_base, 2 * end_base)
+        values_range = range(1, end_base + 1)
+        for size in range(6, min(end_base, 11) + 1):
+            for values in combinations(values_range, size):
+                value_set = set(values)
+                if not covers_window(values, *window):
+                    continue
+                for f, g in combinations(values, 2):
+                    for first, second in ((f, g), (g, f)):
+                        shift = second - first
+                        candidates = tuple(
+                            u
+                            for u in values
+                            if u not in (first, second)
+                            and u + shift in value_set
+                            and u + shift not in (first, second)
+                        )
+                        for packet_size in range(3, min(6, len(candidates)) + 1):
+                            for packet in combinations(candidates, packet_size):
+                                shadow = {
+                                    second + u - anchor
+                                    for u in packet
+                                    for anchor in packet
+                                } & value_set
+                                if len(shadow) <= 2:
+                                    print("parallel copy packet found")
+                                    print(f"A={values}")
+                                    print(f"window={window}")
+                                    print(f"f={first}")
+                                    print(f"g={second}")
+                                    print(f"U={packet}")
+                                    print(f"V={tuple(u + shift for u in packet)}")
+                                    print(f"shadow={tuple(sorted(shadow))}")
+                                    return
+    raise SystemExit("no parallel packet found in default bounds")
+
+
+def main() -> None:
+    find_anchored_shadow_packet()
+    find_parallel_copy_packet()
 
 
 if __name__ == "__main__":
