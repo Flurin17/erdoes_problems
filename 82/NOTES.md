@@ -2869,3 +2869,11 @@ source of growth beyond Ramsey.
   finite nonterminal arbitrary-graph evidence for
   `R_0=(0,1,2,4)`, `R_1=(0,0,2,2)`, `R_2=(0,0,1,2)`,
   `R_3=(0,0,1,3)`.
+- 2026-06-01: Added Conditional Proposition 4E.2B, which makes explicit why
+  the source-residue slot route is theorem-level relevant.  If every dyadic
+  `q` and every source residue `a mod q` has a lift into at most
+  `b(q)<=q^alpha` induced `2q`-modular parts with fixed `alpha<1`, then the
+  existing dyadic largest-part argument gives `F(n)/log n -> infinity`.  In
+  particular, a uniform four-slot source-residue theorem for all dyadic
+  levels would solve Problem 82.  This justifies treating source-sensitive
+  universal slot searches as a main route rather than merely local evidence.

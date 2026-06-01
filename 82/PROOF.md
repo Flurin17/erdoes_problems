@@ -3362,6 +3362,42 @@ It does not by this argument give a single common `B`-slot multiset that
 works simultaneously for all source residues; the class of all `q`-modular
 graphs is not closed under disjoint unions of different source residues.
 
+**Conditional Proposition 4E.2B: Source-Residue Dyadic Lifts Would Suffice.**
+Let `b(q)` be a function on dyadic integers.  Suppose that, for every dyadic
+`q>=2`, every residue `a mod q`, and every graph whose degrees are all
+congruent to `a mod q`, the vertex set can be partitioned into at most
+`b(q)` induced `2q`-modular subgraphs.  If there is a fixed `alpha<1` such
+that
+
+```text
+b(q) <= q^alpha
+```
+
+for all sufficiently large dyadic `q`, then `F(n)/log n -> infinity`.
+
+In particular, the conclusion follows if for every sufficiently large dyadic
+`q` and every source residue `a mod q` there is a universal residue multiset
+`R_{q,a}` of size at most `q^alpha` modulo `2q` for the lift
+`a mod q -> 2q`.
+
+Proof.  Let `H` be any `q`-modular induced subgraph of an ambient graph.
+Then all degrees in `H` have some common source residue `a mod q`.  Applying
+the assumed source-residue lift to `H` partitions `V(H)` into at most `b(q)`
+induced `2q`-modular subgraphs.  Thus the hypothesis of Conditional
+Proposition "Sublinear-Exponent Dyadic Partitioning Would Suffice" holds with
+the same function `b(q)`, and the desired conclusion follows.
+
+For the final assertion, Lemma 4E.2 says that a universal slot multiset
+`R_{q,a}` for each source residue is equivalent to the corresponding
+source-residue partition theorem.  QED.
+
+This is the exact formal role of the source-sensitive slot searches below.
+They are not trying to find one residue multiset that works for all
+`q`-modular graphs at a fixed dyadic step; they are trying to make the
+function `b(q)` small after the source residue is fixed.  A uniform
+four-slot theorem for every dyadic `q` and every source residue would settle
+Erdos Problem 82 by this proposition.
+
 Any universal slot multiset for source residue `a mod q` must pass the clique
 tests whose source residue is `a`.  Since the clique `K_m` has degree
 `m-1`, it belongs to the source class `a mod q` exactly when
