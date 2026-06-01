@@ -2541,3 +2541,8 @@ source of growth beyond Ramsey.
   total size at least `6`, but no regular union; every candidate is destroyed
   by nonconstant cross-degree profiles.  This isolates the next local
   obstruction after `D_spec`.
+- 2026-06-01: Added Corollary 29A.  If two side witnesses are internally
+  `a`- and `b`-regular, their union is regular exactly when their cross-degree
+  profiles are constant with offsets differing by `a-b`.  In particular,
+  same-degree side-spectrum matches need a common cross-degree across both
+  sides; this is exactly what fails in the first `P_6` obstruction.

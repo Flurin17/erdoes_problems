@@ -8806,6 +8806,33 @@ neither side is internally regular and the cross graph is not biregular, but
 the sums are constant.  This points back toward degree-profile absorption
 rather than purely homogeneous pair templates.
 
+**Corollary 29A: Side-Regular Merge Criterion.**  Let `X,Y` be disjoint
+vertex sets.  Suppose `G[X]` is `a`-regular and `G[Y]` is `b`-regular.  Then
+`G[X union Y]` is regular if and only if there is an integer `c` such that
+
+```text
+deg(v,Y)=c          for every v in X,
+deg(w,X)=c+a-b      for every w in Y.
+```
+
+In particular, if `a=b`, then two same-degree side-regular witnesses merge
+precisely when all vertices in `X union Y` have one common cross-degree into
+the opposite side.
+
+Proof.  Apply Lemma 29.  Since `i_X(v)=a` on `X` and `i_Y(w)=b` on `Y`, the
+regularity equations become
+
+```text
+a+deg(v,Y)=D,       b+deg(w,X)=D.
+```
+
+Taking `c=D-a` gives the displayed criterion.  QED.
+
+This is the formal version of the obstruction measured by
+`EXPERIMENTS/marked_pair_profile.py`.  The first `P_6` marked obstruction has
+many same-degree side-regular pairs, but Corollary 29A fails for every one
+because the cross-degrees into the opposite side are not constant.
+
 ## Lemma 30: Profile Absorption Reformulation Across A Cut
 
 Let `V(G)=P union Q` be a fixed partition.  For `X subset P` and `Y subset Q`,
