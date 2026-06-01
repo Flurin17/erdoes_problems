@@ -83,7 +83,9 @@ large bounded-palette parallel-copy packets proves the desired order-\(4\)
 deletion. Warning 3.4d.24 then records a guardrail: finite order-\(3\)
 coverage alone cannot exclude even arbitrarily large remote packets of
 either type. A proof must use the terminal-hole tether supplied by the
-no-good-deletion hypothesis.
+no-good-deletion hypothesis. The same warning also explains why these
+remote templates are not a counterexample route: iterating their interval
+coverage core would trigger Corollary 2.5.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

@@ -3939,6 +3939,15 @@ They show only that the large-packet branches in Corollary 3.4d.23 must be
 excluded using the full no-good-deletion normal form, not by a finite
 coverage or density-window argument in isolation.
 
+Nor do these templates give an asymptotic construction route by themselves.
+If translated versions with \(N\to\infty\) occurred arbitrarily far out in a
+single basis, then \(A\) would contain arbitrarily long intervals
+arbitrarily far out, and Corollary 2.5 would already give a good infinite
+deletion. If the intervals always begin at \(1\) and \(N\to\infty\), then
+\(A\) contains all positive integers. Thus a genuine \(k=3\) counterexample
+would have to replace the interval core in these finite templates by sparse
+order-\(3\) coverage that is still tethered to the terminal holes.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
