@@ -23043,6 +23043,65 @@ gives (3). \(\square\)
 The finite script `EXPERIMENTS/density_split_check.py` checks Lemma 16.76
 on small universes by enumerating subset families.
 
+### Corollary 16.78: No-majority interval packets force two far gates
+
+Keep the setting and hypotheses of Corollary 16.77. Then, after increasing
+\(N=N(r,\eta,\theta)\) if necessary, there are distinct \(f,g\in P\) such
+that
+\[
+D_I(f;r)\ge{\eta n\over4r},\qquad
+D_I(g;r)\ge{(\eta-\theta)n\over4(r-1)}, \tag{1}
+\]
+where
+\[
+D_I(h;r)=\max\{0,\ a+2r-h,\ h-b+2r\}.
+\]
+In particular, for all sufficiently large \(n\), the same two colors
+satisfy
+\[
+f<a-{\eta n\over8r}
+\quad\text{or}\quad
+f>b+{\eta n\over8r}, \tag{2}
+\]
+and
+\[
+g<a-{(\eta-\theta)n\over8(r-1)}
+\quad\text{or}\quad
+g>b+{(\eta-\theta)n\over8(r-1)}. \tag{3}
+\]
+
+Proof. Corollary 16.77 gives distinct \(f,g\) with
+\[
+|U_{f,{\rm gate}}|\ge{\eta n\over2r},\qquad
+|U_{g,{\rm gate}}|\ge{(\eta-\theta)n\over2(r-1)}.
+\]
+Corollary 16.56, equivalently the no-row-allowance case used in Lemma
+16.60, gives
+\[
+|U_{h,{\rm gate}}|\le2D_I(h;r)
+\]
+for each active color \(h\). This proves (1).
+
+If \(D_I(f;r)\ge \eta n/(4r)\), then either
+\[
+a+2r-f\ge{\eta n\over4r}
+\]
+or
+\[
+f-b+2r\ge{\eta n\over4r}.
+\]
+Increasing \(N\) so that \(2r\le\eta n/(8r)\) gives (2). The proof of (3)
+is identical, increasing \(N\) further so that
+\[
+2r\le {(\eta-\theta)n\over8(r-1)}.
+\]
+\(\square\)
+
+Thus the no-majority bounded-rank interval branch is not just a diffuse
+many-color escape. It must produce at least two active colors at linear
+distance from the tested interval, each carrying a positive-density
+finite-palette gate shadow.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24314,6 +24373,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   below a chosen threshold must contain two distinct positive-density
   gate-dependent fibers. The remaining non-majority obstruction is therefore
   at least a two-color gate-shadow problem.
+* Corollary 16.78 adds the interval geometry to that two-color branch:
+  those two positive-density gate fibers force two active colors a linear
+  distance outside the tested interval.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

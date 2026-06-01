@@ -110,6 +110,8 @@ from pigeonholing over the palette. Lemma 16.76 and Corollary 16.77 record
 the complementary no-majority normal form: a dense bounded palette with no
 large individual color fiber yields two distinct positive-density
 gate-dependent fibers, so the remaining branch is genuinely two-color.
+Corollary 16.78 adds that both colors are linearly far from the tested
+interval.
 
 ## Definitions
 
