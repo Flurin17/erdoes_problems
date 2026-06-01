@@ -5834,6 +5834,49 @@ standard binomial estimates for ordinary Ramsey numbers.  Thus any trace
 route still needs an argument coupling different trace classes, not just a
 separate Ramsey bound for each class.
 
+## Lemma 14B.1: Large Traces Have A Stronger Independent-Set Cap
+
+Let `G` have no regular induced subgraph on at least `k` vertices, and let
+`A` be a maximal independent set of size `h<k`.  For nonempty
+`T subset A`, write `j=|T|` and define `C_T` as in Lemma 14B.  Then
+`G[C_T]` has no clique of order `k-1` and no independent set of order
+
+```text
+tau(j)=
+  k-h+j             if j < ceil(k/2),
+  ceil(k/2)         if j >= ceil(k/2).
+```
+
+Consequently,
+
+```text
+|V(G)| <= h + sum_{j=1}^{h} binom(h,j) ( R(k-1,tau(j)) - 1 ).
+```
+
+Proof.  The clique exclusion is the same as in Lemma 14B: if
+`Q subset C_T` is a clique of order `k-1`, then `Q union {a}` is a clique of
+order `k` for any `a in T`.
+
+The independent-set exclusion from Lemma 14B also still applies: an
+independent set `B subset C_T` of order `k-h+j`, together with `A\T`, is an
+independent set of order `k`.
+
+There is an additional exclusion when `j>=ceil(k/2)`.  If
+`B subset C_T` is independent of order `ceil(k/2)`, choose
+`X subset T` with `|X|=|B|`.  Since `A` is independent, `X` is independent;
+since every vertex of `B` has trace `T`, the graph on `B union X` is
+`K_{|B|,|B|}`, which is regular on at least `k` vertices.  This is impossible.
+
+Thus the forbidden independent-set threshold is `k-h+j` for small traces and
+`ceil(k/2)` for large traces.  Summing over all nonempty trace classes gives
+the displayed bound.  QED.
+
+This is a genuine improvement over Lemma 14B only for large traces
+`|T|>=ceil(k/2)`.  It still leaves exponential-size sums in the hardest
+linear-homogeneous regime, but it shows that one-trace amplification already
+removes the weakest Ramsey terms from the maximal-independent-set trace
+decomposition.
+
 ## Lemma 15: Total Trace Imbalance In A Repeated-Degree Host
 
 In the setting of Lemma 12, write

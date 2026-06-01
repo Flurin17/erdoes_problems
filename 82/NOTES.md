@@ -2412,3 +2412,11 @@ source of growth beyond Ramsey.
   witness `B={3,4}`, the script finds both merge mechanisms: `X={0,1}` has
   matching deficit and gives a `K_{2,2}`, while `X={2}` has matching degree
   `0` and gives an independent set.
+- 2026-06-01: Added Lemma 14B.1, sharpening the maximal-independent trace
+  Ramsey bound.  In a trace class `C_T` over a maximal independent set
+  `A`, the old independent-set cap was `k-|A|+|T|`; for large traces
+  `|T|>=ceil(k/2)`, one-trace amplification improves this to `ceil(k/2)`,
+  because an independent set of that size in `C_T` and the same number of
+  vertices from `T` form a regular complete bipartite graph.  This removes
+  the weakest large-trace Ramsey terms but does not yet beat the exponential
+  scale.
