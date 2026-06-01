@@ -1,5 +1,18 @@
 # Notes for Erdős Problem #881
 
+## Current status
+
+The problem is proved here for \(k=1\) and \(k=2\). The \(k=2\) proof is
+Theorem 13.1l.2p in `PROOF.md`: once the finite singleton-exceptional set
+is removed, actual active traces form a nonsingleton weak barrier; Lemma
+3.1c.4 promotes that weak barrier to an actual prefix-front; and Corollary
+13.1l.2o forbids the first finite-prefix suffix section.
+
+The workspace remains open for \(k\ge3\). The active higher-order question
+is whether the \(k=2\) finite-prefix active-trace closure has an analogue
+for \((k+1)\)-term barriers, or whether a robust staged higher-order
+collective barrier can be lifted to an infinite counterexample.
+
 ## Definitions
 
 Throughout, \(\mathbb N\) is interpreted as the positive integers unless
@@ -1139,11 +1152,11 @@ Therefore the \(k=2\) positive route now splits as follows:
 3. the remaining collective case, where all but finitely many singleton
    deletions are order-3 bases with a threshold below the deleted element.
 
-The remaining \(k=2\) obstruction is thus the **finitely-bad case**: all but
-finitely many one-point deletions \(A\setminus\{a\}\) are order-3 bases
-with a threshold \(<a\), but it is not yet known in this workspace how to
-choose an infinite deletion whose finite-prefix thresholds remain
-controlled.
+The remaining \(k=2\) obstruction at this stage was the **finitely-bad
+case**: all but finitely many one-point deletions \(A\setminus\{a\}\) are
+order-3 bases with a threshold \(<a\), while finite-prefix thresholds might
+still drift. This case is closed later by Theorem 13.1l.2p, using actual
+active-trace fronts and finite-prefix suffix closure.
 
 Corollary 8.3b makes this barrier-theoretic: after discarding a finite
 exceptional set, no singleton is late-bad. Hence every infinite subset of
@@ -2074,7 +2087,7 @@ order \(k\) by padding. Thus the robust \(k=3\) booster-pair search is not
 just a local curiosity: it is a finite attempt at a complete negative
 answer.
 
-## Current Mobile-Fiber Reduction for \(k=2\)
+## Closed Mobile-Fiber Reduction for \(k=2\)
 
 The active-trace branch has now been narrowed past the purely injective
 mobile-color model. Lemma 8.5a.7e shows that, after passing to a sufficiently
@@ -2632,8 +2645,9 @@ obligation is local to each section: verify that its arithmetic obstruction
 does produce the fixed-rank shell covered by 13.1l.2b--g, or else descends.
 Proposition 13.1l.2i packages this as a conditional \(k=2\) closure:
 assuming the section-local promotion principle from the private-color
-normal form to the shell/descent dichotomy, no counterexample exists. This
-is now the explicit final missing implication in the \(k=2\) route.
+normal form to the shell/descent dichotomy, no counterexample exists. The
+remaining promotion gap is closed later by Lemma 3.1c.4 and Corollary
+13.1l.2o.
 Corollary 13.1l.2j proves the bounded fixed-section part of that principle:
 if a fixed first point \(d\) has bounded active suffix rank and every tail
 contains an inclusion-minimal hole keeping \(d\), Lemma 8.5a.8b promotes it
@@ -2700,9 +2714,12 @@ combinatorics.
 Corollary 13.1l.2n closes the clean cross-promoted front route: if the
 large-fiber promotions actually produce a prefix-front of active suffix
 traces over a finite fixed prefix, then finite-prefix shell closure and
-well-founded section descent contradict unbounded rank. The remaining gap
-is therefore the promotion from weak private-color barriers to such a clean
-active suffix front.
+well-founded section descent contradict unbounded rank.
+Lemma 3.1c.4 supplies the missing combinatorial promotion: every weak
+barrier of actual finite traces has, after thinning, an actual prefix-front
+subbarrier. Therefore Corollary 13.1l.2o rules out finite-prefix weak
+active suffix barriers outright; bounded suffix rank falls to Corollary
+13.1l.2m, while unbounded suffix rank falls to Corollary 13.1l.2n.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
@@ -2713,13 +2730,11 @@ with ranks \((1,4,2,2,1)\). This success disappears with one unit of tail
 slack, so finite near-terminal cuts should not be mistaken for an iterable
 infinite shell.
 
-Thus the live \(k=2\) obstruction is no longer just "unbounded moving
-colors." It must produce large private fibers that either have genuinely
-unique full two-sum gates while keeping the gate moving or gate-independent
-inside every finite test, or have retained shifted overlaps while keeping
-the shift moving or shift-independent inside every finite test. It must do
-this cofinally outside every finite palette and finite row/mirror core while
-also preventing unbounded reflection centers on any fixed finite-palette
-violation. A proof must turn one of these finite product-cover patterns into
-a recurrent certificate triple; a counterexample must stage these escaping
-fibers while preserving the late-bad barrier for every infinite deletion.
+Thus the former live \(k=2\) obstruction was no longer just "unbounded
+moving colors." It would have had to produce large private fibers that
+either had genuinely unique full two-sum gates while keeping the gate
+moving or gate-independent inside every finite test, or had retained
+shifted overlaps while keeping the shift moving or shift-independent inside
+every finite test. Corollary 13.1l.2o now rules out the required
+finite-prefix weak active suffix barrier, so this obstruction cannot occur
+in an order-2 basis.

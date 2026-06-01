@@ -10,52 +10,17 @@ of order \(k+1\).
 
 ## Status
 
-Complete for \(k=1\). Open in this workspace for \(k\ge 2\). No complete
-proof or counterexample has been verified yet.
+Complete for \(k=1\) and \(k=2\). The \(k=2\) case is closed by Theorem
+13.1l.2p: after the singleton exceptional set is removed, Corollary
+3.1c.3 supplies a weak barrier of nonsingleton actual active traces, Lemma
+3.1c.4 thins it to an actual prefix-front, and Corollary 13.1l.2o forbids
+the resulting finite-prefix weak active suffix barrier.
 
-For \(k=2\), the current reductions rule out:
-
-* infinitely many singleton order-3 failures;
-* bounded-excess fixed-prefix pair barriers;
-* fixed-rank full list-color high-excess barriers;
-* cofinite recurrent finite-color Sidon tails;
-* the enumerated-Schreier counterexample route;
-* fixed-first, fixed-rank generalized prefix-link shells once their
-  inclusion-minimal active traces keep the fixed first point.
-
-The remaining \(k=2\) obstruction, if it exists, must be a genuinely
-variable-rank active-trace finite-barrier system. Inactive prefix padding
-has been removed by Corollary 3.1c.3; every fixed finite moving-label
-palette compacts to recurrent Sidon colors by Lemma 8.5a.6; and pure
-terminal gating gives finite reflection-recurrence by Corollary 8.5a.5.
-The surviving abstract escape is mobile injective coloring by unboundedly
-many active endpoints. Warning 8.5a.7c and the parity-block diagnostics
-show that this escape need not produce the complete prefix-link hypergraph
-of the enumerated-Schreier route; the remaining debt is promotion of those
-moving active colors into future barrier vertices without creating
-recurrent finite palettes or poisoned promoted-pair intervals. Lemma
-8.5a.7e further rules out bounded-fiber mobile packets on a sparse
-deletion, so any surviving obstruction must force unbounded private-color
-fibers or \(F+F\)-exception mass at ambient scale. The rank-controlled
-variant Lemma 8.5a.7e' and Corollary 8.5a.7f.1 sharpen this: those large
-fibers may be forced into either a unique-gate branch or a fixed retained
-shifted-overlap branch. Lemma 8.5a.7i adds that certificate-free shifted
-fibers must be independent for their own shift, while Lemma 8.5a.7j and
-Corollaries 8.5a.7k--8.5a.7l rule out fixed finite gate or shift palettes
-unless the recurring fibers remain inside the corresponding independence
-numbers. Corollaries 8.5a.7v--8.5a.7y now remove the promoted pair
-subcover and bounded-second-excess routes: cofinally, a surviving selector
-tail must contain inclusion-minimal active bad edges of rank at least
-\(3\), with arbitrarily large excess over the second-smallest deleted color
-and with the terminal-gap/shifted-vertex-cover normal form from Lemmas 10.1
-and 10.3b. Proposition 10.3g and Lemma 10.3h show that this large-spread
-high-rank shape is locally compatible inside interval blocks, so the
-remaining issue is no longer a fixed-section generalized shell: Section 13
-now shows that such shells either shrink to forbidden full active packets
-or descend to a proper tail section. The current proof obligation is to
-verify, in every recursive active-trace section, that the private-color
-normal form really supplies the shell/descent alternative required by
-Lemma 13.1l.2h; doing so would close the \(k=2\) case.
+Open in this workspace for \(k\ge3\). The surviving higher-order question
+is whether the \(k=2\) active-trace/front closure has an analogue for
+\((k+1)\)-term barriers, or whether robust higher-order collective
+barriers such as the staged \(k=3\) pair/booster attempts can be lifted to
+an infinite basis.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
@@ -1130,6 +1095,56 @@ the genuinely active holes themselves have unbounded size. The remaining
 variable-rank obstruction must therefore use unbounded active traces or
 unbounded-depth private colors, not merely large prefix-front nodes padded
 by harmless filler points.
+
+### Lemma 3.1c.4: Weak actual barriers contain actual prefix-fronts
+
+Let \(P\) be an infinite ordered set and let
+\[
+\mathcal B\subset [P]^{<\omega}\setminus\{\varnothing\}
+\]
+be a weak barrier: every infinite \(X\subset P\) contains some
+\[
+B\in\mathcal B,\qquad B\subset X.
+\]
+Then there are an infinite \(Q\subset P\) and a subfamily
+\[
+\mathcal F\subset\mathcal B\cap[Q]^{<\omega}
+\]
+such that \(\mathcal F\) is a prefix-front on \(Q\). In particular, if the
+members of \(\mathcal B\) are inclusion-minimal active traces equipped with
+witnesses, no padded supersets are introduced; \(\mathcal F\) consists of
+actual traces with the same witnesses.
+
+Proof. For an infinite
+\[
+X=\{x_1<x_2<\cdots\}\subset P,
+\]
+say \(X\in\mathcal O\) if some finite initial segment
+\[
+\{x_1,\ldots,x_n\}
+\]
+belongs to \(\mathcal B\). The set \(\mathcal O\subset[P]^\omega\) is open
+in the usual product topology on increasing sequences. By the open
+Galvin-Prikry theorem, there is an infinite \(Q\subset P\) such that either
+every infinite \(X\subset Q\) lies in \(\mathcal O\), or no infinite
+\(X\subset Q\) lies in \(\mathcal O\).
+
+The second alternative is impossible. Since \(\mathcal B\) is a weak
+barrier, the infinite set \(Q\) contains some \(B\in\mathcal B\). Then
+\[
+X=B\cup(Q\cap(\max B,\infty))
+\]
+is an infinite subset of \(Q\), and \(B\) is an initial segment of \(X\).
+Thus \(X\in\mathcal O\), a contradiction.
+
+Therefore every infinite subset of \(Q\) has an initial segment belonging
+to \(\mathcal B\). Let \(\mathcal F\) be the subfamily of
+\(\mathcal B\cap[Q]^{<\omega}\) consisting of those \(B\) for which no
+proper initial segment of \(B\), relative to the order on \(Q\), lies in
+\(\mathcal B\). Given infinite \(X=\{x_1<x_2<\cdots\}\subset Q\), choose
+the least \(n\) such that \(\{x_1,\ldots,x_n\}\in\mathcal B\). The least
+initial segment lies in \(\mathcal F\), and uniqueness is immediate from
+least length. Hence \(\mathcal F\) is a prefix-front on \(Q\). \(\square\)
 
 ## Lemma 3.1d: Uniform finite-hole characterization of a good deletion
 
@@ -17236,10 +17251,120 @@ every tail, contradicting the assumption. \(\square\)
 
 This closes the purely front-theoretic cross-promotion route once the
 promoted suffixes themselves form a prefix-front over a finite fixed prefix.
-Accordingly, any remaining \(k=2\) obstruction must fail to produce such a
-clean active suffix front from the large private fibers; the remaining
-promotion problem is now specifically the passage from the weak
-private-color barrier to a prefix-front of active suffix traces.
+At this point the apparent remaining promotion problem is the passage from
+the weak private-color barrier to a prefix-front of active suffix traces.
+
+### Corollary 13.1l.2o: Finite-prefix weak active barriers cannot persist
+
+Work in the \(k=2\) counterexample setting. Fix a finite nonempty prefix
+\[
+\Delta\subset A
+\]
+and an infinite tail \(P\subset A\) above \(\Delta\). There is no weak
+barrier \(\mathcal B\) of nonempty finite suffixes \(H\subset P\) such
+that every \(H\in\mathcal B\) has a witness \(w_H\) for which
+\[
+F_H=\Delta\cup H
+\]
+is inclusion-minimal and
+\[
+w_H\ge\max H-1,\qquad
+w_H\notin3(A\setminus F_H). \tag{1}
+\]
+
+Proof. Suppose such \(\mathcal B\) exists. By Lemma 3.1c.4, after thinning
+to an infinite \(Q\subset P\) there is a prefix-front
+\[
+\mathcal E\subset\mathcal B\cap[Q]^{<\omega}
+\]
+of actual suffix traces, with the same witnesses. If the ranks \(|H|\) for
+\(H\in\mathcal E\) are unbounded on every tail of \(Q\), then Corollary
+13.1l.2n gives a contradiction.
+
+It remains to consider the case where some infinite tail \(Y\subset Q\)
+has bounded ranks. Then there is \(q\) such that every infinite
+\[
+Z\subset Y
+\]
+contains a front edge \(H\in\mathcal E\) with
+\[
+H\subset Z,\qquad |H|\le q.
+\]
+Since (1) gives \(w_H\ge\max H-1\), taking \(Z\) arbitrarily far out gives
+arbitrarily large witnesses. Corollary 13.1l.2m, applied to the section
+with fixed prefix \(\Delta\), rules this out. Thus both alternatives are
+impossible. \(\square\)
+
+Thus the promotion gap after Corollary 13.1l.2n is not a separate
+combinatorial obstruction: weak barriers of actual active traces can be
+thinned to actual prefix-fronts, and finite-prefix active suffix barriers
+are then excluded by the bounded-rank/unbounded-rank dichotomy.
+
+### Theorem 13.1l.2p: The answer is yes for \(k=2\)
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Then
+there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+asymptotic basis of order \(3\).
+
+Proof. Suppose, for contradiction, that no such \(B\) exists. Corollary
+8.3b gives a finite exceptional set \(E\subset A\) such that every
+singleton deletion above \(E\) is an order-\(3\) basis with a threshold
+below the deleted element. Let \(N_3\) be an order-\(3\) threshold for
+\(A\), and pass to the infinite tail
+\[
+P=A\cap(\max(E\cup\{N_3\}),\infty).
+\]
+For every \(a\in P\), the singleton \(\{a\}\) is not late-bad at order
+\(3\).
+
+The proof of Corollary 3.1c.3 applies on this tail, because every infinite
+subset of \(P\) still contains a late-bad finite subset. It gives a weak
+barrier
+\[
+\mathcal H_3
+\]
+of inclusion-minimal active traces \(F\subset P\), each with a witness
+\[
+w_F\ge\max F-1,\qquad w_F\notin3(A\setminus F). \tag{1}
+\]
+Moreover each such \(F\) is late-bad. Since no singleton in \(P\) is
+late-bad, every \(F\in\mathcal H_3\) has
+\[
+|F|\ge2. \tag{2}
+\]
+
+By Lemma 3.1c.4, after thinning to an infinite \(Q\subset P\) there is a
+prefix-front
+\[
+\mathcal F\subset\mathcal H_3\cap[Q]^{<\omega}
+\]
+of actual active traces, retaining the witnesses (1). Let
+\[
+q=\min Q,\qquad Q^+=Q\cap(q,\infty).
+\]
+Because \(\mathcal F\) is a prefix-front, every infinite \(Z\subset Q^+\)
+has an initial segment in the infinite set
+\[
+\{q\}\cup Z.
+\]
+By (2), that initial segment cannot be the singleton \(\{q\}\). Hence the
+suffix family
+\[
+\mathcal B_q
+=\{H\subset Q^+:\{q\}\cup H\in\mathcal F\}
+\]
+is a weak barrier of nonempty finite suffixes on \(Q^+\). For each
+\(H\in\mathcal B_q\), the trace
+\[
+\{q\}\cup H
+\]
+is inclusion-minimal and has a witness satisfying (1), with
+\[
+w_H\ge\max H-1.
+\]
+This is exactly the finite-prefix weak active suffix barrier forbidden by
+Corollary 13.1l.2o with \(\Delta=\{q\}\). The contradiction proves the
+theorem. \(\square\)
 
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
@@ -19124,8 +19249,15 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   step must use additive structure beyond prefix-front combinatorics.
 * Corollary 13.1l.2n closes the case where cross-promoted large fibers
   produce a genuine prefix-front of active suffix traces over a finite
-  fixed prefix; the remaining gap is the promotion from weak private-color
-  barriers to that clean front.
+  fixed prefix.
+* Lemma 3.1c.4 and Corollary 13.1l.2o close the weak-to-front promotion
+  gap for finite-prefix active suffixes: every weak barrier of actual
+  traces thins to an actual prefix-front, and then bounded ranks fall to
+  Corollary 13.1l.2m while unbounded ranks fall to Corollary 13.1l.2n.
+* Theorem 13.1l.2p combines Corollary 8.3b with this weak-to-front closure
+  to prove the \(k=2\) case: after singleton traces are removed, the first
+  section of the actual active prefix-front is a forbidden finite-prefix
+  weak active suffix barrier.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
