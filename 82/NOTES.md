@@ -3418,11 +3418,10 @@ source of growth beyond Ramsey.
 - 2026-06-01: Added the full-drop ordered parameter `C_full(P,h)`, capturing
   the stronger fact that degree-bucket representatives ordered by increasing
   degree satisfy `N(v_i)\N(v_j)<P_h` over all coordinates whenever `i<j`.
-  A first/last peeling lemma gives
-  `C_full(P,h) <= 2P(h-1)^2+2h-1`, improving the polynomial reduction to
-  `G(h) <= 16 h^3 P_h^2`.  This removes the sparse-inversion/column-drop
-  quartic loss, but the asymptotic bottleneck remains the equivalent local
-  problem `P_h=2^{o(h)}`.
+  A one-sided peeling lemma gives `C_full(P,h) <= P(h-1)^2+h`, improving the
+  polynomial reduction to `G(h) <= 8 h^3 P_h^2`.  This removes the
+  sparse-inversion/column-drop quartic loss, but the asymptotic bottleneck
+  remains the equivalent local problem `P_h=2^{o(h)}`.
 - 2026-06-01: Added `full_drop_census.py` and ran small sanity checks for the
   new predicate.  Exact enumeration gives `P=1,n=5` with
   `checked_full_drop=16`, `min_max_homogeneous=3`, and `min_max_regular=3`;
@@ -3444,3 +3443,10 @@ source of growth beyond Ramsey.
   followed by a clique of order `h-1`.  This calibrates the full-drop route:
   the quadratic peeling bound is very loose at `P=1`, but the `P=2,n=13`
   search shows the first error level already has larger behavior.
+- 2026-06-01: Tightened the full-drop peeling proof itself.  The neighborhood
+  of the first vertex has complement maximum degree at most `P-1`, so its
+  complement is greedily `P`-colorable; without an `h`-clique this gives the
+  needed bound `|N(a)|<=P(h-1)`.  Deleting only the first vertex and its
+  neighborhood, rather than also using the last vertex, improves
+  `C_full(P,h)` to `P(h-1)^2+h` and the global pair-parameter reduction to
+  `G(h)<=8h^3P_h^2`.

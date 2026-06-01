@@ -11418,23 +11418,22 @@ graph obtained from exact degree classes satisfies a full one-sided
 neighborhood nesting condition, not just a bound on losses among earlier
 rows.
 
-**Lemma 28D.5: Full-Drop Ordered Graphs Have Quadratic Homogeneous
-Threshold.**  For every `P,h>=1`,
+**Lemma 28D.5: One-Sided Full-Drop Peeling Bound.**  For every `P,h>=1`,
 
 ```text
-C_full(P,h) <= 2P(h-1)^2+2h-1.
+C_full(P,h) <= P(h-1)^2+h.
 ```
 
 Proof.  Let `H` be a full-drop ordered graph with no clique or independent
 set of order `h`.  We prove that
 
 ```text
-|V(H)| <= (h-1)(2P(h-1)+2).
+|V(H)| <= (h-1)(P(h-1)+1).
 ```
 
 The claim is trivial for `h=1`, so assume `h>=2`.  Let `W` be a nonempty
-ordered induced subgraph of `H`, with first vertex `a` and last vertex `b`.
-The full-drop condition is inherited by `H[W]`.
+ordered induced subgraph of `H`, with first vertex `a`.  The full-drop
+condition is inherited by `H[W]`.
 
 First consider `A=N_{H[W]}(a)`.  For every `u in A`, every nonneighbor of
 `u` inside `A` lies in
@@ -11444,52 +11443,24 @@ First consider `A=N_{H[W]}(a)`.  For every `u in A`, every nonneighbor of
 ```
 
 which has size less than `P` because `a` is first.  Thus the complement of
-`H[A]` has maximum degree at most `P-1`, so `H[A]` contains a clique of order
-at least `|A|/P`.  Since no such clique has order `h`, we have
+`H[A]` has maximum degree at most `P-1`.  Greedily color this complement
+with at most `P` colors.  Each color class is a clique in `H[A]`, and since
+no such clique has order `h`, every color class has size at most `h-1`.
+Therefore
 
 ```text
 |A| <= P(h-1).
 ```
 
-Next let
-
-```text
-B={u in W\{b}: ub notin E(H)}.
-```
-
-For every `u in B`, each neighbor of `u` inside `B` lies in
-
-```text
-(N_{H[W]}(u)\N_{H[W]}(b))\{u,b},
-```
-
-which again has size less than `P`, because `u<b`.  Hence `H[B]` has maximum
-degree at most `P-1`, and contains an independent set of order at least
-`|B|/P`.  Therefore
-
-```text
-|B| <= P(h-1).
-```
-
-If `|W|>=2`, delete `a`, `b`, all of `A`, and all of `B`.  The remaining set
-
-```text
-W'={u in W\{a,b}: au notin E(H), ub in E(H)}
-```
-
-has size at least
-
-```text
-|W|-2P(h-1)-2.
-```
+Delete `a` and all of `A`.  This removes at most `P(h-1)+1` vertices.
 
 Starting with `W_0=V(H)`, repeat this deletion process while the current set
 is nonempty, and record the first vertex `a_t` of the current set.  Every
-later recorded vertex lies in the residual set left after `a_t` was deleted,
-and hence is nonadjacent to `a_t`.  Thus the recorded first vertices form an
+later recorded vertex survived the deletion of all neighbors of `a_t`, and
+hence is nonadjacent to `a_t`.  Thus the recorded first vertices form an
 independent set.
 
-If `|V(H)|>(h-1)(2P(h-1)+2)`, then after `h-1` deletion steps at least one
+If `|V(H)|>(h-1)(P(h-1)+1)`, then after `h-1` deletion steps at least one
 vertex remains, so the process records `h` pairwise nonadjacent vertices.
 This is forbidden.  Therefore the displayed upper bound on `|V(H)|` holds,
 which is equivalent to the stated bound on `C_full(P,h)`.  QED.
@@ -11562,8 +11533,8 @@ most one clique vertex, also of order `h-1`.  Thus
 
 ```text
 G(h) <= 4hP C_full(P,h)
-     <= 4hP(2P(h-1)^2+2h-1)
-     <= 16h^3P^2.
+     <= 4hP(P(h-1)^2+h)
+     <= 8h^3P^2.
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
@@ -12221,13 +12192,13 @@ subexponential scale as `G`.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 16 h^3 P_h^2.
+G(h) <= 8 h^3 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
 
 Proof.  This is the final inequality of Corollary 28D.6.  If
-`P_h=2^{o(h)}`, then the polynomial factor `16h^3` is also
+`P_h=2^{o(h)}`, then the polynomial factor `8h^3` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
@@ -13155,7 +13126,7 @@ quickly collapse back to the original problem inside one profile class.
 No complete proof yet.  The strongest current reduction in this workspace is
 
 ```text
-G(h) <= 16h^3 P_h^2,
+G(h) <= 8h^3 P_h^2,
 ```
 
 where `P_h` is the balanced marked-pair parameter from Lemma 28B.  Lemma 28G
