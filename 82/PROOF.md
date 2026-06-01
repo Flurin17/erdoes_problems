@@ -1980,6 +1980,38 @@ needed fixed-degree anti-concentration theorem; it isolates the remaining
 obstacle as the transfer from independent row-regular choices to a
 biregular, or nearly biregular, contingency table.
 
+**Lemma: Single-Row Column Conditioning Is Harmless In Biregular Graphs.**
+Let `B` be sampled uniformly from all simple `d`-regular bipartite graphs with
+left side `X` and right side `Y`, where `|X|=|Y|=N`.  Fix `x in X` and
+`Y_0 subset Y` with `|Y_0|=K`.  Then
+
+```text
+|N_B(x) cap Y_0|
+```
+
+has the hypergeometric distribution obtained by drawing `d` elements from an
+`N`-element population with `K` marked elements.
+
+In particular, when `N=2m`, `K=d=m`, and `m>=C M^2 log M`, the residue of
+`|N_B(x) cap Y_0|` modulo `M` is `(1+o_M(1))/M`-uniform.
+
+Proof.  The uniform model is invariant under every permutation of the right
+side `Y`.  Since every sampled graph has `deg_B(x)=d`, the random set
+`N_B(x)` is supported on `d`-subsets of `Y`.  For any two `d`-subsets
+`S,S' subset Y`, choose a permutation of `Y` sending `S` to `S'`.  This
+permutation is a bijection from graphs with `N_B(x)=S` to graphs with
+`N_B(x)=S'`.  Hence `N_B(x)` is a uniform `d`-subset of `Y`.  Intersecting a
+uniform `d`-subset with the fixed marked set `Y_0` gives exactly the stated
+hypergeometric distribution.  The final assertion is the central
+hypergeometric residue-mixing lemma.  QED.
+
+This lemma shows that column-sum conditioning does not damage the marginal
+distribution of one row.  The missing fixed-degree anti-concentration theorem
+is therefore a genuinely multi-row dependence problem: after conditioning on
+the first few rows, the remaining column capacities are no longer uniform,
+and one needs a switching or martingale argument proving that enough rows
+still have near-hypergeometric residue mixing on the tested set.
+
 For example,
 
 ```text

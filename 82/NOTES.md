@@ -3241,3 +3241,10 @@ source of growth beyond Ramsey.
   is at most `((1+o_M(1))/M)^(|X_0|-1)`.  This closes the independent
   row-sum-conditioned layer and leaves the true column-sum conditioning as the
   precise remaining obstacle.
+- 2026-06-01: Added the single-row biregular conditioning lemma.  In a uniform
+  simple `d`-regular bipartite graph, the neighborhood of any fixed left
+  vertex is a uniform `d`-subset of the right side by column-permutation
+  symmetry, so its intersection with a fixed test set is exactly
+  hypergeometric.  Thus column conditioning is harmless for one row; the
+  unsolved part of the fixed-degree anti-concentration route is purely the
+  multi-row dependence created by the remaining column capacities.
