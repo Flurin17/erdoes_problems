@@ -5749,6 +5749,43 @@ cannot be coherently assigned to finitely many bounded-depth endpoint
 slots across all finite tests. A surviving variable-rank front must make
 the relevant color palette itself escape to unbounded section depth.
 
+### Corollary 8.5a.5: Pure terminal gating collapses to recurrence
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\). Suppose
+that for every finite
+\[
+T\subset A
+\]
+and every \(L\), there are \(g\in A\), a witness parameter \(w\), and
+\[
+m=w-g>L
+\]
+such that
+\[
+m-T\subset A. \tag{1}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-3 basis.
+
+In particular, an unbounded-depth front obstruction cannot have the moving
+terminal endpoint color every protected finite test set with arbitrarily
+large centers. If, for arbitrarily large terminal endpoints \(g=\max F\),
+the private-color relations
+\[
+w-t-g\in A\qquad(t\in T)
+\]
+hold simultaneously for every prescribed finite \(T\), then the obstruction
+is already impossible.
+
+Proof. Condition (1) is exactly finite reflection-recurrence of \(A\).
+Apply Theorem 2.3 with \(k=2\). \(\square\)
+
+Thus the last-gated escape in Warning 8.5a.1b must either split every large
+finite test among several moving active colors, keep the terminal centers
+bounded for some fixed test, or force the stable fibers to be
+certificate-free in a way that avoids compactification to finitely many
+recurrent Sidon colors.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -12240,6 +12277,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.4 rules out coherent bounded-depth endpoint list-coloring:
   finite section-depth palettes compact to recurrent Sidon colors, again
   impossible by Lemma 8.6g''''.2.
+* Corollary 8.5a.5 rules out the pure terminal-color version of the
+  last-gated escape: if the moving last endpoint reflects every protected
+  finite test with unbounded centers, Theorem 2.3 gives a good deletion.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.
