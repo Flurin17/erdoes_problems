@@ -7116,6 +7116,70 @@ The proof of Lemma 25, with `D` replaced by this average, gives
 The assumption `n>4h^2s` makes the first term less than `1/2`, so the second
 term is greater than `1/2`.  Hence `bar sigma >= n/(8h^3)`.  QED.
 
+The average-diversity conclusion in Corollary 25A is, by itself, too weak.
+Ordinary homogeneous-set exclusion already forces a stronger lower bound.
+
+## Lemma 26: Homogeneous Exclusion Forces Larger Neighborhood Diversity
+
+Let `G` be an `n`-vertex graph and put
+
+```text
+bar sigma = (1/binom(n,2)) sum_{u<v} |(N(u) triangle N(v)) \ {u,v}|.
+```
+
+Then `G` contains a clique or independent set of order at least
+
+```text
+(n-1)/(4(2 bar sigma + 1)).
+```
+
+Consequently, if `G` has no regular induced subgraph on `h` vertices, then
+
+```text
+bar sigma >= (n-1)/(8h) - 1/2.
+```
+
+Proof.  Choose a vertex `v` whose average `sigma(u,v)` over
+`u in V(G)\{v}` is at most `bar sigma`; such a vertex exists because the
+average over all ordered pairs is `bar sigma`.  By Markov's inequality, the
+set
+
+```text
+U={u != v : sigma(u,v) <= 2 bar sigma}
+```
+
+has size at least `(n-1)/2`.
+
+Partition `U` into
+
+```text
+A=U cap N(v),       B=U \ N(v).
+```
+
+One of `A,B` has size at least `(n-1)/4`.  If `|A|` is that large, then for
+every `u in A`, the number of nonneighbors of `u` inside `A` is at most
+`sigma(u,v)<=2 bar sigma`, because `v` is adjacent to every vertex of `A`.
+Thus the complement of `G[A]` has maximum degree at most `2 bar sigma`, so
+`G[A]` contains a clique of order at least `|A|/(2 bar sigma+1)`.
+
+If `|B|` is large instead, then for every `u in B`, the number of neighbors of
+`u` inside `B` is at most `sigma(u,v)<=2 bar sigma`, because `v` is adjacent
+to no vertex of `B`.  Hence `G[B]` has maximum degree at most
+`2 bar sigma`, so it contains an independent set of order at least
+`|B|/(2 bar sigma+1)`.
+
+In either case there is a clique or independent set of order at least
+`(n-1)/(4(2 bar sigma+1))`.  Such a set is regular.  If no regular induced
+subgraph on `h` vertices exists, this lower bound is less than `h`, which
+rearranges to the displayed inequality.  QED.
+
+Therefore the variance identity cannot settle the problem using only the
+average value of `sigma(u,v)`: every counterexample already has
+`bar sigma=Omega(n/h)`, whereas Corollary 25A only recovers
+`Omega(n/h^3)` under a low-spread hypothesis.  Any successful variance route
+must exploit a finer distributional feature of the pair differences or a
+stronger way to use low degree spread.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an

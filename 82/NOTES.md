@@ -2235,3 +2235,10 @@ source of growth beyond Ramsey.
   isolates the next bounded-spread target: prove that high neighborhood
   diversity plus low degree spread forces a regular induced subgraph, or find
   a construction showing this diversity condition is still too weak.
+- 2026-06-01: Added Lemma 26 calibrating the variance route.  If the average
+  pairwise neighborhood symmetric difference is `bar sigma`, then a single
+  template vertex plus Markov gives a clique or independent set of order at
+  least `(n-1)/(4(2 bar sigma+1))`.  Thus any counterexample already has
+  `bar sigma=Omega(n/h)`, much stronger than the `Omega(n/h^3)` supplied by
+  Corollary 25A.  The variance route must therefore use more than average
+  neighborhood diversity.
