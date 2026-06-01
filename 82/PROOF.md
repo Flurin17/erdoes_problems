@@ -14734,6 +14734,16 @@ python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 11 --mask 74234523926162
 enumerate all one-vertex extensions of the dense equality example and of one
 of its equality extensions.  Both runs report `criterion_failures=0`.
 
+The same diagnostic has an exact scan mode.  The command
+
+```text
+python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 6 --scan --min-degree 2
+```
+
+checks all `32768` labelled graphs on six vertices.  Among them, `25200`
+have a regular-feedback partition using a degree-`2` core; all `1612800`
+one-vertex extensions of those graphs satisfy the collision criterion.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

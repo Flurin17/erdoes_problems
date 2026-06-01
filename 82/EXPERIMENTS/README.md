@@ -21,7 +21,8 @@ Computational checks and generated data for Erdos Problem 82.
   configurable minimum core degree.
 - `feedback_extension_diagnostic.py`: for a fixed graph with a
   regular-feedback partition, enumerates one-vertex extensions and classifies
-  how the extension fills the one-unit spectrum-mass deficit.
+  how the extension fills the one-unit spectrum-mass deficit; it also has an
+  exact `--scan` mode for small labelled graphs.
 - `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
   ordered graph, including fixed-mask, explicit-column, lower-family, exact
   enumeration, and no-regular-`h` obstruction modes.

@@ -3970,3 +3970,11 @@ source of growth beyond Ramsey.
   `s_0+s_1+s_2=16<17` while `mu=30`.  Thus the degree-`2` collision cannot be
   solved using only the low spectrum; the high-degree/new-degree alternatives
   in Lemma 28J.5e are genuinely needed.
+- 2026-06-01: Added exact scan mode to
+  `feedback_extension_diagnostic.py`.  The scan
+  `python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 6 --scan --min-degree 2`
+  checks all `32768` labelled graphs on six vertices, finds `25200` with a
+  degree-`2` feedback core, and verifies all `1612800` one-vertex extensions
+  without a collision-criterion failure.  This is evidence for the stronger
+  conjecture that Lemma 28J.5e's alternatives may always cover degree-`2`
+  feedback-core extensions, not only equality examples.
