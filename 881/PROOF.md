@@ -18984,6 +18984,32 @@ The shared witnesses \(17\) for \(b=8\) and \(29\) for \(b=19\) are
 singleton-new holes, so this small chain mostly illustrates the
 singleton branch of the dichotomy above rather than a nondegenerate
 many-witness pair mechanism.
+
+The same script also requires witnesses to be non-singleton-new, i.e.
+\[
+w\in4(A_s\setminus\{b\}).
+\]
+The first such high-excess seed is
+\[
+A_{\rm old}=\{1,2,3,6\},\qquad N=7,\qquad b=9,
+\]
+with old coverage through \(15\), declared endpoint \(19\), coverage
+through \(21\), and witnesses
+\[
+\begin{array}{c|c}
+a & w\\ \hline
+1 & 19\\
+2 & 17\\
+3 & 17\\
+6 & 17
+\end{array}
+\]
+all still represented after deleting \(b\) alone. This non-singleton
+high-excess singleton chain stalls immediately at the next stage. Hence
+the nondegenerate branch is also locally possible, but already in the
+smallest examples it demands multiple old-endpoint witnesses inside a very
+short buffer.
+
 Thus the high-excess escape is genuinely locally compatible, but the
 observed finite chain still has the same rapid endpoint/buffer exhaustion
 seen in the robust-booster searches. Any counterexample along this route

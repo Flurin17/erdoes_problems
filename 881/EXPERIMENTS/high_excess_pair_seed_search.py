@@ -37,9 +37,11 @@ def high_excess_witnesses(
     previous_endpoint: int,
     declared_endpoint: int,
     cap: int,
+    non_singleton: bool = False,
 ) -> dict[int, list[int]] | None:
     elements = old | {b}
     four_all = hsum(elements, 4, cap)
+    bfree = hsum(elements - {b}, 4, cap) if non_singleton else None
     result: dict[int, list[int]] = {}
     for a in sorted(old):
         without = hsum(elements - {a, b}, 4, cap)
@@ -49,6 +51,7 @@ def high_excess_witnesses(
             if w in four_all
             and w not in without
             and w - b - 2 * min(elements) >= max(old)
+            and (bfree is None or w in bfree)
         ]
         if not found:
             return None
@@ -61,6 +64,7 @@ def find_singleton_extension(
     base: int,
     previous_endpoint: int,
     slack: int,
+    non_singleton: bool = False,
 ) -> tuple[int, int, int, int, dict[int, list[int]]] | None:
     cap0 = max(5 * max(old) + 200, previous_endpoint + 200)
     oldcov = cover_end(hsum(old, 3, cap0), base, cap0)
@@ -80,13 +84,14 @@ def find_singleton_extension(
                 previous_endpoint,
                 declared,
                 cap,
+                non_singleton=non_singleton,
             )
             if witnesses is not None:
                 return b, declared, newcov, oldcov, witnesses
     return None
 
 
-def find_first_seed() -> None:
+def find_first_seed(non_singleton: bool = False) -> None:
     for max_old in range(6, 19):
         universe = range(1, max_old + 1)
         for size in range(3, min(8, max_old) + 1):
@@ -111,11 +116,13 @@ def find_first_seed() -> None:
                             base,
                             previous_endpoint,
                             slack=80,
+                            non_singleton=non_singleton,
                         )
                         if found is None:
                             continue
                         b, declared, newcov, oldcov2, witnesses = found
-                        print("first high-excess singleton seed")
+                        label = "non-singleton " if non_singleton else ""
+                        print(f"first {label}high-excess singleton seed")
                         print(
                             "old=",
                             sorted(old),
@@ -129,15 +136,24 @@ def find_first_seed() -> None:
                         print("new=", b, "declared=", declared, "coverage=", newcov)
                         print("witnesses=", witnesses)
                         return
-    print("no high-excess singleton seed within searched bounds")
+    label = "non-singleton " if non_singleton else ""
+    print(f"no {label}high-excess singleton seed within searched bounds")
 
 
-def greedy_chain() -> None:
-    old = {1, 2, 3, 4}
-    base = 3
-    endpoint = 4
+def greedy_chain(
+    old: set[int],
+    base: int,
+    endpoint: int,
+    non_singleton: bool = False,
+) -> None:
     for step in range(1, 8):
-        found = find_singleton_extension(old, base, endpoint, slack=200)
+        found = find_singleton_extension(
+            old,
+            base,
+            endpoint,
+            slack=200,
+            non_singleton=non_singleton,
+        )
         if found is None:
             print("stalled", "step=", step, "old=", sorted(old), "endpoint=", endpoint)
             return
@@ -165,4 +181,8 @@ def greedy_chain() -> None:
 if __name__ == "__main__":
     find_first_seed()
     print()
-    greedy_chain()
+    greedy_chain({1, 2, 3, 4}, base=3, endpoint=4)
+    print()
+    find_first_seed(non_singleton=True)
+    print()
+    greedy_chain({1, 2, 3, 6}, base=3, endpoint=7, non_singleton=True)

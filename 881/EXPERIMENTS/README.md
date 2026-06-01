@@ -611,3 +611,7 @@ The greedy high-excess singleton chain then adds `19`, declares endpoint
 `29`, covers through `31`, and stalls at the third stage. This records
 local compatibility of the high-excess escape without giving an iterable
 construction.
+The same script also searches the non-singleton-new subcase, requiring
+witnesses to remain in `4(A\\{b})`. Its first seed is `old=[1,2,3,6]`,
+endpoint `7`, new point `9`, declared endpoint `19`, and coverage through
+`21`; the greedy non-singleton chain stalls at the next stage.

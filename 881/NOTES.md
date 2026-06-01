@@ -2215,8 +2215,15 @@ witnesses for every old endpoint. The greedy singleton continuation adds
 The common witnesses \(17\) and \(29\) are singleton-new holes, so this
 small chain falls mostly on the singleton side of Corollary 16.6a's
 dichotomy.
-So high-excess witnesses are not locally impossible, but the singleton
-version still runs into rapid buffer exhaustion.
+The script also has a non-singleton mode. Its first seed is
+\[
+\{1,2,3,6\}\xrightarrow{\,9\,}\{1,2,3,6,9\},
+\]
+with endpoint \(19\), coverage through \(21\), and all witnesses still
+represented after deleting \(9\) alone; this branch stalls at the next
+stage.
+So high-excess witnesses are not locally impossible, but the tested
+singleton-new-point versions still run into rapid buffer exhaustion.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 
