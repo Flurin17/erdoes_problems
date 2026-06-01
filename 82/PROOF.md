@@ -16493,6 +16493,22 @@ average square-spectrum deletion drop.  The known defect examples are
 consistent with this: most nonessential deletions preserve all large spectrum
 coordinates.
 
+The diagnostic `EXPERIMENTS/spectrum_power_search.py --deletion-tight-scan`
+tests the extreme local obstruction in which every vertex deletion preserves
+the chosen power spectrum.  For the square spectrum, exact enumeration gives
+no deletion-tight labelled graph on five vertices.  On six vertices it finds
+`180` deletion-tight graphs, with minimum
+
+```text
+Q=29,        spectrum {0:3,1:2,2:4}.
+```
+
+The first `100000` labelled graphs on seven vertices already contain `168`
+deletion-tight examples with the same minimum `Q=29`.  Thus deletion-tightness
+alone is not a growth mechanism.  The useful observation is only qualitative:
+all currently seen deletion-tight examples have square spectrum far above the
+low-density thirteen- and fourteen-vertex obstructions with `Q=57`.
+
 **Lemma 28J.10e.6a: One-Vertex Spectrum-Increase Columns.**  Let `G` be a
 graph on vertex set `V`, and let `H` be obtained from `G` by adding a new
 vertex `z` whose neighborhood in `G` is `C subset V`.  Fix an integer `q>=0`.

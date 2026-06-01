@@ -4391,3 +4391,11 @@ source of growth beyond Ramsey.
   disjoint packing has weight only `3/8`; the covering strength in the sharp
   example is therefore strongly overlapping, not explained by disjoint
   constraints alone.
+- 2026-06-01: Added `--deletion-tight-scan` to `spectrum_power_search.py`.
+  For `Q=sum_d s_d^2`, exact `n=5` has no deletion-tight graphs.  Exact
+  `n=6` has `180`, with minimum `Q=29` and spectrum `{0:3,1:2,2:4}`.  A
+  bounded `n=7` prefix of `100000` labelled graphs already has `168`
+  deletion-tight examples with the same minimum `Q=29`.  Thus deletion-tight
+  chains are real, but the currently seen ones have much larger square
+  spectrum than the low-density `Q=57` defects on thirteen and fourteen
+  vertices.

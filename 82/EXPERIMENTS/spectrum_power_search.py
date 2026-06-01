@@ -175,6 +175,87 @@ def exact(n: int, power: int, connected_only: bool) -> None:
         print(f"example mask={mask} power_sum={value} by_degree={by_degree}")
 
 
+def deletion_tight_scan(
+    n: int,
+    power: int,
+    connected_only: bool,
+    max_graphs: int | None,
+    max_examples: int,
+) -> None:
+    pc = cdc.precompute(n)
+    pc_minus = cdc.precompute(n - 1) if n > 1 else None
+    total = 1 << len(pc.edges)
+    checked = 0
+    tight_count = 0
+    zero_drop_histogram: Counter[int] = Counter()
+    min_tight_value = 10**100
+    min_tight_examples: list[tuple[int, int, dict[int, int], list[int]]] = []
+    min_positive_drop = 10**100
+    min_positive_examples: list[tuple[int, int, dict[int, int], list[int]]] = []
+
+    for mask in range(total):
+        adj = cdc.adjacency(n, mask, pc)
+        if connected_only and not is_connected(adj):
+            continue
+        checked += 1
+        _mass, by_degree = spectrum_mass(adj, pc)
+        value = power_value(by_degree, power)
+        drops: list[int] = []
+        if pc_minus is None:
+            drops = [0]
+        else:
+            for vertex in range(n):
+                smaller = delete_vertex(adj, vertex)
+                _smaller_mass, smaller_by_degree = spectrum_mass(smaller, pc_minus)
+                smaller_value = power_value(smaller_by_degree, power)
+                drops.append(value - smaller_value)
+
+        zero_drops = sum(1 for drop in drops if drop == 0)
+        zero_drop_histogram[zero_drops] += 1
+        if zero_drops == len(drops):
+            tight_count += 1
+            if value < min_tight_value:
+                min_tight_value = value
+                min_tight_examples = []
+            if value == min_tight_value and len(min_tight_examples) < max_examples:
+                min_tight_examples.append((mask, value, by_degree, drops))
+        else:
+            positive = min(drop for drop in drops if drop > 0)
+            if positive < min_positive_drop:
+                min_positive_drop = positive
+                min_positive_examples = []
+            if positive == min_positive_drop and len(min_positive_examples) < max_examples:
+                min_positive_examples.append((mask, value, by_degree, drops))
+
+        if max_graphs is not None and checked >= max_graphs:
+            break
+
+    print(f"n={n}")
+    print(f"labelled_graphs={total}")
+    print(f"checked_graphs={checked}")
+    print(f"connected_only={connected_only}")
+    print(f"power={power}")
+    print(f"deletion_tight_count={tight_count}")
+    print(f"zero_drop_histogram={dict(sorted(zero_drop_histogram.items()))}")
+    print(f"min_tight_power_sum={None if tight_count == 0 else min_tight_value}")
+    if tight_count:
+        print(f"min_tight_normalized={min_tight_value / (n**power)}")
+    print(
+        "min_positive_drop="
+        f"{None if min_positive_drop == 10**100 else min_positive_drop}"
+    )
+    for mask, value, by_degree, drops in min_tight_examples:
+        print(
+            f"tight_example mask={mask} power_sum={value} "
+            f"by_degree={by_degree} drops={drops}"
+        )
+    for mask, value, by_degree, drops in min_positive_examples:
+        print(
+            f"min_positive_example mask={mask} power_sum={value} "
+            f"by_degree={by_degree} drops={drops}"
+        )
+
+
 def sample(
     n: int,
     power: int,
@@ -303,8 +384,11 @@ def main() -> None:
     parser.add_argument("--mask", type=int)
     parser.add_argument("--sample", type=int, default=0)
     parser.add_argument("--deletion-profile", action="store_true")
+    parser.add_argument("--deletion-tight-scan", action="store_true")
     parser.add_argument("--extension-profile", action="store_true")
     parser.add_argument("--max-columns", type=int)
+    parser.add_argument("--max-graphs", type=int)
+    parser.add_argument("--max-examples", type=int, default=10)
     parser.add_argument("--extension-sample", type=int, default=0)
     parser.add_argument("--local-steps", type=int, default=0)
     parser.add_argument("--restarts", type=int, default=1)
@@ -334,6 +418,14 @@ def main() -> None:
         )
     elif args.mask is not None:
         fixed(args.n, args.mask, args.power)
+    elif args.deletion_tight_scan:
+        deletion_tight_scan(
+            args.n,
+            args.power,
+            args.connected_only,
+            args.max_graphs,
+            args.max_examples,
+        )
     elif args.sample:
         sample(args.n, args.power, args.sample, args.seed, args.connected_only)
     elif args.local_steps:
