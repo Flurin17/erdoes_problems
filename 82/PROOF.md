@@ -1980,6 +1980,65 @@ needed fixed-degree anti-concentration theorem; it isolates the remaining
 obstacle as the transfer from independent row-regular choices to a
 biregular, or nearly biregular, contingency table.
 
+**Lemma: Sequential Residue Anti-Concentration.**  Let
+`Z_1,...,Z_a` be random variables taking values in `Z/MZ`.  Suppose that for
+some `eta`, for every `i=2,...,a` and every history
+`Z_1=z_1,...,Z_{i-1}=z_{i-1}` of positive probability,
+
+```text
+max_r P(Z_i=r | Z_1=z_1,...,Z_{i-1}=z_{i-1}) <= eta.
+```
+
+Then
+
+```text
+P(Z_1=Z_2=...=Z_a) <= eta^(a-1).
+```
+
+Proof.  Decompose according to the common residue:
+
+```text
+P(Z_1=...=Z_a)
+ = sum_r P(Z_1=r)
+         prod_{i=2}^a P(Z_i=r | Z_1=...=Z_{i-1}=r).
+```
+
+Each conditional factor in the product is at most `eta`, and
+`sum_r P(Z_1=r)=1`.  QED.
+
+**Corollary: Prefix Row Mixing Is Enough For Biregular Residues.**  Let
+`B` be a random bipartite graph with left side `X`, right side `Y`, and a
+distribution supported on graphs with prescribed left degrees.  Fix
+`X_0={x_1,...,x_a} subset X`, a set `Y_0 subset Y`, a modulus `M`, and
+arbitrary shifts `c_i in Z/MZ`.  Reveal the neighborhoods of
+`x_1,...,x_a` in this order.  If for every `i>=2`, after every positive
+probability history of the first `i-1` revealed neighborhoods,
+
+```text
+max_r P(c_i+|N_B(x_i) cap Y_0| congruent r mod M | history) <= eta,
+```
+
+then
+
+```text
+P(c_1+|N_B(x_1) cap Y_0| = ... =
+  c_a+|N_B(x_a) cap Y_0| mod M) <= eta^(a-1).
+```
+
+In particular, proving `eta=(1+o_M(1))/M` for long prefixes in the uniform
+simple biregular model would give the same equal-row-residue estimate as in
+the independent row-regular corollary.
+
+Proof.  Apply the preceding lemma to
+
+```text
+Z_i = c_i + |N_B(x_i) cap Y_0| mod M.
+```
+
+The shifts absorb the already fixed degrees inside `X_0`, so equality of the
+`Z_i` is exactly the one-sided modular condition needed for the row degrees in
+`X_0 union Y_0`.  QED.
+
 **Lemma: Single-Row Column Conditioning Is Harmless In Biregular Graphs.**
 Let `B` be sampled uniformly from all simple `d`-regular bipartite graphs with
 left side `X` and right side `Y`, where `|X|=|Y|=N`.  Fix `x in X` and

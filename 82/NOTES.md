@@ -3266,3 +3266,11 @@ source of growth beyond Ramsey.
   has diameters `4,4,2`; on the delete-saturated mask, the largest bucket has
   diameters `6,4,4`.  Added the row-family example `r_i=e_0+e_i` to record
   why small equal-weight diameter alone does not force low rank.
+- 2026-06-01: Added a sequential residue anti-concentration lemma.  If row
+  residues have conditional point probabilities at most `eta` after every
+  prefix exposure, then the probability that `a` rows all have the same
+  residue is at most `eta^(a-1)`.  The resulting biregular corollary reduces
+  the multi-row fixed-degree obstacle to a precise switching target: after
+  revealing any admissible prefix of selected rows, the next selected row's
+  intersection with the tested right-side set must still be
+  `(1+o_M(1))/M`-mixed modulo `M`.
