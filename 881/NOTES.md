@@ -2688,6 +2688,11 @@ debt stabilizes at a fixed ordered suffix position and is forbidden by the
 finite-prefix list-coloring Corollary 8.5a.4. Therefore cross-promotion
 cannot evade the Section 13 closure merely by carrying a finite fixed
 prefix forward.
+Corollary 13.1l.2m records the resulting abstract shape: in any
+finite-prefix section that does not drop a fixed prefix point, the moving
+suffix ranks must be unbounded on every tail. A bounded-rank suffix front
+would Ramsey-thin to the finite-prefix fixed-rank shell forbidden by
+13.1l.2l.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

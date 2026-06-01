@@ -17081,6 +17081,64 @@ impossible. The only remaining cross-promoted branch must therefore make
 the active suffix rank unbounded at every finite prefix depth, or else
 drop some fixed prefix point and descend.
 
+### Corollary 13.1l.2m: Surviving promoted fronts have unbounded rank in every section
+
+Let \(\mathcal F\) be a prefix-front of inclusion-minimal active traces
+arising in the \(k=2\) counterexample setting. Suppose that in a section
+with finite fixed prefix
+\[
+\Delta
+\]
+the active traces all keep \(\Delta\), and write the moving suffix of an
+edge as
+\[
+H\subset P_\Delta.
+\]
+If there are an infinite tail
+\[
+Y\subset P_\Delta
+\]
+and a bound \(q\) such that every infinite
+\[
+Z\subset Y
+\]
+contains a section edge
+\[
+\Delta\cup H
+\]
+with
+\[
+H\subset Z,\qquad 1\le |H|\le q,
+\]
+then the \(k=2\) counterexample is impossible.
+
+Proof. Apply the bounded-rank Ramsey thinning used in Lemma 8.5a.8b to the
+section property
+\[
+\mathcal P(\Delta\cup H,w):
+\quad
+\Delta\cup H\text{ is inclusion-minimal for }w,\quad
+w\notin3(A\setminus(\Delta\cup H)).
+\]
+Since \(|H|\le q\), after thinning there are an infinite subtail and a
+fixed rank
+\[
+1\le r\le q
+\]
+such that every sufficiently late
+\[
+H\in[Y]^r
+\]
+has a witness \(w\) with \(\mathcal P(\Delta\cup H,w)\), with arbitrarily
+large \(w\). This is exactly the finite-prefix fixed-rank shell forbidden
+by Corollary 13.1l.2l. \(\square\)
+
+Consequently, a cross-promoted \(k=2\) counterexample cannot merely carry a
+finite prefix through a bounded-rank suffix front. In every finite-prefix
+section that does not drop some fixed prefix point, the suffix ranks must
+be unbounded on every tail. This is the abstract front-theoretic core left
+after the fixed-rank and star-cut reductions.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18956,6 +19014,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   needed for cross-promoted star cuts: a finite fixed prefix plus bounded
   suffix rank still collapses to recurrent certificates or the finite
   moving-label obstruction.
+* Corollary 13.1l.2m extracts the abstract consequence: every surviving
+  finite-prefix section that keeps its prefix must have unbounded moving
+  suffix rank on every tail.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
