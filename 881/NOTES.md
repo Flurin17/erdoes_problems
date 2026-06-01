@@ -148,7 +148,10 @@ robust-core profiles, at most the packet size, already have empty common
 intersection on that packet. Corollary 16.94 handles the single-core
 subcase: for interval cores, such finite exclusion forces the minimum or
 maximum of the packet to escape one of the cores, so interior-only
-avoidance requires multi-core disconnected profiles.
+avoidance requires multi-core disconnected profiles. Corollary 16.95
+packages that residual case: finite robust exclusion is either endpoint
+escape or an internal gap in one assigned profile's union of robust cores
+across the packet span.
 
 ## Definitions
 

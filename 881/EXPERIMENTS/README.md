@@ -197,7 +197,10 @@ packets.
 Corollary 16.94: if a finite packet is missed by the common intersection of
 single-interval robust cores, then at least one core misses the packet's
 minimum or maximum. This supports the endpoint-escape normal form for
-single-auxiliary-interval robust profiles.
+single-auxiliary-interval robust profiles. It also checks the finite
+union-of-intervals alternative from Corollary 16.95: a multi-core profile
+that contains both packet endpoints but misses a packet point must have an
+internal gap across the packet span.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For

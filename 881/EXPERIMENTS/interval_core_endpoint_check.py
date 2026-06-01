@@ -29,8 +29,20 @@ def endpoint_escaped(packet: tuple[int, ...], cores: tuple[tuple[int, int], ...]
     return any(not contains(core, lo) or not contains(core, hi) for core in cores)
 
 
+def in_union(cores: tuple[tuple[int, int], ...], x: int) -> bool:
+    return any(contains(core, x) for core in cores)
+
+
+def union_gap_alternative(packet: tuple[int, ...], cores: tuple[tuple[int, int], ...]) -> bool:
+    lo, hi = packet[0], packet[-1]
+    if not in_union(cores, lo) or not in_union(cores, hi):
+        return True
+    return any(lo < x < hi and not in_union(cores, x) for x in packet)
+
+
 def main() -> None:
     checked = 0
+    union_checked = 0
     for n in range(2, 9):
         all_intervals = intervals(n)
         universe = tuple(range(n))
@@ -41,8 +53,12 @@ def main() -> None:
                         if packet_missed(packet, cores):
                             assert endpoint_escaped(packet, cores), (n, packet, cores)
                         checked += 1
+                        if not all(in_union(cores, x) for x in packet):
+                            assert union_gap_alternative(packet, cores), (n, packet, cores)
+                        union_checked += 1
     print("interval core endpoint check passed")
     print(f"total_checked={checked}")
+    print(f"union_gap_checked={union_checked}")
 
 
 if __name__ == "__main__":

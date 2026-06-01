@@ -24057,6 +24057,65 @@ this endpoint normal form is to use multi-core profiles whose robust-core
 unions are disconnected, or to abandon the bounded-rank positive-density
 branch.
 
+### Corollary 16.95: Finite robust exclusion has endpoint or gap form
+
+Let \(P\subset\mathbb N\) be finite and nonempty, with
+\[
+p^-=\min P,\qquad p^+=\max P.
+\]
+Let
+\[
+C_\lambda\qquad(\lambda\in\mathcal B)
+\]
+be a finite family of finite unions of integer intervals. If
+\[
+P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda=\varnothing, \tag{1}
+\]
+then one of the following alternatives holds.
+
+1. **Endpoint escape.** There is \(\lambda\in\mathcal B\) such that
+   \[
+   p^-\notin C_\lambda\quad\text{or}\quad p^+\notin C_\lambda. \tag{2}
+   \]
+2. **Internal profile gap.** There are \(\lambda\in\mathcal B\) and
+   \(p\in P\cap(p^-,p^+)\) such that
+   \[
+   p\notin C_\lambda,
+   \]
+   while \(p^-,p^+\in C_\lambda\). Equivalently, the finite union
+   \(C_\lambda\cap[p^-,p^+]\) is disconnected and has a complementary
+   integer gap inside \((p^-,p^+)\) meeting \(P\).
+
+Consequently, in the robust-core setting of Corollary 16.93, every
+sufficiently late packet has either an endpoint escaping one of the finite
+witness profiles, or an assigned profile whose union of robust cores has an
+internal gap crossing the packet span.
+
+Proof. By (1), choose
+\[
+p\in P
+\]
+and \(\lambda\in\mathcal B\) such that
+\[
+p\notin C_\lambda.
+\]
+If \(p=p^-\) or \(p=p^+\), then endpoint escape holds. If either endpoint
+is not in \(C_\lambda\), endpoint escape again holds. Otherwise
+\[
+p^-,p^+\in C_\lambda,\qquad p\notin C_\lambda,
+\]
+and \(p\) is strictly between the endpoints. Since \(C_\lambda\) is a finite
+union of intervals, the complement of \(C_\lambda\) in
+\([p^-,p^+]\cap\mathbb N\) is a finite union of integer gaps. The gap
+containing \(p\) is internal, because both endpoints lie in \(C_\lambda\).
+This is the second alternative. \(\square\)
+
+Thus multi-core robust profiles are useful only through actual gaps in the
+union of their robust cores across the active packet. The next geometric
+burden is to show that such gaps are incompatible with the earlier
+same-side, spread, and cross-band constraints, or else to build a staged
+construction whose active packets live in those moving gaps.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25387,6 +25446,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.94 reduces the single-core version to endpoint escape:
   finite intersections of interval cores can miss a packet only if some
   core misses the packet minimum or maximum.
+* Corollary 16.95 gives the finite alternative for general robust-profile
+  unions: packet exclusion is either endpoint escape or an internal gap in
+  one profile's union of robust cores across the packet span.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
