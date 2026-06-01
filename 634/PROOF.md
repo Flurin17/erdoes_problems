@@ -2333,6 +2333,8 @@ pinch word are pinch-sector obstructions, all `12` realizations of one selected
 split word are split-corner-label obstructions, and all `12` realizations of
 one selected corner word are corner-label violations. See
 `EXPERIMENTS/results/n99_mixed6_word_invariance_status_examples.json`.
+The reproducible harness for such fixed-word checks is
+`EXPERIMENTS/gamma_2alpha_word_invariance_probe.py`.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count

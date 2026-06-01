@@ -253,6 +253,11 @@ Current components:
   groups from all three representative statuses: `9/9` outside-cover
   realizations are pinch-sector obstructions, `12/12` are
   split-corner-label obstructions, and `12/12` are corner-label violations.
+- `gamma_2alpha_word_invariance_probe.py`: exhaustive fixed-word tester for
+  selected side-label word triples. It enumerates every oriented boundary
+  demand realizing the requested words in the capped shell space, applies the
+  local-overlap cover, and classifies all outside-cover realizations. This is
+  the direct falsification harness for the pending word-invariance lemma.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and
