@@ -16680,6 +16680,33 @@ one finite hole. A proof must force reuse, bounded subtraces, or tail
 descent across many holes and many sections, using the global barrier and
 coverage requirements.
 
+### Corollary 13.1l.2k.3: Fixed-first star cuts must be cross-promoted
+
+An attempted \(k=2\) counterexample cannot realize Target 13.1l.2k by
+placing independent fixed-first star cuts in disjoint blocks.
+
+More precisely, suppose a tail is partitioned into finite disjoint blocks
+\[
+P_1,P_2,\ldots
+\]
+and every active edge supplied inside \(P_s\) has size at least \(2\) and
+is contained wholly in that block. Then the union of these local active
+families is not a weak barrier. Choose one element
+\[
+p_s\in P_s
+\]
+from each block. The infinite selector
+\[
+B=\{p_s:s\ge1\}
+\]
+contains no local active edge, since it meets each block in only one point.
+
+Thus the star-cut diagnostics above can matter only if their active
+endpoints are promoted across blocks: labels or suffix endpoints from one
+stage must become part of later active traces often enough that every
+infinite selector contains an entire active trace. This is the precise
+cross-block wiring requirement left by Target 13.1l.2k.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18537,6 +18564,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 13.1l.2k.2 strengthens this with a star-cut model whose
   retained test rows have singleton moving-label fibers, so finite-palette
   recurrence cannot be forced inside one hole.
+* Corollary 13.1l.2k.3 records that such star cuts are selector-avoidable
+  when placed independently in disjoint blocks; a counterexample needs
+  cross-block promotion of labels into later active traces.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

@@ -2658,6 +2658,10 @@ h_i=N+iR,\quad u_i=r+i,\quad q_i=9N-r-i(R+1),\quad w=10N,
 the retained row \(u_i\) is served by exactly the moving label \(h_i\).
 Thus one finite hole can have arbitrary rank, fixed first point, no bounded
 same-witness subtrace, and singleton certificate-free label fibers.
+Corollary 13.1l.2k.3 records the selector constraint on these models:
+independent fixed-first star cuts in disjoint blocks are not a weak barrier,
+because an infinite deletion can select one point per block. Any genuine
+counterexample must cross-promote labels/endpoints between blocks.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
