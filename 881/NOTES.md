@@ -13,13 +13,17 @@ is whether the \(k=2\) finite-prefix active-trace closure has an analogue
 for \((k+1)\)-term barriers, or whether a robust staged higher-order
 collective barrier can be lifted to an infinite counterexample.
 
-The latest \(k=3\) checkpoint is Corollary 16.135 in `PROOF.md`. After the
+The latest \(k=3\) checkpoint is Corollary 16.136 in `PROOF.md`. After the
 nonsingleton handoff is packetized with \(\sum_s1/|P_s|<\infty\), a
 product-covering high-density linear-core branch must fall into one of
 eight named residuals: rank growth, critical-density degeneration,
 tested-interval length/location growth, auxiliary count/location growth,
 width-heavy residual, or midpoint-displacement residual. Bounded-height
-menus cannot hide in countably many active labels. The earlier handoff
+menus cannot hide in countably many active labels. Corollary 16.136 ties
+the last two residuals back to robust-profile geometry: on packets that are
+narrow at the tested scale, endpoint escape is midpoint displacement, while
+non-endpoint escape already forces an active profile with auxiliary
+midpoint diameter linear in the tested interval scale. The earlier handoff
 begins at Corollaries 16.35--16.36:
 after singleton late-bad bridge fillers are exhausted, the obstruction can
 be made into an actual nonsingleton prefix-front of inclusion-minimal active

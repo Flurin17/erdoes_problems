@@ -26451,6 +26451,97 @@ intervals, and bounded auxiliary profiles must pay a nonsummable
 width-heavy or midpoint-displacement cost. Without that cost, a selector
 tail avoids it.
 
+### Corollary 16.136: Packet-position debt has endpoint or diameter origin
+
+Keep the packet and active-certificate setting of Corollary 16.120. For an
+active pair \((\lambda,s)\), write
+\[
+P_s\subseteq J_s=[u_s,v_s]\cap\mathbb N,\qquad
+W_s=v_s-u_s,
+\]
+and
+\[
+T_\lambda=\gamma_\lambda n_\lambda-D_\lambda.
+\]
+For an auxiliary interval
+\[
+K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
+\]
+put
+\[
+M_{\lambda,i}=2(c_{\lambda,i}+d_{\lambda,i})
+              -a_\lambda-b_\lambda
+\]
+and
+\[
+\operatorname{diam}_{\rm mid}(\lambda)
+=\max_{i,j}|(c_{\lambda,i}+d_{\lambda,i})
+          -(c_{\lambda,j}+d_{\lambda,j})|.
+\]
+If the assigned high-density linear-core branch product-covers every
+selector tail, then for every sufficiently late packet \(P_s\), at least
+one label \(\lambda\in\mathcal B_s\) satisfies one of the following two
+alternatives.
+
+1. **Endpoint-distance origin.** For one endpoint
+   \[
+   p\in\{\min P_s,\max P_s\}
+   \]
+   and every auxiliary interval in the profile,
+   \[
+   |2p-M_{\lambda,i}|\ge T_\lambda. \tag{1}
+   \]
+2. **Auxiliary-diameter origin.** The profile has two auxiliary intervals
+   with
+   \[
+   \operatorname{diam}_{\rm mid}(\lambda)\ge T_\lambda. \tag{2}
+   \]
+
+Moreover, if the endpoint-distance origin holds and
+\[
+W_s\le {T_\lambda\over3}, \tag{3}
+\]
+then that same active pair is strongly midpoint-displaced:
+\[
+\Delta_{\lambda,i,s}=|u_s+v_s-M_{\lambda,i}|
+\ge {2T_\lambda\over3}>{T_\lambda\over2}
+\qquad(i). \tag{4}
+\]
+
+Proof. Since the branch product-covers every selector tail, Corollary
+16.93 gives, for every sufficiently late \(s\),
+\[
+P_s\cap\bigcap_{\lambda\in\mathcal B_s}C_\lambda=\varnothing. \tag{5}
+\]
+Apply Corollary 16.106 to this finite family.
+
+If the endpoint-distance alternative of Corollary 16.106 occurs, then (1)
+is exactly its displayed inequality with the notation \(M_{\lambda,i}\).
+
+If the separated internal-gap alternative occurs, Corollary 16.106 gives
+two auxiliary intervals \(K_1,K_2\) in one profile with
+\[
+(c_2+d_2)-(c_1+d_1)\ge |G|+T_\lambda\ge T_\lambda.
+\]
+Therefore the auxiliary midpoint diameter of that profile is at least
+\(T_\lambda\), proving (2).
+
+It remains to prove the final assertion. If (1) holds with
+\(p=\min P_s\), then \(p\ge u_s\) and
+\[
+|u_s+v_s-M_{\lambda,i}|
+\ge |2p-M_{\lambda,i}|-|u_s+v_s-2p|
+\ge T_\lambda-W_s.
+\]
+The same estimate holds for \(p=\max P_s\). Under (3) this gives (4).
+\(\square\)
+
+Thus the two packet-position residuals in Corollary 16.132 are not
+independent of the earlier robust-profile geometry. If a packet is narrow
+at the tested scale, endpoint escape becomes midpoint displacement; if the
+escape is not endpoint-based, then some active profile already has
+auxiliary midpoint diameter linear in its tested interval scale.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
 inequality and packet-mass inclusion behind Corollary 16.128, the
 bounded-rank/bounded-margin estimate used in Corollary 16.129, the
@@ -27914,6 +28005,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   density separated from \(1/2\), bounded tested intervals, and bounded
   auxiliary profiles are selector-avoidable unless they pay width-heavy or
   midpoint-displacement mass.
+* Corollary 16.136 relates that packet-position mass to the earlier
+  robust-profile geometry: endpoint escape gives midpoint displacement on
+  packets narrow at the tested scale, while non-endpoint internal-gap escape
+  forces auxiliary midpoint diameter at least the linear-core scale.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
