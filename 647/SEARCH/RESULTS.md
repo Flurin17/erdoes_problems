@@ -436,6 +436,54 @@ The stricter CSV is stored as
 `/tmp/erdos647-residues-mod35336848261-k5000.csv`; the next-range dry run has
 the same 274 batch jobs and total `X` count `2540778943775`.
 
+## Complete Scan, 4e16 <= N < 8e16
+
+The range `4*10^16 <= N < 8*10^16` was scanned completely with the
+`23,29,31` lift through `k <= 1000`:
+
+```sh
+python3 SEARCH/run_residue_scan.py \
+  --binary /tmp/erdos647-bin/prime_tuple_search128_batch \
+  --modulus 955049953 \
+  --residue-file /tmp/erdos647-residues-mod955049953-k1000.csv \
+  --n-start 40000000000000000 \
+  --n-stop 80000000000000000 \
+  --outdir /tmp/erdos647-scan-4e16-8e16-lift23-29-31-k1000 \
+  --workers 8 \
+  --batch-size 128 \
+  --segment 10000000 \
+  --sieve-limit 10000 \
+  --quick-shift 5000 \
+  --report-survive 15
+```
+
+Final aggregate:
+
+```text
+prime_tuples=950660 quick_pass=0
+BRANCH_COUNTS A=210485 B=740175
+BEST_FIRST_FAIL k=21 N=59845588255683945 n=150810882404323541400 tau=32
+FIRST_FAIL_COUNTS 5:823271 7:82828 9:38459 10:5283 11:537 13:184 14:72 15:18 16:5 17:1 18:1 21:1
+```
+
+Interpretation: no branch tuple with `4*10^16 <= N < 8*10^16` passed direct
+checks through `k <= 5000`. The deepest near miss was
+
+```text
+N = 59845588255683945
+n = 150810882404323541400
+first_fail_k = 21
+tau(n-21) = 32
+n-21 = 3 * 7^3 * 5711 * 25662865400041
+```
+
+Both independent Python verifiers reject this near miss at `k=21`:
+
+```text
+FAIL n=150810882404323541400 k=21 m=150810882404323541379 tau=32 bound=23
+FAIL n=150810882404323541400 k=21 tau=32 bound=23 m=150810882404323541379
+```
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms

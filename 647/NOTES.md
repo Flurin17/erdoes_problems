@@ -383,6 +383,17 @@ budgets above 5 it falls back to the exact factorization routine.
   then smaller failing divisor count was
   `N = 27483420334150209`, `n = 69258219242058526680`,
   `tau(n-16) = 32`.
+- The complete `23,29,31` lifted scan over
+  `4*10^16 <= N < 8*10^16` found 950,660 branch prime tuples and no value
+  passing direct checks through `k <= 5000`. Aggregated first failures were:
+
+```text
+5:823271 7:82828 9:38459 10:5283 11:537 13:184 14:72 15:18 16:5 17:1 18:1 21:1
+```
+
+  The deepest near miss failed at `k=21`:
+  `N = 59845588255683945`, `n = 150810882404323541400`,
+  `tau(n-21) = 32`. Both independent Python verifiers reject it at `k=21`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a
