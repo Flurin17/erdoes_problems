@@ -14421,6 +14421,61 @@ Each old core piece `R_i` remains induced `d_i`-regular in `G`, so
 coordinates do not collide with `0` or `1`.  Adding the contributions gives
 the result.  QED.
 
+**Lemma 28J.5e: The Degree-Two Collision Criterion.**  Let `H` be a graph
+with a vertex partition
+
+```text
+V(H)=F union R union R_3 union R_4 union ... union R_t
+```
+
+where `H[F]` is a forest, `H[R]` is induced `2`-regular, and for `i>=3`,
+`H[R_i]` is induced `d_i`-regular with
+
+```text
+3 <= d_3 < d_4 < ... < d_t.
+```
+
+Let `G` be obtained from `H` by adding a new vertex `z`, and put
+`A=F union {z}`.  Then `sum_d s_d(G)>=|V(G)|` holds if at least one of the
+following alternatives holds:
+
+1. `s_0(G)+s_1(G) >= |A|`;
+2. `s_2(G) >= |R|+1`;
+3. for some `i>=3`, `s_{d_i}(G)>=|R_i|+1`;
+4. for some degree `e` not in `{0,1,2,d_3,...,d_t}`, the graph `G` contains
+   an induced `e`-regular subgraph on at least one vertex.
+
+Proof.  The old regular core pieces `R_i`, `i>=3`, remain induced
+`d_i`-regular in `G`, and `R` remains induced `2`-regular.  Hence they
+contribute
+
+```text
+s_2(G) >= |R|,        s_{d_i}(G) >= |R_i|  for i>=3.
+```
+
+By Lemma 28J.5c applied to `G[A]`,
+
+```text
+s_0(G[A])+s_1(G[A]) >= |A|-1.
+```
+
+Since witnesses inside `G[A]` are also witnesses in `G`, the same lower bound
+holds for `s_0(G)+s_1(G)`.  Combining this with the old core contributions
+already gives `sum_d s_d(G)>=|V(G)|-1`.
+
+Alternative 1 improves the low-degree contribution by one.  Alternative 2
+improves the degree-`2` contribution by one.  Alternative 3 improves one of
+the old high-degree core coordinates by one.  Alternative 4 contributes at
+least one in a spectrum coordinate not used by the displayed lower bound.  In
+each case the one-unit deficit is filled, proving `sum_d s_d(G)>=|V(G)|`.
+QED.
+
+Thus any counterexample to equality extension arising from a feedback
+partition with a degree-`2` core must satisfy all four negations: the full
+low-degree mass is exactly `|A|-1`, the degree-`2` spectrum does not grow
+beyond the old core size, no high core coordinate grows, and no new regular
+degree appears outside the old spectrum coordinates.
+
 **Lemma 28J.6: Split Graphs Satisfy Spectrum Mass.**  If `G` is a split
 graph, then
 
@@ -14666,6 +14721,18 @@ the non-equality graph with mask `5907` does not:
 python3 82/EXPERIMENTS/regular_feedback_partition.py 10 --mask 7261029317050 --min-degree 2
 python3 82/EXPERIMENTS/regular_feedback_partition.py 6 --mask 5907 --min-degree 2
 ```
+
+Finally, `EXPERIMENTS/feedback_extension_diagnostic.py` checks the
+degree-`2` collision alternatives from Lemma 28J.5e on fixed equality
+examples.  The commands
+
+```text
+python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 10 --mask 7261029317050 --min-degree 2
+python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 11 --mask 742345239261626 --min-degree 2
+```
+
+enumerate all one-vertex extensions of the dense equality example and of one
+of its equality extensions.  Both runs report `criterion_failures=0`.
 
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all

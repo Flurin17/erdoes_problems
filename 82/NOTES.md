@@ -3952,3 +3952,13 @@ source of growth beyond Ramsey.
   with such a feedback partition must be tight in the strongest possible
   sense: the apex-forest low-degree contribution loses exactly one and no
   regular core coordinate increases.
+- 2026-06-01: Added the degree-`2` collision criterion and
+  `feedback_extension_diagnostic.py`.  For a feedback partition with one
+  degree-`2` core, the one-unit deficit is filled if the full low-degree mass
+  grows by one, or `s_2` grows by one, or any old high core coordinate grows,
+  or any new regular degree appears.  The diagnostic checks these alternatives
+  on all one-vertex extensions.  On the dense equality mask `7261029317050`
+  and on its isolated-extension equality mask `742345239261626`, every
+  extension satisfies the criterion (`criterion_failures=0` in both runs).
+  The tight extensions are explained by the first alternative: the full
+  low-degree spectrum grows by one.
