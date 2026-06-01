@@ -80,7 +80,10 @@ through \(2p\) all have size at most \(2\). Likewise the thickened
 \(p\{2,4\}\). Corollary 3.4d.23 gives the current exact \(k=3\) packet
 target: after one finite core, excluding both large unique-gate packets and
 large bounded-palette parallel-copy packets proves the desired order-\(4\)
-deletion.
+deletion. Warning 3.4d.24 then records a guardrail: finite order-\(3\)
+coverage alone cannot exclude even arbitrarily large remote packets of
+either type. A proof must use the terminal-hole tether supplied by the
+no-good-deletion hypothesis.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

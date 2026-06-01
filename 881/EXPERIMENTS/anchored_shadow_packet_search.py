@@ -6,6 +6,8 @@ local finite three-sum coverage does not by itself force anchored-shadow
 expansion, and that the parallel-copy branch is locally compatible with
 finite coverage.  The default run checks the scalable thickened templates
 from Warnings 3.4d.21--3.4d.22 and then rediscovers their base windows.
+It also checks the arbitrary-size remote packet templates from Warning
+3.4d.24.
 """
 
 from __future__ import annotations
@@ -43,6 +45,10 @@ def thickened(base: tuple[int, ...], factor: int) -> tuple[int, ...]:
         for base_value in base
         for value in range(factor * base_value, factor * base_value + factor)
     )
+
+
+def interval(start: int, end: int) -> tuple[int, ...]:
+    return tuple(range(start, end + 1))
 
 
 def check_thickened_templates(max_factor: int = 7) -> None:
@@ -111,6 +117,48 @@ def check_thickened_templates(max_factor: int = 7) -> None:
     print(f"thickened templates verified through p={max_factor}")
 
 
+def check_large_remote_packets(max_size: int = 12) -> None:
+    for packet_size in range(1, max_size + 1):
+        n = 5 * packet_size + 10
+
+        gate = 2 * n
+        packet = interval(n + 1, n + packet_size)
+        values = interval(1, n) + (gate,) + packet
+        value_set = set(values)
+        assert covers_window(values, 3, 3 * n)
+        assert all(
+            gate + u not in hsum(tuple(v for v in values if v != gate), 2, gate + u)
+            for u in packet
+        )
+        assert {u + gate - anchor for u in packet for anchor in packet} & value_set == {
+            gate
+        }
+
+        f = 4 * n
+        g = 4 * n + 2 * packet_size
+        packet_u = interval(6 * n + 1, 6 * n + packet_size)
+        packet_v = tuple(u + 2 * packet_size for u in packet_u)
+        values = interval(1, n) + (f, g) + packet_u + packet_v
+        value_set = set(values)
+        retained = tuple(v for v in values if v not in (f, g))
+        assert covers_window(values, 3, 3 * n)
+        assert packet_v == tuple(u + g - f for u in packet_u)
+        assert all(g + u not in hsum(retained, 2, g + u) for u in packet_u)
+        palette = {f, g}
+        assert (
+            {u + g - anchor for u in packet_u for anchor in packet_u} & value_set
+            <= palette
+        )
+        assert (
+            {v + f - anchor for v in packet_v for anchor in packet_v} & value_set
+            <= palette
+        )
+        assert {v + f - u for v in packet_v for u in packet_u} & value_set <= palette
+        assert {u + g - v for u in packet_u for v in packet_v} & value_set <= palette
+
+    print(f"large remote packet templates verified through L={max_size}")
+
+
 def find_anchored_shadow_packet() -> None:
     for end_base in range(8, 21):
         window = (end_base, 2 * end_base)
@@ -176,6 +224,7 @@ def find_parallel_copy_packet() -> None:
 
 def main() -> None:
     check_thickened_templates()
+    check_large_remote_packets()
     find_anchored_shadow_packet()
     find_parallel_copy_packet()
 

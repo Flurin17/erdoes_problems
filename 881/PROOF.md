@@ -3858,6 +3858,87 @@ large bounded-palette parallel-copy packets cannot both persist. Corollary
 3.4d.19 is a stronger one-line sufficient condition, but Corollary
 3.4d.23 is closer to the actual normal form forced by a counterexample.
 
+### Warning 3.4d.24: Large remote packets coexist with local coverage
+
+The packet-exclusion target cannot be proved from finite order-\(3\)
+coverage alone, even if the packet size is allowed to be arbitrarily large.
+The missing input must tie the packets to the terminal-hole witnesses in
+the counterexample normal form.
+
+First fix \(L\ge1\), choose \(N>2L\), and set
+\[
+A^{\mathrm{uniq}}_{N,L}=[1,N]\cup\{2N\}\cup[N+1,N+L].
+\]
+Then
+\[
+[3,3N]\subset3A^{\mathrm{uniq}}_{N,L}.
+\]
+With
+\[
+g=2N,\qquad U=[N+1,N+L],
+\]
+the packet has size \(L\), and for every \(u\in U\),
+\[
+g+u\notin2(A^{\mathrm{uniq}}_{N,L}\setminus\{g\}). \tag{1}
+\]
+Indeed, the largest two-sum from
+\([1,N]\cup[N+1,N+L]\) is \(2N+2L<3N+1\le g+u\). Also
+\[
+(U+g-U)\cap A^{\mathrm{uniq}}_{N,L}=\{g\}. \tag{2}
+\]
+The difference interval \(U+g-U\) is contained in
+\([2N-L+1,2N+L-1]\), which is disjoint from
+\([1,N]\cup[N+1,N+L]\) when \(N>2L\).
+
+There is an analogous active parallel-copy family. Fix \(L\ge1\), choose
+\(N>4L\), and put
+\[
+f=4N,\qquad g=4N+2L,\qquad
+U=[6N+1,6N+L],\qquad V=U+2L.
+\]
+Let
+\[
+A^{\mathrm{par}}_{N,L}=[1,N]\cup\{f,g\}\cup U\cup V.
+\]
+Again
+\[
+[3,3N]\subset3A^{\mathrm{par}}_{N,L}.
+\]
+For every \(u\in U\),
+\[
+g+u=f+(u+2L),
+\]
+where \(u+2L\in V\), and
+\[
+g+u\notin2(A^{\mathrm{par}}_{N,L}\setminus\{f,g\}). \tag{3}
+\]
+The retained two-sums from \([1,N]\cup U\cup V\) are either at most
+\(7N+3L\) or at least \(12N+2\), while
+\[
+10N+2L+1\le g+u\le10N+3L.
+\]
+Thus \(\{f,g\}\) is an active two-point cover for all the centers
+\(g+u\). Moreover \(V=U+g-f\), and the four self- and cross-shadows obey
+\[
+(U+g-U)\cap A^{\mathrm{par}}_{N,L}\subset\{f,g\},
+\]
+\[
+(V+f-V)\cap A^{\mathrm{par}}_{N,L}\subset\{f,g\},
+\]
+\[
+(V+f-U)\cap A^{\mathrm{par}}_{N,L}\subset\{f,g\},\qquad
+(U+g-V)\cap A^{\mathrm{par}}_{N,L}\subset\{f,g\}. \tag{4}
+\]
+All these shadows lie in intervals of radius \(L-1\) around \(f\) or \(g\),
+and the only points of \(A^{\mathrm{par}}_{N,L}\) in those intervals are
+\(f\) and \(g\).
+
+These examples are deliberately not counterexamples: the interval
+\([1,N]\) is doing all the local coverage work, and the packets are remote.
+They show only that the large-packet branches in Corollary 3.4d.23 must be
+excluded using the full no-good-deletion normal form, not by a finite
+coverage or density-window argument in isolation.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -28900,6 +28981,11 @@ missing from ordinary minimal order-\(h\) bases.
   if one finite core rules out all sufficiently large unique-gate packets
   and all sufficiently large bounded-palette parallel-copy packets, then a
   good order-\(4\) deletion exists.
+* Warning 3.4d.24 shows that this branch-exclusion target cannot be proved
+  from finite order-\(3\) coverage alone: arbitrarily large remote
+  unique-gate packets and active parallel-copy packets coexist with a local
+  three-sum interval. The missing input must come from the way packets are
+  tethered to terminal holes in the no-good-deletion normal form.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
