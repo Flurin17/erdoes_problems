@@ -2609,6 +2609,11 @@ choice has a certificate fiber, a fixed certificate recurs; if the rows can
 always be split into certificate-free fibers, Corollary 8.5a.4 forbids the
 finite moving-label palette. Therefore a fixed first point and fixed rank
 cannot support a full inclusion-minimal generalized prefix-link shell.
+Lemma 13.1l.2g handles nonminimal prefix links: Ramsey thinning fixes the
+position pattern of the inclusion-minimal subhole. If the fixed first point
+remains active, sparse reblocking turns the pattern into a smaller full
+active prefix shell, now forbidden; if it does not remain active, the
+obstruction has genuinely descended to the tail section.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

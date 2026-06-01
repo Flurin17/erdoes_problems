@@ -16157,6 +16157,126 @@ only remaining prefix-front escape is genuine active-trace descent before a
 fixed full packet is obtained, or unbounded rank/section depth escaping
 every fixed first-section rank.
 
+## Lemma 13.1l.2g: Nonminimal prefix links descend to active traces
+
+Work in the \(k=2\) counterexample setting. Fix
+\[
+d\in A,\qquad r\ge1,
+\]
+and an infinite ordered tail
+\[
+Y=\{y_1<y_2<\cdots\}\subset A\setminus\{d\}.
+\]
+Suppose that, for every \(L\), all sufficiently late
+\[
+H=\{h_1<\cdots<h_r\}\in[Y]^r
+\]
+have a witness \(w>L\) with
+\[
+w\notin3(A\setminus(\{d\}\cup H)). \tag{1}
+\]
+For each such pair \((H,w)\), shrink
+\[
+\{d\}\cup H
+\]
+inclusion-minimally for the same witness, and record the position pattern
+\[
+P\subseteq\{0,1,\ldots,r\},
+\]
+where \(0\in P\) means \(d\) remains in the active trace and
+\[
+i\in P\quad(1\le i\le r)
+\]
+means \(h_i\) remains.
+
+After passing to an infinite subtail and to cofinally many height
+parameters, this pattern is constant. If the constant pattern contains
+\[
+0
+\]
+and at least one moving position, then it yields a full inclusion-minimal
+prefix shell with the same fixed first point \(d\) and smaller rank
+\[
+s=|P|-1
+\]
+on a further sparse subtail. If \(P=\{0\}\), then \(d\) itself has
+arbitrarily large one-point holes. If \(0\notin P\), the obstruction has
+descended to an active trace wholly inside the tail, with the old fixed
+prefix point \(d\) inactive.
+
+Proof. For each integer \(n\), restrict to a tail of \(Y\) on which (1)
+holds with witnesses \(w>n\). Choose one witness for each \(H\), shrink it
+inclusion-minimally, and color \(H\) by the resulting subset
+\[
+P(H)\subseteq\{0,\ldots,r\}.
+\]
+There are only finitely many colors. Ramsey's theorem gives an infinite
+subtail with constant color. Iterating over \(n=1,2,\ldots\), then passing
+to an infinite subsequence of height parameters on which the color is the
+same, and diagonalizing through the nested tails, gives an infinite
+\[
+Y'\subset Y
+\]
+and a fixed pattern \(P\) such that, for every selected height parameter,
+all sufficiently late \(r\)-sets from \(Y'\) have an inclusion-minimal
+subhole in exactly the positions \(P\).
+
+Assume first that
+\[
+P=\{0,p_1,\ldots,p_s\},\qquad 1\le p_1<\cdots<p_s\le r,
+\]
+with \(s\ge1\). Choose a further subtail
+\[
+Z=\{z_1<z_2<\cdots\}\subset Y'
+\]
+so sparse that between any two consecutive points of \(Z\), and before the
+first point under consideration, there are enough unused points of \(Y'\)
+to fill all nonactive positions required by \(P\). Concretely, when given
+a sufficiently late
+\[
+S=\{z_{i_1}<\cdots<z_{i_s}\}\in[Z]^s,
+\]
+we can choose filler points from \(Y'\setminus Z\) so that, in the ordered
+\[
+r\text{-set }H=\{h_1<\cdots<h_r\},
+\]
+one has
+\[
+h_{p_\ell}=z_{i_\ell}\qquad(1\le\ell\le s).
+\]
+The fixed-pattern conclusion supplies a witness \(w\) whose
+inclusion-minimal active trace is exactly
+\[
+\{d\}\cup S.
+\]
+Thus, for every selected height parameter, every sufficiently late
+\[
+S\in[Z]^s
+\]
+has a witness for which \(\{d\}\cup S\) is inclusion-minimal. This is the
+claimed full active prefix shell of rank \(s\), since the selected height
+parameters are unbounded and therefore dominate any prescribed \(L\).
+
+If \(P=\{0\}\), the same argument gives arbitrarily large witnesses
+\[
+w\notin3(A\setminus\{d\}),
+\]
+so the obstruction is a one-point failure for \(d\). Finally, if
+\[
+0\notin P,
+\]
+then every inclusion-minimal trace obtained after thinning lies entirely in
+the moving tail \(Y'\). The fixed prefix point \(d\) is inactive for those
+holes, so the obstruction has passed to a proper tail trace rather than to
+a fixed first-section shell. \(\square\)
+
+Consequently, in the no-section-descent alternative of Lemma 8.5a.8a, a
+fixed first-section generalized prefix link cannot survive by hiding behind
+nonminimal packets. Either its active trace keeps the fixed first point and
+shrinks to a full active fixed-rank shell, forbidden by Corollaries
+13.1l.2b--13.1l.2f, or the active trace drops the fixed first point and
+the obstruction has genuinely descended to the tail section.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -17989,6 +18109,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   endpoint rows use only the finite palette of earlier labels, so they
   either force a recurrent certificate or violate Corollary 8.5a.4's
   finite moving-label obstruction.
+* Lemma 13.1l.2g handles nonminimal fixed-rank prefix links: after Ramsey
+  thinning the inclusion-minimal active trace has a fixed position pattern;
+  if it contains the fixed first point it reblocks to a smaller full active
+  prefix shell, and otherwise it is genuine tail-section descent.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
