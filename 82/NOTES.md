@@ -3321,6 +3321,10 @@ source of growth beyond Ramsey.
   easy: one side of a split partition is a clique or independent set of size
   at least `n/2`.  Lemma 0B remains useful only as a warning that split graphs
   need not have mixed regular witnesses beyond homogeneous sets.
+- 2026-06-01: Strengthened Lemma 7 to `reg(G)>=max(n/t(G),reg(Q))`, where
+  `Q` is the twin quotient, and added Corollary 7.0A: if the twin quotient is
+  perfect then `reg(G)>=n^{1/3}`.  Thus twin-class structure is only hard when
+  the quotient itself is an imperfect Ramsey-core graph.
 - 2026-06-01: Added Lemma 0B.2: complete multipartite graphs, and disjoint
   unions of cliques, always contain regular induced subgraphs of order at
   least `n/H_n`.  The proof chooses the largest Ferrers rectangle

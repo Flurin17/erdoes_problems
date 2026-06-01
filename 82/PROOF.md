@@ -7188,24 +7188,43 @@ classes the bipartite graph is either complete or empty.  Let `t(G)` be the
 number of twin classes of `G`.  Then
 
 ```text
-reg(G) >= max { n/t(G), c log t(G) }
+reg(G) >= max { n/t(G), reg(Q) } >= max { n/t(G), c log t(G) },
 ```
 
-for an absolute constant `c>0`.
+where `Q` is the twin quotient and `c>0` is an absolute Ramsey constant.
 
 Proof.  Some twin class has order at least `n/t(G)`.  Since a twin class
 induces either a clique or an independent set, it is regular.
 
-For the second term, form the quotient graph `Q` whose vertices are the twin
-classes and whose edges record complete adjacency between classes.  Choose one
-representative from each class.  Any clique or independent set in `Q` lifts to
-a clique or independent set in `G`, hence to a regular induced subgraph.  By
-Ramsey's theorem, `Q` has a clique or independent set of order at least
-`c log t(G)`.  QED.
+For the quotient term, choose one representative from each twin class in a
+regular induced subgraph of `Q`.  The representatives induce the same graph
+inside `G`, so `reg(G)>=reg(Q)`.  Ramsey's theorem gives
+`reg(Q)>=c log t(G)` because cliques and independent sets are regular.  QED.
 
 Optimizing the displayed lower bound over `t` gives only `Omega(log n)`.
 Thus neighborhood diversity alone cannot prove the target; it must be coupled
 with a stronger statement about the quotient or with a way to use class sizes.
+
+**Corollary 7.0A: Perfect Twin Quotients Are Polynomially Easy.**  If the
+twin quotient `Q` of an `n`-vertex graph `G` is perfect, then
+
+```text
+reg(G) >= n^{1/3}.
+```
+
+Proof.  Let `t=t(G)`.  By Lemma 1A applied to the perfect quotient,
+`reg(Q)>=sqrt(t)`.  Lemma 7 gives
+
+```text
+reg(G) >= max(n/t, sqrt(t)).
+```
+
+If `t<=n^{2/3}`, the first term is at least `n^{1/3}`; if
+`t>=n^{2/3}`, the second term is at least `n^{1/3}`.  QED.
+
+Therefore a Ramsey-scale counterexample cannot be explained by twin classes
+whose quotient is perfect.  After quotienting twins, the hard quotient must
+itself lie in the imperfect Ramsey core.
 
 **Lemma 7.1: Modular Quotient Reduction.**  Let
 `V(G)=V_1 union ... union V_m` be a partition into graph modules: for every
