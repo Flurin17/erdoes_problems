@@ -7475,6 +7475,84 @@ degree `2`, matching the pair vertices.  The verification command is
 python3 82/EXPERIMENTS/pair_role_witness.py 12 --mask 72400984189589100935 --witness 2,3,8,9,11 --pair 2,3
 ```
 
+The broader signature scan
+
+```text
+python3 82/EXPERIMENTS/pair_role_signature.py 12 --mask 72400984189589100935
+```
+
+inspects all `48` maximum regular witnesses and reports
+`min_pair_nonempty_roles=3`.  Thus, in this graph, every maximum witness needs
+at least three pair roles; the two-role balanced extension cannot recover a
+maximum witness by choosing a different pair.
+
+**Example 27E: Four Pair Roles Can Be Unavoidable In A Regular Witness.**
+Let `p>=13` be a prime with `p congruent 1 mod 4`, and let `P_p` be the Paley
+graph on `F_p`: two vertices are adjacent when their difference is a nonzero
+quadratic residue.  Then `P_p` is regular, but for every pair of vertices in
+the full regular witness `V(P_p)`, all four pair roles `A,B,C,E` from
+Lemma 27C are nonempty.
+
+Proof.  Let `chi` be the quadratic character modulo `p`, with `chi(0)=0`.
+Because `p congruent 1 mod 4`, `chi(-1)=1`, so the Paley graph is undirected
+and every vertex has degree
+
+```text
+d=(p-1)/2.
+```
+
+By translation, it is enough to count common neighbors of `0` and `a != 0`.
+For `x notin {0,a}`, the vertex `x` is adjacent to both if and only if
+`chi(x)=chi(x-a)=1`.  Hence the number `N(a)` of common neighbors is
+
+```text
+N(a)=1/4 sum_{x notin {0,a}} (1+chi(x))(1+chi(x-a)).
+```
+
+The four sums are
+
+```text
+sum 1 = p-2,
+sum_{x notin {0,a}} chi(x) = -chi(a),
+sum_{x notin {0,a}} chi(x-a) = -chi(-a)=-chi(a),
+sum_x chi(x(x-a)) = -1.
+```
+
+The last identity is the standard quadratic character sum for a nonconstant
+quadratic with distinct roots.  Therefore
+
+```text
+N(a)=(p-3-2chi(a))/4.
+```
+
+For an adjacent pair this gives
+
+```text
+|C|=(p-5)/4,       |A|=|B|=d-1-|C|=(p-1)/4,
+|E|=p-2-|A|-|B|-|C|=(p-1)/4.
+```
+
+For a nonadjacent pair it gives
+
+```text
+|C|=(p-1)/4,       |A|=|B|=d-|C|=(p-1)/4,
+|E|=p-2-|A|-|B|-|C|=(p-5)/4.
+```
+
+All four quantities are positive for `p>=13`.  Thus no pair in the full
+regular witness has fewer than four nonempty roles.  QED.
+
+For `p=13`, the verification command
+
+```text
+python3 82/EXPERIMENTS/pair_role_signature.py 13 --paley-prime 13
+```
+
+reports `max_regular_order=13` and `min_pair_nonempty_roles=4`.  Thus any
+proof that starts from an already-found regular witness and then tries to
+select a pair with at most three nonempty roles is false.  Pair-role
+absorption must allow all four roles, or it must find a different witness.
+
 ## Lemma 28: Ramsey Bound For Pair-Difference Amplification
 
 Let `BR(p,q)` be the least integer `N` such that every bipartite graph with

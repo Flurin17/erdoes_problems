@@ -256,6 +256,8 @@ Computational checks and generated data for Erdos Problem 82.
   required regular graph between themselves, not a homogeneous template.
 - `pair_role_witness.py`: prints the exact four-role pair profile equations
   from Lemma 27C for a supplied regular witness and optional pair.
+- `pair_role_signature.py`: scans largest regular witnesses for the number
+  and sizes of nonempty pair roles, with an option to generate Paley graphs.
 - `regular_witness.py`: prints one largest regular induced witness for a
   fixed graph mask, including degrees, witness edges, and optional split-side
   counts/profiles for structured examples.

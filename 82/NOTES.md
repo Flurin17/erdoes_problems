@@ -2368,3 +2368,18 @@ source of growth beyond Ramsey.
   nonneighbor satisfy middle-degree profiles `1+1=2`, `1+1=2`, and `2+0=2`.
   Thus the witness missed by balanced pair extension is still a two-pole
   profile-absorption witness.
+- 2026-06-01: Added Example 27E and `pair_role_signature.py`.  Paley graphs
+  `P_p` for primes `p congruent 1 mod 4`, `p>=13`, are regular witnesses in
+  which every pair has all four roles `A,B,C,E` nonempty.  The `p=13`
+  computation reports `max_regular_order=13` and
+  `min_pair_nonempty_roles=4`.  This kills the shortcut "choose a pair with
+  at most three roles inside a regular witness"; any two-pole proof must
+  genuinely handle all four residual-degree roles or find a different
+  witness.
+- 2026-06-01: Ran `pair_role_signature.py` on the compensated samples.  For
+  the `n=12` mask, all `48` maximum order-`5` witnesses have
+  `min_pair_nonempty_roles=3`, so the two-role balanced extension cannot
+  recover a maximum witness by changing the pair.  For the `n=20` mask, the
+  maximum order-`10` witnesses include two-role pairs, matching the balanced
+  extension found earlier, but many pairs in those same witnesses already use
+  three or four roles.
