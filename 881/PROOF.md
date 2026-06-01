@@ -21849,6 +21849,108 @@ translate sends many rows into that band is impossible. A large bounded-rank
 interval packet must place its active color outside the corresponding
 central gate range, not merely outside the original interval.
 
+### Corollary 16.57: Bounded-rank interval packets force central escape
+
+In the setting of Corollary 16.45, suppose
+\[
+T_0=I=[a,b]\cap\mathbb N
+\]
+is an interval of length \(n>2r\), \(|F|\le r\), and
+\[
+U\subset I
+\]
+satisfies the hypotheses of Corollary 16.45 for an active color
+\[
+f\in F.
+\]
+Put
+\[
+B_r={r(r+1)\over2}+2r.
+\]
+For all sufficiently large witness parameters \(L\), if \(M\ge0\) and
+\[
+|U|>B_r+2M, \tag{1}
+\]
+then
+\[
+f<a+2r-M
+\quad\text{or}\quad
+f>b-2r+M. \tag{2}
+\]
+
+Proof. Corollary 16.45 leaves at most \(B_r\) rows outside the
+finite-palette gate-dependent branch. Thus the gate-dependent subpacket
+\[
+U_{\rm gate}\subset U
+\]
+satisfies
+\[
+|U_{\rm gate}|\ge |U|-B_r>2M.
+\]
+For every \(u\in U_{\rm gate}\),
+\[
+f+u\notin2(A\setminus F).
+\]
+Corollary 16.56 applied to \(U_{\rm gate}\), with
+\[
+C=A\setminus F,
+\]
+gives (2). \(\square\)
+
+### Corollary 16.58: Dense bounded-rank interval packets have linearly far gates
+
+Fix \(r\ge1\) and \(0<\eta\le1\). In the setting of Corollary 16.57,
+there is \(N=N(r,\eta)\) such that whenever \(I=[a,b]\cap\mathbb N\) has
+length \(n\ge N\) and
+\[
+|U|\ge\eta n, \tag{1}
+\]
+then, for all sufficiently large witness parameters \(L\),
+\[
+f<a-{\eta n\over4}
+\quad\text{or}\quad
+f>b+{\eta n\over4}. \tag{2}
+\]
+
+Proof. Let
+\[
+B_r={r(r+1)\over2}+2r.
+\]
+Choose \(N\) so large that \(n\ge N\) implies
+\[
+n>2r,\qquad
+{\eta n-B_r-1\over2}\ge{\eta n\over3}+1,\qquad
+2r\le{\eta n\over12}. \tag{3}
+\]
+Set
+\[
+M=\left\lfloor{\eta n-B_r-1\over2}\right\rfloor .
+\]
+Then \(M\ge\eta n/3\), and (1) gives
+\[
+|U|\ge\eta n>B_r+2M.
+\]
+Corollary 16.57 yields
+\[
+f<a+2r-M
+\quad\text{or}\quad
+f>b-2r+M.
+\]
+By (3),
+\[
+M-2r\ge{\eta n\over4},
+\]
+which is exactly (2). \(\square\)
+
+The bounded-rank nonsingleton interval obstruction is now forced into a
+long-range regime. Positive-density row packets over an interval cannot be
+served by a finite active palette near that interval: after the bounded
+row-dependent allowance is removed, the central retained two-sum band pushes
+every active gate a linear distance outside the block. The remaining escape
+must therefore either make the packet density vanish, let the deletion rank
+grow with the interval, or coordinate several far gates across separated
+blocks.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -23037,6 +23139,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \([2a+2r,2b-2r]\) inside the retained two-sumset. Corollaries
   16.55--16.56 translate this into a central gate exclusion range for
   gate-dependent interval packets.
+* Corollaries 16.57--16.58 combine that central exclusion with the
+  bounded-rank row allowance from Corollary 16.45: any positive-density
+  bounded-rank interval packet must use an active gate a linear distance
+  outside the tested interval. Hence the remaining interval obstruction
+  must have vanishing packet density, growing deletion rank, or coordinated
+  far-gate structure across separated blocks.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
