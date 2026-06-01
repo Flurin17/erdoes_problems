@@ -22351,6 +22351,96 @@ Also \(M_\eta\le n\). Since \(n-M_\eta<\eta n\), (1) gives
 \]
 Lemma 16.65 with \(M=M_\eta\) yields (3) or (4). \(\square\)
 
+### Corollary 16.67: Blocker windows localize dense far-gate packets
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite, and put
+\[
+C=A\setminus F.
+\]
+Let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length \(n\). Fix \(0<\eta\le1\), and put
+\[
+M_\eta=\lfloor(1-\eta)n\rfloor+1.
+\]
+Let \(\mathcal J\) be a finite family of retained intervals
+\[
+J=[\alpha_J,\beta_J]\cap\mathbb N\subset C
+\]
+with lengths
+\[
+\ell_J=\beta_J-\alpha_J+1
+\]
+satisfying
+\[
+M_\eta\le2\ell_J-1. \tag{1}
+\]
+For each \(J\in\mathcal J\), define its blocker window
+\[
+W_J(\eta,I)
+=
+[2\alpha_J-b+M_\eta-1,\ 2\beta_J-a-M_\eta+1]\cap\mathbb N. \tag{2}
+\]
+
+If \(f\in F\) and \(U\subset I\cap C\) satisfy
+\[
+f+u\notin2C\qquad(u\in U),\qquad |U|\ge\eta n, \tag{3}
+\]
+then
+\[
+f\notin \bigcup_{J\in\mathcal J}W_J(\eta,I). \tag{4}
+\]
+Equivalently, any prescribed candidate gate set
+\[
+G\subseteq\bigcup_{J\in\mathcal J}W_J(\eta,I)
+\]
+supports no \(\eta\)-dense gate-dependent packet over \(I\).
+
+Moreover, let \(P\subset F\) be nonempty and let \(U_f\subset I\cap C\)
+be gate-dependent packets for \(f\in P\). Put
+\[
+f_-=\min P,\qquad f_+=\max P,\qquad s=f_+-f_-.
+\]
+If
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n, \tag{5}
+\]
+then for every \(J\in\mathcal J\) at least one of the following holds:
+\[
+s>2\ell_J-1-M_\eta, \tag{6}
+\]
+\[
+f_-<2\alpha_J-b+M_\eta-1, \tag{7}
+\]
+or
+\[
+f_+>2\beta_J-a-M_\eta+1. \tag{8}
+\]
+In particular, if for some \(J\in\mathcal J\) the whole palette lies in
+\[
+W_J(\eta,I)
+\]
+and
+\[
+s\le2\ell_J-1-M_\eta,
+\]
+then (5) is impossible.
+
+Proof. The single-gate assertion is Corollary 16.64 applied to each
+\[
+J\in\mathcal J.
+\]
+Indeed, (3) forces \(f\) to lie outside the window (2) for every such
+\(J\), proving (4).
+
+For the palette assertion, apply Corollary 16.66 to each \(J\in\mathcal J\).
+It gives precisely the alternatives (6), (7), and (8). If one blocker
+window contains the whole palette and the span bound also holds, then
+neither (7) nor (8) nor (6) can hold, contradicting the alternatives.
+\(\square\)
+
 Thus a far-gate packet cannot be dense in a tested interval while an old
 retained interval has a doubled band deeply overlapping that test. Any
 block construction that pays the linear far-gate cost from Corollary 16.61
@@ -22361,6 +22451,11 @@ Corollary 16.66 is the palette version: a dense coordinated far-gate packet
 against one retained interval must either spread its active colors across
 almost the full doubled length of that interval or put one extreme active
 color outside the corresponding overlap window.
+
+Corollary 16.67 packages the usable obstruction for staged constructions:
+each retained interval contributes a forbidden affine window for dense gate
+packets over the tested block, and clustered finite palettes cannot hide
+inside any one of those windows.
 
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
@@ -23592,6 +23687,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   have a common forbidden core. A dense cross-block packet therefore forces
   either palette spread on the scale of the retained interval or an extreme
   active color outside the overlap window.
+* Corollary 16.67 packages finite blocker families: every retained interval
+  contributes a forbidden affine gate window for dense packets over the test
+  interval, and clustered finite palettes cannot be contained in any one
+  blocker window unless their span exceeds the retained interval's doubled
+  length allowance.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

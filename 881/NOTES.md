@@ -81,7 +81,10 @@ interval, so a staged construction must thread active gates through all
 cross-block overlap windows. Lemma 16.65 and Corollary 16.66 add the
 palette version: clustered active colors share a common forbidden band, so
 a dense cross-block packet requires either large palette spread or an
-extreme gate outside the overlap window.
+extreme gate outside the overlap window. Corollary 16.67 packages finite
+families of retained intervals as blocker windows: dense single-gate
+packets must avoid their union, while clustered finite palettes cannot lie
+inside any one blocker window without enough spread.
 
 ## Definitions
 

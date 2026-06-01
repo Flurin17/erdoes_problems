@@ -756,3 +756,9 @@ has at least the promised deep overlap with the tested interval whenever
 the gate lies in the corresponding forbidden range. It also checks the
 palette common-band version from Lemma 16.65 by varying the span between
 the minimum and maximum active colors.
+
+`blocker_window_diagnostic.py` packages Corollary 16.67 as finite data:
+for a tested interval and several retained intervals it prints the affine
+blocker windows, then checks that every gate in such a window has the
+required deep doubled-band overlap and that clustered palettes contained in
+one window have the common forbidden band promised by Lemma 16.65.
