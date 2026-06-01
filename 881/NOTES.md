@@ -2311,6 +2311,11 @@ create a large shifted two-sum spike at a common deleted color. Warning
 8.5a.7z.7 then records the negative side: these transversal constraints do
 not alone produce an escaping selector, because an abstract rank-three
 product front can assign essentially selector-specific witness classes.
+Target 8.5a.7z.8 isolates the remaining counterexample skeleton as a
+selector-specific reflected front: each front edge and selector receives a
+nearly private witness, every old padder is assigned to a deleted gate and a
+retained mirror, and the gate/mirror data must avoid all finite recurrent
+palettes while preserving pair-harmlessness.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

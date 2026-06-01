@@ -8184,6 +8184,56 @@ reuse to consume old prefix capacity, or it must rule out the fully
 selector-specific reflected-front construction where essentially every
 selector edge receives its own private witness.
 
+### Target 8.5a.7z.8: Rule out selector-specific reflected fronts
+
+After Lemmas 8.5a.7z.4--8.5a.7z.5 and Corollary 8.5a.7z.6, the remaining
+negative construction route for \(k=2\) has the following form. One chooses
+fresh packet blocks
+\[
+P_i
+\]
+and a genuine front \(\mathcal B\) on their indices, with all edges of rank
+at least \(3\). For each
+\[
+I\in\mathcal B
+\]
+and each selector
+\[
+\sigma\in\prod_{i\in I}P_i,
+\]
+one assigns a nearly private witness
+\[
+w_{I,\sigma}
+\]
+to the deletion
+\[
+F_{I,\sigma}=\{\sigma(i):i\in I\}.
+\]
+For every old retained padder \(e\) below \(w_{I,\sigma}-N_0\), the
+vertex-cover condition from Lemma 10.1 requires a deleted gate
+\[
+\gamma_{I,\sigma}(e)\in F_{I,\sigma}
+\]
+and a retained mirror
+\[
+w_{I,\sigma}-e-\gamma_{I,\sigma}(e)\in A. \tag{1}
+\]
+The witness must be private enough that every three-term representation of
+\(w_{I,\sigma}\) uses a point of \(F_{I,\sigma}\), while restoring any one
+point of \(F_{I,\sigma}\) repairs the witness.
+
+This route evades the shared-witness lemmas by making the classes
+\(\mathcal C_v\) very small. It also evades the disjoint-window warning by
+using a true front \(\mathcal B\), so every infinite packet selector
+contains some protected edge. Therefore a final positive proof must show
+that such reflected front data cannot be staged indefinitely: either the
+gate maps \(\gamma_{I,\sigma}\) repeat over a finite palette and trigger the
+certificate/recurrent-color machinery, or the mirrors in (1) force pair
+cylinders, bounded second-excess edges, or large shifted spikes with stable
+finite overlap. Conversely, a counterexample would have to supply a finite
+extension lemma producing this data while keeping singleton and pair
+deletions harmless and freezing all older witnesses below later stages.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -14899,6 +14949,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   shared witness classes, while Warning 8.5a.7z.7 records that the
   transversal constraints alone cannot produce an escaping selector against
   fully selector-specific rank-three fronts.
+* Target 8.5a.7z.8 isolates that last route: a counterexample must stage a
+  selector-specific reflected front whose old padders are assigned to
+  moving deleted gates and retained mirrors without creating recurrent
+  finite palettes, pair cylinders, or stable shifted spikes.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
