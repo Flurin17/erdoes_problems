@@ -2880,6 +2880,80 @@ kill lower-order targets already represented wholly outside that core. For
 \(\ell=3\); Corollary 3.4d.9 is the finite-pin specialization of the
 \(\ell=2\) branch.
 
+### Corollary 3.4d.12: Lower-order hypergraph criterion
+
+Let \(A\subseteq\mathbb N\) be an order-\(k\) asymptotic basis. Suppose
+there is a finite set
+\[
+P\subset A
+\]
+with the following property. For every
+\[
+\ell=2,\ldots,k
+\]
+and every \(q\ge1\), there is \(M=M(\ell,q)\) such that, for every
+\[
+t>M,\qquad t\in \ell(A\setminus P),
+\]
+the hypergraph \(\mathcal G_{\ell,P}(t)\) has transversal number \(>q\),
+where \(\mathcal G_{\ell,P}(t)\) has vertex set
+\[
+A\cap[1,t]\setminus P
+\]
+and edges the nonempty outside-\(P\) supports
+\[
+\{a_1,\ldots,a_\ell\}\setminus P
+\]
+arising from \(\ell\)-term representations
+\[
+t=a_1+\cdots+a_\ell,\qquad a_i\in A.
+\]
+Then there is an infinite \(B\subset A\) such that
+\[
+A\setminus B
+\]
+is an asymptotic basis of order \(k+1\).
+
+It is enough, in particular, that the same lower-order hypergraphs have
+arbitrarily large matchings uniformly on all sufficiently large represented
+targets \(t\in\ell(A\setminus P)\).
+
+Proof. We verify the hypothesis of Corollary 3.4d.11. Fix
+\[
+q,\qquad \ell=2,\ldots,k,
+\]
+and let \(M=M(\ell,q)\). Suppose
+\[
+t>M,\qquad D\subset A\setminus P,\qquad |D|\le q,
+\]
+and
+\[
+t\in\ell(A\setminus P).
+\]
+By the transversal hypothesis, \(D\) does not meet every edge of
+\(\mathcal G_{\ell,P}(t)\). Hence there is an \(\ell\)-term representation
+of \(t\) from \(A\) whose outside-\(P\) support avoids \(D\). Since
+\[
+D\cap P=\varnothing,
+\]
+all summands in this representation lie in \(A\setminus D\). Therefore
+\[
+t\in\ell(A\setminus D).
+\]
+This is exactly the lower-order anti-transversal property required by
+Corollary 3.4d.11.
+
+Finally, a matching of size \(q+1\) forces transversal number \(>q\), so the
+matching formulation is a sufficient special case. \(\square\)
+
+Thus the all-order problem has an exact lower-order hypergraph target. A
+counterexample must have bounded transversals not only for the
+\((k+1)\)-term representation hypergraphs of its holes, but also for some
+lower-order represented targets after every finite core is protected. The
+remaining difficulty is proving that genuine additive bases force those
+lower-order transversal numbers to grow, or constructing a sparse basis in
+which they stay bounded in a coherent barrier pattern.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27830,6 +27904,10 @@ missing from ordinary minimal order-\(h\) bases.
   that kill lower-order targets already represented outside the protected
   core. Conversely, ruling out such bounded lower-order transversals after
   one finite core proves the desired deletion theorem.
+* Corollary 3.4d.12 packages that target as a lower-order representation
+  hypergraph statement: after one finite core is protected, unbounded
+  transversal number, or just arbitrarily large matchings, for every
+  represented lower-order target would prove the full theorem.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

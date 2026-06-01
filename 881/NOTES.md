@@ -39,6 +39,10 @@ bounded two-sum translate rows outside every finite core. Corollaries
 forces bounded fresh transversals for lower-order targets already
 represented outside every protected core; ruling out those lower-order
 transversals after one finite core would prove the full deletion theorem.
+Corollary 3.4d.12 restates this as the current all-order hypergraph target:
+after protecting one finite core, lower-order representation hypergraphs
+for all represented large targets should have transversal number tending to
+infinity; large matchings are a sufficient special case.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the
