@@ -6119,6 +6119,62 @@ for `k=2,3,4,5` without graphical compensation do not satisfy Lemma 16.  With
 the `--require-graphical` filter, the maximum distinct admissible sizes are
 `0,2,4,9` for `k=2,3,4,5`.
 
+## Lemma 16A: Trace Compensation Realizes Minimal Hosts
+
+Let `M` be a multiset of nonzero signed indicators in `Z^{k-1}`, each of the
+form `1_S` or `-1_S`, and suppose no nonempty submultiset of `M` sums to zero.
+Write
+
+```text
+T=sum_{v in M} v.
+```
+
+Suppose there is a graph `J` on vertices `a_1,...,a_k`, with degree sequence
+`e_1,...,e_k`, such that
+
+```text
+e_i-e_k = -T_i       for 1<=i<=k-1.
+```
+
+Then there is a graph `H` containing `A={a_1,...,a_k}` such that:
+
+1. the vertices of `A` have equal degree in `H`;
+2. the trace-difference multiset of `B=V(H)\A` relative to `a_k` is exactly
+   `M`;
+3. no nonempty subset of `B` can be deleted while preserving equal degrees on
+   all vertices of `A`.
+
+Moreover, `B` may be chosen independent.
+
+Proof.  Start with `J` on `A`.  For each vector `1_S in M`, add a new vertex
+`b` that is nonadjacent to `a_k`, adjacent to `a_i` for `i in S`, and
+nonadjacent to `a_i` for `i notin S`.  For each vector `-1_S in M`, add a new
+vertex `b` that is adjacent to `a_k`, nonadjacent to `a_i` for `i in S`, and
+adjacent to `a_i` for `i notin S`.  Put no edges inside the set `B` of new
+vertices.
+
+By construction, each new vertex has the prescribed trace difference vector.
+If `t_i=|N_H(a_i) cap B|`, then
+
+```text
+t_i-t_k = T_i.
+```
+
+Therefore
+
+```text
+deg_H(a_i)-deg_H(a_k)
+  = (e_i-e_k)+(t_i-t_k)
+  = -T_i+T_i
+  = 0,
+```
+
+so all vertices of `A` have equal degree in `H`.
+
+If a nonempty `X subset B` could be deleted while preserving equal degrees on
+`A`, then its trace-difference sum would be zero, contradicting the
+assumption on `M`.  QED.
+
 ## Lemma 17: Steinitz Bound For Minimal Trace Obstructions
 
 In the setting of Lemma 12,
@@ -6562,7 +6618,8 @@ Take the internal degree of the base vertex and all zero-total coordinates to
 be `1`, and take the exceptional coordinate's internal degree to be `2`.
 This degree sequence is graphical: use a length-two path through the
 degree-`2` vertex and pair the remaining degree-`1` vertices by a matching.
-Thus Lemma 16 is satisfied.  QED.
+Thus Lemma 16 is satisfied, and Lemma 16A realizes the multiset as an actual
+minimal repeated-degree host, with `B` independent.  QED.
 
 Consequently, the repeated-degree trace route cannot be completed by proving
 a subexponential upper bound for `|B|` from support size, total imbalance, and

@@ -2216,7 +2216,9 @@ source of growth beyond Ramsey.
   supported on a single coordinate of value `-1`; the multiset is still
   zero-sum-free by the strict separator and it satisfies graphical
   compensation by a degree sequence with one degree-`2` vertex and the rest
-  degree `1`.  Therefore support size, total imbalance, and graphical
-  compensation alone cannot yield a subexponential bound on the outside
-  trace set `B`; the repeated-degree route must exploit regular subgraphs in
-  `B` or another property not visible in the trace multiset.
+  degree `1`.  Lemma 16A realizes any graphically compensated zero-sum-free
+  trace multiset as an actual minimal repeated-degree host, so this support-3
+  packing is not merely formal.  Since the realization can make `B`
+  independent, it is not a counterexample to Problem 82; instead it shows
+  that the repeated-degree route must exploit regular subgraphs in `B` or
+  another property not visible in the trace multiset.
