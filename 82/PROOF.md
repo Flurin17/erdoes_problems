@@ -5729,6 +5729,15 @@ by the one-residue lemma using `--mixed-degree-residue`.  The commands
 
 respectively check `188790`, `181088`, `81996`, `23124`, `169330`,
 `173715`, `77030`, and `22863` filtered even graphs with no counterexample.
+An additional `n=9` mixed-residue chunk
+
+```text
+/tmp/matching_slot_fast --n 9 --min-degree 4 --mixed-degree-residue --start 10000000 --limit 11000000
+/tmp/matching_slot_fast --n 9 --min-degree 4 --mixed-degree-residue --triangle-nonedge 0:1 --start 10000000 --limit 11000000
+```
+
+checks `20469` and `9264` further filtered graphs, respectively, again with
+no counterexample.
 These are finite calibrations of the minimum-degree-four mixed-residue regime
 left by the conditional reductions, not proof of the matching-slot target.
 

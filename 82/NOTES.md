@@ -3206,3 +3206,10 @@ source of growth beyond Ramsey.
   extraction in the representative ordered graph is genuinely stronger than
   chain-antichain extraction, but it does not yet provide an asymptotic
   improvement for Proposition 28F.
+- 2026-06-01: Extended the high-minimum-degree matching-slot calibration by
+  checking the `n=9` free-edge range `[10000000,11000000)` with
+  `--min-degree 4 --mixed-degree-residue`.  The unrooted filter checked
+  `20469` graphs and the `--triangle-nonedge 0:1` boundary filter checked
+  `9264` graphs, with no counterexample in either chunk.  This adds coverage
+  to the finite regime left after the rooted/cut-vertex/degree-two reductions,
+  but remains computational evidence only.
