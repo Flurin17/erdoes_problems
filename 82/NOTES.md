@@ -2332,3 +2332,9 @@ source of growth beyond Ramsey.
   with `D` replaced by the complementary degree.  This is circular as a bound
   on `G(h)`, but it isolates the hard profile-absorption regime: medium-degree
   witnesses with many small profile classes.
+- 2026-06-01: Added Lemma 11E and `compensated_template_check.py`,
+  specializing profile absorption to the compensated double template.  For
+  chosen index sets `U,V`, regularity is exactly `d_U(i)+x_V(i)=D` on the `A`
+  side and `|V|-1-d_V(j)+x_U(j)=D` on the `B` side.  This makes the remaining
+  bounded-spread task a concrete cut-degree system over the base graph and
+  the compensating bipartite graph.

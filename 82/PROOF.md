@@ -5340,6 +5340,46 @@ only the degree interval must still be able to see regular witnesses either
 inside an arbitrary medium-density side or through profile absorption across
 the compensating cut.
 
+**Lemma 11E: Profile Equations In The Compensated Template.**  In the setting
+of Lemma 11B, let `U` be a set of indices on the `A` side and `V` a set of
+indices on the `B` side.  For `i in U`, write
+
+```text
+d_U(i)=|N_F(i) cap U|,       x_V(i)=|N_X(a_i) cap {b_j:j in V}|.
+```
+
+For `j in V`, write
+
+```text
+d_V(j)=|N_F(j) cap V|,       x_U(j)=|N_X({a_i:i in U}, b_j)|.
+```
+
+Then the induced subgraph on
+
+```text
+{a_i:i in U} union {b_j:j in V}
+```
+
+is regular if and only if there is an integer `D` such that
+
+```text
+d_U(i)+x_V(i)=D                 for every i in U,
+|V|-1-d_V(j)+x_U(j)=D           for every j in V.
+```
+
+Proof.  On the `A` side, the internal graph is `F[U]`, so the internal degree
+of `a_i` is `d_U(i)`, and its cross-degree into the chosen `B` vertices is
+`x_V(i)`.  On the `B` side, the internal graph is `complement(F[V])`, so the
+internal degree of `b_j` is `|V|-1-d_V(j)`, and its cross-degree into the
+chosen `A` vertices is `x_U(j)`.  Lemma 29 applied to this cut gives exactly
+the displayed equations.  QED.
+
+Thus regular witnesses in the compensated template are solutions of a fixed
+cut-degree system over the base graph `F` and the compensating bipartite graph
+`X`.  The side-inheritance Lemma 11D corresponds to the special cases
+`V=empty` or `U=empty`; the examples above show that genuinely mixed
+solutions can be larger than the available one-side witnesses.
+
 ## Lemma 12: Minimal Repeated-Degree Host Obstruction
 
 Let `H` be an induced subgraph of `G` containing a set

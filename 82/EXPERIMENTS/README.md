@@ -25,6 +25,9 @@ Computational checks and generated data for Erdos Problem 82.
   complement on the other, and a bipartite graph with complementary degree
   prescriptions between them.  The default base density is `1/2`, matching
   the degree-sum condition `m(m-1)-4e(F) in [0,m]`.
+- `compensated_template_check.py`: verifies a fixed compensated-double
+  template mask, reports the base and cross degree prescriptions, and prints
+  the profile equations of Lemma 11E for a supplied witness.
 - `defect_set.py`: checks the one-defect sufficient condition for the
   `(0,0,1,2)` first-lift slot target, where a residue-`2` part leaves a
   zero-residue complement.
