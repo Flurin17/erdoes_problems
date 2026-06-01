@@ -20,6 +20,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
   Corollary 3.4d.14.
 * active lower-order barriers have lower-sumset shadows after removing one
   active barrier vertex, as used in Corollary 3.4d.15.
+* the triple-shadow branch need not collapse to the two-term pair branch,
+  as in Warning 3.4d.17.
 """
 
 from __future__ import annotations
@@ -267,7 +269,21 @@ def check_active_lower_shadow(A: tuple[int, ...], F: tuple[int, ...]) -> int:
     return checked
 
 
+def check_triple_shadow_not_pair_example() -> None:
+    A = (1, 2, 3, 4)
+    F = {1}
+    C = tuple(a for a in A if a not in F)
+    tau = 2
+    u = 3
+    target = tau + u
+    assert reps(A, 3, target)
+    assert not reps(C, 3, target)
+    assert reps(A, 2, target - 1)
+    assert reps(C, 2, 1 + u)
+
+
 def main() -> None:
+    check_triple_shadow_not_pair_example()
     sets_checked = 0
     decomposition_checked = 0
     obstruction_checked = 0

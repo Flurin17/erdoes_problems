@@ -54,7 +54,11 @@ has \(U+\tau-F\subset(\ell-1)A\), with at least one deleted gate from the
 original multiset lying in \(F\). Corollary 3.4d.16 packages the \(k=3\)
 case as a clean dichotomy: either the obstruction is already a two-sum
 reflected cover packet, or it is a three-sum active cover packet whose
-finite palette has coherent two-sum shadows.
+finite palette has coherent two-sum shadows. Warning 3.4d.17 gives a small
+finite model showing that the triple-shadow branch does not locally imply
+the pair branch: \(\{1\}\) can be an active three-sum barrier for \(5\) in
+\(\{1,2,3,4\}\), while the gate row \(1+3=4\) is already repaired by
+\(2+2\).
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

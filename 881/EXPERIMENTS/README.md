@@ -67,7 +67,9 @@ models and above the finite core-only range, to finite fresh deletions
 creating lower-order holes. It also verifies the inclusion-minimal active
 barrier extraction used in Corollary 3.4d.13 and the two-sum reflected
 cover-packet consequence used in Corollary 3.4d.14. The same script checks
-the active lower-sumset shadow used in Corollary 3.4d.15.
+the active lower-sumset shadow used in Corollary 3.4d.15 and records the
+small Warning 3.4d.17 example where a triple-shadow barrier does not
+collapse to a pair barrier.
 
 `delayed_gap_sim.py` is a toy finite-window simulation for the delayed-gap
 mechanism: after deleting one element, it estimates the first tail point

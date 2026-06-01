@@ -3352,6 +3352,43 @@ sharp: the pair branch is in the finite-palette independence regime, while
 the triple-shadow branch still permits the shadows to live in \(2A\) rather
 than in \(A\) itself.
 
+### Warning 3.4d.17: Triple shadows do not imply pair barriers
+
+The triple-shadow branch in Corollary 3.4d.16 cannot be collapsed to the
+pair branch by a purely local argument.
+
+Let
+\[
+A=\{1,2,3,4\},\qquad F=\{1\},\qquad S=\{1,1\},\qquad u=3.
+\]
+Then
+\[
+\tau=\sigma(S)=2,\qquad t=\tau+u=5.
+\]
+The target \(5\) has three-term representations from \(A\), for instance
+\[
+5=1+1+3=1+2+2,
+\]
+but every such representation uses the barrier point \(1\). Hence
+\[
+5\notin3(A\setminus F),
+\]
+and \(F\) is an inclusion-minimal active three-sum barrier for \(t\).
+The shadow conclusion is also visible:
+\[
+t-1=4\in2A.
+\]
+
+However the associated two-term gate row is already repaired after deleting
+\(F\):
+\[
+1+u=4=2+2\in2(A\setminus F).
+\]
+Thus the active triple barrier has no corresponding two-sum barrier at the
+same gate. A proof of the \(k=3\) case must either use the two-sum shadows
+in their own right, or add genuinely global information from the ambient
+order-\(3\) basis; the local active-cover structure alone is insufficient.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
