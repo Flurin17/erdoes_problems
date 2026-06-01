@@ -5989,6 +5989,83 @@ S_3=\{1,2,3,4,5,6\},\qquad F_3=\{1,3,5\},
 with witnesses \(9,11,13\) and a perfect row-color matching between evens
 and odds.
 
+### Warning 8.5a.7c: Private matchings do not imply Schreier links
+
+Mobile-injective private colors are much weaker than the complete
+prefix-link hypergraphs required by Lemma 13.1j. The gap is already visible
+in a range-separated finite packet.
+
+Let
+\[
+T=\{t_1<\cdots<t_m\}\subset\mathbb N
+\]
+be finite. Put
+\[
+R=\max T+m
+\]
+and choose \(N>4R\). Define
+\[
+w=10N,\qquad f_i=N+i,\qquad q_i=9N-t_i-i.
+\]
+Let
+\[
+F=\{f_1,\ldots,f_m\},\qquad
+C=T\cup\{q_1,\ldots,q_m\},\qquad S=C\cup F.
+\]
+Then
+\[
+w-t_i-f_i=q_i\in C, \tag{1}
+\]
+and
+\[
+t_i+f_i=N+t_i+i\notin2C. \tag{2}
+\]
+Indeed, \(2C\) lies in the separated ranges \(T+T\ll N\),
+\(T+\{q_i\}\sim9N\), and \(\{q_i\}+\{q_j\}\sim18N\).
+More explicitly, \(T+T<N\), while every sum involving a \(q_i\) is larger
+than \(8N\).
+
+Also
+\[
+w\notin3C, \tag{3}
+\]
+because \(3C\) lies in separated ranges near \(0,9N,18N,27N\), none of
+which contains \(10N\). For instance, a sum with no \(q_i\) is less than
+\(N\); a sum with two or three \(q_i\)'s is larger than \(16N\); and a sum
+with exactly one \(q_i\) has the form
+\[
+9N-t_i-i+t_j+t_k,
+\]
+which cannot equal \(10N\) because
+\[
+|t_j+t_k-t_i-i|<N.
+\]
+Restoring \(f_i\) repairs the hole:
+\[
+w=f_i+t_i+q_i. \tag{4}
+\]
+Thus \(F\) is inclusion-minimal for the witness \(w\), and the private
+row-color graph contains the injective matching
+\[
+t_i\mapsto f_i.
+\]
+
+However this packet has no hereditary Schreier-link content. For the same
+witness \(w\), if \(E\subsetneq F\), choose \(f_j\in F\setminus E\). Then
+\[
+w=f_j+t_j+q_j\in3(S\setminus E),
+\]
+so the proper subdeletion \(E\) is not bad for \(w\). Thus a private
+matching can be anti-hereditary: the full active set is needed to create
+the hole, while every proper subedge is repaired by an omitted active
+color.
+
+Consequently, one cannot infer the complete prefix-link condition of Lemma
+13.1j from mobile-injective private colors alone. A positive proof must add
+a promotion principle showing that the colors used in such packets become
+future barrier vertices with their own witnesses; a counterexample attempt
+must pay exactly this promoted-color debt.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
@@ -12522,6 +12599,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Example 8.5a.7b shows this escape is locally arithmetic, not merely
   formal: parity interval blocks have inclusion-minimal odd holes and a
   perfect matching from retained even rows to distinct deleted odd colors.
+* Warning 8.5a.7c separates mobile-injective matchings from the
+  enumerated-Schreier route: range-separated private packets can be
+  inclusion-minimal and anti-hereditary, with no complete prefix-link
+  shadow unless used colors are promoted to future barrier vertices.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and
