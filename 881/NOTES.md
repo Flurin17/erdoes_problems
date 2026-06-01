@@ -2404,8 +2404,8 @@ gate-independent. This is the finite additive pressure a bridge block must
 evade while also covering the next three-sum interval.
 The diagnostic `interval_marker_next_block_search.py` makes the first
 instance reproducible: starting from \([1,4]\cup\{8\}\), no strict
-singleton continuation block of size at most \(5\) with candidates through
-\(55\) protects every new element. This is finite evidence only, but it
+singleton continuation block of size at most \(6\) with candidates through
+\(50\) protects every new element. This is finite evidence only, but it
 matches Lemmas 16.10, 16.11, and 16.24: bridge fillers quickly become
 poisoned by the very coverage they create.
 

@@ -715,6 +715,6 @@ unique-gate, gate-independent packet on `[1,L]` with private witness
 `interval_marker_next_block_search.py` focuses on the first seed
 `[1,4] union {8}` and searches larger strict singleton continuation blocks
 with a bitset sumset engine. The default run checks all blocks of size at
-most `5` with candidate values through `55`; it finds no block where every
+most `6` with candidate values through `50`; it finds no block where every
 new element has a strict singleton order-4 witness below the new declared
 endpoint.

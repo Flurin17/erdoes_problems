@@ -116,8 +116,8 @@ def search(L: int, max_size: int, max_candidate: int, cap: int) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--L", type=int, default=4)
-    parser.add_argument("--max-size", type=int, default=5)
-    parser.add_argument("--max-candidate", type=int, default=55)
+    parser.add_argument("--max-size", type=int, default=6)
+    parser.add_argument("--max-candidate", type=int, default=50)
     parser.add_argument("--cap", type=int, default=180)
     args = parser.parse_args()
     search(args.L, args.max_size, args.max_candidate, args.cap)
