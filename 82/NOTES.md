@@ -3304,3 +3304,10 @@ source of growth beyond Ramsey.
   `(N,d,|Y_0|,rows,M)=(8,4,4,3,4),(10,5,5,3,4),(12,6,6,3,4)` give exact
   probabilities `0.15037,0.11039,0.10298`, respectively, all below the
   independent-row predictions `0.15993,0.12717,0.11086`.
+- 2026-06-01: The same exact DP refutes the naive negative-correlation
+  shortcut for simple biregular residue events.  For
+  `(N,d,|Y_0|,rows,M)=(8,4,4,4,4)`, the exact equal-residue probability is
+  `0.0769772`, while the independent-row prediction is `0.0754146`, ratio
+  `1.02072`.  Therefore the switching target must allow small positive
+  distortion and should aim for `exp(o(rows))`, not pointwise domination by
+  independent hypergeometric rows.

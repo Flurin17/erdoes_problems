@@ -2327,6 +2327,31 @@ enough to threaten the desired anti-concentration transfer.  They remain
 finite calibration only; the required theorem is still the simplicity
 distortion/switching bound above.
 
+The same exact DP also rules out a stronger shortcut.  The command
+
+```text
+python3 82/EXPERIMENTS/biregular_residue_exact.py \
+  --n 8 --degree 4 --marked 4 --rows 4 --modulus 4
+```
+
+reports exact probability
+
+```text
+0.0769772002163447221387533
+```
+
+whereas the independent-row prediction is
+
+```text
+0.0754145772594752186588921.
+```
+
+The ratio is about `1.02072`.  Thus the desired switching theorem cannot be
+the naive assertion that equal-residue events in the simple regular model are
+always no more likely than under independent hypergeometric rows.  The
+available target is necessarily weaker: an `exp(o(a))` distortion bound is
+still compatible with this exact positive finite correlation.
+
 For example,
 
 ```text
