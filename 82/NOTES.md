@@ -2554,4 +2554,6 @@ source of growth beyond Ramsey.
   Candidate 28L.  The construction has one edge plus isolates on one side, a
   clique plus an isolate on the other, and parity cross edges.  It is not a
   proof yet: exact checks show it is not an obstruction for `h=5,6`, but it
-  is a plus obstruction for every `h=7..11` tested.
+  is a plus obstruction for every `h=7..11` tested.  Added
+  `parity_pair_symbolic.py`, which reduces the same construction to seven
+  type counts and verifies the obstruction for every `7<=h<=20`.

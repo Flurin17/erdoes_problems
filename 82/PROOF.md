@@ -8824,6 +8824,15 @@ plus middle of side size `4`.  If the pattern could be proved for all large
 lower bound, but it supplies a structured test family for any proposed
 cross-profile matching theorem.
 
+Because the construction has only seven vertex types, the stronger checker
+`EXPERIMENTS/parity_pair_symbolic.py` tests it by type counts rather than by
+all subsets.  It verifies the same failures at `h=5,6` and no regular
+`h`-set or balanced plus middle for every `7<=h<=20`:
+
+```text
+python3 82/EXPERIMENTS/parity_pair_symbolic.py --min-h 5 --max-h 20
+```
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put
