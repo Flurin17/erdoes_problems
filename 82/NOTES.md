@@ -2838,3 +2838,15 @@ source of growth beyond Ramsey.
   filtered graphs.  This suggests a sharper structural target: a proof may
   only need to justify a single induced-edge correction before solving the
   residual `(0,0,2)` split.
+- 2026-06-01: Added `source_slots_fast.cpp` for exact source-residue dyadic
+  slot sweeps.  It validates against the Python `n=7` counts: source residues
+  `0` and `2 mod 4` each have `592` labelled source-modular graphs, and
+  residues `1` and `3` have none.  On `n=8`, the exact source-modular counts
+  are `23552, 7168, 7168, 23552` for source residues `0,1,2,3`.  Among all
+  four-slot multisets modulo `8`, the survivor counts are respectively
+  `49, 15, 17, 23`.  The current candidate family
+  `R_0=(0,1,2,4)`, `R_1=(0,0,2,2)`, `R_2=(0,0,1,2)`,
+  `R_3=(0,0,1,3)` survives these exact `n=8` arbitrary-graph checks.  The
+  clean complete-multipartite pattern `(0,a,4,a+4)` is again killed in
+  sources `2` and `3`, confirming that the useful four-part lift is genuinely
+  source-sensitive and irregular.

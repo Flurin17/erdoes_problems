@@ -167,6 +167,12 @@ Computational checks and generated data for Erdos Problem 82.
   one and four slots.  The optional `--odd-parts` flag requires every
   nonempty part in the slot partition to have odd cardinality, useful for
   testing complement reductions.
+- `source_slots_fast.cpp`: C++ exact checker for fixed source-residue dyadic
+  lifts, such as `4 -> 8`.  It enumerates all graphs whose full degree
+  sequence is constant modulo `--source-modulus` by choosing the graph on
+  vertices `0,...,n-2` and solving the correction edges to the last vertex.
+  Use `--source-residue a`, `--target-modulus M`, and `--candidates` to test
+  source-sensitive slot families exactly on `n=8`.
 - `slot_local_search.py`: simulated-annealing heuristic for fixed residue-slot
   colorings.  It directly scores a coloring against prescribed residues and
   is useful for larger exploratory searches where exact slot DP is too slow;

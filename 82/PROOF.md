@@ -4414,6 +4414,32 @@ multipartite classes of size at most `16`, using `EXPERIMENTS/multipartite_modul
 with `--source-residue`; the same tests without source filtering give
 irrelevant counterexamples from other source classes.
 
+The new checker `EXPERIMENTS/source_slots_fast.cpp` verifies this family
+exactly for all labelled `8`-vertex graphs whose degrees are congruent modulo
+`4`.  It enumerates the graph induced by vertices `0,...,n-2` and solves the
+edges to the last vertex so that every degree has the prescribed source
+residue modulo `4`.  For `n=8` the exact source-residue counts and four-slot
+survivor counts are:
+
+```text
+source 0: 23552 graphs, 49 surviving four-slot multisets,
+source 1:  7168 graphs, 15 surviving four-slot multisets,
+source 2:  7168 graphs, 17 surviving four-slot multisets,
+source 3: 23552 graphs, 23 surviving four-slot multisets.
+```
+
+The displayed family `R_0,R_1,R_2,R_3` survives in the corresponding source
+classes.  The cleaner complete-multipartite pattern also survives in sources
+`0` and `1`, but is killed in sources `2` and `3`; this agrees with the
+explicit masks recorded below.  The exact checks are reproduced by
+
+```text
+/tmp/source_slots_fast --n 8 --source-modulus 4 --target-modulus 8 --source-residue 0 --candidates '0,0,4,4;0,1,2,4'
+/tmp/source_slots_fast --n 8 --source-modulus 4 --target-modulus 8 --source-residue 1 --candidates '0,1,4,5;0,0,2,2'
+/tmp/source_slots_fast --n 8 --source-modulus 4 --target-modulus 8 --source-residue 2 --candidates '0,2,4,6;0,0,1,2'
+/tmp/source_slots_fast --n 8 --source-modulus 4 --target-modulus 8 --source-residue 3 --candidates '0,3,4,7;0,0,1,3'
+```
+
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
 slot multisets by the source-residue clique subset-sum test and then checks
