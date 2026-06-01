@@ -188,7 +188,10 @@ and packets \(\{4,10\},\{5,11\},\{8,12\}\), every selector triple has an
 inclusion-minimal terminal-gap witness in \([14,23]\), while all singleton
 and pair deletions remain three-fold covered on that same window. This is
 the finite warning recorded as Example 8.5a.7z; the coverage point \(24\)
-is the one-point stage buffer from Lemma 13.1d.
+is the one-point stage buffer from Lemma 13.1d. The script also groups
+shared witness values by their selector families and checks the
+two-transversal condition from Lemma 8.5a.7z.4 on the actual shifted
+two-sum supports.
 
 `product_rank3_extension_search.py` starts from that window and tries to add
 a fourth two-point packet, optionally with fillers. It requires every three

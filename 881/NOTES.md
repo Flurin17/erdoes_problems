@@ -2285,6 +2285,12 @@ the finite set of two-transversal sums inside \(\bigcup\mathcal C\). Thus,
 outside the degenerate common-point case, witness-sharing becomes a finite
 hypergraph-transversal question.
 
+The diagnostic `product_rank3_terminal_cover.py` now checks this directly
+on Example 8.5a.7z. In its only shared witness class without a singleton
+transversal, \(v=22\), the outside shifts \(19,21\) have two-sum supports
+\((8,11)\) and \((10,11)\), exactly two-transversals of the three selector
+edges sharing that witness.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent

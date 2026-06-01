@@ -16,6 +16,7 @@ large-spread rank-3 product obstruction is locally compatible.
 
 from __future__ import annotations
 
+from collections import defaultdict
 from itertools import combinations, product
 
 
@@ -91,6 +92,81 @@ def selector_witnesses(
     return out
 
 
+def transversals(
+    elements: set[int],
+    selector_family: tuple[tuple[int, ...], ...],
+) -> list[tuple[int, ...]]:
+    out: list[tuple[int, ...]] = []
+    for size in (1, 2):
+        for support in combinations(sorted(elements), size):
+            if all(set(support) & set(selector) for selector in selector_family):
+                out.append(support)
+    return out
+
+
+def pair_supports(elements: set[int], target: int) -> list[tuple[int, ...]]:
+    out: list[tuple[int, ...]] = []
+    ordered = sorted(elements)
+    for index, first in enumerate(ordered):
+        for second in ordered[index:]:
+            if first + second == target:
+                if first == second:
+                    out.append((first,))
+                else:
+                    out.append((first, second))
+    return out
+
+
+def report_shared_witnesses(
+    elements: set[int],
+    witnesses: dict[tuple[int, ...], list[tuple[int, tuple[int, int]]]],
+) -> None:
+    by_witness: dict[int, list[tuple[int, ...]]] = defaultdict(list)
+    for selector, data in witnesses.items():
+        for witness, _gap in data:
+            by_witness[witness].append(selector)
+
+    print("shared_witness_transversals:")
+    for witness, selectors in sorted(by_witness.items()):
+        if len(selectors) < 2:
+            continue
+        selector_family = tuple(selectors)
+        supports = transversals(elements, selector_family)
+        singleton_supports = [support for support in supports if len(support) == 1]
+        sums = sorted(
+            {
+                support[0] * 2 if len(support) == 1 else support[0] + support[1]
+                for support in supports
+            }
+        )
+        union = set().union(*(set(selector) for selector in selector_family))
+        outside_shifts = sorted(
+            witness - point
+            for point in elements - union
+            if witness - point >= ORDER2_THRESHOLD
+        )
+        support_set = set(supports)
+        shift_supports = {
+            shift: pair_supports(elements, shift) for shift in outside_shifts
+        }
+        all_shift_supports_transversal = all(
+            set(representations) <= support_set
+            for representations in shift_supports.values()
+        )
+        if not all_shift_supports_transversal:
+            raise AssertionError(
+                f"witness={witness} has non-transversal shifted supports: "
+                f"{shift_supports}"
+            )
+        print(
+            f"  witness={witness} selectors={selector_family} "
+            f"singleton_transversals={singleton_supports} "
+            f"transversal_sums={sums} outside_shifts={outside_shifts} "
+            f"shift_supports={shift_supports} "
+            f"all_shift_supports_transversal={all_shift_supports_transversal}"
+        )
+
+
 def main() -> None:
     cap = 3 * max(SET_A)
     two_sums = hsum(SET_A, 2, cap)
@@ -126,6 +202,7 @@ def main() -> None:
     print(f"singleton_pair_harmless={lower_ok}")
     for selector, data in witnesses.items():
         print(f"selector={selector} witnesses={data}")
+    report_shared_witnesses(SET_A, witnesses)
 
 
 if __name__ == "__main__":
