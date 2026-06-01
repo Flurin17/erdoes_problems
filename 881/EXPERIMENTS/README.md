@@ -626,3 +626,11 @@ endpoints `5,20,30` have non-singleton pair witnesses in the checked
 window; after selecting one endpoint per distinct witness value, the
 reflected rows have no overlap. This supports the current diagnosis that
 the seed fails before a reusable moving row-bank forms.
+
+`k3_pair_stage_dfs.py` is an unrestricted bounded DFS for Proposition
+13.1e with `k=3`, without the modulo-10 booster restriction. With default
+bounds it finds depth-four chains such as
+`[1,2,3,4] -> +7 -> +17 -> +27 -> +37`, with endpoints
+`15,26,36,46` and coverage through `18,28,38,48`. The tempting periodic
+continuation by `47` fails the pair-witness condition, and a bounded
+three-point search through candidate `120` finds no next stage.

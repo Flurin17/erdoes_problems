@@ -2241,6 +2241,32 @@ candidate values up to \(100\); it finds no continuation. So high-excess
 witnesses are not locally impossible, but the tested singleton-new-point
 and small-block continuations still run into rapid buffer exhaustion.
 
+The unrestricted `k3_pair_stage_dfs.py` gives a broader warning. Without
+the modulo-\(10\) booster restriction, pair stages can reach depth four:
+\[
+\{1,2,3,4\}\to\{1,2,3,4,7\}\to
+\{1,2,3,4,7,17\}\to
+\{1,2,3,4,7,17,27\}\to
+\{1,2,3,4,7,17,27,37\},
+\]
+with declared endpoints \(15,26,36,46\). The tempting continuation by
+\(47\) fails the pair-witness condition, and a bounded search through
+three-point increments up to \(120\) finds no next stage. Thus unrestricted
+pair barriers are locally stronger than the robust-booster seed, but the
+first periodic-looking pattern still collapses.
+Lemma 16.9 records the exact singleton-new normal form. If
+\(w=b+d\notin4(A\setminus\{b\})\), then every retained padder below the
+threshold cut forces \(d-p\in2A\) and \(p\le d-2m_0\), giving a terminal
+gap above \(d-2m_0\). In high-excess finite stages the terminal gap becomes
+vacuous on the current stage, so the singleton target is a moving two-sum
+row bank
+\[
+d-(A_s\setminus\{b\})\subset2A_s
+\]
+plus singleton privacy \(b+d\notin4(A_s\setminus\{b\})\). This is now the
+clean adjacent-minimality construction target for a possible \(k=3\)
+counterexample.
+
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 
 The active-trace branch has now been narrowed past the purely injective

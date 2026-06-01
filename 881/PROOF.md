@@ -19114,6 +19114,134 @@ seen in the robust-booster searches. Any counterexample along this route
 would need a non-greedy or larger-block high-excess design, not just a
 single prepared marker at each stage.
 
+### Diagnostic 16.8: General \(k=3\) pair stages reach depth four
+
+The robust-booster pair search is not the only finite source of \(k=3\)
+pair barriers. The script `EXPERIMENTS/k3_pair_stage_dfs.py` removes the
+modulo-\(10\) residue restriction and searches directly for finite stages
+satisfying Proposition 13.1e with \(k=3\). With default bounds it finds,
+for example, the four-stage chain
+\[
+\{1,2,3,4\}
+\to\{1,2,3,4,7\}
+\to\{1,2,3,4,7,17\}
+\to\{1,2,3,4,7,17,27\}
+\to\{1,2,3,4,7,17,27,37\},
+\]
+with declared endpoints
+\[
+15,\ 26,\ 36,\ 46
+\]
+and three-fold coverage through
+\[
+18,\ 28,\ 38,\ 48,
+\]
+respectively. Every old-new pair at each stage has a frozen four-fold
+witness below the declared endpoint.
+
+The apparent arithmetic-progression continuation is false. Although
+\[
+\{1,2,3,4,7\}\pmod {10}
+\]
+has three-fold residue sumset equal to all of \(\mathbb Z/10\mathbb Z\),
+adding \(47\) after the depth-four chain gives coverage through \(58\) but
+does not give pair witnesses for all old endpoints below the natural
+endpoint \(56\). A bounded search through candidate values \(120\) and
+increments of size at most \(3\) finds no next stage from the depth-four
+chain.
+
+This diagnostic is important in both directions. It shows that \(k=3\)
+cross-stage pair barriers are not merely an artefact of the robust residue
+booster seed; unrestricted integer stages have more room. But the first
+visible pattern collapses exactly when it becomes eventually periodic, in
+line with Proposition 7.1 and the finite-core/periodic repair results.
+
+### Lemma 16.9: Singleton-new holes have exact \(2A\)-row normal form
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\)
+and minimum \(m_0\). Fix \(b\in A\), put
+\[
+C=A\setminus\{b\},
+\]
+and suppose
+\[
+w=b+d\notin4C. \tag{1}
+\]
+Then every retained padder
+\[
+p\in C,\qquad w-p\ge N_0,
+\]
+satisfies
+\[
+w-p\in3A\setminus3C,\qquad d-p\in2A,\qquad p\le d-2m_0. \tag{2}
+\]
+Consequently,
+\[
+C\cap(d-2m_0,\ w-N_0]=\varnothing \tag{3}
+\]
+and
+\[
+d-\bigl(C\cap[1,w-N_0]\bigr)\subseteq2A. \tag{4}
+\]
+
+Proof. Since \(w-p\ge N_0\), order-\(3\) basishood gives \(w-p\in3A\). If
+\[
+w-p\in3C,
+\]
+then \(w=p+(w-p)\in4C\), contradicting (1). Thus every three-term
+representation of \(w-p\) from \(A\) uses \(b\), and removing one copy of
+\(b\) gives
+\[
+d-p=w-b-p\in2A.
+\]
+Any representation using \(b\) has sum at least \(b+2m_0\), so
+\[
+w-p\ge b+2m_0,
+\]
+or \(p\le d-2m_0\). This proves (2), and (3)--(4) follow immediately.
+\(\square\)
+
+This is the exact singleton analogue of Lemma 16.3. It sharpens Corollary
+10.2c from finite reflected tests to the whole retained prefix below
+\(w-N_0\), but it also pinpoints the failure of the positive route: the
+rows land only in \(2A\), and the resulting identity
+\[
+w=p+b+x+y
+\]
+still uses the deleted element \(b\). These rows certify domination of the
+shifted targets \(w-p\), not a repair of the singleton hole after deleting
+\(b\). In the high-excess regime
+\[
+d-2m_0\ge\max A_s
+\]
+inside a finite stage, the terminal gap condition (3) is vacuous on the
+current stage, and the remaining requirement is precisely a moving
+two-sum row bank
+\[
+d-(A_s\setminus\{b\})\subseteq2A_s
+\]
+together with the privacy condition \(b+d\notin4(A_s\setminus\{b\})\).
+Lemma 16.0a rules out only fixed finite row banks; it does not rule out a
+moving two-core that changes from stage to stage.
+
+Thus the singleton-new branch now has a concrete negative target: construct
+finite stages \(A_s\), endpoints \(N_s\to\infty\), and increments \(P_s\)
+such that
+\[
+[N_{s-1}+1,N_s+2m_0]\subseteq3A_s,
+\]
+future elements exceed \(N_s\), and every new \(b\in P_s\) has a frozen
+high-excess singleton witness
+\[
+w_b=b+d_b\le N_s,\qquad d_b-2m_0\ge\max A_s,\qquad
+w_b\notin4(A_s\setminus\{b\}).
+\]
+If such stages also give every element of the final union a later frozen
+singleton witness, the final set would be an order-\(3\) basis that is
+ordinary minimal at order \(4\), and hence a counterexample to the broader
+deletion theorem. The remaining obstruction is exactly to supply the moving
+\(2A_s\)-row banks while avoiding one-other-marker plus three-old repairs.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20121,6 +20249,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \(\{1,2,3,4\}\) can add \(8\) with high-excess pair witnesses for all old
   endpoints and a two-point buffer, but the greedy singleton chain stalls
   after adding \(19\).
+* Diagnostic 16.8 shows unrestricted \(k=3\) pair stages can reach depth
+  four without the robust residue booster, but the first periodic-looking
+  chain still has no bounded next stage.
+* Lemma 16.9 gives the exact singleton-new normal form: singleton order-4
+  holes force \(2A\)-valued reflected rows and a terminal gap, but those
+  rows still use the deleted singleton and do not repair the hole.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
