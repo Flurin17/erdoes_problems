@@ -539,6 +539,35 @@ of `a+b+c` under these congruences is `4`: examples attaining it are
 shows that a `2 -> 4` coarse lift cannot generally retain more than half of
 the vertices.
 
+## Lemma 4A.2: Low-Chromatic Graphs Are Dyadic-Partition Easy
+
+Let `M` be any positive integer.  Every graph `G` can be partitioned into
+`chi(G)` induced `M`-modular subgraphs.  It can also be partitioned into
+`chi(complement(G))` induced `M`-modular subgraphs.
+
+Consequently, for any proposed dyadic partition theorem of the form
+
+```text
+every q-modular graph partitions into at most b(q) induced 2q-modular graphs,
+```
+
+a counterexample must satisfy
+
+```text
+chi(G)>b(q)       and       chi(complement(G))>b(q).
+```
+
+Proof.  A proper coloring of `G` partitions `V(G)` into independent sets, and
+each independent set is `0`-regular, hence `M`-modular.  A proper coloring of
+`complement(G)` partitions `V(G)` into cliques in `G`; each clique is regular,
+hence also `M`-modular.  Taking `M=2q` proves the final assertion.  QED.
+
+Thus the dyadic partition route has the same qualitative hard core as the
+original Ramsey problem: low chromatic number or low clique-cover number is
+already handled.  Any obstruction to a sublinear-exponent or polylog-saving
+dyadic partition theorem must be simultaneously high-chromatic and
+high-cochromatic, in addition to satisfying the modular source condition.
+
 For the next dyadic step, exact enumeration shows that every `4`-modular graph
 on `6` or `7` vertices admits a partition into four induced `8`-modular
 parts.  This is tiny evidence, but it is consistent with the uniform

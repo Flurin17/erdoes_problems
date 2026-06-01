@@ -2428,3 +2428,9 @@ source of growth beyond Ramsey.
 - 2026-06-01: Added Corollary 14B.2, the maximal-clique version of the
   sharpened trace bound.  It is just Lemma 14B.1 in the complement, with
   outside vertices grouped by their non-neighborhood inside a maximal clique.
+- 2026-06-01: Added Lemma 4A.2.  Any graph partitions into `chi(G)`
+  independent sets, and into `chi(complement(G))` cliques; all such parts are
+  modular for every modulus.  Therefore any counterexample to a dyadic
+  `q -> 2q` partition theorem with at most `b(q)` parts must have both
+  `chi(G)>b(q)` and `chi(complement(G))>b(q)`.  The dyadic hard core is
+  simultaneously high-chromatic and high-cochromatic, not just modular.
