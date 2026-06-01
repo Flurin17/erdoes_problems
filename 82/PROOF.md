@@ -12458,13 +12458,16 @@ from the homogeneous one.  The commands
 python3 82/EXPERIMENTS/full_drop_census.py 8 --p 2 --search-regular-h 5 --max-nodes 200000 --progress 50000
 python3 82/EXPERIMENTS/full_drop_census.py 9 --p 2 --search-regular-h 5 --max-nodes 200000 --progress 50000
 python3 82/EXPERIMENTS/full_drop_census.py 10 --p 2 --search-regular-h 5 --max-nodes 500000 --progress 100000
+python3 82/EXPERIMENTS/full_drop_census.py 11 --p 2 --search-regular-h 5 --max-nodes 1000000 --progress 100000
 ```
 
 find `P=2` full-drop ordered graphs with no regular induced subgraph of order
-`5` on `8`, `9`, and `10` vertices, respectively.  Thus
+`5` on `8`, `9`, and `10` vertices, respectively, while the `n=11` search
+exhausts the DFS tree in `65,904` nodes with `result=False`.  Thus, subject
+to this finite verifier,
 
 ```text
-C_full^reg(2,5)>10.
+C_full^reg(2,5)=11.
 ```
 
 The `n=10` certificate has columns

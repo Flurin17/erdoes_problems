@@ -3643,5 +3643,7 @@ source of growth beyond Ramsey.
   `G(h)<=2P_h(h-1)C_full^reg(P_h,h)`, formally capturing regular witnesses
   that are not homogeneous.  Small DFS searches find `P=2` full-drop graphs
   on `8`, `9`, and `10` vertices with no regular induced subgraph of order
-  `5`, so `C_full^reg(2,5)>10`; the `n=10` certificate has columns
-  `0,0,1,2,0,0,56,120,255,255` and `max_regular=4`.
+  `5`; the `n=10` certificate has columns
+  `0,0,1,2,0,0,56,120,255,255` and `max_regular=4`.  The exhaustive
+  `n=11` DFS terminates in `65,904` nodes with `result=False`, giving the
+  finite computational value `C_full^reg(2,5)=11`.
