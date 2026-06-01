@@ -18909,6 +18909,37 @@ burden from Corollary 16.5, or rely heavily on singleton-\(b\) holes. The
 latter branch is exactly where the \(k=3\) singleton analysis only gives
 \(2A\)-recurrence rather than \(A\)-recurrence.
 
+### Corollary 16.6a: Non-singleton domination needs linearly many witnesses
+
+Let \(A\subseteq\mathbb N\), let \(b\in A\), and let
+\[
+O\subset A\setminus\{b\}
+\]
+be finite. Suppose that for every \(a\in O\) one has chosen a witness
+\[
+w_a\notin4(A\setminus\{a,b\})
+\]
+which is not a singleton-\(b\) hole, meaning
+\[
+w_a\in4(A\setminus\{b\}). \tag{1}
+\]
+Then the set of distinct witness values satisfies
+\[
+\bigl|\{w_a:a\in O\}\bigr|\ge\left\lceil{|O|\over4}\right\rceil. \tag{2}
+\]
+
+Proof. For each fixed witness value \(w\), Lemma 16.6 says that the set of
+old endpoints \(a\in O\) with \(w_a=w\) has size at most \(4\). Summing over
+the distinct values gives (2). \(\square\)
+
+Thus a cross-stage pair construction for \(k=3\) has a rigid dichotomy. If
+new elements have cofinally many singleton-\(b\) witnesses, the construction
+has fallen into the adjacent-order singleton branch of Attempt 15 and
+Corollary 10.2c. If singleton-\(b\) witnesses are eventually absent, then
+each new point must carry linearly many different pair witnesses against
+the old stage, and each distinct witness brings its own Corollary 16.5
+terminal-gap and reflected-row burden.
+
 ### Diagnostic 16.7: High-excess singleton pair stages are locally compatible
 
 The obstruction in Corollary 16.5 is not, by itself, a local impossibility.
@@ -18949,6 +18980,10 @@ third stage:
 \{1,2,3,4\}\to\{1,2,3,4,8\}
 \to\{1,2,3,4,8,19\}.
 \]
+The shared witnesses \(17\) for \(b=8\) and \(29\) for \(b=19\) are
+singleton-new holes, so this small chain mostly illustrates the
+singleton branch of the dichotomy above rather than a nondegenerate
+many-witness pair mechanism.
 Thus the high-excess escape is genuinely locally compatible, but the
 observed finite chain still has the same rapid endpoint/buffer exhaustion
 seen in the robust-booster searches. Any counterexample along this route
@@ -19949,14 +19984,14 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the third stage because singleton candidates \(41,43\) extend coverage but
   fail simultaneous pair witnesses against many old elements; the obstruction
   is domination, not coverage alone.
-* Target 16.2 and Lemmas 16.3--16.6 isolate the current \(k=3\)
+* Target 16.2 and Lemmas 16.3--16.6a isolate the current \(k=3\)
   moving-core target: after finite-core marker coverage is ruled out, every
   old-new pair witness must either be eventually repaired or force old-gate
   \(2A\)-shadow rows \(w-a-p\in2(A\setminus\{b\})\) across the interval
   where the new endpoint \(b\) is too large to participate; the finite
   prefilter rejects most robust-booster third-stage candidates by missing
-  shadow rows, and a non-singleton witness for one new point can serve at
-  most four old endpoints.
+  shadow rows, and after excluding singleton-new holes each new point needs
+  linearly many distinct witnesses against the old stage.
 * Diagnostic 16.7 shows the high-excess escape is locally compatible:
   \(\{1,2,3,4\}\) can add \(8\) with high-excess pair witnesses for all old
   endpoints and a two-point buffer, but the greedy singleton chain stalls

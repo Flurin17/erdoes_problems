@@ -2200,6 +2200,9 @@ has size at most four. Therefore one new point can dominate many old
 endpoints only by using many distinct witnesses, or by producing many
 singleton-\(b\) holes. The second branch is exactly where the known
 \(k=3\) singleton argument stalls at \(2A\)-recurrence.
+Corollary 16.6a makes this quantitative: after excluding singleton-\(b\)
+holes, a new point needs at least \(\lceil |A_{\rm old}|/4\rceil\) distinct
+witness values to dominate the old stage.
 The new `high_excess_pair_seed_search.py` shows that the high-excess escape
 is locally compatible outside the modulo-\(10\) booster seed. It finds
 \[
@@ -2209,6 +2212,9 @@ is locally compatible outside the modulo-\(10\) booster seed. It finds
 with endpoint \(17\), coverage through \(20\), and high-excess pair
 witnesses for every old endpoint. The greedy singleton continuation adds
 \(19\), declares endpoint \(29\), covers through \(31\), and then stalls.
+The common witnesses \(17\) and \(29\) are singleton-new holes, so this
+small chain falls mostly on the singleton side of Corollary 16.6a's
+dichotomy.
 So high-excess witnesses are not locally impossible, but the singleton
 version still runs into rapid buffer exhaustion.
 
