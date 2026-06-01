@@ -20,6 +20,10 @@ order-\(4\) traces, not just padded late-bad sets. The obstruction to
 reusing the \(k=2\) front closure is now explicit: bounded ordered-depth
 rows in this front reflect only into \(2A\), so a proof must either convert
 those mirrors into four-term repairs or force unbounded depth/rank.
+Lemma 16.37 adds the next local split: each such \(2A\)-row is either
+dependent on the finite deleted palette, or its gate translate is dependent
+on that palette. The singleton unique-gate argument therefore becomes a
+finite-color problem in the nonsingleton branch.
 
 ## Definitions
 

@@ -20832,6 +20832,82 @@ or show that the front is forced into a different branch such as
 unbounded ordered depth, unbounded-window singleton coding, or a genuinely
 higher-rank collective construction.
 
+### Lemma 16.37: Nonsingleton \(2A\)-rows have a collision split
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite and nonempty, put
+\[
+C=A\setminus F,
+\]
+and suppose
+\[
+w\notin4C. \tag{1}
+\]
+Fix \(f\in F\), put
+\[
+m=w-f,
+\]
+and let \(U\subset C\) be finite with
+\[
+m-U\subseteq2A. \tag{2}
+\]
+Define
+\[
+U_{\rm row}=\{u\in U:m-u\notin2C\},\qquad
+U_{\rm gate}=\{u\in U:f+u\notin2C\}. \tag{3}
+\]
+Then
+\[
+U=U_{\rm row}\cup U_{\rm gate}. \tag{4}
+\]
+Consequently at least one of these two sets has size at least
+\[
+{|U|\over2}. \tag{5}
+\]
+
+Moreover, for every \(u\in U_{\rm row}\), every two-term representation of
+\(m-u\) from \(A\) meets \(F\). If in addition
+\[
+m-u\notin F+F,
+\]
+then there are
+\[
+g\in F,\qquad c\in C
+\]
+such that
+\[
+m-u=g+c. \tag{6}
+\]
+For every \(u\in U_{\rm gate}\), every two-term representation of
+\(f+u\) from \(A\) meets \(F\).
+
+Proof. Suppose \(u\in U\) lies outside both sets in (3). Then
+\[
+m-u\in2C,\qquad f+u\in2C.
+\]
+Adding these two retained two-sums gives
+\[
+w=f+m=(f+u)+(m-u)\in4C,
+\]
+contradicting (1). This proves (4), and (5) is immediate.
+
+For \(u\in U_{\rm row}\), condition (2) gives \(m-u\in2A\), while the
+definition of \(U_{\rm row}\) says \(m-u\notin2C\). Hence every two-term
+representation of \(m-u\) from \(A\) uses at least one element of \(F\).
+If \(m-u\notin F+F\), such a representation cannot use two elements of
+\(F\), so it has the form (6).
+
+The assertion for \(U_{\rm gate}\) is identical: \(f+u\) has the displayed
+two-term representation from \(A\), and \(f+u\notin2C\), so every
+two-term representation from \(A\) must meet \(F\). \(\square\)
+
+For singleton traces this reduces to Lemma 16.18: the row-dependent branch
+reflects through the deleted gate, while the gate branch gives a unique
+two-sum translate. For nonsingleton traces the same collision argument
+only gives a finite deleted-color palette. Thus a bounded-depth
+nonsingleton front must still solve a genuine coloring problem: either many
+\(2A\)-rows are forced through deleted colors in \(F\), or many gate
+translates \(f+u\) are forced through the same finite deleted palette.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21960,6 +22036,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   fractional reflected rows only in \(2A\), not in \(A\). The unresolved
   nonsingleton branch must therefore convert \(2A\)-mirrors into usable
   four-term repairs or escape through unbounded depth/rank.
+* Lemma 16.37 gives the corresponding nonsingleton collision split: a
+  \(2A\)-row attached to a deleted color \(f\) either is not retained in
+  \(2C\), hence all its two-sum representations meet the finite deleted
+  palette \(F\), or the gate translate \(f+u\) is not retained in \(2C\).
+  Unlike the singleton case, this yields finite-color dependence rather
+  than a unique gate.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
