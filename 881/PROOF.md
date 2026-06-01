@@ -41,7 +41,15 @@ shifted-overlap branch. Lemma 8.5a.7i adds that certificate-free shifted
 fibers must be independent for their own shift, while Lemma 8.5a.7j and
 Corollaries 8.5a.7k--8.5a.7l rule out fixed finite gate or shift palettes
 unless the recurring fibers remain inside the corresponding independence
-numbers.
+numbers. Corollaries 8.5a.7v--8.5a.7y now remove the promoted pair
+subcover and bounded-second-excess routes: cofinally, a surviving selector
+tail must contain inclusion-minimal active bad edges of rank at least
+\(3\), with arbitrarily large excess over the second-smallest deleted color
+and with the terminal-gap/shifted-vertex-cover normal form from Lemmas 10.1
+and 10.3b. Proposition 10.3g and Lemma 10.3h show that this large-spread
+high-rank shape is locally compatible inside interval blocks, so the
+remaining issue is global product-selector wiring, not a finite-window
+contradiction.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
