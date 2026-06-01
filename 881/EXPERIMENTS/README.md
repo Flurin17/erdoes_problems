@@ -297,6 +297,12 @@ greedy-safe upper-stop `2500` run, the final defect `3101` was added as the
 first retained filler; in the default run, the final defect `3494` was
 added at step `63`. This is the finite shadow of Lemma 8.5a.7z.12h.5:
 safe fillers become future retained defects unless a private gate remains.
+Lemma 8.5a.7z.12h.6 records the other branch: if many fillers survive to
+their future gaps under the same witness and deleted packet, they must
+produce large private-gate fibers, feeding back into the compressed-spike
+diagnostics.
+Corollary 8.5a.7z.12h.7 packages this as a trichotomy for retained fillers:
+future full-gap, private-gate fiber, or reflected wall after gate absorption.
 The reusable sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 prints the same no-safe-one/no-safe-two obstruction throughout that

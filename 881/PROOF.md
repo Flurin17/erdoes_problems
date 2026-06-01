@@ -9297,6 +9297,119 @@ available for some \(f\in F\), or else change the active packet/witness
 before reaching that gap. Otherwise \(x\) becomes the retained defect of a
 reflected wall.
 
+### Lemma 8.5a.7z.12h.6: Surviving future defects create private-gate fibers
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C.
+\]
+Let \(X\subset C\) be finite and assume that for each \(x\in X\):
+
+1. the later target
+   \[
+   p_x=w-x
+   \]
+   is not a retained two-sum:
+   \[
+   p_x\notin2C; \tag{1}
+   \]
+2. it is not a deleted-pair exception:
+   \[
+   p_x\notin F+F; \tag{2}
+   \]
+3. it is covered by the full old packet:
+   \[
+   p_x\in2A. \tag{3}
+   \]
+
+Then every \(x\in X\) has at least one deleted gate \(f\in F\) such that
+\[
+w-x-f\in C,\qquad x+f\notin2C. \tag{4}
+\]
+Consequently, some \(f\in F\) supports a fiber
+\[
+X_f=\{x\in X:w-x-f\in C,\ x+f\notin2C\}
+\]
+with
+\[
+|X_f|\ge |X|/|F|. \tag{5}
+\]
+
+Proof. Fix \(x\in X\). By (3), choose a two-term representation
+\[
+p_x=s_1+s_2,\qquad s_i\in A.
+\]
+It cannot use two retained summands by (1), and it cannot use two deleted
+summands by (2). Hence it uses exactly one deleted gate \(f\in F\) and one
+retained summand \(c\in C\), so
+\[
+w-x=p_x=f+c,
+\]
+or \(c=w-x-f\in C\). If \(x+f\in2C\), say \(x+f=c_1+c_2\), then
+\[
+w=x+f+c=c_1+c_2+c\in3C,
+\]
+contrary to the hypothesis. This proves (4). Pigeonholing the chosen gates
+over \(F\) gives (5). \(\square\)
+
+Thus any stage that keeps many retained fillers \(x\) alive until their
+future defects \(w-x\) must create a large private-gate fiber. This is the
+same row pattern compressed by Lemma 8.5a.7z.10: after large enough tests,
+one either gets a unique-gate packet or a shifted-overlap packet, unless the
+active gates and row tests move cofinally.
+
+### Corollary 8.5a.7z.12h.7: Future-defect trichotomy
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C.
+\]
+For \(x\in C\), put
+\[
+p_x=w-x.
+\]
+Assume
+\[
+p_x\notin F+F. \tag{1}
+\]
+Then exactly one of the following can happen:
+
+1. \(p_x\notin2A\); in this case \(p_x\) is an old full two-sum gap.
+2. \(p_x\in2A\); in this case there is a deleted gate \(f\in F\) such that
+   \[
+   w-x-f\in C,\qquad x+f\notin2C. \tag{2}
+   \]
+
+In particular, if
+\[
+x+F\subseteq2C, \tag{3}
+\]
+then only the first alternative can hold. If later \(p_x\) is the next gap
+to be covered while the same witness and packet are frozen, Lemma
+8.5a.7z.12h.5 turns it into a reflected finite-batch wall.
+
+Proof. Since \(x\in C\) and \(w\notin3C\), one cannot have
+\[
+p_x\in2C,
+\]
+for then \(w=x+p_x\in3C\). If \(p_x\in2A\), condition (1) and
+\[
+p_x\notin2C
+\]
+force every two-term representation of \(p_x\) from \(A\) to use exactly
+one element of \(F\) and one element of \(C\). Choosing such a
+representation gives
+\[
+p_x=f+c,\qquad f\in F,\quad c\in C.
+\]
+Then \(c=w-x-f\). If \(x+f\in2C\), adding \(c\) would put \(w\) in \(3C\),
+so \(x+f\notin2C\). This proves (2).
+
+If (3) holds, (2) is impossible, and therefore \(p_x\notin2A\). The final
+sentence is Lemma 8.5a.7z.12h.5. \(\square\)
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -16558,6 +16671,14 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   once a retained filler \(x\) has \(x+F\subset2C\), the later gap
   \(w-x\) is a reflected finite-batch wall unless the active packet or
   witness changes first.
+* Lemma 8.5a.7z.12h.6 gives the complementary survival route: if many
+  retained fillers are to survive until their future defects under the same
+  witness and packet, they must form large private-gate fibers
+  \(w-x-f\in C,\ x+f\notin2C\), feeding back into Lemma 8.5a.7z.10.
+* Corollary 8.5a.7z.12h.7 packages the resulting trichotomy for a retained
+  filler \(x\): either \(w-x\) is still an old full two-sum gap, or \(x\)
+  belongs to a private-gate fiber, or, when all gates are absorbed, the
+  future target \(w-x\) is a reflected wall.
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.

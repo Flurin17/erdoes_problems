@@ -2492,6 +2492,19 @@ debt. In the greedy-safe upper-stop \(2500\) run, the final defect
 final defect \(3494\) was added at step \(63\). When the gap later reaches
 \(w-x\), the old safe filler \(x\) must still have some private gate
 \(x+f\notin2C\), or it becomes a reflected wall.
+Lemma 8.5a.7z.12h.6 records the survival alternative: if many such fillers
+\(x\) are still covered at their future gaps \(w-x\) without using retained
+pairs or deleted-pair exceptions, then some deleted gate \(f\) has a large
+private fiber
+\[
+w-x-f\in C,\qquad x+f\notin2C.
+\]
+That returns the problem to the compressed-spike machinery of Lemma
+8.5a.7z.10.
+Corollary 8.5a.7z.12h.7 packages this as a trichotomy: for a retained
+filler \(x\), the future target \(w-x\) is either still a full two-sum gap,
+or \(x\) lies in a private-gate fiber, or, if all gates are absorbed, the
+future target is a reflected wall.
 The sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 shows the same no-safe-one/no-safe-two obstruction at every listed endpoint.
