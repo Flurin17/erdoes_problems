@@ -7518,7 +7518,7 @@ over every field.  Equivalently, if either rank is at most `r`, then
 
 Proof.  This is Corollary 7C applied to the induced subgraph on `B`.  QED.
 
-This is not a replacement for Corollary 28D.2's `4hP_h` degree-bucket bound,
+This is not a replacement for Corollary 28D.2's `2hP_h` degree-bucket bound,
 but it supplies an independent local obstruction: a large exact-degree bucket
 in a counterexample must be a high-rank bounded-spread graph.
 
@@ -11329,39 +11329,45 @@ inequality by a non-strict one.  QED.
 `G`, then
 
 ```text
-|U| <= 4hP.
+|U| <= 1+(2P-1)(h-1) <= 2hP.
 ```
 
 Proof.  If `|U|<=1`, this is immediate.  Fix `v in U`, and put
-`U'=U\{v}`.  For every `u in U'`, the two one-sided differences
+`U'=U\{v}`.  Partition
+
+```text
+A=U' cap N(v),        B=U'\N(v).
+```
+
+For every `u in U'`, the two one-sided differences
 
 ```text
 N_G(u)\N_G(v),        N_G(v)\N_G(u)
 ```
 
 have the same size, because `deg_G(u)=deg_G(v)`.  Lemma 28D says their common
-size is less than `P`.  Therefore
+size is less than `P`.
+
+If `u in A`, then `u in N_G(v)\N_G(u)`.  Every nonneighbor of `u` inside `A`
+also lies in `N_G(v)\N_G(u)`.  Hence, for `P=1`, the set `A` is empty; for
+`P>=2`, the complement of `G[A]` has maximum degree at most `P-2`.  Greedily
+coloring this complement with `P-1` colors shows that, since `G` has no
+clique of order `h`,
 
 ```text
-|(N_G(u) triangle N_G(v))\{u,v}| <= 2P-2.
+|A| <= (P-1)(h-1).
 ```
 
-Apply Lemma 26B with this reference vertex `v`, with `D=2P-2`, and with the
-set `U'`.  It gives a clique or independent set, hence a regular induced
-subgraph, of order at least
+If `u in B`, then every neighbor of `u` inside `B` lies in
+`N_G(u)\N_G(v)`.  Thus `G[B]` has maximum degree at most `P-1`.  Greedily
+coloring `G[B]` with `P` colors shows that, since `G` has no independent set
+of order `h`,
 
 ```text
-(|U|-1)/(2(2P-1)).
+|B| <= P(h-1).
 ```
 
-Since `G` has no regular induced subgraph on at least `h` vertices, this
-quantity is less than `h`.  Hence
-
-```text
-|U| <= h(4P-2) <= 4hP.
-```
-
-QED.
+Adding `v`, `A`, and `B` gives the displayed bound.  QED.
 
 **Corollary 28D.3: Exact Degree Buckets Have Small Row Diameter.**  Let
 `h>=3`, put `P=P_h`, and let `G` be a graph with no regular induced
@@ -11532,14 +11538,14 @@ most one clique vertex, also of order `h-1`.  Thus
 `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 4hP C_full(P,h)
-     <= 4hP(P(h-1)^2+h)
-     <= 8h^3P^2.
+G(h) <= 2hP C_full(P,h)
+     <= 2hP(P(h-1)^2+h)
+     <= 4h^3P^2.
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition `V(G)` into exact global degree classes.  By Corollary
-28D.2, every nonempty degree class has size at most `4hP`.
+28D.2, every nonempty degree class has size at most `2hP`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing degree:
@@ -11567,7 +11573,7 @@ subgraph of `G`, impossible.  Thus `b<C_full(P,h)`.  Multiplying by the
 degree-class size bound gives
 
 ```text
-|V(G)| < 4hP C_full(P,h).
+|V(G)| < 2hP C_full(P,h).
 ```
 
 The first displayed inequality follows from the definition of `G(h)`, the
@@ -11904,12 +11910,12 @@ independent set has order exactly `h-1`.  Hence
 every `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 4 h P C_drop(P,h).
+G(h) <= 2 h P C_drop(P,h).
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition its vertices into exact global degree classes.  By
-Corollary 28D.2, every nonempty degree class has size at most `4hP`.
+Corollary 28D.2, every nonempty degree class has size at most `2hP`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing global degree:
@@ -11942,10 +11948,10 @@ Multiplying the number of degree classes by the maximum degree-class size
 gives
 
 ```text
-|V(G)| <= 4hP (C_drop(P,h)-1) < 4hP C_drop(P,h).
+|V(G)| <= 2hP (C_drop(P,h)-1) < 2hP C_drop(P,h).
 ```
 
-Therefore every graph on at least `4hP C_drop(P,h)` vertices has a regular
+Therefore every graph on at least `2hP C_drop(P,h)` vertices has a regular
 induced subgraph on at least `h` vertices, proving the displayed bound for
 `G(h)`.  QED.
 
@@ -12150,12 +12156,12 @@ C_reg(P,h) <= C_drop(P,h).
 `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 4 h P C_reg(P,h).
+G(h) <= 2 h P C_reg(P,h).
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition `V(G)` into exact global degree classes.  By Corollary
-28D.2, every nonempty degree class has size at most `4hP`.
+28D.2, every nonempty degree class has size at most `2hP`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing degree.  As in Lemma 28E.6, Lemma 28D implies
@@ -12171,10 +12177,10 @@ than `C_reg(P,h)` nonempty degree classes.  Multiplying by the degree-class
 size bound gives
 
 ```text
-|V(G)| < 4hP C_reg(P,h).
+|V(G)| < 2hP C_reg(P,h).
 ```
 
-Therefore every graph on at least `4hP C_reg(P,h)` vertices contains a
+Therefore every graph on at least `2hP C_reg(P,h)` vertices contains a
 regular induced subgraph on at least `h` vertices.  QED.
 
 This is formally sharper than Lemma 28E.6.  It would prove Problem 82 under
@@ -12192,13 +12198,13 @@ subexponential scale as `G`.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 8 h^3 P_h^2.
+G(h) <= 4 h^3 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
 
 Proof.  This is the final inequality of Corollary 28D.6.  If
-`P_h=2^{o(h)}`, then the polynomial factor `8h^3` is also
+`P_h=2^{o(h)}`, then the polynomial factor `4h^3` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
@@ -13126,7 +13132,7 @@ quickly collapse back to the original problem inside one profile class.
 No complete proof yet.  The strongest current reduction in this workspace is
 
 ```text
-G(h) <= 8h^3 P_h^2,
+G(h) <= 4h^3 P_h^2,
 ```
 
 where `P_h` is the balanced marked-pair parameter from Lemma 28B.  Lemma 28G

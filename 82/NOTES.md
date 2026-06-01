@@ -3450,3 +3450,10 @@ source of growth beyond Ramsey.
   neighborhood, rather than also using the last vertex, improves
   `C_full(P,h)` to `P(h-1)^2+h` and the global pair-parameter reduction to
   `G(h)<=8h^3P_h^2`.
+- 2026-06-01: Sharpened exact-degree buckets again by splitting a bucket
+  around one reference vertex.  The neighbor side has complement maximum
+  degree at most `P_h-2`, while the nonneighbor side has maximum degree at
+  most `P_h-1`; greedy coloring gives
+  `|U| <= 1+(2P_h-1)(h-1) <= 2hP_h`.  Consequently the column-drop and
+  regular-column-drop reductions have prefactor `2hP_h`, and the full-drop
+  global reduction improves to `G(h)<=4h^3P_h^2`.
