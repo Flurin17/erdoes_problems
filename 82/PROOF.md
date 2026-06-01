@@ -16503,6 +16503,11 @@ no deletion-tight labelled graph on five vertices.  On six vertices it finds
 Q=29,        spectrum {0:3,1:2,2:4}.
 ```
 
+These `180` graphs are exactly the labelled copies of `K_{3,3}` with one edge
+removed, together with their complements: there are `10*9=90` labelled copies
+of `K_{3,3}-e`, and a direct permutation check shows that this family and its
+complements coincide with the deletion-tight census.
+
 The first `100000` labelled graphs on seven vertices already contain `168`
 deletion-tight examples with the same minimum `Q=29`.  Thus deletion-tightness
 alone is not a growth mechanism.  The useful observation is only qualitative:
