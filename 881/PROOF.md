@@ -25623,6 +25623,55 @@ relative to packet size, or the active mass is carried by width-heavy
 packets, or it is carried by profiles whose auxiliary midpoints are
 linearly displaced from the packet centers.
 
+### Corollary 16.123: Width and displacement residuals are linear scale
+
+Keep the notation of Corollary 16.122. For an active label \(\lambda\),
+write
+\[
+T_\lambda=\gamma_\lambda n_\lambda-D_\lambda.
+\]
+If
+\[
+n_\lambda\ge {2D_\lambda\over\gamma_\lambda}, \tag{1}
+\]
+then
+\[
+T_\lambda\ge{\gamma_\lambda n_\lambda\over2}. \tag{2}
+\]
+Consequently:
+
+1. every width-heavy active pair in Corollary 16.122 satisfies
+   \[
+   W_s>{\gamma_\lambda n_\lambda\over4}; \tag{3}
+   \]
+2. every midpoint-displacement active pair in Corollary 16.122 satisfies
+   \[
+   \Delta_{\lambda,i,s}>{\gamma_\lambda n_\lambda\over4}
+   \qquad\text{for every }i. \tag{4}
+   \]
+
+In particular, after discarding active labels whose tested intervals fail
+(1), the residual alternatives in Corollary 16.122 are genuinely linear in
+the tested interval length.
+
+Proof. Equation (2) is immediate from \(T_\lambda=\gamma_\lambda
+n_\lambda-D_\lambda\) and (1). If an active pair is width-heavy, then
+\[
+W_s>{T_\lambda\over2}\ge{\gamma_\lambda n_\lambda\over4}.
+\]
+If it is midpoint-displacement, then for every \(i\),
+\[
+\Delta_{\lambda,i,s}>{T_\lambda\over2}
+\ge{\gamma_\lambda n_\lambda\over4}.
+\]
+\(\square\)
+
+Thus the remaining packet-position branch is not a bounded-error
+phenomenon once small tested intervals are discarded. Either the active
+packet has width comparable to the tested interval, or the profile's
+auxiliary midpoints are separated from the packet center on that same
+linear scale.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27036,6 +27085,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   midpoint-displacement mass.
 * Corollary 16.122 records the unconditional active-countable trichotomy:
   many active labels, width-heavy packets, or midpoint-displacement packets.
+* Corollary 16.123 converts width-heavy and midpoint-displacement residuals
+  into linear-scale statements once the tested interval is large compared
+  with the profile constants.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

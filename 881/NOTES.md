@@ -215,6 +215,8 @@ finite active label family \(\mathcal B_s\) in each packet; the small
 artefact is controlled by \(\sum_s|\mathcal B_s|/|P_s|\).
 Corollary 16.122 packages the unconditional trichotomy: many active labels,
 width-heavy packets, or midpoint-displacement packets.
+Corollary 16.123 turns the latter two branches into linear-scale statements
+once the tested interval is large relative to the profile constants.
 
 ## Definitions
 
