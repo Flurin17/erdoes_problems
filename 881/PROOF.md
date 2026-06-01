@@ -8402,6 +8402,51 @@ missing promotion step must therefore use recurrence across many witnesses,
 stable finite palettes, or an additional argument forcing the remaining
 active colors in \(F\setminus\{f,g\}\) to become irrelevant.
 
+### Diagnostic 8.5a.7z.12: A range-separated spike need not promote to pair debt
+
+The script `EXPERIMENTS/spike_no_promotion_gadget.py` gives an explicit
+finite model of the promotion failure. With scale \(N=1000\), shift
+\(h=7\), witness
+\[
+w=100000,
+\]
+and deleted set
+\[
+F=\{f,g,k\}=\{10007,10000,20000\},
+\]
+it chooses rows
+\[
+U=\{1,4,9,16,25,36\}
+\]
+and retained mirrors
+\[
+w-u-f\qquad(u\in U),
+\]
+together with shifted-overlap rows
+\[
+u+f-g=u+h\in A.
+\]
+Thus the pair \(\{f,g\}\) carries a six-row shifted-overlap spike:
+\[
+u+f=g+(u+h),\qquad w=f+u+(w-u-f).
+\]
+The script verifies all of the following finite facts:
+
+1. \(w\notin3(A\setminus F)\);
+2. restoring any one of \(f,g,k\) repairs \(w\), so \(F\) is
+   inclusion-minimal for this witness;
+3. deleting any pair from \(F\) still leaves a representation of \(w\);
+4. the terminal retained gap above \(w-\min F-\min A\) is empty.
+
+In particular, the shifted-overlap pair \(\{f,g\}\) is not a bad pair at
+the same witness; deleting \(\{f,g\}\) leaves the \(k\)-repair. This
+diagnostic is not an additive basis construction. Its role is to show that
+the local promotion
+\[
+\text{large shifted-overlap spike}\Rightarrow\text{late-bad pair}
+\]
+is false without an additional recurrence or barrier argument.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -15132,6 +15177,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   genuine late-bad pair debt.
 * Diagnostic 8.5a.7z.11 verifies on the seed window that this compression
   does not imply same-witness singleton or pair holes.
+* Diagnostic 8.5a.7z.12 gives a range-separated finite gadget where a
+  shifted-overlap pair spike is repaired by a third active color, so local
+  spike support does not imply pair debt.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

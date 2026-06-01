@@ -216,6 +216,11 @@ fixed shifted-overlap rows from Lemma 8.5a.7z.10, plus whether those
 singleton or pair spike supports are already holes for the same witness.
 On the strict seed run, all such promotion flags are false.
 
+`spike_no_promotion_gadget.py` verifies a range-separated local gadget where
+a rank-three witness has a shifted-overlap spike on one deleted pair, but
+every pair deletion is harmless at that same witness because the remaining
+active color repairs it. This records Diagnostic 8.5a.7z.12.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole

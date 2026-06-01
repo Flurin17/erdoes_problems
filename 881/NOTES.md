@@ -2341,6 +2341,11 @@ It also tests same-witness promotion of those supports. In the strict seed
 run, all singleton and pair promotion flags are false, confirming that
 compression to low-rank spike supports is weaker than producing bad
 singleton or pair deletions.
+The script `spike_no_promotion_gadget.py` isolates the same point without
+the product-window clutter: a rank-three witness can contain a large
+shifted-overlap spike on a pair \(\{f,g\}\), but deleting \(\{f,g\}\) still
+leaves a third active color \(k\) that repairs the witness. Local spike
+support does not imply pair debt.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
