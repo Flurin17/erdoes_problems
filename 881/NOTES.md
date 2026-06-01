@@ -2465,6 +2465,11 @@ The sweep mode
 shows the same no-safe-one/no-safe-two obstruction at every listed endpoint.
 The retained-defect flag changes near \(3100\), but the one-sided split
 saturation remains complete on both sides.
+Target 8.5a.7z.12i is now the local-to-global gap: convert repeated
+one-sided shadow fillers \(Y\subset[1,p]\setminus A\) with \(w-Y\subset2C\)
+into retained-row tests, stable compressed spikes, or pair-cylinder debt,
+or else build a staged construction where those shadows remain ordinary
+moving gaps of \(A\).
 With `--avoid-reflected-blockers`, the same scale-\(100\), beam-\(8\) run
 still reaches only \(6503\). At the stopping step, the script reports
 \(128\) raw extensions and \(0\) surviving after the reflected-blocker

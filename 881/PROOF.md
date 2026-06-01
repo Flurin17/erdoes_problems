@@ -9147,6 +9147,39 @@ successful stage would need more global foresight, a different filler
 geometry, or moving active witnesses rather than a local safe-band
 extension.
 
+### Target 8.5a.7z.12i: Convert one-sided shadows into retained structure
+
+Corollary 8.5a.7z.12g bounds the clean retained-defect wall at fixed rank,
+but Lemma 8.5a.7z.12h exposes a broader escape. A terminal stage can have a
+next gap \(p\) for which many potential fillers
+\[
+x\notin A
+\]
+are blocked only because
+\[
+w-x\in2C. \tag{1}
+\]
+These \(x\)'s are ordinary gaps of the current stage, not retained rows, so
+Corollary 8.4c.1 and Lemma 8.5a.7z.10 do not apply directly.
+
+Thus the next local-to-global target is:
+
+* either prove that repeated one-sided shadow sets
+  \[
+  Y\subset[1,p]\setminus A,\qquad w-Y\subset2C,
+  \]
+  forced by order-2 coverage stages can be converted, using the
+  representations of the \(Y\)-values from the full basis, into large
+  retained-row tests, stable compressed spikes, or genuine pair-cylinder
+  debt; or
+* construct a stage system where the shadow sets stay in ordinary gaps of
+  \(A\), move cofinally with the witnesses, and still leave enough safe
+  fillers to complete order-2 coverage.
+
+This is the precise remaining local obstruction after the reflected
+defect-wall simplification: the problem has shifted from retained
+reflected rows to nonretained shadow fillers.
+
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
 Work in the remaining \(k=2\) counterexample case. Fix a finite row test
@@ -16144,6 +16177,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   nearby seed profiles, where \(d\) need not be retained but every one-new
   repair and one side of every two-new split already hits \(w\) with a
   retained pair.
+* Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
+  shadows may live on nonretained filler candidates \(x\notin A\), so the
+  retained-row bounds do not yet force compressed spikes or pair debt.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample
