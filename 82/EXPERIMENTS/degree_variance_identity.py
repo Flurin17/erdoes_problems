@@ -84,7 +84,7 @@ def main() -> None:
     direct = direct_total(mask, args.h, pc)
     formula, degree_term, symmetry_term = pair_formula_total(mask, args.h, pc)
     max_regular = ri.max_regular_order(mask, pc)
-    lower = math.comb(args.n, args.h) if max_regular < args.h else 0
+    lower = (args.h - 1) * math.comb(args.n, args.h) if max_regular < args.h else 0
 
     print(f"n={args.n}")
     print(f"h={args.h}")
@@ -94,7 +94,7 @@ def main() -> None:
     print(f"formula_total={formula}")
     print(f"degree_difference_term={degree_term}")
     print(f"neighborhood_symdiff_term={symmetry_term}")
-    print(f"counterexample_lower_bound={lower}")
+    print(f"counterexample_variance_lower_bound={lower}")
     assert direct == formula
     assert max_regular >= args.h or direct >= lower
 

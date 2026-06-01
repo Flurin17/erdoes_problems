@@ -7008,7 +7008,7 @@ where `binom(a,b)=0` if `b<0` or `b>a`.
 Consequently, if `G` has no regular induced subgraph on `h` vertices, then
 
 ```text
-binom(n,h)
+(h-1) binom(n,h)
 <= binom(n-4,h-4) sum_{u<v} (deg_G(u)-deg_G(v))^2
  + binom(n-4,h-3) sum_{u<v} sigma(u,v).
 ```
@@ -7018,10 +7018,10 @@ vertices has `sigma(u,v)<=D`, and `n>=2h>=8`, then a graph with no regular
 induced `h`-set must satisfy
 
 ```text
-1 <= 8 h^4 s^2 / n^2 + 4 h^3 D / n.
+1 <= 16 h^3 s^2 / n^2 + 8 h^2 D / n.
 ```
 
-Thus `n>8h^2s` and `n>8h^3D` together force a regular induced subgraph on
+Thus `n>8h^{3/2}s` and `n>16h^2D` together force a regular induced subgraph on
 `h` vertices.
 
 Proof.  Fix an unordered pair `u,v`, and write
@@ -7056,10 +7056,19 @@ Since `N-2=n-4`, this proves the displayed identity after summing over all
 pairs `u<v`.
 
 If an `h`-set `S` is not regular, then at least one pair of vertices in `S`
-has unequal induced degrees, so
+has unequal induced degrees.  For any integers `d_1,...,d_h`,
 
 ```text
-sum_{u<v in S} (deg_S(u)-deg_S(v))^2 >= 1.
+sum_{i<j} (d_i-d_j)^2
+```
+
+is at least `h-1`.  Indeed, choose an integer cut `a` such that at least one
+entry is at most `a` and at least one entry is at least `a+1`; if there are
+`r` entries on the first side, then the `r(h-r)` cross pairs all differ by at
+least `1`, and `r(h-r)>=h-1`.  Therefore every nonregular `h`-set satisfies
+
+```text
+sum_{u<v in S} (deg_S(u)-deg_S(v))^2 >= h-1.
 ```
 
 When no regular `h`-set exists, summing this inequality over all `S` gives
@@ -7092,13 +7101,13 @@ pairwise neighborhood diversity, which is exactly the random-like regime.
 no regular induced subgraph on `h` vertices.  If `n>=2h>=8` and
 
 ```text
-n > 4h^2s,
+n > 8h^{3/2}s,
 ```
 
 then
 
 ```text
-(1/binom(n,2)) sum_{u<v} sigma(u,v) >= n/(8h^3).
+(1/binom(n,2)) sum_{u<v} sigma(u,v) >= n/(16h^2).
 ```
 
 Proof.  Let
@@ -7110,11 +7119,11 @@ bar sigma = binom(n,2)^{-1} sum_{u<v} sigma(u,v).
 The proof of Lemma 25, with `D` replaced by this average, gives
 
 ```text
-1 <= 8 h^4 s^2 / n^2 + 4 h^3 bar sigma / n.
+1 <= 16 h^3 s^2 / n^2 + 8 h^2 bar sigma / n.
 ```
 
-The assumption `n>4h^2s` makes the first term less than `1/2`, so the second
-term is greater than `1/2`.  Hence `bar sigma >= n/(8h^3)`.  QED.
+The assumption `n>8h^{3/2}s` makes the first term less than `1/4`, so the
+second term is greater than `1/2`.  Hence `bar sigma >= n/(16h^2)`.  QED.
 
 The average-diversity conclusion in Corollary 25A is, by itself, too weak.
 Ordinary homogeneous-set exclusion already forces a stronger lower bound.
@@ -7176,7 +7185,7 @@ rearranges to the displayed inequality.  QED.
 Therefore the variance identity cannot settle the problem using only the
 average value of `sigma(u,v)`: every counterexample already has
 `bar sigma=Omega(n/h)`, whereas Corollary 25A only recovers
-`Omega(n/h^3)` under a low-spread hypothesis.  Any successful variance route
+`Omega(n/h^2)` under a low-spread hypothesis.  Any successful variance route
 must exploit a finer distributional feature of the pair differences or a
 stronger way to use low degree spread.
 

@@ -2229,16 +2229,19 @@ source of growth beyond Ramsey.
   neighborhood diversity.  This gives a possible bridge between bounded-spread
   and Ramsey-core methods, and also warns that bounded-spread alone is
   unlikely to be enough without handling random-like pair diversity.
-- 2026-06-01: Added Corollary 25A: if an `n`-vertex graph has degree spread
-  at most `s`, no regular induced `h`-set, and `n>4h^2s`, then the average
-  pairwise neighborhood symmetric difference is at least `n/(8h^3)`.  This
-  isolates the next bounded-spread target: prove that high neighborhood
-  diversity plus low degree spread forces a regular induced subgraph, or find
-  a construction showing this diversity condition is still too weak.
+- 2026-06-01: Strengthened Lemma 25 by observing that every nonconstant
+  integer degree sequence on an `h`-set contributes at least `h-1` to the
+  pair-square variance.  Corollary 25A now says: if an `n`-vertex graph has
+  degree spread at most `s`, no regular induced `h`-set, and
+  `n>8h^{3/2}s`, then the average pairwise neighborhood symmetric difference
+  is at least `n/(16h^2)`.  This isolates the next bounded-spread target:
+  prove that high neighborhood diversity plus low degree spread forces a
+  regular induced subgraph, or find a construction showing this diversity
+  condition is still too weak.
 - 2026-06-01: Added Lemma 26 calibrating the variance route.  If the average
   pairwise neighborhood symmetric difference is `bar sigma`, then a single
   template vertex plus Markov gives a clique or independent set of order at
   least `(n-1)/(4(2 bar sigma+1))`.  Thus any counterexample already has
-  `bar sigma=Omega(n/h)`, much stronger than the `Omega(n/h^3)` supplied by
+  `bar sigma=Omega(n/h)`, much stronger than the `Omega(n/h^2)` supplied by
   Corollary 25A.  The variance route must therefore use more than average
   neighborhood diversity.
