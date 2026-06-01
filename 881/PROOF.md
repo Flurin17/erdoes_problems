@@ -1048,6 +1048,57 @@ Finally, if \(A\) is an order-\(k\) basis, Lemma 10.3b applies to the
 inclusion-minimal hole \(F,w\). Its active-repair conclusion for
 \(f=x_n\) gives (2). \(\square\)
 
+### Corollary 3.1c.3: Active traces form the real barrier
+
+Keep the hypotheses and notation of Lemma 3.1c.2, and pass to the tail
+\[
+P=A\cap(N_h,\infty).
+\]
+For every \(S\in\mathcal P_h\) with \(S\subset P\), choose a witness
+\[
+w_S\ge\max S-1
+\]
+and an inclusion-minimal set
+\[
+F_S\subset S
+\]
+as in Lemma 3.1c.2. Let
+\[
+\mathcal H_h=\{F_S:S\in\mathcal P_h,\ S\subset P\}.
+\]
+Then \(\mathcal H_h\) is a weak barrier on \(P\): every infinite
+\[
+X\subset P
+\]
+contains some \(F\in\mathcal H_h\). Each \(F=F_S\) satisfies
+\[
+\max F=\max S,\qquad w_S\ge\max F-1,\qquad
+w_S\notin h(A\setminus F),
+\]
+and \(F\) is late-bad. In the order-\(k\) setting, every element of \(F\)
+is active in the terminal-gap normal form of Lemma 10.3b.
+
+Proof. Given infinite \(X\subset P\), the prefix-front property gives an
+initial segment \(S\subset X\) with \(S\in\mathcal P_h\). By construction,
+\[
+F_S\subset S\subset X,
+\]
+so \(\mathcal H_h\) is a weak barrier. Lemma 3.1c.2 gives
+\(\max S\in F_S\), and since \(F_S\subset S\), this gives
+\(\max F_S=\max S\). The witness and nonrepresentation properties are part
+of the construction. Because \(w_S\ge\max F_S-1\), the same argument as in
+Lemma 3.1c.2 shows that \(F_S\) is late-bad. Finally, Lemma 10.3b applied
+to the inclusion-minimal hole \(F_S,w_S\) gives the terminal gap and active
+repair for every \(f\in F_S\). \(\square\)
+
+Thus rank coming only from inactive prefix fillers is illusory. In any
+counterexample, either the active traces \(\mathcal H_h\) have bounded size
+on some tail, returning the problem to bounded-width barrier reductions, or
+the genuinely active holes themselves have unbounded size. The remaining
+variable-rank obstruction must therefore use unbounded active traces or
+unbounded-depth private colors, not merely large prefix-front nodes padded
+by harmless filler points.
+
 ## Lemma 3.1d: Uniform finite-hole characterization of a good deletion
 
 Let \(h\ge1\), let \(A\subseteq\mathbb N\), and let \(X\subseteq A\) be
@@ -11900,6 +11951,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   first-prefix front edge, any sufficiently late inclusion-minimal shrink
   must keep the last front point, so that point is active in the terminal
   gap normal form.
+* Corollary 3.1c.3 replaces padded prefix-front edges by their active
+  traces. These traces are themselves a weak late-bad barrier; hence
+  surviving variable rank must occur in active holes, not just in inactive
+  prefix filler.
 * Lemma 3.1d gives an exact fixed-deletion test: \(A\setminus X\) is an
   order-\(h\) basis if and only if all finite deletions inside \(X\) have a
   common order-\(h\) threshold.
