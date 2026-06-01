@@ -14005,6 +14005,49 @@ Proof.  For a fixed degree `d`, choose in each component `G_i` an induced
 second.  If the desired inequality holds for connected graphs, applying it to
 each component and then using superadditivity gives it for `G`.  QED.
 
+**Lemma 28J.3: Forests Satisfy Spectrum Mass.**  If `F` is a forest on `n`
+vertices, then
+
+```text
+sum_d s_d(F) >= n.
+```
+
+Proof.  A forest has no nonempty induced `d`-regular subgraph for `d>=2`,
+because every nonempty forest has a vertex of degree `0` or `1`.  Thus it is
+enough to prove
+
+```text
+alpha(F) + 2 nu_ind(F) >= n,
+```
+
+where `nu_ind(F)` is the maximum size of an induced matching in `F`; then
+`s_0(F)=alpha(F)` and `s_1(F)=2nu_ind(F)`.
+
+Let `mu(F)` be the ordinary matching number.  Since forests are bipartite,
+Konig's theorem gives
+
+```text
+alpha(F)=n-mu(F).
+```
+
+It remains to show `nu_ind(F)>=mu(F)/2`.  Let `M` be a maximum matching in
+`F`, and build a conflict graph `C` whose vertices are the edges of `M`, with
+two matching edges adjacent in `C` exactly when some edge of `F` joins their
+endpoints.  Contract every edge of `M` in the forest `F`; after deleting
+irrelevant vertices and edges, the graph `C` is a subgraph of the contracted
+forest, so `C` is itself a forest.  Therefore `C` has an independent set of
+size at least `|M|/2=mu(F)/2`.
+
+An independent set in `C` is precisely a submatching of `M` in which no two
+chosen edges have an edge of `F` between their endpoints.  Hence it is an
+induced matching in `F`.  Thus `nu_ind(F)>=mu(F)/2`, and
+
+```text
+alpha(F)+2nu_ind(F) >= n-mu(F)+mu(F)=n.
+```
+
+QED.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

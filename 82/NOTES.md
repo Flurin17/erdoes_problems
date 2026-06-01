@@ -3804,3 +3804,11 @@ source of growth beyond Ramsey.
   degree at least `3`, mask `223701335`, degree sequence
   `3,3,4,4,4,4,5,5`, with no induced `3`-regular subgraph.  Thus a proof of
   `mu(G)>=n` cannot simply sum sizes of ordinary `d`-cores.
+- 2026-06-01: Proved the spectrum-mass inequality for forests.  In a forest,
+  only degrees `0` and `1` contribute, so the claim is
+  `alpha(F)+2nu_ind(F)>=|F|`.  Since forests are bipartite,
+  `alpha(F)=|F|-nu(F)` by Konig, and a maximum matching contains an induced
+  matching of size at least half its order because the matching-edge conflict
+  graph is a forest after contraction.  Hence `nu_ind(F)>=nu(F)/2` and the
+  inequality follows.  This explains the tree-like connected equality
+  examples in the exact `n=7` spectrum-mass data.
