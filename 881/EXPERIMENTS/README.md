@@ -711,3 +711,10 @@ a moving gate-independent packet, not just as isolated two-sum accidents.
 interval-marker sizes. It checks that `[1,L] union {2L}` has a full
 unique-gate, gate-independent packet on `[1,L]` with private witness
 `4L+2`, while `[1,L]` still contains the balanced certificate `1,2,2,2`.
+
+`interval_marker_next_block_search.py` focuses on the first seed
+`[1,4] union {8}` and searches larger strict singleton continuation blocks
+with a bitset sumset engine. The default run checks all blocks of size at
+most `5` with candidate values through `55`; it finds no block where every
+new element has a strict singleton order-4 witness below the new declared
+endpoint.
