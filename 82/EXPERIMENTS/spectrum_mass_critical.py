@@ -82,6 +82,64 @@ def exact(n: int) -> None:
         )
 
 
+def extend_mask(mask: int, n: int, column: int, pc: cdc.Precomp, pc_plus: cdc.Precomp) -> int:
+    out = 0
+    for index, (u, v) in enumerate(pc.edges):
+        if (mask >> index) & 1:
+            out |= 1 << pc_plus.edge_index[(u, v)]
+    for u in range(n):
+        if (column >> u) & 1:
+            out |= 1 << pc_plus.edge_index[(u, n)]
+    return out
+
+
+def equality_extensions(n: int, limit: int | None) -> None:
+    pc = cdc.precompute(n)
+    pc_plus = cdc.precompute(n + 1)
+    total = 1 << len(pc.edges)
+    histogram: Counter[int] = Counter()
+    equality_count = 0
+    checked = 0
+    bad_examples: list[tuple[int, int, int, dict[int, int]]] = []
+
+    for mask in range(total):
+        adj = cdc.adjacency(n, mask, pc)
+        mass, _ = spectrum_mass(adj, pc)
+        if mass != n:
+            continue
+        equality_count += 1
+        best = (n + 1) * (n + 1)
+        best_column = 0
+        best_by_degree: dict[int, int] = {}
+        for column in range(1 << n):
+            extended = extend_mask(mask, n, column, pc, pc_plus)
+            extended_adj = cdc.adjacency(n + 1, extended, pc_plus)
+            extended_mass, by_degree = spectrum_mass(extended_adj, pc_plus)
+            if extended_mass < best:
+                best = extended_mass
+                best_column = column
+                best_by_degree = by_degree
+            if best < n + 1:
+                break
+        histogram[best - n] += 1
+        checked += 1
+        if best < n + 1 and len(bad_examples) < 10:
+            bad_examples.append((mask, best_column, best, best_by_degree))
+        if limit is not None and checked >= limit:
+            break
+
+    print(f"n={n}")
+    print(f"equality_graphs_seen={equality_count}")
+    print(f"equality_graphs_checked={checked}")
+    print(f"extension_increment_histogram={dict(sorted(histogram.items()))}")
+    print(f"violates_extension_lemma={bool(bad_examples)}")
+    for mask, column, best, by_degree in bad_examples:
+        print(
+            f"bad mask={mask} column={column} "
+            f"extended_mass={best} by_degree={by_degree}"
+        )
+
+
 def fixed(n: int, mask: int) -> None:
     pc = cdc.precompute(n)
     adj = cdc.adjacency(n, mask, pc)
@@ -100,9 +158,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--mask", type=int)
+    parser.add_argument("--equality-extensions", action="store_true")
+    parser.add_argument("--limit", type=int)
     args = parser.parse_args()
 
-    if args.mask is None:
+    if args.equality_extensions:
+        equality_extensions(args.n, args.limit)
+    elif args.mask is None:
         exact(args.n)
     else:
         fixed(args.n, args.mask)

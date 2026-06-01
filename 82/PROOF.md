@@ -14052,6 +14052,96 @@ G(k) <= D_spec(2k) = O_delta(k^{2/delta}).
 
 QED.
 
+**Conditional Corollary 28J.1c: Any Superquadratic Polylogarithmic
+Spectrum-Mass Bound Would Suffice.**  Suppose there are constants `eta>0`,
+`c>0`, and `N_0` such that every graph `J` on `N>=N_0` vertices satisfies
+
+```text
+sum_d s_d(J) >= c (log_2 N)^{2+eta}.
+```
+
+Then
+
+```text
+G(k) <= 2^{O_eta(k^{2/(2+eta)})}=2^{o(k)}.
+```
+
+In particular Erdős Problem 82 follows.
+
+Proof.  Let `M>=N_0`, and let `J_1,J_2` be two `M`-vertex graphs.  As in
+Conditional Corollary 28J.1b, if the spectrum-matching alternative in
+`D_spec(h)` fails and neither graph has a regular induced subgraph of order
+at least `h`, then
+
+```text
+sum_d s_d(J_1)+sum_d s_d(J_2) <= (h-1)^2.
+```
+
+The assumed lower bound gives
+
+```text
+sum_d s_d(J_1)+sum_d s_d(J_2)
+  >= 2c (log_2 M)^{2+eta}.
+```
+
+Thus the spectrum-matching alternative must hold whenever
+
+```text
+2c (log_2 M)^{2+eta} > (h-1)^2.
+```
+
+Equivalently,
+
+```text
+D_spec(h) <= 2^{O_eta(h^{2/(2+eta)})}.
+```
+
+Using Corollary 28I with `h=2k` gives the displayed bound for `G(k)`.  Since
+`2/(2+eta)<1`, this is subexponential in `k`.  QED.
+
+**Lemma 28J.1d: The Homogeneous Spectrum-Mass Benchmark.**  Every graph `G`
+on `n>=3` vertices satisfies
+
+```text
+sum_d s_d(G) >= c (log_2 n / log_2 log_2 n)^2
+```
+
+for an absolute constant `c>0`.
+
+Proof.  Put `L=log_2 n`, and for all sufficiently large `n` set
+
+```text
+t = floor(L/(4 log_2 L)),        a=t^2.
+```
+
+The Erdos--Szekeres bound gives
+
+```text
+R(a+1,t+1) <= binom(a+t,a).
+```
+
+Since `a=t^2`, for large `n`,
+
+```text
+log_2 binom(a+t,a)
+  <= t log_2(e(a+t)/t)
+  <= t log_2(3et)
+  <= L.
+```
+
+Thus every `n`-vertex graph contains either an independent set of order at
+least `a+1` or a clique of order at least `t+1`.  In the first case,
+`s_0(G)>=a+1>=t^2`.  In the second case, the clique contains, for every
+`0<=d<=t`, a `d`-regular induced subgraph on `d+1` vertices, so
+
+```text
+sum_d s_d(G) >= sum_{d=0}^t (d+1) >= t^2/2.
+```
+
+In either case the spectrum mass is at least a constant multiple of
+`(L/log_2 L)^2`, as claimed.  Adjusting the constant handles the remaining
+finite values of `n`.  QED.
+
 **Lemma 28J.2: Spectrum Mass Is Superadditive Over Components.**  Let
 `G_1,...,G_t` be the connected components of a graph `G`.  With
 `s_d` as in Corollary 28J.1,
@@ -14320,6 +14410,56 @@ n-1 <= sum_d s_d(G-v) <= sum_d s_d(G) < n.
 All quantities are integers, so both sums are equal to `n-1`.  Since
 `s_d(G-v)<=s_d(G)` for every `d` and the sums are equal, equality holds
 coordinatewise for every degree `d`.  QED.
+
+**Conditional Proposition 28J.9: Equality Extensions Would Prove Spectrum
+Mass.**  Suppose that the following one-vertex extension statement holds:
+
+```text
+If H is a graph with sum_d s_d(H)=|V(H)|, then every graph G obtained
+from H by adding one new vertex satisfies sum_d s_d(G)>=|V(G)|.
+```
+
+Then every graph satisfies the spectrum-mass inequality
+
+```text
+sum_d s_d(G) >= |V(G)|.
+```
+
+Consequently, by Conditional Corollary 28J.1a, Erdős Problem 82 follows with
+the polynomial bound `G(k)<2k^2`.
+
+Proof.  We prove the spectrum-mass inequality by induction on the number of
+vertices.  The empty graph is trivial.  Let `G` have `n+1` vertices, and fix
+a vertex `z`.  Put `H=G-z`.  By induction,
+
+```text
+sum_d s_d(H) >= n.
+```
+
+If the left hand side is at least `n+1`, then monotonicity of each `s_d`
+under induced supergraphs gives
+
+```text
+sum_d s_d(G) >= sum_d s_d(H) >= n+1.
+```
+
+Otherwise, since the sum is integral, `sum_d s_d(H)=n=|V(H)|`.  The assumed
+one-vertex extension statement applies to the extension from `H` to `G` and
+again gives `sum_d s_d(G)>=n+1`.  This completes the induction.  The final
+claim is exactly Conditional Corollary 28J.1a.  QED.
+
+The script `EXPERIMENTS/spectrum_mass_critical.py` checks the extension
+statement exactly for all equality graphs through seven vertices:
+
+```text
+python3 82/EXPERIMENTS/spectrum_mass_critical.py 6 --equality-extensions
+python3 82/EXPERIMENTS/spectrum_mass_critical.py 7 --equality-extensions
+```
+
+These commands report extension-increment histograms `{1:751}` and
+`{1:3781}`, respectively.  Thus every checked equality graph has the stronger
+property that every one-vertex extension raises spectrum mass by exactly one
+at minimum.
 
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all

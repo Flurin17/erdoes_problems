@@ -11,7 +11,8 @@ Computational checks and generated data for Erdos Problem 82.
   induced `d`-regular order.
 - `spectrum_mass_critical.py`: deletion-critical diagnostics for the same
   spectrum-mass parameter, including exact small-order histograms of
-  `mu(G)-|G|` and the drops `mu(G)-mu(G-v)`.
+  `mu(G)-|G|`, the drops `mu(G)-mu(G-v)`, and the one-vertex extension test
+  for equality graphs.
 - `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
   ordered graph, including fixed-mask, explicit-column, lower-family, exact
   enumeration, and no-regular-`h` obstruction modes.

@@ -3879,3 +3879,23 @@ source of growth beyond Ramsey.
   This removes complete multipartite graphs from the possible spectrum-mass
   obstruction list and gives another nontrivial class beyond forests,
   pseudoforests, split graphs, and regular-feedback-set graphs.
+- 2026-06-01: Found a sharper induction target for spectrum mass.  It is
+  enough to prove the equality-extension lemma: if `mu(H)=|H|`, then every
+  one-vertex extension `G` of `H` has `mu(G)>=|G|`.  The proof is a direct
+  induction: if `mu(G-v)>|G|-1`, monotonicity finishes; otherwise `G-v` is an
+  equality graph and the extension lemma applies.  Exact checks now verify
+  the extension lemma for every equality graph through `n=7`: the histograms
+  are `{1:751}` for `n=6` and `{1:3781}` for `n=7`, where the key is
+  `best_extension_mu - n = 1` for every equality graph.  This target is
+  strictly stronger than the minimal-counterexample deletion-tight condition
+  and is the next main proof route.
+- 2026-06-01: Weakened the spectrum-mass target needed for the original
+  problem.  A bound `mu(G)>=c(log |G|)^{2+eta}` for any fixed `eta>0` already
+  implies `D_spec(h)<=2^{O_eta(h^{2/(2+eta)})}` and hence
+  `G(k)=2^{o(k)}`.  The pure homogeneous Ramsey contribution gives the
+  benchmark `mu(G)>=Omega((log n/log log n)^2)`: take
+  `t~log n/(4loglog n)` and use `R(t^2,t)<=n`; an independent set gives
+  `s_0>=t^2`, while a clique of size `t` contributes `Omega(t^2)` across its
+  subcliques.  Thus the spectral route now has a precise polylogarithmic
+  gap: improve the homogeneous `2` exponent by any fixed amount, or prove the
+  equality-extension lemma.
