@@ -2475,6 +2475,17 @@ Warning 8.5a.7z.12h.3 notes that this cannot be beaten by cardinality:
 large escape sets may sit above \(p/2\). In the endpoint \(3000\) state
 only \(2600\) and \(3200\) lie below \(3450\), and their complements
 \(4300\) and \(3700\) are already retained.
+Warning 8.5a.7z.12h.4 gives a parametric finite counterexample to any
+interval-coverage-only balancing lemma. With
+\[
+C=[1,L]\cup[N,N+L-1],\quad F=\{2L+1,N+2L\},\quad N>3L,
+\]
+the first gap is \(p=2L+1\), the hole \(w=2N+3L-1\) is inclusion-minimal,
+old-row escapes are absent, and the split escape set is
+\[
+E=\{L+1,\ldots,2L\}\subset(p/2,p),
+\]
+so it has no complementary pair.
 The sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 shows the same no-safe-one/no-safe-two obstruction at every listed endpoint.

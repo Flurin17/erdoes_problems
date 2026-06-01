@@ -286,6 +286,12 @@ and the half-candidate is saturated. Only `2` escape points lie below
 `p/2`; their complements are already in the old set. This is the finite
 instance of Warning 8.5a.7z.12h.3, so escape-set size alone cannot force a
 safe split.
+`shadow_escape_counterexample.py` verifies the parametric warning that even
+initial interval coverage and a genuine minimal terminal hole do not force
+escape-set balance. For `--L 5 --N 20`, it reports
+`C=[1,2,3,4,5,20,21,22,23,24]`, `F=[11,30]`, first gap `p=11`, hole
+`w=54`, no old-row escapes, and high-sided split escape set `[6,7,8,9,10]`
+with no complementary pair.
 The reusable sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 prints the same no-safe-one/no-safe-two obstruction throughout that

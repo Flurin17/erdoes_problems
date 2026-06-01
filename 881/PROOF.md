@@ -9176,6 +9176,86 @@ E=\{y\in[1,p-1]\setminus A:d+y\notin2C\},
 \]
 this is exactly \(d+p-z\in2C\). \(\square\)
 
+### Warning 8.5a.7z.12h.4: Interval-stage coverage does not balance the escape set
+
+The missing hypothesis in Warning 8.5a.7z.12h.3 is not supplied by ordinary
+initial interval coverage, even together with a genuine inclusion-minimal
+terminal hole.
+
+Let \(L\ge2\) and choose \(N>3L\). Put
+\[
+C=[1,L]\cup[N,N+L-1],
+\]
+\[
+p=2L+1,\qquad q=N+2L,\qquad F=\{p,q\},
+\]
+\[
+A=C\cup F,\qquad d=2N+L-2,\qquad w=p+d=2N+3L-1.
+\]
+Then
+\[
+[2,p-1]=[2,2L]\subseteq2A,
+\]
+because the low interval \([1,L]\) contributes all sums up to \(2L\), while
+\[
+p\notin2A.
+\]
+Indeed, two low terms sum to at most \(2L\), and every term outside
+\([1,L]\) is already larger than \(p\).
+
+Moreover
+\[
+w\notin3C.
+\]
+The possible three-sum ranges from \(C\) are
+\[
+[3,3L],\quad [N+2,N+3L-1],\quad
+[2N+1,2N+3L-2],\quad [3N,3N+3L-3],
+\]
+and \(w=2N+3L-1\) lies strictly between the third and fourth ranges because
+\(N>3L\). The two deleted gates are active:
+\[
+w=p+N+(N+L-2)=q+1+(N+L-2),
+\]
+with the displayed retained summands in \(C\). Hence \(F\) is
+inclusion-minimal for this hole.
+
+For every old summand \(a\in A\) with
+\[
+p-a>0,\qquad p-a\notin A,
+\]
+one has \(a\in[1,L]\), and therefore
+\[
+d+a\in[2N+L-1,2N+2L-2]\subseteq2C.
+\]
+Thus the old-row escape set \(R\) of Corollary 8.5a.7z.12h.2 is empty.
+
+On the other hand,
+\[
+[1,p-1]\setminus A=\{L+1,\ldots,2L\},
+\]
+and for every such \(z\),
+\[
+d+z\in[2N+2L-1,2N+3L-2],
+\]
+which is disjoint from \(2C\). Hence the split escape set is exactly
+\[
+E=\{L+1,\ldots,2L\}.
+\]
+It has no complementary pair summing to \(p=2L+1\), since it lies entirely
+above \(p/2\). Thus a proof forcing safe two-point repairs must use a
+balance, recurrence, or staging hypothesis beyond initial interval coverage
+and minimal terminal-hole structure.
+
+The script `EXPERIMENTS/shadow_escape_counterexample.py` verifies this
+family; for example, \(L=5,N=20\) gives
+\[
+C=\{1,2,3,4,5,20,21,22,23,24\},\quad F=\{11,30\},
+\]
+\[
+p=11,\quad d=43,\quad w=54,\quad E=\{6,7,8,9,10\}.
+\]
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -16412,6 +16492,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.5a.7z.12h.3 records that large escape sets alone are harmless:
   they may lie almost entirely above \(p/2\), with the few low escapes
   having complements already in \(A\) or absorbed by \(2C\).
+* Warning 8.5a.7z.12h.4 shows that even initial interval coverage and a
+  genuine inclusion-minimal terminal hole do not balance the escape set:
+  a two-interval model has \(E=\{L+1,\ldots,2L\}\) and no complementary
+  pair for \(p=2L+1\).
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.
