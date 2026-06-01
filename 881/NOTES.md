@@ -2137,6 +2137,18 @@ w-p
 \]
 over a cofinal retained padder set. This is the current precise moving-core
 construction target.
+Lemma 16.3 identifies the old-endpoint pressure inside such a pair witness:
+when the retained padder \(p\) is too close to \(w\) for the new endpoint
+\(b\) to appear in a three-term representation of \(w-p\), the old endpoint
+\(a\) must appear and
+\[
+w-a-p\in2(A\setminus\{b\}).
+\]
+The diagnostic `pair_shadow_rows.py` checks this on the robust-booster
+finite stage \((a,b,w)=(20,41,47)\), producing forced rows
+\[
+(p,w-a-p)=(5,22),(21,6),(23,4).
+\]
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

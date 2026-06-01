@@ -18563,6 +18563,78 @@ The next dichotomy to prove is therefore:
   of the \(k=2\) active-trace barriers, and is the remaining candidate
   counterexample mechanism.
 
+### Lemma 16.3: Pair witnesses force old-gate \(2A\)-shadows
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\)
+and minimum \(m_0\). Let
+\[
+a<b
+\]
+be elements of \(A\), put
+\[
+C=A\setminus\{a,b\},
+\]
+and suppose
+\[
+w\notin4C. \tag{1}
+\]
+Then every retained padder
+\[
+p\in C,\qquad w-p\ge N_0,
+\]
+has the following properties.
+
+1. Every three-term representation of \(w-p\) from \(A\) uses \(a\) or
+   \(b\).
+2. If
+   \[
+   p>w-b-2m_0, \tag{2}
+   \]
+   then no such representation can use \(b\). Hence every representation
+   uses \(a\), and
+   \[
+   w-a-p\in2(A\setminus\{b\}). \tag{3}
+   \]
+3. Consequently
+   \[
+   C\cap(w-a-2m_0,\ w-N_0]=\varnothing. \tag{4}
+   \]
+
+Proof. If a three-term representation of \(w-p\) avoided both \(a\) and
+\(b\), then adding the retained padder \(p\) would give
+\[
+w\in4C,
+\]
+contrary to (1). This proves (1) in the list above.
+
+If a representation of \(w-p\) uses \(b\), its other two summands are at
+least \(m_0\), so
+\[
+w-p\ge b+2m_0,
+\]
+or equivalently
+\[
+p\le w-b-2m_0.
+\]
+Thus under (2) every representation must use \(a\) and avoid \(b\). Removing
+one copy of \(a\) gives (3).
+
+If \(p>w-a-2m_0\), then a representation using \(a\) is also impossible,
+and a representation using \(b\) is already impossible because \(b>a\). This
+contradicts the order-\(3\) basishood of \(A\) whenever \(w-p\ge N_0\).
+Therefore no such \(p\in C\) exists, proving (4). \(\square\)
+
+Thus an old-new pair witness with \(b\) much larger than \(a\) has a long
+intermediate region
+\[
+(w-b-2m_0,\ w-a-2m_0]
+\]
+where every retained padder must be handled by the old endpoint \(a\) alone,
+creating forced \(2A\)-shadow rows (3). The robust-booster third-stage
+failure is exactly the finite manifestation of this pressure: candidate
+new elements can extend three-fold coverage, but cannot simultaneously give
+all old endpoints the required \(2A\)-shadow rows before the terminal gap.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -19552,6 +19624,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the third stage because singleton candidates \(41,43\) extend coverage but
   fail simultaneous pair witnesses against many old elements; the obstruction
   is domination, not coverage alone.
+* Target 16.2 and Lemma 16.3 isolate the current \(k=3\) moving-core target:
+  after finite-core marker coverage is ruled out, every old-new pair witness
+  must either be eventually repaired or force old-gate \(2A\)-shadow rows
+  \(w-a-p\in2(A\setminus\{b\})\) across the interval where the new endpoint
+  \(b\) is too large to participate.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
