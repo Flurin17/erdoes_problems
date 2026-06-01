@@ -695,3 +695,10 @@ reproduces the local rank-three delayed examples from `PROOF.md`, starting
 with `S=[1,...,8]`, `F=(4,5,6)`, and witness `20`; variants `(4,5,9)` and
 `(4,6,9)` also appear. These remain block-local fixed-rank cuts, not
 unbounded barriers.
+
+`balanced_k3_certificate_stats.py` brute-forces the finite certificate
+condition used in Corollary 16.20. For the dense interval `[1,...,8]`, the
+largest balanced-certificate-free subset has size `2`, so every half-sized
+subset has a certificate. For the prepared row-bank set
+`{1,2,3,4,8,19,20,28,33}`, the largest such subset has size `6`, showing
+that sparse prepared blocks can evade the reflected-branch finite test.

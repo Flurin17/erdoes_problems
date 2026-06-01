@@ -19874,6 +19874,64 @@ bank becomes a unique-gate packet. A positive proof can therefore split the
 singleton branch into two cleaner subproblems: unbounded actual reflections
 against finite tests, or arbitrarily late moving unique-gate packets.
 
+### Corollary 16.20: Large reflected singleton rows collapse to certificates
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis. Suppose there is a
+finite set
+\[
+T_0\subset A
+\]
+such that every subset
+\[
+U\subset T_0,\qquad |U|\ge |T_0|/2,
+\]
+contains elements
+\[
+e,y_1,y_2,y_3\in U,\qquad y_i\ne e,
+\]
+with
+\[
+y_1+y_2-e\in A,\qquad y_1+y_2+y_3-2e\in A. \tag{1}
+\]
+Assume further that for every \(L\) there are \(q\in A\), a private
+singleton witness
+\[
+w=q+d\notin4(A\setminus\{q\}),
+\]
+and a set
+\[
+U_L\subset T_0,\qquad |U_L|\ge |T_0|/2,
+\]
+such that
+\[
+d-q>L,\qquad d-q-U_L\subset A. \tag{2}
+\]
+Then there is an infinite \(B\subset A\) such that \(A\setminus B\) is an
+order-\(4\) asymptotic basis.
+
+Proof. Put
+\[
+m_L=d-q.
+\]
+By (1), each \(U_L\) contains a certificate tuple
+\[
+e,y_1,y_2,y_3
+\]
+satisfying the two displayed identities. By (2), the center \(m_L\)
+reflects this tuple into \(A\). Since \(T_0\) is finite and \(m_L\) can be
+made arbitrarily large, one fixed certificate tuple is reflected by
+arbitrarily large centers. Lemma 2.3b, with \(k=3\), applies to this fixed
+tuple and gives an infinite deletion whose complement is an order-\(4\)
+basis. \(\square\)
+
+Consequently, if the singleton-row-bank branch is to support a \(k=3\)
+counterexample, then for every finite test \(T_0\) with small
+certificate-free independence, the reflected half of Lemma 16.18 cannot
+occur with unbounded centers on at least half of \(T_0\). Combined with
+Lemma 16.19, the only remaining singleton escape is a moving unique-gate
+packet, or reflected packets contained inside large certificate-free
+subsets of every finite test.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20921,6 +20979,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.19 shows that bounded secondary centers \(d-q\) force all
   sufficiently late tested rows into the unique-gate alternative; actual
   reflected-row recurrence requires \(d-q\) to move past the finite tests.
+* Corollary 16.20 shows that unbounded reflected singleton rows over a
+  finite test with no balanced certificate-free halfset give a fixed
+  recurrent \(k=3\) certificate tuple and therefore a good order-\(4\)
+  deletion.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

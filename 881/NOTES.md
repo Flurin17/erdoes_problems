@@ -2353,6 +2353,26 @@ center \(m=d-q\): if \(p>m-\min A\), then \(d-q-p\notin A\), so the
 collision-complete split forces \(q+p\) to be unique-gate. Hence bounded
 secondary centers force late finite tests entirely into the unique-gate
 branch.
+Corollary 16.20 closes the opposite reflected case conditionally. If a
+finite test set \(T_0\) has no certificate-free halfset in the \(k=3\)
+balanced sense
+\[
+y_1+y_2-e,\quad y_1+y_2+y_3-2e\in A,
+\]
+then any unbounded reflected half-row packet over \(T_0\) gives a fixed
+recurrent certificate tuple and hence a good order-\(4\) deletion by Lemma
+2.3b. Thus the singleton branch has been reduced to moving unique-gate
+packets or large balanced-certificate-free subsets in every finite test.
+The new diagnostic `balanced_k3_certificate_stats.py` checks this finite
+condition. On the dense test \([1,8]\), the largest balanced-certificate-free
+subset has size \(2\), so every half-sized subset has a \(k=3\) balanced
+certificate. On the prepared row-bank set
+\[
+\{1,2,3,4,8,19,20,28,33\},
+\]
+the largest certificate-free subset has size \(6\), for instance
+\(\{2,4,8,20,28,33\}\), so the Corollary 16.20 finite-test hypothesis is
+not automatic in sparse prepared blocks.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
