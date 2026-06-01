@@ -2312,22 +2312,22 @@ split-corner-label-obstruction: 2,753,220
 
 The summary is recorded in
 `EXPERIMENTS/results/n99_mixed6_word_quotient_summary.json`, with interval
-artifacts for the disjoint word ranges. This would close the `N=99`
-mixed-`6` outside-cover stratum if one proves the word-invariance lemma: for
-fixed side-label word triple `(L,R,B)`, the refined residual obstruction status
-is independent of the endpoint orientations realizing those words.
+artifacts for the disjoint word ranges. The exhaustive mode below upgrades this
+representative quotient from calibration to a proof-level finite check, so the
+`N=99` mixed-`6` outside-cover stratum no longer depends on proving a separate
+word-invariance lemma for fixed side-label word triples `(L,R,B)`.
 
 The word-quotient runner now also supports an exhaustive interval mode that
 classifies every oriented realization in selected word groups rather than a
-bounded representative set. In the first `390000` `N=99` mixed-`6` word groups,
-all `5484270` outside-cover realizations agree with their word-group status, and
+bounded representative set. Across all `418260` `N=99` mixed-`6` word groups,
+all `5867040` outside-cover realizations agree with their word-group status, and
 the exact realization counts match the word-quotient multiplicities. The
-weighted totals in this consecutive block are:
+complete weighted totals are:
 
 ```text
-corner-label-violation:         2,185,740
-pinch-sector-obstruction:         769,770
-split-corner-label-obstruction: 2,528,760
+corner-label-violation:         2,338,380
+pinch-sector-obstruction:         775,440
+split-corner-label-obstruction: 2,753,220
 ```
 
 The interval artifacts are
@@ -2371,16 +2371,22 @@ The interval artifacts are
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_340000_350000.json`,
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_350000_360000.json`,
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_360000_370000.json`,
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_370000_380000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_380000_390000.json`.
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_370000_380000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_380000_390000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_390000_400000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_400000_410000.json`, and
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_410000_418260.json`.
 The verifier `EXPERIMENTS/gamma_2alpha_word_exhaustive_summary.py` checks these
-as a contiguous prefix with no gaps, no overlaps, no mixed-status words, and no
-word-count mismatches; its current summary is
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_summary_000001_390000.json`.
+as a complete contiguous partition with no gaps, no overlaps, no mixed-status
+words, and no word-count mismatches; its current summary is
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_summary_000001_418260.json`.
+Together with the local-overlap cover, this closes the `N=99` mixed-exactly-`6`
+finite boundary-shell stratum for the `gamma=2alpha` survivor.
 
-Higher-representative stress tests support the same lemma. With up to `8`
-representatives per word group, the first `2000` word groups and the late
-interval `350001..352000` again have no mixed-status word group. These are
+Higher-representative stress tests remain as diagnostic checks on the same
+status-stability phenomenon. With up to `8` representatives per word group, the
+first `2000` word groups and the late interval `350001..352000` again have no
+mixed-status word group. These are
 stored as
 `EXPERIMENTS/results/n99_mixed6_word_quotient_reps8_first2000.json` and
 `EXPERIMENTS/results/n99_mixed6_word_quotient_reps8_350000_352000.json`.

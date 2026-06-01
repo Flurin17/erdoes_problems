@@ -246,9 +246,10 @@ Current components:
   `results/n99_mixed6_word_quotient_summary.json`. The runner supports
   `--skip-classified-words` for disjoint classification intervals.
   Its `--classification-mode exhaustive` option checks every oriented
-  realization of each selected word group; in the first `390000` `N=99`
-  mixed-`6` word groups, all `5484270` outside-cover realizations match the
-  word-group status with no count mismatches.
+  realization of each selected word group. For `N=99` mixed `6`, this
+  exhaustive mode now covers all `418260` word groups and all `5867040`
+  outside-cover realizations, with no mixed-status word group and no count
+  mismatches.
   Stress tests with up to `8` representatives per word also found no
   mixed-status word among the first `2000` word groups or among word groups
   `350001..352000`. A full targeted enumeration of a heaviest `N=99`
@@ -278,9 +279,9 @@ Current components:
 - `gamma_2alpha_word_exhaustive_summary.py`: verifier for disjoint exhaustive
   word-quotient interval artifacts. It checks interval lengths, gaps,
   overlaps, mixed-status words, word-count mismatches, and weighted status
-  totals. The current summary for the first `390000` `N=99` mixed-`6` word
-  groups is stored in
-  `results/n99_mixed6_word_exhaustive_summary_000001_390000.json`.
+  totals. The complete summary for all `418260` `N=99` mixed-`6` word groups
+  is stored in
+  `results/n99_mixed6_word_exhaustive_summary_000001_418260.json`.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and

@@ -1,0 +1,63 @@
+{
+  "classification_mode": "exhaustive",
+  "classified_groups": 10000,
+  "classified_weight": 141870,
+  "classified_words": 10000,
+  "elapsed_seconds": 1527.084225,
+  "endpoint_groups": 20,
+  "example_words": {},
+  "first_classified_group_index": 390001,
+  "first_classified_word_index": 390001,
+  "last_classified_group_index": 400000,
+  "last_classified_word_index": 400000,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_example_words": [],
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "profile_groups": null,
+  "quotient": "word",
+  "quotient_groups": 418260,
+  "radicand": 1,
+  "reps_per_group": 1,
+  "reps_per_word": 1,
+  "skip_classified_groups": 390000,
+  "skip_classified_words": 390000,
+  "status_group_counts": {
+    "corner-label-violation": 3240,
+    "pinch-sector-obstruction": 630,
+    "split-corner-label-obstruction": 6130
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 12}": 720,
+    "{\"corner-label-violation\": 15}": 180,
+    "{\"corner-label-violation\": 18}": 540,
+    "{\"corner-label-violation\": 21}": 540,
+    "{\"corner-label-violation\": 24}": 540,
+    "{\"corner-label-violation\": 27}": 180,
+    "{\"corner-label-violation\": 3}": 180,
+    "{\"corner-label-violation\": 9}": 360,
+    "{\"pinch-sector-obstruction\": 9}": 630,
+    "{\"split-corner-label-obstruction\": 12}": 1650,
+    "{\"split-corner-label-obstruction\": 15}": 1260,
+    "{\"split-corner-label-obstruction\": 18}": 540,
+    "{\"split-corner-label-obstruction\": 21}": 540,
+    "{\"split-corner-label-obstruction\": 24}": 540,
+    "{\"split-corner-label-obstruction\": 27}": 180,
+    "{\"split-corner-label-obstruction\": 3}": 1360,
+    "{\"split-corner-label-obstruction\": 9}": 60
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 54000,
+    "pinch-sector-obstruction": 5670,
+    "split-corner-label-obstruction": 82200
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_count_mismatches": [],
+  "word_groups": 418260
+}

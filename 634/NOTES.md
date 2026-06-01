@@ -179,16 +179,19 @@ The tile triangle is not required to be similar to the large triangle unless exp
   to two representatives per word and no mixed-status word group; the
   representative weighted totals are `2338380` corner-label violations,
   `775440` pinch-sector obstructions, and `2753220` split-corner-label
-  obstructions. To turn this into a proof closure for `99` mixed `6`, the next
-  missing lemma is that the side-label word triple determines the refined
-  residual obstruction status. The word-quotient runner now has an exhaustive
-  interval mode; in the first `390000` `99` mixed-`6` word groups, all
-  `5484270` outside-cover oriented realizations match the word-group status
-  with no count mismatches. Stress tests with up to `8` representatives per
-  word found no mixed-status word among the first `2000` word groups or among
-  word groups `350001..352000`. A targeted full enumeration of one heaviest
-  `99` mixed-`6` outside-cover word group (multiplicity `54`) found all `54`
-  realizations have status `corner-label-violation`. A second targeted
+  obstructions. The word-quotient runner's exhaustive interval mode upgrades
+  this calibration to a proof-level finite check for the whole `99` mixed-`6`
+  outside-cover stratum: all `418260` word groups and all `5867040`
+  outside-cover oriented realizations are classified, with no mixed-status word
+  group and no count mismatches. Thus this stratum no longer depends on a
+  separate side-label word-invariance lemma; together with the local-overlap
+  cover, it closes the `99` mixed-exactly-`6` finite shell stratum. Stress
+  tests with up to `8`
+  representatives per word found no mixed-status word among the first `2000`
+  word groups or among word groups `350001..352000`. A targeted full
+  enumeration of one heaviest `99` mixed-`6` outside-cover word group
+  (multiplicity `54`) found all `54` realizations have status
+  `corner-label-violation`. A second targeted
   exhaustive check covers selected word groups from all three representative
   status classes: `9/9` outside-cover realizations are pinch-sector
   obstructions, `12/12` are split-corner-label obstructions, and `12/12` are
