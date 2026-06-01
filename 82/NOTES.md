@@ -2785,3 +2785,14 @@ source of growth beyond Ramsey.
   No counterexample is found.  The remaining first-lift proof bottleneck is
   therefore not visible in these small high-minimum-degree mixed-residue
   ranges.
+- 2026-06-01: Proved that complete multipartite even graphs satisfy the
+  stronger matching-slot target.  If all class sizes are even, group
+  `0 mod 4` classes into a zero slot and group `2 mod 4` classes into a zero
+  or residue-`2` slot according to parity.  If all class sizes are odd, put a
+  `1 mod 4` piece from every class into a zero or residue-`2` slot according
+  to the number of classes, and handle the residual `2`-pieces with the two
+  zero slots or the residue-`2` slot.  The new
+  `matching_multipartite.py` count-model checker verifies the construction
+  through several bounded searches, including `5` classes of size `10`,
+  `6` classes with total size at most `30`, and `7` classes with total size at
+  most `28`.

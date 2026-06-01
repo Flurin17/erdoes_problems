@@ -4552,6 +4552,78 @@ Consequently, a minimal counterexample to the matching-slot target must have
 at least one vertex of degree `0 mod 4` and at least one vertex of degree
 `2 mod 4`.
 
+**Proposition: Complete Multipartite Even Graphs Satisfy The Matching-Slot
+Target.**  Let `G` be a complete multipartite graph all of whose degrees are
+even.  Then `G` has a partition `A,B,C,D` such that `A` and `B` have internal
+degree `0 mod 4`, `C` is empty, and `D` has internal degree `2 mod 4`.
+
+Proof.  Let the multipartite class sizes be `s_1,...,s_t`.  Since every
+degree is even, the numbers `s_i` all have the same parity as
+`N=sum_i s_i`.
+
+First suppose all `s_i` are even.  Let `I_0={i:s_i congruent 0 mod 4}` and
+`I_2={i:s_i congruent 2 mod 4}`.  Put all classes in `I_0` into `A`.  This
+induces a complete multipartite graph in which every positive class
+intersection has size `0 mod 4`, so every internal degree is `0 mod 4`.
+
+If `|I_2|` is odd, put all classes in `I_2` into `B`; every vertex in such a
+part has internal degree
+
+```text
+2(|I_2|-1) congruent 0 mod 4.
+```
+
+If `|I_2|` is even, put all classes in `I_2` into `D`; if the set is
+nonempty, every vertex there has internal degree
+
+```text
+2(|I_2|-1) congruent 2 mod 4.
+```
+
+This covers the even-class case.
+
+Now suppose all `s_i` are odd.  Then `t` is odd.  For each class with
+`s_i congruent 1 mod 4`, reserve the whole class as a `1 mod 4` piece.  For
+each class with `s_i congruent 3 mod 4`, reserve a piece of size `s_i-2`,
+which is positive and congruent to `1 mod 4`, and leave a residual piece of
+size `2`.  Let `R` be the set of classes with such residual pieces.
+
+If `t congruent 1 mod 4`, put all reserved `1 mod 4` pieces into `A`.  Since
+there are `t` positive pieces of the same residue, every vertex in `A` has
+internal degree
+
+```text
+t-1 congruent 0 mod 4.
+```
+
+If `|R|` is odd, put all residual `2`-pieces into `B`, giving internal degree
+`2(|R|-1) congruent 0 mod 4`.  If `|R|` is even, put all residual `2`-pieces
+into `D`, giving internal degree `2(|R|-1) congruent 2 mod 4` when nonempty.
+
+It remains to handle `t congruent 3 mod 4`.  Put all reserved `1 mod 4`
+pieces into `D`; their internal degree is `t-1 congruent 2 mod 4`.  If
+`|R|` is odd, put all residual `2`-pieces into `A`, where they have internal
+degree `2(|R|-1) congruent 0 mod 4`.  If `|R|` is even and nonzero, put one
+residual `2`-piece alone into `A` and all remaining residual `2`-pieces into
+`B`; a one-class part is independent, and the remaining number of residual
+pieces is odd, so `B` has internal degree `0 mod 4`.  If `R` is empty there
+is nothing more to place.
+
+In all cases the described pieces partition the vertex set, `C` is empty, and
+the induced same-slot degrees have the required residues.  QED.
+
+The verifier `EXPERIMENTS/matching_multipartite.py` checks the corresponding
+integer count model.  For example,
+
+```text
+python3 82/EXPERIMENTS/matching_multipartite.py --max-classes 5 --max-size 10
+python3 82/EXPERIMENTS/matching_multipartite.py --max-classes 6 --max-size 12 --max-total 30
+python3 82/EXPERIMENTS/matching_multipartite.py --max-classes 7 --max-size 10 --max-total 28
+```
+
+check `417`, `508`, and `459` even complete multipartite size vectors,
+respectively, with no counterexample.
+
 The following rooted form is stronger and is the right object for cut-vertex
 induction.
 

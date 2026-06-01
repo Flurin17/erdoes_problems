@@ -228,6 +228,9 @@ Computational checks and generated data for Erdos Problem 82.
   complete multipartite instance such as the `K_{22,2,1}` strict-terminal
   obstruction.  Add `--print-partition` with `--sizes` to print one minimum
   bin packing certificate.
+- `matching_multipartite.py`: complete multipartite count model for the
+  stronger first-lift matching-slot target, where the residue-`1` slot must be
+  an exact induced matching.
 - `source_slot_finder.py`: enumerates source-residue fixed slot multisets and
   filters them through the complete multipartite integer model.  It applies
   the dyadic clique subset-sum test by default, then keeps only slot families
