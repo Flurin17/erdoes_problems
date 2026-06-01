@@ -35,6 +35,9 @@ anchored translate \(f+U-u_0\) lies inside \(A\), then \(U\) injects into
 the finite active palette.
 Lemma 16.41 strengthens this to a sparse-shadow statement: every anchored
 translate \(f+U-u_0\) contains at most \(|F|\) points of \(A\).
+Corollary 16.42 rewrites this as an anchored-copy obstruction: \(U\) cannot
+contain more than \(|F|\) points of any translate \(u_0+T-f\) of a finite
+test \(T\subset A\).
 
 ## Definitions
 

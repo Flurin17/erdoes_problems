@@ -21130,6 +21130,54 @@ a Sidon problem: collisions among sums inside \(U\) are allowed, but every
 anchored difference translate must be almost entirely absent from the
 retained set.
 
+### Corollary 16.42: Gate packets avoid anchored copies of finite tests
+
+Keep the hypotheses of Lemma 16.41. Then for every finite test
+\[
+T\subset A
+\]
+and every anchor \(u_0\in U\),
+\[
+\bigl|U\cap(u_0+T-f)\bigr|\le |F|. \tag{1}
+\]
+Equivalently, if \(V\subset U\) and
+\[
+f+V-u_0\subset A,
+\]
+then \(|V|\le |F|\).
+
+In particular, if \(A\) contains an interval \(I\) and \(U\) contains the
+anchored translate
+\[
+u_0+I-f,
+\]
+then
+\[
+|I|\le |F|. \tag{2}
+\]
+
+Proof. The map
+\[
+u\mapsto f+u-u_0
+\]
+sends \(U\cap(u_0+T-f)\) injectively into
+\[
+(f+U-u_0)\cap A.
+\]
+Lemma 16.41 bounds this latter set by \(|F|\), proving (1). The equivalent
+form is the same statement with
+\[
+T=f+V-u_0.
+\]
+Taking \(T=I\) gives (2). \(\square\)
+
+Thus a finite-palette gate packet can be dense internally only if it avoids
+aligned copies of every dense finite piece of \(A\). In particular, an
+interval-marker bridge cannot place a large gate-dependent packet inside a
+translate of the old interval block; it must either be arithmetically
+misaligned with that old block, keep the active palette large, or leave the
+finite-palette branch.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22281,6 +22329,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   translate \(f+U-u_0\) contains at most \(|F|\) points of \(A\). The
   surviving gate branch is therefore a sparse-shadow problem, verified in
   finite toy windows by `EXPERIMENTS/finite_palette_gate_pressure.py`.
+* Corollary 16.42 rewrites that sparse-shadow pressure in the form needed
+  for block constructions: \(U\) cannot contain more than \(|F|\) points of
+  any anchored copy \(u_0+T-f\) of a finite test \(T\subset A\). In
+  particular it cannot contain a long translate of an old interval block.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
