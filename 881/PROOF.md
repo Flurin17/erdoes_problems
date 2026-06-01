@@ -8944,6 +8944,55 @@ T.
 \]
 The final assertion is Corollary 8.5a.7z.12e''' with \(d=w-p\). \(\square\)
 
+### Lemma 8.5a.7z.12h: One-sided pair-saturation blockers
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C,\qquad p\notin2A.
+\]
+Let
+\[
+X_p=\{p-a:a\in A,\ p-a>0\}\cup
+\begin{cases}
+\{p/2\},&p\text{ even},\\
+\varnothing,&p\text{ odd}.
+\end{cases}
+\]
+Assume:
+
+1. for every \(x\in X_p\setminus A\),
+   \[
+   w-x\in2C; \tag{1}
+   \]
+2. for every split
+   \[
+   x+y=p,\qquad 1\le x<y,\qquad x,y\notin A,
+   \]
+   at least one of
+   \[
+   w-x\in2C,\qquad w-y\in2C \tag{2}
+   \]
+   holds.
+
+Then no finite retained batch \(S\subset\mathbb N\setminus A\) can satisfy
+\[
+p\in2(A\cup S),\qquad w\notin3(C\cup S).
+\]
+
+Proof. By Lemma 8.5a.7z.12e', any such finite batch contains either a
+one-point repair \(x\in X_p\setminus A\) of the gap \(p\), or a two-point
+repair \(x+y=p\) with \(x,y\notin A\). In the one-point case, (1) gives
+\[
+w=x+c_1+c_2
+\]
+with \(c_1,c_2\in C\), contradicting \(w\notin3(C\cup S)\). In the
+two-point case, (2) gives the same contradiction using whichever of
+\[
+x,\ y
+\]
+has its complement in \(2C\). \(\square\)
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -9038,8 +9087,15 @@ d=3100\notin C.
 \]
 There the full reflected-complement certificate of Lemma 8.5a.7z.12e''
 does not apply, but the script still reports no safe one-point or two-point
-batch. Thus Lemma 8.5a.7z.12e'' captures the cleanest wall, not the whole
-pair-saturation obstruction measured by Lemma 8.5a.7z.12e'.
+batch. It prints the stronger one-sided saturation certificate from Lemma
+8.5a.7z.12h:
+\[
+2312\text{ one-point candidates saturated, and }1138/1138
+\text{ two-point splits saturated}.
+\]
+Thus Lemma 8.5a.7z.12e'' captures the cleanest wall, not the whole
+pair-saturation obstruction measured by Lemmas 8.5a.7z.12e' and
+8.5a.7z.12h.
 The optional blocker-avoidance mode
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --avoid-reflected-blockers

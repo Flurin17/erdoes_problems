@@ -2455,8 +2455,11 @@ coverage \(6899\) and immediately stall at \(6900\); the blocker has
 \(d=3100\) and the same deleted-gate reflection condition.
 The adjacent greedy-safe endpoint \(3000\) also starts with coverage
 \(6899\) and stalls at \(6900\), but \(d=3100\notin C\). It still has no
-safe one-point or two-point batch, so the finite pair-saturation
-obstruction is broader than the clean retained-defect certificate.
+safe one-point or two-point batch. Lemma 8.5a.7z.12h packages this as a
+one-sided saturation blocker: the run has \(2312\) saturated one-point
+candidates and \(1138/1138\) saturated two-point splits. Thus the finite
+pair-saturation obstruction is broader than the clean retained-defect
+certificate.
 With `--avoid-reflected-blockers`, the same scale-\(100\), beam-\(8\) run
 still reaches only \(6503\). At the stopping step, the script reports
 \(128\) raw extensions and \(0\) surviving after the reflected-blocker

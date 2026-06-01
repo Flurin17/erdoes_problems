@@ -272,8 +272,11 @@ A greedy-safe upper band with endpoint `2500` reaches `6898`; endpoints
 `3200` and `5000` start with coverage `6899` and immediately stall at
 `6900`, again with a deleted-gate reflected blocker. The adjacent endpoint
 `3000` also stalls at `6900` with no safe one- or two-point batch even
-though `d=3100` is not retained, so the observed pair-saturation
-obstruction is broader than the clean retained-defect certificate.
+though `d=3100` is not retained. The script reports the one-sided
+saturation certificate from Lemma 8.5a.7z.12h: `2312` saturated one-point
+candidates and `1138/1138` saturated two-point splits. So the observed
+pair-saturation obstruction is broader than the clean retained-defect
+certificate.
 With `--avoid-reflected-blockers`, the scale `100`, beam-`8` run reaches
 only `6503`; at the stopping step it has `128` raw extensions and `0`
 surviving the reflected-blocker filter. This tests the escape of avoiding

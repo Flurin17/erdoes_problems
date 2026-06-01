@@ -206,6 +206,57 @@ def has_reflected_next_gap_blocker(
     )
 
 
+def one_sided_pair_saturation_blocker(
+    state: State,
+    deleted: set[int],
+    witness: int,
+    gap: int,
+) -> dict[str, object]:
+    full = set(state.retained) | deleted
+    one_point_candidates = {gap - old for old in full if gap - old > 0}
+    if gap % 2 == 0:
+        one_point_candidates.add(gap // 2)
+    one_point_candidates -= full
+    one_point_unsaturated = sorted(
+        candidate
+        for candidate in one_point_candidates
+        if witness - candidate not in state.retained_pair_sums
+    )
+
+    split_count = 0
+    split_saturated_count = 0
+    split_unsaturated: list[tuple[int, int]] = []
+    for first in range(1, gap // 2 + 1):
+        second = gap - first
+        if first == second:
+            continue
+        if first in full or second in full:
+            continue
+        split_count += 1
+        if (
+            witness - first in state.retained_pair_sums
+            or witness - second in state.retained_pair_sums
+        ):
+            split_saturated_count += 1
+        else:
+            split_unsaturated.append((first, second))
+
+    return {
+        "one_point_candidate_count": len(one_point_candidates),
+        "one_point_saturated_count": (
+            len(one_point_candidates) - len(one_point_unsaturated)
+        ),
+        "one_point_unsaturated_examples": one_point_unsaturated[:20],
+        "two_point_split_count": split_count,
+        "two_point_split_saturated_count": split_saturated_count,
+        "two_point_unsaturated_examples": split_unsaturated[:20],
+        "blocks_all_one_and_two_point_repairs": (
+            not one_point_unsaturated
+            and split_count == split_saturated_count
+        ),
+    }
+
+
 def add_retained_batch(
     state: State,
     deleted: set[int],
@@ -492,6 +543,10 @@ def main() -> None:
     print(
         "reflected_next_gap_blocker="
         f"{reflected_next_gap_blocker(best, deleted, witness, final_gap)}"
+    )
+    print(
+        "one_sided_pair_saturation_blocker="
+        f"{one_sided_pair_saturation_blocker(best, deleted, witness, final_gap)}"
     )
 
     if any(witness - retained in best.retained_pair_sums for retained in best.retained):
