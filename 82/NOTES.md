@@ -3056,3 +3056,11 @@ source of growth beyond Ramsey.
   by the same expression with `max(|X|,|Y|)-1`.  This is the exact
   unconditioned residue estimate that a future switching/local-CLT argument
   must transfer to the fixed two-degree model.
+- 2026-06-01: Added the corresponding semi-random two-block first-moment
+  corollary.  For fixed internal graphs on two `N`-vertex sides and random
+  cross edges, the expected number of `M`-modular induced sets with side
+  sizes `x,y >= C M^2 log M` is at most
+  `binom(N,x)binom(N,y)((1+o_M(1))/M)^(max(x,y)-1)`.  This records the entropy
+  bottleneck explicitly: row/column congruence on one side alone is weaker
+  than the full independent-edge heuristic and must be supplemented by
+  additional constraints or by a fixed-degree conditioning transfer.
