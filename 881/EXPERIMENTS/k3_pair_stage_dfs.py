@@ -185,6 +185,45 @@ def search(
     print("done best", len(best))
 
 
+def classify_depth5_chain() -> None:
+    chain = [
+        ({1, 2, 3}, {7}, 3, 9),
+        ({1, 2, 3, 7}, {10}, 9, 17),
+        ({1, 2, 3, 7, 10}, {23}, 17, 35),
+        ({1, 2, 3, 7, 10, 23}, {36}, 35, 43),
+        ({1, 2, 3, 7, 10, 23, 36}, {46}, 43, 61),
+    ]
+    for old, new, previous_endpoint, endpoint in chain:
+        elements = old | new
+        cap = max(5 * max(elements) + 180, endpoint + 180)
+        four_all = hsum(elements, 4, cap)
+        for b in sorted(new):
+            without_b = hsum(elements - {b}, 4, cap)
+            singleton = []
+            pair_only = []
+            for a in sorted(old):
+                without_pair = hsum(elements - {a, b}, 4, cap)
+                witnesses = [
+                    w
+                    for w in range(previous_endpoint + 1, endpoint + 1)
+                    if w in four_all and w not in without_pair
+                ]
+                pair_witnesses_only = [w for w in witnesses if w in without_b]
+                if pair_witnesses_only:
+                    pair_only.append((a, pair_witnesses_only[:3]))
+                else:
+                    singleton.append((a, witnesses[:3]))
+            print(
+                "stage",
+                "new=",
+                b,
+                "singleton_only=",
+                singleton,
+                "pair_only=",
+                pair_only,
+            )
+
+
 if __name__ == "__main__":
     if "--depth5" in sys.argv:
         search(
@@ -197,6 +236,10 @@ if __name__ == "__main__":
             max_candidate=90,
             branch_limit=300,
         )
+        raise SystemExit
+
+    if "--classify-depth5" in sys.argv:
+        classify_depth5_chain()
         raise SystemExit
 
     for start, base, endpoint in [

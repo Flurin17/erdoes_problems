@@ -2653,8 +2653,11 @@ three-point increments up to \(120\) finds no next stage. A wider
 with endpoints \(9,17,35,43,61\); a bounded depth-six rerun still finds no
 next stage. Thus unrestricted pair barriers are locally stronger than the
 robust-booster seed, and nonperiodic branches survive longer than the first
-periodic-looking pattern, but the tested continuations still run into
-buffer exhaustion. Lemma 13.1d.1 isolates one source of this pressure: the
+periodic-looking pattern. The depth-five chain is also genuinely pair-like:
+apart from \((1,23)\), the checked witnesses survive deletion of the new
+point alone and fail only after deleting the old-new pair. The tested
+continuations still run into buffer exhaustion. Lemma 13.1d.1 isolates one
+source of this pressure: the
 first point of every new block must already lie in the old three-fold
 coverage frontier, and later block points can only bootstrap from earlier
 new points.

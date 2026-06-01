@@ -21343,6 +21343,13 @@ terminal seed found no singleton extension through candidate \(400\), no
 extension of size at most \(3\) in the tested deterministic ranges, and no
 random extension of sizes \(4,\ldots,8\) in \(5000\) trials per size.
 
+The depth-five chain is not merely a disguised singleton-new construction.
+Classifying the displayed witnesses shows that, except for the pair
+\((a,b)=(1,23)\), every old-new pair in the chain has a witness still
+represented in \(4(A_s\setminus\{b\})\), but not in
+\(4(A_s\setminus\{a,b\})\). Thus the finite pattern is genuinely testing
+the pair-barrier mechanism.
+
 This diagnostic is important in both directions. It shows that \(k=3\)
 cross-stage pair barriers are not merely an artefact of the robust residue
 booster seed; unrestricted integer stages have more room, and small
