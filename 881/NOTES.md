@@ -1714,6 +1714,13 @@ For \(k=2\) this is genuine reflection-recurrence and closes by Theorem
 8.2. For \(k>2\) it lands in a lower sumset, so delayed finite-core
 stability still leaves the same budget mismatch as the bad-one-point
 case.
+Corollary 10.2c makes the \(k=3\) singleton version exact: infinitely many
+singleton late-bad order-4 failures force, for every finite \(T\subset A\),
+arbitrarily large centers \(d\) with
+\[
+d-T\subset2A,
+\]
+but they do not force \(d-T\subset A\).
 
 For \(k=3\), the split is explicit: bad one-point deletions reflect a
 half-sized subset either into \(A\) or into \(2A\). The first case can feed

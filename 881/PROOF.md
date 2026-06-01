@@ -13293,6 +13293,62 @@ but none of \(2,4,6\) lies in \(A_0\). Thus the lower-sumset recurrence in
 the \(r=1\) branch is not a notational artefact; it can be genuinely
 \(2A\)-valued even in a small local model.
 
+### Corollary 10.2c: Singleton \(k=3\) debt is \(2A\)-recurrent
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(3\), with
+threshold \(N_0\). Suppose infinitely many \(b\in A\) are singleton
+late-bad at order \(4\): either \(A\setminus\{b\}\) is not an order-\(4\)
+basis, or it is an order-\(4\) basis with no threshold below \(b\). Then
+for every finite
+\[
+T\subset A
+\]
+and every \(L\), there are such a singleton \(b\notin T\), a witness
+\[
+w_b=b+d_b,
+\]
+and a center \(d_b>L\) such that
+\[
+d_b-T\subset 2A. \tag{1}
+\]
+
+If the singleton is a genuine order-\(4\) failure, \(w_b\) may be chosen
+arbitrarily large outside \(4(A\setminus\{b\})\). If it is a delayed
+threshold failure, \(w_b\) may be chosen with
+\[
+w_b\ge b-1,\qquad w_b\notin4(A\setminus\{b\}).
+\]
+In either case the corresponding centers \(d_b=w_b-b\) are unbounded along
+the chosen singleton failures.
+
+Proof. The delayed-threshold case is exactly Lemma 10.2b with \(k=3\):
+after choosing \(b\) outside \(T\), it gives \(d_b-T\subset2A\) and
+unbounded \(d_b\).
+
+For a genuine order-\(4\) failure, choose
+\[
+w_b>\max\{L+b+\max T,\ \max T+N_0\}
+\]
+with \(w_b\notin4(A\setminus\{b\})\), and put \(d_b=w_b-b\). For each
+\(t\in T\), the number \(w_b-t\) is at least \(N_0\), so it has a
+three-term representation from \(A\). If any such representation avoided
+\(b\), then adding \(t\) would put \(w_b\) in \(4(A\setminus\{b\})\).
+Therefore every representation of \(w_b-t\) uses \(b\); removing one copy
+of \(b\) gives
+\[
+d_b-t=w_b-b-t\in2A.
+\]
+The choice of \(w_b\) gives \(d_b>L\). Since \(w_b\) can be taken
+arbitrarily large, these centers are unbounded. \(\square\)
+
+Thus the higher-order analogue of Corollary 8.3b cannot be obtained from
+the singleton argument alone. For \(k=2\), (1) is actual
+reflection-recurrence in \(A\), and Theorem 8.2 constructs a good deletion.
+For \(k=3\), (1) is only reflection-recurrence in the lower sumset \(2A\).
+Using such a mirror in the repair identities costs two retained summands,
+which exhausts the one extra summand available when passing from order
+\(3\) to order \(4\).
+
 ## Lemma 10.1: Finite deletion holes force vertex-cover domination
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(k\) with
