@@ -726,6 +726,13 @@ bounds, the best eligible size-6 block is `(19,25,26,39,43,44)`, declared
 at `95`; only `19` and `39` have strict singleton witnesses, and only `39`
 lies in the common-row pressure range from Corollary 16.29.
 
+`interval_marker_deferred_followup.py` starts from that best debt block and
+tries to protect the deferred fillers `25,26,43,44` in one later bounded
+stage. With blocks of size at most `2` and candidates through `150`, every
+target fails in both ordinary and strict high-excess modes; the best window
+is `(99,132)` after adding `(96,99)`, and all represented candidates in
+that window are already poisoned by retained-padder shifts.
+
 `bridge_sidon_pressure.py` evaluates Corollary 16.28 numerically. For the
 interval-marker model with `L=4`, the default run shows the first possible
 next marker `x=19` is still in the near-range escape, while

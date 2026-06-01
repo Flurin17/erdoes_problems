@@ -2423,6 +2423,13 @@ row-bank analysis, or after thinning they carry a nonsingleton late-bad
 prefix-front. Thus sparse same-window protection is not a self-contained
 escape; it is a handoff to staggered singleton windows or collective
 cross-window barriers.
+The new `interval_marker_deferred_followup.py` tests the first staggered
+step for the best debt block. For deferred targets \(25,26,43,44\), adding
+one later block of size at most \(2\) through \(150\) gives no ordinary or
+strict high-excess witness; the best window \([99,132]\) after adding
+\((96,99)\) is fully represented but fully poisoned by retained-padder
+shifts. This is again finite evidence, but it shows that the simplest
+staggered repair inherits the same shifted-cover poisoning.
 Corollary 16.25 packages the exact finite criterion behind these searches:
 for a finite stage \(S\) and target \(q\), the private order-\(4\)
 candidates in a window \(I\) are exactly

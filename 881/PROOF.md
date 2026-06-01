@@ -20532,6 +20532,46 @@ left by the interval-marker diagnostics: same-window singleton protection
 is sparse, so an infinite counterexample must pay either with repeated
 staggered singleton windows or with collective cross-window barriers.
 
+### Diagnostic 16.32: The first deferred bridge block does not heal one step later
+
+The script `EXPERIMENTS/interval_marker_deferred_followup.py` starts from
+the best debt block in Diagnostic 16.30,
+\[
+S=\{1,2,3,4,8,19,25,26,39,43,44\},
+\]
+with previous endpoint \(95\), and tests the deferred targets
+\[
+25,\ 26,\ 43,\ 44.
+\]
+For each target it tries to add a later block of size at most \(2\), with
+candidate values through \(150\), and asks for either an ordinary
+singleton witness or a strict high-excess singleton witness.
+
+No target is protected in this bounded search. In every case the strongest
+failed window is obtained after adding
+\[
+(96,99),
+\]
+where the window
+\[
+[99,132]
+\]
+has all \(34\) values represented in \(4S'\), but all \(34\) also lie in
+\[
+4(S'\setminus\{q\})
+\]
+for the tested target \(q\). The first poison examples are
+\[
+99=1+98,\quad 100=1+99,\quad 101=1+100,
+\]
+with the tails in \(3(S'\setminus\{q\})\).
+
+Thus the simplest staggered repair of the first interval bridge debt
+inherits the same shifted-cover poisoning as the same-window attempt. This
+does not rule out longer staggered constructions, but it shows that a
+successful construction must do more than postpone each deferred filler by
+one small bridge block.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21635,6 +21675,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   structure: any infinite deferred set either has infinitely many singleton
   late-bad elements, so the singleton analysis recurs at later windows, or
   contains a nonsingleton late-bad prefix-front.
+* Diagnostic 16.32 tests the first staggered repair of the interval-marker
+  debt block and finds no bounded one-step singleton protection for the
+  deferred fillers \(25,26,43,44\); the best next window is completely
+  represented but completely poisoned.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
