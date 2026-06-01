@@ -31,7 +31,10 @@ many active endpoints. Warning 8.5a.7c and the parity-block diagnostics
 show that this escape need not produce the complete prefix-link hypergraph
 of the enumerated-Schreier route; the remaining debt is promotion of those
 moving active colors into future barrier vertices without creating
-recurrent finite palettes or poisoned promoted-pair intervals.
+recurrent finite palettes or poisoned promoted-pair intervals. Lemma
+8.5a.7e further rules out bounded-fiber mobile packets on a sparse
+deletion, so any surviving obstruction must force unbounded private-color
+fibers or \(F+F\)-exception mass at ambient scale.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
@@ -6210,6 +6213,97 @@ excluded in the remaining \(k=2\) case by Corollary 8.3b. This is the
 combinatorial content of the promoted-color debt: active colors from one
 packet must become vertices in later packet edges often enough that every
 infinite deletion contains a whole active edge.
+
+### Lemma 8.5a.7e: Sparse deletion avoids bounded-fiber mobile packets
+
+Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
+order-2 threshold \(N_0\). Fix constants
+\[
+D\ge0,\qquad L\ge1.
+\]
+Then there is an infinite set
+\[
+B=\{b_1<b_2<\cdots\}\subset A
+\]
+with the following property. No finite nonempty
+\[
+F\subset B,\qquad r=|F|,
+\]
+has a witness \(w\) such that:
+
+1. \(w\notin3(A\setminus F)\);
+2. \(w\ge\max F-D\);
+3. the active retained rows
+   \[
+   R(F,w)=\{e\in A\setminus F:\ e\le w-N_0,\ w-e\notin F+F\}
+   \]
+   admit a private-color assignment
+   \[
+   \chi:R(F,w)\to F
+   \]
+   with
+   \[
+   w-e-\chi(e)\in A\setminus F,\qquad
+   e+\chi(e)\notin2(A\setminus F)
+   \]
+   for every \(e\in R(F,w)\), and with every fiber satisfying
+   \[
+   |\chi^{-1}(f)|\le L\qquad(f\in F).
+   \]
+
+Proof. First note the capacity bound. If \(F,w,\chi\) satisfy the displayed
+properties, then every element
+\[
+e\in A\cap[1,w-N_0]
+\]
+is in one of three classes:
+
+* \(e\in F\), giving at most \(r\) choices;
+* \(e\notin F\) and \(w-e\in F+F\), giving at most \(|F+F|\le r(r+1)/2\)
+  choices;
+* \(e\in R(F,w)\), giving at most \(Lr\) choices by the fiber bound.
+
+Hence
+\[
+A(w-N_0)\le r+\frac{r(r+1)}2+Lr\le (L+2)r^2. \tag{1}
+\]
+
+Now construct \(B\) recursively. Since \(A(x)\to\infty\), choose
+\[
+b_r\in A
+\]
+strictly increasing so fast that
+\[
+A(b_r-D-N_0)>(L+2)r^2 \tag{2}
+\]
+for every \(r\ge1\), ignoring finitely many negative arguments by starting
+far enough out. Let \(B=\{b_r:r\ge1\}\).
+
+Suppose a finite \(F\subset B\) of size \(r\) satisfied the three
+properties with witness \(w\). Then
+\[
+\max F\ge b_r,
+\]
+and by \(w\ge\max F-D\),
+\[
+w-N_0\ge b_r-D-N_0.
+\]
+Therefore (2) gives
+\[
+A(w-N_0)>(L+2)r^2,
+\]
+contradicting the capacity bound (1). \(\square\)
+
+In a \(k=2\) counterexample, apply Corollary 3.1c to the sparse set
+\(B\) supplied by the lemma. Any sufficiently late inclusion-minimal
+late-bad edge inside \(B\) has a witness \(w\ge\max F-1\), so it satisfies
+condition (2) with \(D=1\). Lemma 8.4c supplies private colors for all
+non-\(F+F\) retained rows. Hence, for every fixed \(L\), such an edge must
+force some active color to serve more than \(L\) retained rows. The
+surviving mobile-color obstruction is therefore not genuinely injective on
+sparse deletions: it must create unbounded private-color fibers, or use
+deleted-pair exceptions \(F+F\) at rank comparable to the ambient counting
+function.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -12760,6 +12854,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.5a.7d adds the block-selector obstruction: independent
   mobile-injective packets are not a barrier, since an infinite selector can
   take one vertex from each packet and contain no whole non-singleton edge.
+* Lemma 8.5a.7e adds a density-capacity obstruction: for any fixed fiber
+  bound \(L\), a sparse deletion can avoid every late mobile packet whose
+  rank-\(r\) private coloring serves at most \(L\) rows per active color.
+  Thus a genuine counterexample must force unbounded private-color fibers
+  or \(F+F\)-exception mass at ambient scale.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and
