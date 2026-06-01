@@ -3170,3 +3170,9 @@ source of growth beyond Ramsey.
   the delete-saturated mask the largest size-`8` bucket is also the largest
   complement bucket, with max regular order `5`.  This keeps the bucket
   diagnostic aligned with complement-symmetric reductions.
+- 2026-06-01: Added Lemma 10A and `automorphism_orbits.py`.  Every
+  automorphism orbit induces a vertex-transitive, hence regular, subgraph; so
+  every counterexample has all automorphism orbits below the target size.  The
+  `14`-vertex add-saturated mask has largest orbit `4`, while the
+  delete-saturated mask and the `C_reg(1,5)>12` mask are rigid.  Thus the
+  finite obstruction masks are not large-symmetry artifacts.

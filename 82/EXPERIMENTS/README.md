@@ -319,6 +319,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `balanced_pair_extension.py`: searches the broader Lemma 27A criterion,
   where equal-sized one-sided difference subsets only need to induce the
   required regular graph between themselves, not a homogeneous template.
+- `automorphism_orbits.py`: brute-force small-mask automorphism orbit
+  diagnostic.  Automorphism orbits induce regular subgraphs by Lemma 10A, so
+  this quickly rules out highly symmetric finite obstruction candidates.
 - `pair_defect_witness.py`: checks the two-defect pair-role equations from
   Lemma 27H for near-regular witnesses created by edge perturbations.
 - `pair_role_witness.py`: prints the exact four-role pair profile equations

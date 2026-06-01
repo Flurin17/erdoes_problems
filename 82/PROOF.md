@@ -6725,6 +6725,43 @@ cells in structured graphs, but random-like graphs typically refine to
 singletons.  Thus this is another useful certificate that does not address the
 hard `C`-Ramsey core by itself.
 
+## Lemma 10A: Automorphism Orbits Are Regular
+
+Let a group `Gamma` act on a graph `G` by automorphisms.  Then every orbit of
+this action induces a regular subgraph.  In particular, if `G` has no regular
+induced subgraph on at least `k` vertices, then every automorphism orbit of
+`G` has size less than `k`.
+
+Proof.  Let `O` be an orbit and let `x,y in O`.  Choose
+`gamma in Gamma` with `gamma x=y`.  Because `gamma` is an automorphism and
+preserves the orbit `O`, it maps
+
+```text
+N_G(x) cap O
+```
+
+bijectively onto
+
+```text
+N_G(y) cap O.
+```
+
+Thus every vertex of `O` has the same number of neighbors inside `O`, so
+`G[O]` is regular.  The final assertion is immediate.  QED.
+
+This is a special source of equitable partition cells: automorphism orbits are
+equitable, and transitive induced subgraphs are regular.  Therefore highly
+symmetric constructions cannot be extremal at scales above the target.
+
+The helper `EXPERIMENTS/automorphism_orbits.py` checks this certificate for
+small fixed masks.  On the `14`-vertex threshold-`7` add-saturated mask
+`765415324481232608887291903`, the largest automorphism orbit has size `4`.
+On the delete-saturated mask `88255234986600583676821506` and on the
+`C_reg(1,5)>12` mask `25366485577502803966`, all automorphism orbits are
+singletons.  Thus the recorded finite obstructions are not explained by large
+symmetry; the first has only small residual symmetry, and the latter two are
+rigid under this diagnostic.
+
 ## Lemma 11: Repeated Degree Gives Bounded Spread
 
 Let `H` be an induced subgraph of `G`, and let `A subset V(H)` be a set of
