@@ -18909,6 +18909,52 @@ burden from Corollary 16.5, or rely heavily on singleton-\(b\) holes. The
 latter branch is exactly where the \(k=3\) singleton analysis only gives
 \(2A\)-recurrence rather than \(A\)-recurrence.
 
+### Diagnostic 16.7: High-excess singleton pair stages are locally compatible
+
+The obstruction in Corollary 16.5 is not, by itself, a local impossibility.
+The script `EXPERIMENTS/high_excess_pair_seed_search.py` searches for
+singleton \(k=3\) stages in which one new point \(b\) has pair witnesses
+against every old endpoint \(a\), and every such witness satisfies
+\[
+w-b-2m_0\ge\max A_{\rm old}. \tag{1}
+\]
+Condition (1) makes the old-padder part of the Corollary 16.4 shadow
+interval empty.
+
+The first small seed found is
+\[
+A_{\rm old}=\{1,2,3,4\},\qquad N=4,\qquad b=8.
+\]
+Here \(3A_{\rm old}\) covers from \(3\) through \(12\), while
+\[
+3(A_{\rm old}\cup\{8\})
+\]
+covers through \(20\). The stage can declare endpoint \(17\), leaving the
+two-point positive-summand buffer, and has high-excess pair witnesses
+\[
+\begin{array}{c|c}
+a & w\\ \hline
+1 & 17\\
+2 & 17\\
+3 & 15\\
+4 & 14
+\end{array}
+\]
+with \(w\notin4((A_{\rm old}\cup\{8\})\setminus\{a,8\})\).
+
+The greedy high-excess singleton chain then adds \(19\) at the next stage,
+declaring endpoint \(29\) with coverage through \(31\), and stalls at the
+third stage:
+\[
+\{1,2,3,4\}\to\{1,2,3,4,8\}
+\to\{1,2,3,4,8,19\}.
+\]
+Thus the high-excess escape is genuinely locally compatible, but the
+observed finite chain still has the same rapid endpoint/buffer exhaustion
+seen in the robust-booster searches. Any counterexample along this route
+would need a non-greedy or larger-block high-excess design, not just a
+single prepared marker at each stage.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -19911,6 +19957,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   prefilter rejects most robust-booster third-stage candidates by missing
   shadow rows, and a non-singleton witness for one new point can serve at
   most four old endpoints.
+* Diagnostic 16.7 shows the high-excess escape is locally compatible:
+  \(\{1,2,3,4\}\) can add \(8\) with high-excess pair witnesses for all old
+  endpoints and a two-point buffer, but the greedy singleton chain stalls
+  after adding \(19\).
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

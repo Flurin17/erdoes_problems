@@ -602,3 +602,12 @@ A bounded non-greedy DFS with candidate values up to `110`, increments of
 size at most `3`, and slack `100` also found no chain beyond depth `2`.
 With wider first/second-stage enumeration, alternative first moves exist
 but the branches tested still have no third extension.
+
+`high_excess_pair_seed_search.py` searches for non-residue singleton
+stages satisfying the same high-excess condition. It finds the local seed
+`old=[1,2,3,4]`, endpoint `4`, new point `8`, declared endpoint `17`,
+and coverage through `20`; all old-new pairs have high-excess witnesses.
+The greedy high-excess singleton chain then adds `19`, declares endpoint
+`29`, covers through `31`, and stalls at the third stage. This records
+local compatibility of the high-excess escape without giving an iterable
+construction.

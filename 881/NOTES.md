@@ -2200,6 +2200,17 @@ has size at most four. Therefore one new point can dominate many old
 endpoints only by using many distinct witnesses, or by producing many
 singleton-\(b\) holes. The second branch is exactly where the known
 \(k=3\) singleton argument stalls at \(2A\)-recurrence.
+The new `high_excess_pair_seed_search.py` shows that the high-excess escape
+is locally compatible outside the modulo-\(10\) booster seed. It finds
+\[
+\{1,2,3,4\}\xrightarrow{\,8\,}
+\{1,2,3,4,8\}
+\]
+with endpoint \(17\), coverage through \(20\), and high-excess pair
+witnesses for every old endpoint. The greedy singleton continuation adds
+\(19\), declares endpoint \(29\), covers through \(31\), and then stalls.
+So high-excess witnesses are not locally impossible, but the singleton
+version still runs into rapid buffer exhaustion.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 
