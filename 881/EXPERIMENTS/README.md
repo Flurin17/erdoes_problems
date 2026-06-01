@@ -721,3 +721,10 @@ endpoint.
 This implements the exact witness-window criterion of Corollary 16.25:
 private candidates for `q` are represented values in `4S` that avoid every
 shift `p + 3(S \\ {q})` from retained padders `p`.
+
+`bridge_sidon_pressure.py` evaluates Corollary 16.28 numerically. For the
+interval-marker model with `L=4`, the default run shows the first possible
+next marker `x=19` is still in the near-range escape, while
+`x=1600=100L^2` is already beyond the Sidon-pressure threshold: any bridge
+block inside `[x,2x-2]` covering `[x+13,2x]` cannot have a simultaneous
+gate-independent half-packet over its own rows.

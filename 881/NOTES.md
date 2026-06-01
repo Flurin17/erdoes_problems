@@ -2449,6 +2449,10 @@ rows forces
 This gives a quick finite pressure test for future staged constructions:
 dense interval coverage by a small old sumset and simultaneous same-window
 protection are incompatible beyond Sidon scale.
+The script `bridge_sidon_pressure.py` evaluates this inequality directly.
+For the interval-marker model at \(L=4\), the first possible next marker
+\(x=19\) remains in the near-range escape, while \(x=1600=100L^2\) already
+violates the inequality for any bridge block contained in \([x,2x-2]\).
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
