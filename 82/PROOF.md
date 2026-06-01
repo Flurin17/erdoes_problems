@@ -8513,7 +8513,7 @@ independent set of order greater than `sqrt(s)`.  QED.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 360 h^5 P_h^2.
+G(h) <= 148 h^5 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
@@ -8522,46 +8522,45 @@ Proof.  Let `P=P_h`, and suppose for contradiction that `G` is an `n`-vertex
 graph with no regular induced subgraph on at least `h` vertices, where
 
 ```text
-n > 360 h^5 P^2.
+n > 148 h^5 P^2.
 ```
 
-Partition the vertices by their degrees in `G` into intervals of length `P`:
+Partition the vertices by their exact degrees in `G`:
 
 ```text
-V_t={v : tP <= deg_G(v) < (t+1)P}.
+V_d={v : deg_G(v)=d}.
 ```
 
-First consider one nonempty bucket `U=V_t`.  For any two vertices
-`u,v in U`, the degree difference in `G` is less than `P`.  Lemma 28D gives
+First consider one nonempty bucket `U=V_d`.  For any two vertices `u,v in U`,
+Lemma 28D gives
 
 ```text
-|(N(u) triangle N(v))\{u,v}| < 3P.
+|(N(u) triangle N(v))\{u,v}| < 2P.
 ```
 
-Therefore their degrees inside `G[U]` differ by less than `3P`.  Thus
-`G[U]` has degree spread at most `3P`.
+Therefore their degrees inside `G[U]` differ by less than `2P`.  Thus
+`G[U]` has degree spread at most `2P`.
 
 Apply Corollary 28D.1 to the induced graph `G[U]`, whose balanced pair
 parameter is still controlled by the same global value `P=P_h`.  With spread
-`s=3P`, any bucket of size greater than
+`s=2P`, any bucket of size greater than
 
 ```text
-8h(2P+3P+1/2)+1 <= 45hP
+8h(2P+2P+1/2)+1 <= 37hP
 ```
 
 would contain a regular induced subgraph on at least `h` vertices.  Hence
-every bucket has size at most `45hP`.
+every bucket has size at most `37hP`.
 
 Let `b` be the number of nonempty buckets.  If
 
 ```text
-b > 8P h^4,
+b > 4P h^4,
 ```
 
-then one parity class of bucket indices contains representatives
-`v_1,...,v_m` from more than `4P h^4` nonempty buckets.  Ordered by degree,
-any two representatives from this parity class have degree difference at
-least `P`.  Therefore, for `j<k`, Lemma 28D gives
+then choose representatives `v_1,...,v_m` from all nonempty degree buckets,
+ordered by increasing degree.  For every `j<k`, the degree of `v_j` is
+strictly smaller than the degree of `v_k`, so Lemma 28D gives
 
 ```text
 |N(v_j)\N(v_k)| < P.
@@ -8588,19 +8587,19 @@ Lemma 28E.1 gives a clique or independent set of order greater than `h`, a
 forbidden regular induced subgraph.  Hence
 
 ```text
-b <= 8P h^4.
+b <= 4P h^4.
 ```
 
 Combining the bucket count and bucket size bounds,
 
 ```text
-n <= b * 45hP <= 360 h^5 P^2,
+n <= b * 37hP <= 148 h^5 P^2,
 ```
 
 contradicting the assumed value of `n`.  This proves the displayed bound on
 `G(h)`.
 
-If `P_h=2^{o(h)}`, then the polynomial factor `360h^5` is also
+If `P_h=2^{o(h)}`, then the polynomial factor `148h^5` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 

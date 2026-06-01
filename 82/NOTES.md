@@ -2502,11 +2502,12 @@ source of growth beyond Ramsey.
   replaces the earlier `O(h^2P_h)` bounded-spread bucket bound by
   `O(hP_h)`.
 - 2026-06-01: Sharpened Proposition 28F again to
-  `G(h) <= 360 h^5 P_h^2`.  Lemma 28E.1 replaces the fixed-size random subset
+  `G(h) <= 148 h^5 P_h^2`.  Lemma 28E.1 replaces the fixed-size random subset
   inversion lemma by a sparse-inversion deletion lemma: if an ordered graph
   has fewer than `m^3/(8s^2)` inversion triples and `m>=2s`, then it has a
-  clique or independent set larger than `sqrt(s)`.  This reduces the number
-  of degree buckets from `O(P_h h^6)` to `O(P_h h^4)`.
+  clique or independent set larger than `sqrt(s)`.  Using exact degree
+  buckets, rather than length-`P_h` buckets and a parity subfamily, reduces
+  the number of buckets to `O(P_h h^4)` and the bucket size to `37hP_h`.
 - 2026-06-01: Added Lemma 28G.  The local balanced pair parameter satisfies
   `G(ceil(h/2)) <= P_h <= ceil(G(h)/2)`, so `P_h=2^{o(h)}` is actually
   equivalent to the original inverse conjecture.  Proposition 28F is still
