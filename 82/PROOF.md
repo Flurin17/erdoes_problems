@@ -14932,6 +14932,22 @@ python3 82/EXPERIMENTS/regular_spectrum_mass.py 14 --mask 3912193921158682796400
 
 The same diagnostic reports that deleting any vertex from this graph leaves
 spectrum mass `13`; in the notation of Lemma 28J.8, it is deletion-tight.
+Another violation from the same extension profile,
+
+```text
+429588619789184147001379,
+```
+
+has minimum degree `2`, degree sequence
+
+```text
+4,4,6,3,7,7,8,8,4,3,2,5,4,3,
+```
+
+and the same spectrum `{0:5,1:4,2:4}`.  Thus even the stronger statement
+"minimum degree at least `2` implies linear spectrum mass" is false if
+"linear" means the exact bound `sum_d s_d(G)>=|G|`.
+
 Thus Conditional Corollaries 28J.1 and 28J.1a remain valid conditional
 statements, but their linear spectrum-mass hypothesis and the
 equality-extension lemma are false.  Future spectrum arguments must target a

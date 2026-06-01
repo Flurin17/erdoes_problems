@@ -4077,15 +4077,16 @@ source of growth beyond Ramsey.
   defect-one graph whose spectrum mass drops when the leaf-neighbor is
   deleted.  This focuses the connected target on either minimum-degree-`2`
   graphs with `mu<n`, or non-deletion-tight defect-one graphs.
-- 2026-06-01: Added a `--min-degree` filter to `regular_spectrum_mass.py` and
-  tested the total minimum-degree-`2` spectrum target.  This target is
-  different from the already-refuted high-core shortcut
-  `sum_{d>=2}s_d>=n`: the low coordinates `s_0,s_1` are still allowed.
-  Exact labelled `n=7` with minimum degree at least `2` has minimum
-  `mu=9>7`.  Seeded connected local search at `n=13` starting from the
-  equality graph `1584140989738554425379` stayed at `mu=13`, while connected
-  minimum-degree-`2` searches at `n=14` and `n=16` found best masses `15` and
-  `21`.  No minimum-degree-`2` graph with `mu<n` is currently known.
+- 2026-06-01: Added a `--min-degree` filter to `regular_spectrum_mass.py`,
+  then refuted the stronger total minimum-degree-`2` target.  Among the eight
+  fourteen-vertex linear-mass violations extending
+  `1584140989738554425379`, the graph with mask
+  `429588619789184147001379` has degree sequence
+  `(4,4,6,3,7,7,8,8,4,3,2,5,4,3)`, hence minimum degree `2`, but still has
+  `mu=13<14` and spectrum `{0:5,1:4,2:4}`.  It is deletion-tight: deleting
+  any vertex leaves mass `13`.  Therefore the connected defect-one target is
+  sharp even inside the minimum-degree-`2` regime; the next proof cannot rely
+  on peeling leaves down to a stronger 2-core theorem.
 - 2026-06-01: Added the square-spectrum route.  Let
   `Q(G)=sum_d s_d(G)^2`.  If `Q(G)>=c|G|^2` for some absolute `c>0`, then
   for two `M`-vertex graphs failing the spectrum match at threshold `h`, each
