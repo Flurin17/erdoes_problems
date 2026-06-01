@@ -13921,6 +13921,60 @@ this disjoint-union obstruction to the pair route, one must use
 nonhomogeneous regular spectrum entries rather than only cliques and
 independent sets.
 
+**Conditional Corollary 28J.1: Spectrum Mass Would Give Quadratic
+`D_spec`.**  For a graph `J`, let
+
+```text
+s_d(J)=max{|S| : J[S] is d-regular},
+```
+
+with `s_d(J)=0` if there is no induced `d`-regular subgraph.  Suppose that
+every `M`-vertex graph `J` satisfies the spectrum-mass inequality
+
+```text
+sum_d s_d(J) >= M.
+```
+
+Then
+
+```text
+D_spec(h) <= floor((h-1)^2/2)+1.
+```
+
+Proof.  Let
+
+```text
+M >= floor((h-1)^2/2)+1,
+```
+
+and let `J_1,J_2` be graphs on `M` vertices.  If either graph has a regular
+induced subgraph on at least `h` vertices, then the first alternative in the
+definition of `D_spec(h)` holds.
+
+Otherwise every regular induced subgraph in either graph has order at most
+`h-1`.  Hence only degrees `0,1,...,h-2` can contribute to the spectra.  Put
+`s_d=s_d(J_1)` and `t_d=s_d(J_2)`.  If the spectrum-matching alternative
+failed, then for every `d`,
+
+```text
+s_d+t_d <= h-1.
+```
+
+Summing over the `h-1` possible degrees gives
+
+```text
+sum_d s_d + sum_d t_d <= (h-1)^2.
+```
+
+But the assumed spectrum-mass inequality gives
+
+```text
+sum_d s_d + sum_d t_d >= 2M > (h-1)^2,
+```
+
+contradiction.  Therefore some degree `d` has `s_d+t_d>=h`, which is exactly
+the spectrum-matching alternative.  QED.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.
