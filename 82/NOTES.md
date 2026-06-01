@@ -4283,3 +4283,16 @@ source of growth beyond Ramsey.
   and fifteen-vertex defect descendants do not.  Thus the obstruction to the
   `Q>=n^{3/2}/3` decomposition route first appears exactly at the same
   spectrum-defect family.
+- 2026-06-01: Added the power-spectrum deletion-drop lemma.  For
+  `Phi_p=sum_d s_d^p`, the total drop over all vertex deletions is at most
+  `sum_d s_d^{p+1}`.  The proof uses essential vertices: only vertices lying
+  in every maximum `d`-regular witness can lower the `d` coordinate, and
+  there are at most `s_d` such vertices.  This gives a quantitative induction
+  handle for the superlinear square-spectrum target.
+- 2026-06-01: Added `--deletion-profile` to `spectrum_power_search.py`.  On
+  the fifteen-vertex defect extension `98404699529372860578279459`, the
+  square-spectrum drop is zero for vertices `0..12` and equals `11` exactly
+  for the two independence-essential vertices `13,14`; total drop is `22`,
+  far below the crude bound `344`.  On the fourteen-vertex sharp defect
+  `429588619789184147001379`, every deletion has zero square-spectrum drop.
+  Thus deletion induction must exploit more than the averaged drop bound.

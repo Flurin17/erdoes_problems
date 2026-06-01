@@ -15926,6 +15926,48 @@ python3 82/EXPERIMENTS/distinct_regular_partition.py 14 --mask 42958861978918414
 python3 82/EXPERIMENTS/distinct_regular_partition.py 15 --mask 98404699529372860578279459
 ```
 
+**Lemma 28J.10e.6: Deletion Drop Bound For Power Spectra.**  For `p>=1`,
+define
+
+```text
+Phi_p(G)=sum_d s_d(G)^p.
+```
+
+If `G` has `n` vertices, then
+
+```text
+sum_{v in V(G)} (Phi_p(G)-Phi_p(G-v))
+  <= sum_d s_d(G)^{p+1}.
+```
+
+In particular, for the square spectrum `Q=Phi_2`,
+
+```text
+sum_{v in V(G)} (Q(G)-Q(G-v)) <= sum_d s_d(G)^3.
+```
+
+Proof.  Fix a degree `d`, and put `s=s_d(G)`.  If `s=0`, there is nothing to
+prove.  Let `E_d` be the set of vertices that are `d`-essential, meaning that
+they lie in every induced `d`-regular subgraph of order `s`.  Since any one
+maximum witness has `s` vertices, `|E_d|<=s`.
+
+If `v notin E_d`, Lemma 28J.10d.1b gives `s_d(G-v)=s_d(G)`, so the
+degree-`d` coordinate contributes no drop when deleting `v`.  If
+`v in E_d`, the coordinate drop in the `p`th power is at most `s^p`.  Hence
+
+```text
+sum_v (s_d(G)^p-s_d(G-v)^p) <= |E_d| s^p <= s^{p+1}.
+```
+
+Summing this inequality over all degrees `d` proves the claim.  QED.
+
+This lemma is a possible route to an induction for superlinear square
+spectrum: in a minimal counterexample to `Q(G)>=c n^{1+epsilon}`, every vertex
+deletion has `Q(G-v)` close to `Q(G)`, so the graph must have very small
+average square-spectrum deletion drop.  The known defect examples are
+consistent with this: most nonessential deletions preserve all large spectrum
+coordinates.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

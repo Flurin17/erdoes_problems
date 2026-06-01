@@ -18,6 +18,7 @@ from collections import Counter
 
 import column_drop_census as cdc
 from regular_spectrum_mass import is_connected, spectrum_mass
+from spectrum_mass_critical import delete_vertex
 
 
 def power_value(by_degree: dict[int, int], power: int) -> int:
@@ -37,6 +38,37 @@ def fixed(n: int, mask: int, power: int) -> None:
     print(f"power_sum={value}")
     print(f"normalized={value / (n**power)}")
     print(f"by_degree={by_degree}")
+
+
+def deletion_profile(n: int, mask: int, power: int) -> None:
+    pc = cdc.precompute(n)
+    pc_minus = cdc.precompute(n - 1)
+    adj = cdc.adjacency(n, mask, pc)
+    mass, by_degree = spectrum_mass(adj, pc)
+    value = power_value(by_degree, power)
+    bound = sum(order ** (power + 1) for order in by_degree.values())
+    total_drop = 0
+    print(f"n={n}")
+    print(f"mask={mask}")
+    print(f"connected={is_connected(adj)}")
+    print(f"spectrum_mass={mass}")
+    print(f"power={power}")
+    print(f"power_sum={value}")
+    print(f"by_degree={by_degree}")
+    for vertex in range(n):
+        smaller = delete_vertex(adj, vertex)
+        smaller_mass, smaller_by_degree = spectrum_mass(smaller, pc_minus)
+        smaller_value = power_value(smaller_by_degree, power)
+        drop = value - smaller_value
+        total_drop += drop
+        print(
+            f"delete vertex={vertex} mass={smaller_mass} "
+            f"power_sum={smaller_value} drop={drop} "
+            f"by_degree={smaller_by_degree}"
+        )
+    print(f"total_drop={total_drop}")
+    print(f"drop_bound=sum_s_d_power_{power + 1}={bound}")
+    print(f"bound_holds={total_drop <= bound}")
 
 
 def exact(n: int, power: int, connected_only: bool) -> None:
@@ -200,6 +232,7 @@ def main() -> None:
     parser.add_argument("--power", type=int, default=2)
     parser.add_argument("--mask", type=int)
     parser.add_argument("--sample", type=int, default=0)
+    parser.add_argument("--deletion-profile", action="store_true")
     parser.add_argument("--local-steps", type=int, default=0)
     parser.add_argument("--restarts", type=int, default=1)
     parser.add_argument("--seed", type=int, default=1)
@@ -210,7 +243,9 @@ def main() -> None:
     if args.power < 1:
         parser.error("--power must be positive")
 
-    if args.mask is not None:
+    if args.mask is not None and args.deletion_profile:
+        deletion_profile(args.n, args.mask, args.power)
+    elif args.mask is not None:
         fixed(args.n, args.mask, args.power)
     elif args.sample:
         sample(args.n, args.power, args.sample, args.seed, args.connected_only)
