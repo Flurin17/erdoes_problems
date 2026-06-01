@@ -12445,7 +12445,7 @@ a regular induced subgraph on at least `h` vertices.
 Since every clique and every independent set is regular,
 
 ```text
-C_full^reg(P,h) <= C_full(P,h).
+C_full^reg(P,h) <= C_full(P,h) <= 4P(h-2)+2        for h>=2.
 ```
 
 **Corollary 28D.6b: Global Reduction Through Regular Full-Drop.**  For every
