@@ -22641,6 +22641,47 @@ Proof. Pigeonhole as in Corollary 16.68: from (2) and \(|P|\le r\), some
 \]
 Lemma 16.69 applied to this \(f\) and \(U_f\) gives (3). \(\square\)
 
+### Lemma 16.71: Robust blocker core length
+
+In the setting of Lemma 16.69, the interval \(R_K(\delta,I;r)\) has length
+\[
+\max\{0,\ n-2M_\delta+4\ell_0-2m\}. \tag{1}
+\]
+Equivalently, the robust blocker core is nonempty exactly when
+\[
+n-2M_\delta+4\ell_0-2m\ge1. \tag{2}
+\]
+
+Proof. The left and right endpoints in (4) of Lemma 16.69 are
+\[
+L=2(d-\ell_0+1)-b+M_\delta-1
+\]
+and
+\[
+R=2(c+\ell_0-1)-a-M_\delta+1.
+\]
+If \(R<L\), the intersection with \(\mathbb N\) is empty. Otherwise its
+length is
+\[
+R-L+1.
+\]
+Using
+\[
+d=c+m-1,\qquad b=a+n-1,
+\]
+we compute
+\[
+R-L+1=n-2M_\delta+4\ell_0-2m.
+\]
+This proves (1), and (2) is the nonemptiness criterion. \(\square\)
+
+Thus robust auxiliary blockers are strongest when the retained-run
+guarantee \(\ell_0\) is a large fraction of the auxiliary interval length
+and the required packet density is high enough that \(M_\delta\) is small.
+For low-density packets or high deletion rank, the robust core may be empty;
+then the proof must use more detailed information about the actual retained
+run, not just the rank bound.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -23888,6 +23929,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   possible blocker windows from such runs is a robust forbidden gate core.
   Bounded palettes carrying dense packets must have at least one active
   color outside this core.
+* Lemma 16.71 gives the exact core length
+  \(\max\{0,n-2M_\delta+4\ell_0-2m\}\). This records when the robust
+  blocker is genuinely present and when the argument must use the actual
+  retained run rather than only the rank-\(r\) guarantee.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

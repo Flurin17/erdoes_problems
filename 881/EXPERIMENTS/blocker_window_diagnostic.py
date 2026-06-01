@@ -118,16 +118,20 @@ def robust_core(test: Interval, block: Interval, rank: int, eta_num: int, eta_de
 
 def check_robust_core(test: Interval, block: Interval, rank: int, eta_num: int, eta_den: int) -> int:
     core = robust_core(test, block, rank, eta_num, eta_den)
+    n = test.length
+    m = block.length
+    ell_0 = (m - rank + rank) // (rank + 1)
+    m_eta = ((eta_den - eta_num) * n) // eta_den + 1
+    expected_length = max(0, n - 2 * m_eta + 4 * ell_0 - 2 * m)
+    actual_length = 0 if core.lo > core.hi else core.length
+    if actual_length != expected_length:
+        raise AssertionError((test, block, rank, core, actual_length, expected_length))
     if core.lo > core.hi:
         print(
             f"robust I=[{test.lo},{test.hi}] K=[{block.lo},{block.hi}] "
             f"rank={rank} eta={eta_num}/{eta_den} core=empty"
         )
         return 0
-    n = test.length
-    m = block.length
-    ell_0 = (m - rank + rank) // (rank + 1)
-    m_eta = ((eta_den - eta_num) * n) // eta_den + 1
     if m_eta > 2 * ell_0 - 1:
         return 0
 

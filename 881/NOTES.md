@@ -92,7 +92,9 @@ Corollary 16.70 remove dependence on the exact finite deletion pattern
 inside an auxiliary interval: a long interval \(K\) has a robust blocker
 core coming from the retained run left after deleting at most \(r\) points,
 and dense bounded-palette packets must place at least one active color
-outside that core.
+outside that core. Lemma 16.71 gives the exact core length
+\(\max\{0,n-2M_\delta+4\ell_0-2m\}\), clarifying when the rank-only
+blocker is nonempty and when actual retained-run data is needed.
 
 ## Definitions
 
