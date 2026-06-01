@@ -2486,6 +2486,13 @@ old-row escapes are absent, and the split escape set is
 E=\{L+1,\ldots,2L\}\subset(p/2,p),
 \]
 so it has no complementary pair.
+Warning 8.5a.7z.12h.4a tunes the second deleted gate to
+\(q=N+3L-2\). Then the retained complements \(X=p-E=\{1,\ldots,L\}\) are
+large, but only one future target \(w-x\) is covered by \(2A\); the rest are
+old full two-sum gaps. It also records the promotion debt: any shadow point
+\(z\in E\) retained in \(A\) immediately repairs the witness because
+\(w-z=d+(p-z)\in2C\). Thus this cartridge cannot be iterated as a selector
+barrier without turning promoted shadows into deleted packet elements.
 Lemma 8.5a.7z.12h.5 reframes successful safe fillers as future-defect
 debt. In the greedy-safe upper-stop \(2500\) run, the final defect
 \(3101\) was added as the first retained filler; in the default run the
@@ -2546,6 +2553,13 @@ a true cross-window selector front of moving compressed spikes, no pair
 promotion, no stable finite row/gate/shift palettes, and enough coverage
 fillers to bridge the two-sum gaps without repairing the protected
 witnesses.
+Lemma 8.5a.8a now separates the purely front-theoretic part of the next
+step: any unbounded obstruction statistic on a prefix-front either remains
+unbounded in a proper one-point section, or becomes a first-coordinate shell
+whose section bounds are finite for each first point and diverge only as the
+first point moves. The open arithmetic issue is to show that the active
+trace/private-color statistic relevant here survives section descent and, in
+the shell case, really has the first-prefix structure handled in Section 13.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

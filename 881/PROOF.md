@@ -9256,6 +9256,94 @@ C=\{1,2,3,4,5,20,21,22,23,24\},\quad F=\{11,30\},
 p=11,\quad d=43,\quad w=54,\quad E=\{6,7,8,9,10\}.
 \]
 
+### Warning 8.5a.7z.12h.4a: Shadow complements need not be covered runways
+
+The high-sided shadow example can be tuned so that the retained complements
+of the shadows are numerous, but their future targets remain almost entirely
+uncovered by the old full set. Thus Corollary 8.5a.7z.12h.9 genuinely needs
+a large covered-runway hypothesis.
+
+Let \(L\ge2\), choose \(N>4L\), and put
+\[
+C=[1,L]\cup[N,N+L-1],
+\]
+\[
+p=2L+1,\qquad q=N+3L-2,\qquad F=\{p,q\},
+\]
+\[
+A=C\cup F,\qquad d=2N+L-2,\qquad w=p+d=2N+3L-1.
+\]
+As in Warning 8.5a.7z.12h.4,
+\[
+[2,p-1]\subseteq2A,\qquad p\notin2A,\qquad w\notin3C,
+\]
+and there are no old-row escapes. The deleted gates are active because
+\[
+w=p+N+(N+L-2)=q+1+N.
+\]
+The split escape set is still
+\[
+E=\{L+1,\ldots,2L\}\subset(p/2,p),
+\]
+with no complementary pair.
+
+Now take its retained complement runway
+\[
+X=p-E=\{1,\ldots,L\}\subset C.
+\]
+Only the first row has its future target covered by the old full set:
+\[
+w-1=q+N\in2A.
+\]
+For \(2\le x\le L\),
+\[
+w-x\in[2N+2L-1,\ 2N+3L-3],
+\]
+which lies strictly between the retained high-high interval
+\[
+[2N,\ 2N+2L-2]\subset2C
+\]
+and the \(q\)-high interval
+\[
+[2N+3L-2,\ 2N+4L-3]\subset q+C.
+\]
+The remaining \(F+F\) and low-involving ranges are outside this interval
+when \(N>4L\). Hence
+\[
+\{x\in X:w-x\in2A\}=\{1\}.
+\]
+Thus the large shadow-complement block falls into the old full two-sum gap
+alternative of Corollary 8.5a.7z.12h.8, not into the covered-runway
+compression of Corollary 8.5a.7z.12h.9.
+
+The same computation explains why this local cartridge does not itself
+build a selector counterexample. If a shadow point
+\[
+z\in E
+\]
+is promoted into \(A\) as a retained point, then
+\[
+w-z=d+(p-z)\in2C,
+\]
+because \(p-z\in[1,L]\). Hence
+\[
+w=z+(w-z)\in3(C\cup\{z\}),
+\]
+so the old witness is immediately repaired. A promoted shadow can preserve
+the witness only by joining the deleted packet for that witness. Therefore
+the two-interval cartridge converts promoted shadows into packet debt; by
+itself it supplies local whole-cut structure, not a cross-window selector
+barrier.
+
+The script `EXPERIMENTS/shadow_escape_counterexample.py` verifies this
+variant with
+`--q-policy sparse-covered`; for example \(L=5,N=25\) gives
+\[
+q=38,\qquad E=\{6,7,8,9,10\},\qquad X=\{5,4,3,2,1\},
+\]
+and reports that the covered complement runway has size \(1\), while every
+promoted shadow point repairs \(w\) if retained.
+
 ### Lemma 8.5a.7z.12h.5: Safe fillers create future-defect debt
 
 Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
@@ -9971,6 +10059,86 @@ front-rank phenomenon. A final positive proof would combine this dichotomy
 with the enumerated-Schreier obstruction results in Section 13. A
 counterexample would have to realize the mobile injective coloring
 arithmetically while evading that shell analysis.
+
+### Lemma 8.5a.8a: Abstract section-depth dichotomy
+
+Let \(P=\{p_1<p_2<\cdots\}\) be infinite and let \(\mathcal F\) be a
+prefix-front on \(P\). Let
+\[
+\delta:\mathcal F\to\mathbb N
+\]
+be any obstruction statistic. For an initial segment \(s\) of a member of
+\(\mathcal F\), with no proper initial segment already in \(\mathcal F\),
+write
+\[
+\mathcal F_s=\{G\subset P_s:s\cup G\in\mathcal F\},
+\qquad P_s=\{p\in P:p>\max s\},
+\]
+and let
+\[
+\delta_s(G)=\delta(s\cup G).
+\]
+If \(\delta\) is unbounded on every tail of \(P\), then one of the following
+two alternatives holds:
+
+1. **section descent:** there is a one-point prefix \(a\in P\) such that
+   \(\delta_{\{a\}}\) is unbounded on every tail of \(P_{\{a\}}\);
+2. **first-coordinate shell:** for every \(a\in P\), the statistic
+   \(\delta_{\{a\}}\) is bounded on some tail of \(P_{\{a\}}\), but these
+   tail bounds are unbounded as \(a\) ranges through \(P\).
+
+More explicitly, in the second alternative there is a tail
+\[
+Q=\{q_1<q_2<\cdots\}\subset P
+\]
+and integers \(D_i\to\infty\) such that, for each \(i\), all sufficiently
+late edges of the section \(\mathcal F_{\{q_i\}}\) have
+\[
+\delta_{\{q_i\}}(G)\le D_i,
+\]
+while no single \(D\) bounds \(\delta\) on all late front edges over \(Q\).
+
+Proof. If the first alternative holds, there is nothing to prove. Otherwise,
+for each \(a\in P\) there are a tail
+\[
+P(a)\subset P_{\{a\}}
+\]
+and a finite bound \(D(a)\) such that every \(G\in\mathcal F_{\{a\}}\) with
+\[
+G\subset P(a)
+\]
+satisfies
+\[
+\delta_{\{a\}}(G)\le D(a). \tag{1}
+\]
+Build \(Q=\{q_1<q_2<\cdots\}\) recursively. Having chosen
+\[
+q_1<\cdots<q_i,
+\]
+choose the remaining tail inside
+\[
+P(q_1)\cap\cdots\cap P(q_i).
+\]
+This diagonal thinning ensures that, for each fixed \(q_i\), all sufficiently
+late section edges over \(Q\) satisfy (1) with bound \(D(q_i)\).
+
+Because \(\delta\) is unbounded on every tail of the original \(P\), it is
+still unbounded on the tail \(Q\). Therefore the sequence of section bounds
+\[
+D(q_i)
+\]
+cannot be bounded: if \(D(q_i)\le D\) eventually, then every sufficiently
+late front edge over \(Q\) would have first element \(q_i\) in the eventual
+range and would satisfy \(\delta\le D\), contradicting unboundedness on
+tails. Passing to a subsequence gives \(D(q_i)\to\infty\). \(\square\)
+
+This is only bookkeeping, but it fixes the recursive shape of Target
+8.5a.8. A counterexample whose active-trace statistic does not descend to a
+proper section must be first-coordinate coded: every fixed first point has
+only bounded late complexity, and the bound escapes solely by moving the
+first point. The remaining arithmetic task is to convert that shell into
+one of the Section 13 first-prefix configurations, or to show that the
+conversion can fail in a genuine order-\(2\) basis.
 
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
@@ -16808,6 +16976,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   genuine inclusion-minimal terminal hole do not balance the escape set:
   a two-interval model has \(E=\{L+1,\ldots,2L\}\) and no complementary
   pair for \(p=2L+1\).
+* Warning 8.5a.7z.12h.4a tunes that model so the retained complements of the
+  shadows form a large block but almost all future targets \(w-x\) are still
+  old full two-sum gaps. Promoting a shadow as retained repairs the witness,
+  so the cartridge creates deleted-packet debt rather than a selector
+  barrier.
 * Lemma 8.5a.7z.12h.5 records the future-defect debt of safe fillers:
   once a retained filler \(x\) has \(x+F\subset2C\), the later gap
   \(w-x\) is a reflected finite-batch wall unless the active packet or
@@ -16840,6 +17013,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   Corollary 8.5a.7z.12h.8 now adds that those fillers cannot form long
   fixed-witness runways: such a runway either leaves old two-sum gaps or
   creates a large private-gate fiber.
+* Lemma 8.5a.8a isolates the abstract front recursion: an unbounded
+  obstruction statistic either descends to a one-point section or becomes a
+  first-coordinate shell with finite section bounds diverging along the
+  first coordinate.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
