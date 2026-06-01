@@ -7490,6 +7490,51 @@ finite product window merely to contain many pair edges; if pairs alone
 cover all selectors on every tail, the earlier pair-barrier machinery
 already gives the desired infinite deletion.
 
+### Corollary 8.5a.7w: High-rank selector debt is cofinally forced
+
+In the remaining \(k=2\) counterexample case, for arbitrarily large
+thresholds \(L\) there are an infinite packet set
+\[
+I\subset\mathbb N
+\]
+and a selector
+\[
+x_s\in F_s\qquad(s\in I)
+\]
+such that no pair from the selector lies in \(\mathcal G_L\). For every
+such selector, Corollary 8.5a.7s still supplies
+\[
+G\in\mathcal G_L,\qquad G\subset\{x_s:s\in I\},
+\]
+and necessarily
+\[
+|G|\ge3.
+\]
+
+Proof. If the first assertion failed, then for some \(L_0\) and every
+\[
+L\ge L_0
+\]
+the pair subfamily of \(\mathcal G_L\) would product-cover every infinite
+packet selector tail. Since the condition \(v>L\) is monotone in \(L\),
+this would imply the pair-cylinder hypothesis of Corollary 8.5a.7v for
+every threshold. That corollary gives a contradiction. Hence the
+pair-avoiding selectors exist for arbitrarily large \(L\).
+
+For such an \(L\) and selector, Corollary 8.5a.7s gives some
+\[
+G\in\mathcal G_L
+\]
+contained in the selector. By construction the selector contains no pair
+from \(\mathcal G_L\), while every member of \(\mathcal G_L\) has size at
+least \(2\). Therefore this \(G\) has size at least \(3\). \(\square\)
+
+Thus the live product debt cannot be discharged by pair barriers at late
+levels. Any final positive proof must rule out rank-\(\ge3\) promoted
+edges on pair-avoiding selectors, while any negative construction must make
+those higher-rank edges persistent and arithmetic, not just abstractly
+available.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7534,12 +7579,13 @@ that these bounded-center, cofinally moving-palette, moving-row/mirror, or
 independence-number escapes are impossible under the cross-packet selector
 obligation of Corollaries 8.5a.7r--8.5a.7t and the counting pressure of
 Lemma 8.5a.7u, with Corollary 8.5a.7v ruling out the pair-cylinder
-subcover, or to construct a staged basis in which the fibers \(U\), mirrors
-\(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all escape
-while maintaining order-2 coverage and arbitrarily late finite product
-covers whose pair subfamilies are selector-avoidable. This is now the active
-form of the certificate-free obstruction; it is stronger than mobile
-injectivity and weaker than finite recurrent Sidon coloring.
+subcover and Corollary 8.5a.7w forcing rank-\(\ge3\) selector debt
+cofinally, or to construct a staged basis in which the fibers \(U\),
+mirrors \(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all
+escape while maintaining order-2 coverage and arbitrarily late finite
+product covers whose pair subfamilies are selector-avoidable. This is now
+the active form of the certificate-free obstruction; it is stronger than
+mobile injectivity and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14157,6 +14203,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.7v rules out the pair-cylinder subcase: if bad pairs alone
   product-covered every fresh-packet selector tail, the existing pair
   barrier/list-color machinery would give a good deletion.
+* Corollary 8.5a.7w records the resulting cofinal high-rank debt: for
+  arbitrarily large thresholds there is a pair-avoiding selector that still
+  contains a promoted bad edge, hence one of rank at least \(3\).
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

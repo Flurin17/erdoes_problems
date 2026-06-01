@@ -2202,6 +2202,13 @@ colors, both of which are impossible in a counterexample. Thus the
 remaining product-cover debt must be genuinely high-rank on some selector
 tail.
 
+Corollary 8.5a.7w makes this cofinal: for arbitrarily large \(L\), there is
+an infinite packet selector containing no bad pair with witness \(>L\), but
+the full product-selector barrier still forces a bad edge inside that same
+selector. Such an edge must have rank at least \(3\). The remaining
+obstruction is therefore a rank-\(\ge3\) product-cover problem on
+pair-avoiding selectors.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
