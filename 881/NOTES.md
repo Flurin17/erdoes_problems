@@ -2073,13 +2073,23 @@ generalize: once mirrors may live in lower sumsets, the residue layer has
 real adjacent-order private holes. The missing issue is elementwise
 integer lifting, not residue arithmetic.
 
-Lemma 16.0 rules out the simplest lift. If \(A=C\cup M\) has finite core
-\(C\) and tail coverage
+Lemma 16.0 rules out the simplest lift in every order. If \(A=C\cup M\) has
+finite core \(C\) and order-\(k\) tail coverage by one marker plus a fixed
+core sum,
+\[
+[N_0,\infty)\subset M+(k-1)C,
+\]
+then every finite marker deletion \(F\subset M\) is eventually repaired at
+order \(k+1\):
+\[
+[N_F,\infty)\subset 2(M\setminus F)+(k-1)C
+\subset(k+1)(A\setminus F).
+\]
+For \(k=3\) this says that if
 \[
 [N_0,\infty)\subset M+2C,
 \]
-then every finite marker deletion \(F\subset M\) is eventually repaired at
-order \(4\):
+then
 \[
 [N_F,\infty)\subset 2(M\setminus F)+2C\subset4(A\setminus F).
 \]
