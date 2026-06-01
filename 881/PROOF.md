@@ -8107,6 +8107,83 @@ selector-specific enough to avoid large outside fibers or compatible with
 the high-multiplicity branches already isolated in Corollaries 3.4d and
 8.5a.7f.
 
+### Corollary 8.5a.7z.6: Shared witness classes have finite prefix capacity
+
+Keep the hypotheses and notation of Lemma 8.5a.7z.5, and let
+\[
+R_v=A\cap[1,v-N_0]\setminus U.
+\]
+Then
+\[
+|R_v|\le |\Sigma_2^0(\mathcal C)|
+      +2|K|\max_{c\in K} r_{2,A}(v-c), \tag{1}
+\]
+with the second term interpreted as \(0\) when \(K=\varnothing\).
+
+Proof. If \(K=\varnothing\), Lemma 8.5a.7z.5 leaves only the
+\(\Sigma_2^0(\mathcal C)\) alternative, and each sum value gives at most
+one \(e\in R_v\).
+
+If \(K\ne\varnothing\), let \(M=\max_{c\in K}r_{2,A}(v-c)\). If (1)
+failed, then
+\[
+|R_v|-|\Sigma_2^0(\mathcal C)|>2|K|M,
+\]
+and Lemma 8.5a.7z.5 would give some \(c\in K\) with
+\[
+r_{2,A}(v-c)>
+M,
+\]
+a contradiction. \(\square\)
+
+Thus a witness value can be reused across a selector family only by paying
+one of two explicit prices: a large non-common two-transversal sumset, or a
+large two-sum spike at one of the common deleted colors. Since \(R_v\)
+contains the old retained prefix below \(v-N_0\) outside the finite selector
+union, this capacity inequality becomes stronger as the staged prefix below
+the witness grows.
+
+### Warning 8.5a.7z.7: Transversal constraints alone do not give selector escape
+
+The shared-witness restrictions above do not by themselves rule out the
+abstract product-selector barrier. Let
+\[
+P_i=\{p_i^0,p_i^1\}\qquad(i\ge1)
+\]
+be pairwise disjoint two-point packets. For each triple of indices
+\[
+i<j<\ell
+\]
+and each bit vector
+\[
+\varepsilon\in\{0,1\}^{\{i,j,\ell\}},
+\]
+let
+\[
+F_{\varepsilon}=
+\{p_i^{\varepsilon_i},p_j^{\varepsilon_j},p_\ell^{\varepsilon_\ell}\},
+\]
+and group the two complementary selector triples
+\[
+\{F_{\varepsilon},F_{1-\varepsilon}\}
+\]
+as one formal witness class.
+
+The resulting support family is pair-free and rank \(3\). Every infinite
+packet selector contains one of its edges: choose any three selected packet
+indices. However each two-edge complementary witness class has no singleton
+transversal; its two-transversals are simply pairs choosing one point from
+each of the complementary triples. Hence Lemma 8.5a.7z.4 is compatible with
+the abstract barrier.
+
+This example is not an arithmetic construction. It shows only that the
+next step cannot be a pure diagonal or compactness argument from
+two-transversal constraints to an escaping selector. A proof must use
+additional arithmetic pressure, such as Corollary 8.5a.7z.6 forcing witness
+reuse to consume old prefix capacity, or it must rule out the fully
+selector-specific reflected-front construction where essentially every
+selector edge receives its own private witness.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -14815,6 +14892,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 8.5a.7z.4 generalizes this: if one witness is shared by a selector
   family, every shifted two-sum support for an outside retained padder must
   be a two-transversal of that selector family.
+* Lemma 8.5a.7z.5 handles shared witness classes with common deleted
+  points: outside padders either use non-common two-transversal sums or
+  force shifted two-sum spikes at a common color.
+* Corollary 8.5a.7z.6 turns this into a prefix-capacity inequality for
+  shared witness classes, while Warning 8.5a.7z.7 records that the
+  transversal constraints alone cannot produce an escaping selector against
+  fully selector-specific rank-three fronts.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

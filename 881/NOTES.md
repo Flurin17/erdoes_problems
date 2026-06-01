@@ -2299,6 +2299,19 @@ Thus many old padders below one shared witness force a representation spike
 at one of the common colors, up to the finite non-common two-transversal
 sum set.
 
+Corollary 8.5a.7z.6 packages this as a capacity inequality for a shared
+witness class:
+\[
+|A\cap[1,v-N_0]\setminus U|
+\le |\Sigma_2^0(\mathcal C)|
+   +2|K|\max_{c\in K}r_{2,A}(v-c).
+\]
+So witness reuse must either spend many non-common two-transversal sums or
+create a large shifted two-sum spike at a common deleted color. Warning
+8.5a.7z.7 then records the negative side: these transversal constraints do
+not alone produce an escaping selector, because an abstract rank-three
+product front can assign essentially selector-specific witness classes.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
