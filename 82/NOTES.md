@@ -3034,4 +3034,16 @@ source of growth beyond Ramsey.
   `6,14` on `22` vertices gave `4:2`.  For `q=4`, degree levels `7,11` on
   `18` vertices gave `3:2, 4:3`.  These are small sampled checks, but they
   separate partition count from largest-witness size and keep pointing to
-  four flexible parts as the right two-degree local target.
+  four flexible parts as the small-`q` calibration.  They should not be read
+  as an asymptotic conjecture: the fixed-degree anti-concentration heuristic
+  predicts that random two-degree graphs at large `q` can force the largest
+  `2q`-modular witness down to the `N/q` scale, and hence can require
+  order-`q` flexible parts.
+- 2026-06-01: Added a conditional corollary of the fixed-degree
+  anti-concentration heuristic: if that heuristic is true, then every
+  sublinear part-count dyadic partition theorem fails already for connected
+  two-degree `q`-modular graphs.  Indeed, with `b(q)=o(q)`, set
+  `psi(q)=q/b(q)`; a partition into `b(q)` target-modular parts would create
+  a `2q`-modular witness of order at least `N/b(q)=N psi(q)/q`, contradicting
+  the anti-concentration construction.  This makes the witness-or-regular
+  dichotomy necessary for the dyadic route, not just aesthetically preferable.

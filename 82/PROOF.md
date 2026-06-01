@@ -1605,6 +1605,38 @@ This proposition explains why the witness-or-regular dichotomy above is the
 right replacement target.  The anti-concentration hypothesis is plausible in
 the dense fixed-degree model but remains unproved here.
 
+**Conditional Corollary: Fixed-Degree Anti-Concentration Refutes Sublinear
+Two-Degree Partition Lifts.**  Assume the anti-concentration hypothesis from
+the preceding proposition.  Let `b(q)=o(q)` along dyadic `q`.  Then for all
+sufficiently large dyadic `q` there is a connected two-degree `q`-modular
+graph with no partition into at most `b(q)` induced `2q`-modular subgraphs.
+
+Proof.  Put
+
+```text
+psi(q)=q/b(q).
+```
+
+After increasing `q` if necessary, `psi(q)->infinity` and `b(q)>=1`.  The
+preceding conditional proposition gives a connected `q`-modular graph
+`G_q` on `N=q^3` vertices, with degrees taking the two values
+`(N-q)/2` and `(N+q)/2`, and with no induced `2q`-modular subgraph of order
+at least
+
+```text
+N psi(q)/q = N/b(q).
+```
+
+If `G_q` had a partition into at most `b(q)` induced `2q`-modular subgraphs,
+one part would have order at least `N/b(q)`, contradicting the choice of
+`G_q`.  QED.
+
+Thus, unless the fixed-degree anti-concentration heuristic is false, the
+dyadic partition-only route cannot have the sublinear part count required by
+Conditional Proposition "Sublinear-Exponent Dyadic Partitioning Would
+Suffice".  The viable dyadic target must use a regular alternative, as in the
+witness-or-regular dichotomy.
+
 ## Conditional Proposition: A Witness-Or-Regular Dyadic Dichotomy Suffices
 
 Let `psi(q)` be an eventually nondecreasing function on dyadic integers and
