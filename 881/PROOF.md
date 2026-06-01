@@ -24795,27 +24795,15 @@ certificate from a selector argument may draw profiles built over different
 tested intervals, but every successful finite exclusion still exposes a
 long-range witness in one of those profiles.
 
-### Corollary 16.107: Centered clustered profiles cannot exclude narrow packets
+### Corollary 16.107: Centered cores cannot exclude narrow packets
 
 Keep the notation and hypotheses of Corollary 16.106. Write
 \[
 p^-=\min P,\qquad p^+=\max P,\qquad w=p^+-p^-.
 \]
-Assume that every profile is internally clustered at its own tested scale:
-for every \(\lambda\in\mathcal B\) and every pair of auxiliary intervals
-\[
-K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N,\qquad
-K_{\lambda,j}=[c_{\lambda,j},d_{\lambda,j}]\cap\mathbb N
-\]
-in that profile,
-\[
-\left|(c_{\lambda,j}+d_{\lambda,j})
-      -(c_{\lambda,i}+d_{\lambda,i})\right|
-<\gamma_\lambda n_\lambda-D_\lambda. \tag{1}
-\]
-Assume also that every profile has one auxiliary midpoint close to the
-packet center with room for the packet width: for every
-\(\lambda\in\mathcal B\), there is an interval
+Assume that every profile has one auxiliary midpoint close to the packet
+center with room for the packet width: for every \(\lambda\in\mathcal B\),
+there is an interval
 \[
 K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
 \]
@@ -24824,20 +24812,15 @@ in that profile such that
 \left|p^-+p^+ + a_\lambda+b_\lambda
       -2(c_{\lambda,i}+d_{\lambda,i})\right|
       +w
-<\gamma_\lambda n_\lambda-D_\lambda. \tag{2}
+<\gamma_\lambda n_\lambda-D_\lambda. \tag{1}
 \]
 Then
 \[
-P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda\ne\varnothing. \tag{3}
+P\subseteq\bigcap_{\lambda\in\mathcal B}C_\lambda. \tag{2}
 \]
 
-Proof. Suppose (3) failed. Corollary 16.106 gives either a variable
-endpoint-distance witness or a variable separated internal gap.
-
-The internal-gap alternative contradicts the clustering hypothesis (1), as
-in the proof of Corollary 16.105. For the endpoint alternative, fix the
-profile \(\lambda\) it supplies. Let \(K_{\lambda,i}\) be the interval from
-(2). For \(p=p^-\) or \(p=p^+\),
+Proof. Fix \(\lambda\in\mathcal B\), and let \(K_{\lambda,i}\) be supplied
+by (1). For \(p=p^-\) or \(p=p^+\),
 \[
 \left|2p+a_\lambda+b_\lambda
       -2(c_{\lambda,i}+d_{\lambda,i})\right|
@@ -24846,15 +24829,19 @@ profile \(\lambda\) it supplies. Let \(K_{\lambda,i}\) be the interval from
       -2(c_{\lambda,i}+d_{\lambda,i})\right|+w
 <\gamma_\lambda n_\lambda-D_\lambda.
 \]
-This contradicts the endpoint-distance lower bound (3) in Corollary
-16.106, which would hold for every auxiliary interval in the same profile.
-Thus (3) must hold. \(\square\)
+By the contrapositive of Corollary 16.103, both endpoints \(p^-\) and
+\(p^+\) lie in the robust core
+\[
+R_{K_{\lambda,i}}(\delta_\lambda,I_\lambda;r_\lambda).
+\]
+That core is an interval, so it contains every point of \(P\). Since
+\(\lambda\) was arbitrary, every point of \(P\) lies in every profile
+\(C_\lambda\), proving (2). \(\square\)
 
 Equivalently, a bounded-complexity finite robust exclusion must make at
-least one of three quantities large at the relevant tested scale: the
-packet width \(w\), the displacement between the packet center and all
-auxiliary midpoints in one profile, or the internal midpoint diameter of a
-profile.
+least one of two quantities large in some profile at the relevant tested
+scale: the packet width \(w\), or the displacement between the packet
+center and every auxiliary midpoint in that profile.
 
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
@@ -26228,8 +26215,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   exclusions assembled from a countable assigned menu still have a
   long-range witness inside one selected profile.
 * Corollary 16.107 gives the centered-packet form: if packets are narrow
-  and every internally clustered profile has an auxiliary midpoint near
-  the packet center, finite robust exclusion is impossible.
+  and every profile has one robust core centered near the packet, finite
+  robust exclusion is impossible.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
