@@ -3436,3 +3436,11 @@ source of growth beyond Ramsey.
   homogeneous threshold is not collapsing to the `P=1` threshold at the first
   nontrivial error level, while still leaving open whether the deterministic
   `O(P h^2)` peeling bound can be improved to `O(P h)`.
+- 2026-06-01: Proved the exact `P=1` full-drop threshold:
+  `C_full(1,h)=2h-2`.  The key structural induction is that in a `P=1`
+  full-drop ordered graph, the first vertex is either isolated or its first
+  neighbor is universal; hence every induced subgraph has
+  `alpha+omega >= n+1`.  The lower construction is `h-2` isolated vertices
+  followed by a clique of order `h-1`.  This calibrates the full-drop route:
+  the quadratic peeling bound is very loose at `P=1`, but the `P=2,n=13`
+  search shows the first error level already has larger behavior.

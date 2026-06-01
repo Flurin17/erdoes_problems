@@ -11494,6 +11494,69 @@ vertex remains, so the process records `h` pairwise nonadjacent vertices.
 This is forbidden.  Therefore the displayed upper bound on `|V(H)|` holds,
 which is equivalent to the stated bound on `C_full(P,h)`.  QED.
 
+**Lemma 28D.5a: Exact Full-Drop Threshold At `P=1`.**  For every `h>=2`,
+
+```text
+C_full(1,h)=2h-2.
+```
+
+Proof.  First we prove the upper bound.  Let `H` be an ordered graph
+satisfying the full-drop condition with `P=1`, that is,
+
+```text
+N(v_i)\{v_j} subset N(v_j)\{v_i}       whenever i<j.
+```
+
+We claim that every nonempty induced subgraph `J` of `H`, with its inherited
+order, has
+
+```text
+alpha(J)+omega(J) >= |V(J)|+1.
+```
+
+The proof is by induction on `|V(J)|`.  Let `x` be the first vertex of `J`.
+If `x` is isolated in `J`, then applying the induction hypothesis to
+`J-x` gives
+
+```text
+alpha(J)+omega(J) >= (alpha(J-x)+1)+omega(J-x) >= |V(J)|+1.
+```
+
+Otherwise let `y` be the first neighbor of `x` in `J`.  We show that `y` is
+universal in `J`.  If `z` lies before `y`, then `x<z<y` and `xy` is an edge;
+the full-drop condition applied to the pair `x<z` forces `zy` to be an edge,
+because otherwise `y` would lie in `N(x)\N(z)`.  If `z` lies after `y`, then
+there are two cases.  If `xz` is an edge, applying the condition to `x<y`
+forces `yz` to be an edge.  If `xz` is not an edge, applying the condition to
+`x<z` with the witness `y` forces `yz` to be an edge.  Thus `y` is adjacent
+to every other vertex of `J`.
+
+Removing this universal vertex and applying induction gives
+
+```text
+alpha(J)+omega(J) >= alpha(J-y)+(\omega(J-y)+1) >= |V(J)|+1.
+```
+
+This proves the claim.
+
+Consequently, if `|V(H)|>=2h-2`, then
+
+```text
+max(alpha(H),omega(H)) >= (|V(H)|+1)/2 > h-1,
+```
+
+so `H` contains a clique or independent set of order at least `h`.  Hence
+`C_full(1,h)<=2h-2`.
+
+For the lower bound, take the disjoint union of `h-2` isolated vertices and a
+clique of order `h-1`, ordered with all isolated vertices first and all clique
+vertices last.  This graph satisfies the `P=1` full-drop condition: an earlier
+isolated vertex has empty neighborhood, and two clique vertices have identical
+neighborhoods outside each other.  Its largest clique has order `h-1`, and
+its largest independent set consists of all `h-2` isolated vertices plus at
+most one clique vertex, also of order `h-1`.  Thus
+`C_full(1,h)>2h-3`, and the upper bound gives equality.  QED.
+
 **Corollary 28D.6: Global Reduction Through Full-Drop Ordering.**  For every
 `h>=3`, with `P=P_h`,
 
