@@ -15127,6 +15127,17 @@ criterion.  The known sharp fourteen- and fifteen-vertex defect examples have
 non-cut full-mass deletions; in the two-connected fourteen-vertex example,
 every vertex deletion has full mass.
 
+An additional exact extension check supports the same target.  Among all
+connected below-full one-vertex extensions of the two sharp fourteen-vertex
+defect graphs with masks
+
+```text
+391219392115868279640099,        429588619789184147001379,
+```
+
+there are respectively `39` and `35` such extensions, and each has a non-cut
+vertex whose deletion has full spectrum mass.
+
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then
 

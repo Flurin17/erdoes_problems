@@ -4137,6 +4137,13 @@ source of growth beyond Ramsey.
   A fifteen-vertex leaf extension has cut vertex `0`, but still has many
   non-cut full-mass deletions.  Exact connected `n=7` has no below-full
   examples.
+- 2026-06-01: Stress-tested the non-cut full-deletion target on all connected
+  below-full one-vertex extensions of the two sharp fourteen-vertex defect
+  graphs `391219392115868279640099` and `429588619789184147001379`.
+  The first has `39` connected below-full extensions and the second has `35`;
+  in both cases every one has a non-cut vertex whose deletion has full mass.
+  Thus the target survives not only the known defects but also their full
+  connected one-step below-full neighborhoods.
 - 2026-06-01: Isolated the connected defect-extension induction.  It is enough
   to prove: if `H` is connected and `mu(H)=|H|-1`, then every connected
   one-vertex extension `G` of `H` has `mu(G)>=|H|`.  The proof deletes a
