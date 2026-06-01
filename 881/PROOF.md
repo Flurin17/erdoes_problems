@@ -25281,6 +25281,54 @@ center-far or packet-width-large with nonsummable normalized frequency.
 
 Proof. This is the contrapositive of Corollary 16.115. \(\square\)
 
+### Corollary 16.117: Joint packet-position summability removes the linear-core branch
+
+Keep the countable-menu setting of Corollary 16.112, with assigned profile
+set
+\[
+\Lambda.
+\]
+For each sufficiently large packet \(P_s\), choose an interval
+\[
+J_s=[u_s,v_s]\cap\mathbb N
+\]
+with \(P_s\subseteq J_s\), and define
+\[
+\beta_{\lambda,s}
+\]
+for every \(\lambda\in\Lambda\) exactly as in Corollary 16.115. If for
+some tail index \(t\),
+\[
+\sum_{\lambda\in\Lambda}\sum_{s\ge t}\beta_{\lambda,s}<1, \tag{1}
+\]
+then the assigned high-density linear-core branch does not product-cover
+that selector tail.
+
+Equivalently, if this branch product-covers every selector tail, then for
+every \(t\),
+\[
+\sum_{\lambda\in\Lambda}\sum_{s\ge t}\beta_{\lambda,s}\ge1. \tag{2}
+\]
+
+Proof. Lemma 16.114 gives
+\[
+{|H_{\lambda,s}|\over |P_s|}\le\beta_{\lambda,s}
+\]
+for every profile \(\lambda\) and sufficiently large packet \(s\). If
+(1) holds, then
+\[
+\sum_{\lambda\in\Lambda}\sum_{s\ge t}
+{|H_{\lambda,s}|\over |P_s|}<1.
+\]
+This contradicts the mass lower bound (3) of Corollary 16.112, which is
+necessary for product-covering the tail. The equivalent formulation is the
+contrapositive. \(\square\)
+
+This is the countable-menu packet-position normal form. The remaining
+linear-core obstruction must keep nonsummable total error in the concrete
+quantities from Lemma 16.114: packet width, packet-center displacement, and
+profile midpoint placement.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25297,10 +25345,10 @@ at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
 remaining escape must therefore either make the packet density vanish, let
 the deletion rank or robust-profile complexity grow with the interval,
-produce packetwise center-far assigned profiles after charging packet
-width, use auxiliary profiles whose midpoint diameter is linear in their
-tested interval, or maintain nonsummable robust-core escape mass across the
-packet selector tail.
+produce nonsummable packet-position error in the linear-core profiles, use
+auxiliary profiles whose midpoint diameter is linear in their tested
+interval, or maintain nonsummable robust-core escape mass across the packet
+selector tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 
@@ -26678,6 +26726,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the high-density linear-core menu is avoidable.
 * Corollary 16.116 states the resulting residual sharply: finite-menu
   survival forces nonsummable packet-position error for one fixed profile.
+* Corollary 16.117 gives the countable-menu analogue: joint summability of
+  the packet-position upper bounds on a tail removes the high-density
+  linear-core branch.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

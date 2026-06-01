@@ -202,6 +202,9 @@ bounds are summable for every profile in a finite assigned menu, that
 finite-menu linear-core branch is selector-avoidable.
 Corollary 16.116 states the residual contrapositively: finite-menu survival
 requires nonsummable packet-position error for one fixed profile.
+Corollary 16.117 extends this to countable assigned menus: if the joint
+packet-position upper bounds are summable on some tail, the high-density
+linear-core branch is selector-avoidable.
 
 ## Definitions
 
