@@ -22738,6 +22738,75 @@ tested interval. Such an auxiliary block contributes a forbidden active-gate
 interval of length linear in \(n\), independent of the exact deleted
 positions inside that block.
 
+### Corollary 16.73: Robust cores block bounded-rank interval packets
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Fix \(r\ge1\) and \(0<\eta\le1\).
+Put
+\[
+B_r={r(r+1)\over2}+2r,\qquad \delta={\eta\over2r}. \tag{1}
+\]
+There is \(N=N(r,\eta)\) such that the following holds whenever
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+has length \(n\ge N\).
+
+Let \(F\subset A\) satisfy \(1\le|F|\le r\), let \(P\subset F\), and let
+\[
+K=[c,d]\cap\mathbb N\subset A
+\]
+have length \(m\). Define
+\[
+\ell_0=\left\lceil {m-r\over r+1}\right\rceil,
+\qquad
+M_\delta=\lfloor(1-\delta)n\rfloor+1,
+\]
+and assume
+\[
+M_\delta\le2\ell_0-1. \tag{2}
+\]
+Suppose also that
+\[
+P\subseteq R_K(\delta,I;r). \tag{3}
+\]
+For each \(f\in P\), let \(U_f\subset I\) satisfy the hypotheses of
+Corollary 16.45 for the active color \(f\), with witness parameter
+sufficiently large for the fixed interval \(I\) and rank bound \(r\). Then
+\[
+\left|\bigcup_{f\in P}U_f\right|<\eta n. \tag{4}
+\]
+
+Proof. Choose \(N\) so large that
+\[
+rB_r\le{\eta n\over2}\qquad(n\ge N). \tag{5}
+\]
+Assume, for contradiction, that
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n. \tag{6}
+\]
+For each \(f\), Corollary 16.45 leaves at most \(B_r\) rows outside the
+gate-dependent packet
+\[
+U_{f,{\rm gate}}=\{u\in U_f:f+u\notin2(A\setminus F)\}.
+\]
+Therefore
+\[
+\left|\bigcup_{f\in P}U_{f,{\rm gate}}\right|
+\ge
+\eta n-|P|B_r
+\ge{\eta n\over2}. \tag{7}
+\]
+Since \(|P|\le r\), one \(f\in P\) has
+\[
+|U_{f,{\rm gate}}|\ge{\eta n\over2r}=\delta n. \tag{8}
+\]
+Lemma 16.69, applied to \(U_{f,{\rm gate}}\), says
+\[
+f\notin R_K(\delta,I;r).
+\]
+This contradicts (3). \(\square\)
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -23993,6 +24062,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   for fixed \(r\) and density \(\delta>1/2\), every auxiliary interval
   whose length is a sufficiently small fixed fraction of the tested
   interval supplies a robust blocker core of linear length.
+* Corollary 16.73 folds the bounded-rank row allowance back in: if all
+  active colors of a bounded-rank interval packet lie in such a robust core,
+  then the packet cannot cover a fixed positive fraction of the tested
+  interval once the interval is long enough.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

@@ -97,7 +97,10 @@ outside that core. Lemma 16.71 gives the exact core length
 blocker is nonempty and when actual retained-run data is needed. Corollary
 16.72 makes this asymptotic: at fixed rank and density \(\delta>1/2\), any
 auxiliary interval whose length is a sufficiently small fixed fraction of
-the tested interval gives a robust blocker core of linear length.
+the tested interval gives a robust blocker core of linear length. Corollary
+16.73 then reincorporates the bounded row-dependent allowance: if all
+active colors of a bounded-rank interval packet lie in a robust core, the
+packet cannot have fixed positive density in the tested interval.
 
 ## Definitions
 
