@@ -19352,6 +19352,157 @@ counterexample cannot simply repeat one marker over a dense initial
 interval; it needs multi-marker blocks that bridge the one-marker coverage
 gap without repairing the singleton witnesses.
 
+### Lemma 16.11: Next interval-marker stages require a one-new bridge block
+
+Keep \(L\ge4\) and
+\[
+A_1=[1,L]\cup\{2L\}
+\]
+as in Lemma 16.10, with previous endpoint
+\[
+N_1=4L+2.
+\]
+Let \(P\) be a nonempty finite block with
+\[
+x=\min P>N_1,
+\]
+and put
+\[
+A_2=A_1\cup P.
+\]
+If the next stage is to give the smallest new element \(x\) a strict
+singleton-high-excess witness while satisfying the positive-summand buffer,
+then the whole bridge interval
+\[
+J_x=[x+3L+1,\ 2x]\cap\mathbb N \tag{1}
+\]
+must satisfy
+\[
+J_x\subseteq P+\bigl([2,3L]\cup\{4L\}\bigr). \tag{2}
+\]
+
+Proof. A strict singleton-high-excess witness for \(x\) has the form
+\[
+w_x=x+d_x
+\]
+with
+\[
+d_x-2\ge\max A_2\ge x,
+\]
+so
+\[
+w_x+2\ge2x+4. \tag{3}
+\]
+The positive-summand buffer therefore requires
+\[
+[N_1+1,\ 2x]\subseteq3A_2. \tag{4}
+\]
+Because \(x>4L+2\), the interval \(J_x\) is nonempty and lies above the
+old three-sum range:
+\[
+x+3L+1>7L+3>6L=\max 3A_1.
+\]
+For any \(n\in J_x\), a three-term representation from \(A_2\) cannot use
+two elements of \(P\), since two such elements and one positive summand
+already sum to at least
+\[
+2x+1>n.
+\]
+Thus every representation of \(n\) uses exactly one element of \(P\) and
+two elements of \(A_1\). Finally
+\[
+2A_1=[2,3L]\cup\{4L\},
+\]
+so (2) follows. \(\square\)
+
+Thus any attempt to continue the interval-marker singleton seed must build
+a genuine bridge block \(P\). The block must cover the long interval
+\([x+3L+1,2x]\) by translates of the old two-sum set before the smallest
+new marker's high-excess witness can even be placed. This bridge burden is
+separate from the privacy burden \(w_x\notin4(A_2\setminus\{x\})\), and in
+finite searches the two demands conflict quickly.
+
+### Diagnostic 16.12: A prepared moving row-bank marker exists
+
+The strict singleton-high-excess target is not locally impossible after the
+first interval-marker seed if one allows a prepared old block. The script
+`EXPERIMENTS/row_collision_scanner.py` records the following stage. Let
+\[
+A_0=\{1,2,3,4,8,19,20,28\},\qquad N_0=32.
+\]
+Then
+\[
+[3,44]\subseteq3A_0.
+\]
+Adjoin
+\[
+b=33,\qquad A_1=A_0\cup\{33\}.
+\]
+Now
+\[
+[3,76]\subseteq3A_1,
+\]
+so the interval
+\[
+[N_0+1,74+2]=[33,76]
+\]
+has the required positive-summand buffer. The new marker has the
+singleton-high-excess witness
+\[
+w=73=33+40,
+\]
+with
+\[
+w\notin4(A_1\setminus\{33\}),\qquad w-33-2=38\ge33=\max A_1.
+\]
+
+The moving row bank for \(d=40\) is explicit:
+\[
+\begin{array}{c|c|c}
+p & d-p & \text{row}\\ \hline
+1&39&19+20\\
+2&38&19+19\\
+3&37&4+33\\
+4&36&8+28\\
+8&32&4+28\\
+19&21&1+20\\
+20&20&1+19\\
+28&12&4+8
+\end{array}
+\]
+The only row that uses \(33\) is the \(p=3\) row. This is harmless: if a
+row is \(33\)-dependent it does not contribute to a repair after deleting
+\(33\).
+
+The useful collision test is the following. Let \(C=A\setminus\{b\}\) and
+\[
+w=b+d.
+\]
+If for some retained padder \(p\in C\) both
+\[
+d-p\in2C,\qquad b+p\in2C, \tag{1}
+\]
+then
+\[
+w=(d-p)+(b+p)\in4C,
+\]
+so \(w\) is repaired after deleting \(b\). Therefore a viable singleton
+row bank must avoid the collision set
+\[
+\{p:d-p\in2C\}\cap\{p:b+p\in2C\},
+\]
+except that a row \(d-p\in2A\setminus2C\) may be \(b\)-dependent and hence
+does not create a retained repair. In the prepared marker above, the
+scanner reports all eight required rows, no retained collisions, and one
+\(b\)-dependent row.
+
+This example is only a prepared-marker template, not an iterable
+counterexample stage. The elements \(19,20,28\) are doing bridge and row-bank
+work but are not themselves protected by singleton witnesses below the
+declared endpoint. A staged counterexample would need to add such fillers
+only after arranging their own future witnesses, or protect them by a
+collective barrier.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20369,6 +20520,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \([1,L]\cup\{2L\}\) supplies strict singleton-high-excess first stages but
   cannot be iterated by one later marker, because the required next witness
   lies beyond a three-sum coverage gap.
+* Lemma 16.11 shows what a multi-marker continuation would have to do:
+  the next block must cover a long bridge interval by one new element plus
+  two old interval-marker terms before singleton privacy is even tested.
+* Diagnostic 16.12 gives a prepared one-marker moving row-bank example:
+  fillers can bridge the coverage gap and support a high-excess singleton
+  witness, but those fillers are not protected in the same stage.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

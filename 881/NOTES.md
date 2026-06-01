@@ -2277,6 +2277,25 @@ marker starts beyond \(4L+2\) and leaves an unavoidable gap between the
 one-marker and two-marker three-sum ranges before its required high-excess
 witness. Iteration would therefore need genuine multi-marker bridge blocks,
 not repeated interval markers.
+Lemma 16.11 makes that bridge burden precise. If \(P\) is the next block
+and \(x=\min P>4L+2\), then before \(x\)'s high-excess singleton witness can
+be declared the whole interval
+\[
+[x+3L+1,2x]
+\]
+must lie in \(P+([2,3L]\cup\{4L\})\). The next block must therefore cover a
+long one-new/two-old bridge interval before privacy is even considered.
+Diagnostic 16.12 shows that such preparation is locally feasible for one
+marker: with
+\[
+A_0=\{1,2,3,4,8,19,20,28\}
+\]
+and \(b=33\), the witness \(w=73=33+40\) is private after deleting \(33\),
+has high excess, and all rows \(40-p\) are supplied by \(2A_1\). The row
+collision scanner records no retained collision \(40-p\in2C\) and
+\(33+p\in2C\) for the same \(p\), with one row deliberately depending on
+the deleted \(33\). The caveat is that the preparatory fillers \(19,20,28\)
+are not protected in this stage.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

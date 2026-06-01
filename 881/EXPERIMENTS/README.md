@@ -645,3 +645,12 @@ Lemma 16.10 explains the one-marker version: `[1,...,L] -> +2L` is always
 a strict singleton-high-excess first stage for `L >= 4`, but a later single
 marker begins beyond `4L+2` and leaves a three-sum coverage gap before its
 required high-excess witness.
+Lemma 16.11 records the corresponding block burden: if the next block has
+minimum `x`, then `[x+3L+1, 2x]` must be covered by one new block element
+plus `2([1,...,L] union {2L}) = [2,3L] union {4L}`.
+
+`row_collision_scanner.py` checks singleton row-bank collisions. For
+`A={1,2,3,4,8,19,20,28,33}`, `b=33`, and `d=40`, it verifies coverage
+through `76`, confirms `73 notin 4(A\\{33})`, prints all eight rows
+`40-p in 2A`, and reports no retained collision of `40-p in 2C` with
+`33+p in 2C`.
