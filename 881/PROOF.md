@@ -2020,21 +2020,43 @@ Proposition 8.4f.
 ## Corollary 3.4d: Counterexamples force shifted representation spikes
 
 Assume that no infinite deletion from the order-\(k\) basis \(A\), with
-order-\(k\) threshold \(N_0\), remains an order-\((k+1)\) basis. Let
-\(E\subset A\) be finite. Then there are a constant \(\eta_E>0\),
-arbitrarily large integers \(n\), and elements
+order-\(k\) threshold \(N_0\), remains an order-\((k+1)\) basis. Put
 \[
-x_n\in A\setminus E
+h=k+1.
+\]
+Let \(E\subset A\) be finite. Then there are constants
+\[
+q_E,\qquad \eta_E>0,
+\]
+arbitrarily large integers \(n\), finite sets
+\[
+D_n\subset A\setminus E,\qquad 1\le |D_n|\le q_E,
+\]
+and elements
+\[
+x_n\in D_n
 \]
 such that
 \[
-r_{k,A}(n-x_n)\ge \eta_E\, A(n), \tag{1}
+n\notin h(A\setminus D_n), \tag{1}
+\]
+and
+\[
+r_{k,A}(n-x_n)\ge \eta_E\, A(n), \tag{2}
 \]
 where \(r_{k,A}\) counts unordered \(k\)-term multiset representations.
 
-Proof. By Corollary 3.3, for this fixed \(E\) there is an integer \(M_E\)
+Proof. By Corollary 3.3, for this fixed \(E\) there is an integer \(q_E\)
 and arbitrarily large \(n\) for which \(\mathcal H_E(n)\) has a transversal
-of size at most \(M_E\). Let
+\[
+D_n\subset A\setminus E,\qquad |D_n|\le q_E.
+\]
+Taking \(n\) larger than every \(h\)-term sum from \(E\), this transversal
+also gives
+\[
+n\notin h(A\setminus D_n).
+\]
+Let
 \[
 C_{k,E}=\binom{|E|+2k+1}{k+1}.
 \]
@@ -2058,27 +2080,26 @@ c_{k,E} A(n)
 \]
 for a constant \(c_{k,E}>0\), because \(E\) and \(N_0\) are fixed.
 
-Since a set of at most \(M_E\) vertices meets every edge, some vertex has
-degree at least \(|\mathcal H_E(n)|/M_E\). Hence
+Since \(D_n\) meets every edge and has size at most \(q_E\), some vertex
+\(x_n\in D_n\) has degree at least \(|\mathcal H_E(n)|/q_E\). Hence
 \[
-\Delta_E(n)\ge \frac{c_{k,E}}{M_E}A(n). \tag{2}
+\deg_{\mathcal H_E(n)}(x_n)\ge \frac{c_{k,E}}{q_E}A(n). \tag{3}
 \]
-Choose a vertex \(x_n\in A\setminus E\) with this degree. Every edge
-containing \(x_n\) comes from some \((k+1)\)-term multiset representation
-of \(n\) using \(x_n\). Removing one occurrence of \(x_n\) gives a
-\(k\)-term multiset representation of \(n-x_n\), and different support
-edges give different resulting multisets. Hence
+Every edge containing \(x_n\) comes from some \((k+1)\)-term multiset
+representation of \(n\) using \(x_n\). Removing one occurrence of \(x_n\)
+gives a \(k\)-term multiset representation of \(n-x_n\), and different
+support edges give different resulting multisets. Hence
 \[
 r_{k,A}(n-x_n)\ge \deg_{\mathcal H_E(n)}(x_n).
 \]
-Combining this with (2) proves (1). \(\square\)
+Combining this with (3) proves (2), with \(\eta_E=c_{k,E}/q_E\). \(\square\)
 
 Thus the representation-spike obstruction is not merely global. After any
 finite core is protected, a counterexample has arbitrarily large
-\((k+1)\)-targets \(n\) with some unprotected summand \(x_n\) such that the
-shifted target \(n-x_n\) has order-\(k\) representation multiplicity
-comparable to \(A(n)\). For \(k=2\), this means arbitrarily large reflected
-clusters
+\((k+1)\)-targets \(n\), a bounded deletion \(D_n\) causing an actual
+order-\((k+1)\) hole, and a gate \(x_n\in D_n\) such that the shifted target
+\(n-x_n\) has order-\(k\) representation multiplicity comparable to
+\(A(n)\). For \(k=2\), this means arbitrarily large reflected clusters
 \[
 A\cap(n-x_n-A)
 \]
@@ -26999,9 +27020,9 @@ missing from ordinary minimal order-\(h\) bases.
   representation count up to \(X\). Thus a counterexample needs
   representation spikes comparable to its counting function.
 * Corollary 3.4d localizes those spikes: after any finite core is
-  protected, a counterexample has arbitrarily large targets \(n\) and an
-  unprotected summand \(x\) for which \(n-x\) has \(\gg A(n)\)
-  \(k\)-term representations.
+  protected, a counterexample has arbitrarily large bounded finite holes
+  \(n\notin(k+1)(A\setminus D)\) and a gate \(x\in D\) for which \(n-x\)
+  has \(\gg A(n)\) \(k\)-term representations.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

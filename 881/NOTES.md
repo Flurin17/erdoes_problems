@@ -893,8 +893,8 @@ multiplicity spikes and the private-color barrier normal form.
 
 Corollary 3.4d localizes the spike requirement. In a counterexample, after
 any finite core \(E\) is protected, there are arbitrarily large
-\((k+1)\)-targets \(n\) and unprotected summands \(x\in A\setminus E\)
-such that
+\((k+1)\)-targets \(n\), bounded finite deletions \(D\subset A\setminus E\)
+with \(n\notin(k+1)(A\setminus D)\), and gates \(x\in D\) such that
 \[
 r_{k,A}(n-x)\gg_E A(n).
 \]
