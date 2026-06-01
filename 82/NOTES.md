@@ -3297,3 +3297,10 @@ source of growth beyond Ramsey.
   the simplicity probability by at most `exp(o(a))`, where `a` is the number
   of tested rows.  Combined with configuration prefix mixing, this would give
   the desired simple-biregular anti-concentration at the first-moment scale.
+- 2026-06-01: Added `biregular_residue_exact.py`, an exact DP for small
+  labelled simple regular bipartite graphs.  It tracks marked and unmarked
+  column-capacity histograms under row exposure and counts the event that the
+  first tested rows have equal hit-count residue.  Balanced checks with
+  `(N,d,|Y_0|,rows,M)=(8,4,4,3,4),(10,5,5,3,4),(12,6,6,3,4)` give exact
+  probabilities `0.15037,0.11039,0.10298`, respectively, all below the
+  independent-row predictions `0.15993,0.12717,0.11086`.

@@ -244,6 +244,10 @@ Computational checks and generated data for Erdos Problem 82.
   rows have equal cross-degree residue into a fixed column set.  It compares
   the empirical value to the independent hypergeometric-row prediction,
   probing the multi-row dependence left after the single-row biregular lemma.
+- `biregular_residue_exact.py`: exactly counts small labelled simple
+  `d`-regular bipartite graphs by a row-exposure DP over marked/unmarked
+  column-capacity histograms, and computes the exact probability that the
+  first few rows have equal residue into a fixed marked column set.
 - `two_level_modular_sample.py`: generates connected graphs with two prescribed
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic

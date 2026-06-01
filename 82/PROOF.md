@@ -2292,6 +2292,41 @@ reports empirical probability `0.0175` versus independent-row prediction
 conditioning may be controllable in dense balanced cases, but supplies no
 asymptotic switching bound.
 
+The exact dynamic program `EXPERIMENTS/biregular_residue_exact.py` gives
+small labelled checks without sampling.  It groups the column side by
+remaining capacities inside and outside `Y_0`; this makes exact enumeration
+possible for small balanced cases.  The commands
+
+```text
+python3 82/EXPERIMENTS/biregular_residue_exact.py \
+  --n 8 --degree 4 --marked 4 --rows 3 --modulus 4
+python3 82/EXPERIMENTS/biregular_residue_exact.py \
+  --n 10 --degree 5 --marked 5 --rows 3 --modulus 4
+python3 82/EXPERIMENTS/biregular_residue_exact.py \
+  --n 12 --degree 6 --marked 6 --rows 3 --modulus 4
+```
+
+report exact equal-row-residue probabilities
+
+```text
+0.150371377245717603835041,
+0.110390208666622881332398,
+0.102981196977735162641382,
+```
+
+versus independent-row predictions
+
+```text
+0.159930029154518950437318,
+0.127173091458805744520030,
+0.110864262702684021624821.
+```
+
+Thus these finite balanced cases do not show positive correlation large
+enough to threaten the desired anti-concentration transfer.  They remain
+finite calibration only; the required theorem is still the simplicity
+distortion/switching bound above.
+
 For example,
 
 ```text
