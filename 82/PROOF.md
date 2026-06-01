@@ -5324,6 +5324,22 @@ Thus even the compensated double spread-one model need not contain a regular
 induced subgraph on half its vertices.  Any theorem strong enough for
 bounded-spread graphs must allow smaller, profile-absorbed witnesses.
 
+**Lemma 11D: The Compensated Template Inherits Side Witnesses.**  In the
+construction of Lemma 11B, if the base graph `F` contains a regular induced
+subgraph on `t` vertices, then `G` contains a regular induced subgraph on
+`t` vertices.  The same holds if `complement(F)` contains one.
+
+Proof.  The side `A` of `G` induces exactly `F`, and the side `B` induces
+exactly `complement(F)`.  Any regular induced subgraph contained wholly in
+one side remains an induced regular subgraph of the whole graph, since
+external vertices are not included in the induced subgraph.  QED.
+
+Thus the compensated template is not a new lower-bound construction by
+itself.  It is a calibration for bounded-spread methods: any proof that uses
+only the degree interval must still be able to see regular witnesses either
+inside an arbitrary medium-density side or through profile absorption across
+the compensating cut.
+
 ## Lemma 12: Minimal Repeated-Degree Host Obstruction
 
 Let `H` be an induced subgraph of `G` containing a set

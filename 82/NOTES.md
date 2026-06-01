@@ -2315,3 +2315,8 @@ source of growth beyond Ramsey.
   Computational Example 11C.  The bounded-spread target must allow smaller
   profile-absorbed witnesses, not a clean half-size theorem even in this
   structured template.
+- 2026-06-01: Added Lemma 11D.  The compensated spread-one template always
+  inherits regular induced subgraphs from the base graph `F` and from
+  `complement(F)`, because the two sides induce exactly those graphs.  Thus
+  the template is a calibration for bounded-spread methods, not by itself a
+  new lower-bound construction beyond the original problem on a side.
