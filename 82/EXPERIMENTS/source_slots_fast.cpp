@@ -60,6 +60,40 @@ std::string edge_mask_string(EdgeMask value) {
     return out;
 }
 
+bool edge_present(EdgeMask graph_mask, int n, int a, int b) {
+    return (graph_mask >> edge_index(n, a, b)) & 1;
+}
+
+std::array<int, 13> graph_degrees(int n, EdgeMask graph_mask) {
+    std::array<int, 13> degrees{};
+    for (int i = 0; i < n; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            if (edge_present(graph_mask, n, i, j)) {
+                ++degrees[i];
+                ++degrees[j];
+            }
+        }
+    }
+    return degrees;
+}
+
+bool is_connected_graph(int n, EdgeMask graph_mask) {
+    if (n <= 1) return true;
+    int seen = 1;
+    std::vector<int> stack{0};
+    while (!stack.empty()) {
+        int v = stack.back();
+        stack.pop_back();
+        for (int w = 0; w < n; ++w) {
+            if ((seen >> w) & 1) continue;
+            if (!edge_present(graph_mask, n, v, w)) continue;
+            seen |= 1 << w;
+            stack.push_back(w);
+        }
+    }
+    return seen == ((1 << n) - 1);
+}
+
 std::vector<Candidate> all_candidates(int modulus, int slot_count) {
     std::vector<Candidate> out;
     Candidate current;
@@ -279,6 +313,8 @@ int main(int argc, char** argv) {
     uint64_t seed = 1;
     bool progress = false;
     bool quiet_kills = false;
+    bool connected_only = false;
+    int min_degree = -1;
     uint64_t progress_every = 262144;
     std::string candidate_text;
 
@@ -308,6 +344,10 @@ int main(int argc, char** argv) {
             progress = true;
         } else if (arg == "--quiet-kills") {
             quiet_kills = true;
+        } else if (arg == "--connected") {
+            connected_only = true;
+        } else if (arg == "--min-degree" && i + 1 < argc) {
+            min_degree = std::stoi(argv[++i]);
         } else if (arg == "--progress-every" && i + 1 < argc) {
             progress_every = std::stoull(argv[++i]);
         } else {
@@ -317,7 +357,8 @@ int main(int argc, char** argv) {
                       << " [--candidates r,...;...] [--slot-count B]"
                       << " [--start S] [--limit L]"
                       << " [--random-samples N] [--seed S]"
-                      << " [--progress] [--quiet-kills]\n";
+                      << " [--progress] [--quiet-kills]"
+                      << " [--connected] [--min-degree D]\n";
             return 2;
         }
     }
@@ -362,6 +403,18 @@ int main(int argc, char** argv) {
             bool ok = false;
             EdgeMask graph_mask = source_modular_mask(n, bits, source_modulus, a, ok);
             if (!ok) continue;
+            if (connected_only && !is_connected_graph(n, graph_mask)) continue;
+            if (min_degree >= 0) {
+                auto degrees = graph_degrees(n, graph_mask);
+                bool degree_ok = true;
+                for (int v = 0; v < n; ++v) {
+                    if (degrees[v] < min_degree) {
+                        degree_ok = false;
+                        break;
+                    }
+                }
+                if (!degree_ok) continue;
+            }
             ++checked;
             checker.compute_residues(graph_mask);
             for (size_t i = 0; i < candidates.size(); ++i) {
@@ -411,6 +464,8 @@ int main(int argc, char** argv) {
     if (source_residue >= 0) std::cout << "source_residue=" << source_residue << "\n";
     std::cout << "bit_start=" << start << "\n";
     std::cout << "bit_stop=" << stop << "\n";
+    if (connected_only) std::cout << "connected_only=true\n";
+    if (min_degree >= 0) std::cout << "min_degree=" << min_degree << "\n";
     if (random_samples) {
         std::cout << "random_samples=" << random_samples << "\n";
         std::cout << "seed=" << seed << "\n";

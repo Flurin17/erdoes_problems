@@ -2922,3 +2922,14 @@ source of growth beyond Ramsey.
   `4 -> 8` probe with `50,000,000` sampled internal graphs and `9229`
   accepted source-modular graphs (`seed=5120`).  The larger probe strengthens
   the candidate but does not close the proof gap.
+- 2026-06-01: Proved the componentwise reduction for fixed universal slots:
+  by Lemma 4E, it is enough to prove a fixed `R`-slot theorem on connected
+  graphs in a fixed source residue.  Added `--connected` and `--min-degree`
+  filters to `source_slots_fast.cpp` for this minimal-counterexample regime.
+  The source-`0` five-slot candidate `(0,0,0,1,4)` now passes the full exact
+  `n=9` source-`0` sweep, checking `1,409,024` source-modular graphs; the
+  connected, minimum-degree-`4` subcheck contains `1,216,702` graphs and also
+  passes.  A deterministic `n=12`, connected, minimum-degree-`4` random probe
+  with `50,000,000` sampled internal graphs checks `8876` accepted graphs and
+  finds no counterexample.  The source-`2` four-slot candidate `(0,0,1,2)`
+  also passes the full exact `n=9` source-`2` sweep (`229,376` graphs).

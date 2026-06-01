@@ -3362,6 +3362,27 @@ It does not by this argument give a single common `B`-slot multiset that
 works simultaneously for all source residues; the class of all `q`-modular
 graphs is not closed under disjoint unions of different source residues.
 
+**Corollary 4E.2A: Universal Slot Theorems Are Componentwise.**  Fix
+`q,M,B,a`, and a residue multiset `R` of size `B` modulo `M`.  The following
+are equivalent.
+
+1. Every graph of source residue `a mod q` has an `R`-slot partition into
+   induced `M`-modular subgraphs.
+2. Every connected graph of source residue `a mod q` has such an `R`-slot
+   partition.
+
+Proof.  The first statement implies the second.  Conversely, suppose every
+connected graph in the source class has an `R`-slot partition.  If `G` is any
+graph in the source class, then every connected component of `G` is still in
+the same source class, because vertex degrees are unchanged inside connected
+components.  Apply the connected hypothesis to each component and then align
+the component partitions into the global slots of `R` using Lemma 4E.  QED.
+
+Thus any minimal counterexample to a fixed source-residue universal-slot
+statement may be assumed connected.  This does not by itself solve the
+problem, but it justifies filtering computational searches to connected
+graphs after a candidate slot multiset has been fixed.
+
 **Conditional Proposition 4E.2B: Source-Residue Dyadic Lifts Would Suffice.**
 Let `b(q)` be a function on dyadic integers.  Suppose that, for every dyadic
 `q>=2`, every residue `a mod q`, and every graph whose degrees are all
@@ -4566,12 +4587,21 @@ surviving candidates, the simple multiset
 (0,0,0,1,4)
 ```
 
-passes the full `n=8` source-`0` sweep, deterministic `20,000,000`-sample
-source-`0` probes on `n=10` and `n=11`, a deterministic `50,000,000`-sample
-source-`0` probe on `n=12`, and the first `100` source-`0`
-complete-multipartite vectors with at most six classes of size at most `16`.
-This is the current smallest concrete replacement target for the refuted
-four-slot source-`0` theorem, but it remains only finite evidence.
+passes the full `n=8` and `n=9` source-`0` sweeps, deterministic
+`20,000,000`-sample source-`0` probes on `n=10` and `n=11`, a deterministic
+`50,000,000`-sample source-`0` probe on `n=12`, and the first `100`
+source-`0` complete-multipartite vectors with at most six classes of size at
+most `16`.  The exact `n=9` sweep checks `1,409,024` source-`0` graphs; its
+connected, minimum-degree-`4` subcheck contains `1,216,702` graphs.  The
+`n=12` connected, minimum-degree-`4` random probe with `50,000,000` sampled
+internal graphs checks `8876` accepted graphs.  This is the current smallest
+concrete replacement target for the refuted four-slot source-`0` theorem, but
+it remains only finite evidence.
+
+For comparison, the source-`2` four-slot candidate `(0,0,1,2)` survives the
+full exact `n=9` source-`2` sweep, which checks `229,376` source-modular
+graphs.  Thus the first exact odd-order obstruction is currently confined to
+source residue `0`, where four slots are already known to be impossible.
 
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
