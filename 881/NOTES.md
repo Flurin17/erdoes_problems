@@ -21,7 +21,10 @@ bounded deleted set forces, along arbitrarily large witnesses, a retained
 representation bank of dimension \(r\ge2\) behind a deleted multiset. Thus
 for \(k=3\) every counterexample must have either a large retained
 three-term bank behind one deleted gate or a large retained two-term bank
-behind two deleted gates.
+behind two deleted gates. Lemma 3.4d.3 and Corollary 3.4d.4 sharpen the
+second branch: a two-gate retained pair bank contains a linear-size
+reflected packet whose translates by one of the two gates have bounded
+two-sum representation count.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

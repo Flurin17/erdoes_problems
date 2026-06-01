@@ -2281,6 +2281,155 @@ behind several deleted gates and have lower retained dimension. The
 behind a single gate; for \(k=3\) the new live branch is a two-gate retained
 pair bank, not an uncontrolled three-term contamination cloud.
 
+### Lemma 3.4d.3: Two-gate pair banks contain a low-count star
+
+Let \(D\subset A\) be finite, put
+\[
+C=A\setminus D,
+\]
+and suppose
+\[
+w\notin4C. \tag{1}
+\]
+Let \(p,q\in D\), not necessarily distinct, and put
+\[
+m=w-p-q.
+\]
+Let \(\mathcal P\) be a family of unordered retained pair representations
+\[
+m=a+b,\qquad a,b\in C. \tag{2}
+\]
+Then there are a gate
+\[
+g\in\{p,q\}
+\]
+and a set
+\[
+U\subset C\cap(m-C)
+\]
+such that
+\[
+|U|\ge {|\mathcal P|\over2} \tag{3}
+\]
+and
+\[
+g+u\notin2C\qquad(u\in U). \tag{4}
+\]
+Consequently
+\[
+r_{2,A}(g+u)\le |D|\qquad(u\in U). \tag{5}
+\]
+
+Proof. For a pair \(\{a,b\}\in\mathcal P\), at least one of the four
+incidences
+\[
+p+a,\quad p+b,\quad q+a,\quad q+b
+\]
+is absent from \(2C\). Otherwise
+\[
+p+a\in2C,\qquad q+b\in2C
+\]
+would give
+\[
+w=(p+a)+(q+b)\in4C,
+\]
+contradicting (1).
+
+Choose one absent incidence \(g+u\notin2C\) for each pair. Distinct
+unordered pairs with the same sum \(m\) have disjoint supports unless they
+are the same pair; hence, for each fixed gate \(g\in\{p,q\}\), the selected
+endpoints \(u\) are distinct. Pigeonholing between the at most two gates
+gives a gate \(g\) selected by at least \(|\mathcal P|/2\) pairs, and the
+corresponding selected endpoints form \(U\). Each selected endpoint belongs
+to a retained pair summing to \(m\), so
+\[
+U\subset C\cap(m-C),
+\]
+and (3)--(4) hold.
+
+Finally, if \(g+u\notin2C\), every two-term representation of \(g+u\) from
+\(A\) uses at least one element of \(D\). For each fixed \(d\in D\), there
+is at most one unordered representation of \(g+u\) containing \(d\), namely
+\[
+\{d,\ g+u-d\}.
+\]
+The union bound over \(D\) gives (5). \(\square\)
+
+### Corollary 3.4d.4: The \(k=3\) pair-bank branch is a low-count reflected star
+
+Assume that \(A\) is an order-\(3\) basis and that no infinite deletion from
+\(A\) remains an order-\(4\) basis. Let \(E\subset A\) be finite. Then
+there are constants
+\[
+Q_E,\eta_E>0
+\]
+and arbitrarily large witnesses for which one of the following alternatives
+holds.
+
+1. There are \(w\), a finite
+   \[
+   D\subset A\setminus E,\qquad |D|\le Q_E,
+   \]
+   a gate \(x\in D\), and at least
+   \[
+   \eta_E A(w)
+   \]
+   retained three-term representations
+   \[
+   w-x=a+b+c,\qquad a,b,c\in A\setminus D, \tag{1}
+   \]
+   with \(w\notin4(A\setminus D)\).
+2. There are \(w\), a finite
+   \[
+   D\subset A\setminus E,\qquad |D|\le Q_E,
+   \]
+   gates \(p,q\in D\), and a set
+   \[
+   U\subset (A\setminus D)\cap(w-p-q-(A\setminus D))
+   \]
+   such that
+   \[
+   |U|\ge \eta_E A(w), \tag{2}
+   \]
+   \[
+   w\notin4(A\setminus D), \tag{3}
+   \]
+   and for one gate \(g\in\{p,q\}\),
+   \[
+   r_{2,A}(g+u)\le Q_E\qquad(u\in U). \tag{4}
+   \]
+
+Proof. Apply Corollary 3.4d.2 with \(k=3\). There are arbitrarily large
+\(w\), bounded \(D\), a retained bank of dimension \(r=2\) or \(r=3\), and
+\[
+w\notin4(A\setminus D).
+\]
+Absorb the constants in that corollary into \(Q_E\) and \(\eta_E\).
+
+If \(r=3\), the deleted multiset has size one, say \(\{x\}\), and the
+retained bank is exactly (1). This is alternative 1.
+
+If \(r=2\), the deleted multiset has size two, say \(\{p,q\}\), with
+repetition allowed. The retained bank is a family \(\mathcal P\) of
+unordered pairs
+\[
+w-p-q=a+b,\qquad a,b\in A\setminus D,
+\]
+of size at least \(c_EA(w)\). Lemma 3.4d.3 gives a gate \(g\in\{p,q\}\) and
+a reflected endpoint set \(U\) of size at least \(c_EA(w)/2\), all
+satisfying
+\[
+r_{2,A}(g+u)\le |D|\le Q_E.
+\]
+After decreasing \(\eta_E\), this is alternative 2. \(\square\)
+
+Thus the first genuinely new \(k=3\) obstruction is now sharply separated.
+The one-gate three-bank branch gives many retained triples but may have only
+a root-sized set of distinct endpoints. The two-gate pair-bank branch,
+however, recovers a full linear-size reflected packet of bounded two-sum
+translate rows, analogous to the \(k=2\) star obstruction but with the
+reflected center shifted by the sum of two deleted gates.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27207,6 +27356,10 @@ missing from ordinary minimal order-\(h\) bases.
   eventually produce a retained representation bank of dimension at least
   two behind a bounded deleted multiset. For \(k=3\), the live alternatives
   are a one-gate retained three-bank or a two-gate retained pair-bank.
+* Lemma 3.4d.3 and Corollary 3.4d.4 sharpen the \(k=3\) pair-bank branch:
+  a two-gate retained pair bank contains a linear-size reflected packet
+  whose translate by one of the two gates has bounded two-sum representation
+  count.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

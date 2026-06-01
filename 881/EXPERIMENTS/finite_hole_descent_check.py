@@ -8,6 +8,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
   descends through one deleted gate to (r-1)-term representations;
 * a retained repair inside an h-term hole cannot have any deleted subblock
   plus retained subblock replaced by retained summands of the same length.
+* a retained pair bank behind two deleted gates in a four-term hole contains
+  a large one-gate low-count star.
 """
 
 from __future__ import annotations
@@ -86,10 +88,45 @@ def check_hole_obstruction(A: tuple[int, ...], D: tuple[int, ...], max_h: int) -
     return checked
 
 
+def check_pair_bank_star(A: tuple[int, ...], D: tuple[int, ...]) -> int:
+    C = tuple(a for a in A if a not in D)
+    checked = 0
+    for w in range(1, 4 * max(A) + 1):
+        if reps(C, 4, w):
+            continue
+        for p in D:
+            for q in D:
+                m = w - p - q
+                if m <= 0:
+                    continue
+                pairs = reps(C, 2, m)
+                if not pairs:
+                    continue
+                low_by_gate: dict[int, set[int]] = {p: set(), q: set()}
+                for a, b in pairs:
+                    incidences = []
+                    for gate, endpoint in ((p, a), (p, b), (q, a), (q, b)):
+                        if not reps(C, 2, gate + endpoint):
+                            incidences.append((gate, endpoint))
+                    assert incidences
+                    for gate, endpoint in incidences:
+                        low_by_gate.setdefault(gate, set()).add(endpoint)
+
+                best = max(len(points) for points in low_by_gate.values())
+                assert best * 2 >= len(pairs)
+                for gate, points in low_by_gate.items():
+                    for endpoint in points:
+                        assert reps(A, 2, gate + endpoint)
+                        assert len(reps(A, 2, gate + endpoint)) <= len(D)
+                checked += 1
+    return checked
+
+
 def main() -> None:
     sets_checked = 0
     decomposition_checked = 0
     obstruction_checked = 0
+    pair_star_checked = 0
     universe = range(1, 10)
     for size in range(4, 8):
         for A_raw in combinations(universe, size):
@@ -100,10 +137,12 @@ def main() -> None:
                     sets_checked += 1
                     decomposition_checked += check_decomposition(A, D, max_h=5)
                     obstruction_checked += check_hole_obstruction(A, D, max_h=5)
+                    pair_star_checked += check_pair_bank_star(A, D)
     print("finite hole descent checks passed")
     print(f"sets_checked={sets_checked}")
     print(f"decomposition_checked={decomposition_checked}")
     print(f"obstruction_checked={obstruction_checked}")
+    print(f"pair_star_checked={pair_star_checked}")
 
 
 if __name__ == "__main__":
