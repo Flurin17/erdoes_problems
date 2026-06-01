@@ -20891,6 +20891,56 @@ late-bad sets. Once singleton late-bad points have been exhausted, the
 remaining \(k=3\) obstruction may be studied as a genuine nonsingleton
 prefix-front of active order-\(4\) holes.
 
+### Lemma 16.35a: Active fronts admit reciprocal-summable packetization
+
+Keep the conclusion of Corollary 16.35, and let
+\[
+m_1,m_2,\ldots
+\]
+be any prescribed sequence of positive integers. Then, after discarding at
+most finitely many points of \(Q\), one can write a tail of \(Q\) as
+pairwise disjoint finite packets
+\[
+P_1,P_2,\ldots
+\]
+with
+\[
+|P_s|=m_s\qquad(s\ge1). \tag{1}
+\]
+Moreover, for every infinite \(I\subset\mathbb N\) and every selector
+\[
+x_s\in P_s\qquad(s\in I),
+\]
+the selected set
+\[
+X=\{x_s:s\in I\}
+\]
+contains a trace \(F\in\mathcal F\). This trace meets each packet in at
+most one point, has \(|F|\ge2\), and carries the active order-\(4\) witness
+from Corollary 16.35.
+
+In particular the packets may be chosen so that
+\[
+\sum_s {1\over |P_s|}<\infty. \tag{2}
+\]
+
+Proof. Enumerate a tail of \(Q\) increasingly and divide it into consecutive
+blocks of sizes \(m_1,m_2,\ldots\); this gives (1). If \(I\) is infinite
+and \(x_s\in P_s\), then \(X\) is an infinite subset of \(Q\). Since
+\(\mathcal F\) is a prefix-front on \(Q\), there is \(F\in\mathcal F\) with
+\[
+F\subset X.
+\]
+The selector \(X\) has at most one point from each packet, so \(F\) also
+meets each packet in at most one point. The lower bound \(|F|\ge2\) and the
+witness properties are exactly those supplied by Corollary 16.35. Finally,
+choosing for example \(m_s=s^2\) gives (2). \(\square\)
+
+Thus all later product-selector normal forms may be tested on packet
+sequences whose reciprocal sizes are summable. Any residual obstruction
+that depends only on nonsummable \(\sum_s1/|P_s|\) is an artefact of a poor
+packetization, not a live \(k=3\) counterexample branch.
+
 ### Corollary 16.36: Bounded-depth nonsingleton debt lands in \(2A\)
 
 Keep the notation of Corollary 16.35. Let
@@ -25770,6 +25820,8 @@ normalization leaves no bounded-error countable-menu escape. A surviving
 linear-core branch must either move to profiles of unbounded complexity or
 pay linear packet-width or auxiliary-midpoint displacement on a
 nonsummable active subseries.
+By Lemma 16.35a this normalization is available in the \(k=3\)
+nonsingleton-front setting before the selector reductions are applied.
 
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
@@ -26923,6 +26975,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   actual prefix-front of inclusion-minimal active order-\(4\) traces, with
   witnesses \(w_F\ge\max F-1\) and the full three-term vertex-cover
   condition from Lemma 10.1.
+* Lemma 16.35a records that this active front can be partitioned into
+  packets of any prescribed finite sizes, including reciprocal-summable
+  sizes, while preserving selector-front coverage.
 * Corollary 16.36 records the exact limitation of importing the \(k=2\)
   front closure: bounded ordered-depth debt in such a \(k=3\) front gives
   fractional reflected rows only in \(2A\), not in \(A\). The unresolved

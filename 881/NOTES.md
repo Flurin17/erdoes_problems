@@ -223,6 +223,9 @@ or genuinely unbounded active profile complexity on every tail.
 Corollary 16.125 shows that reciprocal-summable packet choices remove the
 recurrent-label artefact, leaving only unbounded complexity or the two
 linear-scale packet-position residuals.
+Lemma 16.35a justifies that normalization in the \(k=3\) nonsingleton
+front: the active front can be partitioned into packets of prescribed
+sizes, e.g. \(|P_s|=s^2\), while preserving selector-front coverage.
 
 ## Definitions
 
