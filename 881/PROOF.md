@@ -11720,6 +11720,12 @@ w=f+e+q_e.
 Thus mirrored Sidon packets can satisfy the private-incidence matrix
 row-by-row, at least as a finite affine-avoidance problem.
 
+Warning 8.5a.7c shows that this remains true even after the new mirrors are
+included among the current retained test rows: a range-separated packet can
+gate \(e\) and \(q_e\) through the same moving color while keeping that
+two-point fiber certificate-free. Hence the local mirror rows alone do not
+force recurrence or a Schreier prefix link.
+
 The debt appears when a filler \(q_e\) is later promoted into the protected
 tail. For any old retained endpoint \(p\), Lemma 13.1h says that if an
 interval of shifted values is already absorbed,
@@ -12946,9 +12952,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   possible in the P5 seed, but only by adding fillers that immediately fail
   the next complete-prefix-link test when promoted.
 * Warning 13.1n packages the construction-side reason: mirrored private
-  packets can satisfy Lemma 8.4c row-by-row, but every mirror later promoted
-  into the protected tail inherits new poisoned pair intervals from old
-  retained endpoints.
+  packets can satisfy Lemma 8.4c row-by-row, even after folding current
+  mirrors into the same certificate-free color fibers, but every mirror
+  later promoted into the protected tail inherits new poisoned pair
+  intervals from old retained endpoints.
 * Proposition 13.1b-general gives the same finite-stage barrier criterion
   for every order \(k\), and observes that failure at order \(k+1\)
   automatically gives strong infinite-deletion minimality at order \(k\).
