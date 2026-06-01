@@ -16,6 +16,8 @@ Problem 647.
 - `residue_classes.cpp`: experimental small-modulus residue filter.
 - `residue_lift.py`: lifts the 41-class filter through extra small primes
   using the forced-smooth obstruction.
+- `residue_lift_fast.cpp`: compiled version of the same lift, used for
+  larger lifts such as `23,29,31,37`.
 - `run_residue_scan.py`: launches and aggregates `prime_tuple_search` jobs
   over exact half-open ranges of `N`, either one residue per process or
   batched with `--batch-size` for the 128-bit binary.
@@ -27,6 +29,7 @@ c++ -O3 -std=c++17 -march=native SEARCH/prime_tuple_search.cpp -o SEARCH/prime_t
 c++ -O3 -std=c++17 -march=native SEARCH/prime_tuple_search128.cpp -o SEARCH/prime_tuple_search128
 c++ -O3 -std=c++17 -march=native SEARCH/record_sieve.cpp -o SEARCH/record_sieve
 c++ -O3 -std=c++17 SEARCH/residue_classes.cpp -o SEARCH/residue_classes
+c++ -O3 -std=c++17 -march=native SEARCH/residue_lift_fast.cpp -o SEARCH/residue_lift_fast
 ```
 
 ## Reproducibility Checks
@@ -121,6 +124,10 @@ batched job mode through the range driver to keep process overhead low:
 
 ```sh
 python3 SEARCH/residue_lift.py --k 1000 --add-primes 23,29,31 --format csv \
+  | tail -1 > /tmp/erdos647-residues-mod955049953-k1000.csv
+
+# Equivalent, and faster for deeper lifts:
+./SEARCH/residue_lift_fast --k 1000 --add-primes 23,29,31 --format csv \
   | tail -1 > /tmp/erdos647-residues-mod955049953-k1000.csv
 
 python3 SEARCH/run_residue_scan.py \
