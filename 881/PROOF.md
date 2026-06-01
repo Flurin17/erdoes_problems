@@ -2960,6 +2960,103 @@ remaining difficulty is proving that genuine additive bases force those
 lower-order transversal numbers to grow, or constructing a sparse basis in
 which they stay bounded in a coherent barrier pattern.
 
+### Corollary 3.4d.13: Common active lower-order barriers
+
+Assume that no infinite deletion from the order-\(k\) basis \(A\) remains
+an order-\((k+1)\) basis. Let \(E\subset A\) be finite. Then there are
+constants
+\[
+q_E,\qquad c_E>0,
+\]
+arbitrarily large \(w\), an integer
+\[
+\ell\in\{2,\ldots,k\},
+\]
+a finite set
+\[
+F\subset A\setminus E,\qquad 1\le |F|\le q_E,
+\]
+a constant shift \(\tau\), and a set
+\[
+U\subset A\setminus E
+\]
+such that
+\[
+|U|\ge c_E A(w)^{1/k}, \tag{1}
+\]
+and for every \(u\in U\):
+
+1. the target
+   \[
+   t_u=\tau+u
+   \]
+   has an \(\ell\)-term representation from \(A\setminus E\);
+2. \(F\) is inclusion-minimal for the lower-order hole
+   \[
+   t_u\notin \ell(A\setminus F); \tag{2}
+   \]
+3. equivalently, every \(f\in F\) is active for \(t_u\):
+   \[
+   t_u\in\ell(A\setminus(F\setminus\{f\})). \tag{3}
+   \]
+
+Proof. Apply Corollary 3.4d.10. It gives \(D,S,r,U_0\), with
+\[
+|D|\le q_E,\qquad |U_0|\ge c'_E A(w)^{1/r},
+\]
+where
+\[
+2\le r\le k.
+\]
+Put
+\[
+\tau=\sigma(S),\qquad \ell=|S|+1.
+\]
+For every \(u\in U_0\),
+\[
+\tau+u\in\ell(A\setminus E)
+\]
+because \(S\cup\{u\}\) is such a representation, and
+\[
+\tau+u\notin\ell(A\setminus D). \tag{4}
+\]
+
+For each \(u\in U_0\), choose an inclusion-minimal subset
+\[
+F_u\subset D
+\]
+such that
+\[
+\tau+u\notin\ell(A\setminus F_u).
+\]
+This is possible by (4), and \(F_u\ne\varnothing\) because
+\[
+\tau+u\in\ell A.
+\]
+There are at most \(2^{q_E}\) possible subsets of \(D\). Hence one subset
+\[
+F\subset D
+\]
+occurs for at least
+\[
+|U_0|/2^{q_E}
+\]
+values of \(u\). Restrict \(U_0\) to those \(u\)'s and discard the finite
+set \(E\) if necessary; since \(A(w)\to\infty\), the lower bound remains
+\[
+\gg_E A(w)^{1/r}\ge \gg_E A(w)^{1/k}
+\]
+after changing the constant. This proves (1).
+
+For the surviving \(u\)'s, \(F=F_u\), so (2) holds and inclusion-minimality
+gives (3) for every \(f\in F\). \(\square\)
+
+This is the lower-order analogue of the active-trace normal forms used in
+the \(k=2\) proof. A higher-order counterexample must not only have bounded
+lower-order transversals; after passing to a large packet, the same finite
+deleted set \(F\) is an inclusion-minimal active barrier for a whole
+translate family \(t_u=\tau+u\).
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27914,6 +28011,9 @@ missing from ordinary minimal order-\(h\) bases.
   hypergraph statement: after one finite core is protected, unbounded
   transversal number, or just arbitrarily large matchings, for every
   represented lower-order target would prove the full theorem.
+* Corollary 3.4d.13 sharpens the negative side: bounded lower-order
+  transversals may be pigeonholed to one common inclusion-minimal active
+  finite barrier over a large translate packet \(t_u=\tau+u\).
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

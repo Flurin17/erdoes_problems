@@ -42,7 +42,10 @@ transversals after one finite core would prove the full deletion theorem.
 Corollary 3.4d.12 restates this as the current all-order hypergraph target:
 after protecting one finite core, lower-order representation hypergraphs
 for all represented large targets should have transversal number tending to
-infinity; large matchings are a sufficient special case.
+infinity; large matchings are a sufficient special case. Corollary 3.4d.13
+sharpens the negative normal form: bounded lower-order transversals can be
+made into one common inclusion-minimal active finite barrier across a large
+translate packet \(t_u=\tau+u\).
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the
