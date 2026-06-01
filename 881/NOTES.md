@@ -54,6 +54,10 @@ outside the tested interval.
 Lemma 16.50 and Corollary 16.51 add the two-sum band obstruction for those
 far gates: any retained subinterval \(J\) forbids gate rows in \(2J-f\),
 and if that band covers the tested interval then no gate packet remains.
+Lemma 16.52 and Corollary 16.53 make this quantitative: after deleting at
+most \(r\) active colors from an \(n\)-point interval, a retained run of
+length at least \(\lceil(n-r)/(r+1)\rceil\) gives a concrete gate-exclusion
+band.
 
 ## Definitions
 

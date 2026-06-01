@@ -21622,6 +21622,103 @@ there. Surviving large packets must place \(f\) so far away that
 misses most of the row interval, or else arrange that deletion holes
 fragment every long retained subinterval of the test block.
 
+### Lemma 16.52: Finite deletions leave a long retained run
+
+Let
+\[
+I=[a,b]\cap\mathbb N
+\]
+be an interval of length
+\[
+n=b-a+1,
+\]
+and let \(F\subset I\) have \(|F|\le r\). Then \(I\setminus F\) contains an
+interval \(J\) of length at least
+\[
+\left\lceil {n-r\over r+1}\right\rceil. \tag{1}
+\]
+
+Proof. The \(r\) deleted points split the \(n-|F|\) retained points of
+\(I\setminus F\) into at most \(|F|+1\le r+1\) consecutive runs. One run
+has length at least
+\[
+\left\lceil {n-|F|\over |F|+1}\right\rceil.
+\]
+For \(0\le t\le r\), the function
+\[
+{n-t\over t+1}
+\]
+is decreasing in \(t\). Therefore this lower bound is at least (1).
+\(\square\)
+
+### Corollary 16.53: Retained runs impose gate exclusion bands
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite with
+\[
+|F|\le r,
+\]
+and let
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+have length \(n\). Then there is a retained interval
+\[
+J=[\alpha,\beta]\cap\mathbb N\subset I\cap(A\setminus F)
+\]
+of length
+\[
+\ell=\beta-\alpha+1\ge\left\lceil {n-r\over r+1}\right\rceil. \tag{1}
+\]
+For every \(f\in F\) and every gate-dependent packet
+\[
+U\subset I,\qquad f+u\notin2(A\setminus F)\quad(u\in U),
+\]
+one has
+\[
+|U|\le n-\Lambda(f), \tag{2}
+\]
+where
+\[
+\Lambda(f)=
+\left|
+[a,b]\cap[2\alpha-f,\ 2\beta-f]
+\right|. \tag{3}
+\]
+In particular, if \(|U|>n-M\), then
+\[
+\Lambda(f)<M. \tag{4}
+\]
+If also
+\[
+M\le2\ell-1,
+\]
+then the band \(2J-f\) has length at least \(M\), and (4) forces
+\[
+f<2\alpha-b+M-1
+\quad\text{or}\quad
+f>2\beta-a-M+1. \tag{5}
+\]
+
+Proof. Lemma 16.52 gives \(J\). Corollary 16.51 says that \(U\) is
+disjoint from the band
+\[
+[2\alpha-f,\ 2\beta-f].
+\]
+Inside \(I\), this removes exactly \(\Lambda(f)\) possible row positions,
+so (2) follows. If \(|U|>n-M\), then (2) gives \(\Lambda(f)<M\).
+
+Finally assume \(M\le2\ell-1\). The intersection in (3) then has at least
+\(M\) points unless the left endpoint of the band lies after the first
+\(M-1\) points of \(I\), or the right endpoint lies before the last
+\(M-1\) points of \(I\). Written out, these two alternatives are exactly
+(5). \(\square\)
+
+Thus a large gate packet over an interval cannot merely put its active
+color far from the interval endpoints. It must avoid the exclusion band of
+some long retained run left after deleting \(F\). For bounded rank, that
+run has length comparable to \(|I|/(r+1)\), so a packet occupying almost all
+of \(I\) forces each active gate outside a long forbidden interval.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22801,6 +22898,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   a retained subinterval \(J\) forbids every gate row in \(2J-f\).
   Corollary 16.51 says a gate whose band \(2J-f\) covers the tested interval
   supports no gate packet there at all.
+* Lemma 16.52 notes that a rank-\(r\) deletion leaves a retained interval
+  of length at least \(\lceil(n-r)/(r+1)\rceil\) inside any \(n\)-point
+  interval. Corollary 16.53 uses that run to give a quantitative exclusion
+  band for every finite-palette gate packet over the interval.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
