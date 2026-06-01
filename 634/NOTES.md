@@ -189,7 +189,10 @@ The tile triangle is not required to be similar to the large triangle unless exp
   exhaustive check covers selected word groups from all three representative
   status classes: `9/9` outside-cover realizations are pinch-sector
   obstructions, `12/12` are split-corner-label obstructions, and `12/12` are
-  corner-label violations.
+  corner-label violations. The same word quotient does not extend naively to
+  `63` mixed `8`: the first `50000` word groups include `1152` mixed-status
+  word groups, and one fixed word triple with `48` outside-cover realizations
+  splits as `12` corner-label violations and `36` pinch-sector obstructions.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

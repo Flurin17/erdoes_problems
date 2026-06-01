@@ -2336,6 +2336,16 @@ one selected corner word are corner-label violations. See
 The reproducible harness for such fixed-word checks is
 `EXPERIMENTS/gamma_2alpha_word_invariance_probe.py`.
 
+This word-invariance phenomenon is not automatic and does not extend naively
+to the next high-mixed stratum. For `N=63` mixed `8`, the word-quotient counter
+finds `133680` outside-cover word groups over `3382720` outside-cover shells.
+In the first `50000` word groups, `1152` already have mixed representative
+statuses. A direct fixed-word check of
+`L=baabccb`, `R=aabbcbc`, `B=bcbaaabcc` finds `48` outside-cover realizations:
+`12` are corner-label violations and `36` are pinch-sector obstructions. See
+`EXPERIMENTS/results/n63_mixed8_word_quotient_010000_050000.json` and
+`EXPERIMENTS/results/n63_mixed8_word_invariance_mixed_example.json`.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`

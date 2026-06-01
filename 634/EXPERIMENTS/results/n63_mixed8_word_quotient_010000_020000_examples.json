@@ -1,0 +1,197 @@
+{
+  "classified_weight": 272288,
+  "classified_words": 10000,
+  "elapsed_seconds": 127.276959,
+  "endpoint_groups": 30,
+  "example_words": {
+    "corner-label-violation": [
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "corner-label-violation": 2
+        },
+        "word": "L=baaccbb R=abacbbc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "corner-label-violation": 2
+        },
+        "word": "L=baaccbb R=abbacbc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "corner-label-violation": 2
+        },
+        "word": "L=baaccbb R=abbcabc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "corner-label-violation": 2
+        },
+        "word": "L=baaccbb R=abcabbc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "corner-label-violation": 2
+        },
+        "word": "L=baaccbb R=abcbabc B=bcaaabbcc"
+      }
+    ],
+    "pinch-sector-obstruction": [
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "pinch-sector-obstruction": 2
+        },
+        "word": "L=bbaaccb R=aabbcbc B=bccaaabbc"
+      },
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "pinch-sector-obstruction": 2
+        },
+        "word": "L=bbaaccb R=aabcbbc B=bccaaabbc"
+      },
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "pinch-sector-obstruction": 2
+        },
+        "word": "L=bbaaccb R=aacbbbc B=bccaaabbc"
+      },
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "pinch-sector-obstruction": 2
+        },
+        "word": "L=bbaaccb R=ababcbc B=bccaaabbc"
+      },
+      {
+        "multiplicity": 18,
+        "statuses": {
+          "pinch-sector-obstruction": 2
+        },
+        "word": "L=bbaaccb R=abacbbc B=bccaaabbc"
+      }
+    ],
+    "split-corner-label-obstruction": [
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "split-corner-label-obstruction": 2
+        },
+        "word": "L=bbaaccb R=aabbcbc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "split-corner-label-obstruction": 2
+        },
+        "word": "L=bbaaccb R=aabcbbc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "split-corner-label-obstruction": 2
+        },
+        "word": "L=bbaaccb R=aacbbbc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "split-corner-label-obstruction": 2
+        },
+        "word": "L=bbaaccb R=ababcbc B=bcaaabbcc"
+      },
+      {
+        "multiplicity": 42,
+        "statuses": {
+          "split-corner-label-obstruction": 2
+        },
+        "word": "L=bbaaccb R=abacbbc B=bcaaabbcc"
+      }
+    ]
+  },
+  "first_classified_word_index": 10001,
+  "last_classified_word_index": 20000,
+  "max_total_mixed": 8,
+  "min_total_mixed": 8,
+  "mixed_example_words": [
+    {
+      "multiplicity": 48,
+      "statuses": {
+        "corner-label-violation": 1,
+        "pinch-sector-obstruction": 1
+      },
+      "word": "L=baabccb R=aabbcbc B=bcbaaabcc"
+    },
+    {
+      "multiplicity": 48,
+      "statuses": {
+        "corner-label-violation": 1,
+        "pinch-sector-obstruction": 1
+      },
+      "word": "L=baabccb R=aabcbbc B=bcbaaabcc"
+    },
+    {
+      "multiplicity": 48,
+      "statuses": {
+        "corner-label-violation": 1,
+        "pinch-sector-obstruction": 1
+      },
+      "word": "L=baabccb R=aacbbbc B=bcbaaabcc"
+    },
+    {
+      "multiplicity": 48,
+      "statuses": {
+        "corner-label-violation": 1,
+        "pinch-sector-obstruction": 1
+      },
+      "word": "L=baabccb R=ababcbc B=bcbaaabcc"
+    },
+    {
+      "multiplicity": 48,
+      "statuses": {
+        "corner-label-violation": 1,
+        "pinch-sector-obstruction": 1
+      },
+      "word": "L=baabccb R=abacbbc B=bcbaaabcc"
+    }
+  ],
+  "mixed_status_words": 576,
+  "n": 63,
+  "outside_cover_shells": 3382720,
+  "radicand": 5,
+  "reps_per_word": 2,
+  "skip_classified_words": 10000,
+  "status_group_counts": {
+    "corner-label-violation": 4864,
+    "pinch-sector-obstruction": 3972,
+    "split-corner-label-obstruction": 1164
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 1, \"pinch-sector-obstruction\": 1}": 432,
+    "{\"corner-label-violation\": 1}": 2292,
+    "{\"corner-label-violation\": 2}": 2140,
+    "{\"pinch-sector-obstruction\": 1, \"split-corner-label-obstruction\": 1}": 144,
+    "{\"pinch-sector-obstruction\": 1}": 2724,
+    "{\"pinch-sector-obstruction\": 2}": 1248,
+    "{\"split-corner-label-obstruction\": 1}": 744,
+    "{\"split-corner-label-obstruction\": 2}": 276
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 146024,
+    "pinch-sector-obstruction": 91008,
+    "split-corner-label-obstruction": 35256
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "word_groups": 133680
+}

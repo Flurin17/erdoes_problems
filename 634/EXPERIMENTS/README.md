@@ -253,6 +253,10 @@ Current components:
   groups from all three representative statuses: `9/9` outside-cover
   realizations are pinch-sector obstructions, `12/12` are
   split-corner-label obstructions, and `12/12` are corner-label violations.
+  The same quotient does not naively extend to `N=63` mixed `8`: the first
+  `50000` word groups include `1152` mixed-status word groups, and a fixed
+  word triple with `48` outside-cover realizations splits as `12`
+  corner-label violations and `36` pinch-sector obstructions.
 - `gamma_2alpha_word_invariance_probe.py`: exhaustive fixed-word tester for
   selected side-label word triples. It enumerates every oriented boundary
   demand realizing the requested words in the capped shell space, applies the

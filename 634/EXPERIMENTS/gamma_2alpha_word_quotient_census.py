@@ -242,6 +242,7 @@ def census_survivor(
     status_weight_counts: Counter[str] = Counter()
     status_signatures: Counter[tuple[tuple[str, int], ...]] = Counter()
     example_words: dict[str, list[dict[str, object]]] = defaultdict(list)
+    mixed_example_words: list[dict[str, object]] = []
     mixed_status_words = 0
     classified_words = 0
     classified_weight = 0
@@ -256,6 +257,14 @@ def census_survivor(
         )
         if len(statuses) > 1:
             mixed_status_words += 1
+            if example_words_per_status and len(mixed_example_words) < example_words_per_status:
+                mixed_example_words.append(
+                    {
+                        "word": signature,
+                        "multiplicity": multiplicity,
+                        "statuses": dict(sorted(statuses.items())),
+                    }
+                )
         representative_status = next(iter(statuses))
         status_group_counts[representative_status] += 1
         status_weight_counts[representative_status] += multiplicity
@@ -300,6 +309,7 @@ def census_survivor(
             for signature, count in sorted(status_signatures.items())
         },
         "example_words": dict(sorted(example_words.items())),
+        "mixed_example_words": mixed_example_words,
         "elapsed_seconds": round(time.monotonic() - started, 6),
     }
 

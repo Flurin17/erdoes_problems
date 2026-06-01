@@ -1,0 +1,28 @@
+{
+  "elapsed_seconds": 0.458458,
+  "generated_until_stop": 96,
+  "max_total_mixed": 8,
+  "min_total_mixed": 8,
+  "n": 63,
+  "radicand": 5,
+  "targets": [
+    {
+      "covered_target": 48,
+      "outside_cover_seen": 48,
+      "status_counts": {
+        "corner-label-violation": 12,
+        "pinch-sector-obstruction": 36
+      },
+      "word": {
+        "B": "bcbaaabcc",
+        "L": "baabccb",
+        "R": "aabbcbc"
+      }
+    }
+  ],
+  "tile": [
+    9,
+    7,
+    12
+  ]
+}
