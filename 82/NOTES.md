@@ -3418,8 +3418,9 @@ source of growth beyond Ramsey.
 - 2026-06-01: Added the full-drop ordered parameter `C_full(P,h)`, capturing
   the stronger fact that degree-bucket representatives ordered by increasing
   degree satisfy `N(v_i)\N(v_j)<P_h` over all coordinates whenever `i<j`.
-  A one-sided peeling lemma gives `C_full(P,h) <= P(h-1)^2+h`, improving the
-  polynomial reduction to `G(h) <= 8 h^3 P_h^2`.  This removes the
+  A one-sided peeling lemma gives
+  `C_full(P,h) <= P(h-1)(h-2)+h`, improving the polynomial reduction to
+  `G(h) <= 2 h^3 P_h^2` after the later bucket sharpening.  This removes the
   sparse-inversion/column-drop quartic loss, but the asymptotic bottleneck
   remains the equivalent local problem `P_h=2^{o(h)}`.
 - 2026-06-01: Added `full_drop_census.py` and ran small sanity checks for the
@@ -3445,18 +3446,20 @@ source of growth beyond Ramsey.
   search shows the first error level already has larger behavior.
 - 2026-06-01: Tightened the full-drop peeling proof itself.  The neighborhood
   of the first vertex has complement maximum degree at most `P-1`, so its
-  complement is greedily `P`-colorable; without an `h`-clique this gives the
-  needed bound `|N(a)|<=P(h-1)`.  Deleting only the first vertex and its
-  neighborhood, rather than also using the last vertex, improves
-  `C_full(P,h)` to `P(h-1)^2+h` and the global pair-parameter reduction to
-  `G(h)<=8h^3P_h^2`.
+  complement is greedily `P`-colorable; without an `h`-clique, the absence of
+  an `(h-1)`-clique in the neighborhood gives the stronger bound
+  `|N(a)|<=P(h-2)`.  Deleting only the first vertex and its neighborhood,
+  rather than also using the last vertex, improves `C_full(P,h)` to
+  `P(h-1)(h-2)+h`.
 - 2026-06-01: Sharpened exact-degree buckets again by splitting a bucket
   around one reference vertex.  The neighbor side has complement maximum
   degree at most `P_h-2`, while the nonneighbor side has maximum degree at
   most `P_h-1`; greedy coloring gives
-  `|U| <= 1+(2P_h-1)(h-1) <= 2hP_h`.  Consequently the column-drop and
-  regular-column-drop reductions have prefactor `2hP_h`, and the full-drop
-  global reduction improves to `G(h)<=4h^3P_h^2`.
+  `|U| <= 1+(2P_h-1)(h-2) <= 2P_h(h-1)`, because an `(h-1)`-clique or
+  independent set on the appropriate side extends with the reference vertex.
+  Consequently the column-drop and regular-column-drop reductions have
+  prefactor `2P_h(h-1)`, and the full-drop global reduction improves to
+  `G(h)<=2h^3P_h^2`.
 - 2026-06-01: Extracted the pattern behind the `P=2` full-drop search
   certificates.  For every `h>=4`, a graph on `4h-7` ordered vertices
   satisfies the `P=2` full-drop condition and has no clique or independent

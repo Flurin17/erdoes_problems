@@ -7518,7 +7518,8 @@ over every field.  Equivalently, if either rank is at most `r`, then
 
 Proof.  This is Corollary 7C applied to the induced subgraph on `B`.  QED.
 
-This is not a replacement for Corollary 28D.2's `2hP_h` degree-bucket bound,
+This is not a replacement for Corollary 28D.2's `2P_h(h-1)`
+degree-bucket bound,
 but it supplies an independent local obstruction: a large exact-degree bucket
 in a counterexample must be a high-rank bounded-spread graph.
 
@@ -11329,7 +11330,7 @@ inequality by a non-strict one.  QED.
 `G`, then
 
 ```text
-|U| <= 1+(2P-1)(h-1) <= 2hP.
+|U| <= 1+(2P-1)(h-2) <= 2P(h-1).
 ```
 
 Proof.  If `|U|<=1`, this is immediate.  Fix `v in U`, and put
@@ -11352,19 +11353,21 @@ If `u in A`, then `u in N_G(v)\N_G(u)`.  Every nonneighbor of `u` inside `A`
 also lies in `N_G(v)\N_G(u)`.  Hence, for `P=1`, the set `A` is empty; for
 `P>=2`, the complement of `G[A]` has maximum degree at most `P-2`.  Greedily
 coloring this complement with `P-1` colors shows that, since `G` has no
-clique of order `h`,
+clique of order `h` and every clique of order `h-1` in `A` would extend with
+`v` to a clique of order `h`,
 
 ```text
-|A| <= (P-1)(h-1).
+|A| <= (P-1)(h-2).
 ```
 
 If `u in B`, then every neighbor of `u` inside `B` lies in
 `N_G(u)\N_G(v)`.  Thus `G[B]` has maximum degree at most `P-1`.  Greedily
 coloring `G[B]` with `P` colors shows that, since `G` has no independent set
-of order `h`,
+of order `h` and every independent set of order `h-1` in `B` would extend
+with `v` to an independent set of order `h`,
 
 ```text
-|B| <= P(h-1).
+|B| <= P(h-2).
 ```
 
 Adding `v`, `A`, and `B` gives the displayed bound.  QED.
@@ -11427,14 +11430,14 @@ rows.
 **Lemma 28D.5: One-Sided Full-Drop Peeling Bound.**  For every `P,h>=1`,
 
 ```text
-C_full(P,h) <= P(h-1)^2+h.
+C_full(P,h) <= P(h-1)(h-2)+h.
 ```
 
 Proof.  Let `H` be a full-drop ordered graph with no clique or independent
 set of order `h`.  We prove that
 
 ```text
-|V(H)| <= (h-1)(P(h-1)+1).
+|V(H)| <= (h-1)(P(h-2)+1).
 ```
 
 The claim is trivial for `h=1`, so assume `h>=2`.  Let `W` be a nonempty
@@ -11451,14 +11454,14 @@ First consider `A=N_{H[W]}(a)`.  For every `u in A`, every nonneighbor of
 which has size less than `P` because `a` is first.  Thus the complement of
 `H[A]` has maximum degree at most `P-1`.  Greedily color this complement
 with at most `P` colors.  Each color class is a clique in `H[A]`, and since
-no such clique has order `h`, every color class has size at most `h-1`.
-Therefore
+no clique of order `h-1` can occur in `A` without extending with `a` to a
+clique of order `h`, every color class has size at most `h-2`.  Therefore
 
 ```text
-|A| <= P(h-1).
+|A| <= P(h-2).
 ```
 
-Delete `a` and all of `A`.  This removes at most `P(h-1)+1` vertices.
+Delete `a` and all of `A`.  This removes at most `P(h-2)+1` vertices.
 
 Starting with `W_0=V(H)`, repeat this deletion process while the current set
 is nonempty, and record the first vertex `a_t` of the current set.  Every
@@ -11466,7 +11469,7 @@ later recorded vertex survived the deletion of all neighbors of `a_t`, and
 hence is nonadjacent to `a_t`.  Thus the recorded first vertices form an
 independent set.
 
-If `|V(H)|>(h-1)(P(h-1)+1)`, then after `h-1` deletion steps at least one
+If `|V(H)|>(h-1)(P(h-2)+1)`, then after `h-1` deletion steps at least one
 vertex remains, so the process records `h` pairwise nonadjacent vertices.
 This is forbidden.  Therefore the displayed upper bound on `|V(H)|` holds,
 which is equivalent to the stated bound on `C_full(P,h)`.  QED.
@@ -11694,14 +11697,14 @@ from this clique-core construction.
 `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 2hP C_full(P,h)
-     <= 2hP(P(h-1)^2+h)
-     <= 4h^3P^2.
+G(h) <= 2P(h-1) C_full(P,h)
+     <= 2P(h-1)(P(h-1)(h-2)+h)
+     <= 2h^3P^2.
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition `V(G)` into exact global degree classes.  By Corollary
-28D.2, every nonempty degree class has size at most `2hP`.
+28D.2, every nonempty degree class has size at most `2P(h-1)`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing degree:
@@ -11729,7 +11732,7 @@ subgraph of `G`, impossible.  Thus `b<C_full(P,h)`.  Multiplying by the
 degree-class size bound gives
 
 ```text
-|V(G)| < 2hP C_full(P,h).
+|V(G)| < 2P(h-1) C_full(P,h).
 ```
 
 The first displayed inequality follows from the definition of `G(h)`, the
@@ -12081,12 +12084,12 @@ independent set has order exactly `h-1`.  Hence
 every `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 2 h P C_drop(P,h).
+G(h) <= 2 P(h-1) C_drop(P,h).
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition its vertices into exact global degree classes.  By
-Corollary 28D.2, every nonempty degree class has size at most `2hP`.
+Corollary 28D.2, every nonempty degree class has size at most `2P(h-1)`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing global degree:
@@ -12119,12 +12122,12 @@ Multiplying the number of degree classes by the maximum degree-class size
 gives
 
 ```text
-|V(G)| <= 2hP (C_drop(P,h)-1) < 2hP C_drop(P,h).
+|V(G)| <= 2P(h-1) (C_drop(P,h)-1) < 2P(h-1) C_drop(P,h).
 ```
 
-Therefore every graph on at least `2hP C_drop(P,h)` vertices has a regular
-induced subgraph on at least `h` vertices, proving the displayed bound for
-`G(h)`.  QED.
+Therefore every graph on at least `2P(h-1) C_drop(P,h)` vertices has a
+regular induced subgraph on at least `h` vertices, proving the displayed
+bound for `G(h)`.  QED.
 
 Before the full-drop refinement in Corollary 28D.6, this gave the polynomial
 reduction through the crude
@@ -12327,12 +12330,12 @@ C_reg(P,h) <= C_drop(P,h).
 `h>=3`, with `P=P_h`,
 
 ```text
-G(h) <= 2 h P C_reg(P,h).
+G(h) <= 2 P(h-1) C_reg(P,h).
 ```
 
 Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
 vertices.  Partition `V(G)` into exact global degree classes.  By Corollary
-28D.2, every nonempty degree class has size at most `2hP`.
+28D.2, every nonempty degree class has size at most `2P(h-1)`.
 
 Choose one representative from each nonempty degree class and order the
 representatives by increasing degree.  As in Lemma 28E.6, Lemma 28D implies
@@ -12348,10 +12351,10 @@ than `C_reg(P,h)` nonempty degree classes.  Multiplying by the degree-class
 size bound gives
 
 ```text
-|V(G)| < 2hP C_reg(P,h).
+|V(G)| < 2P(h-1) C_reg(P,h).
 ```
 
-Therefore every graph on at least `2hP C_reg(P,h)` vertices contains a
+Therefore every graph on at least `2P(h-1) C_reg(P,h)` vertices contains a
 regular induced subgraph on at least `h` vertices.  QED.
 
 This is formally sharper than Lemma 28E.6.  It would prove Problem 82 under
@@ -12369,13 +12372,13 @@ subexponential scale as `G`.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 4 h^3 P_h^2.
+G(h) <= 2 h^3 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
 
 Proof.  This is the final inequality of Corollary 28D.6.  If
-`P_h=2^{o(h)}`, then the polynomial factor `4h^3` is also
+`P_h=2^{o(h)}`, then the polynomial factor `2h^3` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
@@ -13303,7 +13306,7 @@ quickly collapse back to the original problem inside one profile class.
 No complete proof yet.  The strongest current reduction in this workspace is
 
 ```text
-G(h) <= 4h^3 P_h^2,
+G(h) <= 2h^3 P_h^2,
 ```
 
 where `P_h` is the balanced marked-pair parameter from Lemma 28B.  Lemma 28G
