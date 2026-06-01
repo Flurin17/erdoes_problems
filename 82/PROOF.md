@@ -8793,6 +8793,37 @@ This identifies the next local obstacle after spectrum matching: even when
 same-degree side witnesses exist, one must find such witnesses whose
 cross-degree profiles compensate rather than split.
 
+**Computational Candidate 28L: A Parity Cross-Profile Family.**  The script
+`EXPERIMENTS/parity_pair_construction.py` generates the following marked
+two-part graph with `|A|=|B|=h`.  On the `A` side put one edge `a_0a_1` and
+make all other `A` vertices isolated.  On the `B` side put a clique on
+`b_0,...,b_{h-2}` and make `b_{h-1}` isolated.  Between the sides, join
+`a_i` to `b_j` exactly when
+
+```text
+i+j is even.
+```
+
+The construction is not currently proved to work for all `h`.  Exact checks
+with the same verifier used for `P_h` show:
+
+```text
+h=5,6:   not an obstruction,
+h=7..11: plus obstruction at side size M=h.
+```
+
+For example,
+
+```text
+python3 82/EXPERIMENTS/parity_pair_construction.py 9
+```
+
+reports no regular induced subgraph on at least `9` vertices and no balanced
+plus middle of side size `4`.  If the pattern could be proved for all large
+`h`, it would give `P_h>h` for all large `h`.  This is still only a linear
+lower bound, but it supplies a structured test family for any proposed
+cross-profile matching theorem.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

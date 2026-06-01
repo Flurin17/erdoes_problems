@@ -2550,3 +2550,8 @@ source of growth beyond Ramsey.
   profiles are constant with offsets differing by `a-b`.  In particular,
   same-degree side-spectrum matches need a common cross-degree across both
   sides; this is exactly what fails in the first `P_6` obstruction.
+- 2026-06-01: Added `parity_pair_construction.py` and Computational
+  Candidate 28L.  The construction has one edge plus isolates on one side, a
+  clique plus an isolate on the other, and parity cross edges.  It is not a
+  proof yet: exact checks show it is not an obstruction for `h=5,6`, but it
+  is a plus obstruction for every `h=7..11` tested.
