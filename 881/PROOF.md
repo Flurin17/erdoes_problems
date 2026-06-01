@@ -1668,23 +1668,24 @@ coming from \((k+1)\)-term representations
 n=a_1+\cdots+a_{k+1},\qquad a_i\in A.
 \]
 Then there is an integer \(r_E\) and arbitrarily large \(n\) such that the
-matching number of \(\mathcal H_E(n)\) is \(<r_E\). Consequently, for those
-\(n\), there is a transversal
+transversal number of \(\mathcal H_E(n)\) is at most \(r_E\). Consequently,
+for those \(n\), there is a transversal
 \[
-D_n\subset A\setminus E,\qquad |D_n|\le (k+1)(r_E-1),
+D_n\subset A\setminus E,\qquad |D_n|\le r_E,
 \]
 meeting every \((k+1)\)-representation of \(n\) outside \(E\).
 
-Proof. If the matching numbers were unbounded uniformly for all sufficiently
-large \(n\), then the hypothesis of Lemma 3.2 would hold with this \(E\),
-and we could delete an infinite subset of \(A\setminus E\) while preserving
-order \(k+1\), contrary to the assumption. Hence for some \(r_E\), the
-matching number is \(<r_E\) for arbitrarily large \(n\).
-
-For such an \(n\), take a maximal matching. It has at most \(r_E-1\) edges,
-each of size at most \(k+1\). The union of these edges meets every edge of
-\(\mathcal H_E(n)\), by maximality, and has size at most
-\((k+1)(r_E-1)\). \(\square\)
+Proof. If no such \(r_E\) existed, then for every \(r\) all sufficiently
+large \(n\) would have no transversal of size at most \(r\) in
+\(\mathcal H_E(n)\). Equivalently, every set
+\[
+D\subset A\setminus E,\qquad |D|\le r,
+\]
+would fail to hit all outside-\(E\) support edges of every sufficiently
+large \(n\). This is exactly the hypothesis of Lemma 3.2a, which would give
+an infinite deletion preserving order \(k+1\), contrary to the assumption.
+Thus some \(r_E\) and arbitrarily large \(n\) have transversal number at
+most \(r_E\), and choosing such a transversal gives \(D_n\). \(\square\)
 
 This corollary is often the most concrete form of the remaining problem:
 one must either rule out such bounded moving transversals for arbitrary
@@ -2032,8 +2033,8 @@ r_{k,A}(n-x_n)\ge \eta_E\, A(n), \tag{1}
 where \(r_{k,A}\) counts unordered \(k\)-term multiset representations.
 
 Proof. By Corollary 3.3, for this fixed \(E\) there is an integer \(M_E\)
-and arbitrarily large \(n\) for which the matching number of
-\(\mathcal H_E(n)\) is less than \(M_E\). Let
+and arbitrarily large \(n\) for which \(\mathcal H_E(n)\) has a transversal
+of size at most \(M_E\). Let
 \[
 C_{k,E}=\binom{|E|+2k+1}{k+1}.
 \]
@@ -2057,14 +2058,10 @@ c_{k,E} A(n)
 \]
 for a constant \(c_{k,E}>0\), because \(E\) and \(N_0\) are fixed.
 
-The greedy matching lower bound used in Proposition 3.4 gives
+Since a set of at most \(M_E\) vertices meets every edge, some vertex has
+degree at least \(|\mathcal H_E(n)|/M_E\). Hence
 \[
-\operatorname{match}(\mathcal H_E(n))
-\ge \frac{|\mathcal H_E(n)|}{(k+1)\Delta_E(n)}.
-\]
-Since the matching number is less than \(M_E\), we have
-\[
-\Delta_E(n)\ge \frac{c_{k,E}}{(k+1)M_E}A(n). \tag{2}
+\Delta_E(n)\ge \frac{c_{k,E}}{M_E}A(n). \tag{2}
 \]
 Choose a vertex \(x_n\in A\setminus E\) with this degree. Every edge
 containing \(x_n\) comes from some \((k+1)\)-term multiset representation
@@ -2214,12 +2211,8 @@ and an element \(d\in D\) with:
    \]
 
 Proof. Fix \(E\). Corollary 3.3 gives arbitrarily large \(w\) for which
-\(\mathcal H_E(w)\) has matching number bounded by some \(M_E\). Let
-\(D\) be the union of a maximal matching, so \(D\subset A\setminus E\),
-\[
-|D|<3M_E=:q_E,
-\]
-and \(D\) meets every edge of \(\mathcal H_E(w)\). Taking \(w\) larger than
+\(\mathcal H_E(w)\) has a transversal \(D\subset A\setminus E\) of size
+bounded by some \(q_E\). Taking \(w\) larger than
 every three-term sum from \(E\), this implies
 \[
 w\notin3(A\setminus D).

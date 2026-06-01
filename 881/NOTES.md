@@ -898,9 +898,9 @@ such that
 \[
 r_{k,A}(n-x)\gg_E A(n).
 \]
-This follows because bounded matching number plus the padded lower bound
-for \(|\mathcal H_E(n)|\) forces a high-degree vertex, and each edge
-through that vertex gives a \(k\)-term representation of the shifted target.
+This follows because a bounded transversal plus the padded lower bound for
+\(|\mathcal H_E(n)|\) forces a high-degree vertex, and each edge through
+that vertex gives a \(k\)-term representation of the shifted target.
 For \(k=2\), the large spikes are large reflected clusters
 \[
 A\cap(n-x-A).
