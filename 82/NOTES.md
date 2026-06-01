@@ -3487,3 +3487,10 @@ source of growth beyond Ramsey.
   order.  On the `P=2,h=5` certificate mask `146393211167096786919426`, the
   enhanced output reports `clique_number=4` and `independence_number=4`,
   matching the lower-construction proof exactly.
+- 2026-06-01: Added `full_drop_alpha_omega.py` to census the stronger
+  possible `P=2` full-drop inequality `alpha+omega >= (n+3)/2`.  Exact DFS
+  enumeration at `n=8` checks all `58,604` ordered full-drop graphs with
+  maximum loss `1` and finds `best_alpha=4`, `best_omega=2`, `best_sum=6`,
+  with extremal columns `0,0,0,0,1,2,4,8` (a matching of size `4`).  This is
+  finite support only; no general proof of the linear `P=2` upper bound is
+  recorded yet.

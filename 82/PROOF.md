@@ -11779,6 +11779,36 @@ case `n=17`, always with maximum full drop `1` and maximum homogeneous order
 `h`; they calibrate the homogeneous full-drop parameter, not the regular
 column-drop parameter.
 
+The helper `EXPERIMENTS/full_drop_alpha_omega.py` tests a stronger possible
+`P=2` theorem, suggested by Lemma 28D.5b:
+
+```text
+alpha(H)+omega(H) >= (|V(H)|+3)/2
+```
+
+for every `P=2` full-drop ordered graph `H`.  Exact DFS enumeration at
+`n=8`,
+
+```text
+python3 82/EXPERIMENTS/full_drop_alpha_omega.py 8 --p 2 --progress 20000
+```
+
+checks all `58,604` ordered graphs satisfying the condition and reports
+
+```text
+best_alpha=4,       best_omega=2,       best_sum=6.
+```
+
+The extremal columns are
+
+```text
+0,0,0,0,1,2,4,8,
+```
+
+that is, a matching of size `4` ordered with all left endpoints first.  This
+is only finite calibration, but it supports the possibility that the current
+quadratic upper bound for `C_full(2,h)` is far from sharp.
+
 **Lemma 28E: Ordered Graphs With Few Inversions Have Large Homogeneous
 Sets.**  Let `H` be a graph whose vertices are linearly ordered as
 `v_1,...,v_m`.  Call a triple `i<j<k` an inversion if
