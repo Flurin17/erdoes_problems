@@ -20149,6 +20149,53 @@ range: every retained padder below the threshold cut is forced into a
 bridge block must evade when it tries to protect elements near the top of
 the same declaration window.
 
+### Corollary 16.25: Exact finite singleton witness window
+
+Let \(S\subset\mathbb N\) be finite, let \(q\in S\), and put
+\[
+C=S\setminus\{q\}.
+\]
+For any finite interval \(I\subset\mathbb N\), the set of values in \(I\)
+that are represented from \(4S\) but remain private after deleting \(q\) is
+exactly
+\[
+\left(I\cap4S\right)\setminus\bigcup_{p\in C}(p+3C). \tag{1}
+\]
+Equivalently, \(q\) has an order-\(4\) singleton witness in \(I\) if and
+only if the set in (1) is nonempty.
+
+If one also requires strict high excess inside the finite stage, with
+\[
+m_0=\min S,\qquad M=\max S,
+\]
+then the admissible witness set is
+\[
+\left\{w\in (I\cap4S)\setminus\bigcup_{p\in C}(p+3C):
+        w-q-2m_0\ge M\right\}. \tag{2}
+\]
+
+Proof. A value \(w\in I\cap4S\) is a singleton witness for deleting \(q\)
+exactly when
+\[
+w\notin4C.
+\]
+By Lemma 16.14 this is equivalent to
+\[
+w-p\notin3C\qquad(p\in C),
+\]
+or
+\[
+w\notin\bigcup_{p\in C}(p+3C).
+\]
+This proves (1). Adding the displayed high-excess inequality gives (2).
+\(\square\)
+
+Thus every finite continuation search can be read as a shifted-cover
+problem: the coverage block must make the stage's \(3S\)-sumset long
+enough, but the same retained elements shift \(3C\) across the candidate
+windows for later promoted fillers. The interval-marker and prepared-marker
+diagnostics are both instances of this exact criterion.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21219,6 +21266,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   row above \(W-2q-\min A\) is forced into a \(q\)-independent unique-gate
   packet. In particular targets above \(W/2\) impose independence on their
   whole active retained range.
+* Corollary 16.25 records the exact finite singleton witness-window
+  criterion used by the diagnostics: the private candidates for \(q\) in
+  an interval \(I\) are precisely
+  \((I\cap4S)\setminus\bigcup_{p\in S\setminus\{q\}}(p+3(S\setminus\{q\}))\),
+  with the high-excess inequality imposed afterward.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

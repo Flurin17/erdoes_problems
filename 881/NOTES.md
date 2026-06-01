@@ -2408,6 +2408,16 @@ singleton continuation block of size at most \(6\) with candidates through
 \(50\) protects every new element. This is finite evidence only, but it
 matches Lemmas 16.10, 16.11, and 16.24: bridge fillers quickly become
 poisoned by the very coverage they create.
+Corollary 16.25 packages the exact finite criterion behind these searches:
+for a finite stage \(S\) and target \(q\), the private order-\(4\)
+candidates in a window \(I\) are exactly
+\[
+(I\cap4S)\setminus\bigcup_{p\in S\setminus\{q\}}
+      \bigl(p+3(S\setminus\{q\})\bigr),
+\]
+with the strict high-excess inequality imposed afterward. So the bridge
+problem is a shifted-cover problem, not a matter of finding represented
+values.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running

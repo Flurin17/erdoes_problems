@@ -718,3 +718,6 @@ with a bitset sumset engine. The default run checks all blocks of size at
 most `6` with candidate values through `50`; it finds no block where every
 new element has a strict singleton order-4 witness below the new declared
 endpoint.
+This implements the exact witness-window criterion of Corollary 16.25:
+private candidates for `q` are represented values in `4S` that avoid every
+shift `p + 3(S \\ {q})` from retained padders `p`.
