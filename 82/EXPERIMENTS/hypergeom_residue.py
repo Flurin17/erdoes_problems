@@ -54,6 +54,23 @@ def central_pair_bound(population: int, marked: int, draws: int, modulus: int) -
     return best
 
 
+def general_pair_bound(
+    population: int, marked: int, draws: int, modulus: int
+) -> tuple[float, float] | None:
+    if not 0 < draws < population:
+        return None
+    p = draws / population
+    paired = min(marked, population - marked)
+    lambda_value = paired * p * (1.0 - p)
+    prefactor = math.sqrt(population * p * (1.0 - p))
+    best = 0.0
+    for frequency in range(1, modulus):
+        cosine = abs(math.cos(math.pi * frequency / modulus))
+        bound = prefactor * math.exp(-2.0 * (1.0 - cosine) * lambda_value)
+        best = max(best, bound)
+    return lambda_value, best
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--population", type=int, required=True)
@@ -104,6 +121,13 @@ def main() -> None:
     )
     if central_bound is not None:
         print(f"central_pair_fourier_bound={central_bound:.12g}")
+    general_bound = general_pair_bound(
+        args.population, args.marked, args.draws, args.modulus
+    )
+    if general_bound is not None:
+        lambda_value, bound = general_bound
+        print(f"paired_mass_lambda={lambda_value:.12g}")
+        print(f"general_pair_fourier_bound_unit_constant={bound:.12g}")
     if args.show:
         print(
             "distribution="

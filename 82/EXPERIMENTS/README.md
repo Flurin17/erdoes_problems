@@ -236,7 +236,9 @@ Computational checks and generated data for Erdos Problem 82.
   two-degree anti-concentration route.  It also reports the largest
   nontrivial Fourier bias of the residue distribution, matching the exact
   roots-of-unity formula in `PROOF.md`; in the central balanced case it also
-  reports the paired central-hypergeometric Fourier bound.
+  reports the paired central-hypergeometric Fourier bound.  For general
+  parameters it reports the paired-mass quantity `L p(1-p)` and the unit
+  constant version of the general paired-mass Fourier bound.
 - `biregular_residue_sample.py`: samples simple regular bipartite graphs by
   degree-preserving switches and estimates the probability that several fixed
   rows have equal cross-degree residue into a fixed column set.  It compares

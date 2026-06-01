@@ -2219,7 +2219,9 @@ python3 82/EXPERIMENTS/hypergeom_residue.py \
 ```
 
 has variance about `512` and maximum residue probability only `1.00011` times
-uniform; the maximum nontrivial Fourier bias is about `5.2e-5`.  By contrast,
+uniform; the maximum nontrivial Fourier bias is about `5.2e-5`.  The general
+paired-mass quantity is `Lambda=1024`, and the unit-constant paired-mass
+Fourier bound is about `0.00236`.  By contrast,
 
 ```text
 python3 82/EXPERIMENTS/hypergeom_residue.py \
@@ -2227,7 +2229,9 @@ python3 82/EXPERIMENTS/hypergeom_residue.py \
 ```
 
 has variance about `56` and maximum residue probability about `1.70` times
-uniform; the maximum nontrivial Fourier bias is about `0.34`.  This finite
+uniform; the maximum nontrivial Fourier bias is about `0.34`.  Here
+`Lambda=64`, and the paired-mass bound is correspondingly useless
+(`12.22` before the hidden absolute constant is inserted).  This finite
 calibration is consistent with a local-CLT requirement on the scale of `M^2`
 variance for residue mixing, but it does not address the harder column-sum
 conditioning in the true fixed two-degree model.

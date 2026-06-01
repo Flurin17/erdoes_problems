@@ -3283,3 +3283,9 @@ source of growth beyond Ramsey.
   next row's hit count in a marked column set is hypergeometric over the
   remaining stubs and is residue-mixed whenever both marked and unmarked
   remaining stub mass are large enough.
+- 2026-06-01: Updated `hypergeom_residue.py` to print the general paired-mass
+  diagnostic.  In the balanced `8192,4096,4096,32` run it gives
+  `Lambda=1024` and unit-constant Fourier bound `0.00236`, while the exact
+  maximum Fourier bias is `5.15e-5`.  In the off-balance
+  `2048,256,1024,32` run it gives `Lambda=64` and a useless bound `12.22`,
+  matching the observed lack of residue mixing at that scale.
