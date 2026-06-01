@@ -5927,6 +5927,68 @@ length \(r-1\); the unboundedness comes entirely from moving the first
 point. Thus no fixed proper section inherits the full "all finite tests"
 mobile-color obstruction.
 
+### Example 8.5a.7b: Parity blocks realize mobile-injective colors
+
+The mobile-injective pattern is not merely combinatorial. It occurs in
+arbitrarily large finite additive windows.
+
+Fix \(r\ge2\), and put
+\[
+S_r=\{1,2,\ldots,2r\},\qquad
+F_r=\{1,3,\ldots,2r-1\},\qquad
+C_r=S_r\setminus F_r=\{2,4,\ldots,2r\}.
+\]
+Let
+\[
+w_r=2r+3.
+\]
+Then
+\[
+w_r\notin3C_r, \tag{1}
+\]
+because \(3C_r\) consists only of even numbers. The hole is
+inclusion-minimal with respect to \(F_r\): for
+\[
+f_j=2j-1\in F_r
+\]
+one has
+\[
+w_r-f_j=2r+4-2j=2+2(r+1-j)\in2C_r. \tag{2}
+\]
+Thus restoring any one deleted odd element repairs the witness.
+
+Moreover every retained row
+\[
+e_i=2i\in C_r
+\]
+has a private color
+\[
+\chi(e_i)=2r+1-2i\in F_r
+\]
+with a common retained mirror:
+\[
+w_r-e_i-\chi(e_i)=2\in C_r. \tag{3}
+\]
+At the same time,
+\[
+e_i+\chi(e_i)=2r+1\notin2C_r, \tag{4}
+\]
+again by parity. Hence the row-color graph from Lemma 8.4c contains a
+perfect matching of size \(r\), with every color fiber a singleton.
+
+Thus no argument can rule out mobile-injective active colors using only the
+local private-sum conditions from Lemma 8.4c. The obstruction must use
+global iteration, threshold control, or the way the support fillers and
+active colors must themselves become future barrier vertices.
+
+The finite diagnostic `EXPERIMENTS/mobile_injective_color_search.py` finds
+the case \(r=3\) immediately:
+\[
+S_3=\{1,2,3,4,5,6\},\qquad F_3=\{1,3,5\},
+\]
+with witnesses \(9,11,13\) and a perfect row-color matching between evens
+and odds.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
@@ -12457,6 +12519,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.5a.7 records the remaining mobile-injective escape: protected
   test points may be assigned to distinct moving active endpoints, so no
   finite palette or pure terminal recurrence appears.
+* Example 8.5a.7b shows this escape is locally arithmetic, not merely
+  formal: parity interval blocks have inclusion-minimal odd holes and a
+  perfect matching from retained even rows to distinct deleted odd colors.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

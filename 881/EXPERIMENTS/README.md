@@ -140,6 +140,12 @@ barrier edge first completed by a prefix contains the prefix maximum, and
 that any shrink omitting that maximum would already lie in the previous
 prefix if it remained in the same late-bad family.
 
+`mobile_injective_color_search.py` searches finite additive windows for
+the mobile-injective private-color pattern from Warning 8.5a.7. It reports
+small inclusion-minimal holes whose Lemma 8.4c row/color graph has a large
+matching; the first examples are the parity interval blocks from Example
+8.5a.7b, where retained even rows match distinct deleted odd colors.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole
