@@ -400,6 +400,27 @@ The dry run for the next range, `4*10^16 <= N < 8*10^16`, with
 `--batch-size 128` produces 462 process jobs and total `X` count
 `2476435910553`.
 
+## Lift Through 37
+
+The compiled lifter `residue_lift_fast.cpp` was checked against the existing
+Python-generated `23,29,31` CSV for `k <= 1000`; the final CSV line matched
+byte-for-byte. Extending the same forced-smooth filter through prime `37`
+gives:
+
+```text
+LIFT prime=23 modulus=1062347 count=352 density=0.000331342
+LIFT prime=29 modulus=30808063 count=4374 density=0.000141976
+LIFT prime=31 modulus=955049953 count=59128 density=6.19109e-05
+LIFT prime=37 modulus=35336848261 count=1122290 density=3.17598e-05
+RESULT modulus=35336848261 count=1122290
+```
+
+The resulting CSV is stored as
+`/tmp/erdos647-residues-mod35336848261-k1000.csv`. A dry run for
+`8*10^16 <= N < 1.6*10^17` with `--batch-size 4096` gives 274 batch jobs and
+total `X` count `2540781207701`, comparable to the active
+`4*10^16 <= N < 8*10^16` scan.
+
 ## Restrictive Prime-Form Subsearch
 
 This uses the 7-tuple branch conditions plus the forced prime forms

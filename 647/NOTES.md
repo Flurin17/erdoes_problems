@@ -363,6 +363,11 @@ budgets above 5 it falls back to the exact factorization routine.
   the tested progression density by about `2.29x` compared with the
   `23,29` lift, but it requires the batched job mode in `prime_tuple_search128`
   and `run_residue_scan.py` to avoid one process per residue class.
+- A compiled lifter independently reproduced the `23,29,31` CSV byte-for-byte.
+  Extending the same forced-smooth filter through prime `37` with `k <= 1000`
+  gives 1,122,290 residue classes modulo `35336848261`, density approximately
+  `3.17598e-5`. A dry run for `8*10^16 <= N < 1.6*10^17` gives 274 batched
+  jobs with `--batch-size 4096` and total `X` count `2540781207701`.
 - The complete `23,29,31` lifted scan over
   `2*10^16 <= N < 4*10^16` found 532,062 branch prime tuples and no value
   passing direct checks through `k <= 5000`. Aggregated first failures were:
