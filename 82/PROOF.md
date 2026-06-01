@@ -12411,6 +12411,39 @@ This regular full-drop parameter is the natural home for Lemma 28D.5b.11:
 covered singleton parts may give a large regular witness even when they do
 not immediately improve the homogeneous `alpha+omega` bound.
 
+**Definition 28D.6b.1: The Loss Graph At `P=2`.**  Let `H` be a
+`P=2` full-drop ordered graph on vertices `v_1<...<v_m`.  The loss graph
+`L(H)` is the graph on the same vertex set in which `v_i v_j`, `i<j`, is an
+edge exactly when
+
+```text
+|(N_H(v_i)\N_H(v_j))\{v_i,v_j}| = 1.
+```
+
+Thus a nonedge of `L(H)` is a pair with zero earlier-to-later loss.
+
+**Lemma 28D.6b.2: Loss-Independent Sets Are `P=1` Full-Drop.**  Let `H` be a
+`P=2` full-drop ordered graph.  If `I` is an independent set in `L(H)`, then
+`H[I]`, with the inherited order, satisfies the `P=1` full-drop condition.
+Consequently,
+
+```text
+reg(H) >= ceil((|I|+1)/2).
+```
+
+Proof.  For any two vertices `v_i<v_j` in `I`, the `P=2` full-drop condition
+says the earlier-to-later loss has size at most `1`, and independence in
+`L(H)` says it is not equal to `1`.  Hence it is `0`.  This is precisely the
+`P=1` full-drop condition on `H[I]`.  Lemma 28D.5a proves that every
+`P=1` full-drop ordered graph on `s` vertices satisfies
+`alpha+\omega>=s+1`, so it contains a clique or independent set, hence a
+regular induced subgraph, of order at least `ceil((s+1)/2)`.  QED.
+
+Thus proving a half-size regular theorem for `P=2` full-drop graphs reduces
+to understanding the case where the loss graph itself has small independence
+number.  The lower family in Lemma 28D.6c has a large loss-independent block,
+so it is extremal for a subtler reason than loss-graph density.
+
 **Lemma 28D.6c: A Linear Lower Construction For Regular Full-Drop At
 `P=2`.**  For every `h>=7`,
 

@@ -3687,3 +3687,12 @@ source of growth beyond Ramsey.
   computation, this gives `n=10 -> 4` and `n=11 -> 5`.  These data suggest
   the sharp fixed-`P=2` upper theorem `reg(H)>=floor((|V(H)|-1)/2)`, with the
   regular full-drop lower family essentially tight.
+- 2026-06-01: Added the `P=2` loss graph `L(H)`, where an edge records a
+  pair whose ordered one-sided loss is exactly one.  Any independent set in
+  `L(H)` inherits the `P=1` full-drop condition, hence contains a regular
+  induced subgraph of order at least `ceil((s+1)/2)` by the exact
+  `C_full(1,h)=2h-2` theorem.  Therefore a `P=2` full-drop counterexample to
+  a regular `h`-set has `alpha(L(H))<=2h-3`.  The linear lower family has
+  large loss-independent sets, so the extremal obstruction is not explained
+  just by dense loss graphs; the next target is to exploit either many loss
+  edges or the rigid witness pattern of sparse loss graphs.
