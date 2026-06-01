@@ -2229,3 +2229,9 @@ source of growth beyond Ramsey.
   neighborhood diversity.  This gives a possible bridge between bounded-spread
   and Ramsey-core methods, and also warns that bounded-spread alone is
   unlikely to be enough without handling random-like pair diversity.
+- 2026-06-01: Added Corollary 25A: if an `n`-vertex graph has degree spread
+  at most `s`, no regular induced `h`-set, and `n>4h^2s`, then the average
+  pairwise neighborhood symmetric difference is at least `n/(8h^3)`.  This
+  isolates the next bounded-spread target: prove that high neighborhood
+  diversity plus low degree spread forces a regular induced subgraph, or find
+  a construction showing this diversity condition is still too weak.

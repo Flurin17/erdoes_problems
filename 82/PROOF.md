@@ -7087,6 +7087,35 @@ neighborhood symmetric difference.  Thus a bounded-spread proof cannot depend
 only on the degree interval; it must also handle graph families with strong
 pairwise neighborhood diversity, which is exactly the random-like regime.
 
+**Corollary 25A: Low-Spread Counterexamples Are Neighborhood-Diverse.**  Let
+`G` be an `n`-vertex graph with degree spread at most `s`, and suppose `G` has
+no regular induced subgraph on `h` vertices.  If `n>=2h>=8` and
+
+```text
+n > 4h^2s,
+```
+
+then
+
+```text
+(1/binom(n,2)) sum_{u<v} sigma(u,v) >= n/(8h^3).
+```
+
+Proof.  Let
+
+```text
+bar sigma = binom(n,2)^{-1} sum_{u<v} sigma(u,v).
+```
+
+The proof of Lemma 25, with `D` replaced by this average, gives
+
+```text
+1 <= 8 h^4 s^2 / n^2 + 4 h^3 bar sigma / n.
+```
+
+The assumption `n>4h^2s` makes the first term less than `1/2`, so the second
+term is greater than `1/2`.  Hence `bar sigma >= n/(8h^3)`.  QED.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an
