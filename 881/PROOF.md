@@ -20665,6 +20665,64 @@ remaining singleton escape must use unboundedly many staggered windows,
 vanishing protected density per bounded window family, or pass to the
 nonsingleton-front alternative of Corollary 16.31.
 
+### Corollary 16.34: Large interval bridges have vanishing bounded-window protection
+
+Fix \(L\ge4\), put
+\[
+D_L=[2,3L]\cup\{4L\},
+\]
+and let
+\[
+x_\nu\to\infty,\qquad {x_\nu\over L^2}\to\infty.
+\]
+For each \(\nu\), let
+\[
+P_\nu\subset[x_\nu,2x_\nu-2]\cap A
+\]
+cover the interval-marker bridge
+\[
+[x_\nu+3L+1,2x_\nu]\subset P_\nu+D_L. \tag{1}
+\]
+Fix \(s\ge1\) and \(\beta>0\). Then, for all sufficiently large \(\nu\),
+there is no subset
+\[
+Q_\nu\subset P_\nu,\qquad |Q_\nu|\ge\beta |P_\nu|,
+\]
+that can be protected by at most \(s\) common-row singleton witness windows
+in the sense of Corollary 16.33.
+
+Proof. In Corollary 16.33 take
+\[
+R_\nu=x_\nu-3L,\qquad H=|D_L|=3L,\qquad
+\Delta_\nu\le x_\nu-2.
+\]
+For fixed \(s,\beta\), the number
+\[
+\gamma={\beta\over s}
+\]
+is fixed and positive. The monotonicity condition (5) of Corollary 16.33
+holds for all sufficiently large \(\nu\), since \(R_\nu/H\to\infty\).
+If such a \(Q_\nu\) existed, Corollary 16.33 would give
+\[
+\left(\gamma-{\gamma^2\over2}\right){(x_\nu-3L)^2\over9L^2}
+   -{x_\nu-3L\over6L}
+\le 2x_\nu-3. \tag{2}
+\]
+The left side is
+\[
+\asymp_{\beta,s}{x_\nu^2\over L^2},
+\]
+whereas the right side is \(O(x_\nu)\). Since \(x_\nu/L^2\to\infty\), (2)
+fails for all sufficiently large \(\nu\). \(\square\)
+
+Thus an interval-marker singleton construction with genuinely large bridge
+gaps cannot use any fixed finite menu of witness windows to protect a
+positive fraction of each bridge block. In the singleton branch, the
+remaining large-bridge escape is now sharply constrained: every bounded
+window family has vanishing protected density, so a counterexample must
+encode its protection debt across unboundedly many windows or hand it to a
+nonsingleton prefix-front.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21778,6 +21836,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   a fixed positive fraction and satisfies a Sidon-scale bridge inequality.
   Thus the singleton escape requires unboundedly many windows, vanishing
   per-window density, or a nonsingleton front.
+* Corollary 16.34 specializes this to large interval-marker bridges:
+  whenever \(x/L^2\to\infty\), every fixed finite family of staggered
+  windows protects only a vanishing fraction of the bridge block. The only
+  singleton escape left there is unbounded-window coding or a
+  nonsingleton-front handoff.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

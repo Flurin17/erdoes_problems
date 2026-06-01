@@ -2437,6 +2437,11 @@ fraction and the Sidon pressure inequality reappears. Hence a singleton
 counterexample must use unboundedly many staggered windows, vanishing
 per-window protected density, or the nonsingleton-front branch from
 Corollary 16.31.
+Corollary 16.34 records the interval-marker consequence: for bridges
+\([x+3L+1,2x]\) with \(x/L^2\to\infty\), every fixed finite collection of
+staggered windows protects only a vanishing fraction of the bridge block.
+So large interval-marker bridges can survive only by unbounded-window
+coding or by handing deferred fillers to a nonsingleton front.
 Corollary 16.25 packages the exact finite criterion behind these searches:
 for a finite stage \(S\) and target \(q\), the private order-\(4\)
 candidates in a window \(I\) are exactly
