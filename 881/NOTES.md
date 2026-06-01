@@ -38,6 +38,9 @@ translate \(f+U-u_0\) contains at most \(|F|\) points of \(A\).
 Corollary 16.42 rewrites this as an anchored-copy obstruction: \(U\) cannot
 contain more than \(|F|\) points of any translate \(u_0+T-f\) of a finite
 test \(T\subset A\).
+Corollary 16.43 packages the bounded-rank normal form: over a
+certificate-dense finite test, all but a bounded number of rows must lie in
+that gate-shadow branch.
 
 ## Definitions
 

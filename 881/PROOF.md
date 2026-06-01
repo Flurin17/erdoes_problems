@@ -21178,6 +21178,74 @@ translate of the old interval block; it must either be arithmetically
 misaligned with that old block, keep the active palette large, or leave the
 finite-palette branch.
 
+### Corollary 16.43: Bounded-rank packets reduce to gate shadows
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Let \(T_0\subset A\) be finite and
+let \(s\ge1\) be such that every subset of \(T_0\) of size at least \(s\)
+contains a \(k=3\) certificate tuple as in Corollary 16.38. Fix \(r\ge1\).
+Then there is \(L_0\) such that the following holds for all \(L\ge L_0\).
+
+Suppose
+\[
+F\subset A,\qquad 1\le |F|\le r,\qquad f\in F,
+\]
+\[
+C=A\setminus F,\qquad w\notin4C,\qquad m=w-f,
+\]
+and
+\[
+U\subset T_0\setminus F,\qquad m-U\subseteq2A,\qquad m-\max F>L. \tag{1}
+\]
+Define
+\[
+R_F=|F+F|+|F|(s-1)
+\]
+and
+\[
+U_{\rm gate}=\{u\in U:f+u\notin2C\}. \tag{2}
+\]
+Then
+\[
+|U_{\rm gate}|\ge |U|-R_F. \tag{3}
+\]
+Moreover
+\[
+(U_{\rm gate}+f-U_{\rm gate})\cap A\subseteq F, \tag{4}
+\]
+and for every finite \(T\subset A\) and every anchor \(u_0\in U_{\rm gate}\),
+\[
+\bigl|U_{\rm gate}\cap(u_0+T-f)\bigr|\le |F|. \tag{5}
+\]
+
+Proof. Take \(L_0\) from Corollary 16.38 for the fixed \(T_0,s,r\). Under
+the displayed hypotheses, Lemma 16.37 gives
+\[
+U=U_{\rm row}\cup U_{\rm gate},
+\]
+where
+\[
+U_{\rm row}=\{u\in U:m-u\notin2C\}.
+\]
+Corollary 16.38 forbids
+\[
+|U_{\rm row}|>R_F
+\]
+for \(L\ge L_0\). Hence
+\[
+|U_{\rm gate}|\ge |U|-|U_{\rm row}|\ge |U|-R_F,
+\]
+which proves (3). Statement (4) is Lemma 16.39 applied to
+\(U_{\rm gate}\), and (5) is Corollary 16.42. \(\square\)
+
+Thus bounded-rank, bounded-depth nonsingleton \(k=3\) debt has a sharp
+finite-test normal form. Over certificate-dense tests, all rows beyond a
+bounded finite-color allowance must become gate-dependent; those rows then
+avoid every anchored copy of every finite \(A\)-test. A remaining
+counterexample must therefore make the gate-shadow packet move away from
+all dense old pieces of \(A\), use tests with large certificate-free
+subsets, or escape bounded rank/depth.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22333,6 +22401,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   for block constructions: \(U\) cannot contain more than \(|F|\) points of
   any anchored copy \(u_0+T-f\) of a finite test \(T\subset A\). In
   particular it cannot contain a long translate of an old interval block.
+* Corollary 16.43 combines the row and gate halves: over a
+  certificate-dense finite test, every bounded-rank packet beyond the
+  finite row-dependent allowance is forced into the gate-shadow branch and
+  inherits the anchored-copy bound.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
