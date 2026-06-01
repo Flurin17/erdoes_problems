@@ -7472,6 +7472,39 @@ into `X` is weaker than regularity inside the profile class itself, so this
 does not by itself reduce profile absorption to the pair-template or
 trace-class arguments.
 
+**Corollary 31A: Profile Classes In A Counterexample Are Small.**  Let `G`
+have no regular induced subgraph on `h` vertices.  Suppose `S=X union Y`
+induces a `D`-regular graph.  Then every profile class from Lemma 31 has size
+less than `G(h)`.  Consequently,
+
+```text
+|X| < (D+1)G(h),       |Y| < (D+1)G(h).
+```
+
+Applying the same assertion in the complement gives the stronger pair of
+bounds with `D` replaced by
+
+```text
+min(D, |S|-1-D).
+```
+
+Proof.  Any profile class is itself a vertex set in `G`; if it had at least
+`G(h)` vertices, the definition of `G(h)` applied to the induced graph on
+that class would give a regular induced subgraph on at least `h` vertices in
+`G`, a contradiction.  Lemma 31 gives at most `D+1` profile classes on each
+side, so the displayed bounds follow.
+
+The complement of `G[S]` is `(|S|-1-D)`-regular.  Regular induced subgraphs
+are preserved by complementation, and the profile-class argument applies to
+the same cut in the complement.  Taking the better of the graph and complement
+bounds gives the final statement.  QED.
+
+This corollary is circular if used with the unknown function `G(h)`, but it is
+a useful structural warning.  A profile-absorption proof that hopes to improve
+`G(h)` must exploit medium-degree witnesses or use information beyond the
+existence of repeated profile classes; low-degree and co-low-degree witnesses
+quickly collapse back to the original problem inside one profile class.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an

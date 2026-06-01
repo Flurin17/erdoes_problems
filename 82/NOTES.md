@@ -2326,3 +2326,9 @@ source of growth beyond Ramsey.
   are at most `D+1` profile classes per side and one class has size at least
   a `1/(D+1)` fraction of that side.  This is only a compression: equal
   profile relative to the whole side does not make the profile class regular.
+- 2026-06-01: Added Corollary 31A.  In a graph with no regular induced
+  `h`-set, every profile class inside a split `D`-regular witness has size
+  less than `G(h)`, so each side has size below `(D+1)G(h)`, and similarly
+  with `D` replaced by the complementary degree.  This is circular as a bound
+  on `G(h)`, but it isolates the hard profile-absorption regime: medium-degree
+  witnesses with many small profile classes.
