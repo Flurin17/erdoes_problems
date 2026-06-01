@@ -2407,3 +2407,8 @@ source of growth beyond Ramsey.
   side `A\T` of the same degree.  This generalizes the earlier independent
   and clique-base amplification lemmas and records the exact degree data that
   trace recursion must preserve.
+- 2026-06-01: Added `trace_merge_search.py` for Lemma 14A.5.  On the hand
+  check mask `108` with base `A={0,1,2}`, trace `T={0,1}`, and trace-class
+  witness `B={3,4}`, the script finds both merge mechanisms: `X={0,1}` has
+  matching deficit and gives a `K_{2,2}`, while `X={2}` has matching degree
+  `0` and gives an independent set.

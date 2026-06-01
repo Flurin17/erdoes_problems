@@ -8,6 +8,9 @@ Computational checks and generated data for Erdos Problem 82.
   verifier for larger individual graphs, avoiding all-subset precomputation.
 - `trace_bridge.py`: tests the degree-class bridge from repeated-degree data
   to regular induced subgraphs.
+- `trace_merge_search.py`: searches the one-trace regular merge criterion
+  from Lemma 14A.5, reporting regular subsets on the trace and nontrace sides
+  whose degree or degree-deficit matches a regular trace-class witness.
 - `ramsey_sample.py`: compares largest homogeneous and regular induced
   subgraphs in random samples.
 - `rectangle_cover.py`: exact checker for the Ferrers rectangle-covering
