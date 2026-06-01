@@ -725,6 +725,9 @@ continuation by `47` fails the pair-witness condition, and a bounded
 three-point search through candidate `120` finds no next stage. A later
 one-step rerun from the same depth-four seed with slack `80`, candidate
 values through `140`, and block size at most `3` also finds no extension.
+A targeted rerun from the same seed found no singleton extension through
+candidate `400`, and no block extension of size at most `3` through
+candidate `260` with slack up to `220`.
 
 `singleton_high_excess_stage_search.py` tests the stricter Lemma 16.9
 singleton target: every new `b` needs `w notin 4(A\\{b})` and

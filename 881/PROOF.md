@@ -21264,7 +21264,9 @@ endpoint \(56\). A bounded search through candidate values \(120\) and
 increments of size at most \(3\) finds no next stage from the depth-four
 chain. A later one-step rerun from the same depth-four seed, with candidate
 values through \(140\), slack \(80\), and increments of size at most \(3\),
-again found no extension.
+again found no extension. A further targeted rerun found no singleton
+extension through candidate \(400\), and no block extension of size at most
+\(3\) through candidate \(260\) even with slack \(220\).
 
 This diagnostic is important in both directions. It shows that \(k=3\)
 cross-stage pair barriers are not merely an artefact of the robust residue
