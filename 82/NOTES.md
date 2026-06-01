@@ -2400,3 +2400,10 @@ source of growth beyond Ramsey.
   type-count small or recursively hide a hard graph inside a high-multiplicity
   trace class.  This clarifies why the support-three exponential trace
   packings are not yet genuine counterexample mechanisms.
+- 2026-06-01: Added Lemma 14A.5 and Corollary 14A.6.  A regular subgraph
+  `B` inside one identical trace class can merge with any regular subgraph
+  `X` inside the trace side `T` when the degree deficits match
+  (`|X|-deg_X = |B|-deg_B`), or with any regular subgraph inside the nontrace
+  side `A\T` of the same degree.  This generalizes the earlier independent
+  and clique-base amplification lemmas and records the exact degree data that
+  trace recursion must preserve.

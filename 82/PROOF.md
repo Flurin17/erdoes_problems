@@ -5719,6 +5719,67 @@ both `T` and its complement inside the same homogeneous base.  Any stronger
 trace argument must combine multiple trace classes or use additional
 structure inside the trace classes.
 
+## Lemma 14A.5: One-Trace Regular Merge
+
+Let `A` be a vertex set in `G`, let `T subset A`, and let
+
+```text
+C_T = {v in V(G)\A : N_G(v) cap A = T}.
+```
+
+Suppose `B subset C_T` induces an `r`-regular graph on `b` vertices.
+
+1. If `X subset T` induces a `d`-regular graph on `x` vertices and
+
+```text
+x-d = b-r,
+```
+
+then `G[B union X]` is regular on `b+x` vertices.
+
+2. If `X subset A\T` induces an `r`-regular graph on `x` vertices, then
+   `G[B union X]` is regular on `b+x` vertices.
+
+Proof.  In the first case, every vertex of `B` is adjacent to every vertex of
+`X`, so its degree in `G[B union X]` is `r+x`.  Every vertex of `X` has
+degree `d+b`.  The displayed equality is exactly `r+x=d+b`, so the union is
+regular.
+
+In the second case, there are no edges between `B` and `X`, so vertices of
+`B` and vertices of `X` keep their internal degrees.  Both internal degrees
+are `r`, and the union is regular.  QED.
+
+The independent-base Lemma 14A.1 is the special case of (1) where `X` is an
+independent set of order `b-r`.  The clique-base Lemma 14A.2 is the special
+case of (2) applied with a clique `A` and an `(r+1)`-vertex clique inside
+`A\T`.  Lemma 14A.5 is the usable recursive form: a high-multiplicity trace
+class is dangerous not only when the base contains a large homogeneous set,
+but whenever the trace side contains a regular subgraph with matching
+degree-deficit, or the nontrace side contains a regular subgraph of the same
+degree.
+
+**Corollary 14A.6: One-Trace Merge Restrictions In Counterexamples.**  Let
+`G` have no regular induced subgraph on at least `k` vertices.  In the setting
+of Lemma 14A.5:
+
+1. If `X subset T` is `d`-regular on `x` vertices and
+
+```text
+x-d=b-r,
+```
+
+then `b+x<k`.
+
+2. If `X subset A\T` is `r`-regular on `x` vertices, then `b+x<k`.
+
+Proof.  Otherwise Lemma 14A.5 gives a regular induced subgraph on at least
+`k` vertices.  QED.
+
+These restrictions are still not enough by themselves, because they require
+a matching degree or degree-deficit inside `T` or `A\T`, not just a large
+regular subgraph somewhere in the base.  They do, however, identify the exact
+degree data that a trace-class recursion must preserve.
+
 ## Lemma 14B: Maximal Independent Trace Ramsey Bound
 
 Let `G` be a graph with no regular induced subgraph of order at least `k`,
