@@ -3962,3 +3962,11 @@ source of growth beyond Ramsey.
   extension satisfies the criterion (`criterion_failures=0` in both runs).
   The tight extensions are explained by the first alternative: the full
   low-degree spectrum grows by one.
+- 2026-06-01: Refuted the stronger shortcut
+  `s_0(G)+s_1(G)+s_2(G)>=|G|` for graphs with a degree-`2` feedback
+  partition.  A structured random graph on `17` vertices, mask
+  `55937735565645977329293451605957880880803`, has feedback partition
+  degrees `2` and `4`, spectrum `{0:6,1:4,2:6,3:6,4:8}`, and therefore
+  `s_0+s_1+s_2=16<17` while `mu=30`.  Thus the degree-`2` collision cannot be
+  solved using only the low spectrum; the high-degree/new-degree alternatives
+  in Lemma 28J.5e are genuinely needed.
