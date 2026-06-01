@@ -4189,3 +4189,14 @@ source of growth beyond Ramsey.
   also finds many full/surplus graphs where every non-cut vertex is
   essential, confirming that the two extremal deletion behaviors are both
   common away from the below-defect-one regime.
+- 2026-06-01: Added `cut_gluing_scan.py` and Lemma 28J.10d.1d.  If two
+  induced graphs `A,B` meet only in a cut vertex `x`, then
+  `s_d(A union_x B) >= max(s_d(A)+s_d(B-x), s_d(A-x)+s_d(B))`; equivalently,
+  the only loss against adding the two spectra is the overlap of the
+  root-deletion drop vectors.  Exact gluing of connected `4`-vertex graphs
+  to connected `5`-vertex graphs checks `553280` rooted pairs and has minimum
+  surplus `1` over the defect-one bound; a `2000`-sample connected `5+5`
+  gluing run also has minimum surplus `1`.  This makes cut-vertex gluing a
+  plausible reduction, but the missing theorem is to show that simultaneous
+  root-essential drops are always compensated, typically by low-degree
+  witnesses crossing the two branches.

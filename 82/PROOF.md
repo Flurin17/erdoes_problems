@@ -15252,6 +15252,72 @@ checks this target exactly on connected labelled graphs with six vertices.
 It finds `660` graphs for which every non-cut vertex is nonessential; their
 mass histogram is `{7:360, 8:120, 9:180}`, so none has mass below `|G|-1`.
 
+**Lemma 28J.10d.1d: One-Cut Spectrum Gluing Inequality.**  Let `G` be the
+union of two induced subgraphs `A` and `B` such that
+
+```text
+V(A) cap V(B) = {x}
+```
+
+and there are no edges between `A-x` and `B-x`.  Then for every degree `d`,
+
+```text
+s_d(G) >= max { s_d(A)+s_d(B-x), s_d(A-x)+s_d(B) }.
+```
+
+Consequently, if
+
+```text
+Delta_A(d)=s_d(A)-s_d(A-x),        Delta_B(d)=s_d(B)-s_d(B-x),
+```
+
+then
+
+```text
+sum_d s_d(G)
+  >= sum_d s_d(A)+sum_d s_d(B)-sum_d min(Delta_A(d),Delta_B(d)).
+```
+
+Proof.  Let `X` be an induced `d`-regular subgraph of `A` of order `s_d(A)`,
+and let `Y` be an induced `d`-regular subgraph of `B-x` of order
+`s_d(B-x)`.  Since `Y` avoids `x` and there are no edges between `A-x` and
+`B-x`, the set `X union Y` induces a `d`-regular subgraph of `G`: vertices in
+`X` see exactly the same neighbors inside `X` as they did in `A`, and
+vertices in `Y` see exactly the same neighbors inside `Y` as they did in
+`B-x`.  Hence
+
+```text
+s_d(G) >= s_d(A)+s_d(B-x).
+```
+
+The symmetric argument gives
+
+```text
+s_d(G) >= s_d(A-x)+s_d(B).
+```
+
+Taking the maximum proves the first display.  For the second, write
+`a=s_d(A)`, `a'=s_d(A-x)`, `b=s_d(B)`, and `b'=s_d(B-x)`.  Since
+`a'<=a` and `b'<=b`,
+
+```text
+max(a+b',a'+b)=a+b-min(a-a',b-b').
+```
+
+Summing over `d` proves the claim.  QED.
+
+Thus a cut-vertex proof of connected defect one reduces to controlling the
+overlap of the root-essential drop vectors `Delta_A` and `Delta_B`.  The
+scanner
+
+```text
+python3 82/EXPERIMENTS/cut_gluing_scan.py 4 5
+python3 82/EXPERIMENTS/cut_gluing_scan.py 5 5 --samples 2000 --seed 82
+```
+
+finds no glued graph below the full-mass threshold in these bounded checks;
+both runs have minimum surplus `1` over the defect-one bound.
+
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then
 
