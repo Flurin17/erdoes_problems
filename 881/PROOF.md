@@ -19503,6 +19503,23 @@ declared endpoint. A staged counterexample would need to add such fillers
 only after arranging their own future witnesses, or protect them by a
 collective barrier.
 
+The follow-up diagnostic
+`EXPERIMENTS/prepared_marker_followup_search.py` tests exactly this caveat.
+Starting from
+\[
+A_1=\{1,2,3,4,8,19,20,28,33\},\qquad N_1=74,
+\]
+it asks whether any of
+\[
+19,\ 20,\ 28,\ 33,\ 8
+\]
+can be given a frozen order-\(4\) singleton witness at the next bounded
+stage after adjoining a block of size at most \(3\) with candidate values
+up to \(180\). It finds none; the stricter high-excess version also finds
+none for blocks of size at most \(2\) up to \(150\). Thus the prepared
+marker demonstrates local row-bank feasibility, but its fillers appear
+hard to protect even one step later.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20526,6 +20543,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 16.12 gives a prepared one-marker moving row-bank example:
   fillers can bridge the coverage gap and support a high-excess singleton
   witness, but those fillers are not protected in the same stage.
+* The prepared-marker follow-up search finds no bounded next-stage
+  singleton protection for the row-bank fillers \(19,20,28\), reinforcing
+  the coverage/privacy conflict for filler promotion.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

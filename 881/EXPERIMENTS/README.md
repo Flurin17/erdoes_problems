@@ -654,3 +654,9 @@ plus `2([1,...,L] union {2L}) = [2,3L] union {4L}`.
 through `76`, confirms `73 notin 4(A\\{33})`, prints all eight rows
 `40-p in 2A`, and reports no retained collision of `40-p in 2C` with
 `33+p in 2C`.
+
+`prepared_marker_followup_search.py` starts from that prepared marker stage
+at endpoint `74` and tries to protect `19,20,28,33,8` in the next bounded
+stage. It finds no ordinary singleton witness after adding blocks up to
+size `3` through candidate `180`, and no strict high-excess witness after
+blocks up to size `2` through candidate `150`.

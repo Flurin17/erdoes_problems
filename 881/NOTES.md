@@ -2296,6 +2296,13 @@ collision scanner records no retained collision \(40-p\in2C\) and
 \(33+p\in2C\) for the same \(p\), with one row deliberately depending on
 the deleted \(33\). The caveat is that the preparatory fillers \(19,20,28\)
 are not protected in this stage.
+The follow-up search `prepared_marker_followup_search.py` starts from the
+prepared marker stage at endpoint \(74\) and tries to protect \(19,20,28,33\),
+or \(8\) in the next bounded stage. It finds no ordinary singleton witness
+after adding up to three new points through \(180\), and no strict
+high-excess witness after adding up to two new points through \(150\). This
+keeps the prepared-marker route as a local row-bank template rather than an
+iterable construction.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 
