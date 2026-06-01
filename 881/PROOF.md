@@ -25952,13 +25952,14 @@ served by a finite active palette near that interval: after the bounded
 row-dependent allowance is removed, the central retained two-sum band pushes
 at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
-remaining escape must therefore either make the packet density vanish, let
-the deletion rank or robust-profile complexity grow with the interval,
-use too many active profiles relative to packet size, produce width-heavy
-or midpoint-displacement packet-position error in the linear-core profiles,
-use auxiliary profiles whose midpoint diameter is linear in their tested
-interval, or maintain nonsummable robust-core escape mass across the packet
-selector tail.
+reciprocal-summable packetization removes the recurrent-label artefact, so
+the countable-menu escape has also been forced into concrete geometry. The
+remaining escape must therefore either make the packet density vanish, make
+the geometric profile height from Corollary 16.127 unbounded, produce
+linear width-heavy or midpoint-displacement packet-position cost in the
+linear-core profiles, use auxiliary profiles whose midpoint diameter is
+linear in their tested interval, or maintain nonsummable robust-core escape
+mass across the packet selector tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 

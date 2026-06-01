@@ -233,6 +233,9 @@ linear in the tested interval length.
 Corollary 16.127 supplies a concrete geometric height for the profile labels,
 so the unbounded-complexity branch means rank/density scale, tested interval
 data, auxiliary interval count/endpoints, or asymptotic constants must grow.
+The Attempt 16 residual summary has been updated accordingly: after
+reciprocal-summable packetization, bounded-height countable menus must pay
+linear packet-position cost.
 
 ## Definitions
 
