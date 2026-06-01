@@ -2520,3 +2520,8 @@ source of growth beyond Ramsey.
   disjoint-union proof of `P_7>7`.  A random spectrum search also found an
   `h=8` instance on `8+8` vertices with masks `7877621` and `155665244`,
   giving `P_8>8`.
+- 2026-06-01: Added Corollary 28I defining `D_spec(h)`, the two-graph
+  regular-degree spectrum matching threshold.  It satisfies
+  `G(ceil(h/2)) <= D_spec(h) <= G(h)` and `D_spec(h) <= P_h`, so any
+  subexponential proof for the pair parameter must also control this
+  disjoint-union spectrum-matching subproblem.

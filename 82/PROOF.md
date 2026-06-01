@@ -8655,6 +8655,41 @@ command is
 python3 82/EXPERIMENTS/regular_spectrum.py 8 --h 8 --mask-a 7877621 --mask-b 155665244
 ```
 
+**Corollary 28I: The Spectrum-Matching Parameter Is A Lower Subproblem.**  Let
+`D_spec(h)` be the least integer `M` with the following property: for every
+pair of graphs `J_1,J_2` on `M` vertices, either one of the two graphs has a
+regular induced subgraph on at least `h` vertices, or there are regular
+induced subgraphs `R_i subset J_i` of the same degree with
+
+```text
+|R_1|+|R_2| >= h.
+```
+
+Then
+
+```text
+G(ceil(h/2)) <= D_spec(h) <= G(h),
+P_h >= D_spec(h).
+```
+
+Proof.  The upper bound `D_spec(h)<=G(h)` is immediate: if each `J_i` has
+`G(h)` vertices, then each graph separately has a regular induced subgraph on
+at least `h` vertices.
+
+For the lower bound, let `k=ceil(h/2)` and take two copies of a graph on
+`G(k)-1` vertices with no regular induced subgraph on at least `k` vertices.
+No regular subgraphs in the two copies can have total order at least `h`,
+because then one copy contributes at least `k` vertices.  Hence the
+spectrum-matching property fails below `G(k)`.
+
+Finally, if `M<D_spec(h)`, there is a pair `J_1,J_2` failing the
+spectrum-matching property.  Lemma 28H gives `P_h>M`.  Since this holds for
+every `M<D_spec(h)`, we get `P_h>=D_spec(h)`.  QED.
+
+Thus the local pair problem contains a purely one-component spectral
+matching problem before any cross-edge structure appears.  A proof of
+`P_h=2^{o(h)}` must in particular prove `D_spec(h)=2^{o(h)}`.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put
