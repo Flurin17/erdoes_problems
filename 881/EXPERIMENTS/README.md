@@ -179,6 +179,14 @@ in Lemma 8.5a.7u. The complete rank-3 product wiring example is the
 abstract pair-free product cover left after Corollaries 8.5a.7v--8.5a.7x:
 it covers every selector with weight \(1\), but only at support rank \(3\).
 
+`selector_cylinder_mass.py` checks the finite shadow of Lemma 8.5a.7u':
+finite selector cylinders that cover the whole product must have total
+product mass at least \(1\), and cylinder families with mass below \(1\)
+leave an escaping selector. It exhausts the binary two-block case and
+samples several larger products. This is a diagnostic for the later
+vanishing-density branch: low-density interval-packet cylinders cannot
+carry a product-selector barrier if their tail masses are summable.
+
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For
 \[

@@ -124,7 +124,12 @@ individual cost in the no-majority branch: the two selected gate fibers each
 avoid all blocker windows available at their own densities, even if their
 union is not itself dense. Corollary 16.86 packages the finite-cover form:
 if auxiliary intervals have robust cores covering the active palette, then
-the packet cannot be dense.
+the packet cannot be dense. Lemma 8.5a.7u' and Corollary 16.87 now connect
+this geometry to selector thinning: if the escape sets for bounded-rank
+positive-density interval packets have summable product mass on a packet
+tail, an infinite selector avoids that entire branch. Thus a surviving
+vanishing-density route must maintain nonsummable selector mass on every
+tail, or move to growing rank.
 
 ## Definitions
 
