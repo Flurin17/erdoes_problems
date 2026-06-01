@@ -2858,3 +2858,14 @@ source of growth beyond Ramsey.
   terminal modular criterion, so the pass has no real force for the next
   dyadic lift.  Nontrivial arbitrary-graph evidence for `8 -> 16` must start
   at `n>=9` or use structured larger models.
+- 2026-06-01: Ran nonterminal prefix checks for the currently recorded
+  source-sensitive `4 -> 8` family.  On `n=9`, the chunk
+  `0 <= internal_bits < 10000000` checks `18153` source-`0` and `20876`
+  source-`2` graphs; source residues `1` and `3` cannot occur on an odd
+  number of vertices.  On `n=10`, the two chunks
+  `0 <= internal_bits < 2000000` and `2000000 <= internal_bits < 4000000`
+  check `(131,852,16640,1891)` and `(205,358,5861,2754)` graphs in source
+  residues `0,1,2,3`, respectively.  No counterexample appears.  This gives
+  finite nonterminal arbitrary-graph evidence for
+  `R_0=(0,1,2,4)`, `R_1=(0,0,2,2)`, `R_2=(0,0,1,2)`,
+  `R_3=(0,0,1,3)`.

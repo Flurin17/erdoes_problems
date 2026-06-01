@@ -4440,6 +4440,29 @@ explicit masks recorded below.  The exact checks are reproduced by
 /tmp/source_slots_fast --n 8 --source-modulus 4 --target-modulus 8 --source-residue 3 --candidates '0,3,4,7;0,0,1,3'
 ```
 
+The same family also survives initial nonterminal chunks beyond the full
+`n=8` sweep.  For `n=9`, the range `0 <= internal_bits < 10000000` checks
+`18153` source-`0` graphs and `20876` source-`2` graphs; source residues `1`
+and `3` are impossible on `9` vertices by degree-sum parity.  For `n=10`, the
+two ranges
+
+```text
+0 <= internal_bits < 2000000,
+2000000 <= internal_bits < 4000000
+```
+
+check respectively
+
+```text
+source 0: 131 and 205 graphs,
+source 1: 852 and 358 graphs,
+source 2: 16640 and 5861 graphs,
+source 3: 1891 and 2754 graphs,
+```
+
+with no counterexample to the displayed source-residue family.  These are
+finite prefix checks, not a proof.
+
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
 slot multisets by the source-residue clique subset-sum test and then checks
