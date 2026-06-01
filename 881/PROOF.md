@@ -25672,6 +25672,56 @@ packet has width comparable to the tested interval, or the profile's
 auxiliary midpoints are separated from the packet center on that same
 linear scale.
 
+### Corollary 16.124: Many active labels force recurrence or complexity growth
+
+Keep the notation of Corollary 16.122, and let
+\[
+\chi:\Lambda\to\mathbb N
+\]
+be any complexity function on the assigned label menu whose sublevel sets
+\[
+\Lambda_{\le M}=\{\lambda\in\Lambda:\chi(\lambda)\le M\}
+\]
+are finite. If the many-active-label alternative
+\[
+\sum_s {|\mathcal B_s|\over |P_s|}=\infty \tag{1}
+\]
+holds, then at least one of the following alternatives holds.
+
+1. **Recurrent bounded-complexity label.** There is a label
+   \(\lambda\in\Lambda\) such that
+   \[
+   \sum_{\substack{s:\lambda\in\mathcal B_s}}{1\over |P_s|}
+   =\infty. \tag{2}
+   \]
+2. **Unbounded-complexity active mass.** For every \(M\),
+   \[
+   \sum_s {|\mathcal B_s\setminus\Lambda_{\le M}|\over |P_s|}
+   =\infty. \tag{3}
+   \]
+
+Proof. Suppose (2) fails. Since \(\Lambda_{\le M}\) is finite, for every
+fixed \(M\) we have
+\[
+\sum_s {|\mathcal B_s\cap\Lambda_{\le M}|\over |P_s|}
+\le
+\sum_{\lambda\in\Lambda_{\le M}}
+\sum_{\substack{s:\lambda\in\mathcal B_s}}{1\over |P_s|}
+<\infty. \tag{4}
+\]
+Subtracting this finite sum from the divergent sum (1) gives
+\[
+\sum_s {|\mathcal B_s\setminus\Lambda_{\le M}|\over |P_s|}
+=\infty
+\]
+for every \(M\), which is (3). \(\square\)
+
+Thus the active-label residual has only two countable-menu forms. Either
+one fixed assigned profile recurs on a nonsummable reciprocal-packet
+subseries, or the finite packet certificates must push arbitrarily far out
+in whatever proper complexity scale is imposed on rank, density, auxiliary
+interval count, and tested interval data.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27088,6 +27138,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.123 converts width-heavy and midpoint-displacement residuals
   into linear-scale statements once the tested interval is large compared
   with the profile constants.
+* Corollary 16.124 splits the many-active-label residual into one recurrent
+  bounded-complexity label with nonsummable reciprocal-packet mass, or
+  unbounded active-label complexity on every proper finite-sublevel scale.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

@@ -217,6 +217,9 @@ Corollary 16.122 packages the unconditional trichotomy: many active labels,
 width-heavy packets, or midpoint-displacement packets.
 Corollary 16.123 turns the latter two branches into linear-scale statements
 once the tested interval is large relative to the profile constants.
+Corollary 16.124 splits the many-active-label branch into either one
+recurrent bounded-complexity label with nonsummable reciprocal-packet mass,
+or genuinely unbounded active profile complexity on every tail.
 
 ## Definitions
 
