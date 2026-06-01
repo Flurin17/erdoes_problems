@@ -8924,9 +8924,145 @@ Now take any selected vertex of the clique core `C`, which exists because
 For `zeta in {0,1}` and `r>=3`, this is larger than `r`, contradicting
 `r`-regularity.  QED.
 
-Thus the only unproved part of Candidate 28L is the absence of regular
-induced subgraphs on at least `h` vertices.  The symbolic checker verifies
-that absence through `h=30`.
+It remains to rule out all large regular sets.  The same type notation gives
+a short proof.
+
+**Lemma 28N: The Parity Construction Has No Large Regular Set.**  For
+`h>=7`, the parity construction in Candidate 28L has no regular induced
+subgraph on at least `h` vertices.
+
+Proof.  Let `S` be a regular induced subgraph of the construction.  Use the
+notation from Candidate 28L:
+
+```text
+X_0=x_0+x_e,       X_1=x_1+x_o,
+Y_0=y_e,           Y_1=y_o,        Y=Y_0+Y_1,
+```
+
+and let `p` be the parity of `z=b_{h-1}`.  First suppose that `S` is contained
+in one side.  On the `A` side the only non-isolated edge is `a_0a_1`, so every
+regular induced subgraph has order at most `h-1`.  On the `B` side the clique
+core has order `h-1`, and adding the isolated vertex `z` to two or more core
+vertices destroys regularity; again every regular induced subgraph has order
+at most `h-1`.  Hence we may assume that `S` meets both sides.
+
+If the common degree of `S` is `0`, then `S` is independent.  An independent
+set with no selected clique-core vertex has size at most `h-1`: without `z`
+this is the independence number of the one-edge graph on `A`, and with `z`
+one may use only the `A` vertices of parity opposite to `p`.  If an
+independent set contains a clique-core vertex of parity `q`, it contains no
+other clique-core vertex and no `A` vertex of parity `q`; hence its size is at
+most
+
+```text
+1+1+ceil(h/2) <= h-1
+```
+
+for `h>=7`.  Thus every regular set of order at least `h` has positive common
+degree `d`.
+
+Assume from now on that `d>0`.  If `Y=0`, then `S` contains `z` and some
+vertices of `A`.  If `X_p>=2`, then a selected `A`-isolate of parity `p` has
+degree `1`, while `z` has degree `X_p>=2`, a contradiction.  If
+`X_{1-p}>=2`, then a selected `A`-isolate of parity `1-p` has degree `0`,
+also a contradiction.  Hence `|S|<=X_0+X_1+1<=3<h`.
+
+Now suppose exactly one clique-core parity is selected.  Say `Y_q=Y>0` and
+`Y_{1-q}=0`.  The selected core vertices have degree
+
+```text
+d=Y-1+X_q.
+```
+
+If `X_{1-q}>=2`, then a selected `A`-isolate of parity `1-q` has degree
+`zeta` when `p=1-q` and degree `0` otherwise.  Since `d>0`, regularity would
+force `zeta=1`, `p=1-q`, and `d=1`; but then the selected vertex `z` has
+degree `X_{1-q}`, forcing `X_{1-q}=1`, a contradiction.  Therefore
+`X_{1-q}<=1`.
+
+If `X_q>=2`, then a selected `A`-isolate of parity `q` has degree
+`Y+zeta*1_{p=q}`.  Equating this with the core degree gives
+
+```text
+X_q=1+zeta*1_{p=q}.
+```
+
+Thus `X_q=2`, `zeta=1`, and `p=q`; but then `z` has degree `X_q=2`, so
+`d=2`, while the core degree is `Y+1`.  Hence this exceptional case has
+`Y=1` and contributes at most
+
+```text
+Y+X_q+X_{1-q}+zeta <= 1+2+1+1=5<h.
+```
+
+In the remaining case `X_q<=1`, and therefore
+
+```text
+|S|=Y+X_q+X_{1-q}+zeta <= Y+3 <= ceil((h-1)/2)+3 <= h-1
+```
+
+for every `h>=7`.
+
+It remains to consider the case in which both clique-core parities are
+selected.  Equality of the two core degrees gives
+
+```text
+Y-1+X_0=Y-1+X_1,
+```
+
+so `X_0=X_1=:X`.  Because `S` is not contained in `B`, we have `X>=1`.  For
+each parity `q`, choose a selected `A` vertex of parity `q`.  Its degree is at
+most
+
+```text
+Y_q+1+zeta*1_{p=q},
+```
+
+where the `1` allows for the possible edge `a_0a_1`.  Since the selected core
+vertices of parity `q` have degree `Y-1+X`, we get
+
+```text
+Y-1+X <= Y_q+1+zeta*1_{p=q}.
+```
+
+Equivalently,
+
+```text
+X+Y_{1-q} <= 2+zeta*1_{p=q}.
+```
+
+Summing this inequality over `q=0,1` gives
+
+```text
+2X+Y <= 4+zeta.
+```
+
+Therefore
+
+```text
+|S|=2X+Y+zeta <= 4+2zeta <= 6<h,
+```
+
+because `h>=7`.  All cases give `|S|<h`.  QED.
+
+Combining Lemmas 28M and 28N, the parity construction is a genuine infinite
+family of balanced-pair obstructions.
+
+**Corollary 28O: A Linear Lower Bound for the Pair Parameter.**  For every
+`h>=7`,
+
+```text
+P_h^+>h.
+```
+
+Consequently, using Lemma 28B, the common balanced pair parameter satisfies
+`P_h>h` for every `h>=7`.
+
+Proof.  Candidate 28L gives a marked graph with `|A|=|B|=h`.  Lemma 28N rules
+out the first alternative in the definition of `P_h^+`, and Lemma 28M rules
+out the balanced plus middle of side size `floor((h-1)/2)=ceil((h-2)/2)`.
+Thus side size `h` does not force the defining alternatives, so `P_h^+>h`.
+Lemma 28B identifies `P_h^+` and `P_h^-`.  QED.
 
 ## Lemma 29: Split Compensation Criterion
 

@@ -2566,3 +2566,11 @@ source of growth beyond Ramsey.
   selected `A` vertices to have that parity; then a selected `B`-clique
   vertex has degree larger than `r`.  The remaining unproved part of the
   candidate is excluding arbitrary regular `h`-sets.
+- 2026-06-01: Proved Lemma 28N, the remaining large-regular-set half of the
+  parity construction.  The proof splits regular sets by degree zero, no
+  clique-core vertices, exactly one selected core parity, and both selected
+  core parities.  In the one-core case a positive-degree regular set has size
+  at most `Y+3` except for a five-vertex exception; in the two-core case
+  equality of core degrees gives `X_0=X_1` and the endpoint-edge allowance
+  yields total size at most `6`.  Corollary 28O now records the genuine
+  infinite lower bound `P_h>h` for every `h>=7`.
