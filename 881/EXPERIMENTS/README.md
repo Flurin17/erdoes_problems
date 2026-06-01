@@ -684,3 +684,9 @@ later block starts above `4 max(S)`, then any private order-4 witness for
 an old target below the two-new range is just `p + z` with one new `p` and
 an old three-sum private hole `z` for that target. New high blocks cannot
 create such singleton protection from scratch in the one-new range.
+
+`delayed_collective_barrier_search.py --rank 3 --max-value 32 --max-size 12`
+reproduces the local rank-three delayed examples from `PROOF.md`, starting
+with `S=[1,...,8]`, `F=(4,5,6)`, and witness `20`; variants `(4,5,9)` and
+`(4,6,9)` also appear. These remain block-local fixed-rank cuts, not
+unbounded barriers.

@@ -2335,6 +2335,17 @@ three-term private hole for \(q\) in the old stage. A high block cannot
 promote an old filler by adjacent one-new translation unless that filler
 was already protected one order lower.
 
+Rank-three delayed collective barriers remain locally easy in finite
+windows. Running
+`delayed_collective_barrier_search.py --rank 3 --max-value 32 --max-size 12`
+again finds \(S=[1,8]\), \(F=\{4,5,6\}\), and witness \(20\), with all
+proper subdeletions having finite three-sum tail from \(3\). Nearby variants
+\(\{4,5,9\}\) and \(\{4,6,9\}\) also occur. These are not counterexample
+stages: they are fixed-rank block-local cuts, and Warning 10.3i still lets
+an infinite selector avoid containing a whole cut from each block. The
+remaining negative route needs a cross-block or unbounded-rank barrier, not
+more isolated interval cuts.
+
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 
 The active-trace branch has now been narrowed past the purely injective
