@@ -3388,6 +3388,119 @@ same gate. A proof of the \(k=3\) case must either use the two-sum shadows
 in their own right, or add genuinely global information from the ambient
 order-\(3\) basis; the local active-cover structure alone is insufficient.
 
+### Corollary 3.4d.18: \(k=3\) counterexamples force common active pair packets
+
+Assume that \(A\) is an order-\(3\) basis and that no infinite deletion
+from \(A\) remains an order-\(4\) basis. Let \(E\subset A\) be finite. Then
+there are constants
+\[
+q_E,\qquad c_E>0,
+\]
+arbitrarily large \(w\), a finite set
+\[
+F\subset A\setminus E,\qquad 1\le |F|\le q_E,
+\]
+a gate
+\[
+g\in F,
+\]
+and a set
+\[
+U\subset A\setminus(E\cup F)
+\]
+such that
+\[
+|U|\ge c_EA(w)^{1/3}, \tag{1}
+\]
+and for every \(u\in U\):
+
+1. \(F\) is inclusion-minimal for the two-sum hole
+   \[
+   g+u\notin2(A\setminus F); \tag{2}
+   \]
+2. every \(f\in F\) is active:
+   \[
+   g+u\in2(A\setminus(F\setminus\{f\})); \tag{3}
+   \]
+3. every active point is reflected by the same center:
+   \[
+   g+u-f\in A\qquad(f\in F). \tag{4}
+   \]
+
+Moreover the packet is \(F\)-independent:
+\[
+(U+g-U)\cap A\subset F, \tag{5}
+\]
+and therefore, for every \(u_0\in U\) and finite \(T\subset A\),
+\[
+\left|U\cap(u_0+T-g)\right|\le |F\cap T|\le q_E. \tag{6}
+\]
+
+Proof. Apply Corollary 3.4d.8. It gives, outside the protected core \(E\),
+arbitrarily large witnesses with a bounded set
+\[
+D\subset A\setminus E,\qquad |D|\le Q_E,
+\]
+a gate \(g\in D\), and a set
+\[
+U_0\subset A\setminus(D\cup E)
+\]
+with
+\[
+|U_0|\ge \eta_EA(w)^{1/3}
+\]
+in the smaller branch, and an even stronger linear lower bound in the
+reflected pair-bank branch, such that
+\[
+g+u\notin2(A\setminus D)\qquad(u\in U_0). \tag{7}
+\]
+
+For each \(u\in U_0\), choose an inclusion-minimal subset
+\[
+F_u\subset D
+\]
+such that
+\[
+g+u\notin2(A\setminus F_u). \tag{8}
+\]
+This is possible by (7). Also \(F_u\ne\varnothing\), since
+\[
+g+u\in2A
+\]
+via the pair \(\{g,u\}\). In fact \(g\in F_u\): if \(g\notin F_u\), then
+the representation \(g+u\) by \(g\) and \(u\) survives after deleting
+\(F_u\), because \(u\notin D\supset F_u\), contradicting (8).
+
+There are at most \(2^{Q_E}\) possible subsets of \(D\). Pigeonhole one
+value \(F\) occurring for at least \(|U_0|/2^{Q_E}\) elements of \(U_0\),
+and restrict \(U_0\) to that subpacket. Since \(A(w)\to\infty\), the
+finite losses are absorbed into a new constant \(c_E>0\), giving (1) with
+\[
+q_E=Q_E.
+\]
+The surviving packet still lies in \(A\setminus(E\cup F)\), and \(g\in F\).
+By construction, (2) holds and \(F\) is inclusion-minimal. This
+inclusion-minimality is exactly the activity statement (3).
+
+For (4), fix \(u\in U\) and \(f\in F\). By (3), choose a two-term
+representation of \(g+u\) from \(A\setminus(F\setminus\{f\})\). Since
+\(F\) is a vertex cover of all two-term representations of \(g+u\), this
+representation must use \(f\). Removing \(f\) leaves the other summand
+\[
+g+u-f\in A.
+\]
+
+Finally apply Lemma 3.4d.7 with this \(F\) in place of the deleted palette
+and with \(C=A\setminus F\). The hypothesis needed there is exactly (2),
+and \(U\subset C\). It gives (5) and (6). \(\square\)
+
+This is stronger than the local dichotomy in Corollary 3.4d.16 for the
+global \(k=3\) problem. Although an isolated active three-sum barrier need
+not imply a pair barrier, the retained-bank origin of every \(k=3\)
+counterexample supplies enough mass to extract a common active two-sum
+barrier after all. Thus the live \(k=3\) obstruction is a moving family of
+fresh finite-palette independent pair packets outside every protected core.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -28398,6 +28511,17 @@ missing from ordinary minimal order-\(h\) bases.
 * Corollary 3.4d.15 records the all-order shadow of active lower barriers:
   \(U+\tau-F\subset(\ell-1)A\), with at least one original deleted gate
   lying in the active finite barrier.
+* Corollary 3.4d.16 packages the lower-barrier alternatives for \(k=3\):
+  either a genuine two-sum reflected cover packet occurs, or an active
+  three-sum cover packet casts coherent two-sum shadows.
+* Warning 3.4d.17 shows that the triple-shadow branch cannot be collapsed
+  to the pair branch by a local argument; the dilated set
+  \(\{p,2p,3p\}\) already gives active three-sum barriers whose gate row is
+  repaired at order \(2\).
+* Corollary 3.4d.18 uses the older retained-bank sparse-shadow normal form
+  to recover a stronger global \(k=3\) target: every counterexample has
+  common active two-sum barrier packets after shrinking the bounded deleted
+  palette.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

@@ -58,7 +58,10 @@ finite palette has coherent two-sum shadows. Warning 3.4d.17 gives a small
 scalable finite model showing that the triple-shadow branch does not locally
 imply the pair branch: \(\{p\}\) can be an active three-sum barrier for
 \(5p\) in \(\{p,2p,3p\}\), while the gate row \(p+3p=4p\) is already
-repaired by \(2p+2p\).
+repaired by \(2p+2p\). Corollary 3.4d.18 then records the stronger global
+normal form for \(k=3\): despite that local warning, every actual
+counterexample still yields common active two-sum barrier packets after
+shrinking the bounded deletion set from the sparse-shadow normal form.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

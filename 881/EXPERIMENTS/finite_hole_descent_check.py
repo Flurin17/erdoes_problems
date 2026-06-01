@@ -22,6 +22,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
   active barrier vertex, as used in Corollary 3.4d.15.
 * the triple-shadow branch need not collapse to the two-term pair branch,
   as in Warning 3.4d.17.
+* bounded two-sum palettes shrink to active pair barriers containing the
+  gate, as used in Corollary 3.4d.18.
 """
 
 from __future__ import annotations
@@ -283,6 +285,46 @@ def check_triple_shadow_not_pair_example() -> None:
         assert reps(C, 2, p + u)
 
 
+def check_pair_packet_minimal_shrink(A: tuple[int, ...], D: tuple[int, ...]) -> int:
+    checked = 0
+    D_set = set(D)
+    outside = tuple(a for a in A if a not in D_set)
+    for gate in D:
+        for u in outside:
+            target = gate + u
+            if reps(outside, 2, target):
+                continue
+
+            minimal: tuple[int, ...] | None = None
+            for size in range(1, len(D) + 1):
+                for F in combinations(D, size):
+                    F_set = set(F)
+                    C = tuple(a for a in A if a not in F_set)
+                    if not reps(C, 2, target):
+                        minimal = F
+                        break
+                if minimal is not None:
+                    break
+
+            assert minimal is not None
+            assert gate in minimal
+            F_set = set(minimal)
+            C = tuple(a for a in A if a not in F_set)
+            assert u in C
+            for f in minimal:
+                restored = tuple(a for a in A if a not in (F_set - {f}))
+                assert reps(restored, 2, target)
+                assert target - f in A
+            for v in outside:
+                if reps(C, 2, gate + v):
+                    continue
+                x = u + gate - v
+                if x in A:
+                    assert x in F_set
+            checked += 1
+    return checked
+
+
 def main() -> None:
     check_triple_shadow_not_pair_example()
     sets_checked = 0
@@ -294,6 +336,7 @@ def main() -> None:
     minimal_barrier_checked = 0
     pair_barrier_reflection_checked = 0
     active_lower_shadow_checked = 0
+    pair_packet_shrink_checked = 0
     universe = range(1, 10)
     for size in range(4, 8):
         for A_raw in combinations(universe, size):
@@ -309,6 +352,7 @@ def main() -> None:
                     minimal_barrier_checked += check_minimal_barrier_extraction(A, D)
                     pair_barrier_reflection_checked += check_pair_barrier_reflection(A, D)
                     active_lower_shadow_checked += check_active_lower_shadow(A, D)
+                    pair_packet_shrink_checked += check_pair_packet_minimal_shrink(A, D)
             for core_size in range(0, min(3, size) + 1):
                 for core in combinations(A, core_size):
                     lower_hypergraph_checked += check_lower_hypergraph_equivalence(A, core)
@@ -322,6 +366,7 @@ def main() -> None:
     print(f"minimal_barrier_checked={minimal_barrier_checked}")
     print(f"pair_barrier_reflection_checked={pair_barrier_reflection_checked}")
     print(f"active_lower_shadow_checked={active_lower_shadow_checked}")
+    print(f"pair_packet_shrink_checked={pair_packet_shrink_checked}")
 
 
 if __name__ == "__main__":
