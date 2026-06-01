@@ -2747,7 +2747,7 @@ source of growth beyond Ramsey.
   rooted endpoint is isolated from its own zero slot and from the matching
   slot.  The C++ checker now verifies the full labelled `n=8` rooted-nonedge
   sweep (`1048576` even graphs with `01` nonadjacent) and the prefix
-  `0 <= bits < 1000000` at `n=9` (`500000` rooted nonedge cases), with no
+  `0 <= bits < 10000000` at `n=9` (`5000000` rooted nonedge cases), with no
   counterexample.  This makes the triangular degree-`2` boundary condition a
   serious candidate for a minimal-counterexample induction rather than just a
   Python-scale observation.

@@ -4767,10 +4767,10 @@ The C++ checker ports the same condition and verifies the full labelled
 
 ```text
 /tmp/matching_slot_fast --n 8 --triangle-nonedge 0:1
-/tmp/matching_slot_fast --n 9 --triangle-nonedge 0:1 --limit 1000000
+/tmp/matching_slot_fast --n 9 --triangle-nonedge 0:1 --limit 10000000
 ```
 
-These commands respectively check `1048576` and `500000` even graphs with
+These commands respectively check `1048576` and `5000000` even graphs with
 `01` nonadjacent, with no counterexample.
 
 This is only finite evidence, but it identifies a plausible boundary
