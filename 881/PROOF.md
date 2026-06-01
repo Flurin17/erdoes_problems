@@ -9461,6 +9461,87 @@ reflected-wall outcome: leave many future targets uncovered by the old full
 set, or create a large private-gate fiber. The latter is precisely the
 input to the compressed-spike reduction of Lemma 8.5a.7z.10.
 
+### Corollary 8.5a.7z.12h.9: Covered runways compress to spikes
+
+Let \(A\) be an order-\(2\) basis with threshold \(N_0\). Let
+\[
+F\subset A,\qquad |F|=r,
+\]
+put \(C=A\setminus F\), and suppose
+\[
+w\notin3C.
+\]
+Let \(X\subset C\) be finite and assume:
+
+1. the rows are active for the order-\(2\) threshold,
+   \[
+   x\le w-N_0\qquad(x\in X); \tag{1}
+   \]
+2. they are not deleted-pair exceptions,
+   \[
+   w-x\notin F+F\qquad(x\in X); \tag{2}
+   \]
+3. all but \(G\subset X\) have future targets already covered by the old
+   full packet,
+   \[
+   w-x\in2A\qquad(x\in X\setminus G). \tag{3}
+   \]
+
+If for some \(M\)
+\[
+|X|-|G|>r(rM+|F+F|), \tag{4}
+\]
+then there are a gate \(f\in F\) and a set
+\[
+U\subset X\setminus G,\qquad |U|=M,
+\]
+satisfying one of the two alternatives from Lemma 8.5a.7z.10:
+
+1. **unique-gate spike:**
+   \[
+   r_{2,A}(u+f)=1\qquad(u\in U);
+   \]
+2. **shifted-overlap spike:** there is \(g\in F\setminus\{f\}\) such that
+   \[
+   U+f-g\subset C.
+   \]
+
+Proof. For each \(x\in X\setminus G\), hypotheses (1) and (2) put
+\[
+x\in R(F,w)
+\]
+in the notation of Lemma 8.5a.7z.10. Corollary 8.5a.7z.12h.8 gives a gate
+\[
+f\in F
+\]
+whose private fiber
+\[
+U_0=\{x\in X\setminus G:w-x-f\in C,\ x+f\notin2C\}
+\]
+has size at least
+\[
+\frac{|X|-|G|}{r}.
+\]
+By (4), this fiber satisfies
+\[
+|U_0|>rM+|F+F|.
+\]
+For all rows in \(U_0\), the condition \(w-x-f\in C\) is exactly the gate
+condition required by Lemma 8.5a.7z.10, and \(U_0\subset R(F,w)\). Extend
+the choice \(\gamma(x)=f\) on \(U_0\) to any valid gate map on \(R(F,w)\);
+such an extension exists because, for every \(e\in R(F,w)\), the assumptions
+that \(A\) is an order-\(2\) basis, \(e\le w-N_0\), \(w-e\notin F+F\), and
+\(w\notin3C\) rule out both \(F+F\) and \(2C\) representations of \(w-e\).
+The resulting \(f\)-fiber contains \(U_0\), so the fiber form of Lemma
+8.5a.7z.10 gives the claimed subset \(U\) and one of the two spike
+alternatives. \(\square\)
+
+Thus a fixed witness cannot have a long covered runway without immediately
+feeding the stable-spike closure machinery. The only remaining runway
+escape is to leave many \(w-x\) as old full two-sum gaps, or to keep the
+row tests, gates, and witnesses moving before any finite test exceeds the
+threshold in (4).
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -9784,12 +9865,13 @@ the following escape conditions must hold simultaneously:
    push the declared endpoint past the protected witnesses without entering
    the terminal gaps, repairing those witnesses, or creating stable
    compressed spikes.
-5. **No fixed-witness runway:** by Corollary 8.5a.7z.12h.8, if one witness
+5. **No fixed-witness runway:** by Corollary 8.5a.7z.12h.9, if one witness
    \(w\) and one deleted packet \(F\) remain frozen while many retained
    fillers \(x\) have their future targets \(w-x\) covered by the old full
-   set, then a large private-gate fiber appears and Lemma 8.5a.7z.10
-   compresses it. If instead many such targets remain uncovered, the stage
-   has not supplied the required order-2 coverage. Hence a surviving
+   set, then the runway crosses the explicit threshold
+   \(|X|-|G|>|F|(|F|M+|F+F|)\) and compresses to a unique-gate or
+   shifted-overlap spike. If instead many such targets remain uncovered, the
+   stage has not supplied the required order-2 coverage. Hence a surviving
    construction must reset witnesses, packets, or row tests cofinally before
    a long fixed runway forms.
 
@@ -16742,6 +16824,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   under one frozen witness and deleted packet, either many future targets
   \(w-x\) remain old full two-sum gaps, or one gate supports a private
   fiber of size comparable to the test size.
+* Corollary 8.5a.7z.12h.9 combines that fixed-witness runway dichotomy with
+  Lemma 8.5a.7z.10: once the covered part of the runway exceeds
+  \(|F|(|F|M+|F+F|)\), it contains an \(M\)-row unique-gate spike or
+  shifted-overlap spike.
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.

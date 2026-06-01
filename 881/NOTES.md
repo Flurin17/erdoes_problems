@@ -2510,6 +2510,14 @@ Corollary 8.5a.7z.12h.8 aggregates the trichotomy: for a finite test
 \(w-X\) remain uncovered by the old full set, or one deleted gate carries a
 private fiber of size at least \((|X|-|G|)/|F|\). In particular, a fully
 covered fixed-witness runway immediately returns to Lemma 8.5a.7z.10.
+Corollary 8.5a.7z.12h.9 makes this quantitative: once
+\[
+|X|-|G|>|F|(|F|M+|F+F|),
+\]
+the covered part of the runway contains an \(M\)-row unique-gate spike or an
+\(M\)-row shifted-overlap spike. Thus a fixed witness can only avoid the
+stable-spike machine by leaving many future targets as old full two-sum gaps
+or by resetting the packet, witness, or row test before this threshold.
 The sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 shows the same no-safe-one/no-safe-two obstruction at every listed endpoint.
