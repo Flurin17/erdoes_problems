@@ -50,6 +50,7 @@ def scan(A: set[int], b: int, d: int) -> None:
     b_dependent = {}
     reflected = {}
     unique_gate = {}
+    unique_gate_independence_violations = []
     for p in sorted(C):
         row_target = d - p
         if row_target in two_a:
@@ -64,6 +65,13 @@ def scan(A: set[int], b: int, d: int) -> None:
                 reflected[p] = d - b - p
         if b + p not in two_c:
             unique_gate[p] = b + p
+    for p in sorted(unique_gate):
+        for r in sorted(unique_gate):
+            if p == r:
+                continue
+            translate = p + b - r
+            if translate in A:
+                unique_gate_independence_violations.append((p, r, translate))
     print("A=", sorted(A))
     print("b=", b, "d=", d, "w=", w)
     print("3A coverage from 3=", cover_end(hsum(A, 3, 6 * max(A) + 100), 3, 6 * max(A) + 100))
@@ -72,6 +80,7 @@ def scan(A: set[int], b: int, d: int) -> None:
     print("b-dependent rows=", b_dependent)
     print("one-term reflected rows d-b-p=", reflected)
     print("unique gate translates b+p notin 2C=", unique_gate)
+    print("unique gate independence violations=", unique_gate_independence_violations)
     print("collisions=", collisions)
 
 

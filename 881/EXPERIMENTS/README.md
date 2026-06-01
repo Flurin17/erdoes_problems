@@ -682,7 +682,9 @@ The prepared marker has one reflected row, `p=3 -> 4`, and seven
 unique-gate translates `33+p notin 2C`, matching Lemmas 16.17-16.18.
 Here the secondary center is `d-b=7`, so Lemma 16.19 predicts that all
 tested rows `p>6` must be unique-gate; the scanner reports exactly that
-for `8,19,20,28`.
+for `8,19,20,28`. The scanner also checks the Corollary 16.22
+gate-independence condition `p+b-r notin A` among unique-gate rows; the
+prepared marker has no violations.
 
 Lemma 16.16 records the adjacent-block obstruction for old fillers. If a
 later block starts above `4 max(S)`, then any private order-4 witness for
@@ -702,3 +704,5 @@ largest balanced-certificate-free subset has size `2`, so every half-sized
 subset has a certificate. For the prepared row-bank set
 `{1,2,3,4,8,19,20,28,33}`, the largest such subset has size `6`, showing
 that sparse prepared blocks can evade the reflected-branch finite test.
+Corollary 16.22 then says the surviving unique-gate rows should be read as
+a moving gate-independent packet, not just as isolated two-sum accidents.

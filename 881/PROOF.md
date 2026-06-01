@@ -19979,6 +19979,52 @@ with large secondary center must present many unique-gate translates
 unique-gate rows on late tests. Thus the unresolved singleton escape is
 not generic row-bank recurrence; it is moving unique-gate arithmetic.
 
+### Corollary 16.22: Unique-gate half-packets are gate-independent
+
+Let \(A\subseteq\mathbb N\), let \(q\in A\), and let
+\[
+U\subset A\setminus\{q\}.
+\]
+Suppose that for every \(p\in U\) the only unordered two-term
+representation of \(q+p\) from \(A\) is the gate pair \(q+p\); equivalently
+\[
+q+p\notin2(A\setminus\{q\}). \tag{1}
+\]
+Then
+\[
+(U+q-U)\cap A\subset\{q\}. \tag{2}
+\]
+Equivalently, for distinct \(p,r\in U\),
+\[
+p+q-r\notin A. \tag{3}
+\]
+
+Proof. This is Lemma 8.5a.7j with \(f=q\). Explicitly, if distinct
+\(p,r\in U\) and
+\[
+x=p+q-r\in A,
+\]
+then
+\[
+q+p=r+x
+\]
+is a two-term representation of \(q+p\) from \(A\). It is not the gate
+pair \(\{q,p\}\): equality would force either \(r=p\) or \(r=q\), both
+impossible. This contradicts (1). \(\square\)
+
+Combining this with Corollary 16.21, a hypothetical \(k=3\) counterexample
+has the following sharper singleton normal form. Over every finite
+balanced certificate test \(T_0\), every sufficiently large-secondary-center
+singleton row bank contains a set
+\[
+U\subset T_0,\qquad |U|\ge |T_0|/2,
+\]
+which is \(q\)-independent in the sense of (2). For bounded secondary
+centers, Lemma 16.19 gives the same conclusion on all tested rows beyond
+the bounded threshold. Thus the singleton branch has been reduced from
+generic private row banks to moving gate-independent packets, unless the
+finite tests themselves contain large balanced-certificate-free halfsets.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21034,6 +21080,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   counterexample: over every finite balanced certificate test, large
   secondary-center singleton row banks must contain a unique-gate
   half-packet.
+* Corollary 16.22 applies the unique-gate independence lemma to those
+  half-packets: if \(U\) is the unique-gate set, then
+  \((U+q-U)\cap A\subset\{q\}\). The remaining singleton escape is
+  therefore moving \(q\)-independent arithmetic, or large
+  balanced-certificate-free halfsets in every finite test.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

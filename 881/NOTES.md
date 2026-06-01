@@ -2379,6 +2379,14 @@ half-certificate property, sufficiently large-secondary-center singleton
 row banks must have at least half their rows in the unique-gate branch.
 Together with Lemma 16.19 for bounded secondary centers, this isolates
 moving unique-gate packets as the remaining singleton obstruction.
+Corollary 16.22 applies Lemma 8.5a.7j to those packets. If \(U\) is the
+unique-gate half-packet for a deleted gate \(q\), then
+\[
+(U+q-U)\cap A\subset\{q\}.
+\]
+Thus the remaining singleton escape is not merely "many unique sums";
+it is a moving \(q\)-independent halfset over each balanced finite test,
+unless the tests themselves have large balanced-certificate-free halfsets.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
