@@ -24116,6 +24116,49 @@ burden is to show that such gaps are incompatible with the earlier
 same-side, spread, and cross-band constraints, or else to build a staged
 construction whose active packets live in those moving gaps.
 
+### Corollary 16.96: Bounded multi-core profiles concentrate interior escape
+
+Let \(P\subset\mathbb N\) be finite and nonempty, with endpoints
+\[
+p^-=\min P,\qquad p^+=\max P.
+\]
+Let
+\[
+C=\bigcup_{i=1}^m I_i
+\]
+be a union of \(m\) integer intervals, and suppose
+\[
+p^-,p^+\in C. \tag{1}
+\]
+Then \(P\setminus C\) is contained in at most \(m-1\) disjoint internal
+integer gaps in \((p^-,p^+)\). Consequently, if
+\[
+|P\setminus C|=D>0,
+\]
+then one internal gap contains at least
+\[
+\left\lceil {D\over m-1}\right\rceil \tag{2}
+\]
+points of \(P\). For \(m=1\), condition (1) forces \(P\subset C\).
+
+In particular, a bounded-complexity multi-core robust profile that catches
+a positive fraction of a packet away from the endpoints must place a
+positive fraction of that packet in one actual gap between components of
+its robust-core union.
+
+Proof. Merge the intervals \(I_i\) into their disjoint interval components.
+There are at most \(m\) components. Since \(p^-\) and \(p^+\) belong to the
+union, every point of \(P\setminus C\) lies in a gap between two consecutive
+components that is contained in \((p^-,p^+)\). Hence there are at most
+\(m-1\) such gaps. The pigeonhole bound (2) follows. If \(m=1\), there is
+no internal gap, so \(P\setminus C=\varnothing\). \(\square\)
+
+Thus the multi-core escape from Corollary 16.95 is not diffuse when the
+number of auxiliary intervals in the profile is bounded. It produces a
+large packet subpiece inside one concrete robust-core gap, returning the
+problem to a single moving interval gap rather than an arbitrary finite
+union.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25449,6 +25492,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.95 gives the finite alternative for general robust-profile
   unions: packet exclusion is either endpoint escape or an internal gap in
   one profile's union of robust cores across the packet span.
+* Corollary 16.96 shows bounded-complexity multi-core profiles concentrate
+  interior escape: if a union of \(m\) robust intervals catches \(D\)
+  packet points away from endpoints, one internal gap catches at least
+  \(D/(m-1)\) of them.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

@@ -200,7 +200,9 @@ minimum or maximum. This supports the endpoint-escape normal form for
 single-auxiliary-interval robust profiles. It also checks the finite
 union-of-intervals alternative from Corollary 16.95: a multi-core profile
 that contains both packet endpoints but misses a packet point must have an
-internal gap across the packet span.
+internal gap across the packet span. The same script checks Corollary
+16.96: a union of \(m\) interval cores has at most \(m-1\) internal gaps,
+so missing packet points concentrate in one gap by pigeonhole.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For

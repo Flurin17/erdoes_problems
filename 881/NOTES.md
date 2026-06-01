@@ -151,7 +151,9 @@ maximum of the packet to escape one of the cores, so interior-only
 avoidance requires multi-core disconnected profiles. Corollary 16.95
 packages that residual case: finite robust exclusion is either endpoint
 escape or an internal gap in one assigned profile's union of robust cores
-across the packet span.
+across the packet span. Corollary 16.96 adds that bounded-complexity
+multi-core profiles concentrate their interior packet escape into one of
+finitely many actual gaps.
 
 ## Definitions
 
