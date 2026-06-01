@@ -2520,6 +2520,9 @@ one-sided shadow fillers \(Y\subset[1,p]\setminus A\) with \(w-Y\subset2C\)
 into retained-row tests, stable compressed spikes, or pair-cylinder debt,
 or else build a staged construction where those shadows remain ordinary
 moving gaps of \(A\).
+Target 8.5a.7z.14 is correspondingly sharper: a counterexample must avoid
+long fixed-witness runways, because covered future targets create private
+fibers while uncovered future targets leave the order-2 stage incomplete.
 With `--avoid-reflected-blockers`, the same scale-\(100\), beam-\(8\) run
 still reaches only \(6503\). At the stopping step, the script reports
 \(128\) raw extensions and \(0\) surviving after the reflected-blocker

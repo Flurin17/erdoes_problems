@@ -9784,6 +9784,14 @@ the following escape conditions must hold simultaneously:
    push the declared endpoint past the protected witnesses without entering
    the terminal gaps, repairing those witnesses, or creating stable
    compressed spikes.
+5. **No fixed-witness runway:** by Corollary 8.5a.7z.12h.8, if one witness
+   \(w\) and one deleted packet \(F\) remain frozen while many retained
+   fillers \(x\) have their future targets \(w-x\) covered by the old full
+   set, then a large private-gate fiber appears and Lemma 8.5a.7z.10
+   compresses it. If instead many such targets remain uncovered, the stage
+   has not supplied the required order-2 coverage. Hence a surviving
+   construction must reset witnesses, packets, or row tests cofinally before
+   a long fixed runway forms.
 
 Thus the final problem is no longer a local terminal-hole problem. It is a
 global recurrence-versus-staging problem for moving compressed spikes: prove
@@ -16743,6 +16751,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   must stage a cross-window selector front of moving compressed spikes,
   with no pair promotion, no stable finite palettes, and enough coverage
   fillers to avoid the two-sum gaps in the local no-promotion gadgets.
+  Corollary 8.5a.7z.12h.8 now adds that those fillers cannot form long
+  fixed-witness runways: such a runway either leaves old two-sum gaps or
+  creates a large private-gate fiber.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
