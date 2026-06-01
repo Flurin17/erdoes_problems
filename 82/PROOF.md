@@ -11397,6 +11397,172 @@ over every field: in a linear relation, the `e_i` coordinate forces the
 coefficient of `r_i` to be zero for each `i`.  Thus equal weights and tiny
 diameter do not imply low rank without additional graph-theoretic structure.
 
+**Definition 28D.4: The Full-Drop Ordered Parameter.**  For integers
+`P,h>=1`, let `C_full(P,h)` be the least integer `m` such that every ordered
+graph `H` on vertices
+
+```text
+v_1<...<v_m
+```
+
+with
+
+```text
+|(N_H(v_i)\N_H(v_j))\{v_i,v_j}| < P        for every i<j
+```
+
+contains a clique or independent set of order `h`.
+
+This is stronger than the column-drop condition below: the representative
+graph obtained from exact degree classes satisfies a full one-sided
+neighborhood nesting condition, not just a bound on losses among earlier
+rows.
+
+**Lemma 28D.5: Full-Drop Ordered Graphs Have Quadratic Homogeneous
+Threshold.**  For every `P,h>=1`,
+
+```text
+C_full(P,h) <= 2P(h-1)^2+2h-1.
+```
+
+Proof.  Let `H` be a full-drop ordered graph with no clique or independent
+set of order `h`.  We prove that
+
+```text
+|V(H)| <= (h-1)(2P(h-1)+2).
+```
+
+The claim is trivial for `h=1`, so assume `h>=2`.  Let `W` be a nonempty
+ordered induced subgraph of `H`, with first vertex `a` and last vertex `b`.
+The full-drop condition is inherited by `H[W]`.
+
+First consider `A=N_{H[W]}(a)`.  For every `u in A`, every nonneighbor of
+`u` inside `A` lies in
+
+```text
+(N_{H[W]}(a)\N_{H[W]}(u))\{a,u},
+```
+
+which has size less than `P` because `a` is first.  Thus the complement of
+`H[A]` has maximum degree at most `P-1`, so `H[A]` contains a clique of order
+at least `|A|/P`.  Since no such clique has order `h`, we have
+
+```text
+|A| <= P(h-1).
+```
+
+Next let
+
+```text
+B={u in W\{b}: ub notin E(H)}.
+```
+
+For every `u in B`, each neighbor of `u` inside `B` lies in
+
+```text
+(N_{H[W]}(u)\N_{H[W]}(b))\{u,b},
+```
+
+which again has size less than `P`, because `u<b`.  Hence `H[B]` has maximum
+degree at most `P-1`, and contains an independent set of order at least
+`|B|/P`.  Therefore
+
+```text
+|B| <= P(h-1).
+```
+
+If `|W|>=2`, delete `a`, `b`, all of `A`, and all of `B`.  The remaining set
+
+```text
+W'={u in W\{a,b}: au notin E(H), ub in E(H)}
+```
+
+has size at least
+
+```text
+|W|-2P(h-1)-2.
+```
+
+Starting with `W_0=V(H)`, repeat this deletion process while the current set
+is nonempty, and record the first vertex `a_t` of the current set.  Every
+later recorded vertex lies in the residual set left after `a_t` was deleted,
+and hence is nonadjacent to `a_t`.  Thus the recorded first vertices form an
+independent set.
+
+If `|V(H)|>(h-1)(2P(h-1)+2)`, then after `h-1` deletion steps at least one
+vertex remains, so the process records `h` pairwise nonadjacent vertices.
+This is forbidden.  Therefore the displayed upper bound on `|V(H)|` holds,
+which is equivalent to the stated bound on `C_full(P,h)`.  QED.
+
+**Corollary 28D.6: Global Reduction Through Full-Drop Ordering.**  For every
+`h>=3`, with `P=P_h`,
+
+```text
+G(h) <= 4hP C_full(P,h)
+     <= 4hP(2P(h-1)^2+2h-1)
+     <= 16h^3P^2.
+```
+
+Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
+vertices.  Partition `V(G)` into exact global degree classes.  By Corollary
+28D.2, every nonempty degree class has size at most `4hP`.
+
+Choose one representative from each nonempty degree class and order the
+representatives by increasing degree:
+
+```text
+v_1<...<v_b.
+```
+
+For `i<j`, the representative degrees are strictly increasing.  With
+
+```text
+A=N_G(v_i)\N_G(v_j),       B=N_G(v_j)\N_G(v_i),
+```
+
+we have `|A|<|B|`, and Lemma 28D gives `min(|A|,|B|)<P`.  Hence
+
+```text
+|(N_G(v_i)\N_G(v_j))\{v_i,v_j}| < P.
+```
+
+Restricting to representatives shows that their ordered induced graph
+satisfies the full-drop condition.  If `b>=C_full(P,h)`, the representatives
+contain a clique or independent set of order `h`, which is a regular induced
+subgraph of `G`, impossible.  Thus `b<C_full(P,h)`.  Multiplying by the
+degree-class size bound gives
+
+```text
+|V(G)| < 4hP C_full(P,h).
+```
+
+The first displayed inequality follows from the definition of `G(h)`, the
+second from Lemma 28D.5, and the final coarse bound from `h>=3` and `P>=1`.
+QED.
+
+**Computational Calibration 28D.7: Small Full-Drop Values.**  The script
+`EXPERIMENTS/full_drop_census.py` exactly enumerates small ordered graphs
+satisfying the full-drop condition and reuses the regular-witness checker.
+The commands
+
+```text
+python3 82/EXPERIMENTS/full_drop_census.py 5 --p 1
+python3 82/EXPERIMENTS/full_drop_census.py 6 --p 2
+python3 82/EXPERIMENTS/full_drop_census.py 8 --p 2 --search-h 4 --max-nodes 50000
+```
+
+report respectively:
+
+```text
+P=1, n=5: checked_full_drop=16,   min_max_homogeneous=3, min_max_regular=3
+P=2, n=6: checked_full_drop=1622, min_max_homogeneous=3, min_max_regular=3
+P=2, n=8: DFS found max_full_drop=1 with max_homogeneous=3 and max_regular=4.
+```
+
+These checks are only finite calibration.  Their role is to verify the new
+full-drop predicate and to confirm that it is genuinely stronger than the
+older column-drop predicate used below.
+
 **Lemma 28E: Ordered Graphs With Few Inversions Have Large Homogeneous
 Sets.**  Let `H` be a graph whose vertices are linearly ordered as
 `v_1,...,v_m`.  Call a triple `i<j<k` an inversion if
@@ -11747,7 +11913,8 @@ Therefore every graph on at least `4hP C_drop(P,h)` vertices has a regular
 induced subgraph on at least `h` vertices, proving the displayed bound for
 `G(h)`.  QED.
 
-The proof of Proposition 28F is the special case obtained from the crude
+Before the full-drop refinement in Corollary 28D.6, this gave the polynomial
+reduction through the crude
 estimate
 
 ```text
@@ -11758,9 +11925,10 @@ which follows by summing the column-drop bounds to get fewer than
 `P binom(m,2)` total inversions and then applying Lemma 28E.1 with
 `s=h^2`.  Lemma 28E.5 shows that this crude route loses real information:
 at `P=1`, the exact value is quadratic in `h`, while the sparse-inversion
-estimate gives only a quartic bound.  Any improvement to Proposition 28F
-should therefore target the column-drop parameter directly, rather than only
-the total inversion count.
+estimate gives only a quartic bound.  Corollary 28D.6 now bypasses this loss
+by using the stronger full-drop condition; the column-drop parameter remains
+useful as a diagnostic for what can and cannot be proved from the weaker
+earlier-row information alone.
 
 **Computational Calibration 28E.7: Small Column-Drop Values.**  The script
 `EXPERIMENTS/column_drop_census.py` exactly enumerates labelled ordered graphs
@@ -11837,7 +12005,7 @@ These produce ordered graphs with maximum column drop respectively `0,0,1`
 and largest regular induced orders `4,5,4`.  The data suggest that replacing
 homogeneous extraction by regular extraction may improve constants or small
 parameters in the degree-bucket representative argument, but it does not yet
-give a theorem-level improvement over Proposition 28F.
+give a theorem-level improvement over the full-drop reduction.
 
 One small exact lower calibration for the regular column-drop parameter is
 the following.  The ordered graph on `12` vertices with edge mask
@@ -11921,8 +12089,8 @@ C_reg(1,6)>13.
 By contrast, Lemma 28E.5 gives `C_drop(1,5)=17`.  Thus even in the first
 nontrivial regular column-drop case, regular extraction improves the
 homogeneous column-drop bound.  The improvement is finite and does not yet
-give a theorem-level asymptotic gain over Proposition 28F, but it confirms
-that the regular representative step is genuinely sharper than the
+give a theorem-level asymptotic gain over the full-drop reduction, but it
+confirms that the regular representative step is genuinely sharper than the
 chain-antichain extraction.
 
 **Definition 28E.8: The Regular Column-Drop Parameter.**  For integers
@@ -11988,74 +12156,13 @@ subexponential scale as `G`.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 16 h^5 P_h^2.
+G(h) <= 16 h^3 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
 
-Proof.  Let `P=P_h`, and suppose for contradiction that `G` is an `n`-vertex
-graph with no regular induced subgraph on at least `h` vertices, where
-
-```text
-n > 16 h^5 P^2.
-```
-
-Partition the vertices by their exact degrees in `G`:
-
-```text
-V_d={v : deg_G(v)=d}.
-```
-
-By Corollary 28D.2, every nonempty degree bucket has size at most `4hP`.
-
-Let `b` be the number of nonempty buckets.  If
-
-```text
-b > 4P h^4,
-```
-
-then choose representatives `v_1,...,v_m` from all nonempty degree buckets,
-ordered by increasing degree.  For every `j<k`, the degree of `v_j` is
-strictly smaller than the degree of `v_k`, so Lemma 28D gives
-
-```text
-|N(v_j)\N(v_k)| < P.
-```
-
-The number of inversions `i<j<k` among the representatives is consequently
-less than `P binom(m,2)`, because for each pair `j<k` there are fewer than
-`P` possible earlier vertices `i` with `v_i v_j` an edge and `v_i v_k` a
-nonedge.
-
-Set `s_0=h^2`.  Since
-
-```text
-m > 4P h^4 >= 2h^2
-```
-
-for `h>=3` and `P>=1`, and since
-
-```text
-P binom(m,2) < Pm^2/2 < m^3/(8h^4)=m^3/(8s_0^2),
-```
-
-Lemma 28E.1 gives a clique or independent set of order greater than `h`, a
-forbidden regular induced subgraph.  Hence
-
-```text
-b <= 4P h^4.
-```
-
-Combining the bucket count and bucket size bounds,
-
-```text
-n <= b * 4hP <= 16 h^5 P^2,
-```
-
-contradicting the assumed value of `n`.  This proves the displayed bound on
-`G(h)`.
-
-If `P_h=2^{o(h)}`, then the polynomial factor `16h^5` is also
+Proof.  This is the final inequality of Corollary 28D.6.  If
+`P_h=2^{o(h)}`, then the polynomial factor `16h^3` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 

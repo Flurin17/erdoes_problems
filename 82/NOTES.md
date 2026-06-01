@@ -3415,3 +3415,18 @@ source of growth beyond Ramsey.
   reduction improves to `G(h) <= 16 h^5 P_h^2`.  This is only a constant
   improvement; the remaining proof target is still a subexponential bound for
   one of the equivalent local/ordered parameters.
+- 2026-06-01: Added the full-drop ordered parameter `C_full(P,h)`, capturing
+  the stronger fact that degree-bucket representatives ordered by increasing
+  degree satisfy `N(v_i)\N(v_j)<P_h` over all coordinates whenever `i<j`.
+  A first/last peeling lemma gives
+  `C_full(P,h) <= 2P(h-1)^2+2h-1`, improving the polynomial reduction to
+  `G(h) <= 16 h^3 P_h^2`.  This removes the sparse-inversion/column-drop
+  quartic loss, but the asymptotic bottleneck remains the equivalent local
+  problem `P_h=2^{o(h)}`.
+- 2026-06-01: Added `full_drop_census.py` and ran small sanity checks for the
+  new predicate.  Exact enumeration gives `P=1,n=5` with
+  `checked_full_drop=16`, `min_max_homogeneous=3`, and `min_max_regular=3`;
+  `P=2,n=6` gives `checked_full_drop=1622`, with both minima equal to `3`.
+  A DFS search at `P=2,n=8` found a full-drop example with maximum
+  homogeneous order `3` and maximum regular order `4`, confirming that the
+  script enforces the stronger all-coordinate drop condition.
