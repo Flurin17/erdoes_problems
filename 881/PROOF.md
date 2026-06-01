@@ -6442,6 +6442,35 @@ range-separated. A proof must use their forced recurrence across all finite
 tails, or the promotion of their active colors into later barriers, rather
 than a one-stage contradiction.
 
+### Target 8.5a.7h: From large private fibers to recurrent colors
+
+After Corollary 8.5a.7f and Example 8.5a.7g, the remaining \(k=2\)
+problem can be stated more sharply. In every tail and outside every finite
+core, a counterexample must produce arbitrarily large sets
+\[
+U
+\]
+and centers
+\[
+m=w-f
+\]
+with
+\[
+m-U\subset A,\qquad U+f\cap2(A\setminus F)=\varnothing. \tag{1}
+\]
+If a fixed finite test set \(T_0\) had the property that every large subset
+of \(T_0\) contains a certificate triple, then repeated occurrences of
+(1) inside \(T_0\) would give a recurrent certificate and hence a good
+deletion by Corollary 2.3c. Therefore a surviving counterexample must make
+these large private fibers escape every fixed certificate-rich test set.
+
+The precise missing step is to show that this escape is impossible under
+the global late-bad barrier hypothesis, or to construct a staged basis in
+which the fibers \(U\), centers \(m\), and active colors \(f\) all escape
+while maintaining order-2 coverage and promoted-edge barriers. This is now
+the active form of the certificate-free obstruction; it is stronger than
+mobile injectivity and weaker than finite recurrent Sidon coloring.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
@@ -13003,6 +13032,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Example 8.5a.7g shows that these large fibers are locally compatible:
   a range-separated two-color packet can make one active color carry an
   arbitrarily large certificate-free private fiber.
+* Target 8.5a.7h identifies the current live obstruction: large private
+  fibers must escape every fixed certificate-rich test set without
+  compacting to recurrent Sidon colors or losing the late-bad barrier.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and
