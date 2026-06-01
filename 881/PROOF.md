@@ -3057,6 +3057,82 @@ lower-order transversals; after passing to a large packet, the same finite
 deleted set \(F\) is an inclusion-minimal active barrier for a whole
 translate family \(t_u=\tau+u\).
 
+### Corollary 3.4d.14: Two-term barriers are reflected cover packets
+
+In the notation of Corollary 3.4d.13, suppose that the lower-order branch
+has
+\[
+\ell=2.
+\]
+Then \(S\) has one element; write
+\[
+S=\{g\},\qquad \tau=g.
+\]
+For every surviving \(u\in U\), put
+\[
+m_u=g+u.
+\]
+Then:
+
+1. \(g\in F\);
+2. \(F\) is an inclusion-minimal vertex cover of the two-sum graph
+   \(\Gamma(m_u)\), whose edges are the unordered supports of
+   representations
+   \[
+   m_u=a+b,\qquad a,b\in A;
+   \]
+3. every \(f\in F\) is reflected by the same center:
+   \[
+   m_u-f\in A; \tag{1}
+   \]
+4. consequently
+   \[
+   U+g-F\subset A. \tag{2}
+   \]
+
+Equivalently, a two-term lower-order obstruction is not just a bounded
+transversal row. It is a finite active palette \(F\) whose every point is
+seen in the reflected packet with centers \(m_u=g+u\), while no edge of
+\(\Gamma(m_u)\) avoids \(F\).
+
+Proof. Since \(\ell=2\), the deleted multiset \(S\) from Corollary
+3.4d.10 has size one. Write it as \(\{g\}\). For each \(u\in U\), the pair
+\[
+\{g,u\}
+\]
+is a two-term representation of \(m_u=g+u\), and \(u\notin F\) because
+\[
+U\subset A\setminus(D\cup E),\qquad F\subset D.
+\]
+If \(g\notin F\), this pair would survive after deleting \(F\), contrary to
+\[
+m_u\notin2(A\setminus F).
+\]
+Thus \(g\in F\).
+
+The nonrepresentation \(m_u\notin2(A\setminus F)\) says exactly that every
+two-term representation edge of \(m_u\) meets \(F\), so \(F\) is a vertex
+cover of \(\Gamma(m_u)\). Its inclusion-minimality is part of Corollary
+3.4d.13.
+
+Fix \(f\in F\). By activity,
+\[
+m_u\in2(A\setminus(F\setminus\{f\})).
+\]
+Choose a surviving two-term representation after deleting
+\(F\setminus\{f\}\). Because \(F\) is a vertex cover of all two-term
+representations of \(m_u\), this representation must use \(f\). Therefore
+the other summand is \(m_u-f\), and it lies in \(A\). This proves (1).
+Equation (2) is just (1) with \(m_u=g+u\). \(\square\)
+
+Thus the pair branch of a higher-order counterexample is a packetized
+finite-reflection phenomenon. If one fixed \(F\) occurs along arbitrarily
+large witnesses, then \(F\) is reflection-recurrent in the usual sense.
+Without that extra recurrence, the obstruction is still highly structured:
+outside every finite protected core there must be fresh finite palettes
+whose translates \(U+g-F\) all lie in \(A\), while the same palettes cover
+every two-sum representation of the corresponding centers.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a

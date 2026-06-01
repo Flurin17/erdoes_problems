@@ -45,7 +45,10 @@ for all represented large targets should have transversal number tending to
 infinity; large matchings are a sufficient special case. Corollary 3.4d.13
 sharpens the negative normal form: bounded lower-order transversals can be
 made into one common inclusion-minimal active finite barrier across a large
-translate packet \(t_u=\tau+u\).
+translate packet \(t_u=\tau+u\). Corollary 3.4d.14 specializes the
+two-term branch: the active barrier is an inclusion-minimal two-sum vertex
+cover \(F\), the deleted gate \(g\) lies in \(F\), and every packet center
+\(g+u\) reflects the whole finite palette \(F\) back into \(A\).
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the
