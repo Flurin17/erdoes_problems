@@ -7719,6 +7719,66 @@ holes of rank at least \(3\), with unbounded second excess and a terminal
 retained gap. Pair subedges, bounded second-excess barriers, and nonminimal
 inactive padding have all been removed.
 
+### Example 8.5a.7z: Rank-three product terminal covers are locally compatible
+
+The normal form in Corollary 8.5a.7y is not locally contradictory. Let
+\[
+A_0=\{1,3,4,5,8,10,11,12\}.
+\]
+Then
+\[
+[4,24]\subseteq2A_0.
+\]
+On the window
+\[
+[14,24],
+\]
+every singleton and every pair deletion from \(A_0\) still leaves full
+three-fold coverage. However the three two-point packets
+\[
+F_1=\{4,10\},\qquad F_2=\{5,11\},\qquad F_3=\{8,12\}
+\]
+support a complete rank-three product cover: for every selector
+\[
+(x_1,x_2,x_3)\in F_1\times F_2\times F_3
+\]
+there is a witness \(v\in[14,24]\) such that, with
+\[
+F=\{x_1,x_2,x_3\},
+\]
+one has
+\[
+v\notin3(A_0\setminus F),
+\]
+the deletion \(F\) is inclusion-minimal for \(v\), and the finite terminal
+gap
+\[
+(A_0\setminus F)\cap(v-\min F-1,\ v-4]=\varnothing. \tag{1}
+\]
+One possible witness table is:
+\[
+\begin{array}{c|c}
+F & v\\ \hline
+\{4,5,8\} & 19\\
+\{4,5,12\} & 18\\
+\{4,11,8\} & 17\\
+\{4,11,12\} & 22\\
+\{10,5,8\} & 21\\
+\{10,5,12\} & 21\\
+\{10,11,8\} & 23\\
+\{10,11,12\} & 22
+\end{array}
+\]
+The diagnostic
+`EXPERIMENTS/product_rank3_terminal_cover.py` verifies these assertions
+directly.
+
+Thus even the pair-free product-cover form of the remaining obstruction is
+finite-window compatible. What is missing for a counterexample is not a
+single product window, but an infinite staging that freezes such windows
+below later elements and makes them an unbounded selector barrier while
+preserving order-2 coverage.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7766,14 +7826,16 @@ Lemma 8.5a.7u, with Corollary 8.5a.7v ruling out the pair-cylinder
 subcover, Corollary 8.5a.7w forcing rank-\(\ge3\) selector debt cofinally,
 and Corollary 8.5a.7x forcing that debt to have unbounded second excess, or
 Corollary 8.5a.7y putting the surviving edges in the full minimal
-terminal-gap normal form, or to construct a staged basis in which the
-fibers \(U\), mirrors \(m-U\), centers \(m\), shifts \(h\), and active
-colors \(f,g\) all escape while maintaining order-2 coverage and
-arbitrarily late finite product covers whose pair subfamilies are
-selector-avoidable and whose high-rank edges are minimal large-spread
-terminal cuts. This is now the active form of the certificate-free
-obstruction; it is stronger than mobile injectivity and weaker than finite
-recurrent Sidon coloring.
+terminal-gap normal form. Example 8.5a.7z shows that this final local
+product-window form is itself compatible, so the missing step must use
+infinite staging, recurrence, or cross-window product pressure; otherwise
+one must construct a staged basis in which the fibers \(U\), mirrors
+\(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all escape
+while maintaining order-2 coverage and arbitrarily late finite product
+covers whose pair subfamilies are selector-avoidable and whose high-rank
+edges are minimal large-spread terminal cuts. This is now the active form of
+the certificate-free obstruction; it is stronger than mobile injectivity
+and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14401,6 +14463,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.7y shrinks the forced large-spread edge
   inclusion-minimally and imports the terminal-gap, shifted vertex-cover,
   and active-repair normal forms from Lemmas 10.1 and 10.3b.
+* Example 8.5a.7z gives a finite full product-window model of the final
+  local shape: three two-point packets whose eight selector triples all
+  have inclusion-minimal terminal-gap witnesses, while all singleton and
+  pair deletions are harmless on the same window.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

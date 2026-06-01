@@ -179,6 +179,16 @@ in Lemma 8.5a.7u. The complete rank-3 product wiring example is the
 abstract pair-free product cover left after Corollaries 8.5a.7v--8.5a.7x:
 it covers every selector with weight \(1\), but only at support rank \(3\).
 
+`product_rank3_terminal_cover.py` verifies a finite arithmetic realization
+of that abstract rank-three shape. For
+\[
+A=\{1,3,4,5,8,10,11,12\}
+\]
+and packets \(\{4,10\},\{5,11\},\{8,12\}\), every selector triple has an
+inclusion-minimal terminal-gap witness in \([14,24]\), while all singleton
+and pair deletions remain three-fold covered on that same window. This is
+the finite warning recorded as Example 8.5a.7z.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole
