@@ -14317,6 +14317,55 @@ Let `R` be the vertex set of this induced cycle.  Then `G[R]` is `2`-regular.
 Also `G-R` is an induced subgraph of the forest `G-z`, hence is a forest.
 Lemma 28J.4 applies with this `R` and proves the claim.  QED.
 
+**Lemma 28J.5b: High-Degree Regular Feedback Partitions Are Stable Under One
+Extension.**  Let `H` be a graph with a vertex partition
+
+```text
+V(H)=F union R_1 union ... union R_t
+```
+
+such that `H[F]` is a forest and, for each `i`, `H[R_i]` is induced
+`d_i`-regular, where
+
+```text
+3 <= d_1 < d_2 < ... < d_t.
+```
+
+If `G` is obtained from `H` by adding one new vertex, then
+
+```text
+sum_d s_d(G) >= |V(G)|.
+```
+
+Proof.  Let `z` be the new vertex and put `A=F union {z}`.  The induced graph
+`G[A]` is an apex forest: deleting `z` leaves the forest `H[F]`.
+
+If `G[A]` is a forest, Lemma 28J.3 gives
+
+```text
+s_0(G)+s_1(G) >= s_0(G[A])+s_1(G[A]) >= |A|.
+```
+
+If `G[A]` is not a forest, the proof of Lemma 28J.5a gives an induced cycle
+`C subset A` such that `G[A\C]` is a forest.  Therefore
+
+```text
+s_0(G)+s_1(G) >= |A|-|C|,        s_2(G) >= |C|,
+```
+
+and the spectrum coordinates `0,1,2` contribute at least `|A|`.
+
+For each `i`, the old set `R_i` remains an induced `d_i`-regular set in `G`,
+so `s_{d_i}(G)>=|R_i|`.  The degrees `d_i` are distinct and at least `3`, so
+these contributions do not collide with the coordinates `0,1,2` used for
+`A`.  Adding the contributions gives
+
+```text
+sum_d s_d(G) >= |A| + |R_1| + ... + |R_t| = |V(G)|.
+```
+
+QED.
+
 **Lemma 28J.6: Split Graphs Satisfy Spectrum Mass.**  If `G` is a split
 graph, then
 
@@ -14545,6 +14594,23 @@ with parts of degrees `0,1,2` and orders `4,2,4`.  By contrast, spectral
 partitioning is not a general consequence of large spectrum mass: the earlier
 six-vertex mask `659` has `sum_d s_d(G)=7>|V(G)|` but no such partition of
 the full maximum spectrum.
+
+The related checker `EXPERIMENTS/regular_feedback_partition.py` verifies that
+the same equality graphs through seven vertices admit a stronger
+regular-feedback partition with core degrees at least `2`:
+
+```text
+python3 82/EXPERIMENTS/regular_feedback_partition.py 6 --equality-only --min-degree 2
+python3 82/EXPERIMENTS/regular_feedback_partition.py 7 --equality-only --min-degree 2
+```
+
+It also verifies that the dense equality example has such a partition, while
+the non-equality graph with mask `5907` does not:
+
+```text
+python3 82/EXPERIMENTS/regular_feedback_partition.py 10 --mask 7261029317050 --min-degree 2
+python3 82/EXPERIMENTS/regular_feedback_partition.py 6 --mask 5907 --min-degree 2
+```
 
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all

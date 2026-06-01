@@ -3907,7 +3907,10 @@ source of growth beyond Ramsey.
   equality example on `10` vertices with mask `7261029317050` partitions into
   an independent `4`-set, one edge, and an induced `4`-cycle.  This is false
   for general non-equality graphs: the earlier mask `659` has `mu=7>6` and no
-  spectral partition.
+  spectral partition.  Added `regular_feedback_partition.py` for the related
+  forest-plus-regular-core decomposition; it verifies that the equality
+  graphs through `n=7` and the dense `n=10` equality example also have
+  regular-feedback partitions with core degrees at least `2`.
 - 2026-06-01: Extended the forest spectrum-mass proof to apex forests.  If
   `G-z` is a forest and `G` is not a forest, choose two consecutive neighbors
   of `z` in a tree component; the path between them plus `z` is an induced
@@ -3931,3 +3934,12 @@ source of growth beyond Ramsey.
   core.  Thus future decomposition arguments must allow repeated-degree core
   pieces to be paid for by the low-degree spectrum or must merge them more
   carefully.
+- 2026-06-01: Proved a stable partial equality-extension theorem for regular
+  feedback partitions with no degree-`2` core piece.  If `H` is a forest plus
+  induced regular pieces of distinct degrees at least `3`, then every
+  one-vertex extension `G` satisfies `mu(G)>=|G|`: apply the apex-forest
+  proof to the old forest plus the new vertex, using only spectrum coordinates
+  `0,1,2`, and add the old core pieces in degrees `>=3`.  Thus the only
+  unresolved collision in this decomposition framework is the degree-`2`
+  core case, exactly where cycles in the new apex-forest part may compete for
+  the same spectrum coordinate.

@@ -16,6 +16,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `spectrum_partition.py`: checks whether a graph has a spectral partition,
   meaning one maximum induced `d`-regular witness for every positive spectrum
   entry, chosen disjointly so that the witnesses cover all vertices.
+- `regular_feedback_partition.py`: searches for partitions into a forest
+  remainder plus induced regular core pieces of distinct degrees, with a
+  configurable minimum core degree.
 - `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
   ordered graph, including fixed-mask, explicit-column, lower-family, exact
   enumeration, and no-regular-`h` obstruction modes.
