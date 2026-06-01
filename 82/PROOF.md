@@ -9935,6 +9935,65 @@ homogeneous extraction by regular extraction may improve constants or small
 parameters in the degree-bucket representative argument, but it does not yet
 give a theorem-level improvement over Proposition 28F.
 
+**Definition 28E.8: The Regular Column-Drop Parameter.**  For integers
+`P,h>=1`, let `C_reg(P,h)` be the least integer `m` such that every ordered
+graph on `m` vertices satisfying the column-drop condition
+
+```text
+|{ i<j : v_i v_j in E(H), v_i v_k notin E(H) }| < P
+```
+
+for every ordered pair `j<k` contains a regular induced subgraph on at least
+`h` vertices.
+
+Since cliques and independent sets are regular,
+
+```text
+C_reg(P,h) <= C_drop(P,h).
+```
+
+**Lemma 28E.9: Global Reduction Through Regular Column Drop.**  For every
+`h>=3`, with `P=P_h`,
+
+```text
+G(h) <= 16 h P C_reg(P,h).
+```
+
+Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
+vertices.  Partition `V(G)` into exact global degree classes.  By Corollary
+28D.2, every nonempty degree class has size at most `16hP`.
+
+Choose one representative from each nonempty degree class and order the
+representatives by increasing degree.  As in Lemma 28E.6, Lemma 28D implies
+that this ordered representative graph satisfies the column-drop condition
+with parameter `P`: for `j<k`, fewer than `P` earlier representatives are
+adjacent to `v_j` and nonadjacent to `v_k`.
+
+If the number of representatives were at least `C_reg(P,h)`, then the
+representative graph would contain a regular induced subgraph on at least
+`h` vertices.  The same vertex set induces the same graph inside `G`, so this
+would be a forbidden regular induced subgraph of `G`.  Hence there are fewer
+than `C_reg(P,h)` nonempty degree classes.  Multiplying by the degree-class
+size bound gives
+
+```text
+|V(G)| < 16hP C_reg(P,h).
+```
+
+Therefore every graph on at least `16hP C_reg(P,h)` vertices contains a
+regular induced subgraph on at least `h` vertices.  QED.
+
+This is formally sharper than Lemma 28E.6.  It would prove Problem 82 under
+the target
+
+```text
+P_h C_reg(P_h,h) = 2^{o(h)}.
+```
+
+At present this is not known to be easier than proving `P_h=2^{o(h)}`:
+Lemma 28G shows that the balanced pair parameter itself has the same
+subexponential scale as `G`.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 

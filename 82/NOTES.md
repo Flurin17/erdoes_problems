@@ -2998,3 +2998,10 @@ source of growth beyond Ramsey.
   regular orders `4` and `5`, and a maximum-column-drop `1` example on `13`
   vertices with largest regular order `4`.  This is only a calibration: no
   improved global reduction beyond Proposition 28F is proved.
+- 2026-06-01: Added the regular column-drop parameter `C_reg(P,h)` and Lemma
+  28E.9: `G(h) <= 16 h P_h C_reg(P_h,h)`.  This is formally sharper than the
+  homogeneous `C_drop` reduction because the representative graph only needs a
+  regular induced witness, not necessarily a clique or independent set.  The
+  current theorem-level target from this refinement is
+  `P_h C_reg(P_h,h)=2^{o(h)}`; Lemma 28G still warns that controlling
+  `P_h` itself is subexponentially equivalent to the original problem.
