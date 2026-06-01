@@ -15714,6 +15714,97 @@ D_spec(h)=O_{c,epsilon}(h^{3/(1+epsilon)}).
 
 Corollary 28I gives `G(k)<=D_spec(2k)`, proving the claim.  QED.
 
+**Conditional Corollary 28J.10e.0b: Polylogarithmic Square Spectrum
+Threshold.**  Suppose there are constants `eta>0`, `c>0`, and `N_0` such
+that every graph `J` on `N>=N_0` vertices satisfies
+
+```text
+Q(J) >= c (log_2 N)^{3+eta}.
+```
+
+Then
+
+```text
+G(k) <= 2^{O_eta(k^{3/(3+eta)})}=2^{o(k)}.
+```
+
+In particular Erdős Problem 82 follows.
+
+Proof.  If two `M`-vertex graphs fail both alternatives in the definition of
+`D_spec(h)`, the proof of Conditional Corollary 28J.10e.0a gives
+
+```text
+Q(J_1)+Q(J_2) <= (h-1)^3.
+```
+
+The assumed polylogarithmic square-spectrum bound gives
+
+```text
+Q(J_1)+Q(J_2) >= 2c (log_2 M)^{3+eta}
+```
+
+for `M>=N_0`.  Hence the two alternatives cannot both fail once
+
+```text
+2c (log_2 M)^{3+eta} > (h-1)^3.
+```
+
+Thus
+
+```text
+D_spec(h) <= 2^{O_eta(h^{3/(3+eta)})}.
+```
+
+Corollary 28I with `h=2k` proves the displayed bound for `G(k)`.  Since
+`3/(3+eta)<1`, this is subexponential.  QED.
+
+**Lemma 28J.10e.0c: Homogeneous Square-Spectrum Benchmark.**  Every graph
+`G` on `n>=3` vertices satisfies
+
+```text
+Q(G) >= c (log_2 n / log_2 log_2 n)^3
+```
+
+for an absolute constant `c>0`.
+
+Proof.  Put `L=log_2 n`.  For all sufficiently large `n`, set
+
+```text
+t = floor(L/(6 log_2 L)),        a=floor(t^{3/2}).
+```
+
+The Erdős--Szekeres bound gives
+
+```text
+R(a+1,t+1) <= binom(a+t,a).
+```
+
+Because `a>=t` for large `t`,
+
+```text
+log_2 binom(a+t,a)
+  <= t log_2(e(a+t)/t)
+  <= t log_2(3e sqrt(t))
+  <= L.
+```
+
+Thus `G` contains either an independent set of order at least `a+1`, or a
+clique of order at least `t+1`.  In the first case
+
+```text
+Q(G) >= s_0(G)^2 >= a^2 >= c_1 t^3.
+```
+
+In the second case, the clique contains a `d`-regular induced subgraph on
+`d+1` vertices for each `0<=d<=t`, and hence
+
+```text
+Q(G) >= sum_{d=0}^t (d+1)^2 >= c_2 t^3.
+```
+
+Since `t` is a constant multiple of `L/log_2 L`, the asserted lower bound
+follows after adjusting the absolute constant and absorbing finite `n`.  QED.
+
 The script `EXPERIMENTS/spectrum_power_search.py` was added to search this
 functional.  Exact labelled enumeration through seven vertices gives minimum
 `Q/n^2` equal to `29/49` at `n=7`.  The fourteen-vertex linear-mass

@@ -4296,3 +4296,20 @@ source of growth beyond Ramsey.
   far below the crude bound `344`.  On the fourteen-vertex sharp defect
   `429588619789184147001379`, every deletion has zero square-spectrum drop.
   Thus deletion induction must exploit more than the averaged drop bound.
+- 2026-06-01: Added the polylogarithmic square-spectrum threshold.  A bound
+  `Q(G)>=c(log |G|)^{3+eta}` for any fixed `eta>0` would imply
+  `D_spec(h)<=2^{O_eta(h^{3/(3+eta)})}` and solve the problem.  The
+  homogeneous Ramsey benchmark gives only
+  `Q(G)>=Omega((log n/loglog n)^3)`: choose off-diagonal parameters
+  `a=t^{3/2}` and `t`, so an independent set contributes `a^2~t^3` to
+  `s_0^2`, while a clique contributes `sum_{j<=t}j^2~t^3`.
+- 2026-06-01: Added a guarded `--extension-profile` mode to
+  `spectrum_power_search.py` for one-vertex extensions of `Phi_p`.  The mode
+  now requires `--max-columns` or `--extension-sample` for `n>12`, because an
+  exhaustive profile recomputes a full spectrum for every possible new
+  column.  On the fourteen-vertex defect, the isolated extension raises
+  `Q` from `57` to `68`, while a `64`-column random sample had minimum
+  extension `Q=73`.  On the fifteen-vertex rooted defect, the isolated
+  extension raises `Q` from `68` to `81`, while a `64`-column random sample
+  had minimum extension `Q=93`.  Thus the square-spectrum obstruction is not
+  simple one-step stagnation in these sampled extensions.

@@ -18,7 +18,7 @@ from collections import Counter
 
 import column_drop_census as cdc
 from regular_spectrum_mass import is_connected, spectrum_mass
-from spectrum_mass_critical import delete_vertex
+from spectrum_mass_critical import delete_vertex, extend_mask
 
 
 def power_value(by_degree: dict[int, int], power: int) -> int:
@@ -69,6 +69,70 @@ def deletion_profile(n: int, mask: int, power: int) -> None:
     print(f"total_drop={total_drop}")
     print(f"drop_bound=sum_s_d_power_{power + 1}={bound}")
     print(f"bound_holds={total_drop <= bound}")
+
+
+def extension_profile(
+    n: int,
+    mask: int,
+    power: int,
+    max_columns: int | None,
+    extension_sample: int,
+    seed: int,
+) -> None:
+    pc = cdc.precompute(n)
+    pc_plus = cdc.precompute(n + 1)
+    adj = cdc.adjacency(n, mask, pc)
+    mass, by_degree = spectrum_mass(adj, pc)
+    value = power_value(by_degree, power)
+    total_columns = 1 << n
+    if extension_sample:
+        rng = random.Random(seed)
+        columns = [rng.randrange(total_columns) for _ in range(extension_sample)]
+    else:
+        column_count = (
+            total_columns if max_columns is None else min(max_columns, total_columns)
+        )
+        columns = list(range(column_count))
+    histogram: Counter[int] = Counter()
+    best_value = (n + 1) ** (power + 2)
+    best_mass = (n + 1) ** 2
+    best_examples: list[tuple[int, int, int, dict[int, int]]] = []
+
+    for column in columns:
+        extended = extend_mask(mask, n, column, pc, pc_plus)
+        extended_adj = cdc.adjacency(n + 1, extended, pc_plus)
+        extended_mass, extended_by_degree = spectrum_mass(extended_adj, pc_plus)
+        extended_value = power_value(extended_by_degree, power)
+        increment = extended_value - value
+        histogram[increment] += 1
+        if extended_value < best_value:
+            best_value = extended_value
+            best_mass = extended_mass
+            best_examples = []
+        if extended_value == best_value and len(best_examples) < 10:
+            best_examples.append(
+                (column, extended_mass, extended_value, extended_by_degree)
+            )
+
+    print(f"n={n}")
+    print(f"mask={mask}")
+    print(f"connected={is_connected(adj)}")
+    print(f"spectrum_mass={mass}")
+    print(f"power={power}")
+    print(f"power_sum={value}")
+    print(f"by_degree={by_degree}")
+    print(f"total_columns={total_columns}")
+    print(f"checked_columns={len(columns)}")
+    print(f"sampled_columns={bool(extension_sample)}")
+    print(f"extension_increment_histogram={dict(sorted(histogram.items()))}")
+    print(f"minimum_extended_mass={best_mass}")
+    print(f"minimum_extended_power_sum={best_value}")
+    print(f"minimum_power_increment={best_value - value}")
+    for column, extended_mass, extended_value, extended_by_degree in best_examples:
+        print(
+            f"best column={column} mass={extended_mass} "
+            f"power_sum={extended_value} by_degree={extended_by_degree}"
+        )
 
 
 def exact(n: int, power: int, connected_only: bool) -> None:
@@ -233,6 +297,9 @@ def main() -> None:
     parser.add_argument("--mask", type=int)
     parser.add_argument("--sample", type=int, default=0)
     parser.add_argument("--deletion-profile", action="store_true")
+    parser.add_argument("--extension-profile", action="store_true")
+    parser.add_argument("--max-columns", type=int)
+    parser.add_argument("--extension-sample", type=int, default=0)
     parser.add_argument("--local-steps", type=int, default=0)
     parser.add_argument("--restarts", type=int, default=1)
     parser.add_argument("--seed", type=int, default=1)
@@ -245,6 +312,20 @@ def main() -> None:
 
     if args.mask is not None and args.deletion_profile:
         deletion_profile(args.n, args.mask, args.power)
+    elif args.mask is not None and args.extension_profile:
+        if args.n > 12 and args.max_columns is None and not args.extension_sample:
+            parser.error(
+                "--extension-profile is exhaustive; use --max-columns or "
+                "--extension-sample for n > 12"
+            )
+        extension_profile(
+            args.n,
+            args.mask,
+            args.power,
+            args.max_columns,
+            args.extension_sample,
+            args.seed,
+        )
     elif args.mask is not None:
         fixed(args.n, args.mask, args.power)
     elif args.sample:
