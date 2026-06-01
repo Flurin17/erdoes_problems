@@ -2192,6 +2192,16 @@ below rank \(q\) costs at least \(m^q\) realized bad edges in the same
 finite window. In particular, finite product covers must either expose
 low-rank arithmetic edges or pay a large high-rank edge count.
 
+Corollary 8.5a.7v closes the strongest low-rank subcase: pair edges cannot
+themselves form a product-selector subcover on every packet tail. If every
+selector through the fresh packets contained an arbitrarily late bad pair,
+then the pair-barrier machinery from Corollary 8.6b and Lemmas
+8.6g'--8.6g'''' would either give bounded-excess tail recurrence or
+compact high-excess endpoint lists into two recurrent certificate-free
+colors, both of which are impossible in a counterexample. Thus the
+remaining product-cover debt must be genuinely high-rank on some selector
+tail.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent

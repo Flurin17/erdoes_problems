@@ -7401,6 +7401,95 @@ m=\min_{j\in J}|F_j|.
 Thus a construction cannot hide the promoted-edge debt in a small number of
 high-rank cross-packet constraints.
 
+### Corollary 8.5a.7v: Pair-cylinder subcovers are impossible
+
+Work in the remaining \(k=2\) counterexample case, and let
+\[
+F_1,F_2,\ldots
+\]
+be the disjoint fresh deleted-color packets from Corollary 8.5a.7r. It is
+impossible that the promoted debt can be carried by pairs alone in the
+following product sense: for every \(L\), every infinite
+\[
+I\subset\mathbb N
+\]
+and every selector
+\[
+x_s\in F_s\qquad(s\in I),
+\]
+there are \(i<j\) in \(I\) and a witness \(v>L\) such that
+\[
+v\ge x_j-1,\qquad v\notin3(A\setminus\{x_i,x_j\}). \tag{1}
+\]
+
+Proof. Put
+\[
+P=\bigcup_sF_s.
+\]
+The hypothesis first gives an ordinary pair barrier on the reservoir \(P\):
+if \(X\subset P\) is infinite, then \(X\) meets infinitely many packets;
+choosing one point \(x_s\in X\cap F_s\) from each such packet and applying
+the hypothesis gives a bad pair contained in \(X\), above any prescribed
+threshold \(L\).
+
+The proofs of Corollary 8.6b and Lemmas 8.6g'--8.6g'''' use only the
+ability to choose bad pairs outside an arbitrary finite test set. Therefore
+they apply to the infinite reservoir \(P\) just as they apply to a cofinite
+tail. We recall the reduction to make the quantifiers explicit.
+
+If there is \(D\) such that every infinite \(X\subset P\) and every \(L\)
+contain a pair \(x<y\) and a witness
+\[
+v>L,\qquad y\le v\le y+D,\qquad v\notin3(A\setminus\{x,y\}),
+\]
+then the proof of Corollary 8.6b gives tail reflection-recurrence and
+hence a good infinite deletion, contradicting the counterexample
+assumption. The lower bound \(v\ge y\) is automatic for sufficiently late
+pairs in the remaining case: singleton deletions have order-3 thresholds
+below the smaller endpoint, and a genuine pair witness below \(y\) would
+already be repaired after deleting only \(x\).
+
+Thus, for every \(D\), there are an infinite \(X_D\subset P\) and a
+threshold \(L_D\) such that no pair in \(X_D\) has a witness
+\[
+v>L_D,\qquad v\le\max\{x,y\}+D. \tag{2}
+\]
+Fix a finite test set \(T\subset A\) and \(M\). Remove from \(X_D\) both
+\(T\) and the finitely many elements at most \(\max T\), and take \(D\)
+larger than \(M+N_0\). Applying the pair-cylinder hypothesis inside the
+remaining selector tail with threshold
+\[
+L>\max\{L_D,\max T+N_0\}
+\]
+gives a pair \(x<y\) outside \(T\) and a witness \(v\). By (2),
+\[
+v-y>D,\qquad v-x>D,\qquad v-\max T\ge N_0. \tag{3}
+\]
+Therefore high-excess pair witnesses exist outside every finite test set.
+
+For such a pair and finite test \(T\), define endpoint lists
+\[
+L_v(t)=\{z\in\{x,y\}:v-t-z\in A\}\qquad(t\in T).
+\]
+Lemma 10.1 makes these lists nonempty. If for some finite \(T_0\) and
+arbitrarily large parameters the lists admit no choice whose two fibers are
+certificate-free relative to \(A\), Lemma 8.6g' produces a recurrent
+certificate triple and Corollary 2.3c gives a good deletion. Otherwise,
+for every finite \(T\) and every \(M\), there are high-excess pair
+witnesses whose endpoint lists are two-colorable with certificate-free
+fibers. Lemma 8.6g'' compactifies these finite list colorings to a
+partition of \(A\) into two certificate-free reflection-recurrent colors.
+Lemma 8.6g'''' forbids such two recurrent Sidon colors in the integers.
+
+Both alternatives contradict that \(A\) is a counterexample. Hence the
+pair-cylinder product subcover cannot exist. \(\square\)
+
+Consequently, any surviving product-selector debt from Corollary 8.5a.7t
+must be genuinely high-rank on some selector tail. It is not enough for a
+finite product window merely to contain many pair edges; if pairs alone
+cover all selectors on every tail, the earlier pair-barrier machinery
+already gives the desired infinite deletion.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7444,12 +7533,13 @@ for the retained mirror set \(m-U\). The precise missing step is to show
 that these bounded-center, cofinally moving-palette, moving-row/mirror, or
 independence-number escapes are impossible under the cross-packet selector
 obligation of Corollaries 8.5a.7r--8.5a.7t and the counting pressure of
-Lemma 8.5a.7u, or to construct a staged basis in which the fibers \(U\),
-mirrors \(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all
-escape while maintaining order-2 coverage and arbitrarily late finite
-product covers of promoted cross-packet edges. This is now the active form
-of the certificate-free obstruction; it is stronger than mobile injectivity
-and weaker than finite recurrent Sidon coloring.
+Lemma 8.5a.7u, with Corollary 8.5a.7v ruling out the pair-cylinder
+subcover, or to construct a staged basis in which the fibers \(U\), mirrors
+\(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all escape
+while maintaining order-2 coverage and arbitrarily late finite product
+covers whose pair subfamilies are selector-avoidable. This is now the active
+form of the certificate-free obstruction; it is stronger than mobile
+injectivity and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14064,6 +14154,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   cover has total weight at least \(1\), so avoiding supports below rank
   \(q\) in packets of size at least \(m\) requires at least \(m^q\) realized
   bad edges in the same finite window.
+* Corollary 8.5a.7v rules out the pair-cylinder subcase: if bad pairs alone
+  product-covered every fresh-packet selector tail, the existing pair
+  barrier/list-color machinery would give a good deletion.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
