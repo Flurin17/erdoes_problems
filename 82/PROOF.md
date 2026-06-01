@@ -12094,6 +12094,43 @@ mechanism in Lemma 28D.5b.4.  When `r<=omega-2`, edges in `B` may be
 unconstrained by the first neighborhood, and a different source of one extra
 independent vertex is needed to close the induction.
 
+**Corollary 28D.5b.8: A One-Step Induction Deficit Forces A Covered Part.**
+Use the notation of Lemma 28D.5b.7, and put `b=|B|`.  Let
+`omega_B=omega(H[B])`.  If the lower bound obtained by applying the
+`P=2` alpha-plus-omega conjecture inductively to `H[B]` would not by itself
+prove the desired inequality for `H`, that is, if
+
+```text
+1+ceil((b+3)/2)+(omega-omega_B)
+  < ceil((|V(H)|+3)/2),
+```
+
+then every maximum clique `T` of `H[B]` fully covers at least one of the
+first-neighborhood parts `P_i` from Lemma 28D.5b.7.
+
+Proof.  Let `d=|A|` and let `r` be the number of parts in the decomposition
+of `A`.  Since every part has size at most `2`,
+
+```text
+ceil(d/2) <= r.
+```
+
+Also `|V(H)|=b+d+1`, and therefore
+
+```text
+ceil((|V(H)|+3)/2)-1-ceil((b+3)/2) <= ceil(d/2) <= r.
+```
+
+The assumed strict inequality gives
+
+```text
+omega-omega_B < r,
+```
+
+or equivalently `r+omega_B-omega>=1`.  Applying Lemma 28D.5b.7 to any clique
+`T subset B` of order `omega_B` shows that `T` fully covers at least
+`r+omega_B-omega` first-neighborhood parts, and hence at least one.  QED.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose
