@@ -17180,6 +17180,83 @@ to a regular induced subgraph on at least `h` vertices.  Thus the obstruction
 comes from cross-profile failure, not from absence of same-degree side
 spectrum matches.  QED.
 
+**Lemma 28Q: The Parity Cross-Profile Gap Is Linear.**  For `h>=7`, in the
+parity construction from Candidate 28L, let `X subset A` and `Y subset B` be
+side-regular induced subgraphs of the same degree with
+
+```text
+|X|+|Y| >= h.
+```
+
+For `v in X union Y`, write `c(v)` for the number of neighbors of `v` on the
+opposite side.  Then
+
+```text
+max_{v in X union Y} c(v) - min_{v in X union Y} c(v)
+  >= floor((h-3)/2).
+```
+
+Thus, in this family, every large same-degree side-spectrum match is blocked
+from merging by a cross-degree spread that grows linearly with `h`.
+
+Proof.  The graph induced by `A` is one edge `a_0a_1` plus isolated vertices.
+Hence a regular induced subgraph of `A` is either a `0`-regular independent
+set, or the `1`-regular edge `{a_0,a_1}`.  The graph induced by `B` is a
+clique core on `h-1` vertices plus the isolated vertex `z=b_{h-1}`.  Hence a
+regular induced subgraph of `B` is either a clique inside the core, or a
+`0`-regular set of order at most two, namely a singleton or `{z,b_j}`.
+
+If the common side degree is positive, then the `A`-side has order at most
+`2`, and the only possible positive common degree is `1`; the corresponding
+`B`-side has order at most `2`.  Since `h>=7`, this cannot satisfy
+`|X|+|Y|>=h`.  Therefore the common side degree is `0`.  Consequently `X` is
+an independent set in `A`, `Y` is a `0`-regular set in `B`, `|X|>=h-2`, and
+`1<=|Y|<=2`.
+
+Let `p` be the parity of `z=b_{h-1}`.  If `Y={y}` is a singleton, then
+`c(y)` is the number of vertices of `X` whose parity matches `y`.  Since
+`|X|>=h-1` and `X` omits at most one of the two endpoint vertices
+`a_0,a_1`, the parity class matching `y` contributes at least
+`floor(h/2)-1` vertices.  The vertices of `X` have cross-degree at most `1`,
+and at least one vertex of the opposite parity is present.  Hence the spread
+is at least
+
+```text
+floor(h/2)-1 >= floor((h-3)/2).
+```
+
+Now suppose `Y={z,b_j}`.  If `j` has parity different from `p`, then every
+vertex of `X` has cross-degree exactly `1`.  The two vertices of `Y` have
+cross-degrees equal to the two parity counts inside `X`; one of these counts
+is at least `ceil(|X|/2)>=ceil((h-2)/2)`.  The spread is therefore at least
+
+```text
+ceil((h-2)/2)-1 = floor((h-3)/2).
+```
+
+If `j` has the same parity as `p`, then vertices of `X` in that parity have
+cross-degree `2`, and vertices of the other parity have cross-degree `0`.
+Both parities occur in `X`, because `|X|>=h-2` while each parity class in
+`A` has fewer than `h-2` vertices for `h>=7`.  The two vertices of `Y` both
+have cross-degree equal to the number of selected vertices of parity `p`.
+This count is minimized by deleting two parity-`p` vertices from `A`, and is
+still at least `floor((h-3)/2)`.  Since the minimum cross-degree on `X` is
+`0`, the spread is again at least `floor((h-3)/2)`.  QED.
+
+The strengthened profiler `EXPERIMENTS/marked_pair_profile.py` measures this
+cross-spread obstruction.  On the small `P_6` obstruction
+
+```text
+python3 82/EXPERIMENTS/marked_pair_profile.py 12 --split 6 --h 6 \
+  --mask 1680212686667006004 --limit 5
+```
+
+it reports `18` side-compatible pairs, no regular unions, and blocked
+cross-spread histogram `{1:6, 2:6, 3:6}`.  The obstruction is barely
+cross-irregular.  On the parity construction it reports the predicted linear
+gap; for example the `h=7,8,9,10` instances have minimum blocked cross-spread
+`2,2,3,3`, respectively.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

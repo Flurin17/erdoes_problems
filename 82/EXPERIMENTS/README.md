@@ -445,7 +445,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `split_spectrum_construction.py`: verifies the explicit split-graph
   spectrum separation family used in Lemma 28H's discussion.
 - `marked_pair_profile.py`: inspects same-degree side witnesses and their
-  cross-degree profiles in marked pair obstructions.
+  cross-degree profiles in marked pair obstructions, including blocked
+  cross-spread histograms for side-compatible pairs that fail to merge.
 - `parity_pair_construction.py`, `parity_pair_symbolic.py`, and
   `parity_pair_case_audit.py`: generate the parity cross-profile family,
   verify it by type counts, and audit the case bounds used in Lemma 28N.

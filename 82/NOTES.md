@@ -4408,3 +4408,11 @@ source of growth beyond Ramsey.
   `{0:3,1:2,2:4}` and `Q=29`.  Thus deletion-tight chains are real, but the
   currently seen ones have much larger square spectrum than the low-density
   `Q=57` defects on thirteen and fourteen vertices.
+- 2026-06-01: Strengthened `marked_pair_profile.py` to report blocked
+  cross-degree spread histograms for same-degree side-spectrum matches.
+  Proved that the parity marked-pair obstruction has a linear cross-profile
+  gap: every large same-degree side match has cross-degree spread at least
+  `floor((h-3)/2)`.  The profiler matches this on `h=7,8,9,10`, with minimum
+  blocked spreads `2,2,3,3`.  By contrast the small `P_6` obstruction has
+  blocked spread histogram `{1:6,2:6,3:6}`, so finite obstructions can be
+  only barely cross-irregular.
