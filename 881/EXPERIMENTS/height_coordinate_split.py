@@ -8,6 +8,9 @@ Corollary 16.128 uses only the inequality
 when q, b, m, S, and K are all at most M.  This script exhausts a small
 integer box and samples weighted packet families to verify the corresponding
 set inclusion behind the pigeonhole step.
+
+It also checks the finite inequality behind Corollary 16.129: with rank and
+linear-core density margin bounded, the pre-asymptotic constant K is bounded.
 """
 
 from __future__ import annotations
@@ -95,12 +98,47 @@ def check_weighted_packet_shadow(trials: int = 2000) -> int:
     return checked
 
 
+def gamma(rank: int, margin_height: int) -> float:
+    """Smallest gamma when ceil(1 / (2 delta - 1)) <= margin_height."""
+    if rank == 1:
+        return 1.0 / margin_height
+    return 1.0 / (2 * margin_height)
+
+
+def d_constant(rank: int) -> int:
+    """Toy positive D(r) for the finite check."""
+    return rank * rank + 3
+
+
+def check_constant_margin_split(limit: int = 12) -> int:
+    checked = 0
+    for rank_bound in range(1, limit + 1):
+        for margin_bound in range(1, limit + 1):
+            d_star = max(d_constant(rank) for rank in range(1, rank_bound + 1))
+            k_star = int(4 * margin_bound * d_star + 1)
+            for rank in range(1, rank_bound + 1):
+                for margin in range(1, margin_bound + 1):
+                    k_const = int(2 * d_constant(rank) / gamma(rank, margin) + 1)
+                    assert k_const <= k_star, (
+                        rank_bound,
+                        margin_bound,
+                        rank,
+                        margin,
+                        k_const,
+                        k_star,
+                    )
+                    checked += 1
+    return checked
+
+
 def main() -> None:
     inclusion_checked = check_inclusion()
     packet_checked = check_weighted_packet_shadow()
+    constant_margin_checked = check_constant_margin_split()
     print("height coordinate split checks passed")
     print(f"inclusion_checked={inclusion_checked}")
     print(f"packet_shadow_checked={packet_checked}")
+    print(f"constant_margin_checked={constant_margin_checked}")
 
 
 if __name__ == "__main__":

@@ -241,6 +241,9 @@ data, auxiliary interval count/endpoints, or asymptotic constants must grow.
 Corollary 16.128 splits that height growth into a single nonsummable
 coordinate branch: rank/density scale, tested-interval height, auxiliary
 count, auxiliary endpoint height, or the pre-asymptotic constants.
+Corollary 16.129 further splits the pre-asymptotic constants: that branch
+is either true rank growth or degeneration of the linear-core density
+margin toward the critical value \(1/2\).
 The Attempt 16 residual summary has been updated accordingly: after
 reciprocal-summable packetization, bounded-height countable menus must pay
 linear packet-position cost.

@@ -226,7 +226,9 @@ Corollary 16.100.
 auxiliary endpoint sum, and pre-asymptotic constant are all at most \(M\),
 then the geometric height \(\chi_{\rm geom}\) is at most \(7M\). It also
 samples finite packet families to verify that the high-height active mass is
-bounded by the union of the five coordinate-high masses.
+bounded by the union of the five coordinate-high masses. The same script
+checks the finite bound used in Corollary 16.129: bounded rank and bounded
+linear-core density margin force a bounded pre-asymptotic constant.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For

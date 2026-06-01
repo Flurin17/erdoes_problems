@@ -26026,8 +26026,84 @@ specific coordinate: rank/density scale, tested interval position/length,
 auxiliary profile count, auxiliary endpoint height, or the constants
 required before the robust-core estimates become linear.
 
+### Corollary 16.129: Pre-asymptotic growth means rank or critical density
+
+Keep the notation of Corollary 16.128, and for each label define the
+linear-core density-margin height
+\[
+\Theta_\lambda=\left\lceil {1\over 2\delta_\lambda-1}\right\rceil,
+\]
+where \(\delta_\lambda>1/2\) is the density parameter in Corollary 16.106.
+If the pre-asymptotic constant branch
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:K_\lambda>M\}|\over |P_s|}
+=\infty
+\qquad(M\ge1) \tag{1}
+\]
+holds, then at least one of the following alternatives holds.
+
+1. **Rank growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:r_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{2}
+   \]
+2. **Critical-density degeneration.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:\Theta_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{3}
+   \]
+
+Proof. Suppose neither (2) nor (3) holds. Then there are thresholds
+\[
+R,\ H
+\]
+such that the active masses of the sets
+\[
+\{\lambda:r_\lambda>R\},\qquad
+\{\lambda:\Theta_\lambda>H\}
+\]
+are finite. Let
+\[
+D_*=\max\bigl(\{0\}\cup\{D(r):1\le r\le R\}\bigr),
+\]
+where \(D(r)\) is the constant chosen in Corollary 16.106. On labels with
+\[
+r_\lambda\le R,\qquad \Theta_\lambda\le H,
+\]
+we have
+\[
+2\delta_\lambda-1\ge {1\over H}.
+\]
+By the definitions of the linear-core constants in Corollaries 16.98 and
+16.103,
+\[
+\gamma_\lambda\ge {1\over 2H}. \tag{4}
+\]
+Therefore
+\[
+K_\lambda
+=\left\lceil \max\left\{0,{2D_\lambda\over\gamma_\lambda}\right\}\right\rceil
+\le \left\lceil 4HD_*\right\rceil=:K_* \tag{5}
+\]
+on the complement of the two finite-mass exceptional sets.
+
+Thus
+\[
+\{\lambda:K_\lambda>K_*\}
+\subseteq
+\{\lambda:r_\lambda>R\}\cup\{\lambda:\Theta_\lambda>H\}
+\]
+has finite active mass, contradicting (1) with \(M=K_*\). Hence (2) or
+(3) must hold. \(\square\)
+
+Thus the fifth coordinate in Corollary 16.128 is not a new geometric
+mechanism. It records either true growth of the deletion-rank scale or
+linear-core densities tending down to the critical value \(1/2\), where
+the robust cores cease to have a uniform linear lower bound.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
-inequality and packet-mass inclusion behind Corollary 16.128.
+inequality and packet-mass inclusion behind Corollary 16.128, and the
+bounded-rank/bounded-margin estimate used in Corollary 16.129.
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27465,6 +27541,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.128 splits that unbounded-height alternative into one
   nonsummable coordinate branch: rank/density scale, tested-interval height,
   auxiliary count, auxiliary endpoint height, or pre-asymptotic constants.
+* Corollary 16.129 shows that the pre-asymptotic-constant coordinate itself
+  is rank growth or degeneration of the linear-core density margin toward
+  \(1/2\).
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
