@@ -2400,6 +2400,36 @@ always no more likely than under independent hypergeometric rows.  The
 available target is necessarily weaker: an `exp(o(a))` distortion bound is
 still compatible with this exact positive finite correlation.
 
+The same exact script can inspect the sequential condition directly.  With
+`--prefix-next 3`, it reports the distribution of the fourth row's residue
+conditional on the first three rows having one common residue.  For
+
+```text
+(N,d,|Y_0|,M)=(8,4,4,4),(10,5,5,4),(12,6,6,4),
+```
+
+the conditional next-row maximum probabilities are respectively
+
+```text
+0.531031205921509084582683,
+0.394465256057708166368660,
+0.434251675695444427491401.
+```
+
+The corresponding one-row hypergeometric maximum probabilities are
+
+```text
+0.514285714286,
+0.396825396825,
+0.432900432900.
+```
+
+Thus the prefix conditioning introduces only a small finite distortion in
+these tests, sometimes upward and sometimes downward.  This is still far from
+an asymptotic proof, but it validates the formulation of the switching target
+as a sequential point-probability bound rather than only an aggregate
+all-rows estimate.
+
 For example,
 
 ```text

@@ -3342,3 +3342,10 @@ source of growth beyond Ramsey.
   choosing one representative per quotient vertex.  Therefore substitution
   and modular decomposition do not create new hard instances unless both the
   quotient and substituted modules are hard.
+- 2026-06-01: Extended `biregular_residue_exact.py` with `--prefix-next`,
+  which computes the next-row residue distribution after a same-residue
+  prefix.  For balanced `(N,d,|Y_0|,M)=(8,4,4,4),(10,5,5,4),(12,6,6,4)` with
+  three prefix rows, the next-row maximum probabilities are
+  `0.53103,0.39447,0.43425`; the corresponding one-row hypergeometric maxima
+  are `0.51429,0.39683,0.43290`.  The finite distortion is small and changes
+  sign, supporting the sequential switching formulation but not proving it.

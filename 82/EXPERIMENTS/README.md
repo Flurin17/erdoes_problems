@@ -247,7 +247,10 @@ Computational checks and generated data for Erdos Problem 82.
 - `biregular_residue_exact.py`: exactly counts small labelled simple
   `d`-regular bipartite graphs by a row-exposure DP over marked/unmarked
   column-capacity histograms, and computes the exact probability that the
-  first few rows have equal residue into a fixed marked column set.
+  first few rows have equal residue into a fixed marked column set.  With
+  `--prefix-next`, it also reports the next-row residue distribution
+  conditional on a same-residue prefix, directly probing the sequential
+  anti-concentration target.
 - `two_level_modular_sample.py`: generates connected graphs with two prescribed
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic
