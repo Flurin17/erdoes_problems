@@ -69,8 +69,12 @@ interval, and the pointwise packet size is controlled by the gate's distance
 from the central gate range. Lemma 16.60 and Corollary 16.61 extend this to
 finite active palettes: a dense bounded-rank interval cover forces linear
 total gate distance and hence at least one linearly far active color. The
-live escapes are now vanishing packet density, growing deletion rank, or
-coordinated far gates across separated blocks.
+near-gate alternative is quantified in Corollary 16.62: if all active gates
+stay within distance \(\eta n/(4r)\) of the central range while covering an
+\(\eta\)-fraction of an \(n\)-point interval, then
+\(r^3+5r^2\ge\eta n\). The live escapes are now vanishing packet density,
+growing deletion rank on a real scale, or coordinated far gates across
+separated blocks.
 
 ## Definitions
 

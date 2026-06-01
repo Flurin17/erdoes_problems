@@ -22106,6 +22106,59 @@ f-b+2r\ge{\eta n\over4r}.
 \]
 Using (5) yields (4). \(\square\)
 
+### Corollary 16.62: Near-gate dense covers force rank growth
+
+Keep the setting of Corollary 16.61. Suppose that
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n \tag{1}
+\]
+for some \(0<\eta\le1\), and that every active color in \(P\) has central
+gate distance at most \(\Delta\):
+\[
+D_I(f;r)\le\Delta\qquad(f\in P). \tag{2}
+\]
+Then, for all sufficiently large witness parameters,
+\[
+\eta n\le rB_r+2r\Delta, \tag{3}
+\]
+where
+\[
+B_r={r(r+1)\over2}+2r.
+\]
+In particular, if
+\[
+\Delta\le{\eta n\over4r}, \tag{4}
+\]
+then
+\[
+r^3+5r^2\ge \eta n. \tag{5}
+\]
+
+Proof. Corollary 16.61 gives
+\[
+\left|\bigcup_{f\in P}U_f\right|
+\le |P|B_r+2\sum_{f\in P}D_I(f;r).
+\]
+Using \(|P|\le|F|\le r\) and (2), this gives
+\[
+\eta n\le rB_r+2r\Delta,
+\]
+which is (3). If (4) holds, then
+\[
+rB_r\ge{\eta n\over2}.
+\]
+Since
+\[
+rB_r={r^3+5r^2\over2},
+\]
+we get (5). \(\square\)
+
+Thus a dense bounded-depth interval cover cannot hide all active colors
+near the central gate range unless the deletion rank grows at least on the
+cubic scale dictated by (5). This does not close the unbounded-rank branch,
+but it removes the possibility that growing rank is merely cosmetic: near
+gates must carry genuinely increasing active traces.
+
 The bounded-rank nonsingleton interval obstruction is now forced into a
 long-range regime. Positive-density row packets over an interval cannot be
 served by a finite active palette near that interval: after the bounded
@@ -23315,6 +23368,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   central gate range, hence at least one linearly far active color. Thus the
   remaining interval obstruction must have vanishing packet density, growing
   deletion rank, or coordinated far-gate structure across separated blocks.
+* Corollary 16.62 quantifies the growing-rank alternative: if a dense
+  interval cover keeps all active colors near the central gate range, then
+  the deletion rank must satisfy \(r^3+5r^2\ge\eta n\) at interval length
+  \(n\). Hence near-gate rank growth is forced on a genuine cubic scale,
+  not merely by front padding.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
