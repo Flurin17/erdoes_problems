@@ -12,6 +12,7 @@ from regular_spectrum_mass import (
     is_connected,
     spectrum_mass,
 )
+from spectrum_partition import maximum_regular_sets
 from spectrum_mass_critical import delete_vertex
 
 
@@ -42,10 +43,28 @@ def simplicial_degree_two_vertices(adj: list[int]) -> list[tuple[int, tuple[int,
     return out
 
 
+def essential_vertices_by_degree(
+    adj: list[int], pc: cdc.Precomp, by_degree: dict[int, int]
+) -> dict[int, tuple[int, ...]]:
+    out: dict[int, tuple[int, ...]] = {}
+    for degree, order in by_degree.items():
+        sets = maximum_regular_sets(adj, pc, degree, order)
+        if not sets:
+            out[degree] = ()
+            continue
+        intersection = sets[0]
+        for subset in sets[1:]:
+            intersection &= subset
+        out[degree] = tuple(v for v in range(pc.n) if (intersection >> v) & 1)
+    return out
+
+
 def fixed(n: int, mask: int) -> None:
     pc = cdc.precompute(n)
     adj = cdc.adjacency(n, mask, pc)
     mass, by_degree = spectrum_mass(adj, pc)
+    essential = essential_vertices_by_degree(adj, pc, by_degree)
+    essential_union = tuple(sorted({v for vertices in essential.values() for v in vertices}))
     pc_minus = cdc.precompute(n - 1) if n > 1 else None
     cuts = cut_vertices(adj) if is_connected(adj) else []
     full_mass_deletions: list[int] = []
@@ -71,6 +90,8 @@ def fixed(n: int, mask: int) -> None:
     print(f"spectrum_mass={mass}")
     print(f"defect={n - mass}")
     print(f"by_degree={by_degree}")
+    print(f"essential_vertices_by_degree={essential}")
+    print(f"essential_vertex_union={essential_union}")
     print(f"cut_vertices={cuts}")
     print(f"first_2_cut={first_vertex_cut(adj, 2)}")
     print(f"simplicial_degree_two_vertices={simplicial_degree_two_vertices(adj)}")

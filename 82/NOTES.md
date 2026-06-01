@@ -4161,3 +4161,18 @@ source of growth beyond Ramsey.
   `Q/n^2=29/49`, while the fourteen-vertex linear-mass counterexample has
   `Q/n^2=57/196`.  A seeded connected local search from that example found
   no smaller square-spectrum value.
+- 2026-06-01: Added essential-vertex diagnostics to
+  `defect_structure_scan.py`.  For a spectrum coordinate `d`, a vertex is
+  `d`-essential if it lies in every maximum induced `d`-regular witness.
+  Lemma 28J.10d.1b records the exact criterion
+  `s_d(G-v)=s_d(G)` iff `v` is not `d`-essential; hence full spectrum-mass
+  deletion is the same as deleting a vertex outside the union of essential
+  coordinates.  The two sharp fourteen-vertex defect graphs
+  `429588619789184147001379` and `391219392115868279640099` have empty
+  essential union, explaining why every vertex deletion preserves mass `13`.
+  A fifteen-vertex defect extension `98404699529372860578279459` has
+  essential union `{13,14}` only in the independence coordinate, and exactly
+  those two deletions are the ones that drop the mass to `13`; many non-cut
+  nonessential deletions still keep mass `14`.  New proof target: prove that
+  every connected below-full graph has a non-cut vertex outside its essential
+  spectrum union.

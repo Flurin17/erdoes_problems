@@ -15138,6 +15138,57 @@ defect graphs with masks
 there are respectively `39` and `35` such extensions, and each has a non-cut
 vertex whose deletion has full spectrum mass.
 
+**Lemma 28J.10d.1b: Essential-Vertex Deletion Criterion.**  Fix a graph
+`G`.  For every degree `d`, call a vertex `v` `d`-essential if `v` belongs to
+every induced `d`-regular subgraph of `G` of order `s_d(G)`.
+
+Then
+
+```text
+s_d(G-v)=s_d(G)
+```
+
+if and only if `v` is not `d`-essential.  Consequently,
+
+```text
+sum_d s_d(G-v)=sum_d s_d(G)
+```
+
+if and only if `v` is not `d`-essential for any degree `d` with
+`s_d(G)>0`.
+
+Proof.  If `v` is not `d`-essential, some maximum induced `d`-regular witness
+of order `s_d(G)` avoids `v`, and the same witness lies in `G-v`; hence
+`s_d(G-v)>=s_d(G)`.  The reverse inequality follows from monotonicity under
+induced subgraphs, so equality holds.
+
+Conversely, if `s_d(G-v)=s_d(G)`, a maximum induced `d`-regular subgraph of
+`G-v` is also a maximum induced `d`-regular subgraph of `G`, and it avoids
+`v`.  Hence `v` is not `d`-essential.
+
+The final assertion follows by applying the coordinatewise equivalence to
+every degree and using monotonicity: the sum can stay equal only when no
+coordinate drops.  QED.
+
+Thus Conditional Proposition 28J.10d.1 can be sharpened to a purely
+structural deletion target: every connected below-full graph should have a
+non-cut vertex outside the union of all essential spectrum coordinates.  On a
+defect-one graph this is exactly the same as a non-cut full-mass deletion.
+The diagnostic
+
+```text
+python3 82/EXPERIMENTS/defect_structure_scan.py 14 --mask 429588619789184147001379
+python3 82/EXPERIMENTS/defect_structure_scan.py 14 --mask 391219392115868279640099
+python3 82/EXPERIMENTS/defect_structure_scan.py 15 --mask 98404699529372860578279459
+```
+
+now reports the essential vertices explicitly.  The two sharp fourteen-vertex
+defect graphs have empty essential union, explaining why every deletion keeps
+mass `13`.  The displayed fifteen-vertex extension has essential union
+`{13,14}` in the independence coordinate; deleting exactly those two vertices
+drops the mass to `13`, while many non-cut nonessential deletions keep mass
+`14`.
+
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then
 
