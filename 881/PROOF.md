@@ -19616,6 +19616,56 @@ because all shifted values \(w-p\), \(p\in C\), escape \(3C=[3,3L]\).
 The obstruction to the next one-marker stage is therefore the coverage gap
 from Lemma 16.10, not poisoning alone.
 
+### Lemma 16.15: Collision avoidance forces one-term reflected rows
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\).
+Fix \(q\in A\), put
+\[
+C=A\setminus\{q\},
+\]
+and suppose
+\[
+w=q+d\notin4C. \tag{1}
+\]
+If \(p\in C\) satisfies
+\[
+w-p\ge N_0,\qquad q+p\in2C, \tag{2}
+\]
+then
+\[
+d-q-p\in A. \tag{3}
+\]
+Equivalently, every two-term representation of the forced row \(d-p\) from
+\(A\) uses \(q\).
+
+Proof. By Lemma 16.9, the first condition in (2) gives
+\[
+d-p\in2A. \tag{4}
+\]
+If \(d-p\in2C\), then the second condition in (2) gives
+\[
+w=q+d=(q+p)+(d-p)\in4C,
+\]
+contradicting (1). Hence
+\[
+d-p\in2A\setminus2C. \tag{5}
+\]
+Choose a two-term representation \(d-p=x+y\) from \(A\). Since it is not a
+representation from \(C\), at least one of \(x,y\) is \(q\). Removing that
+copy of \(q\) gives
+\[
+d-p-q\in A,
+\]
+which is (3). \(\square\)
+
+Thus a singleton row bank has a rigid dichotomy on every retained padder
+\(p\) below the threshold cut. If \(q+p\notin2C\), then \(q+p\) is a
+low-count translate row pinned by \(q\). If \(q+p\in2C\), then the row
+\(d-p\) cannot be retained, so the bank must reflect \(p\) all the way back
+to the one-term value \(d-q-p\in A\). A moving singleton counterexample
+must keep both alternatives from stabilizing into the finite
+reflection-recurrence criteria of Theorem 2.3.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20645,6 +20695,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.13 explains the follow-up failure mode: retained padders shift
   three-sum coverage into whole intervals of repaired order-\(4\)
   candidates, so extending coverage can itself destroy singleton privacy.
+* Lemma 16.14 records the exact singleton criterion \(w\notin4C\) iff
+  every retained shift \(w-p\) is outside \(3C\); poisoning requires
+  complement-side three-sum coverage and is not automatic from row banks.
+* Lemma 16.15 sharpens the row-bank collision test: if \(q+p\in2C\), then
+  privacy forces the row \(d-p\) to be \(q\)-dependent, giving a genuine
+  one-term reflected row \(d-q-p\in A\).
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

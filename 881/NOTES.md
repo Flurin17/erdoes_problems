@@ -2316,6 +2316,17 @@ three-sum coverage. The interval-marker seed shows that high-excess
 row-bank stages may have the opposite feature: all shifted values avoid
 \(3C\), so the witness stays private and the actual obstruction is the
 next-stage coverage gap.
+Lemma 16.15 adds the useful collision dichotomy for singleton row banks.
+If \(w=q+d\) is private and a retained padder \(p\) has \(q+p\in2C\), then
+the forced row \(d-p\in2A\) cannot lie in \(2C\), so it must use \(q\) and
+\[
+d-q-p\in A.
+\]
+Thus a viable moving row bank either keeps many translates \(q+p\) at
+bounded two-sum count, or creates actual one-term reflected rows. The next
+positive target is to show that one of these alternatives stabilizes on a
+finite test set; the next negative target is to move both alternatives
+between stages without producing a recurrent certificate.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

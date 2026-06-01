@@ -653,7 +653,8 @@ plus `2([1,...,L] union {2L}) = [2,3L] union {4L}`.
 `A={1,2,3,4,8,19,20,28,33}`, `b=33`, and `d=40`, it verifies coverage
 through `76`, confirms `73 notin 4(A\\{33})`, prints all eight rows
 `40-p in 2A`, and reports no retained collision of `40-p in 2C` with
-`33+p in 2C`.
+`33+p in 2C`. It also prints the one-term reflected row behind the unique
+`b`-dependent row: for `p=3`, `40-33-3=4`.
 
 `prepared_marker_followup_search.py` starts from that prepared marker stage
 at endpoint `74` and tries to protect `19,20,28,33,8` in the next bounded
@@ -671,3 +672,9 @@ for `C=A\\{q}`, a candidate `w` is private after deleting `q` exactly when
 because represented candidates already lie in some `p+3C`; the
 interval-marker seed escapes precisely by leaving all those shifted
 three-sum gaps open.
+
+Lemma 16.15 gives the row-bank follow-up to the scanner's collision test:
+if a private witness `w=q+d` has a retained padder `p` with `q+p in 2C`,
+then the forced row `d-p` must be `q`-dependent, so `d-q-p in A`.
+Diagnostics that print b-dependent rows are therefore also printing
+one-term reflected rows.
