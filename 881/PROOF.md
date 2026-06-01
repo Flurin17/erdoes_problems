@@ -16596,6 +16596,90 @@ pressure to show that the required coverage fillers cannot always be routed
 around these poisoned intervals; it cannot use only the local fact that a
 fixed first point belongs to arbitrarily large inclusion-minimal holes.
 
+### Diagnostic 13.1l.2k.2: Fixed-first star cuts can have mobile singleton labels
+
+The preceding interval model has many repeated repair labels. The
+unbounded-rank branch can also be locally compatible with completely
+mobile labels.
+
+Let
+\[
+r\ge1,\qquad R>2r,
+\]
+and choose \(N\) much larger than \(rR\). Put
+\[
+d=1,\qquad w=10N,
+\]
+\[
+h_i=N+iR,\qquad u_i=r+i,\qquad
+q_i=9N-r-i(R+1)\qquad(1\le i\le r).
+\]
+Define
+\[
+H=\{h_1,\ldots,h_r\},
+\]
+\[
+C=\{u_i,q_i:1\le i\le r\}\cup\{4N,6N-1\},
+\]
+and
+\[
+F=\{d\}\cup H,\qquad A=C\cup F.
+\]
+By range separation,
+\[
+w\notin3C.
+\]
+The only sums near \(10N\) are deliberately placed on the wrong side:
+\[
+4N+(6N-1)+u_i>10N,
+\]
+whereas
+\[
+q_i+u_j+u_k<10N
+\]
+for \(N\) large, and all other combinations of the ranges
+\[
+U=\{u_i\},\quad Q=\{q_i\},\quad \{4N\},\quad \{6N-1\}
+\]
+are far below or far above \(10N\).
+
+Restoring the fixed endpoint repairs \(w\):
+\[
+w=d+4N+(6N-1).
+\]
+Restoring \(h_i\) repairs \(w\):
+\[
+w=h_i+u_i+q_i.
+\]
+Thus \(F\) is inclusion-minimal for \(w\), with arbitrary suffix rank.
+
+Now look at the retained test rows \(u_i\). For a moving label \(h_j\),
+\[
+w-u_i-h_j=9N-r-i-jR.
+\]
+This can equal \(q_k=9N-r-k(R+1)\) only if
+\[
+(j-k)R=k-i.
+\]
+Since \(|k-i|<R\), this forces \(j=k=i\). It cannot equal any \(u_k\),
+\(4N\), or \(6N-1\) by range separation. Hence the row \(u_i\) is served
+by exactly one moving label, namely \(h_i\). The endpoint-label fibers are
+singletons, so finite-palette and certificate-density arguments see no
+repeated label.
+
+The mode
+`EXPERIMENTS/fixed_first_unbounded_rank_model.py --model star`
+verifies this model; for example `--rank 5 --start 1000 --spacing 20`
+prints singleton private labels
+\[
+6\mapsto1020,\quad 7\mapsto1040,\quad \ldots,\quad 10\mapsto1100.
+\]
+
+Thus Target 13.1l.2k cannot be closed by asking only for color reuse inside
+one finite hole. A proof must force reuse, bounded subtraces, or tail
+descent across many holes and many sections, using the global barrier and
+coverage requirements.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18450,6 +18534,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   first point \(1\) and far suffix endpoints, proving that local
   inclusion-minimality alone cannot close Target 13.1l.2k; global
   order-\(2\) coverage or recurrence must be used.
+* Diagnostic 13.1l.2k.2 strengthens this with a star-cut model whose
+  retained test rows have singleton moving-label fibers, so finite-palette
+  recurrence cannot be forced inside one hole.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

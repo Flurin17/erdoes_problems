@@ -2651,6 +2651,13 @@ coverage: \(2A\) has a large gap before the suffix, and every filler
 x\in[N-2r+2,N]
 \]
 would repair the witness because \(w-x\in2[2,2r]\).
+Diagnostic 13.1l.2k.2 gives the stronger star-cut version: with
+\[
+h_i=N+iR,\quad u_i=r+i,\quad q_i=9N-r-i(R+1),\quad w=10N,
+\]
+the retained row \(u_i\) is served by exactly the moving label \(h_i\).
+Thus one finite hole can have arbitrary rank, fixed first point, no bounded
+same-witness subtrace, and singleton certificate-free label fibers.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
