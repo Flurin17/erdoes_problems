@@ -2602,6 +2602,13 @@ obstruction. Corollary 13.1l.2b supplies a bounded endpoint debt, 13.1l.2d
 stabilizes its ordered position, and 13.1l.2c converts it to fractional
 reflection-recurrence. Hence the only fixed-section escapes are proper
 active-trace descent or the large certificate-free fractional branch.
+Corollary 13.1l.2f closes that fixed-depth fractional branch. Once the debt
+position \(h_j\) is fixed, the shifted rows for a finite test can only use
+the finite label palette \(\{d,h_1,\ldots,h_{j-1}\}\). If every endpoint
+choice has a certificate fiber, a fixed certificate recurs; if the rows can
+always be split into certificate-free fibers, Corollary 8.5a.4 forbids the
+finite moving-label palette. Therefore a fixed first point and fixed rank
+cannot support a full inclusion-minimal generalized prefix-link shell.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

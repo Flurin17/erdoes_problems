@@ -16058,10 +16058,104 @@ Applying Corollary 13.1l.2c gives (1) and the stated deletion consequence.
 \(\square\)
 
 Thus a fixed first point with a fixed rank is no longer a live
-full-active shell. In the remaining prefix-front analysis, a counterexample
-must either make the active trace drop to a proper subpacket before this
-corollary applies, or else survive inside the large certificate-free
-fractional-recurrence branch.
+full-active shell unless the fractional branch from Corollary 13.1l.2c
+can persist. The next corollary closes that branch when it comes from a
+fixed ordered endpoint position: the endpoint lists use only finitely many
+earlier labels, so they either produce a recurrent certificate directly or
+fall under Corollary 8.5a.4.
+
+## Corollary 13.1l.2f: Fixed-depth endpoint debt is impossible
+
+Work in the \(k=2\) counterexample setting. Fix
+\[
+d\in A,\qquad r\ge1,\qquad 1\le j\le r,\qquad D\ge d,
+\]
+and let \(Y\subset A\setminus\{d\}\) be infinite. It is impossible that for
+every finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and every \(M\), there are
+\[
+H=\{h_1<\cdots<h_r\}\subset Y\setminus T
+\]
+and a witness \(w\) such that
+\[
+w-\max T\ge N_0,\qquad
+w-\max\{d,h_1,\ldots,h_{j-1}\}>M,\qquad
+w\le h_j+D, \tag{1}
+\]
+and
+\[
+w\notin3(A\setminus(\{d\}\cup H)). \tag{2}
+\]
+
+Proof. Suppose such data exist. Fix a finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and a parameter \(M\), and choose admissible \(H,w\). Put
+\[
+\Delta=\{d\}.
+\]
+For each \(t\in T\), the integer \(w-t\) has a two-term representation
+from \(A\), and every such representation must meet
+\[
+\{d\}\cup H,
+\]
+otherwise adding \(t\) would contradict (2). No representation of \(w-t\)
+can use \(h_\ell\) with \(\ell\ge j\), since
+\[
+w-t-h_\ell\le h_j+D-t-h_\ell\le D-t<0.
+\]
+Thus the endpoint list
+\[
+L(t)=\{d:w-t-d\in A\}\cup
+\{\ell\in\{1,\ldots,j-1\}:w-t-h_\ell\in A\}
+\]
+is nonempty.
+
+First suppose there are a finite nonempty \(T_0\subset A\cap(D,\infty)\)
+and arbitrarily large \(M\) for which some admissible \(H,w\) have endpoint
+lists on \(T_0\) such that every choice function
+\[
+\chi(t)\in L(t)\qquad(t\in T_0)
+\]
+has a fiber containing a certificate triple. If the recurring fiber is
+labeled by \(d\), then the centers \(w-d\) reflect that triple; if it is
+labeled by \(\ell<j\), then the centers \(w-h_\ell\) do. In both cases
+(1) makes the centers tend to infinity. Since \(T_0\) contains only
+finitely many triples and labels, one fixed certificate triple is
+reflection-recurrent. Corollary 2.3c gives a good infinite deletion,
+contradicting the counterexample assumption.
+
+Therefore, in a counterexample, for every finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and every \(M\), after increasing \(M\) if necessary, we may choose
+admissible data whose endpoint lists admit a choice function with every
+fiber certificate-free. Label \(d\) by itself and label \(h_\ell\) by the
+position \(\ell\) for \(1\le\ell<j\). The centers
+\[
+w-d,\qquad w-h_\ell\quad(1\le\ell<j)
+\]
+are all \(>M\), and the chosen coloring reflects each row \(t\) by its
+label with certificate-free fibers. This is exactly the finite-depth
+section list-coloring forbidden by Corollary 8.5a.4, with
+\[
+\Delta=\{d\}.
+\]
+The contradiction proves the corollary. \(\square\)
+
+Combining Corollaries 13.1l.2b--13.1l.2f, a fixed first point and fixed
+rank cannot support a full inclusion-minimal generalized prefix-link shell
+in a \(k=2\) counterexample. High-center witnesses are forbidden by
+13.1l.2a; bounded active endpoint debt stabilizes by 13.1l.2d; and the
+resulting fixed-depth endpoint lists are forbidden by 13.1l.2f. Hence the
+only remaining prefix-front escape is genuine active-trace descent before a
+fixed full packet is obtained, or unbounded rank/section depth escaping
+every fixed first-section rank.
 
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
@@ -17891,6 +17985,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   point and fixed rank with full inclusion-minimal packets cannot be a new
   shell obstruction; it yields fractional reflection-recurrence unless the
   active trace descends to a proper subpacket.
+* Corollary 13.1l.2f closes the fixed-depth fractional alternative: the
+  endpoint rows use only the finite palette of earlier labels, so they
+  either force a recurrent certificate or violate Corollary 8.5a.4's
+  finite moving-label obstruction.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
