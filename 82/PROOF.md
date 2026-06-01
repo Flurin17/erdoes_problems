@@ -15089,6 +15089,44 @@ Thus the disconnected repeated-copy obstruction in Lemma 28J.10d does not
 kill the spectrum-mass route.  It only changes the target from global
 additive defect to connected additive defect.
 
+**Conditional Proposition 28J.10d.1a: Non-Cut Full Deletions Would Prove
+Connected Defect One.**  Suppose that every connected graph `G` with
+
+```text
+sum_d s_d(G) < |V(G)|
+```
+
+has a vertex `v` such that `G-v` is connected and
+
+```text
+sum_d s_d(G-v) >= |V(G)|-1.
+```
+
+Then every connected graph `G` satisfies
+
+```text
+sum_d s_d(G) >= |V(G)|-1.
+```
+
+Consequently Erdős Problem 82 follows with a polynomial bound.
+
+Proof.  Let `G` be connected on `n` vertices.  If
+`sum_d s_d(G)>=n`, there is nothing to prove.  Otherwise the hypothesis gives
+a non-cut vertex `v` with `sum_d s_d(G-v)>=n-1`.  By monotonicity of every
+spectrum coordinate under induced supergraphs,
+
+```text
+sum_d s_d(G) >= sum_d s_d(G-v) >= n-1.
+```
+
+This proves connected defect one.  Conditional Corollary 28J.10d.1 then gives
+the final claim.  QED.
+
+The structural scanner `EXPERIMENTS/defect_structure_scan.py` tests this
+criterion.  The known sharp fourteen- and fifteen-vertex defect examples have
+non-cut full-mass deletions; in the two-connected fourteen-vertex example,
+every vertex deletion has full mass.
+
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then
 

@@ -22,6 +22,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `defect_extension_profile.py`: focused one-vertex extension profiler for
   connected defect-one spectrum-mass graphs.  It reports connected extension
   mass histograms and which spectrum coordinates grow in the worst extensions.
+- `defect_structure_scan.py`: structural scanner for connected graphs with
+  spectrum-mass defect.  It reports cut vertices, first two-cuts, simplicial
+  degree-two vertices, and whether non-cut vertex deletions have full mass.
 - `spectrum_partition.py`: checks whether a graph has a spectral partition,
   meaning one maximum induced `d`-regular witness for every positive spectrum
   entry, chosen disjointly so that the witnesses cover all vertices.

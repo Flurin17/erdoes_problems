@@ -53,6 +53,17 @@ def min_degree_at_least(adj: list[int], threshold: int) -> bool:
     return all(row.bit_count() >= threshold for row in adj)
 
 
+def has_simplicial_degree_two_vertex(adj: list[int]) -> bool:
+    n = len(adj)
+    for v in range(n):
+        if adj[v].bit_count() != 2:
+            continue
+        neighbors = [u for u in range(n) if (adj[v] >> u) & 1]
+        if (adj[neighbors[0]] >> neighbors[1]) & 1:
+            return True
+    return False
+
+
 def connected_after_deleting(adj: list[int], deleted: tuple[int, ...]) -> bool:
     n = len(adj)
     deleted_mask = 0
@@ -96,6 +107,7 @@ def passes_filters(
     connected_only: bool,
     min_degree: int,
     vertex_connectivity: int,
+    forbid_simplicial_degree_two: bool,
 ) -> bool:
     if connected_only and not is_connected(adj):
         return False
@@ -104,6 +116,8 @@ def passes_filters(
     if vertex_connectivity and not vertex_connectivity_at_least(
         adj, vertex_connectivity
     ):
+        return False
+    if forbid_simplicial_degree_two and has_simplicial_degree_two_vertex(adj):
         return False
     return True
 
@@ -114,6 +128,7 @@ def exact(
     connected_only: bool,
     min_degree: int,
     vertex_connectivity: int,
+    forbid_simplicial_degree_two: bool,
 ) -> None:
     pc = cdc.precompute(n)
     total = 1 << len(pc.edges)
@@ -125,7 +140,13 @@ def exact(
 
     for mask in range(total):
         adj = cdc.adjacency(n, mask, pc)
-        if not passes_filters(adj, connected_only, min_degree, vertex_connectivity):
+        if not passes_filters(
+            adj,
+            connected_only,
+            min_degree,
+            vertex_connectivity,
+            forbid_simplicial_degree_two,
+        ):
             continue
         checked += 1
         mass, by_degree = spectrum_mass(adj, pc)
@@ -147,6 +168,7 @@ def exact(
     print(f"connected_only={connected_only}")
     print(f"min_degree_filter={min_degree}")
     print(f"vertex_connectivity_filter={vertex_connectivity}")
+    print(f"forbid_simplicial_degree_two={forbid_simplicial_degree_two}")
     print(f"checked_graphs={checked}")
     print(f"min_spectrum_mass={best}")
     print(f"violates_mu_ge_n={best < n}")
@@ -162,6 +184,7 @@ def sample(
     connected_only: bool,
     min_degree: int,
     vertex_connectivity: int,
+    forbid_simplicial_degree_two: bool,
 ) -> None:
     rng = random.Random(seed)
     pc = cdc.precompute(n)
@@ -175,7 +198,13 @@ def sample(
         attempts += 1
         mask = rng.getrandbits(bits)
         adj = cdc.adjacency(n, mask, pc)
-        if not passes_filters(adj, connected_only, min_degree, vertex_connectivity):
+        if not passes_filters(
+            adj,
+            connected_only,
+            min_degree,
+            vertex_connectivity,
+            forbid_simplicial_degree_two,
+        ):
             continue
         mass, by_degree = spectrum_mass(adj, pc)
         histogram[mass] += 1
@@ -189,6 +218,7 @@ def sample(
     print(f"connected_only={connected_only}")
     print(f"min_degree_filter={min_degree}")
     print(f"vertex_connectivity_filter={vertex_connectivity}")
+    print(f"forbid_simplicial_degree_two={forbid_simplicial_degree_two}")
     print(f"min_seen={best}")
     print(f"violates_mu_ge_n={best < n}")
     print(f"histogram={dict(sorted(histogram.items()))}")
@@ -206,6 +236,8 @@ def local_search(
     start_mask: int | None,
     min_degree: int,
     vertex_connectivity: int,
+    forbid_simplicial_degree_two: bool,
+    stop_below: int | None,
 ) -> None:
     rng = random.Random(seed)
     pc = cdc.precompute(n)
@@ -219,10 +251,19 @@ def local_search(
         else:
             mask = rng.getrandbits(bits)
         adj = cdc.adjacency(n, mask, pc)
-        if connected_only or min_degree or vertex_connectivity:
+        if (
+            connected_only
+            or min_degree
+            or vertex_connectivity
+            or forbid_simplicial_degree_two
+        ):
             attempts = 0
             while not passes_filters(
-                adj, connected_only, min_degree, vertex_connectivity
+                adj,
+                connected_only,
+                min_degree,
+                vertex_connectivity,
+                forbid_simplicial_degree_two,
             ):
                 if restart == 0 and start_mask is not None:
                     raise ValueError("start mask does not satisfy filters")
@@ -246,7 +287,11 @@ def local_search(
             candidate = mask ^ (1 << bit)
             candidate_adj = cdc.adjacency(n, candidate, pc)
             if not passes_filters(
-                candidate_adj, connected_only, min_degree, vertex_connectivity
+                candidate_adj,
+                connected_only,
+                min_degree,
+                vertex_connectivity,
+                forbid_simplicial_degree_two,
             ):
                 continue
             candidate_value, candidate_by_degree = spectrum_mass(candidate_adj, pc)
@@ -262,9 +307,9 @@ def local_search(
                     f"mass={value} mask={mask} by_degree={by_degree}",
                     flush=True,
                 )
-                if global_best < n:
+                if stop_below is not None and global_best < stop_below:
                     break
-        if global_best < n:
+        if stop_below is not None and global_best < stop_below:
             break
 
     print(f"n={n}")
@@ -273,6 +318,8 @@ def local_search(
     print(f"connected_only={connected_only}")
     print(f"min_degree_filter={min_degree}")
     print(f"vertex_connectivity_filter={vertex_connectivity}")
+    print(f"forbid_simplicial_degree_two={forbid_simplicial_degree_two}")
+    print(f"stop_below={stop_below}")
     print(f"min_seen={global_best}")
     print(f"violates_mu_ge_n={global_best < n}")
     if global_example is not None:
@@ -302,6 +349,12 @@ def main() -> None:
     parser.add_argument("--connected-only", action="store_true")
     parser.add_argument("--min-degree", type=int, default=0)
     parser.add_argument("--vertex-connectivity", type=int, default=0)
+    parser.add_argument("--forbid-simplicial-degree2", action="store_true")
+    parser.add_argument(
+        "--stop-below",
+        type=int,
+        help="stop local search after finding spectrum mass below this value",
+    )
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--progress", type=int, default=0)
     parser.add_argument("--start-mask", type=int)
@@ -319,6 +372,8 @@ def main() -> None:
             args.start_mask,
             args.min_degree,
             args.vertex_connectivity,
+            args.forbid_simplicial_degree2,
+            args.stop_below,
         )
     elif args.sample:
         sample(
@@ -328,6 +383,7 @@ def main() -> None:
             args.connected_only,
             args.min_degree,
             args.vertex_connectivity,
+            args.forbid_simplicial_degree2,
         )
     else:
         exact(
@@ -336,6 +392,7 @@ def main() -> None:
             args.connected_only,
             args.min_degree,
             args.vertex_connectivity,
+            args.forbid_simplicial_degree2,
         )
 
 

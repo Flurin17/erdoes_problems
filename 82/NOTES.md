@@ -4128,6 +4128,15 @@ source of growth beyond Ramsey.
   give defect at most one.  A local search among connected graphs with no
   simplicial degree-`2` vertex found no linear-mass violation: best masses
   were `15` at `n=14` and `21` at `n=16`.
+- 2026-06-01: Added `defect_structure_scan.py` and isolated another
+  equivalent-strength structural target: every connected graph with
+  `mu(G)<|G|` should have a non-cut vertex `v` such that `mu(G-v)>=|G|-1`.
+  This immediately gives connected defect one by monotonicity.  The known
+  sharp fourteen-vertex defect graph `429588619789184147001379` satisfies the
+  target strongly: every vertex is non-cut and every deletion has full mass.
+  A fifteen-vertex leaf extension has cut vertex `0`, but still has many
+  non-cut full-mass deletions.  Exact connected `n=7` has no below-full
+  examples.
 - 2026-06-01: Isolated the connected defect-extension induction.  It is enough
   to prove: if `H` is connected and `mu(H)=|H|-1`, then every connected
   one-vertex extension `G` of `H` has `mu(G)>=|H|`.  The proof deletes a
