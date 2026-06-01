@@ -2742,3 +2742,12 @@ source of growth beyond Ramsey.
   A larger Python `n=8` prefix was too slow for the checkpoint.  Next action:
   if this boundary condition remains plausible, port it to the C++ checker or
   search directly for a minimal failure.
+- 2026-06-01: Ported `--triangle-nonedge` to `matching_slot_fast.cpp`, where
+  the recursion distinguishes the two zero slots and tracks whether each
+  rooted endpoint is isolated from its own zero slot and from the matching
+  slot.  The C++ checker now verifies the full labelled `n=8` rooted-nonedge
+  sweep (`1048576` even graphs with `01` nonadjacent) and the prefix
+  `0 <= bits < 1000000` at `n=9` (`500000` rooted nonedge cases), with no
+  counterexample.  This makes the triangular degree-`2` boundary condition a
+  serious candidate for a minimal-counterexample induction rather than just a
+  Python-scale observation.

@@ -11,6 +11,7 @@
 #include <iostream>
 #include <optional>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 namespace {
@@ -19,6 +20,7 @@ enum class RootMode {
     None,
     Edge,
     Nonedge,
+    TriangleNonedge,
 };
 
 int edge_index(int n, int a, int b) {
@@ -82,6 +84,17 @@ class Checker {
     }
 
     void compute_valid_subsets(uint64_t graph_mask) {
+        adjacency.fill(0);
+        int edge = 0;
+        for (int u = 0; u < n; ++u) {
+            for (int v = u + 1; v < n; ++v) {
+                if ((graph_mask >> edge) & 1) {
+                    adjacency[u] |= 1 << v;
+                    adjacency[v] |= 1 << u;
+                }
+                ++edge;
+            }
+        }
         residue.fill(-1);
         exact_matching.fill(false);
         for (int subset = 1; subset <= full; ++subset) {
@@ -114,6 +127,9 @@ class Checker {
         RootMode root_mode,
         std::optional<std::pair<int, int>> root_pair
     ) {
+        if (root_mode == RootMode::TriangleNonedge) {
+            return has_triangle_partition(root_pair);
+        }
         for (auto& table : memo) {
             for (auto& row : table) row.fill(-1);
         }
@@ -129,6 +145,153 @@ class Checker {
     std::array<int, 1 << 10> residue{};
     std::array<bool, 1 << 10> exact_matching{};
     std::vector<std::array<std::array<int8_t, 25>, 625>> memo;
+    std::array<int, 10> adjacency{};
+    std::unordered_set<uint64_t> triangle_failed;
+
+    bool has_triangle_partition(std::optional<std::pair<int, int>> root_pair) {
+        if (!root_pair) return false;
+        triangle_failed.clear();
+        return rec_triangle(
+            full,
+            0b1111,
+            4,
+            4,
+            true,
+            true,
+            true,
+            true,
+            *root_pair
+        );
+    }
+
+    static bool is_zero_slot(int slot) {
+        return slot == 0 || slot == 1;
+    }
+
+    static uint64_t triangle_key(
+        int remaining,
+        int slot_mask,
+        int first_slot,
+        int second_slot,
+        bool first_zero_clean,
+        bool second_zero_clean,
+        bool first_c_clean,
+        bool second_c_clean
+    ) {
+        uint64_t key = static_cast<uint64_t>(remaining);
+        key = (key << 4) | static_cast<uint64_t>(slot_mask);
+        key = (key << 3) | static_cast<uint64_t>(first_slot);
+        key = (key << 3) | static_cast<uint64_t>(second_slot);
+        key = (key << 1) | static_cast<uint64_t>(first_zero_clean);
+        key = (key << 1) | static_cast<uint64_t>(second_zero_clean);
+        key = (key << 1) | static_cast<uint64_t>(first_c_clean);
+        key = (key << 1) | static_cast<uint64_t>(second_c_clean);
+        return key;
+    }
+
+    bool rec_triangle(
+        int remaining,
+        int slot_mask,
+        int first_slot,
+        int second_slot,
+        bool first_zero_clean,
+        bool second_zero_clean,
+        bool first_c_clean,
+        bool second_c_clean,
+        std::pair<int, int> root_pair
+    ) {
+        if (remaining == 0) {
+            bool direct =
+                first_slot != second_slot
+                && !(is_zero_slot(first_slot) && is_zero_slot(second_slot));
+            bool zero_split =
+                is_zero_slot(first_slot)
+                && is_zero_slot(second_slot)
+                && first_slot != second_slot;
+            bool repair =
+                zero_split
+                && (
+                    (first_zero_clean && first_c_clean)
+                    || (second_zero_clean && second_c_clean)
+                );
+            return direct || repair;
+        }
+        if (slot_mask == 0) return false;
+        uint64_t key = triangle_key(
+            remaining,
+            slot_mask,
+            first_slot,
+            second_slot,
+            first_zero_clean,
+            second_zero_clean,
+            first_c_clean,
+            second_c_clean
+        );
+        if (triangle_failed.find(key) != triangle_failed.end()) return false;
+
+        constexpr std::array<int, 4> slot_residue{0, 0, 1, 2};
+        for (int slot = 0; slot < 4; ++slot) {
+            if (!((slot_mask >> slot) & 1)) continue;
+            int next_slot_mask = slot_mask & ~(1 << slot);
+            int target_residue = slot_residue[slot];
+            for (int sub : submasks_with_pivot[remaining]) {
+                if (residue[sub] != target_residue) continue;
+                if (target_residue == 1 && !exact_matching[sub]) continue;
+
+                int next_first_slot = first_slot;
+                int next_second_slot = second_slot;
+                bool next_first_zero_clean = first_zero_clean;
+                bool next_second_zero_clean = second_zero_clean;
+                bool next_first_c_clean = first_c_clean;
+                bool next_second_c_clean = second_c_clean;
+
+                if (slot == 2) {
+                    next_first_c_clean =
+                        __builtin_popcount(static_cast<unsigned>(
+                            adjacency[root_pair.first] & sub
+                        )) == 0;
+                    next_second_c_clean =
+                        __builtin_popcount(static_cast<unsigned>(
+                            adjacency[root_pair.second] & sub
+                        )) == 0;
+                }
+                if ((sub >> root_pair.first) & 1) {
+                    next_first_slot = slot;
+                    if (is_zero_slot(slot)) {
+                        next_first_zero_clean =
+                            __builtin_popcount(static_cast<unsigned>(
+                                adjacency[root_pair.first] & sub
+                            )) == 0;
+                    }
+                }
+                if ((sub >> root_pair.second) & 1) {
+                    next_second_slot = slot;
+                    if (is_zero_slot(slot)) {
+                        next_second_zero_clean =
+                            __builtin_popcount(static_cast<unsigned>(
+                                adjacency[root_pair.second] & sub
+                            )) == 0;
+                    }
+                }
+
+                if (rec_triangle(
+                        remaining ^ sub,
+                        next_slot_mask,
+                        next_first_slot,
+                        next_second_slot,
+                        next_first_zero_clean,
+                        next_second_zero_clean,
+                        next_first_c_clean,
+                        next_second_c_clean,
+                        root_pair
+                    )) {
+                    return true;
+                }
+            }
+        }
+        triangle_failed.insert(key);
+        return false;
+    }
 
     bool rec(
         int remaining,
@@ -258,12 +421,29 @@ int main(int argc, char** argv) {
                 std::stoi(text.substr(0, sep)),
                 std::stoi(text.substr(sep + 1)),
             };
+        } else if (arg == "--triangle-nonedge" && i + 1 < argc) {
+            if (root_mode != RootMode::None) {
+                std::cerr << "only one rooted endpoint option is allowed\n";
+                return 2;
+            }
+            std::string text = argv[++i];
+            size_t sep = text.find(':');
+            if (sep == std::string::npos) {
+                std::cerr << "--triangle-nonedge expects u:v\n";
+                return 2;
+            }
+            root_mode = RootMode::TriangleNonedge;
+            root_pair = {
+                std::stoi(text.substr(0, sep)),
+                std::stoi(text.substr(sep + 1)),
+            };
         } else if (arg == "--progress") {
             progress = true;
         } else {
             std::cerr << "usage: matching_slot_fast [--n N] [--start S]"
                       << " [--limit L] [--good-edge u:v]"
-                      << " [--good-nonedge u:v] [--progress]"
+                      << " [--good-nonedge u:v]"
+                      << " [--triangle-nonedge u:v] [--progress]"
                       << " [--progress-every P]\n";
             return 2;
         }
@@ -303,16 +483,23 @@ int main(int argc, char** argv) {
             int idx = edge_index(n, root_pair->first, root_pair->second);
             bool present = ((graph_mask >> idx) & 1) != 0;
             if (root_mode == RootMode::Edge && !present) continue;
-            if (root_mode == RootMode::Nonedge && present) continue;
+            if (
+                (root_mode == RootMode::Nonedge
+                 || root_mode == RootMode::TriangleNonedge)
+                && present
+            ) {
+                continue;
+            }
         }
         ++checked;
         checker.compute_valid_subsets(graph_mask);
         if (!checker.has_partition(root_mode, root_pair)) {
             std::cout << "n=" << n << "\n";
             if (root_pair) {
-                std::cout
-                    << (root_mode == RootMode::Edge ? "good_edge=" : "good_nonedge=")
-                    << root_pair->first << ":" << root_pair->second << "\n";
+                if (root_mode == RootMode::Edge) std::cout << "good_edge=";
+                else if (root_mode == RootMode::Nonedge) std::cout << "good_nonedge=";
+                else std::cout << "triangle_nonedge=";
+                std::cout << root_pair->first << ":" << root_pair->second << "\n";
             }
             std::cout << "checked_before_counterexample=" << checked << "\n";
             std::cout << "counterexample_mask=" << graph_mask << "\n";
@@ -330,9 +517,10 @@ int main(int argc, char** argv) {
     }
     std::cout << "n=" << n << "\n";
     if (root_pair) {
-        std::cout
-            << (root_mode == RootMode::Edge ? "good_edge=" : "good_nonedge=")
-            << root_pair->first << ":" << root_pair->second << "\n";
+        if (root_mode == RootMode::Edge) std::cout << "good_edge=";
+        else if (root_mode == RootMode::Nonedge) std::cout << "good_nonedge=";
+        else std::cout << "triangle_nonedge=";
+        std::cout << root_pair->first << ":" << root_pair->second << "\n";
     }
     std::cout << "bit_start=" << start << "\n";
     std::cout << "bit_stop=" << stop << "\n";

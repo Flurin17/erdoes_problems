@@ -4756,13 +4756,22 @@ triangle case: either the direct different-slot condition of the previous
 lemma holds, or the endpoints are split between `A` and `B` and one endpoint
 is isolated from both its own zero slot and `C`.  The Python checker option
 `--triangle-nonedge` tests exactly this condition.  It verifies all even
-graphs on at most `7` vertices for the rooted nonedge `0:1`, and a prefix of
-`1000` checked even graphs on `8` vertices:
+graphs on at most `7` vertices for the rooted nonedge `0:1`:
 
 ```text
 python3 82/EXPERIMENTS/matching_slot_search.py 7 --exhaustive-even --triangle-nonedge 0:1
-python3 82/EXPERIMENTS/matching_slot_search.py 8 --exhaustive-even --triangle-nonedge 0:1 --limit 1000
 ```
+
+The C++ checker ports the same condition and verifies the full labelled
+`n=8` rooted-nonedge sweep, plus a prefix at `n=9`:
+
+```text
+/tmp/matching_slot_fast --n 8 --triangle-nonedge 0:1
+/tmp/matching_slot_fast --n 9 --triangle-nonedge 0:1 --limit 1000000
+```
+
+These commands respectively check `1048576` and `500000` even graphs with
+`01` nonadjacent, with no counterexample.
 
 This is only finite evidence, but it identifies a plausible boundary
 signature for handling degree-`2` triangles in a minimal-counterexample
