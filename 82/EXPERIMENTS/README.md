@@ -261,6 +261,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `edge_perturbation_witness.py`: inspects regular induced witnesses created
   by adding a missing edge or deleting an existing edge, supporting the
   edge-extremal defect-witness lemma.
+- `edge_saturate.py`: greedily adds or deletes edges while preserving absence
+  of a threshold-size regular induced subgraph, producing small edge-maximal
+  or edge-minimal examples for perturbation checks.
 - `pair_difference_template.py`: searches the two-pole amplification template
   from Lemma 27, where equal-sized homogeneous subsets of
   `N(u)\N(v)` and `N(v)\N(u)` combine with `u,v` to form a regular induced

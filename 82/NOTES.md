@@ -2453,3 +2453,10 @@ source of growth beyond Ramsey.
   edge-extremal, `17/33` missing-edge additions and `17/33` edge deletions
   already create regular witnesses of order at least `6`; every listed
   witness contains the perturbed pair, matching Lemma 27F's mechanism.
+- 2026-06-01: Added `edge_saturate.py` and produced saturated `12`-vertex
+  threshold-`6` examples from the compensated template.  Add-saturation gives
+  mask `72413377920641400783`, with no regular `6`-set and all `17` missing
+  edges blocked by regular witnesses after addition.  Delete-saturation gives
+  mask `56205204850483501447`, with no regular `6`-set and all `19` remaining
+  edges blocked by regular witnesses after deletion.  These are concrete
+  small edge-extremal calibrations for Lemma 27F.

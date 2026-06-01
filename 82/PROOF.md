@@ -7885,6 +7885,39 @@ This graph is not asserted to be edge-extremal; the computation is only a
 sanity check that the two-defect witnesses appear naturally near small
 bounded-spread examples.
 
+**Computational Example 27G: Saturated Twelve-Vertex Counterexamples.**  The
+script `EXPERIMENTS/edge_saturate.py` greedily turns a fixed graph with no
+regular induced `k`-set into an edge-maximal or edge-minimal graph with the
+same property.
+
+Starting from the `12`-vertex compensated template of Example 11C and using
+threshold `k=6`, edge-addition saturation produces the mask
+
+```text
+72413377920641400783.
+```
+
+It has no regular induced subgraph of order at least `6`; all `17` remaining
+missing-edge additions create one, and every reported witness contains the
+added pair.  The verification commands are
+
+```text
+python3 82/EXPERIMENTS/edge_saturate.py 12 --mask 72400984189589100935 --threshold 6 --mode add
+python3 82/EXPERIMENTS/regular_bitset.py 12 --mask 72413377920641400783 --threshold 6
+python3 82/EXPERIMENTS/edge_perturbation_witness.py 12 --mask 72413377920641400783 --threshold 6 --mode add
+```
+
+Edge-deletion saturation from the same starting graph produces the mask
+
+```text
+56205204850483501447.
+```
+
+It also has no regular induced subgraph of order at least `6`; all `19`
+remaining edge deletions create one, again with witnesses containing the
+deleted pair.  Thus both edge-extremal forms in Lemma 27F occur in small
+examples.
+
 ## Lemma 28: Ramsey Bound For Pair-Difference Amplification
 
 Let `BR(p,q)` be the least integer `N` such that every bipartite graph with
