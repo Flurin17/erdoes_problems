@@ -2432,20 +2432,21 @@ This interval is stored as
 generated-shell prefix probe over the first `100000` `N=63` mixed-`8` shells
 touched `10560` profile groups, again with no mixed-status group; see
 `EXPERIMENTS/results/n63_mixed8_profile_group_probe_limit100000.json`.
-The same runner can now exhaustively replay selected profile groups. On the
-first `1300000` profile groups it checks all `2663222` outside-cover realizations,
+The same runner can now exhaustively replay selected profile groups. Replaying
+all `1493568` profile groups checks all `3382720` outside-cover realizations,
 with no mixed-status profile group and no count mismatch:
 
 ```text
-corner-label-violation:         1,386,598
-pinch-sector-obstruction:         778,080
-split-corner-label-obstruction:   498,544
+corner-label-violation:         1,837,392
+pinch-sector-obstruction:         878,400
+split-corner-label-obstruction:   666,928
 ```
 
 The exact profile replay intervals are summarized by
-`EXPERIMENTS/results/n63_mixed8_profile_exhaustive_summary_000001_1300000.json`.
-This does not close the stratum, but it gives a plausible quotient after raw
-side-label words fail.
+`EXPERIMENTS/results/n63_mixed8_profile_exhaustive_summary_000001_1493568.json`.
+Together with the local-overlap cover, this closes the `N=63`
+mixed-exactly-`8` finite boundary-shell stratum. Higher mixed levels for the
+same survivor still need a structural cutoff or analogous exact quotient pass.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count

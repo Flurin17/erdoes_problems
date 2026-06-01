@@ -206,11 +206,12 @@ The tile triangle is not required to be similar to the large triangle unless exp
   profile groups have no mixed representative status, and a first
   `100000`-generated-shell probe touched `10560` profile groups with no
   mixed-status group. The profile quotient now also has an exhaustive replay
-  mode; replaying the first `1300000` profile groups checks all `2663222`
-  outside-cover realizations in those groups with no mixed-status group and no
-  count mismatch. The exact prefix split is `1386598` corner-label violations,
-  `778080` pinch-sector obstructions, and `498544` split-corner-label
-  obstructions.
+  mode; replaying all `1493568` profile groups checks all `3382720`
+  outside-cover realizations with no mixed-status group and no count mismatch.
+  The exact split is `1837392` corner-label violations, `878400`
+  pinch-sector obstructions, and `666928` split-corner-label obstructions.
+  Together with the local-overlap cover, this closes the `63`
+  mixed-exactly-`8` finite shell stratum; mixed `10` and `12` remain open.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

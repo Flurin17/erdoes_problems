@@ -1,0 +1,118 @@
+{
+  "classified_weight": 3382720,
+  "classified_words": 1493568,
+  "contiguous_prefix": true,
+  "covered_first": 1,
+  "covered_last": 1493568,
+  "files": [
+    "n63_mixed8_profile_exhaustive_first100000.json",
+    "n63_mixed8_profile_exhaustive_100000_200000.json",
+    "n63_mixed8_profile_exhaustive_200000_300000.json",
+    "n63_mixed8_profile_exhaustive_300000_400000.json",
+    "n63_mixed8_profile_exhaustive_400000_500000.json",
+    "n63_mixed8_profile_exhaustive_500000_600000.json",
+    "n63_mixed8_profile_exhaustive_600000_700000.json",
+    "n63_mixed8_profile_exhaustive_700000_800000.json",
+    "n63_mixed8_profile_exhaustive_800000_900000.json",
+    "n63_mixed8_profile_exhaustive_900000_1000000.json",
+    "n63_mixed8_profile_exhaustive_1000000_1100000.json",
+    "n63_mixed8_profile_exhaustive_1100000_1200000.json",
+    "n63_mixed8_profile_exhaustive_1200000_1300000.json",
+    "n63_mixed8_profile_exhaustive_1300000_1400000.json",
+    "n63_mixed8_profile_exhaustive_1400000_1493568.json"
+  ],
+  "gaps": [],
+  "intervals": [
+    {
+      "file": "n63_mixed8_profile_exhaustive_first100000.json",
+      "first": 1,
+      "last": 100000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_100000_200000.json",
+      "first": 100001,
+      "last": 200000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_200000_300000.json",
+      "first": 200001,
+      "last": 300000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_300000_400000.json",
+      "first": 300001,
+      "last": 400000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_400000_500000.json",
+      "first": 400001,
+      "last": 500000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_500000_600000.json",
+      "first": 500001,
+      "last": 600000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_600000_700000.json",
+      "first": 600001,
+      "last": 700000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_700000_800000.json",
+      "first": 700001,
+      "last": 800000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_800000_900000.json",
+      "first": 800001,
+      "last": 900000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_900000_1000000.json",
+      "first": 900001,
+      "last": 1000000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_1000000_1100000.json",
+      "first": 1000001,
+      "last": 1100000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_1100000_1200000.json",
+      "first": 1100001,
+      "last": 1200000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_1200000_1300000.json",
+      "first": 1200001,
+      "last": 1300000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_1300000_1400000.json",
+      "first": 1300001,
+      "last": 1400000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_1400000_1493568.json",
+      "first": 1400001,
+      "last": 1493568
+    }
+  ],
+  "mixed_status_words": 0,
+  "n": 63,
+  "outside_cover_shells": 3382720,
+  "overlaps": [],
+  "quotient_groups": 1493568,
+  "status_weight_counts": {
+    "corner-label-violation": 1837392,
+    "pinch-sector-obstruction": 878400,
+    "split-corner-label-obstruction": 666928
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "word_count_mismatches": []
+}

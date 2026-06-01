@@ -269,11 +269,12 @@ Current components:
   outside-cover shells; the first `10000` profile groups have no mixed
   representative status, with weighted status counts `23660` corner-label,
   `8370` pinch-sector, and `4320` split-corner-label obstructions.
-  Exhaustively replaying the first `1300000` profile groups checks all `2663222`
-  outside-cover realizations in those groups and finds no mixed-status profile
-  group or count mismatch. The exact prefix split is `1386598` corner-label
-  violations, `778080` pinch-sector obstructions, and `498544`
-  split-corner-label obstructions.
+  Exhaustively replaying all `1493568` profile groups checks all `3382720`
+  outside-cover realizations and finds no mixed-status profile group or count
+  mismatch. The exact split is `1837392` corner-label violations, `878400`
+  pinch-sector obstructions, and `666928` split-corner-label obstructions.
+  Together with the local-overlap cover, this closes the `N=63`
+  mixed-exactly-`8` finite shell stratum.
   A generated-shell prefix probe over the first `100000` shells also found no
   mixed-status profile group among `10560` touched groups.
 - `gamma_2alpha_word_invariance_probe.py`: exhaustive fixed-word tester for
