@@ -16059,6 +16059,50 @@ average square-spectrum deletion drop.  The known defect examples are
 consistent with this: most nonessential deletions preserve all large spectrum
 coordinates.
 
+**Computational Example 28J.10e.7: Square Spectrum Can Stagnate Under
+Extensions.**  The thirteen-vertex equality graph
+
+```text
+1584140989738554425379
+```
+
+has spectrum
+
+```text
+{s_0,s_1,s_2}={5,4,4}
+```
+
+and therefore `Q=57`.  Exhaustively checking all one-vertex extensions gives
+eight extensions with the same square spectrum value `Q=57` and the same
+spectrum summary.  The extension columns are
+
+```text
+1, 193, 4096, 4100, 4112, 4116, 4288, 4320.
+```
+
+The first two are the previously recorded fourteen-vertex sharp defects with
+masks
+
+```text
+391219392115868279640099,
+429588619789184147001379.
+```
+
+The commands are
+
+```text
+python3 82/EXPERIMENTS/spectrum_power_search.py 13 \
+  --mask 1584140989738554425379 --extension-profile --max-columns 8192
+
+python3 82/EXPERIMENTS/spectrum_mass_critical.py 13 \
+  --mask 1584140989738554425379 --extension-profile
+```
+
+Thus a square-spectrum induction cannot require every one-vertex extension
+of a sharp graph to increase `Q`.  Any successful extension argument must use
+multi-step structure, essential-root signatures, or a lower bound that
+survives these finite stagnant extensions.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

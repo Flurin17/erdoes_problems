@@ -4313,3 +4313,11 @@ source of growth beyond Ramsey.
   extension raises `Q` from `68` to `81`, while a `64`-column random sample
   had minimum extension `Q=93`.  Thus the square-spectrum obstruction is not
   simple one-step stagnation in these sampled extensions.
+- 2026-06-01: Exhaustively profiled the thirteen-vertex equality obstruction
+  `1584140989738554425379` for one-vertex square-spectrum extensions.  There
+  are exactly eight columns with `Q` increment `0`, including the two known
+  fourteen-vertex defects `391219392115868279640099` and
+  `429588619789184147001379`; all have the same spectrum
+  `{0:5,1:4,2:4}` and `Q=57`.  This kills the naive extension-induction hope
+  for `Q`, even though random and isolated extensions of the later defects
+  increase `Q` substantially.

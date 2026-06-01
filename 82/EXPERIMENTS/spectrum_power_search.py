@@ -96,7 +96,7 @@ def extension_profile(
     histogram: Counter[int] = Counter()
     best_value = (n + 1) ** (power + 2)
     best_mass = (n + 1) ** 2
-    best_examples: list[tuple[int, int, int, dict[int, int]]] = []
+    best_examples: list[tuple[int, int, int, int, dict[int, int]]] = []
 
     for column in columns:
         extended = extend_mask(mask, n, column, pc, pc_plus)
@@ -111,7 +111,7 @@ def extension_profile(
             best_examples = []
         if extended_value == best_value and len(best_examples) < 10:
             best_examples.append(
-                (column, extended_mass, extended_value, extended_by_degree)
+                (column, extended, extended_mass, extended_value, extended_by_degree)
             )
 
     print(f"n={n}")
@@ -128,9 +128,15 @@ def extension_profile(
     print(f"minimum_extended_mass={best_mass}")
     print(f"minimum_extended_power_sum={best_value}")
     print(f"minimum_power_increment={best_value - value}")
-    for column, extended_mass, extended_value, extended_by_degree in best_examples:
+    for (
+        column,
+        extended,
+        extended_mass,
+        extended_value,
+        extended_by_degree,
+    ) in best_examples:
         print(
-            f"best column={column} mass={extended_mass} "
+            f"best column={column} mask={extended} mass={extended_mass} "
             f"power_sum={extended_value} by_degree={extended_by_degree}"
         )
 
