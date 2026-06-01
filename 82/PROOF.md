@@ -14246,6 +14246,42 @@ s_d(G) >= |R|.
 
 Adding the two displays gives the claim.  QED.
 
+**Lemma 28J.4a: Regular Feedback Partitions Force Spectrum Mass.**  Let `G`
+be a graph with a vertex partition
+
+```text
+V(G)=F union R_1 union ... union R_t
+```
+
+such that `G[F]` is a forest and, for each `i`, `G[R_i]` is induced
+`d_i`-regular, where
+
+```text
+2 <= d_1 < d_2 < ... < d_t.
+```
+
+Then
+
+```text
+sum_j s_j(G) >= |V(G)|.
+```
+
+Proof.  As in Lemma 28J.4, the forest part contributes
+
+```text
+s_0(G)+s_1(G) >= |F|.
+```
+
+For each `i`, the set `R_i` contributes
+
+```text
+s_{d_i}(G) >= |R_i|.
+```
+
+The degrees `d_i` are distinct and are not `0` or `1`, so these contributions
+use disjoint spectrum coordinates.  Adding them gives the displayed
+inequality.  QED.
+
 **Corollary 28J.5: Pseudoforests Satisfy Spectrum Mass.**  If every
 connected component of `G` has at most one cycle, then
 
@@ -14258,6 +14294,28 @@ the component is a tree, this is Lemma 28J.3.  Otherwise let `C` be its unique
 cycle.  The cycle is induced, since a chord would create a second cycle, so
 `C` is an induced `2`-regular subgraph.  Removing `V(C)` leaves a forest
 `F`, so Lemma 28J.4 applies with `R=V(C)` and `d=2`.  QED.
+
+**Lemma 28J.5a: Apex Forests Satisfy Spectrum Mass.**  Let `G` be a graph
+with a vertex `z` such that `G-z` is a forest.  Then
+
+```text
+sum_d s_d(G) >= |V(G)|.
+```
+
+Proof.  If `G` is itself a forest, this is Lemma 28J.3.  Otherwise `G`
+contains a cycle, and every cycle must contain `z` because `G-z` is acyclic.
+Thus `z` has two neighbors in the same component of the forest `G-z`.
+
+Choose two such neighbors `x,y` at minimum possible distance in the tree
+component.  Then the unique `x`-to-`y` path in `G-z` contains no internal
+neighbor of `z`, because any such internal neighbor would be closer to one of
+`x,y`.  The cycle formed by this path together with the two edges `zx` and
+`zy` is induced: the path lies in a tree and has no chord, and `z` is
+adjacent to no internal vertex of the path by the choice of `x,y`.
+
+Let `R` be the vertex set of this induced cycle.  Then `G[R]` is `2`-regular.
+Also `G-R` is an induced subgraph of the forest `G-z`, hence is a forest.
+Lemma 28J.4 applies with this `R` and proves the claim.  QED.
 
 **Lemma 28J.6: Split Graphs Satisfy Spectrum Mass.**  If `G` is a split
 graph, then
@@ -14460,6 +14518,33 @@ These commands report extension-increment histograms `{1:751}` and
 `{1:3781}`, respectively.  Thus every checked equality graph has the stronger
 property that every one-vertex extension raises spectrum mass by exactly one
 at minimum.
+
+**Computational Observation 28J.10: Equality Graphs Have Spectral Partitions
+In Small Orders.**  Say that a graph `G` has a spectral partition if, for
+every degree `d` with `s_d(G)>0`, one can choose an induced `d`-regular set of
+order exactly `s_d(G)` so that the chosen sets are pairwise disjoint and cover
+`V(G)`.  This is possible only when `sum_d s_d(G)=|V(G)|`.
+
+The checker `EXPERIMENTS/spectrum_partition.py` verifies that every equality
+graph through seven vertices has such a partition:
+
+```text
+python3 82/EXPERIMENTS/spectrum_partition.py 6 --equality-only
+python3 82/EXPERIMENTS/spectrum_partition.py 7 --equality-only
+```
+
+The outputs report `751/751` and `3781/3781` equality graphs with spectral
+partitions.  The dense equality example with mask `7261029317050` on ten
+vertices also has a spectral partition:
+
+```text
+python3 82/EXPERIMENTS/spectrum_partition.py 10 --mask 7261029317050
+```
+
+with parts of degrees `0,1,2` and orders `4,2,4`.  By contrast, spectral
+partitioning is not a general consequence of large spectrum mass: the earlier
+six-vertex mask `659` has `sum_d s_d(G)=7>|V(G)|` but no such partition of
+the full maximum spectrum.
 
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all

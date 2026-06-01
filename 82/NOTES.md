@@ -3899,3 +3899,25 @@ source of growth beyond Ramsey.
   subcliques.  Thus the spectral route now has a precise polylogarithmic
   gap: improve the homogeneous `2` exponent by any fixed amount, or prove the
   equality-extension lemma.
+- 2026-06-01: Added `spectrum_partition.py` for the structural equality case.
+  A spectral partition chooses one maximum `d`-regular witness for every
+  positive spectrum entry and asks that these witnesses be disjoint and cover
+  all vertices.  Exact equality graphs through `n=7` all have such a
+  partition (`751/751` at `n=6`, `3781/3781` at `n=7`), and the dense
+  equality example on `10` vertices with mask `7261029317050` partitions into
+  an independent `4`-set, one edge, and an induced `4`-cycle.  This is false
+  for general non-equality graphs: the earlier mask `659` has `mu=7>6` and no
+  spectral partition.
+- 2026-06-01: Extended the forest spectrum-mass proof to apex forests.  If
+  `G-z` is a forest and `G` is not a forest, choose two consecutive neighbors
+  of `z` in a tree component; the path between them plus `z` is an induced
+  cycle.  Removing that induced cycle leaves a forest, so the regular
+  feedback-set lemma applies.  Hence every one-vertex extension of a forest
+  satisfies `mu(G)>=|G|`, a rigorous partial case of the equality-extension
+  target.
+- 2026-06-01: Generalized the regular-feedback-set lemma to regular feedback
+  partitions: if deleting a forest leaves induced regular pieces whose
+  degrees are distinct and at least `2`, then the pieces contribute in
+  disjoint spectrum coordinates while the forest contributes through
+  `s_0+s_1`.  This is a reusable decomposition target for future attempts to
+  prove spectrum mass by carving out several cycle/core pieces instead of one.

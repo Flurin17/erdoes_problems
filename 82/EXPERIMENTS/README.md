@@ -13,6 +13,9 @@ Computational checks and generated data for Erdos Problem 82.
   spectrum-mass parameter, including exact small-order histograms of
   `mu(G)-|G|`, the drops `mu(G)-mu(G-v)`, and the one-vertex extension test
   for equality graphs.
+- `spectrum_partition.py`: checks whether a graph has a spectral partition,
+  meaning one maximum induced `d`-regular witness for every positive spectrum
+  entry, chosen disjointly so that the witnesses cover all vertices.
 - `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
   ordered graph, including fixed-mask, explicit-column, lower-family, exact
   enumeration, and no-regular-`h` obstruction modes.
