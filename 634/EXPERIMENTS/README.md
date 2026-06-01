@@ -246,7 +246,7 @@ Current components:
   `results/n99_mixed6_word_quotient_summary.json`. The runner supports
   `--skip-classified-words` for disjoint classification intervals.
   Its `--classification-mode exhaustive` option checks every oriented
-  realization of each selected word group. For `N=99` mixed `6`, this
+  realization of each selected word or profile group. For `N=99` mixed `6`, this
   exhaustive mode now covers all `418260` word groups and all `5867040`
   outside-cover realizations, with no mixed-status word group and no count
   mismatches.
@@ -269,6 +269,10 @@ Current components:
   outside-cover shells; the first `10000` profile groups have no mixed
   representative status, with weighted status counts `23660` corner-label,
   `8370` pinch-sector, and `4320` split-corner-label obstructions.
+  Exhaustively replaying the first `1000` profile groups checks all `3530`
+  outside-cover realizations in those groups and finds no mixed-status profile
+  group or count mismatch; the exact split is `2720` corner-label violations
+  and `810` pinch-sector obstructions.
   A generated-shell prefix probe over the first `100000` shells also found no
   mixed-status profile group among `10560` touched groups.
 - `gamma_2alpha_word_invariance_probe.py`: exhaustive fixed-word tester for

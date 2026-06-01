@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Count and sample-classify outside-cover shells by side-label word triples.
+"""Count and sample-classify outside-cover shells by quotient signatures.
 
 This is an experimental quotient for the remaining `gamma=2alpha` boundary
 shells.  It uses the same count-only local-cover factorization as
 `gamma_2alpha_overlap_remainder_inventory.py`, but aggregates uncovered shells
-by `(left label word, right label word, base label word)` and then classifies a
-bounded number of representative demands from those word groups.
+by `(left label word, right label word, base label word)` or by a stricter
+profile signature and then classifies a bounded number of representatives or,
+for selected groups, every oriented realization in the group.
 """
 
 from __future__ import annotations
@@ -267,6 +268,71 @@ def census_survivor(
                                     statuses[classify_shell(survivor, demand, radicand).status] += 1
         return statuses
 
+    def classify_signatures_exhaustively(signatures: set[str]) -> dict[str, Counter[str]]:
+        statuses_by_signature = {signature: Counter() for signature in signatures}
+        if not signatures:
+            return statuses_by_signature
+        seen_demands = set()
+        for short_side, left_reps, right_reps in orientations:
+            for left_rep in left_reps:
+                for right_rep in right_reps:
+                    for base_rep in base_reps:
+                        for left_key, left_paths in indexes[left_rep].items():
+                            left_first, left_last, left_mixed = left_key
+                            for right_key, right_paths in indexes[right_rep].items():
+                                right_first, right_last, right_mixed = right_key
+                                if left_mixed + right_mixed > max_total_mixed:
+                                    continue
+                                if not apex_corner(left_last, right_first):
+                                    continue
+                                for base_key, base_paths in indexes[base_rep].items():
+                                    base_first, base_last, base_mixed = base_key
+                                    total_mixed = left_mixed + right_mixed + base_mixed
+                                    if not min_total_mixed <= total_mixed <= max_total_mixed:
+                                        continue
+                                    if not alpha_corner(right_last, base_first):
+                                        continue
+                                    if not alpha_corner(base_last, left_first):
+                                        continue
+                                    for left_path in left_paths:
+                                        left_quotient_key = path_quotient_key("L", left_path)
+                                        for right_path in right_paths:
+                                            if not apex_corner(left_path[-1], right_path[0]):
+                                                continue
+                                            right_quotient_key = path_quotient_key("R", right_path)
+                                            for base_path in base_paths:
+                                                if not alpha_corner(right_path[-1], base_path[0]):
+                                                    continue
+                                                if not alpha_corner(base_path[-1], left_path[0]):
+                                                    continue
+                                                signature = group_signature(
+                                                    left_quotient_key,
+                                                    right_quotient_key,
+                                                    path_quotient_key("B", base_path),
+                                                )
+                                                if signature not in signatures:
+                                                    continue
+                                                demand = BoundaryDemand(
+                                                    short_side=short_side,
+                                                    left_rep=left_rep,
+                                                    right_rep=right_rep,
+                                                    base_rep=base_rep,
+                                                    mixed_transitions=total_mixed,
+                                                    left_path=left_path,
+                                                    right_path=right_path,
+                                                    base_path=base_path,
+                                                )
+                                                key = demand_key(demand)
+                                                if key in seen_demands:
+                                                    continue
+                                                seen_demands.add(key)
+                                                if demand_covered(demand):
+                                                    continue
+                                                statuses_by_signature[signature][
+                                                    classify_shell(survivor, demand, radicand).status
+                                                ] += 1
+        return statuses_by_signature
+
     started = time.monotonic()
     for short_side, left_reps, right_reps in orientations:
         for left_rep in left_reps:
@@ -341,6 +407,14 @@ def census_survivor(
     word_count_mismatches: list[dict[str, object]] = []
     classified_words = 0
     classified_weight = 0
+    selected_exhaustive_statuses: dict[str, Counter[str]] = {}
+    if classification_mode == "exhaustive" and quotient != "word":
+        selected_signatures = {
+            signature
+            for word_index, (signature, _multiplicity) in enumerate(quotient_counts.items(), start=1)
+            if skip_classified_words < word_index <= skip_classified_words + max_classified_words
+        }
+        selected_exhaustive_statuses = classify_signatures_exhaustively(selected_signatures)
     for word_index, (signature, multiplicity) in enumerate(quotient_counts.items(), start=1):
         if word_index <= skip_classified_words:
             continue
@@ -354,9 +428,10 @@ def census_survivor(
             status_weights = Counter({next(iter(statuses)): multiplicity})
             word_weight = multiplicity
         elif classification_mode == "exhaustive":
-            if quotient != "word":
-                raise ValueError("exhaustive classification is only implemented for word quotient")
-            statuses = classify_word_exhaustively(signature)
+            if quotient == "word":
+                statuses = classify_word_exhaustively(signature)
+            else:
+                statuses = selected_exhaustive_statuses[signature]
             status_weights = statuses
             word_weight = sum(statuses.values())
             if word_weight != multiplicity:
@@ -465,9 +540,6 @@ def main() -> None:
         raise SystemExit("--max-classified-words must be positive")
     if args.example_words_per_status < 0:
         raise SystemExit("--example-words-per-status must be nonnegative")
-    if args.classification_mode == "exhaustive" and args.quotient != "word":
-        raise SystemExit("--classification-mode exhaustive is only implemented with --quotient word")
-
     results = []
     for n in args.n:
         survivors = refined_survivors_for_n(n)

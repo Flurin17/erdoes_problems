@@ -1,0 +1,88 @@
+{
+  "classification_mode": "exhaustive",
+  "classified_groups": 1000,
+  "classified_weight": 3530,
+  "classified_words": 1000,
+  "elapsed_seconds": 452.973532,
+  "endpoint_groups": 30,
+  "example_words": {
+    "corner-label-violation": [
+      {
+        "multiplicity": 3,
+        "statuses": {
+          "corner-label-violation": 3
+        },
+        "word": "L[c=5,6 mix=4,6 test=aa fan=4:bc:gamma+alpha:a>b:beta|6:cb:beta+gamma:a>a:alpha] R[c=6,7 mix=5 test=bcc fan=5:bc:gamma+beta:a>a:alpha] B[c=5,7,9 mix=4,5,6,7,8 test=aaacb fan=4:ac:gamma+alpha:b>b:beta|5:cb:beta+alpha:a>c:2alpha/gamma|6:bc:gamma+alpha:a>b:beta|7:cb:beta+gamma:a>a:alpha|8:bc:alpha+beta:c>a:2alpha/gamma]"
+      },
+      {
+        "multiplicity": 1,
+        "statuses": {
+          "corner-label-violation": 1
+        },
+        "word": "L[c=5,6 mix=4,6 test=aa fan=4:bc:gamma+alpha:a>b:beta|6:cb:beta+gamma:a>a:alpha] R[c=6,7 mix=5 test=acc fan=5:ac:gamma+beta:b>a:alpha] B[c=5,7,9 mix=4,5,6,7,8 test=aaacb fan=4:ac:gamma+alpha:b>b:beta|5:cb:beta+alpha:a>c:2alpha/gamma|6:bc:gamma+alpha:a>b:beta|7:cb:beta+gamma:a>a:alpha|8:bc:alpha+beta:c>a:2alpha/gamma]"
+      }
+    ],
+    "pinch-sector-obstruction": [
+      {
+        "multiplicity": 3,
+        "statuses": {
+          "pinch-sector-obstruction": 3
+        },
+        "word": "L[c=5,6 mix=4,6 test=ba fan=4:ac:gamma+alpha:b>b:beta|6:cb:beta+gamma:a>a:alpha] R[c=6,7 mix=5 test=bcc fan=5:bc:gamma+beta:a>a:alpha] B[c=5,7,9 mix=4,5,6,7,8 test=aaacb fan=4:ac:gamma+alpha:b>b:beta|5:cb:beta+alpha:a>c:2alpha/gamma|6:bc:gamma+alpha:a>b:beta|7:cb:beta+gamma:a>a:alpha|8:bc:alpha+beta:c>a:2alpha/gamma]"
+      },
+      {
+        "multiplicity": 1,
+        "statuses": {
+          "pinch-sector-obstruction": 1
+        },
+        "word": "L[c=5,6 mix=4,6 test=ba fan=4:ac:gamma+alpha:b>b:beta|6:cb:beta+gamma:a>a:alpha] R[c=6,7 mix=5 test=acc fan=5:ac:gamma+beta:b>a:alpha] B[c=5,7,9 mix=4,5,6,7,8 test=aaacb fan=4:ac:gamma+alpha:b>b:beta|5:cb:beta+alpha:a>c:2alpha/gamma|6:bc:gamma+alpha:a>b:beta|7:cb:beta+gamma:a>a:alpha|8:bc:alpha+beta:c>a:2alpha/gamma]"
+      }
+    ]
+  },
+  "first_classified_group_index": 1,
+  "first_classified_word_index": 1,
+  "last_classified_group_index": 1000,
+  "last_classified_word_index": 1000,
+  "max_total_mixed": 8,
+  "min_total_mixed": 8,
+  "mixed_example_words": [],
+  "mixed_status_words": 0,
+  "n": 63,
+  "outside_cover_shells": 3382720,
+  "profile_groups": 1493568,
+  "quotient": "profile",
+  "quotient_groups": 1493568,
+  "radicand": 5,
+  "reps_per_group": 1,
+  "reps_per_word": 1,
+  "skip_classified_groups": 0,
+  "skip_classified_words": 0,
+  "status_group_counts": {
+    "corner-label-violation": 730,
+    "pinch-sector-obstruction": 270
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 1}": 230,
+    "{\"corner-label-violation\": 3}": 230,
+    "{\"corner-label-violation\": 4}": 45,
+    "{\"corner-label-violation\": 5}": 45,
+    "{\"corner-label-violation\": 6}": 45,
+    "{\"corner-label-violation\": 7}": 45,
+    "{\"corner-label-violation\": 9}": 90,
+    "{\"pinch-sector-obstruction\": 1}": 90,
+    "{\"pinch-sector-obstruction\": 3}": 90,
+    "{\"pinch-sector-obstruction\": 4}": 45,
+    "{\"pinch-sector-obstruction\": 6}": 45
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 2720,
+    "pinch-sector-obstruction": 810
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "word_count_mismatches": [],
+  "word_groups": null
+}
