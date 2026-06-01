@@ -24843,6 +24843,42 @@ least one of two quantities large in some profile at the relevant tested
 scale: the packet width \(w\), or the displacement between the packet
 center and every auxiliary midpoint in that profile.
 
+### Corollary 16.108: Finite exclusion forces a center-far profile
+
+Keep the notation and hypotheses of Corollary 16.106. Write
+\[
+p^-=\min P,\qquad p^+=\max P,\qquad w=p^+-p^-.
+\]
+If
+\[
+P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda=\varnothing, \tag{1}
+\]
+then there is a profile \(\lambda\in\mathcal B\) such that every auxiliary
+interval
+\[
+K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
+\]
+in that profile satisfies
+\[
+\left|p^-+p^+ + a_\lambda+b_\lambda
+      -2(c_{\lambda,i}+d_{\lambda,i})\right|
+      +w
+\ge \gamma_\lambda n_\lambda-D_\lambda. \tag{2}
+\]
+
+Proof. This is the contrapositive of Corollary 16.107. If every
+\(\lambda\in\mathcal B\) had at least one auxiliary interval for which
+(2) failed, then Corollary 16.107 would give
+\[
+P\subseteq\bigcap_{\lambda\in\mathcal B}C_\lambda,
+\]
+contradicting (1). \(\square\)
+
+Thus the packetwise finite witness supplied by Corollary 16.93 cannot be
+made entirely from profiles with one centered linear core over the packet.
+At least one selected profile must see the whole packet as too wide or too
+far from all of its auxiliary midpoints.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26217,6 +26253,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.107 gives the centered-packet form: if packets are narrow
   and every profile has one robust core centered near the packet, finite
   robust exclusion is impossible.
+* Corollary 16.108 records the contrapositive: every finite robust
+  exclusion has a profile whose auxiliary midpoints are all center-far
+  after accounting for packet width.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

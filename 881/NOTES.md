@@ -181,6 +181,9 @@ still expose a long-range witness in one selected profile.
 Corollary 16.107 translates endpoint proximity into a packet-center
 criterion: a narrow packet cannot be excluded by profiles that each have
 one robust core centered near that packet.
+Corollary 16.108 gives the contrapositive residual: every finite robust
+exclusion has a profile for which all auxiliary midpoints are center-far
+after paying the packet width.
 
 ## Definitions
 
