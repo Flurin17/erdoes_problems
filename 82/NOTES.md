@@ -3524,3 +3524,11 @@ source of growth beyond Ramsey.
   satisfies `alpha+omega>=6=ceil((n+3)/2)`.  The next proof target after the
   triangle-free case is therefore the `omega=3` case, where the finite minimum
   is already tight at `alpha=3`.
+- 2026-06-01: Ran the enhanced bucket census at `P=2,n=9`.  Bucket minima are
+  `omega:min_alpha = 1:9, 2:4, 3:3, 4:2, 5:2, 6:2, 7:2, 8:2, 9:1`; again
+  every bucket satisfies `alpha+omega>=6=ceil((n+3)/2)`.  A direct induction
+  for the `omega=3` case gets stuck when the first vertex has two or three
+  neighbors: the residual induction loses exactly the extra independent
+  vertex needed.  The next proof attempt should exploit the type structure of
+  vertices that miss one first-neighborhood vertex, rather than just deleting
+  the first closed neighborhood.
