@@ -45,6 +45,12 @@ of residues destroys 3-basis status. Such examples are plentiful in small
 cyclic groups, but lifting them to integer element deletions is the hard
 part.
 
+`colored_marker_obstruction_check.py` exhaustively checks the small cyclic
+cases of Lemma 16.0-pre: full one-from-each-class colored marker coverage
+automatically gives a \((k+1)\)-term marker representation with an extra
+marker from any chosen class, so mandatory-marker residue privacy cannot by
+itself lift to singleton integer privacy.
+
 `rep_hypergraph_stats.py` computes finite representation-hypergraph edge
 counts, maximum degrees, and greedy matching sizes for sample models. It is
 meant to sanity-check the matching criterion in Proposition 3.4.

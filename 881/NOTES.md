@@ -2406,6 +2406,22 @@ generalize: once mirrors may live in lower sumsets, the residue layer has
 real adjacent-order private holes. The missing issue is elementwise
 integer lifting, not residue arithmetic.
 
+Lemma 16.0-pre adds a finite obstruction to the mandatory-marker version of
+that lift. If colored marker classes \(C_1,\ldots,C_k\) satisfy
+\[
+C_1+\cdots+C_k=G,
+\]
+then every residue \(r\) and every extra marker \(z\in C_j\) has a
+\((k+1)\)-term marker representation
+\[
+r=z+c_1+\cdots+c_k,\qquad c_i\in C_i.
+\]
+Thus no residue can force all \((k+1)\)-marker representations to use
+exactly one prescribed marker from class \(j\). A successful lift must use
+endpoint high-digit constraints, omit zero-high padders, or make the
+barriers collective rather than relying only on singleton colored residue
+privacy.
+
 Lemma 16.0 rules out the simplest lift in every order. If \(A=C\cup M\) has
 finite core \(C\) and order-\(k\) tail coverage by one marker plus a fixed
 core sum,

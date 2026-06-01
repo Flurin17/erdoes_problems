@@ -19738,6 +19738,47 @@ unresolved part is still the integer lift, where deleting one integer does
 not delete its whole residue class and central quotient representations
 replace the missing representative.
 
+### Lemma 16.0-pre: Full colored coverage destroys marker privacy
+
+Let \(G\) be an abelian group, and let
+\[
+C_1,\ldots,C_k\subset G
+\]
+be nonempty finite marker sets satisfying the full colored coverage
+condition
+\[
+C_1+\cdots+C_k=G. \tag{1}
+\]
+Fix a class \(j\), a marker \(c\in C_j\), and a residue \(r\in G\). Then
+for every \(z\in C_j\) there is a \((k+1)\)-term marker representation of
+\(r\) using at least two markers from class \(j\):
+\[
+r=z+c_1+\cdots+c_k,\qquad c_i\in C_i. \tag{2}
+\]
+In particular, no residue \(r\) can have the property that every
+\((k+1)\)-term marker representation of \(r\) uses exactly one marker from
+class \(j\), or exactly one prescribed marker \(c\) from class \(j\).
+
+Proof. Since \(r-z\in G\), the full coverage condition (1) gives
+\[
+r-z=c_1+\cdots+c_k,\qquad c_i\in C_i.
+\]
+Adding \(z\in C_j\) gives (2). The representation (2) contains both the
+extra marker \(z\) and the class-\(j\) marker \(c_j\) from the covering
+sum, counted with multiplicity. Thus it has at least two markers from
+class \(j\). This contradicts any proposed uniqueness condition requiring
+exactly one class-\(j\) marker in all \((k+1)\)-term representations.
+\(\square\)
+
+This rules out a tempting mandatory-marker lift of the finite residue
+boosters. If an integer construction includes zero-high representatives for
+all marker types and relies only on colored residue arithmetic, then any
+private residue can be padded by another marker from the same structural
+class and recovered by a colored \(k\)-term cover of the shifted residue.
+A viable lift must therefore remove these zero-high padders, force endpoint
+high-digit constraints, or use collective barriers rather than singleton
+marker privacy.
+
 ### Lemma 16.0: Finite-core one-marker coverage repairs finite marker deletions
 
 Let \(r\ge1\), let \(C\subset\mathbb N\) be finite, and let
