@@ -2149,6 +2149,13 @@ finite stage \((a,b,w)=(20,41,47)\), producing forced rows
 \[
 (p,w-a-p)=(5,22),(21,6),(23,4).
 \]
+Corollary 16.4 packages these rows as a finite prefilter for pair witnesses:
+the terminal interval above \(w-a-2m_0\) must be empty of retained padders,
+and the whole intermediate interval between the \(b\)-cut and the \(a\)-cut
+must reflect through the old gate \(a\) into \(2(A\setminus\{b\})\). The
+same diagnostic classifies candidate third-stage witnesses; for
+\(b=41,43\), most failed old pairs are rejected by missing shadow rows, with
+only a few low-endpoint candidates falling to unrelated four-term repairs.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

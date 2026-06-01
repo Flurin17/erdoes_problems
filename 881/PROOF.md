@@ -18635,6 +18635,50 @@ failure is exactly the finite manifestation of this pressure: candidate
 new elements can extend three-fold coverage, but cannot simultaneously give
 all old endpoints the required \(2A\)-shadow rows before the terminal gap.
 
+### Corollary 16.4: Pair-witness shadow prefilter
+
+Keep the hypotheses of Lemma 16.3, and assume also that
+\[
+a+2m_0\ge N_0. \tag{0}
+\]
+If \(w\) is a valid pair witness for \(\{a,b\}\), meaning
+\[
+w\notin4(A\setminus\{a,b\}),
+\]
+then, with \(C=A\setminus\{a,b\}\), the following two necessary conditions
+hold:
+
+1. **terminal gap**
+   \[
+   C\cap(w-a-2m_0,\ w-N_0]=\varnothing; \tag{1}
+   \]
+2. **old-gate shadow rows**
+   \[
+   w-a-p\in2(A\setminus\{b\}) \tag{2}
+   \]
+   for every
+   \[
+   p\in C\cap(w-b-2m_0,\ w-a-2m_0].
+   \]
+
+Proof. The terminal gap is Lemma 16.3(3). For the shadow rows, every
+\[
+p\in C\cap(w-b-2m_0,\ w-a-2m_0]
+\]
+satisfies \(p>w-b-2m_0\) and \(p\le w-a-2m_0\). If also \(w-p<N_0\), then
+\[
+w-p\ge a+2m_0\ge N_0,
+\]
+contradiction. Thus \(w-p\ge N_0\), so Lemma 16.3(2) applies and gives
+(2). \(\square\)
+
+The script `EXPERIMENTS/pair_shadow_rows.py` uses (1)--(2) as a finite
+prefilter on the robust-booster third stage. For candidates \(b=41,43\),
+most old-pair witness candidates are rejected by a missing old-gate shadow
+row, and the high candidates for larger old endpoints are rejected by the
+terminal gap. The few remaining rejected candidates have ordinary
+four-term repairs not detected by this necessary test.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -19624,11 +19668,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the third stage because singleton candidates \(41,43\) extend coverage but
   fail simultaneous pair witnesses against many old elements; the obstruction
   is domination, not coverage alone.
-* Target 16.2 and Lemma 16.3 isolate the current \(k=3\) moving-core target:
-  after finite-core marker coverage is ruled out, every old-new pair witness
-  must either be eventually repaired or force old-gate \(2A\)-shadow rows
-  \(w-a-p\in2(A\setminus\{b\})\) across the interval where the new endpoint
-  \(b\) is too large to participate.
+* Target 16.2 and Lemmas 16.3--16.4 isolate the current \(k=3\)
+  moving-core target: after finite-core marker coverage is ruled out, every
+  old-new pair witness must either be eventually repaired or force old-gate
+  \(2A\)-shadow rows \(w-a-p\in2(A\setminus\{b\})\) across the interval
+  where the new endpoint \(b\) is too large to participate; the finite
+  prefilter rejects most robust-booster third-stage candidates by missing
+  shadow rows.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
