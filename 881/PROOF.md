@@ -20999,6 +20999,50 @@ bounded-depth nonsingleton escape must either keep the row-dependent packet
 below this finite-color threshold, make the finite tests contain large
 certificate-free subsets, or concentrate in the gate-dependent branch.
 
+### Lemma 16.39: Gate-dependent packets are finite-palette independent
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite and nonempty, and
+put
+\[
+C=A\setminus F.
+\]
+Fix \(f\in F\), and let \(U\subset C\) satisfy
+\[
+f+u\notin2C\qquad(u\in U). \tag{1}
+\]
+Then
+\[
+(U+f-U)\cap A\subseteq F. \tag{2}
+\]
+Equivalently, if \(u,v\in U\) and
+\[
+u+f-v\in A,
+\]
+then \(u+f-v\in F\).
+
+Proof. Suppose
+\[
+x=u+f-v\in A\setminus F
+\]
+for some \(u,v\in U\). Since \(v\in U\subset C\) and \(x\in C\), we get
+\[
+f+u=x+v\in2C,
+\]
+contradicting (1). Therefore no such \(x\) lies in \(A\setminus F\), which
+is exactly (2). \(\square\)
+
+For \(|F|=1\), this is Corollary 16.22. For nonsingleton traces the
+forbidden translate set is allowed to hit the finite active palette \(F\),
+so the surviving gate branch is not ordinary Sidon independence. It is a
+finite-palette independence condition:
+\[
+U+f-U
+\]
+must avoid the retained set \(C\). A positive proof must either turn this
+finite-palette avoidance into a density or coverage contradiction, or show
+that a counterexample can stage these avoided difference translates without
+breaking order-\(3\) coverage.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22138,6 +22182,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   a \(k=3\) certificate tuple, too many row-dependent \(2A\)-rows force an
   actual \(A\)-reflected certificate and hence a good order-\(4\) deletion
   by Lemma 2.3b.
+* Lemma 16.39 handles the other half of the split: a large gate-dependent
+  packet is independent modulo the finite deleted palette,
+  \((U+f-U)\cap A\subseteq F\). This is the nonsingleton replacement for
+  the singleton unique-gate condition of Corollary 16.22.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

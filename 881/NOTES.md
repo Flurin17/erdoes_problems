@@ -27,6 +27,9 @@ finite-color problem in the nonsingleton branch.
 Corollary 16.38 rules out the large row-dependent bounded-rank subbranch
 over certificate-dense finite tests, because pigeonholing over the deleted
 palette recovers an actual \(A\)-reflected \(k=3\) certificate tuple.
+Lemma 16.39 identifies the gate-dependent alternative as finite-palette
+independence: \(U+f-U\) may hit the deleted active palette, but it must
+avoid the retained set.
 
 ## Definitions
 
