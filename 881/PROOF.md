@@ -20349,6 +20349,54 @@ the next bridge near the \(O(L^2)\) finite range, protect substantially
 fewer than half of the bridge elements at that stage, or arrange staggered
 witness windows so that the active row ranges do not share one dense block.
 
+### Corollary 16.28: Abstract bridge covers are Sidon-limited
+
+Let \(P,D\subset\mathbb N\) be finite, and let \(J\subset\mathbb N\) be an
+interval of length
+\[
+R=|J|.
+\]
+Suppose
+\[
+J\subset P+D. \tag{1}
+\]
+Let \(Q\subset P\), \(|Q|\ge |P|/2\), and suppose that for every \(q\in Q\),
+\[
+\bigl((P\setminus\{q\})+q-(P\setminus\{q\})\bigr)\cap P\subset\{q\}. \tag{2}
+\]
+Put
+\[
+H=|D|,\qquad \Delta=\max P-\min P.
+\]
+If \(R\ge H\), then
+\[
+{3R^2\over8H^2}-{R\over4H}\le2\Delta+1. \tag{3}
+\]
+
+Proof. Write \(m=|P|\). Since each translate \(p+D\) contains at most
+\(H\) points of \(J\), the cover (1) gives
+\[
+mH\ge R,\qquad m\ge R/H. \tag{4}
+\]
+If \(m=1\), then \(R\le H\), so the assumption \(R\ge H\) gives \(R=H\);
+then the left side of (3) is \(1/8\), while the right side is at least
+\(1\). Thus assume \(m\ge2\).
+
+Lemma 16.26 gives
+\[
+{3m^2\over8}-{m\over4}\le2\Delta+1. \tag{5}
+\]
+The function \(u\mapsto3u^2/8-u/4\) is increasing for \(u\ge1\), and
+\(R/H\ge1\). Combining (4) and (5) proves (3). \(\square\)
+
+This is the reusable finite pressure behind Lemma 16.27. To build a
+same-window singleton bridge, one pays for interval coverage by making
+\(|P|\) large relative to \(|D|\), while simultaneous gate-independence
+forces \(P\) to have Sidon-scale size inside its diameter. Any construction
+route using dense translate covers must therefore explain which hypothesis
+of Corollary 16.28 fails: the protected targets are sparse, the active row
+sets differ, or the witness windows are staggered.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21434,6 +21482,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   covering \([x+3L+1,2x]\) cannot have a gate-independent half-packet over
   its own bridge rows. Any iterable singleton bridge must therefore be
   near-range, sparse-protected, or staggered-window.
+* Corollary 16.28 records the abstract inequality: if an interval \(J\) of
+  length \(R\) is covered by \(P+D\), and a half of \(P\) is simultaneously
+  gate-independent over \(P\), then
+  \(3R^2/(8|D|^2)-R/(4|D|)\le2(\max P-\min P)+1\).
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

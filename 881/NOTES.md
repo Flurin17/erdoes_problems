@@ -2439,6 +2439,16 @@ width \(O(x)\). Thus an interval-marker singleton construction can only
 escape by staying in a bounded \(O(L^2)\) bridge range, protecting fewer
 than half the bridge elements at a time, or staggering witness windows so
 the common-row Sidon argument does not apply.
+Corollary 16.28 abstracts the estimate: for any translate bridge
+\(J\subset P+D\), \(|J|=R\), a gate-independent half of \(P\) over the same
+rows forces
+\[
+{3R^2\over8|D|^2}-{R\over4|D|}
+   \le 2(\max P-\min P)+1.
+\]
+This gives a quick finite pressure test for future staged constructions:
+dense interval coverage by a small old sumset and simultaneous same-window
+protection are incompatible beyond Sidon scale.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
