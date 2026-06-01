@@ -3185,7 +3185,7 @@ Proof. Since \(\ell=2\), the deleted multiset \(S\) from Corollary
 \]
 is a two-term representation of \(m_u=g+u\), and \(u\notin F\) because
 \[
-U\subset A\setminus(D\cup E),\qquad F\subset D.
+U\subset A\setminus(E\cup F).
 \]
 If \(g\notin F\), this pair would survive after deleting \(F\), contrary to
 \[
@@ -3283,6 +3283,74 @@ order lower. The unresolved higher-order issue is whether these shadows can
 be iterated until they either produce the reflected two-sum packets of
 Corollary 3.4d.14, or supply enough protected lower-order repairs to build
 the deletion promised by Lemma 2.2.
+
+### Corollary 3.4d.16: The \(k=3\) lower-barrier dichotomy
+
+Assume that \(A\) is an order-\(3\) basis and that no infinite deletion
+from \(A\) remains an order-\(4\) basis. Let \(E\subset A\) be finite. Then
+there are constants
+\[
+q_E,\qquad c_E>0,
+\]
+and arbitrarily large witnesses with a finite set
+\[
+F\subset A\setminus E,\qquad 1\le |F|\le q_E,
+\]
+a set
+\[
+U\subset A\setminus(E\cup F),\qquad |U|\ge c_EA(w)^{1/3},
+\]
+and one of the following two alternatives.
+
+1. **Pair branch.** There is a gate \(g\in F\) such that, for every
+   \(u\in U\),
+   \[
+   g+u\notin2(A\setminus F),
+   \]
+   \(F\) is an inclusion-minimal vertex cover of the two-sum graph of
+   \(g+u\), and
+   \[
+   U+g-F\subset A. \tag{1}
+   \]
+2. **Triple-shadow branch.** There is a two-element deleted multiset \(S\)
+   from \(A\setminus E\), with
+   \[
+   \tau=\sigma(S),
+   \]
+   such that
+   \[
+   \operatorname{supp}(S)\cap F\ne\varnothing, \tag{2}
+   \]
+   and, for every \(u\in U\),
+   \[
+   \tau+u\notin3(A\setminus F), \tag{3}
+   \]
+   \(F\) is an inclusion-minimal vertex cover of the three-sum
+   representation hypergraph of \(\tau+u\), and
+   \[
+   U+\tau-F\subset2A. \tag{4}
+   \]
+   More precisely, for every \(f\in F\),
+   \[
+   \tau+u-f\in2(A\setminus(F\setminus\{f\})). \tag{5}
+   \]
+
+Proof. Apply Corollary 3.4d.13 with \(k=3\). Then
+\[
+\ell\in\{2,3\}.
+\]
+If \(\ell=2\), Corollary 3.4d.14 gives the pair branch. If \(\ell=3\),
+then the multiset \(S\) has size two, and Corollary 3.4d.15 gives
+(2), (4), and the sharper shadow statement (5); the lower-order hole and
+inclusion-minimal cover statements are exactly those of Corollary 3.4d.13.
+\(\square\)
+
+Thus every \(k=3\) counterexample must repeatedly present either a genuine
+two-sum reflected cover packet, or a three-sum active cover packet whose
+finite palette casts coherent two-sum shadows. The remaining gap is now
+sharp: the pair branch is in the finite-palette independence regime, while
+the triple-shadow branch still permits the shadows to live in \(2A\) rather
+than in \(A\) itself.
 
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 

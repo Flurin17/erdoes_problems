@@ -51,7 +51,10 @@ cover \(F\), the deleted gate \(g\) lies in \(F\), and every packet center
 \(g+u\) reflects the whole finite palette \(F\) back into \(A\). Corollary
 3.4d.15 records the all-\(\ell\) shadow: every active lower-order barrier
 has \(U+\tau-F\subset(\ell-1)A\), with at least one deleted gate from the
-original multiset lying in \(F\).
+original multiset lying in \(F\). Corollary 3.4d.16 packages the \(k=3\)
+case as a clean dichotomy: either the obstruction is already a two-sum
+reflected cover packet, or it is a three-sum active cover packet whose
+finite palette has coherent two-sum shadows.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the
