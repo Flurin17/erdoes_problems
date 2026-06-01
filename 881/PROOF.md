@@ -8725,6 +8725,16 @@ it supplies a large reflected row set, and therefore either falls into the
 stable finite-palette closures or joins the moving compressed-spike front of
 Target 8.5a.7z.14.
 
+In particular, a genuinely one-gate terminal construction is not a new
+remaining route for \(k=2\). If \(F=\{f\}\) gives infinitely many late
+singleton holes, Corollaries 8.3 and 8.3b put the basis in the already
+closed reflection-recurrent case, or else remove all but finitely many such
+singletons from the counterexample tail. The surviving one-gate-looking
+objects are only unique-gate fibers inside larger active edges \(F\), where
+other active colors may repair the singleton deletion. Those are exactly
+the unique-gate branch in Lemma 8.5a.7z.10, not a finite-accelerator
+shortcut.
+
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
 Work in the remaining \(k=2\) counterexample case. Fix a finite row test
