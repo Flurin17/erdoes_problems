@@ -156,6 +156,9 @@ multi-core profiles concentrate their interior packet escape into one of
 finitely many actual gaps. Lemma 16.97 identifies the geometry of those
 gaps: their length records the separation of the auxiliary-interval
 midpoints after subtracting half the adjacent robust-core lengths.
+Corollary 16.98 combines this with the linear-core estimate: in fixed-rank
+density \(>1/2\) regimes, internal robust-core gaps require auxiliary
+midpoint separation linear in the tested interval length.
 
 ## Definitions
 

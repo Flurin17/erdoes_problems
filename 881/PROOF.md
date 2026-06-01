@@ -24240,6 +24240,63 @@ When Corollary 16.72 supplies linear robust-core lengths, bounded-complexity
 multi-core escape requires auxiliary intervals separated on the same linear
 scale as the tested interval.
 
+### Corollary 16.98: Linear robust cores force linear auxiliary separation
+
+Fix \(r\ge1\) and \(1/2<\delta\le1\). There are constants
+\[
+\gamma=\gamma(r,\delta)>0,\qquad C=C(r)
+\]
+with the following property. Let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length \(n\), and let \(K_1,K_2\) be auxiliary intervals whose robust
+cores
+\[
+R_i=R_{K_i}(\delta,I;r)
+\]
+are nonempty and separated by an integer gap of length \(g\ge0\), with
+\(R_1\) to the left of \(R_2\). Write
+\[
+K_i=[c_i,d_i]\cap\mathbb N.
+\]
+If \(r=1\), take
+\[
+\gamma=2\delta-1.
+\]
+If \(r\ge2\), assume both auxiliary lengths \(m_i=|K_i|\) satisfy
+\[
+m_i\le { (2\delta-1)(r+1)\over4(r-1)}\,n, \tag{1}
+\]
+and take
+\[
+\gamma={2\delta-1\over2}.
+\]
+Then
+\[
+(c_2+d_2)-(c_1+d_1)\ge g+\gamma n-C. \tag{2}
+\]
+
+Proof. Corollary 16.72 gives
+\[
+|R_i|\ge \gamma n-C
+\]
+for \(i=1,2\), with \(C=C_1\) when \(r=1\) and \(C=C_r\) when
+\(r\ge2\). Lemma 16.97(5), applied with
+\[
+\rho=\gamma n-C,
+\]
+gives (2). If \(\gamma n-C<1\), the inequality is weaker than Lemma
+16.97(4) after increasing \(C\), so no separate small-\(n\) exception is
+needed. \(\square\)
+
+Thus bounded-complexity internal-gap escape has a concrete scale cost. In
+the density regimes where robust cores are linear, adjacent components of
+one multi-core profile can leave an active packet gap only by using
+auxiliary intervals whose midpoints are separated linearly in the tested
+interval length. This is the same long-range cost already seen for
+same-side far gates, now expressed at the robust-profile level.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25581,6 +25638,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the midpoint of a robust core is an affine function of the auxiliary
   interval midpoint, and a gap between adjacent cores forces comparable
   separation of the auxiliary interval midpoints.
+* Corollary 16.98 combines this with Corollary 16.72: when robust cores
+  have linear length, any internal robust-profile gap forces auxiliary
+  midpoint separation linear in the tested interval length.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
