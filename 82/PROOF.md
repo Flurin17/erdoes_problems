@@ -6777,6 +6777,48 @@ graphical compensation alone.  A successful argument must use regular
 subgraphs inside the outside trace classes, or some other structure beyond
 the trace multiset.
 
+## Lemma 18D: Bounded-Support Trace Recursion
+
+Let `G` be a graph with no regular induced subgraph on at least `k` vertices.
+Let `H` be a minimal repeated-degree host as in Lemma 12, with repeated class
+`A={a_1,...,a_k}` and outside set `B`.  Encode outside vertices by the
+signed-indicator trace differences from Lemma 12A, relative to `a_k`.
+
+Suppose every outside trace difference has support size at most `s`.  Then
+
+```text
+|B| < 2 ( sum_{i=1}^s binom(k-1,i) ) G(k).
+```
+
+Proof.  By Lemma 12A, every trace difference is one of
+
+```text
+1_S       or       -1_S
+```
+
+where `emptyset != S subset {1,...,k-1}`.  Under the support bound
+`|S|<=s`, the number of possible signed trace-difference types is at most
+
+```text
+2 sum_{i=1}^s binom(k-1,i).
+```
+
+For any fixed type `tau`, let `C_tau` be the set of vertices of `B` with that
+trace difference.  If `|C_tau|>=G(k)`, then the induced graph `G[C_tau]`
+contains a regular induced subgraph on at least `k` vertices, by the
+definition of `G(k)`.  This is also an induced regular subgraph of `G`,
+contradicting the hypothesis.  Hence every type class has size less than
+`G(k)`, and summing over the possible types gives the displayed bound.  QED.
+
+This lemma is intentionally recursive and therefore not a proof of the main
+conjecture.  Its value is diagnostic: for `s=o(k/log k)`, the number of
+support-`<=s` trace types is `2^{o(k)}`, so a support-restricted obstruction
+larger than `2^{o(k)}G(k)` must already contain a hard graph inside one
+identical-trace class.  The support-three constructions in Examples 18B and
+18C therefore show that small support, imbalance control, and graphical
+compensation do not suffice unless one also uses the induced graph structure
+inside high-multiplicity trace classes.
+
 ## Conditional Proposition: Repeated-Degree / Bounded-Spread Bridge
 
 Let `E(r)` be the least integer `N` such that every `N`-vertex graph contains

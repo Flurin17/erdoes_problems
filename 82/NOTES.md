@@ -2392,3 +2392,11 @@ source of growth beyond Ramsey.
   half-size theorem, already refuted at `n=12`, but they calibrate the
   compensated template as sitting near the half-size boundary in small larger
   samples.
+- 2026-06-01: Added Lemma 18D, a bounded-support trace recursion.  If all
+  outside trace differences in a minimal repeated-degree host have support at
+  most `s`, then the outside set is covered by at most
+  `2 sum_{i<=s} binom(k-1,i)` identical-trace classes, each smaller than
+  `G(k)` in a counterexample.  Thus support-`<=s` obstructions are either
+  type-count small or recursively hide a hard graph inside a high-multiplicity
+  trace class.  This clarifies why the support-three exponential trace
+  packings are not yet genuine counterexample mechanisms.
