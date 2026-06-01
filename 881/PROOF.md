@@ -2430,6 +2430,109 @@ however, recovers a full linear-size reflected packet of bounded two-sum
 translate rows, analogous to the \(k=2\) star obstruction but with the
 reflected center shifted by the sum of two deleted gates.
 
+### Lemma 3.4d.5: One-gate banks have root-sized low-count endpoint sets
+
+Let \(D\subset A\) be finite, put
+\[
+C=A\setminus D,
+\]
+and suppose
+\[
+w\notin hC.
+\]
+Let \(x\in D\), let \(r=h-1\), and let \(\mathcal R\) be a family of
+unordered retained \(r\)-term representations
+\[
+w-x=c_1+\cdots+c_r,\qquad c_i\in C. \tag{1}
+\]
+Let \(U\) be the set of all elements of \(C\) appearing in some multiset in
+\(\mathcal R\). Then
+\[
+x+u\notin2C\qquad(u\in U), \tag{2}
+\]
+and consequently
+\[
+r_{2,A}(x+u)\le |D|\qquad(u\in U). \tag{3}
+\]
+Moreover, if \(M=|\mathcal R|\), then
+\[
+|U|\ge (r!M)^{1/r}-r. \tag{4}
+\]
+
+Proof. If \(u\in U\), choose a retained representation (1) containing one
+occurrence of \(u\). If \(x+u\in2C\), replacing \(x+u\) by two retained
+summands and keeping the other \(r-1\) retained summands from (1) gives an
+\[
+(r+1)=h
+\]
+term representation of \(w\) from \(C\), contradiction. This proves (2).
+The proof of (3) is the same union bound as in Lemma 3.4d.3: every
+two-term \(A\)-representation of \(x+u\) must use at least one element of
+\(D\), and each fixed \(d\in D\) occurs in at most one unordered
+representation.
+
+All representations in \(\mathcal R\) are \(r\)-multisets drawn from \(U\).
+Hence
+\[
+M\le \binom{|U|+r-1}{r}\le {(|U|+r)^r\over r!},
+\]
+which gives (4). \(\square\)
+
+### Corollary 3.4d.6: The \(k=3\) obstruction always has low-count translates
+
+In the setting of Corollary 3.4d.4, after decreasing \(\eta_E\) and
+increasing \(Q_E\) if necessary, arbitrarily large witnesses satisfy one of
+the following two alternatives.
+
+1. There are \(w\), \(D\), and \(x\in D\) with
+   \[
+   w\notin4(A\setminus D),
+   \]
+   and a set
+   \[
+   U\subset A\setminus D
+   \]
+   such that
+   \[
+   |U|\ge \eta_E A(w)^{1/3} \tag{1}
+   \]
+   and
+   \[
+   r_{2,A}(x+u)\le Q_E\qquad(u\in U). \tag{2}
+   \]
+2. There are \(w\), \(D\), \(p,q\in D\), and \(g\in\{p,q\}\), with
+   \[
+   w\notin4(A\setminus D),
+   \]
+   and a reflected set
+   \[
+   U\subset (A\setminus D)\cap(w-p-q-(A\setminus D))
+   \]
+   such that
+   \[
+   |U|\ge \eta_E A(w) \tag{3}
+   \]
+   and
+   \[
+   r_{2,A}(g+u)\le Q_E\qquad(u\in U). \tag{4}
+   \]
+
+Proof. Apply Corollary 3.4d.4. In its first alternative, Lemma 3.4d.5 with
+\[
+h=4,\qquad r=3
+\]
+turns the retained three-bank of size \(\gg_E A(w)\) into a low-count
+endpoint set of size \(\gg_E A(w)^{1/3}\). This gives alternative 1. The
+second alternative is exactly the pair-bank conclusion of Corollary
+3.4d.4. \(\square\)
+
+This dichotomy is weaker than a proof but useful as a target. Any order-3
+counterexample must create bounded two-sum translate rows outside every
+finite protected core. If the rows come from a two-gate pair bank they have
+linear density inside a reflected two-sum slice; if they come from a
+one-gate triple bank they may be much thinner, but their size still tends to
+infinity with the witness.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27360,6 +27463,12 @@ missing from ordinary minimal order-\(h\) bases.
   a two-gate retained pair bank contains a linear-size reflected packet
   whose translate by one of the two gates has bounded two-sum representation
   count.
+* Lemma 3.4d.5 and Corollary 3.4d.6 add the complementary one-gate
+  endpoint bound: the retained three-bank branch still gives a root-sized
+  set of bounded-count two-sum translates. Thus every \(k=3\) obstruction
+  now has bounded two-sum translate rows outside every finite core, with
+  linear size in the two-gate pair branch and root size in the one-gate
+  triple branch.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
