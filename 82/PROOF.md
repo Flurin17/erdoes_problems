@@ -8672,6 +8672,12 @@ G(ceil(h/2)) <= D_spec(h) <= G(h),
 P_h >= D_spec(h).
 ```
 
+In particular,
+
+```text
+D_spec(h)=2^{o(h)}    iff    G(h)=2^{o(h)}.
+```
+
 Proof.  The upper bound `D_spec(h)<=G(h)` is immediate: if each `J_i` has
 `G(h)` vertices, then each graph separately has a regular induced subgraph on
 at least `h` vertices.
@@ -8687,8 +8693,11 @@ spectrum-matching property.  Lemma 28H gives `P_h>M`.  Since this holds for
 every `M<D_spec(h)`, we get `P_h>=D_spec(h)`.  QED.
 
 Thus the local pair problem contains a purely one-component spectral
-matching problem before any cross-edge structure appears.  A proof of
-`P_h=2^{o(h)}` must in particular prove `D_spec(h)=2^{o(h)}`.
+matching problem before any cross-edge structure appears.  The displayed
+sandwich also shows that this spectral matching problem is subexponentially
+equivalent to Erdős Problem 82 itself: if `D_spec(h)=2^{o(h)}`, then
+`G(t)<=D_spec(2t)=2^{o(t)}`, while the reverse implication follows from
+`D_spec(h)<=G(h)`.
 
 **Corollary 28J: A Homogeneous Ramsey Upper Bound For `D_spec`.**  Let
 `k=ceil(h/2)`.  Then
