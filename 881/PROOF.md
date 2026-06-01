@@ -8662,6 +8662,56 @@ target \(w-e\) to be covered only through deleted gates, returning exactly
 to the reflected-front and compressed-spike obligations of Lemma
 8.5a.7z.10.
 
+### Corollary 8.5a.7z.12d: Frozen filler blocks force compressed spikes
+
+Let \(A\) be an order-2 basis with threshold \(N_0\). Let \(F\subset A\)
+be finite of size \(r\), put \(C=A\setminus F\), and suppose
+\[
+w\notin3C.
+\]
+Let \(I\subset C\) be finite and satisfy
+\[
+e\le w-N_0,\qquad w-e\notin F+F\qquad(e\in I). \tag{1}
+\]
+If
+\[
+|I|>r(rM+|F+F|),
+\]
+then some gate \(f\in F\) and some \(U\subset I\) of size \(M\) satisfy one
+of the two alternatives from Lemma 8.5a.7z.10:
+
+1. \(r_{2,A}(u+f)=1\) for every \(u\in U\);
+2. there is a fixed \(g\in F\setminus\{f\}\) such that
+   \[
+   U+f-g\subset C.
+   \]
+
+Proof. For each \(e\in I\), condition (1) gives \(w-e\ge N_0\), so choose
+a two-term representation
+\[
+w-e=a_e+a'_e,\qquad a_e,a'_e\in A.
+\]
+If both summands lay in \(C\), then adding \(e\) would put \(w\) in \(3C\),
+contrary to the hypothesis. Since \(w-e\notin F+F\), the representation
+cannot use two summands from \(F\). Hence it uses exactly one point
+\[
+\gamma(e)\in F
+\]
+and one point \(w-e-\gamma(e)\in C\). Thus \(I\subset R(F,w)\) with a gate
+map on the restricted row set \(I\). By pigeonhole, some \(f\in F\) has
+more than \(rM+|F+F|\) rows of \(I\) assigned to it. The proof of Lemma
+8.5a.7z.10 applied to this restricted fiber gives the claimed subset
+\(U\subset I\) and compressed-spike alternative.
+\(\square\)
+
+This is the formal version of the stage burden exposed by Diagnostic
+8.5a.7z.12c. Initial fillers can bridge early two-sum gaps while the witness
+lies far beyond the coverage endpoint. Once the endpoint is pushed past the
+witness, any large safe filler block below the witness is no longer inert:
+it supplies a large reflected row set, and therefore either falls into the
+stable finite-palette closures or joins the moving compressed-spike front of
+Target 8.5a.7z.14.
+
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
 Work in the remaining \(k=2\) counterexample case. Fix a finite row test
@@ -15494,6 +15544,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   bridged locally by safe retained bands; the unresolved burden is pushing
   coverage past the witness while keeping every shifted terminal target
   gated by deleted colors.
+* Corollary 8.5a.7z.12d records the resulting formal pressure: any large
+  retained filler block below a frozen witness feeds directly into the
+  compressed-spike dichotomy of Lemma 8.5a.7z.10.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample

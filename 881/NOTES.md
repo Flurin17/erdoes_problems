@@ -2372,6 +2372,10 @@ is still not in the retained three-sumset. So the first coverage gap is not
 by itself fatal; the hard stage burden is to continue coverage up to a
 declared endpoint beyond the witness, where every retained filler below the
 witness creates a shifted terminal-cover obligation.
+Corollary 8.5a.7z.12d packages that obligation: any large retained filler
+block below a frozen witness and outside the \(F+F\) exception rows is
+automatically a row set for Lemma 8.5a.7z.10, hence compresses to a
+unique-gate or shifted-overlap spike.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed
