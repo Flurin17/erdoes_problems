@@ -2628,6 +2628,12 @@ Proposition 13.1l.2i packages this as a conditional \(k=2\) closure:
 assuming the section-local promotion principle from the private-color
 normal form to the shell/descent dichotomy, no counterexample exists. This
 is now the explicit final missing implication in the \(k=2\) route.
+Corollary 13.1l.2j proves the bounded fixed-section part of that principle:
+if a fixed first point \(d\) has bounded active suffix rank and every tail
+contains an inclusion-minimal hole keeping \(d\), Lemma 8.5a.8b promotes it
+to a full active fixed-rank prefix shell, forbidden by 13.1l.2b--f. Hence a
+surviving section must either drop \(d\) or have unbounded active suffix
+rank on every tail.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

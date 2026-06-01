@@ -16398,6 +16398,58 @@ private-color normal form of Proposition 8.4f and Corollaries
 8.5a.7f--8.5a.7y to the abstract shell/descent dichotomy in every recursive
 section.
 
+## Corollary 13.1l.2j: Bounded active fixed sections must descend
+
+Work in the \(k=2\) counterexample setting. Fix \(d\in A\). It is
+impossible that there are an infinite tail
+\[
+P\subset A\cap(d,\infty)
+\]
+and a bound \(q\) such that, for every infinite
+\[
+Y\subset P
+\]
+and every \(L\), there are
+\[
+H\subset Y,\qquad 1\le |H|\le q,
+\]
+and a witness \(w>L\) for which
+\[
+F=\{d\}\cup H
+\]
+is inclusion-minimal and
+\[
+w\notin3(A\setminus F). \tag{1}
+\]
+
+Proof. Apply the fixed-first Ramsey argument used in Lemma 8.5a.8b to the
+property
+\[
+\mathcal P(\{d\}\cup H,w):
+\quad
+\{d\}\cup H\text{ is inclusion-minimal for }w
+\text{ and }w\notin3(A\setminus(\{d\}\cup H)).
+\]
+Since the rank is bounded by \(q\), that argument gives an infinite subtail
+and a fixed rank
+\[
+1\le r\le q
+\]
+such that, for every \(L\), every sufficiently late
+\[
+H\in[P]^r
+\]
+has a witness \(w>L\) for which \(\{d\}\cup H\) is inclusion-minimal and
+satisfies (1). This is exactly the full active fixed-rank prefix shell
+forbidden by Corollaries 13.1l.2b--13.1l.2f. \(\square\)
+
+Therefore, in any recursive section of a \(k=2\) counterexample, a fixed
+first point cannot support bounded-rank active traces that keep that first
+point. Such a section must either descend to traces omitting the fixed
+first point, or have unbounded active suffix rank on every tail. This is
+the remaining distinction needed to turn Proposition 13.1l.2i from a
+conditional closure into an unconditional \(k=2\) proof.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18241,6 +18293,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   once the private-color normal form is promoted section-locally to the
   shell/descent dichotomy, the fixed-rank shell results and well-foundedness
   rule out a counterexample.
+* Corollary 13.1l.2j proves the bounded fixed-section part of that
+  promotion principle: bounded active suffix rank keeping a fixed first
+  point promotes to a forbidden full active fixed-rank shell.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
