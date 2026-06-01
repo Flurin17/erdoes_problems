@@ -2062,3 +2062,44 @@ that every infinite deletion fails at order \(k+1\), and hence fails at
 order \(k\) by padding. Thus the robust \(k=3\) booster-pair search is not
 just a local curiosity: it is a finite attempt at a complete negative
 answer.
+
+## Current Mobile-Fiber Reduction for \(k=2\)
+
+The active-trace branch has now been narrowed past the purely injective
+mobile-color model. Lemma 8.5a.7e shows that, after passing to a sufficiently
+sparse deletion set, no late-bad finite edge can have all private-color
+fibers bounded by a fixed constant. The functional variant Lemma 8.5a.7e'
+strengthens this to any prescribed rank function \(\Phi(|F|)\).
+
+Consequently, a surviving \(k=2\) counterexample must force arbitrarily
+large one-color private reflected fibers
+\[
+m-U\subset A\setminus F,\qquad U+f\cap2(A\setminus F)=\varnothing
+\]
+outside every finite core. Corollary 8.5a.7f.1 splits such fibers into two
+rank-free branches:
+
+1. **unique-gate:** \(r_{2,A}(u+f)=1\) for all \(u\in U\);
+2. **retained shifted-overlap:** for some fixed \(g\in F\setminus\{f\}\),
+   \[
+   U+f-g\subset A\setminus F.
+   \]
+
+Lemma 8.5a.7i adds a finite-test constraint on the shifted-overlap branch.
+Writing \(h=f-g\), any shifted fiber \(U\) that remains certificate-free
+relative to \(A\) must be \(h\)-independent:
+\[
+U\cap(U-h)=\varnothing.
+\]
+Indeed, \(u,u+h\in U\) and \(U+h\subset A\) would give the certificate
+\[
+e=u,\qquad y_1=y_2=u+h,\qquad y_1+y_2-e=u+2h\in A.
+\]
+
+Thus the live \(k=2\) obstruction is no longer just "unbounded moving
+colors." It must produce large private fibers that either have genuinely
+unique full two-sum gates, or have retained shifted overlaps while keeping
+the shift moving or keeping every fixed-shift fiber independent inside all
+finite tests. A proof must turn one of these escape patterns into a
+recurrent certificate triple; a counterexample must stage these escaping
+fibers while preserving the late-bad barrier for every infinite deletion.
