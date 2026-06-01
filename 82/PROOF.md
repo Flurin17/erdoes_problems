@@ -8261,6 +8261,182 @@ local theorem cannot be a trivial one-sided pigeonhole statement.  A short
 hill-climb search at `h=6, M=8` found no obstruction, but this is only a
 calibration run rather than evidence for the exact value of `P_6`.
 
+**Lemma 28D: The Pair Parameter Controls One-Sided Differences.**  Let
+`h>=3`, and let `P=P_h` be the common balanced pair parameter from
+Lemma 28B.  If `G` has no regular induced subgraph on at least `h` vertices,
+then for every pair `u,v`, with
+
+```text
+A=N(u)\N(v),       B=N(v)\N(u),
+```
+
+one has
+
+```text
+min(|A|,|B|) < P.
+```
+
+Consequently,
+
+```text
+|(N(u) triangle N(v))\{u,v}| < 2P + |deg_G(u)-deg_G(v)|.
+```
+
+Proof.  Suppose first that `uv` is an edge and that both `A` and `B` have
+size at least `P`.  Choose marked subsets `A_0 subset A`, `B_0 subset B` of
+size `P`.  By the definition of `P=P_h^+`, the induced graph on
+`A_0 union B_0` either contains a regular induced subgraph on at least `h`
+vertices, impossible in `G`, or contains balanced sets `X subset A_0`,
+`Y subset B_0` with `|X|=|Y|=r=ceil((h-2)/2)` such that
+`G[X union Y]` is `r`-regular.  Lemma 27A then makes
+`{u,v} union X union Y` regular on `2r+2>=h` vertices, again impossible.
+
+If `uv` is a nonedge, the same argument uses `P=P_h^-` and the
+`(r-1)`-regular middle alternative.  Lemma 28B identifies the two parameters.
+Thus `min(|A|,|B|)<P` in all cases.
+
+Finally
+
+```text
+|(N(u) triangle N(v))\{u,v}| = |A|+|B|
+                              = 2 min(|A|,|B|)
+                                + ||A|-|B||,
+```
+
+and `||A|-|B||=|deg_G(u)-deg_G(v)|`, since the possible edge `uv` contributes
+equally to the two degrees.  QED.
+
+**Lemma 28E: Ordered Graphs With Few Inversions Have Large Homogeneous
+Sets.**  Let `H` be a graph whose vertices are linearly ordered as
+`v_1,...,v_m`.  Call a triple `i<j<k` an inversion if
+
+```text
+v_i v_j in E(H),       v_i v_k notin E(H).
+```
+
+If the total number of inversions is less than
+
+```text
+binom(m,3) / binom(s,3)
+```
+
+for some integer `m>=s>=3`, then `H` contains a clique or independent set
+of order at least `sqrt(s)`.
+
+Proof.  Choose a uniformly random `s`-element subset of the ordered vertex
+set.  The expected number of inversions inside it is less than `1`, so some
+`s`-subset has no inversion.  Restrict to such a subset, preserving the
+inherited order.
+
+Define a relation `prec` on this subset by
+
+```text
+v_i prec v_j       iff       i<j and v_i v_j in E(H).
+```
+
+The relation is transitive: if `i<j<k`, `v_i v_j` is an edge, and
+`v_j v_k` is an edge, then the absence of inversions forces `v_i v_k` to be
+an edge.  Hence `prec` is a partial order.  Chains in this partial order are
+cliques of `H`, and antichains are independent sets of `H`, because two
+vertices are comparable exactly when they are adjacent.
+
+In every finite partial order, the product of the largest chain size and the
+largest antichain size is at least the number of elements: otherwise the
+levels by longest-chain length would give fewer than `s` elements.  Therefore
+this `s`-vertex inversion-free induced subgraph contains a clique or
+independent set of order at least `sqrt(s)`.  QED.
+
+**Proposition 28F: Polynomial Global Reduction To The Balanced Pair
+Parameter.**  For every `h>=3`,
+
+```text
+G(h) <= 320 h^8 P_h^2.
+```
+
+Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
+
+Proof.  Let `P=P_h`, and suppose for contradiction that `G` is an `n`-vertex
+graph with no regular induced subgraph on at least `h` vertices, where
+
+```text
+n > 320 h^8 P^2.
+```
+
+Partition the vertices by their degrees in `G` into intervals of length `P`:
+
+```text
+V_t={v : tP <= deg_G(v) < (t+1)P}.
+```
+
+First consider one nonempty bucket `U=V_t`.  For any two vertices
+`u,v in U`, the degree difference in `G` is less than `P`.  Lemma 28D gives
+
+```text
+|(N(u) triangle N(v))\{u,v}| < 3P.
+```
+
+Therefore their degrees inside `G[U]` differ by less than `3P`.  Thus
+`G[U]` has degree spread at most `3P`.
+
+Apply Conditional Proposition 28A, using Lemma 28B so that the two local
+parameters are both `P`.  With spread `s=3P`, any bucket of size greater than
+
+```text
+16h^2(2P+3P) = 80h^2P
+```
+
+would contain a regular induced subgraph on at least `h` vertices.  Hence
+every bucket has size at most `80h^2P`.
+
+Let `b` be the number of nonempty buckets.  If
+
+```text
+b > 2(P h^6 + 2),
+```
+
+then one parity class of bucket indices contains representatives
+`v_1,...,v_m` from more than `P h^6+2` nonempty buckets.  Ordered by degree,
+any two representatives from this parity class have degree difference at
+least `P`.  Therefore, for `j<k`, Lemma 28D gives
+
+```text
+|N(v_j)\N(v_k)| < P.
+```
+
+The number of inversions `i<j<k` among the representatives is consequently
+less than `P binom(m,2)`, because for each pair `j<k` there are fewer than
+`P` possible earlier vertices `i` with `v_i v_j` an edge and `v_i v_k` a
+nonedge.
+
+Set `s_0=h^2`.  Since
+
+```text
+P binom(m,2) * binom(m-3,s_0-3) / binom(m,s_0)
+  < P h^6 / (2(m-2)) < 1,
+```
+
+Lemma 28E gives a clique or independent set of order at least `h`, a
+forbidden regular induced subgraph.  Hence
+
+```text
+b <= 2(P h^6+2) <= 4P h^6
+```
+
+for `h>=3` and `P>=1`.
+
+Combining the bucket count and bucket size bounds,
+
+```text
+n <= b * 80h^2P <= 320 h^8 P^2,
+```
+
+contradicting the assumed value of `n`.  This proves the displayed bound on
+`G(h)`.
+
+If `P_h=2^{o(h)}`, then the polynomial factor `320h^8` is also
+`2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
+inverse form of `F(n)/log n -> infinity`.  QED.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

@@ -2487,3 +2487,10 @@ source of growth beyond Ramsey.
   calibration missed the `h=6, M=6` obstruction; hill-climbing found it, which
   reinforces that this local problem has its own nontrivial extremal
   structure.
+- 2026-06-01: Added Lemma 28D, Lemma 28E, and Proposition 28F.  The pair
+  parameter now gives a polynomial global reduction:
+  `G(h) <= 320 h^8 P_h^2`.  The proof buckets vertices by global degree,
+  uses Lemma 28D to make each bucket bounded-spread, and uses an ordered
+  inversion lemma on bucket representatives to force a large clique or
+  independent set if there are too many buckets.  This isolates the remaining
+  main target as the local statement `P_h=2^{o(h)}`.
