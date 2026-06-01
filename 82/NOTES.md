@@ -3653,3 +3653,10 @@ source of growth beyond Ramsey.
   `0,0,1,2,0,0,0,120,248,504,1023,1023` and `max_regular=5`, giving
   `C_full^reg(2,6)>12`.  A direct `n=13,h=6` search did not finish quickly
   and needs a better search strategy or structural proof.
+- 2026-06-01: Extracted the block family behind the `h=5,6` regular full-drop
+  lower examples into `full_drop_p2_regular_construction.py`.  For
+  `h>=7`, a proof by cases on the number of selected top vertices shows this
+  `2h`-vertex `P=2` full-drop ordered graph has no regular induced subgraph
+  of order `h`; hence `C_full^reg(2,h)>2h` for all `h>=7`.  The script
+  verifies the same pattern for `h=5,6,7,8,9`, always with
+  `max_full_drop=1` and `max_regular=h-1`.

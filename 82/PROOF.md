@@ -12411,6 +12411,78 @@ This regular full-drop parameter is the natural home for Lemma 28D.5b.11:
 covered singleton parts may give a large regular witness even when they do
 not immediately improve the homogeneous `alpha+omega` bound.
 
+**Lemma 28D.6c: A Linear Lower Construction For Regular Full-Drop At
+`P=2`.**  For every `h>=7`,
+
+```text
+C_full^reg(2,h) > 2h.
+```
+
+Proof.  Put `t=h-3`.  We construct an ordered graph `H_t` on `2h=2t+6`
+vertices.  First take four vertices
+
+```text
+p_0,p_1,q_0,q_1
+```
+
+with only the two matching edges `p_0q_0` and `p_1q_1`.  Next take an
+independent set `M` of size `t`, then a clique `K` of size `t`, and finally
+two vertices `u_0,u_1`.  Order the vertices in these four blocks.  Join every
+vertex of `K` to every vertex of `M` and to `q_1`; join `u_0,u_1` to every
+earlier vertex but not to each other; add no other edges.
+
+The `P=2` full-drop condition is immediate from the ordered construction.
+When a later vertex lies in `M`, an earlier special vertex loses at most its
+matching mate, and earlier vertices of `M` lose nothing.  When a later vertex
+lies in `K`, an earlier special vertex loses at most one of
+`p_0,p_1,q_0`, and an earlier vertex of `M` loses nothing.  A later top
+vertex is adjacent to every earlier vertex, so it creates no earlier-to-later
+loss.  The remaining comparisons are inside the first four vertices, where
+the earlier vertex loses at most its matching mate, and inside `K`, where
+neighborhoods are nested up to the excluded endpoints.
+
+We prove that `H_t` has no regular induced subgraph of order at least
+`h=t+3`.  Let `S` be a regular induced subgraph.  Write `z` for the number of
+selected top vertices, and write `m,c` for the numbers of selected vertices
+from `M,K`.
+
+First suppose `z=0`.  If both `M` and `K` meet `S`, then vertices of `M` have
+degree `c`, while vertices of `K` have degree `c-1+m+epsilon`, where
+`epsilon` records whether `q_1` is selected.  Hence `m+epsilon=1`.  Thus
+`m=1` and `q_1` is not selected.  If `c>=2`, no one of
+`p_0,p_1,q_0` can have degree `c`, so `|S|<=c+1<=t+1`; if `c<=1`, then
+`|S|<=6<t+3` because `t>=4`.  If `S` meets `M` but not `K`, then `S` is
+independent and can contain at most all `t` vertices of `M` plus two of the
+first four vertices, so `|S|<=t+2`.  If `S` meets `K` but not `M`, the same
+degree comparison shows that it contains at most `K` together with `q_1`, or
+is one of the bounded small cases `|S|<=6`; hence `|S|<=t+1` or
+`|S|<t+3`.  If it meets neither `M` nor `K`, then `|S|<=4`.  Therefore
+`|S|<h` when `z=0`.
+
+If `z=1`, the selected top vertex has degree `|S|-1`, so every other selected
+vertex must be adjacent to every other non-top selected vertex.  The non-top
+graph has clique number `t+1`, for instance `K union {q_1}` or `K` plus one
+vertex of `M`, and no larger clique.  Hence `|S|<=t+2<h`.
+
+It remains to consider `z=2`.  The two top vertices have degree `|S|-2`.
+Thus the selected non-top vertices must induce a graph whose complement is
+`1`-regular, i.e. a perfect matching.  In the complement of the non-top
+graph, the set `M union {p_0,p_1,q_0,q_1}` is complete except for the two
+missing complement-edges `p_0q_0` and `p_1q_1`, while a vertex of `K` is
+adjacent in the complement only to `p_0,p_1,q_0`.  If a selected non-top set
+contains a vertex of `M`, then it contains at most one further vertex from
+`M union {p_0,p_1,q_0,q_1}`, and it cannot also contain a vertex of `K`
+without giving the matching partner degree at least two in the complement.
+So it has size at most `2`.  If it contains no vertex of `M`, then it contains
+at most one vertex of `K`; that one vertex must be matched to exactly one of
+`p_0,p_1,q_0`, and the remaining selected first-four vertices contribute at
+most one complement edge.  Hence the selected non-top set has size at most
+`4`.  Therefore `|S|<=2+4=6<t+3`, since `t>=4`.
+
+All cases give `|S|<h`.  Thus `H_t` is a `P=2` full-drop ordered graph on
+`2h` vertices with no regular induced subgraph of order at least `h`, proving
+the displayed lower bound.  QED.
+
 **Computational Calibration 28D.7: Small Full-Drop Values.**  The script
 `EXPERIMENTS/full_drop_census.py` exactly enumerates small ordered graphs
 satisfying the full-drop condition and reuses the regular-witness checker.
@@ -12455,12 +12527,17 @@ The regular full-drop parameter from Definition 28D.6a is genuinely distinct
 from the homogeneous one.  The commands
 
 ```text
+python3 82/EXPERIMENTS/full_drop_p2_regular_construction.py 5
+python3 82/EXPERIMENTS/full_drop_p2_regular_construction.py 6
+python3 82/EXPERIMENTS/full_drop_p2_regular_construction.py 9
 python3 82/EXPERIMENTS/full_drop_census.py 8 --p 2 --search-regular-h 5 --max-nodes 200000 --progress 50000
 python3 82/EXPERIMENTS/full_drop_census.py 9 --p 2 --search-regular-h 5 --max-nodes 200000 --progress 50000
 python3 82/EXPERIMENTS/full_drop_census.py 10 --p 2 --search-regular-h 5 --max-nodes 500000 --progress 100000
 python3 82/EXPERIMENTS/full_drop_census.py 11 --p 2 --search-regular-h 5 --max-nodes 1000000 --progress 100000
 ```
 
+verify the construction of Lemma 28D.6c in the small cases `h=5,6` and one
+larger sample `h=9`, and also
 find `P=2` full-drop ordered graphs with no regular induced subgraph of order
 `5` on `8`, `9`, and `10` vertices, respectively, while the `n=11` search
 exhausts the DFS tree in `65,904` nodes with `result=False`.  Thus, subject
