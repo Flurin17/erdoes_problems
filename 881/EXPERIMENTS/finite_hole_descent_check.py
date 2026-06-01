@@ -270,16 +270,17 @@ def check_active_lower_shadow(A: tuple[int, ...], F: tuple[int, ...]) -> int:
 
 
 def check_triple_shadow_not_pair_example() -> None:
-    A = (1, 2, 3, 4)
-    F = {1}
-    C = tuple(a for a in A if a not in F)
-    tau = 2
-    u = 3
-    target = tau + u
-    assert reps(A, 3, target)
-    assert not reps(C, 3, target)
-    assert reps(A, 2, target - 1)
-    assert reps(C, 2, 1 + u)
+    for p in range(1, 8):
+        A = (p, 2 * p, 3 * p)
+        F = {p}
+        C = tuple(a for a in A if a not in F)
+        tau = 2 * p
+        u = 3 * p
+        target = tau + u
+        assert reps(A, 3, target)
+        assert not reps(C, 3, target)
+        assert reps(A, 2, target - p)
+        assert reps(C, 2, p + u)
 
 
 def main() -> None:
