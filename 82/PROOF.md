@@ -5877,6 +5877,12 @@ linear-homogeneous regime, but it shows that one-trace amplification already
 removes the weakest Ramsey terms from the maximal-independent-set trace
 decomposition.
 
+The script `EXPERIMENTS/trace_ramsey_bound.py` compares Lemma 14B and
+Lemma 14B.1 using the binomial Erdos--Szekeres proxy
+`R(a,b)<=binom(a+b-2,a-1)`.  For example, at `(k,h)=(80,70)`, the proxy
+improves from `2^191.61` to `2^183.82`.  This is a real constant-factor
+exponent saving in that range, but it is still exponential in `k`.
+
 ## Lemma 15: Total Trace Imbalance In A Repeated-Degree Host
 
 In the setting of Lemma 12, write

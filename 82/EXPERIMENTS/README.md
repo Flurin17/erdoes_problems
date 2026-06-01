@@ -11,6 +11,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `trace_merge_search.py`: searches the one-trace regular merge criterion
   from Lemma 14A.5, reporting regular subsets on the trace and nontrace sides
   whose degree or degree-deficit matches a regular trace-class witness.
+- `trace_ramsey_bound.py`: compares the maximal-independent trace Ramsey
+  bounds from Lemmas 14B and 14B.1 using the Erdos-Szekeres binomial proxy.
 - `ramsey_sample.py`: compares largest homogeneous and regular induced
   subgraphs in random samples.
 - `rectangle_cover.py`: exact checker for the Ferrers rectangle-covering

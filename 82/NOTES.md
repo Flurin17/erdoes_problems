@@ -2420,3 +2420,8 @@ source of growth beyond Ramsey.
   vertices from `T` form a regular complete bipartite graph.  This removes
   the weakest large-trace Ramsey terms but does not yet beat the exponential
   scale.
+- 2026-06-01: Added `trace_ramsey_bound.py` to quantify Lemma 14B.1.  With
+  the Erdos--Szekeres binomial proxy, `(k,h)=(80,70)` improves from
+  `log2` bound `191.61` to `183.82`, while `(80,60)` improves only from
+  `186.42` to `184.44`.  This confirms the sharpening is real but still
+  leaves a linear-in-`k` exponent.
