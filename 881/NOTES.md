@@ -2249,6 +2249,13 @@ the one-point buffer required by Lemma 13.1d for a \(k=2\) staged window.
 Thus no purely local argument can rule out pair-free rank-three product
 covers; the obstruction must be global.
 
+Warning 8.5a.7z.1 records the first global restriction on this local model.
+Disjoint copies of such rank-three product windows are not a selector
+barrier: an infinite packet set can take at most two indices from each
+finite window and avoid every rank-\(\ge3\) support. Therefore any negative
+construction has to wire these terminal-cut supports across windows into a
+true weak barrier/front on packet indices.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent

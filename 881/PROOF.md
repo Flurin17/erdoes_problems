@@ -7781,6 +7781,40 @@ single product window, but an infinite staging that freezes such windows
 below later elements and makes them an unbounded selector barrier while
 preserving order-2 coverage.
 
+### Warning 8.5a.7z.1: Disjoint rank-three product windows are not a barrier
+
+Example 8.5a.7z cannot be iterated by simply placing disjoint copies on
+successive packet windows. More generally, let
+\[
+W_1,W_2,\ldots
+\]
+be disjoint finite sets of packet indices, and suppose a support family
+\[
+\mathcal S
+\]
+has every member contained in one \(W_n\) and of size at least \(3\). Then
+\(\mathcal S\) is not a weak barrier on
+\[
+\bigcup_n W_n.
+\]
+Indeed, choose a set
+\[
+I_n\subset W_n,\qquad |I_n|=\min(2,|W_n|)
+\]
+for each \(n\) with \(W_n\ne\varnothing\), and put
+\[
+I=\bigcup_n I_n.
+\]
+If infinitely many \(W_n\) are nonempty then \(I\) is infinite, but no
+member of \(\mathcal S\) is contained in \(I\), because every member of
+\(\mathcal S\) needs at least three indices from a single \(W_n\).
+
+Thus a negative construction cannot be a disjoint sequence of finite
+rank-three product gadgets. The supports of the promoted terminal cuts must
+form a genuine cross-window front or weak barrier on packet indices. This
+is the same global demand already encoded abstractly in Corollary
+8.5a.7s, now applied to the concrete local model of Example 8.5a.7z.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7835,9 +7869,10 @@ one must construct a staged basis in which the fibers \(U\), mirrors
 \(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all escape
 while maintaining order-2 coverage and arbitrarily late finite product
 covers whose pair subfamilies are selector-avoidable and whose high-rank
-edges are minimal large-spread terminal cuts. This is now the active form of
-the certificate-free obstruction; it is stronger than mobile injectivity
-and weaker than finite recurrent Sidon coloring.
+edges are minimal large-spread terminal cuts whose supports form a genuine
+cross-window weak barrier rather than disjoint local gadgets. This is now
+the active form of the certificate-free obstruction; it is stronger than
+mobile injectivity and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14469,6 +14504,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   local shape: three two-point packets whose eight selector triples all
   have inclusion-minimal terminal-gap witnesses, while all singleton and
   pair deletions are harmless on the same window.
+* Warning 8.5a.7z.1 notes that disjoint repetitions of such rank-three
+  windows do not form a weak barrier: an infinite packet set can keep at
+  most two indices from each window and avoid all rank-\(\ge3\) supports.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
