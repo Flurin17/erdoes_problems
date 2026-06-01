@@ -33,7 +33,12 @@ from gamma_2alpha_overlap_cover import (  # noqa: E402
     side_tile_polygon,
     valid_pairs_for_lengths,
 )
-from gamma_2alpha_overlap_remainder_inventory import label_word, word_signature  # noqa: E402
+from gamma_2alpha_overlap_remainder_inventory import (  # noqa: E402
+    label_word,
+    path_profile,
+    profile_text,
+    word_signature,
+)
 from gamma_2alpha_residual_capped_census import classify_shell, demand_key  # noqa: E402
 
 
@@ -75,6 +80,7 @@ def census_survivor(
     skip_classified_words: int,
     max_classified_words: int,
     classification_mode: str,
+    quotient: str,
     progress_every: int,
     example_words_per_status: int,
 ) -> dict:
@@ -132,7 +138,7 @@ def census_survivor(
     scale = qdenominator_scale(all_polygons)
     polygons = {key: kscale_polygon(polygon, scale) for key, polygon in q_polygons.items()}
     overlap_cache: dict[tuple[KPolygon, KPolygon], bool] = {}
-    side_word_cache: dict[tuple[str, tuple[BoundaryPath, ...], tuple[KPolygon, ...]], dict[str, WordData]] = {}
+    side_group_cache: dict[tuple[str, tuple[BoundaryPath, ...], tuple[KPolygon, ...]], dict[str, WordData]] = {}
 
     base_positions = needed_positions["B"]
 
@@ -159,13 +165,27 @@ def census_survivor(
                 return True
         return False
 
-    def side_good_words(
+    def path_quotient_key(side_name: str, path: BoundaryPath) -> str:
+        if quotient == "word":
+            return label_word(path)
+        if quotient == "profile":
+            return profile_text(path_profile(path, tuple(needed_positions[side_name])))
+        raise ValueError(quotient)
+
+    def group_signature(left_key: str, right_key: str, base_key: str) -> str:
+        if quotient == "word":
+            return word_signature(left_key, right_key, base_key)
+        if quotient == "profile":
+            return f"L[{left_key}] R[{right_key}] B[{base_key}]"
+        raise ValueError(quotient)
+
+    def side_good_groups(
         side_name: str,
         paths: tuple[BoundaryPath, ...],
         feature: tuple[KPolygon, ...],
     ) -> dict[str, WordData]:
         key = (side_name, paths, feature)
-        cached = side_word_cache.get(key)
+        cached = side_group_cache.get(key)
         if cached is not None:
             return cached
         relevant = tuple(pair for pair in active_pairs if pair.side == side_name)
@@ -181,15 +201,15 @@ def census_survivor(
             )
             if bad:
                 continue
-            word = label_word(path)
-            counts[word] += 1
-            reps.setdefault(word, path)
-        cached = {word: (count, reps[word]) for word, count in counts.items()}
-        side_word_cache[key] = cached
+            quotient_key = path_quotient_key(side_name, path)
+            counts[quotient_key] += 1
+            reps.setdefault(quotient_key, path)
+        cached = {quotient_key: (count, reps[quotient_key]) for quotient_key, count in counts.items()}
+        side_group_cache[key] = cached
         return cached
 
-    word_counts: Counter[str] = Counter()
-    word_reps: dict[str, list[BoundaryDemand]] = defaultdict(list)
+    quotient_counts: Counter[str] = Counter()
+    quotient_reps: dict[str, list[BoundaryDemand]] = defaultdict(list)
     total_uncovered = 0
     endpoint_groups = 0
 
@@ -274,24 +294,24 @@ def census_survivor(
                                 base_counts: Counter[tuple[tuple[KPolygon, ...], str]] = Counter()
                                 base_rep_by_key: dict[tuple[tuple[KPolygon, ...], str], BoundaryPath] = {}
                                 for base_path in base_paths:
-                                    key = (base_feature(base_path), label_word(base_path))
+                                    key = (base_feature(base_path), path_quotient_key("B", base_path))
                                     base_counts[key] += 1
                                     base_rep_by_key.setdefault(key, base_path)
 
-                                for (feature, base_word), base_count in base_counts.items():
-                                    left_words = side_good_words("L", left_paths, feature)
-                                    right_words = side_good_words("R", right_paths, feature)
-                                    if not left_words or not right_words:
+                                for (feature, base_key), base_count in base_counts.items():
+                                    left_groups = side_good_groups("L", left_paths, feature)
+                                    right_groups = side_good_groups("R", right_paths, feature)
+                                    if not left_groups or not right_groups:
                                         continue
-                                    base_path = base_rep_by_key[(feature, base_word)]
-                                    for left_word, (left_count, left_path) in left_words.items():
-                                        for right_word, (right_count, right_path) in right_words.items():
-                                            signature = word_signature(left_word, right_word, base_word)
+                                    base_path = base_rep_by_key[(feature, base_key)]
+                                    for left_key, (left_count, left_path) in left_groups.items():
+                                        for right_key, (right_count, right_path) in right_groups.items():
+                                            signature = group_signature(left_key, right_key, base_key)
                                             multiplicity = base_count * left_count * right_count
-                                            word_counts[signature] += multiplicity
+                                            quotient_counts[signature] += multiplicity
                                             total_uncovered += multiplicity
                                             add_rep(
-                                                word_reps[signature],
+                                                quotient_reps[signature],
                                                 BoundaryDemand(
                                                     short_side=short_side,
                                                     left_rep=left_rep,
@@ -304,10 +324,10 @@ def census_survivor(
                                                 ),
                                                 reps_per_word,
                                             )
-        if progress_every and len(word_counts) and len(word_counts) % progress_every == 0:
+        if progress_every and len(quotient_counts) and len(quotient_counts) % progress_every == 0:
             elapsed = time.monotonic() - started
             print(
-                f"    counted word_groups={len(word_counts)} uncovered={total_uncovered} "
+                f"    counted {quotient}_groups={len(quotient_counts)} uncovered={total_uncovered} "
                 f"elapsed={elapsed:.1f}s",
                 flush=True,
             )
@@ -321,7 +341,7 @@ def census_survivor(
     word_count_mismatches: list[dict[str, object]] = []
     classified_words = 0
     classified_weight = 0
-    for word_index, (signature, multiplicity) in enumerate(word_counts.items(), start=1):
+    for word_index, (signature, multiplicity) in enumerate(quotient_counts.items(), start=1):
         if word_index <= skip_classified_words:
             continue
         if classified_words >= max_classified_words:
@@ -329,11 +349,13 @@ def census_survivor(
         if classification_mode == "representative":
             statuses = Counter(
                 classify_shell(survivor, demand, radicand).status
-                for demand in word_reps[signature]
+                for demand in quotient_reps[signature]
             )
             status_weights = Counter({next(iter(statuses)): multiplicity})
             word_weight = multiplicity
         elif classification_mode == "exhaustive":
+            if quotient != "word":
+                raise ValueError("exhaustive classification is only implemented for word quotient")
             statuses = classify_word_exhaustively(signature)
             status_weights = statuses
             word_weight = sum(statuses.values())
@@ -375,7 +397,7 @@ def census_survivor(
         if progress_every and classified_words % progress_every == 0:
             elapsed = time.monotonic() - started
             print(
-                f"    classified word_groups={classified_words} weight={classified_weight} "
+                f"    classified {quotient}_groups={classified_words} weight={classified_weight} "
                 f"elapsed={elapsed:.1f}s",
                 flush=True,
             )
@@ -387,13 +409,21 @@ def census_survivor(
         "max_total_mixed": max_total_mixed,
         "endpoint_groups": endpoint_groups,
         "outside_cover_shells": total_uncovered,
-        "word_groups": len(word_counts),
+        "quotient": quotient,
+        "word_groups": len(quotient_counts) if quotient == "word" else None,
+        "profile_groups": len(quotient_counts) if quotient == "profile" else None,
+        "quotient_groups": len(quotient_counts),
         "reps_per_word": reps_per_word,
+        "reps_per_group": reps_per_word,
         "skip_classified_words": skip_classified_words,
+        "skip_classified_groups": skip_classified_words,
         "classification_mode": classification_mode,
         "classified_words": classified_words,
+        "classified_groups": classified_words,
         "first_classified_word_index": skip_classified_words + 1 if classified_words else None,
+        "first_classified_group_index": skip_classified_words + 1 if classified_words else None,
         "last_classified_word_index": skip_classified_words + classified_words if classified_words else None,
+        "last_classified_group_index": skip_classified_words + classified_words if classified_words else None,
         "classified_weight": classified_weight,
         "mixed_status_words": mixed_status_words,
         "status_group_counts": dict(sorted(status_group_counts.items())),
@@ -418,6 +448,7 @@ def main() -> None:
     parser.add_argument("--skip-classified-words", type=int, default=0)
     parser.add_argument("--max-classified-words", type=int, default=10000)
     parser.add_argument("--classification-mode", choices=("representative", "exhaustive"), default="representative")
+    parser.add_argument("--quotient", choices=("word", "profile"), default="word")
     parser.add_argument("--progress-every", type=int, default=0)
     parser.add_argument("--example-words-per-status", type=int, default=0)
     parser.add_argument("--json-out", type=Path)
@@ -434,6 +465,8 @@ def main() -> None:
         raise SystemExit("--max-classified-words must be positive")
     if args.example_words_per_status < 0:
         raise SystemExit("--example-words-per-status must be nonnegative")
+    if args.classification_mode == "exhaustive" and args.quotient != "word":
+        raise SystemExit("--classification-mode exhaustive is only implemented with --quotient word")
 
     results = []
     for n in args.n:
@@ -448,6 +481,7 @@ def main() -> None:
                 skip_classified_words=args.skip_classified_words,
                 max_classified_words=args.max_classified_words,
                 classification_mode=args.classification_mode,
+                quotient=args.quotient,
                 progress_every=args.progress_every,
                 example_words_per_status=args.example_words_per_status,
             )

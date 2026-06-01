@@ -231,7 +231,8 @@ Current components:
   c-position, mixed-position, and tested-local-label profiles. This is evidence
   for the grouped proof target, not a complete count.
 - `gamma_2alpha_word_quotient_census.py`: exact count-plus-representative
-  classifier for outside-cover side-label word triples. It reproduces the full
+  classifier for outside-cover quotient groups. In its default `--quotient word`
+  mode it groups by side-label word triples. It reproduces the full
   `N=63` mixed-`6` outside-cover mass as `40560` word groups over `415840`
   shells; classifying up to two representatives in every word group gives no
   mixed-status word group and weighted totals exactly matching the full refined
@@ -261,6 +262,14 @@ Current components:
   `50000` word groups include `1152` mixed-status word groups, and a fixed
   word triple with `48` outside-cover realizations splits as `12`
   corner-label violations and `36` pinch-sector obstructions.
+  The newer `--quotient profile` mode groups by c-positions, mixed-transition
+  positions, tested local-overlap labels, and oriented fan signatures. For
+  `N=63` mixed `8`, this gives `1493568` profile groups over `3382720`
+  outside-cover shells; the first `10000` profile groups have no mixed
+  representative status, with weighted status counts `23660` corner-label,
+  `8370` pinch-sector, and `4320` split-corner-label obstructions.
+  A generated-shell prefix probe over the first `100000` shells also found no
+  mixed-status profile group among `10560` touched groups.
 - `gamma_2alpha_word_invariance_probe.py`: exhaustive fixed-word tester for
   selected side-label word triples. It enumerates every oriented boundary
   demand realizing the requested words in the capped shell space, applies the

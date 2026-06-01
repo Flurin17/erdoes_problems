@@ -2353,6 +2353,28 @@ statuses. A direct fixed-word check of
 `EXPERIMENTS/results/n63_mixed8_word_quotient_010000_050000.json` and
 `EXPERIMENTS/results/n63_mixed8_word_invariance_mixed_example.json`.
 
+The word-quotient runner now has a stricter `--quotient profile` mode that
+retains c-positions, mixed-transition positions, tested local-overlap labels,
+and oriented fan signatures on each side. This quotient is far larger, but it
+separates the first recorded `N=63` mixed-`8` slices. Exact counting gives
+`1493568` profile groups over `3382720` outside-cover shells, and the first
+`10000` profile groups have no mixed representative status. Their weighted
+representative totals are:
+
+```text
+corner-label-violation:          23,660
+pinch-sector-obstruction:         8,370
+split-corner-label-obstruction:   4,320
+```
+
+This interval is stored as
+`EXPERIMENTS/results/n63_mixed8_profile_quotient_first10000.json`. A separate
+generated-shell prefix probe over the first `100000` `N=63` mixed-`8` shells
+touched `10560` profile groups, again with no mixed-status group; see
+`EXPERIMENTS/results/n63_mixed8_profile_group_probe_limit100000.json`. This
+does not close the stratum, but it gives a plausible quotient after raw
+side-label words fail.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`

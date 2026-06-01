@@ -196,6 +196,13 @@ The tile triangle is not required to be similar to the large triangle unless exp
   `63` mixed `8`: the first `50000` word groups include `1152` mixed-status
   word groups, and one fixed word triple with `48` outside-cover realizations
   splits as `12` corner-label violations and `36` pinch-sector obstructions.
+  A stricter profile quotient, retaining c-positions, mixed-transition
+  positions, tested local-overlap labels, and oriented fan signatures, does
+  separate the first recorded `63` mixed-`8` slices: the exact profile quotient
+  has `1493568` groups over `3382720` outside-cover shells, the first `10000`
+  profile groups have no mixed representative status, and a first
+  `100000`-generated-shell probe touched `10560` profile groups with no
+  mixed-status group.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.
