@@ -76,6 +76,30 @@ def glued_spectrum(
     return by_degree
 
 
+def bouquet_spectrum(signature: RootedSignature, copies: int, max_degree: int) -> dict[int, int]:
+    avoid, include = signature
+    by_degree: dict[int, int] = {}
+
+    for degree in range(max_degree + 1):
+        best = copies * avoid.get(degree, 0)
+        partial: dict[int, int] = {0: 0}
+        for _ in range(copies):
+            next_partial: dict[int, int] = {}
+            for root_degree_so_far, size_so_far in partial.items():
+                for root_degree, size in include.get(degree, {}).items():
+                    new_root_degree = root_degree_so_far + root_degree
+                    new_size = size_so_far + size
+                    if new_size > next_partial.get(new_root_degree, -1):
+                        next_partial[new_root_degree] = new_size
+            partial = next_partial
+        if degree in partial:
+            best = max(best, partial[degree] - (copies - 1))
+        if best:
+            by_degree[degree] = best
+
+    return by_degree
+
+
 def fixed(
     n1: int,
     mask1: int,
@@ -83,27 +107,40 @@ def fixed(
     n2: int,
     mask2: int,
     root2: int,
+    copies: int,
     brute_force_check: bool,
 ) -> None:
+    if copies < 2:
+        raise ValueError("--copies must be at least 2")
+    if copies != 2 and (n2 != n1 or mask2 != mask1 or root2 != root1):
+        raise ValueError("--copies above 2 is only supported for one repeated rooted graph")
+
     pc1 = cdc.precompute(n1)
     pc2 = cdc.precompute(n2)
     adj1 = cdc.adjacency(n1, mask1, pc1)
     adj2 = cdc.adjacency(n2, mask2, pc2)
-    max_degree = n1 + n2 - 2
+    glued_order = n1 + n2 - 1 if copies == 2 else 1 + copies * (n1 - 1)
+    max_degree = glued_order - 1
 
     mass1, by1 = spectrum_mass(adj1, pc1)
-    mass2, by2 = spectrum_mass(adj2, pc2)
     root_deleted1 = delete_vertex(adj1, root1)
-    root_deleted2 = delete_vertex(adj2, root2)
     mass1_deleted, by1_deleted = spectrum_mass(root_deleted1, cdc.precompute(n1 - 1))
-    mass2_deleted, by2_deleted = spectrum_mass(root_deleted2, cdc.precompute(n2 - 1))
-
     sig1 = rooted_signature(adj1, root1, max_degree)
-    sig2 = rooted_signature(adj2, root2, max_degree)
-    by_glued = glued_spectrum(sig1, sig2, max_degree)
-    mass_glued = sum(by_glued.values())
-    glued_order = n1 + n2 - 1
 
+    if copies == 2:
+        mass2, by2 = spectrum_mass(adj2, pc2)
+        root_deleted2 = delete_vertex(adj2, root2)
+        mass2_deleted, by2_deleted = spectrum_mass(root_deleted2, cdc.precompute(n2 - 1))
+        sig2 = rooted_signature(adj2, root2, max_degree)
+        by_glued = glued_spectrum(sig1, sig2, max_degree)
+    else:
+        mass2, by2 = mass1, by1
+        mass2_deleted, by2_deleted = mass1_deleted, by1_deleted
+        by_glued = bouquet_spectrum(sig1, copies, max_degree)
+
+    mass_glued = sum(by_glued.values())
+
+    print(f"copies={copies}")
     print(f"n1={n1}")
     print(f"mask1={mask1}")
     print(f"root1={root1}")
@@ -124,6 +161,8 @@ def fixed(
     print(f"glued_by_degree={by_glued}")
 
     if brute_force_check:
+        if copies != 2:
+            raise ValueError("brute-force check is only implemented for two-copy gluing")
         if glued_order > 22:
             raise ValueError("brute-force check is too large")
         glued = materialize_gluing(adj1, root1, adj2, root2)
@@ -170,6 +209,7 @@ def main() -> None:
     parser.add_argument("--n2", type=int)
     parser.add_argument("--mask2", type=int)
     parser.add_argument("--root2", type=int)
+    parser.add_argument("--copies", type=int, default=2)
     parser.add_argument("--brute-force-check", action="store_true")
     args = parser.parse_args()
 
@@ -180,6 +220,7 @@ def main() -> None:
         args.n2 if args.n2 is not None else args.n1,
         args.mask2 if args.mask2 is not None else args.mask1,
         args.root2 if args.root2 is not None else args.root1,
+        args.copies,
         args.brute_force_check,
     )
 

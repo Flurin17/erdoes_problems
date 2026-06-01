@@ -15401,6 +15401,29 @@ signatures on each fifteen-vertex side.  Its `--brute-force-check` mode also
 checks the rooted formula against direct subset enumeration on smaller glued
 examples.
 
+The same rooted formula gives an infinite connected family.  If `t` copies of
+`H` are all identified at the same root vertex `13`, then the rooted bouquet
+has
+
+```text
+|V|=14t+1,        sum_d s_d = 13t+1,
+```
+
+with spectrum
+
+```text
+{s_0,s_1,s_2}={5t+1,4t,4t}.
+```
+
+For example,
+
+```text
+python3 82/EXPERIMENTS/rooted_gluing_spectrum.py 15 \
+  --mask1 98404699529372860578279459 --root1 13 --copies 8
+```
+
+reports order `113` and spectrum mass `105`.
+
 This refutes the connected-defect-one proof route and the non-cut
 full-deletion target as universal statements.  The spectrum route must now
 aim directly at a positive-density lower bound such as

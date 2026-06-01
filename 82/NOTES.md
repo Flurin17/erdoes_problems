@@ -4212,3 +4212,10 @@ source of growth beyond Ramsey.
   deletion-tight defects gives mass `26=27-1`; the extra loss occurs exactly
   when both sides have the same root-essential independence drop.  The viable
   spectrum target is now positive density, not additive defect one.
+- 2026-06-01: Extended `rooted_gluing_spectrum.py` with `--copies` for rooted
+  bouquets.  A bouquet of `t` copies of the fifteen-vertex rooted defect
+  block at root `13` has order `14t+1`, spectrum `{0:5t+1,1:4t,2:4t}`, and
+  mass `13t+1`; the ratio tends to `13/14`.  Thus the known glued connected
+  obstructions still support the stronger candidate `mu(G)>=ceil(13|G|/14)`,
+  which would solve the problem by the existing positive-density spectrum
+  corollary if it could be proved.
