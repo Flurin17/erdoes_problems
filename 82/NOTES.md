@@ -3164,3 +3164,9 @@ source of growth beyond Ramsey.
   on the delete-saturated mask the largest bucket has size `8`, max regular
   order `5`, and ranks `6,7`.  The diagnostic confirms this is a large-bucket
   obstruction, not a near-threshold explanation.
+- 2026-06-01: Extended `degree_bucket_profile.py` to print complement degree
+  buckets as well.  On the add-saturated mask the largest graph bucket
+  reappears as the largest complement bucket, with max regular order `4`; on
+  the delete-saturated mask the largest size-`8` bucket is also the largest
+  complement bucket, with max regular order `5`.  This keeps the bucket
+  diagnostic aligned with complement-symmetric reductions.

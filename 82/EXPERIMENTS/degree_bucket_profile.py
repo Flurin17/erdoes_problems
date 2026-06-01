@@ -36,30 +36,29 @@ def max_regular_in_vertices(adj: list[int], vertices: list[int]) -> tuple[int, i
     return 0, None
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("n", type=int)
-    parser.add_argument("--mask", type=int, required=True)
-    parser.add_argument("--primes", default="2")
-    args = parser.parse_args()
+def complement_adjacency(adj: list[int], n: int) -> list[int]:
+    full = (1 << n) - 1
+    return [((~adj[v]) & (full ^ (1 << v))) for v in range(n)]
 
-    adj = regular_bitset.build_adjacency(args.n, args.mask)
-    rows = rank_profile.adjacency_rows(args.n, args.mask)
-    full = (1 << args.n) - 1
+
+def complement_rows(rows: list[list[int]]) -> list[list[int]]:
+    n = len(rows)
+    return [[0 if i == j else 1 - rows[i][j] for j in range(n)] for i in range(n)]
+
+
+def print_profile(name: str, adj: list[int], rows: list[list[int]], n: int, primes: list[int]) -> None:
+    full = (1 << n) - 1
     buckets: dict[int, list[int]] = defaultdict(list)
-    for vertex in range(args.n):
+    for vertex in range(n):
         buckets[(adj[vertex] & full).bit_count()].append(vertex)
 
-    primes = [int(item) for item in args.primes.split(",") if item]
-    print(f"n={args.n}")
-    print(f"mask={args.mask}")
-    print(f"bucket_count={len(buckets)}")
+    print(f"{name}_bucket_count={len(buckets)}")
     for degree in sorted(buckets):
         vertices = buckets[degree]
         matrix = induced_matrix(rows, vertices)
         regular_order, regular_degree = max_regular_in_vertices(adj, vertices)
         fields = [
-            f"degree={degree}",
+            f"{name}_degree={degree}",
             f"size={len(vertices)}",
             "vertices=" + ",".join(map(str, vertices)),
             f"max_regular={regular_order}",
@@ -73,6 +72,25 @@ def main() -> None:
             fields.append(f"rank_mod_{p}={rank}")
             fields.append(f"shifted_rank_mod_{p}={shifted_rank}")
         print(" ".join(fields))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("n", type=int)
+    parser.add_argument("--mask", type=int, required=True)
+    parser.add_argument("--primes", default="2")
+    args = parser.parse_args()
+
+    primes = [int(item) for item in args.primes.split(",") if item]
+    adj = regular_bitset.build_adjacency(args.n, args.mask)
+    rows = rank_profile.adjacency_rows(args.n, args.mask)
+    comp_adj = complement_adjacency(adj, args.n)
+    comp_rows = complement_rows(rows)
+
+    print(f"n={args.n}")
+    print(f"mask={args.mask}")
+    print_profile("graph", adj, rows, args.n, primes)
+    print_profile("complement", comp_adj, comp_rows, args.n, primes)
 
 
 if __name__ == "__main__":
