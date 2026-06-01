@@ -11549,6 +11549,7 @@ The commands
 python3 82/EXPERIMENTS/full_drop_census.py 5 --p 1
 python3 82/EXPERIMENTS/full_drop_census.py 6 --p 2
 python3 82/EXPERIMENTS/full_drop_census.py 8 --p 2 --search-h 4 --max-nodes 50000
+python3 82/EXPERIMENTS/full_drop_census.py 13 --p 2 --search-h 5 --max-nodes 100000
 ```
 
 report respectively:
@@ -11557,6 +11558,7 @@ report respectively:
 P=1, n=5: checked_full_drop=16,   min_max_homogeneous=3, min_max_regular=3
 P=2, n=6: checked_full_drop=1622, min_max_homogeneous=3, min_max_regular=3
 P=2, n=8: DFS found max_full_drop=1 with max_homogeneous=3 and max_regular=4.
+P=2, n=13: DFS found max_full_drop=1 with max_homogeneous=4 and max_regular=6.
 ```
 
 These checks are only finite calibration.  Their role is to verify the new

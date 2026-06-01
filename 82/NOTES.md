@@ -3430,3 +3430,9 @@ source of growth beyond Ramsey.
   A DFS search at `P=2,n=8` found a full-drop example with maximum
   homogeneous order `3` and maximum regular order `4`, confirming that the
   script enforces the stronger all-coordinate drop condition.
+- 2026-06-01: Pushed the full-drop DFS calibration to `P=2,n=13,h=5`.
+  The search found a max-full-drop-`1` ordered graph with maximum homogeneous
+  order `4` and maximum regular order `6`.  This shows the full-drop
+  homogeneous threshold is not collapsing to the `P=1` threshold at the first
+  nontrivial error level, while still leaving open whether the deterministic
+  `O(P h^2)` peeling bound can be improved to `O(P h)`.
