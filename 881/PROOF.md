@@ -23758,6 +23758,84 @@ finite menu of robust-core tests must nominate one test whose active-color
 escape proportion is not summable across the packet tail. A finite menu
 cannot spread the selector debt into vanishing summable errors.
 
+### Corollary 16.90: Joint robust-profile summability removes the bounded-rank branch
+
+Keep the packet notation of Corollary 16.87. For each \(q\ge1\), let
+\[
+\mathcal A_q
+\]
+be a countable set of robust-core profiles satisfying the hypotheses of
+Corollary 16.88 with rank bound \(q\) and density threshold \(1/q\). For
+\(\alpha\in\mathcal A_q\), write
+\[
+C_{\alpha,q}=
+\bigcup_{K\in\mathcal K_\alpha}
+R_K\left({1\over2q^2},I_\alpha;q\right),
+\qquad
+E_{\alpha,q,s}=P_s\setminus C_{\alpha,q}. \tag{1}
+\]
+
+Let \(\mathcal G_{\rm bd}\) be a family of active traces
+\[
+G\subset\bigcup_sP_s
+\]
+which product-covers every selector tail. Suppose that every
+\[
+G\in\mathcal G_{\rm bd}
+\]
+has finite rank \(r_G=|G|\), an assigned integer \(q(G)\ge r_G\), an
+assigned profile \(\alpha(G)\in\mathcal A_{q(G)}\), and a nonempty active
+palette
+\[
+P_G\subseteq G
+\]
+whose interval packet over \(I_{\alpha(G)}\) has density at least
+\(1/q(G)\), rank at most \(q(G)\), and satisfies the hypotheses of
+Corollary 16.86 for the profile \(\alpha(G)\).
+
+Then, for every tail index \(t\),
+\[
+\sum_{q\ge1}\sum_{\alpha\in\mathcal A_q}\sum_{s\ge t}
+{|E_{\alpha,q,s}|\over |P_s|}\ge1. \tag{2}
+\]
+Equivalently, if the joint robust-profile escape mass in (2) is \(<1\) on
+some tail, then there is a selector tail avoiding every trace in
+\(\mathcal G_{\rm bd}\).
+
+Proof. For every triple \((q,\alpha,s)\), form the one-coordinate cylinder
+\[
+\mathcal C_{q,\alpha,s}=(\{s\},E_{\alpha,q,s})
+\]
+and discard the empty ones. Fix \(G\in\mathcal G_{\rm bd}\), put
+\[
+q=q(G),\qquad \alpha=\alpha(G).
+\]
+If \(P_G\subset C_{\alpha,q}\), then Corollary 16.86, with rank bound
+\(q\) and density \(1/q\), says that the assigned interval packet has
+density \(<1/q\), contradiction. Hence some active color of \(P_G\) lies
+in
+\[
+P_s\cap E_{\alpha,q,s}
+\]
+for a packet index \(s\) in the support of \(G\). Any selector containing
+\(G\) is therefore caught by \(\mathcal C_{q,\alpha,s}\).
+
+The product mass of \(\mathcal C_{q,\alpha,s}\) is
+\[
+{|E_{\alpha,q,s}|\over |P_s|}.
+\]
+Lemma 8.5a.7u' applied to the union of all these cylinders gives (2), and
+the equivalent selector-avoidance statement is its contrapositive.
+\(\square\)
+
+This is the diagonal form needed for the vanishing-density discussion. A
+counterexample may distribute its debt across ranks and density scales, but
+only at the price of keeping the total robust-core escape mass
+nonsummable on every selector tail. If a construction makes all such
+escapes jointly summable after passing to a tail, a selector deletion
+removes the entire bounded-rank positive-density interval-packet branch at
+once.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -23773,8 +23851,9 @@ row-dependent allowance is removed, the central retained two-sum band pushes
 at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
 remaining escape must therefore either make the packet density vanish, let
-the deletion rank grow with the interval, or coordinate genuinely far gates
-across separated blocks.
+the deletion rank grow with the interval, coordinate genuinely far gates
+across separated blocks, or maintain nonsummable robust-core escape mass
+across the packet selector tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 
@@ -25066,6 +25145,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   tail sum at least \(1\) on every packet tail.
 * Corollary 16.89 sharpens this for finite profile menus: one robust-core
   profile must have divergent escape proportion across the packet sequence.
+* Corollary 16.90 diagonalizes over rank and density thresholds: joint
+  summability of all robust-core escape proportions on a tail lets a
+  selector avoid the entire bounded-rank positive-density interval-packet
+  branch.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

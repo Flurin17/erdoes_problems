@@ -133,7 +133,10 @@ tail, or move to growing rank. Corollary 16.88 specializes this to robust
 cores: the active-color proportions escaping all assigned robust-core
 profiles must have tail sum at least \(1\) on every packet tail. Corollary
 16.89 adds that a finite menu of such profiles forces one profile to have
-divergent escape proportion along the packet sequence.
+divergent escape proportion along the packet sequence. Corollary 16.90
+diagonalizes over all fixed ranks and density thresholds: if the robust-core
+escape proportions are jointly summable on a tail, a selector avoids the
+whole bounded-rank positive-density interval-packet branch.
 
 ## Definitions
 
