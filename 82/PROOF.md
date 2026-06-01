@@ -14197,6 +14197,130 @@ single vertex of `A` has no neighbor in `B`, then again `G` is independent.
 If `a=1` and there is an edge, then `s_1(G)>=2`, while `s_0(G)>= b`, so the
 spectrum mass is at least `b+2>=b+1=|V(G)|`.  QED.
 
+**Lemma 28J.7: Complete Multipartite Graphs Satisfy Spectrum Mass.**  If
+`G` is a complete multipartite graph, then
+
+```text
+sum_d s_d(G) >= |V(G)|.
+```
+
+The same conclusion holds for a disjoint union of cliques.
+
+Proof.  First suppose that `G` is complete multipartite with part sizes
+
+```text
+lambda_1 >= lambda_2 >= ... >= lambda_m.
+```
+
+The largest part gives an independent set, so
+
+```text
+s_0(G) >= lambda_1.
+```
+
+For every pair of integers `(a,t)` with `2<=a<=m` and `1<=t<=lambda_a`,
+choose `t` vertices from each of the first `a` parts.  They induce a complete
+`a`-partite graph with equal part size `t`, hence a regular graph of order
+`at` and degree
+
+```text
+d=t(a-1).
+```
+
+Several pairs `(a,t)` may lead to the same degree `d`; this is the only point
+that needs care.  Fix such a positive degree `d`, and let
+
+```text
+C_d = { (a,t) : 2<=a<=m, 1<=t<=lambda_a, t(a-1)=d }.
+```
+
+If `C_d` is nonempty, then every element of `C_d` corresponds to a divisor
+`a-1` of `d`, so `|C_d|<=tau(d)<=d+1`.  On the other hand, for every
+`(a,t) in C_d`, the corresponding regular subgraph has order
+
+```text
+at = t(a-1)+t = d+t >= d+1.
+```
+
+Therefore the largest order contributed at degree `d` is at least `|C_d|`.
+Summing this inequality over all positive degrees appearing from such pairs
+gives
+
+```text
+sum_{d>=1} s_d(G)
+  >= sum_d |C_d|
+  =  |{(a,t): 2<=a<=m, 1<=t<=lambda_a}|
+  =  lambda_2+...+lambda_m.
+```
+
+Together with `s_0(G)>=lambda_1`, this proves the desired inequality.
+
+For a disjoint union of cliques with clique sizes
+`lambda_1,...,lambda_m`, put
+
+```text
+a_t = |{i : lambda_i >= t}|.
+```
+
+For every `t` with `a_t>0`, choosing `t` vertices from each clique of size at
+least `t` gives a disjoint union of equal `t`-cliques.  This graph is
+`(t-1)`-regular and has order `t a_t`.  These degrees are distinct as `t`
+varies, so
+
+```text
+sum_d s_d(G) >= sum_{t>=1} t a_t >= sum_{t>=1} a_t = |V(G)|.
+```
+
+QED.
+
+**Lemma 28J.8: Minimal Counterexamples To Spectrum Mass Are
+Deletion-Tight.**  Suppose that the spectrum-mass inequality
+
+```text
+sum_d s_d(G) >= |V(G)|
+```
+
+fails, and let `G` be a counterexample with the minimum possible number
+`n=|V(G)|` of vertices.  Then
+
+```text
+sum_d s_d(G)=n-1.
+```
+
+Moreover, for every vertex `v` and every degree `d`,
+
+```text
+s_d(G-v)=s_d(G),
+```
+
+and in particular
+
+```text
+sum_d s_d(G-v)=n-1.
+```
+
+Proof.  The parameter `s_d` is monotone under passing from an induced
+subgraph to the whole graph: if `H` is induced in `G`, then any induced
+`d`-regular subgraph of `H` is also an induced `d`-regular subgraph of `G`.
+Thus `s_d(H)<=s_d(G)` for every `d`, and hence the spectrum mass is monotone.
+
+Fix a vertex `v`.  By minimality, `G-v` satisfies the spectrum-mass
+inequality, so
+
+```text
+sum_d s_d(G-v) >= n-1.
+```
+
+By monotonicity and the assumption that `G` is a counterexample,
+
+```text
+n-1 <= sum_d s_d(G-v) <= sum_d s_d(G) < n.
+```
+
+All quantities are integers, so both sums are equal to `n-1`.  Since
+`s_d(G-v)<=s_d(G)` for every `d` and the sums are equal, equality holds
+coordinatewise for every degree `d`.  QED.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

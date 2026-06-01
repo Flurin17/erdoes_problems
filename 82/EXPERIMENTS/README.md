@@ -9,6 +9,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `regular_spectrum_mass.py`: exact, sample, and local-search diagnostics for
   the spectrum-mass parameter `mu(G)=sum_d s_d(G)`, where `s_d` is the largest
   induced `d`-regular order.
+- `spectrum_mass_critical.py`: deletion-critical diagnostics for the same
+  spectrum-mass parameter, including exact small-order histograms of
+  `mu(G)-|G|` and the drops `mu(G)-mu(G-v)`.
 - `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
   ordered graph, including fixed-mask, explicit-column, lower-family, exact
   enumeration, and no-regular-`h` obstruction modes.

@@ -3862,3 +3862,20 @@ source of growth beyond Ramsey.
   is false: adding an edge can decrease `mu`, even inside connected graphs
   (for example `n=4`, mask `30` has `mu=8`, while adding edge-index `0`
   gives mask `31` with `mu=7`).
+- 2026-06-01: Added `spectrum_mass_critical.py` to test deletion-critical
+  behavior of the spectrum mass.  Exact `n=5` and `n=6` sweeps again give
+  minimum `mu=n`, but many equality examples have vertices whose deletion does
+  not lower `mu`; for instance the `n=6` max-deletion-drop histogram starts
+  `{0:180, 1:3241, 2:4998, ...}`.  Therefore a direct induction requiring a
+  vertex with `mu(G)-mu(G-v)>=1` is false even among graphs satisfying the
+  target with equality.  The only viable induction of this kind would need a
+  sharper minimal-counterexample argument: a smallest counterexample would
+  have `mu(G)=n-1` and `mu(G-v)=n-1` for every vertex `v`.
+- 2026-06-01: Proved the spectrum-mass inequality for complete multipartite
+  graphs and for disjoint unions of cliques.  The complete multipartite proof
+  groups equal-part selections by the regular degree `d=t(a-1)`; collisions
+  are harmless because the number of divisor representations of `d` is at
+  most `d+1`, while every corresponding witness has order `at=d+t>=d+1`.
+  This removes complete multipartite graphs from the possible spectrum-mass
+  obstruction list and gives another nontrivial class beyond forests,
+  pseudoforests, split graphs, and regular-feedback-set graphs.
