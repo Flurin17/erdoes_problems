@@ -15030,6 +15030,78 @@ sum_d s_d(G) >= c |V(G)|
 for some absolute `c>0`; this would also imply Erdős Problem 82 by the same
 argument as Conditional Corollary 28J.1b with `delta=1`.
 
+**Conditional Corollary 28J.10e: Quadratic Square-Spectrum Mass Would
+Suffice.**  Define
+
+```text
+Q(G)=sum_d s_d(G)^2.
+```
+
+Suppose there are constants `c>0` and `N_0` such that every graph `J` on
+`N>=N_0` vertices satisfies
+
+```text
+Q(J) >= cN^2.
+```
+
+Then
+
+```text
+D_spec(h) = O_c(h^{3/2})
+```
+
+and consequently
+
+```text
+G(k)=O_c(k^{3/2}).
+```
+
+In particular Erdős Problem 82 follows.
+
+Proof.  Let `J_1,J_2` be two `M`-vertex graphs.  If either graph has a
+regular induced subgraph of order at least `h`, the first alternative in
+`D_spec(h)` holds.  Otherwise all contributing degrees lie in
+`0,...,h-2`.  If the spectrum-matching alternative also fails, then for every
+such degree `d`,
+
+```text
+s_d(J_1)+s_d(J_2) <= h-1.
+```
+
+For nonnegative `x,y` with `x+y<=h-1`, one has
+
+```text
+x^2+y^2 <= (h-1)^2.
+```
+
+Therefore
+
+```text
+Q(J_1)+Q(J_2) <= (h-1)^3.
+```
+
+The assumed square-spectrum lower bound gives
+
+```text
+Q(J_1)+Q(J_2) >= 2cM^2
+```
+
+for `M>=N_0`.  Hence the two alternatives cannot both fail once
+`M > (h-1)^{3/2}/sqrt(2c)`.  This proves `D_spec(h)=O_c(h^{3/2})`, and
+Corollary 28I gives `G(k)<=D_spec(2k)=O_c(k^{3/2})`.  QED.
+
+The script `EXPERIMENTS/spectrum_power_search.py` was added to search this
+functional.  Exact labelled enumeration through seven vertices gives minimum
+`Q/n^2` equal to `29/49` at `n=7`.  The fourteen-vertex linear-mass
+counterexample has
+
+```text
+Q=5^2+4^2+4^2=57,        Q/n^2=57/196.
+```
+
+A seeded connected local search from that graph did not find a smaller
+square-spectrum value.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

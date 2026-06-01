@@ -4061,3 +4061,13 @@ source of growth beyond Ramsey.
   defect-one theorem could still imply a positive-density global theorem
   because the first known connected deficit has size `14`, but the clean
   target is now `mu(G)>=c|G|` for an absolute constant `c>0`.
+- 2026-06-01: Added the square-spectrum route.  Let
+  `Q(G)=sum_d s_d(G)^2`.  If `Q(G)>=c|G|^2` for some absolute `c>0`, then
+  for two `M`-vertex graphs failing the spectrum match at threshold `h`, each
+  coordinate pair contributes at most `(h-1)^2` to the combined square sum and
+  there are only `h-1` relevant degrees.  Hence `2cM^2<=(h-1)^3`, giving
+  `D_spec(h)=O(h^{3/2})` and `G(k)=O(k^{3/2})`.  Added
+  `spectrum_power_search.py`; exact labelled `n=7` gives minimum
+  `Q/n^2=29/49`, while the fourteen-vertex linear-mass counterexample has
+  `Q/n^2=57/196`.  A seeded connected local search from that example found
+  no smaller square-spectrum value.
