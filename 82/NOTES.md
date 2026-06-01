@@ -2499,3 +2499,8 @@ source of growth beyond Ramsey.
   equivalent to the original inverse conjecture.  Proposition 28F is still
   useful because it proves a polynomial global reduction from arbitrary
   counterexamples to the marked two-part obstruction.
+- 2026-06-01: Added Lemma 11G and `spread_one_deletion_certificate.py`.
+  In a graph whose degrees are `d` or `d+1`, a set `S` is regular exactly
+  when `deg(v,V\S)-epsilon(v)` is constant on `S`.  This turns the spread-one
+  route into an offset-trace deletion problem and gives a precise certificate
+  to inspect in compensated examples.

@@ -5478,6 +5478,55 @@ not restore the false universal half-size theorem from Example 11C, but they
 show that the compensated family oscillates around the half-size boundary in
 small samples rather than immediately producing a decreasing ratio.
 
+**Lemma 11G: Deletion Certificate For Spread-One Regularity.**  Let `G` be a
+graph whose degrees are all `d` or `d+1`.  Put
+
+```text
+epsilon(v)=deg_G(v)-d in {0,1}.
+```
+
+For a vertex set `S` and its complement `T=V(G)\S`, the induced graph `G[S]`
+is regular if and only if the quantity
+
+```text
+deg_G(v,T)-epsilon(v)
+```
+
+is constant over all `v in S`.
+
+Proof.  For `v in S`,
+
+```text
+deg_{G[S]}(v) = deg_G(v)-deg_G(v,T)
+              = d + epsilon(v) - deg_G(v,T).
+```
+
+The left-hand side is independent of `v in S` exactly when
+`deg_G(v,T)-epsilon(v)` is independent of `v in S`.  QED.
+
+Thus the spread-one problem can be phrased as a deletion-trace problem: find a
+small deletion set `T` such that all surviving low-degree vertices have one
+common trace size into `T`, while all surviving high-degree vertices have
+trace size larger by one.  This is the bounded-spread analogue of Lemma 12's
+minimal repeated-degree obstruction, but now the target is constructive rather
+than obstruction-minimal.
+
+The helper `EXPERIMENTS/spread_one_deletion_certificate.py` displays this
+certificate for fixed witnesses.  On Example 11C, it finds a maximum
+order-`5` witness and verifies that the values `deg(v,T)-epsilon(v)` are
+constant on the witness:
+
+```text
+python3 82/EXPERIMENTS/spread_one_deletion_certificate.py 12 --mask 72400984189589100935
+```
+
+This reformulation suggests a concrete route for spread-one graphs: prove
+that every two-degree graph has an offset-trace deletion certificate with
+`|T|=n-o(n/log n)`, or even with `|S|=omega(log n)`.  The compensated examples
+show that `T` need not be small; the useful question is whether one can always
+make the surviving trace-equalized set substantially larger than the Ramsey
+scale.
+
 ## Lemma 12: Minimal Repeated-Degree Host Obstruction
 
 Let `H` be an induced subgraph of `G` containing a set
