@@ -2292,3 +2292,10 @@ source of growth beyond Ramsey.
   biregular, but internal degree plus cross degree is constantly `4`.
   Therefore the missing structure beyond pair templates is degree-profile
   compensation across a cut, not just homogeneous subpairs.
+- 2026-06-01: Added Lemma 30, a profile absorption reformulation across a
+  fixed cut.  Once candidate internal sets `X,Y` are chosen, regularity asks
+  the cross graph to realize residual degree demands
+  `D-deg_X(x)` and `D-deg_Y(y)`.  The pair-template route is the constant
+  residual-demand case; the spread-one witness above uses varying residual
+  demands.  This turns the next target into a demand-realization problem for
+  cross subgraphs.

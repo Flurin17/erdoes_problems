@@ -7337,6 +7337,51 @@ neither side is internally regular and the cross graph is not biregular, but
 the sums are constant.  This points back toward degree-profile absorption
 rather than purely homogeneous pair templates.
 
+## Lemma 30: Profile Absorption Reformulation Across A Cut
+
+Let `V(G)=P union Q` be a fixed partition.  For `X subset P` and `Y subset Q`,
+define the profile vectors
+
+```text
+alpha_X(x)=deg_{G[X]}(x)      for x in X,
+beta_Y(x)=|N(x) cap Y|        for x in X,
+gamma_Y(y)=deg_{G[Y]}(y)      for y in Y,
+eta_X(y)=|N(y) cap X|         for y in Y.
+```
+
+Then `G[X union Y]` is regular if and only if the two finite multisets
+
+```text
+{ alpha_X(x)+beta_Y(x) : x in X },
+{ gamma_Y(y)+eta_X(y) : y in Y }
+```
+
+are both singletons with the same value.
+
+Equivalently, after choosing the internal sets `X` and `Y`, the cross graph
+between them must realize prescribed degree lists
+
+```text
+beta_Y(x)=D-alpha_X(x),       x in X,
+eta_X(y)=D-gamma_Y(y),        y in Y,
+```
+
+for some integer `D`.
+
+Proof.  The first statement is Lemma 29 with notation adapted to the ambient
+cut `P,Q`.  The second is just a rearrangement of the same equal-degree
+equations: once `X` and `Y` are fixed, the internal degrees
+`alpha_X,gamma_Y` are fixed, and regularity is exactly the assertion that the
+cross degrees into the other side match the displayed residual demands for a
+common `D`.  QED.
+
+This reformulation identifies the next nonhomogeneous target.  Pair-template
+arguments choose `X,Y` so that the residual demands are constant.  The
+compensated spread-one examples show that useful witnesses can have genuinely
+varying residual demands, so a proof must either find such demand-realizing
+cross subgraphs efficiently or prove that a counterexample has a large
+regular witness elsewhere.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an
