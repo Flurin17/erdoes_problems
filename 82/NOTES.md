@@ -2222,3 +2222,10 @@ source of growth beyond Ramsey.
   independent, it is not a counterexample to Problem 82; instead it shows
   that the repeated-degree route must exploit regular subgraphs in `B` or
   another property not visible in the trace multiset.
+- 2026-06-01: Added Lemma 25 and `degree_variance_identity.py`.  Summing the
+  squared degree variance over all `h`-sets expands exactly into a degree
+  spread term plus a neighborhood symmetric-difference term.  Therefore any
+  counterexample with small degree spread must have large aggregate
+  neighborhood diversity.  This gives a possible bridge between bounded-spread
+  and Ramsey-core methods, and also warns that bounded-spread alone is
+  unlikely to be enough without handling random-like pair diversity.

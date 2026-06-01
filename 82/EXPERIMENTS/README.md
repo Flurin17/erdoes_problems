@@ -241,3 +241,6 @@ Computational checks and generated data for Erdos Problem 82.
 - `separator_gap.py`: verifies the four-vector support-`<=2` example showing
   that deletion-minimality, which forbids only `0/1` zero subfamilies, does
   not imply the strict cone separation used in conditional separator bounds.
+- `degree_variance_identity.py`: verifies the pair-expanded identity for the
+  total squared degree variance over all `h`-vertex induced subgraphs.  This
+  supports the diversity-counting route in Lemma 25.

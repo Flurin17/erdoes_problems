@@ -6979,6 +6979,114 @@ has `O(k^2)` possible colors on `(k-1)`-sets, so plain pigeonhole density is
 far below the threshold.  Any successful use of Lemma 24 must exploit special
 structure of the edge-count level sets, not just their number.
 
+## Lemma 25: Degree-Variance Diversity Certificate
+
+Let `G` be a graph on `n` vertices, and fix `h` with `2<=h<=n`.  For
+`S subset V(G)`, write `deg_S(v)` for the degree of `v` in `G[S]`, and put
+
+```text
+V_h(G) =
+sum_{|S|=h} sum_{u<v in S} (deg_S(u)-deg_S(v))^2.
+```
+
+For vertices `u,v`, let
+
+```text
+sigma(u,v)=|(N(u) triangle N(v)) \ {u,v}|.
+```
+
+Then
+
+```text
+V_h(G)
+= binom(n-4,h-4) sum_{u<v} (deg_G(u)-deg_G(v))^2
+  + binom(n-4,h-3) sum_{u<v} sigma(u,v),
+```
+
+where `binom(a,b)=0` if `b<0` or `b>a`.
+
+Consequently, if `G` has no regular induced subgraph on `h` vertices, then
+
+```text
+binom(n,h)
+<= binom(n-4,h-4) sum_{u<v} (deg_G(u)-deg_G(v))^2
+ + binom(n-4,h-3) sum_{u<v} sigma(u,v).
+```
+
+In particular, if the degree spread of `G` is at most `s`, every pair of
+vertices has `sigma(u,v)<=D`, and `n>=2h>=8`, then a graph with no regular
+induced `h`-set must satisfy
+
+```text
+1 <= 8 h^4 s^2 / n^2 + 4 h^3 D / n.
+```
+
+Thus `n>8h^2s` and `n>8h^3D` together force a regular induced subgraph on
+`h` vertices.
+
+Proof.  Fix an unordered pair `u,v`, and write
+
+```text
+x_w = 1_{uw in E(G)} - 1_{vw in E(G)}
+```
+
+for `w notin {u,v}`.  If `S={u,v} union T`, where `|T|=h-2`, then
+
+```text
+deg_S(u)-deg_S(v) = sum_{w in T} x_w,
+```
+
+since the edge `uv`, if present, contributes equally to both degrees.  Let
+`N=n-2` and `r=h-2`.  Summing the square over all such `T` gives
+
+```text
+sum_{|T|=r} (sum_{w in T} x_w)^2
+= binom(N-2,r-2) (sum_w x_w)^2
+  + binom(N-2,r-1) sum_w x_w^2.
+```
+
+Here
+
+```text
+sum_w x_w = deg_G(u)-deg_G(v),
+sum_w x_w^2 = sigma(u,v).
+```
+
+Since `N-2=n-4`, this proves the displayed identity after summing over all
+pairs `u<v`.
+
+If an `h`-set `S` is not regular, then at least one pair of vertices in `S`
+has unequal induced degrees, so
+
+```text
+sum_{u<v in S} (deg_S(u)-deg_S(v))^2 >= 1.
+```
+
+When no regular `h`-set exists, summing this inequality over all `S` gives
+the second display.
+
+For the final estimate, use
+
+```text
+sum_{u<v} (deg_G(u)-deg_G(v))^2 <= binom(n,2)s^2,
+sum_{u<v} sigma(u,v) <= binom(n,2)D.
+```
+
+If `n>=2h>=8`, then
+
+```text
+binom(n-4,h-4)/binom(n,h) <= 16h^4/n^4,
+binom(n-4,h-3)/binom(n,h) <= 8h^3/n^3.
+```
+
+Substitution gives the claimed necessary inequality.  QED.
+
+This identity is a useful diagnostic for low-diversity routes.  A large
+counterexample with small degree spread must have many pairs with large
+neighborhood symmetric difference.  Thus a bounded-spread proof cannot depend
+only on the degree interval; it must also handle graph families with strong
+pairwise neighborhood diversity, which is exactly the random-like regime.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an
