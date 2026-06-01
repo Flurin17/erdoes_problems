@@ -8619,6 +8619,28 @@ disjoint-union proof of `P_6>5`, verified by
 python3 82/EXPERIMENTS/regular_spectrum.py 5 --h 6 --mask-a 478 --mask-b 35
 ```
 
+The same mechanism reaches the current small `P_7` calibration.  For `h=7`
+and component order `M=7`, the masks
+
+```text
+287010,       2096239
+```
+
+have spectra
+
+```text
+1:0 2:0 2:1 3:0 3:2 4:0 4:1,
+1:0 2:0 2:1 3:2 4:3 5:4.
+```
+
+For each degree, the largest same-degree orders in the two components sum to
+at most `6`, so Lemma 28H gives a disjoint-union proof of `P_7>7`.  This is
+verified by
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum.py 7 --h 7 --mask-a 287010 --mask-b 2096239
+```
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

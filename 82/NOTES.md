@@ -2516,4 +2516,5 @@ source of growth beyond Ramsey.
   disjoint degree spectra.  This strengthens the simple lower construction in
   Lemma 28G, which only used components with no regular set of order
   `ceil(h/2)`.  The masks `478` and `35` give a spectrum-disjoint
-  disjoint-union proof of `P_6>5`.
+  disjoint-union proof of `P_6>5`, and masks `287010` and `2096239` give a
+  disjoint-union proof of `P_7>7`.
