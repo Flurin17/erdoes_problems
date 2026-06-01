@@ -4335,3 +4335,9 @@ source of growth beyond Ramsey.
   `O(sqrt R)`, giving `Q>=R^{3/2}/3`.  This explains why repeated regular
   degrees are harmless across components; the difficult partition
   obstructions require cross edges between repeated-degree pieces.
+- 2026-06-01: Added the vertex-separator version of the same square-spectrum
+  bounds.  For any separator `S`, components of `G-S` contribute
+  root-avoiding spectra exactly as disconnected pieces do:
+  `Q(G)>=sum_i Q(C_i)`, `Q(G)>=t^2`, and total separated regular witness
+  mass `R` gives `Q>=R^{3/2}/3`.  This is relevant because the first sharp
+  defects have 2-cuts even when they have no cut vertex.

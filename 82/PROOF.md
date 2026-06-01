@@ -16171,6 +16171,38 @@ partition parts may have cross edges; for components, or for root-avoiding
 pieces across a cut vertex, repeated degrees add constructively in the same
 spectrum coordinate.
 
+**Lemma 28J.10e.5c: Vertex Separators Have The Same Root-Avoiding Square
+Lower Bounds.**  Let `S subset V(G)`, and let `C_1,...,C_t` be the connected
+components of `G-S`.  Then
+
+```text
+Q(G) >= sum_{i=1}^t Q(C_i)
+```
+
+and
+
+```text
+Q(G) >= t^2.
+```
+
+Moreover, if `G[C_i]` contains a regular induced subgraph of order `r_i>=1`
+for every `i`, and `R=sum_i r_i`, then
+
+```text
+Q(G) >= R^{3/2}/3.
+```
+
+Proof.  All witnesses used inside the components of `G-S` avoid `S`, and
+there are no edges between distinct components.  Therefore the proofs of
+Lemma 28J.10e.5a and Lemma 28J.10e.5b apply verbatim to these components.
+QED.
+
+Thus small separators are harmless only when the root-avoiding component
+pieces already carry enough spectrum.  The finite fourteen-vertex defects
+show that separator roots can still be essential for the sharp linear mass
+functional, but for `Q` every root-avoiding component contribution remains
+available and same-degree contributions across separated pieces add.
+
 **Lemma 28J.10e.6: Deletion Drop Bound For Power Spectra.**  For `p>=1`,
 define
 
