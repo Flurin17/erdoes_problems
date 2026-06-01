@@ -5498,6 +5498,51 @@ private-incidence structure, or produce a finite recurrent
 certificate-free coloring, already impossible by Lemma 8.6g''''.2. Pure
 combinatorics alone does not provide that descent.
 
+### Warning 8.5a.1b: Active last points do not by themselves give descent
+
+Lemma 3.1c.2 and Corollary 3.1c.3 show that first-prefix late-bad fronts
+can be replaced by active traces containing the last front point. This
+removes purely inactive rank inflation, but it still does not give a
+purely combinatorial section descent.
+
+Use the second-element front
+\[
+\mathcal B_2=\{\{x_1<\cdots<x_m\}\subset\{2,3,\ldots\}:m=x_2\}.
+\]
+For
+\[
+S=\{x_1<\cdots<x_m\}\in\mathcal B_2
+\]
+write
+\[
+a=x_2,\qquad b=x_m=\max S,
+\]
+and declare the active trace to be
+\[
+F_S=\{a,b\}.
+\]
+Then every infinite
+\[
+X=\{x_1<x_2<\cdots\}
+\]
+contains the front edge \(S=\{x_1,\ldots,x_{x_2}\}\), and the associated
+trace \(F_S=\{x_2,x_{x_2}\}\) contains the last front point. The remaining
+points of \(S\setminus F_S\) are inactive fillers.
+
+This model satisfies the formal conclusion of Lemma 3.1c.2, but it does
+not descend to a collective hole in the suffix after the prefix point
+\(a\). Once \(a\) is fixed in the prefix, the moving part of the active
+trace is only the singleton \(\{b\}\), while singleton late-bad barriers
+are already excluded in the remaining \(k=2\) case. A formal private-color
+model can still color all inactive fillers by the moving last point \(b\),
+with the color depth \(x_2-1\) escaping to infinity.
+
+Thus active-last information narrows the obstruction but does not close it.
+A final proof must rule out last-gated or unbounded-depth active traces by
+arithmetic means, or else construct them coherently. Bounded-depth section
+arguments such as Lemma 8.5a.3 and Corollary 8.5a.4 do not cover this
+abstract pattern.
+
 ### Lemma 8.5a.2: Front sections are fronts
 
 Let \(P\) be an infinite ordered set, and let \(\mathcal F\) be a front on
@@ -12180,6 +12225,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the second-element front shows rank may be controlled by later points.
   The remaining abstract target is recursive front-section descent plus
   arithmetic input.
+* Warning 8.5a.1b shows that even the active-last reduction from Lemma
+  3.1c.2 does not give pure section descent: a second-element front can
+  carry pair active traces \(\{x_2,\max S\}\) while all filler rows are
+  last-gated at unbounded depth.
 * Lemma 8.5a.2 supplies the basic recursive tool: proper sections of a
   front are fronts on the tail. The missing step is preserving the
   arithmetic private-incidence normal form under this descent.
