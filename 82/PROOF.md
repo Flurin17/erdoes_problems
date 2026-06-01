@@ -15171,6 +15171,19 @@ The verified fourteen-vertex defect graphs satisfy this extension target in
 all tested one-vertex extensions: the worst extensions have mass exactly
 `|H|`, not below it.
 
+The focused diagnostic
+
+```text
+python3 82/EXPERIMENTS/defect_extension_profile.py 14 --mask 429588619789184147001379 --connected-only
+```
+
+checks all connected one-vertex extensions of the sharp minimum-degree-`2`
+defect graph.  It reports minimum connected extension mass `14`.  Among the
+worst extensions, `33` increase only `s_0` by one and `2` increase only
+`s_2` by one.  Thus the tested sharp examples support the idea that every
+connected extension fills the single missing spectrum unit either by growing
+the independence coordinate or by growing the induced `2`-regular coordinate.
+
 **Conditional Corollary 28J.10e: Quadratic Square-Spectrum Mass Would
 Suffice.**  Define
 

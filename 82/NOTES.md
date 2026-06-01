@@ -4101,6 +4101,15 @@ source of growth beyond Ramsey.
   extensions also stay at defect at most one in the full profile runs.
   The longer symmetric batch was stopped after these two checks to avoid
   spending more time on computation before extracting a structural proof.
+- 2026-06-01: Added `defect_extension_profile.py` for the connected
+  defect-extension target.  On the sharp minimum-degree-`2` defect graph
+  `429588619789184147001379`, all connected one-vertex extensions have
+  mass at least `14`; the worst connected extensions split into `33` cases
+  where only `s_0` grows by one and `2` cases where only `s_2` grows by one.
+  On the leaf-containing defect graph `391219392115868279640099`, the
+  corresponding worst count is `39`, all with mass `14`.  Broader connected
+  local searches found no defect-two example: an `n=14` search reached
+  `mu=14`, and an `n=16` search only reached `mu=21`.
 - 2026-06-01: Isolated the connected defect-extension induction.  It is enough
   to prove: if `H` is connected and `mu(H)=|H|-1`, then every connected
   one-vertex extension `G` of `H` has `mu(G)>=|H|`.  The proof deletes a
