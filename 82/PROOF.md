@@ -1806,6 +1806,62 @@ four-part partition:
 with residues respectively `0,2,2,0` modulo `4`.  Hence a connected
 first-lift theorem, if true, must allow at least four parts.
 
+The same four-part lower bound already appears at the next tested dyadic
+scale.
+
+**Computational Proposition: Connected `8 -> 16` Lift Requiring Four
+Parts.**  There is a connected `8`-modular graph on `22` vertices which has
+no partition into three induced `16`-modular subgraphs, but does have such a
+partition into four parts.
+
+Proof.  In the edge ordering used by `EXPERIMENTS/regular_induced.py`, take
+the mask
+
+```text
+2425868777297445838675614324200469721061724971533052238852775774199814.
+```
+
+The graph has degree sequence
+
+```text
+(6,6,6,6,6,6,6,6,6,6,6,14,14,14,14,14,14,14,14,14,14,14),
+```
+
+so all degrees are congruent modulo `8`, and the checker verifies that the
+graph is connected.  Exact subset enumeration gives
+
+```text
+max_16_modular_order=7.
+```
+
+Therefore no three-part `16`-modular partition can exist: in any partition of
+`22` vertices into three parts, one part has size at least `ceil(22/3)=8`.
+On the other hand,
+
+```text
+python3 82/EXPERIMENTS/large_modular_partition.py 22 \
+  2425868777297445838675614324200469721061724971533052238852775774199814 \
+  --modulus 16 --find-min-colors 6 --node-limit 50000000
+```
+
+returns `min_colors=4`, with partition
+
+```text
+0,1,2,3,0,3,1,3,2,2,1,1,3,0,0,0,2,2,0,1,0,2
+```
+
+and part data
+
+```text
+color0:size7:residue2
+color1:size5:residue0
+color2:size6:residue5
+color3:size4:residue1.
+```
+
+Thus the connected flexible dyadic lift, even if true, cannot be improved to
+three parts at `q=8`.  QED.
+
 Residue flexibility is also essential; even connected first-lift examples
 cannot be forced into zero-residue parts.
 

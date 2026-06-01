@@ -60,6 +60,12 @@ Computational checks and generated data for Erdos Problem 82.
   modular subsets by pivot vertex rather than enumerating all submasks.
   `--connected-only` filters full-modular samples to connected source graphs,
   which is useful for testing the connected coarse-lift reduction.
+- `large_modular_partition.py`: memory-light fixed-mask checker for larger
+  individual graphs, avoiding the all-subset incident table used by
+  `modular_partition.py`.  It can compute the largest induced modular witness
+  and the minimum modular partition color count up to a supplied cap for
+  graphs around `20--26` vertices.  This is useful for certifying larger
+  two-degree dyadic-lift examples.
 - `modular_oct.py`: checks the modular odd-cycle-transversal candidate for
   even graphs: colors `A,B` must be independent, color `C` must have internal
   degree `1 mod 4`, and color `D` internal degree `2 mod 4`.  This stronger

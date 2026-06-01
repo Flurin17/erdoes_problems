@@ -2970,3 +2970,13 @@ source of growth beyond Ramsey.
   supersedes the earlier three-part fixed-slot complete-multipartite lemma
   for the flexible part-count route and shows that complete multipartite
   graphs are not an obstruction to connected flexible coarse lifts.
+- 2026-06-01: Added `large_modular_partition.py`, a memory-light fixed-mask
+  partition checker for graphs around `20--26` vertices.  It certified a
+  connected `22`-vertex `8`-modular graph with degree sequence
+  `6^11,14^11` and mask
+  `2425868777297445838675614324200469721061724971533052238852775774199814`.
+  Exact subset enumeration gives largest induced `16`-modular order `7`, so
+  any `16`-modular partition needs at least four parts; the new checker finds
+  `min_colors=4` with part sizes `7,5,6,4`.  This shows that the connected
+  flexible dyadic lift cannot have a three-part theorem at `q=8`, matching
+  the first-lift four-part calibration at `q=2`.
