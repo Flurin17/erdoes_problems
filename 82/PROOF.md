@@ -4559,7 +4559,18 @@ for a different witness-or-regular dichotomy.
 As a first calibration after this obstruction, the same `n=11`, source-`0`
 sample with `--slot-count 5` leaves `52` of the `792` five-slot multisets
 alive.  This is only an exploratory lower-bound calibration for the slot
-count; no five-slot source-`0` theorem has been identified.
+count; no five-slot source-`0` theorem has been identified.  Among the
+surviving candidates, the simple multiset
+
+```text
+(0,0,0,1,4)
+```
+
+passes the full `n=8` source-`0` sweep, deterministic `20,000,000`-sample
+source-`0` probes on `n=10` and `n=11`, and the first `100` source-`0`
+complete-multipartite vectors with at most six classes of size at most `16`.
+This is the current smallest concrete replacement target for the refuted
+four-slot source-`0` theorem, but it remains only finite evidence.
 
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters

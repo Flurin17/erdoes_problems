@@ -2905,3 +2905,14 @@ source of growth beyond Ramsey.
   constant four-slot lift at every level.  As calibration, the same `n=11`
   source-`0` sample leaves `52` of the `792` five-slot multisets alive; this
   is evidence only, not a five-slot theorem.
+- 2026-06-01: Identified a first source-`0` five-slot replacement candidate
+  for the refuted `4 -> 8` four-slot target.  The multiset `(0,0,0,1,4)`
+  passes the full exact `n=8` source-`0` sweep (`23552` graphs), deterministic
+  `20,000,000`-sample source-`0` probes on `n=10` and `n=11` (`38679` and
+  `12005` accepted graphs, respectively), and the first `100`
+  source-`0` complete-multipartite vectors with at most six classes of size
+  at most `16`.  Two other five-slot candidates, `(0,0,1,2,4)` and
+  `(0,1,2,3,4)`, survive the same arbitrary-graph random probes and the same
+  first `100` multipartite vectors.  None of these is a theorem; the next
+  useful step is either an optimized multipartite five-slot audit or a
+  structural proof attempt for `(0,0,0,1,4)`.
