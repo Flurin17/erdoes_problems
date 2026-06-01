@@ -170,6 +170,11 @@ profile whose auxiliary midpoint diameter is linear in the tested interval.
 Lemma 16.102 and Corollary 16.103 quantify the remaining endpoint branch:
 escaping a linear robust core forces the active endpoint to be linearly far
 from the auxiliary midpoint in doubled coordinates.
+Corollaries 16.104--16.105 combine the two geometric branches: finite
+robust-profile packet exclusion needs either a linearly far endpoint
+witness or linearly separated auxiliary midpoints inside one profile; if
+profiles are midpoint-clustered and endpoint-proximal, a common packet
+point survives.
 
 ## Definitions
 

@@ -24548,6 +24548,145 @@ profile contains a linear robust core. In the bounded-rank,
 positive-density regime, endpoints cannot slip past robust profiles at
 bounded distance from the corresponding auxiliary midpoint.
 
+### Corollary 16.104: Finite robust exclusion has a long-range witness
+
+Fix \(r\ge1\) and \(1/2<\delta\le1\), and let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length \(n\). Let \(P\subset\mathbb N\) be finite and nonempty, and
+let \(\mathcal B\) be a finite family of labels. For each
+\(\lambda\in\mathcal B\), suppose
+\[
+C_\lambda=\bigcup_{i=1}^{m_\lambda}R_{K_{\lambda,i}}(\delta,I;r)
+\]
+is a union of nonempty robust cores, with \(1\le m_\lambda\le M\). If
+\(r\ge2\), assume every auxiliary interval \(K_{\lambda,i}\) has length at
+most
+\[
+{ (2\delta-1)(r+1)\over4(r-1)}\,n. \tag{1}
+\]
+Let \(\gamma=\gamma(r,\delta)>0\) be the constant from Corollaries
+16.98 and 16.103, and choose \(C_0=C_0(r)\) large enough for both of those
+corollaries. If
+\[
+P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda=\varnothing, \tag{2}
+\]
+then one of the following alternatives holds.
+
+1. **Endpoint-distance witness.** There are \(\lambda\in\mathcal B\) and
+   \(p\in\{\min P,\max P\}\) such that, for every auxiliary interval
+   \[
+   K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
+   \]
+   in the profile \(C_\lambda\),
+   \[
+   \left|2p+a+b-2(c_{\lambda,i}+d_{\lambda,i})\right|
+   \ge \gamma n-C_0. \tag{3}
+   \]
+2. **Separated internal gap.** One has \(M\ge2\), and there are
+   \(\lambda\in\mathcal B\), two robust cores
+   \[
+   R_{K_1}(\delta,I;r),\qquad R_{K_2}(\delta,I;r)
+   \]
+   belonging to the profile \(C_\lambda\), with the first to the left of
+   the second, such that the gap \(G\) between them contains at least
+   \[
+   \left\lceil {|P|\over |\mathcal B|(M-1)}\right\rceil \tag{4}
+   \]
+   points of \(P\). Writing \(K_i=[c_i,d_i]\cap\mathbb N\), the auxiliary
+   intervals satisfy
+   \[
+   (c_2+d_2)-(c_1+d_1)\ge |G|+\gamma n-C_0. \tag{5}
+   \]
+
+Proof. Apply Corollary 16.99. If its separated internal-gap alternative
+holds, then (5) follows after increasing the constant from Corollary
+16.98 to \(C_0\).
+
+Otherwise Corollary 16.99 gives endpoint escape: for some
+\(\lambda\in\mathcal B\) and some
+\[
+p\in\{\min P,\max P\}
+\]
+one has
+\[
+p\notin C_\lambda.
+\]
+Since \(C_\lambda\) is the union of the robust cores
+\[
+R_{K_{\lambda,i}}(\delta,I;r),
+\]
+the endpoint \(p\) lies outside every one of those cores. Corollary 16.103
+applied to each \(K_{\lambda,i}\) gives (3), again with the common enlarged
+constant \(C_0\). \(\square\)
+
+This is the most economical form of the bounded-complexity residual
+obstruction. A finite robust profile cannot exclude a packet invisibly:
+either an entire profile sees one packet endpoint at linear
+midpoint-distance, or one profile contains an internal gap whose adjacent
+auxiliary intervals have linearly separated midpoints.
+
+### Corollary 16.105: Proximal clustered profiles cannot exclude a packet
+
+Keep the hypotheses and notation of Corollary 16.104, including the
+constant \(C_0\). Suppose that every profile \(C_\lambda\) is internally
+clustered in the sense that, for all auxiliary intervals
+\[
+K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N,\qquad
+K_{\lambda,j}=[c_{\lambda,j},d_{\lambda,j}]\cap\mathbb N
+\]
+in the same profile,
+\[
+\left|(c_{\lambda,j}+d_{\lambda,j})
+      -(c_{\lambda,i}+d_{\lambda,i})\right|
+<\gamma n-C_0. \tag{1}
+\]
+Assume also that each packet endpoint is midpoint-proximal to each profile:
+for every \(\lambda\in\mathcal B\) and every
+\[
+p\in\{\min P,\max P\}
+\]
+there exists some auxiliary interval
+\[
+K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
+\]
+in that profile such that
+\[
+\left|2p+a+b-2(c_{\lambda,i}+d_{\lambda,i})\right|
+<\gamma n-C_0. \tag{2}
+\]
+Then
+\[
+P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda\ne\varnothing. \tag{3}
+\]
+
+Proof. Suppose (3) failed. Corollary 16.104 would give an endpoint-distance
+witness or a separated internal gap.
+
+The endpoint-distance alternative is impossible because, for the same
+endpoint \(p\) and profile \(\lambda\), hypothesis (2) supplies one core in
+that profile whose auxiliary midpoint violates the lower bound (3) of
+Corollary 16.104.
+
+The separated internal-gap alternative is impossible because (1) gives, for
+any two auxiliary intervals in the same profile,
+\[
+(c_2+d_2)-(c_1+d_1)<\gamma n-C_0,
+\]
+after ordering them by midpoint, whereas Corollary 16.104 would require
+\[
+(c_2+d_2)-(c_1+d_1)\ge |G|+\gamma n-C_0
+\ge\gamma n-C_0.
+\]
+Both alternatives are excluded, so (3) must hold. \(\square\)
+
+Thus a finite robust-core menu can defeat all common-core selectors only by
+paying a visible long-range cost. If every profile stays midpoint-clustered
+at the tested scale and every endpoint has a nearby auxiliary midpoint
+inside each profile, then some packet point survives in every profile at
+once.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24564,8 +24703,8 @@ at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
 remaining escape must therefore either make the packet density vanish, let
 the deletion rank or robust-profile complexity grow with the interval,
-force endpoint escape from robust profiles, use auxiliary profiles whose
-midpoint diameter is linear in the tested interval, or maintain
+produce a linearly far endpoint-midpoint witness, use auxiliary profiles
+whose midpoint diameter is linear in the tested interval, or maintain
 nonsummable robust-core escape mass across the packet selector tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
@@ -25909,6 +26048,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.103 combines this with Corollary 16.72: when the escaping
   robust core has linear length, endpoint escape also has a linear
   midpoint-distance cost.
+* Corollary 16.104 packages endpoint and internal-gap escape together:
+  bounded-complexity finite robust exclusion has either a linearly far
+  endpoint-midpoint witness or a linearly separated pair of auxiliary
+  midpoints inside one profile.
+* Corollary 16.105 gives the contrapositive usable in selector arguments:
+  midpoint-clustered profiles that are endpoint-proximal cannot have empty
+  common intersection on the packet.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

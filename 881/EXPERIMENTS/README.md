@@ -211,7 +211,8 @@ of a robust blocker core depends affinely on the midpoint of its auxiliary
 interval, a gap between two robust-core components equals the corresponding
 auxiliary midpoint separation minus half the two core lengths, and an
 endpoint outside a core pays the predicted doubled-coordinate distance
-from the auxiliary midpoint. It also checks the finite separated-pair
+from the auxiliary midpoint. It also checks the endpoint-proximal
+contrapositive used in Corollary 16.105 and the finite separated-pair
 inequality behind the clustered-profile reduction in Corollary 16.100.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
