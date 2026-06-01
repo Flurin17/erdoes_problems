@@ -3680,3 +3680,10 @@ source of growth beyond Ramsey.
   and finds `extendable=0`, reproducing `C_full^reg(2,5)=11` from the
   frontier viewpoint.  The analogous `n=12,h=6` frontier is still too slow
   without stronger pruning.
+- 2026-06-01: Added `full_drop_regular_min.py` for exact minimization of the
+  largest regular induced subgraph over `P=2` full-drop ordered graphs.  Exact
+  values for `n=5,6,7,8,9` are `3,3,4,4,4`; combined with the known
+  `n=10` obstruction to regular `5`-sets and the `C_full^reg(2,5)=11`
+  computation, this gives `n=10 -> 4` and `n=11 -> 5`.  These data suggest
+  the sharp fixed-`P=2` upper theorem `reg(H)>=floor((|V(H)|-1)/2)`, with the
+  regular full-drop lower family essentially tight.

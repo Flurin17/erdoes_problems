@@ -12646,6 +12646,40 @@ visits `65,904` search nodes, checks `9,656` terminal `10`-vertex
 obstructions to regular `5`-sets, and finds `extendable=0`, matching the
 exact value `C_full^reg(2,5)=11`.
 
+The script `EXPERIMENTS/full_drop_regular_min.py` exactly enumerates
+`P=2` full-drop ordered graphs and minimizes the largest regular induced
+subgraph.  The commands
+
+```text
+python3 82/EXPERIMENTS/full_drop_regular_min.py 5 --p 2
+python3 82/EXPERIMENTS/full_drop_regular_min.py 6 --p 2
+python3 82/EXPERIMENTS/full_drop_regular_min.py 7 --p 2
+python3 82/EXPERIMENTS/full_drop_regular_min.py 8 --p 2
+python3 82/EXPERIMENTS/full_drop_regular_min.py 9 --p 2
+```
+
+give
+
+```text
+n=5: min_max_regular=3
+n=6: min_max_regular=3
+n=7: min_max_regular=4
+n=8: min_max_regular=4
+n=9: min_max_regular=4.
+```
+
+Together with the `n=10` obstruction to regular `5`-sets and the
+`C_full^reg(2,5)=11` computation, this gives
+
+```text
+n=10: min_max_regular=4,       n=11: min_max_regular=5.
+```
+
+These data support the sharp fixed-`P=2` possibility that every `P=2`
+full-drop ordered graph on `n` vertices has a regular induced subgraph of
+order at least `floor((n-1)/2)`, with Lemma 28D.6c showing this would be
+best possible up to the endpoint.
+
 For the next order, the command
 
 ```text
