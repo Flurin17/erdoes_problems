@@ -9034,6 +9034,34 @@ estimate gives only a quartic bound.  Any improvement to Proposition 28F
 should therefore target the column-drop parameter directly, rather than only
 the total inversion count.
 
+**Computational Calibration 28E.7: Small Column-Drop Values.**  The script
+`EXPERIMENTS/column_drop_census.py` exactly enumerates labelled ordered graphs
+with bounded maximum column drop.  The commands
+
+```text
+python3 82/EXPERIMENTS/column_drop_census.py 6 --p 2
+python3 82/EXPERIMENTS/column_drop_census.py 7 --p 2 --progress 500000
+python3 82/EXPERIMENTS/column_drop_census.py 6 --p 3
+```
+
+report:
+
+```text
+P=2, n=6:  checked_column_drop=15920,  min_max_homogeneous=3
+P=2, n=7:  checked_column_drop=480776, min_max_homogeneous=3
+P=3, n=6:  checked_column_drop=30256,  min_max_homogeneous=3
+```
+
+Thus, for example, the exact census proves
+
+```text
+C_drop(2,4) > 7.
+```
+
+This is only a small finite calibration, but it confirms that the
+column-drop parameter is not collapsing immediately to the inversion-free
+case once one drop per column pair is allowed.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 

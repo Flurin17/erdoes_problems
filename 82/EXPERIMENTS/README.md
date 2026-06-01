@@ -295,6 +295,10 @@ Computational checks and generated data for Erdos Problem 82.
   hard examples at orders where exact all-subset regularity checks are still
   feasible, and `--thresholds` evaluates a fixed threshold sequence while
   printing largest regular and homogeneous witnesses.
+- `column_drop_census.py`: exact small labelled census for the column-drop
+  ordered parameter `C_drop(P,h)` introduced after Lemma 28E.3.  It filters
+  ordered graphs by maximum column drop and reports the minimum largest
+  homogeneous set, with fixed-mask inspection support.
 - `split_spectrum_construction.py`: verifies the explicit split-graph
   spectrum separation family used in Lemma 28H's discussion.
 - `marked_pair_profile.py`: inspects same-degree side witnesses and their

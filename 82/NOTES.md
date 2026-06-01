@@ -2681,3 +2681,9 @@ source of growth beyond Ramsey.
   inversions and the crude bound `C_drop(P,h) <= 4P h^4+1`; at `P=1` the
   exact value is `C_drop(1,h)=(h-1)^2+1`, so the ordered subproblem to improve
   is genuinely the column-drop problem, not just sparse inversion counting.
+- 2026-06-01: Added `column_drop_census.py` for exact small labelled
+  enumeration of the new ordered parameter.  It verifies, among other small
+  cases, that `P=2, n=7` still has examples with maximum homogeneous set only
+  `3`, so `C_drop(2,4)>7`.  This is finite calibration only, but it confirms
+  that allowing one dropped earlier row per column pair creates behavior not
+  already covered by the exact inversion-free value `C_drop(1,h)`.
