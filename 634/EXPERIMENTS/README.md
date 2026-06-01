@@ -275,6 +275,12 @@ Current components:
   demand realizing the requested words in the capped shell space, applies the
   local-overlap cover, and classifies all outside-cover realizations. This is
   the direct falsification harness for the pending word-invariance lemma.
+- `gamma_2alpha_word_exhaustive_summary.py`: verifier for disjoint exhaustive
+  word-quotient interval artifacts. It checks interval lengths, gaps,
+  overlaps, mixed-status words, word-count mismatches, and weighted status
+  totals. The current summary for the first `5000` `N=99` mixed-`6` word
+  groups is stored in
+  `results/n99_mixed6_word_exhaustive_summary_000001_005000.json`.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and

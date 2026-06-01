@@ -1,0 +1,46 @@
+{
+  "classified_weight": 65580,
+  "classified_words": 5000,
+  "contiguous_prefix": true,
+  "covered_first": 1,
+  "covered_last": 5000,
+  "files": [
+    "n99_mixed6_word_exhaustive_first1000.json",
+    "n99_mixed6_word_exhaustive_001000_002000.json",
+    "n99_mixed6_word_exhaustive_002000_005000.json"
+  ],
+  "gaps": [],
+  "intervals": [
+    {
+      "file": "n99_mixed6_word_exhaustive_first1000.json",
+      "first": 1,
+      "last": 1000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_001000_002000.json",
+      "first": 1001,
+      "last": 2000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_002000_005000.json",
+      "first": 2001,
+      "last": 5000
+    }
+  ],
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "overlaps": [],
+  "quotient_groups": 418260,
+  "status_weight_counts": {
+    "corner-label-violation": 34800,
+    "pinch-sector-obstruction": 6480,
+    "split-corner-label-obstruction": 24300
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_count_mismatches": []
+}

@@ -2334,6 +2334,10 @@ The interval artifacts are
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_first1000.json`,
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_001000_002000.json`, and
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_002000_005000.json`.
+The verifier `EXPERIMENTS/gamma_2alpha_word_exhaustive_summary.py` checks these
+as a contiguous prefix with no gaps, no overlaps, no mixed-status words, and no
+word-count mismatches; its current summary is
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_summary_000001_005000.json`.
 
 Higher-representative stress tests support the same lemma. With up to `8`
 representatives per word group, the first `2000` word groups and the late
