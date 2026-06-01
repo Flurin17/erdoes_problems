@@ -18349,6 +18349,58 @@ unresolved part is still the integer lift, where deleting one integer does
 not delete its whole residue class and central quotient representations
 replace the missing representative.
 
+### Lemma 16.0: Finite-core marker coverage repairs finite marker deletions
+
+Let \(C\subset\mathbb N\) be finite, let \(M\subset\mathbb N\) be infinite,
+and put
+\[
+S=2C.
+\]
+Suppose there is \(N_0\) such that
+\[
+[N_0,\infty)\subset M+S. \tag{1}
+\]
+Then for every finite \(F\subset M\), all sufficiently large integers lie
+in
+\[
+2(M\setminus F)+S\subset 4((C\cup M)\setminus F). \tag{2}
+\]
+
+Proof. Fix finite \(F\subset M\). Since \(S\) is finite and \(M\) is
+infinite, for every sufficiently large \(n\) we may choose
+\[
+p\in M\setminus F
+\]
+with
+\[
+p\le n-N_0
+\]
+and
+\[
+p\notin n-F-S.
+\]
+The last condition means that no representation
+\[
+n-p=f+s,\qquad f\in F,\ s\in S,
+\]
+is possible. By (1), since \(n-p\ge N_0\), write
+\[
+n-p=m'+s,\qquad m'\in M,\ s\in S.
+\]
+The avoidance condition forces \(m'\notin F\). Hence
+\[
+n=p+m'+s\in2(M\setminus F)+S.
+\]
+Because \(S=2C\), (2) follows. \(\square\)
+
+Consequently, a \(k=3\) counterexample cannot be obtained by taking a
+finite core \(C\), an infinite marker set \(M\), and relying on tail
+coverage of the form \(M+2C\). Any finite deletion from the marker set is
+eventually repaired at order \(4\) by two retained markers and two core
+terms. The robust residue booster lift must therefore use moving finite
+cores, collective cross-stage barriers, or endpoint-local witnesses outside
+this finite-core marker-coverage regime.
+
 The cross-stage pair version has slightly more traction. The script
 `EXPERIMENTS/robust_booster_pair_stage_search.py` starts from the same
 \(C_0=\{1,3,20,21\}\), first adds \(23\), and then adds \(30,31\). At each

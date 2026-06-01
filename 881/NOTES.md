@@ -2067,6 +2067,21 @@ generalize: once mirrors may live in lower sumsets, the residue layer has
 real adjacent-order private holes. The missing issue is elementwise
 integer lifting, not residue arithmetic.
 
+Lemma 16.0 rules out the simplest lift. If \(A=C\cup M\) has finite core
+\(C\) and tail coverage
+\[
+[N_0,\infty)\subset M+2C,
+\]
+then every finite marker deletion \(F\subset M\) is eventually repaired at
+order \(4\):
+\[
+[N_F,\infty)\subset 2(M\setminus F)+2C\subset4(A\setminus F).
+\]
+Thus a \(k=3\) counterexample cannot be a finite-core marker set whose
+order-3 coverage is supplied by one marker plus two core terms. The
+integer lift must use moving cores, endpoint-local witnesses, or collective
+cross-stage barriers.
+
 The stage search has one nontrivial finite lift:
 \[
 C_0=\{1,3,20,21\},\quad f=5,\quad C_1=C_0\cup\{30,31\}.
