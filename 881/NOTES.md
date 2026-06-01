@@ -66,9 +66,11 @@ Corollaries 16.57--16.59 combine the central range with the bounded-rank
 row allowance: a positive-density interval packet of bounded deletion rank
 can survive only if its active gate is a linear distance outside the
 interval, and the pointwise packet size is controlled by the gate's distance
-from the central gate range. The live escapes are now vanishing packet
-density, growing deletion rank, or coordinated far gates across separated
-blocks.
+from the central gate range. Lemma 16.60 and Corollary 16.61 extend this to
+finite active palettes: a dense bounded-rank interval cover forces linear
+total gate distance and hence at least one linearly far active color. The
+live escapes are now vanishing packet density, growing deletion rank, or
+coordinated far gates across separated blocks.
 
 ## Definitions
 

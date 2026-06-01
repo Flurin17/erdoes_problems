@@ -21979,14 +21979,142 @@ The script `EXPERIMENTS/interval_gate_profile.py` exhaustively checks the
 interval-only version of (2), before adding the bounded row-dependent
 allowance \(B_r\), on small translated intervals.
 
+### Lemma 16.60: Finite gate palettes have additive interval profile
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite, and put
+\[
+C=A\setminus F.
+\]
+Let
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+have length \(n>2r\), and assume
+\[
+|F\cap I|\le r.
+\]
+Let \(P\subset F\) be finite. For each \(f\in P\), let
+\[
+U_f\subset I\setminus F
+\]
+satisfy
+\[
+f+u\notin2C\qquad(u\in U_f). \tag{1}
+\]
+Then
+\[
+\left|\bigcup_{f\in P}U_f\right|
+\le
+2\sum_{f\in P}D_I(f;r), \tag{2}
+\]
+where
+\[
+D_I(f;r)=\max\{0,\ a+2r-f,\ f-b+2r\}.
+\]
+
+Proof. Corollary 16.55 applied to each \(f\in P\) gives
+\[
+U_f\cap[2a+2r-f,\ 2b-2r-f]=\varnothing. \tag{3}
+\]
+Equivalently, \(U_f\) lies outside the translate of the central retained
+two-sum band by \(-f\). Since the definition of \(D_I(f;r)\) gives
+\[
+a+2r-D_I(f;r)\le f\le b-2r+D_I(f;r),
+\]
+Corollary 16.56, with \(M=D_I(f;r)\), gives
+\[
+|U_f|\le2D_I(f;r). \tag{4}
+\]
+Summing (4) over \(f\in P\) and using the union bound proves (2).
+\(\square\)
+
+### Corollary 16.61: Coordinated interval covers need total far-gate distance
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Let
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+have length \(n>2r\), let \(F\subset A\) satisfy \(1\le|F|\le r\), and let
+\[
+P\subset F.
+\]
+For each \(f\in P\), suppose \(U_f\subset I\) satisfies the hypotheses of
+Corollary 16.45 for the active color \(f\), with witness parameter
+sufficiently large for the fixed interval \(I\) and rank bound \(r\).
+Then
+\[
+\left|\bigcup_{f\in P}U_f\right|
+\le
+|P|B_r+2\sum_{f\in P}D_I(f;r), \tag{1}
+\]
+where
+\[
+B_r={r(r+1)\over2}+2r.
+\]
+Consequently, for every \(0<\eta\le1\) there is \(N=N(r,\eta)\) such that
+if \(n\ge N\) and
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n, \tag{2}
+\]
+then some \(f\in P\) satisfies
+\[
+D_I(f;r)\ge{\eta n\over4r}. \tag{3}
+\]
+For the same \(N\), this implies
+\[
+f<a-{\eta n\over8r}
+\quad\text{or}\quad
+f>b+{\eta n\over8r}. \tag{4}
+\]
+
+Proof. For each \(f\in P\), Corollary 16.45 leaves at most \(B_r\) rows of
+\(U_f\) outside the gate-dependent packet
+\[
+U_{f,{\rm gate}}=\{u\in U_f:f+u\notin2(A\setminus F)\}.
+\]
+Applying Lemma 16.60 to the family \(U_{f,{\rm gate}}\) gives
+\[
+\left|\bigcup_{f\in P}U_{f,{\rm gate}}\right|
+\le
+2\sum_{f\in P}D_I(f;r).
+\]
+Adding the at most \(|P|B_r\) row-dependent exceptions proves (1).
+
+Choose \(N\) so large that \(n\ge N\) implies
+\[
+rB_r\le{\eta n\over2}
+\quad\text{and}\quad
+2r\le{\eta n\over8r}. \tag{5}
+\]
+If (2) holds, then (1) and \(|P|\le r\) give
+\[
+\sum_{f\in P}D_I(f;r)
+\ge {\,\eta n-|P|B_r\,\over2}
+\ge{\eta n\over4}.
+\]
+Since \(|P|\le r\), one \(f\in P\) satisfies (3).
+
+Finally, if \(D_I(f;r)\ge\eta n/(4r)\), then by definition of \(D_I\)
+either
+\[
+a+2r-f\ge{\eta n\over4r}
+\]
+or
+\[
+f-b+2r\ge{\eta n\over4r}.
+\]
+Using (5) yields (4). \(\square\)
+
 The bounded-rank nonsingleton interval obstruction is now forced into a
 long-range regime. Positive-density row packets over an interval cannot be
 served by a finite active palette near that interval: after the bounded
 row-dependent allowance is removed, the central retained two-sum band pushes
-every active gate a linear distance outside the block. The remaining escape
-must therefore either make the packet density vanish, let the deletion rank
-grow with the interval, or coordinate several far gates across separated
-blocks.
+at least one active gate a linear distance outside the block, and a
+coordinated finite palette must pay a linear total gate-distance cost. The
+remaining escape must therefore either make the packet density vanish, let
+the deletion rank grow with the interval, or coordinate genuinely far gates
+across separated blocks.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 
@@ -23180,9 +23308,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   bounded-rank row allowance from Corollary 16.45: any positive-density
   bounded-rank interval packet must use an active gate a linear distance
   outside the tested interval, and more generally packet size is bounded by
-  the gate's distance from the central gate range. Hence the remaining
-  interval obstruction must have vanishing packet density, growing deletion
-  rank, or coordinated far-gate structure across separated blocks.
+  the gate's distance from the central gate range.
+* Lemma 16.60 and Corollary 16.61 extend the same estimate to a finite
+  active palette: a bounded-rank family of interval packets covering a
+  positive fraction of the interval forces linear total distance from the
+  central gate range, hence at least one linearly far active color. Thus the
+  remaining interval obstruction must have vanishing packet density, growing
+  deletion rank, or coordinated far-gate structure across separated blocks.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
