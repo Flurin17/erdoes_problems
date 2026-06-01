@@ -25938,6 +25938,94 @@ tested interval location or length, number of auxiliary intervals, auxiliary
 endpoint height, or the constants needed before the linear-core estimate
 has reached its asymptotic range.
 
+### Corollary 16.128: Geometric height growth has a coordinate branch
+
+Keep the notation of Corollary 16.127, and suppose the unbounded-height
+alternative holds:
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:
+        \chi_{\rm geom}(\lambda)>M\}|\over |P_s|}=\infty
+\qquad(M\ge1). \tag{1}
+\]
+For each label \(\lambda=(q,\alpha)\), put
+\[
+q_\lambda=q,
+\qquad
+K_\lambda=
+\left\lceil \max\left\{0,{2D_\lambda\over\gamma_\lambda}\right\}\right\rceil
+\]
+and
+\[
+S_\lambda=\sum_{i=1}^{m_\lambda}(c_{\lambda,i}+d_{\lambda,i}).
+\]
+Then at least one of the following five alternatives holds.
+
+1. **Rank/density-scale growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:q_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{2}
+   \]
+2. **Tested-interval height growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:b_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{3}
+   \]
+3. **Auxiliary-count growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:m_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{4}
+   \]
+4. **Auxiliary-endpoint growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:S_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{5}
+   \]
+5. **Pre-asymptotic constant growth.** For every \(M\),
+   \[
+   \sum_s {|\{\lambda\in\mathcal B_s:K_\lambda>M\}|\over |P_s|}
+   =\infty. \tag{6}
+   \]
+
+Proof. For \(M\ge1\), if
+\[
+q_\lambda,\ b_\lambda,\ m_\lambda,\ S_\lambda,\ K_\lambda\le M,
+\]
+then \(a_\lambda\le b_\lambda\le M\) and
+\[
+n_\lambda=b_\lambda-a_\lambda+1\le b_\lambda\le M,
+\]
+since the intervals lie in \(\mathbb N\). Hence
+\[
+\chi_{\rm geom}(\lambda)
+=q_\lambda+a_\lambda+b_\lambda+n_\lambda
+ +m_\lambda+S_\lambda+K_\lambda
+\le 7M. \tag{7}
+\]
+Therefore
+\[
+\{\lambda:\chi_{\rm geom}(\lambda)>7M\}
+\subseteq
+\{\lambda:q_\lambda>M\}\cup\{\lambda:b_\lambda>M\}
+\cup\{\lambda:m_\lambda>M\}
+\cup\{\lambda:S_\lambda>M\}
+\cup\{\lambda:K_\lambda>M\}. \tag{8}
+\]
+By (1), the left side of (8) has divergent active mass for every \(M\).
+Thus for every \(M\) at least one of the five right-side families has
+divergent active mass.
+
+If none of the five alternatives (2)--(6) held, then for each branch there
+would be some threshold at which its active mass is finite. Taking the
+maximum of those five thresholds would make all five right-side masses in
+(8) finite, contradicting the divergence of the left side at that
+threshold. Hence one alternative holds. \(\square\)
+
+Thus the profile-height residual no longer hides several effects in one
+symbol. A surviving construction must have nonsummable active mass in one
+specific coordinate: rank/density scale, tested interval position/length,
+auxiliary profile count, auxiliary endpoint height, or the constants
+required before the robust-core estimates become linear.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27372,6 +27460,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   sublevel sets, making the unbounded-complexity alternative mean growth in
   rank/density scale, tested interval data, auxiliary interval count or
   endpoints, or the constants preceding the linear range.
+* Corollary 16.128 splits that unbounded-height alternative into one
+  nonsummable coordinate branch: rank/density scale, tested-interval height,
+  auxiliary count, auxiliary endpoint height, or pre-asymptotic constants.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
