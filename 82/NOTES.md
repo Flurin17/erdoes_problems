@@ -3819,3 +3819,9 @@ source of growth beyond Ramsey.
   the number of deleted-off-cycle vertices through `s_0+s_1`.  Component
   superadditivity then proves `mu(G)>=|G|` for every graph whose components
   have at most one cycle.
+- 2026-06-01: Extracted the regular-feedback-set mechanism behind the
+  pseudoforest proof.  If `V(G)=R union F`, `G[F]` is a forest, and `G[R]` is
+  induced `d`-regular for some `d>=2`, then the forest contributes
+  `s_0+s_1>=|F|` and `R` contributes `s_d>=|R|`, proving `mu(G)>=|G|`.  A
+  broader spectrum-mass proof could try to find such regular feedback sets,
+  or decompose a general feedback set into a small number of regular degrees.
