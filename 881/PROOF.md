@@ -26403,6 +26403,54 @@ must keep returning, with nonsummable active mass, at densities arbitrarily
 close to the critical threshold where the robust cores stop being uniformly
 linear.
 
+### Corollary 16.135: Bounded separated linear-core menus are avoidable
+
+Keep the setting of Corollary 16.132. Suppose there are constants
+\[
+R,N,A,M,E,\qquad \varepsilon>0,
+\]
+and a packet tail such that every active label
+\[
+\lambda\in\mathcal B_s
+\]
+on that tail satisfies
+\[
+r_\lambda\le R,\qquad
+\delta_\lambda\ge {1\over2}+\varepsilon,\qquad
+n_\lambda\le N,\qquad
+a_\lambda\le A,\qquad
+m_\lambda\le M,\qquad
+E_\lambda\le E. \tag{1}
+\]
+If the width-heavy and midpoint-displacement residuals are finite on that
+tail, namely
+\[
+\sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+W_s>T_\lambda/2}}\beta_{\lambda,s}<\infty, \tag{2}
+\]
+and
+\[
+\sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+\Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+\beta_{\lambda,s}<\infty, \tag{3}
+\]
+then the assigned high-density linear-core branch does not product-cover
+that packet tail.
+
+Proof. The bounds in (1) make the rank, tested-length, tested-location,
+auxiliary-count, and auxiliary-location coordinate masses vanish on the
+tail once the thresholds exceed \(R,N,A,M,E\). The density separation in
+(1), together with Corollary 16.134, removes the critical-density
+degeneration branch on a further tail. Conditions (2) and (3) remove the
+two packet-position residuals. Corollary 16.133 then gives
+selector-avoidability of the assigned linear-core branch. \(\square\)
+
+Thus any product-covering high-density linear-core obstruction with
+bounded rank, a fixed density margin above \(1/2\), bounded tested
+intervals, and bounded auxiliary profiles must pay a nonsummable
+width-heavy or midpoint-displacement cost. Without that cost, a selector
+tail avoids it.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
 inequality and packet-mass inclusion behind Corollary 16.128, the
 bounded-rank/bounded-margin estimate used in Corollary 16.129, the
@@ -27862,6 +27910,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   assigned linear-core branch is selector-avoidable.
 * Corollary 16.134 rewrites critical-density degeneration as nonsummable
   active mass at densities below \(1/2+1/(2H)\) for every \(H\).
+* Corollary 16.135 packages the bounded-window closure: bounded rank,
+  density separated from \(1/2\), bounded tested intervals, and bounded
+  auxiliary profiles are selector-avoidable unless they pay width-heavy or
+  midpoint-displacement mass.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

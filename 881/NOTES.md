@@ -13,7 +13,7 @@ is whether the \(k=2\) finite-prefix active-trace closure has an analogue
 for \((k+1)\)-term barriers, or whether a robust staged higher-order
 collective barrier can be lifted to an infinite counterexample.
 
-The latest \(k=3\) checkpoint is Corollary 16.134 in `PROOF.md`. After the
+The latest \(k=3\) checkpoint is Corollary 16.135 in `PROOF.md`. After the
 nonsingleton handoff is packetized with \(\sum_s1/|P_s|<\infty\), a
 product-covering high-density linear-core branch must fall into one of
 eight named residuals: rank growth, critical-density degeneration,
@@ -260,6 +260,10 @@ if the six geometric coordinate masses and the two packet-position residuals
 are summable on a tail, the assigned linear-core branch cannot product-cover.
 Corollary 16.134 makes critical-density degeneration quantitative: it means
 nonsummable active mass at densities below \(1/2+1/(2H)\) for every \(H\).
+Corollary 16.135 packages the bounded-window closure: bounded rank, a fixed
+density margin above \(1/2\), bounded tested intervals, and bounded
+auxiliary profiles are selector-avoidable unless the width-heavy or
+midpoint-displacement residual is nonsummable.
 The Attempt 16 residual summary has been updated accordingly: after
 reciprocal-summable packetization, bounded-height countable menus must pay
 linear packet-position cost.
