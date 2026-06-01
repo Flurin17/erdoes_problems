@@ -3768,3 +3768,13 @@ source of growth beyond Ramsey.
   only at homogeneous multipartite blow-ups cannot produce
   `omega(log n)`; any dense-core proof must use genuinely nonhomogeneous
   regular witnesses.
+- 2026-06-01: Added spectrum-mass output to `regular_spectrum.py`.  For a
+  graph `G`, let `s_d(G)` be the largest order of an induced `d`-regular
+  subgraph and `mu(G)=sum_d s_d(G)`.  Exact checks through all labelled
+  graphs on `n<=6` give `mu(G)>=n`, with equality on empty graphs; random
+  checks at `n=8,10,12` also found no violation.  If this spectrum-mass
+  inequality were true, then the disjoint-union spectrum parameter
+  `D_spec(h)` would be `O(h^2)`: two graphs with `s_d+t_d<h` for every
+  degree have combined mass below `h^2`.  This would not settle the full
+  marked-pair parameter, because cross-profile compensation remains, but it
+  would close the pure disjoint-spectrum obstruction.

@@ -42,16 +42,29 @@ def max_same_degree_total(
     spectrum_a: set[tuple[int, int]],
     spectrum_b: set[tuple[int, int]],
 ) -> int:
-    by_degree_a: dict[int, int] = {}
-    by_degree_b: dict[int, int] = {}
-    for order, degree in spectrum_a:
-        by_degree_a[degree] = max(by_degree_a.get(degree, 0), order)
-    for order, degree in spectrum_b:
-        by_degree_b[degree] = max(by_degree_b.get(degree, 0), order)
+    by_degree_a = spectrum_by_degree(spectrum_a)
+    by_degree_b = spectrum_by_degree(spectrum_b)
     best = 0
     for degree in by_degree_a.keys() & by_degree_b.keys():
         best = max(best, by_degree_a[degree] + by_degree_b[degree])
     return best
+
+
+def spectrum_by_degree(spectrum: set[tuple[int, int]]) -> dict[int, int]:
+    by_degree: dict[int, int] = {}
+    for order, degree in spectrum:
+        by_degree[degree] = max(by_degree.get(degree, 0), order)
+    return dict(sorted(by_degree.items()))
+
+
+def format_by_degree(spectrum: set[tuple[int, int]]) -> str:
+    return " ".join(
+        f"{degree}:{order}" for degree, order in spectrum_by_degree(spectrum).items()
+    )
+
+
+def spectrum_mass(spectrum: set[tuple[int, int]]) -> int:
+    return sum(spectrum_by_degree(spectrum).values())
 
 
 def format_spectrum(spectrum: set[tuple[int, int]]) -> str:
@@ -64,11 +77,15 @@ def inspect(args: argparse.Namespace) -> None:
     print(f"h={args.h}")
     print(f"mask_a={args.mask_a}")
     print("spectrum_a=" + format_spectrum(spectrum_a))
+    print("by_degree_a=" + format_by_degree(spectrum_a))
+    print(f"spectrum_mass_a={spectrum_mass(spectrum_a)}")
     if args.mask_b is None:
         return
     spectrum_b = regular_spectrum(args.n, args.mask_b)
     print(f"mask_b={args.mask_b}")
     print("spectrum_b=" + format_spectrum(spectrum_b))
+    print("by_degree_b=" + format_by_degree(spectrum_b))
+    print(f"spectrum_mass_b={spectrum_mass(spectrum_b)}")
     print(f"max_same_degree_total={max_same_degree_total(spectrum_a, spectrum_b)}")
     print(f"disjoint_union_obstruction={obstructs_disjoint_union(spectrum_a, spectrum_b, args.h)}")
 
