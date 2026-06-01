@@ -9035,6 +9035,54 @@ x,\ y
 \]
 has its complement in \(2C\). \(\square\)
 
+### Lemma 8.5a.7z.12h.1: One-point shadows are external translate absorption
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+let
+\[
+w\notin3C,\qquad p\notin2A,\qquad d=w-p.
+\]
+Let \(T\subset A\) be a finite set of old summands such that
+\[
+p-a>0,\qquad p-a\notin A\qquad(a\in T). \tag{1}
+\]
+Then the one-new candidates
+\[
+x_a=p-a\qquad(a\in T)
+\]
+are all blocked by the pair-saturation condition
+\[
+w-x_a\in2C \tag{2}
+\]
+if and only if
+\[
+d+T\subseteq2C. \tag{3}
+\]
+
+Consequently, one-sided saturation has only two local forms:
+
+1. if \(d\in C\), then retained old summands are reflected automatically,
+   and only deleted old summands need the extra checks of Corollary
+   8.5a.7z.12e''';
+2. if \(d\notin C\), then the obstruction is not a retained-row wall but an
+   external translate absorption
+   \[
+   T+d\subseteq2C.
+   \]
+
+Proof. For each \(a\in T\),
+\[
+w-x_a=w-(p-a)=w-p+a=d+a.
+\]
+Thus (2) is exactly (3). The two local forms are just the alternatives
+\[
+d\in C,\qquad d\notin C.
+\]
+In the first alternative, \(d+a\in2C\) is automatic for every \(a\in C\),
+and the only nonautomatic old summands are the deleted ones \(a\in F\).
+The second alternative is precisely an absorbed translate by a center not
+available as a retained row. \(\square\)
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -9138,6 +9186,18 @@ batch. It prints the stronger one-sided saturation certificate from Lemma
 Thus Lemma 8.5a.7z.12e'' captures the cleanest wall, not the whole
 pair-saturation obstruction measured by Lemmas 8.5a.7z.12e' and
 8.5a.7z.12h.
+The shadow-translation summary for this endpoint shows the normal form of
+Lemma 8.5a.7z.12h.1:
+\[
+d=3100\notin C,\qquad d\in2C,\qquad d+\{1000,1007,2000\}\subset2C,
+\]
+and \(2311\) old rows satisfy
+\[
+d+a\in2C
+\]
+for the associated one-new candidates \(p-a\). Of these rows, \(2308\) are
+retained and \(3\) are the deleted gates. The obstruction is therefore a
+large external translate absorbed into \(2C\), not a retained-defect wall.
 The reusable sweep
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200
@@ -16231,6 +16291,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   nearby seed profiles, where \(d\) need not be retained but every one-new
   repair and one side of every two-new split already hits \(w\) with a
   retained pair.
+* Lemma 8.5a.7z.12h.1 rewrites the one-point part exactly as external
+  translate absorption \(d+T\subseteq2C\) for the old summand rows whose
+  candidates \(p-a\) are outside the current set.
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.

@@ -276,7 +276,10 @@ though `d=3100` is not retained. The script reports the one-sided
 saturation certificate from Lemma 8.5a.7z.12h: `2312` saturated one-point
 candidates and `1138/1138` saturated two-point splits. So the observed
 pair-saturation obstruction is broader than the clean retained-defect
-certificate. The reusable sweep mode
+certificate. The `shadow_translation_summary` output records the normal
+form from Lemma 8.5a.7z.12h.1: at endpoint `3000`, `d=3100` is not
+retained but lies in `2C`, and `2311` old rows satisfy `d+a in 2C`.
+The reusable sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 prints the same no-safe-one/no-safe-two obstruction throughout that
 transition range.

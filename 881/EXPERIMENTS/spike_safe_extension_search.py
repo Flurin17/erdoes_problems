@@ -257,6 +257,51 @@ def one_sided_pair_saturation_blocker(
     }
 
 
+def shadow_translation_summary(
+    state: State,
+    deleted: set[int],
+    witness: int,
+    gap: int,
+) -> dict[str, object]:
+    full = set(state.retained) | deleted
+    defect = witness - gap
+    deleted_retained_reps = [
+        (gate, defect - gate)
+        for gate in sorted(deleted)
+        if defect - gate in state.retained
+    ]
+    deleted_deleted_reps = [
+        (first, second)
+        for first in sorted(deleted)
+        for second in sorted(deleted)
+        if first <= second and first + second == defect
+    ]
+    rows: list[int] = []
+    for old in sorted(full):
+        candidate = gap - old
+        if (
+            candidate > 0
+            and candidate not in full
+            and witness - candidate in state.retained_pair_sums
+        ):
+            rows.append(old)
+    retained_rows = [row for row in rows if row in state.retained]
+    deleted_rows = [row for row in rows if row in deleted]
+    return {
+        "defect": defect,
+        "defect_in_retained": defect in state.retained,
+        "defect_in_deleted": defect in deleted,
+        "defect_in_2retained": defect in state.retained_pair_sums,
+        "defect_deleted_retained_reps": deleted_retained_reps[:20],
+        "defect_deleted_deleted_reps": deleted_deleted_reps,
+        "saturated_old_row_count": len(rows),
+        "saturated_retained_row_count": len(retained_rows),
+        "saturated_deleted_row_count": len(deleted_rows),
+        "saturated_row_examples": rows[:20],
+        "saturated_row_tail": rows[-20:],
+    }
+
+
 def add_retained_batch(
     state: State,
     deleted: set[int],
@@ -637,6 +682,10 @@ def main() -> None:
     print(
         "one_sided_pair_saturation_blocker="
         f"{one_sided_pair_saturation_blocker(best, deleted, witness, final_gap)}"
+    )
+    print(
+        "shadow_translation_summary="
+        f"{shadow_translation_summary(best, deleted, witness, final_gap)}"
     )
 
     if any(witness - retained in best.retained_pair_sums for retained in best.retained):

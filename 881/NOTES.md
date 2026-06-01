@@ -2462,6 +2462,11 @@ one-sided saturation blocker: the run has \(2312\) saturated one-point
 candidates and \(1138/1138\) saturated two-point splits. Thus the finite
 pair-saturation obstruction is broader than the clean retained-defect
 certificate.
+Lemma 8.5a.7z.12h.1 identifies the one-point part as external translate
+absorption: for candidates \(x=p-a\), the condition \(w-x\in2C\) is exactly
+\(d+a\in2C\). The endpoint \(3000\) shadow summary has \(d=3100\notin C\),
+\(d\in2C\), and \(2311\) absorbed old rows, \(2308\) retained and \(3\)
+deleted.
 The sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 shows the same no-safe-one/no-safe-two obstruction at every listed endpoint.
