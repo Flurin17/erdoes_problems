@@ -181,7 +181,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   `775440` pinch-sector obstructions, and `2753220` split-corner-label
   obstructions. To turn this into a proof closure for `99` mixed `6`, the next
   missing lemma is that the side-label word triple determines the refined
-  residual obstruction status.
+  residual obstruction status. Stress tests with up to `8` representatives per
+  word found no mixed-status word among the first `2000` word groups or among
+  word groups `350001..352000`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

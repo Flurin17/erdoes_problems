@@ -244,6 +244,9 @@ Current components:
   and `2753220` split-corner-label obstructions, recorded in
   `results/n99_mixed6_word_quotient_summary.json`. The runner supports
   `--skip-classified-words` for disjoint classification intervals.
+  Stress tests with up to `8` representatives per word found no mixed-status
+  word among the first `2000` word groups or among word groups
+  `350001..352000`.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and

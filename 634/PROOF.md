@@ -2317,6 +2317,13 @@ mixed-`6` outside-cover stratum if one proves the word-invariance lemma: for
 fixed side-label word triple `(L,R,B)`, the refined residual obstruction status
 is independent of the endpoint orientations realizing those words.
 
+Two higher-representative stress tests support the same lemma. With up to `8`
+representatives per word group, the first `2000` word groups and the late
+interval `350001..352000` again have no mixed-status word group. These are
+stored as
+`EXPERIMENTS/results/n99_mixed6_word_quotient_reps8_first2000.json` and
+`EXPERIMENTS/results/n99_mixed6_word_quotient_reps8_350000_352000.json`.
+
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
 and carrying Pareto-minimal local fan side-incidence vectors, all `88`
