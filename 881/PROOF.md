@@ -24159,6 +24159,87 @@ large packet subpiece inside one concrete robust-core gap, returning the
 problem to a single moving interval gap rather than an arbitrary finite
 union.
 
+### Lemma 16.97: Robust-core gaps measure auxiliary midpoint separation
+
+Fix an interval
+\[
+I=[a,b]\cap\mathbb N
+\]
+and parameters \(r,\delta\). Let
+\[
+K_i=[c_i,d_i]\cap\mathbb N\qquad(i=1,2)
+\]
+be auxiliary intervals for which the robust cores
+\[
+R_i=R_{K_i}(\delta,I;r)=[L_i,U_i]\cap\mathbb N
+\]
+are nonempty. Put
+\[
+\rho_i=|R_i|=U_i-L_i+1.
+\]
+Then
+\[
+L_i+U_i=2(c_i+d_i)-a-b. \tag{1}
+\]
+If \(R_1\) lies strictly to the left of \(R_2\), and the gap between them
+has length
+\[
+g=L_2-U_1-1\ge0, \tag{2}
+\]
+then
+\[
+(c_2+d_2)-(c_1+d_1)=g+{\rho_1+\rho_2\over2}. \tag{3}
+\]
+In particular,
+\[
+(c_2+d_2)-(c_1+d_1)\ge g+1, \tag{4}
+\]
+and if both robust cores have length at least \(\rho\), then
+\[
+(c_2+d_2)-(c_1+d_1)\ge g+\rho. \tag{5}
+\]
+
+Proof. Let \(m_i=d_i-c_i+1\) and
+\[
+\ell_i=\left\lceil {m_i-r\over r+1}\right\rceil,\qquad
+M_\delta=\lfloor(1-\delta)|I|\rfloor+1.
+\]
+By Lemma 16.69,
+\[
+L_i=2(d_i-\ell_i+1)-b+M_\delta-1
+\]
+and
+\[
+U_i=2(c_i+\ell_i-1)-a-M_\delta+1.
+\]
+Adding gives (1), since the \(\ell_i\)- and \(M_\delta\)-terms cancel.
+
+Assume \(U_1<L_2\). Then
+\[
+L_2=U_1+g+1,\qquad
+U_2=L_2+\rho_2-1,\qquad
+L_1=U_1-\rho_1+1.
+\]
+Therefore
+\[
+(L_2+U_2)-(L_1+U_1)=2g+\rho_1+\rho_2. \tag{6}
+\]
+Using (1) for \(i=1,2\), the left side of (6) is
+\[
+2\bigl((c_2+d_2)-(c_1+d_1)\bigr).
+\]
+Dividing by \(2\) proves (3). Since nonempty integer intervals have
+\(\rho_i\ge1\), (4) follows, and (5) is immediate when
+\(\rho_i\ge\rho\) for both \(i\). \(\square\)
+
+Consequently, the internal gaps isolated in Corollary 16.96 are not
+arbitrary holes in the active-color line. A gap between robust-core
+components records auxiliary intervals whose doubled midpoints are
+separated by the gap length plus half the two adjacent robust-core lengths.
+When Corollary 16.72 supplies linear robust-core lengths, bounded-complexity
+multi-core escape requires auxiliary intervals separated on the same linear
+scale as the tested interval.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25496,6 +25577,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   interior escape: if a union of \(m\) robust intervals catches \(D\)
   packet points away from endpoints, one internal gap catches at least
   \(D/(m-1)\) of them.
+* Lemma 16.97 translates such robust-core gaps back to auxiliary geometry:
+  the midpoint of a robust core is an affine function of the auxiliary
+  interval midpoint, and a gap between adjacent cores forces comparable
+  separation of the auxiliary interval midpoints.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

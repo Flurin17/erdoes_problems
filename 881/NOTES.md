@@ -153,7 +153,9 @@ packages that residual case: finite robust exclusion is either endpoint
 escape or an internal gap in one assigned profile's union of robust cores
 across the packet span. Corollary 16.96 adds that bounded-complexity
 multi-core profiles concentrate their interior packet escape into one of
-finitely many actual gaps.
+finitely many actual gaps. Lemma 16.97 identifies the geometry of those
+gaps: their length records the separation of the auxiliary-interval
+midpoints after subtracting half the adjacent robust-core lengths.
 
 ## Definitions
 

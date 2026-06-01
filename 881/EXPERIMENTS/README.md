@@ -204,6 +204,11 @@ internal gap across the packet span. The same script checks Corollary
 16.96: a union of \(m\) interval cores has at most \(m-1\) internal gaps,
 so missing packet points concentrate in one gap by pigeonhole.
 
+`robust_core_gap_geometry.py` checks Lemma 16.97: the midpoint of a robust
+blocker core depends affinely on the midpoint of its auxiliary interval,
+and a gap between two robust-core components equals the corresponding
+auxiliary midpoint separation minus half the two core lengths.
+
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For
 \[
