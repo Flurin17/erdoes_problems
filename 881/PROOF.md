@@ -25198,6 +25198,71 @@ ordinary packet-position condition. A fixed profile can carry substantial
 mass on a late packet only if the packet interval is wide at the tested
 scale, or its center is far from every auxiliary midpoint of that profile.
 
+### Corollary 16.115: Summable center-far upper bounds remove finite menus
+
+Keep the finite-menu setting of Corollary 16.113, with profile set
+\[
+\Lambda.
+\]
+For each sufficiently large packet \(P_s\), choose an interval
+\[
+J_s=[u_s,v_s]\cap\mathbb N
+\]
+with \(P_s\subseteq J_s\), and put
+\[
+W_s=v_s-u_s.
+\]
+For \(\lambda\in\Lambda\), write
+\[
+T_\lambda=\gamma_\lambda n_\lambda-D_\lambda.
+\]
+For an auxiliary interval \(K_{\lambda,i}\) in the profile \(\lambda\), put
+\[
+M_{\lambda,i}=2(c_{\lambda,i}+d_{\lambda,i})-a_\lambda-b_\lambda,
+\qquad
+\Delta_{\lambda,i,s}=|u_s+v_s-M_{\lambda,i}|.
+\]
+Define
+\[
+\beta_{\lambda,i,s}=
+\begin{cases}
+0, & T_\lambda>W_s+\Delta_{\lambda,i,s},\\[1mm]
+\min\!\left(1,\,
+{\max\{0,\ W_s-(T_\lambda-\Delta_{\lambda,i,s})\}+2\over |P_s|}
+\right),
+& T_\lambda>\Delta_{\lambda,i,s},\\[4mm]
+1, & T_\lambda\le\Delta_{\lambda,i,s},
+\end{cases} \tag{1}
+\]
+and
+\[
+\beta_{\lambda,s}=\min_i\beta_{\lambda,i,s}. \tag{2}
+\]
+If
+\[
+\sum_s\beta_{\lambda,s}<\infty\qquad(\lambda\in\Lambda), \tag{3}
+\]
+then the assigned high-density linear-core branch does not product-cover
+every selector tail.
+
+Proof. Lemma 16.114, applied to each auxiliary interval in the fixed
+profile \(\lambda\), gives
+\[
+{|H_{\lambda,s}|\over |P_s|}\le \beta_{\lambda,s} \tag{4}
+\]
+for every sufficiently large \(s\). If the branch product-covered every
+selector tail, Corollary 16.113 would give some \(\lambda\in\Lambda\) with
+\[
+\sum_s {|H_{\lambda,s}|\over |P_s|}=\infty,
+\]
+contradicting (3) and (4). \(\square\)
+
+Thus a finite menu survives the linear-core selector test only if one
+profile has nonsummable packet-position error: along infinitely many
+packets, every auxiliary midpoint in that profile is too far from the
+packet center, or the packet interval is too wide relative to the tested
+scale and packet size.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26590,6 +26655,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.114 gives the first direct size estimate for that mass: a single
   centered core bounds the center-far part by packet width plus center
   displacement error.
+* Corollary 16.115 converts the estimate into a finite-menu selector
+  criterion: if those upper bounds are summable for every fixed profile,
+  the high-density linear-core menu is avoidable.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

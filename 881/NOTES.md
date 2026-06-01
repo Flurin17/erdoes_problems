@@ -197,6 +197,9 @@ Corollary 16.113 gives the finite-menu version: one fixed profile has
 divergent pointwise center-far mass. Lemma 16.114 then bounds that mass
 from a single centered core in terms of packet width and center
 displacement.
+Corollary 16.115 packages the consequence: if those packet-position upper
+bounds are summable for every profile in a finite assigned menu, that
+finite-menu linear-core branch is selector-avoidable.
 
 ## Definitions
 
