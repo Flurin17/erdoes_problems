@@ -17166,6 +17166,81 @@ gaps, or two-sum coverage to rule out higher-front rank such as
 \(\mathcal B_2\), or else build a genuine integer construction realizing
 that higher-front wiring.
 
+### Corollary 13.1l.2n: Finite-prefix active suffix fronts cannot persist
+
+Work in the \(k=2\) counterexample setting. Fix a finite nonempty prefix
+\[
+\Delta\subset A
+\]
+and an infinite tail \(P\subset A\) above \(\Delta\). Let \(\mathcal E\) be
+a prefix-front on \(P\). Suppose that, for every
+\[
+H\in\mathcal E,
+\]
+there is a witness \(w_H\) such that
+\[
+F_H=\Delta\cup H
+\]
+is inclusion-minimal for \(w_H\) and
+\[
+w_H\ge\max H-1,\qquad
+w_H\notin3(A\setminus F_H). \tag{1}
+\]
+Then the suffix ranks
+\[
+|H|\qquad(H\in\mathcal E)
+\]
+are not unbounded on every tail of \(P\).
+
+Proof. Suppose, to the contrary, that \(|H|\) is unbounded on every tail of
+\(P\). Apply Lemma 13.1l.2h to the prefix-front \(\mathcal E\), with
+\[
+\delta_s(G)=|G|
+\]
+in each section. It is enough to verify that the first-coordinate shell
+alternative of Lemma 8.5a.8a is impossible in every section.
+
+Consider any section with finite suffix prefix \(s\). The fixed prefix in
+the original active trace is
+\[
+\Delta_s=\Delta\cup s.
+\]
+If the first-coordinate shell alternative held in this section, then for
+some first point \(a\) of the section the further section over \(s\cup\{a\}\)
+would have bounded suffix rank on a tail. Equivalently, there would be an
+infinite tail \(Y\) and a bound \(q\) such that every infinite
+\[
+Z\subset Y
+\]
+contains an active trace
+\[
+\Delta_s\cup\{a\}\cup H
+\]
+with
+\[
+H\subset Z,\qquad |H|\le q.
+\]
+Taking \(Z\) arbitrarily far out makes the corresponding witnesses
+arbitrarily large, by (1).
+Corollary 13.1l.2m, applied with finite prefix
+\[
+\Delta_s\cup\{a\},
+\]
+rules this out: a bounded-rank suffix front over a finite fixed prefix
+Ramsey-thins to the finite-prefix fixed-rank shell forbidden by Corollary
+13.1l.2l.
+
+Thus the shell alternative is impossible in every section. Lemma
+13.1l.2h then says that the root statistic \(|H|\) cannot be unbounded on
+every tail, contradicting the assumption. \(\square\)
+
+This closes the purely front-theoretic cross-promotion route once the
+promoted suffixes themselves form a prefix-front over a finite fixed prefix.
+Accordingly, any remaining \(k=2\) obstruction must fail to produce such a
+clean active suffix front from the large private fibers; the remaining
+promotion problem is now specifically the passage from the weak
+private-color barrier to a prefix-front of active suffix traces.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -19047,6 +19122,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 13.1l.2m.1 identifies the remaining abstract shape with
   higher-front rank, exemplified by the second-element front; the final
   step must use additive structure beyond prefix-front combinatorics.
+* Corollary 13.1l.2n closes the case where cross-promoted large fibers
+  produce a genuine prefix-front of active suffix traces over a finite
+  fixed prefix; the remaining gap is the promotion from weak private-color
+  barriers to that clean front.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

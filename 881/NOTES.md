@@ -2697,6 +2697,12 @@ Diagnostic 13.1l.2m.1 ties this to the second-element front
 \(\mathcal B_2=\{m=x_2\}\): finite-prefix closure is front-theoretically
 sharp, and the last proof must use additive information, not just prefix
 combinatorics.
+Corollary 13.1l.2n closes the clean cross-promoted front route: if the
+large-fiber promotions actually produce a prefix-front of active suffix
+traces over a finite fixed prefix, then finite-prefix shell closure and
+well-founded section descent contradict unbounded rank. The remaining gap
+is therefore the promotion from weak private-color barriers to such a clean
+active suffix front.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
