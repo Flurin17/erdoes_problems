@@ -18468,6 +18468,103 @@ coverage \(M+2C\); it must use moving finite cores, collective cross-stage
 barriers, or endpoint-local witnesses outside this one-marker coverage
 regime.
 
+### Lemma 16.0a: Finite-core one-marker coverage admits a good infinite deletion
+
+Let \(S\subset\mathbb N\) be finite and nonempty, and let
+\[
+M\subset\mathbb N
+\]
+be infinite. Suppose there is \(N_0\) such that
+\[
+[N_0,\infty)\subset M+S. \tag{1}
+\]
+Then there is an infinite
+\[
+B\subset M
+\]
+such that all sufficiently large integers lie in
+\[
+2(M\setminus B)+S. \tag{2}
+\]
+
+In particular, if \(C\) is finite, \(r\ge1\), \(S=rC\), and
+\[
+[N_0,\infty)\subset M+rC,
+\]
+then for \(A=C\cup M\) there is an infinite \(B\subset M\) such that
+\[
+A\setminus B
+\]
+is an asymptotic basis of order \(r+2\).
+
+Proof. Enlarge \(N_0\) if necessary so that \(N_0\ge1\). We recursively choose
+\[
+b_1<b_2<\cdots,\qquad b_j\in M,
+\]
+so that, writing \(F_j=\{b_1,\ldots,b_j\}\),
+\[
+\bigl|(M\setminus F_j)\cap[1,b_j-N_0]\bigr|>|F_j+S|. \tag{3}
+\]
+This is possible because \(|F_j+S|\le j|S|\), while \(M\) has arbitrarily
+many elements below a sufficiently late choice of \(b_j-N_0\).
+
+Fix \(j\), and choose
+\[
+G_j\subset(M\setminus F_j)\cap[1,b_j-N_0]
+\]
+with
+\[
+|G_j|>|F_j+S|. \tag{4}
+\]
+We claim that every \(n\ge b_j\) lies in
+\[
+G_j+(M\setminus F_j)+S. \tag{5}
+\]
+Indeed, for every \(p\in G_j\) one has \(n-p\ge N_0\). At most
+\(|F_j+S|\) choices of \(p\in G_j\) can lie in the finite forbidden set
+\[
+n-F_j-S.
+\]
+By (4), choose
+\[
+p\in G_j\setminus(n-F_j-S).
+\]
+Then (1) gives
+\[
+n-p=m+s,\qquad m\in M,\ s\in S.
+\]
+The avoidance condition forces \(m\notin F_j\). Hence
+\[
+n=p+m+s\in G_j+(M\setminus F_j)+S,
+\]
+proving (5).
+
+Let
+\[
+B=\{b_1,b_2,\ldots\}.
+\]
+For \(n\ge b_1\), let \(j\) be maximal with \(b_j\le n\). By (5), write
+\[
+n=p+m+s
+\]
+with \(p\in G_j\), \(m\in M\setminus F_j\), and \(s\in S\). Since
+\[
+p\le b_j-N_0\le b_j
+\]
+and \(p\notin F_j\), the element \(p\) is not \(b_j\) or any later deleted
+marker. Also \(m<n\), because \(s\ge1\) and \(p\ge1\); maximality of \(j\)
+therefore prevents \(m\) from being a later deleted marker. Thus
+\[
+p,m\in M\setminus B,
+\]
+and \(n\in2(M\setminus B)+S\). This proves (2). The final assertion is the
+special case \(S=rC\). \(\square\)
+
+Therefore finite-core one-marker coverage is incompatible with a negative
+answer in the stronger infinite-deletion sense, not merely after each
+fixed finite marker deletion. The deleted markers can be chosen sparsely so
+that every finite prefix is repaired below its largest deleted marker.
+
 The cross-stage pair version has slightly more traction. The script
 `EXPERIMENTS/robust_booster_pair_stage_search.py` starts from the same
 \(C_0=\{1,3,20,21\}\), first adds \(23\), and then adds \(30,31\). At each
@@ -18516,6 +18613,17 @@ enumeration shows several alternative first moves and some alternative
 second moves, but the tested branches still have no third extension. This
 keeps the robust-booster pair route open only as a genuinely large-block or
 new-design problem, not as a small non-greedy search miss.
+The script's `--high-excess` diagnostic checks the construction-side escape
+suggested by Lemma 16.4: require
+\[
+w-b-2m_0\ge\max C
+\]
+so old retained padders do not enter the old-gate shadow interval. In the
+same third-stage seed, the only singleton candidates with coverage buffer
+are again \(41\) and \(43\), and neither has any high-excess pair witness
+against the old elements. Thus the current seed has no high-excess
+one-point continuation; escaping the shadow-row stall would require a
+larger prepared block or a different seed.
 
 ### Target 16.2: Moving-core domination is the remaining \(k=3\) lift
 
@@ -18687,6 +18795,119 @@ most old-pair witness candidates are rejected by a missing old-gate shadow
 row, and the high candidates for larger old endpoints are rejected by the
 terminal gap. The few remaining rejected candidates have ordinary
 four-term repairs not detected by this necessary test.
+
+### Corollary 16.5: Pair witnesses impose reflected two-sum rows
+
+Keep the hypotheses of Lemma 16.3, and put
+\[
+d=w-a.
+\]
+Then every valid pair witness \(w\notin4(A\setminus\{a,b\})\) has
+\[
+\{p\in C\cap(d-(b-a)-2m_0,\ d-2m_0]:w-p\ge N_0\}
+\subseteq d-2(A\setminus\{b\}). \tag{1}
+\]
+Equivalently,
+for every finite
+\[
+T\subset C
+\]
+such that
+\[
+w-b-2m_0<t\le w-a-2m_0,\qquad w-t\ge N_0
+\]
+for all \(t\in T\), one has
+\[
+d-T\subseteq2(A\setminus\{b\}). \tag{2}
+\]
+Moreover
+\[
+C\cap(d-2m_0,\ w-N_0]=\varnothing. \tag{3}
+\]
+
+Consequently, if the same new point \(b\) is to support pair witnesses
+\[
+w_i\notin4(A\setminus\{a_i,b\})
+\]
+against many old endpoints \(a_i<b\), then with \(d_i=w_i-a_i\) it must
+simultaneously realize the reflected rows
+\[
+d_i-T_i\subseteq2(A\setminus\{b\}) \tag{4}
+\]
+for every retained row set
+\[
+T_i\subset
+C_i\cap(d_i-(b-a_i)-2m_0,\ d_i-2m_0],
+\qquad C_i=A\setminus\{a_i,b\},
+\]
+that lies below the threshold cut \(w_i-T_i\ge N_0\).
+
+Proof. Formula (1) is only Lemma 16.3(2) rewritten with
+\[
+d=w-a.
+\]
+Indeed, a retained padder in the displayed interval is too large for \(b\)
+to occur in any three-term representation of \(w-p\), so every such
+representation uses \(a\), and removing \(a\) gives \(d-p\in2(A\setminus
+\{b\})\). The finite-set version (2) is the same statement applied to
+each \(t\in T\). Formula (3) is Lemma 16.3(3). Applying these conclusions
+separately to each old endpoint \(a_i\) proves the simultaneous condition
+(4). \(\square\)
+
+This corollary is a capacity test, not an impossibility theorem. It says
+that a moving-core construction cannot treat an old-new pair witness as a
+purely local four-sum hole: before the terminal gap begins, every retained
+padder in the old-gate interval must be mirrored into the lower sumset
+\(2(A\setminus\{b\})\). Thus the surviving \(k=3\) construction route
+requires many compatible shifted copies of retained row sets in a lower
+sumset while still preserving the order-3 coverage interval.
+
+### Lemma 16.6: One nondegenerate witness serves at most four old endpoints
+
+Let \(A\subseteq\mathbb N\), and fix
+\[
+b\in A,\qquad w\in\mathbb N.
+\]
+Put
+\[
+U_b(w)=\{a\in A\setminus\{b\}:w\notin4(A\setminus\{a,b\})\}.
+\]
+If
+\[
+w\in4(A\setminus\{b\}), \tag{1}
+\]
+then
+\[
+|U_b(w)|\le4. \tag{2}
+\]
+More precisely, \(U_b(w)\) is contained in the support of every
+four-term representation of \(w\) from \(A\setminus\{b\}\).
+
+Proof. Let
+\[
+w=x_1+x_2+x_3+x_4,\qquad x_i\in A\setminus\{b\},
+\]
+be any representation supplied by (1), and let
+\[
+R=\{x_1,x_2,x_3,x_4\}
+\]
+be its support. If \(a\in U_b(w)\) and \(a\notin R\), then this same
+representation lies in \(4(A\setminus\{a,b\})\), contradicting the
+definition of \(U_b(w)\). Hence \(U_b(w)\subseteq R\), and \(|R|\le4\).
+\(\square\)
+
+Thus a single witness value \(w\) can certify the pairs \(\{a,b\}\) for
+many old endpoints only if it is already a singleton-\(b\) four-fold hole,
+\[
+w\notin4(A\setminus\{b\}).
+\]
+After excluding that degenerate branch, one fixed \(w\) accounts for at
+most four old endpoints. A moving-core pair construction with one new
+point \(b\) and many old endpoints must therefore either create many
+distinct witness values, each with its own terminal gap and row-reflection
+burden from Corollary 16.5, or rely heavily on singleton-\(b\) holes. The
+latter branch is exactly where the \(k=3\) singleton analysis only gives
+\(2A\)-recurrence rather than \(A\)-recurrence.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 
@@ -19673,17 +19894,23 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   isolating the remaining lift problem: private residue holes must be made
   private for individual integers without losing three-term coverage, and
   robust against all shifted finite-accelerator repairs.
+* Lemma 16.0 and Lemma 16.0a rule out fixed finite-core one-marker lifts:
+  if the tail is covered by \(M+rC\) with finite \(C\), then finite marker
+  deletions are eventually repaired by two retained markers, and one can
+  choose an infinite sparse marker deletion that remains an order-\(r+2\)
+  basis.
 * Diagnostic 16.1 records that the robust-booster pair-stage lift stalls at
   the third stage because singleton candidates \(41,43\) extend coverage but
   fail simultaneous pair witnesses against many old elements; the obstruction
   is domination, not coverage alone.
-* Target 16.2 and Lemmas 16.3--16.4 isolate the current \(k=3\)
+* Target 16.2 and Lemmas 16.3--16.6 isolate the current \(k=3\)
   moving-core target: after finite-core marker coverage is ruled out, every
   old-new pair witness must either be eventually repaired or force old-gate
   \(2A\)-shadow rows \(w-a-p\in2(A\setminus\{b\})\) across the interval
   where the new endpoint \(b\) is too large to participate; the finite
   prefilter rejects most robust-booster third-stage candidates by missing
-  shadow rows.
+  shadow rows, and a non-singleton witness for one new point can serve at
+  most four old endpoints.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

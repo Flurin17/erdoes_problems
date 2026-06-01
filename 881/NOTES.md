@@ -2097,6 +2097,14 @@ Thus a \(k=3\) counterexample cannot be a finite-core marker set whose
 order-3 coverage is supplied by one marker plus two core terms. The
 integer lift must use moving cores, endpoint-local witnesses, or collective
 cross-stage barriers.
+Lemma 16.0a strengthens this from finite deletions to a genuinely good
+infinite deletion: if \([N_0,\infty)\subset M+S\) with fixed finite \(S\),
+then one can choose an infinite sparse \(B\subset M\) so that
+\[
+[N_B,\infty)\subset2(M\setminus B)+S.
+\]
+Thus one-marker finite-core coverage is fully incompatible with a negative
+answer, not just locally repairable after each fixed finite deletion.
 
 The stage search has one nontrivial finite lift:
 \[
@@ -2128,6 +2136,13 @@ classes are \(41\) and \(43\), and both fail pair witnesses against
 \]
 So the robust-booster lift is blocked first by simultaneous domination
 against many old elements, not by lack of three-fold coverage.
+The `--high-excess` diagnostic in the same script tests the possible escape
+where witnesses satisfy \(w-b-2m_0\ge\max C\), eliminating old-padder
+shadow pressure. For the current third-stage seed, the only singleton
+coverage candidates remain \(41\) and \(43\), and both have zero
+high-excess pair witnesses against old endpoints. A viable escape therefore
+needs a larger prepared block or a new seed with an actual high-excess row
+bank.
 
 Propositions 13.1b-general and 13.1e now record the exact infinite
 criterion behind these searches. For any order \(k\), an iterable
@@ -2166,6 +2181,25 @@ must reflect through the old gate \(a\) into \(2(A\setminus\{b\})\). The
 same diagnostic classifies candidate third-stage witnesses; for
 \(b=41,43\), most failed old pairs are rejected by missing shadow rows, with
 only a few low-endpoint candidates falling to unrelated four-term repairs.
+Corollary 16.5 rewrites this as a row-capacity condition: with
+\(d=w-a\), a valid pair witness must place every retained padder in
+\[
+(d-(b-a)-2m_0,\ d-2m_0]
+\]
+inside the reflected lower sumset \(d-2(A\setminus\{b\})\), before the
+terminal gap begins. The updated `pair_shadow_rows.py` prints, for each
+candidate new point \(b=41,43\), the best witness candidate against each
+old endpoint and the number of forced rows, missing rows, and terminal-gap
+violations. This makes the current obstruction more concrete: a new point
+that extends coverage must also manufacture many compatible shifted
+two-sum rows for the old endpoints.
+Lemma 16.6 adds a separate witness-count constraint. For fixed \(b\) and
+fixed \(w\), if \(w\) has any four-term representation avoiding \(b\), then
+the set of old endpoints \(a\) for which \(w\) is private for \(\{a,b\}\)
+has size at most four. Therefore one new point can dominate many old
+endpoints only by using many distinct witnesses, or by producing many
+singleton-\(b\) holes. The second branch is exactly where the known
+\(k=3\) singleton argument stalls at \(2A\)-recurrence.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

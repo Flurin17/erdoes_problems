@@ -46,8 +46,10 @@ def pair_witnesses(
     previous_endpoint: int,
     declared_endpoint: int,
     cap: int,
+    high_excess: bool = False,
 ) -> dict[tuple[int, int], list[int]] | None:
     A = old | new | {BOOSTER}
+    m0 = min(A)
     four_all = hsum(A, 4, cap)
     result: dict[tuple[int, int], list[int]] = {}
     for a in sorted(old):
@@ -57,6 +59,7 @@ def pair_witnesses(
                 w
                 for w in range(previous_endpoint + 1, declared_endpoint + 1)
                 if w in four_all and w not in without
+                if not high_excess or w - b - 2 * m0 >= max(old)
             ]
             if not found:
                 return None
@@ -70,6 +73,7 @@ def find_one_stage(
     base: int,
     slack: int = 100,
     max_new_size: int = 4,
+    high_excess: bool = False,
 ) -> tuple[set[int], int, int, dict[tuple[int, int], list[int]]] | None:
     A_old = old | {BOOSTER}
     cap0 = max(6 * max(A_old) + 200, previous_endpoint + 200)
@@ -96,6 +100,7 @@ def find_one_stage(
                     previous_endpoint,
                     declared,
                     cap,
+                    high_excess=high_excess,
                 )
                 if witnesses is not None:
                     return new, declared, newcov, witnesses
@@ -206,10 +211,58 @@ def diagnose_third_stage_failure() -> None:
         print("b=", b, "coverage=", newcov, "fail_old=", failures, "successes=", successes)
 
 
+def diagnose_high_excess_third_stage() -> None:
+    """Check whether singleton next elements have high-excess pair witnesses."""
+
+    old = {1, 3, 20, 21, 23, 30, 31}
+    previous_endpoint = 40
+    base = 22
+    any_candidate = False
+    for b in [
+        x
+        for x in range(previous_endpoint + 1, 261)
+        if x % MODULUS in RESIDUES and x not in old and x != BOOSTER
+    ]:
+        new = {b}
+        A = old | new | {BOOSTER}
+        cap = max(700, 6 * max(A) + 200)
+        newcov = cover_end(hsum(A, 3, cap), base, cap)
+        if newcov <= previous_endpoint or b > newcov - 2:
+            continue
+        any_candidate = True
+        four_all = hsum(A, 4, cap)
+        successes: dict[int, list[int]] = {}
+        for a in sorted(old):
+            without = hsum(A - {a, b}, 4, cap)
+            found = [
+                w
+                for w in range(previous_endpoint + 1, newcov - 1)
+                if w in four_all
+                and w not in without
+                and w - b - 2 * min(A) >= max(old)
+            ]
+            if found:
+                successes[a] = found[:5]
+        print(
+            "b=",
+            b,
+            "coverage=",
+            newcov,
+            "high_excess_success_count=",
+            len(successes),
+            "successes=",
+            successes,
+        )
+    if not any_candidate:
+        print("no singleton candidates extend coverage with buffer")
+
+
 if __name__ == "__main__":
     if "--extend" in sys.argv:
         extended_third_stage_check()
     elif "--diagnose" in sys.argv:
         diagnose_third_stage_failure()
+    elif "--high-excess" in sys.argv:
+        diagnose_high_excess_third_stage()
     else:
         main()

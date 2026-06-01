@@ -595,6 +595,9 @@ residue-restricted singleton candidates that extend coverage are `41` and
 `43`, and both fail the pair-witness condition against old elements
 `1,3,21,23,31`. This is recorded as Diagnostic 16.1 in `PROOF.md`: the
 third-stage failure is domination-limited, not merely a coverage failure.
+Run it with `--high-excess` to require the stronger escape condition
+`w - b - 2 * min(A) >= max(old)`; in the same third-stage seed, candidates
+`41` and `43` have zero high-excess pair witnesses.
 A bounded non-greedy DFS with candidate values up to `110`, increments of
 size at most `3`, and slack `100` also found no chain beyond depth `2`.
 With wider first/second-stage enumeration, alternative first moves exist

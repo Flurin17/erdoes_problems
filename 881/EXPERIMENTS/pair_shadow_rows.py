@@ -35,13 +35,17 @@ def reps3_using(elements: set[int], target: int, required: set[int]) -> bool:
     return False
 
 
-def diagnose(A: set[int], a: int, b: int, w: int, threshold: int) -> None:
+def row_data(
+    A: set[int],
+    a: int,
+    b: int,
+    w: int,
+    threshold: int,
+) -> tuple[list[tuple[int, int, bool]], list[int]]:
+    """Return forced old-gate rows and terminal-gap violations."""
+
     m0 = min(A)
     C = A - {a, b}
-    cap = max(4 * max(A), w) + 20
-    without = hsum(C, 4, cap)
-    print("A=", sorted(A))
-    print("pair=", (a, b), "w=", w, "w in 4(A\\pair)=", w in without)
     forced = []
     terminal = []
     for p in sorted(C):
@@ -53,6 +57,17 @@ def diagnose(A: set[int], a: int, b: int, w: int, threshold: int) -> None:
         if p > w - b - 2 * m0:
             target = w - a - p
             forced.append((p, target, has_two_sum(A - {b}, target)))
+    return forced, terminal
+
+
+def diagnose(A: set[int], a: int, b: int, w: int, threshold: int) -> None:
+    m0 = min(A)
+    C = A - {a, b}
+    cap = max(4 * max(A), w) + 20
+    without = hsum(C, 4, cap)
+    print("A=", sorted(A))
+    print("pair=", (a, b), "w=", w, "w in 4(A\\pair)=", w in without)
+    forced, terminal = row_data(A, a, b, w, threshold)
     print("forced old-gate rows (p, w-a-p, in 2(A\\{b}))=", forced)
     print("terminal-gap retained p=", terminal)
     print("three-rep uses pair for checked p=")
@@ -104,6 +119,52 @@ def scan_third_stage() -> None:
             print("  old a=", a, buckets)
 
 
+def scan_row_burdens() -> None:
+    """Print the row-reflection burden behind the third-stage stall."""
+
+    old = {1, 3, 5, 20, 21, 23, 30, 31}
+    threshold = 22
+    witness_range = range(41, 48)
+    for b in (41, 43):
+        A = old | {b}
+        print("row burden b=", b)
+        for a in sorted(old):
+            summaries = []
+            for w in witness_range:
+                cls = classify_candidate(A, a, b, w, threshold)
+                rows, terminal = row_data(A, a, b, w, threshold)
+                missing = [(p, target) for p, target, ok in rows if not ok]
+                summaries.append(
+                    (
+                        w,
+                        cls,
+                        len(rows),
+                        len(missing),
+                        len(terminal),
+                        missing[:3],
+                    )
+                )
+            best = min(
+                summaries,
+                key=lambda item: (
+                    item[1] != "success",
+                    item[3],
+                    item[4],
+                    -item[2],
+                    item[0],
+                ),
+            )
+            successes = [item for item in summaries if item[1] == "success"]
+            print(
+                "  old a=",
+                a,
+                "best=(w,class,rows,missing,terminal,first_missing)=",
+                best,
+                "successes=",
+                successes,
+            )
+
+
 def main() -> None:
     # Robust-booster pair-stage diagnostic after adding candidate b=41.
     old = {1, 3, 5, 20, 21, 23, 30, 31}
@@ -111,6 +172,8 @@ def main() -> None:
     diagnose(A, a=20, b=41, w=47, threshold=22)
     print()
     scan_third_stage()
+    print()
+    scan_row_burdens()
 
 
 if __name__ == "__main__":
