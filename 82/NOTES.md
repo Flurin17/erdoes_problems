@@ -3233,3 +3233,11 @@ source of growth beyond Ramsey.
   fixed two-degree graph model still needs simultaneous column-sum
   conditioning.  `hypergeom_residue.py` now prints this central paired bound
   when its parameters match the balanced case.
+- 2026-06-01: Promoted the central hypergeometric lemma to a balanced
+  row-regular cross-edge anti-concentration corollary.  If every row chooses
+  exactly half of a `2m`-vertex opposite side independently and a fixed tested
+  set `Y_0` also has size `m`, then, for `m >= C M^2 log M`, the probability
+  that all rows in any fixed `X_0` have congruent induced degrees modulo `M`
+  is at most `((1+o_M(1))/M)^(|X_0|-1)`.  This closes the independent
+  row-sum-conditioned layer and leaves the true column-sum conditioning as the
+  precise remaining obstacle.

@@ -1928,6 +1928,58 @@ row-conditioned model.  It still does not handle the simultaneous column-sum
 conditioning in the true fixed two-degree graph model, but it replaces the
 first conditioning layer by a theorem rather than a numerical heuristic.
 
+**Corollary: Balanced Row-Regular Cross-Edge Anti-Concentration.**  Let
+`X,Y` be disjoint vertex sets with `|Y|=2m`.  Fix an arbitrary graph on `X`.
+Independently for each `x in X`, choose exactly `m` neighbors of `x` in `Y`,
+uniformly among all `m`-subsets of `Y`.  Let `Y_0 subset Y` have size `m`,
+let `X_0 subset X` have size `a`, and let `M>=2`.  If
+
+```text
+m >= C M^2 log M
+```
+
+for a sufficiently large absolute constant `C`, then the probability that
+the degrees of all vertices in `X_0` inside the induced graph on
+`X_0 union Y_0` are congruent modulo `M` is at most
+
+```text
+((1+o_M(1))/M)^(a-1),
+```
+
+uniformly in `a,m`, in the fixed graph on `X`, and in the chosen set `Y_0`.
+
+Proof.  For `x in X_0`, write the induced degree of `x` in
+`X_0 union Y_0` as
+
+```text
+c_x + Z_x,
+```
+
+where `c_x` is its fixed degree inside `X_0`, and `Z_x` is the number of
+chosen row-neighbors of `x` that lie in `Y_0`.  Since `x` chooses exactly
+`m` elements from a `2m`-set with `m` marked elements `Y_0`, the variable
+`Z_x` has the central hypergeometric distribution from the previous lemma.
+The choices for different `x` are independent.  Therefore each shifted
+variable `c_x+Z_x` has every residue class modulo `M` with probability at
+most `(1+o_M(1))/M`.
+
+Pick one vertex `x_* in X_0`.  Summing over the residue of its degree and
+using independence for all other vertices gives
+
+```text
+P(all degrees on X_0 are congruent mod M)
+ <= ((1+o_M(1))/M)^(a-1).
+```
+
+QED.
+
+This is exactly the row-sum-conditioned analogue of the earlier independent
+cross-edge lemma in the balanced half-density case.  The true two-degree
+model further conditions column sums, so this corollary is still not the
+needed fixed-degree anti-concentration theorem; it isolates the remaining
+obstacle as the transfer from independent row-regular choices to a
+biregular, or nearly biregular, contingency table.
+
 For example,
 
 ```text
