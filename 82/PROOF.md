@@ -13975,6 +13975,36 @@ sum_d s_d + sum_d t_d >= 2M > (h-1)^2,
 contradiction.  Therefore some degree `d` has `s_d+t_d>=h`, which is exactly
 the spectrum-matching alternative.  QED.
 
+**Conditional Corollary 28J.1a: Spectrum Mass Would Solve The Problem
+Polynomially.**  If every graph `J` satisfies
+
+```text
+sum_d s_d(J) >= |V(J)|,
+```
+
+then for every `k>=2`,
+
+```text
+G(k) <= floor((2k-1)^2/2)+1 < 2k^2.
+```
+
+Consequently `F(n)/log n -> infinity`.
+
+Proof.  Apply Corollary 28I with `h=2k`, giving
+
+```text
+G(k) <= D_spec(2k).
+```
+
+Conditional Corollary 28J.1 gives
+
+```text
+D_spec(2k) <= floor((2k-1)^2/2)+1 < 2k^2.
+```
+
+Thus `G(k)=O(k^2)`, which is much stronger than `G(k)=2^{o(k)}` and hence is
+equivalent to `F(n)/log n -> infinity`.  QED.
+
 **Lemma 28J.2: Spectrum Mass Is Superadditive Over Components.**  Let
 `G_1,...,G_t` be the connected components of a graph `G`.  With
 `s_d` as in Corollary 28J.1,

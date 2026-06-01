@@ -3775,9 +3775,10 @@ source of growth beyond Ramsey.
   checks at `n=8,10,12` also found no violation.  If this spectrum-mass
   inequality were true, then the disjoint-union spectrum parameter
   `D_spec(h)` would be `O(h^2)`: two graphs with `s_d+t_d<h` for every
-  degree have combined mass below `h^2`.  This would not settle the full
-  marked-pair parameter, because cross-profile compensation remains, but it
-  would close the pure disjoint-spectrum obstruction.
+  degree have combined mass below `h^2`.  Combined with
+  `G(ceil(h/2))<=D_spec(h)`, this would actually prove the stronger bound
+  `G(k)<2k^2`.  Thus spectrum mass is now a first-tier proof target, not just
+  a cleanup of the pure disjoint-spectrum obstruction.
 - 2026-06-01: Refuted the stronger possible proof route that every graph
   partitions into regular induced subgraphs of distinct degrees.  Exact
   search finds a `6`-vertex counterexample, mask `659`, with spectrum summary
@@ -3839,3 +3840,10 @@ source of growth beyond Ramsey.
   `|A|+|B|` except for the one-clique-vertex case, which is handled by either
   total independence or one edge.  Thus split graphs remain easy for the
   spectrum-mass route despite being a barrier for mixed regular witnesses.
+- 2026-06-01: Promoted spectrum mass to a primary target.  If
+  `mu(G)=sum_d s_d(G)>=|G|` holds for every graph, then the existing
+  `D_spec` sandwich gives `G(k)<=D_spec(2k)<=floor((2k-1)^2/2)+1<2k^2`,
+  solving the full conjecture polynomially.  Larger searches still find no
+  counterexample: `regular_spectrum_mass.py` gives `n=18` random
+  `min_seen=31`, `n=18` local-search `min_seen=27`, and `n=20` random
+  `min_seen=36`.
