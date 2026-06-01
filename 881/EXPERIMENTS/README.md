@@ -183,9 +183,15 @@ it covers every selector with weight \(1\), but only at support rank \(3\).
 finite selector cylinders that cover the whole product must have total
 product mass at least \(1\), and cylinder families with mass below \(1\)
 leave an escaping selector. It exhausts the binary two-block case and
-samples several larger products. This is a diagnostic for the later
+samples several larger products. It also checks Lemma 8.5a.7u'' for
+one-coordinate cylinders: such cylinders cover one finite product exactly
+when at least one coordinate block is fully covered; the infinite-tail
+version therefore requires full coverage eventually on every tail. This is
+a diagnostic for the later
 vanishing-density branch: low-density interval-packet cylinders cannot
-carry a product-selector barrier if their tail masses are summable.
+carry a product-selector barrier if their tail masses are summable, and
+one-coordinate robust-core escape cylinders must eventually cover whole
+packets.
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For

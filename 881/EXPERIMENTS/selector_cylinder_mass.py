@@ -90,12 +90,66 @@ def sampled_checks() -> int:
     return checked
 
 
+def check_one_coordinate_cover() -> int:
+    rng = Random(1881)
+    checked = 0
+    for block_sizes in [(2, 2), (2, 3, 2)]:
+        one_coordinate = [
+            cylinder
+            for cylinder in all_cylinders(block_sizes)
+            if len(cylinder[0]) == 1
+        ]
+        for mask in range(1 << len(one_coordinate)):
+            family = [
+                one_coordinate[i]
+                for i in range(len(one_coordinate))
+                if (mask >> i) & 1
+            ]
+            covered_blocks = [0] * len(block_sizes)
+            for support, masks in family:
+                covered_blocks[support[0]] |= masks[0]
+            expected = any(
+                covered_blocks[i] == (1 << block_sizes[i]) - 1
+                for i in range(len(block_sizes))
+            )
+            assert covers_product(family, block_sizes) == expected, (
+                block_sizes,
+                family,
+                covered_blocks,
+            )
+            checked += 1
+    for block_sizes in [(3, 3, 3), (3, 4, 2)]:
+        one_coordinate = [
+            cylinder
+            for cylinder in all_cylinders(block_sizes)
+            if len(cylinder[0]) == 1
+        ]
+        for _ in range(2000):
+            family = [c for c in one_coordinate if rng.random() < 0.25]
+            covered_blocks = [0] * len(block_sizes)
+            for support, masks in family:
+                covered_blocks[support[0]] |= masks[0]
+            expected = any(
+                covered_blocks[i] == (1 << block_sizes[i]) - 1
+                for i in range(len(block_sizes))
+            )
+            assert covers_product(family, block_sizes) == expected, (
+                block_sizes,
+                family,
+                covered_blocks,
+            )
+            checked += 1
+    return checked
+
+
 def main() -> None:
     exhaustive = exhaustive_binary_two_blocks()
     sampled = sampled_checks()
+    one_coordinate = check_one_coordinate_cover()
     print("selector cylinder mass checks passed")
     print(f"exhaustive_families={exhaustive}")
     print(f"sampled_families={sampled}")
+    print(f"one_coordinate_families={one_coordinate}")
 
 
 if __name__ == "__main__":

@@ -7491,6 +7491,45 @@ If interval geometry shows that all possible bad packets lie in cylinders
 whose masses are summable on some tail, then a selector deletion avoids
 that entire branch.
 
+### Lemma 8.5a.7u'': One-coordinate selector barriers cover whole packets
+
+Let
+\[
+F_1,F_2,\ldots
+\]
+be finite nonempty blocks. For each \(s\), let
+\[
+\mathcal Y_s
+\]
+be any family of subsets of \(F_s\). Consider the one-coordinate cylinders
+\[
+(\{s\},Y),\qquad Y\in\mathcal Y_s.
+\]
+These cylinders catch every selector on every infinite tail if and only if
+there is \(s_0\) such that, for every \(s\ge s_0\),
+\[
+F_s=\bigcup_{Y\in\mathcal Y_s}Y. \tag{1}
+\]
+
+Proof. If (1) holds, then every selector on an infinite tail is caught at
+any tail coordinate \(s\ge s_0\): for the selected \(x_s\in F_s\), some
+\(Y\in\mathcal Y_s\) contains \(x_s\).
+
+Conversely, suppose (1) fails for infinitely many indices \(s\). For each
+such \(s\), choose
+\[
+x_s\in F_s\setminus\bigcup_{Y\in\mathcal Y_s}Y.
+\]
+On the infinite tail consisting of these indices, the selector \(x_s\)
+is caught by none of the one-coordinate cylinders. Hence the cylinders do
+not catch every selector tail. \(\square\)
+
+Thus a one-coordinate explanation of product-selector debt is much more
+rigid than a general cylinder cover. It cannot merely have large or
+nonsummable mass; after discarding finitely many packets, every possible
+selector value in every remaining packet must lie in at least one
+one-coordinate bad set.
+
 ### Corollary 8.5a.7v: Pair-cylinder subcovers are impossible
 
 Work in the remaining \(k=2\) counterexample case, and let
@@ -23836,6 +23875,40 @@ escapes jointly summable after passing to a tail, a selector deletion
 removes the entire bounded-rank positive-density interval-packet branch at
 once.
 
+### Corollary 16.91: Robust-profile debt eventually covers each packet
+
+Under the hypotheses of Corollary 16.90, one has
+\[
+P_s\subseteq
+\bigcup_{q\ge1}\ \bigcup_{\alpha\in\mathcal A_q}
+E_{\alpha,q,s} \tag{1}
+\]
+for all sufficiently large \(s\). In the fixed-\((r,\eta)\) setting of
+Corollary 16.88, the corresponding conclusion is
+\[
+P_s\subseteq\bigcup_{\alpha\in\mathcal A}E_{\alpha,s} \tag{2}
+\]
+for all sufficiently large \(s\).
+
+Proof. In the proof of Corollary 16.90, every selector containing a trace
+from \(\mathcal G_{\rm bd}\) is caught by one of the one-coordinate
+cylinders
+\[
+(\{s\},E_{\alpha,q,s}).
+\]
+Since \(\mathcal G_{\rm bd}\) product-covers every selector tail, these
+one-coordinate cylinders also catch every selector tail. Lemma
+8.5a.7u'' therefore gives (1). The proof of (2) is identical, using the
+one-coordinate cylinders from Corollary 16.88. \(\square\)
+
+This strengthens the mass normal form. A robust-core explanation of the
+bounded-rank positive-density branch cannot merely leave a large set of
+possible escaping colors. It must cover every color in every sufficiently
+late packet by at least one robust-core escape condition. Equivalently, if
+infinitely many packets contain a color lying in all assigned robust cores
+at the relevant scales, a selector can choose such colors and avoid the
+entire assigned branch.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24294,6 +24367,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   with tail product mass below \(1\) is selector-avoidable. Therefore a
   genuine product-selector barrier must keep nonsummable cylinder mass on
   every tail.
+* Lemma 8.5a.7u'' records the stronger one-coordinate fact: if all catching
+  cylinders inspect only one packet coordinate, then they product-cover
+  every tail only by eventually covering each whole packet.
 * Corollary 8.5a.7v rules out the pair-cylinder subcase: if bad pairs alone
   product-covered every fresh-packet selector tail, the existing pair
   barrier/list-color machinery would give a good deletion.
@@ -25149,6 +25225,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   summability of all robust-core escape proportions on a tail lets a
   selector avoid the entire bounded-rank positive-density interval-packet
   branch.
+* Corollary 16.91 uses the one-coordinate selector lemma to sharpen the
+  robust-core branch: every sufficiently late packet must be covered
+  pointwise by robust-core escape conditions, or a selector can stay inside
+  all assigned cores and avoid that branch.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

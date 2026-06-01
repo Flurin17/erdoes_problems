@@ -136,7 +136,10 @@ profiles must have tail sum at least \(1\) on every packet tail. Corollary
 divergent escape proportion along the packet sequence. Corollary 16.90
 diagonalizes over all fixed ranks and density thresholds: if the robust-core
 escape proportions are jointly summable on a tail, a selector avoids the
-whole bounded-rank positive-density interval-packet branch.
+whole bounded-rank positive-density interval-packet branch. Lemma
+8.5a.7u'' and Corollary 16.91 sharpen the robust-core case because those
+cylinders are one-coordinate: a product-covering robust-core explanation
+must eventually cover every color in every packet by some escape condition.
 
 ## Definitions
 
