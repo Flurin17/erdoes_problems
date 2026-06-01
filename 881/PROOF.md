@@ -7535,6 +7535,81 @@ edges on pair-avoiding selectors, while any negative construction must make
 those higher-rank edges persistent and arithmetic, not just abstractly
 available.
 
+### Corollary 8.5a.7x: Pair-free high-rank debt has unbounded second excess
+
+In the remaining \(k=2\) counterexample case, for every \(D\) and every
+\(L_0\) there are a threshold \(L\ge L_0\), an infinite selector
+\[
+Y=\{y_s:s\in I\},\qquad y_s\in F_s,
+\]
+and an edge
+\[
+G=\{g_1<\cdots<g_r\}\in\mathcal G_L,\qquad G\subset Y,
+\]
+such that
+\[
+r\ge3
+\]
+and \(G\) has a witness \(v>L\) satisfying
+\[
+v>g_2+D. \tag{1}
+\]
+
+Proof. By Corollary 8.5a.7w, choose \(L_1\ge L_0\) and an infinite selector
+\[
+Y=\{y_s:s\in I\}
+\]
+with no pair from \(\mathcal G_{L_1}\). Since
+\[
+\mathcal G_L\subset\mathcal G_{L_1}\qquad(L\ge L_1),
+\]
+the same selector has no bad pair at any later threshold.
+
+Fix \(D\). Suppose that, on this selector tail, bounded second-excess edges
+formed a barrier at all later thresholds: for every infinite
+\[
+Z\subset Y
+\]
+and every \(L\ge L_1\), there were a finite
+\[
+H=\{h_1<h_2<\cdots<h_s\}\subset Z,\qquad s\ge2,
+\]
+and a witness \(u>L\) such that
+\[
+u\ge\max H-1,\qquad
+u\notin3(A\setminus H),\qquad u\le h_2+D. \tag{2}
+\]
+The proof of Lemma 8.6a applies verbatim with the infinite reservoir \(Y\)
+in place of the cofinite tail: the endpoints of \(H\) can be chosen outside
+an arbitrary finite test set, and (2) is exactly the bounded
+second-excess hypothesis. It would give tail reflection-recurrence and
+hence a good infinite deletion, contradicting the counterexample
+assumption.
+
+Therefore there are an infinite \(Z\subset Y\) and a threshold
+\[
+L\ge L_1
+\]
+such that no finite subset of \(Z\) has a witness satisfying (2). Apply the
+product-selector barrier, Corollary 8.5a.7s, to the selector \(Z\) at this
+threshold \(L\). It gives
+\[
+G\in\mathcal G_L,\qquad G\subset Z.
+\]
+The set \(G\) is not a pair, because \(Y\) contains no pair from
+\(\mathcal G_L\). Write \(G=\{g_1<\cdots<g_r\}\). Since no bounded
+second-excess edge occurs in \(Z\) at threshold \(L\), any witness
+\[
+v>L,\qquad v\notin3(A\setminus G)
+\]
+certifying \(G\in\mathcal G_L\) must satisfy \(v>g_2+D\). Thus \(r\ge3\)
+and (1) holds. \(\square\)
+
+The remaining promoted edge must therefore be spread out: its witness is
+not controlled by its second-smallest deleted color. This removes the
+bounded-second-excess route of Lemma 8.6a from the pair-free selector
+tail and leaves only genuinely large-spread high-rank barriers.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7579,13 +7654,15 @@ that these bounded-center, cofinally moving-palette, moving-row/mirror, or
 independence-number escapes are impossible under the cross-packet selector
 obligation of Corollaries 8.5a.7r--8.5a.7t and the counting pressure of
 Lemma 8.5a.7u, with Corollary 8.5a.7v ruling out the pair-cylinder
-subcover and Corollary 8.5a.7w forcing rank-\(\ge3\) selector debt
-cofinally, or to construct a staged basis in which the fibers \(U\),
-mirrors \(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all
-escape while maintaining order-2 coverage and arbitrarily late finite
-product covers whose pair subfamilies are selector-avoidable. This is now
-the active form of the certificate-free obstruction; it is stronger than
-mobile injectivity and weaker than finite recurrent Sidon coloring.
+subcover, Corollary 8.5a.7w forcing rank-\(\ge3\) selector debt cofinally,
+and Corollary 8.5a.7x forcing that debt to have unbounded second excess, or
+to construct a staged basis in which the fibers \(U\), mirrors \(m-U\),
+centers \(m\), shifts \(h\), and active colors \(f,g\) all escape while
+maintaining order-2 coverage and arbitrarily late finite product covers
+whose pair subfamilies are selector-avoidable and whose high-rank edges
+have large second excess. This is now the active form of the
+certificate-free obstruction; it is stronger than mobile injectivity and
+weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14206,6 +14283,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.7w records the resulting cofinal high-rank debt: for
   arbitrarily large thresholds there is a pair-avoiding selector that still
   contains a promoted bad edge, hence one of rank at least \(3\).
+* Corollary 8.5a.7x strengthens this on a pair-free selector tail: bounded
+  second-excess high-rank barriers would invoke Lemma 8.6a, so the forced
+  rank-\(\ge3\) edge can be taken with arbitrarily large excess over its
+  second-smallest deleted color.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

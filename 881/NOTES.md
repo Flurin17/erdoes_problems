@@ -2209,6 +2209,13 @@ selector. Such an edge must have rank at least \(3\). The remaining
 obstruction is therefore a rank-\(\ge3\) product-cover problem on
 pair-avoiding selectors.
 
+Corollary 8.5a.7x also removes bounded second-excess from those pair-free
+selector tails. If all high-rank edges in a pair-free selector had witnesses
+bounded by their second-smallest deleted color plus \(D\), Lemma 8.6a would
+give tail reflection-recurrence from that selector reservoir. Therefore,
+for every \(D\), the counterexample must produce a rank-\(\ge3\) edge
+\(\{g_1<g_2<\cdots\}\) with witness \(v>g_2+D\).
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
