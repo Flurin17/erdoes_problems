@@ -122,7 +122,9 @@ auxiliary-interval version: a clustered two-color packet with both active
 colors in the robust core cannot be dense. Corollary 16.85 records the
 individual cost in the no-majority branch: the two selected gate fibers each
 avoid all blocker windows available at their own densities, even if their
-union is not itself dense.
+union is not itself dense. Corollary 16.86 packages the finite-cover form:
+if auxiliary intervals have robust cores covering the active palette, then
+the packet cannot be dense.
 
 ## Definitions
 
