@@ -5824,6 +5824,64 @@ bounded for some fixed test, or force the stable fibers to be
 certificate-free in a way that avoids compactification to finitely many
 recurrent Sidon colors.
 
+### Lemma 8.5a.6: Finite moving-label Sidon palettes are impossible
+
+Let \(P\subset A\) be cofinite in \(A\), and let \(\Lambda\) be a finite
+label set.
+It is impossible that for every finite
+\[
+T\subset P
+\]
+and every \(M\), there are centers
+\[
+m_\lambda>M\qquad(\lambda\in\Lambda)
+\]
+and a coloring
+\[
+\chi:T\to\Lambda
+\]
+such that:
+
+1. for every \(t\in T\),
+   \[
+   m_{\chi(t)}-t\in A;
+   \]
+2. every color fiber \(\chi^{-1}(\lambda)\) is certificate-free relative to
+   \(A\).
+
+Proof. Enumerate
+\[
+P=\{p_1<p_2<\cdots\}
+\]
+and apply the hypothesis to \(T_n=\{p_1,\ldots,p_n\}\) with \(M=n\). By
+compactness of the finite product \(\Lambda^{\mathbb N}\), pass to a
+subsequence on which the color of every fixed \(p_i\) stabilizes. Let
+\[
+C_\lambda\qquad(\lambda\in\Lambda)
+\]
+be the stable fibers.
+
+Every \(C_\lambda\) is certificate-free, hence Sidon. If \(U\subset
+C_\lambda\) is finite, then for all sufficiently large stages in the
+subsequence all elements of \(U\) have color \(\lambda\), and the center
+\(m_{\lambda,n}\) is larger than any prescribed bound. Thus \(C_\lambda\)
+is reflection-recurrent in \(A\). Together with the finite exceptional set
+\[
+E=A\setminus P,
+\]
+the stable fibers form a finite Sidon coloring
+\[
+A=E\cup\bigcup_{\lambda\in\Lambda}C_\lambda
+\]
+whose nonempty color classes are all reflection-recurrent in \(A\). Lemma
+8.6g''''.2 forbids this. \(\square\)
+
+This lemma covers bounded-depth endpoint palettes, the terminal endpoint as
+a moving label, and any finite mixture of them. Therefore a surviving
+last-gated front obstruction must make the number of genuinely used moving
+labels grow without bound, or else keep at least one required label center
+bounded on a fixed finite test.
+
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
 Let \(A\subseteq\mathbb N\) be an asymptotic basis of order \(2\), with
@@ -12321,6 +12379,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.5 rules out the pure terminal-color version of the
   last-gated escape: if the moving last endpoint reflects every protected
   finite test with unbounded centers, Theorem 2.3 gives a good deletion.
+* Lemma 8.5a.6 generalizes the compactness obstruction: any fixed finite
+  palette of moving labels with unbounded reflection centers and
+  certificate-free fibers gives finitely many recurrent Sidon colors,
+  impossible by Lemma 8.6g''''.2.
 * Lemma 8.5b rules out complete fixed-rank barriers on a cofinite tail with
   bounded top excess \(w_F-\max F\); terminal gaps would force
   \(A(X)=O(\log X)\), contradicting order-2 basishood.
