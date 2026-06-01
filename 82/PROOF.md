@@ -12444,6 +12444,42 @@ to understanding the case where the loss graph itself has small independence
 number.  The lower family in Lemma 28D.6c has a large loss-independent block,
 so it is extremal for a subtler reason than loss-graph density.
 
+**Lemma 28D.6b.3: Legal Right Extensions At `P=2`.**  Let `H` be a
+`P=2` full-drop ordered graph on vertices `v_1<...<v_m`, and let `D` be a
+subset of `V(H)`.  Form an ordered graph `H^D` by adding a new last vertex
+`w` which is nonadjacent exactly to the old vertices in `D`.  Then `H^D` is
+again `P=2` full-drop if and only if the following two conditions hold.
+
+1. Every old vertex has at most one neighbor in `D`.
+2. Whenever `i<j` and
+
+```text
+|(N_H(v_i)\N_H(v_j))\{v_i,v_j}| = 1,
+```
+
+if `v_j in D`, then `v_i in D`.
+
+Equivalently, `D` is an open packing in `H` and is down-closed with respect to
+the ordered saturated-loss relation.
+
+Proof.  Old pairs `v_i<v_j` have the same old loss as before, except that the
+new coordinate `w` contributes one additional loss exactly when `w` is
+adjacent to `v_i` and nonadjacent to `v_j`, that is, when
+`v_i notin D` and `v_j in D`.  Since old losses are `0` or `1`, all old pairs
+remain legal exactly when no saturated pair of loss `1` has
+`v_i notin D` and `v_j in D`.  This is condition 2.
+
+It remains to check pairs `v_i<w`.  For such a pair,
+
+```text
+(N_{H^D}(v_i)\N_{H^D}(w))\{v_i,w}
+```
+
+is precisely the set of old neighbors of `v_i` which lie in `D`.  Thus its
+size is less than `2` for every `i` exactly when every old vertex has at most
+one neighbor in `D`.  This is condition 1.  The two conditions together are
+therefore necessary and sufficient.  QED.
+
 **Lemma 28D.6c: A Linear Lower Construction For Regular Full-Drop At
 `P=2`.**  For every `h>=7`,
 

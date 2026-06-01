@@ -3711,3 +3711,10 @@ source of growth beyond Ramsey.
   `alpha(L)>=2h-5` cannot be the fixed-`P=2` proof.  The loss graph may still
   be useful as a dichotomy, but it must be combined with structural
   information about how loss edges are witnessed in the original order.
+- 2026-06-01: Added the legal-right-extension lemma for `P=2` full-drop
+  graphs.  If a new last vertex is nonadjacent exactly to an old set `D`, then
+  the extension is legal precisely when every old vertex has at most one
+  neighbor in `D` and `D` is down-closed under saturated ordered loss pairs.
+  This turns extension criticality into a concrete packing/closure problem:
+  any attempted extension must choose an open-packing set of nonneighbors,
+  and saturated losses force that set leftward in the order.
