@@ -8833,6 +8833,52 @@ all subsets.  It verifies the same failures at `h=5,6` and no regular
 python3 82/EXPERIMENTS/parity_pair_symbolic.py --min-h 5 --max-h 20
 ```
 
+The type-count reduction used by that script is as follows.  Let `z=b_{h-1}`
+be the isolated vertex on the `B` side, and let `p` be the parity of `h-1`.
+For a selected set, write
+
+```text
+x_0,x_1,zeta in {0,1}
+```
+
+for whether `a_0,a_1,z` are selected, and write
+
+```text
+x_e,x_o,y_e,y_o
+```
+
+for the numbers of selected even and odd `A`-isolates and even and odd
+vertices from the `B`-clique.  Put
+
+```text
+X_e=x_0+x_e,      X_o=x_1+x_o,      Y=y_e+y_o.
+```
+
+Then the degrees of the nonempty selected types are:
+
+```text
+a_0:              x_1+y_e+zeta*1_{p=0},
+a_1:              x_0+y_o+zeta*1_{p=1},
+A-even isolates:  y_e+zeta*1_{p=0},
+A-odd isolates:   y_o+zeta*1_{p=1},
+B-even clique:    Y-1+X_e,
+B-odd clique:     Y-1+X_o,
+z:                X_e if p=0, and X_o if p=1.
+```
+
+Thus a regular induced subgraph of this construction is exactly a feasible
+integer choice of these seven parameters for which all displayed degrees
+corresponding to nonempty selected types are equal.  A balanced plus middle
+is the same system with the additional constraints
+
+```text
+x_0+x_1+x_e+x_o = y_e+y_o+zeta = floor((h-1)/2)
+```
+
+and common displayed degree `floor((h-1)/2)`.  This is a finite arithmetic
+form of the parity candidate; a proof of the candidate for all large `h`
+would amount to excluding these integer solutions.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

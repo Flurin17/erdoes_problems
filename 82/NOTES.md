@@ -2556,4 +2556,7 @@ source of growth beyond Ramsey.
   proof yet: exact checks show it is not an obstruction for `h=5,6`, but it
   is a plus obstruction for every `h=7..11` tested.  Added
   `parity_pair_symbolic.py`, which reduces the same construction to seven
-  type counts and verifies the obstruction for every `7<=h<=20`.
+  type counts and verifies the obstruction for every `7<=h<=20`.  The proof
+  file now records the seven displayed type-degree equations; proving the
+  candidate means excluding integer solutions to that system for all large
+  `h`.
