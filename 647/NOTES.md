@@ -356,13 +356,25 @@ budgets above 5 it falls back to the exact factorization routine.
   `tau(n-22) = 32`.
 - Lifting the same forced-smooth residue filter through primes `23,29` with
   `k <= 1000` gives 4,374 residue classes modulo `30808063`, density
-  approximately `1.41975819772e-4`. This is the current search modulus for
-  the range `2*10^16 <= N < 4*10^16`.
+  approximately `1.41975819772e-4`. This scan was stopped early in the range
+  `2*10^16 <= N < 4*10^16` once the stricter `23,29,31` lift was available.
 - Lifting through primes `23,29,31` with `k <= 1000` gives 59,128 residue
   classes modulo `955049953`, density approximately `6.1911e-5`. This cuts
   the tested progression density by about `2.29x` compared with the
   `23,29` lift, but it requires the batched job mode in `prime_tuple_search128`
   and `run_residue_scan.py` to avoid one process per residue class.
+- The complete `23,29,31` lifted scan over
+  `2*10^16 <= N < 4*10^16` found 532,062 branch prime tuples and no value
+  passing direct checks through `k <= 5000`. Aggregated first failures were:
+
+```text
+5:459759 7:46776 9:22007 10:3035 11:325 13:114 14:38 15:5 16:3
+```
+
+  The deepest near misses failed at `k=16`; the best by failing shift and
+  then smaller failing divisor count was
+  `N = 27483420334150209`, `n = 69258219242058526680`,
+  `tau(n-16) = 32`.
 - With the restrictive prime-only filters
   `504N-1,280N-1,252N-1`, the search over `N < 10^9` found only two
   matching prime tuples and neither survived past `k=13`. This is a
