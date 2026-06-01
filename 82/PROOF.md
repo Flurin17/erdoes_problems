@@ -1536,6 +1536,78 @@ bound applies because `k-i>=R+1`.  Multiplying over
 `i=1,...,k-R-1` and summing over the `M` possible common residues proves the
 claim.  QED.
 
+The same idea has a sharper bipartite form that matches the two-degree
+completion model more closely.
+
+**Lemma: Bipartite Cross-Edge Modular Anti-Concentration.**  Let `X,Y` be
+disjoint vertex sets of sizes `a,b`.  Fix arbitrary graphs on `X` and on
+`Y`, and then choose all cross edges between `X` and `Y` independently with
+probability `1/2`.  Let `M>=2`, and put
+
+```text
+R = C M^2 log M
+```
+
+with `C` sufficiently large.  If `b>=R`, then the probability that all
+vertices of `X` have the same degree modulo `M` in the resulting graph on
+`X union Y` is at most
+
+```text
+((1+o_M(1))/M)^(a-1),
+```
+
+uniformly in `a,b` and in the fixed internal graph on `X`.  Consequently, if
+`a,b>=R`, the probability that the whole graph on `X union Y` is
+`M`-modular is at most
+
+```text
+((1+o_M(1))/M)^(max(a,b)-1).
+```
+
+Proof.  For each `x in X`, write
+
+```text
+D_x = c_x + Z_x,
+```
+
+where `c_x` is the fixed degree of `x` inside `X`, and
+`Z_x~Bin(b,1/2)` is its random cross-degree into `Y`.  The variables
+`Z_x`, `x in X`, are independent.  The roots-of-unity estimate used in the
+previous lemma gives
+
+```text
+max_r P(D_x congruent r mod M) <= (1+o_M(1))/M
+```
+
+for every `x`, uniformly in the shift `c_x`, because `b>=R`.
+
+Pick one vertex `x_0 in X`.  The event that all `D_x` have one common residue
+is
+
+```text
+union_r {D_x congruent r mod M for every x in X}.
+```
+
+Using independence and summing over the residue of `D_{x_0}`,
+
+```text
+P(D_x all equal mod M)
+ = sum_r P(D_{x_0}=r mod M) prod_{x != x_0} P(D_x=r mod M)
+ <= ((1+o_M(1))/M)^(a-1).
+```
+
+This proves the first assertion.  If `a,b>=R`, apply the first assertion to
+the larger of the two sides, using the other side as the random target.  The
+event that the whole graph is `M`-modular implies, in particular, that all
+degrees on that larger side are equal modulo `M`.  QED.
+
+This lemma is the unconditioned version of the fixed-degree
+anti-concentration estimate needed above.  The remaining obstacle is that the
+uniform two-degree model conditions the same cross-edge variables on many row
+and column sum constraints; a successful switching or local-CLT transfer would
+need to show that the displayed residue anti-concentration survives that
+conditioning on every fixed large test set.
+
 In the uniform two-degree model one would need the analogue
 
 ```text

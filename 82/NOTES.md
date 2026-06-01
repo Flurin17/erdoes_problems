@@ -3047,3 +3047,12 @@ source of growth beyond Ramsey.
   a `2q`-modular witness of order at least `N/b(q)=N psi(q)/q`, contradicting
   the anti-concentration construction.  This makes the witness-or-regular
   dichotomy necessary for the dyadic route, not just aesthetically preferable.
+- 2026-06-01: Added a rigorous bipartite cross-edge anti-concentration lemma.
+  With arbitrary fixed internal graphs on two sides `X,Y` and independent
+  random cross edges, if the opposite side has size at least
+  `C M^2 log M`, then the probability that all vertices on one side have the
+  same degree modulo `M` is at most `((1+o_M(1))/M)^(|X|-1)`.  If both sides
+  are large, the probability that the whole graph is `M`-modular is bounded
+  by the same expression with `max(|X|,|Y|)-1`.  This is the exact
+  unconditioned residue estimate that a future switching/local-CLT argument
+  must transfer to the fixed two-degree model.
