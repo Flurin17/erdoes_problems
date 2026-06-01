@@ -25722,6 +25722,55 @@ subseries, or the finite packet certificates must push arbitrarily far out
 in whatever proper complexity scale is imposed on rank, density, auxiliary
 interval count, and tested interval data.
 
+### Corollary 16.125: Summable reciprocal packets force complexity growth
+
+Keep the notation and hypotheses of Corollary 16.122, and let
+\(\chi:\Lambda\to\mathbb N\) be a complexity function with finite sublevel
+sets. Assume also that
+\[
+\sum_s {1\over |P_s|}<\infty. \tag{1}
+\]
+If the assigned high-density linear-core branch product-covers every
+selector tail, then at least one of the following alternatives holds.
+
+1. **Unbounded-complexity active mass.** For every \(M\),
+   \[
+   \sum_s {|\mathcal B_s\setminus\Lambda_{\le M}|\over |P_s|}
+   =\infty. \tag{2}
+   \]
+2. **Joint width-heavy residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   W_s>T_\lambda/2}}
+   \beta_{\lambda,s}=\infty. \tag{3}
+   \]
+3. **Joint midpoint-displacement residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   \Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+   \beta_{\lambda,s}=\infty. \tag{4}
+   \]
+
+Proof. Corollary 16.122 gives either the width-heavy alternative (3), the
+midpoint-displacement alternative (4), or the many-active-label alternative
+\[
+\sum_s {|\mathcal B_s|\over |P_s|}=\infty. \tag{5}
+\]
+In the last case apply Corollary 16.124. Its recurrent-label alternative is
+impossible under (1), since for every fixed \(\lambda\)
+\[
+\sum_{\substack{s:\lambda\in\mathcal B_s}}{1\over |P_s|}
+\le
+\sum_s {1\over |P_s|}<\infty.
+\]
+Hence the unbounded-complexity alternative (2) holds. \(\square\)
+
+Combining this with Corollary 16.123, a reciprocal-summable packet
+normalization leaves no bounded-error countable-menu escape. A surviving
+linear-core branch must either move to profiles of unbounded complexity or
+pay linear packet-width or auxiliary-midpoint displacement on a
+nonsummable active subseries.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27141,6 +27190,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.124 splits the many-active-label residual into one recurrent
   bounded-complexity label with nonsummable reciprocal-packet mass, or
   unbounded active-label complexity on every proper finite-sublevel scale.
+* Corollary 16.125 removes the recurrent-label branch when the packet
+  reciprocals are summable, leaving only unbounded complexity or the two
+  linear-scale packet-position residuals.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

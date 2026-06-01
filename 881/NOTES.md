@@ -220,6 +220,9 @@ once the tested interval is large relative to the profile constants.
 Corollary 16.124 splits the many-active-label branch into either one
 recurrent bounded-complexity label with nonsummable reciprocal-packet mass,
 or genuinely unbounded active profile complexity on every tail.
+Corollary 16.125 shows that reciprocal-summable packet choices remove the
+recurrent-label artefact, leaving only unbounded complexity or the two
+linear-scale packet-position residuals.
 
 ## Definitions
 
