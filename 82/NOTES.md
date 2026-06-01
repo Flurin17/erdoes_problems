@@ -3457,3 +3457,17 @@ source of growth beyond Ramsey.
   `|U| <= 1+(2P_h-1)(h-1) <= 2hP_h`.  Consequently the column-drop and
   regular-column-drop reductions have prefactor `2hP_h`, and the full-drop
   global reduction improves to `G(h)<=4h^3P_h^2`.
+- 2026-06-01: Extracted the pattern behind the `P=2` full-drop search
+  certificates.  For every `h>=4`, a graph on `4h-7` ordered vertices
+  satisfies the `P=2` full-drop condition and has no clique or independent
+  set of order `h`: take a matching on `2(h-3)` vertices, disjoint from
+  `C_5` joined to a complete `(h-3)`-partite graph with parts of size `2`.
+  This proves `C_full(2,h)>4h-7`.  Together with `C_full(1,h)=2h-2`, it
+  suggests the full-drop threshold may be linear in fixed `P`, even though
+  the current proof gives only `O(P h^2)`.
+- 2026-06-01: Added `full_drop_p2_construction.py` to generate the `P=2`
+  full-drop family.  Checks for `h=4,5,6` give `n=9,13,17`, maximum full drop
+  `1`, and maximum homogeneous order `h-1`.  The generated `h=4,5` masks
+  match the earlier DFS certificates.  These are not regular-column-drop
+  lower examples: the same graphs can have regular induced subgraphs larger
+  than `h`.
