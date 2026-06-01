@@ -47,6 +47,10 @@ every three-point subset of an interval has a \(k=3\) certificate, so only
 Lemma 16.46 and Corollary 16.47 then close the same-interval gate case:
 if the active color also lies in the interval, the whole bounded-rank
 packet has size at most \(|F+F|+4|F|\).
+Lemma 16.48 and Corollary 16.49 handle near-interval gates: a gate at
+distance \(\delta\) from the interval supports at most \(\delta+|F|\)
+gate rows, so large bounded-rank interval packets require active colors far
+outside the tested interval.
 
 ## Definitions
 

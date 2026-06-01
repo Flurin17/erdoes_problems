@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Finite checker for Lemmas 16.41 and 16.46.
+"""Finite checker for Lemmas 16.41, 16.46, and 16.48.
 
 The lemma says that if a gate packet U satisfies
 
@@ -8,6 +8,8 @@ The lemma says that if a gate packet U satisfies
 then every anchored shadow f + U - u0 contains at most |F| points of A.
 If, in addition, f and U lie in one interval I contained in A, then
 |U| <= 2|F|.
+If f lies just outside such an interval, at distance delta, then
+|U| <= delta + |F|.
 
 This script exhaustively checks small finite universes after generating all
 sets A that contain a fixed palette F and a retained packet U.
@@ -34,7 +36,6 @@ def check_instance(
     assert F.isdisjoint(U)
     interval_set = set(interval or [])
     if interval is not None:
-        assert f in interval_set
         assert U <= interval_set
 
     forced = set(F) | set(U) | interval_set
@@ -58,11 +59,25 @@ def check_instance(
                     f"counterexample: A={sorted(A)}, F={sorted(F)}, "
                     f"U={sorted(U)}, anchor={u0}, shadow={sorted(anchored & A)}"
                 )
-        if interval is not None and len(U) > 2 * len(F):
-            raise AssertionError(
-                f"same-interval counterexample: A={sorted(A)}, F={sorted(F)}, "
-                f"U={sorted(U)}, interval={list(interval)}"
-            )
+        if interval is not None:
+            lo = min(interval_set)
+            hi = max(interval_set)
+            if f in interval_set:
+                bound = 2 * len(F)
+                label = "same-interval"
+            elif f < lo:
+                bound = lo - f + len(F)
+                label = "below-interval"
+            elif f > hi:
+                bound = f - hi + len(F)
+                label = "above-interval"
+            else:
+                raise AssertionError("unexpected interval relation")
+            if len(U) > bound:
+                raise AssertionError(
+                    f"{label} counterexample: A={sorted(A)}, F={sorted(F)}, "
+                    f"U={sorted(U)}, interval={list(interval)}, bound={bound}"
+                )
 
     return checked, admissible
 
@@ -73,6 +88,8 @@ def main() -> None:
         (range(1, 16), 3, {3, 5}, {9, 11, 14}, None),
         (range(1, 18), 4, {1, 4, 6}, {10, 12, 15, 16}, None),
         (range(1, 7), 1, {1, 2}, {3, 4}, range(1, 5)),
+        (range(1, 9), 1, {1}, {4, 5, 6}, range(4, 7)),
+        (range(1, 10), 8, {8}, {3, 4, 5}, range(3, 6)),
         (range(1, 13), 2, {2}, {4, 6, 9}, range(2, 10)),
         (range(1, 16), 3, {3, 5}, {6, 9, 12, 14}, range(3, 15)),
     ]

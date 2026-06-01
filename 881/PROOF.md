@@ -21433,6 +21433,133 @@ inside the same dense interval that supplies the tested rows. A large
 interval-test packet must either use active colors outside that interval,
 move to certificate-free noninterval tests, or escape bounded rank/depth.
 
+### Lemma 16.48: Near-interval finite-palette gates are edge-bounded
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite, and let
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+be an interval. Fix \(f\in F\), and let \(U\subset I\setminus F\) satisfy
+\[
+(U+f-U)\cap A\subseteq F. \tag{1}
+\]
+If \(f<a\), put
+\[
+\delta=a-f.
+\]
+Then
+\[
+|U|\le \delta+|F|. \tag{2}
+\]
+If \(f>b\), put
+\[
+\delta=f-b.
+\]
+Then again
+\[
+|U|\le \delta+|F|. \tag{3}
+\]
+
+Proof. Assume first \(f<a\), and suppose \(U\ne\varnothing\). Let
+\[
+u_-=\min U.
+\]
+By Corollary 16.42 with \(T=I\) and anchor \(u_-\),
+\[
+|U\cap(u_-+I-f)|\le |F|. \tag{4}
+\]
+Since
+\[
+u_-+I-f=[u_-+\delta,\ u_-+b-f]
+\]
+and \(u_-\ge a>f\), the upper endpoint is at least \(b\). Hence (4) bounds
+all rows of \(U\) in
+\[
+[u_-+\delta,\ b].
+\]
+The remaining rows lie in
+\[
+[u_-,\ u_-+\delta-1],
+\]
+which has \(\delta\) integer points. This proves (2).
+
+The case \(f>b\) is symmetric. Let \(u_+=\max U\). Corollary 16.42 with
+anchor \(u_+\) bounds
+\[
+U\cap(u_++I-f).
+\]
+Here
+\[
+u_++I-f=[u_+-(f-a),\ u_+-\delta],
+\]
+and because \(u_+\le b<f\), the lower endpoint is at most \(a\). Thus all
+rows of \(U\) in
+\[
+[a,\ u_+-\delta]
+\]
+contribute at most \(|F|\), while the remaining rows lie in the
+\(\delta\)-point interval
+\[
+[u_+-\delta+1,\ u_+].
+\]
+This proves (3). \(\square\)
+
+### Corollary 16.49: Large interval packets force far gates or unbounded rank
+
+In the setting of Corollary 16.45, suppose \(T_0=[a,b]\cap\mathbb N\) is an
+interval, \(|F|\le r\), \(M\ge0\), and
+\[
+U\subset T_0
+\]
+satisfies the hypotheses of Corollary 16.45 for some active color
+\[
+f\in F.
+\]
+For all sufficiently large \(L\), if
+\[
+|U|>{r(r+1)\over2}+4r+M,
+\]
+then either
+\[
+f<a-M-r
+\]
+or
+\[
+f>b+M+r. \tag{1}
+\]
+
+Proof. By Corollary 16.45, all but at most
+\[
+{r(r+1)\over2}+2r
+\]
+rows of \(U\) lie in \(U_{\rm gate}\). Hence
+\[
+|U_{\rm gate}|>M+2r. \tag{2}
+\]
+If \(f\in T_0\), Corollary 16.47 gives
+\[
+|U|\le {r(r+1)\over2}+4r,
+\]
+contradicting the displayed lower bound. Thus \(f\notin T_0\).
+
+Assume \(f<a\). Lemma 16.48 applied to the gate-dependent packet
+\(U_{\rm gate}\) gives
+\[
+|U_{\rm gate}|\le a-f+|F|\le a-f+r.
+\]
+Together with (2), this forces
+\[
+a-f>M+r,
+\]
+or \(f<a-M-r\). The case \(f>b\) is identical. \(\square\)
+
+The quantifier in Corollary 16.49 is deliberately coarse: its role is to
+show that large bounded-rank interval packets cannot use active colors at
+bounded distance from the tested interval. After the row-dependent
+allowance is removed, any surviving finite-palette gate must be far outside
+the interval, so the next obstruction must use long-range gate shadows
+rather than same-block or near-block geometry.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22603,6 +22730,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   minimum and maximum packet rows. Corollary 16.47 combines this with the
   interval-test normal form: same-interval bounded-rank packets have size
   at most \(|F+F|+4|F|\).
+* Lemma 16.48 handles active gates just outside an interval: if the gate is
+  at distance \(\delta\) from the interval, the finite-palette gate packet
+  has size at most \(\delta+|F|\). Corollary 16.49 combines this with the
+  interval-test normal form, forcing any large bounded-rank interval packet
+  to use active colors far outside the tested interval.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
