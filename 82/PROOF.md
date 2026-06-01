@@ -2954,6 +2954,47 @@ dyadic difficulty.  For example, taking a regular base with about
 ordinary clique or independent-set witnesses in the base do not explain such
 a weighted equitable vector.
 
+**Lemma: Weighted Twin Blowups Inherit Quotient Regularity.**  Let `B` be a
+graph on vertex set `{1,...,r}`.  Form an independent twin blowup `G` by
+replacing vertex `i` with an independent cluster `C_i` of size `s_i`, and
+joining `C_i` completely to `C_j` exactly when `ij in E(B)`.  For `t>=1`,
+let
+
+```text
+I_t={i : s_i>=t}.
+```
+
+Then
+
+```text
+reg(G) >= max_{t>=1} t * reg(B[I_t]).
+```
+
+In particular, if `a_t=|I_t|`, then
+
+```text
+reg(G) >= max_{t>=1} t * F(a_t).
+```
+
+Proof.  Fix `t` and let `J subset I_t` induce a `d`-regular subgraph of
+`B[I_t]` on `reg(B[I_t])` vertices.  Choose exactly `t` vertices from each
+cluster `C_i` with `i in J`, and choose no other vertices.  In the induced
+subgraph of `G`, every selected vertex in a cluster `C_i`, `i in J`, is
+adjacent to all `t` selected vertices in each of the `d` neighboring clusters
+inside `J`, and to no selected vertices in its own independent cluster.
+Therefore every selected vertex has degree `td`, so the selected set is
+regular of order `t|J|`.  Taking the maximum over `t` proves the first
+displayed bound.  The second follows from the definition of `F(a_t)`, applied
+to the quotient induced on `I_t`.  QED.
+
+Thus independent twin blowups do not create a fundamentally new obstruction:
+they transform the original problem into a weighted Ferrers maximum
+`max_t t F(a_t)`.  With only the Ramsey bound `F(m)>=c log m`, this gives at
+best another logarithmic lower bound in the worst case, so the lemma is not a
+proof of Problem 82 by itself.  It does show that any sublogarithmic-looking
+blowup obstruction must already encode hard quotient graphs across many
+weight levels.
+
 Finally, a purely deletion-based absorption proof has a strong trace
 restriction.
 

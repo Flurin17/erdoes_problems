@@ -3323,3 +3323,10 @@ source of growth beyond Ramsey.
   `t * #{classes of size at least t}` in the class-size histogram.  Therefore
   complete multipartite structures can obstruct rigid dyadic partition
   targets, but not the regular-induced-subgraph conjecture itself.
+- 2026-06-01: Added a weighted twin-blowup inheritance lemma.  If a graph is
+  an independent twin blowup of a quotient `B` with cluster sizes `s_i`, then
+  `reg(G) >= max_t t * reg(B[{i:s_i>=t}])`, hence at least
+  `max_t t * F(a_t)` for the Ferrers profile `a_t=#{i:s_i>=t}`.  This shows
+  twin blowups reduce to a weighted version of the original problem; Ramsey's
+  `F(m)>=c log m` only recovers a logarithmic worst-case bound, so a full proof
+  still needs non-Ramsey input on the quotient layers.
