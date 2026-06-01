@@ -3921,3 +3921,13 @@ source of growth beyond Ramsey.
   disjoint spectrum coordinates while the forest contributes through
   `s_0+s_1`.  This is a reusable decomposition target for future attempts to
   prove spectrum mass by carving out several cycle/core pieces instead of one.
+- 2026-06-01: Refuted the overly strong hope that every graph has such a
+  regular-feedback partition.  The `6`-vertex graph with mask `5907` consists
+  of two triangles joined by a bridge edge; it has spectrum summary
+  `{0:2,1:4,2:3}` and `mu=9`, but no partition into a forest plus induced
+  regular pieces of distinct degrees at least `2`.  The obstruction is that
+  both natural core pieces are triangles of the same degree, and including
+  both triangle vertex sets creates an extra bridge edge inside the induced
+  core.  Thus future decomposition arguments must allow repeated-degree core
+  pieces to be paid for by the low-degree spectrum or must merge them more
+  carefully.
