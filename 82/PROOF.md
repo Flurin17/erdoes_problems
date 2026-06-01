@@ -8719,6 +8719,53 @@ degrees.  Since `h>=5`, no same-degree pair has total order at least `h`.
 Lemma 28H gives `P_h>h-1`, and the definition of `D_spec` gives
 `D_spec(h)>h-1`.
 
+The same idea can be pushed a little further with split spectra.  For every
+`h>=5`, set
+
+```text
+r=floor((h-1)/2),        M=floor((h-3+r+h-1)/2).
+```
+
+Let
+
+```text
+J_1=K_r union I_{M-r},        J_2=K_{h-1} union I_{M-h+1},
+```
+
+where `I_t` denotes an independent set of order `t`.  Then
+
+```text
+D_spec(h)>M,        P_h>M.
+```
+
+Indeed, in a graph `K_a union I_b`, the largest `0`-regular induced subgraph
+has order `b+1`, and the largest positive-degree `d`-regular induced subgraph
+has order `d+1` for `1<=d<a` and order `0` for `d>=a`.  Neither `J_i` has a
+regular induced subgraph on `h` vertices: the clique parts have sizes `r` and
+`h-1`, while
+
+```text
+(M-r)+1<h,        (M-h+1)+1<h.
+```
+
+For degree `0`, the two largest side witnesses have total order
+
+```text
+(M-r+1)+(M-h+2)=2M-r-h+3 <= h-1,
+```
+
+by the definition of `M`.  For positive degrees common to both spectra, the
+degree is at most `r-1`, so the largest same-degree total order is at most
+
+```text
+2r <= h-1.
+```
+
+Thus no same-degree pair reaches total order `h`, and Lemma 28H gives the
+claimed lower bound.  The verifier
+`EXPERIMENTS/split_spectrum_construction.py` checks these spectrum summaries
+for finite ranges.
+
 For example, with `h=6` and component order `M=5`, the masks
 
 ```text

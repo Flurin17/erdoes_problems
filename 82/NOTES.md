@@ -2612,3 +2612,10 @@ source of growth beyond Ramsey.
   `14`.  This supports the view that spectrum separation beyond the
   inherited half-target lower bound is delicate, and that cross-profile
   obstructions are the next bottleneck.
+- 2026-06-01: Added `split_spectrum_construction.py` and a split-spectrum
+  extension of the explicit `D_spec` lower construction.  Taking
+  `J_1=K_r union I_{M-r}` and `J_2=K_{h-1} union I_{M-h+1}` with
+  `r=floor((h-1)/2)` and `M=floor((h-3+r+h-1)/2)` gives
+  `D_spec(h)>M` and `P_h>M`.  The construction is still only linear and is
+  dominated asymptotically by the inherited `G(ceil(h/2))` lower bound, but it
+  cleanly calibrates how split-graph spectra separate.

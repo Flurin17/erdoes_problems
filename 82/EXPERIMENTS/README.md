@@ -287,6 +287,8 @@ Computational checks and generated data for Erdos Problem 82.
   for disjoint-union obstructions to the balanced pair parameter.  In random
   sampling mode, `regular_spectrum.py` also reports the sampled pair with the
   smallest maximum same-degree total when no obstruction is found.
+- `split_spectrum_construction.py`: verifies the explicit split-graph
+  spectrum separation family used in Lemma 28H's discussion.
 - `marked_pair_profile.py`: inspects same-degree side witnesses and their
   cross-degree profiles in marked pair obstructions.
 - `parity_pair_construction.py`, `parity_pair_symbolic.py`, and
