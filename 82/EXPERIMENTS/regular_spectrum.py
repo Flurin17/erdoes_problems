@@ -69,6 +69,7 @@ def inspect(args: argparse.Namespace) -> None:
     spectrum_b = regular_spectrum(args.n, args.mask_b)
     print(f"mask_b={args.mask_b}")
     print("spectrum_b=" + format_spectrum(spectrum_b))
+    print(f"max_same_degree_total={max_same_degree_total(spectrum_a, spectrum_b)}")
     print(f"disjoint_union_obstruction={obstructs_disjoint_union(spectrum_a, spectrum_b, args.h)}")
 
 

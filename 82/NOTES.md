@@ -2607,11 +2607,13 @@ source of growth beyond Ramsey.
 - 2026-06-01: Enhanced `regular_spectrum.py` so failed random searches report
   the closest sampled pair by maximum same-degree total.  Added
   Computational Calibration 28K.1: exact labelled enumeration proves
-  `D_spec(7)>7`, while random `h=10` searches at component orders `17` and
+  `D_spec(7)>7`, and a random fixed-mask certificate gives `D_spec(7)>8`.
+  At component order `9`, `500` random samples found no obstruction and best
+  same-degree total `7`.  Random `h=10` searches at component orders `17` and
   `18` found no spectrum-disjoint pairs and best same-degree totals `13` and
-  `14`.  This supports the view that spectrum separation beyond the
-  inherited half-target lower bound is delicate, and that cross-profile
-  obstructions are the next bottleneck.
+  `14`.  This supports the view that spectrum separation beyond the inherited
+  half-target lower bound is delicate, and that cross-profile obstructions
+  are the next bottleneck.
 - 2026-06-01: Added `split_spectrum_construction.py` and a split-spectrum
   extension of the explicit `D_spec` lower construction.  Taking
   `J_1=K_r union I_{M-r}` and `J_2=K_{h-1} union I_{M-h+1}` with

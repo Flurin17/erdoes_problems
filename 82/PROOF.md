@@ -8962,6 +8962,24 @@ mask_b=375775,        summary_b=0:2 1:2 2:3 3:4 4:5 5:6.
 For each common degree, the displayed maximum orders sum to at most `6`, so
 this proves `D_spec(7)>7`.
 
+A random spectrum search finds a component-order `8` obstruction for the same
+target:
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum.py 8 --h 7 --mask-a 111173317 --mask-b 238248447
+```
+
+The spectra are
+
+```text
+1:0 2:0 2:1 3:0 3:2 4:1,
+1:0 2:0 2:1 3:0 3:2 4:3 5:4,
+```
+
+and the maximum same-degree total is `6`.  Hence `D_spec(7)>8`.  A random
+search at component order `9` with `500` samples found no obstruction; its
+best sampled same-degree total was already `7`.
+
 Random searches show that this spectrum-disjoint mechanism becomes much less
 visible above the trivial half-target lower bound.  The command
 
