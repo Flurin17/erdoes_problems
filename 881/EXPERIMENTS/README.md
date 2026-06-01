@@ -134,6 +134,12 @@ property for long finite sequences, and that no tested tail contains the
 first-Schreier prefix-link family as a subbarrier. This is a combinatorial
 sanity check for Warning 8.5a.1 and Lemma 8.5a.2, not an additive model.
 
+`prefix_front_trace.py` checks the first-completion combinatorics behind
+Lemmas 3.1c.1--3.1c.2. On finite weak families it verifies that every
+barrier edge first completed by a prefix contains the prefix maximum, and
+that any shrink omitting that maximum would already lie in the previous
+prefix if it remained in the same late-bad family.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole
