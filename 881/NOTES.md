@@ -2639,6 +2639,14 @@ tail descent, all active traces contain \(d\), but their suffix ranks are
 unbounded on every tail. Existing private-color normal forms are
 unanchored and do not yet promote these large traces to a bounded-rank
 complete prefix shell or to a proper active subtrace.
+Diagnostic 13.1l.2k.1 shows this gap is locally real: for arbitrary rank
+\(r\) and far suffix start \(N\), the finite set
+\[
+C=[2,2r]\cup\{N+2r\},\quad F=\{1\}\cup\{N+1,\ldots,N+r\}
+\]
+has the witness \(w=N+2r+2\), with \(w\notin3C\) and every endpoint of
+\(F\) active. The obstruction is not inclusion-minimality but global
+coverage: \(2A\) has a large gap before the suffix.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

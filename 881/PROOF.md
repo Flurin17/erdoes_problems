@@ -16497,6 +16497,88 @@ private-color alternatives: a finite moving-label palette, a recurrent
 certificate, a bounded-rank active subtrace still containing \(d\), or a
 proper tail descent after all.
 
+### Diagnostic 13.1l.2k.1: Local fixed-first unbounded rank is compatible
+
+Target 13.1l.2k cannot be closed from inclusion-minimality alone. For every
+\[
+r\ge2
+\]
+and every
+\[
+N>4r,
+\]
+put
+\[
+d=1,\qquad H=\{N+1,\ldots,N+r\},
+\]
+\[
+w=N+2r+2,
+\]
+and
+\[
+C=\{2,3,\ldots,2r\}\cup\{N+2r\}.
+\]
+Let
+\[
+F=\{d\}\cup H,\qquad A=C\cup F.
+\]
+Then
+\[
+w\notin3C. \tag{1}
+\]
+Indeed, any three-sum from the low interval \([2,2r]\) is at most
+\[
+6r<w,
+\]
+while any three-sum using the high retained point \(N+2r\) is at least
+\[
+N+2r+4>w.
+\]
+On the other hand, restoring any one element of \(F\) repairs the hole. For
+\[
+d=1
+\]
+one has
+\[
+w=1+1+(N+2r),
+\]
+and for
+\[
+h=N+i,\qquad 1\le i\le r,
+\]
+one has
+\[
+w=h+2+(2r-i),
+\]
+with
+\[
+2r-i\in[2,2r]
+\]
+except in the harmless endpoint \(r=1\), which we excluded. Thus
+\[
+F
+\]
+is inclusion-minimal for the witness \(w\). The suffix \(H\) can be placed
+arbitrarily far out by increasing \(N\), and its rank \(r\) is arbitrary.
+
+The script
+`EXPERIMENTS/fixed_first_unbounded_rank_model.py` verifies this family; for
+example `--rank 12 --start 80` gives
+\[
+F=\{1,81,\ldots,92\},\qquad w=106,
+\]
+with every restored endpoint repairing \(w\).
+
+This is not a counterexample stage. The same diagnostic reports that the
+initial two-sum coverage ends at
+\[
+4r,
+\]
+leaving a large gap before the suffix \(H\). Thus a proof of Target
+13.1l.2k must use global order-\(2\) coverage, recurrence across sections,
+or selector pressure; it cannot use only the local fact that a fixed first
+point belongs to arbitrarily large inclusion-minimal holes.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18347,6 +18429,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   unbounded-rank inclusion-minimal traces that keep the fixed first point
   on every tail, without yet promoting to a bounded active subtrace or
   proper tail descent.
+* Diagnostic 13.1l.2k.1 gives an arbitrary-rank finite model with fixed
+  first point \(1\) and far suffix endpoints, proving that local
+  inclusion-minimality alone cannot close Target 13.1l.2k; global
+  order-\(2\) coverage or recurrence must be used.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
