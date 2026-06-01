@@ -293,7 +293,8 @@ Computational checks and generated data for Erdos Problem 82.
   regular induced subgraph with the largest guaranteed homogeneous set.  The
   `--hill-climb` mode mutates threshold sequences to search deliberately for
   hard examples at orders where exact all-subset regularity checks are still
-  feasible.
+  feasible, and `--thresholds` evaluates a fixed threshold sequence while
+  printing largest regular and homogeneous witnesses.
 - `split_spectrum_construction.py`: verifies the explicit split-graph
   spectrum separation family used in Lemma 28H's discussion.
 - `marked_pair_profile.py`: inspects same-degree side witnesses and their

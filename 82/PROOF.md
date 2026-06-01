@@ -8871,6 +8871,19 @@ small constants or logarithmic factors.  A proof route that needs a power
 improvement inside Lemma 28E.1 should therefore first produce a structural
 reason not visible in the full class of inversion-free ordered graphs.
 
+The fixed-threshold witness mode gives a little more information about the
+current hard examples:
+
+```text
+python3 82/EXPERIMENTS/no_inversion_regular.py 16 --thresholds 6,11,4,10,12,7,7,12,14,11,13,16,16,14,15,16
+python3 82/EXPERIMENTS/no_inversion_regular.py 20 --thresholds 4,14,11,6,17,10,7,18,17,14,13,12,19,16,18,19,17,19,19,20
+```
+
+In both cases the largest regular witness printed by the script is an
+independent set, of orders `6` and `7`.  Thus these particular inversion-free
+examples are not hiding larger mixed regular witnesses; their obstruction is
+already visible at the homogeneous chain-antichain level.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 

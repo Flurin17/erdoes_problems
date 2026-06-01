@@ -61,6 +61,15 @@ def max_regular_order(adj: list[int], pc: Precomp) -> int:
     return 1
 
 
+def regular_witness(adj: list[int], pc: Precomp) -> tuple[int, int, tuple[int, ...]]:
+    for size, entries in pc.subsets_by_size:
+        for subset, vertices in entries:
+            degree = (adj[vertices[0]] & subset).bit_count()
+            if all((adj[v] & subset).bit_count() == degree for v in vertices[1:]):
+                return size, degree, vertices
+    return 1, 0, (0,)
+
+
 def max_homogeneous_order(adj: list[int], pc: Precomp) -> int:
     for size, entries in pc.subsets_by_size:
         clique_degree = size - 1
@@ -73,9 +82,36 @@ def max_homogeneous_order(adj: list[int], pc: Precomp) -> int:
     return 1
 
 
+def homogeneous_witness(adj: list[int], pc: Precomp) -> tuple[int, str, tuple[int, ...]]:
+    for size, entries in pc.subsets_by_size:
+        clique_degree = size - 1
+        for subset, vertices in entries:
+            degree = (adj[vertices[0]] & subset).bit_count()
+            if degree not in (0, clique_degree):
+                continue
+            if all((adj[v] & subset).bit_count() == degree for v in vertices[1:]):
+                kind = "independent" if degree == 0 else "clique"
+                return size, kind, vertices
+    return 1, "single", (0,)
+
+
 def evaluate(n: int, thresholds: tuple[int, ...], pc: Precomp) -> tuple[int, int]:
     adj = build_adjacency(n, thresholds)
     return max_regular_order(adj, pc), max_homogeneous_order(adj, pc)
+
+
+def parse_thresholds(text: str, n: int) -> tuple[int, ...]:
+    values = tuple(int(part) for part in text.replace(" ", "").split(",") if part)
+    if len(values) != n:
+        raise SystemExit(f"expected {n} thresholds, got {len(values)}")
+    for index, value in enumerate(values[:-1]):
+        if not index + 1 <= value <= n:
+            raise SystemExit(
+                f"threshold {index} must lie in [{index + 1}, {n}], got {value}"
+            )
+    if values[-1] != n:
+        raise SystemExit(f"last threshold must be {n}")
+    return values
 
 
 def mutate_thresholds(
@@ -188,6 +224,21 @@ def sample(n: int, samples: int, seed: int, progress: int) -> None:
         print(f"example thresholds={thresholds} max_homogeneous={homogeneous}")
 
 
+def fixed(n: int, thresholds: tuple[int, ...]) -> None:
+    pc = precompute(n)
+    adj = build_adjacency(n, thresholds)
+    regular_size, regular_degree, regular_vertices = regular_witness(adj, pc)
+    homogeneous_size, homogeneous_kind, homogeneous_vertices = homogeneous_witness(adj, pc)
+    print(f"n={n}")
+    print(f"thresholds={thresholds}")
+    print(f"max_regular_order={regular_size}")
+    print(f"regular_degree={regular_degree}")
+    print("regular_vertices=" + ",".join(map(str, regular_vertices)))
+    print(f"max_homogeneous_order={homogeneous_size}")
+    print(f"homogeneous_kind={homogeneous_kind}")
+    print("homogeneous_vertices=" + ",".join(map(str, homogeneous_vertices)))
+
+
 def hill_climb(
     n: int,
     restarts: int,
@@ -268,6 +319,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--exact", action="store_true")
+    parser.add_argument("--thresholds")
     parser.add_argument("--samples", type=int, default=0)
     parser.add_argument("--hill-climb", type=int, default=0, metavar="STEPS")
     parser.add_argument("--restarts", type=int, default=1)
@@ -276,7 +328,9 @@ def main() -> None:
     parser.add_argument("--temperature", type=float, default=0.0)
     args = parser.parse_args()
 
-    if args.exact:
+    if args.thresholds is not None:
+        fixed(args.n, parse_thresholds(args.thresholds, args.n))
+    elif args.exact:
         exact(args.n, args.progress)
     elif args.samples > 0:
         sample(args.n, args.samples, args.seed, args.progress)
@@ -290,7 +344,9 @@ def main() -> None:
             args.temperature,
         )
     else:
-        raise SystemExit("choose --exact, --samples N, or --hill-climb STEPS")
+        raise SystemExit(
+            "choose --exact, --thresholds CSV, --samples N, or --hill-climb STEPS"
+        )
 
 
 if __name__ == "__main__":

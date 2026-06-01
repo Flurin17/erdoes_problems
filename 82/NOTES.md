@@ -2660,3 +2660,9 @@ source of growth beyond Ramsey.
   may have only `sqrt(n)`-scale regular induced subgraphs, so the sparse
   inversion step in Proposition 28F is unlikely to yield a polynomial exponent
   improvement without extra degree-bucket structure.
+- 2026-06-01: Added fixed-threshold witness output to
+  `no_inversion_regular.py`.  The current hard suffix-threshold examples at
+  `n=16` and `n=20` have largest regular witnesses that are independent sets
+  of sizes `6` and `7`, respectively.  This sharpens the warning from the
+  inversion-free calibration: at least in these samples, the regularity
+  obstruction is already the ordinary homogeneous-set obstruction.
