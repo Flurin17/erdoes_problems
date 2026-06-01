@@ -12195,6 +12195,33 @@ clique vertex that misses one covered singleton must occur before every other
 covered singleton.  This is the remaining ordered configuration not excluded
 by Lemma 28D.5b.9.
 
+**Lemma 28D.5b.11: Covered Singleton Parts Give Regular Witnesses.**  Use the
+notation of Lemma 28D.5b.7.  Let `T subset B` be a clique.  Suppose `S` is a
+set of singleton first-neighborhood parts, identified with their unique
+vertices, and that `T` fully covers every singleton in `S`.  Then `H`
+contains a regular induced subgraph of order `2|S|`.
+
+Proof.  For each `x in S`, choose a vertex `t_x in T` nonadjacent to `x`.
+The chosen vertices `t_x` are distinct, because every vertex of `B` is
+nonadjacent to at most one vertex of `A`.  Put
+
+```text
+T_S={t_x : x in S}.
+```
+
+The set `S` is a clique, since its vertices lie in distinct singleton parts
+of `H[A]`.  The set `T_S` is a clique because it is contained in `T`.  For
+`x,y in S`, the vertex `t_x` is adjacent to `y` whenever `y != x`, again
+because `t_x` misses at most one vertex of `A`; and by construction `t_x` is
+nonadjacent to `x`.  Therefore `H[S union T_S]` is the complete graph on
+`2|S|` vertices with the matching `x t_x`, `x in S`, removed.  It is regular
+of degree `2|S|-2`.  QED.
+
+Consequently, in any graph with no regular induced subgraph of order at least
+`h`, a clique in `B` can fully cover fewer than `ceil(h/2)` singleton
+first-neighborhood parts.  This is a direct regularity obstruction, not just
+a homogeneous-set obstruction.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose

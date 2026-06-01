@@ -3628,3 +3628,12 @@ source of growth beyond Ramsey.
   `part_rule_violations=0` and `singleton_order_violations=0`, matching
   Lemmas 28D.5b.9 and 28D.5b.10 while still finding no
   `alpha+omega` violations.
+- 2026-06-01: Observed a direct regular-witness mechanism in the all-singleton
+  residual.  If a clique `T` in the first-vertex nonneighbor side fully covers
+  `m` singleton first-neighborhood parts, choose one clique vertex missing
+  each singleton.  The selected `m` clique vertices plus the `m` singletons
+  induce `K_{2m}` minus a perfect matching, hence a `(2m-2)`-regular graph.
+  Thus in a genuine regular-induced-subgraph counterexample, no such clique
+  can cover `ceil(h/2)` singleton parts.  This may be more useful for the
+  original regular problem than for the auxiliary homogeneous
+  `alpha+omega` conjecture.
