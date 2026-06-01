@@ -152,6 +152,9 @@ def extension_profile(n: int, mask: int) -> None:
     equality_spectral_partitions = 0
     equality_feedback_partitions = 0
     examples: list[tuple[int, int, dict[int, int], bool, bool]] = []
+    violation_examples: list[tuple[int, int, int, dict[int, int]]] = []
+    no_spectral_examples: list[tuple[int, int, dict[int, int], bool]] = []
+    no_feedback_examples: list[tuple[int, int, dict[int, int], bool]] = []
 
     for column in range(1 << n):
         extended = extend_mask(mask, n, column, pc, pc_plus)
@@ -159,6 +162,10 @@ def extension_profile(n: int, mask: int) -> None:
         extended_mass, extended_by_degree = spectrum_mass(extended_adj, pc_plus)
         surplus = extended_mass - (n + 1)
         histogram[surplus] += 1
+        if surplus < 0 and len(violation_examples) < 10:
+            violation_examples.append(
+                (column, extended, extended_mass, extended_by_degree)
+            )
         if surplus == 0:
             equality_count += 1
             has_spectral = (
@@ -171,6 +178,14 @@ def extension_profile(n: int, mask: int) -> None:
                 examples.append(
                     (column, extended, extended_by_degree, has_spectral, has_feedback)
                 )
+            if not has_spectral and len(no_spectral_examples) < 10:
+                no_spectral_examples.append(
+                    (column, extended, extended_by_degree, has_feedback)
+                )
+            if not has_feedback and len(no_feedback_examples) < 10:
+                no_feedback_examples.append(
+                    (column, extended, extended_by_degree, has_spectral)
+                )
 
     print(f"n={n}")
     print(f"mask={mask}")
@@ -180,10 +195,25 @@ def extension_profile(n: int, mask: int) -> None:
     print(f"equality_extensions={equality_count}")
     print(f"equality_extensions_with_spectral_partition={equality_spectral_partitions}")
     print(f"equality_extensions_with_feedback_partition={equality_feedback_partitions}")
+    for column, extended, extended_mass, extended_by_degree in violation_examples:
+        print(
+            f"violation column={column} mask={extended} "
+            f"spectrum_mass={extended_mass} by_degree={extended_by_degree}"
+        )
     for column, extended, extended_by_degree, has_spectral, has_feedback in examples:
         print(
             f"example column={column} mask={extended} by_degree={extended_by_degree} "
             f"spectral_partition={has_spectral} feedback_partition={has_feedback}"
+        )
+    for column, extended, extended_by_degree, has_feedback in no_spectral_examples:
+        print(
+            f"no_spectral column={column} mask={extended} "
+            f"by_degree={extended_by_degree} feedback_partition={has_feedback}"
+        )
+    for column, extended, extended_by_degree, has_spectral in no_feedback_examples:
+        print(
+            f"no_feedback column={column} mask={extended} "
+            f"by_degree={extended_by_degree} spectral_partition={has_spectral}"
         )
 
 

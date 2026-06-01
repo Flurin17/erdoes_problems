@@ -14863,6 +14863,75 @@ regular-feedback partition.  The feedback-partition program must therefore be
 replaced by a spectral-partition program rather than merely repaired by larger
 finite checks.
 
+**Computational Counterexample 28J.10b: Linear Spectrum Mass Is False.**
+The spectrum-mass inequality
+
+```text
+sum_d s_d(G) >= |V(G)|
+```
+
+is false.  The local-search command
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum_mass.py 12 --local-steps 2000 --restarts 5 --seed 1206
+```
+
+finds the twelve-vertex equality graph with mask
+
+```text
+6594103150393786403
+```
+
+and spectrum `{0:4,1:4,2:4}`.  It has a spectral partition and a
+regular-feedback partition.  However, its equality-extension profile
+
+```text
+python3 82/EXPERIMENTS/spectrum_mass_critical.py 12 --mask 6594103150393786403 --extension-profile
+```
+
+has fourteen equality extensions with no spectral partition.  One such
+extension is the connected thirteen-vertex graph with mask
+
+```text
+1584140989738554425379
+```
+
+and spectrum `{0:5,1:4,2:4}`.  It has neither a spectral partition nor a
+regular-feedback partition.
+
+More importantly, the one-vertex extension profile of this thirteen-vertex
+graph contains eight genuine violations of linear spectrum mass:
+
+```text
+python3 82/EXPERIMENTS/spectrum_mass_critical.py 13 --mask 1584140989738554425379 --extension-profile
+```
+
+One connected fourteen-vertex violation is the graph with mask
+
+```text
+391219392115868279640099
+```
+
+for which
+
+```text
+sum_d s_d(G)=13<14=|V(G)|,        {s_0,s_1,s_2}={5,4,4}.
+```
+
+The direct verification command is
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum_mass.py 14 --mask 391219392115868279640099
+```
+
+The same diagnostic reports that deleting any vertex from this graph leaves
+spectrum mass `13`; in the notation of Lemma 28J.8, it is deletion-tight.
+Thus Conditional Corollaries 28J.1 and 28J.1a remain valid conditional
+statements, but their linear spectrum-mass hypothesis and the
+equality-extension lemma are false.  Future spectrum arguments must target a
+weaker lower bound, such as the superquadratic polylogarithmic bound in
+Conditional Corollary 28J.1c, or a different spectrum functional.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

@@ -4030,3 +4030,17 @@ source of growth beyond Ramsey.
   family of equality graphs with spectral partitions but no regular-feedback
   partition.  This definitively retires the regular-feedback structural target
   as a route to the full equality-extension lemma.
+- 2026-06-01: Refuted the spectral-partition equality target and the linear
+  spectrum-mass conjecture itself.  Local search found the twelve-vertex
+  equality graph `6594103150393786403` with spectrum `{0:4,1:4,2:4}`.  Its
+  equality extensions include fourteen connected thirteen-vertex equality
+  graphs with no spectral partition, for example mask
+  `1584140989738554425379` with spectrum `{0:5,1:4,2:4}`.  The extension
+  profile of this thirteen-vertex graph contains eight connected
+  fourteen-vertex graphs with `mu=13<14`, for example mask
+  `391219392115868279640099` with spectrum `{0:5,1:4,2:4}`.  Deleting any
+  vertex from this violation leaves spectrum mass `13`, so it is
+  deletion-tight.  Consequently the linear mass route and the
+  equality-extension lemma are false; the remaining viable spectrum route is
+  to prove a weaker lower bound such as
+  `mu(G)>=c(log |G|)^{2+eta}`, or to replace `mu` by a stronger functional.
