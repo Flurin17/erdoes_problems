@@ -2567,6 +2567,12 @@ infinite sequence \(a_i\) and finite ranks \(r_i\) such that \(a_i\) links to
 every sufficiently late \(r_i\)-subset of the tail. The first Schreier shell
 is only the special case \(r_i=i\); the remaining arithmetic problem is to
 exclude or realize these moving-rank prefix links.
+Corollary 13.1l.2a rules out one large part of that generalized shell: for a
+fixed first point and fixed rank, the linked witnesses cannot sit far above
+every endpoint in the linked tail set. Otherwise endpoint-list choices either
+produce a recurrent certificate triple directly or compactify to the finite
+moving-label Sidon coloring forbidden by Lemma 8.5a.6. Thus any surviving
+prefix-link shell must carry bounded-center debt at some moving endpoint.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

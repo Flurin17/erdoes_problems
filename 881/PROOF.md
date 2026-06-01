@@ -15564,6 +15564,93 @@ chosen center \(w_j-d\) reflects \(U\) into \(A\), and \(w_j-d\to\infty\).
 The same argument with centers \(w_j-p_j\) proves recurrence for finite
 \(U\subset C_p\). \(\square\)
 
+## Corollary 13.1l.2a: Fixed-prefix high-center finite-rank links are impossible
+
+Work in the \(k=2\) case, and suppose \(A\) is a counterexample to the
+desired order-3 deletion conclusion, with order-2 threshold \(N_0\). Fix
+\[
+d\in A,\qquad r\ge1,
+\]
+and let \(Y\subset A\setminus\{d\}\) be infinite. It is impossible that, for
+every finite
+\[
+T\subset A\setminus\{d\}
+\]
+and every \(M\), there are
+\[
+H=\{h_1<\cdots<h_r\}\subset Y\setminus T
+\]
+and a witness \(w\) such that
+\[
+w-\max T\ge N_0,\qquad w-z>M\quad(z\in\{d\}\cup H), \tag{1}
+\]
+and
+\[
+w\notin3(A\setminus(\{d\}\cup H)). \tag{2}
+\]
+
+Proof. Suppose such data exist. Fix a finite test set \(T\) and a parameter
+\(M\), and put
+\[
+F=\{d\}\cup H.
+\]
+For each \(t\in T\), the integer \(w-t\) has a two-term representation from
+\(A\), and every such representation meets \(F\), otherwise (2) would be
+repaired by adding \(t\). Hence the endpoint list
+\[
+L(t)=\{z\in F:w-t-z\in A\}
+\]
+is nonempty.
+
+First suppose that there are a finite \(T_0\) and arbitrarily large \(M\)
+for which some admissible data satisfying (1)--(2) have endpoint lists such
+that every choice function
+\[
+\chi(t)\in L(t)\qquad(t\in T_0)
+\]
+has a fiber containing a certificate triple
+\[
+e,y_1,y_2,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A.
+\]
+For each such \(M\), choose any endpoint-list choice. One of the finitely
+many certificate triples in \(T_0\) recurs for arbitrarily large \(M\), and
+if its fiber is labeled by \(z\in F\), then
+\[
+w-z-\{e,y_1,y_2\}\subset A.
+\]
+By (1), the centers \(w-z\) tend to infinity. Thus this fixed certificate
+triple is reflection-recurrent, and Corollary 2.3c gives a good infinite
+deletion, contradicting the counterexample assumption.
+
+Therefore, in a counterexample, for every finite \(T\subset A\setminus\{d\}\)
+and every \(M\), after increasing \(M\) if necessary, we may choose data
+satisfying (1)--(2) whose endpoint lists admit a choice function with every
+fiber certificate-free. Label the endpoint
+\[
+d
+\]
+by \(0\), and label the ordered elements \(h_i\) by \(i\). The centers
+\[
+m_i=w-h_i\quad(1\le i\le r),\qquad m_0=w-d
+\]
+are all \(>M\), and the chosen list coloring satisfies
+\[
+m_{\chi(t)}-t\in A\qquad(t\in T)
+\]
+with certificate-free fibers. This is exactly the finite moving-label Sidon
+palette forbidden by Lemma 8.5a.6, applied to the cofinite set
+\[
+A\setminus\{d\}.
+\]
+This final contradiction proves the corollary. \(\square\)
+
+Thus generalized prefix-link shells from Lemma 8.5a.8b cannot keep a fixed
+first point while placing the witness far above every endpoint in the linked
+tail set. A surviving moving-rank shell must have bounded-center debt:
+inside each fixed first section, some linked endpoint remains close to the
+witness cofinally, or the endpoint lists compactify to a forbidden recurrent
+Sidon coloring.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -17370,6 +17457,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.2 adds the high-excess pair consequence: fixed-prefix
   pair tails must be endpoint-list colorable on every finite test set, and
   compactness yields two recurrent certificate-free tail colors.
+* Corollary 13.1l.2a extends the endpoint-list obstruction from pairs to
+  fixed finite ranks under a high-center hypothesis: a fixed first point
+  cannot link to arbitrary \(r\)-subsets with witnesses far above every
+  endpoint, since the lists either yield a recurrent certificate or a
+  forbidden finite moving-label Sidon palette.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
