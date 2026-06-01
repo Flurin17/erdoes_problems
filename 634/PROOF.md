@@ -2323,6 +2323,10 @@ interval `350001..352000` again have no mixed-status word group. These are
 stored as
 `EXPERIMENTS/results/n99_mixed6_word_quotient_reps8_first2000.json` and
 `EXPERIMENTS/results/n99_mixed6_word_quotient_reps8_350000_352000.json`.
+A targeted full enumeration of one heaviest outside-cover word group,
+`L=baabbbccb`, `R=aabbbbccb`, `B=cabababcc`, checks all `54` realizations and
+finds all `54` have status `corner-label-violation`; see
+`EXPERIMENTS/results/n99_mixed6_word_invariance_heavy_corner_word.json`.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count

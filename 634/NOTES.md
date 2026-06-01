@@ -183,7 +183,9 @@ The tile triangle is not required to be similar to the large triangle unless exp
   missing lemma is that the side-label word triple determines the refined
   residual obstruction status. Stress tests with up to `8` representatives per
   word found no mixed-status word among the first `2000` word groups or among
-  word groups `350001..352000`.
+  word groups `350001..352000`. A targeted full enumeration of one heaviest
+  `99` mixed-`6` outside-cover word group (multiplicity `54`) found all `54`
+  realizations have status `corner-label-violation`.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

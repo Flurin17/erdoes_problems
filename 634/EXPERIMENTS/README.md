@@ -246,7 +246,9 @@ Current components:
   `--skip-classified-words` for disjoint classification intervals.
   Stress tests with up to `8` representatives per word found no mixed-status
   word among the first `2000` word groups or among word groups
-  `350001..352000`.
+  `350001..352000`. A full targeted enumeration of a heaviest `N=99`
+  mixed-`6` outside-cover word group of multiplicity `54` found all `54`
+  realizations have status `corner-label-violation`.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and

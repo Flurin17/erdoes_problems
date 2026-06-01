@@ -1,0 +1,15 @@
+{
+  "covered_target": 0,
+  "elapsed_seconds": 12.258674,
+  "expected_outside_cover": 54,
+  "generated_until_stop": 1246035,
+  "outside_cover_seen": 54,
+  "status_counts": {
+    "corner-label-violation": 54
+  },
+  "target": [
+    "baabbbccb",
+    "aabbbbccb",
+    "cabababcc"
+  ]
+}
