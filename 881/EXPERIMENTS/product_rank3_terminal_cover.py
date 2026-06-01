@@ -132,6 +132,11 @@ def report_shared_witnesses(
             continue
         selector_family = tuple(selectors)
         supports = transversals(elements, selector_family)
+        common_core = sorted(
+            set(selector_family[0]).intersection(
+                *(set(selector) for selector in selector_family[1:])
+            )
+        )
         singleton_supports = [support for support in supports if len(support) == 1]
         sums = sorted(
             {
@@ -139,11 +144,22 @@ def report_shared_witnesses(
                 for support in supports
             }
         )
+        noncommon_sums = sorted(
+            {
+                support[0] + support[1]
+                for support in supports
+                if len(support) == 2 and not set(support) & set(common_core)
+            }
+        )
         union = set().union(*(set(selector) for selector in selector_family))
-        outside_shifts = sorted(
-            witness - point
+        outside_points = sorted(
+            point
             for point in elements - union
             if witness - point >= ORDER2_THRESHOLD
+        )
+        outside_shifts = sorted(
+            witness - point
+            for point in outside_points
         )
         support_set = set(supports)
         shift_supports = {
@@ -158,12 +174,33 @@ def report_shared_witnesses(
                 f"witness={witness} has non-transversal shifted supports: "
                 f"{shift_supports}"
             )
+        common_spikes = {
+            core: [
+                (point, witness - core - point)
+                for point in outside_points
+                if witness - core - point in elements
+            ]
+            for core in common_core
+        }
+        spike_or_noncommon = all(
+            witness - point in noncommon_sums
+            or any(witness - core - point in elements for core in common_core)
+            for point in outside_points
+        )
+        if not spike_or_noncommon:
+            raise AssertionError(
+                f"witness={witness} violates common-core spike dichotomy"
+            )
         print(
             f"  witness={witness} selectors={selector_family} "
+            f"common_core={common_core} "
             f"singleton_transversals={singleton_supports} "
             f"transversal_sums={sums} outside_shifts={outside_shifts} "
             f"shift_supports={shift_supports} "
-            f"all_shift_supports_transversal={all_shift_supports_transversal}"
+            f"all_shift_supports_transversal={all_shift_supports_transversal} "
+            f"noncommon_transversal_sums={noncommon_sums} "
+            f"common_spikes={common_spikes} "
+            f"spike_or_noncommon={spike_or_noncommon}"
         )
 
 

@@ -191,7 +191,8 @@ the finite warning recorded as Example 8.5a.7z; the coverage point \(24\)
 is the one-point stage buffer from Lemma 13.1d. The script also groups
 shared witness values by their selector families and checks the
 two-transversal condition from Lemma 8.5a.7z.4 on the actual shifted
-two-sum supports.
+two-sum supports, then checks the common-core spike dichotomy from Lemma
+8.5a.7z.5.
 
 `product_rank3_extension_search.py` starts from that window and tries to add
 a fourth two-point packet, optionally with fillers. It requires every three

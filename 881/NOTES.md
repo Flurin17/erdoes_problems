@@ -2291,6 +2291,14 @@ transversal, \(v=22\), the outside shifts \(19,21\) have two-sum supports
 \((8,11)\) and \((10,11)\), exactly two-transversals of the three selector
 edges sharing that witness.
 
+Lemma 8.5a.7z.5 handles the singleton-transversal exception. For a shared
+witness family with common core \(K\), every old retained outside padder is
+either accounted for by a two-transversal avoiding \(K\), or it creates a
+two-sum representation of \(v-c\) for some common deleted point \(c\in K\).
+Thus many old padders below one shared witness force a representation spike
+at one of the common colors, up to the finite non-common two-transversal
+sum set.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent

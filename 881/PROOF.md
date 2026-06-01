@@ -8002,6 +8002,111 @@ common-point case, a witness can serve many selector deletions only if the
 corresponding selector family has enough two-transversal sums to absorb all
 old retained padders \(e\) below \(v-N_0\).
 
+### Lemma 8.5a.7z.5: Common-point witness sharing forces shifted two-sum spikes
+
+Let \(A\) be an order-2 basis with threshold \(N_0\). Let
+\[
+\mathcal C
+\]
+be a finite family of finite subsets of \(A\), and suppose one integer
+\[
+v
+\]
+has the common-hole property
+\[
+v\notin3(A\setminus F)\qquad(F\in\mathcal C). \tag{1}
+\]
+Put
+\[
+U=\bigcup_{F\in\mathcal C}F,\qquad K=\bigcap_{F\in\mathcal C}F.
+\]
+Let \(\mathcal T_2^0(\mathcal C)\) be the family of two-point
+transversals
+\[
+H\subset U\setminus K,\qquad |H|=2,
+\]
+which meet every \(F\in\mathcal C\), and put
+\[
+\Sigma_2^0(\mathcal C)=\{\sum_{h\in H}h:H\in\mathcal T_2^0(\mathcal C)\}.
+\]
+Then every
+\[
+e\in A\setminus U,\qquad v-e\ge N_0, \tag{2}
+\]
+satisfies one of the following alternatives:
+
+1. \(v-e\in\Sigma_2^0(\mathcal C)\);
+2. there are \(c\in K\) and \(a\in A\) such that
+   \[
+   v-c=e+a. \tag{3}
+   \]
+
+Consequently, if \(R\) is a finite set of retained outside points satisfying
+(2), then either
+\[
+|R|\le|\Sigma_2^0(\mathcal C)|
+\]
+or \(K\ne\varnothing\) and some \(c\in K\) satisfies
+\[
+r_{2,A}(v-c)\ge
+\frac{|R|-|\Sigma_2^0(\mathcal C)|}{2|K|}, \tag{4}
+\]
+where \(r_{2,A}\) counts unordered two-term representations, with loops
+allowed.
+
+Proof. Fix \(e\) satisfying (2). Since \(v-e\ge N_0\), choose a two-term
+representation
+\[
+v-e=a+b,\qquad a,b\in A. \tag{5}
+\]
+By Lemma 8.5a.7z.4, its support
+\[
+H=\{a,b\}
+\]
+meets every \(F\in\mathcal C\).
+
+If \(H\cap K\ne\varnothing\), choose \(c\in H\cap K\). The other summand,
+with the same value if (5) is a loop, gives (3). Suppose instead that
+\[
+H\cap K=\varnothing. \tag{6}
+\]
+Then \(H\subset U\). Indeed, a point outside \(U\) meets no member of
+\(\mathcal C\); if such a point lay in \(H\), the other point of \(H\)
+would have to meet every member of \(\mathcal C\), hence would lie in
+\(K\), contradicting (6). Also \(H\) cannot be a singleton, since a
+singleton transversal is exactly a point of \(K\). Thus \(H\) is a two-point
+member of \(\mathcal T_2^0(\mathcal C)\), and
+\[
+v-e=a+b\in\Sigma_2^0(\mathcal C).
+\]
+This proves the dichotomy.
+
+Now let \(R\) be finite. At most \(|\Sigma_2^0(\mathcal C)|\) elements
+\(e\in R\) can satisfy the first alternative, because \(v-e\) determines
+\(e\). For every remaining \(e\), choose one pair \((c_e,a_e)\) satisfying
+(3). If \(K=\varnothing\) there are no remaining \(e\)'s. Otherwise, by
+the pigeonhole principle, some \(c\in K\) occurs for at least
+\[
+\frac{|R|-|\Sigma_2^0(\mathcal C)|}{|K|}
+\]
+values of \(e\). These values yield representations
+\[
+v-c=e+a_e.
+\]
+One unordered representation of \(v-c\) can account for at most two choices
+of \(e\), corresponding to the two elements of its support. Hence (4)
+follows. \(\square\)
+
+Thus the singleton-transversal exception in Lemma 8.5a.7z.4 is not free.
+If many old retained padders lie below a shared witness and the selector
+family has a common deleted point, then either the old padders are still
+confined to finitely many non-common two-transversal shifts, or the common
+deleted point carries a large two-sum representation spike at \(v-c\). A
+counterexample must therefore make heavily shared witnesses either
+selector-specific enough to avoid large outside fibers or compatible with
+the high-multiplicity branches already isolated in Corollaries 3.4d and
+8.5a.7f.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
