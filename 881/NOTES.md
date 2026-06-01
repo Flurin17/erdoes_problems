@@ -2223,6 +2223,17 @@ high-rank profile: no coverage-compatible pair deletions, rank at least
 ingredient is not a finite-window contradiction but a way to prevent such
 cuts from being wired into a cross-packet selector barrier.
 
+Corollary 8.5a.7y packages the surviving edge in its final local normal
+form. After shrinking for its witness, it is still rank at least \(3\)
+because the selector is pair-free and the tail is singleton-free. It is
+inclusion-minimal, active at every deleted color, has the terminal retained
+gap
+\[
+(A\setminus F)\cap(v-f_1-m_0,\ v-N_0]=\varnothing,
+\]
+and every shifted two-sum representation of \(v-e\) for retained \(e\) must
+meet \(F\). This is the current object to rule out globally.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent

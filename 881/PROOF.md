@@ -7631,6 +7631,86 @@ finite-window contradiction. A proof must still use the cross-packet
 product demand, recurrence, or stage iteration; a counterexample would have
 to code these large interval-like cuts into an unbounded selector barrier.
 
+### Corollary 8.5a.7y: Minimal large-spread edges have the full terminal-gap normal form
+
+In the remaining \(k=2\) counterexample case, for every \(D\) and every
+\(L_0\) there are \(L\ge L_0\), an infinite selector
+\[
+Y=\{y_s:s\in I\},\qquad y_s\in F_s,
+\]
+a finite set
+\[
+F=\{f_1<\cdots<f_r\}\subset Y,
+\]
+and a witness \(v\) such that:
+
+1. \(r\ge3\);
+2. \(v>L\), \(v\ge\max F-1\), and
+   \[
+   v\notin3(A\setminus F); \tag{1}
+   \]
+3. \(F\) is inclusion-minimal for the fixed witness \(v\);
+4. the second excess is large:
+   \[
+   v>f_2+D; \tag{2}
+   \]
+5. writing \(m_0=\min A\) and \(N_0\) for an order-2 threshold of \(A\),
+   \[
+   (A\setminus F)\cap(v-f_1-m_0,\ v-N_0]=\varnothing; \tag{3}
+   \]
+6. every retained \(e\in A\setminus F\) with \(v-e\ge N_0\) has every
+   two-term representation of \(v-e\) from \(A\) meeting \(F\);
+7. every \(f\in F\) is active: for some \(q_f\in\{1,2,3\}\) and retained
+   elements \(c_{f,1},\ldots,c_{f,3-q_f}\in A\setminus F\),
+   \[
+   v=q_f f+c_{f,1}+\cdots+c_{f,3-q_f}. \tag{4}
+   \]
+
+Proof. Repeat the construction in the proof of Corollary 8.5a.7x with the
+prescribed \(D,L_0\). First choose a pair-free selector tail. Since
+bounded second-excess edges cannot form a barrier on that tail without
+invoking Lemma 8.6a, there are an infinite subselector
+\[
+Z\subset Y
+\]
+and a threshold \(L\ge L_0\) such that no finite subset of \(Z\) has a
+witness \(u>L\) bounded by its second-smallest element plus \(D\). The
+product-selector barrier then gives an edge
+\[
+G\in\mathcal G_L,\qquad G\subset Y,
+\]
+with \(G\subset Z\), and a witness \(v>L\).
+
+Shrink \(G\) inclusion-minimally while preserving the fixed
+nonrepresentation
+\[
+v\notin3(A\setminus G).
+\]
+Call the resulting set \(F\). Since \(F\subset G\subset Y\), the same
+witness satisfies \(v\ge\max F-1\). If \(|F|=2\), then \(F\) itself would
+be a pair in \(\mathcal G_L\) contained in the pair-free selector \(Y\), a
+contradiction. If \(|F|=1\), then \(F\) would be a singleton late-bad edge
+in the singleton-free tail from Corollary 8.3b, again impossible after the
+fresh packet construction. Thus \(|F|\ge3\).
+
+The subselector \(Z\) was chosen so that no finite subset of \(Z\) has a
+witness \(u>L\) with
+\[
+u\le h_2+D
+\]
+where \(h_2\) is its second-smallest element. Since \(F\subset Z\) and
+\(v\) is a witness for \(F\), this gives (2).
+
+The terminal gap (3) and the activity assertion (4) are the \(k=2\) case of
+Lemma 10.3b applied to the inclusion-minimal witness \(v\). The vertex-cover
+statement in item 6 is Lemma 10.1. \(\square\)
+
+This is the current sharp normal form for the \(k=2\) obstruction: a
+pair-free selector tail contains arbitrarily late inclusion-minimal active
+holes of rank at least \(3\), with unbounded second excess and a terminal
+retained gap. Pair subedges, bounded second-excess barriers, and nonminimal
+inactive padding have all been removed.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7677,13 +7757,15 @@ obligation of Corollaries 8.5a.7r--8.5a.7t and the counting pressure of
 Lemma 8.5a.7u, with Corollary 8.5a.7v ruling out the pair-cylinder
 subcover, Corollary 8.5a.7w forcing rank-\(\ge3\) selector debt cofinally,
 and Corollary 8.5a.7x forcing that debt to have unbounded second excess, or
-to construct a staged basis in which the fibers \(U\), mirrors \(m-U\),
-centers \(m\), shifts \(h\), and active colors \(f,g\) all escape while
-maintaining order-2 coverage and arbitrarily late finite product covers
-whose pair subfamilies are selector-avoidable and whose high-rank edges
-have large second excess. This is now the active form of the
-certificate-free obstruction; it is stronger than mobile injectivity and
-weaker than finite recurrent Sidon coloring.
+Corollary 8.5a.7y putting the surviving edges in the full minimal
+terminal-gap normal form, or to construct a staged basis in which the
+fibers \(U\), mirrors \(m-U\), centers \(m\), shifts \(h\), and active
+colors \(f,g\) all escape while maintaining order-2 coverage and
+arbitrarily late finite product covers whose pair subfamilies are
+selector-avoidable and whose high-rank edges are minimal large-spread
+terminal cuts. This is now the active form of the certificate-free
+obstruction; it is stronger than mobile injectivity and weaker than finite
+recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14308,6 +14390,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   second-excess high-rank barriers would invoke Lemma 8.6a, so the forced
   rank-\(\ge3\) edge can be taken with arbitrarily large excess over its
   second-smallest deleted color.
+* Corollary 8.5a.7y shrinks the forced large-spread edge
+  inclusion-minimally and imports the terminal-gap, shifted vertex-cover,
+  and active-repair normal forms from Lemmas 10.1 and 10.3b.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
