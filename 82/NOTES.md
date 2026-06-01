@@ -2360,3 +2360,11 @@ source of growth beyond Ramsey.
   `n >> h^{3/2}s + h^2(P_h+s)` has a regular induced `h`-set.  This isolates
   the remaining local pair-difference target, while leaving the separate
   global problem of reducing arbitrary counterexamples to bounded spread.
+- 2026-06-01: Added Lemma 27C and `pair_role_witness.py`.  For a fixed pair
+  `u,v`, every regular witness containing the pair is exactly a solution of
+  four residual degree equations over the one-sided, common-neighbor, and
+  common-nonneighbor roles.  This explains the `n=12` compensated example:
+  with pair `2,3`, one one-sided vertex on each side and one common
+  nonneighbor satisfy middle-degree profiles `1+1=2`, `1+1=2`, and `2+0=2`.
+  Thus the witness missed by balanced pair extension is still a two-pole
+  profile-absorption witness.

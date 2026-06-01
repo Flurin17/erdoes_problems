@@ -7399,6 +7399,82 @@ Example 11C, the best balanced pair extension has order `4`, while the true
 maximum regular induced order is `5`.  Full profile absorption remains the
 larger target.
 
+## Lemma 27C: Pair-Role Profile Extension Criterion
+
+Let `u,v` be two vertices of a graph `G`, and put `delta=1` if
+`uv in E(G)` and `delta=0` otherwise.  Partition
+`V(G)\{u,v}` into four sets
+
+```text
+A=N(u)\N(v),              B=N(v)\N(u),
+C=N(u) cap N(v),          E=V(G)\({u,v} union N(u) union N(v)).
+```
+
+Choose subsets `X subset A`, `Y subset B`, `Z subset C`, and `W subset E`,
+and put `M=X union Y union Z union W`.  Then
+
+```text
+G[{u,v} union M]
+```
+
+is regular if and only if the following two conditions hold:
+
+1. `|X|=|Y|`;
+2. with
+
+```text
+D=delta+|X|+|Z|,
+```
+
+the degrees inside `G[M]` satisfy
+
+```text
+deg_M(x)=D-1       for x in X union Y,
+deg_M(z)=D-2       for z in Z,
+deg_M(w)=D         for w in W.
+```
+
+Proof.  The vertices `u` and `v` have degrees
+
+```text
+delta+|X|+|Z|,       delta+|Y|+|Z|,
+```
+
+respectively, so they have equal degree exactly when `|X|=|Y|`; their common
+degree is then `D`.  A vertex in `X union Y` is adjacent to exactly one of
+`u,v`, a vertex in `Z` is adjacent to both, and a vertex in `W` is adjacent to
+neither.  Therefore such a vertex has total degree `D` in
+`G[{u,v} union M]` exactly when its degree inside `M` is respectively
+`D-1`, `D-2`, or `D`.  QED.
+
+Lemma 27A is the special case `Z=W=empty`, where all selected middle vertices
+have the same offset from the pair and hence the same required degree inside
+`M`.  Lemma 27C is the exact two-pole version of the general split
+compensation criterion in Lemma 29.
+
+**Computational Example 27D: The Twelve-Vertex Template Needs A Pair Role.**
+For the `12`-vertex compensated template from Example 11C, the maximum
+regular witness
+
+```text
+{2,3,8,9,11}
+```
+
+is captured by Lemma 27C using the edge pair `2,3`.  Relative to this pair,
+
+```text
+X={9},       Y={8},       Z=empty,       W={11}.
+```
+
+Here `D=2`; inside `M={8,9,11}`, vertices `8` and `9` have middle-degree `1`
+and one incident edge to the pair, while vertex `11` has middle-degree `2`
+and no incident edge to the pair.  Thus all three middle vertices have total
+degree `2`, matching the pair vertices.  The verification command is
+
+```text
+python3 82/EXPERIMENTS/pair_role_witness.py 12 --mask 72400984189589100935 --witness 2,3,8,9,11 --pair 2,3
+```
+
 ## Lemma 28: Ramsey Bound For Pair-Difference Amplification
 
 Let `BR(p,q)` be the least integer `N` such that every bipartite graph with

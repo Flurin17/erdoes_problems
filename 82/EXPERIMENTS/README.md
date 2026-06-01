@@ -254,6 +254,8 @@ Computational checks and generated data for Erdos Problem 82.
 - `balanced_pair_extension.py`: searches the broader Lemma 27A criterion,
   where equal-sized one-sided difference subsets only need to induce the
   required regular graph between themselves, not a homogeneous template.
+- `pair_role_witness.py`: prints the exact four-role pair profile equations
+  from Lemma 27C for a supplied regular witness and optional pair.
 - `regular_witness.py`: prints one largest regular induced witness for a
   fixed graph mask, including degrees, witness edges, and optional split-side
   counts/profiles for structured examples.
