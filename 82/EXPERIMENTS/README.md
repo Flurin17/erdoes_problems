@@ -25,6 +25,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `equitable_partition.py`: computes color-refinement/equitable-partition
   cells and the regular-subgraph certificate from the largest cell.  It has a
   fixed-mask mode via `--mask` for inspecting recorded examples.
+- `module_diagnostics.py`: brute-force small-mask module checker.  It reports
+  whether a fixed graph is prime under modular decomposition and lists large
+  proper modules, calibrating Lemma 7.1's quotient reduction.
 - `degree_spread.py`: filters or samples graphs with bounded degree spread or
   few degree values to test additive near-regularity as a bridge; also verifies
   recorded graph masks with `--mask`.

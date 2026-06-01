@@ -7165,6 +7165,24 @@ quotient remain hard.  In particular, a minimal counterexample can be assumed
 prime with respect to any nontrivial module partition after recursively
 discarding module or quotient witnesses.
 
+The helper `EXPERIMENTS/module_diagnostics.py` checks this obstruction on
+small fixed masks.  It finds that the `14`-vertex add-saturated
+threshold-`7` mask has proper modules, the largest of size `13`, while the
+delete-saturated `14`-vertex mask and the `12`-vertex `C_reg(1,5)>12` mask
+are prime:
+
+```text
+python3 82/EXPERIMENTS/module_diagnostics.py 14 \
+  --mask 765415324481232608887291903
+python3 82/EXPERIMENTS/module_diagnostics.py 14 \
+  --mask 88255234986600583676821506
+python3 82/EXPERIMENTS/module_diagnostics.py 12 \
+  --mask 25366485577502803966
+```
+
+Thus modular quotient structure explains part of one finite example but not
+the rigid finite obstruction masks.
+
 ## Lemma 7A: Low Adjacency Rank Gives A Large Regular Class
 
 Let `A_G` be the adjacency matrix of an `n`-vertex graph `G`, viewed over any

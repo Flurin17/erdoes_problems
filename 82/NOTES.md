@@ -3349,3 +3349,8 @@ source of growth beyond Ramsey.
   `0.53103,0.39447,0.43425`; the corresponding one-row hypergeometric maxima
   are `0.51429,0.39683,0.43290`.  The finite distortion is small and changes
   sign, supporting the sequential switching formulation but not proving it.
+- 2026-06-01: Added `module_diagnostics.py` for brute-force small-mask module
+  checks.  The add-saturated `14`-vertex threshold-`7` mask has nontrivial
+  modules, including size-`13` modules, but the delete-saturated `14`-vertex
+  mask and the `12`-vertex `C_reg(1,5)>12` mask are prime.  Modular
+  decomposition therefore explains only part of the finite structure.
