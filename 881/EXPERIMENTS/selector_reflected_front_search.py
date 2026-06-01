@@ -71,6 +71,47 @@ def pair_harmless_at(elements: set[int], witness: int) -> bool:
     return True
 
 
+def branch_summary(
+    elements: set[int],
+    selector: tuple[int, ...],
+    rows: dict[int, dict[str, list[int]]],
+) -> dict[int, dict[str, object]]:
+    deleted = set(selector)
+    out: dict[int, dict[str, object]] = {}
+    for gate in selector:
+        retained_rows = [
+            point for point, row in rows.items() if gate in row["retained"]
+        ]
+        usable_rows = [
+            point
+            for point in retained_rows
+            if point + gate
+            not in {first + second for first in deleted for second in deleted}
+        ]
+        unique_rows: list[int] = []
+        shifted: dict[int, list[int]] = {
+            other: [] for other in selector if other != gate
+        }
+        for point in usable_rows:
+            supports = pair_supports(elements, point + gate)
+            trivial = tuple(sorted((point, gate)))
+            if supports == [trivial]:
+                unique_rows.append(point)
+                continue
+            for other in selector:
+                if other == gate:
+                    continue
+                if point + gate - other in elements - deleted:
+                    shifted[other].append(point)
+        out[gate] = {
+            "retained_rows": retained_rows,
+            "usable_rows": usable_rows,
+            "unique_rows": unique_rows,
+            "shifted_rows": {k: v for k, v in shifted.items() if v},
+        }
+    return out
+
+
 def selector_candidates(
     elements: set[int],
     selector: tuple[int, ...],
@@ -108,6 +149,7 @@ def selector_candidates(
                 "rows": rows,
                 "retained_counts": retained_counts,
                 "deleted_pair_rows": deleted_pair_rows,
+                "branch_summary": branch_summary(elements, selector, rows),
             }
         )
     return out

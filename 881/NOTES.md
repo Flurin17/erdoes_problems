@@ -2328,6 +2328,15 @@ still covers all eight selector triples, but `--require-retained-mirrors`
 leaves only four candidates, and `--require-all-gates-active` leaves only
 three. Thus a genuine reflected-front counterexample needs more than the
 local terminal product cover; it must control the \(F+F\) exception rows.
+Lemma 8.5a.7z.10 then compresses any large retained-mirror row set on one
+edge: after discarding \(F+F\) rows, a large fiber at one deleted gate gives
+either a unique-gate packet or a shifted-overlap packet through a fixed
+second deleted gate. The remaining missing promotion is to turn those
+one-/two-gate spike supports into recurrent certificates or genuine
+late-bad pair debt.
+The reflected-front script now reports these branches explicitly for each
+candidate by listing usable rows, unique rows, and fixed shifted-overlap
+rows for every retained gate.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

@@ -8283,6 +8283,103 @@ so an iterable reflected-front construction would need either ranks large
 enough to absorb these \(F+F\) exception rows or additional retained mirrors
 that do not repair the private holes.
 
+### Lemma 8.5a.7z.10: Retained-mirror rows compress to one-gate or two-gate spikes
+
+Let \(A\) be an order-2 basis with threshold \(N_0\). Let \(F\subset A\)
+be finite of size \(r\), put \(C=A\setminus F\), and suppose
+\[
+w\notin3C.
+\]
+Let
+\[
+R(F,w)=\{e\in C:e\le w-N_0,\ w-e\notin F+F\}.
+\]
+Assume that for every \(e\in R(F,w)\) one has chosen a gate
+\[
+\gamma(e)\in F
+\]
+with
+\[
+w-e-\gamma(e)\in C. \tag{1}
+\]
+If, for some \(M\), a gate \(f\in F\) has a fiber
+\[
+U_0=\{e\in R(F,w):\gamma(e)=f\}
+\]
+of size
+\[
+|U_0|>rM+|F+F|, \tag{2}
+\]
+then there is a subset \(U\subset U_0\) of size \(M\) satisfying one of the
+following alternatives:
+
+1. **unique-gate spike:**
+   \[
+   r_{2,A}(u+f)=1\qquad(u\in U),
+   \]
+   with the unique representation \(u+f\);
+2. **shifted-overlap spike:** there is a fixed \(g\in F\setminus\{f\}\)
+   such that
+   \[
+   U+f-g\subset C.
+   \]
+
+Consequently, if
+\[
+|R(F,w)|>r(rM+|F+F|),
+\]
+then some gate \(f\in F\) satisfies (2), and the same conclusion holds.
+
+Proof. First observe that every row in \(U_0\) is private for \(f\):
+\[
+u+f\notin2C\qquad(u\in U_0). \tag{3}
+\]
+Indeed, if \(u+f=c_1+c_2\) with \(c_1,c_2\in C\), then (1) gives
+\[
+w=(w-u-f)+c_1+c_2\in3C,
+\]
+contradicting the witness.
+
+Discard the rows with
+\[
+u+f\in F+F.
+\]
+There are at most \(|F+F|\) such rows, so by (2) more than \(rM\) rows
+remain. For a remaining row \(u\), either \(u+f\) has the unique unordered
+two-term representation \(u+f\) in \(A\), or it has another representation.
+The latter representation cannot lie in \(2C\), by (3), and cannot use
+\(f\) with complementary summand \(u\), because that is the trivial
+representation. Hence it uses some
+\[
+g\in F\setminus\{f\}.
+\]
+Since the row \(u+f\notin F+F\) was not discarded, the complementary
+summand is in \(C\), giving
+\[
+u+f-g\in C.
+\]
+
+If at least \(M\) of the remaining rows are unique, take those for \(U\).
+Otherwise more than
+\[
+(r-1)M
+\]
+rows have a shifted-overlap witness \(g\in F\setminus\{f\}\), and one fixed
+\(g\) occurs on at least \(M\) rows. This proves the dichotomy. The final
+assertion follows by pigeonholing \(R(F,w)\) among the \(r\) gates.
+\(\square\)
+
+Thus a selector-specific reflected front cannot merely produce many
+retained mirrors without creating lower-rank structure. On every edge with
+a large retained-mirror row set, either a single deleted gate carries a
+large unique-gate packet, or a pair of deleted gates carries a large
+shifted-overlap packet. The current gap is that these one- and two-gate
+spikes are not themselves late-bad singleton or pair edges: the original
+witness may still be repaired by other active colors in \(F\). A final
+positive proof must promote such spike supports into recurrent certificates
+or genuine pair-cylinder debt; a counterexample must keep the resulting
+gates and shifts moving cofinally.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -15006,6 +15103,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 8.5a.7z.9 shows that the seed terminal product cover is not
   yet such a retained-mirror front: strict retained-mirror requirements
   leave only a few selector triples.
+* Lemma 8.5a.7z.10 compresses large retained-mirror row sets into
+  lower-rank spike supports: either one gate has many unique rows, or a
+  fixed pair of gates has many shifted-overlap rows. The unresolved
+  promotion is from those spike supports to recurrent certificates or
+  genuine late-bad pair debt.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
