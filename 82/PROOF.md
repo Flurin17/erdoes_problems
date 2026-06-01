@@ -8390,6 +8390,41 @@ Finally
 and `||A|-|B||=|deg_G(u)-deg_G(v)|`, since the possible edge `uv` contributes
 equally to the two degrees.  QED.
 
+**Corollary 28D.1: Linear Bounded-Spread Bound From The Pair Parameter.**
+Let `h>=3`, and put `P=P_h`.  Let `G` be an `n`-vertex graph with degree
+spread at most `s`.  If `G` has no regular induced subgraph on at least `h`
+vertices, then
+
+```text
+n <= 8h(2P+s+1/2)+1.
+```
+
+Proof.  If `n<h`, the displayed inequality is immediate because `P>=1` and
+`h>=3`.  Assume `n>=h`.  By Lemma 28D, every pair of vertices satisfies
+
+```text
+sigma(u,v)=|(N(u) triangle N(v))\{u,v}|
+          < 2P+|deg_G(u)-deg_G(v)|
+          <= 2P+s.
+```
+
+Thus the average `bar sigma` from Lemma 26 is also less than `2P+s`.
+Lemma 26, applied to a graph with no regular induced subgraph on `h`
+vertices, gives
+
+```text
+bar sigma >= (n-1)/(8h)-1/2.
+```
+
+Combining the last two inequalities gives
+
+```text
+(n-1)/(8h)-1/2 < 2P+s,
+```
+
+which implies the displayed bound after harmlessly replacing the strict
+inequality by a non-strict one.  QED.
+
 **Lemma 28E: Ordered Graphs With Few Inversions Have Large Homogeneous
 Sets.**  Let `H` be a graph whose vertices are linearly ordered as
 `v_1,...,v_m`.  Call a triple `i<j<k` an inversion if
@@ -8434,7 +8469,7 @@ independent set of order at least `sqrt(s)`.  QED.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 320 h^8 P_h^2.
+G(h) <= 180 h^7 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
@@ -8443,7 +8478,7 @@ Proof.  Let `P=P_h`, and suppose for contradiction that `G` is an `n`-vertex
 graph with no regular induced subgraph on at least `h` vertices, where
 
 ```text
-n > 320 h^8 P^2.
+n > 180 h^7 P^2.
 ```
 
 Partition the vertices by their degrees in `G` into intervals of length `P`:
@@ -8462,15 +8497,16 @@ First consider one nonempty bucket `U=V_t`.  For any two vertices
 Therefore their degrees inside `G[U]` differ by less than `3P`.  Thus
 `G[U]` has degree spread at most `3P`.
 
-Apply Conditional Proposition 28A, using Lemma 28B so that the two local
-parameters are both `P`.  With spread `s=3P`, any bucket of size greater than
+Apply Corollary 28D.1 to the induced graph `G[U]`, whose balanced pair
+parameter is still controlled by the same global value `P=P_h`.  With spread
+`s=3P`, any bucket of size greater than
 
 ```text
-16h^2(2P+3P) = 80h^2P
+8h(2P+3P+1/2)+1 <= 45hP
 ```
 
 would contain a regular induced subgraph on at least `h` vertices.  Hence
-every bucket has size at most `80h^2P`.
+every bucket has size at most `45hP`.
 
 Let `b` be the number of nonempty buckets.  If
 
@@ -8511,13 +8547,13 @@ for `h>=3` and `P>=1`.
 Combining the bucket count and bucket size bounds,
 
 ```text
-n <= b * 80h^2P <= 320 h^8 P^2,
+n <= b * 45hP <= 180 h^7 P^2,
 ```
 
 contradicting the assumed value of `n`.  This proves the displayed bound on
 `G(h)`.
 
-If `P_h=2^{o(h)}`, then the polynomial factor `320h^8` is also
+If `P_h=2^{o(h)}`, then the polynomial factor `180h^7` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 

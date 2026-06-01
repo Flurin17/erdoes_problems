@@ -2494,6 +2494,13 @@ source of growth beyond Ramsey.
   inversion lemma on bucket representatives to force a large clique or
   independent set if there are too many buckets.  This isolates the remaining
   main target as the local statement `P_h=2^{o(h)}`.
+- 2026-06-01: Sharpened Proposition 28F to
+  `G(h) <= 180 h^7 P_h^2`.  The new Corollary 28D.1 combines pair-parameter
+  control of every symmetric difference with Lemma 26's homogeneous-exclusion
+  diversity lower bound, giving a linear bucket-size bound
+  `n <= 8h(2P_h+s+1/2)+1` for degree-spread-`s` counterexamples.  This
+  replaces the earlier `O(h^2P_h)` bounded-spread bucket bound by
+  `O(hP_h)`.
 - 2026-06-01: Added Lemma 28G.  The local balanced pair parameter satisfies
   `G(ceil(h/2)) <= P_h <= ceil(G(h)/2)`, so `P_h=2^{o(h)}` is actually
   equivalent to the original inverse conjecture.  Proposition 28F is still
