@@ -14366,6 +14366,61 @@ sum_d s_d(G) >= |A| + |R_1| + ... + |R_t| = |V(G)|.
 
 QED.
 
+**Lemma 28J.5c: Apex Forests Have Low-Degree Mass Deficit At Most One.**
+Let `G` be a graph with a vertex `z` such that `G-z` is a forest.  Then
+
+```text
+s_0(G)+s_1(G) >= |V(G)|-1.
+```
+
+Proof.  Put `F=G-z`.  By Lemma 28J.3 applied to the forest `F`,
+
+```text
+alpha(F)+2nu_ind(F) >= |F|=|V(G)|-1.
+```
+
+Every independent set in `F` remains independent in `G`, and every induced
+matching in `F` remains an induced matching in `G`, since the induced
+subgraph on the endpoints of the matching does not include `z`.  Hence
+
+```text
+s_0(G)+s_1(G) >= alpha(F)+2nu_ind(F) >= |V(G)|-1.
+```
+
+QED.
+
+**Corollary 28J.5d: Regular Feedback Partitions Are One Unit Stable Under One
+Extension.**  Let `H` be a graph with a vertex partition
+
+```text
+V(H)=F union R_1 union ... union R_t
+```
+
+such that `H[F]` is a forest and, for each `i`, `H[R_i]` is induced
+`d_i`-regular, where
+
+```text
+2 <= d_1 < d_2 < ... < d_t.
+```
+
+If `G` is obtained from `H` by adding one new vertex, then
+
+```text
+sum_d s_d(G) >= |V(G)|-1.
+```
+
+Proof.  Let `z` be the new vertex and put `A=F union {z}`.  By Lemma 28J.5c
+applied to `G[A]`,
+
+```text
+s_0(G)+s_1(G) >= |A|-1.
+```
+
+Each old core piece `R_i` remains induced `d_i`-regular in `G`, so
+`s_{d_i}(G)>=|R_i|`.  These degrees are distinct and at least `2`, so their
+coordinates do not collide with `0` or `1`.  Adding the contributions gives
+the result.  QED.
+
 **Lemma 28J.6: Split Graphs Satisfy Spectrum Mass.**  If `G` is a split
 graph, then
 

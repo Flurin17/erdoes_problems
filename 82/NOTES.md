@@ -3943,3 +3943,12 @@ source of growth beyond Ramsey.
   unresolved collision in this decomposition framework is the degree-`2`
   core case, exactly where cycles in the new apex-forest part may compete for
   the same spectrum coordinate.
+- 2026-06-01: Added a one-unit stability lemma for all regular-feedback
+  partitions.  If `G-z` is a forest, then `s_0(G)+s_1(G)>=|G|-1`, because the
+  forest's independent set and induced matching witnesses survive after
+  adding the apex.  Consequently, if `H` is a forest plus induced regular
+  pieces of distinct degrees at least `2`, then every one-vertex extension has
+  `mu(G)>=|G|-1`.  Thus any counterexample produced from an equality graph
+  with such a feedback partition must be tight in the strongest possible
+  sense: the apex-forest low-degree contribution loses exactly one and no
+  regular core coordinate increases.
