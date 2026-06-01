@@ -2666,3 +2666,10 @@ source of growth beyond Ramsey.
   of sizes `6` and `7`, respectively.  This sharpens the warning from the
   inversion-free calibration: at least in these samples, the regularity
   obstruction is already the ordinary homogeneous-set obstruction.
+- 2026-06-01: Added Lemma 28E.3, an explicit sliding-window inversion-free
+  graph on `q^2` vertices whose largest clique or independent set has order
+  exactly `q`.  This proves the chain-antichain extraction in Lemma 28E is
+  sharp for homogeneous outputs.  The same graph may contain larger mixed
+  regular witnesses, so the lemma does not refute all inversion-free regular
+  extraction; it specifically blocks improving Proposition 28F by asking the
+  inversion-free subgraph only for a clique or independent set.

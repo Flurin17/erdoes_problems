@@ -8884,6 +8884,48 @@ independent set, of orders `6` and `7`.  Thus these particular inversion-free
 examples are not hiding larger mixed regular witnesses; their obstruction is
 already visible at the homogeneous chain-antichain level.
 
+**Lemma 28E.3: The Homogeneous Bound In Inversion-Free Graphs Is Sharp.**
+For every integer `q>=2`, there is an inversion-free ordered graph on `q^2`
+vertices whose largest clique or independent set has order exactly `q`.
+
+Proof.  Put the vertices in the order
+
+```text
+1,2,...,q^2
+```
+
+and join `i<j` if and only if
+
+```text
+j-i >= q.
+```
+
+This graph is inversion-free: if `i<j<k` and `ij` is an edge, then
+`j-i>=q`, hence `k-i>=q`, so `ik` is also an edge.
+
+In any clique, consecutive selected vertices in the ambient order differ by
+at least `q`.  Thus a clique of order `r` spans distance at least
+`(r-1)q`, which is at most `q^2-1`; hence `r<=q`.  This is sharp because
+
+```text
+1, 1+q, 1+2q, ..., 1+(q-1)q
+```
+
+is a clique of order `q`.
+
+In any independent set, no two selected vertices differ by at least `q`.
+Therefore all selected vertices lie in an interval of length at most `q-1`,
+so the independent set has order at most `q`.  This is sharp because
+`{1,...,q}` is independent.  QED.
+
+This lemma shows that Lemma 28E's final chain-antichain step cannot be
+improved, in general, if the output sought from an inversion-free ordered
+graph is only a clique or independent set.  It does not rule out finding
+larger mixed regular induced subgraphs in special inversion-free graphs; for
+example, the sliding-window graph above itself contains large complete
+multipartite regular induced subgraphs.  The obstruction is specifically to
+the homogeneous extraction used in Proposition 28F.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 
