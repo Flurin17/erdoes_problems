@@ -2299,3 +2299,11 @@ source of growth beyond Ramsey.
   residual-demand case; the spread-one witness above uses varying residual
   demands.  This turns the next target into a demand-realization problem for
   cross subgraphs.
+- 2026-06-01: Added `profile_absorption_search.py`.  On the compensated
+  spread-one `n=20` sample with the construction split at `10`, it recovers a
+  maximum regular witness of order `10` via profile absorption:
+  left vertices `0,2,3,4,6,8,9` have profiles
+  `3+1,2+2,3+1,4+0,1+3,2+2,3+1`, while right vertices `11,17,18` have
+  profiles `1+3,1+3,0+4`; all totals are `4`.  This confirms that split
+  profile absorption captures witnesses missed by the pair-template search on
+  the same graph.

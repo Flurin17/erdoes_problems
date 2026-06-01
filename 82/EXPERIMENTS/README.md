@@ -251,3 +251,6 @@ Computational checks and generated data for Erdos Problem 82.
 - `regular_witness.py`: prints one largest regular induced witness for a
   fixed graph mask, including degrees, witness edges, and optional split-side
   counts/profiles for structured examples.
+- `profile_absorption_search.py`: searches across a prescribed cut for a
+  largest regular witness satisfying the split profile equations of Lemma 30,
+  reporting the internal-plus-cross degree profiles on each side.
