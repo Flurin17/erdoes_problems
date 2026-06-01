@@ -255,6 +255,9 @@ either grow in length or move out, and auxiliary endpoint-sum growth either
 comes from auxiliary-count growth or auxiliary-location growth.
 Corollary 16.132 packages the expanded linear-core normal form into the
 eight fully split residual branches.
+Corollary 16.133 records the contrapositive selector-avoidance criterion:
+if the six geometric coordinate masses and the two packet-position residuals
+are summable on a tail, the assigned linear-core branch cannot product-cover.
 The Attempt 16 residual summary has been updated accordingly: after
 reciprocal-summable packetization, bounded-height countable menus must pay
 linear packet-position cost.

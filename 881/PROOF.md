@@ -26306,6 +26306,55 @@ This is the current end of the high-density linear-core reduction. Any
 remaining \(k=3\) counterexample must realize one of these eight explicit
 residuals, rather than a diffuse countable-profile menu.
 
+### Corollary 16.133: Linear-core avoidance criterion
+
+Keep the setting of Corollary 16.132. Suppose there are thresholds
+\[
+R,H,N,A,M,E
+\]
+such that the active masses
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:r_\lambda>R\}|\over |P_s|},\quad
+\sum_s {|\{\lambda\in\mathcal B_s:\Theta_\lambda>H\}|\over |P_s|},
+\]
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:n_\lambda>N\}|\over |P_s|},\quad
+\sum_s {|\{\lambda\in\mathcal B_s:a_\lambda>A\}|\over |P_s|},
+\]
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:m_\lambda>M\}|\over |P_s|},\quad
+\sum_s {|\{\lambda\in\mathcal B_s:E_\lambda>E\}|\over |P_s|}
+\tag{1}
+\]
+are all finite. Suppose also that the two packet-position residuals are
+finite:
+\[
+\sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+W_s>T_\lambda/2}}\beta_{\lambda,s}<\infty, \tag{2}
+\]
+and
+\[
+\sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+\Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+\beta_{\lambda,s}<\infty. \tag{3}
+\]
+Then the assigned high-density linear-core branch does not product-cover
+every selector tail. Equivalently, after passing to a sufficiently late
+packet tail, there is a selector avoiding every trace in this assigned
+linear-core branch.
+
+Proof. If the branch product-covered every selector tail, Corollary 16.132
+would force one of its eight alternatives. The six coordinate alternatives
+contradict the finiteness of the corresponding sum in (1), while the
+width-heavy and midpoint-displacement alternatives contradict (2) and (3).
+Thus product-covering is impossible. The final sentence is the definition
+of product-covering failure on a tail. \(\square\)
+
+This is the form needed for closure attempts: a proof may now attack the
+eight residual branches one at a time. Once all six geometric coordinates
+and both packet-position costs are summable on a tail, the whole assigned
+linear-core obstruction is selector-avoidable.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
 inequality and packet-mass inclusion behind Corollary 16.128, the
 bounded-rank/bounded-margin estimate used in Corollary 16.129, and the
@@ -27759,6 +27808,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   growth comes from auxiliary-count growth or auxiliary-location growth.
 * Corollary 16.132 packages the expanded high-density linear-core normal
   form into eight fully split residual branches.
+* Corollary 16.133 records the exact contrapositive: if the six coordinate
+  masses and two packet-position residuals are summable on a tail, the
+  assigned linear-core branch is selector-avoidable.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
