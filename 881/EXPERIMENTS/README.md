@@ -753,4 +753,6 @@ gate's distance from the central gate range `[a+2r,b-2r]`.
 Lemma 16.63 and Corollary 16.64. It enumerates separated, nested, and
 translated interval pairs and verifies that a shifted doubled band `2J-f`
 has at least the promised deep overlap with the tested interval whenever
-the gate lies in the corresponding forbidden range.
+the gate lies in the corresponding forbidden range. It also checks the
+palette common-band version from Lemma 16.65 by varying the span between
+the minimum and maximum active colors.

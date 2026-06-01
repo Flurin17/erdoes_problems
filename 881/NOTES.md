@@ -78,7 +78,10 @@ separated blocks. Lemma 16.63 and Corollary 16.64 begin the far-gate
 analysis: a dense packet in one interval is excluded whenever the doubled
 band of any retained interval elsewhere has deep overlap with the tested
 interval, so a staged construction must thread active gates through all
-cross-block overlap windows.
+cross-block overlap windows. Lemma 16.65 and Corollary 16.66 add the
+palette version: clustered active colors share a common forbidden band, so
+a dense cross-block packet requires either large palette spread or an
+extreme gate outside the overlap window.
 
 ## Definitions
 
