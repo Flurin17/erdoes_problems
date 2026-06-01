@@ -240,6 +240,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--heartbeat", type=float, default=30.0, help="seconds between liveness lines")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--aggregate-only", action="store_true")
+    parser.add_argument(
+        "--skip-complete",
+        action="store_true",
+        help="when launching, skip batch logs that already contain all expected per-residue DONE lines",
+    )
     return parser.parse_args()
 
 
@@ -256,6 +261,20 @@ def chunk_jobs(jobs: list[tuple[int, int, int, Path]], batch_size: int) -> list[
         spec_path = chunk[0][3].parent / f"batch_{batch_index:05d}_{first_residue}.jobs"
         batches.append(([(residue, start, count) for residue, start, count, _ in chunk], path, spec_path))
     return batches
+
+
+def completed_done_lines(path: Path) -> int:
+    if not path.exists():
+        return 0
+    count = 0
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.startswith("DONE "):
+            count += 1
+    return count
+
+
+def batch_is_complete(path: Path, expected_jobs: int) -> bool:
+    return completed_done_lines(path) >= expected_jobs
 
 
 def main() -> int:
@@ -277,12 +296,25 @@ def main() -> int:
         residue_jobs.append((residue, start, count, args.outdir / f"res_{residue}.log"))
 
     jobs = chunk_jobs(residue_jobs, args.batch_size)
+    all_jobs = list(jobs)
+
+    skipped_complete = 0
+    if args.skip_complete and not args.aggregate_only:
+        remaining = []
+        for batch, path, spec_path in jobs:
+            if batch_is_complete(path, len(batch)):
+                skipped_complete += 1
+            else:
+                remaining.append((batch, path, spec_path))
+        jobs = remaining
 
     print(
         f"RANGE n_start={args.n_start} n_stop={args.n_stop} modulus={args.modulus} "
-        f"residues={len(residue_jobs)} jobs={len(jobs)} batch_size={args.batch_size} "
+        f"residues={len(residue_jobs)} jobs={len(all_jobs)} batch_size={args.batch_size} "
         f"total_x={sum(count for _, _, count, _ in residue_jobs)} outdir={args.outdir}"
     )
+    if skipped_complete:
+        print(f"SKIP_COMPLETE batches={skipped_complete} remaining={len(jobs)}")
     if args.dry_run:
         for batch, path, _ in jobs:
             if len(batch) == 1:
@@ -295,7 +327,7 @@ def main() -> int:
     args.outdir.mkdir(parents=True, exist_ok=True)
 
     if args.aggregate_only:
-        print_summary(merge_summaries([path for _, path, _ in jobs]))
+        print_summary(merge_summaries([path for _, path, _ in all_jobs]))
         return 0
 
     active = []
@@ -372,7 +404,7 @@ def main() -> int:
                 failed = True
         active = still_active
 
-    summary = merge_summaries([path for _, path, _ in jobs])
+    summary = merge_summaries([path for _, path, _ in all_jobs])
     print_summary(summary, time.time() - started)
     return 1 if failed else 0
 
