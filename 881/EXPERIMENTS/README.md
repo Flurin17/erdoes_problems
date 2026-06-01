@@ -243,6 +243,13 @@ two-sum coverage through `30000`, while the retained set still misses all
 private spike sums and does not repair the witness `100000`. This shows
 that the initial coverage gap in Example 8.5a.7z.12a can be bridged
 locally; the remaining stage obstruction is freezing the much later witness.
+`spike_safe_extension_search.py` then tries one-point safe retained
+extensions from the same profile at scale `100`. With beam `8`, coverage
+extends from `3000` to `6488` and stalls at `6489`; with beam `32`, it
+extends only to `6501`. The next-gap candidates are unsafe almost entirely
+because each candidate plus an existing retained pair sums to the witness.
+The scale `200` run gives the same ratio, reaching `12947` below witness
+`20000`.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

@@ -8735,6 +8735,87 @@ other active colors may repair the singleton deletion. Those are exactly
 the unique-gate branch in Lemma 8.5a.7z.10, not a finite-accelerator
 shortcut.
 
+### Lemma 8.5a.7z.12e: One-step safe filler criterion
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C.
+\]
+Let \(p\notin2A\). A single retained filler
+\[
+x\notin A
+\]
+can be adjoined so that
+\[
+p\in2(A\cup\{x\}),\qquad w\notin3(C\cup\{x\})
+\]
+only if
+\[
+x\in X_p:=\{p-a:a\in A,\ p-a>0\}\cup
+\begin{cases}
+\{p/2\},&p\text{ even},\\
+\varnothing,&p\text{ odd},
+\end{cases}
+\tag{1}
+\]
+and
+\[
+w-x\notin2C,\qquad w-2x\notin C,\qquad 3x\ne w. \tag{2}
+\]
+Conversely, any \(x\in X_p\setminus A\) satisfying (2) gives such a
+one-point safe extension.
+
+Proof. The condition \(p\in2(A\cup\{x\})\) while \(p\notin2A\) means that
+some representation of \(p\) uses \(x\). This is exactly (1): either
+\[
+p=x+a\quad(a\in A)
+\]
+or \(p=x+x\). Since \(w\notin3C\), the only new ways to put \(w\) in
+\[
+3(C\cup\{x\})
+\]
+are
+\[
+w=x+c_1+c_2,\qquad w=2x+c,\qquad w=3x
+\]
+with \(c,c_1,c_2\in C\). These are excluded exactly by (2). \(\square\)
+
+### Diagnostic 8.5a.7z.12f: Safe extension stalls below the witness
+
+The script `spike_safe_extension_search.py` applies Lemma 8.5a.7z.12e to
+the safe filler profile from Diagnostic 8.5a.7z.12c. To keep the beam
+search finite, its default scale is \(N=100\), with the same rows
+\[
+U=\{1,4,9,16,25,36\},
+\]
+deleted gates
+\[
+F=\{1000,1007,2000\},
+\]
+and witness
+\[
+w=10000.
+\]
+The initial safe filler profile has full two-sum coverage through \(3000\).
+With beam \(8\), the one-point extension search keeps \(w\notin3C\) and
+extends coverage only to \(6488\), then stalls at the next gap \(6489\).
+It reports \(1031\) possible blockers for that next gap, all unsafe because
+the candidate lies in \(w-2C\); \(16\) also have the double-candidate
+obstruction \(w-2x\in C\). With beam \(32\), the best endpoint improves
+only to \(6501\), stalling at \(6502\) with the same obstruction type.
+At scale \(N=200\), beam \(8\) similarly extends coverage from \(6000\) to
+\(12947\), again far below the witness \(20000\).
+
+This is finite evidence, not a proof. Its value is that it identifies the
+local pressure precisely: once safe fillers make \(2C\) dense near the
+complements of the next possible gap-fillers, the witness-free condition
+blocks every one-point retained extension. A genuine staged counterexample
+would therefore need to add coordinated batches of fillers, change the
+active gate packet, or use a different cross-window design; extending a
+single safe band greedily is not enough to freeze the witness below a
+stage endpoint.
+
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
 Work in the remaining \(k=2\) counterexample case. Fix a finite row test
@@ -15714,6 +15795,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.7z.12d records the resulting formal pressure: any large
   retained filler block below a frozen witness feeds directly into the
   compressed-spike dichotomy of Lemma 8.5a.7z.10.
+* Lemma 8.5a.7z.12e and Diagnostic 8.5a.7z.12f isolate the next local
+  obstruction: one-point retained fillers that would cover the next gap
+  may all lie in \(w-2C\), so each would repair the protected witness.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7z.14 is the resulting live normal form: any counterexample

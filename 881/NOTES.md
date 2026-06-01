@@ -2398,6 +2398,17 @@ True one-gate terminal barriers are already closed in the \(k=2\) reduction
 by Corollaries 8.3 and 8.3b; the only surviving one-gate-looking objects
 are unique-gate fibers inside larger active edges, where another active
 color repairs the singleton deletion.
+Lemma 8.5a.7z.12e records the exact one-step safe filler criterion:
+a filler that covers a current two-sum gap \(p\) must be of the form
+\(p-a\), but it preserves \(w\notin3C\) only if it avoids
+\(w-2C\), \( (w-C)/2\), and \(w/3\). The new
+`spike_safe_extension_search.py` applies this to the safe spike profile.
+At scale \(100\), beam \(8\) extends full two-sum coverage from \(3000\) to
+\(6488\) and stalls at \(6489\); beam \(32\) reaches only \(6501\). The
+next-gap candidates are all unsafe because they lie in \(w-2C\), with a
+few also hitting \(w-2x\in C\). Scale \(200\) gives the same ratio,
+reaching \(12947<20000\). This is evidence that greedy safe bands hit
+complement-pair saturation well below the witness.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed
