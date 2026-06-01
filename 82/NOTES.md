@@ -3517,3 +3517,10 @@ source of growth beyond Ramsey.
   `alpha >= n/(P(omega-1)+1)`.  This recovers the quadratic-scale full-drop
   upper bound from a coloring viewpoint but is too weak to settle the desired
   linear `P=2` alpha-plus-omega conjecture.
+- 2026-06-01: Extended `full_drop_alpha_omega.py` to report the best
+  independence number in each clique-number bucket.  The exact `P=2,n=8`
+  census gives bucket minima
+  `omega:min_alpha = 1:8, 2:4, 3:3, 4:2, 5:2, 6:2, 7:2, 8:1`; every bucket
+  satisfies `alpha+omega>=6=ceil((n+3)/2)`.  The next proof target after the
+  triangle-free case is therefore the `omega=3` case, where the finite minimum
+  is already tight at `alpha=3`.

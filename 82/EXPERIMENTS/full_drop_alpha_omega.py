@@ -25,6 +25,7 @@ def search(
         "best_omega": None,
         "best_columns": None,
         "best_mask": None,
+        "best_by_omega": {},
     }
     start = monotonic()
 
@@ -49,6 +50,16 @@ def search(
                     f"omega={clique} sum={total} columns="
                     + ",".join(map(str, columns)),
                     flush=True,
+                )
+            best_by_omega = stats["best_by_omega"]
+            assert isinstance(best_by_omega, dict)
+            previous = best_by_omega.get(clique)
+            if previous is None or independent < previous[0]:
+                best_by_omega[clique] = (
+                    independent,
+                    total,
+                    columns[:],
+                    cdc.columns_to_mask(columns, pc),
                 )
             if progress and int(stats["terminals"]) % progress == 0:
                 print(
@@ -82,6 +93,15 @@ def search(
     print(f"best_sum={stats['best_sum']}")
     print(f"best_mask={stats['best_mask']}")
     print("best_columns=" + ",".join(map(str, stats["best_columns"] or [])))
+    best_by_omega = stats["best_by_omega"]
+    assert isinstance(best_by_omega, dict)
+    for omega in sorted(best_by_omega):
+        alpha, total, columns, mask = best_by_omega[omega]
+        print(
+            f"omega_bucket omega={omega} min_alpha={alpha} "
+            f"min_sum={total} mask={mask} columns="
+            + ",".join(map(str, columns))
+        )
 
 
 def main() -> None:

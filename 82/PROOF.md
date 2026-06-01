@@ -11929,6 +11929,20 @@ that is, a matching of size `4` ordered with all left endpoints first.  The
 0,0,1,2,0,0,16,48,96.
 ```
 
+The same script reports the best independence number in each clique-number
+bucket.  At `n=8`, the bucket summary is
+
+```text
+omega=1: min_alpha=8
+omega=2: min_alpha=4
+omega=3: min_alpha=3
+omega=4: min_alpha=2
+omega=5: min_alpha=2
+omega=6: min_alpha=2
+omega=7: min_alpha=2
+omega=8: min_alpha=1.
+```
+
 This is only finite calibration, but it supports the possibility that the
 current quadratic upper bound for `C_full(2,h)` is far from sharp.
 
