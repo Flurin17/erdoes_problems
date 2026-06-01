@@ -3112,3 +3112,10 @@ source of growth beyond Ramsey.
   count at most `N^2 M rho_M^T`.  This makes the entropy bottleneck explicit:
   the unconditioned row/column estimate alone cannot reach the fixed-degree
   heuristic scale `N/M`.
+- 2026-06-01: Added `hypergeom_residue.py` for the first fixed-degree
+  conditioning layer.  It computes exact residue distributions for a
+  hypergeometric cross-degree after fixing one row sum.  For modulus `32`,
+  variance about `512` gives max residue probability `1.00011` times uniform,
+  while variance about `56` gives `1.70` times uniform.  This supports the
+  expected `M^2`-scale residue-mixing threshold but leaves the harder
+  row-and-column-sum conditioning problem untouched.

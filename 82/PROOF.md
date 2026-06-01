@@ -1777,6 +1777,28 @@ argument should replace the independent binomial variables above by
 conditional hypergeometric variables with variance `Theta(|S|-i)`.  This is
 currently an obstruction lemma to prove, not an established fact.
 
+The helper `EXPERIMENTS/hypergeom_residue.py` calibrates this first
+conditioning layer.  It computes the residue distribution of a hypergeometric
+cross-degree after fixing one row sum.  For example,
+
+```text
+python3 82/EXPERIMENTS/hypergeom_residue.py \
+  --population 8192 --marked 4096 --draws 4096 --modulus 32
+```
+
+has variance about `512` and maximum residue probability only `1.00011` times
+uniform.  By contrast,
+
+```text
+python3 82/EXPERIMENTS/hypergeom_residue.py \
+  --population 2048 --marked 256 --draws 1024 --modulus 32
+```
+
+has variance about `56` and maximum residue probability about `1.70` times
+uniform.  This finite calibration is consistent with a local-CLT requirement
+on the scale of `M^2` variance for residue mixing, but it does not address the
+harder column-sum conditioning in the true fixed two-degree model.
+
 **Conditional Proposition: Fixed-Degree Anti-Concentration Refutes The
 Universal Witness Target.**  Let `psi(q)->infinity` along dyadic `q`, and put
 

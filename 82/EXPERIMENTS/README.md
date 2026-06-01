@@ -230,6 +230,9 @@ Computational checks and generated data for Erdos Problem 82.
   target-modular subgraph, testing the tradeoff in witness-or-regular
   dichotomy targets.  Use `--exhaustive` for small labelled sweeps and
   `--target-modulus` to override the default target `2q`.
+- `hypergeom_residue.py`: computes residue distributions for hypergeometric
+  cross-degrees, modelling the first fixed-row-sum conditioning layer in the
+  two-degree anti-concentration route.
 - `two_level_modular_sample.py`: generates connected graphs with two prescribed
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic
