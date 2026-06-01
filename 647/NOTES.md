@@ -169,7 +169,7 @@ N odd, and
 are prime.
 ```
 
-Additional constraints from shifts `k=5,9,10`:
+Additional necessary prime constraints from shifts `k=5,9,10`:
 
 ```text
 k=5:  n-5  = 5(504N-1).
@@ -188,16 +188,21 @@ k=10: n-10 = 10(252N-1).
       252N-1 = 5p with p prime.
 ```
 
-The current C++ search can enforce a restrictive prime-only subsearch for
-these three forms with:
+For `N > 24`, the exceptional pure-power cases allowed by the divisor budget
+would force the displayed cofactor to be one of finitely many tiny powers
+(`5^a` for `k=5,10`, or `3^a` for `k=9`), which is impossible in the searched
+ranges. Thus the relevant divided cofactor is prime. The current C++ search
+enforces the complete conditional version with:
 
 ```text
---extra-prime-coeffs 504,280,252
+--extra-prime-shift-forms 5,9,10
 ```
 
-This is useful for finding very prime-rich near misses, but it is not a
-complete candidate search. A complete search must use the 7-tuple branch
-conditions and then verify all shifts directly.
+This is not the same as the older restrictive `--extra-prime-coeffs
+504,280,252`: that older option incorrectly throws away the valid divided
+prime cases `(504N-1)/5`, `(280N-1)/3`, `(280N-1)/9`, and `(252N-1)/5`.
+The shift-form option conditionally root-sieves those divided forms according
+to the current `N` congruence, then still verifies all shifts directly.
 
 The next obstructions in direct verification are often at `k=14,15,16`:
 
@@ -258,7 +263,7 @@ Here `r`, or `a,b`, denotes valuation at the displayed shared prime(s), and
 `C` is the remaining cofactor.
 
 The C++ tuple search now handles these exact low-budget shared-prime cases
-for `k=7,14,15,16,18,20,21,24,28,30,36,40,42,45,48,56,60,72,84,90,120`
+for `k=7,14,15,16,18,20,21,24,27,28,30,32,35,36,40,42,45,48,56,60,72,84,90,120`
 without full factorization when possible. The helper `tau_leq_small(C,T)` is
 exact for `T <= 5`: it permits `C=1`, primes, prime squares, prime cubes,
 fourth powers of primes, and semiprimes as allowed by the divisor budget, so

@@ -9,6 +9,8 @@
 #include <random>
 #include <sstream>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 using u64 = uint64_t;
@@ -648,6 +650,137 @@ static bool shift120_ok(u128 N) {
     return coeff_minus_one(21, N, L) && shared_primes_budget_ok(L, primes, 2, 2, 122);
 }
 
+static bool exact_shift_ok(uint32_t k, u128 N) {
+    switch (k) {
+        case 5: return shift5_ok(N);
+        case 7: return shift7_ok(N);
+        case 9: return shift9_ok(N);
+        case 10: return shift10_ok(N);
+        case 14: return shift14_ok(N);
+        case 15: return shift15_ok(N);
+        case 16: return shift16_ok(N);
+        case 18: return shift18_ok(N);
+        case 20: return shift20_ok(N);
+        case 21: return shift21_ok(N);
+        case 24: return shift24_ok(N);
+        case 27: return shift27_ok(N);
+        case 28: return shift28_ok(N);
+        case 30: return shift30_ok(N);
+        case 32: return shift32_ok(N);
+        case 35: return shift35_ok(N);
+        case 36: return shift36_ok(N);
+        case 40: return shift40_ok(N);
+        case 42: return shift42_ok(N);
+        case 45: return shift45_ok(N);
+        case 48: return shift48_ok(N);
+        case 56: return shift56_ok(N);
+        case 60: return shift60_ok(N);
+        case 72: return shift72_ok(N);
+        case 84: return shift84_ok(N);
+        case 90: return shift90_ok(N);
+        case 120: return shift120_ok(N);
+        default: return false;
+    }
+}
+
+static bool exact_shift_is_implemented(uint32_t k) {
+    switch (k) {
+        case 5:
+        case 7:
+        case 9:
+        case 10:
+        case 14:
+        case 15:
+        case 16:
+        case 18:
+        case 20:
+        case 21:
+        case 24:
+        case 27:
+        case 28:
+        case 30:
+        case 32:
+        case 35:
+        case 36:
+        case 40:
+        case 42:
+        case 45:
+        case 48:
+        case 56:
+        case 60:
+        case 72:
+        case 84:
+        case 90:
+        case 120:
+            return true;
+        default:
+            return false;
+    }
+}
+
+static bool exact_shifts_ok(u128 N, const std::vector<uint32_t>& shifts) {
+    for (uint32_t k : shifts) {
+        if (!exact_shift_ok(k, N)) return false;
+    }
+    return true;
+}
+
+static bool shift_prime_form_is_implemented(uint32_t k) {
+    return k == 5 || k == 9 || k == 10;
+}
+
+static u128 shift_prime_form_coeff(uint32_t k) {
+    switch (k) {
+        case 5: return 504;
+        case 9: return 280;
+        case 10: return 252;
+        default: die("unsupported shift prime form");
+    }
+}
+
+static int mod_i128(i128 x, int p);
+
+static u128 shift_prime_form_divisor(uint32_t k, u128 L) {
+    if (k == 5 || k == 10) {
+        return L % 5 == 0 ? 5 : 1;
+    }
+    if (k == 9) {
+        if (L % 9 == 0) return 9;
+        if (L % 3 == 0) return 3;
+        return 1;
+    }
+    die("unsupported shift prime form");
+}
+
+static u128 shift_prime_form_divisor_signed(uint32_t k, i128 L) {
+    if (k == 5 || k == 10) {
+        return mod_i128(L, 5) == 0 ? 5 : 1;
+    }
+    if (k == 9) {
+        if (mod_i128(L, 9) == 0) return 9;
+        if (mod_i128(L, 3) == 0) return 3;
+        return 1;
+    }
+    die("unsupported shift prime form");
+}
+
+static bool shift_prime_form_value(u128 N, uint32_t k, u128& value) {
+    u128 L = 0;
+    if (!coeff_minus_one(shift_prime_form_coeff(k), N, L)) return false;
+    u128 d = shift_prime_form_divisor(k, L);
+    if (L % d != 0) return false;
+    value = L / d;
+    return true;
+}
+
+static bool shift_prime_forms_ok(u128 N, const std::vector<uint32_t>& shifts) {
+    for (uint32_t k : shifts) {
+        u128 value = 0;
+        if (!shift_prime_form_value(N, k, value) || !is_prime128(value)) return false;
+    }
+    return true;
+}
+
 static bool guaranteed_by_branch(uint32_t k, int branch) {
     if (k == 1 || k == 2 || k == 3 || k == 4 || k == 6 || k == 8 || k == 12) {
         return true;
@@ -810,6 +943,12 @@ struct AffineForm {
     i128 b;
 };
 
+struct DivAffineForm {
+    u128 a;
+    i128 b;
+    u128 d;
+};
+
 static bool eval_affine_u128(const AffineForm& form, u128 x, u128& out) {
     u128 prod = 0;
     if (!checked_mul(form.a, x, prod)) return false;
@@ -842,7 +981,42 @@ struct Args {
     std::vector<u128> extra_prime_coeffs;
     std::vector<AffineForm> extra_prime_forms;
     std::vector<AffineForm> extra_prime_n_forms;
+    std::vector<DivAffineForm> extra_prime_n_div_forms;
+    std::vector<uint32_t> extra_prime_shift_forms;
+    std::vector<uint32_t> prefilter_shifts;
 };
+
+static std::vector<uint32_t> parse_shift_list(const std::string& text) {
+    std::vector<uint32_t> shifts;
+    std::unordered_set<uint32_t> seen;
+    std::stringstream ss(text);
+    std::string part;
+    while (std::getline(ss, part, ',')) {
+        if (part.empty()) continue;
+        uint32_t k = parse_u32(part, "--prefilter-shifts");
+        if (!exact_shift_is_implemented(k)) {
+            die("no exact prefilter implemented for shift " + std::to_string(k));
+        }
+        if (seen.insert(k).second) shifts.push_back(k);
+    }
+    return shifts;
+}
+
+static std::vector<uint32_t> parse_shift_prime_form_list(const std::string& text) {
+    std::vector<uint32_t> shifts;
+    std::unordered_set<uint32_t> seen;
+    std::stringstream ss(text);
+    std::string part;
+    while (std::getline(ss, part, ',')) {
+        if (part.empty()) continue;
+        uint32_t k = parse_u32(part, "--extra-prime-shift-forms");
+        if (!shift_prime_form_is_implemented(k)) {
+            die("no conditional prime form implemented for shift " + std::to_string(k));
+        }
+        if (seen.insert(k).second) shifts.push_back(k);
+    }
+    return shifts;
+}
 
 static Args parse_args(int argc, char** argv) {
     Args a;
@@ -902,6 +1076,27 @@ static Args parse_args(int argc, char** argv) {
                 i128 bb = parse_i128(part.substr(colon + 1));
                 a.extra_prime_n_forms.push_back({aa, bb});
             }
+        }
+        else if (key == "--extra-prime-n-div-forms") {
+            std::stringstream ss(need());
+            std::string part;
+            while (std::getline(ss, part, ',')) {
+                if (part.empty()) continue;
+                size_t first = part.find(':');
+                size_t second = first == std::string::npos ? std::string::npos : part.find(':', first + 1);
+                if (first == std::string::npos || second == std::string::npos) {
+                    die("extra prime divided N-forms must be A:B:D triples");
+                }
+                u128 aa = parse_u128(part.substr(0, first));
+                i128 bb = parse_i128(part.substr(first + 1, second - first - 1));
+                u128 dd = parse_u128(part.substr(second + 1));
+                if (dd == 0) die("divided N-form denominator must be positive");
+                a.extra_prime_n_div_forms.push_back({aa, bb, dd});
+            }
+        }
+        else if (key == "--prefilter-shifts") a.prefilter_shifts = parse_shift_list(need());
+        else if (key == "--extra-prime-shift-forms") {
+            a.extra_prime_shift_forms = parse_shift_prime_form_list(need());
         }
         else {
             die("unknown arg " + key);
@@ -998,6 +1193,24 @@ static bool make_N_affine_form(const AffineForm& n_form, const Args& args, Affin
     return true;
 }
 
+static bool make_N_div_affine_form(const DivAffineForm& n_form, const Args& args, AffineForm& out) {
+    u128 slope_num = 0;
+    if (!checked_mul(n_form.a, args.variable_mod, slope_num)) return false;
+    if (slope_num % n_form.d != 0) return false;
+    u128 slope = slope_num / n_form.d;
+
+    u128 rem_part = 0;
+    if (!checked_mul(n_form.a, args.variable_rem, rem_part)) return false;
+
+    i128 intercept_num = 0;
+    if (!add_u128_i128(rem_part, n_form.b, intercept_num)) return false;
+    i128 denom = u128_to_i128_checked(n_form.d, "divided affine denominator");
+    if (intercept_num % denom != 0) return false;
+    i128 intercept = intercept_num / denom;
+    out = {slope, intercept};
+    return true;
+}
+
 static bool check_prime_coeff(u128 coeff, u128 N) {
     u128 value = 0;
     return coeff_minus_one(coeff, N, value) && is_prime128(value);
@@ -1086,6 +1299,85 @@ static void mark_roots(std::vector<uint8_t>& alive, u128 seg_start, uint32_t len
     }
 }
 
+struct GenericRootInfo {
+    u64 modulus = 0;
+    std::vector<u64> roots;
+};
+
+static void add_conditional_shift_roots(std::unordered_map<u64, std::vector<u64>>& roots_by_modulus,
+                                        uint32_t k, const Args& args, int p, u64 split_mod) {
+    u128 coeff = shift_prime_form_coeff(k);
+    u64 modulus = split_mod * (u64)p;
+    std::vector<u64>& roots = roots_by_modulus[modulus];
+
+    for (u64 c = 0; c < split_mod; ++c) {
+        u128 N0 = 0;
+        u128 mc = 0;
+        if (!checked_mul(args.variable_mod, (u128)c, mc) ||
+            !checked_add(mc, args.variable_rem, N0)) {
+            die("conditional shift root construction overflows N0");
+        }
+
+        u128 prod = 0;
+        if (!checked_mul(coeff, N0, prod)) die("conditional shift root construction overflows L0");
+        i128 intercept_num = 0;
+        if (!add_u128_i128(prod, -1, intercept_num)) {
+            die("conditional shift root construction overflows intercept");
+        }
+        u128 divisor = shift_prime_form_divisor_signed(k, intercept_num);
+        i128 denom = u128_to_i128_checked(divisor, "conditional shift divisor");
+        if (intercept_num % denom != 0) die("conditional shift divisor is not integral");
+
+        u128 slope_num = 0;
+        if (!checked_mul(coeff, args.variable_mod, slope_num) ||
+            !checked_mul(slope_num, (u128)split_mod, slope_num)) {
+            die("conditional shift root slope overflows");
+        }
+        if (slope_num % divisor != 0) die("conditional shift slope is not integral");
+
+        u64 am = (u64)((slope_num / divisor) % (u128)p);
+        u64 bm = (u64)mod_i128(intercept_num / denom, p);
+        if (am == 0) {
+            if (bm == 0) {
+                for (int y = 0; y < p; ++y) roots.push_back(c + split_mod * (u64)y);
+            }
+            continue;
+        }
+        u64 root_y = ((u64)(p - bm) * (u64)inv_mod((int)am, p)) % (u64)p;
+        roots.push_back(c + split_mod * root_y);
+    }
+}
+
+static std::vector<GenericRootInfo> compute_conditional_shift_roots(
+    const Args& args, const std::vector<int>& primes, u64 split_mod) {
+    std::unordered_map<u64, std::vector<u64>> roots_by_modulus;
+    for (uint32_t k : args.extra_prime_shift_forms) {
+        for (int p : primes) {
+            add_conditional_shift_roots(roots_by_modulus, k, args, p, split_mod);
+        }
+    }
+
+    std::vector<GenericRootInfo> infos;
+    infos.reserve(roots_by_modulus.size());
+    for (auto& item : roots_by_modulus) {
+        std::vector<u64>& roots = item.second;
+        std::sort(roots.begin(), roots.end());
+        roots.erase(std::unique(roots.begin(), roots.end()), roots.end());
+        infos.push_back({item.first, roots});
+    }
+    return infos;
+}
+
+static void mark_generic_roots(std::vector<uint8_t>& alive, u128 seg_start, uint32_t len,
+                               const GenericRootInfo& info) {
+    if (info.modulus == 0) return;
+    u64 rem = (u64)(seg_start % (u128)info.modulus);
+    for (u64 root : info.roots) {
+        u64 off = (root + info.modulus - rem) % info.modulus;
+        for (u64 j = off; j < (u64)len; j += info.modulus) alive[(size_t)j] = 0;
+    }
+}
+
 static bool compute_N(const Args& args, u128 X, u128& N) {
     u128 prod = 0;
     if (!checked_mul(args.variable_mod, X, prod)) return false;
@@ -1103,6 +1395,13 @@ static bool run_scan(const Args& args, const std::vector<int>& primes) {
     for (const auto& n_form : args.extra_prime_n_forms) {
         AffineForm form;
         if (!make_N_affine_form(n_form, args, form)) die("affine extra N-form overflows int128");
+        extra_x_forms.push_back(form);
+    }
+    for (const auto& n_form : args.extra_prime_n_div_forms) {
+        AffineForm form;
+        if (!make_N_div_affine_form(n_form, args, form)) {
+            die("divided affine extra N-form is not integral for this residue class");
+        }
         extra_x_forms.push_back(form);
     }
 
@@ -1132,6 +1431,8 @@ static bool run_scan(const Args& args, const std::vector<int>& primes) {
         common_root_infos.push_back(compute_roots_for_prime(p, common_forms));
         branch_a_root_infos.push_back(compute_roots_for_prime(p, branch_a_forms));
     }
+    std::vector<GenericRootInfo> conditional_root_infos =
+        compute_conditional_shift_roots(args, primes, 45);
 
     u128 end = 0;
     if (!checked_add(args.start, args.count, end)) die("--start + --count overflows uint128");
@@ -1155,6 +1456,9 @@ static bool run_scan(const Args& args, const std::vector<int>& primes) {
         for (const auto& info : common_root_infos) {
             mark_roots(alive_common, base, len, info);
         }
+        for (const auto& info : conditional_root_infos) {
+            mark_generic_roots(alive_common, base, len, info);
+        }
         alive_a = alive_common;
         for (const auto& info : branch_a_root_infos) {
             mark_roots(alive_a, base, len, info);
@@ -1165,7 +1469,18 @@ static bool run_scan(const Args& args, const std::vector<int>& primes) {
             u128 N = 0;
             if (!compute_N(args, X, N)) die("N = variable_mod * X + variable_rem overflows uint128");
             if (args.require_mod != 1 && N % args.require_mod != args.require_rem) continue;
+            bool possible_branch = ((N & 1) == 0 && alive_a[(size_t)i]) ||
+                                   ((N & 1) == 1 && alive_common[(size_t)i]);
+            if (!possible_branch) continue;
             if (!check_extra_prime_forms(X, extra_x_forms)) continue;
+            if (!args.extra_prime_shift_forms.empty() &&
+                !shift_prime_forms_ok(N, args.extra_prime_shift_forms)) {
+                continue;
+            }
+            if (!args.prefilter_shifts.empty() &&
+                !exact_shifts_ok(N, args.prefilter_shifts)) {
+                continue;
+            }
 
             int branch = 0;
             if ((N & 1) == 0 && alive_a[(size_t)i] &&

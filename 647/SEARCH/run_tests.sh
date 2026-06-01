@@ -2,6 +2,7 @@
 set -euo pipefail
 
 c++ -O3 -std=c++17 -march=native SEARCH/prime_tuple_search.cpp -o SEARCH/prime_tuple_search
+c++ -O3 -std=c++17 -march=native SEARCH/prime_tuple_search128.cpp -o SEARCH/prime_tuple_search128
 c++ -O3 -std=c++17 -march=native SEARCH/record_sieve.cpp -o SEARCH/record_sieve
 c++ -O3 -std=c++17 SEARCH/residue_classes.cpp -o SEARCH/residue_classes
 
@@ -30,5 +31,26 @@ grep -q '^FAIL n=604517614941240 k=14' "$tmp"
   --report-survive 10 \
   --print-fails > "$tmp"
 grep -q 'SURVIVE branch=B N=239887942437 n=604517614941240 first_fail_k=14' "$tmp"
+
+./SEARCH/prime_tuple_search128 \
+  --start 59845588255683945 \
+  --count 1 \
+  --segment 1 \
+  --sieve-limit 10000 \
+  --quick-shift 25 \
+  --report-survive 15 \
+  --stats \
+  --extra-prime-shift-forms 5,9,10 > "$tmp"
+grep -q 'SURVIVE branch=B N=59845588255683945 n=150810882404323541400 first_fail_k=21' "$tmp"
+
+./SEARCH/prime_tuple_search128 \
+  --start 113432449033802613 \
+  --count 1 \
+  --segment 1 \
+  --sieve-limit 10000 \
+  --quick-shift 25 \
+  --stats \
+  --extra-prime-shift-forms 5,9,10 > "$tmp"
+grep -q '^DONE start=113432449033802613 count=1 prime_tuples=0 quick_pass=0$' "$tmp"
 
 echo "all tests passed"

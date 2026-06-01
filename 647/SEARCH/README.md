@@ -81,10 +81,16 @@ This is used with the 41-class reduction modulo `46189`. The
 the `X` variable and requires each `A*X+B` to be prime. The
 `--extra-prime-n-forms` option is the same condition in the `N` variable,
 so `315:-2` requires `315N-2` to be prime after conversion to the active
-residue progression. These options support restrictive subsearches and exact
-split-residue filters such as `(504N-1)/5`, `(280N-1)/3`, `(280N-1)/9`, and
-`(252N-1)/5` when the chosen variable modulus makes the division integral for
-all `X`.
+residue progression. `--extra-prime-n-div-forms A:B:D` similarly requires
+`(A*N+B)/D` to be prime when that division is integral on the active
+progression.
+
+For complete large-`N` scans, `--extra-prime-shift-forms 5,9,10` is stronger:
+it conditionally sieves and tests the divided cofactors forced by shifts
+`k=5,9,10`, allowing `(504N-1)/5`, `(280N-1)/3`, `(280N-1)/9`, and
+`(252N-1)/5` exactly when the current `N` congruence requires the division.
+For `N > 24`, these are necessary prime conditions, not merely a restrictive
+subsearch.
 
 The range driver records reproducible logs for complete residue scans. For
 example, this covers `3*10^15 <= N < 7320136537186331`, the largest range
@@ -142,15 +148,19 @@ python3 SEARCH/run_residue_scan.py \
   --segment 10000000 \
   --sieve-limit 10000 \
   --quick-shift 5000 \
-  --report-survive 15
+  --report-survive 15 \
+  --extra-arg=--extra-prime-shift-forms \
+  --extra-arg=5,9,10
 ```
 
 ## Restrictive Subsearch
 
-The option below additionally requires `504N-1`, `280N-1`, and `252N-1` to
-be prime. This is useful for finding very prime-rich near misses, but it is
-not complete: shifts `k=5,9,10` allow some composite cases such as `5p`,
-`3p`, or `9p` in the corresponding cofactors.
+The option below additionally requires the undivided forms `504N-1`,
+`280N-1`, and `252N-1` to be prime. This is useful for finding very
+prime-rich near misses, but it is not complete: shifts `k=5,9,10` allow
+necessary divided prime cases such as `5p`, `3p`, or `9p` in the
+corresponding cofactors. Use `--extra-prime-shift-forms 5,9,10` for the
+complete conditional version.
 
 ```sh
 ./SEARCH/prime_tuple_search \
@@ -165,5 +175,5 @@ not complete: shifts `k=5,9,10` allow some composite cases such as `5p`,
 ```
 
 For shifts whose useful cofactor is not of the form `cN-1`, use
-`--extra-prime-n-forms`; for example, `315:-2` asks for the `k=16` cofactor
-`315N-2` to be prime.
+`--extra-prime-n-forms` or `--extra-prime-n-div-forms`; for example,
+`315:-2` asks for the `k=16` cofactor `315N-2` to be prime.
