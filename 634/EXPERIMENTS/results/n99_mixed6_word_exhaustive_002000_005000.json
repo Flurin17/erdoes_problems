@@ -1,0 +1,89 @@
+{
+  "classification_mode": "exhaustive",
+  "classified_groups": 3000,
+  "classified_weight": 41460,
+  "classified_words": 3000,
+  "elapsed_seconds": 463.971505,
+  "endpoint_groups": 20,
+  "example_words": {
+    "corner-label-violation": [
+      {
+        "multiplicity": 3,
+        "statuses": {
+          "corner-label-violation": 3
+        },
+        "word": "L=baabbbccb R=aabbbbbcc B=baabbcacc"
+      }
+    ],
+    "pinch-sector-obstruction": [
+      {
+        "multiplicity": 9,
+        "statuses": {
+          "pinch-sector-obstruction": 9
+        },
+        "word": "L=bbababccb R=abbabbbcc B=baabaccbc"
+      }
+    ],
+    "split-corner-label-obstruction": [
+      {
+        "multiplicity": 3,
+        "statuses": {
+          "split-corner-label-obstruction": 3
+        },
+        "word": "L=bbaabbccb R=aabbbbbcc B=baabbcacc"
+      }
+    ]
+  },
+  "first_classified_group_index": 2001,
+  "first_classified_word_index": 2001,
+  "last_classified_group_index": 5000,
+  "last_classified_word_index": 5000,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "mixed_example_words": [],
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "profile_groups": null,
+  "quotient": "word",
+  "quotient_groups": 418260,
+  "radicand": 1,
+  "reps_per_group": 1,
+  "reps_per_word": 1,
+  "skip_classified_groups": 2000,
+  "skip_classified_words": 2000,
+  "status_group_counts": {
+    "corner-label-violation": 1580,
+    "pinch-sector-obstruction": 340,
+    "split-corner-label-obstruction": 1080
+  },
+  "status_signatures": {
+    "{\"corner-label-violation\": 12}": 180,
+    "{\"corner-label-violation\": 13}": 60,
+    "{\"corner-label-violation\": 15}": 180,
+    "{\"corner-label-violation\": 18}": 320,
+    "{\"corner-label-violation\": 21}": 180,
+    "{\"corner-label-violation\": 24}": 180,
+    "{\"corner-label-violation\": 3}": 360,
+    "{\"corner-label-violation\": 9}": 120,
+    "{\"pinch-sector-obstruction\": 9}": 340,
+    "{\"split-corner-label-obstruction\": 12}": 180,
+    "{\"split-corner-label-obstruction\": 15}": 180,
+    "{\"split-corner-label-obstruction\": 18}": 180,
+    "{\"split-corner-label-obstruction\": 21}": 180,
+    "{\"split-corner-label-obstruction\": 24}": 180,
+    "{\"split-corner-label-obstruction\": 3}": 180
+  },
+  "status_weight_counts": {
+    "corner-label-violation": 21660,
+    "pinch-sector-obstruction": 3060,
+    "split-corner-label-obstruction": 16740
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_count_mismatches": [],
+  "word_groups": 418260
+}
