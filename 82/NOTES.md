@@ -4263,3 +4263,9 @@ source of growth beyond Ramsey.
   `Q/n^2` values `190/18^2≈0.586` over `80` graphs at `n=18` and
   `249/20^2=0.6225` over `40` graphs at `n=20`; these random graphs are far
   from the structured rooted-bouquet ratio `57/196≈0.291`.
+- 2026-06-01: Weakened the square-spectrum target to the right threshold.
+  Conditional Corollary 28J.10e.0a shows that any bound
+  `Q(G)>=c|G|^{1+epsilon}` with fixed `epsilon>0` already gives polynomial
+  `G(k)`.  Lemma 28J.10e.4 proves that regular-feedback partitions with
+  distinct core degrees give `Q>=n^{3/2}/3`; if such a decomposition could be
+  generalized beyond the known no-feedback obstructions, it would suffice.

@@ -15676,6 +15676,44 @@ for `M>=N_0`.  Hence the two alternatives cannot both fail once
 `M > (h-1)^{3/2}/sqrt(2c)`.  This proves `D_spec(h)=O_c(h^{3/2})`, and
 Corollary 28I gives `G(k)<=D_spec(2k)=O_c(k^{3/2})`.  QED.
 
+**Conditional Corollary 28J.10e.0a: Superlinear Square Spectrum Would
+Suffice.**  Suppose there are constants `c>0`, `epsilon>0`, and `N_0` such
+that every graph `J` on `N>=N_0` vertices satisfies
+
+```text
+Q(J) >= cN^{1+epsilon}.
+```
+
+Then
+
+```text
+G(k)=O_{c,epsilon}(k^{3/(1+epsilon)}).
+```
+
+In particular Erdős Problem 82 follows.
+
+Proof.  Repeat the proof of Conditional Corollary 28J.10e.  If the two
+alternatives in the definition of `D_spec(h)` both fail for two `M`-vertex
+graphs, then
+
+```text
+Q(J_1)+Q(J_2) <= (h-1)^3.
+```
+
+The assumed lower bound gives
+
+```text
+Q(J_1)+Q(J_2) >= 2cM^{1+epsilon}
+```
+
+for `M>=N_0`.  Hence
+
+```text
+D_spec(h)=O_{c,epsilon}(h^{3/(1+epsilon)}).
+```
+
+Corollary 28I gives `G(k)<=D_spec(2k)`, proving the claim.  QED.
+
 The script `EXPERIMENTS/spectrum_power_search.py` was added to search this
 functional.  Exact labelled enumeration through seven vertices gives minimum
 `Q/n^2` equal to `29/49` at `n=7`.  The fourteen-vertex linear-mass
@@ -15771,6 +15809,64 @@ Q(G) >= |A|^2+|B|^2 >= (|A|+|B|)^2/2.
 ```
 
 This is stronger than the displayed `n^2/4` bound.  QED.
+
+**Lemma 28J.10e.4: Regular Feedback Partitions Have Superlinear Square
+Spectrum.**  Suppose `G` has a partition
+
+```text
+V(G)=F union R_1 union ... union R_t
+```
+
+such that `G[F]` is a forest and, for each `i`, `G[R_i]` is induced
+`d_i`-regular, where
+
+```text
+2 <= d_1 < d_2 < ... < d_t.
+```
+
+Then, for `n=|V(G)|`,
+
+```text
+Q(G) >= n^{3/2}/3.
+```
+
+Proof.  Put `f=|F|` and `r_i=|R_i|`.  The forest part contributes at least
+`f^2/2` to `Q(G)` in degrees `0` and `1`, by Lemma 28J.10e.1.  Each regular
+part contributes `r_i^2` in degree `d_i`, and the degrees `d_i` are distinct
+and at least `2`.  Therefore
+
+```text
+Q(G) >= f^2/2 + r_1^2+...+r_t^2.
+```
+
+By Cauchy's inequality, treating the forest contribution as two bins of total
+size `f`, this is at least
+
+```text
+n^2/(t+2).
+```
+
+It remains to bound `t`.  Since an induced `d_i`-regular graph has at least
+`d_i+1` vertices and the `d_i` are distinct integers at least `2`,
+
+```text
+n >= r_1+...+r_t >= 3+4+...+(t+2).
+```
+
+In particular `t+2 <= 3 sqrt(n)` for all `n>=1`.  Hence
+
+```text
+Q(G) >= n^2/(t+2) >= n^{3/2}/3.
+```
+
+QED.
+
+Thus, if every graph admitted a regular feedback partition of the type in
+Lemma 28J.10e.4, Conditional Corollary 28J.10e.0a with `epsilon=1/2` would
+prove Erdős Problem 82.  Earlier counterexamples show that this exact
+partition theorem is false, but the lemma identifies the amount of square
+spectrum supplied by any successful decomposition into a forest plus
+distinct-degree regular cores.
 
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
