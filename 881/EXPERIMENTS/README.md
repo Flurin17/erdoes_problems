@@ -219,7 +219,8 @@ On the strict seed run, all such promotion flags are false.
 `spike_no_promotion_gadget.py` verifies a range-separated local gadget where
 a rank-three witness has a shifted-overlap spike on one deleted pair, but
 every pair deletion is harmless at that same witness because the remaining
-active color repairs it. This records Diagnostic 8.5a.7z.12.
+active color repairs it. This records Diagnostic 8.5a.7z.12; Example
+8.5a.7z.12a gives the corresponding arbitrary-size finite construction.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

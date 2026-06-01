@@ -8447,6 +8447,116 @@ the local promotion
 \]
 is false without an additional recurrence or barrier argument.
 
+### Example 8.5a.7z.12a: Arbitrarily large nonpromoting shifted spikes
+
+The preceding diagnostic is not an isolated numerical accident. For every
+finite nonempty set
+\[
+U\subset\mathbb N
+\]
+and every nonzero positive shift \(h\), choose \(N\) so large that
+\[
+N>10(\max U+h+1).
+\]
+Put
+\[
+w=100N,\qquad f=10N+h,\qquad g=10N,\qquad k=20N,
+\]
+\[
+F=\{f,g,k\},
+\]
+and
+\[
+C=U\cup(U+h)\cup\{90N-h-u:u\in U\}
+  \cup\{30N,37N,43N,60N\}.
+\]
+Let
+\[
+A_0=C\cup F.
+\]
+Then:
+
+1. \(w\notin3C\);
+2. \(F\) is inclusion-minimal for the witness \(w\);
+3. deleting any two points of \(F\) still leaves a representation of \(w\)
+   from \(A_0\);
+4. the pair \(\{f,g\}\) carries a shifted-overlap spike on \(U\):
+   \[
+   w=f+u+(90N-h-u),\qquad u+f=g+(u+h)\qquad(u\in U);
+   \]
+5. if \(1\in U\), the retained terminal interval
+   \[
+   (w-\min F-\min A_0,\ w-1]
+   \]
+   is disjoint from \(C\).
+
+Proof. The repair identities in (4) are immediate, and they also show that
+restoring \(f\) repairs \(w\). Restoring \(g\) repairs \(w\) by
+\[
+w=g+(u+h)+(90N-h-u)\qquad(u\in U),
+\]
+and restoring \(k\) repairs \(w\) by
+\[
+w=k+37N+43N. \tag{1}
+\]
+Thus \(F\) is inclusion-minimal once \(w\notin3C\) is proved. Moreover,
+after deleting \(\{f,g\}\), (1) remains; after deleting \(\{f,k\}\), the
+\(g\)-repair remains; after deleting \(\{g,k\}\), the \(f\)-repair remains.
+This proves (2) and (3), assuming (1).
+
+It remains to check that \(w\notin3C\). Let
+\[
+B=\max U+h.
+\]
+The set \(C\) is contained in the union of the low interval \([1,B]\), the
+four middle points
+\[
+30N,\quad37N,\quad43N,\quad60N,
+\]
+and the high interval
+\[
+[90N-h-\max U,\ 90N-h-\min U].
+\]
+A sum using at least two high terms exceeds \(w\), while a sum using one
+high term and one middle term also exceeds \(w\). A sum using one high term
+and two low terms is at most
+\[
+90N-h-\min U+2B<92N<w,
+\]
+by the choice of \(N\). Thus no representation of \(w\) uses a high term.
+
+Without high terms, a sum with at most one middle term is less than
+\[
+60N+2B<61N.
+\]
+A sum with two middle terms has middle-part coefficient in
+\[
+\{60,67,73,74,80,86,90,97,103,120\}N.
+\]
+Adding one low term cannot reach \(100N\), because the only positive gap
+below \(100N\) that is smaller than \(N\) would have to occur among these
+coefficients, and none does. A sum of three middle terms has coefficient in
+\[
+\{90,97,103,104,110,111,116,117,120,123,
+  127,129,133,134,140,146,150,157,163,180\}N,
+\]
+which again never equals \(100N\). This proves \(w\notin3C\).
+
+Finally assume \(1\in U\), so \(\min A_0=1\) and \(\min F=g=10N\). The
+left endpoint of the terminal interval is
+\[
+w-g-1=90N-1.
+\]
+Every high retained point is at most \(90N-h-1\le90N-2\), and all other
+retained points are far below. Hence the displayed terminal interval is
+disjoint from \(C\). \(\square\)
+
+Thus the nonpromotion obstruction can have arbitrarily large shifted fibers
+even in the terminal-gap normal form. The finite local data from Lemma
+8.5a.7z.10 cannot by itself produce pair-cylinder debt; the proof must use
+global repetition, palette stabilization, or some additional pressure from
+the product-selector barrier.
+
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
 Work in the remaining \(k=2\) counterexample case. Fix a finite row test
@@ -15234,6 +15344,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 8.5a.7z.12 gives a range-separated finite gadget where a
   shifted-overlap pair spike is repaired by a third active color, so local
   spike support does not imply pair debt.
+* Example 8.5a.7z.12a makes that obstruction arbitrary-size: terminal
+  rank-three holes can carry shifted-overlap spikes of any finite size
+  while all pair deletions inside the active triple remain harmless at the
+  same witness.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7h identifies the current live obstruction: large private

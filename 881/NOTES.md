@@ -2346,6 +2346,10 @@ the product-window clutter: a rank-three witness can contain a large
 shifted-overlap spike on a pair \(\{f,g\}\), but deleting \(\{f,g\}\) still
 leaves a third active color \(k\) that repairs the witness. Local spike
 support does not imply pair debt.
+Example 8.5a.7z.12a generalizes this diagnostic: for arbitrarily large
+finite row sets \(U\), a range-separated rank-three terminal hole can carry
+a shifted-overlap spike \(U+f-g\subset A\) while every pair deletion inside
+\(\{f,g,k\}\) is harmless at the same witness.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed
