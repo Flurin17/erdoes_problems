@@ -2634,6 +2634,11 @@ contains an inclusion-minimal hole keeping \(d\), Lemma 8.5a.8b promotes it
 to a full active fixed-rank prefix shell, forbidden by 13.1l.2b--f. Hence a
 surviving section must either drop \(d\) or have unbounded active suffix
 rank on every tail.
+Target 13.1l.2k is the exact remaining fixed-section gap: after excluding
+tail descent, all active traces contain \(d\), but their suffix ranks are
+unbounded on every tail. Existing private-color normal forms are
+unanchored and do not yet promote these large traces to a bounded-rank
+complete prefix shell or to a proper active subtrace.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

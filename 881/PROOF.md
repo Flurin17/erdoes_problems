@@ -16450,6 +16450,53 @@ first point, or have unbounded active suffix rank on every tail. This is
 the remaining distinction needed to turn Proposition 13.1l.2i from a
 conditional closure into an unconditional \(k=2\) proof.
 
+### Target 13.1l.2k: Fixed first point with unbounded active suffix rank
+
+The remaining section-local gap is now precise. Fix a first point
+\[
+d\in A
+\]
+in a recursive section. After removing the genuine descent branch, every
+sufficiently late inclusion-minimal active trace in that section contains
+\[
+d.
+\]
+Corollary 13.1l.2j rules out the case where the suffix
+\[
+F\setminus\{d\}
+\]
+has bounded size on some tail. Thus a surviving section must satisfy:
+for every infinite tail \(Y\) and every \(q,L\), there is an
+inclusion-minimal hole
+\[
+F=\{d\}\cup H,\qquad H\subset Y,\qquad |H|>q,
+\]
+with witness \(w>L\) and
+\[
+w\notin3(A\setminus F). \tag{1}
+\]
+
+This is not yet a fixed-rank prefix shell. Proposition 8.4f gives the
+private-color normal form for each such \(F,w\), but its quantifiers are
+unanchored:
+\[
+\forall T,\ \forall X,\ \forall L,\ \exists F\subset X.
+\]
+It does not by itself give a bounded
+\[
+q(d)
+\]
+or a complete link over all \(q(d)\)-subsets of a tail. Nor does Lemma
+13.1l.2g help before such a fixed-rank packet has been promoted; that lemma
+only shrinks a packet after the complete prefix-link structure is already
+available.
+
+Therefore the final \(k=2\) promotion problem is to show that the
+unbounded-rank fixed-first traces in (1) force one of the already closed
+private-color alternatives: a finite moving-label palette, a recurrent
+certificate, a bounded-rank active subtrace still containing \(d\), or a
+proper tail descent after all.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18296,6 +18343,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 13.1l.2j proves the bounded fixed-section part of that
   promotion principle: bounded active suffix rank keeping a fixed first
   point promotes to a forbidden full active fixed-rank shell.
+* Target 13.1l.2k isolates the only remaining fixed-section escape:
+  unbounded-rank inclusion-minimal traces that keep the fixed first point
+  on every tail, without yet promoting to a bounded active subtrace or
+  proper tail descent.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
