@@ -30,7 +30,11 @@ a root-sized set of endpoints whose translates by the gate have bounded
 two-sum count. Lemma 3.4d.7 and Corollary 3.4d.8 tie both branches back to
 the finite-palette gate machinery: the resulting packets satisfy
 \((U+g-U)\cap A\subset D\) and have uniformly sparse anchored shadows
-against every finite test.
+against every finite test. Corollary 3.4d.9 gives a new positive \(k=3\)
+criterion: if bounded two-sum representation values are eventually explained
+by one finite pin set, then the desired infinite deletion exists at order
+\(4\). Hence any \(k=3\) counterexample must have genuinely fresh unpinned
+bounded two-sum translate rows outside every finite core.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

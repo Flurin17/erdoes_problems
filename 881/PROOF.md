@@ -2662,6 +2662,78 @@ two-gate branch those packets are linearly large inside a reflected slice;
 in the one-gate branch they are only root-large, but they still cannot
 contain large anchored copies of any finite retained test.
 
+### Corollary 3.4d.9: Finitely pinned low-count two-sums satisfy the \(k=3\) conclusion
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) asymptotic basis. Suppose
+there is a finite set \(P\subset A\) such that for every \(Q\ge1\) there is
+\(N_Q\) with the following property:
+whenever
+\[
+s>N_Q,\qquad x,y\in A\setminus P,\qquad s=x+y,
+\]
+one has
+\[
+r_{2,A}(s)>Q. \tag{1}
+\]
+Then there is an infinite \(B\subset A\) such that
+\[
+A\setminus B
+\]
+is an asymptotic basis of order \(4\).
+
+Proof. Suppose, for contradiction, that no infinite deletion from \(A\)
+remains an order-\(4\) basis. Apply Corollary 3.4d.8 with
+\[
+E=P.
+\]
+It gives constants \(Q_E,\eta_E>0\) and arbitrarily large witnesses with a
+set \(D\subset A\setminus P\), a gate \(g\in D\), and a packet
+\[
+U\subset A\setminus(D\cup P)
+\]
+such that
+\[
+g+u\notin2(A\setminus D),\qquad r_{2,A}(g+u)\le Q_E\qquad(u\in U), \tag{2}
+\]
+and
+\[
+|U|\ge\eta_E A(w)^{1/3} \tag{3}
+\]
+in the one-gate branch, or
+\[
+|U|\ge\eta_E A(w) \tag{4}
+\]
+in the two-gate branch.
+
+Let \(N=N_{Q_E}\) be supplied by (1). Since
+\[
+g,u\in A\setminus P
+\]
+for every \(u\in U\), the contrapositive of (1) and (2) imply
+\[
+g+u\le N\qquad(u\in U).
+\]
+Therefore
+\[
+u\le N\qquad(u\in U),
+\]
+and hence
+\[
+|U|\le A(N), \tag{5}
+\]
+a constant depending only on \(Q_E\) and \(P\). But \(A\) is infinite, so
+\[
+A(w)\to\infty
+\]
+along the arbitrarily large witnesses, contradicting either (3) or (4).
+\(\square\)
+
+This extends Corollary 3.4m's finite-pin principle from the closed \(k=2\)
+case to the present \(k=3\) obstruction. A \(k=3\) counterexample cannot
+attribute all bounded two-sum translate rows to finitely many permanent
+pins. It must create genuinely fresh bounded-count two-sum behaviour outside
+every finite protected core, even though \(A\) is an order-\(3\) basis.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27603,6 +27675,10 @@ missing from ordinary minimal order-\(h\) bases.
   \((U+g-U)\cap A\subseteq D\), with uniformly sparse anchored shadows
   against every finite test. This connects the finite-hole normal form back
   to the interval gate-pressure machinery of Lemmas 16.39--16.53.
+* Corollary 3.4d.9 is the \(k=3\) finite-pin positive criterion: if all
+  sufficiently large bounded two-sum representation values are forced to use
+  one fixed finite pin set, then the sparse-shadow packets from Corollary
+  3.4d.8 are impossible, so a good order-\(4\) deletion exists.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
