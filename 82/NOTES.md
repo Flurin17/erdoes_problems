@@ -2814,14 +2814,15 @@ source of growth beyond Ramsey.
   and `19` times in residue `3`; the current irregular candidates had no
   failures in the same samples.  This rules out promoting the
   complete-multipartite clean-slot lemma directly to arbitrary graphs.
-- 2026-06-01: The broader flexible `4 -> 8` partition route remains alive.
-  An exact sweep of all `1184` source-`4`-modular graphs on `7` vertices found
-  a partition into at most `3` induced `8`-modular parts.  Random accepted
-  source-`4`-modular samples also had maximum observed `8`-modular partition
-  count `3`: on `10` vertices, `50` samples gave histogram `1:18, 2:17,
-  3:15`; on `12` vertices, `30` samples gave `1:4, 2:3, 3:23`; with a
+- 2026-06-01: The broader flexible `4 -> 8` partition route remains alive,
+  but the evidence must be interpreted with the existing three-part
+  obstruction in mind.  An exact sweep of all `1184` source-`4`-modular graphs
+  on `7` vertices found a partition into at most `3` induced `8`-modular
+  parts, and random accepted source-`4`-modular samples also had maximum
+  observed count `3`: on `10` vertices, `50` samples gave histogram `1:18,
+  2:17, 3:15`; on `12` vertices, `30` samples gave `1:4, 2:3, 3:23`; with a
   `3`-part cap, `50` samples on `12` vertices gave `1:8, 2:4, 3:38`, and
-  `20` samples on `14` vertices gave `1:1, 3:19`.  This is only evidence for
-  a flexible bounded-part dyadic theorem, but it suggests that the obstruction
-  is fixed-residue rigidity rather than the number of parts at the `4 -> 8`
-  level.
+  `20` samples on `14` vertices gave `1:1, 3:19`.  However Proposition 4E.4
+  already gives a disjoint-union source-`2 mod 4` obstruction to any universal
+  three-part `4 -> 8` theorem.  These checks therefore support only the
+  four-part dyadic route, not a renewed three-part conjecture.
