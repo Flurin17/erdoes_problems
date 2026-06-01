@@ -3020,3 +3020,9 @@ source of growth beyond Ramsey.
   extraction improves the ordered representative step before asymptotic
   questions.  Searches at `13` and `14` vertices reached `100,000` nodes at
   depth `8` without a certificate and were stopped.
+- 2026-06-01: Added Lemma 28E.3a.  The sliding-window inversion-free graph
+  that makes the homogeneous chain/antichain bound sharp is not a regular
+  obstruction: grouping intervals of length `q-1` separated by gaps of
+  `q-1` gives an induced complete multipartite regular subgraph on
+  `(1/2+o(1))q^2` vertices.  Therefore lower examples for `C_reg(1,h)` must
+  be subtler than the standard homogeneous sharpness construction.

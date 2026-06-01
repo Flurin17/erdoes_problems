@@ -9715,6 +9715,44 @@ example, the sliding-window graph above itself contains large complete
 multipartite regular induced subgraphs.  The obstruction is specifically to
 the homogeneous extraction used in Proposition 28F.
 
+**Lemma 28E.3a: The Sliding-Window Example Is Regularly Easy.**  In the
+sliding-window graph from Lemma 28E.3 on vertices `1,...,q^2`, where
+`ij` is an edge exactly when `|i-j|>=q`, there is a regular induced subgraph
+on at least
+
+```text
+(q-1)(floor((q^2-q+1)/(2q-2))+1) = (1/2+o(1))q^2
+```
+
+vertices.
+
+Proof.  Put `s=q-1` and `d=2q-2`.  For every integer
+
+```text
+0 <= t <= floor((q^2-q+1)/(2q-2)),
+```
+
+take the block
+
+```text
+B_t={1+td, 2+td, ..., q-1+td}.
+```
+
+The displayed upper bound on `t` is exactly the condition that the last
+vertex of `B_t` is at most `q^2`.  Inside a single block, all pairwise
+distances are at most `q-2`, so the block is independent.  Between consecutive
+blocks, the distance from the last vertex of `B_t` to the first vertex of
+`B_{t+1}` is
+
+```text
+(1+(t+1)d) - (q-1+td) = q,
+```
+
+so every vertex of `B_t` is adjacent to every vertex of every later block.
+Thus the union of these blocks induces a complete multipartite graph with
+equal part size `q-1`.  It is therefore regular, and its order is the
+displayed number.  QED.
+
 **Definition 28E.4: The Column-Drop Ordered Parameter.**  For integers
 `P,h>=1`, let `C_drop(P,h)` be the least integer `m` such that every ordered
 graph `H` on vertices
