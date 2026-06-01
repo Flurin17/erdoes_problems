@@ -10422,6 +10422,35 @@ average value of `sigma(u,v)`: every counterexample already has
 must exploit a finer distributional feature of the pair differences or a
 stronger way to use low degree spread.
 
+**Corollary 26A: Bounded Row-Diameter Graphs Are Linearly Easy.**  Let `G`
+be an `n`-vertex graph.  Suppose that for every distinct pair `u,v`,
+
+```text
+|(N(u) triangle N(v))\{u,v}| <= D.
+```
+
+Then
+
+```text
+reg(G) >= (n-1)/(4(2D+1)).
+```
+
+In particular, if the row diameter is at most `2`, then
+
+```text
+reg(G) >= (n-1)/20.
+```
+
+Proof.  The hypothesis gives `bar sigma<=D`.  Substitute this into the
+clique-or-independent-set lower bound from Lemma 26.  QED.
+
+This is the positive counterpart to Corollary 28D.3.  Small row diameter
+inside a whole induced graph is not a hard case at all: it gives a linear
+homogeneous, hence regular, induced subgraph.  The exact-degree bucket
+obstruction is subtler because Corollary 28D.3 controls rows of bucket
+vertices in the ambient graph, while the induced bucket itself may still
+interact with a large and varying exterior.
+
 ## Lemma 27: Pair-Difference Amplification Template
 
 Let `u,v` be two vertices of a graph `G`, and put

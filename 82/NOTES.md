@@ -3395,3 +3395,10 @@ source of growth beyond Ramsey.
   the configuration event counts row stubs hitting columns in `Y_0`; under
   simplicity this equals the distinct-neighbor count, but outside `Simp` it is
   a multiplicity count.
+- 2026-06-01: Added Corollary 26A: if every pair of vertices has
+  neighborhood symmetric difference outside the pair at most `D`, then
+  `reg(G) >= (n-1)/(4(2D+1))`; for row diameter `2` this is `(n-1)/20`.
+  This records the positive side of the row-diameter route: whole induced
+  graphs of bounded row diameter are linearly easy, so the exact-degree bucket
+  difficulty comes from ambient/exterior variation rather than from small
+  internal row diameter alone.
