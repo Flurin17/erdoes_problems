@@ -4077,6 +4077,15 @@ source of growth beyond Ramsey.
   defect-one graph whose spectrum mass drops when the leaf-neighbor is
   deleted.  This focuses the connected target on either minimum-degree-`2`
   graphs with `mu<n`, or non-deletion-tight defect-one graphs.
+- 2026-06-01: Added a `--min-degree` filter to `regular_spectrum_mass.py` and
+  tested the total minimum-degree-`2` spectrum target.  This target is
+  different from the already-refuted high-core shortcut
+  `sum_{d>=2}s_d>=n`: the low coordinates `s_0,s_1` are still allowed.
+  Exact labelled `n=7` with minimum degree at least `2` has minimum
+  `mu=9>7`.  Seeded connected local search at `n=13` starting from the
+  equality graph `1584140989738554425379` stayed at `mu=13`, while connected
+  minimum-degree-`2` searches at `n=14` and `n=16` found best masses `15` and
+  `21`.  No minimum-degree-`2` graph with `mu<n` is currently known.
 - 2026-06-01: Added the square-spectrum route.  Let
   `Q(G)=sum_d s_d(G)^2`.  If `Q(G)>=c|G|^2` for some absolute `c>0`, then
   for two `M`-vertex graphs failing the spectrum match at threshold `h`, each
