@@ -1,0 +1,52 @@
+{
+  "classified_weight": 97032,
+  "classified_words": 40000,
+  "contiguous_prefix": true,
+  "covered_first": 1,
+  "covered_last": 40000,
+  "files": [
+    "n63_mixed8_profile_exhaustive_first10000.json",
+    "n63_mixed8_profile_exhaustive_010000_020000.json",
+    "n63_mixed8_profile_exhaustive_020000_030000.json",
+    "n63_mixed8_profile_exhaustive_030000_040000.json"
+  ],
+  "gaps": [],
+  "intervals": [
+    {
+      "file": "n63_mixed8_profile_exhaustive_first10000.json",
+      "first": 1,
+      "last": 10000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_010000_020000.json",
+      "first": 10001,
+      "last": 20000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_020000_030000.json",
+      "first": 20001,
+      "last": 30000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_030000_040000.json",
+      "first": 30001,
+      "last": 40000
+    }
+  ],
+  "mixed_status_words": 0,
+  "n": 63,
+  "outside_cover_shells": 3382720,
+  "overlaps": [],
+  "quotient_groups": 1493568,
+  "status_weight_counts": {
+    "corner-label-violation": 69966,
+    "pinch-sector-obstruction": 17580,
+    "split-corner-label-obstruction": 9486
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "word_count_mismatches": []
+}

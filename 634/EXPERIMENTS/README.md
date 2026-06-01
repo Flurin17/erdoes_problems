@@ -269,11 +269,11 @@ Current components:
   outside-cover shells; the first `10000` profile groups have no mixed
   representative status, with weighted status counts `23660` corner-label,
   `8370` pinch-sector, and `4320` split-corner-label obstructions.
-  Exhaustively replaying the first `10000` profile groups checks all `36350`
+  Exhaustively replaying the first `40000` profile groups checks all `97032`
   outside-cover realizations in those groups and finds no mixed-status profile
-  group or count mismatch; the exact split matches the representative weights:
-  `23660` corner-label violations, `8370` pinch-sector obstructions, and
-  `4320` split-corner-label obstructions.
+  group or count mismatch. The exact prefix split is `69966` corner-label
+  violations, `17580` pinch-sector obstructions, and `9486`
+  split-corner-label obstructions.
   A generated-shell prefix probe over the first `100000` shells also found no
   mixed-status profile group among `10560` touched groups.
 - `gamma_2alpha_word_invariance_probe.py`: exhaustive fixed-word tester for
@@ -282,7 +282,7 @@ Current components:
   local-overlap cover, and classifies all outside-cover realizations. This is
   the direct falsification harness for the pending word-invariance lemma.
 - `gamma_2alpha_word_exhaustive_summary.py`: verifier for disjoint exhaustive
-  word-quotient interval artifacts. It checks interval lengths, gaps,
+  word/profile-quotient interval artifacts. It checks interval lengths, gaps,
   overlaps, mixed-status words, word-count mismatches, and weighted status
   totals. The complete summary for all `418260` `N=99` mixed-`6` word groups
   is stored in

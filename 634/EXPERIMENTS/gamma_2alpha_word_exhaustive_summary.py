@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarize exhaustive word-quotient interval artifacts."""
+"""Summarize exhaustive word/profile-quotient interval artifacts."""
 
 from __future__ import annotations
 
