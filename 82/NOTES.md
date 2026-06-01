@@ -2887,3 +2887,21 @@ source of growth beyond Ramsey.
   sources.  The next computational step is to keep extending `n=10` chunks or
   to search for a smaller canonical survivor family that persists across
   source residues.
+- 2026-06-01: Extended `source_slots_fast.cpp` to support deterministic
+  random solved-edge probes on `n=11`, quiet kill output, and five-slot
+  candidate multisets.  This found a decisive obstruction to the hoped-for
+  uniform four-slot source-residue theorem: source residue `0 mod 4` has no
+  universal four-slot multiset for the `4 -> 8` lift.  A seeded `n=11` probe
+  with `5000000` internal-bit samples (`2986` accepted source-`0` graphs)
+  kills all but five four-slot multisets; the old candidate
+  `(0,1,2,4)` is killed by mask `11691695018335739`, with degree sequence
+  `8,8,4,4,4,4,8,4,4,4,4`.  The remaining five survivors are killed by
+  complete multipartite source-`0` graphs: `(0,0,2,2)` by
+  `(3,3,3,3,3)`, `(0,1,1,2)` and `(0,1,2,2)` by `(2,6,6)`,
+  `(0,1,2,3)` by `(4,4,4,4,4,4)`, and `(0,2,2,2)` by `(4,8,8,8)`.
+  By Lemma 4E.2 this refutes even a flexible four-part source-`0`
+  `4 -> 8` theorem.  The dyadic route must therefore seek a growing
+  sublinear part bound or a different regular-witness alternative, not a
+  constant four-slot lift at every level.  As calibration, the same `n=11`
+  source-`0` sample leaves `52` of the `792` five-slot multisets alive; this
+  is evidence only, not a five-slot theorem.

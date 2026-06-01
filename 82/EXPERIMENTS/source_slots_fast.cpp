@@ -2,15 +2,18 @@
 //
 // For the lift q -> M, this enumerates labelled graphs whose full vertex set
 // has one common degree residue modulo q, then tests fixed M-modular slot
-// multisets.  The enumeration chooses all edges among the first n-1 vertices
-// and solves the incident edges to the last vertex.  For q=4 this reduces the
-// n=8 search from 2^28 full masks to 2^21 internal masks.
+// multisets.  The exhaustive mode chooses all edges among the first n-1
+// vertices and solves the incident edges to the last vertex.  For q=4 this
+// reduces the n=8 search from 2^28 full masks to 2^21 internal masks.  The
+// random-sample mode uses the same solved-edge representation for deterministic
+// seeded probes at n=10 and n=11.
 
 #include <algorithm>
 #include <array>
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
+#include <random>
 #include <sstream>
 #include <string>
 #include <unordered_set>
@@ -93,29 +96,29 @@ std::string candidate_string(const Candidate& cand) {
     return out.str();
 }
 
-uint64_t state_code(const Candidate& cand, int modulus) {
-    uint64_t pow5 = 1;
+uint64_t state_code(const Candidate& cand, int modulus, int base) {
+    uint64_t place = 1;
     uint64_t code = 0;
     for (int residue = 0; residue < modulus; ++residue) {
         int count = 0;
         for (int slot : cand) {
             if (slot == residue) ++count;
         }
-        code += count * pow5;
-        pow5 *= 5;
+        code += count * place;
+        place *= base;
     }
     return code;
 }
 
-bool has_count(uint64_t code, int residue) {
-    for (int i = 0; i < residue; ++i) code /= 5;
-    return code % 5;
+bool has_count(uint64_t code, int residue, int base) {
+    for (int i = 0; i < residue; ++i) code /= base;
+    return code % base;
 }
 
-uint64_t remove_count(uint64_t code, int residue) {
-    uint64_t pow5 = 1;
-    for (int i = 0; i < residue; ++i) pow5 *= 5;
-    return code - pow5;
+uint64_t remove_count(uint64_t code, int residue, int base) {
+    uint64_t place = 1;
+    for (int i = 0; i < residue; ++i) place *= base;
+    return code - place;
 }
 
 class Checker {
@@ -173,19 +176,20 @@ class Checker {
 
     bool has_partition(const Candidate& cand) {
         failed.clear();
-        return rec(full, state_code(cand, target_modulus));
+        int base = static_cast<int>(cand.size()) + 1;
+        return rec(full, state_code(cand, target_modulus, base), base);
     }
 
   private:
     int n;
     int target_modulus;
     int full;
-    std::vector<std::array<uint64_t, 10>> incident;
+    std::vector<std::array<uint64_t, 12>> incident;
     std::vector<std::vector<int>> submasks_with_pivot;
     std::vector<int> residue;
     std::unordered_set<uint64_t> failed;
 
-    bool rec(int remaining, uint64_t code) {
+    bool rec(int remaining, uint64_t code, int base) {
         if (remaining == 0) return true;
         if (code == 0) return false;
         uint64_t key = (static_cast<uint64_t>(remaining) << 48) | code;
@@ -193,12 +197,12 @@ class Checker {
         int pivot = remaining & -remaining;
         int pivot_index = __builtin_ctz(static_cast<unsigned>(pivot));
         for (int r = 0; r < target_modulus; ++r) {
-            if (!has_count(code, r)) continue;
-            uint64_t next_code = remove_count(code, r);
+            if (!has_count(code, r, base)) continue;
+            uint64_t next_code = remove_count(code, r, base);
             for (int sub : submasks_with_pivot[remaining]) {
                 if (!((sub >> pivot_index) & 1)) continue;
                 if (residue[sub] != r) continue;
-                if (rec(remaining ^ sub, next_code)) return true;
+                if (rec(remaining ^ sub, next_code, base)) return true;
             }
         }
         failed.insert(key);
@@ -215,7 +219,7 @@ uint64_t source_modular_mask(
 ) {
     ok = false;
     uint64_t graph_mask = 0;
-    std::array<int, 10> degrees{};
+    std::array<int, 12> degrees{};
     int bit_index = 0;
     for (int i = 0; i < n - 1; ++i) {
         for (int j = i + 1; j < n - 1; ++j) {
@@ -254,7 +258,10 @@ int main(int argc, char** argv) {
     int slot_count = 4;
     uint64_t start = 0;
     uint64_t limit = 0;
+    uint64_t random_samples = 0;
+    uint64_t seed = 1;
     bool progress = false;
+    bool quiet_kills = false;
     uint64_t progress_every = 262144;
     std::string candidate_text;
 
@@ -276,8 +283,14 @@ int main(int argc, char** argv) {
             start = std::stoull(argv[++i]);
         } else if (arg == "--limit" && i + 1 < argc) {
             limit = std::stoull(argv[++i]);
+        } else if (arg == "--random-samples" && i + 1 < argc) {
+            random_samples = std::stoull(argv[++i]);
+        } else if (arg == "--seed" && i + 1 < argc) {
+            seed = std::stoull(argv[++i]);
         } else if (arg == "--progress") {
             progress = true;
+        } else if (arg == "--quiet-kills") {
+            quiet_kills = true;
         } else if (arg == "--progress-every" && i + 1 < argc) {
             progress_every = std::stoull(argv[++i]);
         } else {
@@ -285,20 +298,22 @@ int main(int argc, char** argv) {
                       << " [--source-modulus q] [--target-modulus M]"
                       << " [--source-residue a]"
                       << " [--candidates r,...;...] [--slot-count B]"
-                      << " [--start S] [--limit L] [--progress]\n";
+                      << " [--start S] [--limit L]"
+                      << " [--random-samples N] [--seed S]"
+                      << " [--progress] [--quiet-kills]\n";
             return 2;
         }
     }
 
-    if (n < 1 || n > 10) {
-        std::cerr << "supported range: 1 <= n <= 10\n";
+    if (n < 1 || n > 11) {
+        std::cerr << "supported range: 1 <= n <= 11\n";
         return 2;
     }
     if (source_modulus <= 0 || target_modulus <= 0 || slot_count <= 0) {
         std::cerr << "invalid modulus or slot count\n";
         return 2;
     }
-    if (target_modulus > 16 || slot_count > 4) {
+    if (target_modulus > 16 || slot_count > 5) {
         std::cerr << "target modulus and slot count are intentionally capped\n";
         return 2;
     }
@@ -323,7 +338,8 @@ int main(int argc, char** argv) {
     Checker checker(n, target_modulus);
 
     uint64_t checked = 0;
-    for (uint64_t bits = start; bits < stop; ++bits) {
+    uint64_t attempted = 0;
+    auto process_bits = [&](uint64_t bits) {
         for (int a = 0; a < source_modulus; ++a) {
             if (source_residue >= 0 && a != source_residue) continue;
             bool ok = false;
@@ -337,17 +353,37 @@ int main(int argc, char** argv) {
                     alive[i] = 0;
                     bad[i] = graph_mask;
                     killed_at_checked[i] = checked;
-                    std::cout << "killed=" << candidate_string(candidates[i])
-                              << " source_residue=" << a
-                              << " mask=" << graph_mask
-                              << " checked=" << checked
-                              << " internal_bits=" << bits << "\n";
+                    if (!quiet_kills) {
+                        std::cout << "killed=" << candidate_string(candidates[i])
+                                  << " source_residue=" << a
+                                  << " mask=" << graph_mask
+                                  << " checked=" << checked
+                                  << " internal_bits=" << bits << "\n";
+                    }
                 }
             }
         }
-        if (progress && progress_every && bits > start && (bits - start) % progress_every == 0) {
-            std::cerr << "bits=" << bits << "/" << stop
-                      << " source_modular_checked=" << checked << "\n";
+    };
+
+    if (random_samples) {
+        std::mt19937_64 rng(seed);
+        for (uint64_t sample = 0; sample < random_samples; ++sample) {
+            uint64_t bits = rng() & (all_bits - 1);
+            ++attempted;
+            process_bits(bits);
+            if (progress && progress_every && sample > 0 && sample % progress_every == 0) {
+                std::cerr << "samples=" << sample << "/" << random_samples
+                          << " source_modular_checked=" << checked << "\n";
+            }
+        }
+    } else {
+        for (uint64_t bits = start; bits < stop; ++bits) {
+            ++attempted;
+            process_bits(bits);
+            if (progress && progress_every && bits > start && (bits - start) % progress_every == 0) {
+                std::cerr << "bits=" << bits << "/" << stop
+                          << " source_modular_checked=" << checked << "\n";
+            }
         }
     }
 
@@ -358,6 +394,11 @@ int main(int argc, char** argv) {
     if (source_residue >= 0) std::cout << "source_residue=" << source_residue << "\n";
     std::cout << "bit_start=" << start << "\n";
     std::cout << "bit_stop=" << stop << "\n";
+    if (random_samples) {
+        std::cout << "random_samples=" << random_samples << "\n";
+        std::cout << "seed=" << seed << "\n";
+    }
+    std::cout << "attempted=" << attempted << "\n";
     std::cout << "source_modular_checked=" << checked << "\n";
     for (size_t i = 0; i < candidates.size(); ++i) {
         std::cout << "slots=" << candidate_string(candidates[i]) << " ";

@@ -172,8 +172,11 @@ Computational checks and generated data for Erdos Problem 82.
   sequence is constant modulo `--source-modulus` by choosing the graph on
   vertices `0,...,n-2` and solving the correction edges to the last vertex.
   Use `--source-residue a`, `--target-modulus M`, and `--candidates` to test
-  source-sensitive slot families exactly on `n=8`.  The state code supports
-  target moduli up to `16` for small higher-lift sanity checks.
+  source-sensitive slot families exactly on `n=8`, or `--random-samples`
+  with `--seed` for deterministic probes of the same solved-edge space on
+  `n=10` and `n=11`.  Candidate multisets may have up to five slots, and the
+  state code supports target moduli up to `16` for small higher-lift sanity
+  checks.
 - `slot_local_search.py`: simulated-annealing heuristic for fixed residue-slot
   colorings.  It directly scores a coloring against prescribed residues and
   is useful for larger exploratory searches where exact slot DP is too slow;

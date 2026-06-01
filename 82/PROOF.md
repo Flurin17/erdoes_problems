@@ -4433,8 +4433,7 @@ candidate is true, the higher-dyadic route needs ordinary source-residue
 slots, a more flexible regular alternative, or a different witness-or-regular
 dichotomy.
 
-The current computational `4 -> 8` ordinary-slot candidates include the
-source-residue family
+The formerly plausible computational `4 -> 8` ordinary-slot family was
 
 ```text
 R_0=(0,1,2,4),   R_1=(0,0,2,2),
@@ -4442,15 +4441,13 @@ R_2=(0,0,1,2),   R_3=(0,0,1,3),
 ```
 
 where `R_a` is meant for graphs whose total degree residue is `a mod 4`.
-This is only finite evidence for a source-residue four-part lift, not a
-proof.  It also illustrates why higher dyadic slots must depend on the source
-residue and cannot simply reuse `(0,0,1,2)`.  In the complete-multipartite
-count model, this four-family passes all source-filtered checks through six
-multipartite classes of size at most `16`, using `EXPERIMENTS/multipartite_modular.py`
-with `--source-residue`; the same tests without source filtering give
-irrelevant counterexamples from other source classes.
+It was useful finite evidence but is now refuted as a universal four-slot
+source-residue theorem.  The refutation is important: it shows that the
+dyadic route cannot rely on a uniform four-slot theorem at every level,
+although Conditional Proposition 4E.2B remains available with any
+sublinear-in-`q` part bound.
 
-The new checker `EXPERIMENTS/source_slots_fast.cpp` verifies this family
+The checker `EXPERIMENTS/source_slots_fast.cpp` verifies the old family
 exactly for all labelled `8`-vertex graphs whose degrees are congruent modulo
 `4`.  It enumerates the graph induced by vertices `0,...,n-2` and solves the
 edges to the last vertex so that every degree has the prescribed source
@@ -4464,10 +4461,10 @@ source 2:  7168 graphs, 17 surviving four-slot multisets,
 source 3: 23552 graphs, 23 surviving four-slot multisets.
 ```
 
-The displayed family `R_0,R_1,R_2,R_3` survives in the corresponding source
-classes.  The cleaner complete-multipartite pattern also survives in sources
-`0` and `1`, but is killed in sources `2` and `3`; this agrees with the
-explicit masks recorded below.  The exact checks are reproduced by
+The displayed old family `R_0,R_1,R_2,R_3` survives in the corresponding
+source classes.  The cleaner complete-multipartite pattern also survives in
+sources `0` and `1`, but is killed in sources `2` and `3`; this agrees with
+the explicit masks recorded below.  The exact checks are reproduced by
 
 ```text
 /tmp/source_slots_fast --n 8 --source-modulus 4 --target-modulus 8 --source-residue 0 --candidates '0,0,4,4;0,1,2,4'
@@ -4496,8 +4493,73 @@ source 2: 16640 and 5861 graphs,
 source 3: 1891 and 2754 graphs,
 ```
 
-with no counterexample to the displayed source-residue family.  These are
-finite prefix checks, not a proof.
+with no counterexample to the displayed old source-residue family.  These are
+finite prefix checks, not a proof, and the next deterministic sample refutes
+the source-`0` member.
+
+**Computational Proposition: Four Source-`0` Slots Do Not Suffice For
+`4 -> 8`.**  There is no four-element residue multiset `R` modulo `8` such
+that every graph whose degrees are all `0 mod 4` has a partition into induced
+`8`-modular subgraphs with residue signature contained in `R`.
+
+Proof.  The deterministic seeded command
+
+```text
+/tmp/source_slots_fast --n 11 --source-modulus 4 --target-modulus 8 \
+  --source-residue 0 --slot-count 4 --random-samples 5000000 \
+  --seed 1100 --quiet-kills
+```
+
+checks `2986` labelled source-`0 mod 4` graphs on `11` vertices.  For every
+four-slot multiset except the following five, one of these checked graphs is
+a concrete counterexample:
+
+```text
+(0,0,2,2),  (0,1,1,2),  (0,1,2,2),
+(0,1,2,3),  (0,2,2,2).
+```
+
+The old candidate `(0,1,2,4)` is killed in this sample by the `11`-vertex
+mask
+
+```text
+11691695018335739,
+```
+
+whose degree sequence is
+
+```text
+8,8,4,4,4,4,8,4,4,4,4.
+```
+
+The five survivors are killed by complete multipartite source-`0` graphs:
+
+```text
+(0,0,2,2)  is killed by class sizes (3,3,3,3,3),
+(0,1,1,2)  is killed by class sizes (2,6,6),
+(0,1,2,2)  is killed by class sizes (2,6,6),
+(0,1,2,3)  is killed by class sizes (4,4,4,4,4,4),
+(0,2,2,2)  is killed by class sizes (4,8,8,8).
+```
+
+In each listed complete multipartite graph, every vertex degree is `0 mod 4`.
+The fixed-slot checks are certified by `EXPERIMENTS/multipartite_modular.py`
+with `--source-modulus 4 --source-residue 0 --target-modulus 8 --slots R`.
+Thus every four-element residue multiset modulo `8` has a source-`0`
+counterexample.  By Lemma 4E.2, even the flexible four-part source-`0`
+`4 -> 8` lift is false.  QED.
+
+This obstruction does not disprove Conditional Proposition 4E.2B; the
+proposition only requires `b(q)<=q^alpha` for large dyadic `q`, and the
+exceptional behavior at `q=4` can be absorbed into the initial constant.
+It does, however, rule out the previously hoped-for uniform four-slot theorem
+and forces the dyadic route to aim for a growing but sublinear part bound, or
+for a different witness-or-regular dichotomy.
+
+As a first calibration after this obstruction, the same `n=11`, source-`0`
+sample with `--slot-count 5` leaves `52` of the `792` five-slot multisets
+alive.  This is only an exploratory lower-bound calibration for the slot
+count; no five-slot source-`0` theorem has been identified.
 
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
