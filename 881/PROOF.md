@@ -22441,6 +22441,65 @@ window contains the whole palette and the span bound also holds, then
 neither (7) nor (8) nor (6) can hold, contradicting the alternatives.
 \(\square\)
 
+### Corollary 16.68: Dense bounded palettes have a localized blocker escape
+
+Keep the notation of Corollary 16.67. Let \(r\ge1\), let \(P\subset F\)
+be nonempty with
+\[
+|P|\le r,
+\]
+and for each \(f\in P\) let \(U_f\subset I\cap C\) satisfy
+\[
+f+u\notin2C\qquad(u\in U_f). \tag{1}
+\]
+Fix \(0<\eta\le1\), put
+\[
+\delta={\eta\over r},
+\qquad
+M_\delta=\lfloor(1-\delta)n\rfloor+1,
+\]
+and suppose every retained interval \(J\in\mathcal J\) satisfies
+\[
+M_\delta\le2\ell_J-1. \tag{2}
+\]
+If
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n, \tag{3}
+\]
+then there is \(f\in P\) such that
+\[
+|U_f|\ge\delta n \tag{4}
+\]
+and
+\[
+f\notin\bigcup_{J\in\mathcal J}W_J(\delta,I), \tag{5}
+\]
+where
+\[
+W_J(\delta,I)
+=
+[2\alpha_J-b+M_\delta-1,\ 2\beta_J-a-M_\delta+1]\cap\mathbb N.
+\]
+Consequently, if
+\[
+P\subseteq\bigcup_{J\in\mathcal J}W_J(\delta,I), \tag{6}
+\]
+then (3) is impossible.
+
+Proof. Since
+\[
+\sum_{f\in P}|U_f|\ge\left|\bigcup_{f\in P}U_f\right|\ge\eta n
+\]
+and \(|P|\le r\), some \(f\in P\) satisfies
+\[
+|U_f|\ge{\eta n\over r}=\delta n.
+\]
+Apply the single-gate part of Corollary 16.67 with density \(\delta\) to
+this \(f\) and \(U_f\). Assumption (2) is exactly the retained-length
+hypothesis for that density, and the conclusion is (5). If (6) held, this
+same \(f\) would both lie in and outside the blocker union, a contradiction.
+\(\square\)
+
 Thus a far-gate packet cannot be dense in a tested interval while an old
 retained interval has a doubled band deeply overlapping that test. Any
 block construction that pays the linear far-gate cost from Corollary 16.61
@@ -22456,6 +22515,9 @@ Corollary 16.67 packages the usable obstruction for staged constructions:
 each retained interval contributes a forbidden affine window for dense gate
 packets over the tested block, and clustered finite palettes cannot hide
 inside any one of those windows.
+Corollary 16.68 removes the clustering assumption at the cost of the
+expected \(1/r\) density loss: a dense bounded palette has one active color
+that must escape all blocker windows at density \(\eta/r\).
 
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
@@ -23692,6 +23754,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   interval, and clustered finite palettes cannot be contained in any one
   blocker window unless their span exceeds the retained interval's doubled
   length allowance.
+* Corollary 16.68 removes clustering by pigeonholing: an \(\eta\)-dense
+  packet carried by at most \(r\) active colors has one \(\eta/r\)-dense
+  color, which must avoid every blocker window at that smaller density.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

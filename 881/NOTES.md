@@ -84,7 +84,10 @@ a dense cross-block packet requires either large palette spread or an
 extreme gate outside the overlap window. Corollary 16.67 packages finite
 families of retained intervals as blocker windows: dense single-gate
 packets must avoid their union, while clustered finite palettes cannot lie
-inside any one blocker window without enough spread.
+inside any one blocker window without enough spread. Corollary 16.68
+removes clustering at the expected density loss: an \(\eta\)-dense packet
+using at most \(r\) active colors has an \(\eta/r\)-dense color that must
+escape all blocker windows at density \(\eta/r\).
 
 ## Definitions
 
