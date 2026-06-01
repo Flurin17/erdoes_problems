@@ -20397,6 +20397,62 @@ route using dense translate covers must therefore explain which hypothesis
 of Corollary 16.28 fails: the protected targets are sparse, the active row
 sets differ, or the witness windows are staggered.
 
+### Corollary 16.29: Same-window singleton protection forces bridge pressure
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\)
+and minimum \(m_0\). Let
+\[
+P\subset A
+\]
+be finite, let \(D\subset\mathbb N\) be finite, and let \(J\) be an interval
+of length \(R\) such that
+\[
+J\subset P+D. \tag{1}
+\]
+Let \(Q\subset P\), \(|Q|\ge |P|/2\), and suppose there is a common bound
+\[
+W
+\]
+such that for every \(q\in Q\) there is a singleton private witness
+\[
+w_q=q+d_q\le W,\qquad w_q\notin4(A\setminus\{q\}), \tag{2}
+\]
+and every other bridge element is an active late row for that witness:
+\[
+w_q-p\ge N_0,\qquad p>W-2q-m_0
+        \qquad(q\in Q,\ p\in P\setminus\{q\}). \tag{3}
+\]
+Put
+\[
+H=|D|,\qquad \Delta=\max P-\min P.
+\]
+If \(R\ge H\), then
+\[
+{3R^2\over8H^2}-{R\over4H}\le2\Delta+1. \tag{4}
+\]
+
+Proof. Fix \(q\in Q\). Lemma 16.24, applied to the finite set
+\[
+T=P\setminus\{q\},
+\]
+uses (2)--(3) to give
+\[
+\bigl((P\setminus\{q\})+q-(P\setminus\{q\})\bigr)\cap A\subset\{q\}.
+\]
+Since \(P\subset A\), this implies the gate-independence condition
+\[
+\bigl((P\setminus\{q\})+q-(P\setminus\{q\})\bigr)\cap P\subset\{q\}.
+\]
+This holds for every \(q\in Q\). Corollary 16.28 now applies to the bridge
+cover (1) and gives (4). \(\square\)
+
+Thus every attempted singleton stage using one bounded witness window has
+a numerical certificate of failure: if its translate cover violates (4),
+then either fewer than half of the bridge block can be protected in that
+window, or some protected target must keep many bridge rows below the
+late-row threshold in (3). This isolates the remaining singleton escape as
+a genuinely staggered-window construction rather than a same-window bridge.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21486,6 +21542,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   length \(R\) is covered by \(P+D\), and a half of \(P\) is simultaneously
   gate-independent over \(P\), then
   \(3R^2/(8|D|^2)-R/(4|D|)\le2(\max P-\min P)+1\).
+* Corollary 16.29 connects this back to actual singleton witnesses: if
+  half of a bridge block has private witnesses below one common bound and
+  the other bridge elements are active late rows, then the same bridge
+  inequality must hold. Violating it forces sparse protection or staggered
+  witness windows.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

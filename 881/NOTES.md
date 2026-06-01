@@ -2453,6 +2453,11 @@ The script `bridge_sidon_pressure.py` evaluates this inequality directly.
 For the interval-marker model at \(L=4\), the first possible next marker
 \(x=19\) remains in the near-range escape, while \(x=1600=100L^2\) already
 violates the inequality for any bridge block contained in \([x,2x-2]\).
+Corollary 16.29 ties the inequality back to private witnesses: if half of
+a bridge block has singleton witnesses below a common bound and the other
+bridge elements are active late rows for those witnesses, then the
+translate-cover inequality must hold. Hence any violation forces sparse
+same-window protection or genuinely staggered witness windows.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
