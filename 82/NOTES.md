@@ -3609,3 +3609,17 @@ source of growth beyond Ramsey.
   complement-matching parts of the first neighborhood.  The next possible
   proof route is to use these fully missed parts to manufacture the extra
   independent vertices that the induction lacks.
+- 2026-06-01: Proved an additional restriction on fully covered parts.  A
+  clique in the nonneighbor side cannot fully cover a size-two
+  first-neighborhood part and any other part: comparing a covered endpoint
+  with a clique vertex missing the other part violates the `P=2` drop
+  condition in one of the two orders.  Hence any residual induction deficit
+  `D>=2` must be accounted for entirely by singleton parts of the first
+  neighborhood.  This splits the remaining `P=2` problem into a one-paired
+  deficit case and an all-singleton deficit case.
+- 2026-06-01: Added the order constraint for the all-singleton residual case.
+  If a clique in the first-vertex nonneighbor side fully covers two singleton
+  first-neighborhood parts `{x}` and `{y}`, and `t_x,t_y` are clique vertices
+  missing them, then `t_x<y` and `t_y<x`; otherwise the singleton vertex loses
+  both `a` and the other singleton to the later clique vertex.  Thus multiple
+  covered singleton parts force a rigid alternating order pattern.

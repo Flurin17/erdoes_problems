@@ -12130,6 +12130,71 @@ Applying Lemma 28D.5b.7 to any clique `T subset B` of order `omega_B` shows
 that `T` fully covers at least `r+omega_B-omega` first-neighborhood parts,
 and hence at least `D` of them when `D>0`.  QED.
 
+**Lemma 28D.5b.9: A Clique Cannot Fully Cover Two Parts If One Has Size
+Two.**  Use the notation of Lemma 28D.5b.7.  Let `T subset B` be a clique.
+If `T` fully covers a first-neighborhood part of size `2`, then `T` fully
+covers no other first-neighborhood part.
+
+Proof.  Suppose, for contradiction, that `T` fully covers a size-two part
+`{x,x'}` and also fully covers a distinct part containing a vertex `y`.
+Choose vertices `t_x,t_y in T` such that `t_x` is nonadjacent to `x` and
+`t_y` is nonadjacent to `y`.  Such vertices exist by full coverage.  Since
+every vertex of `B` misses at most one vertex of `A`, the vertex `t_y` is
+adjacent to `x` and `x'`.
+
+Compare the ordered pair `x,t_y`.  If `x<t_y`, then `x` is adjacent to both
+`a` and `y`, while `t_y` is adjacent to neither `a` nor `y`.  These two
+vertices are counted in
+
+```text
+(N(x)\N(t_y))\{x,t_y},
+```
+
+contradicting the `P=2` full-drop condition.  If `t_y<x`, then `t_y` is
+adjacent to both `t_x` and `x'`, while `x` is adjacent to neither: `t_x`
+misses `x`, and `x'` lies in the same first-neighborhood part as `x`.  These
+two vertices are counted in
+
+```text
+(N(t_y)\N(x))\{t_y,x},
+```
+
+again contradicting the `P=2` full-drop condition.  QED.
+
+Consequently, in the situation of Corollary 28D.5b.8, if the induction
+deficit `D` is at least `2`, then the `D` forced covered parts must all be
+singleton parts of the first neighborhood.  Any residual proof can therefore
+split into a one-paired-part deficit and an all-singleton deficit.
+
+**Lemma 28D.5b.10: Order Constraint For Covered Singleton Parts.**  Use the
+notation of Lemma 28D.5b.7.  Let `T subset B` be a clique, and suppose that
+two distinct singleton first-neighborhood parts `{x}` and `{y}` are fully
+covered by `T`.  Let `t_x,t_y in T` be vertices with `t_x` nonadjacent to
+`x` and `t_y` nonadjacent to `y`.  Then
+
+```text
+t_x < y        and        t_y < x.
+```
+
+Proof.  Since every vertex of `B` misses at most one vertex of `A`, the
+vertices `t_x` and `t_y` are distinct, `t_x` is adjacent to `y`, and `t_y` is
+adjacent to `x`.
+
+If `y<t_x`, then `y` is adjacent to both `a` and `x`, while `t_x` is adjacent
+to neither `a` nor `x`.  These two vertices are counted in
+
+```text
+(N(y)\N(t_x))\{y,t_x},
+```
+
+contradicting the `P=2` full-drop condition.  Thus `t_x<y`.  The proof of
+`t_y<x` is symmetric.  QED.
+
+Thus an all-singleton induction deficit has a rigid order pattern: each
+clique vertex that misses one covered singleton must occur before every other
+covered singleton.  This is the remaining ordered configuration not excluded
+by Lemma 28D.5b.9.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose
