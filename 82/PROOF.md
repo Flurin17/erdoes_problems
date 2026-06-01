@@ -15805,6 +15805,124 @@ Q(G) >= sum_{d=0}^t (d+1)^2 >= c_2 t^3.
 Since `t` is a constant multiple of `L/log_2 L`, the asserted lower bound
 follows after adjusting the absolute constant and absorbing finite `n`.  QED.
 
+**Conditional Corollary 28J.10e.0d: Fixed Power-Spectrum Threshold.**  Fix
+an integer `p>=1`, and define
+
+```text
+Phi_p(G)=sum_d s_d(G)^p.
+```
+
+Suppose there are constants `eta>0`, `c>0`, and `N_0` such that every graph
+`J` on `N>=N_0` vertices satisfies
+
+```text
+Phi_p(J) >= c (log_2 N)^{p+1+eta}.
+```
+
+Then
+
+```text
+G(k) <= 2^{O_{p,eta}(k^{(p+1)/(p+1+eta)})}=2^{o(k)}.
+```
+
+In particular Erdős Problem 82 follows.
+
+Proof.  Let `J_1,J_2` be two `M`-vertex graphs failing both alternatives in
+the definition of `D_spec(h)`.  Since neither graph has a regular induced
+subgraph of order at least `h`, only degrees `0,...,h-2` can contribute.  For
+each such degree `d`, failure of the spectrum-matching alternative gives
+
+```text
+s_d(J_1)+s_d(J_2) <= h-1.
+```
+
+For nonnegative `x,y` and `p>=1`,
+
+```text
+x^p+y^p <= (x+y)^p.
+```
+
+Therefore each degree contributes at most `(h-1)^p` to
+`Phi_p(J_1)+Phi_p(J_2)`, and there are at most `h-1` relevant degrees.  Hence
+
+```text
+Phi_p(J_1)+Phi_p(J_2) <= (h-1)^{p+1}.
+```
+
+The assumed lower bound gives
+
+```text
+Phi_p(J_1)+Phi_p(J_2) >= 2c (log_2 M)^{p+1+eta}
+```
+
+for `M>=N_0`.  Thus the two alternatives cannot both fail once
+
+```text
+2c (log_2 M)^{p+1+eta} > (h-1)^{p+1}.
+```
+
+Equivalently,
+
+```text
+D_spec(h) <= 2^{O_{p,eta}(h^{(p+1)/(p+1+eta)})}.
+```
+
+Corollary 28I with `h=2k` proves the displayed bound for `G(k)`, and the
+exponent is below `1`.  QED.
+
+**Lemma 28J.10e.0e: Homogeneous Fixed-Power Benchmark.**  For every fixed
+integer `p>=1`, every graph `G` on `n>=3` vertices satisfies
+
+```text
+Phi_p(G) >= c_p (log_2 n / log_2 log_2 n)^{p+1}
+```
+
+for an absolute constant `c_p>0` depending only on `p`.
+
+Proof.  Put `L=log_2 n`.  For all sufficiently large `n`, set
+
+```text
+t = floor(L/(C_p log_2 L)),        a=floor(t^{1+1/p}),
+```
+
+where `C_p` is a sufficiently large constant depending only on `p`.  The
+Erdős--Szekeres bound gives
+
+```text
+R(a+1,t+1) <= binom(a+t,a).
+```
+
+Since `a>=t` for large `t`,
+
+```text
+log_2 binom(a+t,a)
+  <= t log_2(e(a+t)/t)
+  <= t log_2(3e t^{1/p})
+  <= L
+```
+
+by the choice of `C_p`.  Thus `G` contains either an independent set of order
+at least `a+1`, or a clique of order at least `t+1`.  In the first case
+
+```text
+Phi_p(G) >= s_0(G)^p >= a^p >= c'_p t^{p+1}.
+```
+
+In the second case, the clique contains a `d`-regular induced subgraph on
+`d+1` vertices for every `0<=d<=t`, so
+
+```text
+Phi_p(G) >= sum_{d=0}^t (d+1)^p >= c''_p t^{p+1}.
+```
+
+Since `t` is a constant multiple of `L/log_2 L`, the result follows after
+adjusting `c_p` to cover the finitely many small values of `n`.  QED.
+
+Thus changing from the square spectrum to a different fixed power does not
+by itself remove the polylogarithmic gap: the threshold in Conditional
+Corollary 28J.10e.0d asks for exponent `p+1+eta`, while the homogeneous
+Ramsey benchmark supplies exponent `p+1` up to logarithmic losses.
+
 The script `EXPERIMENTS/spectrum_power_search.py` was added to search this
 functional.  Exact labelled enumeration through seven vertices gives minimum
 `Q/n^2` equal to `29/49` at `n=7`.  The fourteen-vertex linear-mass

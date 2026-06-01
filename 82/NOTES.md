@@ -4356,3 +4356,12 @@ source of growth beyond Ramsey.
   labelled `n=6` graphs already contains `982` two-step examples.  Thus the
   one-step stopping of the thirteen-vertex obstruction branch is special, not
   a universal induction mechanism.
+- 2026-06-01: Generalized the square-spectrum polylog threshold to every
+  fixed power `Phi_p=sum_d s_d^p`.  A bound
+  `Phi_p(G)>=c(log |G|)^{p+1+eta}` would give
+  `D_spec(h)<=2^{O_{p,eta}(h^{(p+1)/(p+1+eta)})}` and solve the problem.
+  The matching homogeneous Ramsey benchmark is
+  `Phi_p(G)>=Omega_p((log n/loglog n)^{p+1})`, obtained by choosing
+  off-diagonal parameters `a=t^{1+1/p}` and `t`.  Thus changing to another
+  fixed power does not by itself close the gap; non-homogeneous regular
+  spectrum entries are still needed.
