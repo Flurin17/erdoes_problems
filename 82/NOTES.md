@@ -3336,3 +3336,9 @@ source of growth beyond Ramsey.
   `a_t=#{i:s_i>=t}` satisfies `sum_t a_t=n`, and
   `max_t t phi(a_t)=omega(log n)`.  Thus weighted twin blowups preserve any
   eventual solution rather than creating an independent obstruction.
+- 2026-06-01: Added Lemma 7.1, a modular quotient reduction.  For any
+  partition into graph modules, `reg(G)` is at least the maximum regular order
+  inside a module and at least the regular order of the quotient graph, by
+  choosing one representative per quotient vertex.  Therefore substitution
+  and modular decomposition do not create new hard instances unless both the
+  quotient and substituted modules are hard.

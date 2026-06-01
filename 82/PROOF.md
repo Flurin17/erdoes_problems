@@ -7101,6 +7101,40 @@ Optimizing the displayed lower bound over `t` gives only `Omega(log n)`.
 Thus neighborhood diversity alone cannot prove the target; it must be coupled
 with a stronger statement about the quotient or with a way to use class sizes.
 
+**Lemma 7.1: Modular Quotient Reduction.**  Let
+`V(G)=V_1 union ... union V_m` be a partition into graph modules: for every
+`i` and every vertex `x notin V_i`, either `x` is adjacent to all vertices of
+`V_i` or to none of them.  Let `Q` be the quotient graph on
+`{1,...,m}`, with `ij in E(Q)` exactly when all edges between `V_i` and
+`V_j` are present.  Then
+
+```text
+reg(G) >= max_i reg(G[V_i]),
+reg(G) >= reg(Q).
+```
+
+Consequently, if `G` has no regular induced subgraph on at least `k`
+vertices, then every module `G[V_i]` and the quotient `Q` also have no
+regular induced subgraph on at least `k` vertices.
+
+Proof.  The first inequality is immediate because every induced subgraph
+inside a module is also induced in `G`.
+
+For the quotient inequality, let `J subset {1,...,m}` induce a `d`-regular
+subgraph of `Q`.  Choose one representative vertex `v_i in V_i` for every
+`i in J`.  The graph induced by these representatives in `G` is exactly
+`Q[J]`, because module adjacency between two distinct parts is complete or
+empty according to the quotient edge.  Hence the representative set is
+`d`-regular in `G`.  Taking `J` of maximum regular order in `Q` proves
+`reg(G)>=reg(Q)`.  The final assertion is the contrapositive of the two
+inequalities.  QED.
+
+This reduction is useful for modular decomposition: substitution operations
+do not create a new obstruction unless both the substituted pieces and the
+quotient remain hard.  In particular, a minimal counterexample can be assumed
+prime with respect to any nontrivial module partition after recursively
+discarding module or quotient witnesses.
+
 ## Lemma 7A: Low Adjacency Rank Gives A Large Regular Class
 
 Let `A_G` be the adjacency matrix of an `n`-vertex graph `G`, viewed over any
