@@ -16884,6 +16884,98 @@ iterable inside a sparse selector tail; a surviving cross-promoted
 construction must create large private fibers attached to a fixed or moving
 active endpoint.
 
+### Corollary 13.1l.2k.5: Fixed-first unbounded rank feeds large private fibers
+
+Work in the actual \(k=2\) Target 13.1l.2k branch coming from the
+active-trace normal form of Corollary 3.1c.3, so the witnesses satisfy
+\[
+w\ge\max H-1
+\]
+for traces
+\[
+F=\{d\}\cup H.
+\]
+Then for every finite
+\[
+E\subset A\cap(d,\infty),
+\]
+every \(M\), and every \(L_0\), there are:
+
+* a finite nonempty
+  \[
+  H\subset A\setminus(E\cup\{d\});
+  \]
+* an inclusion-minimal trace
+  \[
+  F=\{d\}\cup H
+  \]
+  and witness \(w>L_0\) with
+  \[
+  w\notin3(A\setminus F),\qquad w\ge\max H-1;
+  \]
+* an active color
+  \[
+  f\in F;
+  \]
+* a set
+  \[
+  U\subset A\setminus F,\qquad |U|=M,
+  \]
+
+such that, putting
+\[
+C=A\setminus F,\qquad m=w-f,
+\]
+one has
+\[
+m-U\subset C,\qquad u+f\notin2C\quad(u\in U). \tag{1}
+\]
+
+Proof. Apply Lemma 13.1l.2k.4 with
+\[
+D=1,\qquad \Phi(r)=M-1,
+\]
+choosing the sparse set \(B\) inside
+\[
+A\setminus(E\cup\{d\})
+\]
+and above \(L_0+1\). The Target 13.1l.2k branch applied to the infinite
+tail \(B\) gives an inclusion-minimal
+\[
+F=\{d\}\cup H,\qquad H\subset B,
+\]
+with witness
+\[
+w>L_0,\qquad w\ge\max H-1,\qquad w\notin3(A\setminus F).
+\]
+For every retained row
+\[
+e\in R(F,w)
+\]
+from Lemma 13.1l.2k.4, Lemma 8.4c supplies at least one private color
+\[
+f\in F
+\]
+with
+\[
+w-e-f\in C,\qquad e+f\notin2C.
+\]
+Choose one such color for each row. If every color fiber had size at most
+\[
+M-1,
+\]
+then \(F,w\) would contradict the defining property of the sparse tail
+from Lemma 13.1l.2k.4. Hence some color \(f\in F\) has a fiber of size at
+least \(M\). Taking any \(M\)-element subset of that fiber gives \(U\), and
+(1) follows. \(\square\)
+
+Thus Target 13.1l.2k has been reduced to the same large-private-fiber
+normal form as Corollary 8.5a.7f, now inside a fixed-first section. The
+remaining obstruction is not an unbounded-rank star cut with singleton
+labels; it is a cross-promoted large-fiber construction whose gates, row
+sets, and shifted overlaps must still evade the stable-palette closures
+from Corollaries 8.5a.7k--8.5a.7l and 8.5a.7z.13.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18751,6 +18843,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   8.5a.7e': in a sparse suffix selector, every fixed-prefix trace must
   have a private-color fiber larger than any prescribed function of its
   suffix rank.
+* Corollary 13.1l.2k.5 converts that counting pressure back into the
+  large-private-fiber normal form: fixed-first unbounded-rank sections
+  must produce arbitrarily large private reflected row sets for some active
+  endpoint.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

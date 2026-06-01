@@ -2675,6 +2675,12 @@ no fixed-prefix active trace can have all private-color fibers bounded by a
 prescribed function of its suffix rank. Thus the singleton-label star cuts
 are local only; an iterable construction must produce large private fibers
 despite unbounded rank.
+Corollary 13.1l.2k.5 packages the consequence in the actual active-trace
+branch: for every finite protected set and every \(M\), a fixed-first
+unbounded-rank section yields an inclusion-minimal trace with an active
+color \(f\) and \(M\) private reflected rows \(U\). Thus the remaining
+branch feeds back into the large-private-fiber normal form from
+Corollary 8.5a.7f.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
