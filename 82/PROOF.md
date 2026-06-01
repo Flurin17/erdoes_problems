@@ -7224,6 +7224,88 @@ does not immediately improve the Ramsey scale: finding the displayed
 homogeneous pattern inside `A` and `B` is itself a Ramsey-type problem unless
 additional structure is available.
 
+## Lemma 28: Ramsey Bound For Pair-Difference Amplification
+
+Let `BR(p,q)` be the least integer `N` such that every bipartite graph with
+both parts of size at least `N` contains either a complete `K_{p,p}` or an
+empty `K_{q,q}` between the two parts.  Put
+
+```text
+r=ceil((h-2)/2),       q=ceil(h/2),
+T_h = R(h, BR(r,q)).
+```
+
+If `G` has no regular induced subgraph on `h` vertices, then for every pair
+`u,v`, with
+
+```text
+A=N(u)\N(v),       B=N(v)\N(u),
+```
+
+we have
+
+```text
+min(|A|,|B|) < T_h.
+```
+
+Consequently,
+
+```text
+sigma(u,v) < 2T_h + |deg_G(u)-deg_G(v)|.
+```
+
+Proof.  Suppose first that `uv` is an edge and that `|A|,|B|>=T_h`.  Since
+`G` has no clique of order `h`, Ramsey's theorem gives an independent set
+`A_0 subset A` of order `BR(r,q)`.  Similarly `B` contains an independent set
+`B_0` of order `BR(r,q)`.
+
+Apply the definition of `BR(r,q)` to the bipartite graph between `A_0` and
+`B_0`.  If it contains a complete `K_{r,r}`, then Lemma 27 gives a regular
+induced subgraph on `2r+2>=h` vertices.  If it contains an empty `K_{q,q}`,
+then the corresponding subsets of `A_0` and `B_0` together form an independent
+set of order `2q>=h`, again a regular induced subgraph.  Both alternatives
+are impossible.
+
+If `uv` is a nonedge, the same argument is applied with cliques replacing
+independent sets.  Since `G` has no independent set of order `h`, each of
+`A` and `B` contains a clique of order `BR(r,q)`.  Between these cliques, an
+empty `K_{r,r}` gives the nonedge case of Lemma 27, while a complete
+`K_{q,q}` gives a clique of order `2q>=h`.  Again both alternatives are
+impossible.
+
+Thus `min(|A|,|B|)<T_h` for every pair.  Finally
+
+```text
+sigma(u,v)=|A|+|B|,
+| |A|-|B| | = |deg_G(u)-deg_G(v)|,
+```
+
+because the possible edge `uv` contributes equally to both degrees.  Hence
+`sigma(u,v)=2 min(|A|,|B|)+|deg_G(u)-deg_G(v)| < 2T_h+|deg_G(u)-deg_G(v)|`.
+QED.
+
+Combining Lemma 28 with Lemma 25 gives a bounded-spread theorem, but only at
+the usual Ramsey scale.  If the degree spread is at most `s`, then every pair
+has
+
+```text
+sigma(u,v) < 2T_h+s.
+```
+
+Lemma 25 therefore forces a regular induced `h`-set whenever
+
+```text
+n > 8h^{3/2}s
+and
+n > 16h^2(2T_h+s).
+```
+
+Since `T_h` is already exponential or worse in `h`, this does not imply
+`G(h)<=2^{o(h)}`.  The value of the lemma is diagnostic: any successful
+pair-difference proof must replace the internal Ramsey extraction in `A` and
+`B`, or the bipartite Ramsey extraction between them, by a more efficient use
+of counterexample structure.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an

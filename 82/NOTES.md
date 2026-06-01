@@ -2266,3 +2266,11 @@ source of growth beyond Ramsey.
   regular induced order is `10`.  Thus pair-difference amplification explains
   some small extremals but does not capture all regular subgraphs even in
   bounded-spread samples.
+- 2026-06-01: Added Lemma 28, the Ramsey benchmark for pair-difference
+  amplification.  In a graph with no regular induced `h`-set, every pair
+  `u,v` has `min(|N(u)\N(v)|,|N(v)\N(u)|)<R(h,BR(ceil((h-2)/2),ceil(h/2)))`;
+  otherwise Ramsey inside the two difference sides plus bipartite Ramsey
+  between them yields either Lemma 27's regular template or a homogeneous set
+  of order at least `h`.  Combined with Lemma 25 this gives only a
+  Ramsey-scale bounded-spread theorem, so the pair-difference route needs a
+  non-Ramsey extraction from the two one-sided difference sets.
