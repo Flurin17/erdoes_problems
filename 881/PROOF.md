@@ -6138,6 +6138,35 @@ has pair links to both other vertices, so Lemma 13.1j's first prefix-link
 condition fails for every ordering of \(F\), despite the mobile-injective
 private coloring of the collective hole.
 
+The interval parity blocks from Example 8.5a.7b give the same separation
+at arbitrary rank. For \(r\ge4\), the odd active set
+\[
+F_r=\{1,3,\ldots,2r-1\}
+\]
+has the collective parity hole \(w_r=2r+3\), but it has no
+Schreier-compatible order using pair links in the covered window
+\([2,4r]\). Indeed, if \(E=\{a,b\}\subset F_r\), \(a<b\), and \(1\notin
+E\), then \(1\), all evens, and at least one odd are retained. Every
+\[
+n\in[b-1,4r]
+\]
+lies in \(3([1,2r]\setminus E)\): even \(n\)'s are sums of three retained
+evens, except for small even values which are \(1+1+(n-2)\), and odd
+\(n\)'s are \(1\) plus two retained evens. If \(E=\{1,b\}\) with
+\[
+b\ge7,
+\]
+then \(3\) and all evens are retained; every even \(n\ge6\) is a sum of
+three retained evens, and every odd \(n\ge7\) is \(3\) plus two retained
+evens. Thus the only odd pairs with a high-window hole are contained in
+\[
+\{1,3\},\qquad \{1,5\}.
+\]
+For \(r\ge4\), no vertex of \(F_r\) is linked by such pair holes to every
+other vertex of \(F_r\). Lemma 13.1j therefore cannot even start. The
+collective mobile-injective hole is again strictly weaker than a
+Schreier-prefix-link hypergraph.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
@@ -12680,7 +12709,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Warning 8.5a.7c separates mobile-injective matchings from the
   enumerated-Schreier route: range-separated private packets can be
   inclusion-minimal and anti-hereditary, with no complete prefix-link
-  shadow unless used colors are promoted to future barrier vertices.
+  shadow unless used colors are promoted to future barrier vertices. The
+  parity interval blocks strengthen this separation: for ranks at least
+  four they have collective mobile-injective holes but no possible first
+  Schreier pair-link vertex.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

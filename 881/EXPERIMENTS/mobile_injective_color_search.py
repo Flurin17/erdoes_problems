@@ -151,6 +151,37 @@ def verify_range_packet(test: tuple[int, ...]) -> dict[str, object]:
     }
 
 
+def parity_block_pair_links(r: int) -> dict[str, object]:
+    S = tuple(range(1, 2 * r + 1))
+    F = tuple(range(1, 2 * r, 2))
+    two_S = sums_k(S, 2, 4 * r)
+    high_pair_links = []
+    for pair in combinations(F, 2):
+        C = tuple(x for x in S if x not in set(pair))
+        three_C = sums_k(C, 3, 4 * r)
+        start = max(pair) - 1
+        holes = [n for n in range(start, 4 * r + 1) if n not in three_C]
+        if holes:
+            high_pair_links.append((pair, holes[:6]))
+
+    pair_graph = {f: set() for f in F}
+    for pair, _holes in high_pair_links:
+        a, b = pair
+        pair_graph[a].add(b)
+        pair_graph[b].add(a)
+
+    universal_vertices = [f for f, neighbors in pair_graph.items() if len(neighbors) == len(F) - 1]
+    return {
+        "r": r,
+        "S": S,
+        "F": F,
+        "two_coverage_to_4r": all(n in two_S for n in range(2, 4 * r + 1)),
+        "collective_witness": 2 * r + 3,
+        "high_pair_links": high_pair_links,
+        "universal_pair_link_vertices": universal_vertices,
+    }
+
+
 def search(max_value: int, max_size: int, min_match: int, limit: int) -> list[dict[str, object]]:
     results: list[dict[str, object]] = []
     universe = tuple(range(1, max_value + 1))
@@ -206,6 +237,16 @@ def main() -> None:
     print("range-separated packet check")
     for key, value in packet.items():
         print(f"{key}={value}")
+
+    print()
+    print("parity block pair-link check")
+    for r in range(3, 7):
+        summary = parity_block_pair_links(r)
+        print("r=", r)
+        print("two_coverage_to_4r=", summary["two_coverage_to_4r"])
+        print("collective_witness=", summary["collective_witness"])
+        print("high_pair_links=", summary["high_pair_links"])
+        print("universal_pair_link_vertices=", summary["universal_pair_link_vertices"])
 
 
 if __name__ == "__main__":

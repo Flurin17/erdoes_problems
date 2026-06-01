@@ -147,7 +147,10 @@ matching; the first examples are the parity interval blocks from Example
 8.5a.7b, where retained even rows match distinct deleted odd colors. It
 also verifies the range-separated packet from Warning 8.5a.7c, including
 the fact that each moving color gates both an old row and its retained
-mirror while the two-point fiber remains certificate-free.
+mirror while the two-point fiber remains certificate-free. The final block
+checks the parity interval examples: for ranks at least four the collective
+odd deletion has a mobile-injective hole, but the high-window pair-link
+graph has no universal first vertex, so Lemma 13.1j cannot start.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
