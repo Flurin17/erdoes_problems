@@ -7268,6 +7268,36 @@ must distribute its mass so that, for every useful `ell`, only few modules
 are large enough to force homogeneous `ell`-sets, or else the quotient on
 those large modules has already produced the regular witness above.
 
+**Corollary 7.4: Module-Size Tail Constraint In Counterexamples.**  Let `G`
+have no regular induced subgraph on at least `k` vertices, and let
+`V(G)=V_1 union ... union V_m` be any partition into modules.  There is an
+absolute constant `C` such that for every `ell>=1`,
+
+```text
+|{i : |V_i| >= R(ell,ell)}| <= exp(C k/ell).
+```
+
+Proof.  Let `B={i: |V_i|>=R(ell,ell)}`.  If `|B|>=2`, Corollary 7.3 gives
+
+```text
+k > reg(G) >= (c ell/2) log |B|
+```
+
+after changing constants to absorb the floor.  Hence
+
+```text
+log |B| <= C k/ell
+```
+
+for an absolute `C`.  The cases `|B|<2` are absorbed by increasing `C`.
+QED.
+
+This tail constraint is still not a proof of the conjecture, because a
+counterexample could have a hard prime quotient with many small modules, or a
+hierarchy of substitutions whose mass avoids every fixed internal Ramsey
+scale.  It does, however, rule out substitution trees with a broad layer of
+large modules unless the desired regular subgraph has already appeared.
+
 ## Lemma 7A: Low Adjacency Rank Gives A Large Regular Class
 
 Let `A_G` be the adjacency matrix of an `n`-vertex graph `G`, viewed over any

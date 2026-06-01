@@ -3367,3 +3367,9 @@ source of growth beyond Ramsey.
   type pigeonhole gives a regular induced subgraph of order
   `Omega(ell log |B|)`.  Thus a hard substitution instance cannot have many
   large modules at any useful internal Ramsey scale.
+- 2026-06-01: Added Corollary 7.4, the module-size tail constraint.  In any
+  counterexample with target `k`, every module partition satisfies
+  `#{i: |V_i|>=R(ell,ell)} <= exp(O(k/ell))`.  This quantifies the hard
+  modular-decomposition regime: a substitution tree can only remain hard if
+  large modules are sparse at every internal Ramsey scale, or the quotient is
+  itself a hard instance.
