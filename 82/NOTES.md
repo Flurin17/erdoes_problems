@@ -3311,3 +3311,9 @@ source of growth beyond Ramsey.
   `1.02072`.  Therefore the switching target must allow small positive
   distortion and should aim for `exp(o(rows))`, not pointwise domination by
   independent hypergeometric rows.
+- 2026-06-01: Added `--time-limit` to `threshold_regular_dfs.py` so hard
+  `P=1` regular column-drop searches report node counts and an `unknown_*`
+  status cleanly.  A probe of `n=14,h=6` for `10` seconds reached `10823`
+  nodes and returned `status=unknown_time_limit`; closing `C_reg(1,6)` beyond
+  the existing `C_reg(1,6)>13` certificate will need stronger pruning or a
+  different exact formulation.

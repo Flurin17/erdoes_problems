@@ -24,6 +24,7 @@ class SearchState:
     columns: list[int]
     nodes: int = 0
     start: float = 0.0
+    stop_reason: str = ""
 
 
 def precompute_masks(n: int) -> list[list[list[tuple[int, tuple[int, ...]]]]]:
@@ -116,8 +117,12 @@ def dfs(
     masks_by_k_size: list[list[list[tuple[int, tuple[int, ...]]]]],
     max_nodes: int,
     progress: int,
+    time_limit: float,
 ) -> list[int] | None | bool:
     state.nodes += 1
+    if time_limit and monotonic() - state.start > time_limit:
+        state.stop_reason = "time_limit"
+        return None
     if progress and state.nodes % progress == 0:
         print(
             f"progress nodes={state.nodes} depth={len(state.columns)} "
@@ -125,6 +130,7 @@ def dfs(
             flush=True,
         )
     if max_nodes and state.nodes > max_nodes:
+        state.stop_reason = "node_limit"
         return None
     if len(state.columns) == state.n:
         return state.columns[:]
@@ -142,7 +148,7 @@ def dfs(
                 next_adj[i] |= 1 << k
         state.adj = next_adj
         state.columns.append(column)
-        result = dfs(state, masks_by_k_size, max_nodes, progress)
+        result = dfs(state, masks_by_k_size, max_nodes, progress, time_limit)
         if isinstance(result, list):
             return result
         state.columns.pop()
@@ -179,18 +185,20 @@ def main() -> None:
     parser.add_argument("n", type=int)
     parser.add_argument("--h", type=int, required=True)
     parser.add_argument("--max-nodes", type=int, default=0)
+    parser.add_argument("--time-limit", type=float, default=0.0)
     parser.add_argument("--progress", type=int, default=100000)
     args = parser.parse_args()
 
     state = SearchState(n=args.n, h=args.h, adj=[], columns=[], start=monotonic())
     masks_by_k_size = precompute_masks(args.n)
-    result = dfs(state, masks_by_k_size, args.max_nodes, args.progress)
+    result = dfs(state, masks_by_k_size, args.max_nodes, args.progress, args.time_limit)
     print(f"n={args.n}")
     print(f"h={args.h}")
     print(f"nodes={state.nodes}")
     print(f"elapsed={monotonic() - state.start:.3f}s")
     if result is None:
-        print("status=unknown_node_limit")
+        reason = state.stop_reason or "limit"
+        print(f"status=unknown_{reason}")
     elif result is False:
         print("status=unsat")
     else:

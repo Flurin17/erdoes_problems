@@ -380,7 +380,9 @@ Computational checks and generated data for Erdos Problem 82.
   column-drop problem.  It enumerates only legal suffix-threshold columns and
   prunes when the newest vertex creates a regular induced subgraph at or above
   the requested order.  This is faster than the general column-drop DFS for
-  checks such as `C_reg(1,5)`.
+  checks such as `C_reg(1,5)`.  Use `--time-limit` or `--max-nodes` for
+  bounded exploratory runs that report an `unknown_*` status rather than
+  relying on an external timeout.
 - `column_drop_census.py`: exact small labelled census for the column-drop
   ordered parameter `C_drop(P,h)` introduced after Lemma 28E.3.  It filters
   ordered graphs by maximum column drop and reports homogeneous and regular
