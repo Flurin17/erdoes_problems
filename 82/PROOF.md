@@ -371,6 +371,86 @@ G(k)>N >= c_epsilon k^{3/2-epsilon}
 
 after adjusting constants and returning to `delta=epsilon`.  QED.
 
+Optimizing the split parameter slowly with `k` gives a more explicit
+logarithmic loss.
+
+**Proposition 0F: A Log-Loss Homogeneous Random Lower Bound.**  There is an
+absolute constant `c>0` such that, for all sufficiently large `k`,
+
+```text
+G(k) > c k^{3/2} / sqrt(log k).
+```
+
+Proof.  Let `L=log k`, and take `G` from `G(N,1/2)`.  For every fixed
+`t`-vertex set `T`, with `k<=t<=N`, split
+
+```text
+T=A union B,       |B|=ceil(t/L),       |A|=t-|B|.
+```
+
+Condition on all edges of `G[T]` except the cross edges between `A` and `B`.
+As in Proposition 0E, regularity of `G[T]` forces the independent binomial
+variables
+
+```text
+X_a=deg(a,B),        a in A,
+```
+
+after fixed integer shifts, to all take one common value.  Hence, writing
+`b=|B|` and `p_b=max_j Pr[Bin(b,1/2)=j]`,
+
+```text
+Pr[G[T] is regular] <= p_b^{|A|-1}.
+```
+
+The central-binomial bound gives
+
+```text
+p_b <= 3/sqrt(b) <= 3 sqrt(L/t).
+```
+
+For large `k`, `|A|-1 >= (1-2/L)t`.  Put
+
+```text
+q_t=3 sqrt(L/t).
+```
+
+Since `t<=N`, and we will choose `N<=k^{3/2}`, we have
+`log t <= 2 log k=2L` for large `k`.  Therefore
+
+```text
+q_t^{-2/L}
+ = exp((2/L) log(1/q_t))
+ <= exp((1/L) log t) <= e^2
+```
+
+after increasing the final constant harmlessly.  Thus
+
+```text
+Pr[G[T] is regular]
+ <= q_t^{(1-2/L)t}
+ <= (3e^2 sqrt(L/t))^t.
+```
+
+The expected number of regular induced subgraphs of order exactly `t` is
+therefore at most
+
+```text
+binom(N,t) (3e^2 sqrt(L/t))^t
+ <= (3e^3 N sqrt(L) / t^{3/2})^t.
+```
+
+Choose
+
+```text
+N <= (6e^3)^{-1} k^{3/2}/sqrt(L).
+```
+
+Then for every `t>=k` the last expectation is at most `2^{-t}`.  Summing over
+`t>=k` gives total expectation less than `1` for all large `k`.  Hence some
+`N`-vertex graph has no regular induced subgraph on at least `k` vertices,
+and the displayed lower bound for `G(k)` follows.  QED.
+
 ## Lemma 1: Hole / Antihole Reduction
 
 Let `k >= 4`.  If `G` has no regular induced subgraph of order at least `k`,

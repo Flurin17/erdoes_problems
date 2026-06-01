@@ -2646,3 +2646,9 @@ source of growth beyond Ramsey.
   `(C_epsilon t^{-1/2})^{(1-2epsilon)t}`.  This reconstructs the easy side of
   the `G(n,1/2)` calibration locally, though it still points in the opposite
   direction from the desired upper bound.
+- 2026-06-01: Optimized the same homogeneous-random proof in Proposition 0F
+  by taking the conditioning side `B` to have size about `t/log k`, giving the
+  explicit lower construction `G(k)>c k^{3/2}/sqrt(log k)`.  The proof uses
+  only binomial point-mass bounds and a union bound over all `t>=k`; it is not
+  as sharp as the known `Theta(n^{2/3})` random-graph calibration but removes
+  the arbitrary `epsilon` from Proposition 0E.
