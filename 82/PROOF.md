@@ -13089,6 +13089,22 @@ quickly collapse back to the original problem inside one profile class.
 
 ## New Proof
 
-No complete proof yet.  The current public literature still marks this as an
-open problem, so every new route is being treated as provisional until all
-gaps are closed.
+No complete proof yet.  The strongest current reduction in this workspace is
+
+```text
+G(h) <= 16h^3 P_h^2,
+```
+
+where `P_h` is the balanced marked-pair parameter from Lemma 28B.  Lemma 28G
+still gives
+
+```text
+G(ceil(h/2)) <= P_h <= ceil(G(h)/2),
+```
+
+so proving `P_h=2^{o(h)}` is subexponentially equivalent to the original
+problem.  The full-drop refinement removes the previous ordered
+sparse-inversion loss, but it does not by itself create a non-circular
+recurrence for `P_h`.  The remaining gap is therefore a genuinely new
+subexponential argument for the balanced marked-pair problem, or a different
+route that avoids this equivalent local obstruction.
