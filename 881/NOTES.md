@@ -119,7 +119,10 @@ Corollaries 16.82--16.83 then constrain same-side clustered pairs with the
 common-band blocker: absent enough pair spread, one extreme color must
 escape the relevant blocker window. Corollary 16.84 gives the robust
 auxiliary-interval version: a clustered two-color packet with both active
-colors in the robust core cannot be dense.
+colors in the robust core cannot be dense. Corollary 16.85 records the
+individual cost in the no-majority branch: the two selected gate fibers each
+avoid all blocker windows available at their own densities, even if their
+union is not itself dense.
 
 ## Definitions
 

@@ -23419,6 +23419,59 @@ retained-run allowance. The remaining same-side pair escape must either
 spread farther than every such allowance or move an extreme color outside
 the robust core.
 
+### Corollary 16.85: The two no-majority fibers have separate blocker escapes
+
+Keep the setting and hypotheses of Corollary 16.77, and let \(f,g\) be the
+two active colors supplied there. Put
+\[
+\rho_f={\eta\over2r},\qquad
+\rho_g={\eta-\theta\over2(r-1)}. \tag{1}
+\]
+Let \(\mathcal J_f\) and \(\mathcal J_g\) be finite families of retained
+intervals
+\[
+J=[\alpha_J,\beta_J]\cap\mathbb N\subset A\setminus F
+\]
+such that, writing \(\ell_J=\beta_J-\alpha_J+1\),
+\[
+\lfloor(1-\rho_f)n\rfloor+1\le2\ell_J-1
+\quad(J\in\mathcal J_f), \tag{2}
+\]
+and
+\[
+\lfloor(1-\rho_g)n\rfloor+1\le2\ell_J-1
+\quad(J\in\mathcal J_g). \tag{3}
+\]
+Then
+\[
+f\notin\bigcup_{J\in\mathcal J_f}W_J(\rho_f,I),
+\qquad
+g\notin\bigcup_{J\in\mathcal J_g}W_J(\rho_g,I). \tag{4}
+\]
+In particular, if \(K_f,K_g\subset A\) are auxiliary intervals satisfying
+the length condition of Lemma 16.69 at densities \(\rho_f\) and \(\rho_g\),
+respectively, then
+\[
+f\notin R_{K_f}(\rho_f,I;r),\qquad
+g\notin R_{K_g}(\rho_g,I;r). \tag{5}
+\]
+
+Proof. Corollary 16.77 gives
+\[
+|U_{f,{\rm gate}}|\ge\rho_f n,\qquad
+|U_{g,{\rm gate}}|\ge\rho_g n.
+\]
+The single-gate part of Corollary 16.67, applied to \(U_{f,{\rm gate}}\)
+and \(U_{g,{\rm gate}}\) with densities \(\rho_f\) and \(\rho_g\),
+respectively, proves (4). Statement (5) follows from Lemma 16.69 applied
+to the two gate-dependent packets. \(\square\)
+
+Thus the no-majority branch not only creates two far active colors; each
+selected color must independently avoid all blocker windows available at
+its own positive density. The cost is that these densities may be below
+\(1/2\), so robust cores can become empty and actual retained-run data may
+be needed.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24706,6 +24759,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.84 makes this robust against the unknown deletion pattern in
   an auxiliary interval: if a clustered two-color packet has both active
   colors in the auxiliary interval's robust core, it cannot be dense.
+* Corollary 16.85 records the individual blocker cost in the no-majority
+  branch: the two positive-density gate fibers each avoid every blocker
+  window available at their own density, even when their union is not dense.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
