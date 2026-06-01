@@ -174,7 +174,7 @@ Computational checks and generated data for Erdos Problem 82.
   Use `--source-residue a`, `--target-modulus M`, and `--candidates` to test
   source-sensitive slot families exactly on `n=8`, or `--random-samples`
   with `--seed` for deterministic probes of the same solved-edge space on
-  `n=10` and `n=11`.  Candidate multisets may have up to five slots, and the
+  `n=10`, `n=11`, and `n=12`.  Candidate multisets may have up to five slots, and the
   state code supports target moduli up to `16` for small higher-lift sanity
   checks.
 - `slot_local_search.py`: simulated-annealing heuristic for fixed residue-slot

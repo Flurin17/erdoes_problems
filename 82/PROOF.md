@@ -4567,7 +4567,8 @@ surviving candidates, the simple multiset
 ```
 
 passes the full `n=8` source-`0` sweep, deterministic `20,000,000`-sample
-source-`0` probes on `n=10` and `n=11`, and the first `100` source-`0`
+source-`0` probes on `n=10` and `n=11`, a deterministic `50,000,000`-sample
+source-`0` probe on `n=12`, and the first `100` source-`0`
 complete-multipartite vectors with at most six classes of size at most `16`.
 This is the current smallest concrete replacement target for the refuted
 four-slot source-`0` theorem, but it remains only finite evidence.

@@ -2916,3 +2916,9 @@ source of growth beyond Ramsey.
   first `100` multipartite vectors.  None of these is a theorem; the next
   useful step is either an optimized multipartite five-slot audit or a
   structural proof attempt for `(0,0,0,1,4)`.
+- 2026-06-01: Extended `source_slots_fast.cpp` from `64`-bit to `128`-bit
+  edge masks, raising the solved-edge random-probe cap to `n=12`.  The
+  candidate `(0,0,0,1,4)` survives a deterministic `n=12`, source-`0`
+  `4 -> 8` probe with `50,000,000` sampled internal graphs and `9229`
+  accepted source-modular graphs (`seed=5120`).  The larger probe strengthens
+  the candidate but does not close the proof gap.

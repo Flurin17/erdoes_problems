@@ -6,7 +6,7 @@
 // vertices and solves the incident edges to the last vertex.  For q=4 this
 // reduces the n=8 search from 2^28 full masks to 2^21 internal masks.  The
 // random-sample mode uses the same solved-edge representation for deterministic
-// seeded probes at n=10 and n=11.
+// seeded probes at n=10, n=11, and n=12.
 
 #include <algorithm>
 #include <array>
@@ -20,6 +20,7 @@
 #include <vector>
 
 using Candidate = std::vector<int>;
+using EdgeMask = unsigned __int128;
 
 namespace {
 
@@ -39,6 +40,24 @@ int edge_index(int n, int a, int b) {
         }
     }
     return -1;
+}
+
+int popcount_edge(EdgeMask value) {
+    uint64_t lo = static_cast<uint64_t>(value);
+    uint64_t hi = static_cast<uint64_t>(value >> 64);
+    return __builtin_popcountll(lo) + __builtin_popcountll(hi);
+}
+
+std::string edge_mask_string(EdgeMask value) {
+    if (value == 0) return "0";
+    std::string out;
+    while (value > 0) {
+        int digit = static_cast<int>(value % 10);
+        out.push_back(static_cast<char>('0' + digit));
+        value /= 10;
+    }
+    std::reverse(out.begin(), out.end());
+    return out;
 }
 
 std::vector<Candidate> all_candidates(int modulus, int slot_count) {
@@ -133,10 +152,10 @@ class Checker {
         for (int subset = 1; subset <= full; ++subset) {
             for (int v = 0; v < n; ++v) {
                 if (!((subset >> v) & 1)) continue;
-                uint64_t mask = 0;
+                EdgeMask mask = 0;
                 for (int w = 0; w < n; ++w) {
                     if (v == w || !((subset >> w) & 1)) continue;
-                    mask |= uint64_t{1} << edge_index(n, v, w);
+                    mask |= static_cast<EdgeMask>(1) << edge_index(n, v, w);
                 }
                 incident[subset][v] = mask;
             }
@@ -149,21 +168,19 @@ class Checker {
         }
     }
 
-    void compute_residues(uint64_t graph_mask) {
+    void compute_residues(EdgeMask graph_mask) {
         std::fill(residue.begin(), residue.end(), -1);
         for (int subset = 1; subset <= full; ++subset) {
             int first = __builtin_ctz(static_cast<unsigned>(subset));
             int value =
-                __builtin_popcountll(graph_mask & incident[subset][first])
-                % target_modulus;
+                popcount_edge(graph_mask & incident[subset][first]) % target_modulus;
             bool ok = true;
             int rest = subset & ~(1 << first);
             while (rest) {
                 int bit = rest & -rest;
                 int v = __builtin_ctz(static_cast<unsigned>(bit));
                 int here =
-                    __builtin_popcountll(graph_mask & incident[subset][v])
-                    % target_modulus;
+                    popcount_edge(graph_mask & incident[subset][v]) % target_modulus;
                 if (here != value) {
                     ok = false;
                     break;
@@ -184,7 +201,7 @@ class Checker {
     int n;
     int target_modulus;
     int full;
-    std::vector<std::array<uint64_t, 12>> incident;
+    std::vector<std::array<EdgeMask, 13>> incident;
     std::vector<std::vector<int>> submasks_with_pivot;
     std::vector<int> residue;
     std::unordered_set<uint64_t> failed;
@@ -210,7 +227,7 @@ class Checker {
     }
 };
 
-uint64_t source_modular_mask(
+EdgeMask source_modular_mask(
     int n,
     uint64_t bits,
     int source_modulus,
@@ -218,14 +235,14 @@ uint64_t source_modular_mask(
     bool& ok
 ) {
     ok = false;
-    uint64_t graph_mask = 0;
-    std::array<int, 12> degrees{};
+    EdgeMask graph_mask = 0;
+    std::array<int, 13> degrees{};
     int bit_index = 0;
     for (int i = 0; i < n - 1; ++i) {
         for (int j = i + 1; j < n - 1; ++j) {
             if ((bits >> bit_index) & 1) {
                 int idx = edge_index(n, i, j);
-                graph_mask |= uint64_t{1} << idx;
+                graph_mask |= static_cast<EdgeMask>(1) << idx;
                 ++degrees[i];
                 ++degrees[j];
             }
@@ -238,7 +255,7 @@ uint64_t source_modular_mask(
         if (diff > 1) return 0;
         if (diff == 1) {
             int idx = edge_index(n, i, n - 1);
-            graph_mask |= uint64_t{1} << idx;
+            graph_mask |= static_cast<EdgeMask>(1) << idx;
             ++degrees[i];
             ++degrees[n - 1];
         }
@@ -305,8 +322,8 @@ int main(int argc, char** argv) {
         }
     }
 
-    if (n < 1 || n > 11) {
-        std::cerr << "supported range: 1 <= n <= 11\n";
+    if (n < 1 || n > 12) {
+        std::cerr << "supported range: 1 <= n <= 12\n";
         return 2;
     }
     if (source_modulus <= 0 || target_modulus <= 0 || slot_count <= 0) {
@@ -333,7 +350,7 @@ int main(int argc, char** argv) {
     std::vector<Candidate> candidates =
         parse_candidates(candidate_text, target_modulus, slot_count);
     std::vector<int> alive(candidates.size(), 1);
-    std::vector<uint64_t> bad(candidates.size(), 0);
+    std::vector<EdgeMask> bad(candidates.size(), 0);
     std::vector<uint64_t> killed_at_checked(candidates.size(), 0);
     Checker checker(n, target_modulus);
 
@@ -343,7 +360,7 @@ int main(int argc, char** argv) {
         for (int a = 0; a < source_modulus; ++a) {
             if (source_residue >= 0 && a != source_residue) continue;
             bool ok = false;
-            uint64_t graph_mask = source_modular_mask(n, bits, source_modulus, a, ok);
+            EdgeMask graph_mask = source_modular_mask(n, bits, source_modulus, a, ok);
             if (!ok) continue;
             ++checked;
             checker.compute_residues(graph_mask);
@@ -356,7 +373,7 @@ int main(int argc, char** argv) {
                     if (!quiet_kills) {
                         std::cout << "killed=" << candidate_string(candidates[i])
                                   << " source_residue=" << a
-                                  << " mask=" << graph_mask
+                                  << " mask=" << edge_mask_string(graph_mask)
                                   << " checked=" << checked
                                   << " internal_bits=" << bits << "\n";
                     }
@@ -406,7 +423,7 @@ int main(int argc, char** argv) {
             std::cout << "ok\n";
             ++good_count;
         } else {
-            std::cout << "bad=" << bad[i]
+            std::cout << "bad=" << edge_mask_string(bad[i])
                       << " checked=" << killed_at_checked[i] << "\n";
         }
     }
