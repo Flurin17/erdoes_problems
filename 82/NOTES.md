@@ -3361,3 +3361,9 @@ source of growth beyond Ramsey.
   equal-size/equal-internal-degree case over a regular quotient immediately
   gives a regular witness.  This records the exact balancing problem left by
   modular decomposition.
+- 2026-06-01: Added Corollary 7.3, a Ramsey multiplication lemma across large
+  modules.  If `B` modules all have size at least `R(ell,ell)`, then each
+  supplies a homogeneous `ell`-set; a homogeneous set in the quotient plus a
+  type pigeonhole gives a regular induced subgraph of order
+  `Omega(ell log |B|)`.  Thus a hard substitution instance cannot have many
+  large modules at any useful internal Ramsey scale.

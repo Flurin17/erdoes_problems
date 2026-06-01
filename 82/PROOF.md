@@ -7230,6 +7230,44 @@ quotient reduction: one may also need to coordinate regular witnesses inside
 several modules so that their internal degrees and quotient-weighted external
 degrees balance.
 
+**Corollary 7.3: Ramsey Multiplication Across Large Modules.**  Let
+`V(G)=V_1 union ... union V_m` be a partition into modules with quotient
+`Q`.  Fix an integer `ell>=1`, and let `B` be the set of indices `i` for
+which
+
+```text
+|V_i| >= R(ell,ell).
+```
+
+Then
+
+```text
+reg(G) >= (ell/2) c log |B|
+```
+
+for an absolute Ramsey constant `c>0`, whenever `|B|>=2`.  More precisely,
+`reg(G) >= ell floor(c log |B|/2)`.
+
+Proof.  For every `i in B`, Ramsey's theorem gives either a clique or an
+independent set of order `ell` inside `G[V_i]`.  Mark `i` by one of the two
+types that exists, choosing arbitrarily if both exist.  Ramsey's theorem
+applied to the quotient graph `Q[B]` gives a clique or independent set
+`J_0 subset B` of size at least `c log |B|`.  At least half of the vertices
+of `J_0` have the same internal type; let `J` be that same-type subcollection.
+
+For every `i in J`, choose the corresponding homogeneous `ell`-set `S_i` in
+`V_i`.  These pieces all have the same order `ell` and the same internal
+degree, either `0` or `ell-1`.  Since `J` is still a clique or independent
+set in the quotient, `Q[J]` is regular.  Lemma 7.2 therefore makes
+`union_{i in J} S_i` a regular induced subgraph of `G`, of order
+`ell |J| >= ell floor(c log |B|/2)`.  QED.
+
+Thus a modular-decomposition proof can multiply internal and quotient Ramsey
+gains whenever many modules are large.  A hard substitution counterexample
+must distribute its mass so that, for every useful `ell`, only few modules
+are large enough to force homogeneous `ell`-sets, or else the quotient on
+those large modules has already produced the regular witness above.
+
 ## Lemma 7A: Low Adjacency Rank Gives A Large Regular Class
 
 Let `A_G` be the adjacency matrix of an `n`-vertex graph `G`, viewed over any
