@@ -6305,6 +6305,78 @@ sparse deletions: it must create unbounded private-color fibers, or use
 deleted-pair exceptions \(F+F\) at rank comparable to the ambient counting
 function.
 
+### Corollary 8.5a.7f: Counterexamples force large private fibers
+
+Work in the remaining \(k=2\) case, and suppose \(A\) is a counterexample
+to the desired order-3 deletion conclusion. Then for every finite
+\[
+E\subset A
+\]
+and every \(M,L_0\), there are:
+
+* a finite set \(F\subset A\setminus E\);
+* a witness \(w>L_0\) with
+  \[
+  w\notin3(A\setminus F),\qquad w\ge\max F-1;
+  \]
+* an active color \(f\in F\);
+* a set
+  \[
+  U\subset A\setminus F,\qquad |U|=M,
+  \]
+
+such that, putting
+\[
+m=w-f,
+\]
+one has
+\[
+m-U\subset A\setminus F \tag{1}
+\]
+and
+\[
+u+f\notin2(A\setminus F)\qquad(u\in U). \tag{2}
+\]
+
+Proof. Apply the construction in Lemma 8.5a.7e with \(D=1\) and
+\(L=M-1\), choosing the sparse set \(B\) inside \(A\setminus E\) and above
+\(L_0+1\). This is possible because deleting finitely many elements and an
+initial segment does not change the fact that \(A(x)\to\infty\). By
+Corollary 3.1c,
+the infinite set \(B\) contains a finite late-bad set \(F_0\). Since
+\(\min F_0>L_0+1\), it has a witness
+\[
+w\ge\max F_0-1>L_0
+\]
+with \(w\notin3(A\setminus F_0)\). Shrink \(F_0\) inclusion-minimally for
+this fixed witness and call the result \(F\). Then
+\[
+F\subset B\subset A\setminus E,\qquad
+w\notin3(A\setminus F),\qquad
+w\ge\max F-1.
+\]
+
+For every retained row
+\[
+u\in R(F,w)=\{e\in A\setminus F:\ e\le w-N_0,\ w-e\notin F+F\},
+\]
+Lemma 8.4c gives at least one private color \(f\in F\) satisfying
+\[
+w-u-f\in A\setminus F,\qquad u+f\notin2(A\setminus F).
+\]
+Choose one such color for each row. If every color fiber had size at most
+\(M-1\), then \(F,w\) would violate the defining property of the sparse set
+\(B\) from Lemma 8.5a.7e. Hence some \(f\in F\) has a fiber of size at
+least \(M\). Taking any \(M\)-element subset of that fiber gives \(U\), and
+(1)--(2) follow. \(\square\)
+
+This is not yet reflection-recurrence: the large fiber \(U\) may move with
+the active color and witness, and it may be certificate-free. But the
+purely injective packet model is eliminated. Any final counterexample must
+produce arbitrarily large private reflected fibers while also preventing
+those fibers from compacting to a recurrent certificate triple or to a
+finite recurrent Sidon coloring.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
@@ -12859,6 +12931,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   rank-\(r\) private coloring serves at most \(L\) rows per active color.
   Thus a genuine counterexample must force unbounded private-color fibers
   or \(F+F\)-exception mass at ambient scale.
+* Corollary 8.5a.7f turns this into a positive structural demand:
+  remaining counterexamples have arbitrarily large private reflected
+  fibers \(U\) for a single active color, with \(m-U\subset A\) and
+  \(U+f\) still excluded from \(2(A\setminus F)\).
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and
