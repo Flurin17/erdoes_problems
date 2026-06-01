@@ -1701,6 +1701,55 @@ because both sides of the fixed set have size at least `R`.  Summing over the
 `binom(N,x)binom(N,y)` choices of `X_0,Y_0` gives the displayed expectation.
 QED.
 
+**Corollary: Semi-Random Balanced Witnesses Above The `N/sqrt(M)` Scale.**
+In the same semi-random two-block model, fix `A>e`.  Let
+
+```text
+T >= max { R, A N / sqrt(M) }.
+```
+
+Then the expected number of `M`-modular induced sets `S` satisfying
+
+```text
+|S cap X| >= T,        |S cap Y| >= T
+```
+
+is at most
+
+```text
+N^2 M rho_M^T,
+```
+
+where `rho_M=(1+o_M(1)) e^2/A^2`.  In particular, for fixed `A>e` and
+`M` sufficiently large, `rho_M<1`; if also `T/log(NM)->infinity`, then with
+probability tending to `1` there is no such balanced `M`-modular induced set.
+
+Proof.  Put `c_M>=1`, `c_M=1+o_M(1)`, for the factor in the previous
+corollary.  For fixed `x,y>=T`, let `L=max(x,y)`.  The standard binomial
+estimate gives
+
+```text
+binom(N,x)binom(N,y) <= (eN/T)^(x+y) <= (eN/T)^(2L).
+```
+
+Therefore
+
+```text
+E Z_{x,y}
+ <= (eN/T)^(2L) (c_M/M)^(L-1)
+ <= M (c_M e^2 N^2/(T^2 M))^L.
+```
+
+Since `T>=A N/sqrt(M)`, the parenthesized factor is at most
+
+```text
+rho_M = c_M e^2/A^2.
+```
+
+Summing over at most `N^2` choices of the pair `(x,y)` and using `L>=T`
+gives the displayed bound.  The final statement follows from Markov's
+inequality.  QED.
+
 For balanced choices `x~y`, this first moment has exponent roughly
 
 ```text
@@ -1709,11 +1758,13 @@ x log(eN/x)+y log(eN/y)-x log M.
 
 Thus the row/column residue information alone does not yet recover the full
 independent-edge heuristic when `N/x` is comparable to `M`; it saves one
-power of `M` per vertex on only one side.  This identifies a precise
-technical bottleneck for the two-degree anti-concentration route: one must
-extract additional independent constraints from the opposite side, or prove
-that fixed-degree conditioning creates enough effective randomness to recover
-the expected `(2q)^-(|S|-1)` scale.
+power of `M` per vertex on only one side.  The corollary makes the loss
+quantitative: this one-sided first moment rules out balanced witnesses only
+above the `N/sqrt(M)` scale.  This identifies a precise technical bottleneck
+for the two-degree anti-concentration route: one must extract additional
+independent constraints from the opposite side, or prove that fixed-degree
+conditioning creates enough effective randomness to recover the expected
+`(2q)^-(|S|-1)` scale.
 
 In the uniform two-degree model one would need the analogue
 

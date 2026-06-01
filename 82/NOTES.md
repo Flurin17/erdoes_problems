@@ -3104,3 +3104,11 @@ source of growth beyond Ramsey.
   have nullity `0`; on the `14`-vertex add/delete saturated masks the
   `A+I` nullities are `3` and `1`.  Thus the finite obstruction masks are not
   explained by a large binary eigenspace.
+- 2026-06-01: Added the quantitative semi-random balanced-witness corollary.
+  In the two-block model with arbitrary fixed internal graphs and random cross
+  edges, the one-sided modular anti-concentration first moment rules out
+  balanced `M`-modular sets only once both side sizes are above
+  `A N/sqrt(M)` (up to the `C M^2 log M` residue-mixing floor), with expected
+  count at most `N^2 M rho_M^T`.  This makes the entropy bottleneck explicit:
+  the unconditioned row/column estimate alone cannot reach the fixed-degree
+  heuristic scale `N/M`.
