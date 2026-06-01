@@ -8447,6 +8447,60 @@ the local promotion
 \]
 is false without an additional recurrence or barrier argument.
 
+### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
+
+Work in the remaining \(k=2\) counterexample case. Fix a finite row test
+\[
+T_0\subset A,
+\]
+a finite gate palette
+\[
+P\subset A,
+\]
+and a finite shift palette
+\[
+H\subset\mathbb Z\setminus\{0\}.
+\]
+Then the following two alternatives are impossible for arbitrarily large
+centers.
+
+1. There are arbitrarily large \(m\), some \(f\in P\), and
+   \(U\subset T_0\) such that
+   \[
+   m-U\subset A,\qquad r_{2,A}(u+f)=1\quad(u\in U),
+   \]
+   and
+   \[
+   |U|>\beta_f(T_0),
+   \]
+   where \(\beta_f(T_0)\) is as in Corollary 8.5a.7k.
+2. There are arbitrarily large \(m\), some \(h\in H\), and
+   \(U\subset T_0\) such that
+   \[
+   m-U\subset A,\qquad U+h\subset A,
+   \]
+   and
+   \[
+   |U|>\gamma_h(T_0),
+   \]
+   where \(\gamma_h(T_0)\) is as in Corollary 8.5a.7l.
+
+Proof. The first alternative is exactly the hypothesis of Corollary
+8.5a.7k for the finite palette \(P\) and test \(T_0\); it gives an infinite
+deletion whose complement is an order-3 basis, contradicting the remaining
+counterexample case. The second alternative is exactly Corollary 8.5a.7l
+for the finite shift palette \(H\) and test \(T_0\), and gives the same
+contradiction. \(\square\)
+
+Combined with Lemma 8.5a.7z.10, this says that a selector-specific
+reflected front can survive only if its compressed spike data also escapes:
+the row sets cannot recur inside any fixed finite \(T_0\) with gates in a
+fixed finite \(P\) or shifts in a fixed finite \(H\) while exceeding the
+corresponding independence thresholds. Thus the remaining obstruction is
+not just selector-specific; it is selector-specific with cofinally moving
+row tests, gate palettes, and shift palettes, unless one can promote the
+spike supports to genuine late-bad pair debt.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -15180,6 +15234,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Diagnostic 8.5a.7z.12 gives a range-separated finite gadget where a
   shifted-overlap pair spike is repaired by a third active color, so local
   spike support does not imply pair debt.
+* Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
+  the existing finite gate- and shift-palette certificate lemmas.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

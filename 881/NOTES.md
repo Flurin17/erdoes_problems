@@ -2346,6 +2346,11 @@ the product-window clutter: a rank-three witness can contain a large
 shifted-overlap spike on a pair \(\{f,g\}\), but deleting \(\{f,g\}\) still
 leaves a third active color \(k\) that repairs the witness. Local spike
 support does not imply pair debt.
+Corollary 8.5a.7z.13 records the stable case that is already closed: if
+the compressed unique-gate or shifted-overlap packets recur inside one
+finite row test with gates or shifts in fixed finite palettes and exceed
+the corresponding independence thresholds, Corollaries 8.5a.7k--8.5a.7l
+produce a recurrent certificate and a good deletion.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
