@@ -15797,6 +15797,69 @@ branch. The unresolved part is therefore a moving-position, bounded-window
 debt shell in which finite tests must keep finding large certificate-free
 subsets.
 
+## Corollary 13.1l.2c: Fixed-position debt is fractional recurrence
+
+Let \(A\) be an order-\(2\) basis with threshold \(N_0\). Fix
+\[
+d\in A,\qquad r\ge1,\qquad 1\le j\le r,\qquad D\ge d,
+\]
+and let \(Y\subset A\setminus\{d\}\) be infinite. Suppose that for every
+finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and every \(L\), there are
+\[
+H=\{h_1<\cdots<h_r\}\subset Y\setminus T
+\]
+and a witness \(w\) such that
+\[
+w-\max T\ge N_0,\qquad
+w-\max\{d,h_1,\ldots,h_{j-1}\}>L,\qquad
+w\le h_j+D, \tag{1}
+\]
+and
+\[
+w\notin3(A\setminus(\{d\}\cup H)). \tag{2}
+\]
+Then for every finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and every \(L_0\), there are
+\[
+U\subset T,\qquad |U|\ge |T|/j,
+\]
+and a center \(m>L_0\) such that
+\[
+m-U\subset A. \tag{3}
+\]
+If, moreover, some finite
+\[
+T_0\subset A\cap(D,\infty)
+\]
+has no certificate-free subset of size at least \(|T_0|/j\), then there is
+an infinite \(B\subset A\) such that
+\[
+A\setminus B
+\]
+is an order-\(3\) basis.
+
+Proof. Apply Lemma 8.2c''' with
+\[
+f_0=d,\qquad f_i=h_i\quad(1\le i\le r).
+\]
+The hypotheses (1)--(2) are exactly the intermediate endpoint-excess
+hypotheses of that lemma. Its conclusion gives (3), and its final
+certificate-density clause gives the good infinite deletion. \(\square\)
+
+Thus the endpoint-close debt from Corollary 13.1l.2b can remain genuinely
+new only if the ordered debt position refuses to stabilize in a form with
+arbitrarily large lower gaps, or if every finite test set contains large
+certificate-free pieces at the corresponding fractional scale. This is the
+same certificate-free recurrent-cluster obstruction already isolated after
+Lemma 8.6c, now forced inside each fixed first-section prefix shell.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -17612,6 +17675,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   first point, rank, and tail, some finite test set and constant force every
   sufficiently high linked hole to have bounded excess over one endpoint;
   in a generalized prefix-link shell, this endpoint is a moving tail point.
+* Corollary 13.1l.2c specializes Lemma 8.2c''' to prefix shells: if that
+  bounded endpoint debt sits at a fixed ordered tail position while the
+  witness is arbitrarily far above all earlier endpoints, then the shell
+  gives fractional reflection-recurrence, and certificate-dense finite
+  tests already yield a good deletion.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

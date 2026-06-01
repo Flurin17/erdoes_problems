@@ -2581,6 +2581,14 @@ sufficiently high hole for \(\{d\}\cup H\), \(H\in[Y\setminus T_*]^r\), has
 shell, requesting witnesses above \(d+M_*\) moves this debt onto a tail
 endpoint \(h\in H\). If the hole is inclusion-minimal, this becomes a real
 finite-width endpoint window \(w-h\in2A\) with \(w-h\le M_*\).
+Corollary 13.1l.2c imports Lemma 8.2c''' into this shell language: if the
+bounded endpoint debt stabilizes at a fixed ordered tail position \(h_j\)
+and the witness stays arbitrarily far above all earlier endpoints
+\(\{d,h_1,\ldots,h_{j-1}\}\), then the shell gives fractional
+reflection-recurrence of size at least \(|T|/j\). Hence a surviving
+fixed-section shell must either move the debt position/gap pattern or keep
+large certificate-free subsets in every finite test at the relevant
+fractional scale.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
