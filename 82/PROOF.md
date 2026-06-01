@@ -8926,6 +8926,114 @@ example, the sliding-window graph above itself contains large complete
 multipartite regular induced subgraphs.  The obstruction is specifically to
 the homogeneous extraction used in Proposition 28F.
 
+**Definition 28E.4: The Column-Drop Ordered Parameter.**  For integers
+`P,h>=1`, let `C_drop(P,h)` be the least integer `m` such that every ordered
+graph `H` on vertices
+
+```text
+v_1<...<v_m
+```
+
+with
+
+```text
+|{ i<j : v_i v_j in E(H), v_i v_k notin E(H) }| < P
+```
+
+for every ordered pair `j<k`, contains a clique or independent set of order
+`h`.
+
+The condition says that, as one moves from column `j` to a later column `k`,
+fewer than `P` earlier rows are lost from the earlier-neighborhood.  The
+representative graph in Proposition 28F satisfies exactly this stronger
+pointwise condition, not merely a bound on the total number of inversions.
+
+**Lemma 28E.5: Exact Value At One Drop.**  For every `h>=2`,
+
+```text
+C_drop(1,h) = (h-1)^2+1.
+```
+
+Proof.  The condition with `P=1` says that the displayed set is empty for
+every `j<k`, which is exactly the absence of inversion triples.  Lemma 28E,
+applied with `s=m`, shows that every inversion-free ordered graph on `m`
+vertices has a clique or independent set of order at least `sqrt(m)`.
+Therefore `m>(h-1)^2` forces a clique or independent set of order at least
+`h`, so
+
+```text
+C_drop(1,h) <= (h-1)^2+1.
+```
+
+For the reverse inequality, apply Lemma 28E.3 with `q=h-1`.  It gives an
+inversion-free ordered graph on `(h-1)^2` vertices whose largest clique or
+independent set has order exactly `h-1`.  Hence
+`C_drop(1,h)>(h-1)^2`, proving equality.  QED.
+
+**Lemma 28E.6: Global Reduction Through The Column-Drop Parameter.**  For
+every `h>=3`, with `P=P_h`,
+
+```text
+G(h) <= 16 h P C_drop(P,h).
+```
+
+Proof.  Let `G` be a graph with no regular induced subgraph on at least `h`
+vertices.  Partition its vertices into exact global degree classes.  By
+Corollary 28D.2, every nonempty degree class has size at most `16hP`.
+
+Choose one representative from each nonempty degree class and order the
+representatives by increasing global degree:
+
+```text
+v_1<...<v_b.
+```
+
+For `j<k`, Lemma 28D gives
+
+```text
+|N(v_j)\N(v_k)| < P,
+```
+
+because `deg(v_j)<deg(v_k)`.  Therefore, in the ordered representative graph,
+the number of earlier vertices `v_i`, `i<j`, such that `v_i v_j` is an edge
+and `v_i v_k` is not an edge is also less than `P`.  Thus the representative
+graph satisfies the defining column-drop condition for `C_drop(P,h)`.
+
+If `b>=C_drop(P,h)`, the representative graph contains a clique or
+independent set of order `h`.  The same vertices form a clique or independent
+set in `G`, hence a regular induced subgraph on `h` vertices, contradiction.
+So
+
+```text
+b < C_drop(P,h).
+```
+
+Multiplying the number of degree classes by the maximum degree-class size
+gives
+
+```text
+|V(G)| <= 16hP (C_drop(P,h)-1) < 16hP C_drop(P,h).
+```
+
+Therefore every graph on at least `16hP C_drop(P,h)` vertices has a regular
+induced subgraph on at least `h` vertices, proving the displayed bound for
+`G(h)`.  QED.
+
+The proof of Proposition 28F is the special case obtained from the crude
+estimate
+
+```text
+C_drop(P,h) <= 4P h^4+1,
+```
+
+which follows by summing the column-drop bounds to get fewer than
+`P binom(m,2)` total inversions and then applying Lemma 28E.1 with
+`s=h^2`.  Lemma 28E.5 shows that this crude route loses real information:
+at `P=1`, the exact value is quadratic in `h`, while the sparse-inversion
+estimate gives only a quartic bound.  Any improvement to Proposition 28F
+should therefore target the column-drop parameter directly, rather than only
+the total inversion count.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 

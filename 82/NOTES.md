@@ -2673,3 +2673,11 @@ source of growth beyond Ramsey.
   regular witnesses, so the lemma does not refute all inversion-free regular
   extraction; it specifically blocks improving Proposition 28F by asking the
   inversion-free subgraph only for a clique or independent set.
+- 2026-06-01: Introduced the column-drop ordered parameter `C_drop(P,h)`.
+  The degree-bucket representatives in Proposition 28F satisfy a pointwise
+  condition: for every pair of later columns `j<k`, fewer than `P_h` earlier
+  rows are adjacent to `j` and nonadjacent to `k`.  This gives the cleaner
+  reduction `G(h) <= 16 h P_h C_drop(P_h,h)`.  The old proof used only total
+  inversions and the crude bound `C_drop(P,h) <= 4P h^4+1`; at `P=1` the
+  exact value is `C_drop(1,h)=(h-1)^2+1`, so the ordered subproblem to improve
+  is genuinely the column-drop problem, not just sparse inversion counting.
