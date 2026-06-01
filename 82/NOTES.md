@@ -2383,3 +2383,12 @@ source of growth beyond Ramsey.
   maximum order-`10` witnesses include two-role pairs, matching the balanced
   extension found earlier, but many pairs in those same witnesses already use
   three or four roles.
+- 2026-06-01: Added `regular_bitset.py` and `compensated_spread_fast.py` to
+  check fixed masks without all-subset precomputation.  This allowed exact
+  threshold verification for larger compensated spread-one samples: a
+  `22`-vertex sample with degree sequence `10^20,11^2` has maximum regular
+  order exactly `11`, and a `24`-vertex sample with degree sequence
+  `11^16,12^8` has maximum regular order exactly `12`.  These do not prove a
+  half-size theorem, already refuted at `n=12`, but they calibrate the
+  compensated template as sitting near the half-size boundary in small larger
+  samples.

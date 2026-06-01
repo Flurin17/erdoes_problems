@@ -4,6 +4,8 @@ Computational checks and generated data for Erdos Problem 82.
 
 - `regular_induced.py`: exhaustive, random, and fixed-mask checks for largest
   regular or modular induced subgraphs.
+- `regular_bitset.py`: memory-light fixed-mask regular induced subgraph
+  verifier for larger individual graphs, avoiding all-subset precomputation.
 - `trace_bridge.py`: tests the degree-class bridge from repeated-degree data
   to regular induced subgraphs.
 - `ramsey_sample.py`: compares largest homogeneous and regular induced
@@ -25,6 +27,9 @@ Computational checks and generated data for Erdos Problem 82.
   complement on the other, and a bipartite graph with complementary degree
   prescriptions between them.  The default base density is `1/2`, matching
   the degree-sum condition `m(m-1)-4e(F) in [0,m]`.
+- `compensated_spread_fast.py`: samples the same template but uses
+  `regular_bitset.py` for memory-light fixed-mask verification on larger
+  orders.
 - `compensated_template_check.py`: verifies a fixed compensated-double
   template mask, reports the base and cross degree prescriptions, and prints
   the profile equations of Lemma 11E for a supplied witness.

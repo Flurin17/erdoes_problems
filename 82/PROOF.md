@@ -5380,6 +5380,56 @@ cut-degree system over the base graph `F` and the compensating bipartite graph
 `V=empty` or `U=empty`; the examples above show that genuinely mixed
 solutions can be larger than the available one-side witnesses.
 
+**Computational Example 11F: Larger Compensated Templates At The Half-Size
+Boundary.**  The memory-light verifier `EXPERIMENTS/regular_bitset.py`
+extends exact fixed-mask checks beyond the all-subset precomputation range
+used by `regular_induced.py`.  In compensated spread-one samples, it verifies
+the following two larger masks.
+
+For `m=11`, the graph on `22` vertices with mask
+
+```text
+1514445400399818308793001504185320897379013154226396489070190770383185
+```
+
+has degree sequence
+
+```text
+10^20, 11^2
+```
+
+and maximum regular induced order exactly `11`: the command
+
+```text
+python3 82/EXPERIMENTS/regular_bitset.py 22 --mask 1514445400399818308793001504185320897379013154226396489070190770383185 --threshold 12
+```
+
+reports no regular induced subgraph of order at least `12`, while
+
+```text
+python3 82/EXPERIMENTS/regular_bitset.py 22 --mask 1514445400399818308793001504185320897379013154226396489070190770383185 --threshold 11
+```
+
+finds an order-`11` witness.
+
+For `m=12`, the graph on `24` vertices with mask
+
+```text
+92539845710879666640401066284165863542407620232601075165182118091113678175564578752
+```
+
+has degree sequence
+
+```text
+11^16, 12^8
+```
+
+and maximum regular induced order exactly `12`: the threshold-`13` check is
+negative, and the threshold-`12` check finds a witness.  These examples do
+not restore the false universal half-size theorem from Example 11C, but they
+show that the compensated family oscillates around the half-size boundary in
+small samples rather than immediately producing a decreasing ratio.
+
 ## Lemma 12: Minimal Repeated-Degree Host Obstruction
 
 Let `H` be an induced subgraph of `G` containing a set
