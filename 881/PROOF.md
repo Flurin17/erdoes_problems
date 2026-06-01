@@ -20908,6 +20908,97 @@ nonsingleton front must still solve a genuine coloring problem: either many
 \(2A\)-rows are forced through deleted colors in \(F\), or many gate
 translates \(f+u\) are forced through the same finite deleted palette.
 
+### Corollary 16.38: Large row-dependent packets force certificates
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Let \(T_0\subset A\) be finite, and
+let \(s\ge1\) have the following certificate property: every subset
+\[
+V\subset T_0,\qquad |V|\ge s,
+\]
+contains elements
+\[
+e,y_1,y_2,y_3\in V,\qquad y_i\ne e,
+\]
+such that
+\[
+y_1+y_2-e\in A,\qquad y_1+y_2+y_3-2e\in A. \tag{1}
+\]
+Fix \(r\ge1\). Then there is \(L_0\) such that the following data do not
+exist for any \(L\ge L_0\):
+
+* a finite set \(F\subset A\) with \(1\le |F|\le r\);
+* a point \(f\in F\), a witness \(w\notin4(A\setminus F)\), and
+  \(m=w-f\);
+* a set \(U\subset T_0\setminus F\) with
+  \[
+  m-U\subseteq2A,\qquad m-\max F>L; \tag{2}
+  \]
+* the row-dependent set from Lemma 16.37,
+  \[
+  U_{\rm row}=\{u\in U:m-u\notin2(A\setminus F)\},
+  \]
+  satisfying
+  \[
+  |U_{\rm row}|>|F+F|+|F|(s-1). \tag{3}
+  \]
+
+Proof. Suppose such data exist for arbitrarily large \(L\). Put
+\[
+C=A\setminus F.
+\]
+For \(u\in U_{\rm row}\), Lemma 16.37 says that every two-term
+representation of \(m-u\) from \(A\) meets \(F\). At most \(|F+F|\) values
+of \(u\) have
+\[
+m-u\in F+F,
+\]
+because the map \(u\mapsto m-u\) is injective. By (3), after discarding
+these exceptional rows, more than \(|F|(s-1)\) values remain. For each
+remaining \(u\), choose a representation
+\[
+m-u=g_u+c_u,\qquad g_u\in F,\quad c_u\in C.
+\]
+Pigeonholing over the at most \(|F|\) colors \(g_u\), there are
+\[
+g\in F,\qquad V\subset T_0,\qquad |V|\ge s,
+\]
+such that
+\[
+m-g-V\subset C\subset A. \tag{4}
+\]
+The center
+\[
+M=m-g
+\]
+satisfies
+\[
+M\ge m-\max F>L.
+\]
+
+By the certificate property of \(T_0\), the set \(V\) contains a tuple
+\[
+e,y_1,y_2,y_3
+\]
+satisfying (1). Since \(T_0\) is finite and the displayed data exist for
+arbitrarily large \(L\), one fixed certificate tuple occurs with centers
+\[
+M\to\infty
+\]
+and
+\[
+M-\{e,y_1,y_2,y_3\}\subset A
+\]
+by (4). Lemma 2.3b with \(k=3\) gives an infinite deletion whose complement
+is an order-\(4\) basis, contradicting the hypothesis on \(A\). \(\square\)
+
+Thus, in a \(k=3\) counterexample, bounded-rank nonsingleton fronts cannot
+put a large row-dependent packet over any finite test that is certificate
+dense at the corresponding scale. After Lemma 16.37, the remaining
+bounded-depth nonsingleton escape must either keep the row-dependent packet
+below this finite-color threshold, make the finite tests contain large
+certificate-free subsets, or concentrate in the gate-dependent branch.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22042,6 +22133,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   palette \(F\), or the gate translate \(f+u\) is not retained in \(2C\).
   Unlike the singleton case, this yields finite-color dependence rather
   than a unique gate.
+* Corollary 16.38 closes the large row-dependent part of that finite-color
+  branch at bounded rank: over any finite test whose large subsets contain
+  a \(k=3\) certificate tuple, too many row-dependent \(2A\)-rows force an
+  actual \(A\)-reflected certificate and hence a good order-\(4\) deletion
+  by Lemma 2.3b.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

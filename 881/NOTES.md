@@ -24,6 +24,9 @@ Lemma 16.37 adds the next local split: each such \(2A\)-row is either
 dependent on the finite deleted palette, or its gate translate is dependent
 on that palette. The singleton unique-gate argument therefore becomes a
 finite-color problem in the nonsingleton branch.
+Corollary 16.38 rules out the large row-dependent bounded-rank subbranch
+over certificate-dense finite tests, because pigeonholing over the deleted
+palette recovers an actual \(A\)-reflected \(k=3\) certificate tuple.
 
 ## Definitions
 
