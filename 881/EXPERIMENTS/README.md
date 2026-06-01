@@ -689,7 +689,9 @@ bounds it finds depth-four chains such as
 `[1,2,3,4] -> +7 -> +17 -> +27 -> +37`, with endpoints
 `15,26,36,46` and coverage through `18,28,38,48`. The tempting periodic
 continuation by `47` fails the pair-witness condition, and a bounded
-three-point search through candidate `120` finds no next stage.
+three-point search through candidate `120` finds no next stage. A later
+one-step rerun from the same depth-four seed with slack `80`, candidate
+values through `140`, and block size at most `3` also finds no extension.
 
 `singleton_high_excess_stage_search.py` tests the stricter Lemma 16.9
 singleton target: every new `b` needs `w notin 4(A\\{b})` and

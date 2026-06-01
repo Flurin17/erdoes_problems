@@ -19298,7 +19298,9 @@ adding \(47\) after the depth-four chain gives coverage through \(58\) but
 does not give pair witnesses for all old endpoints below the natural
 endpoint \(56\). A bounded search through candidate values \(120\) and
 increments of size at most \(3\) finds no next stage from the depth-four
-chain.
+chain. A later one-step rerun from the same depth-four seed, with candidate
+values through \(140\), slack \(80\), and increments of size at most \(3\),
+again found no extension.
 
 This diagnostic is important in both directions. It shows that \(k=3\)
 cross-stage pair barriers are not merely an artefact of the robust residue
