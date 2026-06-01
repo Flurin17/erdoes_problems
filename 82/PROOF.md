@@ -2012,6 +2012,22 @@ the first few rows, the remaining column capacities are no longer uniform,
 and one needs a switching or martingale argument proving that enough rows
 still have near-hypergeometric residue mixing on the tested set.
 
+The helper `EXPERIMENTS/biregular_residue_sample.py` probes this remaining
+dependence by sampling simple regular bipartite graphs with degree-preserving
+switches and comparing equal-residue probabilities against the independent
+hypergeometric-row prediction.  For example,
+
+```text
+python3 82/EXPERIMENTS/biregular_residue_sample.py \
+  --n 128 --degree 64 --marked 64 --rows 3 --modulus 8 \
+  --samples 2000 --burnin 10000 --between 500 --seed 83128
+```
+
+reports empirical probability `0.0175` versus independent-row prediction
+`0.016253`.  This is only finite evidence; it suggests that the multi-row
+conditioning may be controllable in dense balanced cases, but supplies no
+asymptotic switching bound.
+
 For example,
 
 ```text

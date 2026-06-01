@@ -237,6 +237,11 @@ Computational checks and generated data for Erdos Problem 82.
   nontrivial Fourier bias of the residue distribution, matching the exact
   roots-of-unity formula in `PROOF.md`; in the central balanced case it also
   reports the paired central-hypergeometric Fourier bound.
+- `biregular_residue_sample.py`: samples simple regular bipartite graphs by
+  degree-preserving switches and estimates the probability that several fixed
+  rows have equal cross-degree residue into a fixed column set.  It compares
+  the empirical value to the independent hypergeometric-row prediction,
+  probing the multi-row dependence left after the single-row biregular lemma.
 - `two_level_modular_sample.py`: generates connected graphs with two prescribed
   degree levels `d` and `d+q`, randomizes them by degree-preserving swaps, and
   measures the largest induced `2q`-modular witness.  This stress-tests dyadic

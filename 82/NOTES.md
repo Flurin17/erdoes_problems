@@ -3248,3 +3248,11 @@ source of growth beyond Ramsey.
   hypergeometric.  Thus column conditioning is harmless for one row; the
   unsolved part of the fixed-degree anti-concentration route is purely the
   multi-row dependence created by the remaining column capacities.
+- 2026-06-01: Added `biregular_residue_sample.py` to probe that multi-row
+  dependence in simple regular bipartite graphs sampled by switches.  For
+  `N=128,d=64,|Y_0|=64`, `3` fixed rows, and modulus `8`, a `2000`-sample run
+  estimated equal-row-residue probability `0.0175` versus independent-row
+  prediction `0.016253`, ratio `1.08`.  For `5` rows the event was too rare
+  in `300` samples.  This is weak finite evidence that column conditioning
+  does not create a large positive dependence in the dense balanced regime,
+  but it is not a replacement for a switching proof.
