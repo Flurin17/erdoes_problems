@@ -14048,6 +14048,32 @@ alpha(F)+2nu_ind(F) >= n-mu(F)+mu(F)=n.
 
 QED.
 
+**Corollary 28J.4: Pseudoforests Satisfy Spectrum Mass.**  If every
+connected component of `G` has at most one cycle, then
+
+```text
+sum_d s_d(G) >= |V(G)|.
+```
+
+Proof.  By Lemma 28J.2 it is enough to handle one connected component.  If
+the component is a tree, this is Lemma 28J.3.  Otherwise let `C` be its unique
+cycle.  The cycle is induced, since a chord would create a second cycle, so
+`C` is an induced `2`-regular subgraph.  Removing `V(C)` leaves a forest
+`F`.  Any independent set or induced matching in `F` remains one in the
+whole component, and Lemma 28J.3 gives
+
+```text
+s_0(G)+s_1(G) >= alpha(F)+2nu_ind(F) >= |V(F)|.
+```
+
+Also `s_2(G)>=|C|`.  Therefore
+
+```text
+sum_d s_d(G) >= |V(F)|+|C|=|V(G)|.
+```
+
+QED.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

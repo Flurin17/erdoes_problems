@@ -3812,3 +3812,10 @@ source of growth beyond Ramsey.
   graph is a forest after contraction.  Hence `nu_ind(F)>=nu(F)/2` and the
   inequality follows.  This explains the tree-like connected equality
   examples in the exact `n=7` spectrum-mass data.
+- 2026-06-01: Extended the forest proof to pseudoforests.  In a connected
+  unicyclic component, the unique cycle is induced and contributes
+  `s_2>=|C|`; deleting the cycle leaves a forest whose independent sets and
+  induced matchings remain valid in the whole graph, contributing at least
+  the number of deleted-off-cycle vertices through `s_0+s_1`.  Component
+  superadditivity then proves `mu(G)>=|G|` for every graph whose components
+  have at most one cycle.
