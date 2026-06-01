@@ -664,3 +664,10 @@ failed declaration windows: for all five tested targets, the ordinary
 block `(75,77,85)` makes every value of `[85,131]` represented but
 poisoned in the complement of the target, while the strict block `(75,81)`
 does the same on `[81,97]`.
+
+Lemma 16.14 in `PROOF.md` records the exact diagnostic behind this output:
+for `C=A\\{q}`, a candidate `w` is private after deleting `q` exactly when
+`w-p notin 3C` for every retained padder `p`. The follow-up windows fail
+because represented candidates already lie in some `p+3C`; the
+interval-marker seed escapes precisely by leaving all those shifted
+three-sum gaps open.

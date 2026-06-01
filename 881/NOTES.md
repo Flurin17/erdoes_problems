@@ -2308,6 +2308,14 @@ the form \(v=1+(v-1)\) with \(v-1\in3(A\setminus\{q\})\). Thus the follow-up
 failure is not lack of order-\(4\) mass; it is retained-padder poisoning.
 This keeps the prepared-marker route as a local row-bank template rather
 than an iterable construction.
+The exact singleton criterion is sharper than the interval poison lemma:
+for \(C=S\setminus\{q\}\), a value \(w\) is private after deleting \(q\)
+exactly when \(w-p\notin3C\) for every retained padder \(p\in C\). Thus
+poisoning can only prove a no-go after one has complement-side
+three-sum coverage. The interval-marker seed shows that high-excess
+row-bank stages may have the opposite feature: all shifted values avoid
+\(3C\), so the witness stays private and the actual obstruction is the
+next-stage coverage gap.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

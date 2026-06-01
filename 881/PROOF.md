@@ -19567,6 +19567,55 @@ Therefore a staged singleton-high-excess construction must not only build
 row banks for new markers; it must also leave shifted three-sum gaps for
 every filler when that filler later becomes protected.
 
+### Lemma 16.14: Singleton privacy is exactly a shifted three-sum gap
+
+Let \(S\subset\mathbb N\) be finite, let \(q\in S\), put
+\[
+C=S\setminus\{q\},
+\]
+and let \(w\in\mathbb N\). Then
+\[
+w\notin4C
+\]
+if and only if
+\[
+w-p\notin3C\qquad(p\in C). \tag{1}
+\]
+Consequently, if \(w\in4S\setminus4C\), then every retained padder
+\(p\in C\) makes \(w-p\) a three-sum hole after deleting \(q\).
+
+Proof. If \(w-p\in3C\) for some \(p\in C\), then
+\[
+w=p+(w-p)\in4C.
+\]
+Conversely, if \(w\in4C\), choose any one summand \(p\in C\) from a
+four-term representation of \(w\) in \(C\). The other three summands show
+\[
+w-p\in3C.
+\]
+This proves the equivalence. \(\square\)
+
+Thus Lemma 16.13 is not, by itself, an iteration obstruction. It is the
+forward direction of the exact characterization above, applied on a whole
+interval for one fixed padder. The current singleton-high-excess stage
+hypotheses give \(3S\)-coverage and the Lemma 16.9 rows
+\[
+d-p\in2S,
+\]
+but they do not give \(3C\)-coverage after deleting the target \(q\). The
+interval-marker seed in Lemma 16.10 is the basic witness to this gap:
+with
+\[
+S=[1,L]\cup\{2L\},\qquad q=2L,\qquad C=[1,L],
+\]
+the value \(w=4L+2\) is a high-excess singleton witness, yet
+\[
+w\notin4C
+\]
+because all shifted values \(w-p\), \(p\in C\), escape \(3C=[3,3L]\).
+The obstruction to the next one-marker stage is therefore the coverage gap
+from Lemma 16.10, not poisoning alone.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
