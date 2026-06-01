@@ -2734,6 +2734,152 @@ attribute all bounded two-sum translate rows to finitely many permanent
 pins. It must create genuinely fresh bounded-count two-sum behaviour outside
 every finite protected core, even though \(A\) is an order-\(3\) basis.
 
+### Corollary 3.4d.10: General lower-order transversal rows
+
+Assume that no infinite deletion from the order-\(k\) basis \(A\) remains
+an order-\((k+1)\) basis. Let \(E\subset A\) be finite. Then there are
+constants
+\[
+q_E,\qquad c_E>0,
+\]
+arbitrarily large \(w\), finite sets
+\[
+D\subset A\setminus E,\qquad 1\le |D|\le q_E,
+\]
+an integer
+\[
+2\le r\le k,
+\]
+a deleted multiset \(S\) from \(D\), with
+\[
+s=|S|=k+1-r,
+\]
+and a set
+\[
+U\subset A\setminus(D\cup E)
+\]
+such that
+\[
+|U|\ge c_E A(w)^{1/r}, \tag{1}
+\]
+and for every \(u\in U\),
+\[
+\sigma(S)+u\notin(s+1)(A\setminus D). \tag{2}
+\]
+Equivalently, for each \(u\in U\), the same bounded set \(D\) is a
+transversal for all \((s+1)\)-term representations of the lower-order
+target
+\[
+\sigma(S)+u,
+\]
+even though this target has the explicit \((s+1)\)-term representation
+given by the elements of \(S\) together with \(u\), all outside \(E\).
+
+Proof. Apply Corollary 3.4d.2. It gives \(w,D,S,r\) and at least
+\[
+c_E' A(w)
+\]
+retained \(r\)-term multiset representations of
+\[
+w-\sigma(S)
+\]
+from \(A\setminus D\). Let \(U_0\) be the set of all summands appearing in
+these retained representations. Since every representation is an
+\(r\)-multiset drawn from \(U_0\),
+\[
+c_E'A(w)\le \binom{|U_0|+r-1}{r}\le {(|U_0|+r)^r\over r!}.
+\]
+Thus
+\[
+|U_0|\gg_E A(w)^{1/r}.
+\]
+After discarding the finite set \(E\), and passing to sufficiently large
+\(w\), we retain a set
+\[
+U\subset U_0\setminus E
+\]
+satisfying (1), after decreasing \(c_E\).
+
+For \(u\in U\), choose one retained representation containing \(u\). Apply
+the no-replacement condition in Corollary 3.4d.2 to the one-element
+submultiset \(\{u\}\) of that representation. This gives
+\[
+\sigma(S)+u\notin(s+1)(A\setminus D),
+\]
+which is (2). The representation by \(S\cup\{u\}\) uses only elements of
+\(A\setminus E\), since \(D\cap E=\varnothing\) and \(u\notin E\).
+\(\square\)
+
+### Corollary 3.4d.11: Lower-order anti-transversals imply the deletion theorem
+
+Let \(A\subseteq\mathbb N\) be an order-\(k\) asymptotic basis. Suppose that
+there is a finite set \(P\subset A\) with the following property: for every
+\(q\ge1\) and every \(\ell=2,\ldots,k\), there is \(M=M(q,\ell)\) such that
+no data
+\[
+t>M,\qquad D\subset A\setminus P,\quad |D|\le q,
+\]
+satisfy both
+\[
+t\in \ell(A\setminus P) \tag{1}
+\]
+and
+\[
+t\notin \ell(A\setminus D). \tag{2}
+\]
+Then there is an infinite \(B\subset A\) such that
+\[
+A\setminus B
+\]
+is an asymptotic basis of order \(k+1\).
+
+Proof. Suppose the conclusion fails. Apply Corollary 3.4d.10 with the
+finite core \(E=P\). It gives \(q_P\),
+arbitrarily large \(w\), a set \(D\subset A\setminus E\) with
+\[
+|D|\le q_P,
+\]
+a multiset \(S\) of size \(s\), where \(1\le s\le k-1\), and a set
+\[
+U\subset A\setminus(D\cup E)
+\]
+with \(|U|\to\infty\), such that for every \(u\in U\)
+\[
+t_u=\sigma(S)+u
+\]
+has an \((s+1)\)-term representation from \(A\setminus E\), namely
+\[
+S\cup\{u\},
+\]
+but
+\[
+t_u\notin(s+1)(A\setminus D). \tag{3}
+\]
+
+Put
+\[
+\ell=s+1.
+\]
+The hypothesis gives \(M(q_P,\ell)\). Since \(U\) is arbitrarily large
+and \(A\cap[1,M]\) is finite, for arbitrarily large witnesses we may choose
+\[
+u\in U,\qquad u>M(q_P,\ell).
+\]
+Then
+\[
+t_u>M(q_P,\ell),
+\]
+and (1)--(2) hold with this \(t_u,D,\ell\), contradicting the assumed
+lower-order anti-transversal property. \(\square\)
+
+Thus the remaining higher-order obstruction can be phrased without
+reference to \((k+1)\)-term holes: if the desired deletion theorem fails,
+then outside every finite core there are bounded fresh deletion sets that
+kill lower-order targets already represented wholly outside that core. For
+\(k=3\), the only lower order in this statement is \(\ell=2\) or
+\(\ell=3\); Corollary 3.4d.9 is the finite-pin specialization of the
+\(\ell=2\) branch.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27679,6 +27825,11 @@ missing from ordinary minimal order-\(h\) bases.
   sufficiently large bounded two-sum representation values are forced to use
   one fixed finite pin set, then the sparse-shadow packets from Corollary
   3.4d.8 are impossible, so a good order-\(4\) deletion exists.
+* Corollaries 3.4d.10--3.4d.11 give the all-order lower-transversal
+  abstraction: every counterexample produces bounded fresh deletion sets
+  that kill lower-order targets already represented outside the protected
+  core. Conversely, ruling out such bounded lower-order transversals after
+  one finite core proves the desired deletion theorem.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

@@ -34,7 +34,11 @@ against every finite test. Corollary 3.4d.9 gives a new positive \(k=3\)
 criterion: if bounded two-sum representation values are eventually explained
 by one finite pin set, then the desired infinite deletion exists at order
 \(4\). Hence any \(k=3\) counterexample must have genuinely fresh unpinned
-bounded two-sum translate rows outside every finite core.
+bounded two-sum translate rows outside every finite core. Corollaries
+3.4d.10--3.4d.11 record the all-order abstraction: any counterexample
+forces bounded fresh transversals for lower-order targets already
+represented outside every protected core; ruling out those lower-order
+transversals after one finite core would prove the full deletion theorem.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the
