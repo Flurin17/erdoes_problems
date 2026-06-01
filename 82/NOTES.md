@@ -3005,3 +3005,9 @@ source of growth beyond Ramsey.
   current theorem-level target from this refinement is
   `P_h C_reg(P_h,h)=2^{o(h)}`; Lemma 28G still warns that controlling
   `P_h` itself is subexponentially equivalent to the original problem.
+- 2026-06-01: Made the lower scale of the balanced-pair parameter explicit.
+  Corollary 28G.1 combines Lemma 28G with Proposition 0F to get the local
+  self-contained calibration `P_h >= c h^{3/2}/sqrt(log h)`, and with the
+  recorded Dyson--McKay construction to get the stronger literature-dependent
+  `P_h >= (9/652+o(1))h^2`.  Thus the parity cross-profile family remains
+  useful for structure, but not for the best known magnitude lower bound.

@@ -10112,6 +10112,47 @@ subexponentially equivalent to `G`.  The gain is structural.  Proposition 28F
 shows that controlling the marked two-part obstruction automatically controls
 all global counterexamples with only a polynomial loss.
 
+**Corollary 28G.1: Polynomial Lower Calibration For `P_h`.**  The
+self-contained random lower bound of Proposition 0F gives an absolute
+constant `c>0` such that, for all sufficiently large `h`,
+
+```text
+P_h >= c h^{3/2}/sqrt(log h).
+```
+
+Using the recorded Dyson--McKay lower construction
+
+```text
+G(k) >= (9/163) k^2
+```
+
+for all large `k`, one obtains the stronger literature-dependent calibration
+
+```text
+P_h >= (9/652+o(1)) h^2.
+```
+
+Proof.  Lemma 28G gives
+
+```text
+P_h >= G(ceil(h/2)).
+```
+
+Substituting `k=ceil(h/2)` into Proposition 0F proves the first display,
+after changing the absolute constant.  Substituting the recorded
+Dyson--McKay lower bound gives
+
+```text
+P_h >= (9/163) ceil(h/2)^2 = (9/652+o(1))h^2.
+```
+
+QED.
+
+Thus the explicit linear parity obstruction below is not the dominant known
+lower scale for `P_h`; its value is structural, because it exhibits an
+infinite cross-profile obstruction not inherited from disjoint copies of
+ordinary regular-induced-subgraph counterexamples.
+
 **Lemma 28H: Spectrum-Disjoint Disjoint-Union Lower Bounds For `P_h`.**  Let
 `J_1,J_2` be two graphs on the same number `M` of vertices.  Suppose:
 
