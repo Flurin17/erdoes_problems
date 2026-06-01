@@ -24468,9 +24468,10 @@ row-dependent allowance is removed, the central retained two-sum band pushes
 at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
 remaining escape must therefore either make the packet density vanish, let
-the deletion rank grow with the interval, coordinate genuinely far gates
-across separated blocks, or maintain nonsummable robust-core escape mass
-across the packet selector tail.
+the deletion rank or robust-profile complexity grow with the interval,
+force endpoint escape from robust profiles, use auxiliary profiles whose
+midpoint diameter is linear in the tested interval, or maintain
+nonsummable robust-core escape mass across the packet selector tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 
