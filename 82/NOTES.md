@@ -3673,3 +3673,10 @@ source of growth beyond Ramsey.
   vertex, `q_1`, and the whole clique block `K`.  This explains the targeted
   extension check for the `n=12,h=6` certificate, where zero legal extensions
   avoid a regular `6`-set.
+- 2026-06-01: Added `full_drop_regular_frontier.py`, which enumerates
+  regular-full-drop obstructions at depth `n` and tests whether any legal last
+  column extends them while still avoiding a regular `h`-set.  For
+  `n=10,h=5`, it visits `65,904` nodes, checks `9,656` terminal obstructions,
+  and finds `extendable=0`, reproducing `C_full^reg(2,5)=11` from the
+  frontier viewpoint.  The analogous `n=12,h=6` frontier is still too slow
+  without stronger pruning.

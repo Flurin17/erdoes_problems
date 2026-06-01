@@ -12634,6 +12634,18 @@ The `n=10` certificate has columns
 with `max_full_drop=1`, `clique_number=4`, `independence_number=4`, and
 `max_regular=4`.
 
+The auxiliary script `EXPERIMENTS/full_drop_regular_frontier.py` checks
+whether obstructions at one order have legal right-extensions that remain
+obstructions.  The command
+
+```text
+python3 82/EXPERIMENTS/full_drop_regular_frontier.py 10 --p 2 --h 5 --max-nodes 200000 --progress 50000
+```
+
+visits `65,904` search nodes, checks `9,656` terminal `10`-vertex
+obstructions to regular `5`-sets, and finds `extendable=0`, matching the
+exact value `C_full^reg(2,5)=11`.
+
 For the next order, the command
 
 ```text
