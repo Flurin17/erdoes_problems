@@ -2702,3 +2702,13 @@ source of growth beyond Ramsey.
   DFS-produced examples.  Next action: look for a rank-block argument that
   combines this forced nonadjacency with the column-drop condition to improve
   `C_drop(P,h)` beyond the crude sparse-inversion bound.
+- 2026-06-01: Refuted a tempting stronger interpretation of column drop.  For
+  `P=2`, earlier-neighborhoods
+  `A_1=A_2=A_3=empty`, `A_4={1,2,3}`, `A_5={2,3,4}`,
+  `A_6={1,3,4,5}`, and `A_7={1,2,4,5,6}` satisfy
+  `|A_j\A_k|<=1` for every `j<k`.  However no deletion of at most one element
+  from each `A_j` can make the sequence nested, because any nested correction
+  would require the corrected `A_4` to lie in
+  `A_4 cap A_5 cap A_6 cap A_7=empty`, while deleting one element from
+  `A_4` leaves at least two.  Thus the rank/column-drop route cannot assume a
+  small per-column correction to an inversion-free threshold graph.
