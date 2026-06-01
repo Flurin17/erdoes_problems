@@ -8513,7 +8513,7 @@ independent set of order greater than `sqrt(s)`.  QED.
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 148 h^5 P_h^2.
+G(h) <= 128 h^5 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
@@ -8522,7 +8522,7 @@ Proof.  Let `P=P_h`, and suppose for contradiction that `G` is an `n`-vertex
 graph with no regular induced subgraph on at least `h` vertices, where
 
 ```text
-n > 148 h^5 P^2.
+n > 128 h^5 P^2.
 ```
 
 Partition the vertices by their exact degrees in `G`:
@@ -8535,22 +8535,24 @@ First consider one nonempty bucket `U=V_d`.  For any two vertices `u,v in U`,
 Lemma 28D gives
 
 ```text
-|(N(u) triangle N(v))\{u,v}| < 2P.
+|(N(u) triangle N(v))\{u,v}| <= 2P-2.
 ```
 
-Therefore their degrees inside `G[U]` differ by less than `2P`.  Thus
-`G[U]` has degree spread at most `2P`.
+Indeed, the two one-sided differences have equal size because `u` and `v`
+have the same global degree, and each has size less than `P` by Lemma 28D.
+Therefore their degrees inside `G[U]` differ by at most `2P-2`.  Thus
+`G[U]` has degree spread at most `2P-2`.
 
 Apply Corollary 28D.1 to the induced graph `G[U]`, whose balanced pair
 parameter is still controlled by the same global value `P=P_h`.  With spread
-`s=2P`, any bucket of size greater than
+`s=2P-2`, any bucket of size greater than
 
 ```text
-8h(2P+2P+1/2)+1 <= 37hP
+8h(2P+(2P-2)+1/2)+1 <= 32hP
 ```
 
 would contain a regular induced subgraph on at least `h` vertices.  Hence
-every bucket has size at most `37hP`.
+every bucket has size at most `32hP`.
 
 Let `b` be the number of nonempty buckets.  If
 
@@ -8593,13 +8595,13 @@ b <= 4P h^4.
 Combining the bucket count and bucket size bounds,
 
 ```text
-n <= b * 37hP <= 148 h^5 P^2,
+n <= b * 32hP <= 128 h^5 P^2,
 ```
 
 contradicting the assumed value of `n`.  This proves the displayed bound on
 `G(h)`.
 
-If `P_h=2^{o(h)}`, then the polynomial factor `148h^5` is also
+If `P_h=2^{o(h)}`, then the polynomial factor `128h^5` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
