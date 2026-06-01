@@ -905,6 +905,10 @@ For \(k=2\), the large spikes are large reflected clusters
 \[
 A\cap(n-x-A).
 \]
+The bounded finite deletion \(D\) then gives the star-gate refinement in
+Corollary 3.4g, because edges through \(x\) and a second deleted element
+are only \(O_E(1)\). For \(k\ge3\), those second-deleted-gate edges can be
+large lower-sumset families, so the same pruning is unavailable.
 Lemma 3.4f records the only direct recurrence consequence currently
 available from such spikes: if the reflected clusters \(U_n=A\cap(n-A)\)
 hit one finite certificate-dense test set \(T_0\) in more than

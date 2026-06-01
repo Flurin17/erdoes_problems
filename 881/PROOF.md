@@ -2105,6 +2105,19 @@ A\cap(n-x_n-A)
 \]
 of size comparable to the whole counting function at the larger scale.
 
+For \(k=2\), the bounded size of \(D_n\) lets one discard the edges through
+\(x_n\) that use a second deleted element; only \(O_{E}(1)\) such support
+edges are possible. This is the star-gate refinement in Corollary 3.4g.
+For \(k\ge3\), the same discard is not harmless: edges using another
+\(d'\in D_n\) correspond to \((k-1)\)-term representations of
+\[
+n-x_n-d',
+\]
+and these may themselves have large multiplicity. Thus Corollary 3.4d is
+the natural higher-order normal form; promoting it to retained repairs
+requires new control on lower-sumset multiplicities or on the collective
+finite barrier.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27023,6 +27036,9 @@ missing from ordinary minimal order-\(h\) bases.
   protected, a counterexample has arbitrarily large bounded finite holes
   \(n\notin(k+1)(A\setminus D)\) and a gate \(x\in D\) for which \(n-x\)
   has \(\gg A(n)\) \(k\)-term representations.
+  The following paragraph records why the \(k=2\) star-gate pruning does
+  not automatically generalize: second deleted gates may carry large
+  \((k-1)\)-sum families.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
