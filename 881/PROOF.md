@@ -15612,7 +15612,7 @@ desired order-3 deletion conclusion, with order-2 threshold \(N_0\). Fix
 d\in A,\qquad r\ge1,
 \]
 and let \(Y\subset A\setminus\{d\}\) be infinite. It is impossible that, for
-every finite
+every finite nonempty
 \[
 T\subset A\setminus\{d\}
 \]
@@ -15629,8 +15629,8 @@ and
 w\notin3(A\setminus(\{d\}\cup H)). \tag{2}
 \]
 
-Proof. Suppose such data exist. Fix a finite test set \(T\) and a parameter
-\(M\), and put
+Proof. Suppose such data exist. Fix a finite nonempty test set \(T\) and a
+parameter \(M\), and put
 \[
 F=\{d\}\cup H.
 \]
@@ -15662,8 +15662,9 @@ By (1), the centers \(w-z\) tend to infinity. Thus this fixed certificate
 triple is reflection-recurrent, and Corollary 2.3c gives a good infinite
 deletion, contradicting the counterexample assumption.
 
-Therefore, in a counterexample, for every finite \(T\subset A\setminus\{d\}\)
-and every \(M\), after increasing \(M\) if necessary, we may choose data
+Therefore, in a counterexample, for every finite nonempty
+\(T\subset A\setminus\{d\}\) and every \(M\), after increasing \(M\) if
+necessary, we may choose data
 satisfying (1)--(2) whose endpoint lists admit a choice function with every
 fiber certificate-free. Label the endpoint
 \[
@@ -15690,6 +15691,111 @@ tail set. A surviving moving-rank shell must have bounded-center debt:
 inside each fixed first section, some linked endpoint remains close to the
 witness cofinally, or the endpoint lists compactify to a forbidden recurrent
 Sidon coloring.
+
+## Corollary 13.1l.2b: Generalized prefix links have endpoint-close debt
+
+Work in the \(k=2\) counterexample setting of Corollary 13.1l.2a. Fix
+\[
+d\in A,\qquad r\ge1,
+\]
+and an infinite set
+\[
+Y\subset A\setminus\{d\}.
+\]
+Then there are a finite nonempty set
+\[
+T_*\subset A\setminus\{d\}
+\]
+and a constant
+\[
+M_*
+\]
+with the following property. Whenever
+\[
+H\in[Y\setminus T_*]^r
+\]
+and
+\[
+w-\max T_*\ge N_0,\qquad
+w\notin3(A\setminus(\{d\}\cup H)), \tag{1}
+\]
+one has
+\[
+\min_{z\in\{d\}\cup H}(w-z)\le M_*. \tag{2}
+\]
+Consequently, suppose a Lemma 8.5a.8b shell supplies, for this fixed
+first point \(d\) and rank \(r\), witnesses for every sufficiently late
+\[
+H\in[Y]^r
+\]
+with arbitrarily large \(w\). Then, after increasing the requested witness
+height past
+\[
+\max T_*+N_0\quad\text{and}\quad d+M_*,
+\]
+every sufficiently late linked edge has a witness \(w\) and a moving
+endpoint
+\[
+h\in H
+\]
+such that
+\[
+w-h\le M_*. \tag{3}
+\]
+If the witness is inclusion-minimal in the deleted packet and \(h\) is an
+active endpoint, then also
+\[
+w-h\in2A,
+\]
+so (3) is a genuine finite-width endpoint window rather than merely a
+failure of high-centering.
+
+Proof. If no such nonempty \(T_*,M_*\) existed, then for every finite
+nonempty
+\[
+T\subset A\setminus\{d\}
+\]
+and every \(M\) there would be
+\[
+H\subset Y\setminus T,\qquad |H|=r,
+\]
+and a witness \(w\) satisfying
+\[
+w-\max T\ge N_0,\qquad
+w-z>M\quad(z\in\{d\}\cup H),
+\]
+as well as
+\[
+w\notin3(A\setminus(\{d\}\cup H)).
+\]
+This is exactly the high-center finite-rank configuration forbidden by
+Corollary 13.1l.2a. Hence \(T_*,M_*\) exist, and (2) is just the negation
+written out.
+
+Now apply the generalized prefix-link shell with the height parameter
+\[
+L>\max\{\max T_*+N_0,\ d+M_*\}.
+\]
+For all sufficiently late \(H\in[Y]^r\), the shell gives a witness
+\[
+w>L
+\]
+satisfying (1). Since \(w-d>M_*\), the endpoint realizing (2) cannot be
+\(d\); it is some \(h\in H\), proving (3). If \(h\) is active in an
+inclusion-minimal hole, then restoring \(h\) repairs the hole, so
+\[
+w=h+a_1+a_2
+\]
+with \(a_1,a_2\in A\), equivalently \(w-h\in2A\). \(\square\)
+
+Thus the generalized shell left by Lemma 8.5a.8b has only one remaining
+fixed-section escape: the witness must track one of the moving tail
+endpoints within a bounded window. If these debt endpoints can be placed at
+a fixed ordered position with arbitrarily large gaps below them, Lemma
+8.2c''' converts the shell back into the fractional recurrent-cluster
+branch. The unresolved part is therefore a moving-position, bounded-window
+debt shell in which finite tests must keep finding large certificate-free
+subsets.
 
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
@@ -17502,6 +17608,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   cannot link to arbitrary \(r\)-subsets with witnesses far above every
   endpoint, since the lists either yield a recurrent certificate or a
   forbidden finite moving-label Sidon palette.
+* Corollary 13.1l.2b records the exact negated quantifier: for each fixed
+  first point, rank, and tail, some finite test set and constant force every
+  sufficiently high linked hole to have bounded excess over one endpoint;
+  in a generalized prefix-link shell, this endpoint is a moving tail point.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

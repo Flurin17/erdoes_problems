@@ -2573,6 +2573,14 @@ every endpoint in the linked tail set. Otherwise endpoint-list choices either
 produce a recurrent certificate triple directly or compactify to the finite
 moving-label Sidon coloring forbidden by Lemma 8.5a.6. Thus any surviving
 prefix-link shell must carry bounded-center debt at some moving endpoint.
+Corollary 13.1l.2b makes the quantifiers explicit: for each fixed first
+point \(d\), fixed rank \(r\), and infinite later tail \(Y\), there is a
+finite nonempty test set \(T_*\) and bound \(M_*\) such that every
+sufficiently high hole for \(\{d\}\cup H\), \(H\in[Y\setminus T_*]^r\), has
+\(\min_{z\in\{d\}\cup H}(w-z)\le M_*\). In a generalized prefix-link
+shell, requesting witnesses above \(d+M_*\) moves this debt onto a tail
+endpoint \(h\in H\). If the hole is inclusion-minimal, this becomes a real
+finite-width endpoint window \(w-h\in2A\) with \(w-h\le M_*\).
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
