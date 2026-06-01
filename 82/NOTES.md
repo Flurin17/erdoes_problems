@@ -2877,3 +2877,13 @@ source of growth beyond Ramsey.
   particular, a uniform four-slot source-residue theorem for all dyadic
   levels would solve Problem 82.  This justifies treating source-sensitive
   universal slot searches as a main route rather than merely local evidence.
+- 2026-06-01: Scored all `330` four-slot multisets modulo `8` in the same
+  nonterminal source-modular chunks.  On `n=9`, source residues `0` and `2`
+  have survivor counts `16` and `18` after the `0 <= internal_bits < 10000000`
+  chunk.  The surviving source-`0` list includes `(0,1,2,4)`, and the
+  surviving source-`2` list includes `(0,0,1,2)`.  On `n=10`, after
+  `0 <= internal_bits < 4000000`, the survivor counts by source residue
+  `0,1,2,3` are `49,29,26,20`.  The current family remains alive in all
+  sources.  The next computational step is to keep extending `n=10` chunks or
+  to search for a smaller canonical survivor family that persists across
+  source residues.
