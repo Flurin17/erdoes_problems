@@ -168,12 +168,104 @@ def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
         )
 
 
+def local_search(
+    n: int,
+    steps: int,
+    restarts: int,
+    seed: int,
+    start_mask: int | None,
+    root: int | None,
+    connected_only: bool,
+) -> None:
+    rng = random.Random(seed)
+    pc = cdc.precompute(n)
+    bits = len(pc.edges)
+    global_best = n * n
+    global_example: tuple[int, int, dict[int, int], dict[int, int]] | None = None
+
+    def score(mask: int) -> tuple[int, int, dict[int, int], dict[int, int]] | None:
+        adj = cdc.adjacency(n, mask, pc)
+        if connected_only and not is_connected(adj):
+            return None
+        mass, by_degree = spectrum_mass(adj, pc)
+        roots = range(n) if root is None else (root,)
+        best = n * n
+        best_root = 0
+        best_coefficient_by_degree: dict[int, int] = {}
+        for r in roots:
+            coefficient, coefficient_by_degree = bouquet_coefficient(adj, r, pc)
+            if coefficient < best:
+                best = coefficient
+                best_root = r
+                best_coefficient_by_degree = coefficient_by_degree
+        return best, best_root, by_degree, best_coefficient_by_degree
+
+    for restart in range(restarts):
+        if restart == 0 and start_mask is not None:
+            mask = start_mask
+        else:
+            while True:
+                mask = rng.getrandbits(bits)
+                if score(mask) is not None:
+                    break
+        current = score(mask)
+        assert current is not None
+        current_score = current[0]
+        temperature = max(1.0, n / 3)
+
+        for step in range(steps + 1):
+            if current_score < global_best:
+                global_best = current_score
+                global_example = (mask, current[1], current[2], current[3])
+                print(
+                    f"new_best restart={restart} step={step} "
+                    f"coefficient={global_best} ratio={global_best/(n-1):.12g} "
+                    f"mask={mask} root={current[1]} "
+                    f"by_degree={current[2]} coefficient_by_degree={current[3]}",
+                    flush=True,
+                )
+            if step == steps:
+                break
+
+            candidate_mask = mask ^ (1 << rng.randrange(bits))
+            candidate = score(candidate_mask)
+            if candidate is None:
+                continue
+            candidate_score = candidate[0]
+            if candidate_score <= current_score:
+                accept = True
+            else:
+                accept = rng.random() < min(0.05, temperature / (steps + n))
+            if accept:
+                mask = candidate_mask
+                current = candidate
+                current_score = candidate_score
+
+    print(f"n={n}")
+    print(f"steps={steps}")
+    print(f"restarts={restarts}")
+    print(f"seed={seed}")
+    print(f"connected_only={connected_only}")
+    print(f"root_filter={root}")
+    print(f"min_coefficient={global_best}")
+    print(f"min_ratio={global_best/(n-1):.12g}")
+    if global_example is not None:
+        mask, best_root, by_degree, coefficient_by_degree = global_example
+        print(
+            f"best_example mask={mask} root={best_root} by_degree={by_degree} "
+            f"coefficient_by_degree={coefficient_by_degree}"
+        )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--mask", type=int)
     parser.add_argument("--root", type=int)
     parser.add_argument("--sample", type=int, default=0)
+    parser.add_argument("--local-steps", type=int, default=0)
+    parser.add_argument("--restarts", type=int, default=1)
+    parser.add_argument("--start-mask", type=int)
     parser.add_argument("--seed", type=int, default=82)
     parser.add_argument("--connected-only", action="store_true")
     parser.add_argument("--progress", type=int, default=0)
@@ -181,6 +273,16 @@ def main() -> None:
 
     if args.mask is not None:
         inspect(args.n, args.mask, args.root)
+    elif args.local_steps:
+        local_search(
+            args.n,
+            args.local_steps,
+            args.restarts,
+            args.seed,
+            args.start_mask,
+            args.root,
+            args.connected_only,
+        )
     elif args.sample:
         sample(args.n, args.sample, args.seed, args.connected_only)
     else:

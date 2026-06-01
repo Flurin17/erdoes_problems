@@ -4234,3 +4234,10 @@ source of growth beyond Ramsey.
   `n=10,12,14` found minimum ratios `11/9`, `13/11`, and `19/13`,
   respectively, so no sampled rooted block beats the current `13/14`
   bouquet density.
+- 2026-06-01: Added local edge-flip search mode to
+  `rooted_bouquet_density.py`.  A run started from the fifteen-vertex rooted
+  defect block at root `13` for `80` random flips found no improvement below
+  coefficient `13`.  A separate `n=12` connected local run found coefficient
+  `12` on `11` new vertices, still above density `1`.  This keeps the
+  fifteen-vertex essential-root block as the only known rooted bouquet source
+  with coefficient below `|H|-1`.
