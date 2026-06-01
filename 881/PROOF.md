@@ -22682,6 +22682,62 @@ For low-density packets or high deletion rank, the robust core may be empty;
 then the proof must use more detailed information about the actual retained
 run, not just the rank bound.
 
+### Corollary 16.72: Short auxiliary intervals give linear robust cores
+
+Fix \(r\ge1\) and \(1/2<\delta\le1\). In the setting of Lemma 16.69, there
+is a constant \(C_r\), depending only on \(r\), with the following
+properties.
+
+If \(r=1\), then
+\[
+|R_K(\delta,I;1)|\ge (2\delta-1)n-C_1. \tag{1}
+\]
+If \(r\ge2\) and
+\[
+m\le { (2\delta-1)(r+1)\over4(r-1)}\,n, \tag{2}
+\]
+then
+\[
+|R_K(\delta,I;r)|\ge {2\delta-1\over2}\,n-C_r. \tag{3}
+\]
+Consequently, under either hypothesis, the robust blocker core is nonempty
+for all sufficiently large \(n\).
+
+Proof. By Lemma 16.71 and the estimates
+\[
+M_\delta\le(1-\delta)n+1,\qquad
+\ell_0\ge {m-r\over r+1},
+\]
+we get
+\[
+|R_K(\delta,I;r)|
+\ge
+(2\delta-1)n-2-{4r\over r+1}
+-{2(r-1)\over r+1}m, \tag{4}
+\]
+with the convention that the right side is a lower bound for the
+nonnegative length.
+
+For \(r=1\), the coefficient of \(m\) in (4) is zero, giving (1) with any
+\[
+C_1\ge4.
+\]
+For \(r\ge2\), condition (2) makes the \(m\)-term in (4) at most
+\[
+{2\delta-1\over2}\,n.
+\]
+Taking, for instance,
+\[
+C_r=2+{4r\over r+1}
+\]
+proves (3). \(\square\)
+
+Thus fixed-rank dense far-gate packets cannot freely use earlier or later
+intervals whose lengths are a sufficiently small fixed fraction of the
+tested interval. Such an auxiliary block contributes a forbidden active-gate
+interval of length linear in \(n\), independent of the exact deleted
+positions inside that block.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -23933,6 +23989,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \(\max\{0,n-2M_\delta+4\ell_0-2m\}\). This records when the robust
   blocker is genuinely present and when the argument must use the actual
   retained run rather than only the rank-\(r\) guarantee.
+* Corollary 16.72 converts that exact formula into an asymptotic tool:
+  for fixed \(r\) and density \(\delta>1/2\), every auxiliary interval
+  whose length is a sufficiently small fixed fraction of the tested
+  interval supplies a robust blocker core of linear length.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

@@ -94,7 +94,10 @@ core coming from the retained run left after deleting at most \(r\) points,
 and dense bounded-palette packets must place at least one active color
 outside that core. Lemma 16.71 gives the exact core length
 \(\max\{0,n-2M_\delta+4\ell_0-2m\}\), clarifying when the rank-only
-blocker is nonempty and when actual retained-run data is needed.
+blocker is nonempty and when actual retained-run data is needed. Corollary
+16.72 makes this asymptotic: at fixed rank and density \(\delta>1/2\), any
+auxiliary interval whose length is a sufficiently small fixed fraction of
+the tested interval gives a robust blocker core of linear length.
 
 ## Definitions
 
