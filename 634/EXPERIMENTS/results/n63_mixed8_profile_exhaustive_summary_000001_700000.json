@@ -1,0 +1,70 @@
+{
+  "classified_weight": 1416386,
+  "classified_words": 700000,
+  "contiguous_prefix": true,
+  "covered_first": 1,
+  "covered_last": 700000,
+  "files": [
+    "n63_mixed8_profile_exhaustive_first100000.json",
+    "n63_mixed8_profile_exhaustive_100000_200000.json",
+    "n63_mixed8_profile_exhaustive_200000_300000.json",
+    "n63_mixed8_profile_exhaustive_300000_400000.json",
+    "n63_mixed8_profile_exhaustive_400000_500000.json",
+    "n63_mixed8_profile_exhaustive_500000_600000.json",
+    "n63_mixed8_profile_exhaustive_600000_700000.json"
+  ],
+  "gaps": [],
+  "intervals": [
+    {
+      "file": "n63_mixed8_profile_exhaustive_first100000.json",
+      "first": 1,
+      "last": 100000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_100000_200000.json",
+      "first": 100001,
+      "last": 200000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_200000_300000.json",
+      "first": 200001,
+      "last": 300000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_300000_400000.json",
+      "first": 300001,
+      "last": 400000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_400000_500000.json",
+      "first": 400001,
+      "last": 500000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_500000_600000.json",
+      "first": 500001,
+      "last": 600000
+    },
+    {
+      "file": "n63_mixed8_profile_exhaustive_600000_700000.json",
+      "first": 600001,
+      "last": 700000
+    }
+  ],
+  "mixed_status_words": 0,
+  "n": 63,
+  "outside_cover_shells": 3382720,
+  "overlaps": [],
+  "quotient_groups": 1493568,
+  "status_weight_counts": {
+    "corner-label-violation": 712584,
+    "pinch-sector-obstruction": 439416,
+    "split-corner-label-obstruction": 264386
+  },
+  "tile": [
+    9,
+    7,
+    12
+  ],
+  "word_count_mismatches": []
+}

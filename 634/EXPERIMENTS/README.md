@@ -269,10 +269,10 @@ Current components:
   outside-cover shells; the first `10000` profile groups have no mixed
   representative status, with weighted status counts `23660` corner-label,
   `8370` pinch-sector, and `4320` split-corner-label obstructions.
-  Exhaustively replaying the first `400000` profile groups checks all `834924`
+  Exhaustively replaying the first `700000` profile groups checks all `1416386`
   outside-cover realizations in those groups and finds no mixed-status profile
-  group or count mismatch. The exact prefix split is `471894` corner-label
-  violations, `243360` pinch-sector obstructions, and `119670`
+  group or count mismatch. The exact prefix split is `712584` corner-label
+  violations, `439416` pinch-sector obstructions, and `264386`
   split-corner-label obstructions.
   A generated-shell prefix probe over the first `100000` shells also found no
   mixed-status profile group among `10560` touched groups.
