@@ -806,6 +806,7 @@ struct Args {
     std::string jobs_file;
     std::vector<u128> extra_prime_coeffs;
     std::vector<AffineForm> extra_prime_forms;
+    std::vector<AffineForm> extra_prime_n_forms;
 };
 
 static Args parse_args(int argc, char** argv) {
@@ -851,6 +852,20 @@ static Args parse_args(int argc, char** argv) {
                 u128 aa = parse_u128(part.substr(0, colon));
                 i128 bb = parse_i128(part.substr(colon + 1));
                 a.extra_prime_forms.push_back({aa, bb});
+            }
+        }
+        else if (key == "--extra-prime-n-forms") {
+            std::stringstream ss(need());
+            std::string part;
+            while (std::getline(ss, part, ',')) {
+                if (part.empty()) continue;
+                size_t colon = part.find(':');
+                if (colon == std::string::npos) {
+                    die("extra prime N-forms must be A:B pairs");
+                }
+                u128 aa = parse_u128(part.substr(0, colon));
+                i128 bb = parse_i128(part.substr(colon + 1));
+                a.extra_prime_n_forms.push_back({aa, bb});
             }
         }
         else {
@@ -905,6 +920,46 @@ static bool make_N_coeff_form(u128 coeff, const Args& args, AffineForm& out) {
         b = u128_to_i128_checked(rem_part - 1, "affine intercept");
     }
     out = {slope, b};
+    return true;
+}
+
+static bool add_u128_i128(u128 a, i128 b, i128& out) {
+    if (b >= 0) {
+        u128 sum = 0;
+        if (!checked_add(a, (u128)b, sum)) return false;
+        if (sum > I128_MAX_AS_U128) return false;
+        out = (i128)sum;
+        return true;
+    }
+
+    u128 mag = i128_abs_to_u128(b);
+    if (a >= mag) {
+        u128 diff = a - mag;
+        if (diff > I128_MAX_AS_U128) return false;
+        out = (i128)diff;
+        return true;
+    }
+
+    u128 diff = mag - a;
+    if (diff > I128_MAX_AS_U128 + 1) return false;
+    if (diff == I128_MAX_AS_U128 + 1) {
+        out = I128_MIN_VALUE;
+    } else {
+        out = -(i128)diff;
+    }
+    return true;
+}
+
+static bool make_N_affine_form(const AffineForm& n_form, const Args& args, AffineForm& out) {
+    u128 slope = 0;
+    if (!checked_mul(n_form.a, args.variable_mod, slope)) return false;
+
+    u128 rem_part = 0;
+    if (!checked_mul(n_form.a, args.variable_rem, rem_part)) return false;
+
+    i128 intercept = 0;
+    if (!add_u128_i128(rem_part, n_form.b, intercept)) return false;
+    out = {slope, intercept};
     return true;
 }
 
@@ -1009,13 +1064,20 @@ static bool run_scan(const Args& args, const std::vector<int>& primes) {
         common_coeffs.push_back(c);
     }
 
+    std::vector<AffineForm> extra_x_forms = args.extra_prime_forms;
+    for (const auto& n_form : args.extra_prime_n_forms) {
+        AffineForm form;
+        if (!make_N_affine_form(n_form, args, form)) die("affine extra N-form overflows int128");
+        extra_x_forms.push_back(form);
+    }
+
     std::vector<AffineForm> common_forms;
     for (u128 c : common_coeffs) {
         AffineForm form;
         if (!make_N_coeff_form(c, args, form)) die("affine common form overflows uint128");
         common_forms.push_back(form);
     }
-    for (const auto& form : args.extra_prime_forms) {
+    for (const auto& form : extra_x_forms) {
         common_forms.push_back(form);
     }
 
@@ -1068,7 +1130,7 @@ static bool run_scan(const Args& args, const std::vector<int>& primes) {
             u128 N = 0;
             if (!compute_N(args, X, N)) die("N = variable_mod * X + variable_rem overflows uint128");
             if (args.require_mod != 1 && N % args.require_mod != args.require_rem) continue;
-            if (!check_extra_prime_forms(X, args.extra_prime_forms)) continue;
+            if (!check_extra_prime_forms(X, extra_x_forms)) continue;
 
             int branch = 0;
             if ((N & 1) == 0 && alive_a[(size_t)i] &&

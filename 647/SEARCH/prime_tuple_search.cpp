@@ -13,6 +13,7 @@
 
 using u64 = uint64_t;
 using u128 = __uint128_t;
+using i128 = __int128_t;
 
 static u64 mul_mod(u64 a, u64 b, u64 mod) {
     return static_cast<u64>((u128)a * b % mod);
@@ -605,6 +606,7 @@ struct Args {
     u64 variable_rem = 0;
     std::vector<u64> extra_prime_coeffs;
     std::vector<AffineForm> extra_prime_forms;
+    std::vector<AffineForm> extra_prime_n_forms;
 };
 
 static u64 parse_u64(const std::string& s) {
@@ -659,6 +661,21 @@ static Args parse_args(int argc, char** argv) {
                 a.extra_prime_forms.push_back({aa, bb});
             }
         }
+        else if (key == "--extra-prime-n-forms") {
+            std::stringstream ss(need());
+            std::string part;
+            while (std::getline(ss, part, ',')) {
+                if (part.empty()) continue;
+                size_t colon = part.find(':');
+                if (colon == std::string::npos) {
+                    std::cerr << "extra prime N-forms must be A:B pairs\n";
+                    std::exit(2);
+                }
+                u64 aa = parse_u64(part.substr(0, colon));
+                int64_t bb = std::stoll(part.substr(colon + 1));
+                a.extra_prime_n_forms.push_back({aa, bb});
+            }
+        }
         else {
             std::cerr << "unknown arg " << key << "\n";
             std::exit(2);
@@ -680,6 +697,20 @@ static bool check_extra_prime_forms(u64 X, const std::vector<AffineForm>& forms)
         u64 value = eval_affine_u64(form, X);
         if (!is_prime64(value)) return false;
     }
+    return true;
+}
+
+static bool make_N_affine_form(const AffineForm& n_form, const Args& args, AffineForm& out) {
+    u128 slope = (u128)n_form.a * (u128)args.variable_mod;
+    if (slope > (u128)std::numeric_limits<u64>::max()) return false;
+
+    i128 intercept = (i128)n_form.a * (i128)args.variable_rem + (i128)n_form.b;
+    if (intercept < (i128)std::numeric_limits<int64_t>::min() ||
+        intercept > (i128)std::numeric_limits<int64_t>::max()) {
+        return false;
+    }
+
+    out = {(u64)slope, (int64_t)intercept};
     return true;
 }
 
@@ -755,11 +786,20 @@ int main(int argc, char** argv) {
     for (u64 c : args.extra_prime_coeffs) {
         common_coeffs.push_back(c);
     }
+    std::vector<AffineForm> extra_x_forms = args.extra_prime_forms;
+    for (const auto& n_form : args.extra_prime_n_forms) {
+        AffineForm form;
+        if (!make_N_affine_form(n_form, args, form)) {
+            std::cerr << "affine extra N-form overflows 64-bit search limits\n";
+            return 2;
+        }
+        extra_x_forms.push_back(form);
+    }
     std::vector<AffineForm> common_forms;
     for (u64 c : common_coeffs) {
         common_forms.push_back({c * args.variable_mod, (int64_t)(c * args.variable_rem) - 1});
     }
-    for (const auto& form : args.extra_prime_forms) {
+    for (const auto& form : extra_x_forms) {
         common_forms.push_back(form);
     }
     std::vector<AffineForm> branch_a_forms;
@@ -803,7 +843,7 @@ int main(int argc, char** argv) {
             u64 X = base + i;
             u64 N = args.variable_mod * X + args.variable_rem;
             if (args.require_mod != 1 && N % args.require_mod != args.require_rem) continue;
-            if (!check_extra_prime_forms(X, args.extra_prime_forms)) continue;
+            if (!check_extra_prime_forms(X, extra_x_forms)) continue;
             int branch = 0;
             if ((N & 1) == 0 && alive_a[i] && branch_a_prime_tuple(N, args.extra_prime_coeffs)) branch = 1;
             if (!branch && (N & 1) == 1 && alive_common[i] && branch_b_prime_tuple(N, args.extra_prime_coeffs)) branch = 2;

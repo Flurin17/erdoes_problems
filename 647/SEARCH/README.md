@@ -74,10 +74,14 @@ N = variable_mod * X + variable_rem.
 ```
 
 This is used with the 41-class reduction modulo `46189`. The
-`--extra-prime-forms` option accepts comma-separated `A:B` affine forms and
-requires each `A*X+B` to be prime. This supports exact split-residue filters
-such as `(504N-1)/5`, `(280N-1)/3`, `(280N-1)/9`, and `(252N-1)/5` when the
-chosen variable modulus makes the division integral for all `X`.
+`--extra-prime-forms` option accepts comma-separated `A:B` affine forms in
+the `X` variable and requires each `A*X+B` to be prime. The
+`--extra-prime-n-forms` option is the same condition in the `N` variable,
+so `315:-2` requires `315N-2` to be prime after conversion to the active
+residue progression. These options support restrictive subsearches and exact
+split-residue filters such as `(504N-1)/5`, `(280N-1)/3`, `(280N-1)/9`, and
+`(252N-1)/5` when the chosen variable modulus makes the division integral for
+all `X`.
 
 The range driver records reproducible logs for complete residue scans. For
 example, this covers `3*10^15 <= N < 7320136537186331`, the largest range
@@ -152,3 +156,7 @@ not complete: shifts `k=5,9,10` allow some composite cases such as `5p`,
   --report-survive 13 \
   --extra-prime-coeffs 504,280,252
 ```
+
+For shifts whose useful cofactor is not of the form `cN-1`, use
+`--extra-prime-n-forms`; for example, `315:-2` asks for the `k=16` cofactor
+`315N-2` to be prime.
