@@ -3847,3 +3847,11 @@ source of growth beyond Ramsey.
   counterexample: `regular_spectrum_mass.py` gives `n=18` random
   `min_seen=31`, `n=18` local-search `min_seen=27`, and `n=20` random
   `min_seen=36`.
+- 2026-06-01: Exact connected `n=7` spectrum-mass data show that all
+  connected equality cases `mu(G)=|G|` are trees (`630` labelled examples).
+  Connected non-trees on `7` vertices have `mu>=9=|G|+2`, with the minimum
+  achieved already in every cyclomatic class `1` through `9`.  This supports
+  the idea that cycles create spare spectrum mass, but the monotonicity route
+  is false: adding an edge can decrease `mu`, even inside connected graphs
+  (for example `n=4`, mask `30` has `mu=8`, while adding edge-index `0`
+  gives mask `31` with `mu=7`).
