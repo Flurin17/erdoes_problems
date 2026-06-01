@@ -15318,6 +15318,94 @@ python3 82/EXPERIMENTS/cut_gluing_scan.py 5 5 --samples 2000 --seed 82
 finds no glued graph below the full-mass threshold in these bounded checks;
 both runs have minimum surplus `1` over the defect-one bound.
 
+**Lemma 28J.10d.1e: Exact Rooted Formula For One-Cut Gluing.**  In the
+setting of Lemma 28J.10d.1d, define `a_d^0(A,x)=s_d(A-x)`.  Also let
+`a_{d,p}^1(A,x)` be the maximum order of a vertex set `S subset V(A)` such
+that:
+
+1. `x in S`;
+2. every vertex of `S\{x}` has degree exactly `d` in `A[S]`;
+3. `x` has degree exactly `p` in `A[S]`.
+
+If no such set exists, set `a_{d,p}^1(A,x)=0`, except that the singleton
+`S={x}` gives `a_{d,0}^1(A,x)>=1` for every target degree `d`.  Define
+`b_d^0` and `b_{d,p}^1` analogously for `(B,x)`.  Then
+
+```text
+s_d(G)=max(
+  a_d^0+b_d^0,
+  max_{p+q=d} (a_{d,p}^1+b_{d,q}^1-1)
+).
+```
+
+Proof.  Let `S` induce a `d`-regular subgraph of `G`.  If `x notin S`, then
+`S cap A` and `S cap B` are disjoint induced `d`-regular subgraphs of `A-x`
+and `B-x`; hence `|S|<=a_d^0+b_d^0`.
+
+If `x in S`, put `S_A=S cap A` and `S_B=S cap B`.  Every non-root vertex of
+`S_A` has the same degree in `A[S_A]` as in `G[S]`, namely `d`, and similarly
+for `S_B`.  If `p` and `q` are the partial degrees of `x` into `S_A` and
+`S_B`, then `p+q=d`, and
+
+```text
+|S|=|S_A|+|S_B|-1 <= a_{d,p}^1+b_{d,q}^1-1.
+```
+
+This proves the upper bound.  Conversely, any two rooted partial witnesses
+with partial root degrees summing to `d` glue to a `d`-regular induced
+subgraph of `G`, and any two root-avoiding witnesses glue disjointly.  Hence
+the displayed maximum is also a lower bound.  QED.
+
+**Computational Counterexample 28J.10d.1f: Connected Defect One Is False.**
+The connected defect-one hypothesis in Conditional Corollary 28J.10d.1 is
+false.  Let `H` be the fifteen-vertex connected defect graph with mask
+
+```text
+98404699529372860578279459
+```
+
+and spectrum
+
+```text
+{s_0,s_1,s_2}={6,4,4},        sum_d s_d(H)=14=|H|-1.
+```
+
+Vertices `13` and `14` are essential for the independence coordinate:
+deleting either gives spectrum `{0:5,1:4,2:4}` and mass `13`.  Glue two
+copies of `H` by identifying vertex `13` in the first copy with vertex `13`
+in the second.  The resulting graph `G` is connected and has
+
+```text
+|V(G)|=29,
+sum_d s_d(G)=27,
+{s_0,s_1,s_2}={11,8,8}.
+```
+
+In particular
+
+```text
+sum_d s_d(G)=|V(G)|-2,
+```
+
+so connected defect one is not true.
+
+The exact rooted computation is reproduced by
+
+```text
+python3 82/EXPERIMENTS/rooted_gluing_spectrum.py 15 \
+  --mask1 98404699529372860578279459 --root1 13
+```
+
+The script implements Lemma 28J.10d.1e by exhaustive enumeration of rooted
+signatures on each fifteen-vertex side.  Its `--brute-force-check` mode also
+checks the rooted formula against direct subset enumeration on smaller glued
+examples.
+
+This refutes the connected-defect-one proof route and the non-cut
+full-deletion target as universal statements.  The spectrum route must now
+aim directly at a positive-density lower bound such as
+`sum_d s_d(G)>=c|V(G)|`, or at a superquadratic polylogarithmic bound.
+
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then
 

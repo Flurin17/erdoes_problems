@@ -4200,3 +4200,15 @@ source of growth beyond Ramsey.
   plausible reduction, but the missing theorem is to show that simultaneous
   root-essential drops are always compensated, typically by low-degree
   witnesses crossing the two branches.
+- 2026-06-01: The previous optimism was too strong.  Added
+  `rooted_gluing_spectrum.py` and the exact rooted one-cut formula.  Gluing
+  two copies of the fifteen-vertex defect graph
+  `98404699529372860578279459` at either essential independence vertex
+  `13` or `14` gives a connected graph on `29` vertices with spectrum
+  `{0:11,1:8,2:8}` and mass `27=29-2`.  Therefore connected defect one,
+  the non-cut full-deletion target, and the connected defect-extension
+  induction are false as universal routes.  Gluing at a nonessential vertex
+  of the same block gives mass `28`, and gluing two fourteen-vertex
+  deletion-tight defects gives mass `26=27-1`; the extra loss occurs exactly
+  when both sides have the same root-essential independence drop.  The viable
+  spectrum target is now positive density, not additive defect one.
