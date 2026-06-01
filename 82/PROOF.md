@@ -8879,6 +8879,55 @@ and common displayed degree `floor((h-1)/2)`.  This is a finite arithmetic
 form of the parity candidate; a proof of the candidate for all large `h`
 would amount to excluding these integer solutions.
 
+One half of the candidate has a short proof.
+
+**Lemma 28M: The Parity Construction Has No Balanced Plus Middle.**  For
+`h>=7`, the parity construction in Candidate 28L has no sets
+`X subset A`, `Y subset B` with
+
+```text
+|X|=|Y|=r=floor((h-1)/2)
+```
+
+such that the induced graph on `X union Y` is `r`-regular.
+
+Proof.  Since `h>=7`, we have `r>=3`.  Suppose such sets `X,Y` exist.  Let
+`C=Y cap {b_0,...,b_{h-2}}` be the selected part of the clique core, and let
+`zeta` indicate whether the isolated vertex `z=b_{h-1}` is selected.  Then
+
+```text
+|C|=r-zeta >= r-1 >= 2.
+```
+
+Among the `r` selected vertices of `A`, at least one is an isolate `a_i` with
+`i>=2`.  Let `q` be its parity.  The selected neighbors of this isolate are
+exactly the selected `B` vertices of parity `q`, including `z` only when
+`z` has parity `q`.  Its degree is `r`, while there are only `r` selected
+vertices on the `B` side.  Therefore all selected vertices of `Y` have parity
+`q`: the core vertices in `C` all have parity `q`, and if `z` is selected
+then `z` also has parity `q`.
+
+It follows that no selected `A`-isolate of the other parity can occur, since
+it would have degree `0`.  The endpoint among `a_0,a_1` of the other parity
+also cannot occur: it sees no selected `B` vertex and has at most one neighbor
+inside `A`, so its degree is at most `1<r`.  Hence every selected vertex of
+`A` has parity `q`, so the number `X_q` of selected `A` vertices of parity
+`q` is exactly `r`.
+
+Now take any selected vertex of the clique core `C`, which exists because
+`|C|>=2`.  Its degree inside `X union Y` is
+
+```text
+|C|-1+X_q = (r-zeta)-1+r.
+```
+
+For `zeta in {0,1}` and `r>=3`, this is larger than `r`, contradicting
+`r`-regularity.  QED.
+
+Thus the only unproved part of Candidate 28L is the absence of regular
+induced subgraphs on at least `h` vertices.  The symbolic checker verifies
+that absence through `h=20`.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

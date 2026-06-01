@@ -2560,3 +2560,9 @@ source of growth beyond Ramsey.
   file now records the seven displayed type-degree equations; proving the
   candidate means excluding integer solutions to that system for all large
   `h`.
+- 2026-06-01: Proved Lemma 28M, the balanced-plus half of the parity
+  construction.  For `h>=7`, any balanced plus middle would need all selected
+  `B` vertices to have the parity of a selected `A` isolate, forcing all
+  selected `A` vertices to have that parity; then a selected `B`-clique
+  vertex has degree larger than `r`.  The remaining unproved part of the
+  candidate is excluding arbitrary regular `h`-sets.
