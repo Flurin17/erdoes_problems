@@ -2596,6 +2596,12 @@ position \(j\) on an infinite tail. By choosing packets with a large gap
 below \(h_j\), Corollary 13.1l.2c applies. Thus active fixed-rank prefix
 shells reduce to the fractional certificate-free branch or to smaller
 active traces.
+Corollary 13.1l.2e packages this for the actual shell target: a fixed first
+point and fixed rank with full inclusion-minimal packets cannot be a new
+obstruction. Corollary 13.1l.2b supplies a bounded endpoint debt, 13.1l.2d
+stabilizes its ordered position, and 13.1l.2c converts it to fractional
+reflection-recurrence. Hence the only fixed-section escapes are proper
+active-trace descent or the large certificate-free fractional branch.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order

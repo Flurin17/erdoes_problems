@@ -15982,6 +15982,87 @@ position stabilizes. What remains in a \(k=2\) counterexample is the
 certificate-free fractional branch, or links that are not full-rank
 inclusion-minimal and hence should descend to smaller active traces.
 
+## Corollary 13.1l.2e: Full active prefix shells are fractional
+
+Work in the \(k=2\) counterexample setting, and fix
+\[
+d\in A,\qquad r\ge1,
+\]
+and an infinite ordered tail
+\[
+Y=\{y_1<y_2<\cdots\}\subset A\setminus\{d\}.
+\]
+Suppose that, for every \(L\), all sufficiently late
+\[
+H\in[Y]^r
+\]
+have a witness \(w>L\) such that
+\[
+w\notin3(A\setminus(\{d\}\cup H)),
+\]
+and the whole packet
+\[
+\{d\}\cup H
+\]
+is inclusion-minimal for this witness. Then there are a constant
+\[
+D
+\]
+and an index
+\[
+1\le j\le r
+\]
+such that, for every finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and every \(L_0\), there are
+\[
+U\subset T,\qquad |U|\ge |T|/j,
+\]
+and a center \(m>L_0\) satisfying
+\[
+m-U\subset A. \tag{1}
+\]
+Consequently, if some finite \(T_0\subset A\cap(D,\infty)\) has no
+certificate-free subset of size at least \(|T_0|/j\), then there is an
+infinite \(B\subset A\) such that
+\[
+A\setminus B
+\]
+is an order-\(3\) basis.
+
+Proof. Apply Corollary 13.1l.2b to the fixed \(d,r,Y\). It gives a finite
+nonempty test set \(T_*\) and a bound \(M_*\). Discard finitely many
+points of \(Y\) so that the remaining tail is disjoint from \(T_*\). If a
+height parameter \(L\) is raised above
+\[
+\max T_*+N_0\quad\text{and}\quad d+M_*,
+\]
+then every sufficiently late linked packet has a witness \(w>L\) and some
+tail endpoint \(h\in H\) with
+\[
+w-h\le M_*.
+\]
+Because the packet is inclusion-minimal, every endpoint in it is active
+for \(w\). Thus the hypotheses of Corollary 13.1l.2d hold with
+\[
+M=M_*.
+\]
+That corollary gives an infinite subtail, an index \(j\), and the
+hypotheses of Corollary 13.1l.2c with
+\[
+D=\max\{M_*,d\}.
+\]
+Applying Corollary 13.1l.2c gives (1) and the stated deletion consequence.
+\(\square\)
+
+Thus a fixed first point with a fixed rank is no longer a live
+full-active shell. In the remaining prefix-front analysis, a counterexample
+must either make the active trace drop to a proper subpacket before this
+corollary applies, or else survive inside the large certificate-free
+fractional-recurrence branch.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -17806,6 +17887,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   bounded moving-endpoint debt stabilizes at one ordered position on an
   infinite tail, so full-rank inclusion-minimal prefix shells reduce to
   the fractional certificate-free branch or to smaller active traces.
+* Corollary 13.1l.2e packages the fixed-section conclusion: a fixed first
+  point and fixed rank with full inclusion-minimal packets cannot be a new
+  shell obstruction; it yields fractional reflection-recurrence unless the
+  active trace descends to a proper subpacket.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.
