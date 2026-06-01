@@ -678,6 +678,8 @@ if a private witness `w=q+d` has a retained padder `p` with `q+p in 2C`,
 then the forced row `d-p` must be `q`-dependent, so `d-q-p in A`.
 Diagnostics that print b-dependent rows are therefore also printing
 one-term reflected rows.
+The prepared marker has one reflected row, `p=3 -> 4`, and seven
+unique-gate translates `33+p notin 2C`, matching Lemma 16.17's split.
 
 Lemma 16.16 records the adjacent-block obstruction for old fillers. If a
 later block starts above `4 max(S)`, then any private order-4 witness for

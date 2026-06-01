@@ -49,6 +49,7 @@ def scan(A: set[int], b: int, d: int) -> None:
     collisions = {}
     b_dependent = {}
     reflected = {}
+    unique_gate = {}
     for p in sorted(C):
         row_target = d - p
         if row_target in two_a:
@@ -61,6 +62,8 @@ def scan(A: set[int], b: int, d: int) -> None:
             if row_target not in two_c:
                 b_dependent[p] = two_a[row_target]
                 reflected[p] = d - b - p
+        if b + p not in two_c:
+            unique_gate[p] = b + p
     print("A=", sorted(A))
     print("b=", b, "d=", d, "w=", w)
     print("3A coverage from 3=", cover_end(hsum(A, 3, 6 * max(A) + 100), 3, 6 * max(A) + 100))
@@ -68,6 +71,7 @@ def scan(A: set[int], b: int, d: int) -> None:
     print("row count=", len(rows), "expected=", len(C))
     print("b-dependent rows=", b_dependent)
     print("one-term reflected rows d-b-p=", reflected)
+    print("unique gate translates b+p notin 2C=", unique_gate)
     print("collisions=", collisions)
 
 

@@ -2334,6 +2334,16 @@ use exactly one new element \(p\), so the tail \(w-p\) was already a
 three-term private hole for \(q\) in the old stage. A high block cannot
 promote an old filler by adjacent one-new translation unless that filler
 was already protected one order lower.
+Lemma 16.17 packages the singleton row-bank dichotomy on a finite test set
+\(T\). The rows with \(q+p\in2C\) give actual one-term reflections
+\[
+d-q-p\in A,
+\]
+while the remaining rows have \(q+p\) uniquely represented by the deleted
+gate pair \(q+p\). Thus every private singleton row bank has a
+half-density branch: many actual reflections, or many unique-gate
+translates. This is the \(k=3\) successor of the low-count star split in
+the \(k=2\) argument, but with the gate \(q\) still moving.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running

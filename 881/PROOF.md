@@ -19718,6 +19718,66 @@ either use witnesses in the two-new range, where the positive buffer and
 Lemma 16.14 poisoning become active, or use collective barriers rather than
 singleton promotion.
 
+### Lemma 16.17: Singleton row banks split into reflection and unique-gate rows
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\).
+Fix \(q\in A\), put
+\[
+C=A\setminus\{q\},
+\]
+and suppose
+\[
+w=q+d\notin4C. \tag{1}
+\]
+Let \(T\subset C\) be finite and satisfy
+\[
+w-p\ge N_0\qquad(p\in T). \tag{2}
+\]
+Define
+\[
+T_{\rm ref}=\{p\in T:q+p\in2C\},\qquad
+T_{\rm uniq}=T\setminus T_{\rm ref}.
+\]
+Then
+\[
+d-q-T_{\rm ref}\subseteq A, \tag{3}
+\]
+and, for every \(p\in T_{\rm uniq}\), the only unordered two-term
+representation of \(q+p\) from \(A\) is
+\[
+q+p=q+p. \tag{4}
+\]
+In particular, at least one of the two alternatives has size
+\[
+|T_{\rm ref}|\ge |T|/2,\qquad |T_{\rm uniq}|\ge |T|/2. \tag{5}
+\]
+
+Proof. For \(p\in T_{\rm ref}\), Lemma 16.15 applies directly and gives
+\[
+d-q-p\in A.
+\]
+This proves (3).
+
+Now let \(p\in T_{\rm uniq}\). Since \(p\in C\), the displayed sum
+\[
+q+p
+\]
+is a two-term representation from \(A\). If there were any two-term
+representation of \(q+p\) from \(C\), then \(q+p\in2C\), contradicting
+\(p\notin T_{\rm ref}\). Hence every two-term representation from \(A\)
+uses \(q\). The complementary summand is then forced to be \(p\), so the
+unordered representation is unique. This proves (4). The size alternative
+(5) is the pigeonhole principle. \(\square\)
+
+Thus singleton \(k=3\) row banks do not remain amorphous. On every finite
+test set below the threshold cut, either a positive proportion of rows give
+actual one-term reflection in \(A\), or a positive proportion give unique
+two-sum translates pinned by the deleted gate \(q\). A positive proof would
+need to stabilize one of these two moving structures into a fixed
+certificate or absorption pattern; a negative construction must keep both
+the reflected rows and the unique-gate rows moving beyond every finite
+test.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20756,6 +20816,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.16 shows that later high blocks cannot one-new promote an old
   unprotected filler: any adjacent private witness translates an old
   three-sum private hole for that filler.
+* Lemma 16.17 splits singleton row banks into two half-density branches:
+  actual one-term reflected rows in \(A\), or unique two-sum translates
+  pinned by the deleted gate.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
