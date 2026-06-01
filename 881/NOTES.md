@@ -44,6 +44,9 @@ that gate-shadow branch.
 Lemma 16.44 and Corollary 16.45 make this concrete for interval tests:
 every three-point subset of an interval has a \(k=3\) certificate, so only
 \(|F+F|+2|F|\) rows can stay in the row-dependent branch at bounded rank.
+Lemma 16.46 and Corollary 16.47 then close the same-interval gate case:
+if the active color also lies in the interval, the whole bounded-rank
+packet has size at most \(|F+F|+4|F|\).
 
 ## Definitions
 

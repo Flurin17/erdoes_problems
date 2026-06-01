@@ -21337,6 +21337,102 @@ row-dependent debt. A bounded-rank nonsingleton obstruction over an
 interval must put almost every tested row into the finite-palette gate
 branch, where Corollary 16.42 forbids aligned copies of the same interval.
 
+### Lemma 16.46: Same-interval finite-palette gates are bounded
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite, and let
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+be an interval. Fix
+\[
+f\in F\cap I,
+\]
+and let \(U\subset I\setminus F\) satisfy
+\[
+(U+f-U)\cap A\subseteq F. \tag{1}
+\]
+Then
+\[
+|U|\le2|F|. \tag{2}
+\]
+
+Proof. If \(U=\varnothing\), there is nothing to prove. Put
+\[
+u_-=\min U,\qquad u_+=\max U.
+\]
+By Corollary 16.42 with \(T=I\) and anchor \(u_-\),
+\[
+|U\cap(u_-+I-f)|\le |F|. \tag{3}
+\]
+Since \(f\in I\), the interval \(u_-+I-f\) contains
+\[
+[u_-,\ u_-+b-f].
+\]
+Thus (3) bounds the lower part
+\[
+U_-=U\cap[u_-,\ u_-+b-f].
+\]
+
+Similarly, Corollary 16.42 with anchor \(u_+\) gives
+\[
+|U\cap(u_++I-f)|\le |F|.
+\]
+The interval \(u_++I-f\) contains
+\[
+[u_++a-f,\ u_+],
+\]
+so the upper part
+\[
+U_+=U\cap[u_++a-f,\ u_+]
+\]
+has size at most \(|F|\).
+
+The two displayed intervals cover \(U\). Indeed, if they did not, then
+\[
+u_-+b-f<u_++a-f,
+\]
+or \(u_+-u_->b-a\), impossible because \(U\subset I=[a,b]\). Therefore
+\[
+U=U_-\cup U_+,
+\]
+and (2) follows. \(\square\)
+
+### Corollary 16.47: Same-interval bounded-rank packets are bounded
+
+In the setting of Corollary 16.45, assume in addition that the active color
+\[
+f\in F
+\]
+belongs to the interval \(T_0\). Then, for all sufficiently large \(L\),
+every packet \(U\) satisfying the hypotheses of Corollary 16.45 has
+\[
+|U|\le |F+F|+4|F|. \tag{1}
+\]
+In particular, if \(|F|\le r\), then
+\[
+|U|\le {r(r+1)\over2}+4r. \tag{2}
+\]
+
+Proof. Corollary 16.45 leaves at most \(|F+F|+2|F|\) rows outside the
+gate-dependent set \(U_{\rm gate}\). Since \(f\in T_0\) and
+\[
+U_{\rm gate}\subset T_0,
+\]
+Lemma 16.46 gives
+\[
+|U_{\rm gate}|\le2|F|.
+\]
+Adding the two bounds proves (1), and (2) follows from
+\[
+|F+F|\le {|F|(|F|+1)\over2}.
+\]
+\(\square\)
+
+Thus a bounded-rank nonsingleton obstruction cannot keep its active color
+inside the same dense interval that supplies the tested rows. A large
+interval-test packet must either use active colors outside that interval,
+move to certificate-free noninterval tests, or escape bounded rank/depth.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22502,6 +22598,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   bounded-rank normal form to interval tests, leaving only
   \(|F+F|+2|F|\) row-dependent exceptions before the gate-shadow branch
   takes over.
+* Lemma 16.46 bounds finite-palette gate packets lying in the same interval
+  as their active gate by \(2|F|\), using the two anchored shadows from the
+  minimum and maximum packet rows. Corollary 16.47 combines this with the
+  interval-test normal form: same-interval bounded-rank packets have size
+  at most \(|F+F|+4|F|\).
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
