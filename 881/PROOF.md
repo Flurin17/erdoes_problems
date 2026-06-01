@@ -24687,6 +24687,114 @@ at the tested scale and every endpoint has a nearby auxiliary midpoint
 inside each profile, then some packet point survives in every profile at
 once.
 
+### Corollary 16.106: Variable-test robust exclusions are still long-range
+
+Let \(P\subset\mathbb N\) be finite and nonempty, and let \(\mathcal B\)
+be a finite family of labels. For each \(\lambda\in\mathcal B\), let
+\[
+I_\lambda=[a_\lambda,b_\lambda]\cap\mathbb N
+\]
+have length \(n_\lambda\), fix \(r_\lambda\ge1\) and
+\[
+1/2<\delta_\lambda\le1,
+\]
+and suppose
+\[
+C_\lambda=\bigcup_{i=1}^{m_\lambda}
+R_{K_{\lambda,i}}(\delta_\lambda,I_\lambda;r_\lambda)
+\]
+is a union of nonempty robust cores with
+\[
+1\le m_\lambda\le M.
+\]
+If \(r_\lambda\ge2\), assume every
+\[
+K_{\lambda,i}
+\]
+has length at most
+\[
+{ (2\delta_\lambda-1)(r_\lambda+1)
+  \over4(r_\lambda-1)}\,n_\lambda. \tag{1}
+\]
+Let
+\[
+\gamma_\lambda=\gamma(r_\lambda,\delta_\lambda)>0
+\]
+be the linear-core constant from Corollaries 16.98 and 16.103, and choose
+\[
+D_\lambda=D(r_\lambda)
+\]
+large enough for both corollaries at rank \(r_\lambda\). If
+\[
+P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda=\varnothing, \tag{2}
+\]
+then one of the following alternatives holds.
+
+1. **Variable endpoint-distance witness.** There are
+   \(\lambda\in\mathcal B\) and
+   \(p\in\{\min P,\max P\}\) such that, for every
+   \[
+   K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N,
+   \]
+   one has
+   \[
+   \left|2p+a_\lambda+b_\lambda
+          -2(c_{\lambda,i}+d_{\lambda,i})\right|
+   \ge \gamma_\lambda n_\lambda-D_\lambda. \tag{3}
+   \]
+2. **Variable separated internal gap.** One has \(M\ge2\), and there are
+   \(\lambda\in\mathcal B\), two robust cores
+   \[
+   R_{K_1}(\delta_\lambda,I_\lambda;r_\lambda),\qquad
+   R_{K_2}(\delta_\lambda,I_\lambda;r_\lambda)
+   \]
+   belonging to \(C_\lambda\), with the first to the left of the second,
+   such that the gap \(G\) between them contains at least
+   \[
+   \left\lceil {|P|\over|\mathcal B|(M-1)}\right\rceil \tag{4}
+   \]
+   points of \(P\). Writing \(K_i=[c_i,d_i]\cap\mathbb N\), the auxiliary
+   intervals satisfy
+   \[
+   (c_2+d_2)-(c_1+d_1)
+   \ge |G|+\gamma_\lambda n_\lambda-D_\lambda. \tag{5}
+   \]
+
+Proof. If some endpoint \(p\in\{\min P,\max P\}\) lies outside some
+profile \(C_\lambda\), then \(p\) lies outside every robust core in that
+profile. Corollary 16.103, applied with the data
+\[
+(I_\lambda,r_\lambda,\delta_\lambda,K_{\lambda,i}),
+\]
+gives (3) for every \(i\). This is the first alternative.
+
+Suppose instead that both endpoints of \(P\) lie in every \(C_\lambda\).
+By (2), for each \(p\in P\) some profile omits \(p\). Hence the sets
+\[
+P\setminus C_\lambda\qquad(\lambda\in\mathcal B)
+\]
+cover \(P\), and some \(\lambda\) satisfies
+\[
+|P\setminus C_\lambda|\ge {|P|\over|\mathcal B|}. \tag{6}
+\]
+For this \(\lambda\), Corollary 16.96 gives an internal component gap of
+\(C_\lambda\) containing at least
+\[
+\left\lceil {|P|\over|\mathcal B|(M-1)}\right\rceil
+\]
+points of \(P\); if \(M=1\), no such gap exists and (6) contradicts the
+endpoint containment. Choose adjacent robust cores bounding this component
+gap as in the proof of Corollary 16.99. Corollary 16.98, applied with
+\[
+(I_\lambda,r_\lambda,\delta_\lambda),
+\]
+gives (5). \(\square\)
+
+This version is the one needed for countable assigned menus: the finite
+certificate from a selector argument may draw profiles built over different
+tested intervals, but every successful finite exclusion still exposes a
+long-range witness in one of those profiles.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24704,7 +24812,7 @@ coordinated finite palette must pay a linear total gate-distance cost. The
 remaining escape must therefore either make the packet density vanish, let
 the deletion rank or robust-profile complexity grow with the interval,
 produce a linearly far endpoint-midpoint witness, use auxiliary profiles
-whose midpoint diameter is linear in the tested interval, or maintain
+whose midpoint diameter is linear in their tested interval, or maintain
 nonsummable robust-core escape mass across the packet selector tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
@@ -26055,6 +26163,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.105 gives the contrapositive usable in selector arguments:
   midpoint-clustered profiles that are endpoint-proximal cannot have empty
   common intersection on the packet.
+* Corollary 16.106 removes the common-tested-interval restriction: finite
+  exclusions assembled from a countable assigned menu still have a
+  long-range witness inside one selected profile.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

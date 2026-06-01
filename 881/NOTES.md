@@ -175,6 +175,9 @@ robust-profile packet exclusion needs either a linearly far endpoint
 witness or linearly separated auxiliary midpoints inside one profile; if
 profiles are midpoint-clustered and endpoint-proximal, a common packet
 point survives.
+Corollary 16.106 removes the common-tested-interval restriction, so finite
+selector certificates assembled from a countable menu of interval tests
+still expose a long-range witness in one selected profile.
 
 ## Definitions
 
