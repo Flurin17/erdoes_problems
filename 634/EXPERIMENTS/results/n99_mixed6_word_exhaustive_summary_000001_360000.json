@@ -1,0 +1,262 @@
+{
+  "classified_weight": 5099812,
+  "classified_words": 360000,
+  "contiguous_prefix": true,
+  "covered_first": 1,
+  "covered_last": 360000,
+  "files": [
+    "n99_mixed6_word_exhaustive_001000_002000.json",
+    "n99_mixed6_word_exhaustive_002000_005000.json",
+    "n99_mixed6_word_exhaustive_005000_010000.json",
+    "n99_mixed6_word_exhaustive_010000_020000.json",
+    "n99_mixed6_word_exhaustive_020000_030000.json",
+    "n99_mixed6_word_exhaustive_030000_040000.json",
+    "n99_mixed6_word_exhaustive_040000_050000.json",
+    "n99_mixed6_word_exhaustive_050000_060000.json",
+    "n99_mixed6_word_exhaustive_060000_070000.json",
+    "n99_mixed6_word_exhaustive_070000_080000.json",
+    "n99_mixed6_word_exhaustive_080000_090000.json",
+    "n99_mixed6_word_exhaustive_090000_100000.json",
+    "n99_mixed6_word_exhaustive_100000_110000.json",
+    "n99_mixed6_word_exhaustive_110000_120000.json",
+    "n99_mixed6_word_exhaustive_120000_130000.json",
+    "n99_mixed6_word_exhaustive_130000_140000.json",
+    "n99_mixed6_word_exhaustive_140000_150000.json",
+    "n99_mixed6_word_exhaustive_150000_160000.json",
+    "n99_mixed6_word_exhaustive_160000_170000.json",
+    "n99_mixed6_word_exhaustive_170000_180000.json",
+    "n99_mixed6_word_exhaustive_180000_190000.json",
+    "n99_mixed6_word_exhaustive_190000_200000.json",
+    "n99_mixed6_word_exhaustive_200000_210000.json",
+    "n99_mixed6_word_exhaustive_210000_220000.json",
+    "n99_mixed6_word_exhaustive_220000_230000.json",
+    "n99_mixed6_word_exhaustive_230000_240000.json",
+    "n99_mixed6_word_exhaustive_240000_250000.json",
+    "n99_mixed6_word_exhaustive_250000_260000.json",
+    "n99_mixed6_word_exhaustive_260000_270000.json",
+    "n99_mixed6_word_exhaustive_270000_280000.json",
+    "n99_mixed6_word_exhaustive_280000_290000.json",
+    "n99_mixed6_word_exhaustive_290000_300000.json",
+    "n99_mixed6_word_exhaustive_300000_310000.json",
+    "n99_mixed6_word_exhaustive_310000_320000.json",
+    "n99_mixed6_word_exhaustive_320000_330000.json",
+    "n99_mixed6_word_exhaustive_330000_340000.json",
+    "n99_mixed6_word_exhaustive_340000_350000.json",
+    "n99_mixed6_word_exhaustive_350000_360000.json",
+    "n99_mixed6_word_exhaustive_first1000.json"
+  ],
+  "gaps": [],
+  "intervals": [
+    {
+      "file": "n99_mixed6_word_exhaustive_first1000.json",
+      "first": 1,
+      "last": 1000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_001000_002000.json",
+      "first": 1001,
+      "last": 2000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_002000_005000.json",
+      "first": 2001,
+      "last": 5000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_005000_010000.json",
+      "first": 5001,
+      "last": 10000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_010000_020000.json",
+      "first": 10001,
+      "last": 20000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_020000_030000.json",
+      "first": 20001,
+      "last": 30000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_030000_040000.json",
+      "first": 30001,
+      "last": 40000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_040000_050000.json",
+      "first": 40001,
+      "last": 50000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_050000_060000.json",
+      "first": 50001,
+      "last": 60000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_060000_070000.json",
+      "first": 60001,
+      "last": 70000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_070000_080000.json",
+      "first": 70001,
+      "last": 80000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_080000_090000.json",
+      "first": 80001,
+      "last": 90000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_090000_100000.json",
+      "first": 90001,
+      "last": 100000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_100000_110000.json",
+      "first": 100001,
+      "last": 110000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_110000_120000.json",
+      "first": 110001,
+      "last": 120000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_120000_130000.json",
+      "first": 120001,
+      "last": 130000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_130000_140000.json",
+      "first": 130001,
+      "last": 140000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_140000_150000.json",
+      "first": 140001,
+      "last": 150000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_150000_160000.json",
+      "first": 150001,
+      "last": 160000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_160000_170000.json",
+      "first": 160001,
+      "last": 170000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_170000_180000.json",
+      "first": 170001,
+      "last": 180000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_180000_190000.json",
+      "first": 180001,
+      "last": 190000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_190000_200000.json",
+      "first": 190001,
+      "last": 200000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_200000_210000.json",
+      "first": 200001,
+      "last": 210000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_210000_220000.json",
+      "first": 210001,
+      "last": 220000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_220000_230000.json",
+      "first": 220001,
+      "last": 230000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_230000_240000.json",
+      "first": 230001,
+      "last": 240000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_240000_250000.json",
+      "first": 240001,
+      "last": 250000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_250000_260000.json",
+      "first": 250001,
+      "last": 260000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_260000_270000.json",
+      "first": 260001,
+      "last": 270000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_270000_280000.json",
+      "first": 270001,
+      "last": 280000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_280000_290000.json",
+      "first": 280001,
+      "last": 290000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_290000_300000.json",
+      "first": 290001,
+      "last": 300000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_300000_310000.json",
+      "first": 300001,
+      "last": 310000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_310000_320000.json",
+      "first": 310001,
+      "last": 320000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_320000_330000.json",
+      "first": 320001,
+      "last": 330000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_330000_340000.json",
+      "first": 330001,
+      "last": 340000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_340000_350000.json",
+      "first": 340001,
+      "last": 350000
+    },
+    {
+      "file": "n99_mixed6_word_exhaustive_350000_360000.json",
+      "first": 350001,
+      "last": 360000
+    }
+  ],
+  "mixed_status_words": 0,
+  "n": 99,
+  "outside_cover_shells": 5867040,
+  "overlaps": [],
+  "quotient_groups": 418260,
+  "status_weight_counts": {
+    "corner-label-violation": 1921308,
+    "pinch-sector-obstruction": 731520,
+    "split-corner-label-obstruction": 2446984
+  },
+  "tile": [
+    25,
+    11,
+    30
+  ],
+  "word_count_mismatches": []
+}
