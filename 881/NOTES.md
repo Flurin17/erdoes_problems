@@ -2565,8 +2565,10 @@ finite rank bound but remains a barrier with unbounded witnesses, Ramsey
 thinning produces a generalized complete prefix-link shell. There is an
 infinite sequence \(a_i\) and finite ranks \(r_i\) such that \(a_i\) links to
 every sufficiently late \(r_i\)-subset of the tail. The first Schreier shell
-is only the special case \(r_i=i\); the remaining arithmetic problem is to
-exclude or realize these moving-rank prefix links.
+is only the special case \(r_i=i\). Section 13 now excludes the fixed-first,
+fixed-rank shell when inclusion-minimal traces keep the fixed first point;
+the remaining arithmetic problem is to verify that every section either
+promotes to that full active shell or genuinely descends to a tail section.
 Corollary 13.1l.2a rules out one large part of that generalized shell: for a
 fixed first point and fixed rank, the linked witnesses cannot sit far above
 every endpoint in the linked tail set. Otherwise endpoint-list choices either
@@ -2593,15 +2595,16 @@ Corollary 13.1l.2d removes the moving-position escape for active
 full-rank links. If every linked packet is inclusion-minimal, so every tail
 endpoint is active, then Ramsey thinning stabilizes the bounded-debt
 position \(j\) on an infinite tail. By choosing packets with a large gap
-below \(h_j\), Corollary 13.1l.2c applies. Thus active fixed-rank prefix
-shells reduce to the fractional certificate-free branch or to smaller
-active traces.
+below \(h_j\), Corollary 13.1l.2c applies; Corollary 13.1l.2f then closes
+that fixed-depth fractional branch. Thus active fixed-rank prefix shells
+reduce only to smaller active traces.
 Corollary 13.1l.2e packages this for the actual shell target: a fixed first
 point and fixed rank with full inclusion-minimal packets cannot be a new
 obstruction. Corollary 13.1l.2b supplies a bounded endpoint debt, 13.1l.2d
-stabilizes its ordered position, and 13.1l.2c converts it to fractional
-reflection-recurrence. Hence the only fixed-section escapes are proper
-active-trace descent or the large certificate-free fractional branch.
+stabilizes its ordered position, 13.1l.2c converts it to fixed-depth
+fractional recurrence, and 13.1l.2f rules out the associated finite
+endpoint-label palette. Hence the only fixed-section escape is proper
+active-trace descent.
 Corollary 13.1l.2f closes that fixed-depth fractional branch. Once the debt
 position \(h_j\) is fixed, the shifted rows for a finite test can only use
 the finite label palette \(\{d,h_1,\ldots,h_{j-1}\}\). If every endpoint
@@ -2611,9 +2614,10 @@ finite moving-label palette. Therefore a fixed first point and fixed rank
 cannot support a full inclusion-minimal generalized prefix-link shell.
 Lemma 13.1l.2g handles nonminimal prefix links: Ramsey thinning fixes the
 position pattern of the inclusion-minimal subhole. If the fixed first point
-remains active, sparse reblocking turns the pattern into a smaller full
-active prefix shell, now forbidden; if it does not remain active, the
-obstruction has genuinely descended to the tail section.
+remains active, sparse reblocking turns the pattern into a full active
+prefix shell of rank at most the original rank, now forbidden; if it does
+not remain active, the obstruction has genuinely descended to the tail
+section.
 Lemma 13.1l.2h records the abstract well-foundedness step: if every
 prefix-front section with unbounded obstruction rules out its own
 first-coordinate shell, repeated section descent would build an infinite

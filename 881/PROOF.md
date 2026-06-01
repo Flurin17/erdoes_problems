@@ -19,7 +19,9 @@ For \(k=2\), the current reductions rule out:
 * bounded-excess fixed-prefix pair barriers;
 * fixed-rank full list-color high-excess barriers;
 * cofinite recurrent finite-color Sidon tails;
-* the enumerated-Schreier counterexample route.
+* the enumerated-Schreier counterexample route;
+* fixed-first, fixed-rank generalized prefix-link shells once their
+  inclusion-minimal active traces keep the fixed first point.
 
 The remaining \(k=2\) obstruction, if it exists, must be a genuinely
 variable-rank active-trace finite-barrier system. Inactive prefix padding
@@ -48,8 +50,12 @@ tail must contain inclusion-minimal active bad edges of rank at least
 and with the terminal-gap/shifted-vertex-cover normal form from Lemmas 10.1
 and 10.3b. Proposition 10.3g and Lemma 10.3h show that this large-spread
 high-rank shape is locally compatible inside interval blocks, so the
-remaining issue is global product-selector wiring, not a finite-window
-contradiction.
+remaining issue is no longer a fixed-section generalized shell: Section 13
+now shows that such shells either shrink to forbidden full active packets
+or descend to a proper tail section. The current proof obligation is to
+verify, in every recursive active-trace section, that the private-color
+normal form really supplies the shell/descent alternative required by
+Lemma 13.1l.2h; doing so would close the \(k=2\) case.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
@@ -10222,10 +10228,12 @@ Thus the no-section-descent case is not an arbitrary weak barrier. After
 thinning, it has complete prefix links of finite but moving ranks \(r_i\):
 the first point \(a_i\) is linked to every sufficiently late \(r_i\)-subset
 of the remaining tail. The first Schreier shell is the special case
-\(r_i=i\). The remaining arithmetic gap is to rule out these generalized
-prefix-link shells when the witnesses are genuine order-\(3\) holes with
-the private-color normal form, or to build a staged basis realizing such
-moving ranks.
+\(r_i=i\). Section 13 now rules out the fixed-first, fixed-rank shell when
+the associated witnesses shrink to inclusion-minimal traces that keep the
+fixed first point. What remains to finish the recursive proof is the
+promotion step: in each section, nonminimal traces must either descend to a
+proper tail section or supply exactly the full active shell forbidden by
+Corollaries 13.1l.2b--13.1l.2f.
 
 ## Lemma 8.5b: Complete fixed-rank barriers have unbounded top excess
 
@@ -16125,9 +16133,10 @@ has a fiber containing a certificate triple. If the recurring fiber is
 labeled by \(d\), then the centers \(w-d\) reflect that triple; if it is
 labeled by \(\ell<j\), then the centers \(w-h_\ell\) do. In both cases
 (1) makes the centers tend to infinity. Since \(T_0\) contains only
-finitely many triples and labels, one fixed certificate triple is
-reflection-recurrent. Corollary 2.3c gives a good infinite deletion,
-contradicting the counterexample assumption.
+finitely many triples and the label set is finite, pass to an unbounded
+subsequence on which both the certificate triple and its label are fixed.
+That fixed certificate triple is reflection-recurrent. Corollary 2.3c gives
+a good infinite deletion, contradicting the counterexample assumption.
 
 Therefore, in a counterexample, for every finite nonempty
 \[
@@ -16195,14 +16204,15 @@ parameters, this pattern is constant. If the constant pattern contains
 0
 \]
 and at least one moving position, then it yields a full inclusion-minimal
-prefix shell with the same fixed first point \(d\) and smaller rank
+prefix shell with the same fixed first point \(d\) and rank
 \[
 s=|P|-1
 \]
-on a further sparse subtail. If \(P=\{0\}\), then \(d\) itself has
-arbitrarily large one-point holes. If \(0\notin P\), the obstruction has
-descended to an active trace wholly inside the tail, with the old fixed
-prefix point \(d\) inactive.
+on a further sparse subtail; this rank is at most \(r\), and is strictly
+smaller unless the original packet was already full-active. If
+\(P=\{0\}\), then \(d\) itself has arbitrarily large one-point holes. If
+\(0\notin P\), the obstruction has descended to an active trace wholly
+inside the tail, with the old fixed prefix point \(d\) inactive.
 
 Proof. For each integer \(n\), restrict to a tail of \(Y\) on which (1)
 holds with witnesses \(w>n\). Choose one witness for each \(H\), shrink it
@@ -16220,6 +16230,9 @@ Y'\subset Y
 and a fixed pattern \(P\) such that, for every selected height parameter,
 all sufficiently late \(r\)-sets from \(Y'\) have an inclusion-minimal
 subhole in exactly the positions \(P\).
+Discard the finitely many selected height parameters below an order-\(3\)
+threshold for \(A\). Since \(A\) is an order-\(2\), hence order-\(3\),
+basis, the minimal trace is then nonempty, so \(P\ne\varnothing\).
 
 Assume first that
 \[
@@ -16231,8 +16244,8 @@ Z=\{z_1<z_2<\cdots\}\subset Y'
 \]
 so sparse that between any two consecutive points of \(Z\), and before the
 first point under consideration, there are enough unused points of \(Y'\)
-to fill all nonactive positions required by \(P\). Concretely, when given
-a sufficiently late
+to fill all nonactive positions required by \(P\), including the positions
+after the last active point. Concretely, when given a sufficiently late
 \[
 S=\{z_{i_1}<\cdots<z_{i_s}\}\in[Z]^s,
 \]
