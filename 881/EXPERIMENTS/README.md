@@ -217,6 +217,14 @@ singleton or pair spike supports are already holes for the same witness.
 On the strict seed run, all such promotion flags are false; with
 `--promotion-radius 5`, the strict run still has no nearby singleton or
 pair holes.
+`selector_pair_promotion_scan.py` aggregates the same shifted-overlap
+branches and classifies repair triples. In the strict retained-mirror and
+all-gates-active run it finds `6` directed shifted-overlap branches, no
+pair holes at the original witness or within radius `5`, and every original
+witness repair after deleting the pair uses the remaining active selector.
+In the broader default run it finds `34` directed branches, still no holes
+on the original witness window `[14,23]`, and the only nearby pair holes
+are the later `(10,11,12)` cases at `26`, `27`, and `28`.
 
 `spike_no_promotion_gadget.py` verifies a range-separated local gadget where
 a rank-three witness has a shifted-overlap spike on one deleted pair, but

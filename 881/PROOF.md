@@ -8403,6 +8403,19 @@ within distance \(5\) of their witnesses. If the retained-mirror and
 all-gates-active restrictions are dropped, nearby pair holes do appear in
 the seed set, but only in the later \((10,11,12)\) selector cases and at
 new targets such as \(26,27,28\), not at the original terminal witnesses.
+
+The companion script
+```
+python3 881/EXPERIMENTS/selector_pair_promotion_scan.py --require-retained-mirrors --require-all-gates-active --promotion-window nearby --nearby-radius 5
+```
+aggregates the shifted-overlap branches and records the actual repairs
+after deleting each pair. In the strict run it finds \(6\) directed
+shifted-overlap branches, no pair holes at the original witness or in the
+nearby window, and each repair uses the remaining active color of the
+selector. In the broader default run it finds \(34\) directed branches, no
+pair holes on the original witness window \([14,23]\), and nearby holes
+only in the later \((10,11,12)\) cases at \(26,27,28\).
+
 This is expected because the seed window was chosen so that every singleton
 and pair deletion remains harmless on the witness window. It is still a
 useful check: Lemma 8.5a.7z.10 produces low-rank spike supports, but those
@@ -15529,7 +15542,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   promotion is from those spike supports to recurrent certificates or
   genuine late-bad pair debt.
 * Diagnostic 8.5a.7z.11 verifies on the seed window that this compression
-  does not imply same-witness singleton or pair holes.
+  does not imply same-witness singleton or pair holes; the pair-promotion
+  scan also confirms that strict shifted-overlap branches are repaired by
+  the remaining active selector color and have no nearby pair holes.
 * Diagnostic 8.5a.7z.12 gives a range-separated finite gadget where a
   shifted-overlap pair spike is repaired by a third active color, so local
   spike support does not imply pair debt.

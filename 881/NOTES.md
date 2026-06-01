@@ -2345,6 +2345,13 @@ With `--promotion-radius 5`, the strict retained-mirror/all-gates-active
 seed still has no nearby low-rank holes; the broader unfiltered seed has
 nearby pair holes only in later \((10,11,12)\) selector cases, not at the
 original terminal witnesses.
+The companion `selector_pair_promotion_scan.py` aggregates these branches:
+the strict run has \(6\) directed shifted-overlap branches and no pair holes
+at the original witnesses or within radius \(5\); the broader run has
+\(34\) directed branches, no holes on \([14,23]\), and nearby holes only at
+\(26,27,28\) in the later \((10,11,12)\) selector cases. It also prints the
+repair triples, confirming that the original pair deletions are repaired by
+the remaining active selector color.
 The script `spike_no_promotion_gadget.py` isolates the same point without
 the product-window clutter: a rank-three witness can contain a large
 shifted-overlap spike on a pair \(\{f,g\}\), but deleting \(\{f,g\}\) still
