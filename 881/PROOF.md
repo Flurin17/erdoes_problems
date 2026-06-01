@@ -7845,6 +7845,81 @@ pressure appears immediately when one asks a rank-three product window to
 coexist with all four possible three-packet subwindows while preserving
 pair-harmlessness.
 
+### Lemma 8.5a.7z.3: Common rank-three product witnesses have tiny outside fibers
+
+Let \(A\) be an order-2 basis with threshold \(N_0\). Let
+\[
+P_1,\ P_2,\ P_3\subset A
+\]
+be pairwise disjoint two-point packets, say
+\[
+P_i=\{p_i^0,p_i^1\}.
+\]
+Suppose one integer \(v\) has the following common product-hole property:
+for every selector
+\[
+x_i\in P_i\qquad(i=1,2,3),
+\]
+writing
+\[
+F=\{x_1,x_2,x_3\},
+\]
+one has
+\[
+v\notin3(A\setminus F). \tag{1}
+\]
+Then every retained point
+\[
+e\in A\setminus(P_1\cup P_2\cup P_3),\qquad v-e\ge N_0,
+\]
+satisfies
+\[
+v-e\in
+\{p_1^0+p_1^1,\ p_2^0+p_2^1,\ p_3^0+p_3^1\}. \tag{2}
+\]
+In particular there are at most three such outside retained points \(e\).
+
+Proof. Fix \(e\) as above. Since \(v-e\ge N_0\), choose a two-term
+representation
+\[
+v-e=a+b,\qquad a,b\in A. \tag{3}
+\]
+For each selector \(F\), the point \(e\) is retained after deleting \(F\).
+If the support \(\{a,b\}\) avoided \(F\), then
+\[
+v=e+a+b\in3(A\setminus F),
+\]
+contradicting (1). Hence the support of every representation (3) meets
+every selector in
+\[
+P_1\times P_2\times P_3. \tag{4}
+\]
+
+A set of at most two points can meet every selector in this product only by
+containing both points of one packet. Indeed, if it does not contain all of
+any \(P_i\), choose \(x_i\in P_i\) outside the set for each \(i\); the
+resulting selector avoids it. Therefore the support of (3) contains
+\[
+P_i
+\]
+for some \(i\in\{1,2,3\}\). Since the support has size at most two, this
+means
+\[
+\{a,b\}=P_i
+\]
+as a multiset-free support, and hence
+\[
+v-e=p_i^0+p_i^1.
+\]
+This proves (2). The bound of three outside retained points follows because
+each displayed sum determines \(e\) uniquely. \(\square\)
+
+Thus a product-window construction with many old retained padders cannot
+reuse one witness for an entire three-packet cube. The witnesses in any
+iterable rank-three product barrier must be selector-specific, or at least
+specific to very small subfamilies of selectors, so that the shifted
+two-sum fibers \(v-e\) do not collapse to the three full packet-pair sums.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7902,9 +7977,10 @@ covers whose pair subfamilies are selector-avoidable and whose high-rank
 edges are minimal large-spread terminal cuts whose supports form a genuine
 cross-window weak barrier rather than disjoint local gadgets. Diagnostic
 8.5a.7z.2 shows that even the first bounded fourth-packet extension of the
-small local model is nontrivial. This is now the active form of the
-certificate-free obstruction; it is stronger than mobile injectivity and
-weaker than finite recurrent Sidon coloring.
+small local model is nontrivial, and Lemma 8.5a.7z.3 shows that common
+three-packet witness layers have only tiny outside retained fibers. This is
+now the active form of the certificate-free obstruction; it is stronger
+than mobile injectivity and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14543,6 +14619,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   two-point packet with up to two fillers through \(30\) extends the small
   rank-three product terminal window while preserving all three-packet
   product requirements and pair-harmlessness.
+* Lemma 8.5a.7z.3 proves that a single witness cannot cover a whole
+  three-packet selector cube in the presence of many retained outside
+  padders: all shifted two-sums \(v-e\) must collapse to the three full
+  packet-pair sums.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,

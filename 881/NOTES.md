@@ -2265,6 +2265,17 @@ remain harmless. It checks \(20961\) candidates and finds no extension.
 This is finite evidence only, but it points to the simultaneous
 cross-window closure burden.
 
+Lemma 8.5a.7z.3 gives a rigorous reason common witness layers are too
+rigid. If one witness \(v\) works for every selector through three
+two-point packets \(P_1,P_2,P_3\), then any retained outside point \(e\)
+with \(v-e\) above the order-2 threshold must satisfy
+\[
+v-e\in\{P_1\text{-sum},P_2\text{-sum},P_3\text{-sum}\}.
+\]
+So at most three outside retained padders can coexist with such a common
+witness. Any iterable product construction must therefore use highly
+selector-specific witnesses.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
