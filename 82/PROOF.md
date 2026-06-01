@@ -106,7 +106,23 @@ itself a source of extra regularity: the cross edges between one clique and
 one independent set may form a split graph, and in split graphs regular
 induced subgraphs are exactly the ordinary homogeneous induced subgraphs.
 
-## Lemma 0B.1: Complete Multipartite Graphs Are Logarithmically Easy
+**Corollary 0B.1: Split Graphs Are Linearly Easy.**  If `G` is a split graph
+on `n` vertices, then
+
+```text
+reg(G) >= n/2.
+```
+
+Proof.  Let `V(G)=A union B` be a split partition with `A` a clique and `B`
+an independent set.  The larger of `A` and `B` has order at least `n/2`, and
+it induces a regular subgraph.  QED.
+
+Thus Lemma 0B should be read only as a warning that mixed regular witnesses
+need not exist in split graphs.  Split graphs themselves are far from the
+hard regime because their defining partition already supplies a linear
+homogeneous, hence regular, induced subgraph.
+
+## Lemma 0B.2: Complete Multipartite Graphs Are Logarithmically Easy
 
 Let `G` be a complete multipartite graph on `n>=1` vertices.  Then `G`
 contains a regular induced subgraph on at least

@@ -3317,7 +3317,11 @@ source of growth beyond Ramsey.
   nodes and returned `status=unknown_time_limit`; closing `C_reg(1,6)` beyond
   the existing `C_reg(1,6)>13` certificate will need stronger pruning or a
   different exact formulation.
-- 2026-06-01: Added Lemma 0B.1: complete multipartite graphs, and disjoint
+- 2026-06-01: Added Corollary 0B.1 recording that split graphs are linearly
+  easy: one side of a split partition is a clique or independent set of size
+  at least `n/2`.  Lemma 0B remains useful only as a warning that split graphs
+  need not have mixed regular witnesses beyond homogeneous sets.
+- 2026-06-01: Added Lemma 0B.2: complete multipartite graphs, and disjoint
   unions of cliques, always contain regular induced subgraphs of order at
   least `n/H_n`.  The proof chooses the largest Ferrers rectangle
   `t * #{classes of size at least t}` in the class-size histogram.  Therefore
