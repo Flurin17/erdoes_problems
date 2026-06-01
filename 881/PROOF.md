@@ -23960,6 +23960,58 @@ requires the common robust-core intersection to miss every sufficiently
 late packet point. If even one color per infinitely many packets remains
 inside all assigned cores, those colors form an escaping selector.
 
+### Corollary 16.93: Robust-core packet exclusion is finitely witnessed
+
+Keep the hypotheses of Corollary 16.90, and suppose
+\(\mathcal G_{\rm bd}\) product-covers every selector tail. Then for every
+sufficiently large packet index \(s\) there is a finite set of profile
+labels
+\[
+\mathcal B_s\subset\{(q,\alpha):q\ge1,\ \alpha\in\mathcal A_q\}
+\]
+with
+\[
+|\mathcal B_s|\le |P_s|
+\]
+such that
+\[
+P_s\cap\bigcap_{(q,\alpha)\in\mathcal B_s}C_{\alpha,q}=\varnothing.
+\tag{1}
+\]
+In the fixed-\((r,\eta)\) setting of Corollary 16.88, the analogous
+conclusion is that, for all sufficiently large \(s\), there is a finite
+\[
+\mathcal B_s\subset\mathcal A,\qquad |\mathcal B_s|\le |P_s|,
+\]
+with
+\[
+P_s\cap\bigcap_{\alpha\in\mathcal B_s}C_\alpha=\varnothing. \tag{2}
+\]
+
+Proof. By Corollary 16.91, for all sufficiently large \(s\),
+\[
+P_s\subseteq
+\bigcup_{q\ge1}\ \bigcup_{\alpha\in\mathcal A_q}
+\left(P_s\setminus C_{\alpha,q}\right).
+\]
+For each \(x\in P_s\), choose one label \((q_x,\alpha_x)\) such that
+\[
+x\notin C_{\alpha_x,q_x}.
+\]
+Let
+\[
+\mathcal B_s=\{(q_x,\alpha_x):x\in P_s\}.
+\]
+Then \(|\mathcal B_s|\le |P_s|\), and no \(x\in P_s\) lies in every
+\(C_{\alpha,q}\) with \((q,\alpha)\in\mathcal B_s\), proving (1). The
+fixed-\((r,\eta)\) proof is the same. \(\square\)
+
+Thus a surviving assigned robust-core branch has a finite local certificate
+inside each sufficiently late packet: finitely many robust-core profiles,
+no more than the packet size, already exclude every active color in that
+packet. The remaining geometric problem is therefore finite per packet,
+even if the global menu of assigned profiles is countable.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25283,6 +25335,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.92 gives the direct common-core selector criterion: if
   infinitely many packets retain one color in every assigned robust core,
   those colors avoid all assigned bounded-rank positive-density traces.
+* Corollary 16.93 makes this finite per packet: once the assigned robust
+  branch product-covers selector tails, every sufficiently late packet has
+  a finite subfamily of assigned robust profiles, of size at most the packet
+  size, whose common core misses the whole packet.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

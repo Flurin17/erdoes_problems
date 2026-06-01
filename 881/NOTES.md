@@ -142,7 +142,10 @@ cylinders are one-coordinate: a product-covering robust-core explanation
 must eventually cover every color in every packet by some escape condition.
 Corollary 16.92 records the contrapositive selector form: one color in the
 common assigned robust core for infinitely many packets avoids the entire
-assigned bounded-rank dense branch.
+assigned bounded-rank dense branch. Corollary 16.93 adds finite
+witnessing: for each sufficiently late packet, finitely many assigned
+robust-core profiles, at most the packet size, already have empty common
+intersection on that packet.
 
 ## Definitions
 
