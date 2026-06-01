@@ -13,6 +13,14 @@ is whether the \(k=2\) finite-prefix active-trace closure has an analogue
 for \((k+1)\)-term barriers, or whether a robust staged higher-order
 collective barrier can be lifted to an infinite counterexample.
 
+The latest \(k=3\) reduction is Corollaries 16.35--16.36 in `PROOF.md`.
+After singleton late-bad bridge fillers are exhausted, the handoff can be
+made into an actual nonsingleton prefix-front of inclusion-minimal active
+order-\(4\) traces, not just padded late-bad sets. The obstruction to
+reusing the \(k=2\) front closure is now explicit: bounded ordered-depth
+rows in this front reflect only into \(2A\), so a proof must either convert
+those mirrors into four-term repairs or force unbounded depth/rank.
+
 ## Definitions
 
 Throughout, \(\mathbb N\) is interpreted as the positive integers unless

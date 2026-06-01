@@ -20723,6 +20723,115 @@ window family has vanishing protected density, so a counterexample must
 encode its protection debt across unboundedly many windows or hand it to a
 nonsingleton prefix-front.
 
+### Corollary 16.35: The nonsingleton handoff can be made active
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis, and let \(X\subset A\) be infinite.
+Suppose that only finitely many elements of \(X\) are singleton late-bad at
+order \(4\). Then there are an infinite
+\[
+Q\subset X
+\]
+and a prefix-front
+\[
+\mathcal F\subset[Q]^{<\omega}
+\]
+such that every \(F\in\mathcal F\) has \(|F|\ge2\) and has an associated
+witness \(w_F\) with the following properties. Put
+\[
+C_F=A\setminus F.
+\]
+Then
+\[
+w_F\ge\max F-1,\qquad w_F\notin4C_F, \tag{1}
+\]
+\(F\) is inclusion-minimal for the nonrepresentation in (1), every
+\(f\in F\) is active in an order-\(4\) repair after the other points of
+\(F\) are restored, and for every retained padder
+\[
+e\in C_F,\qquad w_F-e\ge N_0,
+\]
+where \(N_0\) is an order-\(3\) threshold for \(A\), the set \(F\)
+intersects every three-term representation of \(w_F-e\) from \(A\).
+
+Proof. Remove the finitely many singleton late-bad elements from \(X\), and
+call the remaining infinite set \(Y\). By Corollary 16.31, the order-\(4\)
+late-bad subsets of \(Y\) form a nonsingleton weak barrier. For every
+late-bad \(S\subset Y\), choose a witness
+\[
+w_S\ge\max S-1,\qquad w_S\notin4(A\setminus S),
+\]
+using an arbitrarily large hole if \(A\setminus S\) is not an order-\(4\)
+basis, and using the delayed-threshold witness otherwise. Shrink \(S\)
+inclusion-minimally for this same witness, and call the shrink \(F_S\).
+
+The family of all such \(F_S\) is still a weak barrier on \(Y\), since
+\(F_S\subset S\). It has no singleton member. Indeed, if
+\[
+F_S=\{q\},
+\]
+then the same witness satisfies
+\[
+w_S\ge\max S-1\ge q-1
+\]
+and is missing from \(4(A\setminus\{q\})\). Hence either
+\(A\setminus\{q\}\) is not an order-\(4\) basis, or every order-\(4\)
+threshold for it is \(>w_S\), and therefore at least \(q\). Thus
+\(\{q\}\) would be singleton late-bad in \(Y\), a contradiction.
+
+Lemma 3.1c.4 now thins this weak barrier to a prefix-front
+\(\mathcal F\) of actual inclusion-minimal traces on an infinite
+\(Q\subset Y\), retaining the same witnesses. The activity of every
+deleted point is the inclusion-minimal repair conclusion of Lemma 10.3b
+with \(k=3\). The final vertex-cover assertion is Lemma 10.1, again with
+\(k=3\). \(\square\)
+
+Thus the handoff in Corollary 16.31 is not merely a front of padded
+late-bad sets. Once singleton late-bad points have been exhausted, the
+remaining \(k=3\) obstruction may be studied as a genuine nonsingleton
+prefix-front of active order-\(4\) holes.
+
+### Corollary 16.36: Bounded-depth nonsingleton debt lands in \(2A\)
+
+Keep the notation of Corollary 16.35. Let
+\[
+F=\{f_1<\cdots<f_r\}\in\mathcal F
+\]
+have witness \(w=w_F\), and suppose \(r\ge j\ge2\) and
+\[
+w\le f_j+D \tag{1}
+\]
+for some \(D\ge0\). If \(T\subset A\setminus F\) is finite and satisfies
+\[
+\min T>D,\qquad w-\max T\ge N_0, \tag{2}
+\]
+then there are an index \(i<j\) and a subset
+\[
+U\subset T,\qquad |U|\ge {|T|\over j-1},
+\]
+such that
+\[
+w-f_i-U\subseteq2A. \tag{3}
+\]
+
+Proof. This is Lemma 10.4 specialized to \(k=3\), with the active trace
+\(F\), witness \(w\), ordered depth \(j\), and test set \(T\). The
+nonrepresentation \(w\notin4(A\setminus F)\) forces every three-term
+representation of \(w-t\), \(t\in T\), to use a point of \(F\). Condition
+(1) and \(\min T>D\) rule out every endpoint \(f_\ell\) with
+\(\ell\ge j\). Pigeonholing among \(f_1,\ldots,f_{j-1}\) gives (3).
+\(\square\)
+
+This is the precise point where the \(k=2\) finite-prefix closure cannot be
+quoted for the \(k=3\) nonsingleton front. In the \(k=2\) proof the
+corresponding bounded-depth rows land in \(A\) itself, producing
+reflection-recurrence and fixed certificates. Here they land only in
+\(2A\). Any closure of the nonsingleton handoff must either convert these
+\(2A\)-valued mirrors into usable \(A\)-mirrors with the four-term budget,
+or show that the front is forced into a different branch such as
+unbounded ordered depth, unbounded-window singleton coding, or a genuinely
+higher-rank collective construction.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21841,6 +21950,16 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   windows protects only a vanishing fraction of the bridge block. The only
   singleton escape left there is unbounded-window coding or a
   nonsingleton-front handoff.
+* Corollary 16.35 upgrades that handoff: after deleting finitely many
+  singleton late-bad points, the nonsingleton alternative thins to an
+  actual prefix-front of inclusion-minimal active order-\(4\) traces, with
+  witnesses \(w_F\ge\max F-1\) and the full three-term vertex-cover
+  condition from Lemma 10.1.
+* Corollary 16.36 records the exact limitation of importing the \(k=2\)
+  front closure: bounded ordered-depth debt in such a \(k=3\) front gives
+  fractional reflected rows only in \(2A\), not in \(A\). The unresolved
+  nonsingleton branch must therefore convert \(2A\)-mirrors into usable
+  four-term repairs or escape through unbounded depth/rank.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
