@@ -8549,6 +8549,43 @@ is a partial order whose chains are cliques and whose antichains are
 independent sets.  The chain-antichain product bound gives a clique or
 independent set of order greater than `sqrt(s)`.  QED.
 
+**Computational Calibration 28E.2: Inversion-Free Graphs Do Not Show A
+Large Extra Gain.**  The script `EXPERIMENTS/no_inversion_regular.py`
+enumerates or samples ordered graphs with no inversion triples.  Such a graph
+is encoded by thresholds `t_i`, where vertex `i` is adjacent to a later vertex
+`j` exactly when `j>=t_i`.
+
+Exact enumeration gives:
+
+```text
+python3 82/EXPERIMENTS/no_inversion_regular.py 8 --exact
+python3 82/EXPERIMENTS/no_inversion_regular.py 9 --exact --progress 100000
+```
+
+For `m=8`, among all `40320` threshold sequences, the minimum possible
+maximum regular induced order is `4`; the minimum possible maximum homogeneous
+order is `3`.  For `m=9`, among all `362880` threshold sequences, the same
+minimum maximum regular order is `4`, while the minimum maximum homogeneous
+order is again `3`.  One extremal `m=9` threshold sequence is
+
+```text
+(1, 2, 5, 5, 7, 9, 9, 9, 9).
+```
+
+Random samples at larger orders found:
+
+```text
+python3 82/EXPERIMENTS/no_inversion_regular.py 14 --samples 500 --seed 82014 --progress 100
+python3 82/EXPERIMENTS/no_inversion_regular.py 16 --samples 200 --seed 82016 --progress 50
+```
+
+with smallest sampled maximum regular orders `6` and `6`, respectively.
+These checks do not prove an upper construction, but they suggest that the
+inversion-free step may at best improve the chain-antichain `sqrt(m)` bound by
+small constants.  A proof route that needs a power improvement inside
+Lemma 28E.1 should therefore first produce a structural reason not visible in
+the full class of inversion-free ordered graphs.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 

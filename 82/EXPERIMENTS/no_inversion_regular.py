@@ -1,0 +1,195 @@
+#!/usr/bin/env python3
+"""Census and sampling for inversion-free ordered graphs.
+
+An ordered graph is inversion-free when, for every i<j<k, the edge ij implies
+the edge ik.  Equivalently, each vertex i has a later-neighborhood that is a
+suffix of the later vertices.  This script represents such a graph by
+thresholds t_i, with i adjacent to j>i exactly when j>=t_i.
+"""
+
+from __future__ import annotations
+
+import argparse
+import random
+from dataclasses import dataclass
+from itertools import product
+from math import factorial, sqrt
+from time import monotonic
+
+
+@dataclass(frozen=True)
+class Precomp:
+    n: int
+    subsets_by_size: list[tuple[int, list[tuple[int, tuple[int, ...]]]]]
+
+
+def precompute(n: int) -> Precomp:
+    by_size: list[tuple[int, list[tuple[int, tuple[int, ...]]]]] = []
+    for size in range(n, 0, -1):
+        entries = []
+        for subset in range(1, 1 << n):
+            if subset.bit_count() == size:
+                vertices = tuple(v for v in range(n) if (subset >> v) & 1)
+                entries.append((subset, vertices))
+        by_size.append((size, entries))
+    return Precomp(n=n, subsets_by_size=by_size)
+
+
+def random_thresholds(n: int, rng: random.Random) -> tuple[int, ...]:
+    return tuple(rng.randrange(i + 1, n + 1) for i in range(n - 1)) + (n,)
+
+
+def threshold_ranges(n: int) -> list[range]:
+    return [range(i + 1, n + 1) for i in range(n - 1)]
+
+
+def build_adjacency(n: int, thresholds: tuple[int, ...]) -> list[int]:
+    adj = [0] * n
+    for i, threshold in enumerate(thresholds):
+        for j in range(threshold, n):
+            adj[i] |= 1 << j
+            adj[j] |= 1 << i
+    return adj
+
+
+def max_regular_order(adj: list[int], pc: Precomp) -> int:
+    for size, entries in pc.subsets_by_size:
+        for subset, vertices in entries:
+            degree = (adj[vertices[0]] & subset).bit_count()
+            if all((adj[v] & subset).bit_count() == degree for v in vertices[1:]):
+                return size
+    return 1
+
+
+def max_homogeneous_order(adj: list[int], pc: Precomp) -> int:
+    for size, entries in pc.subsets_by_size:
+        clique_degree = size - 1
+        for subset, vertices in entries:
+            degree = (adj[vertices[0]] & subset).bit_count()
+            if degree not in (0, clique_degree):
+                continue
+            if all((adj[v] & subset).bit_count() == degree for v in vertices[1:]):
+                return size
+    return 1
+
+
+def evaluate(n: int, thresholds: tuple[int, ...], pc: Precomp) -> tuple[int, int]:
+    adj = build_adjacency(n, thresholds)
+    return max_regular_order(adj, pc), max_homogeneous_order(adj, pc)
+
+
+def exact(n: int, progress: int) -> None:
+    pc = precompute(n)
+    ranges = threshold_ranges(n)
+    total = factorial(n)
+    best_regular = n
+    best_homogeneous = n
+    regular_hist: dict[int, int] = {}
+    homogeneous_hist: dict[int, int] = {}
+    examples: list[tuple[tuple[int, ...], int]] = []
+    start = monotonic()
+
+    for count, thresholds0 in enumerate(product(*ranges), start=1):
+        thresholds = tuple(thresholds0) + (n,)
+        regular, homogeneous = evaluate(n, thresholds, pc)
+        regular_hist[regular] = regular_hist.get(regular, 0) + 1
+        homogeneous_hist[homogeneous] = homogeneous_hist.get(homogeneous, 0) + 1
+
+        if regular < best_regular:
+            best_regular = regular
+            examples = [(thresholds, homogeneous)]
+            print(
+                "new_best "
+                f"count={count} max_regular={regular} "
+                f"max_homogeneous={homogeneous} thresholds={thresholds}",
+                flush=True,
+            )
+        elif regular == best_regular and len(examples) < 5:
+            examples.append((thresholds, homogeneous))
+        best_homogeneous = min(best_homogeneous, homogeneous)
+
+        if progress and count % progress == 0:
+            print(
+                f"progress count={count}/{total} best={best_regular} "
+                f"elapsed={monotonic() - start:.1f}s",
+                flush=True,
+            )
+
+    print(f"n={n}")
+    print(f"threshold_graphs={total}")
+    print(f"min_max_regular={best_regular}")
+    print(f"min_max_homogeneous={best_homogeneous}")
+    print(f"sqrt_n={sqrt(n):.6f}")
+    print(f"regular_histogram={dict(sorted(regular_hist.items()))}")
+    print(f"homogeneous_histogram={dict(sorted(homogeneous_hist.items()))}")
+    for thresholds, homogeneous in examples:
+        print(f"example thresholds={thresholds} max_homogeneous={homogeneous}")
+
+
+def sample(n: int, samples: int, seed: int, progress: int) -> None:
+    pc = precompute(n)
+    rng = random.Random(seed)
+    best_regular = n
+    best_homogeneous = n
+    regular_hist: dict[int, int] = {}
+    homogeneous_hist: dict[int, int] = {}
+    examples: list[tuple[tuple[int, ...], int]] = []
+    start = monotonic()
+
+    for count in range(1, samples + 1):
+        thresholds = random_thresholds(n, rng)
+        regular, homogeneous = evaluate(n, thresholds, pc)
+        regular_hist[regular] = regular_hist.get(regular, 0) + 1
+        homogeneous_hist[homogeneous] = homogeneous_hist.get(homogeneous, 0) + 1
+
+        if regular < best_regular:
+            best_regular = regular
+            examples = [(thresholds, homogeneous)]
+            print(
+                "new_best "
+                f"count={count} max_regular={regular} "
+                f"max_homogeneous={homogeneous} thresholds={thresholds}",
+                flush=True,
+            )
+        elif regular == best_regular and len(examples) < 5:
+            examples.append((thresholds, homogeneous))
+        best_homogeneous = min(best_homogeneous, homogeneous)
+
+        if progress and count % progress == 0:
+            print(
+                f"progress count={count}/{samples} best={best_regular} "
+                f"elapsed={monotonic() - start:.1f}s",
+                flush=True,
+            )
+
+    print(f"n={n}")
+    print(f"samples={samples}")
+    print(f"seed={seed}")
+    print(f"min_seen_max_regular={best_regular}")
+    print(f"min_seen_max_homogeneous={best_homogeneous}")
+    print(f"sqrt_n={sqrt(n):.6f}")
+    print(f"regular_histogram={dict(sorted(regular_hist.items()))}")
+    print(f"homogeneous_histogram={dict(sorted(homogeneous_hist.items()))}")
+    for thresholds, homogeneous in examples:
+        print(f"example thresholds={thresholds} max_homogeneous={homogeneous}")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("n", type=int)
+    parser.add_argument("--exact", action="store_true")
+    parser.add_argument("--samples", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--progress", type=int, default=0)
+    args = parser.parse_args()
+
+    if args.exact:
+        exact(args.n, args.progress)
+    elif args.samples > 0:
+        sample(args.n, args.samples, args.seed, args.progress)
+    else:
+        raise SystemExit("choose --exact or --samples N")
+
+
+if __name__ == "__main__":
+    main()

@@ -2621,3 +2621,12 @@ source of growth beyond Ramsey.
   `D_spec(h)>M` and `P_h>M`.  The construction is still only linear and is
   dominated asymptotically by the inherited `G(ceil(h/2))` lower bound, but it
   cleanly calibrates how split-graph spectra separate.
+- 2026-06-01: Added `no_inversion_regular.py` to calibrate the ordered
+  inversion subproblem in Lemma 28E.1.  Exact enumeration of all suffix
+  threshold graphs gives minimum maximum regular order `4` for `m=8` and
+  `m=9`, while the minimum maximum homogeneous order is `3`.  Random samples
+  found examples with maximum regular order `5` on `12` vertices and `6` on
+  `14` and `16` vertices.  This suggests that the inversion-free step is
+  unlikely to yield more than a constant-factor improvement over the current
+  chain-antichain `sqrt(m)` fallback without additional structure from the
+  degree-bucket representatives.
