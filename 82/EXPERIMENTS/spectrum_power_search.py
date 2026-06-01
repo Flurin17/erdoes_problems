@@ -25,6 +25,32 @@ def power_value(by_degree: dict[int, int], power: int) -> int:
     return sum(order**power for order in by_degree.values())
 
 
+def delete_vertex_mask(
+    mask: int,
+    vertex: int,
+    pc: cdc.Precomp,
+    pc_minus: cdc.Precomp,
+) -> int:
+    out = 0
+    for small_index, (u, v) in enumerate(pc_minus.edges):
+        old_u = u if u < vertex else u + 1
+        old_v = v if v < vertex else v + 1
+        old_edge = (old_u, old_v)
+        if (mask >> pc.edge_index[old_edge]) & 1:
+            out |= 1 << small_index
+    return out
+
+
+def precompute_power_values(n: int, power: int) -> list[int]:
+    pc = cdc.precompute(n)
+    values: list[int] = []
+    for mask in range(1 << len(pc.edges)):
+        adj = cdc.adjacency(n, mask, pc)
+        _mass, by_degree = spectrum_mass(adj, pc)
+        values.append(power_value(by_degree, power))
+    return values
+
+
 def fixed(n: int, mask: int, power: int) -> None:
     pc = cdc.precompute(n)
     adj = cdc.adjacency(n, mask, pc)
@@ -184,6 +210,11 @@ def deletion_tight_scan(
 ) -> None:
     pc = cdc.precompute(n)
     pc_minus = cdc.precompute(n - 1) if n > 1 else None
+    smaller_power_values = (
+        precompute_power_values(n - 1, power)
+        if pc_minus is not None and len(pc_minus.edges) <= 22
+        else None
+    )
     total = 1 << len(pc.edges)
     checked = 0
     tight_count = 0
@@ -205,9 +236,13 @@ def deletion_tight_scan(
             drops = [0]
         else:
             for vertex in range(n):
-                smaller = delete_vertex(adj, vertex)
-                _smaller_mass, smaller_by_degree = spectrum_mass(smaller, pc_minus)
-                smaller_value = power_value(smaller_by_degree, power)
+                if smaller_power_values is not None:
+                    smaller_mask = delete_vertex_mask(mask, vertex, pc, pc_minus)
+                    smaller_value = smaller_power_values[smaller_mask]
+                else:
+                    smaller = delete_vertex(adj, vertex)
+                    _smaller_mass, smaller_by_degree = spectrum_mass(smaller, pc_minus)
+                    smaller_value = power_value(smaller_by_degree, power)
                 drops.append(value - smaller_value)
 
         zero_drops = sum(1 for drop in drops if drop == 0)
@@ -235,6 +270,7 @@ def deletion_tight_scan(
     print(f"checked_graphs={checked}")
     print(f"connected_only={connected_only}")
     print(f"power={power}")
+    print(f"cached_deletion_values={smaller_power_values is not None}")
     print(f"deletion_tight_count={tight_count}")
     print(f"zero_drop_histogram={dict(sorted(zero_drop_histogram.items()))}")
     print(f"min_tight_power_sum={None if tight_count == 0 else min_tight_value}")

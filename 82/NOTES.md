@@ -4395,8 +4395,9 @@ source of growth beyond Ramsey.
   For `Q=sum_d s_d^2`, exact `n=5` has no deletion-tight graphs.  Exact
   `n=6` has `180`, with minimum `Q=29` and spectrum `{0:3,1:2,2:4}`.  A
   permutation check identifies these `180` graphs as exactly the labelled
-  copies of `K_{3,3}-e` and their complements.  A bounded `n=7` prefix of
-  `100000` labelled graphs already has `168` deletion-tight examples with
-  the same minimum `Q=29`.  Thus deletion-tight chains are real, but the
-  currently seen ones have much larger square spectrum than the low-density
-  `Q=57` defects on thirteen and fourteen vertices.
+  copies of `K_{3,3}-e` and their complements.  After adding cached
+  `(n-1)`-vertex power values, the full exact `n=7` scan completes and finds
+  `12600` deletion-tight examples, again with minimum `Q=29`.  Thus
+  deletion-tight chains are real, but the currently seen ones have much
+  larger square spectrum than the low-density `Q=57` defects on thirteen and
+  fourteen vertices.

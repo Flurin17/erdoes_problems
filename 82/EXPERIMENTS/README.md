@@ -15,7 +15,8 @@ Computational checks and generated data for Erdos Problem 82.
   `sum_d s_d(G)^2` used in the current polynomial-bound conditional route.
   It also has deletion and extension profiles, plus `--deletion-tight-scan`
   for finding graphs whose every vertex deletion preserves the chosen power
-  spectrum.
+  spectrum.  The deletion-tight scan caches all `(n-1)`-vertex power values
+  when that cache is small enough, making exact seven-vertex scans practical.
 - `extension_stagnation.py`: fast one-vertex extension stagnation test for
   the full regular spectrum.  It uses the two-consecutive-degree
   characterization of old subsets `T` to mark all extension columns that

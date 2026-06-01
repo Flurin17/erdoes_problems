@@ -16508,11 +16508,12 @@ removed, together with their complements: there are `10*9=90` labelled copies
 of `K_{3,3}-e`, and a direct permutation check shows that this family and its
 complements coincide with the deletion-tight census.
 
-The first `100000` labelled graphs on seven vertices already contain `168`
-deletion-tight examples with the same minimum `Q=29`.  Thus deletion-tightness
-alone is not a growth mechanism.  The useful observation is only qualitative:
-all currently seen deletion-tight examples have square spectrum far above the
-low-density thirteen- and fourteen-vertex obstructions with `Q=57`.
+Exact seven-vertex enumeration, using cached six-vertex deletion values,
+finds `12600` deletion-tight graphs, again with minimum `Q=29`.  Thus
+deletion-tightness alone is not a growth mechanism.  The useful observation
+is only qualitative: all currently seen deletion-tight examples have square
+spectrum far above the low-density thirteen- and fourteen-vertex obstructions
+with `Q=57`.
 
 **Lemma 28J.10e.6a: One-Vertex Spectrum-Increase Columns.**  Let `G` be a
 graph on vertex set `V`, and let `H` be obtained from `G` by adding a new
