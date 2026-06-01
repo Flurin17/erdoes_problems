@@ -10698,8 +10698,41 @@ Thus
 C_reg(1,5)>12.
 ```
 
-By contrast, Lemma 28E.5 gives `C_drop(1,5)=17`.  Closing even this finite gap
-requires using regular induced subgraphs beyond homogeneous sets.
+The dedicated suffix-threshold search
+`EXPERIMENTS/threshold_regular_dfs.py` closes this finite case.  For
+`P=1`, the column-drop condition means exactly that each row's later
+neighborhood is a suffix, so when the ordered graph is built one column at a
+time, the next column is obtained from the previous one by turning on an
+arbitrary subset of rows that were still off, together with an arbitrary
+choice for the immediate predecessor.  The command
+
+```text
+python3 82/EXPERIMENTS/threshold_regular_dfs.py 13 --h 5 --progress 0
+```
+
+exhausts this search tree and reports
+
+```text
+n=13
+h=5
+nodes=186020
+status=unsat
+```
+
+Thus every inversion-free ordered graph on `13` vertices has a regular
+induced subgraph on at least `5` vertices.  Combining this exact upper
+calibration with the `12`-vertex lower example gives
+
+```text
+C_reg(1,5)=13.
+```
+
+By contrast, Lemma 28E.5 gives `C_drop(1,5)=17`.  Thus even in the first
+nontrivial regular column-drop case, regular extraction improves the
+homogeneous column-drop bound.  The improvement is finite and does not yet
+give a theorem-level asymptotic gain over Proposition 28F, but it confirms
+that the regular representative step is genuinely sharper than the
+chain-antichain extraction.
 
 **Definition 28E.8: The Regular Column-Drop Parameter.**  For integers
 `P,h>=1`, let `C_reg(P,h)` be the least integer `m` such that every ordered

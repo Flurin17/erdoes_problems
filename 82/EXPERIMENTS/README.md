@@ -360,6 +360,11 @@ Computational checks and generated data for Erdos Problem 82.
   hard examples at orders where exact all-subset regularity checks are still
   feasible, and `--thresholds` evaluates a fixed threshold sequence while
   printing largest regular and homogeneous witnesses.
+- `threshold_regular_dfs.py`: dedicated exact DFS for the `P=1` regular
+  column-drop problem.  It enumerates only legal suffix-threshold columns and
+  prunes when the newest vertex creates a regular induced subgraph at or above
+  the requested order.  This is faster than the general column-drop DFS for
+  checks such as `C_reg(1,5)`.
 - `column_drop_census.py`: exact small labelled census for the column-drop
   ordered parameter `C_drop(P,h)` introduced after Lemma 28E.3.  It filters
   ordered graphs by maximum column drop and reports homogeneous and regular

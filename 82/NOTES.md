@@ -3196,3 +3196,13 @@ source of growth beyond Ramsey.
   delete-saturated mask and the `C_reg(1,5)>12` mask, color refinement is
   discrete.  This confirms that equitable-cell certificates explain only part
   of the structured examples and miss regular witnesses in rigid examples.
+- 2026-06-01: Added `threshold_regular_dfs.py`, a dedicated exact DFS for the
+  `P=1` regular column-drop problem.  It finds a `12`-vertex inversion-free
+  ordered graph with no regular induced `5`-set in `6342` search nodes, then
+  exhausts all `13`-vertex suffix-threshold graphs in `186020` search nodes
+  with status `unsat`.  Together with the previous fixed-mask lower example,
+  this gives the exact finite calibration `C_reg(1,5)=13`, improving on the
+  homogeneous value `C_drop(1,5)=17`.  This is finite evidence that regular
+  extraction in the representative ordered graph is genuinely stronger than
+  chain-antichain extraction, but it does not yet provide an asymptotic
+  improvement for Proposition 28F.
