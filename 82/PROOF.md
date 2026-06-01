@@ -12023,6 +12023,33 @@ alpha(H)+omega(H)
 
 QED.
 
+**Corollary 28D.5b.6: The High First-Degree Case At `P=2`.**  Let `H` be an
+ordered graph on `n` vertices satisfying the `P=2` full-drop condition, and
+let `omega=omega(H)`.  If the first vertex has degree at least
+
+```text
+2omega-3,
+```
+
+then
+
+```text
+alpha(H)+omega(H) >= ceil((n+3)/2).
+```
+
+Proof.  Let the first degree be `d`.  As in Lemma 28D.5, the first
+neighborhood has complement maximum degree at most `1`, and since every
+clique in that neighborhood extends with the first vertex, the usual matching
+cover bound gives
+
+```text
+d <= 2omega-2.
+```
+
+Thus `d` is either `2omega-2` or `2omega-3`.  In the first case apply
+Lemma 28D.5b.4 with `s=omega-1`; in the second case apply Lemma 28D.5b.5
+with the same value of `s`.  QED.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose

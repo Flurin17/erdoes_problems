@@ -3579,3 +3579,9 @@ source of growth beyond Ramsey.
   `P=2` full-drop condition in one of the two possible orders.  Thus the
   nonneighbor side is triangle-free, giving the same
   `alpha+omega>=ceil((n+3)/2)` conclusion.
+- 2026-06-01: Packaged the maximal even/odd lemmas as a high-first-degree
+  corollary: in a `P=2` full-drop graph with clique number `omega`, if the
+  first vertex has degree at least `2omega-3`, then the conjectured
+  `alpha+omega>=ceil((n+3)/2)` bound holds.  The unresolved `P=2` cases are
+  therefore those where each available first vertex falls at least two below
+  the extremal degree allowed by its clique number.
