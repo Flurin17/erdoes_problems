@@ -27,7 +27,10 @@ reflected packet whose translates by one of the two gates have bounded
 two-sum representation count. Lemma 3.4d.5 and Corollary 3.4d.6 record the
 weaker first-branch consequence: a one-gate retained triple bank still gives
 a root-sized set of endpoints whose translates by the gate have bounded
-two-sum count.
+two-sum count. Lemma 3.4d.7 and Corollary 3.4d.8 tie both branches back to
+the finite-palette gate machinery: the resulting packets satisfy
+\((U+g-U)\cap A\subset D\) and have uniformly sparse anchored shadows
+against every finite test.
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

@@ -54,7 +54,8 @@ behind Lemma 3.4d.1 on small sets: contaminated representation mass
 descends through a deleted gate, and retained repair banks inside an
 order-\(h\) hole satisfy the no-replacement obstruction for every retained
 subblock. It also checks Lemma 3.4d.3's pair-bank split into a one-gate
-low-count star.
+low-count star and Lemma 3.4d.7's finite-palette sparse-shadow consequence
+for low-count packets.
 
 `delayed_gap_sim.py` is a toy finite-window simulation for the delayed-gap
 mechanism: after deleting one element, it estimates the first tail point

@@ -10,6 +10,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
   plus retained subblock replaced by retained summands of the same length.
 * a retained pair bank behind two deleted gates in a four-term hole contains
   a large one-gate low-count star.
+* every one-gate low-count packet is finite-palette independent and has
+  sparse anchored shadows.
 """
 
 from __future__ import annotations
@@ -122,11 +124,33 @@ def check_pair_bank_star(A: tuple[int, ...], D: tuple[int, ...]) -> int:
     return checked
 
 
+def check_sparse_shadow(A: tuple[int, ...], D: tuple[int, ...]) -> int:
+    C = tuple(a for a in A if a not in D)
+    checked = 0
+    for gate in D:
+        U = tuple(u for u in C if not reps(C, 2, gate + u))
+        if not U:
+            continue
+        for u in U:
+            for v in U:
+                x = u + gate - v
+                if x in A:
+                    assert x in D
+        for u0 in U:
+            shadow = [u for u in U if gate + u - u0 in A]
+            assert len(shadow) <= len(D)
+            retained_shadow = [u for u in U if gate + u - u0 in C]
+            assert not retained_shadow
+        checked += 1
+    return checked
+
+
 def main() -> None:
     sets_checked = 0
     decomposition_checked = 0
     obstruction_checked = 0
     pair_star_checked = 0
+    sparse_shadow_checked = 0
     universe = range(1, 10)
     for size in range(4, 8):
         for A_raw in combinations(universe, size):
@@ -138,11 +162,13 @@ def main() -> None:
                     decomposition_checked += check_decomposition(A, D, max_h=5)
                     obstruction_checked += check_hole_obstruction(A, D, max_h=5)
                     pair_star_checked += check_pair_bank_star(A, D)
+                    sparse_shadow_checked += check_sparse_shadow(A, D)
     print("finite hole descent checks passed")
     print(f"sets_checked={sets_checked}")
     print(f"decomposition_checked={decomposition_checked}")
     print(f"obstruction_checked={obstruction_checked}")
     print(f"pair_star_checked={pair_star_checked}")
+    print(f"sparse_shadow_checked={sparse_shadow_checked}")
 
 
 if __name__ == "__main__":

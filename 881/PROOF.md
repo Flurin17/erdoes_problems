@@ -2533,6 +2533,135 @@ linear density inside a reflected two-sum slice; if they come from a
 one-gate triple bank they may be much thinner, but their size still tends to
 infinity with the witness.
 
+### Lemma 3.4d.7: Low-count translate packets are finite-palette independent
+
+Let \(D\subset A\) be finite, put
+\[
+C=A\setminus D,
+\]
+let \(g\in D\), and let
+\[
+U\subset C
+\]
+satisfy
+\[
+g+u\notin2C\qquad(u\in U). \tag{1}
+\]
+Then
+\[
+(U+g-U)\cap A\subseteq D. \tag{2}
+\]
+Consequently, for every \(u_0\in U\) and every finite \(T\subset A\),
+\[
+\left|U\cap(u_0+T-g)\right|\le |D\cap T|\le |D|. \tag{3}
+\]
+In particular,
+\[
+(g+U-u_0)\cap C=\varnothing\qquad(u_0\in U). \tag{4}
+\]
+
+Proof. Suppose \(u,v\in U\) and
+\[
+x=u+g-v\in A.
+\]
+If \(x\in C\), then
+\[
+g+u=x+v\in2C,
+\]
+contrary to (1). Hence \(x\in D\), proving (2).
+
+For (3), if \(u\in U\cap(u_0+T-g)\), then
+\[
+t=g+u-u_0\in T.
+\]
+By (2), applied with \(u\) and \(u_0\), this element \(t\) must lie in
+\(D\). The map \(u\mapsto g+u-u_0\) is injective, so at most
+\(|D\cap T|\) such \(u\)'s exist.
+
+Finally, if \(g+u-u_0\in C\) for some \(u\in U\), then
+\[
+g+u-u_0\in (U+g-U)\cap A
+\]
+but this element is not in \(D\), contradicting (2). This gives (4).
+\(\square\)
+
+### Corollary 3.4d.8: \(k=3\) counterexamples force sparse-shadow packets
+
+Assume that \(A\) is an order-\(3\) basis and that no infinite deletion from
+\(A\) remains an order-\(4\) basis. Let \(E\subset A\) be finite. Then
+there are constants
+\[
+Q_E,\eta_E>0
+\]
+and arbitrarily large witnesses for which one of the following alternatives
+holds.
+
+1. There are \(w\), a finite
+   \[
+   D\subset A\setminus E,\qquad |D|\le Q_E,
+   \]
+   a gate \(g\in D\), and a set
+   \[
+   U\subset A\setminus(D\cup E)
+   \]
+   such that
+   \[
+   |U|\ge \eta_E A(w)^{1/3}. \tag{1}
+   \]
+2. There are \(w\), a finite
+   \[
+   D\subset A\setminus E,\qquad |D|\le Q_E,
+   \]
+   gates \(p,q\in D\), a gate \(g\in\{p,q\}\), and a set
+   \[
+   U\subset (A\setminus(D\cup E))\cap(w-p-q-(A\setminus D))
+   \]
+   such that
+   \[
+   |U|\ge \eta_E A(w). \tag{2}
+   \]
+
+In both alternatives,
+\[
+w\notin4(A\setminus D), \tag{3}
+\]
+and the same \(g,D,U\) satisfy
+\[
+g+u\notin2(A\setminus D)\qquad(u\in U), \tag{4}
+\]
+\[
+(U+g-U)\cap A\subseteq D, \tag{5}
+\]
+and, for every \(u_0\in U\) and finite \(T\subset A\),
+\[
+\left|U\cap(u_0+T-g)\right|\le |D\cap T|\le Q_E. \tag{6}
+\]
+
+Proof. Start from Corollary 3.4d.6. In both alternatives there is a set
+\(U_0\subset A\setminus D\) of the displayed size, up to constants, with
+\[
+g+u\notin2(A\setminus D)\qquad(u\in U_0).
+\]
+Since \(E\) is finite and \(A(w)\to\infty\), along arbitrarily large
+witnesses we may discard \(U_0\cap E\) and still retain at least half the
+displayed lower bound; decrease \(\eta_E\) accordingly. This gives the
+sets \(U\) in (1) or (2), while preserving the reflected-slice containment
+in the second alternative.
+
+Now apply Lemma 3.4d.7 with
+\[
+C=A\setminus D.
+\]
+It gives (5) and (6), and (4) is the input just noted. Equation (3) is
+already part of Corollary 3.4d.6. \(\square\)
+
+Thus the \(k=3\) normal form has entered the same finite-palette gate regime
+as the interval analysis in Lemmas 16.39--16.53. A counterexample must place
+unbounded sparse-shadow packets outside every protected finite core. In the
+two-gate branch those packets are linearly large inside a reflected slice;
+in the one-gate branch they are only root-large, but they still cannot
+contain large anchored copies of any finite retained test.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27469,6 +27598,11 @@ missing from ordinary minimal order-\(h\) bases.
   now has bounded two-sum translate rows outside every finite core, with
   linear size in the two-gate pair branch and root size in the one-gate
   triple branch.
+* Lemma 3.4d.7 and Corollary 3.4d.8 convert those \(k=3\) low-count
+  translate rows into finite-palette independent packets:
+  \((U+g-U)\cap A\subseteq D\), with uniformly sparse anchored shadows
+  against every finite test. This connects the finite-hole normal form back
+  to the interval gate-pressure machinery of Lemmas 16.39--16.53.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
