@@ -2694,3 +2694,11 @@ source of growth beyond Ramsey.
   `7508164912550504206`.  This improves the finite calibration to
   `C_drop(2,4)>12`, indicating that even the first non-inversion-free layer of
   the column-drop problem can exceed the basic quadratic `P=1` threshold.
+- 2026-06-01: Added Lemma 28E.4a, the clique-rank constraint for column-drop
+  graphs.  If `rho(j)` is the largest clique ending at `v_j`, then any edge
+  `v_a v_b` with `a<b` forces `rho(b)>=rho(a)-P+2`; equivalently vertices
+  whose clique ranks drop by at least `P-1` cannot be adjacent.  The census
+  script now prints clique-rank and independent-rank profiles for fixed and
+  DFS-produced examples.  Next action: look for a rank-block argument that
+  combines this forced nonadjacency with the column-drop condition to improve
+  `C_drop(P,h)` beyond the crude sparse-inversion bound.

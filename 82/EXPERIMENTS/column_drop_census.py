@@ -65,6 +65,51 @@ def max_homogeneous(adj: list[int], pc: Precomp) -> tuple[int, str, tuple[int, .
     return 1, "single", (0,)
 
 
+def clique_ranks(adj: list[int], n: int) -> list[int]:
+    ranks = [1] * n
+    for v in range(n):
+        best = 1
+        earlier_neighbors = [u for u in range(v) if (adj[v] >> u) & 1]
+        for size in range(len(earlier_neighbors), 0, -1):
+            found = False
+            for combo in combinations(earlier_neighbors, size):
+                subset = sum(1 << x for x in combo)
+                if all((adj[x] & subset).bit_count() == size - 1 for x in combo):
+                    best = size + 1
+                    found = True
+                    break
+            if found:
+                break
+        ranks[v] = best
+    return ranks
+
+
+def independent_ranks(adj: list[int], n: int) -> list[int]:
+    ranks = [1] * n
+    for v in range(n):
+        best = 1
+        earlier_nonneighbors = [u for u in range(v) if not ((adj[v] >> u) & 1)]
+        for size in range(len(earlier_nonneighbors), 0, -1):
+            found = False
+            for combo in combinations(earlier_nonneighbors, size):
+                subset = sum(1 << x for x in combo)
+                if all((adj[x] & subset).bit_count() == 0 for x in combo):
+                    best = size + 1
+                    found = True
+                    break
+            if found:
+                break
+        ranks[v] = best
+    return ranks
+
+
+def histogram(values: list[int]) -> dict[int, int]:
+    out: dict[int, int] = {}
+    for value in values:
+        out[value] = out.get(value, 0) + 1
+    return dict(sorted(out.items()))
+
+
 def columns_to_adjacency(columns: list[int]) -> list[int]:
     adj = []
     for k, mask in enumerate(columns):
@@ -208,12 +253,18 @@ def fixed(n: int, mask: int) -> None:
     pc = precompute(n)
     adj = adjacency(n, mask, pc)
     homogeneous, kind, vertices = max_homogeneous(adj, pc)
+    clique = clique_ranks(adj, n)
+    independent = independent_ranks(adj, n)
     print(f"n={n}")
     print(f"mask={mask}")
     print(f"max_column_drop={max_column_drop(adj, n)}")
     print(f"max_homogeneous={homogeneous}")
     print(f"homogeneous_kind={kind}")
     print("homogeneous_vertices=" + ",".join(map(str, vertices)))
+    print("clique_ranks=" + ",".join(map(str, clique)))
+    print(f"clique_rank_histogram={histogram(clique)}")
+    print("independent_ranks=" + ",".join(map(str, independent)))
+    print(f"independent_rank_histogram={histogram(independent)}")
 
 
 def search(n: int, p: int, homogeneous_order: int, max_nodes: int, progress: int) -> None:
@@ -229,12 +280,18 @@ def search(n: int, p: int, homogeneous_order: int, max_nodes: int, progress: int
         pc = precompute(n)
         adj = columns_to_adjacency(result)
         homogeneous, kind, vertices = max_homogeneous(adj, pc)
+        clique = clique_ranks(adj, n)
+        independent = independent_ranks(adj, n)
         print("columns=" + ",".join(map(str, result)))
         print(f"mask={columns_to_mask(result, pc)}")
         print(f"max_column_drop={max_column_drop(adj, n)}")
         print(f"max_homogeneous={homogeneous}")
         print(f"homogeneous_kind={kind}")
         print("homogeneous_vertices=" + ",".join(map(str, vertices)))
+        print("clique_ranks=" + ",".join(map(str, clique)))
+        print(f"clique_rank_histogram={histogram(clique)}")
+        print("independent_ranks=" + ",".join(map(str, independent)))
+        print(f"independent_rank_histogram={histogram(independent)}")
 
 
 def main() -> None:

@@ -8948,6 +8948,41 @@ fewer than `P` earlier rows are lost from the earlier-neighborhood.  The
 representative graph in Proposition 28F satisfies exactly this stronger
 pointwise condition, not merely a bound on the total number of inversions.
 
+**Lemma 28E.4a: Clique-Rank Constraint Under Column Drop.**  Let `H` be an
+ordered graph on
+
+```text
+v_1<...<v_m
+```
+
+satisfying the defining column-drop condition with parameter `P`.  For each
+`j`, let `rho(j)` be the largest order of a clique whose maximum vertex in
+the order is `v_j`.  If `a<b` and `v_a v_b` is an edge, then
+
+```text
+rho(b) >= rho(a)-P+2.
+```
+
+Consequently, if `rho(a) >= rho(b)+P-1`, then `v_a v_b` is not an edge.
+
+Proof.  Let `C` be a clique of order `rho(a)` whose maximum vertex is `v_a`.
+Every vertex of `C\{v_a}` has index below `a` and is adjacent to `v_a`.
+Apply the column-drop condition to the pair `a<b`.  Fewer than `P` earlier
+vertices are adjacent to `v_a` and nonadjacent to `v_b`.  Hence at least
+
+```text
+rho(a)-1-(P-1) = rho(a)-P
+```
+
+vertices of `C\{v_a}` are also adjacent to `v_b`.  These vertices, together
+with `v_a` and `v_b`, form a clique whose maximum vertex is `v_b`, because
+`C` was already a clique and `v_a v_b` is an edge.  Therefore
+`rho(b)>=rho(a)-P+2`.
+
+The final assertion is the contrapositive: if `v_a v_b` were an edge, the
+displayed inequality would give `rho(b)>=rho(a)-P+2`, contradicting
+`rho(a)>=rho(b)+P-1`.  QED.
+
 **Lemma 28E.5: Exact Value At One Drop.**  For every `h>=2`,
 
 ```text
