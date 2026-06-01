@@ -9,6 +9,9 @@ Computational checks and generated data for Erdos Problem 82.
 - `full_drop_loss_graph.py`: computes the loss graph of a `P=2` full-drop
   ordered graph, including fixed-mask, explicit-column, lower-family, exact
   enumeration, and no-regular-`h` obstruction modes.
+- `eulerian_regular.py`: directly enumerates or samples graphs with prescribed
+  degree parity by solving the last-vertex edges, then measures the largest
+  regular induced subgraph.
 - `trace_bridge.py`: tests the degree-class bridge from repeated-degree data
   to regular induced subgraphs.
 - `trace_merge_search.py`: searches the one-trace regular merge criterion

@@ -3727,3 +3727,10 @@ source of growth beyond Ramsey.
   filters all labelled graphs rather than generating Eulerian graphs directly.
   This route remains possible, but it needs a real Eulerian structural
   theorem, not just Gallai plus small-order behavior.
+- 2026-06-01: Added `eulerian_regular.py`, which directly generates fixed
+  degree-parity graphs by choosing the graph on the first `n-1` vertices and
+  solving the last-vertex edges.  Exact `n=8` sweeps for both even and odd
+  degree parity check `2,097,152` graphs and give the same histogram
+  `{4:1085700, 5:758520, 6:222516, 7:7448, 8:22968}`.  Thus the Eulerian
+  restriction improves neither the exact worst-case value at `n=8` nor the
+  small sampled behavior enough to suggest a direct shortcut.
