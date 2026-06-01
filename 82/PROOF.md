@@ -7183,6 +7183,53 @@ python3 82/EXPERIMENTS/module_diagnostics.py 12 \
 Thus modular quotient structure explains part of one finite example but not
 the rigid finite obstruction masks.
 
+**Lemma 7.2: Substitution Regularity Criterion.**  Let `G` be obtained by
+substituting graphs `H_i` into the vertices of a quotient graph `Q`:
+
+```text
+V(G)=V_1 union ... union V_m,       G[V_i]=H_i,
+```
+
+and for `i != j` all edges between `V_i` and `V_j` are present exactly when
+`ij in E(Q)`.  Let `J subset {1,...,m}`.  Suppose that for each `i in J`
+there is a regular induced subgraph `S_i subset V_i` of order `s_i>0` and
+degree `r_i`.  Then
+
+```text
+S = union_{i in J} S_i
+```
+
+is regular in `G` if and only if the quantities
+
+```text
+r_i + sum_{j in J, ij in E(Q)} s_j
+```
+
+are the same for all `i in J`.
+
+In particular, if `Q[J]` is `d`-regular and the pieces `S_i` all have the
+same order `s` and the same internal degree `r`, then `S` is regular of
+order `s|J|`.
+
+Proof.  For a vertex `v in S_i`, its degree inside `G[S]` is the sum of its
+internal degree inside `S_i` and the sizes of all selected neighboring
+modules in the quotient:
+
+```text
+deg_{G[S]}(v)=r_i + sum_{j in J, ij in E(Q)} s_j.
+```
+
+This expression is independent of the choice of `v in S_i` because `S_i` is
+regular.  Therefore the union is regular exactly when the displayed value is
+independent of `i`.  If `Q[J]` is `d`-regular and all `s_i=s`, all `r_i=r`,
+then the displayed degree is `r+ds` for every `i`.  QED.
+
+This is the precise substitution analogue of the profile-absorption
+criterion.  It shows why modular decomposition is not solved merely by the
+quotient reduction: one may also need to coordinate regular witnesses inside
+several modules so that their internal degrees and quotient-weighted external
+degrees balance.
+
 ## Lemma 7A: Low Adjacency Rank Gives A Large Regular Class
 
 Let `A_G` be the adjacency matrix of an `n`-vertex graph `G`, viewed over any

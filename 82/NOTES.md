@@ -3354,3 +3354,10 @@ source of growth beyond Ramsey.
   modules, including size-`13` modules, but the delete-saturated `14`-vertex
   mask and the `12`-vertex `C_reg(1,5)>12` mask are prime.  Modular
   decomposition therefore explains only part of the finite structure.
+- 2026-06-01: Added Lemma 7.2, the substitution regularity criterion.  In a
+  graph obtained by substituting module graphs `H_i` into a quotient `Q`, a
+  union of regular pieces `S_i` is regular exactly when
+  `r_i + sum_{j~i} |S_j|` is constant across active quotient vertices.  The
+  equal-size/equal-internal-degree case over a regular quotient immediately
+  gives a regular witness.  This records the exact balancing problem left by
+  modular decomposition.
