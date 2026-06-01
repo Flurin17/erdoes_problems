@@ -22,8 +22,12 @@ For \(k=2\), the current reductions rule out:
 * the enumerated-Schreier counterexample route.
 
 The remaining \(k=2\) obstruction, if it exists, must be a genuinely
-variable-rank collective finite-barrier system that avoids compacting to a
-finite recurrent certificate-free coloring.
+variable-rank active-trace finite-barrier system. Inactive prefix padding
+has been removed by Corollary 3.1c.3; every fixed finite moving-label
+palette compacts to recurrent Sidon colors by Lemma 8.5a.6; and pure
+terminal gating gives finite reflection-recurrence by Corollary 8.5a.5.
+The surviving abstract escape is mobile injective coloring by unboundedly
+many active endpoints, possibly in a first-coordinate Schreier shell.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
