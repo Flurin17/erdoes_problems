@@ -16277,6 +16277,66 @@ shrinks to a full active fixed-rank shell, forbidden by Corollaries
 13.1l.2b--13.1l.2f, or the active trace drops the fixed first point and
 the obstruction has genuinely descended to the tail section.
 
+## Lemma 13.1l.2h: Endless section descent is impossible in a prefix-front
+
+Let \(P\) be infinite and let \(\mathcal F\) be a prefix-front on \(P\).
+For every finite initial segment \(s\) of a member of \(\mathcal F\), with
+no proper initial segment already in \(\mathcal F\), let \(\mathcal F_s\)
+be the section from Lemma 8.5a.2p. Suppose each nonempty section carries an
+obstruction statistic
+\[
+\delta_s:\mathcal F_s\to\mathbb N
+\]
+such that, whenever \(\delta_s\) is unbounded on every tail of the section
+ground set, the first-coordinate shell alternative of Lemma 8.5a.8a is
+impossible for that section.
+
+Then \(\delta_\varnothing\) is not unbounded on every tail of \(P\).
+
+Proof. Suppose \(\delta_\varnothing\) is unbounded on every tail. By Lemma
+8.5a.8a and the assumed impossibility of the first-coordinate shell
+alternative in the root section, there is a first point
+\[
+a_1\in P
+\]
+such that the section over
+\[
+s_1=\{a_1\}
+\]
+has \(\delta_{s_1}\) unbounded on every tail. Since no initial segment of
+\(s_1\) lies in \(\mathcal F\), Lemma 8.5a.2p makes this a prefix-front
+section.
+
+Repeat inside that section. Having chosen
+\[
+s_m=\{a_1<\cdots<a_m\}
+\]
+with no initial segment in \(\mathcal F\) and with \(\delta_{s_m}\)
+unbounded on every tail, the shell alternative is again impossible by
+hypothesis, so Lemma 8.5a.8a gives
+\[
+a_{m+1}>a_m
+\]
+such that \(\delta_{s_{m+1}}\) is unbounded on every tail for
+\[
+s_{m+1}=s_m\cup\{a_{m+1}\}.
+\]
+
+This constructs an infinite increasing set
+\[
+X=\{a_1<a_2<\cdots\}\subset P
+\]
+none of whose finite initial segments lies in \(\mathcal F\). That
+contradicts the defining property of a prefix-front, which assigns a
+finite initial segment of \(X\) to \(\mathcal F\). Therefore the root
+statistic cannot be unbounded on every tail. \(\square\)
+
+Thus, once the arithmetic work rules out the first-coordinate shell
+alternative in every active-trace section, the recursive front obstruction
+collapses. Lemma 13.1l.2g supplies the needed bridge for fixed-rank prefix
+links: nonminimality is either genuine section descent or a smaller full
+active shell, and the latter is already forbidden.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18113,6 +18173,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   thinning the inclusion-minimal active trace has a fixed position pattern;
   if it contains the fixed first point it reblocks to a smaller full active
   prefix shell, and otherwise it is genuine tail-section descent.
+* Lemma 13.1l.2h gives the abstract well-foundedness closure: if every
+  section rules out its first-coordinate shell alternative, endless
+  section descent contradicts the prefix-front property.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

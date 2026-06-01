@@ -2614,6 +2614,12 @@ position pattern of the inclusion-minimal subhole. If the fixed first point
 remains active, sparse reblocking turns the pattern into a smaller full
 active prefix shell, now forbidden; if it does not remain active, the
 obstruction has genuinely descended to the tail section.
+Lemma 13.1l.2h records the abstract well-foundedness step: if every
+prefix-front section with unbounded obstruction rules out its own
+first-coordinate shell, repeated section descent would build an infinite
+set with no front initial segment, impossible. Thus the remaining proof
+obligation is local to each section: verify that its arithmetic obstruction
+does produce the fixed-rank shell covered by 13.1l.2b--g, or else descends.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
