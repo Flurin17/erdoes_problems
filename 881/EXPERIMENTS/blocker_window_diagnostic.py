@@ -10,6 +10,7 @@ palettes contained in one blocker window have a common forbidden band.
 
 from __future__ import annotations
 
+from itertools import combinations
 from dataclasses import dataclass
 
 
@@ -43,6 +44,25 @@ def overlap(a: Interval, b: Interval) -> int:
     lo = max(a.lo, b.lo)
     hi = min(a.hi, b.hi)
     return max(0, hi - lo + 1)
+
+
+def retained_runs(block: Interval, deletion: set[int]) -> list[Interval]:
+    runs: list[Interval] = []
+    start: int | None = None
+    prev: int | None = None
+    for point in range(block.lo, block.hi + 1):
+        if point in deletion:
+            if start is not None and prev is not None:
+                runs.append(Interval(start, prev))
+            start = None
+            prev = None
+        else:
+            if start is None:
+                start = point
+            prev = point
+    if start is not None and prev is not None:
+        runs.append(Interval(start, prev))
+    return runs
 
 
 def check_single_gates(test: Interval, retained: Interval, eta_num: int, eta_den: int) -> int:
@@ -85,6 +105,56 @@ def check_palette(test: Interval, retained: Interval, eta_num: int, eta_den: int
     return checked
 
 
+def robust_core(test: Interval, block: Interval, rank: int, eta_num: int, eta_den: int) -> Interval:
+    n = test.length
+    m = block.length
+    ell_0 = (m - rank + rank) // (rank + 1)
+    m_eta = ((eta_den - eta_num) * n) // eta_den + 1
+    return Interval(
+        2 * (block.hi - ell_0 + 1) - test.hi + m_eta - 1,
+        2 * (block.lo + ell_0 - 1) - test.lo - m_eta + 1,
+    )
+
+
+def check_robust_core(test: Interval, block: Interval, rank: int, eta_num: int, eta_den: int) -> int:
+    core = robust_core(test, block, rank, eta_num, eta_den)
+    if core.lo > core.hi:
+        print(
+            f"robust I=[{test.lo},{test.hi}] K=[{block.lo},{block.hi}] "
+            f"rank={rank} eta={eta_num}/{eta_den} core=empty"
+        )
+        return 0
+    n = test.length
+    m = block.length
+    ell_0 = (m - rank + rank) // (rank + 1)
+    m_eta = ((eta_den - eta_num) * n) // eta_den + 1
+    if m_eta > 2 * ell_0 - 1:
+        return 0
+
+    checked = 0
+    values = list(range(block.lo, block.hi + 1))
+    for size in range(rank + 1):
+        for deletion_tuple in combinations(values, size):
+            deletion = set(deletion_tuple)
+            runs = retained_runs(block, deletion)
+            long_runs = [run for run in runs if run.length >= ell_0]
+            if not long_runs:
+                raise AssertionError((block, rank, deletion_tuple, ell_0, runs))
+            for run in long_runs:
+                window = blocker_window(test, run, eta_num, eta_den)
+                if core.lo < window.lo or core.hi > window.hi:
+                    raise AssertionError((test, block, rank, deletion_tuple, run, core, window))
+                for gate in range(core.lo, core.hi + 1):
+                    if overlap(test, doubled_band(run, gate)) < m_eta:
+                        raise AssertionError((test, block, deletion_tuple, run, gate, core, m_eta))
+                checked += core.length
+    print(
+        f"robust I=[{test.lo},{test.hi}] K=[{block.lo},{block.hi}] "
+        f"rank={rank} eta={eta_num}/{eta_den} core=[{core.lo},{core.hi}] checked={checked}"
+    )
+    return checked
+
+
 def main() -> None:
     cases = [
         (Interval(50, 80), [Interval(1, 20), Interval(95, 120)], 1, 2),
@@ -103,6 +173,13 @@ def main() -> None:
         for retained in blockers:
             total += check_single_gates(test, retained, eta_num, eta_den)
             total += check_palette(test, retained, eta_num, eta_den)
+    robust_cases = [
+        (Interval(50, 80), Interval(1, 24), 1, 3, 4),
+        (Interval(100, 140), Interval(30, 78), 1, 3, 4),
+        (Interval(20, 35), Interval(1, 12), 2, 7, 8),
+    ]
+    for case in robust_cases:
+        total += check_robust_core(*case)
     print("blocker-window diagnostic passed")
     print("total_checked=", total)
 

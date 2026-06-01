@@ -22519,10 +22519,135 @@ Corollary 16.68 removes the clustering assumption at the cost of the
 expected \(1/r\) density loss: a dense bounded palette has one active color
 that must escape all blocker windows at density \(\eta/r\).
 
+### Lemma 16.69: Auxiliary intervals give robust blocker cores
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) satisfy \(|F|\le r\), and
+put
+\[
+C=A\setminus F.
+\]
+Let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length \(n\), and let
+\[
+K=[c,d]\cap\mathbb N\subset A
+\]
+have length \(m=d-c+1\). Put
+\[
+\ell_0=\left\lceil {m-r\over r+1}\right\rceil. \tag{1}
+\]
+Fix \(0<\delta\le1\), and set
+\[
+M_\delta=\lfloor(1-\delta)n\rfloor+1. \tag{2}
+\]
+Assume
+\[
+1\le M_\delta\le2\ell_0-1. \tag{3}
+\]
+Define the robust blocker core of \(K\) against \(I\) at density \(\delta\)
+and rank \(r\) by
+\[
+R_K(\delta,I;r)=
+[\,2(d-\ell_0+1)-b+M_\delta-1,
+  2(c+\ell_0-1)-a-M_\delta+1\,]\cap\mathbb N. \tag{4}
+\]
+If \(f\in F\) and \(U\subset I\cap C\) satisfy
+\[
+f+u\notin2C\qquad(u\in U),\qquad |U|\ge\delta n, \tag{5}
+\]
+then
+\[
+f\notin R_K(\delta,I;r). \tag{6}
+\]
+
+Proof. Apply Lemma 16.52 to the deletion \(F\cap K\) inside the interval
+\(K\). Since \(|F\cap K|\le |F|\le r\), the set \(K\setminus F\) contains
+a retained subinterval
+\[
+J=[\alpha,\beta]\cap\mathbb N\subset C
+\]
+of length \(\ell\ge\ell_0\). Since \(J\subset K\), we have
+\[
+c\le\alpha\le\beta\le d.
+\]
+The blocker window from Corollary 16.67 for this \(J\) and density
+\(\delta\) is
+\[
+W_J(\delta,I)=
+[2\alpha-b+M_\delta-1,\ 2\beta-a-M_\delta+1]\cap\mathbb N. \tag{7}
+\]
+Every length-\(\ell\) subinterval of \(K\) satisfies
+\[
+\alpha\le d-\ell+1\le d-\ell_0+1,\qquad
+\beta\ge c+\ell-1\ge c+\ell_0-1.
+\]
+Therefore
+\[
+2\alpha-b+M_\delta-1
+\le
+2(d-\ell_0+1)-b+M_\delta-1,
+\]
+and
+\[
+2\beta-a-M_\delta+1
+\ge
+2(c+\ell_0-1)-a-M_\delta+1.
+\]
+Thus
+\[
+R_K(\delta,I;r)\subseteq W_J(\delta,I). \tag{8}
+\]
+Condition (3) gives \(M_\delta\le2\ell-1\), so Corollary 16.67 applied to
+the single retained interval \(J\) says that a \(\delta\)-dense
+gate-dependent packet cannot have \(f\in W_J(\delta,I)\). Inclusion (8)
+proves (6). \(\square\)
+
+### Corollary 16.70: Bounded palettes must escape robust blocker cores
+
+Keep the setting of Lemma 16.69. Let \(P\subset F\) be nonempty with
+\[
+|P|\le r,
+\]
+and for each \(f\in P\) let \(U_f\subset I\cap C\) satisfy
+\[
+f+u\notin2C\qquad(u\in U_f). \tag{1}
+\]
+Fix \(0<\eta\le1\), put
+\[
+\delta={\eta\over r},
+\qquad
+M_\delta=\lfloor(1-\delta)n\rfloor+1,
+\]
+and suppose \(M_\delta\le2\ell_0-1\). If
+\[
+\left|\bigcup_{f\in P}U_f\right|\ge\eta n, \tag{2}
+\]
+then some \(f\in P\) satisfies
+\[
+f\notin R_K(\delta,I;r). \tag{3}
+\]
+Consequently, if
+\[
+P\subseteq R_K(\delta,I;r),
+\]
+then (2) is impossible.
+
+Proof. Pigeonhole as in Corollary 16.68: from (2) and \(|P|\le r\), some
+\(f\in P\) has
+\[
+|U_f|\ge\delta n.
+\]
+Lemma 16.69 applied to this \(f\) and \(U_f\) gives (3). \(\square\)
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
 geometry from Lemma 16.65.
+The script `EXPERIMENTS/blocker_window_diagnostic.py` checks the finite
+blocker-window package, including the robust-core formula in Lemma 16.69
+against all deletions up to a prescribed rank in small auxiliary intervals.
 
 The bounded-rank nonsingleton interval obstruction is now forced into a
 long-range regime. Positive-density row packets over an interval cannot be
@@ -23757,6 +23882,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.68 removes clustering by pigeonholing: an \(\eta\)-dense
   packet carried by at most \(r\) active colors has one \(\eta/r\)-dense
   color, which must avoid every blocker window at that smaller density.
+* Lemma 16.69 and Corollary 16.70 make blocker windows independent of the
+  actual deletion pattern inside an auxiliary interval \(K\): deleting at
+  most \(r\) points leaves a retained run, and the intersection of all
+  possible blocker windows from such runs is a robust forbidden gate core.
+  Bounded palettes carrying dense packets must have at least one active
+  color outside this core.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

@@ -87,7 +87,12 @@ packets must avoid their union, while clustered finite palettes cannot lie
 inside any one blocker window without enough spread. Corollary 16.68
 removes clustering at the expected density loss: an \(\eta\)-dense packet
 using at most \(r\) active colors has an \(\eta/r\)-dense color that must
-escape all blocker windows at density \(\eta/r\).
+escape all blocker windows at density \(\eta/r\). Lemma 16.69 and
+Corollary 16.70 remove dependence on the exact finite deletion pattern
+inside an auxiliary interval: a long interval \(K\) has a robust blocker
+core coming from the retained run left after deleting at most \(r\) points,
+and dense bounded-palette packets must place at least one active color
+outside that core.
 
 ## Definitions
 

@@ -761,4 +761,6 @@ the minimum and maximum active colors.
 for a tested interval and several retained intervals it prints the affine
 blocker windows, then checks that every gate in such a window has the
 required deep doubled-band overlap and that clustered palettes contained in
-one window have the common forbidden band promised by Lemma 16.65.
+one window have the common forbidden band promised by Lemma 16.65. It also
+checks the robust-core formula from Lemma 16.69 by enumerating all deletion
+sets up to a chosen rank in an auxiliary interval.
