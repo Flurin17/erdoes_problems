@@ -2118,6 +2118,169 @@ the natural higher-order normal form; promoting it to retained repairs
 requires new control on lower-sumset multiplicities or on the collective
 finite barrier.
 
+### Lemma 3.4d.1: Spike mass descends to a retained finite-bank
+
+Let \(h=k+1\). Let \(D\subset A\) be finite, put
+\[
+C=A\setminus D,
+\]
+and suppose
+\[
+w\notin hC. \tag{1}
+\]
+For \(r\ge0\) write \(r_{r,A}(t)\) for the number of unordered \(r\)-term
+multiset representations of \(t\) from \(A\), with the convention
+\[
+r_{0,A}(t)=1_{t=0},
+\]
+and write
+\[
+\rho_{r,C}(t)
+\]
+for the corresponding count using only elements of \(C\).
+
+Fix a nonempty deleted multiset \(S\) from \(D\), of size \(s<h\), and put
+\[
+r=h-s,\qquad t=w-\sigma(S).
+\]
+Then
+\[
+r_{r,A}(t)
+\le \rho_{r,C}(t)+\sum_{d\in D}r_{r-1,A}(t-d). \tag{2}
+\]
+Consequently, if \(q=|D|\), \(M=r_{r,A}(t)\), and
+\[
+\rho_{r,C}(t)<{M\over2},
+\]
+then some \(d\in D\) satisfies
+\[
+r_{r-1,A}(t-d)\ge {M\over 2q}. \tag{3}
+\]
+
+Moreover, every retained representation counted by \(\rho_{r,C}(t)\),
+\[
+t=c_1+\cdots+c_r,\qquad c_i\in C,
+\]
+has the following no-replacement property: for every submultiset \(U\) of
+\(\{c_1,\ldots,c_r\}\), including \(U=\varnothing\),
+\[
+\sigma(S)+\sigma(U)\notin (s+|U|)C. \tag{4}
+\]
+
+Proof. Order the elements of \(D\). Every \(r\)-term multiset representation
+of \(t\) is either retained, hence counted by \(\rho_{r,C}(t)\), or contains
+at least one element of \(D\). In the latter case choose the least deleted
+element \(d\in D\) that occurs and remove one occurrence of it. The
+remaining multiset is an \((r-1)\)-term representation of \(t-d\) from
+\(A\), and the pair consisting of \(d\) and that remaining multiset
+determines the original multiset. This injects the contaminated
+representations into the disjoint union counted by the right side of (2).
+The pigeonhole consequence (3) is immediate.
+
+Now suppose a retained representation of \(t\) and a submultiset \(U\) of
+its summands violate (4). Replacing the deleted block \(S\) and the retained
+block \(U\) by \(s+|U|\) retained summands, and keeping the remaining
+\[
+r-|U|
+\]
+retained summands of the representation of \(t\), gives an \(h\)-term
+representation of \(w\) from \(C\). This contradicts (1). \(\square\)
+
+### Corollary 3.4d.2: Counterexamples have a retained lower-dimensional bank
+
+Assume that no infinite deletion from the order-\(k\) basis \(A\) remains
+an order-\((k+1)\) basis. Let \(E\subset A\) be finite. Then there are
+constants
+\[
+q_E,\qquad c_E>0,
+\]
+arbitrarily large integers \(w\), finite sets
+\[
+D\subset A\setminus E,\qquad 1\le |D|\le q_E,
+\]
+an integer
+\[
+2\le r\le k,
+\]
+and a deleted multiset \(S\) from \(D\), of size
+\[
+k+1-r,
+\]
+such that
+\[
+w\notin(k+1)(A\setminus D) \tag{1}
+\]
+and
+\[
+\rho_{r,A\setminus D}(w-\sigma(S))\ge c_E A(w). \tag{2}
+\]
+Every representation counted in (2) satisfies the no-replacement condition
+\[
+\sigma(S)+\sigma(U)\notin (k+1-r+|U|)(A\setminus D) \tag{3}
+\]
+for every submultiset \(U\) of its retained summands.
+
+In particular, for \(k=3\) every counterexample has, outside every finite
+protected core and along arbitrarily large witnesses, either a large
+retained three-term bank behind one deleted gate or a large retained
+two-term bank behind two deleted gates.
+
+Proof. Apply Corollary 3.4d. For arbitrarily large \(w\) there are
+\[
+D\subset A\setminus E,\qquad |D|\le q_E,
+\]
+and \(x\in D\) such that
+\[
+w\notin(k+1)(A\setminus D)
+\]
+and
+\[
+r_{k,A}(w-x)\ge \eta_E A(w). \tag{4}
+\]
+Start Lemma 3.4d.1 with the one-element deleted multiset \(S=\{x\}\) and
+\[
+r=k.
+\]
+If the retained count is at least half the current mass, stop. Otherwise
+use (3) of Lemma 3.4d.1 to append one deleted element of \(D\) to \(S\) and
+continue with \(r\) decreased by one. After \(\ell\) descents the surviving
+mass is at least
+\[
+{\eta_E A(w)\over (2q_E)^\ell}. \tag{5}
+\]
+This process cannot reach \(r=0\) for all sufficiently large \(w\), since
+\[
+r_{0,A}(t)\le1
+\]
+whereas the right side of (5) tends to infinity with \(w\). It also cannot
+stop at \(r=1\) for all sufficiently large \(w\), because
+\[
+\rho_{1,A\setminus D}(t)\le1.
+\]
+Therefore, after passing to arbitrarily large \(w\), it stops at some
+\[
+2\le r\le k.
+\]
+At that stopping point,
+\[
+\rho_{r,A\setminus D}(w-\sigma(S))
+\ge {1\over2}{\eta_E A(w)\over(2q_E)^{k}},
+\]
+so (2) holds after setting
+\[
+c_E={\eta_E\over 2(2q_E)^k}.
+\]
+The no-replacement condition (3) is exactly (4) of Lemma 3.4d.1. \(\square\)
+
+Thus the higher-order obstruction is not merely that the large spike from
+Corollary 3.4d might be contaminated by other deleted gates. Contamination
+can be iterated only finitely many times. Eventually a counterexample must
+produce a linearly large retained representation bank, but the bank may sit
+behind several deleted gates and have lower retained dimension. The
+\(k=2\) proof is the special case where the bank must have dimension \(2\)
+behind a single gate; for \(k=3\) the new live branch is a two-gate retained
+pair bank, not an uncontrolled three-term contamination cloud.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -27039,6 +27202,11 @@ missing from ordinary minimal order-\(h\) bases.
   The following paragraph records why the \(k=2\) star-gate pruning does
   not automatically generalize: second deleted gates may carry large
   \((k-1)\)-sum families.
+* Lemma 3.4d.1 and Corollary 3.4d.2 make that contamination finite and
+  iterable: starting from the large shifted spike, a counterexample must
+  eventually produce a retained representation bank of dimension at least
+  two behind a bounded deleted multiset. For \(k=3\), the live alternatives
+  are a one-gate retained three-bank or a two-gate retained pair-bank.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

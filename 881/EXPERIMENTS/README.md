@@ -49,6 +49,12 @@ part.
 counts, maximum degrees, and greedy matching sizes for sample models. It is
 meant to sanity-check the matching criterion in Proposition 3.4.
 
+`finite_hole_descent_check.py` exhaustively checks the finite bookkeeping
+behind Lemma 3.4d.1 on small sets: contaminated representation mass
+descends through a deleted gate, and retained repair banks inside an
+order-\(h\) hole satisfy the no-replacement obstruction for every retained
+subblock.
+
 `delayed_gap_sim.py` is a toy finite-window simulation for the delayed-gap
 mechanism: after deleting one element, it estimates the first tail point
 where order-3 coverage resumes. Large threshold/deleted-element ratios are

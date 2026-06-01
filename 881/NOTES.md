@@ -13,7 +13,18 @@ is whether the \(k=2\) finite-prefix active-trace closure has an analogue
 for \((k+1)\)-term barriers, or whether a robust staged higher-order
 collective barrier can be lifted to an infinite counterexample.
 
-The latest \(k=3\) checkpoint is Corollary 16.137 in `PROOF.md`. After the
+The latest global \(k=3\) geometric checkpoint is Corollary 16.137 in
+`PROOF.md`. A newer finite-hole bookkeeping checkpoint is Lemma 3.4d.1 and
+Corollary 3.4d.2: the shifted spike from Corollary 3.4d cannot remain an
+undefined cloud of contaminated representations. Iterating through the
+bounded deleted set forces, along arbitrarily large witnesses, a retained
+representation bank of dimension \(r\ge2\) behind a deleted multiset. Thus
+for \(k=3\) every counterexample must have either a large retained
+three-term bank behind one deleted gate or a large retained two-term bank
+behind two deleted gates.
+
+The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
+`PROOF.md`. After the
 nonsingleton handoff is packetized with \(\sum_s1/|P_s|<\infty\), a
 product-covering high-density linear-core branch must fall into one of
 eight named residuals: rank growth, critical-density degeneration,
