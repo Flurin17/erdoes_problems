@@ -66,6 +66,9 @@ Corollary 3.4d.19 turns this into a positive criterion: if, after one
 finite core is protected, every sufficiently large finite \(U\subset A\)
 has an anchored translate \(g+U-u_0\) meeting the unprotected part of \(A\)
 in arbitrarily many points, then the desired order-\(4\) deletion exists.
+Warning 3.4d.20 records a finite caution: \(A_0=\{1,2,3,4,7\}\) covers
+\([8,16]\) by three sums but has a four-point packet \(U=\{1,3,4,7\}\)
+whose anchored shadows through \(g=2\) all have size at most \(2\).
 
 The latest \(k=3\) interval-geometry checkpoint is Corollary 16.137 in
 `PROOF.md`. After the

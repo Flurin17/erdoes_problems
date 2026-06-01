@@ -3563,6 +3563,40 @@ remaining problem is now an additive expansion question: does order-\(3\)
 basishood force anchored-shadow expansion after deleting one finite core,
 or can a sparse basis sustain these moving anti-expanding packets forever?
 
+### Warning 3.4d.20: Finite windows do not force anchored-shadow expansion
+
+Corollary 3.4d.19 needs asymptotic input. A finite order-\(3\) covering
+window may still contain a sizeable sparse anchored-shadow packet.
+
+Let
+\[
+A_0=\{1,2,3,4,7\}.
+\]
+Then
+\[
+[8,16]\subset3A_0.
+\]
+Take
+\[
+g=2,\qquad U=\{1,3,4,7\}\subset A_0.
+\]
+For the four anchors \(u_0\in U\), the intersections
+\[
+(g+U-u_0)\cap A_0
+\]
+are respectively
+\[
+\{2,4\},\qquad \{2,3\},\qquad \{1,2\},\qquad \{2\}.
+\]
+Thus every anchored shadow has size at most \(2\), even though \(U\) has
+four points and \(3A_0\) covers a full finite interval of length \(9\).
+
+This does not threaten Corollary 3.4d.19, whose hypothesis is a uniform
+tail expansion property after one finite core. It does show that the
+criterion cannot be proved by looking only at one finite covered window;
+one needs global recurrence, density growth across many windows, or a
+threshold argument.
+
 ## Warning 3.4e: Large spikes do not force fixed recurrence
 
 The shifted-spike condition in Corollary 3.4d is necessary for a
@@ -28587,6 +28621,9 @@ missing from ordinary minimal order-\(h\) bases.
 * Corollary 3.4d.19 gives the corresponding positive criterion: if one
   finite core forces anchored-shadow expansion for all sufficiently large
   finite packets \(U\subset A\), then a good order-\(4\) deletion exists.
+* Warning 3.4d.20 gives a finite-window caution for that criterion:
+  \(\{1,2,3,4,7\}\) covers \([8,16]\) by three sums but has a four-point
+  packet whose anchored shadows through \(2\) all have size at most \(2\).
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent

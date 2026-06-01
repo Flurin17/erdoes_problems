@@ -51,6 +51,11 @@ automatically gives a \((k+1)\)-term marker representation with an extra
 marker from any chosen class, so mandatory-marker residue privacy cannot by
 itself lift to singleton integer privacy.
 
+`anchored_shadow_packet_search.py` searches finite order-3 covering windows
+for large packets whose anchored shadows stay small. The default run
+reproduces Warning 3.4d.20, showing that Corollary 3.4d.19 needs global
+tail expansion rather than one-window coverage.
+
 `rep_hypergraph_stats.py` computes finite representation-hypergraph edge
 counts, maximum degrees, and greedy matching sizes for sample models. It is
 meant to sanity-check the matching criterion in Proposition 3.4.
