@@ -95,6 +95,62 @@ def max_bipartite_matching(graph: dict[int, set[int]]) -> tuple[int, dict[int, i
     return len(row_to_color), row_to_color
 
 
+def verify_range_packet(test: tuple[int, ...]) -> dict[str, object]:
+    """Check the range-separated packet from Warning 8.5a.7c."""
+
+    m = len(test)
+    big_n = 4 * (max(test) + m) + 1
+    w = 10 * big_n
+    colors = tuple(big_n + i for i in range(1, m + 1))
+    mirrors = tuple(9 * big_n - t - i for i, t in enumerate(test, start=1))
+    C = tuple(sorted(test + mirrors))
+    S = tuple(sorted(C + colors))
+    two_C = sums_k(C, 2, 3 * w)
+    three_C = sums_k(C, 3, w)
+    fibers = {
+        colors[i]: (test[i], mirrors[i])
+        for i in range(m)
+    }
+
+    private_rows = []
+    for i, color in enumerate(colors):
+        t = test[i]
+        q = mirrors[i]
+        private_rows.append(
+            (
+                t,
+                color,
+                w - t - color,
+                (t + color) not in two_C,
+            )
+        )
+        private_rows.append(
+            (
+                q,
+                color,
+                w - q - color,
+                (q + color) not in two_C,
+            )
+        )
+
+    fiber_cert_free = True
+    S_set = set(S)
+    for t, q in fibers.values():
+        if 2 * q - t in S_set or 2 * t - q in S_set:
+            fiber_cert_free = False
+
+    return {
+        "test": test,
+        "N": big_n,
+        "w": w,
+        "colors": colors,
+        "mirrors": mirrors,
+        "w_notin_3C": w not in three_C,
+        "private_rows": private_rows,
+        "fiber_cert_free": fiber_cert_free,
+    }
+
+
 def search(max_value: int, max_size: int, min_match: int, limit: int) -> list[dict[str, object]]:
     results: list[dict[str, object]] = []
     universe = tuple(range(1, max_value + 1))
@@ -144,6 +200,12 @@ def main() -> None:
         print("example", idx)
         for key, value in result.items():
             print(f"{key}={value}")
+
+    packet = verify_range_packet((2, 5, 9))
+    print()
+    print("range-separated packet check")
+    for key, value in packet.items():
+        print(f"{key}={value}")
 
 
 if __name__ == "__main__":

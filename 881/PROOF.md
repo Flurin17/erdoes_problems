@@ -6066,6 +6066,37 @@ a promotion principle showing that the colors used in such packets become
 future barrier vertices with their own witnesses; a counterexample attempt
 must pay exactly this promoted-color debt.
 
+The range-separated packet has a stronger feature: the new mirrors
+\(q_i\) do not immediately force a new color palette. The same active color
+\(f_i\) gates both the old row \(t_i\) and its mirror \(q_i\):
+\[
+w-q_i-f_i=t_i\in C. \tag{5}
+\]
+Moreover
+\[
+q_i+f_i=10N-t_i\notin2C, \tag{6}
+\]
+again by the same range separation. Hence each moving color \(f_i\) can
+carry the two-point fiber
+\[
+\{t_i,q_i\}.
+\]
+This fiber is certificate-free relative to \(S\). Indeed, the only
+nontrivial same-fiber certificate candidates are
+\[
+2q_i-t_i
+\]
+and
+\[
+2t_i-q_i,
+\]
+the first lying near \(18N\) and outside \(S\), the second negative for
+large \(N\). Thus the support mirrors of the private matching can be folded
+back into the same moving labels. The promoted-color debt is subtler: it
+concerns the active colors \(f_i\) themselves becoming future deletion
+vertices, not merely the retained mirrors \(q_i\) created to certify the
+current hole.
+
 The same separation occurs in a small covered additive window. Let
 \[
 A_0=\{1,2,3,4,5,8\},\qquad F=\{2,4,8\},\qquad C=A_0\setminus F=\{1,3,5\}.
