@@ -4603,6 +4603,73 @@ full exact `n=9` source-`2` sweep, which checks `229,376` source-modular
 graphs.  Thus the first exact odd-order obstruction is currently confined to
 source residue `0`, where four slots are already known to be impossible.
 
+The five-slot candidate is genuinely five-slot, not merely a padded four-slot
+candidate.
+
+**Computational Example: The Candidate `(0,0,0,1,4)` Can Need All Five
+Slots.**  There is a source-`0 mod 4` graph with an
+`(0,0,0,1,4)`-slot partition and with no partition using only four of those
+five slots.
+
+Proof.  Let `R=(0,0,0,1,4)`.  Its distinct four-element submultisets are
+
+```text
+(0,0,1,4),     (0,0,0,4),     (0,0,0,1).
+```
+
+The `9`-vertex graph with mask
+
+```text
+56480298224
+```
+
+has degree sequence
+
+```text
+4,4,4,4,4,4,4,4,8
+```
+
+and is source-`0 mod 4`.  The exact command
+
+```text
+/tmp/source_slots_fast --n 9 --source-modulus 4 --target-modulus 8 \
+  --source-residue 0 --candidates '0,0,1,4;0,0,0,4;0,0,0,1'
+```
+
+kills `(0,0,1,4)` and `(0,0,0,4)` on this mask, while `(0,0,0,1)` survives
+the full `n=9` sweep.  The `11`-vertex graph with mask
+
+```text
+10809538658185181
+```
+
+has degree sequence
+
+```text
+8,4,8,8,4,8,4,8,8,4,4
+```
+
+and is also source-`0 mod 4`.  The seeded command
+
+```text
+/tmp/source_slots_fast --n 11 --source-modulus 4 --target-modulus 8 \
+  --source-residue 0 --candidates '0,0,0,1' \
+  --random-samples 100000 --seed 1100
+```
+
+kills `(0,0,0,1)` on this mask.
+
+Now take the disjoint union of these two graphs.  Each component has an
+`R`-slot partition because `R` passes the full `n=9` source-`0` sweep and the
+same seeded `n=11` sample containing the second mask.  Lemma 4E aligns the
+two component partitions into the global slots of `R`.
+
+If the disjoint union had an `R`-slot partition using at most four nonempty
+slots, then its used residue signature would be contained in one of the three
+four-element submultisets displayed above.  Restricting that partition to the
+component that kills the corresponding submultiset gives a contradiction.
+Therefore all five slots of `R` are required.  QED.
+
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
 slot multisets by the source-residue clique subset-sum test and then checks

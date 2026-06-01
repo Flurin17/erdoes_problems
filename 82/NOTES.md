@@ -2933,3 +2933,11 @@ source of growth beyond Ramsey.
   with `50,000,000` sampled internal graphs checks `8876` accepted graphs and
   finds no counterexample.  The source-`2` four-slot candidate `(0,0,1,2)`
   also passes the full exact `n=9` source-`2` sweep (`229,376` graphs).
+- 2026-06-01: Extracted an explicit witness showing that the source-`0`
+  five-slot candidate `(0,0,0,1,4)` is genuinely five-slot.  The `n=9` mask
+  `56480298224` kills the four-subslot multisets `(0,0,1,4)` and
+  `(0,0,0,4)`; the `n=11` mask `10809538658185181` kills `(0,0,0,1)`.
+  Both graphs have all degrees `0 mod 4`, and both are covered by the
+  five-slot candidate.  Their disjoint union has an `(0,0,0,1,4)` partition
+  by Lemma 4E but cannot use only four of the five slots, because every
+  four-submultiset is killed on one component.
