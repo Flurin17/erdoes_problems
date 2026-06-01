@@ -6171,6 +6171,46 @@ other vertex of \(F_r\). Lemma 13.1j therefore cannot even start. The
 collective mobile-injective hole is again strictly weaker than a
 Schreier-prefix-link hypergraph.
 
+### Warning 8.5a.7d: Independent mobile packets are selector-avoidable
+
+The parity and range-separated packets cannot be used as independent
+blocks. Suppose an attempted construction produces pairwise disjoint finite
+sets
+\[
+P_1,P_2,\ldots
+\]
+and, in each block, a finite family \(\mathcal H_s\) of local active edges
+such that every
+\[
+H\in\mathcal H_s
+\]
+has size at least \(2\), and all witnesses attached to \(\mathcal H_s\)
+are blocked only when the deletion contains one whole \(H\). Then
+\[
+\mathcal H=\bigcup_s\mathcal H_s
+\]
+is not a weak barrier on \(\bigcup_sP_s\). Choose one point
+\[
+p_s\in P_s
+\]
+from each block and put
+\[
+B=\{p_s:s\ge1\}.
+\]
+The set \(B\) is infinite, but it contains no member of any
+\(\mathcal H_s\), because it meets each block in only one point. Thus it
+contains no member of \(\mathcal H\).
+
+Consequently, an infinite counterexample cannot be obtained by placing
+unrelated mobile-injective packets in disjoint intervals, even if each
+packet has a large collective hole and perfect private-color matching. The
+packet edges must be wired into a genuine cross-block barrier, or else
+some singleton edges must persist. The singleton alternative is already
+excluded in the remaining \(k=2\) case by Corollary 8.3b. This is the
+combinatorial content of the promoted-color debt: active colors from one
+packet must become vertices in later packet edges often enough that every
+infinite deletion contains a whole active edge.
+
 ### Target 8.5a.8: Trace-section dichotomy
 
 The remaining recursive target is the following dichotomy for prefix-fronts
@@ -12717,6 +12757,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   parity interval blocks strengthen this separation: for ranks at least
   four they have collective mobile-injective holes but no possible first
   Schreier pair-link vertex.
+* Warning 8.5a.7d adds the block-selector obstruction: independent
+  mobile-injective packets are not a barrier, since an infinite selector can
+  take one vertex from each packet and contain no whole non-singleton edge.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and
