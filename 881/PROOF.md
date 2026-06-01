@@ -27,7 +27,11 @@ has been removed by Corollary 3.1c.3; every fixed finite moving-label
 palette compacts to recurrent Sidon colors by Lemma 8.5a.6; and pure
 terminal gating gives finite reflection-recurrence by Corollary 8.5a.5.
 The surviving abstract escape is mobile injective coloring by unboundedly
-many active endpoints, possibly in a first-coordinate Schreier shell.
+many active endpoints. Warning 8.5a.7c and the parity-block diagnostics
+show that this escape need not produce the complete prefix-link hypergraph
+of the enumerated-Schreier route; the remaining debt is promotion of those
+moving active colors into future barrier vertices without creating
+recurrent finite palettes or poisoned promoted-pair intervals.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
