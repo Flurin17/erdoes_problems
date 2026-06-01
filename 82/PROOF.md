@@ -12442,42 +12442,77 @@ the earlier vertex loses at most its matching mate, and inside `K`, where
 neighborhoods are nested up to the excluded endpoints.
 
 We prove that `H_t` has no regular induced subgraph of order at least
-`h=t+3`.  Let `S` be a regular induced subgraph.  Write `z` for the number of
-selected top vertices, and write `m,c` for the numbers of selected vertices
-from `M,K`.
+`h=t+3`.  Let `S` be a regular induced subgraph, and write `z` for the number
+of selected top vertices.  Also write `m,c` for the numbers of selected
+vertices from `M,K`, and write `x_0,x_1,y_0,y_1 in {0,1}` for the indicators
+that `p_0,p_1,q_0,q_1`, respectively, are selected.
 
-First suppose `z=0`.  If both `M` and `K` meet `S`, then vertices of `M` have
-degree `c`, while vertices of `K` have degree `c-1+m+epsilon`, where
-`epsilon` records whether `q_1` is selected.  Hence `m+epsilon=1`.  Thus
-`m=1` and `q_1` is not selected.  If `c>=2`, no one of
-`p_0,p_1,q_0` can have degree `c`, so `|S|<=c+1<=t+1`; if `c<=1`, then
-`|S|<=6<t+3` because `t>=4`.  If `S` meets `M` but not `K`, then `S` is
-independent and can contain at most all `t` vertices of `M` plus two of the
-first four vertices, so `|S|<=t+2`.  If `S` meets `K` but not `M`, the same
-degree comparison shows that it contains at most `K` together with `q_1`, or
-is one of the bounded small cases `|S|<=6`; hence `|S|<=t+1` or
-`|S|<t+3`.  If it meets neither `M` nor `K`, then `|S|<=4`.  Therefore
-`|S|<h` when `z=0`.
+First suppose `z=0`.  If `m>0` and `c>0`, then vertices of `M` have degree
+`c`, while vertices of `K` have degree `c-1+m+y_1`; regularity gives
+
+```text
+m+y_1=1.
+```
+
+Thus `m=1` and `y_1=0`.  If `c>=2`, then none of `p_0,p_1,q_0` can be
+selected, since their degrees are at most `1`; hence `|S|=c+1<=t+1`.  If
+`c=1`, then among `p_0,p_1,q_0` only the adjacent pair `p_0,q_0` can have
+degree `1`, so `|S|<=4<t+3`.
+
+If `m>0` and `c=0`, vertices of `M` have degree `0`, so the selected
+first-four vertices must be independent in the two-edge matching
+`p_0q_0,p_1q_1`.  At most two such vertices can be selected, giving
+`|S|<=m+2<=t+2`.
+
+If `m=0` and `c>0`, then vertices of `K` have degree `c-1+y_1`.  When
+`y_1=0`, this degree is `c-1`: for `c>=3`, no first-four vertex can also have
+that degree, while for `c<=2` the total size is at most `6<t+3`.  Hence
+`|S|<=t` or `|S|<t+3`.  When `y_1=1`, the degree of a vertex in `K` is `c`;
+regularity at `q_1`, whose degree is `x_1+c`, forces `x_1=0`.  If `c>=2`, no
+other first-four vertex can have degree `c`, so `|S|=c+1<=t+1`; if `c=1`,
+then at most the pair `p_0,q_0` can be added, giving `|S|<=4<t+3`.
+
+Finally, if `m=c=0`, then `S` lies inside the first four vertices and has size
+at most `4<t+3`.  Therefore `|S|<h` when `z=0`.
 
 If `z=1`, the selected top vertex has degree `|S|-1`, so every other selected
 vertex must be adjacent to every other non-top selected vertex.  The non-top
 graph has clique number `t+1`, for instance `K union {q_1}` or `K` plus one
 vertex of `M`, and no larger clique.  Hence `|S|<=t+2<h`.
 
-It remains to consider `z=2`.  The two top vertices have degree `|S|-2`.
-Thus the selected non-top vertices must induce a graph whose complement is
-`1`-regular, i.e. a perfect matching.  In the complement of the non-top
-graph, the set `M union {p_0,p_1,q_0,q_1}` is complete except for the two
-missing complement-edges `p_0q_0` and `p_1q_1`, while a vertex of `K` is
-adjacent in the complement only to `p_0,p_1,q_0`.  If a selected non-top set
-contains a vertex of `M`, then it contains at most one further vertex from
-`M union {p_0,p_1,q_0,q_1}`, and it cannot also contain a vertex of `K`
-without giving the matching partner degree at least two in the complement.
-So it has size at most `2`.  If it contains no vertex of `M`, then it contains
-at most one vertex of `K`; that one vertex must be matched to exactly one of
-`p_0,p_1,q_0`, and the remaining selected first-four vertices contribute at
-most one complement edge.  Hence the selected non-top set has size at most
-`4`.  Therefore `|S|<=2+4=6<t+3`, since `t>=4`.
+It remains to consider `z=2`.  Let `X` be the selected non-top set.  The two
+top vertices have degree `|S|-2=|X|`, so each vertex of `X` must have degree
+`|X|-2` inside `X`.  Equivalently, the complement of `H_t[X]` is `1`-regular.
+
+In the complement of the non-top graph, each vertex of `M` is adjacent to all
+other vertices of `M` and to all four special vertices, but to no vertex of
+`K`; each vertex of `K` is adjacent only to `p_0,p_1,q_0`; and the first four
+vertices induce the `4`-cycle
+
+```text
+p_0p_1q_0q_1p_0
+```
+
+in the complement.  If `X` contains a vertex of `M`, then the complement
+degree of every selected `M` vertex is `(m-1)+x_0+x_1+y_0+y_1`, so
+
+```text
+m+x_0+x_1+y_0+y_1=2.
+```
+
+If a vertex of `K` were also selected, it would need exactly one selected
+neighbor among `p_0,p_1,q_0` in the complement; that special vertex would then
+be adjacent in the complement to both the selected `M` vertex and the selected
+`K` vertex, contradiction.  Thus `c=0` and `|X|=2`.
+
+If `X` contains no vertex of `M`, then every selected vertex of `K` must have
+exactly one selected complement-neighbor among `p_0,p_1,q_0`.  If `c>=2`,
+that unique special vertex would have complement degree at least `2`; hence
+`c<=1`.  With `c=0`, the first four vertices have no induced `1`-regular
+subgraph larger than an edge.  With `c=1`, the unique selected vertex of `K`
+must be matched in the complement to exactly one of `p_0,p_1,q_0`, and no
+additional first-four complement edge can be selected.  Hence `|X|<=2` in all
+cases.  Therefore `|S|<=4<t+3`, since `t>=4`.
 
 All cases give `|S|<h`.  Thus `H_t` is a `P=2` full-drop ordered graph on
 `2h` vertices with no regular induced subgraph of order at least `h`, proving

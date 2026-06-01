@@ -3660,3 +3660,9 @@ source of growth beyond Ramsey.
   of order `h`; hence `C_full^reg(2,h)>2h` for all `h>=7`.  The script
   verifies the same pattern for `h=5,6,7,8,9`, always with
   `max_full_drop=1` and `max_regular=h-1`.
+- 2026-06-01: Tightened the proof of the regular full-drop lower family.  The
+  regular-subgraph exclusion is now written using explicit degree equations
+  for the selected counts in the matching block, independent block, clique
+  block, and top pair; the `z=2` case is handled in the complement, where the
+  selected non-top set would have to be `1`-regular.  Rechecked the generator
+  for `h=7,8,9`.
