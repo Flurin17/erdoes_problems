@@ -94,6 +94,10 @@ def stagnant_columns(n: int, mask: int) -> tuple[list[int], Counter[tuple[int, i
     return [column for column, value in enumerate(forbidden) if not value], reason_counts
 
 
+def square_value(by_degree: dict[int, int]) -> int:
+    return sum(order * order for order in by_degree.values())
+
+
 def chain_census(n: int, max_graphs: int | None, max_examples: int) -> None:
     pc = cdc.precompute(n)
     pc_plus = cdc.precompute(n + 1)
@@ -102,6 +106,8 @@ def chain_census(n: int, max_graphs: int | None, max_examples: int) -> None:
     graphs_with_stagnation = 0
     stagnant_edges = 0
     two_step_graphs = 0
+    min_two_step_square: int | None = None
+    min_two_step_examples: list[tuple[int, int, int, dict[int, int], int, list[int]]] = []
     examples: list[tuple[int, int, int, list[int]]] = []
 
     for mask in range(total):
@@ -115,6 +121,16 @@ def chain_census(n: int, max_graphs: int | None, max_examples: int) -> None:
             next_columns, _next_reasons = stagnant_columns(n + 1, extended)
             if next_columns:
                 two_step_graphs += 1
+                adj = cdc.adjacency(n, mask, pc)
+                _mass, by_degree = spectrum_mass(adj, pc)
+                square = square_value(by_degree)
+                if min_two_step_square is None or square < min_two_step_square:
+                    min_two_step_square = square
+                    min_two_step_examples = []
+                if square == min_two_step_square and len(min_two_step_examples) < max_examples:
+                    min_two_step_examples.append(
+                        (mask, column, extended, by_degree, square, next_columns[:10])
+                    )
                 if len(examples) < max_examples:
                     examples.append((mask, column, extended, next_columns[:10]))
                 break
@@ -127,10 +143,17 @@ def chain_census(n: int, max_graphs: int | None, max_examples: int) -> None:
     print(f"graphs_with_stagnation={graphs_with_stagnation}")
     print(f"stagnant_extension_edges={stagnant_edges}")
     print(f"two_step_stagnation_graphs={two_step_graphs}")
+    print(f"min_two_step_square={min_two_step_square}")
     for mask, column, extended, next_columns in examples:
         print(
             f"two_step_example mask={mask} column={column} "
             f"extended_mask={extended} next_columns={next_columns}"
+        )
+    for mask, column, extended, by_degree, square, next_columns in min_two_step_examples:
+        print(
+            f"min_square_two_step_example mask={mask} column={column} "
+            f"extended_mask={extended} square={square} by_degree={by_degree} "
+            f"next_columns={next_columns}"
         )
 
 

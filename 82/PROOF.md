@@ -16469,7 +16469,8 @@ The exact five-vertex census reports
 ```text
 graphs_with_stagnation=782,
 stagnant_extension_edges=5412,
-two_step_stagnation_graphs=97.
+two_step_stagnation_graphs=97,
+min_two_step_square=29.
 ```
 
 The command is
@@ -16478,17 +16479,29 @@ The command is
 python3 82/EXPERIMENTS/extension_stagnation.py 5 --chain-census
 ```
 
-A bounded prefix of the six-vertex census also finds many two-step examples:
+The exact six-vertex census reports
 
 ```text
-python3 82/EXPERIMENTS/extension_stagnation.py 6 \
-  --chain-census --max-graphs 2000
+graphs_with_stagnation=24731,
+stagnant_extension_edges=395191,
+two_step_stagnation_graphs=19627,
+min_two_step_square=29.
 ```
 
-reports `982` two-step examples among the first `2000` labelled graphs.
+The command is
+
+```text
+python3 82/EXPERIMENTS/extension_stagnation.py 6 --chain-census
+```
+
 Therefore a square-spectrum induction cannot rely on the blanket shortcut
 "stagnant extensions never iterate."  The finite stopping seen in the
 thirteen-vertex obstruction is special structure, not a universal mechanism.
+However, the least square-spectrum value among these small two-step examples
+is `29`, substantially above the low-density thirteen-vertex obstruction
+`57/169`.  This leaves open a more refined induction principle in which
+long stagnation chains are allowed only after the square spectrum is already
+large.
 
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all

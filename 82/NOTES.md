@@ -4352,10 +4352,14 @@ source of growth beyond Ramsey.
 - 2026-06-01: Added `--chain-census` to `extension_stagnation.py` and refuted
   the shortcut "spectrum-stagnant extensions never chain."  Exact `n=5` has
   `782` graphs with at least one stagnant extension and `97` graphs with a
-  stagnant extension that again has a stagnant extension.  A prefix of `2000`
-  labelled `n=6` graphs already contains `982` two-step examples.  Thus the
-  one-step stopping of the thirteen-vertex obstruction branch is special, not
-  a universal induction mechanism.
+  stagnant extension that again has a stagnant extension.  Exact `n=6` has
+  `24731` graphs with at least one stagnant extension and `19627` two-step
+  examples.  The minimum square spectrum among the `n=5` and `n=6` two-step
+  examples is `Q=29`, so small chained stagnation is currently a high-`Q`
+  phenomenon rather than a low-square obstruction.  Thus the one-step
+  stopping of the thirteen-vertex obstruction branch is special, not a
+  universal induction mechanism, but a refined low-`Q` non-chain principle
+  remains plausible.
 - 2026-06-01: Generalized the square-spectrum polylog threshold to every
   fixed power `Phi_p=sum_d s_d^p`.  A bound
   `Phi_p(G)>=c(log |G|)^{p+1+eta}` would give
