@@ -100,7 +100,10 @@ auxiliary interval whose length is a sufficiently small fixed fraction of
 the tested interval gives a robust blocker core of linear length. Corollary
 16.73 then reincorporates the bounded row-dependent allowance: if all
 active colors of a bounded-rank interval packet lie in a robust core, the
-packet cannot have fixed positive density in the tested interval.
+packet cannot have fixed positive density in the tested interval. Corollary
+16.74 records the actual-window version for low-density cases where the
+rank-only robust core may be empty: retained intervals whose blocker windows
+cover the active palette rule out dense bounded-rank packets.
 
 ## Definitions
 
