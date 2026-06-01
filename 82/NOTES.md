@@ -2211,3 +2211,12 @@ source of growth beyond Ramsey.
   small-separator theorem alone.  Next target: use graphical compensation or
   multiplicity constraints from the repeated-degree host to get cancellation
   beyond what the abstract cone sees.
+- 2026-06-01: Strengthened the support-`3` calibration with Example 18C.
+  The same vector types admit Fibonacci-size multiplicities with total vector
+  supported on a single coordinate of value `-1`; the multiset is still
+  zero-sum-free by the strict separator and it satisfies graphical
+  compensation by a degree sequence with one degree-`2` vertex and the rest
+  degree `1`.  Therefore support size, total imbalance, and graphical
+  compensation alone cannot yield a subexponential bound on the outside
+  trace set `B`; the repeated-degree route must exploit regular subgraphs in
+  `B` or another property not visible in the trace multiset.

@@ -234,10 +234,10 @@ Computational checks and generated data for Erdos Problem 82.
   reports the incidence, cancellation mass, and L1 imbalance from Lemma 15B.
   `--max-weight W` restricts trace-difference supports to size at most `W`.
   Larger runs should use tight caps because subset-sum sets grow quickly.
-- `support3_separator.py`: verifies the support-`3` signed-indicator system
-  from Example 18B, including support sizes, total imbalance, the explicit
-  strict separator, and the Fibonacci lower bounds forced on every integer
-  separator.
+- `support3_separator.py`: verifies the support-`3` signed-indicator systems
+  from Examples 18B and 18C, including support sizes, total imbalance, the
+  explicit strict separator, Fibonacci separator lower bounds, exponential
+  bounded-imbalance multiplicities, and graphical compensation.
 - `separator_gap.py`: verifies the four-vector support-`<=2` example showing
   that deletion-minimality, which forbids only `0/1` zero subfamilies, does
   not imply the strict cone separation used in conditional separator bounds.

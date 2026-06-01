@@ -6468,6 +6468,108 @@ support-`3` layer by a uniform small-separator theorem.  Any successful trace
 argument at support `3` must use additional structure, such as graphical
 compensation or multiplicity/degree information from the ambient graph.
 
+The same support-`3` pattern also has an exponential primal form.  Thus even
+total imbalance and graphical compensation do not by themselves give a
+subexponential trace count.
+
+**Example 18C: Exponential Support-Three Trace Packings.**  For every
+`t>=2`, there is a signed-indicator multiset in dimension `d=2t+2`, with every
+support of size at most `3`, such that:
+
+1. no nonempty submultiset has sum zero;
+2. the total vector has infinity norm `1`;
+3. the total vector admits graphical compensation in the sense of Lemma 16;
+4. the multiset has at least `F_t` vectors.
+
+Proof.  Use the same vector types and coordinates as Example 18B.  Let
+`x_i` be the multiplicity of the singleton `e_{p_i}`, let `y_i` be the
+multiplicity of `-e_{n_i}`, let `a_i` be the multiplicity of
+
+```text
+e_{p_i}+e_{n_{i-1}}+e_{n_{i-2}}       (2<=i<=t),
+```
+
+and let `b_i` be the multiplicity of
+
+```text
+-(e_{n_i}+e_{p_i}+e_{p_{i-1}})        (1<=i<=t).
+```
+
+Define the triple multiplicities backwards as follows:
+
+```text
+a_t=1,       b_t=b_{t-1}=1.
+```
+
+For `i=t-1,t-2,...,2`, first set
+
+```text
+a_i=b_i+b_{i+1},
+```
+
+and then set
+
+```text
+b_{i-1}=a_i+a_{i+1}.
+```
+
+Then set
+
+```text
+x_0=b_1,       x_1=b_1+b_2,       x_i=0 for 2<=i<=t,
+y_0=a_2,       y_i=0 for 1<=i<=t.
+```
+
+A direct coordinate count gives total `0` on every coordinate except
+`n_t`, where the total is `-1`.  Indeed,
+
+```text
+p_0: x_0-b_1=0,
+p_1: x_1-b_1-b_2=0,
+p_i: a_i-b_i-b_{i+1}=0        (2<=i<=t-1),
+p_t: a_t-b_t=0,
+```
+
+and
+
+```text
+n_0: -y_0+a_2=0,
+n_i: a_{i+1}+a_{i+2}-b_i=0    (1<=i<=t-2),
+n_{t-1}: a_t-b_{t-1}=0,
+n_t: -b_t=-1.
+```
+
+All selected vector types are among the types in Example 18B, and the strict
+separator constructed there is positive on each type.  Therefore every
+nonempty submultiset has positive separator dot product and cannot sum to
+zero.
+
+The size is exponential.  The sequence `b_i` satisfies, for `1<=i<=t-2`,
+
+```text
+b_i=a_{i+1}+a_{i+2}
+    =(b_{i+1}+b_{i+2})+a_{i+2}
+    >= b_{i+1}+b_{i+2},
+```
+
+with `b_{t-1}=b_t=1`.  With the convention `F_0=F_1=1`, this implies
+`b_1>=F_t` for every `t>=3`; the case `t=2` has seven vectors and is
+immediate.  The total number of vectors is at least `b_1`.
+
+Finally the total vector admits graphical compensation.  In difference
+coordinates relative to the base vertex, only one coordinate has total `-1`.
+Take the internal degree of the base vertex and all zero-total coordinates to
+be `1`, and take the exceptional coordinate's internal degree to be `2`.
+This degree sequence is graphical: use a length-two path through the
+degree-`2` vertex and pair the remaining degree-`1` vertices by a matching.
+Thus Lemma 16 is satisfied.  QED.
+
+Consequently, the repeated-degree trace route cannot be completed by proving
+a subexponential upper bound for `|B|` from support size, total imbalance, and
+graphical compensation alone.  A successful argument must use regular
+subgraphs inside the outside trace classes, or some other structure beyond
+the trace multiset.
+
 ## Conditional Proposition: Repeated-Degree / Bounded-Spread Bridge
 
 Let `E(r)` be the least integer `N` such that every `N`-vertex graph contains
