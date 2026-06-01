@@ -206,7 +206,7 @@ The tile triangle is not required to be similar to the large triangle unless exp
   profile groups have no mixed representative status, and a first
   `100000`-generated-shell probe touched `10560` profile groups with no
   mixed-status group. The profile quotient now also has an exhaustive replay
-  mode; replaying the first `1000` profile groups checks all `3530`
+  mode; replaying the first `10000` profile groups checks all `36350`
   outside-cover realizations in those groups with no mixed-status group and no
   count mismatch.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
