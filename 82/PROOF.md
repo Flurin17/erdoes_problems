@@ -5883,6 +5883,26 @@ Lemma 14B.1 using the binomial Erdos--Szekeres proxy
 improves from `2^191.61` to `2^183.82`.  This is a real constant-factor
 exponent saving in that range, but it is still exponential in `k`.
 
+**Corollary 14B.2: Maximal Clique Version.**  Let `G` have no regular induced
+subgraph on at least `k` vertices, and let `A` be a maximal clique of size
+`h<k`.  For each nonempty `T subset A`, put
+
+```text
+C_T = {v in V(G)\A : (A\N_G(v)) cap A = T},
+```
+
+so `T` is the set of non-neighbors of `v` inside the clique `A`.  With
+`tau(j)` as in Lemma 14B.1,
+
+```text
+|V(G)| <= h + sum_{j=1}^{h} binom(h,j) ( R(k-1,tau(j)) - 1 ).
+```
+
+Proof.  Apply Lemma 14B.1 to `complement(G)`.  Regular induced subgraphs are
+preserved by complementation, and the maximal clique `A` in `G` is a maximal
+independent set in `complement(G)`.  Traces in the complement are exactly
+non-neighborhoods inside the clique in `G`.  QED.
+
 ## Lemma 15: Total Trace Imbalance In A Repeated-Degree Host
 
 In the setting of Lemma 12, write

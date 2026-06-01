@@ -2425,3 +2425,6 @@ source of growth beyond Ramsey.
   `log2` bound `191.61` to `183.82`, while `(80,60)` improves only from
   `186.42` to `184.44`.  This confirms the sharpening is real but still
   leaves a linear-in-`k` exponent.
+- 2026-06-01: Added Corollary 14B.2, the maximal-clique version of the
+  sharpened trace bound.  It is just Lemma 14B.1 in the complement, with
+  outside vertices grouped by their non-neighborhood inside a maximal clique.
