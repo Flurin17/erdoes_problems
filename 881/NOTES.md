@@ -2266,6 +2266,10 @@ d-(A_s\setminus\{b\})\subset2A_s
 plus singleton privacy \(b+d\notin4(A_s\setminus\{b\})\). This is now the
 clean adjacent-minimality construction target for a possible \(k=3\)
 counterexample.
+The direct diagnostic `singleton_high_excess_stage_search.py` finds only
+the tiny first stage \(\{1,2,3,4\}\to\{1,2,3,4,8\}\) with singleton witness
+\(18\), endpoint \(18\), and coverage through \(20\); the next step fails
+within blocks of size at most three and candidates up to \(150\).
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

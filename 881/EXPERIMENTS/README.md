@@ -634,3 +634,10 @@ bounds it finds depth-four chains such as
 `15,26,36,46` and coverage through `18,28,38,48`. The tempting periodic
 continuation by `47` fails the pair-witness condition, and a bounded
 three-point search through candidate `120` finds no next stage.
+
+`singleton_high_excess_stage_search.py` tests the stricter Lemma 16.9
+singleton target: every new `b` needs `w notin 4(A\\{b})` and
+`w - b - 2 * min(A) >= max(A)`. It finds only the first stage
+`[1,2,3,4] -> +8`, with witness `18`, endpoint `18`, and coverage through
+`20`; the next step fails after checking blocks up to size `3` and
+candidate values up to `150`.

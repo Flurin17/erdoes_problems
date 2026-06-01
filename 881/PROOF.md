@@ -19242,6 +19242,23 @@ ordinary minimal at order \(4\), and hence a counterexample to the broader
 deletion theorem. The remaining obstruction is exactly to supply the moving
 \(2A_s\)-row banks while avoiding one-other-marker plus three-old repairs.
 
+The diagnostic `EXPERIMENTS/singleton_high_excess_stage_search.py` searches
+this target directly. It finds the first tiny stage
+\[
+\{1,2,3,4\}\to\{1,2,3,4,8\},
+\]
+where the singleton witness
+\[
+w_8=18
+\]
+has \(w_8-8-2=8=\max A_s\), the declared endpoint is \(18\), and
+three-fold coverage runs through \(20\). The next step stalls even when
+allowing blocks of size at most \(3\) with candidate values up to \(150\):
+the script checks \(132\) one-point, \(8646\) two-point, and \(374660\)
+three-point candidate increments without finding a continuation. Thus the
+strict singleton-high-excess target is locally nonempty but much tighter
+than the pair-high-excess diagnostics.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
