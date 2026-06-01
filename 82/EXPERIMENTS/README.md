@@ -283,3 +283,10 @@ Computational checks and generated data for Erdos Problem 82.
 - `profile_absorption_search.py`: searches across a prescribed cut for a
   largest regular witness satisfying the split profile equations of Lemma 30,
   reporting the internal-plus-cross degree profiles on each side.
+- `regular_spectrum.py` and `dspec_exact.py`: compute regular-degree spectra
+  for disjoint-union obstructions to the balanced pair parameter.
+- `marked_pair_profile.py`: inspects same-degree side witnesses and their
+  cross-degree profiles in marked pair obstructions.
+- `parity_pair_construction.py`, `parity_pair_symbolic.py`, and
+  `parity_pair_case_audit.py`: generate the parity cross-profile family,
+  verify it by type counts, and audit the case bounds used in Lemma 28N.

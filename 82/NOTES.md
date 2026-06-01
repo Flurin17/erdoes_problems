@@ -2574,3 +2574,8 @@ source of growth beyond Ramsey.
   equality of core degrees gives `X_0=X_1` and the endpoint-edge allowance
   yields total size at most `6`.  Corollary 28O now records the genuine
   infinite lower bound `P_h>h` for every `h>=7`.
+- 2026-06-01: Added `parity_pair_case_audit.py`.  It audits the proof cases
+  in Lemma 28N by symbolic enumeration, separating pure-side, zero-degree,
+  no-core, one-core, and two-core regular solutions.  The check through
+  `h=40` matches the proof bounds; pure-side solutions are the only ones
+  reaching order `h-1` in that range.
