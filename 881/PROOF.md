@@ -1526,6 +1526,14 @@ arbitrarily long gaps in the tail. Thus the remaining problem is genuinely
 sparse; bounded-gap background structure cannot be responsible for a
 negative answer.
 
+Together with Corollary 2.5, this gives a two-sided run constraint on any
+counterexample. It must have arbitrarily long gaps in \(A\), but it also
+cannot contain arbitrarily long intervals of \(A\) arbitrarily far out.
+Equivalently, after some point the consecutive runs of elements of \(A\)
+have bounded length, while the complementary gaps have unbounded length.
+Any negative construction must therefore be sparse not only in density, but
+also in the elementary run-length sense.
+
 ## Lemma 3.2: Protected matching criterion
 
 Let \(A\) be an asymptotic basis of order \(k\). Suppose there is a finite
@@ -26900,6 +26908,8 @@ missing from ordinary minimal order-\(h\) bases.
 * The contrapositive of Proposition 3.1f says every counterexample has no
   tail-syndetic subset; every infinite subset of \(A\) has arbitrarily long
   tail gaps.
+* Combining Proposition 3.1f with Corollary 2.5, any counterexample has
+  bounded runs of \(A\)-points eventually and unbounded complementary gaps.
 * Lemma 3.2 proves the theorem under an arbitrarily-large protected matching
   hypothesis for \((k+1)\)-representations.
 * Corollary 3.3 converts failure of the broad positive theorem into bounded
