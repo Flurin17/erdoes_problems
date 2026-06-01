@@ -8690,6 +8690,29 @@ Thus the local pair problem contains a purely one-component spectral
 matching problem before any cross-edge structure appears.  A proof of
 `P_h=2^{o(h)}` must in particular prove `D_spec(h)=2^{o(h)}`.
 
+**Corollary 28J: A Homogeneous Ramsey Upper Bound For `D_spec`.**  Let
+`k=ceil(h/2)`.  Then
+
+```text
+D_spec(h) <= R(k,h).
+```
+
+Proof.  Let `J_1,J_2` be two graphs on `M>=R(k,h)` vertices.  If either graph
+has an independent set of order `h`, then it has a regular induced subgraph
+on at least `h` vertices and the first alternative in the definition of
+`D_spec(h)` holds.
+
+Otherwise, Ramsey's theorem gives a clique of order at least `k` in each
+`J_i`.  Taking a `k`-clique in each graph gives two regular induced subgraphs
+of the same degree `k-1` and total order `2k>=h`.  Thus the spectrum-matching
+alternative holds.  QED.
+
+This upper bound is only exponential in `h`; it is the spectrum analogue of
+the ordinary Ramsey bound.  To prove `D_spec(h)=2^{o(h)}`, and hence to remove
+this disjoint-union obstruction to the pair route, one must use
+nonhomogeneous regular spectrum entries rather than only cliques and
+independent sets.
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put

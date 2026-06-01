@@ -2525,3 +2525,8 @@ source of growth beyond Ramsey.
   `G(ceil(h/2)) <= D_spec(h) <= G(h)` and `D_spec(h) <= P_h`, so any
   subexponential proof for the pair parameter must also control this
   disjoint-union spectrum-matching subproblem.
+- 2026-06-01: Added Corollary 28J.  Homogeneous Ramsey gives
+  `D_spec(h) <= R(ceil(h/2),h)`: absent an independent `h`-set, both graphs
+  contain `ceil(h/2)`-cliques of the same degree.  This is still exponential,
+  so a subexponential spectrum-matching proof must use nonhomogeneous regular
+  spectrum entries.
