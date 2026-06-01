@@ -8827,10 +8827,10 @@ cross-profile matching theorem.
 Because the construction has only seven vertex types, the stronger checker
 `EXPERIMENTS/parity_pair_symbolic.py` tests it by type counts rather than by
 all subsets.  It verifies the same failures at `h=5,6` and no regular
-`h`-set or balanced plus middle for every `7<=h<=20`:
+`h`-set or balanced plus middle for every `7<=h<=30`:
 
 ```text
-python3 82/EXPERIMENTS/parity_pair_symbolic.py --min-h 5 --max-h 20
+python3 82/EXPERIMENTS/parity_pair_symbolic.py --min-h 5 --max-h 30
 ```
 
 The type-count reduction used by that script is as follows.  Let `z=b_{h-1}`
@@ -8926,7 +8926,7 @@ For `zeta in {0,1}` and `r>=3`, this is larger than `r`, contradicting
 
 Thus the only unproved part of Candidate 28L is the absence of regular
 induced subgraphs on at least `h` vertices.  The symbolic checker verifies
-that absence through `h=20`.
+that absence through `h=30`.
 
 ## Lemma 29: Split Compensation Criterion
 
