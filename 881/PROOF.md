@@ -25587,6 +25587,42 @@ sufficiently sparse relative to packet size: either large packet width or
 linear auxiliary-midpoint displacement must occur with nonsummable active
 mass.
 
+### Corollary 16.122: Active countable residual trichotomy
+
+Keep the setting of Corollary 16.120, and assume
+\[
+T_\lambda>0
+\]
+for every active label. If the assigned high-density linear-core branch
+product-covers every selector tail, then at least one of the following
+three alternatives holds.
+
+1. **Many active labels.**
+   \[
+   \sum_s {|\mathcal B_s|\over |P_s|}=\infty. \tag{1}
+   \]
+2. **Joint width-heavy residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   W_s>T_\lambda/2}}
+   \beta_{\lambda,s}=\infty. \tag{2}
+   \]
+3. **Joint midpoint-displacement residual.**
+   \[
+   \sum_{\lambda}\sum_{\substack{s:\lambda\in\mathcal B_s\\
+   \Delta_{\lambda,i,s}>T_\lambda/2\ {\rm for\ every}\ i}}
+   \beta_{\lambda,s}=\infty. \tag{3}
+   \]
+
+Proof. If (1) holds, we are done. If (1) fails, Corollary 16.121 applies
+and gives (2) or (3). \(\square\)
+
+Thus the active-countable linear-core branch has a completely explicit
+packetwise residual: either the finite certificates use too many labels
+relative to packet size, or the active mass is carried by width-heavy
+packets, or it is carried by profiles whose auxiliary midpoints are
+linearly displaced from the packet centers.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25603,8 +25639,9 @@ at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
 remaining escape must therefore either make the packet density vanish, let
 the deletion rank or robust-profile complexity grow with the interval,
-produce nonsummable packet-position error in the linear-core profiles, use
-auxiliary profiles whose midpoint diameter is linear in their tested
+use too many active profiles relative to packet size, produce width-heavy
+or midpoint-displacement packet-position error in the linear-core profiles,
+use auxiliary profiles whose midpoint diameter is linear in their tested
 interval, or maintain nonsummable robust-core escape mass across the packet
 selector tail.
 
@@ -26997,6 +27034,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   profiles contribute zero, and if \(\sum_s|\mathcal B_s|/|P_s|<\infty\)
   then countable-menu survival forces nonsummable active width-heavy or
   midpoint-displacement mass.
+* Corollary 16.122 records the unconditional active-countable trichotomy:
+  many active labels, width-heavy packets, or midpoint-displacement packets.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

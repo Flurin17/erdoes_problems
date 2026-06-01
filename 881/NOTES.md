@@ -213,6 +213,8 @@ or midpoint-displacement packets for one fixed profile.
 Corollaries 16.120--16.121 repeat this for countable menus using only the
 finite active label family \(\mathcal B_s\) in each packet; the small
 artefact is controlled by \(\sum_s|\mathcal B_s|/|P_s|\).
+Corollary 16.122 packages the unconditional trichotomy: many active labels,
+width-heavy packets, or midpoint-displacement packets.
 
 ## Definitions
 
