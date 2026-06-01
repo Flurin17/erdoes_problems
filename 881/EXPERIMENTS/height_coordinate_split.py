@@ -14,11 +14,13 @@ linear-core density margin bounded, the pre-asymptotic constant K is bounded.
 Finally, it checks the finite decompositions behind Corollary 16.131:
 bounded start and length bound the tested interval endpoint, while bounded
 auxiliary count and location bound the auxiliary endpoint sum.
+It also checks the integer equivalence behind Corollary 16.134.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 from random import Random
 
 
@@ -155,16 +157,32 @@ def check_height_decompositions(limit: int = 20) -> int:
     return checked
 
 
+def check_critical_density_equivalence(limit: int = 40) -> int:
+    checked = 0
+    for numerator in range(1, limit):
+        margin = Fraction(numerator, limit)
+        delta = Fraction(1, 2) + margin / 2
+        theta = (limit + numerator - 1) // numerator
+        for height in range(1, limit):
+            left = theta > height
+            right = delta < Fraction(1, 2) + Fraction(1, 2 * height)
+            assert left == right, (delta, theta, height, left, right)
+            checked += 1
+    return checked
+
+
 def main() -> None:
     inclusion_checked = check_inclusion()
     packet_checked = check_weighted_packet_shadow()
     constant_margin_checked = check_constant_margin_split()
     height_decomposition_checked = check_height_decompositions()
+    critical_density_checked = check_critical_density_equivalence()
     print("height coordinate split checks passed")
     print(f"inclusion_checked={inclusion_checked}")
     print(f"packet_shadow_checked={packet_checked}")
     print(f"constant_margin_checked={constant_margin_checked}")
     print(f"height_decomposition_checked={height_decomposition_checked}")
+    print(f"critical_density_checked={critical_density_checked}")
 
 
 if __name__ == "__main__":

@@ -26355,10 +26355,59 @@ eight residual branches one at a time. Once all six geometric coordinates
 and both packet-position costs are summable on a tail, the whole assigned
 linear-core obstruction is selector-avoidable.
 
+### Corollary 16.134: Critical-density degeneration is arbitrarily near \(1/2\)
+
+Keep the notation of Corollary 16.132. The critical-density degeneration
+alternative
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:\Theta_\lambda>M\}|\over |P_s|}
+=\infty\qquad(M\ge1) \tag{1}
+\]
+is equivalent to the following explicit near-critical form: for every
+integer \(H\ge1\),
+\[
+\sum_s {|\{\lambda\in\mathcal B_s:
+        \delta_\lambda<{1\over2}+{1\over2H}\}|\over |P_s|}
+=\infty. \tag{2}
+\]
+Consequently, if there are \(\varepsilon>0\) and a tail on which the active
+linear-core labels all satisfy
+\[
+\delta_\lambda\ge {1\over2}+\varepsilon, \tag{3}
+\]
+then the critical-density degeneration branch is absent on that tail.
+
+Proof. Since
+\[
+\Theta_\lambda=\left\lceil {1\over2\delta_\lambda-1}\right\rceil,
+\]
+for integer \(H\ge1\) one has
+\[
+\Theta_\lambda>H
+\quad\Longleftrightarrow\quad
+{1\over2\delta_\lambda-1}>H
+\quad\Longleftrightarrow\quad
+\delta_\lambda<{1\over2}+{1\over2H}. \tag{4}
+\]
+Thus (1) and (2) are the same family of divergent active-mass statements,
+with \(M=H\). If (3) holds on a tail, choose \(H>1/(2\varepsilon)\). Then
+\[
+{1\over2}+{1\over2H}< {1\over2}+\varepsilon,
+\]
+so the set in (2) is empty on that tail, and the branch cannot hold.
+\(\square\)
+
+Thus the second branch of Corollary 16.132 is not a vague failure of the
+linear-core estimate. It says that the assigned positive-density packets
+must keep returning, with nonsummable active mass, at densities arbitrarily
+close to the critical threshold where the robust cores stop being uniformly
+linear.
+
 The script `EXPERIMENTS/height_coordinate_split.py` checks the finite
 inequality and packet-mass inclusion behind Corollary 16.128, the
-bounded-rank/bounded-margin estimate used in Corollary 16.129, and the
-height-coordinate decompositions in Corollary 16.131.
+bounded-rank/bounded-margin estimate used in Corollary 16.129, the
+height-coordinate decompositions in Corollary 16.131, and the
+near-critical density equivalence in Corollary 16.134.
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -27811,6 +27860,8 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.133 records the exact contrapositive: if the six coordinate
   masses and two packet-position residuals are summable on a tail, the
   assigned linear-core branch is selector-avoidable.
+* Corollary 16.134 rewrites critical-density degeneration as nonsummable
+  active mass at densities below \(1/2+1/(2H)\) for every \(H\).
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

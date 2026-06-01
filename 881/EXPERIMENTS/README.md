@@ -231,7 +231,9 @@ checks the finite bound used in Corollary 16.129: bounded rank and bounded
 linear-core density margin force a bounded pre-asymptotic constant. It also
 checks the elementary decompositions used in Corollary 16.131, where tested
 interval height splits into length/location and auxiliary endpoint-sum
-height splits into count/location.
+height splits into count/location. It also checks the exact integer
+equivalence used in Corollary 16.134 between \(\Theta>H\) and
+\(\delta<1/2+1/(2H)\).
 
 `product_rank3_terminal_cover.py` verifies a finite arithmetic realization
 of that abstract rank-three shape. For
