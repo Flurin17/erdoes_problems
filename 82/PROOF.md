@@ -8465,11 +8465,55 @@ levels by longest-chain length would give fewer than `s` elements.  Therefore
 this `s`-vertex inversion-free induced subgraph contains a clique or
 independent set of order at least `sqrt(s)`.  QED.
 
+**Lemma 28E.1: Sparse Inversions Give Large Homogeneous Sets.**  Let `H` be a
+graph whose `m` vertices are linearly ordered.  Let `I` be the number of
+inversion triples in this order.  If `m>=2s` and
+
+```text
+I < m^3/(8s^2),
+```
+
+then `H` contains a clique or independent set of order greater than
+`sqrt(s)`.
+
+Proof.  Choose a random subset `R` of the ordered vertex set by keeping each
+vertex independently with probability
+
+```text
+p=2s/m.
+```
+
+The assumption `m>=2s` makes `p<=1`.  The expected value of
+
+```text
+|R| - #{inversion triples contained in R}
+```
+
+is
+
+```text
+pm - p^3 I > 2s - (8s^3/m^3)(m^3/(8s^2)) = s.
+```
+
+Thus some choice of `R` has `|R|` minus its number of inversion triples larger
+than `s`.  Delete one vertex from each inversion triple in `R`.  The remaining
+ordered set has more than `s` vertices and no inversion triple.
+
+As in Lemma 28E, on an inversion-free ordered set the relation
+
+```text
+v_i prec v_j       iff       i<j and v_i v_j in E(H)
+```
+
+is a partial order whose chains are cliques and whose antichains are
+independent sets.  The chain-antichain product bound gives a clique or
+independent set of order greater than `sqrt(s)`.  QED.
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 
 ```text
-G(h) <= 180 h^7 P_h^2.
+G(h) <= 360 h^5 P_h^2.
 ```
 
 Consequently, a proof that `P_h=2^{o(h)}` would prove Erdős Problem 82.
@@ -8478,7 +8522,7 @@ Proof.  Let `P=P_h`, and suppose for contradiction that `G` is an `n`-vertex
 graph with no regular induced subgraph on at least `h` vertices, where
 
 ```text
-n > 180 h^7 P^2.
+n > 360 h^5 P^2.
 ```
 
 Partition the vertices by their degrees in `G` into intervals of length `P`:
@@ -8511,11 +8555,11 @@ every bucket has size at most `45hP`.
 Let `b` be the number of nonempty buckets.  If
 
 ```text
-b > 2(P h^6 + 2),
+b > 8P h^4,
 ```
 
 then one parity class of bucket indices contains representatives
-`v_1,...,v_m` from more than `P h^6+2` nonempty buckets.  Ordered by degree,
+`v_1,...,v_m` from more than `4P h^4` nonempty buckets.  Ordered by degree,
 any two representatives from this parity class have degree difference at
 least `P`.  Therefore, for `j<k`, Lemma 28D gives
 
@@ -8531,29 +8575,32 @@ nonedge.
 Set `s_0=h^2`.  Since
 
 ```text
-P binom(m,2) * binom(m-3,s_0-3) / binom(m,s_0)
-  < P h^6 / (2(m-2)) < 1,
+m > 4P h^4 >= 2h^2
 ```
 
-Lemma 28E gives a clique or independent set of order at least `h`, a
+for `h>=3` and `P>=1`, and since
+
+```text
+P binom(m,2) < Pm^2/2 < m^3/(8h^4)=m^3/(8s_0^2),
+```
+
+Lemma 28E.1 gives a clique or independent set of order greater than `h`, a
 forbidden regular induced subgraph.  Hence
 
 ```text
-b <= 2(P h^6+2) <= 4P h^6
+b <= 8P h^4.
 ```
-
-for `h>=3` and `P>=1`.
 
 Combining the bucket count and bucket size bounds,
 
 ```text
-n <= b * 45hP <= 180 h^7 P^2,
+n <= b * 45hP <= 360 h^5 P^2,
 ```
 
 contradicting the assumed value of `n`.  This proves the displayed bound on
 `G(h)`.
 
-If `P_h=2^{o(h)}`, then the polynomial factor `180h^7` is also
+If `P_h=2^{o(h)}`, then the polynomial factor `360h^5` is also
 `2^{o(h)}`, so the displayed inequality gives `G(h)=2^{o(h)}`.  This is the
 inverse form of `F(n)/log n -> infinity`.  QED.
 
