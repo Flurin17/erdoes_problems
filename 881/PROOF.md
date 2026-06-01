@@ -21085,6 +21085,51 @@ the gate. Any counterexample using the finite-palette gate branch must keep
 the translates \(f+U-u_0\) outside the retained set for every possible row
 anchor \(u_0\), except at the finitely many active colors in \(F\).
 
+### Lemma 16.41: Finite-palette gates sparsify every anchored shadow
+
+Keep the hypotheses of Lemma 16.40. Then for every anchor \(u_0\in U\),
+\[
+\bigl|(f+U-u_0)\cap A\bigr|\le |F|. \tag{1}
+\]
+Equivalently,
+\[
+\bigl|(f+U-u_0)\setminus A\bigr|\ge |U|-|F|. \tag{2}
+\]
+In particular, if \(U\) has diameter
+\[
+\Delta_U=\max U-\min U,
+\]
+then \(A\) has at most \(|F|\) points in each finite shadow
+\[
+f+U-u_0\subseteq[f-\Delta_U,\ f+\Delta_U]. \tag{3}
+\]
+
+Proof. Lemma 16.39 gives
+\[
+(U+f-U)\cap A\subseteq F.
+\]
+Since
+\[
+f+U-u_0\subset U+f-U,
+\]
+we have
+\[
+(f+U-u_0)\cap A\subseteq F.
+\]
+This proves (1), because the right side has size at most \(|F|\). The map
+\[
+u\mapsto f+u-u_0
+\]
+is injective, so \(|f+U-u_0|=|U|\), giving (2). Finally (3) is the range
+bound for \(u,u_0\in U\). \(\square\)
+
+The script `EXPERIMENTS/finite_palette_gate_pressure.py` verifies this
+shadow-count statement on exhaustive finite toy windows. This lemma shows
+why the finite-palette gate branch is a genuine sparse-shadow problem, not
+a Sidon problem: collisions among sums inside \(U\) are allowed, but every
+anchored difference translate must be almost entirely absent from the
+retained set.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22232,6 +22277,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   translate \(f+U-u_0\) lies in \(A\), then finite-palette independence
   injects \(U\) into \(F\). Large gate packets must therefore avoid retained
   intervals above the gate.
+* Lemma 16.41 strengthens this to a shadow-count statement: every anchored
+  translate \(f+U-u_0\) contains at most \(|F|\) points of \(A\). The
+  surviving gate branch is therefore a sparse-shadow problem, verified in
+  finite toy windows by `EXPERIMENTS/finite_palette_gate_pressure.py`.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

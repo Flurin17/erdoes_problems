@@ -33,6 +33,8 @@ avoid the retained set.
 Lemma 16.40 records the first interval pressure on that branch: if one
 anchored translate \(f+U-u_0\) lies inside \(A\), then \(U\) injects into
 the finite active palette.
+Lemma 16.41 strengthens this to a sparse-shadow statement: every anchored
+translate \(f+U-u_0\) contains at most \(|F|\) points of \(A\).
 
 ## Definitions
 
