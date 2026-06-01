@@ -3091,3 +3091,8 @@ source of growth beyond Ramsey.
   mask `88255234986600583676821506` with `19/19` edge deletions blocked by
   witnesses containing the deleted pair.  This supports the two-defect
   framework beyond the first `12`-vertex threshold-`6` calibration.
+- 2026-06-01: Added witness order and degree histograms to
+  `edge_perturbation_witness.py`.  On the `14`-vertex add-saturated mask the
+  order histogram is `7:17,8:1`; on the delete-saturated mask it is
+  `7:12,8:7`.  Thus the small saturated examples are mostly threshold-tight,
+  with only limited larger defect witnesses.

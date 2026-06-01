@@ -9331,6 +9331,11 @@ python3 82/EXPERIMENTS/edge_perturbation_witness.py 14 \
   --mask 88255234986600583676821506 --threshold 7 --mode delete
 ```
 
+The perturbation script now also reports witness-size histograms.  For these
+two saturated masks the add-saturated witnesses have order histogram
+`7:17,8:1`, and the delete-saturated witnesses have order histogram
+`7:12,8:7`.
+
 ## Lemma 27H: Pair-Role Equations For Two-Defect Witnesses
 
 Let `u,v` be two vertices in a graph `G`, and put `delta=1` if `uv in E(G)`

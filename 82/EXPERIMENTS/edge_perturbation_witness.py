@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from itertools import combinations
 
 import regular_bitset
@@ -38,6 +39,8 @@ def main() -> None:
     checked = 0
     successes = 0
     containing_pair = 0
+    order_counts: Counter[int] = Counter()
+    degree_counts: Counter[int] = Counter()
     examples: list[str] = []
 
     for u, v in combinations(range(args.n), 2):
@@ -62,6 +65,9 @@ def main() -> None:
         if witness is None:
             continue
         successes += 1
+        order_counts[len(witness)] += 1
+        if degree is not None:
+            degree_counts[degree] += 1
         if u in witness and v in witness:
             containing_pair += 1
         if len(examples) < args.limit:
@@ -85,6 +91,16 @@ def main() -> None:
     print(f"pairs_checked={checked}")
     print(f"successful_perturbations={successes}")
     print(f"successes_containing_pair={containing_pair}")
+    print(
+        "witness_order_histogram="
+        + ",".join(f"{order}:{order_counts[order]}" for order in sorted(order_counts))
+    )
+    print(
+        "witness_degree_histogram="
+        + ",".join(
+            f"{degree}:{degree_counts[degree]}" for degree in sorted(degree_counts)
+        )
+    )
     for example in examples:
         print("example=" + example)
 
