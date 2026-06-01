@@ -2319,15 +2319,15 @@ is independent of the endpoint orientations realizing those words.
 
 The word-quotient runner now also supports an exhaustive interval mode that
 classifies every oriented realization in selected word groups rather than a
-bounded representative set. In the first `240000` `N=99` mixed-`6` word groups,
-all `3755316` outside-cover realizations agree with their word-group status, and
+bounded representative set. In the first `270000` `N=99` mixed-`6` word groups,
+all `4050405` outside-cover realizations agree with their word-group status, and
 the exact realization counts match the word-quotient multiplicities. The
 weighted totals in this consecutive block are:
 
 ```text
-corner-label-violation:         1,350,225
-pinch-sector-obstruction:         559,440
-split-corner-label-obstruction: 1,845,651
+corner-label-violation:         1,473,690
+pinch-sector-obstruction:         612,720
+split-corner-label-obstruction: 1,963,995
 ```
 
 The interval artifacts are
@@ -2356,12 +2356,15 @@ The interval artifacts are
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_190000_200000.json`,
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_200000_210000.json`,
 `EXPERIMENTS/results/n99_mixed6_word_exhaustive_210000_220000.json`,
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_220000_230000.json`, and
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_230000_240000.json`.
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_220000_230000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_230000_240000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_240000_250000.json`,
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_250000_260000.json`, and
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_260000_270000.json`.
 The verifier `EXPERIMENTS/gamma_2alpha_word_exhaustive_summary.py` checks these
 as a contiguous prefix with no gaps, no overlaps, no mixed-status words, and no
 word-count mismatches; its current summary is
-`EXPERIMENTS/results/n99_mixed6_word_exhaustive_summary_000001_240000.json`.
+`EXPERIMENTS/results/n99_mixed6_word_exhaustive_summary_000001_270000.json`.
 
 Higher-representative stress tests support the same lemma. With up to `8`
 representatives per word group, the first `2000` word groups and the late
