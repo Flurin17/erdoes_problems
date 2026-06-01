@@ -2505,6 +2505,11 @@ Corollary 8.5a.7z.12h.7 packages this as a trichotomy: for a retained
 filler \(x\), the future target \(w-x\) is either still a full two-sum gap,
 or \(x\) lies in a private-gate fiber, or, if all gates are absorbed, the
 future target is a reflected wall.
+Corollary 8.5a.7z.12h.8 aggregates the trichotomy: for a finite test
+\(X\) of retained fillers under one frozen witness, either many targets
+\(w-X\) remain uncovered by the old full set, or one deleted gate carries a
+private fiber of size at least \((|X|-|G|)/|F|\). In particular, a fully
+covered fixed-witness runway immediately returns to Lemma 8.5a.7z.10.
 The sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 shows the same no-safe-one/no-safe-two obstruction at every listed endpoint.

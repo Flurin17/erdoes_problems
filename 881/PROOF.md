@@ -9410,6 +9410,57 @@ so \(x+f\notin2C\). This proves (2).
 If (3) holds, (2) is impossible, and therefore \(p_x\notin2A\). The final
 sentence is Lemma 8.5a.7z.12h.5. \(\square\)
 
+### Corollary 8.5a.7z.12h.8: Fixed-witness runway dichotomy
+
+Let \(C,F\subset\mathbb N\) be finite and disjoint, put \(A=C\cup F\), and
+suppose
+\[
+w\notin3C.
+\]
+Let \(X\subset C\) be finite and assume
+\[
+w-x\notin F+F\qquad(x\in X). \tag{1}
+\]
+For each \(x\in X\), put \(p_x=w-x\), and define
+\[
+G=\{x\in X:p_x\notin2A\}. \tag{2}
+\]
+Then either \(G\) is large, or one deleted gate carries a large private
+fiber: more precisely, there is \(f\in F\) such that
+\[
+\left|\{x\in X\setminus G:w-x-f\in C,\ x+f\notin2C\}\right|
+\ge \frac{|X|-|G|}{|F|}. \tag{3}
+\]
+In particular, if all future targets are already covered by the full old
+packet,
+\[
+w-X\subseteq2A, \tag{4}
+\]
+then some \(f\in F\) supports a private fiber of size at least
+\[
+|X|/|F|. \tag{5}
+\]
+
+Proof. Apply Corollary 8.5a.7z.12h.7 to each \(x\in X\setminus G\). Since
+\[
+p_x=w-x\in2A
+\]
+and \(p_x\notin F+F\), that corollary supplies at least one gate
+\[
+f_x\in F
+\]
+with
+\[
+w-x-f_x\in C,\qquad x+f_x\notin2C.
+\]
+Pigeonholing the map \(x\mapsto f_x\) over \(F\) gives (3). If (4) holds,
+then \(G=\varnothing\), giving (5). \(\square\)
+
+Thus a long fixed-witness coverage runway has only two ways to avoid the
+reflected-wall outcome: leave many future targets uncovered by the old full
+set, or create a large private-gate fiber. The latter is precisely the
+input to the compressed-spike reduction of Lemma 8.5a.7z.10.
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -16679,6 +16730,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   filler \(x\): either \(w-x\) is still an old full two-sum gap, or \(x\)
   belongs to a private-gate fiber, or, when all gates are absorbed, the
   future target \(w-x\) is a reflected wall.
+* Corollary 8.5a.7z.12h.8 aggregates this over finite filler tests:
+  under one frozen witness and deleted packet, either many future targets
+  \(w-x\) remain old full two-sum gaps, or one gate supports a private
+  fiber of size comparable to the test size.
 * Target 8.5a.7z.12i isolates the new local-to-global gap: one-sided
   shadows may live on nonretained filler candidates \(x\notin A\), so the
   retained-row bounds do not yet force compressed spikes or pair debt.

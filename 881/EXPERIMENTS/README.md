@@ -303,6 +303,9 @@ produce large private-gate fibers, feeding back into the compressed-spike
 diagnostics.
 Corollary 8.5a.7z.12h.7 packages this as a trichotomy for retained fillers:
 future full-gap, private-gate fiber, or reflected wall after gate absorption.
+Corollary 8.5a.7z.12h.8 aggregates this over finite filler tests: a frozen
+witness runway either leaves many future two-sum gaps or produces a large
+private-gate fiber.
 The reusable sweep mode
 `--upper-policy greedy-safe --sweep-upper-stops 2400 2500 2600 2700 2800 2900 3000 3050 3100 3150 3200`
 prints the same no-safe-one/no-safe-two obstruction throughout that
