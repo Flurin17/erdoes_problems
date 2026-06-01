@@ -65,6 +65,99 @@ def max_homogeneous(adj: list[int], pc: Precomp) -> tuple[int, str, tuple[int, .
     return 1, "single", (0,)
 
 
+def columns_to_adjacency(columns: list[int]) -> list[int]:
+    adj = []
+    for k, mask in enumerate(columns):
+        adj.append(mask)
+        for i in range(k):
+            if (mask >> i) & 1:
+                adj[i] |= 1 << k
+    return adj
+
+
+def columns_to_mask(columns: list[int], pc: Precomp) -> int:
+    mask = 0
+    for k, column in enumerate(columns):
+        for i in range(k):
+            if (column >> i) & 1:
+                mask |= 1 << pc.edge_index[(i, k)]
+    return mask
+
+
+def creates_homogeneous(
+    adj: list[int], k: int, column: int, homogeneous_order: int
+) -> bool:
+    for previous in combinations(range(k), homogeneous_order - 1):
+        subset = sum(1 << v for v in previous)
+        new_degree = (column & subset).bit_count()
+        if new_degree == 0 and all((adj[v] & subset).bit_count() == 0 for v in previous):
+            return True
+        if new_degree == homogeneous_order - 1 and all(
+            (adj[v] & subset).bit_count() == homogeneous_order - 2
+            for v in previous
+        ):
+            return True
+    return False
+
+
+def legal_new_column(adj: list[int], k: int, column: int, p: int) -> bool:
+    for j in range(k):
+        earlier_neighbors_of_j = adj[j] & ((1 << j) - 1)
+        if (earlier_neighbors_of_j & ~column).bit_count() >= p:
+            return False
+    return True
+
+
+def search_dfs(
+    n: int,
+    p: int,
+    homogeneous_order: int,
+    adj: list[int],
+    columns: list[int],
+    nodes: list[int],
+    max_nodes: int,
+    progress: int,
+) -> list[int] | None | bool:
+    nodes[0] += 1
+    if progress and nodes[0] % progress == 0:
+        print(f"progress nodes={nodes[0]} depth={len(columns)}", flush=True)
+    if nodes[0] > max_nodes:
+        return None
+    if len(columns) == n:
+        return columns
+
+    k = len(columns)
+    candidates = []
+    for column in range(1 << k):
+        if legal_new_column(adj, k, column, p) and not creates_homogeneous(
+            adj, k, column, homogeneous_order
+        ):
+            candidates.append(column)
+    candidates.sort(key=lambda x: (abs(x.bit_count() - k / 2), x))
+
+    for column in candidates:
+        next_adj = adj[:]
+        next_adj.append(column)
+        for i in range(k):
+            if (column >> i) & 1:
+                next_adj[i] |= 1 << k
+        result = search_dfs(
+            n,
+            p,
+            homogeneous_order,
+            next_adj,
+            columns + [column],
+            nodes,
+            max_nodes,
+            progress,
+        )
+        if isinstance(result, list):
+            return result
+        if result is None:
+            return None
+    return False
+
+
 def exact(n: int, p: int, progress: int) -> None:
     pc = precompute(n)
     total = 1 << len(pc.edges)
@@ -123,17 +216,42 @@ def fixed(n: int, mask: int) -> None:
     print("homogeneous_vertices=" + ",".join(map(str, vertices)))
 
 
+def search(n: int, p: int, homogeneous_order: int, max_nodes: int, progress: int) -> None:
+    nodes = [0]
+    result = search_dfs(n, p, homogeneous_order, [], [], nodes, max_nodes, progress)
+    print(f"n={n}")
+    print(f"P={p}")
+    print(f"homogeneous_order={homogeneous_order}")
+    print(f"nodes={nodes[0]}")
+    print(f"max_nodes={max_nodes}")
+    print(f"result={result}")
+    if isinstance(result, list):
+        pc = precompute(n)
+        adj = columns_to_adjacency(result)
+        homogeneous, kind, vertices = max_homogeneous(adj, pc)
+        print("columns=" + ",".join(map(str, result)))
+        print(f"mask={columns_to_mask(result, pc)}")
+        print(f"max_column_drop={max_column_drop(adj, n)}")
+        print(f"max_homogeneous={homogeneous}")
+        print(f"homogeneous_kind={kind}")
+        print("homogeneous_vertices=" + ",".join(map(str, vertices)))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("n", type=int)
     parser.add_argument("--p", type=int, default=1)
+    parser.add_argument("--search-h", type=int)
     parser.add_argument("--mask", type=int)
+    parser.add_argument("--max-nodes", type=int, default=1_000_000)
     parser.add_argument("--progress", type=int, default=0)
     args = parser.parse_args()
     if args.p < 1:
         raise SystemExit("--p must be positive")
 
-    if args.mask is None:
+    if args.search_h is not None:
+        search(args.n, args.p, args.search_h, args.max_nodes, args.progress)
+    elif args.mask is None:
         exact(args.n, args.p, args.progress)
     else:
         fixed(args.n, args.mask)

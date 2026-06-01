@@ -2687,3 +2687,10 @@ source of growth beyond Ramsey.
   `3`, so `C_drop(2,4)>7`.  This is finite calibration only, but it confirms
   that allowing one dropped earlier row per column pair creates behavior not
   already covered by the exact inversion-free value `C_drop(1,h)`.
+- 2026-06-01: Extended `column_drop_census.py` with a depth-first lower
+  construction mode.  It found a `12`-vertex ordered graph with maximum
+  column drop `1` and maximum homogeneous order `3`, with columns
+  `0,0,1,1,3,6,14,38,78,87,319,415` and labelled mask
+  `7508164912550504206`.  This improves the finite calibration to
+  `C_drop(2,4)>12`, indicating that even the first non-inversion-free layer of
+  the column-drop problem can exceed the basic quadratic `P=1` threshold.

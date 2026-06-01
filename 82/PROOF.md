@@ -9062,6 +9062,37 @@ This is only a small finite calibration, but it confirms that the
 column-drop parameter is not collapsing immediately to the inversion-free
 case once one drop per column pair is allowed.
 
+The same script also has a depth-first construction mode.  The command
+
+```text
+python3 82/EXPERIMENTS/column_drop_census.py 12 --p 2 --search-h 4 --max-nodes 100000 --progress 20000
+```
+
+finds the column sequence
+
+```text
+0,0,1,1,3,6,14,38,78,87,319,415
+```
+
+with labelled mask
+
+```text
+7508164912550504206.
+```
+
+Fixed-mask inspection,
+
+```text
+python3 82/EXPERIMENTS/column_drop_census.py 12 --mask 7508164912550504206
+```
+
+reports maximum column drop `1` and maximum homogeneous order `3`.  Hence the
+search certificate proves the stronger finite lower calibration
+
+```text
+C_drop(2,4) > 12.
+```
+
 **Proposition 28F: Polynomial Global Reduction To The Balanced Pair
 Parameter.**  For every `h>=3`,
 
