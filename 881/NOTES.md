@@ -158,7 +158,11 @@ gaps: their length records the separation of the auxiliary-interval
 midpoints after subtracting half the adjacent robust-core lengths.
 Corollary 16.98 combines this with the linear-core estimate: in fixed-rank
 density \(>1/2\) regimes, internal robust-core gaps require auxiliary
-midpoint separation linear in the tested interval length.
+midpoint separation linear in the tested interval length. Corollary 16.99
+packages the bounded-complexity residual branch: finite robust-profile
+packet exclusion gives either endpoint escape or a definite subpacket
+inside one internal gap whose adjacent auxiliary intervals are linearly
+separated.
 
 ## Definitions
 

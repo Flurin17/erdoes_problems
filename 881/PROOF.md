@@ -24297,6 +24297,86 @@ auxiliary intervals whose midpoints are separated linearly in the tested
 interval length. This is the same long-range cost already seen for
 same-side far gates, now expressed at the robust-profile level.
 
+### Corollary 16.99: Bounded robust exclusions have endpoint or separated-gap form
+
+Fix \(r\ge1\) and \(1/2<\delta\le1\), and let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length \(n\). Let \(P\subset\mathbb N\) be finite and nonempty, and
+let \(\mathcal B\) be a finite family of labels. For each
+\(\lambda\in\mathcal B\), suppose
+\[
+C_\lambda=\bigcup_{i=1}^{m_\lambda}R_{K_{\lambda,i}}(\delta,I;r)
+\]
+is a union of nonempty robust cores, with \(1\le m_\lambda\le M\). If
+\(r\ge2\), assume every auxiliary interval \(K_{\lambda,i}\) has length at
+most
+\[
+{ (2\delta-1)(r+1)\over4(r-1)}\,n. \tag{1}
+\]
+Assume
+\[
+P\cap\bigcap_{\lambda\in\mathcal B}C_\lambda=\varnothing. \tag{2}
+\]
+Then one of the following alternatives holds.
+
+1. **Endpoint escape.** For some \(\lambda\in\mathcal B\),
+   \[
+   \min P\notin C_\lambda\quad\text{or}\quad\max P\notin C_\lambda.
+   \tag{3}
+   \]
+2. **Separated internal gap.** One has \(M\ge2\), and there are
+   \(\lambda\in\mathcal B\), two robust cores
+   \[
+   R_{K_1}(\delta,I;r),\qquad R_{K_2}(\delta,I;r)
+   \]
+   belonging to the profile \(C_\lambda\), with the first to the left of
+   the second, such that the gap \(G\) between them contains at least
+   \[
+   \left\lceil {|P|\over |\mathcal B|(M-1)}\right\rceil \tag{4}
+   \]
+   points of \(P\). Writing \(K_i=[c_i,d_i]\cap\mathbb N\), the auxiliary
+   intervals satisfy
+   \[
+   (c_2+d_2)-(c_1+d_1)\ge |G|+\gamma n-C, \tag{5}
+   \]
+   where \(\gamma=\gamma(r,\delta)>0\) and \(C=C(r)\) are the constants
+   from Corollary 16.98.
+
+Proof. Suppose endpoint escape fails. Then every endpoint of \(P\) lies in
+every \(C_\lambda\). By (2), for each \(p\in P\) there is some
+\(\lambda\in\mathcal B\) with \(p\notin C_\lambda\). Hence the sets
+\[
+P\setminus C_\lambda\qquad(\lambda\in\mathcal B)
+\]
+cover \(P\), so some \(\lambda\) has
+\[
+|P\setminus C_\lambda|\ge {|P|\over|\mathcal B|}. \tag{6}
+\]
+For this \(\lambda\), Corollary 16.96 applies because both endpoints of
+\(P\) lie in \(C_\lambda\). If \(m_\lambda=1\), it would give
+\(P\subset C_\lambda\), contradicting (6). Thus \(m_\lambda\ge2\), and
+some internal component gap of \(C_\lambda\) contains at least
+\[
+\left\lceil {|P\setminus C_\lambda|\over m_\lambda-1}\right\rceil
+\ge
+\left\lceil {|P|\over|\mathcal B|(M-1)}\right\rceil
+\]
+points of \(P\).
+
+Choose one robust core in the left component whose right endpoint is the
+right endpoint of that component, and one robust core in the right component
+whose left endpoint is the left endpoint of the next component. The gap
+between these two robust cores is exactly the component gap \(G\).
+Corollary 16.98 applies to these two cores and gives (5). \(\square\)
+
+Thus a bounded-complexity robust-profile explanation of selector debt has
+a sharp dichotomy. Either some packet endpoint escapes a robust profile, or
+a definite packet subpiece lies in one internal robust-core gap whose
+adjacent auxiliary intervals are linearly separated. This is the current
+bounded-rank, positive-density residual normal form.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25641,6 +25721,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.98 combines this with Corollary 16.72: when robust cores
   have linear length, any internal robust-profile gap forces auxiliary
   midpoint separation linear in the tested interval length.
+* Corollary 16.99 packages the bounded-complexity residual normal form:
+  finite robust-profile exclusion of a packet gives either endpoint escape
+  or a definite packet subpiece inside one internal gap, with adjacent
+  auxiliary intervals linearly separated.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

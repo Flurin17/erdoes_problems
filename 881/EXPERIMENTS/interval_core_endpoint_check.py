@@ -63,11 +63,49 @@ def internal_gap_packet_counts(
     return counts
 
 
+def profile_contains(profile: tuple[tuple[int, int], ...], x: int) -> bool:
+    return in_union(profile, x)
+
+
+def common_profile_misses(
+    packet: tuple[int, ...],
+    profiles: tuple[tuple[tuple[int, int], ...], ...],
+) -> bool:
+    return not any(all(profile_contains(profile, x) for profile in profiles) for x in packet)
+
+
+def profile_endpoint_escape(
+    packet: tuple[int, ...],
+    profiles: tuple[tuple[tuple[int, int], ...], ...],
+) -> bool:
+    lo, hi = packet[0], packet[-1]
+    return any(not profile_contains(profile, lo) or not profile_contains(profile, hi) for profile in profiles)
+
+
+def profile_gap_bound_holds(
+    packet: tuple[int, ...],
+    profiles: tuple[tuple[tuple[int, int], ...], ...],
+) -> bool:
+    if profile_endpoint_escape(packet, profiles):
+        return True
+    label_count = len(profiles)
+    max_complexity = max(len(profile) for profile in profiles)
+    if max_complexity == 1:
+        return not common_profile_misses(packet, profiles)
+    target = ceil(len(packet) / (label_count * (max_complexity - 1)))
+    return any(
+        internal_gap_packet_counts(packet, profile)
+        and max(internal_gap_packet_counts(packet, profile)) >= target
+        for profile in profiles
+    )
+
+
 def main() -> None:
     rng = Random(881)
     checked = 0
     union_checked = 0
     gap_count_checked = 0
+    profile_checked = 0
     for n in range(2, 8):
         all_intervals = intervals(n)
         universe = tuple(range(n))
@@ -121,10 +159,20 @@ def main() -> None:
                         counts,
                     )
                 gap_count_checked += 1
+            profile_count = rng.randint(1, 4)
+            max_complexity = rng.randint(1, 4)
+            profiles = tuple(
+                tuple(rng.choice(all_intervals) for _ in range(rng.randint(1, max_complexity)))
+                for _ in range(profile_count)
+            )
+            if common_profile_misses(packet, profiles):
+                assert profile_gap_bound_holds(packet, profiles), (n, packet, profiles)
+            profile_checked += 1
     print("interval core endpoint check passed")
     print(f"total_checked={checked}")
     print(f"union_gap_checked={union_checked}")
     print(f"gap_count_checked={gap_count_checked}")
+    print(f"profile_checked={profile_checked}")
 
 
 if __name__ == "__main__":
