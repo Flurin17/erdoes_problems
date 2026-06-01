@@ -21560,6 +21560,75 @@ allowance is removed, any surviving finite-palette gate must be far outside
 the interval, so the next obstruction must use long-range gate shadows
 rather than same-block or near-block geometry.
 
+### Lemma 16.50: Retained subintervals exclude gate rows
+
+Let \(A\subseteq\mathbb N\), let \(F\subset A\) be finite, and put
+\[
+C=A\setminus F.
+\]
+Let
+\[
+J=[\alpha,\beta]\cap\mathbb N\subset C
+\]
+be a retained interval, let \(f\in F\), and let \(U\subset C\) satisfy
+\[
+f+u\notin2C\qquad(u\in U). \tag{1}
+\]
+Then
+\[
+U\cap(2J-f)=\varnothing. \tag{2}
+\]
+Equivalently,
+\[
+U\cap[2\alpha-f,\ 2\beta-f]=\varnothing. \tag{3}
+\]
+
+Proof. If \(u\in U\cap(2J-f)\), then
+\[
+f+u\in2J\subseteq2C,
+\]
+contradicting (1). Since \(2J=[2\alpha,2\beta]\), (3) is the interval
+form. \(\square\)
+
+### Corollary 16.51: Far gates must avoid retained two-sum bands
+
+Let \(I=[a,b]\cap\mathbb N\), let \(J=[\alpha,\beta]\cap\mathbb N\), and
+suppose
+\[
+J\subset I\cap(A\setminus F).
+\]
+Let \(f\in F\), and let \(U\subset I\) satisfy
+\[
+f+u\notin2(A\setminus F)\qquad(u\in U). \tag{1}
+\]
+Then
+\[
+|U|\le |I\setminus[2\alpha-f,\ 2\beta-f]|. \tag{2}
+\]
+In particular, if
+\[
+2\alpha-b\le f\le2\beta-a, \tag{3}
+\]
+then \(U=\varnothing\).
+
+Proof. Lemma 16.50 says that \(U\) is disjoint from the band
+\[
+[2\alpha-f,\ 2\beta-f].
+\]
+Since \(U\subset I\), (2) follows. Condition (3) is exactly the assertion
+that the band covers all of \(I=[a,b]\), giving \(U=\varnothing\).
+\(\square\)
+
+Thus the far-gate escape in Corollary 16.49 is not arbitrary. If the tested
+interval contains a long retained subinterval \(J\), then every active gate
+whose translate \(2J-f\) crosses the tested interval kills the gate packet
+there. Surviving large packets must place \(f\) so far away that
+\[
+2J-f
+\]
+misses most of the row interval, or else arrange that deletion holes
+fragment every long retained subinterval of the test block.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -22735,6 +22804,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   has size at most \(\delta+|F|\). Corollary 16.49 combines this with the
   interval-test normal form, forcing any large bounded-rank interval packet
   to use active colors far outside the tested interval.
+* Lemma 16.50 adds the retained two-sum pressure on those far gates:
+  a retained subinterval \(J\) forbids every gate row in \(2J-f\).
+  Corollary 16.51 says a gate whose band \(2J-f\) covers the tested interval
+  supports no gate packet there at all.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

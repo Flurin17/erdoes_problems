@@ -51,6 +51,9 @@ Lemma 16.48 and Corollary 16.49 handle near-interval gates: a gate at
 distance \(\delta\) from the interval supports at most \(\delta+|F|\)
 gate rows, so large bounded-rank interval packets require active colors far
 outside the tested interval.
+Lemma 16.50 and Corollary 16.51 add the two-sum band obstruction for those
+far gates: any retained subinterval \(J\) forbids gate rows in \(2J-f\),
+and if that band covers the tested interval then no gate packet remains.
 
 ## Definitions
 
