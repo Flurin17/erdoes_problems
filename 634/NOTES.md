@@ -185,7 +185,11 @@ The tile triangle is not required to be similar to the large triangle unless exp
   word found no mixed-status word among the first `2000` word groups or among
   word groups `350001..352000`. A targeted full enumeration of one heaviest
   `99` mixed-`6` outside-cover word group (multiplicity `54`) found all `54`
-  realizations have status `corner-label-violation`.
+  realizations have status `corner-label-violation`. A second targeted
+  exhaustive check covers selected word groups from all three representative
+  status classes: `9/9` outside-cover realizations are pinch-sector
+  obstructions, `12/12` are split-corner-label obstructions, and `12/12` are
+  corner-label violations.
 - `n = 66`, `n = 69`, and `n = 70` impossible in this workspace: these
   squarefree composite counts are outside the elementary positive forms, and
   exact equilateral plus source-row filters leave no survivor.

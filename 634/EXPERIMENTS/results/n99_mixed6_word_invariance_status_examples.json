@@ -1,0 +1,54 @@
+{
+  "elapsed_seconds": 3.262942,
+  "generated_until_stop": 226930,
+  "max_total_mixed": 6,
+  "min_total_mixed": 6,
+  "n": 99,
+  "radicand": 1,
+  "targets": [
+    {
+      "covered_target": 9,
+      "expected_outside_cover": 9,
+      "outside_cover_seen": 9,
+      "status_counts": {
+        "pinch-sector-obstruction": 9
+      },
+      "word": {
+        "B": "baaabccbc",
+        "L": "bbaabbccb",
+        "R": "aabbbbbcc"
+      }
+    },
+    {
+      "covered_target": 0,
+      "expected_outside_cover": 12,
+      "outside_cover_seen": 12,
+      "status_counts": {
+        "split-corner-label-obstruction": 12
+      },
+      "word": {
+        "B": "baaabcbcc",
+        "L": "bbaabbccb",
+        "R": "aabbbbbcc"
+      }
+    },
+    {
+      "covered_target": 0,
+      "expected_outside_cover": 12,
+      "outside_cover_seen": 12,
+      "status_counts": {
+        "corner-label-violation": 12
+      },
+      "word": {
+        "B": "baaabcbcc",
+        "L": "baabbbccb",
+        "R": "aabbbbbcc"
+      }
+    }
+  ],
+  "tile": [
+    25,
+    11,
+    30
+  ]
+}

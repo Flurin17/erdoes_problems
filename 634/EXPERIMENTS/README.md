@@ -249,6 +249,10 @@ Current components:
   `350001..352000`. A full targeted enumeration of a heaviest `N=99`
   mixed-`6` outside-cover word group of multiplicity `54` found all `54`
   realizations have status `corner-label-violation`.
+  A second targeted exhaustive check covers selected `N=99` mixed-`6` word
+  groups from all three representative statuses: `9/9` outside-cover
+  realizations are pinch-sector obstructions, `12/12` are
+  split-corner-label obstructions, and `12/12` are corner-label violations.
 - `gamma_2alpha_residual_certificate_probe.py`: bounded exact probe that runs
   the full residual diagnostic and groups shells by compact obstruction
   certificates: forced-corner violation profiles for simple residual cycles and

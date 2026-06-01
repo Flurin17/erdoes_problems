@@ -68,6 +68,7 @@ def census_survivor(
     skip_classified_words: int,
     max_classified_words: int,
     progress_every: int,
+    example_words_per_status: int,
 ) -> dict:
     radicand = exact.field_radicand(survivor)
     if radicand is None:
@@ -240,6 +241,7 @@ def census_survivor(
     status_group_counts: Counter[str] = Counter()
     status_weight_counts: Counter[str] = Counter()
     status_signatures: Counter[tuple[tuple[str, int], ...]] = Counter()
+    example_words: dict[str, list[dict[str, object]]] = defaultdict(list)
     mixed_status_words = 0
     classified_words = 0
     classified_weight = 0
@@ -258,6 +260,14 @@ def census_survivor(
         status_group_counts[representative_status] += 1
         status_weight_counts[representative_status] += multiplicity
         status_signatures[tuple(sorted(statuses.items()))] += 1
+        if example_words_per_status and len(example_words[representative_status]) < example_words_per_status:
+            example_words[representative_status].append(
+                {
+                    "word": signature,
+                    "multiplicity": multiplicity,
+                    "statuses": dict(sorted(statuses.items())),
+                }
+            )
         classified_words += 1
         classified_weight += multiplicity
         if progress_every and classified_words % progress_every == 0:
@@ -289,6 +299,7 @@ def census_survivor(
             json.dumps(dict(signature), sort_keys=True): count
             for signature, count in sorted(status_signatures.items())
         },
+        "example_words": dict(sorted(example_words.items())),
         "elapsed_seconds": round(time.monotonic() - started, 6),
     }
 
@@ -302,6 +313,7 @@ def main() -> None:
     parser.add_argument("--skip-classified-words", type=int, default=0)
     parser.add_argument("--max-classified-words", type=int, default=10000)
     parser.add_argument("--progress-every", type=int, default=0)
+    parser.add_argument("--example-words-per-status", type=int, default=0)
     parser.add_argument("--json-out", type=Path)
     args = parser.parse_args()
     if args.min_total_mixed < 0:
@@ -314,6 +326,8 @@ def main() -> None:
         raise SystemExit("--skip-classified-words must be nonnegative")
     if args.max_classified_words <= 0:
         raise SystemExit("--max-classified-words must be positive")
+    if args.example_words_per_status < 0:
+        raise SystemExit("--example-words-per-status must be nonnegative")
 
     results = []
     for n in args.n:
@@ -328,6 +342,7 @@ def main() -> None:
                 skip_classified_words=args.skip_classified_words,
                 max_classified_words=args.max_classified_words,
                 progress_every=args.progress_every,
+                example_words_per_status=args.example_words_per_status,
             )
             result["n"] = n
             results.append(result)

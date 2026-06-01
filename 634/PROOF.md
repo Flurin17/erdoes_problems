@@ -2327,6 +2327,12 @@ A targeted full enumeration of one heaviest outside-cover word group,
 `L=baabbbccb`, `R=aabbbbccb`, `B=cabababcc`, checks all `54` realizations and
 finds all `54` have status `corner-label-violation`; see
 `EXPERIMENTS/results/n99_mixed6_word_invariance_heavy_corner_word.json`.
+A second targeted exhaustive check covers selected word groups from all three
+representative statuses: all `9` outside-cover realizations of one selected
+pinch word are pinch-sector obstructions, all `12` realizations of one selected
+split word are split-corner-label obstructions, and all `12` realizations of
+one selected corner word are corner-label violations. See
+`EXPERIMENTS/results/n99_mixed6_word_invariance_status_examples.json`.
 
 The aggregate boundary-fan frontier does not provide that obstruction. After
 grouping complete boundary paths by endpoint pair and mixed-transition count
