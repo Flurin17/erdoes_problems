@@ -4572,6 +4572,46 @@ This counterexample is useful calibration.  Source-residue dependence is
 necessary, but not sufficient; arbitrary graph lifts need more flexible slot
 families, additional parts, or a witness-or-regular alternative.
 
+The same failure persists at the next dyadic step, even in source residues
+where the current irregular four-slot candidates survive.  For source
+residue `2 mod 4`, the `8`-vertex mask
+
+```text
+176527396
+```
+
+has degree sequence
+
+```text
+2,2,2,2,2,2,6,2,
+```
+
+and no `(0,2,4,6)` partition modulo `8`, while it does have a
+`(0,0,1,2)` partition modulo `8`.  For source residue `3 mod 4`, the mask
+
+```text
+196192817
+```
+
+has degree sequence
+
+```text
+3,3,3,3,3,3,7,3,
+```
+
+and no `(0,3,4,7)` partition modulo `8`, while it does have a
+`(0,0,1,3)` partition modulo `8`.  The four checks are
+
+```text
+python3 82/EXPERIMENTS/slot_partition.py 8 --mask 176527396 --modulus 8 --slots 0,2,4,6
+python3 82/EXPERIMENTS/slot_partition.py 8 --mask 176527396 --modulus 8 --slots 0,0,1,2
+python3 82/EXPERIMENTS/slot_partition.py 8 --mask 196192817 --modulus 8 --slots 0,3,4,7
+python3 82/EXPERIMENTS/slot_partition.py 8 --mask 196192817 --modulus 8 --slots 0,0,1,3
+```
+
+Thus the clean complete-multipartite pattern should be treated only as a
+model-class theorem, not as a plausible universal fixed-slot lift.
+
 A rooted strengthening was the natural route for this false candidate and is
 still useful for understanding why the attempt breaks.
 

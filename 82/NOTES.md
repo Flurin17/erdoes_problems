@@ -2804,3 +2804,13 @@ source of growth beyond Ramsey.
   partition, but the matching-slot checker immediately certifies it with
   `A={0,1,2,3,4}`, `B={5}`, `C={6,7}`, and `D=empty`.  Thus the exact
   induced-matching correction is not merely cosmetic.
+- 2026-06-01: Tested the clean source-residue dyadic pattern
+  `(0,a,q,a+q)` beyond the complete-multipartite model.  Random source
+  `4`-modular samples on `8` vertices kill `(0,2,4,6)` at mask `176527396`
+  and `(0,3,4,7)` at mask `196192817`.  The former is covered by the
+  irregular source-`2` candidate `(0,0,1,2)` modulo `8`, and the latter by
+  `(0,0,1,3)`.  In `100` sampled source-modular graphs per residue, the clean
+  pattern survived residues `0` and `1` but failed `39` times in residue `2`
+  and `19` times in residue `3`; the current irregular candidates had no
+  failures in the same samples.  This rules out promoting the
+  complete-multipartite clean-slot lemma directly to arbitrary graphs.
