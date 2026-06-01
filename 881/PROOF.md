@@ -198,6 +198,84 @@ This lemma is a possible positive route. The unresolved point is whether one
 can always choose an infinite \(B\) satisfying the two hypotheses under the
 minimality assumption.
 
+## Lemma 2.0a: One-hit direct splitting criterion
+
+Let \(A\) be an order-\(k\) asymptotic basis, let \(B\subseteq A\), and set
+\[
+C=A\setminus B.
+\]
+Suppose:
+
+1. for all sufficiently large \(n\), there is a representation
+   \[
+   n=a_1+\cdots+a_k,\qquad a_i\in A,
+   \]
+   using at most one element of \(B\), and either using one element of
+   \(B\) or having at least one retained summand \(a_i\in2C\);
+2. every deleted element splits into two retained elements:
+   \[
+   B\subset 2C.
+   \]
+
+Then \(C\) is an order-\((k+1)\) asymptotic basis.
+
+Proof. Let \(n\) be large and choose a \(k\)-term representation as in
+(1). If it uses one deleted element \(b\in B\), write
+\[
+b=c_1+c_2,\qquad c_1,c_2\in C.
+\]
+Replacing \(b\) by \(c_1+c_2\) and keeping the other \(k-1\) retained
+summands gives a \((k+1)\)-term representation of \(n\) from \(C\).
+
+If the representation uses no deleted element, then by hypothesis one
+retained summand, say \(a_i\), has a split
+\[
+a_i=c_1+c_2,\qquad c_1,c_2\in C.
+\]
+Replacing \(a_i\) by \(c_1+c_2\) and keeping the other \(k-1\) retained
+summands again gives a \((k+1)\)-term representation of \(n\) from \(C\).
+\(\square\)
+
+### Corollary 2.0b: Split direct-sum components are harmless
+
+Let \(A\) be an order-\(k\) asymptotic basis. Suppose there are disjoint
+sets
+\[
+A_1,\ldots,A_k\subset A
+\]
+such that every sufficiently large \(n\) has a representation
+\[
+n=a_1+\cdots+a_k,\qquad a_i\in A_i.
+\]
+If, for some \(i\), there is an infinite
+\[
+B\subset A_i
+\]
+such that
+\[
+B\subset2(A_i\setminus B),
+\]
+and the displayed direct-sum representations may be chosen so that, for
+all sufficiently large \(n\), either the \(i\)-th summand lies in \(B\) or
+some summand lies in \(2(A\setminus B)\),
+then \(A\setminus B\) is an order-\((k+1)\) asymptotic basis.
+
+Proof. Put \(C=A\setminus B\). The displayed direct-sum representation uses
+at most one element of \(B\), because \(B\) lies in the single disjoint
+component \(A_i\). The additional hypothesis supplies the retained split
+when this representation does not use \(B\). Also
+\[
+B\subset2(A_i\setminus B)\subset2C.
+\]
+Lemma 2.0a applies. \(\square\)
+
+This blocks the most naive digital-partition counterexamples whenever the
+standard representations can also be chosen with a retained splittable
+summand in the rows not using \(B\). A negative digital construction would
+therefore have to arrange infinitely many unsplittable standard rows, prevent
+infinite retained two-splittings inside every component, or make the finite
+barriers collective rather than one-hit.
+
 ## Lemma 2.2: Multi-hit absorption criterion
 
 Let \(A\) be an asymptotic basis of order \(k\), let \(B\subseteq A\), and

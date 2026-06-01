@@ -1304,6 +1304,12 @@ with both summands of odd weight. Hence every \(x+y\in M\) becomes a
 three-sum from the remainder. Thus the clean carry-free model supports the
 positive side rather than a counterexample.
 
+Lemma 2.0a isolates the repair principle behind this example: if the chosen
+order-\(k\) representations hit the deleted set at most once, and every row
+with no deleted hit has some retained summand that also splits in the
+retained set, then direct two-splittings give an order-\((k+1)\) basis.
+Corollary 2.0b is the corresponding direct-sum component criterion.
+
 A faithful additive embedding of this free commutative monoid into
 \((\mathbb N,+)\) is impossible in rank at least two: if independent
 generators \(u,v\) have images \(a,b\), then
@@ -2099,7 +2105,8 @@ each digit class, then after prescribing any residue \(r\in R_i\), the
 remaining target \(\rho-r\) is again covered by one term from each class.
 Thus \(\rho\) has a \((k+1)\)-term residue representation with an extra
 class-\(i\) term. The residue layer therefore cannot force a repair to use
-exactly one term from the deleted element's digit class.
+exactly one term from the deleted element's digit class. Lemma 16.0-pre is
+the precise finite colored-marker version of this obstruction.
 
 The obstruction to turning the formal model into an integer counterexample
 is structural: a faithful additive embedding of a free commutative monoid
