@@ -24414,6 +24414,45 @@ counterexample must either push packet endpoints out of the profile, use
 profiles whose auxiliary intervals split linearly far apart, let the
 profile complexity grow, or leave the fixed-rank positive-density regime.
 
+### Corollary 16.101: Small auxiliary-diameter menus force endpoint escape
+
+Keep the hypotheses and notation of Corollary 16.99. For a label
+\(\lambda\in\mathcal B\), define the auxiliary midpoint diameter of its
+profile by
+\[
+\operatorname{diam}_{\rm mid}(\lambda)=
+\max_{i,j}\left|(c_{\lambda,i}+d_{\lambda,i})
+      -(c_{\lambda,j}+d_{\lambda,j})\right|,
+\]
+where
+\[
+K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N
+\]
+runs over the auxiliary intervals in \(C_\lambda\). If
+\[
+\operatorname{diam}_{\rm mid}(\lambda)<\gamma n-C
+\qquad(\lambda\in\mathcal B), \tag{1}
+\]
+then the endpoint escape alternative of Corollary 16.99 holds.
+
+Consequently, if every endpoint of \(P\) lies in every \(C_\lambda\), then
+any finite robust-profile exclusion of \(P\) must use at least one profile
+whose auxiliary midpoint diameter is at least
+\[
+\gamma n-C. \tag{2}
+\]
+
+Proof. Condition (1) implies the pairwise clustering hypothesis (1) of
+Corollary 16.100 for every profile. That corollary gives endpoint escape.
+The final statement is the contrapositive. \(\square\)
+
+This is the form needed when the available auxiliary blockers come from a
+bounded-diameter finite test region. Such a region cannot realize the
+internal robust-gap branch at positive density; it can only force active
+packet endpoints to escape. A non-endpoint robust-profile obstruction must
+draw auxiliary intervals whose midpoint diameter grows linearly with the
+tested interval.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -25765,6 +25804,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.100 records the clustered-profile corollary: if auxiliary
   intervals inside each bounded-complexity profile have no linear midpoint
   separation, only endpoint escape can remain.
+* Corollary 16.101 restates this as an auxiliary-diameter criterion: a
+  non-endpoint finite robust exclusion needs one profile whose auxiliary
+  midpoint diameter is linear in the tested interval.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

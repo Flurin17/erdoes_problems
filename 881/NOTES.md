@@ -164,7 +164,9 @@ packet exclusion gives either endpoint escape or a definite subpacket
 inside one internal gap whose adjacent auxiliary intervals are linearly
 separated. Corollary 16.100 records the clustered-profile consequence:
 without such linear midpoint separation inside a profile, finite robust
-exclusion reduces to endpoint escape.
+exclusion reduces to endpoint escape. Corollary 16.101 packages this as an
+auxiliary-diameter condition: non-endpoint finite robust exclusion needs a
+profile whose auxiliary midpoint diameter is linear in the tested interval.
 
 ## Definitions
 
