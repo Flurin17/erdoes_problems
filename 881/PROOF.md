@@ -15860,6 +15860,128 @@ certificate-free pieces at the corresponding fractional scale. This is the
 same certificate-free recurrent-cluster obstruction already isolated after
 Lemma 8.6c, now forced inside each fixed first-section prefix shell.
 
+## Corollary 13.1l.2d: Active fixed-section debt stabilizes by Ramsey
+
+Let \(A\) be an order-\(2\) basis with threshold \(N_0\) and minimum
+\[
+m_0=\min A.
+\]
+Fix
+\[
+d\in A,\qquad r\ge1,
+\]
+and an infinite ordered tail
+\[
+Y=\{y_1<y_2<\cdots\}\subset A\setminus\{d\}.
+\]
+Suppose there is a constant \(M\) such that, for every \(L\), all
+sufficiently late
+\[
+H=\{h_1<\cdots<h_r\}\in[Y]^r
+\]
+have a witness \(w>L\) satisfying
+\[
+w\notin3(A\setminus(\{d\}\cup H)), \tag{1}
+\]
+every endpoint of \(\{d\}\cup H\) is active for this witness, and
+\[
+\min_{1\le s\le r}(w-h_s)\le M. \tag{2}
+\]
+Then there are an infinite tail
+\[
+Y'\subset Y
+\]
+and an index
+\[
+1\le j\le r
+\]
+such that the hypotheses of Corollary 13.1l.2c hold on \(Y'\) with
+\[
+D=\max\{M,d\}.
+\]
+In particular, the shell forces fractional reflection-recurrence at scale
+\[
+|U|\ge |T|/j,
+\]
+and any finite test set with no certificate-free subset of that size gives
+an infinite \(B\subset A\) for which \(A\setminus B\) is an order-\(3\)
+basis.
+
+Proof. For each integer \(n\), restrict to a tail of \(Y\) on which every
+\(r\)-set has a witness \(w>n\) satisfying (1)--(2). For each such
+\(H=\{h_1<\cdots<h_r\}\), choose one witness and color \(H\) by the least
+index \(s\) for which
+\[
+w-h_s\le M.
+\]
+Ramsey's theorem gives an infinite subtail on which this color is constant.
+Iterating for \(n=1,2,\ldots\) gives nested infinite tails and colors
+\[
+j_n\in\{1,\ldots,r\}.
+\]
+Choose an infinite sequence
+\[
+n_1<n_2<\cdots
+\]
+on which \(j_{n_t}=j\) is constant, and diagonalize through the
+corresponding nested tails. The resulting infinite set
+\[
+Y'\subset Y
+\]
+has the following property: for every \(t\), all sufficiently late
+\[
+H\in[Y']^r
+\]
+have a witness \(w>n_t\) satisfying (1)--(2) whose least debt position is
+\[
+j.
+\]
+
+We verify Corollary 13.1l.2c. Fix a finite nonempty
+\[
+T\subset A\cap(D,\infty)
+\]
+and a parameter \(L\). Choose \(t\) with
+\[
+n_t>\max T+N_0.
+\]
+The stabilized color-\(j\) conclusion holds on a tail of \(Y'\) for this
+\(t\). Now choose
+\[
+H=\{h_1<\cdots<h_r\}
+\]
+from that tail, disjoint from \(T\), with
+\[
+h_j-\max\{d,h_1,\ldots,h_{j-1}\}>L. \tag{3}
+\]
+This is possible because \(Y'\) is infinite; when \(j=1\), the maximum in
+(3) is just \(d\). Let \(w\) be the stabilized witness for \(H\). Then
+\[
+w-\max T\ge N_0,
+\]
+and the color condition gives
+\[
+w\le h_j+M\le h_j+D. \tag{4}
+\]
+Because \(h_j\) is active, restoring it gives a representation of \(w\)
+using \(h_j\), so
+\[
+w-h_j\in2A
+\]
+and hence \(w\ge h_j+2m_0\). Combining this with (3) yields
+\[
+w-\max\{d,h_1,\ldots,h_{j-1}\}>L.
+\]
+Together with (1) and (4), these are exactly the hypotheses of Corollary
+13.1l.2c on \(Y'\). The fractional recurrence and deletion conclusions
+therefore follow from that corollary. \(\square\)
+
+Consequently, an active fixed-rank prefix shell cannot use merely
+``moving'' bounded endpoint debt as a new escape: after thinning, the debt
+position stabilizes. What remains in a \(k=2\) counterexample is the
+certificate-free fractional branch, or links that are not full-rank
+inclusion-minimal and hence should descend to smaller active traces.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -17680,6 +17802,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   witness is arbitrarily far above all earlier endpoints, then the shell
   gives fractional reflection-recurrence, and certificate-dense finite
   tests already yield a good deletion.
+* Corollary 13.1l.2d adds the Ramsey step for active fixed-rank links:
+  bounded moving-endpoint debt stabilizes at one ordered position on an
+  infinite tail, so full-rank inclusion-minimal prefix shells reduce to
+  the fractional certificate-free branch or to smaller active traces.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

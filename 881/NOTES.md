@@ -2589,6 +2589,13 @@ reflection-recurrence of size at least \(|T|/j\). Hence a surviving
 fixed-section shell must either move the debt position/gap pattern or keep
 large certificate-free subsets in every finite test at the relevant
 fractional scale.
+Corollary 13.1l.2d removes the moving-position escape for active
+full-rank links. If every linked packet is inclusion-minimal, so every tail
+endpoint is active, then Ramsey thinning stabilizes the bounded-debt
+position \(j\) on an infinite tail. By choosing packets with a large gap
+below \(h_j\), Corollary 13.1l.2c applies. Thus active fixed-rank prefix
+shells reduce to the fractional certificate-free branch or to smaller
+active traces.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
