@@ -12,6 +12,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
   a large one-gate low-count star.
 * every one-gate low-count packet is finite-palette independent and has
   sparse anchored shadows.
+* the lower-order hypergraph target matches the direct finite-deletion
+  condition from Corollary 3.4d.12.
 """
 
 from __future__ import annotations
@@ -145,12 +147,46 @@ def check_sparse_shadow(A: tuple[int, ...], D: tuple[int, ...]) -> int:
     return checked
 
 
+def supports_outside_core(
+    A: tuple[int, ...], core: tuple[int, ...], length: int, target: int
+) -> list[frozenset[int]]:
+    core_set = set(core)
+    edges: set[frozenset[int]] = set()
+    for rep in reps(A, length, target):
+        outside = frozenset(x for x in rep if x not in core_set)
+        if outside:
+            edges.add(outside)
+    return list(edges)
+
+
+def check_lower_hypergraph_equivalence(A: tuple[int, ...], core: tuple[int, ...]) -> int:
+    outside = tuple(a for a in A if a not in core)
+    checked = 0
+    for length in range(2, 5):
+        core_bound = length * max(core) if core else 0
+        for target in range(1, length * max(A) + 1):
+            if target <= core_bound:
+                continue
+            if not reps(outside, length, target):
+                continue
+            edges = supports_outside_core(A, core, length, target)
+            for d_size in range(0, min(3, len(outside)) + 1):
+                for D in combinations(outside, d_size):
+                    D_set = set(D)
+                    hit_all = all(edge & D_set for edge in edges)
+                    direct_hole = not reps(tuple(a for a in A if a not in D_set), length, target)
+                    assert hit_all == direct_hole
+                    checked += 1
+    return checked
+
+
 def main() -> None:
     sets_checked = 0
     decomposition_checked = 0
     obstruction_checked = 0
     pair_star_checked = 0
     sparse_shadow_checked = 0
+    lower_hypergraph_checked = 0
     universe = range(1, 10)
     for size in range(4, 8):
         for A_raw in combinations(universe, size):
@@ -163,12 +199,16 @@ def main() -> None:
                     obstruction_checked += check_hole_obstruction(A, D, max_h=5)
                     pair_star_checked += check_pair_bank_star(A, D)
                     sparse_shadow_checked += check_sparse_shadow(A, D)
+            for core_size in range(0, min(3, size) + 1):
+                for core in combinations(A, core_size):
+                    lower_hypergraph_checked += check_lower_hypergraph_equivalence(A, core)
     print("finite hole descent checks passed")
     print(f"sets_checked={sets_checked}")
     print(f"decomposition_checked={decomposition_checked}")
     print(f"obstruction_checked={obstruction_checked}")
     print(f"pair_star_checked={pair_star_checked}")
     print(f"sparse_shadow_checked={sparse_shadow_checked}")
+    print(f"lower_hypergraph_checked={lower_hypergraph_checked}")
 
 
 if __name__ == "__main__":

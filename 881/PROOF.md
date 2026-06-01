@@ -2930,6 +2930,12 @@ and
 \[
 t\in\ell(A\setminus P).
 \]
+Increasing \(M\) if necessary, we may also assume, when \(P\ne\varnothing\),
+\[
+t>\ell\max P,
+\]
+so no \(\ell\)-term representation of \(t\) lies entirely in the finite
+core \(P\).
 By the transversal hypothesis, \(D\) does not meet every edge of
 \(\mathcal G_{\ell,P}(t)\). Hence there is an \(\ell\)-term representation
 of \(t\) from \(A\) whose outside-\(P\) support avoids \(D\). Since
