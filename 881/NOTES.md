@@ -2354,11 +2354,19 @@ Example 8.5a.7z.12a generalizes this diagnostic: for arbitrarily large
 finite row sets \(U\), a range-separated rank-three terminal hole can carry
 a shifted-overlap spike \(U+f-g\subset A\) while every pair deletion inside
 \(\{f,g,k\}\) is harmless at the same witness.
+But it also has a macroscopic two-sum coverage gap: if \(B=\max U+h\), then
+no element below \(9N\) lies outside \([1,B]\), so \(2A_0\) misses
+\((2B,10N)\). It is a local obstruction to promotion, not a stage gadget.
 Corollary 8.5a.7z.13 records the stable case that is already closed: if
 the compressed unique-gate or shifted-overlap packets recur inside one
 finite row test with gates or shifts in fixed finite palettes and exceed
 the corresponding independence thresholds, Corollaries 8.5a.7k--8.5a.7l
 produce a recurrent certificate and a good deletion.
+Target 8.5a.7z.14 is now the live form: a surviving construction must have
+a true cross-window selector front of moving compressed spikes, no pair
+promotion, no stable finite row/gate/shift palettes, and enough coverage
+fillers to bridge the two-sum gaps without repairing the protected
+witnesses.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

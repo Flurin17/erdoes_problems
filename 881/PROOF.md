@@ -8569,6 +8569,21 @@ even in the terminal-gap normal form. The finite local data from Lemma
 global repetition, palette stabilization, or some additional pressure from
 the product-selector barrier.
 
+This example also isolates what it does **not** do. It is very far from a
+finite stage of an order-2 basis. With the notation above and
+\[
+B=\max U+h,
+\]
+all elements of \(A_0\) below \(9N\) lie in \([1,B]\). Hence
+\[
+2A_0\cap(2B,\ 10N)=\varnothing. \tag{2}
+\]
+Thus the construction has a macroscopic two-sum coverage gap before even
+reaching the first deleted gate. The example only disproves a local
+promotion lemma; a counterexample stage would still have to add enough
+coverage fillers to bridge such gaps without repairing the protected
+rank-three witnesses or creating stable finite-palette spikes.
+
 ### Corollary 8.5a.7z.13: Stable compressed spikes collapse to certificates
 
 Work in the remaining \(k=2\) counterexample case. Fix a finite row test
@@ -8622,6 +8637,38 @@ corresponding independence thresholds. Thus the remaining obstruction is
 not just selector-specific; it is selector-specific with cofinally moving
 row tests, gate palettes, and shift palettes, unless one can promote the
 spike supports to genuine late-bad pair debt.
+
+### Target 8.5a.7z.14: Close the moving compressed-spike front
+
+At this point the remaining \(k=2\) obstruction has the following sharper
+form. A counterexample must produce, cofinally in every fresh packet tail,
+finite product windows whose selector edges \(F\) have terminal witnesses
+\(w\) as in Corollary 8.5a.7y, and whose retained-mirror rows from
+Lemma 8.5a.7z.10 yield large compressed spikes. For these spikes, all of
+the following escape conditions must hold simultaneously:
+
+1. **No pair promotion:** the one- and two-gate spike supports do not form a
+   product-covering family of genuine late-bad singleton or pair edges,
+   or Corollary 8.5a.7v and the singleton reductions would close the case.
+2. **No stable finite palettes:** for every fixed finite row test
+   \(T_0\), gate palette \(P\), and shift palette \(H\), the compressed
+   spikes inside \(T_0\) with gates in \(P\) or shifts in \(H\) stay below
+   the thresholds \(\beta_f(T_0)\) and \(\gamma_h(T_0)\), or Corollary
+   8.5a.7z.13 gives a recurrent certificate.
+3. **No disjoint local windows:** the active supports cannot live in
+   disjoint finite windows, by Warning 8.5a.7z.1; they must form a genuine
+   cross-window front on packet indices.
+4. **Coverage without repair:** the extra retained fillers needed for
+   order-2 stage coverage must bridge the large two-sum gaps seen in
+   Example 8.5a.7z.12a without entering the terminal gaps, repairing the
+   protected witnesses, or creating stable compressed spikes.
+
+Thus the final problem is no longer a local terminal-hole problem. It is a
+global recurrence-versus-staging problem for moving compressed spikes: prove
+that product-selector pressure forces one of the forbidden stabilizations
+above, or construct a staged basis where the row tests, gates, shifts,
+mirrors, and coverage fillers all escape cofinally while the active
+supports remain a true deletion barrier.
 
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
@@ -15362,6 +15409,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   same witness.
 * Corollary 8.5a.7z.13 closes the stable compressed-spike case by invoking
   the existing finite gate- and shift-palette certificate lemmas.
+* Target 8.5a.7z.14 is the resulting live normal form: any counterexample
+  must stage a cross-window selector front of moving compressed spikes,
+  with no pair promotion, no stable finite palettes, and enough coverage
+  fillers to avoid the two-sum gaps in the local no-promotion gadgets.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
