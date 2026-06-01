@@ -23168,6 +23168,70 @@ Otherwise \(|U_f|<\theta n\) for all \(f\in P\). Since \(\theta<\eta\),
 condition (3) forces \(|P|\ge2\). Corollary 16.78, again after increasing
 \(N\), gives alternative 2. \(\square\)
 
+### Lemma 16.80: Two far gates are same-side unless the palette spreads
+
+Let
+\[
+I=[a,b]\cap\mathbb N
+\]
+have length \(n=b-a+1\), and fix \(r\ge1\). Let \(f,g\in\mathbb N\) be
+distinct. Suppose that for some \(\lambda,\mu>0\),
+\[
+D_I(f;r)\ge\lambda n,\qquad D_I(g;r)\ge\mu n, \tag{1}
+\]
+where
+\[
+D_I(h;r)=\max\{0,\ a+2r-h,\ h-b+2r\}.
+\]
+Then either \(f\) and \(g\) lie on the same side of \(I\), meaning
+\[
+f<a+2r-\lambda n,\quad g<a+2r-\mu n \tag{2}
+\]
+or
+\[
+f>b-2r+\lambda n,\quad g>b-2r+\mu n, \tag{3}
+\]
+or else
+\[
+|f-g|\ge n+(\lambda+\mu)n-4r-1. \tag{4}
+\]
+
+Proof. By (1), each of \(f,g\) lies either below its lower threshold or
+above its upper threshold. If they lie on the same side, then (2) or (3)
+holds. Otherwise, after possibly swapping \(f,g\),
+\[
+f\le a+2r-\lambda n,\qquad
+g\ge b-2r+\mu n.
+\]
+Hence
+\[
+|f-g|\ge b-a-4r+(\lambda+\mu)n.
+\]
+Since \(b-a=n-1\), this is (4). \(\square\)
+
+### Corollary 16.81: No-majority packets force spread or a same-side pair
+
+Keep the setting and hypotheses of Corollary 16.78. Put
+\[
+\lambda={\eta\over4r},\qquad
+\mu={\eta-\theta\over4(r-1)}. \tag{1}
+\]
+Then the two active colors \(f,g\) supplied there either lie on the same
+side of \(I\), in the sense of Lemma 16.80 with these \(\lambda,\mu\), or
+else
+\[
+|f-g|\ge n+(\lambda+\mu)n-4r-1. \tag{2}
+\]
+
+Proof. This is Lemma 16.80 applied to the distance bounds in Corollary
+16.78. \(\square\)
+
+Thus the two-color no-majority branch has only two geometric shapes:
+either the active palette has diameter comparable to the tested interval
+length, or two positive-density gate fibers sit on the same side of the
+interval. The former is a genuine palette-spread escape; the latter can be
+attacked by same-side blocker windows.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24445,6 +24509,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.79 packages the bounded-rank dense interval normal form for
   densities \(>1/2\): either a majority color escapes every relevant robust
   core, or two active colors are linearly far from the tested interval.
+* Lemma 16.80 and Corollary 16.81 split that two-far-gate branch: either
+  the active palette has diameter comparable to the tested interval length,
+  or two positive-density gate fibers lie on the same side of the interval.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
