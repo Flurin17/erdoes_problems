@@ -2941,3 +2941,15 @@ source of growth beyond Ramsey.
   five-slot candidate.  Their disjoint union has an `(0,0,0,1,4)` partition
   by Lemma 4E but cannot use only four of the five slots, because every
   four-submultiset is killed on one component.
+- 2026-06-01: Added `--flexible-parts` to `source_slots_fast.cpp` to separate
+  fixed universal slot obstructions from genuine flexible part-count
+  obstructions.  The source-`0` fixed-signature obstruction does not currently
+  appear in the flexible connected formulation: every exact `n=9`
+  source-`0` graph has a four-part flexible `8`-modular partition
+  (`1,409,024` graphs), as does every exact connected/minimum-degree-`4`
+  source-`0` graph on `n=9` (`1,216,702` graphs).  Deterministic random probes
+  also found no flexible four-part counterexample among `29,804` accepted
+  source-`0` graphs on `n=11` (`seed=7100`) or among `8864` accepted
+  connected/minimum-degree-`4` source-`0` graphs on `n=12` (`seed=7120`).
+  Conclusion: the five-slot universal-signature obstruction does not refute
+  the connected flexible coarse-lift route.

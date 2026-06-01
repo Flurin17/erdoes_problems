@@ -177,7 +177,9 @@ Computational checks and generated data for Erdos Problem 82.
   `n=10`, `n=11`, and `n=12`.  Candidate multisets may have up to five slots, and the
   state code supports target moduli up to `16` for small higher-lift sanity
   checks.  Use `--connected` and `--min-degree D` to focus searches on
-  minimal-counterexample regimes.
+  minimal-counterexample regimes.  Use `--flexible-parts B` to ignore fixed
+  residue signatures and test whether each graph has some partition into at
+  most `B` target-modular parts.
 - `slot_local_search.py`: simulated-annealing heuristic for fixed residue-slot
   colorings.  It directly scores a coloring against prescribed residues and
   is useful for larger exploratory searches where exact slot DP is too slow;

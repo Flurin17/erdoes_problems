@@ -231,6 +231,11 @@ class Checker {
         return rec(full, state_code(cand, target_modulus, base), base);
     }
 
+    bool has_flexible_partition(int part_count) {
+        failed_flexible.clear();
+        return rec_flexible(full, part_count);
+    }
+
   private:
     int n;
     int target_modulus;
@@ -239,6 +244,7 @@ class Checker {
     std::vector<std::vector<int>> submasks_with_pivot;
     std::vector<int> residue;
     std::unordered_set<uint64_t> failed;
+    std::unordered_set<uint64_t> failed_flexible;
 
     bool rec(int remaining, uint64_t code, int base) {
         if (remaining == 0) return true;
@@ -257,6 +263,22 @@ class Checker {
             }
         }
         failed.insert(key);
+        return false;
+    }
+
+    bool rec_flexible(int remaining, int parts_left) {
+        if (remaining == 0) return true;
+        if (parts_left == 0) return false;
+        uint64_t key = (static_cast<uint64_t>(remaining) << 8) | parts_left;
+        if (failed_flexible.find(key) != failed_flexible.end()) return false;
+        int pivot = remaining & -remaining;
+        int pivot_index = __builtin_ctz(static_cast<unsigned>(pivot));
+        for (int sub : submasks_with_pivot[remaining]) {
+            if (!((sub >> pivot_index) & 1)) continue;
+            if (residue[sub] < 0) continue;
+            if (rec_flexible(remaining ^ sub, parts_left - 1)) return true;
+        }
+        failed_flexible.insert(key);
         return false;
     }
 };
@@ -307,6 +329,7 @@ int main(int argc, char** argv) {
     int target_modulus = 8;
     int source_residue = -1;
     int slot_count = 4;
+    int flexible_parts = 0;
     uint64_t start = 0;
     uint64_t limit = 0;
     uint64_t random_samples = 0;
@@ -330,6 +353,8 @@ int main(int argc, char** argv) {
             source_residue = std::stoi(argv[++i]);
         } else if (arg == "--slot-count" && i + 1 < argc) {
             slot_count = std::stoi(argv[++i]);
+        } else if (arg == "--flexible-parts" && i + 1 < argc) {
+            flexible_parts = std::stoi(argv[++i]);
         } else if (arg == "--candidates" && i + 1 < argc) {
             candidate_text = argv[++i];
         } else if (arg == "--start" && i + 1 < argc) {
@@ -355,6 +380,7 @@ int main(int argc, char** argv) {
                       << " [--source-modulus q] [--target-modulus M]"
                       << " [--source-residue a]"
                       << " [--candidates r,...;...] [--slot-count B]"
+                      << " [--flexible-parts B]"
                       << " [--start S] [--limit L]"
                       << " [--random-samples N] [--seed S]"
                       << " [--progress] [--quiet-kills]"
@@ -369,6 +395,10 @@ int main(int argc, char** argv) {
     }
     if (source_modulus <= 0 || target_modulus <= 0 || slot_count <= 0) {
         std::cerr << "invalid modulus or slot count\n";
+        return 2;
+    }
+    if (flexible_parts < 0) {
+        std::cerr << "invalid flexible part count\n";
         return 2;
     }
     if (target_modulus > 16 || slot_count > 5) {
@@ -388,11 +418,17 @@ int main(int argc, char** argv) {
         return 2;
     }
 
-    std::vector<Candidate> candidates =
-        parse_candidates(candidate_text, target_modulus, slot_count);
+    std::vector<Candidate> candidates;
+    if (!flexible_parts) {
+        candidates = parse_candidates(candidate_text, target_modulus, slot_count);
+    }
     std::vector<int> alive(candidates.size(), 1);
     std::vector<EdgeMask> bad(candidates.size(), 0);
     std::vector<uint64_t> killed_at_checked(candidates.size(), 0);
+    EdgeMask flexible_bad = 0;
+    uint64_t flexible_bad_checked = 0;
+    uint64_t flexible_bad_bits = 0;
+    bool flexible_alive = true;
     Checker checker(n, target_modulus);
 
     uint64_t checked = 0;
@@ -417,6 +453,22 @@ int main(int argc, char** argv) {
             }
             ++checked;
             checker.compute_residues(graph_mask);
+            if (flexible_parts) {
+                if (flexible_alive && !checker.has_flexible_partition(flexible_parts)) {
+                    flexible_alive = false;
+                    flexible_bad = graph_mask;
+                    flexible_bad_checked = checked;
+                    flexible_bad_bits = bits;
+                    if (!quiet_kills) {
+                        std::cout << "flexible_bad"
+                                  << " source_residue=" << a
+                                  << " mask=" << edge_mask_string(graph_mask)
+                                  << " checked=" << checked
+                                  << " internal_bits=" << bits << "\n";
+                    }
+                }
+                continue;
+            }
             for (size_t i = 0; i < candidates.size(); ++i) {
                 if (!alive[i]) continue;
                 if (!checker.has_partition(candidates[i])) {
@@ -472,6 +524,19 @@ int main(int argc, char** argv) {
     }
     std::cout << "attempted=" << attempted << "\n";
     std::cout << "source_modular_checked=" << checked << "\n";
+    if (flexible_parts) {
+        std::cout << "flexible_parts=" << flexible_parts << " ";
+        if (flexible_alive) {
+            std::cout << "ok\n";
+            std::cout << "good_count=1\n";
+        } else {
+            std::cout << "bad=" << edge_mask_string(flexible_bad)
+                      << " checked=" << flexible_bad_checked
+                      << " internal_bits=" << flexible_bad_bits << "\n";
+            std::cout << "good_count=0\n";
+        }
+        return 0;
+    }
     for (size_t i = 0; i < candidates.size(); ++i) {
         std::cout << "slots=" << candidate_string(candidates[i]) << " ";
         if (alive[i]) {

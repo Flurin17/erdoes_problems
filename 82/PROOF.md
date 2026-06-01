@@ -4670,6 +4670,27 @@ four-element submultisets displayed above.  Restricting that partition to the
 component that kills the corresponding submultiset gives a contradiction.
 Therefore all five slots of `R` are required.  QED.
 
+This example should not be confused with a flexible four-part obstruction.
+The fixed-signature obstruction is created by disjoint-union incompatibility:
+different components force different four-slot signatures.  When the residue
+signature is allowed to vary from graph to graph, the current finite evidence
+points in the opposite direction.  The checker
+`EXPERIMENTS/source_slots_fast.cpp` has a `--flexible-parts` mode that tests
+existence of some partition into a prescribed number of target-modular parts,
+ignoring fixed residue slots.  It verifies that every source-`0 mod 4` graph
+in the exact `n=9` solved-edge sweep has a flexible four-part `8`-modular
+partition; this checks `1,409,024` graphs.  The connected, minimum-degree-`4`
+subcheck of the same sweep checks `1,216,702` graphs and also passes.
+Deterministic random probes also find no flexible four-part counterexample in
+`29,804` accepted source-`0` graphs on `11` vertices, nor in `8864` accepted
+connected, minimum-degree-`4` source-`0` graphs on `12` vertices.
+
+Thus the fixed-source universal-slot compactness route and the connected
+flexible coarse-lift route have different obstruction profiles.  The
+source-`0` five-slot evidence rules out a universal four-slot theorem, but it
+does not rule out a connected four-part flexible `4 -> 8` theorem, which is
+the formulation relevant to the coarse-lift propositions above.
+
 The same complete-multipartite fixed-slot model remains consistent one dyadic
 level higher.  The helper `EXPERIMENTS/source_slot_finder.py` first filters
 slot multisets by the source-residue clique subset-sum test and then checks
