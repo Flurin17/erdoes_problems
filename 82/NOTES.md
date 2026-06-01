@@ -2307,3 +2307,11 @@ source of growth beyond Ramsey.
   profiles `1+3,1+3,0+4`; all totals are `4`.  This confirms that split
   profile absorption captures witnesses missed by the pair-template search on
   the same graph.
+- 2026-06-01: Refuted the tempting conjecture that every compensated double
+  spread-one template on `2m` vertices has a regular induced subgraph on at
+  least `m` vertices.  `compensated_spread.py --m 6 --trials 500 --seed 101`
+  found mask `72400984189589100935`, a `12`-vertex graph with degree sequence
+  `5^6,6^6` and maximum regular induced order `5`.  This is now recorded as
+  Computational Example 11C.  The bounded-spread target must allow smaller
+  profile-absorbed witnesses, not a clean half-size theorem even in this
+  structured template.
