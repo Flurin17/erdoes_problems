@@ -680,6 +680,9 @@ Diagnostics that print b-dependent rows are therefore also printing
 one-term reflected rows.
 The prepared marker has one reflected row, `p=3 -> 4`, and seven
 unique-gate translates `33+p notin 2C`, matching Lemmas 16.17-16.18.
+Here the secondary center is `d-b=7`, so Lemma 16.19 predicts that all
+tested rows `p>6` must be unique-gate; the scanner reports exactly that
+for `8,19,20,28`.
 
 Lemma 16.16 records the adjacent-block obstruction for old fillers. If a
 later block starts above `4 max(S)`, then any private order-4 witness for

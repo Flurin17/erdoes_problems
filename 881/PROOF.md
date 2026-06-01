@@ -19836,6 +19836,44 @@ gate translate uniquely represented; it can fail to be unique-gate only by
 making the reflected row \(q\)-dependent. The two failures cannot occur on
 the same retained padder.
 
+### Lemma 16.19: Bounded reflected centers force unique-gate rows
+
+Keep the hypotheses of Lemma 16.18, and put
+\[
+m=d-q,\qquad m_0=\min A.
+\]
+Then
+\[
+T\cap(m-m_0,\infty)\subseteq T_U. \tag{1}
+\]
+Equivalently, every tested row \(p\in T\) with
+\[
+p>m-m_0
+\]
+has \(q+p\) uniquely represented in \(2A\) by the gate pair \(q+p\).
+
+Proof. If \(p\in T_A\), Lemma 16.18 gives
+\[
+m-p=d-q-p\in A.
+\]
+Since every element of \(A\) is at least \(m_0\), this implies
+\[
+p\le m-m_0.
+\]
+Therefore no \(p>m-m_0\) lies in \(T_A\). Lemma 16.18 gives
+\[
+T=T_A\cup T_U,
+\]
+so every such \(p\) belongs to \(T_U\), and the unique-gate conclusion is
+Lemma 16.18(3). \(\square\)
+
+Thus the reflected half of a singleton row bank is useful only when the
+secondary center \(m=d-q\) moves beyond the finite test rows. If \(m\) is
+bounded while the tested padders move into the tail, the entire tested
+bank becomes a unique-gate packet. A positive proof can therefore split the
+singleton branch into two cleaner subproblems: unbounded actual reflections
+against finite tests, or arbitrarily late moving unique-gate packets.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20880,6 +20918,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.18 makes that split collision-complete: every retained padder
   is in at least one of the reflected-row or unique-gate alternatives,
   because otherwise the two retained two-sums repair the private witness.
+* Lemma 16.19 shows that bounded secondary centers \(d-q\) force all
+  sufficiently late tested rows into the unique-gate alternative; actual
+  reflected-row recurrence requires \(d-q\) to move past the finite tests.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

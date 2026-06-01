@@ -2348,6 +2348,11 @@ Lemma 16.18 gives the exact collision-complete version. For each retained
 padder \(p\), either the reflected row \(d-p\) is \(q\)-dependent, giving
 \(d-q-p\in A\), or \(q+p\) is uniquely represented by the gate pair. If
 both failed, \(d-p\in2C\) and \(q+p\in2C\) would repair \(w\) in \(4C\).
+Lemma 16.19 adds that the reflected branch only exists below the secondary
+center \(m=d-q\): if \(p>m-\min A\), then \(d-q-p\notin A\), so the
+collision-complete split forces \(q+p\) to be unique-gate. Hence bounded
+secondary centers force late finite tests entirely into the unique-gate
+branch.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
