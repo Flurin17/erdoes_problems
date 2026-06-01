@@ -20270,6 +20270,85 @@ positive proportion of its own elements late-row gate-independent, unless
 the protected targets or the active row ranges escape this common-window
 configuration.
 
+### Lemma 16.27: Large interval-marker bridges cannot be half protected in one window
+
+Let \(L\ge4\), and put
+\[
+D_L=2([1,L]\cup\{2L\})=[2,3L]\cup\{4L\}.
+\]
+Let
+\[
+x\ge100L^2
+\]
+and let
+\[
+P\subset[x,2x-2]\cap\mathbb N
+\]
+be finite. Suppose the interval-marker bridge interval
+\[
+J=[x+3L+1,2x]\cap\mathbb N \tag{1}
+\]
+is covered by one bridge element and two old terms:
+\[
+J\subset P+D_L. \tag{2}
+\]
+Then no subset
+\[
+Q\subset P,\qquad |Q|\ge |P|/2,
+\]
+can satisfy
+\[
+\bigl((P\setminus\{q\})+q-(P\setminus\{q\})\bigr)\cap P\subset\{q\}
+        \qquad(q\in Q). \tag{3}
+\]
+
+Proof. Write \(m=|P|\). Each \(p\in P\) contributes at most \(3L\) points
+to \(J\) through \(p+D_L\): the interval \(p+[2,3L]\) has \(3L-1\) points,
+and \(p+4L\) contributes at most one more point. Since
+\[
+|J|=x-3L,
+\]
+the cover (2) gives
+\[
+m\ge {x-3L\over3L}. \tag{4}
+\]
+Because \(x\ge100L^2\) and \(L\ge4\), in particular \(x\ge12L\), so
+\[
+m\ge {x\over4L}. \tag{5}
+\]
+
+If \(Q\) satisfying (3) existed, Lemma 16.26 would give, with
+\[
+D=\max P-\min P\le x-2,
+\]
+the bound
+\[
+{3m^2\over8}-{m\over4}\le2D+1\le2x-3. \tag{6}
+\]
+The function
+\[
+u\mapsto {3u^2\over8}-{u\over4}
+\]
+is increasing for \(u\ge1\), and (5) gives \(m\ge x/(4L)\ge1\). Hence the
+left side of (6) is at least
+\[
+{3x^2\over128L^2}-{x\over16L}.
+\]
+Since \(x\ge100L^2\) and \(L\ge4\), this is at least
+\[
+{300\over128}x-{1\over64}x>2x,
+\]
+contradicting (6). \(\square\)
+
+By Lemma 16.11, any large continuation of the interval-marker seed must
+produce exactly a cover of the form (2) for the smallest new element. Lemma
+16.27 says that such a bridge block cannot also have a same-window
+unique-gate half-packet over its own bridge rows. Therefore an iterable
+singleton construction based on interval-marker bridges must either keep
+the next bridge near the \(O(L^2)\) finite range, protect substantially
+fewer than half of the bridge elements at that stage, or arrange staggered
+witness windows so that the active row ranges do not share one dense block.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21350,6 +21429,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   active rows, then all unordered sums from pairs meeting those targets are
   distinct, giving the Sidon-scale bound
   \(t(m-t)+\binom t2\le2(\max P-\min P)+1\).
+* Lemma 16.27 applies this to the interval-marker bridge from Lemma 16.11:
+  once the smallest new marker \(x\) is beyond \(100L^2\), a bridge block
+  covering \([x+3L+1,2x]\) cannot have a gate-independent half-packet over
+  its own bridge rows. Any iterable singleton bridge must therefore be
+  near-range, sparse-protected, or staggered-window.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

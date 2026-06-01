@@ -2429,6 +2429,16 @@ two-sums from pairs meeting those targets are all distinct:
 So a same-window bridge block must either be Sidon-scale, protect only a
 sparse subset of its own elements, or arrange that the active row ranges do
 not overlap.
+Lemma 16.27 applies this to interval-marker bridges. If the next smallest
+marker is \(x\ge100L^2\), any block \(P\subset[x,2x-2]\) covering
+\[
+[x+3L+1,2x]\subset P+\bigl([2,3L]\cup\{4L\}\bigr)
+\]
+has \(|P|\gg x/L\), too dense for a gate-independent half-packet inside
+width \(O(x)\). Thus an interval-marker singleton construction can only
+escape by staying in a bounded \(O(L^2)\) bridge range, protecting fewer
+than half the bridge elements at a time, or staggering witness windows so
+the common-row Sidon argument does not apply.
 
 Rank-three delayed collective barriers remain locally easy in finite
 windows. Running
