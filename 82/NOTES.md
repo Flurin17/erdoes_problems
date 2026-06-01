@@ -2570,7 +2570,7 @@ source of growth beyond Ramsey.
   proof yet: exact checks show it is not an obstruction for `h=5,6`, but it
   is a plus obstruction for every `h=7..11` tested.  Added
   `parity_pair_symbolic.py`, which reduces the same construction to seven
-  type counts and verifies the obstruction for every `7<=h<=30`.  The proof
+  type counts and verifies the obstruction for every `7<=h<=40`.  The proof
   file now records the seven displayed type-degree equations; proving the
   candidate means excluding integer solutions to that system for all large
   `h`.
@@ -2593,3 +2593,9 @@ source of growth beyond Ramsey.
   no-core, one-core, and two-core regular solutions.  The check through
   `h=40` matches the proof bounds; pure-side solutions are the only ones
   reaching order `h-1` in that range.
+- 2026-06-01: Added Corollary 28P.  The parity obstruction is not a
+  disjoint-union/spectrum obstruction: each side has same-degree `0`-regular
+  witnesses of orders `h-1` and `2`, total `h+1`, but Lemma 28N shows no
+  such side witnesses can merge into a regular induced subgraph of order
+  at least `h`.  This gives an infinite cross-profile obstruction beyond
+  `D_spec`.

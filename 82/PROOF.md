@@ -8911,10 +8911,10 @@ cross-profile matching theorem.
 Because the construction has only seven vertex types, the stronger checker
 `EXPERIMENTS/parity_pair_symbolic.py` tests it by type counts rather than by
 all subsets.  It verifies the same failures at `h=5,6` and no regular
-`h`-set or balanced plus middle for every `7<=h<=30`:
+`h`-set or balanced plus middle for every `7<=h<=40`:
 
 ```text
-python3 82/EXPERIMENTS/parity_pair_symbolic.py --min-h 5 --max-h 30
+python3 82/EXPERIMENTS/parity_pair_symbolic.py --min-h 5 --max-h 40
 ```
 
 The type-count reduction used by that script is as follows.  Let `z=b_{h-1}`
@@ -9147,6 +9147,29 @@ out the first alternative in the definition of `P_h^+`, and Lemma 28M rules
 out the balanced plus middle of side size `floor((h-1)/2)=ceil((h-2)/2)`.
 Thus side size `h` does not force the defining alternatives, so `P_h^+>h`.
 Lemma 28B identifies `P_h^+` and `P_h^-`.  QED.
+
+**Corollary 28P: The Parity Obstruction Is Not A Spectrum Obstruction.**  For
+every `h>=7`, the marked graph in Candidate 28L fails the balanced-pair
+alternatives at side size `h`, even though its two marked sides contain
+same-degree regular induced subgraphs whose total order is at least `h`.
+
+Proof.  Corollary 28O proves that the marked graph fails the balanced-pair
+alternatives.  It remains only to exhibit the side witnesses.  On the `A`
+side, delete one endpoint of the unique edge `a_0a_1`; the remaining
+`h-1` vertices form an independent set, hence a `0`-regular induced subgraph.
+On the `B` side, take the isolated vertex `z=b_{h-1}` together with any one
+vertex of the clique core.  These two vertices are nonadjacent in `G[B]`, so
+they form a `0`-regular induced subgraph.  The two side-regular witnesses
+have the same degree and total order
+
+```text
+(h-1)+2=h+1.
+```
+
+By Lemma 28N, however, no choice of side witnesses in this marked graph merges
+to a regular induced subgraph on at least `h` vertices.  Thus the obstruction
+comes from cross-profile failure, not from absence of same-degree side
+spectrum matches.  QED.
 
 ## Lemma 29: Split Compensation Criterion
 
