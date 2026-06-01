@@ -28143,6 +28143,11 @@ missing from ordinary minimal order-\(h\) bases.
 * Theorem 1 is independent and resolves \(k=1\).
 * Lemma 2 would imply the desired conclusion if an infinite \(B\) satisfying
   the two absorption hypotheses can be forced.
+* Lemma 2.0a gives a direct one-hit splitting criterion: if the selected
+  order-\(k\) rows meet the deletion in at most one point, deleted hits
+  split into two retained summands, and rows with no deleted hit still have
+  one retained splittable summand, then the complement is order \(k+1\).
+  Corollary 2.0b records the corresponding direct-sum component version.
 * Lemma 2.2 gives the general multi-hit repair criterion: a fixed retained
   padder may absorb any multiset of at most \(k\) deleted summands.
 * Theorem 2.3 proves that finite reflection-recurrence gives a good infinite
@@ -28282,6 +28287,13 @@ missing from ordinary minimal order-\(h\) bases.
 * Corollary 3.4d.13 sharpens the negative side: bounded lower-order
   transversals may be pigeonholed to one common inclusion-minimal active
   finite barrier over a large translate packet \(t_u=\tau+u\).
+* Corollary 3.4d.14 specializes the two-term branch: the deleted gate lies
+  in the common finite barrier, that barrier is an inclusion-minimal
+  two-sum vertex cover, and the packet centers reflect every barrier point
+  back into \(A\).
+* Corollary 3.4d.15 records the all-order shadow of active lower barriers:
+  \(U+\tau-F\subset(\ell-1)A\), with at least one original deleted gate
+  lying in the active finite barrier.
 * Warning 3.4e shows that large moving representation spikes do not by
   themselves imply finite reflection-recurrence; the benign basis
   \(\{1\}\cup2\mathbb N\) has maximal two-sum spikes but no recurrent
@@ -28932,7 +28944,8 @@ missing from ordinary minimal order-\(h\) bases.
 * Attempt 12 records that the clean direct-sum digital model satisfies the
   desired conclusion, and the standard binary Raikov-Stöhr basis has an
   explicit even-support deletion leaving an order-3 basis; a faithful
-  carry-free embedding into \(\mathbb N\) is impossible.
+  carry-free embedding into \(\mathbb N\) is impossible. Lemma 2.0a and
+  Corollary 2.0b isolate the direct splitting repair behind this failure.
 * Attempt 13 records the staged protected-block counterexample route and
   the coverage-versus-witness-efficiency gap.
 * Proposition 13.1 gives a precise finite-stage criterion that would produce
@@ -29123,6 +29136,10 @@ missing from ordinary minimal order-\(h\) bases.
   isolating the remaining lift problem: private residue holes must be made
   private for individual integers without losing three-term coverage, and
   robust against all shifted finite-accelerator repairs.
+* Lemma 16.0-pre rules out the mandatory-marker residue lift with full
+  colored coverage: adding one marker from a chosen class and covering the
+  shifted residue by one marker from every class always creates a
+  \((k+1)\)-marker representation with at least two markers from that class.
 * Lemma 16.0 and Lemma 16.0a rule out fixed finite-core one-marker lifts:
   if the tail is covered by \(M+rC\) with finite \(C\), then finite marker
   deletions are eventually repaired by two retained markers, and one can
