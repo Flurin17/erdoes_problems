@@ -8217,45 +8217,49 @@ more efficient non-Ramsey extraction from the two one-sided difference sets.
 graphs for the obstruction in the definition of `P_h`.  It found the
 following exact certificates.
 
-For `h=6`, `r=2`, and marked side size `M=5`, the mask
+For `h=6`, `r=2`, and marked side size `M=6`, the mask
 
 ```text
-10189312835074
+1680212686667006004
 ```
 
 has no regular induced subgraph on at least `6` vertices and has no choice
 `X subset A`, `Y subset B`, `|X|=|Y|=2`, for which `G[X union Y]` is
-`2`-regular.  Thus `P_6^+>5`, and by Lemma 28B also `P_6>5`.  The fixed-mask
+`2`-regular.  Thus `P_6^+>6`, and by Lemma 28B also `P_6>6`.  The fixed-mask
 verification command is
 
 ```text
-python3 82/EXPERIMENTS/balanced_pair_parameter_search.py --h 6 --m 5 --mode plus --mask 10189312835074
+python3 82/EXPERIMENTS/balanced_pair_parameter_search.py --h 6 --m 6 --mode plus --mask 1680212686667006004
 ```
 
-The complement-dual `1`-regular middle obstruction is also visible directly:
-with `h=6`, `M=5`, and mask
+The smaller side-size `M=5` obstruction is also visible in both
+complement-dual modes.  For example, the masks
 
 ```text
+10189312835074
 9980350930911
 ```
 
-there is no regular induced subgraph on at least `6` vertices and no balanced
-`1`-regular middle graph.
+certify respectively the `2`-regular and `1`-regular middle obstructions at
+`h=6, M=5`.
 
-For `h=7`, `r=3`, and `M=6`, the mask
+For `h=7`, `r=3`, and `M=7`, the mask
 
 ```text
-49830309353297034971
+1274636503928019582602515941
 ```
 
 has no regular induced subgraph on at least `7` vertices and no balanced
-`3`-regular middle graph, giving `P_7>6`.
+`3`-regular middle graph, giving `P_7>7`.  The fixed-mask verification is
+
+```text
+python3 82/EXPERIMENTS/balanced_pair_parameter_search.py --h 7 --m 7 --mode plus --mask 1274636503928019582602515941
+```
 
 These examples are small, but they calibrate the pair route: the desired
-local theorem cannot be a trivial one-sided pigeonhole statement.  On the
-other hand, random sampling with `2000` graphs at `h=6, M=6` found no
-obstruction in either complement-dual mode, so the first unknown exact value
-already appears just beyond these small certificates.
+local theorem cannot be a trivial one-sided pigeonhole statement.  A short
+hill-climb search at `h=6, M=8` found no obstruction, but this is only a
+calibration run rather than evidence for the exact value of `P_6`.
 
 ## Lemma 29: Split Compensation Criterion
 
