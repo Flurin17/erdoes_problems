@@ -9009,6 +9009,36 @@ an induced matching: for large counterexamples, every maximum matching in both
 `G` and its complement is forced into a conflict graph with growing average
 degree.
 
+**Lemma 22C: Uniform Matching Patterns Need Not Give More Than One Endpoint
+Per Edge.**  For every `q>=1`, there is a graph `H_q` with a matching of size
+`q` such that the cross-edge pattern between every two matching edges is the
+same, but
+
+```text
+reg(H_q)=q.
+```
+
+Proof.  Let `A={a_1,...,a_q}` be a clique, let `B={b_1,...,b_q}` be an
+independent set, and add exactly the matching edges `a_i b_i` between `A` and
+`B`.  The edges `a_i b_i` form a matching of size `q`.  For any two matching
+edges `a_i b_i` and `a_j b_j`, the only cross edge among their four endpoints
+is `a_i a_j`; hence the matching has a single cross-edge pattern.
+
+The graph is split, with clique part `A` and independent part `B`.  By
+Lemma 0B, every regular induced subgraph of a split graph is either a clique
+or an independent set.  The largest clique has size `q`, namely `A`, and the
+largest independent set also has size `q`, for example `B`.  Therefore
+`reg(H_q)=q`.  QED.
+
+Thus a proof that first Ramsey-extracts a matching whose pairwise cross-edge
+pattern is constant cannot by that fact alone force more than `q` regular
+vertices from `q` matching edges.  The helper
+`EXPERIMENTS/matching_pattern_profile.py` enumerates the `16` uniform
+two-edge cross patterns; for `q=8` it reports minimum maximum regular order
+`8`, attained by patterns `1,2,4,8`.  The matching route must therefore use
+additional structure of the conflict graph or of the ambient graph, not just a
+monochromatic cross-pattern submatching.
+
 ## Proposition 23: Maximal Induced Matching Cover Bound
 
 Let `a,r,w` be positive integers.  Let `G` be a graph with

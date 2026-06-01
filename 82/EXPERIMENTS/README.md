@@ -331,6 +331,10 @@ Computational checks and generated data for Erdos Problem 82.
 - `matching_conflict_profile.py`: computes maximum matchings in a fixed graph
   and its complement, then reports the conflict graph on matching edges.  This
   calibrates Lemma 22A's induced-matching density obstruction.
+- `matching_pattern_profile.py`: builds the `16` uniform cross-pattern
+  blowups of a matching and reports their largest regular induced subgraphs.
+  This calibrates Lemma 22C's warning that a monochromatic cross-pattern
+  submatching may force only one endpoint per matched edge.
 - `regular_witness.py`: prints one largest regular induced witness for a
   fixed graph mask, including degrees, witness edges, and optional split-side
   counts/profiles for structured examples.

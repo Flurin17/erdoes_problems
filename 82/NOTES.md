@@ -3182,3 +3182,11 @@ source of growth beyond Ramsey.
   fixed field, then `n<t 2^r k`; in particular degree spread at most `s` gives
   `n<(s+1)2^r k`.  Therefore any bounded-spread proof that goes past this
   scale must handle high-rank exact degree buckets.
+- 2026-06-01: Added Lemma 22C and `matching_pattern_profile.py`.  The split
+  graph with a clique `A`, independent set `B`, and perfect matching between
+  them has a matching whose pairwise cross-edge pattern is constant, but its
+  largest regular induced subgraph has order only `|A|`.  The uniform
+  cross-pattern classifier confirms this obstruction among all `16` patterns:
+  for `q=8`, the minimum maximum regular order is `8`, attained by patterns
+  `1,2,4,8`.  Therefore a matching proof cannot rely only on Ramsey extracting
+  a monochromatic cross-pattern submatching.
