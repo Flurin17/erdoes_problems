@@ -3559,3 +3559,14 @@ source of growth beyond Ramsey.
   first degree `6`.  Low first-degree induction is therefore not the main
   obstruction for the next case; the proof needs to exploit the
   near-complete-matching structure of a large first neighborhood.
+- 2026-06-01: Added a general maximal-even-first-neighborhood lemma for
+  `P=2`.  If the first vertex has `2s` neighbors and the whole graph has
+  clique number at most `s+1`, then the first neighborhood is forced to be
+  the complete `s`-partite graph with parts of size `2`.  Any edge among
+  nonneighbors of the first vertex must join two vertices missing the two
+  endpoints of the same part; otherwise the edge has an `s`-clique in its
+  common first-neighborhood and creates a clique of order `s+2`.  Hence the
+  nonneighbor side is bipartite and
+  `alpha+omega>=ceil((n+3)/2)`.  This explains the tight `omega=4`,
+  first-degree-six `n=9` census bucket and generalizes the four-neighbor
+  `omega=3` case.

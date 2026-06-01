@@ -11858,6 +11858,77 @@ alpha(H)+omega(H) >= ceil((n-3)/2)+3 = ceil((n+3)/2).
 
 QED.
 
+**Lemma 28D.5b.4: Maximal Even First Neighborhoods At `P=2`.**  Let `s>=1`,
+and let `H` be an ordered graph on `n` vertices satisfying the `P=2`
+full-drop condition.  Suppose that the first vertex `a` has exactly `2s`
+neighbors and that
+
+```text
+omega(H) <= s+1.
+```
+
+Then
+
+```text
+alpha(H)+omega(H) >= ceil((n+3)/2).
+```
+
+Proof.  Put `A=N(a)` and `B=V(H)\({a} union A)`.  The complement of `H[A]`
+has maximum degree at most `1`.  Since every clique in `A` extends with `a`,
+we also have `omega(H[A])<=s`.  On `2s` vertices this forces
+`complement(H[A])` to be a perfect matching.  Write its pairs as
+
+```text
+{p_1,q_1}, ..., {p_s,q_s}.
+```
+
+Equivalently, `H[A]` is the complete `s`-partite graph with parts
+`{p_i,q_i}`.
+
+Every vertex `b in B` misses at most one vertex of `A`, by applying the
+full-drop condition to the pair `a<b`.  We claim that `H[B]` is bipartite.
+For a vertex `b in B`, call its type `p_i` if it misses `p_i`, call its type
+`q_i` if it misses `q_i`, and call it type `*` if it misses no vertex of
+`A`.
+
+Let `bb'` be an edge in `H[B]`.  If the union of the vertices of `A` missed by
+`b` or `b'` is not exactly the two endpoints of one pair `{p_i,q_i}`, then
+
+```text
+A cap N(b) cap N(b')
+```
+
+intersects every pair `{p_i,q_i}`.  Choosing one vertex from each pair gives
+an `s`-clique in this common neighborhood, and together with the edge `bb'`
+this forms a clique of order `s+2`, contradicting `omega(H)<=s+1`.
+Therefore every edge of `H[B]` runs between the type `p_i` class and the type
+`q_i` class for some common index `i`; type `*` vertices are isolated.
+Putting all `p_i`-type vertices and all type `*` vertices on one side, and
+all `q_i`-type vertices on the other, gives a bipartition of `H[B]`.
+
+Hence
+
+```text
+alpha(H[B]) >= ceil(|B|/2).
+```
+
+The vertex `a` is nonadjacent to every vertex of `B`, so
+
+```text
+alpha(H) >= 1+ceil(|B|/2).
+```
+
+Also `a` together with one vertex from each pair `{p_i,q_i}` is a clique of
+order `s+1`, so `omega(H)=s+1`.  Since `n=|B|+2s+1`,
+
+```text
+alpha(H)+omega(H)
+  >= 1+ceil(|B|/2)+s+1
+  = ceil((n+3)/2).
+```
+
+QED.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose
