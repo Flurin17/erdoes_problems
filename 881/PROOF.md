@@ -7126,6 +7126,87 @@ shift palette. A construction of a negative answer would have to wire these
 fresh packets into later barrier edges; independent fresh packets alone are
 selector-avoidable by Warning 8.5a.7d.
 
+### Corollary 8.5a.7r: Selectors force cross-packet promoted edges
+
+Work in the remaining \(k=2\) counterexample case, and let
+\[
+E_*
+\]
+be the finite singleton-exceptional set from Corollary 8.3b. Let
+\[
+F_1,F_2,\ldots
+\]
+be pairwise disjoint nonempty finite subsets of
+\[
+A\setminus E_*.
+\]
+Then for every infinite
+\[
+I\subset\mathbb N
+\]
+and every selector
+\[
+x_s\in F_s\qquad(s\in I),
+\]
+the selected set
+\[
+X=\{x_s:s\in I\}
+\]
+contains arbitrarily late bad cross-packet edges: for every \(L\) there is
+a finite set
+\[
+G\subset X,\qquad |G|\ge2,
+\]
+and an integer \(v>L\) such that
+\[
+v\ge\max G-1,\qquad
+v\notin3(A\setminus G). \tag{1}
+\]
+Since \(X\) contains at most one point of each \(F_s\), every such \(G\)
+uses vertices from at least two distinct packets.
+
+Proof. Put
+\[
+X_L=\{x\in X:\ x>L+1\}.
+\]
+This is an infinite subset of \(A\setminus E_*\). By Corollary 3.1c,
+\(X_L\) contains a finite late-bad set
+\[
+G\subset X_L.
+\]
+By Corollary 8.3b, no singleton subset of \(A\setminus E_*\) is late-bad.
+Hence
+\[
+|G|\ge2.
+\]
+
+It remains to choose the displayed witness. If \(A\setminus G\) is not an
+order-3 basis, then it has unbounded holes, so choose
+\[
+v>\max\{L,\max G\}
+\]
+with \(v\notin3(A\setminus G)\). If \(A\setminus G\) is an order-3 basis,
+then late-badness means it has no threshold below \(\max G\). Hence some
+\[
+v\ge\max G-1>L
+\]
+satisfies \(v\notin3(A\setminus G)\). In both cases (1) holds. The
+selector property forces \(G\) to meet at least two of the sets \(F_s\).
+\(\square\)
+
+Combining this with Corollary 8.5a.7q gives the current exact wiring debt.
+One may recursively build pairwise disjoint fresh private packets
+\[
+\Pi_s=(F_s,w_s,f_s,U_s,m_s)
+\]
+whose deleted colors, private rows, and mirrors avoid all earlier packet
+data. But for every infinite subcollection and every choice of one deleted
+color from each \(F_s\), Corollary 8.5a.7r forces arbitrarily late bad
+edges among the selected colors. Therefore a counterexample cannot be a
+disjoint union of self-contained private packets. Its late-bad hypergraph
+must promote colors from many packets into new cross-packet edges on every
+infinite selector.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7167,12 +7248,13 @@ their deleted colors. Corollary 8.5a.7p also lets the retained fiber rows
 avoid any prescribed finite row core, and Corollary 8.5a.7q does the same
 for the retained mirror set \(m-U\). The precise missing step is to show
 that these bounded-center, cofinally moving-palette, moving-row/mirror, or
-independence-number escapes are impossible under the global late-bad barrier
-hypothesis, or to construct a staged basis in which the fibers \(U\),
-mirrors \(m-U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all
-escape while maintaining order-2 coverage and promoted-edge barriers. This
-is now the active form of the certificate-free obstruction; it is stronger
-than mobile injectivity and weaker than finite recurrent Sidon coloring.
+independence-number escapes are impossible under the cross-packet selector
+obligation of Corollary 8.5a.7r, or to construct a staged basis in which
+the fibers \(U\), mirrors \(m-U\), centers \(m\), shifts \(h\), and active
+colors \(f,g\) all escape while maintaining order-2 coverage and promoted
+cross-packet barriers. This is now the active form of the certificate-free
+obstruction; it is stronger than mobile injectivity and weaker than finite
+recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -13772,12 +13854,16 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 8.5a.7q adds mirror-core avoidance: the retained mirror set
   \(m-U\) can simultaneously be kept outside any prescribed finite old
   mirror core.
+* Corollary 8.5a.7r records the promoted-edge debt: after building disjoint
+  fresh private packets, every infinite selector choosing one deleted color
+  from each packet contains arbitrarily late bad edges spanning multiple
+  packets.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
   every fixed certificate-rich test set, every finite row or mirror core,
-  or every unbounded recurrent center set without losing the late-bad
-  barrier.
+  or every unbounded recurrent center set while still creating cross-packet
+  selector edges.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

@@ -166,6 +166,13 @@ the unbounded reflection center \(m=w-f\), full uniqueness
 certificate-freeness of \(U\). This supports Lemmas 8.5a.7i--8.5a.7l and
 the local-compatibility warning in Example 8.5a.7m.
 
+`selector_barrier_diagnostics.py` checks the finite product-cover condition
+behind Corollary 8.5a.7r. Given disjoint packet blocks and proposed
+cross-packet edges, it reports selectors choosing one vertex per block that
+contain no edge. Local block cuts are uncovered, complete bipartite wiring
+between two blocks covers every selector, and sparse wiring leaves explicit
+escaping selectors.
+
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton
 deletions remain 3-bases, but deleting \(\{0,1\}\) creates a 3-sum hole

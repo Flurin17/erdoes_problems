@@ -2155,6 +2155,15 @@ the rows whose mirrors \(m-u\) land in a prescribed finite mirror core.
 Thus the deleted colors \(F\), retained rows \(U\), and retained mirrors
 \(m-U\) can all be chosen outside the current finite stage.
 
+Corollary 8.5a.7r records the resulting promoted-edge debt. Build disjoint
+fresh packets and choose one deleted color from each packet. The selected
+colors form an infinite subset of the singleton-free tail, so Lemma 8.4
+forces arbitrarily late finite bad subsets inside this selector. Since the
+selector has at most one color from each packet, every such bad subset is a
+cross-packet edge. Thus a counterexample cannot be a disjoint union of
+fresh private packets; it must wire selected colors from different packets
+into new late-bad edges.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
@@ -2162,6 +2171,6 @@ inside every finite test, or have retained shifted overlaps while keeping
 the shift moving or shift-independent inside every finite test. It must do
 this cofinally outside every finite palette and finite row/mirror core while
 also preventing unbounded reflection centers on any fixed finite-palette
-violation. A proof must turn one of these escape patterns into a recurrent
-certificate triple; a counterexample must stage these escaping fibers while
-preserving the late-bad barrier for every infinite deletion.
+violation. A proof must turn one of these cross-packet escape patterns into
+a recurrent certificate triple; a counterexample must stage these escaping
+fibers while preserving the late-bad barrier for every infinite deletion.
