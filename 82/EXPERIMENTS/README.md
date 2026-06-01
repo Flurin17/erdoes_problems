@@ -248,3 +248,6 @@ Computational checks and generated data for Erdos Problem 82.
   from Lemma 27, where equal-sized homogeneous subsets of
   `N(u)\N(v)` and `N(v)\N(u)` combine with `u,v` to form a regular induced
   subgraph.
+- `regular_witness.py`: prints one largest regular induced witness for a
+  fixed graph mask, including degrees, witness edges, and optional split-side
+  counts/profiles for structured examples.

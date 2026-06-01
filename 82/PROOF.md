@@ -7306,6 +7306,37 @@ pair-difference proof must replace the internal Ramsey extraction in `A` and
 `B`, or the bipartite Ramsey extraction between them, by a more efficient use
 of counterexample structure.
 
+## Lemma 29: Split Compensation Criterion
+
+Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put
+
+```text
+i_X(x)=deg_{G[X]}(x),       c_Y(x)=|N(x) cap Y|,
+```
+
+and define `i_Y(y),c_X(y)` analogously for `y in Y`.  Then `G[X union Y]` is
+regular if and only if there is an integer `D` such that
+
+```text
+i_X(x)+c_Y(x)=D       for every x in X,
+i_Y(y)+c_X(y)=D       for every y in Y.
+```
+
+Equivalently, the cross-degree profile between the two sides exactly
+compensates the internal-degree profiles on the two sides.
+
+Proof.  For a vertex `x in X`, its degree in `G[X union Y]` is exactly
+`i_X(x)+c_Y(x)`.  For a vertex `y in Y`, it is `i_Y(y)+c_X(y)`.  Thus all
+degrees in `G[X union Y]` are equal precisely when the displayed equations
+hold for a common value `D`.  QED.
+
+Lemma 27 is the special case in which the internal and cross profiles are
+constant on each of the four roles `u,v,X,Y`.  The larger regular witnesses in
+the compensated spread-one samples use the full compensation criterion:
+neither side is internally regular and the cross graph is not biregular, but
+the sums are constant.  This points back toward degree-profile absorption
+rather than purely homogeneous pair templates.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an

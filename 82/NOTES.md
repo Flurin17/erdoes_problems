@@ -2285,3 +2285,10 @@ source of growth beyond Ramsey.
   but the best pair template has order only `6` while the true maximum regular
   order is `10`; the two-sided difference sets are already behaving too
   irregularly for the local template to capture the full witness.
+- 2026-06-01: Added `regular_witness.py` and Lemma 29, the split compensation
+  criterion.  The maximum regular witness in the compensated spread-one
+  `n=20` sample has `4` vertices on the first construction side and `6` on the
+  second; neither side is internally regular and the cross graph is not
+  biregular, but internal degree plus cross degree is constantly `4`.
+  Therefore the missing structure beyond pair templates is degree-profile
+  compensation across a cut, not just homogeneous subpairs.
