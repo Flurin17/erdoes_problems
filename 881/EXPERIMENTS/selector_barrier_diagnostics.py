@@ -32,6 +32,8 @@ def selector_relevant_edges(blocks: tuple[Block, ...], edges: Iterable[Edge]) ->
     owner = vertex_blocks(blocks)
     relevant: list[Edge] = []
     for edge in edges:
+        if any(vertex not in owner for vertex in edge):
+            continue
         seen: set[int] = set()
         ok = True
         for vertex in edge:
@@ -61,6 +63,21 @@ def uncovered_selectors(
     return failures
 
 
+def first_covered_prefix(blocks: tuple[Block, ...], edges: Iterable[Edge]) -> int | None:
+    edge_tuple = tuple(edges)
+    for size in range(1, len(blocks) + 1):
+        if not uncovered_selectors(blocks[:size], edge_tuple, limit=1):
+            return size
+    return None
+
+
+def report(name: str, blocks: tuple[Block, ...], edges: Iterable[Edge]) -> None:
+    edge_tuple = tuple(edges)
+    print(name)
+    print(f"first_covered_prefix={first_covered_prefix(blocks, edge_tuple)}")
+    print(f"uncovered_selectors={uncovered_selectors(blocks, edge_tuple)}")
+
+
 def main() -> None:
     blocks = (
         ("a0", "a1"),
@@ -69,8 +86,7 @@ def main() -> None:
     )
 
     local_edges = [frozenset(block) for block in blocks]
-    print("local block cuts")
-    print(f"uncovered_selectors={uncovered_selectors(blocks, local_edges)}")
+    report("local block cuts", blocks, local_edges)
 
     complete_cross_edges = [
         frozenset((a, b))
@@ -78,16 +94,14 @@ def main() -> None:
         for b in blocks[1]
     ]
     print()
-    print("complete cross-packet wiring")
-    print(f"uncovered_selectors={uncovered_selectors(blocks, complete_cross_edges)}")
+    report("complete cross-packet wiring", blocks, complete_cross_edges)
 
     sparse_cross_edges = [
         frozenset(("a0", "b0")),
         frozenset(("b1", "c1")),
     ]
     print()
-    print("sparse cross-packet wiring")
-    print(f"uncovered_selectors={uncovered_selectors(blocks, sparse_cross_edges)}")
+    report("sparse cross-packet wiring", blocks, sparse_cross_edges)
 
 
 if __name__ == "__main__":

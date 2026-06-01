@@ -7265,6 +7265,66 @@ A positive proof must show that such product-selector barriers cannot carry
 the private-incidence structure above; a negative construction must realize
 them, not merely an abstract index front.
 
+### Corollary 8.5a.7t: Product-selector debt has finite complete windows
+
+Keep the hypotheses and notation of Corollary 8.5a.7s. Fix \(L\). For
+every infinite
+\[
+I\subset\mathbb N
+\]
+there is a finite nonempty set
+\[
+J\subset I
+\]
+such that every finite selector
+\[
+y_j\in F_j\qquad(j\in J)
+\]
+contains a bad cross-packet edge from \(\mathcal G_L\): there is
+\[
+G\in\mathcal G_L,\qquad G\subset\{y_j:j\in J\}. \tag{1}
+\]
+In particular, for every \(L\) and every infinite packet tail, the
+counterexample must realize a finite product cover by arithmetic bad edges
+with witnesses \(>L\).
+
+Proof. Relabel \(I=\{i_1<i_2<\cdots\}\). Suppose no finite
+\[
+J\subset I
+\]
+has the displayed product-cover property. Then for every \(n\) there is a
+selector
+\[
+y_{i_j}^{(n)}\in F_{i_j}\qquad(1\le j\le n)
+\]
+such that no
+\[
+G\in\mathcal G_L
+\]
+is contained in
+\[
+\{y_{i_1}^{(n)},\ldots,y_{i_n}^{(n)}\}. \tag{2}
+\]
+Since every \(F_{i_j}\) is finite, the tree of partial selectors satisfying
+(2) at their length is finitely branching and has nodes at every depth. By
+Koenig's lemma, it has an infinite branch
+\[
+y_{i_j}\in F_{i_j}\qquad(j\ge1)
+\]
+whose every finite initial segment satisfies (2). But Corollary 8.5a.7s,
+applied to this infinite selector on \(I\), gives
+\[
+G\in\mathcal G_L,\qquad G\subset\{y_{i_j}:j\ge1\}.
+\]
+The support of \(G\) is finite, so \(G\) lies in some finite initial
+segment of the branch, contradicting (2). \(\square\)
+
+Thus the promoted-edge debt is finitely visible: it is not enough for a
+construction to arrange an abstract infinite selector barrier. At
+arbitrarily late thresholds and inside every infinite packet tail, some
+finite packet window must already be completely wired so that every product
+choice of one deleted color contains a realized arithmetic late-bad edge.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7307,12 +7367,12 @@ avoid any prescribed finite row core, and Corollary 8.5a.7q does the same
 for the retained mirror set \(m-U\). The precise missing step is to show
 that these bounded-center, cofinally moving-palette, moving-row/mirror, or
 independence-number escapes are impossible under the cross-packet selector
-obligation of Corollaries 8.5a.7r--8.5a.7s, or to construct a staged basis
+obligation of Corollaries 8.5a.7r--8.5a.7t, or to construct a staged basis
 in which the fibers \(U\), mirrors \(m-U\), centers \(m\), shifts \(h\), and
 active colors \(f,g\) all escape while maintaining order-2 coverage and
-promoted product-selector barriers. This is now the active form of the
-certificate-free obstruction; it is stronger than mobile injectivity and
-weaker than finite recurrent Sidon coloring.
+arbitrarily late finite product covers of promoted cross-packet edges. This
+is now the active form of the certificate-free obstruction; it is stronger
+than mobile injectivity and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -13920,12 +13980,15 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   realized cross-packet bad edges form a non-singleton weak barrier for each
   witness threshold, while the actual color edges form a stronger
   product-selector barrier.
+* Corollary 8.5a.7t adds a compactness consequence: inside every infinite
+  packet tail and for every witness threshold, some finite packet window is
+  already completely product-covered by realized cross-packet bad edges.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
   every fixed certificate-rich test set, every finite row or mirror core,
-  or every unbounded recurrent center set while still creating promoted
-  product-selector barriers.
+  or every unbounded recurrent center set while still creating arbitrarily
+  late finite product covers of promoted cross-packet edges.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and

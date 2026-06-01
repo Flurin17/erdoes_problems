@@ -171,7 +171,9 @@ behind Corollary 8.5a.7r. Given disjoint packet blocks and proposed
 cross-packet edges, it reports selectors choosing one vertex per block that
 contain no edge. Local block cuts are uncovered, complete bipartite wiring
 between two blocks covers every selector, and sparse wiring leaves explicit
-escaping selectors.
+escaping selectors. It also reports the first finite prefix that is already
+product-covered, matching the finite compactness target in Corollary
+8.5a.7t.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

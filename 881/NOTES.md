@@ -2171,6 +2171,13 @@ is stronger than the index shadow: every product selector must contain an
 actual realized bad edge, not merely have an index set belonging to an
 abstract front.
 
+Corollary 8.5a.7t gives the finite compactness form of this demand. In
+every infinite packet tail and for every \(L\), some finite packet window is
+already completely product-covered: every choice of one deleted color from
+each packet in that finite window contains a realized late-bad edge with
+witness \(>L\). This is now the finite combinatorial target for any
+negative construction.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
@@ -2178,7 +2185,6 @@ inside every finite test, or have retained shifted overlaps while keeping
 the shift moving or shift-independent inside every finite test. It must do
 this cofinally outside every finite palette and finite row/mirror core while
 also preventing unbounded reflection centers on any fixed finite-palette
-violation. A proof must turn one of these product-selector escape patterns
-into a recurrent certificate triple; a counterexample must stage these
-escaping fibers while preserving the late-bad barrier for every infinite
-deletion.
+violation. A proof must turn one of these finite product-cover patterns into
+a recurrent certificate triple; a counterexample must stage these escaping
+fibers while preserving the late-bad barrier for every infinite deletion.
