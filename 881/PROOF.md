@@ -24879,6 +24879,56 @@ made entirely from profiles with one centered linear core over the packet.
 At least one selected profile must see the whole packet as too wide or too
 far from all of its auxiliary midpoints.
 
+### Corollary 16.109: Product barriers force packetwise center-far debt
+
+Work in the packet setting of Corollary 16.93, and suppose the assigned
+robust-core branch product-covers every selector tail. Assume that the
+finite witness family \(\mathcal B_s\) supplied by Corollary 16.93 is, for
+each sufficiently large \(s\), made of profiles satisfying the hypotheses
+of Corollary 16.106. Thus a label \(\lambda\in\mathcal B_s\) has data
+\[
+I_\lambda=[a_\lambda,b_\lambda]\cap\mathbb N,\quad
+n_\lambda=|I_\lambda|,\quad r_\lambda,\quad \delta_\lambda>1/2,
+\]
+nonempty robust cores
+\[
+R_{K_{\lambda,i}}(\delta_\lambda,I_\lambda;r_\lambda),
+\]
+constants \(\gamma_\lambda,D_\lambda\), and the auxiliary length bound
+from Corollary 16.106.
+
+Write
+\[
+p_s^-=\min P_s,\qquad p_s^+=\max P_s,\qquad
+w_s=p_s^+-p_s^-.
+\]
+Then, for every sufficiently large \(s\), there is
+\[
+\lambda_s\in\mathcal B_s
+\]
+such that every auxiliary interval
+\[
+K_{\lambda_s,i}=[c_{\lambda_s,i},d_{\lambda_s,i}]\cap\mathbb N
+\]
+in that profile satisfies
+\[
+\left|p_s^-+p_s^+ + a_{\lambda_s}+b_{\lambda_s}
+      -2(c_{\lambda_s,i}+d_{\lambda_s,i})\right|
+      +w_s
+\ge \gamma_{\lambda_s}n_{\lambda_s}-D_{\lambda_s}. \tag{1}
+\]
+
+Proof. For all sufficiently large \(s\), Corollary 16.93 gives
+\[
+P_s\cap\bigcap_{\lambda\in\mathcal B_s}C_\lambda=\varnothing.
+\]
+Apply Corollary 16.108 to this finite family. \(\square\)
+
+Thus the high-density linear-core part of a product-selector barrier has a
+packetwise cost that no longer mentions individual selected colors. Every
+late packet must nominate an assigned interval test whose auxiliary
+midpoints all miss the packet center after the packet width is charged.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26256,6 +26306,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollary 16.108 records the contrapositive: every finite robust
   exclusion has a profile whose auxiliary midpoints are all center-far
   after accounting for packet width.
+* Corollary 16.109 plugs the center-far residual back into the selector
+  barrier: in the high-density linear-core branch, every sufficiently late
+  packet must carry one center-far assigned profile.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

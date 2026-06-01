@@ -184,6 +184,9 @@ one robust core centered near that packet.
 Corollary 16.108 gives the contrapositive residual: every finite robust
 exclusion has a profile for which all auxiliary midpoints are center-far
 after paying the packet width.
+Corollary 16.109 plugs this into the selector barrier: in the high-density
+linear-core branch, every sufficiently late packet must nominate such a
+center-far assigned profile.
 
 ## Definitions
 
