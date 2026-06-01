@@ -20453,6 +20453,41 @@ window, or some protected target must keep many bridge rows below the
 late-row threshold in (3). This isolates the remaining singleton escape as
 a genuinely staggered-window construction rather than a same-window bridge.
 
+### Diagnostic 16.30: The first interval bridge shows sparse protection debt
+
+The enhanced script
+`EXPERIMENTS/interval_marker_next_block_search.py` now records, for every
+eligible block, how many new elements have strict singleton witnesses below
+the declared endpoint and how many of those lie in the common-row pressure
+range of Corollary 16.29.
+
+For the first interval-marker seed
+\[
+[1,4]\cup\{8\},
+\]
+the default bounded search checks all next blocks of size at most \(6\) with
+candidate values through \(50\). It finds no strict singleton continuation.
+More specifically, the best eligible block of size \(6\) is
+\[
+P=(19,25,26,39,43,44),
+\]
+with coverage through \(97\) and declared endpoint \(95\). Among these six
+new elements, only
+\[
+19,\ 39
+\]
+have strict singleton witnesses below \(95\), namely witnesses \(65\) and
+\(87\), and only \(39\) lies in the common-row pressure range from
+Corollary 16.29.
+
+This remains finite evidence only, but it clarifies the failure mode. The
+search is not merely failing to find represented values; most bridge
+fillers are deferred immediately, and the few protected fillers do not form
+a half-packet in the same-window pressure regime. Thus the next singleton
+construction target is not an ordinary bridge block, but a mechanism for
+staggering the future witness windows of the deferred fillers while still
+maintaining the order-\(3\) coverage buffer.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21547,6 +21582,11 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   the other bridge elements are active late rows, then the same bridge
   inequality must hold. Violating it forces sparse protection or staggered
   witness windows.
+* Diagnostic 16.30 records the first interval-marker bridge debt under the
+  enhanced search: among all size-\(\le6\) candidate blocks through \(50\),
+  the best size-\(6\) block protects only two elements, and only one lies
+  in the common-row pressure range. The finite obstruction is immediate
+  deferred filler protection, not lack of four-sum representation.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

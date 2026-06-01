@@ -721,6 +721,10 @@ endpoint.
 This implements the exact witness-window criterion of Corollary 16.25:
 private candidates for `q` are represented values in `4S` that avoid every
 shift `p + 3(S \\ {q})` from retained padders `p`.
+The diagnostic now also reports sparse-protection debt. Under the default
+bounds, the best eligible size-6 block is `(19,25,26,39,43,44)`, declared
+at `95`; only `19` and `39` have strict singleton witnesses, and only `39`
+lies in the common-row pressure range from Corollary 16.29.
 
 `bridge_sidon_pressure.py` evaluates Corollary 16.28 numerically. For the
 interval-marker model with `L=4`, the default run shows the first possible

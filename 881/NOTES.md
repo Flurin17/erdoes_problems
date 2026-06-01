@@ -2408,6 +2408,14 @@ singleton continuation block of size at most \(6\) with candidates through
 \(50\) protects every new element. This is finite evidence only, but it
 matches Lemmas 16.10, 16.11, and 16.24: bridge fillers quickly become
 poisoned by the very coverage they create.
+The enhanced diagnostic records the sparse-protection debt: under the
+default bounds, the best size-\(6\) eligible block
+\[
+(19,25,26,39,43,44)
+\]
+has strict witnesses only for \(19\) and \(39\), and only \(39\) is in the
+common-row pressure range of Corollary 16.29. The finite search therefore
+does not merely miss full protection; it sees most bridge fillers deferred.
 Corollary 16.25 packages the exact finite criterion behind these searches:
 for a finite stage \(S\) and target \(q\), the private order-\(4\)
 candidates in a window \(I\) are exactly

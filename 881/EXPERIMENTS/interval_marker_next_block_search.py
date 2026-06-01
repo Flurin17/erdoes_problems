@@ -12,7 +12,19 @@ This is a bounded finite diagnostic only.
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
 from itertools import combinations
+
+
+@dataclass(frozen=True)
+class BestBlock:
+    protected_count: int
+    pressure_count: int
+    block: tuple[int, ...]
+    declared: int
+    coverage_end: int
+    witnesses: dict[int, list[int]]
+    pressure_targets: tuple[int, ...]
 
 
 def hsum_bits(elements: set[int], order: int, cap: int) -> int:
@@ -64,6 +76,8 @@ def search(L: int, max_size: int, max_candidate: int, cap: int) -> None:
     candidates = [value for value in range(previous_endpoint + 1, max_candidate + 1)]
     checked_by_size: dict[int, int] = {}
     eligible_by_size: dict[int, int] = {}
+    best_by_size: dict[int, BestBlock] = {}
+    best_overall: BestBlock | None = None
 
     for size in range(1, max_size + 1):
         checked = 0
@@ -80,6 +94,8 @@ def search(L: int, max_size: int, max_candidate: int, cap: int) -> None:
             eligible += 1
             four_all = hsum_bits(elements, 4, cap)
             witnesses: dict[int, list[int]] = {}
+            protected_count = 0
+            pressure_targets: list[int] = []
             for target in block:
                 found = strict_witnesses(
                     elements,
@@ -90,9 +106,44 @@ def search(L: int, max_size: int, max_candidate: int, cap: int) -> None:
                     cap,
                 )
                 if not found:
-                    break
+                    continue
+                protected_count += 1
                 witnesses[target] = found[:3]
-            else:
+                other_rows = [row for row in block if row != target]
+                if not other_rows or min(other_rows) > declared - 2 * target - min(elements):
+                    pressure_targets.append(target)
+            candidate_best = BestBlock(
+                protected_count=protected_count,
+                pressure_count=len(pressure_targets),
+                block=block,
+                declared=declared,
+                coverage_end=coverage_end,
+                witnesses=witnesses,
+                pressure_targets=tuple(pressure_targets),
+            )
+            current = best_by_size.get(size)
+            if current is None or (
+                candidate_best.protected_count,
+                candidate_best.pressure_count,
+                candidate_best.declared,
+            ) > (
+                current.protected_count,
+                current.pressure_count,
+                current.declared,
+            ):
+                best_by_size[size] = candidate_best
+            if best_overall is None or (
+                candidate_best.protected_count,
+                candidate_best.pressure_count,
+                candidate_best.declared,
+            ) > (
+                best_overall.protected_count,
+                best_overall.pressure_count,
+                best_overall.declared,
+            ):
+                best_overall = candidate_best
+
+            if protected_count == len(block):
                 print("interval-marker continuation found")
                 print(f"L={L}")
                 print(f"old={sorted(old)}")
@@ -100,6 +151,7 @@ def search(L: int, max_size: int, max_candidate: int, cap: int) -> None:
                 print(f"coverage_end={coverage_end}")
                 print(f"declared={declared}")
                 print(f"witnesses={witnesses}")
+                print(f"pressure_targets={tuple(pressure_targets)}")
                 return
 
         checked_by_size[size] = checked
@@ -111,6 +163,15 @@ def search(L: int, max_size: int, max_candidate: int, cap: int) -> None:
     print(f"max_candidate={max_candidate}")
     print(f"checked_by_size={checked_by_size}")
     print(f"eligible_by_size={eligible_by_size}")
+    print("best_by_size=")
+    for size, best in sorted(best_by_size.items()):
+        print(
+            f"  size={size} protected={best.protected_count}/{size} "
+            f"pressure={best.pressure_count}/{size} block={best.block} "
+            f"declared={best.declared} coverage_end={best.coverage_end} "
+            f"pressure_targets={best.pressure_targets} witnesses={best.witnesses}"
+        )
+    print(f"best_overall={best_overall}")
 
 
 def main() -> None:
