@@ -8873,6 +8873,77 @@ w=p+d=x+y+d\in3(C\cup\{x,y\}),
 \]
 again contradicting safety. Therefore no such \(S\) exists. \(\square\)
 
+### Corollary 8.5a.7z.12e''': Deleted-gate reflection is the only extra check
+
+In the setting of Lemma 8.5a.7z.12e'', write
+\[
+A=C\cup F
+\]
+with \(C\) retained and \(F\) deleted. If
+\[
+d=w-p\in C \tag{1}
+\]
+and
+\[
+d+f\in2C\qquad(f\in F), \tag{2}
+\]
+then no finite retained batch can cover the next gap \(p\) while preserving
+\[
+w\notin3C.
+\]
+
+Proof. Lemma 8.5a.7z.12e'' requires \(d+a\in2C\) for every old summand
+\[
+a\in A
+\]
+that could pair with a new point to cover \(p\). For \(a\in C\), this is
+automatic from (1), since
+\[
+d+a\in C+C=2C.
+\]
+For \(a\in F\), it is exactly (2). Thus Lemma 8.5a.7z.12e'' applies.
+\(\square\)
+
+### Corollary 8.5a.7z.12g: Fixed-rank reflected blocker defects are bounded
+
+Assume now that \(A\) is an order-\(2\) basis with threshold \(N_0\), that
+\[
+F\subset A
+\]
+is finite, and put
+\[
+C=A\setminus F.
+\]
+Let
+\[
+w\notin3C.
+\]
+If \(T\subset C\) is finite and satisfies
+\[
+w-\max T\ge N_0,\qquad T+F\subseteq2C, \tag{1}
+\]
+then
+\[
+|T|\le |F+F|. \tag{2}
+\]
+
+In particular, for a fixed deleted packet \(F\), there are at most
+\[
+|F+F|
+\]
+retained complements \(d=w-p\in C\), with \(p\ge N_0\), for which
+\[
+d+F\subseteq2C.
+\]
+For every such complement whose \(p=w-d\) is a genuine next gap of \(2A\),
+Corollary 8.5a.7z.12e''' gives a reflected finite-batch blocker.
+
+Proof. The bound is exactly Corollary 8.4c.1 applied to the test set
+\[
+T.
+\]
+The final assertion is Corollary 8.5a.7z.12e''' with \(d=w-p\). \(\square\)
+
 The hypothesis is intentionally reflected, not merely metric. A coarse
 coverage threshold such as \(2A\) covering past \(0.6w\) cannot replace it:
 for \(C=[1,L]\), \(F=\varnothing\), and \(w=3L+4\), one has
@@ -8933,6 +9004,12 @@ and all \(1034\) one-point candidates \(x=p-a\) satisfy
 \[
 d+a\in2C.
 \]
+By Corollary 8.5a.7z.12e''', this certificate has a smaller core:
+\[
+d+1000,\quad d+1007,\quad d+2000
+\]
+all lie in \(2C\). Once \(d\) itself is retained, every retained old
+summand \(a\in C\) reflects automatically through the pair \(d+a\).
 Thus two-new representations are blocked by \(d\in C\), while one-new
 representations are blocked by the reflected two-sum condition. The script
 prints
@@ -8940,6 +9017,29 @@ prints
 \texttt{no\_finite\_batch\_by\_12e\_prime=True}
 \]
 for this state.
+The seed-geometry parameters in the same script also allow the initial
+upper retained band to be varied. At scale \(100\), with pair batches and
+beam \(8\), interval upper endpoints \(1200,1400,1600,1800\) all end in
+the same kind of reflected finite-batch blocker, with best cover endpoints
+\[
+6465,\ 6506,\ 6200,\ 6550
+\]
+respectively. Extending the initial upper band safely by a greedy rule does
+not evade the obstruction: upper stop \(2500\) reaches \(6898\), and upper
+stops \(3200\) or \(5000\) have initial coverage \(6899\) and immediately
+stall at \(6900\), again with
+\[
+d=w-p=3100\in C,\qquad d+\{1000,1007,2000\}\subset2C.
+\]
+The adjacent greedy-safe endpoint \(3000\) is a useful warning: it has the
+same initial coverage and stalls at the same gap \(6900\), with
+\[
+d=3100\notin C.
+\]
+There the full reflected-complement certificate of Lemma 8.5a.7z.12e''
+does not apply, but the script still reports no safe one-point or two-point
+batch. Thus Lemma 8.5a.7z.12e'' captures the cleanest wall, not the whole
+pair-saturation obstruction measured by Lemma 8.5a.7z.12e'.
 The optional blocker-avoidance mode
 ```
 python3 881/EXPERIMENTS/spike_safe_extension_search.py --scale 100 --beam 8 --steps 400 --allow-pairs --avoid-reflected-blockers

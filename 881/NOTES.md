@@ -2427,8 +2427,36 @@ repair also repairs \(w\). The scale-\(100\), beam-\(8\), pair-batch run
 prints this certificate with \(d=3494\) and all \(1034\) one-point
 candidates reflected into \(2C\). Coarse coverage past a fixed fraction of
 \(w\) is not enough by itself; the blocker is the reflected condition.
+Corollary 8.5a.7z.12e''' simplifies the check in the current retained/deleted
+split: once \(d=w-p\) is retained, every retained old summand reflects
+automatically as \(d+a\in C+C\), so only the deleted gates need separate
+checking. The default terminal state has
+\[
+d+\{1000,1007,2000\}\subset2C.
+\]
+Corollary 8.5a.7z.12g then limits how far this exact wall can persist at
+fixed rank: if \(T\) is a set of retained defects \(d\) with
+\(w-\max T\ge N_0\) and \(T+F\subset2C\), then
+\[
+|T|\le |F+F|.
+\]
+So a fixed deleted packet can create only finitely many retained-complement
+blockers above the order-2 threshold; a global obstruction must either keep
+moving the packet \(F\), grow its rank, or use the private-incidence escape
+\(w-d=f+c\) with \(d+f\notin2C\).
 The script now prints `no_finite_batch_by_12e_prime=True` for that terminal
 state, making the Lemma 8.5a.7z.12e' certificate explicit.
+The seed-geometry scan in the same script varies the upper retained band.
+At scale \(100\), interval upper endpoints \(1200,1400,1600,1800\) still
+stall in reflected blockers, with best cover endpoints \(6465,6506,6200\),
+and \(6550\). A greedy-safe upper band with endpoint \(2500\) reaches
+\(6898\), while endpoints \(3200\) and \(5000\) already have initial
+coverage \(6899\) and immediately stall at \(6900\); the blocker has
+\(d=3100\) and the same deleted-gate reflection condition.
+The adjacent greedy-safe endpoint \(3000\) also starts with coverage
+\(6899\) and stalls at \(6900\), but \(d=3100\notin C\). It still has no
+safe one-point or two-point batch, so the finite pair-saturation
+obstruction is broader than the clean retained-defect certificate.
 With `--avoid-reflected-blockers`, the same scale-\(100\), beam-\(8\) run
 still reaches only \(6503\). At the stopping step, the script reports
 \(128\) raw extensions and \(0\) surviving after the reflected-blocker

@@ -259,7 +259,21 @@ The script also prints a reflected next-gap blocker certificate. In the
 scale `100`, beam-`8`, `--allow-pairs` run, `d=w-p=3494` is retained and
 all `1034` one-point candidates satisfy `d+a in 2C`, so Lemma
 8.5a.7z.12e'' blocks every finite batch at that final gap. The explicit
-flag is `no_finite_batch_by_12e_prime=True`.
+flag is `no_finite_batch_by_12e_prime=True`. It also prints the
+deleted-gate reflection check from Corollary 8.5a.7z.12e''': once `d` is
+retained, retained old summands are automatic, and the default terminal
+state has `d+{1000,1007,2000} subset 2C`. Corollary 8.5a.7z.12g records
+the complementary bound: at fixed deleted packet `F`, such retained-defect
+walls have size at most `|F+F|` above the order-2 threshold.
+The seed geometry can be varied with `--upper-stop` and `--upper-policy`.
+At scale `100`, interval upper endpoints `1200,1400,1600,1800` still end
+in reflected blockers, with best cover endpoints `6465,6506,6200,6550`.
+A greedy-safe upper band with endpoint `2500` reaches `6898`; endpoints
+`3200` and `5000` start with coverage `6899` and immediately stall at
+`6900`, again with a deleted-gate reflected blocker. The adjacent endpoint
+`3000` also stalls at `6900` with no safe one- or two-point batch even
+though `d=3100` is not retained, so the observed pair-saturation
+obstruction is broader than the clean retained-defect certificate.
 With `--avoid-reflected-blockers`, the scale `100`, beam-`8` run reaches
 only `6503`; at the stopping step it has `128` raw extensions and `0`
 surviving the reflected-blocker filter. This tests the escape of avoiding

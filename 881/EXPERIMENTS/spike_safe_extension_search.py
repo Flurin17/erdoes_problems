@@ -180,6 +180,9 @@ def reflected_next_gap_blocker(
     return {
         "defect": defect,
         "defect_retained": defect in state.retained,
+        "deleted_gate_reflections": {
+            gate: defect + gate in state.retained_pair_sums for gate in sorted(deleted)
+        },
         "one_point_candidate_count": len(one_point_candidates),
         "one_point_reflected_blocked_count": (
             len(one_point_candidates) - len(unblocked)
@@ -251,7 +254,12 @@ def add_retained(
     return add_retained_batch(state, deleted, (candidate,), cap)
 
 
-def seed_state(cap: int, scale: int) -> tuple[State, set[int], int, dict[str, object]]:
+def seed_state(
+    cap: int,
+    scale: int,
+    upper_stop: int | None = None,
+    upper_policy: str = "interval",
+) -> tuple[State, set[int], int, dict[str, object]]:
     shift = 7
     rows = {1, 4, 9, 16, 25, 36}
     witness = 100 * scale
@@ -269,10 +277,39 @@ def seed_state(cap: int, scale: int) -> tuple[State, set[int], int, dict[str, ob
     low_radius = (min(private_sums) - 1) // 2
     low_band = set(range(1, low_radius + 1))
     upper_start = max(private_sums) + 1
-    upper_stop = 15 * scale
+    if upper_stop is None:
+        upper_stop = 15 * scale
     dangerous_middle_complement = witness - 2 * 43 * scale
-    upper_band = set(range(upper_start, upper_stop + 1))
-    upper_band.discard(dangerous_middle_complement)
+    upper_candidates = [
+        item for item in range(upper_start, upper_stop + 1) if item not in deleted
+    ]
+    if upper_policy == "interval":
+        upper_band = set(upper_candidates)
+        upper_band.discard(dangerous_middle_complement)
+    elif upper_policy == "greedy-safe":
+        upper_band = set()
+        retained_so_far = set(base_retained | low_band)
+        retained_pairs_so_far = pair_sums(retained_so_far, witness)
+        for candidate in upper_candidates:
+            if candidate == dangerous_middle_complement:
+                continue
+            if safe_to_add(
+                frozenset(retained_so_far),
+                frozenset(retained_pairs_so_far),
+                candidate,
+                witness,
+            ):
+                upper_band.add(candidate)
+                for old in retained_so_far:
+                    total = old + candidate
+                    if total <= witness:
+                        retained_pairs_so_far.add(total)
+                double = candidate + candidate
+                if double <= witness:
+                    retained_pairs_so_far.add(double)
+                retained_so_far.add(candidate)
+    else:
+        raise ValueError(f"unknown upper_policy: {upper_policy}")
 
     retained = base_retained | low_band | upper_band
     full = retained | deleted
@@ -292,6 +329,8 @@ def seed_state(cap: int, scale: int) -> tuple[State, set[int], int, dict[str, ob
         "private_sums": sorted(private_sums),
         "low_band": (1, low_radius),
         "upper_band": (upper_start, upper_stop),
+        "upper_policy": upper_policy,
+        "upper_band_size": len(upper_band),
         "removed_from_upper_band": dangerous_middle_complement,
     }
     return state, deleted, witness, metadata
@@ -338,11 +377,19 @@ def main() -> None:
     parser.add_argument("--steps", type=int, default=400)
     parser.add_argument("--allow-pairs", action="store_true")
     parser.add_argument("--avoid-reflected-blockers", action="store_true")
+    parser.add_argument("--upper-stop", type=int, default=None)
+    parser.add_argument(
+        "--upper-policy",
+        choices=("interval", "greedy-safe"),
+        default="interval",
+    )
     args = parser.parse_args()
 
     cap = args.cap if args.cap is not None else 100 * args.scale
     target = args.target if args.target is not None else 100 * args.scale
-    state, deleted, witness, metadata = seed_state(cap, args.scale)
+    state, deleted, witness, metadata = seed_state(
+        cap, args.scale, args.upper_stop, args.upper_policy
+    )
     beam = [state]
     best = state
     stalled_at: int | None = None
