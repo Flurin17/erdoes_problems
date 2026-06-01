@@ -6827,11 +6827,74 @@ range-separated. A proof must use their forced recurrence across all finite
 tails, or the promotion of their active colors into later barriers, rather
 than a one-stage contradiction.
 
+### Example 8.5a.7m: Moving unique-gate fibers are locally compatible
+
+The unique-gate branch in Corollary 8.5a.7f.1 also has no local
+contradiction once the gate is allowed to move. Let
+\[
+U=\{u_1,\ldots,u_M\}
+\]
+be a finite Sidon set, and choose \(N\) much larger than every element of
+\(U\). Put
+\[
+w=10N,\qquad f=N,\qquad g=2N,\qquad t=3N,\qquad q_g=5N,
+\]
+and for \(u\in U\), put
+\[
+q_u=9N-u.
+\]
+Let
+\[
+F=\{f,g\},\qquad C=U\cup\{q_u:u\in U\}\cup\{t,q_g\},\qquad S=C\cup F.
+\]
+The same range separation as in Example 8.5a.7g gives
+\[
+w\notin3C. \tag{1}
+\]
+Restoring \(f\) repairs \(w\) through every \(u\in U\):
+\[
+w=f+u+q_u, \tag{2}
+\]
+and restoring \(g\) repairs \(w\) through
+\[
+w=g+t+q_g. \tag{3}
+\]
+Thus \(F\) is inclusion-minimal for this local witness.
+
+For every \(u\in U\),
+\[
+w-u-f=q_u\in C,\qquad u+f\notin2C. \tag{4}
+\]
+Moreover,
+\[
+r_{2,S}(u+f)=1, \tag{5}
+\]
+with the unique representation \(u+f=u+f\). Indeed, \(u+f=N+u\) is too
+large to be a sum of two elements of \(U\), while every element of
+\[
+S\setminus(U\cup\{f\})
+\]
+is larger than \(N+u\) once \(N>\max U\); the representation using \(f\)
+forces the other summand to be \(u\). The Sidon choice of \(U\), together
+with range separation, again makes \(U\) certificate-free relative to
+\(S\).
+
+The diagnostic `fiber_palette_independence.py` verifies this with
+\[
+U=(1,2,4,8,16),\qquad N=260,\qquad F=(260,520),\qquad w=2600.
+\]
+It reports \(w\notin3C\), both single-color repairs, private rows for
+\(f\), full uniqueness \(r_{2,S}(u+f)=1\) for every \(u\), and
+certificate-freeness of \(U\). Thus Lemma 8.5a.7j and Corollary
+8.5a.7k are genuinely finite-palette obstructions: a moving unique gate can
+still carry an arbitrarily large local private fiber.
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
-After Corollaries 8.5a.7f--8.5a.7f.1 and Example 8.5a.7g, the remaining
-\(k=2\) problem can be stated more sharply. In every tail and outside every
-finite core, a counterexample must produce arbitrarily large sets
+After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
+the remaining \(k=2\) problem can be stated more sharply. In every tail and
+outside every finite core, a counterexample must produce arbitrarily large
+sets
 \[
 U
 \]
@@ -13448,6 +13511,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Example 8.5a.7g shows that these large fibers are locally compatible:
   a range-separated two-color packet can make one active color carry an
   arbitrarily large certificate-free private fiber.
+* Example 8.5a.7m shows the same for the unique-gate branch: by moving the
+  gate into a fresh range, a large private fiber can have
+  \(r_{2,A}(u+f)=1\) for every row and still be certificate-free.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette and every

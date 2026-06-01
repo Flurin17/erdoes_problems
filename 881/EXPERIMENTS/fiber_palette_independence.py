@@ -11,6 +11,21 @@ from __future__ import annotations
 from itertools import combinations
 
 
+def three_sums(elements: set[int]) -> set[int]:
+    ordered = sorted(elements)
+    sums: set[int] = set()
+    for i, a in enumerate(ordered):
+        for j, b in enumerate(ordered[i:], start=i):
+            for c in ordered[j:]:
+                sums.add(a + b + c)
+    return sums
+
+
+def two_sums(elements: set[int]) -> set[int]:
+    ordered = sorted(elements)
+    return {a + b for i, a in enumerate(ordered) for b in ordered[i:]}
+
+
 def rep_count(ambient: set[int], target: int) -> int:
     ordered = sorted(ambient)
     return sum(
@@ -74,6 +89,40 @@ def max_shift_free(elements: set[int], ambient: set[int], shift: int) -> int:
     )
 
 
+def moving_unique_gate_packet() -> dict[str, object]:
+    test = (1, 2, 4, 8, 16)
+    n = 260
+    w = 10 * n
+    f = n
+    g = 2 * n
+    t = 3 * n
+    q_g = 5 * n
+    mirrors = {u: 9 * n - u for u in test}
+    deleted = {f, g}
+    retained = set(test) | set(mirrors.values()) | {t, q_g}
+    ambient = retained | deleted
+    private_rows = [
+        (u, mirrors[u], mirrors[u] in retained, u + f not in two_sums(retained))
+        for u in test
+    ]
+    unique_rows = [(u, rep_count(ambient, u + f)) for u in test]
+    return {
+        "U": test,
+        "N": n,
+        "w": w,
+        "F": tuple(sorted(deleted)),
+        "w_notin_3C": w not in three_sums(retained),
+        "repairs": {
+            "restore_f": all(w == f + u + mirrors[u] for u in test),
+            "restore_g": w == g + t + q_g,
+        },
+        "private_rows": private_rows,
+        "unique_rows": unique_rows,
+        "gate_independent": gate_independent(set(test), ambient, f),
+        "certificate_free_U": is_certificate_free(set(test), ambient),
+    }
+
+
 def main() -> None:
     ambient = {8, 9, 11, 13, 15, 16}
     gate = 16
@@ -105,6 +154,12 @@ def main() -> None:
     print(f"shift_independent={shift_independent(shifted_rows, shift)}")
     print(f"certificate_free={is_certificate_free(shifted_rows, shifted_ambient)}")
     print(f"max_shift_certificate_free={max_shift_free(shifted_rows, shifted_ambient, shift)}")
+
+    packet = moving_unique_gate_packet()
+    print()
+    print("moving unique-gate packet check")
+    for key, value in packet.items():
+        print(f"{key}={value}")
 
 
 if __name__ == "__main__":

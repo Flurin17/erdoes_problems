@@ -159,7 +159,11 @@ the current large-fiber reduction. On the bipartite six-point window
 \(16\) are independent in the gate-difference graph \(u+16-v\in A\). It
 also checks the shifted-overlap toy window \(\{1,2,3,10\}\), where rows
 \(\{1,2\}\) with shift \(1\) fail shift-independence and therefore contain
-the certificate \(1,2,2\). This supports Lemmas 8.5a.7i--8.5a.7l.
+the certificate \(1,2,2\). It also verifies the moving unique-gate packet
+from Example 8.5a.7m, including the local hole, both repairs, private rows,
+full uniqueness \(r_{2,A}(u+f)=1\), gate-independence, and
+certificate-freeness of \(U\). This supports Lemmas 8.5a.7i--8.5a.7l and
+the local-compatibility warning in Example 8.5a.7m.
 
 `two_center_residue.py` verifies the residue example
 \(\{0,1,2,4\}\subset\mathbb Z/7\mathbb Z\): it is a 2-basis, all singleton

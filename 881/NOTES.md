@@ -2110,6 +2110,13 @@ fixed finite shift palette either stay inside the corresponding
 certificate-free independence numbers, or they contain a certificate triple
 that recurs by reflection and triggers Corollary 2.3c.
 
+Example 8.5a.7m shows why this still does not close the unique-gate branch
+locally. For any finite Sidon \(U\), a range-separated packet can choose a
+fresh gate \(f=N\), mirrors \(q_u=9N-u\), and a second repair color
+\(g=2N\) so that \(w=10N\) is a local collective hole, restoring \(f\)
+repairs through every \(u\in U\), and every sum \(u+f\) has the unique full
+representation \(u+f\). The moving gate makes gate-independence automatic.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent
