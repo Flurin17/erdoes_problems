@@ -763,7 +763,8 @@ blocker windows, then checks that every gate in such a window has the
 required deep doubled-band overlap and that clustered palettes contained in
 one window have the common forbidden band promised by Lemma 16.65. It also
 checks the robust-core formula from Lemma 16.69 by enumerating all deletion
-sets up to a chosen rank in an auxiliary interval.
+sets up to a chosen rank in an auxiliary interval, including the clustered
+two-color robust-core condition from Corollary 16.84.
 
 `density_split_check.py` exhaustively verifies the finite no-majority
 cardinality split used in Lemma 16.76 on small universes and bounded

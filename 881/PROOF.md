@@ -23343,6 +23343,82 @@ same-side active colors are clustered relative to a retained interval, then
 their positive-density gate packets force one extreme color outside the
 corresponding blocker window.
 
+### Corollary 16.84: Robust cores block clustered two-color packets
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis for which no infinite
+deletion leaves an order-\(4\) basis. Fix \(r\ge2\) and \(0<\eta\le1\).
+There is \(N=N(r,\eta)\) such that the following holds whenever
+\[
+I=[a,b]\cap\mathbb N\subset A
+\]
+has length \(n\ge N\).
+
+Let \(F\subset A\) satisfy \(1\le|F|\le r\), let \(f<g\) be points of
+\(F\), and let \(U_f,U_g\subset I\) satisfy the hypotheses of Corollary
+16.45 for their respective active colors, with witness parameter
+sufficiently large for the fixed interval \(I\) and rank bound \(r\). Let
+\[
+K=[c,d]\cap\mathbb N\subset A
+\]
+have length \(m\), and put
+\[
+\ell_0=\left\lceil {m-r\over r+1}\right\rceil,\qquad
+\delta={\eta\over2},\qquad
+M_\delta=\lfloor(1-\delta)n\rfloor+1.
+\]
+Assume
+\[
+M_\delta\le2\ell_0-1, \tag{1}
+\]
+\[
+g-f\le2\ell_0-1-M_\delta, \tag{2}
+\]
+and
+\[
+f,g\in R_K(\delta,I;r). \tag{3}
+\]
+Then
+\[
+|U_f\cup U_g|<\eta n. \tag{4}
+\]
+
+Proof. Choose \(N\) so large that
+\[
+2B_r\le{\eta n\over2}\qquad(n\ge N),
+\]
+where \(B_r=r(r+1)/2+2r\). Suppose, for contradiction, that
+\[
+|U_f\cup U_g|\ge\eta n. \tag{5}
+\]
+After discarding the at most \(B_r\) row-dependent exceptions from each
+packet, the union of the gate-dependent subpackets has size at least
+\[
+{\eta n\over2}=\delta n. \tag{6}
+\]
+
+Apply Lemma 16.52 to \(F\cap K\) inside \(K\). Since \(|F|\le r\), there is
+a retained interval
+\[
+J=[\alpha,\beta]\cap\mathbb N\subset K\cap(A\setminus F)
+\]
+of length \(\ell\ge\ell_0\). As in Lemma 16.69, the robust core
+\[
+R_K(\delta,I;r)
+\]
+is contained in the blocker window \(W_J(\delta,I)\). Hence (3) puts both
+\(f\) and \(g\) in \(W_J(\delta,I)\). Also (2) gives
+\[
+g-f\le2\ell-1-M_\delta.
+\]
+Corollary 16.82 applied to the two gate-dependent subpackets at density
+\(\delta\) contradicts (6). Therefore (4) holds. \(\square\)
+
+Thus clustered two-color packets are blocked by the same robust auxiliary
+cores as majority-color packets, provided the pair span fits inside the
+retained-run allowance. The remaining same-side pair escape must either
+spread farther than every such allowance or move an extreme color outside
+the robust core.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24627,6 +24703,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   clustered pairs: if the pair does not spread across the doubled retained
   interval, then a dense two-color packet forces an extreme color outside
   the blocker window.
+* Corollary 16.84 makes this robust against the unknown deletion pattern in
+  an auxiliary interval: if a clustered two-color packet has both active
+  colors in the auxiliary interval's robust core, it cannot be dense.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

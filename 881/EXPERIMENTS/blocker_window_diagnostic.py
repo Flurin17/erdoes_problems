@@ -136,6 +136,8 @@ def check_robust_core(test: Interval, block: Interval, rank: int, eta_num: int, 
         return 0
 
     checked = 0
+    pair_checked = 0
+    span_allowance = 2 * ell_0 - 1 - m_eta
     values = list(range(block.lo, block.hi + 1))
     for size in range(rank + 1):
         for deletion_tuple in combinations(values, size):
@@ -152,11 +154,21 @@ def check_robust_core(test: Interval, block: Interval, rank: int, eta_num: int, 
                     if overlap(test, doubled_band(run, gate)) < m_eta:
                         raise AssertionError((test, block, deletion_tuple, run, gate, core, m_eta))
                 checked += core.length
+                if span_allowance >= 0:
+                    for f_min in range(core.lo, core.hi + 1):
+                        for f_max in range(f_min, min(core.hi, f_min + span_allowance) + 1):
+                            common = Interval(2 * run.lo - f_min, 2 * run.hi - f_max)
+                            if overlap(test, common) < m_eta:
+                                raise AssertionError(
+                                    (test, block, deletion_tuple, run, f_min, f_max, common, m_eta)
+                                )
+                            pair_checked += 1
     print(
         f"robust I=[{test.lo},{test.hi}] K=[{block.lo},{block.hi}] "
-        f"rank={rank} eta={eta_num}/{eta_den} core=[{core.lo},{core.hi}] checked={checked}"
+        f"rank={rank} eta={eta_num}/{eta_den} core=[{core.lo},{core.hi}] "
+        f"checked={checked} pair_checked={pair_checked}"
     )
-    return checked
+    return checked + pair_checked
 
 
 def main() -> None:
