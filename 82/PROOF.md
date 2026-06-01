@@ -8641,6 +8641,20 @@ verified by
 python3 82/EXPERIMENTS/regular_spectrum.py 7 --h 7 --mask-a 287010 --mask-b 2096239
 ```
 
+A random spectrum search also finds the next instance: for `h=8`, the masks
+
+```text
+7877621,       155665244
+```
+
+on `8` vertices have no same-degree regular spectrum entries whose orders sum
+to `8`, giving `P_8>8` by the same disjoint-union mechanism.  The verification
+command is
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum.py 8 --h 8 --mask-a 7877621 --mask-b 155665244
+```
+
 ## Lemma 29: Split Compensation Criterion
 
 Let `X,Y` be disjoint vertex sets in a graph `G`.  For `x in X` put
