@@ -3666,3 +3666,10 @@ source of growth beyond Ramsey.
   block, and top pair; the `z=2` case is handled in the complement, where the
   selected non-top set would have to be `1`-regular.  Rechecked the generator
   for `h=7,8,9`.
+- 2026-06-01: Proved the regular full-drop lower family is right-extension
+  critical.  Any new last vertex preserving the `P=2` full-drop condition must
+  be adjacent to both top vertices and to every old non-top vertex except
+  possibly `p_0`; consequently it forms a clique of order `h` with one top
+  vertex, `q_1`, and the whole clique block `K`.  This explains the targeted
+  extension check for the `n=12,h=6` certificate, where zero legal extensions
+  avoid a regular `6`-set.

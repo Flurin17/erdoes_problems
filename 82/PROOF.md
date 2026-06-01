@@ -12518,6 +12518,49 @@ All cases give `|S|<h`.  Thus `H_t` is a `P=2` full-drop ordered graph on
 `2h` vertices with no regular induced subgraph of order at least `h`, proving
 the displayed lower bound.  QED.
 
+**Lemma 28D.6d: The Regular Full-Drop Lower Family Is Right-Extension
+Critical.**  Let `H_t` be the ordered graph from Lemma 28D.6c, with
+`h=t+3>=7`.  If a new last vertex `w` is added so that the resulting ordered
+graph still satisfies the `P=2` full-drop condition, then the extended graph
+contains a clique of order `h`.
+
+Proof.  Let `U={u_0,u_1}` be the final top pair of `H_t`, and let
+`X=V(H_t)\U` be the non-top vertices.  Comparing `u_0` with the new last
+vertex `w` shows that `w` is nonadjacent to at most one vertex of `X`, since
+`N(u_0)=X`; the same conclusion follows from `u_1`.
+
+We first show that `w` is adjacent to both top vertices.  If, say, `w` were
+nonadjacent to `u_0`, then choose a vertex `x in X` adjacent to `w`, possible
+because `w` misses at most one vertex of `X` and `|X|>=2`.  In the ordered
+pair `x<u_0`, the earlier vertex `x` is adjacent to both `u_1` and `w`,
+whereas `u_0` is adjacent to neither.  This gives two vertices in
+
+```text
+(N(x)\N(u_0))\{x,u_0},
+```
+
+contradicting the `P=2` full-drop condition.  The proof for `u_1` is the
+same.
+
+It remains to identify the possible non-top vertex missed by `w`.  Since
+`w` is adjacent to both top vertices and misses at most one vertex of `X`,
+all vertices of `X` except possibly one are adjacent to `w`.  If the missed
+vertex were `p_1`, then the ordered pair `p_0<p_1` would have both `q_0` and
+`w` in the earlier-to-later loss.  If it were `q_0`, the pair `p_1<q_0`
+would have both `q_1` and `w` in the loss.  If it were `q_1`, or any vertex
+of `M union K`, the pair `p_0<q_1` or respectively `p_0<y` would have both
+`q_0` and `w` in the loss.  All alternatives contradict full-drop.  Therefore
+the only non-top vertex that `w` may miss is `p_0`.
+
+Thus `w` is adjacent to `q_1`, to both top vertices, and to every vertex of
+`K`.  Hence
+
+```text
+K union {q_1,u_0,w}
+```
+
+is a clique of order `t+3=h`.  QED.
+
 **Computational Calibration 28D.7: Small Full-Drop Values.**  The script
 `EXPERIMENTS/full_drop_census.py` exactly enumerates small ordered graphs
 satisfying the full-drop condition and reuses the regular-witness checker.
