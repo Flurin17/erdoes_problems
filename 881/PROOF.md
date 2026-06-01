@@ -37,7 +37,8 @@ deletion, so any surviving obstruction must force unbounded private-color
 fibers or \(F+F\)-exception mass at ambient scale. The rank-controlled
 variant Lemma 8.5a.7e' and Corollary 8.5a.7f.1 sharpen this: those large
 fibers may be forced into either a unique-gate branch or a fixed retained
-shifted-overlap branch.
+shifted-overlap branch. Lemma 8.5a.7i adds that certificate-free shifted
+fibers must be independent for their own shift.
 
 ## Reduction 0: The minimality hypothesis is redundant for counterexamples
 
@@ -6549,6 +6550,67 @@ either genuinely unique in the full basis \(A\), or all shifted back into
 resembles the low-representation packets of Section 3; the latter is the
 first rank-free form of promoted active-color recurrence.
 
+### Lemma 8.5a.7i: Certificate-free shifted fibers are shift-separated
+
+Let \(A\subseteq\mathbb N\), let \(h\ne0\), and let
+\[
+U\subset A
+\]
+be finite with
+\[
+U+h\subset A. \tag{1}
+\]
+If \(U\) is certificate-free relative to \(A\), meaning that there are no
+\[
+e,y_1,y_2\in U,\qquad y_1,y_2\ne e,\qquad y_1+y_2-e\in A,
+\]
+then
+\[
+U\cap(U-h)=\varnothing. \tag{2}
+\]
+
+Proof. Suppose instead that
+\[
+u,\ u+h\in U.
+\]
+Since \(u+h\in U\), (1) gives
+\[
+u+2h=(u+h)+h\in A.
+\]
+Taking
+\[
+e=u,\qquad y_1=y_2=u+h
+\]
+produces a certificate
+\[
+y_1+y_2-e=u+2h\in A,
+\]
+contrary to certificate-freeness. \(\square\)
+
+Consequently the retained shifted-overlap branch in Corollary 8.5a.7f.1
+has a new finite-test pressure. For a fixed nonzero \(h\), write
+\[
+\alpha_h(T)=\max\{|S|:\ S\subset T,\ S\cap(S-h)=\varnothing\}.
+\]
+If a fixed finite \(T\subset A\) with \(T+h\subset A\) is reflected by
+arbitrarily large centers on subsets \(U\subset T\) with
+\[
+|U|>\alpha_h(T),\qquad U+h\subset A,
+\]
+then some pair \(u,u+h\in U\) occurs. The triple
+\[
+u,\ u+h,\ u+h
+\]
+is reflected by the same center and satisfies
+\[
+(u+h)+(u+h)-u=u+2h\in A.
+\]
+Since \(T\) is finite, one such triple recurs along an unbounded sequence
+of centers, and Corollary 2.3c gives a good infinite deletion. Thus a
+surviving shifted-overlap counterexample must either move the shift \(h\),
+or keep every fixed-\(h\) reflected fiber inside \(h\)-independent subsets
+of all finite tests.
+
 ### Example 8.5a.7g: Large one-color private fibers are locally compatible
 
 The conclusion of Corollary 8.5a.7f is still only a global obstruction, not
@@ -6639,14 +6701,15 @@ these large private fibers escape every fixed certificate-rich test set.
 Corollary 8.5a.7f.1 further says that these escaping fibers may be taken in
 one of two more rigid forms: either \(u+f\) is uniquely represented in the
 full basis for all \(u\in U\), or a fixed retained shifted overlap
-\(U+f-g\subset A\setminus F\) appears for a second deleted color \(g\). The
-precise missing step is to show that both rigid escapes are impossible
-under the global late-bad barrier hypothesis, or to construct a staged
-basis in which the fibers \(U\), centers \(m\), and active colors \(f,g\)
-all escape while maintaining order-2 coverage and promoted-edge barriers.
-This is now the active form of the certificate-free obstruction; it is
-stronger than mobile injectivity and weaker than finite recurrent Sidon
-coloring.
+\(U+f-g\subset A\setminus F\) appears for a second deleted color \(g\).
+Lemma 8.5a.7i adds that, if the shifted fiber is also certificate-free, it
+must be independent for the shift \(h=f-g\). The precise missing step is to
+show that both rigid escapes are impossible under the global late-bad
+barrier hypothesis, or to construct a staged basis in which the fibers
+\(U\), centers \(m\), shifts \(h\), and active colors \(f,g\) all escape
+while maintaining order-2 coverage and promoted-edge barriers. This is now
+the active form of the certificate-free obstruction; it is stronger than
+mobile injectivity and weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -13214,13 +13277,17 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   after passing to a large subfiber, either \(u+f\) has unique full
   representation for every row, or all rows have the same retained shifted
   overlap \(U+f-g\subset A\setminus F\) with another deleted color \(g\).
+* Lemma 8.5a.7i shows that certificate-free retained shifted-overlap
+  fibers are independent for their own shift. Hence a fixed-shift reflected
+  fiber that is too large inside a finite \(h\)-linked test set gives a
+  recurrent certificate triple and a good deletion.
 * Example 8.5a.7g shows that these large fibers are locally compatible:
   a range-separated two-color packet can make one active color carry an
   arbitrarily large certificate-free private fiber.
 * Target 8.5a.7h identifies the current live obstruction: large private
-  fibers in the unique-gate or shifted-overlap branches must escape every
-  fixed certificate-rich test set without compacting to recurrent Sidon
-  colors or losing the late-bad barrier.
+  fibers in the unique-gate or shift-independent shifted-overlap branches
+  must escape every fixed certificate-rich test set without compacting to
+  recurrent Sidon colors or losing the late-bad barrier.
 * Target 8.5a.8 isolates the trace-section dichotomy needed to finish the
   recursive front strategy: either the mobile active-color obstruction
   descends to a proper section, or it is first-coordinate Schreier-coded and
