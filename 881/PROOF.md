@@ -16350,6 +16350,54 @@ collapses. Lemma 13.1l.2g supplies the needed bridge for fixed-rank prefix
 links: nonminimality is either genuine section descent or a smaller full
 active shell, and the latter is already forbidden.
 
+## Proposition 13.1l.2i: Conditional recursive closure of the \(k=2\) front
+
+Work in the remaining \(k=2\) counterexample setting after Corollary 8.3b,
+and let \(\mathcal H_3\) be the active-trace weak barrier from Corollary
+3.1c.3, equipped with the inclusion-minimal witnesses and terminal-gap
+normal form from Lemma 8.4b. Suppose the following section-local promotion
+principle holds.
+
+For every prefix-front section arising from \(\mathcal H_3\), if its
+active-trace obstruction statistic is unbounded on every tail and does not
+descend to a proper tail section, then after thinning it satisfies the
+generalized prefix-link conclusion of Lemma 8.5a.8b with the property
+\[
+\mathcal P(\{d\}\cup H,w):
+\quad
+w\notin3(A\setminus(\{d\}\cup H)),
+\]
+and with inclusion-minimal shrinks handled exactly as in Lemma 13.1l.2g.
+
+Then no \(k=2\) counterexample exists.
+
+Proof. Assume a counterexample exists. Corollary 3.1c.3 supplies the
+active-trace weak barrier, and the remaining obstruction statistic is
+unbounded on every tail by the reductions leading to Target 8.5a.8. Apply
+Lemma 13.1l.2h to the corresponding prefix-front sections.
+
+It remains only to verify the hypothesis of Lemma 13.1l.2h: the
+first-coordinate shell alternative is impossible in every section. By the
+section-local promotion principle, any such shell thins to the generalized
+prefix-link form of Lemma 8.5a.8b. Lemma 13.1l.2g then says that its
+inclusion-minimal traces either descend to a proper tail section, contrary
+to being in the no-descent alternative, or keep the fixed first point and
+produce a full active fixed-rank prefix shell. The latter is forbidden by
+Corollaries 13.1l.2b--13.1l.2f. Hence the shell alternative is impossible
+in every section.
+
+Lemma 13.1l.2h now rules out unboundedness of the root obstruction
+statistic, contradicting the active-trace barrier supplied by the
+counterexample. Therefore, under the stated promotion principle, the
+desired infinite deletion exists. \(\square\)
+
+This proposition isolates the exact remaining \(k=2\) proof obligation.
+The fixed-rank arithmetic shell has been closed; what is not yet proved in
+this workspace is the section-local promotion principle connecting the
+private-color normal form of Proposition 8.4f and Corollaries
+8.5a.7f--8.5a.7y to the abstract shell/descent dichotomy in every recursive
+section.
+
 ## Corollary 13.1l.3: A Schreier first tail is bipartite recurrent Sidon
 
 In any \(k=2\) counterexample realized by the enumerated-Schreier target of
@@ -18189,6 +18237,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 13.1l.2h gives the abstract well-foundedness closure: if every
   section rules out its first-coordinate shell alternative, endless
   section descent contradicts the prefix-front property.
+* Proposition 13.1l.2i states the conditional recursive \(k=2\) closure:
+  once the private-color normal form is promoted section-locally to the
+  shell/descent dichotomy, the fixed-rank shell results and well-foundedness
+  rule out a counterexample.
 * Corollary 13.1l.3 specializes this to the enumerated-Schreier target:
   the first protected tail must be a cofinite union of two recurrent Sidon
   colors at critical density, with large mixed two-sum spikes.

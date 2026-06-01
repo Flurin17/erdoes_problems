@@ -2624,6 +2624,10 @@ first-coordinate shell, repeated section descent would build an infinite
 set with no front initial segment, impossible. Thus the remaining proof
 obligation is local to each section: verify that its arithmetic obstruction
 does produce the fixed-rank shell covered by 13.1l.2b--g, or else descends.
+Proposition 13.1l.2i packages this as a conditional \(k=2\) closure:
+assuming the section-local promotion principle from the private-color
+normal form to the shell/descent dichotomy, no counterexample exists. This
+is now the explicit final missing implication in the \(k=2\) route.
 Diagnostic 13.1j.1 shows why the arbitrary-rank shell is genuinely broader
 than first Schreier: the P6 stalled window has no Schreier-compatible order
 but does have a generalized order
