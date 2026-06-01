@@ -190,6 +190,9 @@ center-far assigned profile.
 Corollaries 16.110--16.111 handle finite assigned menus: one profile must
 be center-far for infinitely many packets, so an eventually centered finite
 menu is selector-avoidable.
+Corollary 16.112 restores a pointwise selector-mass criterion in the
+linear-core branch: the pointwise center-far portions of packets must have
+nonsummable one-coordinate mass on every tail.
 
 ## Definitions
 

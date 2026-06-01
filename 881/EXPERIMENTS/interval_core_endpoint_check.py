@@ -6,7 +6,8 @@ the C_i misses P, then some C_i misses min(P) or max(P).  The script
 exhausts small universes and core families.  It also checks the finite
 shadow of Corollary 16.108: if a family of interval-union profiles misses a
 packet, then one profile has no single interval component containing both
-packet endpoints.
+packet endpoints.  The same sampled profile check verifies the pointwise
+cover behind Corollary 16.112.
 """
 
 from __future__ import annotations
@@ -118,6 +119,13 @@ def profile_center_far_witness(
     return any(not profile_has_centered_core(packet, profile) for profile in profiles)
 
 
+def profile_point_cover(
+    packet: tuple[int, ...],
+    profiles: tuple[tuple[tuple[int, int], ...], ...],
+) -> bool:
+    return all(any(not profile_contains(profile, x) for profile in profiles) for x in packet)
+
+
 def main() -> None:
     rng = Random(881)
     checked = 0
@@ -125,6 +133,7 @@ def main() -> None:
     gap_count_checked = 0
     profile_checked = 0
     center_profile_checked = 0
+    point_profile_checked = 0
     for n in range(2, 8):
         all_intervals = intervals(n)
         universe = tuple(range(n))
@@ -187,7 +196,9 @@ def main() -> None:
             if common_profile_misses(packet, profiles):
                 assert profile_gap_bound_holds(packet, profiles), (n, packet, profiles)
                 assert profile_center_far_witness(packet, profiles), (n, packet, profiles)
+                assert profile_point_cover(packet, profiles), (n, packet, profiles)
                 center_profile_checked += 1
+                point_profile_checked += 1
             profile_checked += 1
     print("interval core endpoint check passed")
     print(f"total_checked={checked}")
@@ -195,6 +206,7 @@ def main() -> None:
     print(f"gap_count_checked={gap_count_checked}")
     print(f"profile_checked={profile_checked}")
     print(f"center_profile_checked={center_profile_checked}")
+    print(f"point_profile_checked={point_profile_checked}")
 
 
 if __name__ == "__main__":

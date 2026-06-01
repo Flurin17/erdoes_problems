@@ -25006,6 +25006,66 @@ robust-core branch cannot be the obstruction; any surviving construction
 must either move through infinitely many different profiles, grow profile
 complexity, or leave the high-density linear-core regime.
 
+### Corollary 16.112: Linear-core barriers have pointwise center-far mass
+
+Work in the packet setting of Corollary 16.93, and suppose the assigned
+robust-core branch product-covers every selector tail. Assume that, for
+each sufficiently large \(s\), the finite witness family
+\[
+\mathcal B_s
+\]
+from Corollary 16.93 is made of profiles satisfying the hypotheses of
+Corollary 16.106. For such a label \(\lambda\), define the pointwise
+center-far set in packet \(P_s\) by
+\[
+H_{\lambda,s}=
+\left\{p\in P_s:
+\begin{array}{l}
+\text{for every }K_{\lambda,i}=[c_{\lambda,i},d_{\lambda,i}]\cap\mathbb N,\\[2mm]
+\left|2p+a_\lambda+b_\lambda
+      -2(c_{\lambda,i}+d_{\lambda,i})\right|
+\ge \gamma_\lambda n_\lambda-D_\lambda
+\end{array}\right\}. \tag{1}
+\]
+Then, for every sufficiently large \(s\),
+\[
+P_s\subseteq\bigcup_{\lambda\in\mathcal B_s}H_{\lambda,s}. \tag{2}
+\]
+
+Consequently, if all labels are drawn from a countable assigned menu
+\(\Lambda\), then the one-coordinate cylinders
+\[
+(\{s\},H_{\lambda,s})\qquad(\lambda\in\Lambda)
+\]
+catch every selector tail, and for every tail index \(t\),
+\[
+\sum_{\lambda\in\Lambda}\sum_{s\ge t}
+{|H_{\lambda,s}|\over |P_s|}\ge1. \tag{3}
+\]
+
+Proof. Fix a sufficiently large \(s\) and \(p\in P_s\). Corollary 16.93
+gives
+\[
+P_s\cap\bigcap_{\lambda\in\mathcal B_s}C_\lambda=\varnothing,
+\]
+so there is some \(\lambda\in\mathcal B_s\) with \(p\notin C_\lambda\).
+Since \(C_\lambda\) is the union of the robust cores in the profile,
+\[
+p\notin R_{K_{\lambda,i}}(\delta_\lambda,I_\lambda;r_\lambda)
+\]
+for every \(i\). Corollary 16.103 gives the inequality in (1) for every
+\(i\), hence \(p\in H_{\lambda,s}\). This proves (2).
+
+The cylinder statement follows from (2): every selector on a sufficiently
+late tail is caught at its first sufficiently late coordinate. Applying
+Lemma 8.5a.7u' to these one-coordinate cylinders gives the mass lower
+bound (3). \(\square\)
+
+Thus the linear-core residual still has a selector-mass form after the
+geometric sharpening. A construction may use infinitely many moving
+profiles, but the pointwise center-far portions of the active packets must
+remain nonsummable on every tail.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -26390,6 +26450,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Corollaries 16.110--16.111 record the finite-menu consequence: one fixed
   profile must be center-far on infinitely many packets, and an eventually
   centered finite menu cannot product-cover selector tails.
+* Corollary 16.112 returns to selector mass in the linear-core branch: the
+  pointwise center-far subsets of the active packets must have nonsummable
+  one-coordinate mass on every tail.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
