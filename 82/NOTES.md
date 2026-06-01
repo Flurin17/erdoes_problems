@@ -4219,3 +4219,11 @@ source of growth beyond Ramsey.
   obstructions still support the stronger candidate `mu(G)>=ceil(13|G|/14)`,
   which would solve the problem by the existing positive-density spectrum
   corollary if it could be proved.
+- 2026-06-01: Salvaged the separator route at the right scale.  Lemma
+  28J.10d.1g proves that any fixed linear lower bound `mu(G)>=c|G|` is stable
+  under one-cut gluing by induction: the possible overlap of root-deletion
+  drop vectors is bounded by the surplus of the two sides plus `c`.  Hence a
+  minimal counterexample to a positive-density spectrum bound has no cut
+  vertex.  The connected defect-one target failed exactly because it asks for
+  additive control at density `1`; the positive-density theorem needed for
+  Problem 82 survives cut vertices.

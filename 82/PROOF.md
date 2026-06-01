@@ -15429,6 +15429,105 @@ full-deletion target as universal statements.  The spectrum route must now
 aim directly at a positive-density lower bound such as
 `sum_d s_d(G)>=c|V(G)|`, or at a superquadratic polylogarithmic bound.
 
+**Lemma 28J.10d.1g: Positive-Density Bounds Are Stable Under One-Cuts.**
+Fix a constant `0<c<=1`.  Suppose that every graph on fewer than `n` vertices
+satisfies
+
+```text
+sum_d s_d(J) >= c|V(J)|.
+```
+
+Let `G` be an `n`-vertex graph with a cut vertex `x`, and write
+`G=A union B`, where `A` and `B` are proper induced subgraphs,
+
+```text
+V(A) cap V(B)={x},
+```
+
+and there are no edges between `A-x` and `B-x`.  If
+
+```text
+sum_d s_d(A) >= c|V(A)|,        sum_d s_d(B) >= c|V(B)|,
+```
+
+then
+
+```text
+sum_d s_d(G) >= c|V(G)|.
+```
+
+Proof.  Put
+
+```text
+mu(J)=sum_d s_d(J).
+```
+
+For each degree `d`, let
+
+```text
+Delta_A(d)=s_d(A)-s_d(A-x),        Delta_B(d)=s_d(B)-s_d(B-x).
+```
+
+Lemma 28J.10d.1d gives
+
+```text
+mu(G) >= mu(A)+mu(B)-L,
+```
+
+where
+
+```text
+L=sum_d min(Delta_A(d),Delta_B(d)).
+```
+
+Since all `Delta` terms are nonnegative,
+
+```text
+L <= min(mu(A)-mu(A-x), mu(B)-mu(B-x)).
+```
+
+By the induction hypothesis applied to the smaller graphs `A-x` and `B-x`,
+
+```text
+mu(A-x) >= c(|V(A)|-1),        mu(B-x) >= c(|V(B)|-1).
+```
+
+Write
+
+```text
+mu(A)=c|V(A)|+sigma_A,        mu(B)=c|V(B)|+sigma_B
+```
+
+with `sigma_A,sigma_B>=0`.  The previous display gives
+
+```text
+mu(A)-mu(A-x) <= sigma_A+c,
+mu(B)-mu(B-x) <= sigma_B+c.
+```
+
+Hence
+
+```text
+L <= min(sigma_A+c,sigma_B+c) <= sigma_A+sigma_B+c.
+```
+
+Therefore
+
+```text
+mu(G) >= c|V(A)|+sigma_A+c|V(B)|+sigma_B
+         -(sigma_A+sigma_B+c)
+       = c(|V(A)|+|V(B)|-1)
+       = c|V(G)|.
+```
+
+QED.
+
+Consequently, to prove any fixed positive-density spectrum-mass bound by
+minimal counterexample, it is enough to handle graphs with no cut vertex.
+The rooted gluing counterexamples above show why this lemma is unavailable at
+the additive-defect-one scale, but it is exactly suited to the weaker
+positive-density target needed for Erdős Problem 82.
+
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then
 
