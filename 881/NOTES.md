@@ -2276,6 +2276,15 @@ So at most three outside retained padders can coexist with such a common
 witness. Any iterable product construction must therefore use highly
 selector-specific witnesses.
 
+Lemma 8.5a.7z.4 records the general version. If one witness \(v\) works for
+a family \(\mathcal C\) of selector deletions, then every shifted two-sum
+support representing \(v-e\), with \(e\) retained outside the selectors, is
+a transversal of \(\mathcal C\) of size at most two. When there is no
+singleton transversal, the possible shifted sums \(v-e\) are confined to
+the finite set of two-transversal sums inside \(\bigcup\mathcal C\). Thus,
+outside the degenerate common-point case, witness-sharing becomes a finite
+hypergraph-transversal question.
+
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
 unique full two-sum gates while keeping the gate moving or gate-independent

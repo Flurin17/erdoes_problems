@@ -7920,6 +7920,88 @@ iterable rank-three product barrier must be selector-specific, or at least
 specific to very small subfamilies of selectors, so that the shifted
 two-sum fibers \(v-e\) do not collapse to the three full packet-pair sums.
 
+### Lemma 8.5a.7z.4: Shared witnesses force two-transversals
+
+Let \(A\) be an order-2 basis with threshold \(N_0\). Let
+\[
+\mathcal C
+\]
+be a finite family of finite subsets of \(A\), and suppose one integer
+\[
+v
+\]
+has the common-hole property
+\[
+v\notin3(A\setminus F)\qquad(F\in\mathcal C). \tag{1}
+\]
+Let \(\mathcal T_2(\mathcal C)\) be the family of subsets
+\[
+H\subset A,\qquad |H|\le2,
+\]
+that meet every \(F\in\mathcal C\). Then every
+\[
+e\in A\setminus\bigcup_{F\in\mathcal C}F,\qquad v-e\ge N_0,
+\]
+has the following property: every two-term representation
+\[
+v-e=a+b,\qquad a,b\in A, \tag{2}
+\]
+has support containing a member of \(\mathcal T_2(\mathcal C)\). In
+particular, the support itself satisfies
+\[
+\{a,b\}\in\mathcal T_2(\mathcal C). \tag{3}
+\]
+Suppose further that \(\mathcal C\) has no singleton transversal, i.e.
+there is no \(h\in A\) with
+\[
+h\in F\qquad(F\in\mathcal C).
+\]
+Then every support in (2) has size two and is contained in the finite set
+\[
+U=\bigcup_{F\in\mathcal C}F.
+\]
+Consequently, if
+\[
+\Sigma_2(\mathcal C)=
+\{h+h':\{h,h'\}\in\mathcal T_2(\mathcal C)\},
+\]
+then every such \(e\) satisfies
+\[
+v-e\in \Sigma_2(\mathcal C). \tag{4}
+\]
+In particular, the number of outside retained \(e\)'s with \(v-e\ge N_0\)
+is at most
+\[
+|\Sigma_2(\mathcal C)|.
+\]
+
+Proof. Fix \(e\) and a representation (2). If the support
+\[
+H=\{a,b\}
+\]
+failed to meet some \(F\in\mathcal C\), then \(e,a,b\) would all be
+retained after deleting \(F\), and
+\[
+v=e+a+b\in3(A\setminus F),
+\]
+contradicting (1). Thus \(H\in\mathcal T_2(\mathcal C)\). The containment
+(3) follows.
+
+Now assume there is no singleton transversal. Then \(H\) cannot have size
+one. Also both points of \(H\) must lie in \(U\): a point outside \(U\)
+meets no member of \(\mathcal C\), so if \(H\) contained such a point, the
+other point of \(H\) would be a singleton transversal. Thus (4) follows
+from (2). Since \(v\) is fixed, each possible value of \(v-e\) determines
+\(e\) uniquely. \(\square\)
+
+Lemma 8.5a.7z.3 is the no-singleton-transversal special case where
+\(\mathcal C\) is the full selector cube of three two-point packets. Its
+two-transversals are exactly the full pairs \(P_i\). The general form shows
+the remaining witness-sharing obstruction precisely: outside a degenerate
+common-point case, a witness can serve many selector deletions only if the
+corresponding selector family has enough two-transversal sums to absorb all
+old retained padders \(e\) below \(v-N_0\).
+
 ### Target 8.5a.7h: From large private fibers to recurrent colors
 
 After Corollaries 8.5a.7f--8.5a.7f.1 and Examples 8.5a.7g and 8.5a.7m,
@@ -7978,9 +8060,11 @@ edges are minimal large-spread terminal cuts whose supports form a genuine
 cross-window weak barrier rather than disjoint local gadgets. Diagnostic
 8.5a.7z.2 shows that even the first bounded fourth-packet extension of the
 small local model is nontrivial, and Lemma 8.5a.7z.3 shows that common
-three-packet witness layers have only tiny outside retained fibers. This is
-now the active form of the certificate-free obstruction; it is stronger
-than mobile injectivity and weaker than finite recurrent Sidon coloring.
+three-packet witness layers have only tiny outside retained fibers. Lemma
+8.5a.7z.4 gives the general witness-sharing constraint in terms of
+two-transversals of selector families. This is now the active form of the
+certificate-free obstruction; it is stronger than mobile injectivity and
+weaker than finite recurrent Sidon coloring.
 
 ### Target 8.5a.8: Trace-section dichotomy
 
@@ -14623,6 +14707,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   three-packet selector cube in the presence of many retained outside
   padders: all shifted two-sums \(v-e\) must collapse to the three full
   packet-pair sums.
+* Lemma 8.5a.7z.4 generalizes this: if one witness is shared by a selector
+  family, every shifted two-sum support for an outside retained padder must
+  be a two-transversal of that selector family.
 * Target 8.5a.7h identifies the current live obstruction: large private
   fibers in the gate-independent unique branch or shift-independent
   shifted-overlap branch must escape every fixed finite palette cofinally,
