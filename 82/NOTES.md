@@ -3176,3 +3176,9 @@ source of growth beyond Ramsey.
   `14`-vertex add-saturated mask has largest orbit `4`, while the
   delete-saturated mask and the `C_reg(1,5)>12` mask are rigid.  Thus the
   finite obstruction masks are not large-symmetry artifacts.
+- 2026-06-01: Added Corollary 7E, a bounded-spread low-bucket-rank easy case.
+  If a counterexample has `t` distinct global degrees and every exact degree
+  bucket has either adjacency rank or shifted-adjacency rank at most `r` over a
+  fixed field, then `n<t 2^r k`; in particular degree spread at most `s` gives
+  `n<(s+1)2^r k`.  Therefore any bounded-spread proof that goes past this
+  scale must handle high-rank exact degree buckets.

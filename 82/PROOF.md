@@ -6482,6 +6482,38 @@ This is not a replacement for Corollary 28D.2's `16hP_h` degree-bucket bound,
 but it supplies an independent local obstruction: a large exact-degree bucket
 in a counterexample must be a high-rank bounded-spread graph.
 
+**Corollary 7E: Bounded-Spread Low-Bucket-Rank Easy Case.**  Let `G` be an
+`n`-vertex graph with no regular induced subgraph on at least `k` vertices.
+Suppose the global degrees of `G` take values in a set `D` of size `t`.  Fix a
+field and an integer `r`.  If every exact degree bucket `B_d` satisfies
+
+```text
+rank(A_{B_d}) <= r        or        rank(A_{B_d}+I) <= r,
+```
+
+then
+
+```text
+n < t 2^r k.
+```
+
+In particular, if the degree spread of `G` is at most `s`, then the same
+hypothesis gives
+
+```text
+n < (s+1)2^r k.
+```
+
+Proof.  By Corollary 7D, every nonempty bucket with either displayed rank at
+most `r` has size less than `2^r k`.  Summing over the `t` nonempty degree
+values gives the first bound.  If the degree spread is at most `s`, then at
+most `s+1` integer degree values occur.  QED.
+
+Thus a bounded-spread proof cannot be completed by reducing all exact degree
+buckets to low-rank models.  Any counterexample beyond the displayed bound
+must contain a high-rank bucket, in both the adjacency and shifted-adjacency
+senses.
+
 The script `EXPERIMENTS/subset_rank_profile.py` calibrates how weak this
 obstruction is near the threshold.  On the `14`-vertex add-saturated
 threshold-`7` mask `765415324481232608887291903`, the minimum `F_2` ranks of

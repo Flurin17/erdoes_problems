@@ -38,7 +38,8 @@ Finite lemmas suitable for formalization:
   a field, then there are at most `2^r` distinct `0`-`1` rows, and one row
   class is an independent set; if `A+I` has rank `r`, one shifted-row class is
   a clique.  The hereditary version applies to every induced subgraph of a
-  counterexample.
+  counterexample, and summing over exact degree buckets gives a bounded-spread
+  low-bucket-rank easy case.
 - Automorphism orbit certificate: every orbit of a graph automorphism group
   induces a regular subgraph, because the action is transitive on the orbit
   and preserves internal degree.
