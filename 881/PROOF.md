@@ -21942,6 +21942,39 @@ M-2r\ge{\eta n\over4},
 \]
 which is exactly (2). \(\square\)
 
+### Corollary 16.59: Pointwise gate-distance controls interval packet size
+
+In the setting of Corollary 16.57, put
+\[
+B_r={r(r+1)\over2}+2r
+\]
+and define the central gate distance
+\[
+D_I(f;r)=\max\{0,\ a+2r-f,\ f-b+2r\}. \tag{1}
+\]
+For all sufficiently large witness parameters \(L\),
+\[
+|U|\le B_r+2D_I(f;r). \tag{2}
+\]
+In particular, if
+\[
+a+2r\le f\le b-2r,
+\]
+then \(|U|\le B_r\).
+
+Proof. Let \(D=D_I(f;r)\). By definition of \(D\),
+\[
+a+2r-D\le f\le b-2r+D. \tag{3}
+\]
+If \(|U|>B_r+2D\), Corollary 16.57 with \(M=D\) gives
+\[
+f<a+2r-D
+\quad\text{or}\quad
+f>b-2r+D,
+\]
+contradicting (3). Hence (2) holds. The final assertion is the case
+\(D=0\). \(\square\)
+
 The bounded-rank nonsingleton interval obstruction is now forced into a
 long-range regime. Positive-density row packets over an interval cannot be
 served by a finite active palette near that interval: after the bounded
@@ -23139,12 +23172,13 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \([2a+2r,2b-2r]\) inside the retained two-sumset. Corollaries
   16.55--16.56 translate this into a central gate exclusion range for
   gate-dependent interval packets.
-* Corollaries 16.57--16.58 combine that central exclusion with the
+* Corollaries 16.57--16.59 combine that central exclusion with the
   bounded-rank row allowance from Corollary 16.45: any positive-density
   bounded-rank interval packet must use an active gate a linear distance
-  outside the tested interval. Hence the remaining interval obstruction
-  must have vanishing packet density, growing deletion rank, or coordinated
-  far-gate structure across separated blocks.
+  outside the tested interval, and more generally packet size is bounded by
+  the gate's distance from the central gate range. Hence the remaining
+  interval obstruction must have vanishing packet density, growing deletion
+  rank, or coordinated far-gate structure across separated blocks.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

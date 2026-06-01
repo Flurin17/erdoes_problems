@@ -62,11 +62,13 @@ Lemma 16.54 strengthens the interval geometry: the central band
 \([2a+2r,2b-2r]\) remains in the retained two-sumset. Corollaries
 16.55--16.56 turn that into a central forbidden gate range for
 gate-dependent interval packets.
-Corollaries 16.57--16.58 combine the central range with the bounded-rank
+Corollaries 16.57--16.59 combine the central range with the bounded-rank
 row allowance: a positive-density interval packet of bounded deletion rank
 can survive only if its active gate is a linear distance outside the
-interval. The live escapes are now vanishing packet density, growing
-deletion rank, or coordinated far gates across separated blocks.
+interval, and the pointwise packet size is controlled by the gate's distance
+from the central gate range. The live escapes are now vanishing packet
+density, growing deletion rank, or coordinated far gates across separated
+blocks.
 
 ## Definitions
 
