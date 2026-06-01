@@ -2270,6 +2270,13 @@ The direct diagnostic `singleton_high_excess_stage_search.py` finds only
 the tiny first stage \(\{1,2,3,4\}\to\{1,2,3,4,8\}\) with singleton witness
 \(18\), endpoint \(18\), and coverage through \(20\); the next step fails
 within blocks of size at most three and candidates up to \(150\).
+Lemma 16.10 explains the one-marker part of this stall for the full
+interval family: \([1,L]\cup\{2L\}\) always gives a first strict
+singleton-high-excess marker stage for \(L\ge4\), but any later single
+marker starts beyond \(4L+2\) and leaves an unavoidable gap between the
+one-marker and two-marker three-sum ranges before its required high-excess
+witness. Iteration would therefore need genuine multi-marker bridge blocks,
+not repeated interval markers.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

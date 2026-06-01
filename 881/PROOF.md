@@ -19259,6 +19259,99 @@ three-point candidate increments without finding a continuation. Thus the
 strict singleton-high-excess target is locally nonempty but much tighter
 than the pair-high-excess diagnostics.
 
+### Lemma 16.10: The interval-marker singleton seed does not one-marker iterate
+
+Let \(L\ge4\), put
+\[
+I_L=[1,L]\cap\mathbb N,\qquad b=2L,\qquad A_1=I_L\cup\{b\}.
+\]
+Then \(A_1\) has a singleton-high-excess stage witness
+\[
+w_b=4L+2.
+\]
+Indeed,
+\[
+[3,5L]\subseteq3A_1,\qquad w_b\notin4(A_1\setminus\{b\}),
+\]
+and
+\[
+w_b-b-2=2L=\max A_1.
+\]
+
+However this interval-marker seed cannot be continued by one later marker
+in the same strict singleton-high-excess form. More precisely, let
+\[
+x>w_b,\qquad A_2=A_1\cup\{x\}.
+\]
+If a next stage using only the new marker \(x\) had a singleton-high-excess
+witness \(w_x=x+d_x\), then
+\[
+w_x-x-2\ge\max A_2=x,
+\]
+so
+\[
+w_x\ge2x+2. \tag{1}
+\]
+But \(3A_2\) has a gap after the main one-\(x\) range:
+\[
+3A_2\cap[x+3L+1,\ x+4L-1]=\varnothing. \tag{2}
+\]
+Since \(L\ge4\), this gap is nonempty; since \(x>w_b=4L+2\), it lies after
+the previous endpoint and before the required endpoint
+\[
+w_x+2\ge2x+4.
+\]
+Thus the positive-summand buffer
+\[
+[w_b+1,\ w_x+2]\subseteq3A_2
+\]
+cannot hold.
+
+Proof. The coverage assertion for \(A_1\) follows from the intervals
+\[
+3I_L=[3,3L],\qquad
+b+2I_L=[2L+2,4L],\qquad
+2b+I_L=[4L+1,5L],
+\]
+which are contiguous for \(L\ge4\). Since \(A_1\setminus\{b\}=I_L\), one
+has
+\[
+4(A_1\setminus\{b\})=[4,4L],
+\]
+so \(w_b=4L+2\) is private after deleting \(b\). The high-excess equality
+is immediate.
+
+For the non-iteration claim, any three-sum from \(A_2\) that uses no copy
+of \(x\) is at most
+\[
+3b=6L<x+3L
+\]
+because \(x>4L+2\). Any three-sum with exactly one copy of \(x\) is
+\[
+x+s,\qquad s\in2A_1.
+\]
+The two-sum set of \(A_1\) is
+\[
+2A_1=[2,3L]\cup\{4L\};
+\]
+therefore the one-\(x\) sums cover \([x+2,x+3L]\) and the isolated point
+\(x+4L\), but they miss the whole interval in (2). A three-sum with at
+least two copies of \(x\) is at least
+\[
+2x+1.
+\]
+Hence (2) is absent from \(3A_2\). The high-excess condition gives (1), so
+any buffered stage declaring a point at or above \(w_x\) would have to cover
+across this gap, impossible.
+\(\square\)
+
+This explains why the strict singleton-high-excess diagnostic stalls
+immediately after the seed \(\{1,2,3,4,8\}\): the seed is the case \(L=4\)
+of the interval-marker family. A successful singleton-high-excess
+counterexample cannot simply repeat one marker over a dense initial
+interval; it needs multi-marker blocks that bridge the one-marker coverage
+gap without repairing the singleton witnesses.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20272,6 +20365,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Lemma 16.9 gives the exact singleton-new normal form: singleton order-4
   holes force \(2A\)-valued reflected rows and a terminal gap, but those
   rows still use the deleted singleton and do not repair the hole.
+* Lemma 16.10 proves that the interval-marker family
+  \([1,L]\cup\{2L\}\) supplies strict singleton-high-excess first stages but
+  cannot be iterated by one later marker, because the required next witness
+  lies beyond a three-sum coverage gap.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

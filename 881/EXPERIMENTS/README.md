@@ -641,3 +641,7 @@ singleton target: every new `b` needs `w notin 4(A\\{b})` and
 `[1,2,3,4] -> +8`, with witness `18`, endpoint `18`, and coverage through
 `20`; the next step fails after checking blocks up to size `3` and
 candidate values up to `150`.
+Lemma 16.10 explains the one-marker version: `[1,...,L] -> +2L` is always
+a strict singleton-high-excess first stage for `L >= 4`, but a later single
+marker begins beyond `4L+2` and leaves a three-sum coverage gap before its
+required high-excess witness.
