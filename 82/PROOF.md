@@ -4538,6 +4538,20 @@ Proof.  If `n congruent 1 mod 4`, put all vertices in one zero slot, since
 `K_n` has degree `n-1 congruent 0 mod 4`.  If `n congruent 3 mod 4`, put all
 vertices in `D`, since `n-1 congruent 2 mod 4`.  QED.
 
+**Lemma: One Degree Residue Is Trivial For The Matching-Slot Target.**  Let
+`G` be an even graph.  If every vertex of `G` has degree congruent to
+`0 mod 4`, then `G` has a matching-slot partition.  The same holds if every
+vertex has degree congruent to `2 mod 4`.
+
+Proof.  In the first case put all vertices in one of the zero slots and leave
+the other slots empty.  In the second case put all vertices in the residue-`2`
+slot `D`.  The required same-slot degrees are then just the original degrees
+of `G`.  QED.
+
+Consequently, a minimal counterexample to the matching-slot target must have
+at least one vertex of degree `0 mod 4` and at least one vertex of degree
+`2 mod 4`.
+
 The following rooted form is stronger and is the right object for cut-vertex
 induction.
 
@@ -4808,19 +4822,24 @@ contradiction.  Hence no degree-`2` vertex exists.  All degrees in an even
 graph are even, so the minimum degree is at least `4`.  QED.
 
 The fast checker now supports this post-reduction regime directly through
-`--min-degree`.  The commands
+`--min-degree`, and it can also keep only the mixed degree-residue case forced
+by the one-residue lemma using `--mixed-degree-residue`.  The commands
 
 ```text
 /tmp/matching_slot_fast --n 8 --min-degree 4
 /tmp/matching_slot_fast --n 9 --min-degree 4 --limit 10000000
 /tmp/matching_slot_fast --n 9 --min-degree 4 --triangle-nonedge 0:1 --limit 10000000
 /tmp/matching_slot_fast --n 10 --min-degree 4 --start 1234567890 --limit 1235567890
+/tmp/matching_slot_fast --n 8 --min-degree 4 --mixed-degree-residue
+/tmp/matching_slot_fast --n 9 --min-degree 4 --mixed-degree-residue --limit 10000000
+/tmp/matching_slot_fast --n 9 --min-degree 4 --mixed-degree-residue --triangle-nonedge 0:1 --limit 10000000
+/tmp/matching_slot_fast --n 10 --min-degree 4 --mixed-degree-residue --start 1234567890 --limit 1235567890
 ```
 
-respectively check `188790`, `181088`, `81996`, and `23124` filtered even
-graphs with no counterexample.  These are finite calibrations of the
-minimum-degree-four regime left by the conditional reductions, not proof of
-the matching-slot target.
+respectively check `188790`, `181088`, `81996`, `23124`, `169330`,
+`173715`, `77030`, and `22863` filtered even graphs with no counterexample.
+These are finite calibrations of the minimum-degree-four mixed-residue regime
+left by the conditional reductions, not proof of the matching-slot target.
 
 **Rooted Modular OCT Variant.**  For every even graph `G` and every vertex
 `r`, there is a modular odd-cycle-transversal certificate as above in which

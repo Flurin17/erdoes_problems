@@ -2769,3 +2769,19 @@ source of growth beyond Ramsey.
   `1234567890 <= bits < 1235567890` checks `23124`.  None produce a
   counterexample.  This is finite evidence only, but it confirms that the new
   low-degree reductions are testing a nonempty high-minimum-degree regime.
+- 2026-06-01: Added the one-degree-residue triviality lemma for the
+  matching-slot target.  An even graph whose degrees are all `0 mod 4` goes
+  wholly into a zero slot; one whose degrees are all `2 mod 4` goes wholly
+  into the residue-`2` slot.  Thus any minimal matching-slot counterexample
+  must have both degree residues `0` and `2 mod 4`, in addition to the
+  conditional minimum-degree and connectivity restrictions.
+- 2026-06-01: Added `--mixed-degree-residue` to `matching_slot_fast.cpp` and
+  rechecked the degree-filtered ranges in the sharper residue-mixed regime.
+  The full `n=8`, minimum-degree-`4`, mixed-residue sweep checks `169330`
+  graphs.  The `n=9` prefix `0 <= bits < 10000000` checks `173715` unrooted
+  mixed-residue graphs and `77030` rooted `--triangle-nonedge 0:1`
+  mixed-residue graphs.  The `n=10` range
+  `1234567890 <= bits < 1235567890` checks `22863` mixed-residue graphs.
+  No counterexample is found.  The remaining first-lift proof bottleneck is
+  therefore not visible in these small high-minimum-degree mixed-residue
+  ranges.

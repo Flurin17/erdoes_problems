@@ -373,9 +373,16 @@ bool degree_bounds_ok(
     int n,
     uint64_t graph_mask,
     int min_degree,
-    int max_degree
+    int max_degree,
+    bool require_mixed_degree_residue
 ) {
-    if (min_degree <= 0 && max_degree >= n - 1) return true;
+    if (
+        min_degree <= 0
+        && max_degree >= n - 1
+        && !require_mixed_degree_residue
+    ) {
+        return true;
+    }
     std::array<int, 10> degrees{};
     int edge = 0;
     for (int u = 0; u < n; ++u) {
@@ -387,10 +394,15 @@ bool degree_bounds_ok(
             ++edge;
         }
     }
+    bool has_zero_residue = false;
+    bool has_two_residue = false;
     for (int v = 0; v < n; ++v) {
         if (degrees[v] < min_degree || degrees[v] > max_degree) return false;
+        int residue = degrees[v] % 4;
+        if (residue == 0) has_zero_residue = true;
+        if (residue == 2) has_two_residue = true;
     }
-    return true;
+    return !require_mixed_degree_residue || (has_zero_residue && has_two_residue);
 }
 
 }  // namespace
@@ -403,6 +415,7 @@ int main(int argc, char** argv) {
     bool progress = false;
     int min_degree = 0;
     int max_degree = -1;
+    bool require_mixed_degree_residue = false;
     RootMode root_mode = RootMode::None;
     std::optional<std::pair<int, int>> root_pair;
     for (int i = 1; i < argc; ++i) {
@@ -419,6 +432,8 @@ int main(int argc, char** argv) {
             min_degree = std::stoi(argv[++i]);
         } else if (arg == "--max-degree" && i + 1 < argc) {
             max_degree = std::stoi(argv[++i]);
+        } else if (arg == "--mixed-degree-residue") {
+            require_mixed_degree_residue = true;
         } else if (arg == "--good-edge" && i + 1 < argc) {
             if (root_mode != RootMode::None) {
                 std::cerr << "only one rooted endpoint option is allowed\n";
@@ -475,7 +490,8 @@ int main(int argc, char** argv) {
                       << " [--good-nonedge u:v]"
                       << " [--triangle-nonedge u:v] [--progress]"
                       << " [--progress-every P]"
-                      << " [--min-degree D] [--max-degree D]\n";
+                      << " [--min-degree D] [--max-degree D]"
+                      << " [--mixed-degree-residue]\n";
             return 2;
         }
     }
@@ -527,7 +543,15 @@ int main(int argc, char** argv) {
                 continue;
             }
         }
-        if (!degree_bounds_ok(n, graph_mask, min_degree, max_degree)) continue;
+        if (!degree_bounds_ok(
+                n,
+                graph_mask,
+                min_degree,
+                max_degree,
+                require_mixed_degree_residue
+            )) {
+            continue;
+        }
         ++checked;
         checker.compute_valid_subsets(graph_mask);
         if (!checker.has_partition(root_mode, root_pair)) {
@@ -563,6 +587,7 @@ int main(int argc, char** argv) {
     std::cout << "bit_stop=" << stop << "\n";
     if (min_degree != 0) std::cout << "min_degree=" << min_degree << "\n";
     if (max_degree != n - 1) std::cout << "max_degree=" << max_degree << "\n";
+    if (require_mixed_degree_residue) std::cout << "mixed_degree_residue=True\n";
     std::cout << "checked=" << checked << "\n";
     std::cout << "no_counterexample_seen\n";
     return 0;
