@@ -14802,6 +14802,29 @@ degree-`2` feedback-core graphs encountered and finds no criterion failure.
 The second verifies that all `3781` seven-vertex equality graphs have
 regular-feedback partitions but none require a degree-`2` core.
 
+The feedback-partition structure is not inherited by all equality extensions,
+so assumption 1 in Conditional Proposition 28J.5f is too strong as a final
+target.  The dense ten-vertex equality graph with mask `7261029317050` has
+ten equality extensions.  Nine have regular-feedback partitions, but the
+extension by column `368`, with mask
+
+```text
+10049161412571578
+```
+
+has spectrum `{0:5,1:2,2:4}` and no regular-feedback partition, verified by
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum_mass.py 11 --mask 10049161412571578
+python3 82/EXPERIMENTS/regular_feedback_partition.py 11 --mask 10049161412571578 --min-degree 2
+python3 82/EXPERIMENTS/spectrum_partition.py 11 --mask 10049161412571578
+```
+
+The last command still finds a spectral partition with parts of degrees
+`0,1,2` and orders `5,2,4`.  Thus the equality-structure target must allow
+spectral partitions whose degree-`0` and degree-`1` pieces do not form a
+forest.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

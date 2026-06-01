@@ -3999,3 +3999,16 @@ source of growth beyond Ramsey.
   `feedback_extension_diagnostic.py 7 --scan --min-degree 2 --equality-only`
   confirms the `3781` seven-vertex equality graphs have no degree-`2` core
   in their found feedback partitions.
+- 2026-06-01: Refuted target (1) in Conditional Proposition 28J.5f as a
+  universal structural theorem.  The dense equality graph `7261029317050` on
+  `10` vertices has `10` equality one-vertex extensions; the extension by
+  column `368`, mask `10049161412571578`, is an equality graph with spectrum
+  `{0:5,1:2,2:4}` but `regular_feedback_partition.py` finds no feedback
+  partition with core degrees at least `2`.  It still has a spectral
+  partition: degree-`0` vertices `(1,2,7,9,10)`, degree-`1` vertices `(4,6)`,
+  and degree-`2` vertices `(0,3,5,8)`.  The union of the degree-`0` and
+  degree-`1` parts is connected with `7` vertices and `8` edges, so the
+  obstruction is exactly that the low spectral pieces do not induce a forest.
+  The structural equality target must therefore be broadened from
+  regular-feedback partitions to spectral partitions with controlled low-part
+  excess.
