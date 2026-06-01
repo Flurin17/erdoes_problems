@@ -3317,3 +3317,9 @@ source of growth beyond Ramsey.
   nodes and returned `status=unknown_time_limit`; closing `C_reg(1,6)` beyond
   the existing `C_reg(1,6)>13` certificate will need stronger pruning or a
   different exact formulation.
+- 2026-06-01: Added Lemma 0B.1: complete multipartite graphs, and disjoint
+  unions of cliques, always contain regular induced subgraphs of order at
+  least `n/H_n`.  The proof chooses the largest Ferrers rectangle
+  `t * #{classes of size at least t}` in the class-size histogram.  Therefore
+  complete multipartite structures can obstruct rigid dyadic partition
+  targets, but not the regular-induced-subgraph conjecture itself.

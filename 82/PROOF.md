@@ -106,6 +106,54 @@ itself a source of extra regularity: the cross edges between one clique and
 one independent set may form a split graph, and in split graphs regular
 induced subgraphs are exactly the ordinary homogeneous induced subgraphs.
 
+## Lemma 0B.1: Complete Multipartite Graphs Are Logarithmically Easy
+
+Let `G` be a complete multipartite graph on `n>=1` vertices.  Then `G`
+contains a regular induced subgraph on at least
+
+```text
+n/H_n
+```
+
+vertices, where `H_n=1+1/2+...+1/n`.  The same conclusion holds for the
+complement of a complete multipartite graph, that is, for a disjoint union of
+cliques.
+
+Proof.  Let the multipartite class sizes be `s_1,...,s_m`.  For an integer
+`t>=1`, put
+
+```text
+a_t = |{i : s_i >= t}|.
+```
+
+If `a_t>0`, choose exactly `t` vertices from each class with size at least
+`t`.  The induced graph is complete `a_t`-partite with all parts of size
+`t`, hence it is regular of degree `(a_t-1)t` and has order `t a_t`.
+
+Let
+
+```text
+M=max_{t>=1} t a_t.
+```
+
+Since `a_t=0` for `t>n`,
+
+```text
+n=sum_i s_i = sum_{t>=1} a_t <= sum_{t=1}^n M/t = M H_n.
+```
+
+Thus some `t` gives a regular induced subgraph of order `M>=n/H_n`.
+
+For a disjoint union of cliques, apply the same argument to the clique sizes:
+choosing exactly `t` vertices from every clique of size at least `t` gives a
+disjoint union of equal `t`-cliques, which is `(t-1)`-regular.  QED.
+
+This is much stronger than the conjectured `omega(log n)` lower bound on this
+model class.  It also explains why the complete multipartite obstructions
+appearing in the modular-partition route are obstructions to particular
+dyadic lift statements, not to the existence of large regular induced
+subgraphs themselves.
+
 ## Lemma 0C: Split Graphs Satisfy The Terminal-Size Partition Target
 
 Let `G` be a split graph on `n` vertices, and put `q=ceil(sqrt n)`.  Then
