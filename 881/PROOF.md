@@ -16683,23 +16683,39 @@ coverage requirements.
 ### Corollary 13.1l.2k.3: Fixed-first star cuts must be cross-promoted
 
 An attempted \(k=2\) counterexample cannot realize Target 13.1l.2k by
-placing independent fixed-first star cuts in disjoint blocks.
+placing independent fixed-first star cuts in disjoint suffix blocks.
 
 More precisely, suppose a tail is partitioned into finite disjoint blocks
 \[
 P_1,P_2,\ldots
 \]
-and every active edge supplied inside \(P_s\) has size at least \(2\) and
-is contained wholly in that block. Then the union of these local active
-families is not a weak barrier. Choose one element
+and every active edge in the fixed first section has the form
+\[
+\{d\}\cup H,
+\]
+where
+\[
+H\subset P_s
+\]
+for some \(s\), and
+\[
+|H|\ge2.
+\]
+Then these local section edges are not a weak barrier in the section above
+\(d\). Choose one element
 \[
 p_s\in P_s
 \]
-from each block. The infinite selector
+from each block. The infinite suffix selector
 \[
 B=\{p_s:s\ge1\}
 \]
-contains no local active edge, since it meets each block in only one point.
+contains no \(H\), since it meets each block in only one point. Equivalently,
+the full deletion
+\[
+\{d\}\cup B
+\]
+contains no active edge of the displayed local form.
 
 Thus the star-cut diagnostics above can matter only if their active
 endpoints are promoted across blocks: labels or suffix endpoints from one
