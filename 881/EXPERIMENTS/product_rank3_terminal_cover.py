@@ -212,7 +212,7 @@ def report_gate_maps(
     for selector, data in witnesses.items():
         deletion = set(selector)
         for witness, _gap in data:
-            rows: dict[int, list[int]] = {}
+            rows: dict[int, dict[str, list[int]]] = {}
             for point in sorted(elements - deletion):
                 shift = witness - point
                 if shift < ORDER2_THRESHOLD:
@@ -228,22 +228,36 @@ def report_gate_maps(
                         f"non-gated support for selector={selector} "
                         f"witness={witness} point={point}: {representations}"
                     )
-                gates = sorted(
-                    gate for gate in deletion if witness - point - gate in elements
+                retained_gates = sorted(
+                    gate
+                    for gate in deletion
+                    if witness - point - gate in elements - deletion
                 )
-                if not gates:
+                deleted_pair_gates = sorted(
+                    gate
+                    for gate in deletion
+                    if witness - point - gate in deletion
+                )
+                if not retained_gates and not deleted_pair_gates:
                     raise AssertionError(
                         f"no gate for selector={selector} witness={witness} "
                         f"point={point}"
                     )
-                rows[point] = gates
+                rows[point] = {
+                    "retained": retained_gates,
+                    "deleted_pair": deleted_pair_gates,
+                }
             gate_counts = {
-                gate: sum(gate in gates for gates in rows.values())
+                gate: sum(gate in row["retained"] for row in rows.values())
                 for gate in selector
             }
+            deleted_pair_rows = [
+                point for point, row in rows.items() if row["deleted_pair"]
+            ]
             print(
                 f"  selector={selector} witness={witness} "
-                f"rows={rows} gate_counts={gate_counts}"
+                f"rows={rows} retained_gate_counts={gate_counts} "
+                f"deleted_pair_rows={deleted_pair_rows}"
             )
 
 

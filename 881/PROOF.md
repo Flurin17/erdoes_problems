@@ -8210,14 +8210,29 @@ to the deletion
 F_{I,\sigma}=\{\sigma(i):i\in I\}.
 \]
 For every old retained padder \(e\) below \(w_{I,\sigma}-N_0\), the
-vertex-cover condition from Lemma 10.1 requires a deleted gate
+vertex-cover condition from Lemma 10.1 requires every two-sum
+representation of
+\[
+w_{I,\sigma}-e
+\]
+to meet \(F_{I,\sigma}\). Thus each such row is either a deleted-pair
+exception
+\[
+w_{I,\sigma}-e\in F_{I,\sigma}+F_{I,\sigma}, \tag{1}
+\]
+or it has a deleted gate
 \[
 \gamma_{I,\sigma}(e)\in F_{I,\sigma}
 \]
 and a retained mirror
 \[
-w_{I,\sigma}-e-\gamma_{I,\sigma}(e)\in A. \tag{1}
+w_{I,\sigma}-e-\gamma_{I,\sigma}(e)
+  \in A\setminus F_{I,\sigma}. \tag{2}
 \]
+The \(F+F\) exception rows are the same finite exception mass isolated in
+Lemma 8.4c and Corollary 8.4c.1; on large active old tests, a surviving
+front must therefore produce many retained-mirror rows unless the edge rank
+itself grows fast enough to absorb the exceptions.
 The witness must be private enough that every three-term representation of
 \(w_{I,\sigma}\) uses a point of \(F_{I,\sigma}\), while restoring any one
 point of \(F_{I,\sigma}\) repairs the witness.
@@ -8228,7 +8243,7 @@ using a true front \(\mathcal B\), so every infinite packet selector
 contains some protected edge. Therefore a final positive proof must show
 that such reflected front data cannot be staged indefinitely: either the
 gate maps \(\gamma_{I,\sigma}\) repeat over a finite palette and trigger the
-certificate/recurrent-color machinery, or the mirrors in (1) force pair
+certificate/recurrent-color machinery, or the mirrors in (2) force pair
 cylinders, bounded second-excess edges, or large shifted spikes with stable
 finite overlap. Conversely, a counterexample would have to supply a finite
 extension lemma producing this data while keeping singleton and pair

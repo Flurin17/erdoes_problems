@@ -2313,12 +2313,15 @@ not alone produce an escaping selector, because an abstract rank-three
 product front can assign essentially selector-specific witness classes.
 Target 8.5a.7z.8 isolates the remaining counterexample skeleton as a
 selector-specific reflected front: each front edge and selector receives a
-nearly private witness, every old padder is assigned to a deleted gate and a
-retained mirror, and the gate/mirror data must avoid all finite recurrent
-palettes while preserving pair-harmlessness.
+nearly private witness, and every old padder is either a deleted-pair
+exception from \(F+F\) or is assigned to a deleted gate and retained mirror.
+The retained gate/mirror data must avoid all finite recurrent palettes
+while preserving pair-harmlessness, and the \(F+F\) exceptions are bounded
+only by the rank-sensitive mass from Lemma 8.4c.
 The terminal-cover diagnostic now prints the finite gate-option maps
-\(e\mapsto\{f\in F:v-e-f\in A\}\) for the small rank-three product window,
-so this bookkeeping is checked on the local model.
+\(e\mapsto\{f\in F:v-e-f\in A\setminus F\}\), along with deleted-pair
+exceptions, for the small rank-three product window, so this bookkeeping is
+checked on the local model.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely
