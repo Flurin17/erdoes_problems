@@ -3718,3 +3718,12 @@ source of growth beyond Ramsey.
   This turns extension criticality into a concrete packing/closure problem:
   any attempted extension must choose an open-packing set of nonneighbors,
   and saturated losses force that set leftward in the order.
+- 2026-06-01: Rechecked the tempting Eulerian-host shortcut.  Gallai gives a
+  linear-size induced even graph, so it would suffice to prove
+  `reg(H)=omega(log |H|)` for Eulerian graphs.  Small parity-conditioned
+  samples do not show an easy strengthening: among `100` random all-even
+  graphs, the minimum largest regular induced subgraph was `4` at `n=10` and
+  `5` at `n=12`.  The generic exact `n=8` enumeration is too slow because it
+  filters all labelled graphs rather than generating Eulerian graphs directly.
+  This route remains possible, but it needs a real Eulerian structural
+  theorem, not just Gallai plus small-order behavior.
