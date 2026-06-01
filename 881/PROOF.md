@@ -3620,7 +3620,11 @@ alternatives.
    (U+g-U)\cap A\subset F, \tag{5}
    \]
    \[
-   (V+f-U)\cap A\subset F. \tag{6}
+   (V+f-V)\cap A\subset F, \tag{6}
+   \]
+   and the cross-shadows are also trapped:
+   \[
+   (V+f-U)\cap A\subset F,\qquad (U+g-V)\cap A\subset F. \tag{7}
    \]
 
 Proof. Start from Corollary 3.4d.18. It gives \(F,g,U\) with
@@ -3652,6 +3656,33 @@ Put
 V=U+g-f.
 \]
 By (9), \(V\subset A\), and the translation is injective, so \(|V|=|U|\).
+Since \(E\cup F\) is finite and the maps \(u\mapsto u\) and
+\[
+u\mapsto u+g-f
+\]
+are injective, deleting from \(U\) the points for which
+\[
+u\in E\cup F\quad\text{or}\quad u+g-f\in E\cup F
+\]
+removes at most \(O_E(1)\) points. Along arbitrarily large witnesses this
+loss is absorbed into \(c_E\). Redefine \(U\) and \(V=U+g-f\) after this
+discard. Then
+\[
+U,V\subset A\setminus(E\cup F)
+\]
+and the displayed lower bound in (3) still holds after decreasing \(c_E\).
+
+For \(v=u+g-f\in V\),
+\[
+f+v=g+u\notin2(A\setminus F).
+\]
+Thus Lemma 3.4d.7, applied with gate \(f\), deleted palette \(F\), and
+packet \(V\), gives
+\[
+(V+f-V)\cap A\subset F,
+\]
+which is (6).
+
 For \(v=u+g-f\in V\) and \(u_0\in U\),
 \[
 v+f-u_0=g+u-u_0.
@@ -3660,18 +3691,17 @@ Thus (10) gives
 \[
 (V+f-U)\cap A\subset F,
 \]
-which is (6), while (5) is again (10). Since \(E\cup F\) is finite and the
-maps \(u\mapsto u\) and \(u\mapsto u+g-f\) are injective, deleting from
-\(U\) the points for which \(u\in E\cup F\) or \(u+g-f\in E\cup F\)
-removes at most \(O_E(1)\) points. Along arbitrarily large witnesses this
-loss is absorbed into \(c_E\), so the displayed lower bound in (3) still
-holds after decreasing \(c_E\). \(\square\)
+and (5) is again (10). Finally,
+\[
+U+g-V=V+f-V,
+\]
+so (6) gives the second containment in (7). \(\square\)
 
 Thus the remaining \(k=3\) obstruction is not an arbitrary sparse packet.
 It is either a moving unique-gate packet, or it carries at least two
-parallel retained copies whose cross-shadows are still trapped in one
-bounded active palette. This is the \(k=3\) analogue of the singleton versus
-nonsingleton split used in the completed \(k=2\) proof.
+parallel retained copies whose self-shadows and cross-shadows are all
+trapped in one bounded active palette. This is the \(k=3\) analogue of the
+singleton versus nonsingleton split used in the completed \(k=2\) proof.
 
 ### Warning 3.4d.21: Finite windows do not force anchored-shadow expansion
 
@@ -28768,7 +28798,8 @@ missing from ordinary minimal order-\(h\) bases.
   finite packets \(U\subset A\), then a good order-\(4\) deletion exists.
 * Corollary 3.4d.20 splits those active pair packets into a singleton
   unique-gate branch and a nonsingleton branch with two parallel retained
-  copies whose cross-shadows are trapped in one bounded active palette.
+  copies whose self-shadows and cross-shadows are trapped in one bounded
+  active palette.
 * Warning 3.4d.21 gives a finite-window caution for the anchored-shadow
   criterion:
   \(\{1,2,3,4,7\}\) covers \([8,16]\) by three sums but has a four-point

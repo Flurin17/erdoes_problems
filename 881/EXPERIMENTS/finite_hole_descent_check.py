@@ -25,7 +25,8 @@ on small finite sets, the two purely finite facts used in Lemma 3.4d.1:
 * bounded two-sum palettes shrink to active pair barriers containing the
   gate, as used in Corollary 3.4d.18.
 * active pair packets split into singleton unique-gate packets or
-  nonsingleton parallel-copy packets, as used in Corollary 3.4d.20.
+  nonsingleton parallel-copy packets with trapped self-shadows and
+  cross-shadows, as used in Corollary 3.4d.20.
 """
 
 from __future__ import annotations
@@ -372,14 +373,30 @@ def check_pair_packet_split(A: tuple[int, ...], D: tuple[int, ...]) -> int:
         for f in F:
             if f == gate:
                 continue
-            parallel = [gate + u - f for u in packet]
+            filtered = [
+                u for u in packet
+                if u not in F_set and gate + u - f not in F_set
+            ]
+            parallel = [gate + u - f for u in filtered]
             assert all(v in A_set for v in parallel)
             for v in parallel:
-                for u0 in packet:
+                assert not reps(C, 2, f + v)
+            for v in parallel:
+                for v0 in parallel:
+                    x = v + f - v0
+                    if x in A_set:
+                        assert x in F_set
+            for v in parallel:
+                for u0 in filtered:
                     x = v + f - u0
                     if x in A_set:
                         assert x in F_set
-            checked += len(packet)
+            for u in filtered:
+                for v0 in parallel:
+                    x = u + gate - v0
+                    if x in A_set:
+                        assert x in F_set
+            checked += len(filtered)
     return checked
 
 
