@@ -15688,6 +15688,90 @@ Q=5^2+4^2+4^2=57,        Q/n^2=57/196.
 A seeded connected local search from that graph did not find a smaller
 square-spectrum value.
 
+**Lemma 28J.10e.1: Forests Have Quadratic Square Spectrum.**  If `F` is a
+forest on `n` vertices, then
+
+```text
+Q(F)=sum_d s_d(F)^2 >= n^2/2.
+```
+
+Proof.  As in Lemma 28J.3, a forest contributes only in degrees `0` and `1`,
+and
+
+```text
+s_0(F)+s_1(F) >= n.
+```
+
+For nonnegative real numbers `x,y` with `x+y>=n`, one has
+
+```text
+x^2+y^2 >= (x+y)^2/2 >= n^2/2.
+```
+
+Applying this with `x=s_0(F)` and `y=s_1(F)` proves the claim.  QED.
+
+**Lemma 28J.10e.2: One Regular Feedback Set Gives Quadratic Square
+Spectrum.**  Suppose `V(G)=F union R`, where `G[F]` is a forest and `G[R]` is
+induced `d`-regular for some `d>=2`.  Then, with `n=|V(G)|`,
+
+```text
+Q(G) >= n^2/3.
+```
+
+Proof.  Put `f=|F|` and `r=|R|`.  Lemma 28J.10e.1 applied inside the forest
+part gives
+
+```text
+s_0(G)^2+s_1(G)^2 >= f^2/2,
+```
+
+because independent sets and induced matchings in `G[F]` remain valid in
+`G`.  The regular part contributes
+
+```text
+s_d(G)^2 >= r^2.
+```
+
+The degree `d` is distinct from `0,1`, so
+
+```text
+Q(G) >= f^2/2+r^2.
+```
+
+Subject to `f+r=n`, the expression `f^2/2+r^2` is minimized at
+`f=2n/3`, where it equals `n^2/3`.  QED.
+
+In particular every pseudoforest satisfies `Q(G)>=|V(G)|^2/3`, by the same
+cycle-plus-forest decomposition used in Corollary 28J.5.
+
+**Lemma 28J.10e.3: Split Graphs Have Quadratic Square Spectrum.**  If `G` is
+a split graph on `n` vertices, then
+
+```text
+Q(G) >= n^2/4.
+```
+
+Proof.  Let `V(G)=A union B` be a split partition with `A` a clique and `B`
+independent.  Then
+
+```text
+s_0(G) >= |B|.
+```
+
+If `A` is nonempty, the clique `A` itself is an induced regular subgraph, so
+
+```text
+s_{|A|-1}(G) >= |A|.
+```
+
+If `A` is empty, the first display gives `Q(G)=n^2`.  Otherwise,
+
+```text
+Q(G) >= |A|^2+|B|^2 >= (|A|+|B|)^2/2.
+```
+
+This is stronger than the displayed `n^2/4` bound.  QED.
+
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all
 labelled graphs on `M` vertices by their regular degree spectrum summaries.

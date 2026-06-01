@@ -4251,3 +4251,10 @@ source of growth beyond Ramsey.
   random connected `n=12` starts found no lower square ratio; the best `n=12`
   rooted local example had coefficient vector `{0:4,1:4,2:4}` and square
   ratio `48/121`.
+- 2026-06-01: Added rigorous square-spectrum bounds for easy graph classes:
+  forests satisfy `Q>=n^2/2`; graphs that are a forest plus one induced
+  regular feedback set of degree at least `2` satisfy `Q>=n^2/3`; in
+  particular pseudoforests satisfy `Q>=n^2/3`; and split graphs satisfy
+  `Q>=n^2/4`.  These lemmas give the square route more proved coverage, but
+  they do not yet address repeated-degree feedback partitions with many
+  distinct core degrees or the rooted bouquet obstructions.
