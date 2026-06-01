@@ -12827,6 +12827,101 @@ n=\underbrace{1+\cdots+1}_{r\text{ times}}
 \]
 Thus \(C\) is an order-\((k+1)\) basis. \(\square\)
 
+### Proposition 11.1: Finite accelerators over a cofinite lattice component
+
+Let \(d\ge1\), let \(D\subseteq\mathbb N\) be cofinite, let
+\[
+F\subset\mathbb N
+\]
+be finite, and put
+\[
+A=F\cup dD.
+\]
+Fix \(k\ge1\). Suppose that for every residue
+\[
+\rho\in\mathbb Z/d\mathbb Z
+\]
+there are elements
+\[
+f_{\rho,1},\ldots,f_{\rho,j_\rho}\in F
+\]
+not necessarily distinct,
+and an integer \(L_\rho\ge2\) such that
+\[
+j_\rho+L_\rho=k+1
+\]
+and
+\[
+f_{\rho,1}+\cdots+f_{\rho,j_\rho}\equiv \rho\pmod d. \tag{1}
+\]
+Then there is an infinite \(B\subset dD\subset A\) such that
+\[
+A\setminus B
+\]
+is an asymptotic basis of order \(k+1\).
+
+Proof. We first choose an infinite sparse set \(P\subset D\) whose
+complement \(D'=D\setminus P\) is an asymptotic basis of every order
+\(L\ge2\). Since \(D\) is cofinite, choose two elements
+\[
+s,\ s+2\in D
+\]
+large enough that all sufficiently large integers lie in \(D\). Let
+\[
+P=\{2^i:i\ge i_0\}\subset D
+\]
+with \(2^{i_0}>s+2\), and put \(D'=D\setminus P\). For every sufficiently
+large \(M\), at least one of
+\[
+M-s,\qquad M-(s+2)
+\]
+is not a power of two, since two powers of two differ by \(2\) only in the
+exceptional pair \(2,4\). Taking \(M\) large also puts that difference in
+\(D\). Hence
+\[
+M\in2D'
+\]
+for all sufficiently large \(M\). For \(L>2\), subtract \((L-2)s\) and pad
+with \(L-2\) copies of \(s\), so \(D'\) is an asymptotic basis of every
+order \(L\ge2\).
+
+Now let
+\[
+B=dP.
+\]
+Then \(B\subset dD\subset A\) is infinite, and
+\[
+A\setminus B=F\cup dD'.
+\]
+Let \(n\) be sufficiently large and let \(\rho\equiv n\pmod d\). Choose the
+data from (1). Then
+\[
+Q={n-(f_{\rho,1}+\cdots+f_{\rho,j_\rho})\over d}
+\]
+is a sufficiently large positive integer. Since \(L_\rho\ge2\) and \(D'\)
+is an order-\(L_\rho\) asymptotic basis, write
+\[
+Q=d_1+\cdots+d_{L_\rho},\qquad d_i\in D'.
+\]
+Therefore
+\[
+n=f_{\rho,1}+\cdots+f_{\rho,j_\rho}
+  +dd_1+\cdots+dd_{L_\rho}
+\]
+is a \((k+1)\)-term representation from \(A\setminus B\). Thus
+\(A\setminus B\) is an order-\((k+1)\) basis. \(\square\)
+
+Example 11 is the case \(d=k\), \(D=\mathbb N\), and \(F=\{1\}\): for
+\(\rho=r\in\{0,\ldots,k-1\}\), take \(j_\rho=r\) copies of \(1\) and
+\[
+L_\rho=k+1-r\ge2.
+\]
+The proposition also explains why finite residue accelerators are not by
+themselves a negative mechanism. A counterexample using a cofinite lattice
+component would need some residue class whose \((k+1)\)-term residue
+representations all use at most one lattice term; otherwise the sparse
+deletion above absorbs the accelerator.
+
 ## Attempt 12: Digital strongly minimal bases
 
 A Raikov-Stöhr-type construction is a natural source of strongly minimal
@@ -15766,6 +15861,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   \((k-1)A\), which becomes full recurrence only when \(k=2\).
 * Example 11 gives a residue-padding family satisfying the desired
   conclusion for every \(k\ge2\).
+* Proposition 11.1 extends this to finite accelerators over a cofinite
+  lattice component whenever every residue has a \((k+1)\)-term residue
+  representation using at least two lattice summands.
 * Attempt 12 records that the clean direct-sum digital model satisfies the
   desired conclusion, and the standard binary Raikov-Stöhr basis has an
   explicit even-support deletion leaving an order-3 basis; a faithful

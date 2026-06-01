@@ -306,6 +306,12 @@ The desired deletion exists: delete \(B_0=\{k2^i:i\ge1\}\). Since
 \(\mathbb N\setminus\{2^i:i\ge1\}\) is an asymptotic basis of every order
 \(L\ge2\), the remaining set \(\{1\}\cup k(\mathbb N\setminus\{2^i\})\) is
 an order-\((k+1)\) basis. The proof is written as Example 11 in `PROOF.md`.
+Proposition 11.1 generalizes this: for a finite accelerator \(F\) over a
+cofinite lattice component \(dD\), a sparse deletion from \(dD\) works
+whenever every residue has a \((k+1)\)-term residue representation using at
+least two lattice terms. Thus a finite-accelerator counterexample over a
+cofinite component would need a residue class whose \((k+1)\)-term residue
+repairs all use at most one lattice term.
 
 ### A genuine \(k=2\) model where the desired deletion exists
 
