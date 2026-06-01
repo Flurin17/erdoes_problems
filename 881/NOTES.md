@@ -129,7 +129,9 @@ this geometry to selector thinning: if the escape sets for bounded-rank
 positive-density interval packets have summable product mass on a packet
 tail, an infinite selector avoids that entire branch. Thus a surviving
 vanishing-density route must maintain nonsummable selector mass on every
-tail, or move to growing rank.
+tail, or move to growing rank. Corollary 16.88 specializes this to robust
+cores: the active-color proportions escaping all assigned robust-core
+profiles must have tail sum at least \(1\) on every packet tail.
 
 ## Definitions
 

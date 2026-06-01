@@ -23656,6 +23656,80 @@ density tends to zero pointwise: it must do so while still maintaining
 nonsummable product mass on every selector tail, or else abandon bounded
 rank or fixed positive density.
 
+### Corollary 16.88: Summable robust-core escapes are selector-avoidable
+
+Keep the packet notation of Corollary 16.87 and fix \(r,\eta\). Let
+\(\mathcal A\) be a countable set of robust-core profiles
+\[
+\alpha=(I_\alpha,\mathcal K_\alpha),
+\]
+where \(I_\alpha\) is a tested interval and \(\mathcal K_\alpha\) is a
+finite auxiliary-interval family satisfying the hypotheses of Corollary
+16.86 for \(r,\eta\). Put
+\[
+C_\alpha=\bigcup_{K\in\mathcal K_\alpha}
+R_K\left({\eta\over2r},I_\alpha;r\right). \tag{1}
+\]
+For each packet \(P_s\), define the escape set
+\[
+E_{\alpha,s}=P_s\setminus C_\alpha. \tag{2}
+\]
+
+Let \(\mathcal G_{r,\eta}\) be a family of active traces satisfying the
+first and third hypotheses of Corollary 16.87. Suppose that every
+\[
+G\in\mathcal G_{r,\eta}
+\]
+has an assigned profile \(\alpha(G)\in\mathcal A\) and a nonempty active
+palette
+\[
+P_G\subseteq G
+\]
+such that the corresponding interval packet is \(\eta\)-dense over
+\(I_{\alpha(G)}\), has rank at most \(r\), and satisfies the hypotheses of
+Corollary 16.86 with active palette \(P_G\) and auxiliary family
+\(\mathcal K_{\alpha(G)}\).
+
+Then, for every tail index \(t\),
+\[
+\sum_{\alpha\in\mathcal A}\sum_{s\ge t}
+{|E_{\alpha,s}|\over |P_s|}\ge1. \tag{3}
+\]
+Consequently, if the double sum in (3) is \(<1\) on some tail, the
+bounded-rank \(\eta\)-dense robust-core-escape branch cannot product-cover
+that tail.
+
+Proof. Fix \(G\in\mathcal G_{r,\eta}\), and put
+\(\alpha=\alpha(G)\). If
+\[
+P_G\subset C_\alpha,
+\]
+then Corollary 16.86 applies to the assigned interval packet and gives a
+union size \(<\eta |I_\alpha|\), contradicting the asserted
+\(\eta\)-density. Hence
+\[
+P_G\cap P_s\cap E_{\alpha,s}\ne\varnothing
+\]
+for at least one packet index \(s\) in the support of \(G\).
+
+For each \((\alpha,s)\), form the one-coordinate cylinder
+\[
+\mathcal C_{\alpha,s}=(\{s\},E_{\alpha,s})
+\]
+and discard the empty ones. The preceding paragraph says that every
+selector containing a trace \(G\in\mathcal G_{r,\eta}\) is caught by one of
+these cylinders. The product mass of \(\mathcal C_{\alpha,s}\) is
+\[
+{|E_{\alpha,s}|\over |P_s|}.
+\]
+Corollary 16.87, applied to this cylinder family, gives (3). \(\square\)
+
+This is the concrete selector form of the robust-core obstruction. A
+packetized counterexample cannot let the active-color escape proportions
+from all available robust cores be tail-summable: then a selector chooses
+inside every robust core simultaneously and defeats all bounded-rank
+positive-density interval packets assigned to those profiles.
+
 The script `EXPERIMENTS/cross_interval_band_profile.py` checks the
 interval-overlap inequality behind Lemma 16.63 on separated, nested, and
 translated finite interval pairs, and also checks the common-band palette
@@ -24958,6 +25032,10 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   selector tail only if its associated escape cylinders have product mass
   at least \(1\) on every tail. Summable low-density escape sets are
   selector-avoidable.
+* Corollary 16.88 gives the robust-core specialization: if each dense
+  bounded-rank trace is assigned to a robust-core profile, then the
+  one-coordinate active-color escape proportions from those cores must have
+  tail sum at least \(1\) on every packet tail.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective
