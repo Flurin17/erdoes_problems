@@ -312,6 +312,11 @@ whenever every residue has a \((k+1)\)-term residue representation using at
 least two lattice terms. Thus a finite-accelerator counterexample over a
 cofinite component would need a residue class whose \((k+1)\)-term residue
 repairs all use at most one lattice term.
+Corollary 11.1a removes even that caveat when \(F\cup dD\) is already an
+order-\(k\) basis: the order-\(k\) residue representation uses at least one
+lattice term for large targets, and the order-\((k+1)\) repair can use one
+more. Hence finite accelerators over cofinite lattice components are always
+positive.
 
 ### A genuine \(k=2\) model where the desired deletion exists
 

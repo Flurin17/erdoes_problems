@@ -12927,10 +12927,51 @@ Example 11 is the case \(d=k\), \(D=\mathbb N\), and \(F=\{1\}\): for
 L_\rho=k+1-r\ge2.
 \]
 The proposition also explains why finite residue accelerators are not by
-themselves a negative mechanism. A counterexample using a cofinite lattice
-component would need some residue class whose \((k+1)\)-term residue
-representations all use at most one lattice term; otherwise the sparse
-deletion above absorbs the accelerator.
+themselves a negative mechanism: once the residue repair can be arranged
+with at least two lattice terms, the sparse deletion above absorbs the
+accelerator. The next corollary shows that this condition is automatic when
+\(F\cup dD\) is already an order-\(k\) basis.
+
+### Corollary 11.1a: Cofinite lattice accelerators are always positive
+
+Let \(d\ge1\), let \(D\subseteq\mathbb N\) be cofinite, let \(F\subset
+\mathbb N\) be finite, and put
+\[
+A=F\cup dD.
+\]
+If \(A\) is an asymptotic basis of order \(k\), then there is an infinite
+\[
+B\subset dD
+\]
+such that \(A\setminus B\) is an asymptotic basis of order \(k+1\).
+
+Proof. We verify the residue hypothesis of Proposition 11.1. Fix a residue
+\[
+\rho\in\mathbb Z/d\mathbb Z.
+\]
+Choose \(n\equiv\rho\pmod d\) so large that \(n\in kA\) and \(n\) is larger
+than every \(k\)-term sum using only elements of \(F\). In any
+representation
+\[
+n=a_1+\cdots+a_k,\qquad a_i\in A,
+\]
+at least one summand lies in \(dD\). Let \(j_\rho\) be the number of
+summands lying in \(F\), and let
+\[
+L'_\rho=k-j_\rho\ge1
+\]
+be the number of lattice summands. The sum of the \(F\)-summands is
+congruent to \(\rho\pmod d\), since all lattice summands are \(0\pmod d\).
+For Proposition 11.1 use these \(j_\rho\) finite summands and set
+\[
+L_\rho=L'_\rho+1\ge2.
+\]
+Then \(j_\rho+L_\rho=k+1\), and the required congruence holds. Proposition
+11.1 gives the desired infinite deletion. \(\square\)
+
+Thus the finite-accelerator warning in Attempt 17 can only be relevant for
+thin non-accelerator components, not for components that are cofinite in an
+arithmetic progression.
 
 ## Attempt 12: Digital strongly minimal bases
 
@@ -15199,13 +15240,12 @@ version of this shortcut also fails: residue accelerators create
 \((k+1)\)-term repairs involving the accelerator, while thick integer lifts
 replace a deleted representative by another representative except near
 block endpoints.
-Proposition 11.1 gives the cofinite-lattice version of the same warning:
-if the non-accelerator component is cofinite in a lattice and every residue
-has a \((k+1)\)-term repair using at least two component terms, then a
-sparse deletion inside that component remains an order-\((k+1)\) basis.
-Thus any finite-accelerator counterexample must use a sparse component with
-shifted witnesses robust against all accelerator sums, or a residue class
-whose \((k+1)\)-term repairs are forced to use at most one component term.
+Proposition 11.1 and Corollary 11.1a give the cofinite-lattice version of
+the same warning: if the non-accelerator component is cofinite in a lattice,
+then any finite accelerator that makes the set an order-\(k\) basis still
+admits a sparse deletion leaving an order-\((k+1)\) basis. Thus any
+finite-accelerator counterexample must use a genuinely sparse component
+with shifted witnesses robust against all accelerator sums.
 
 Therefore a finite-accelerator counterexample would need an
 \(F\)-robust minimal basis \(M\): every infinite deletion would have to
@@ -15881,6 +15921,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * Proposition 11.1 extends this to finite accelerators over a cofinite
   lattice component whenever every residue has a \((k+1)\)-term residue
   representation using at least two lattice summands.
+* Corollary 11.1a observes that this residue condition is automatic if the
+  finite accelerator over the cofinite lattice component is already an
+  order-\(k\) basis.
 * Attempt 12 records that the clean direct-sum digital model satisfies the
   desired conclusion, and the standard binary Raikov-Stöhr basis has an
   explicit even-support deletion leaving an order-3 basis; a faithful
