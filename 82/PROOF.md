@@ -15252,71 +15252,32 @@ checks this target exactly on connected labelled graphs with six vertices.
 It finds `660` graphs for which every non-cut vertex is nonessential; their
 mass histogram is `{7:360, 8:120, 9:180}`, so none has mass below `|G|-1`.
 
-**Lemma 28J.10d.1d: One-Cut Spectrum Gluing Inequality.**  Let `G` be the
-union of two induced subgraphs `A` and `B` such that
+**False Lemma Attempt 28J.10d.1d: Naive One-Cut Gluing Fails.**  A tempting
+one-cut inequality is
 
 ```text
-V(A) cap V(B) = {x}
+s_d(A union_x B) >= max { s_d(A)+s_d(B-x), s_d(A-x)+s_d(B) }.
 ```
 
-and there are no edges between `A-x` and `B-x`.  Then for every degree `d`,
+This is false.  The obstruction is that a witness on one side may contain the
+root `x`, and then vertices chosen from the other side can change the degree
+of `x`.
+
+A minimal counterexample is obtained as follows.  Let `A` be the edgeless
+graph on `{x,a}`, let `B` be the single edge `xb`, and glue them at `x`.
+Then `G=A union_x B` is the disjoint union of the edge `xb` and the isolated
+vertex `a`.  For `d=0`,
 
 ```text
-s_d(G) >= max { s_d(A)+s_d(B-x), s_d(A-x)+s_d(B) }.
+s_0(A)=2,        s_0(B-x)=1,
 ```
 
-Consequently, if
+so the displayed inequality predicts `s_0(G)>=3`.  But `alpha(G)=2`, because
+`x` is adjacent to `b`.  Thus the root interaction must be tracked explicitly.
 
-```text
-Delta_A(d)=s_d(A)-s_d(A-x),        Delta_B(d)=s_d(B)-s_d(B-x),
-```
-
-then
-
-```text
-sum_d s_d(G)
-  >= sum_d s_d(A)+sum_d s_d(B)-sum_d min(Delta_A(d),Delta_B(d)).
-```
-
-Proof.  Let `X` be an induced `d`-regular subgraph of `A` of order `s_d(A)`,
-and let `Y` be an induced `d`-regular subgraph of `B-x` of order
-`s_d(B-x)`.  Since `Y` avoids `x` and there are no edges between `A-x` and
-`B-x`, the set `X union Y` induces a `d`-regular subgraph of `G`: vertices in
-`X` see exactly the same neighbors inside `X` as they did in `A`, and
-vertices in `Y` see exactly the same neighbors inside `Y` as they did in
-`B-x`.  Hence
-
-```text
-s_d(G) >= s_d(A)+s_d(B-x).
-```
-
-The symmetric argument gives
-
-```text
-s_d(G) >= s_d(A-x)+s_d(B).
-```
-
-Taking the maximum proves the first display.  For the second, write
-`a=s_d(A)`, `a'=s_d(A-x)`, `b=s_d(B)`, and `b'=s_d(B-x)`.  Since
-`a'<=a` and `b'<=b`,
-
-```text
-max(a+b',a'+b)=a+b-min(a-a',b-b').
-```
-
-Summing over `d` proves the claim.  QED.
-
-Thus a cut-vertex proof of connected defect one reduces to controlling the
-overlap of the root-essential drop vectors `Delta_A` and `Delta_B`.  The
-scanner
-
-```text
-python3 82/EXPERIMENTS/cut_gluing_scan.py 4 5
-python3 82/EXPERIMENTS/cut_gluing_scan.py 5 5 --samples 2000 --seed 82
-```
-
-finds no glued graph below the full-mass threshold in these bounded checks;
-both runs have minimum surplus `1` over the defect-one bound.
+The script `EXPERIMENTS/cut_gluing_scan.py` remains useful as a direct
+bounded check of glued graphs, but it is not backed by the naive inequality.
+The correct replacement is the rooted formula below.
 
 **Lemma 28J.10d.1e: Exact Rooted Formula For One-Cut Gluing.**  In the
 setting of Lemma 28J.10d.1d, define `a_d^0(A,x)=s_d(A-x)`.  Also let
@@ -15429,104 +15390,11 @@ full-deletion target as universal statements.  The spectrum route must now
 aim directly at a positive-density lower bound such as
 `sum_d s_d(G)>=c|V(G)|`, or at a superquadratic polylogarithmic bound.
 
-**Lemma 28J.10d.1g: Positive-Density Bounds Are Stable Under One-Cuts.**
-Fix a constant `0<c<=1`.  Suppose that every graph on fewer than `n` vertices
-satisfies
-
-```text
-sum_d s_d(J) >= c|V(J)|.
-```
-
-Let `G` be an `n`-vertex graph with a cut vertex `x`, and write
-`G=A union B`, where `A` and `B` are proper induced subgraphs,
-
-```text
-V(A) cap V(B)={x},
-```
-
-and there are no edges between `A-x` and `B-x`.  If
-
-```text
-sum_d s_d(A) >= c|V(A)|,        sum_d s_d(B) >= c|V(B)|,
-```
-
-then
-
-```text
-sum_d s_d(G) >= c|V(G)|.
-```
-
-Proof.  Put
-
-```text
-mu(J)=sum_d s_d(J).
-```
-
-For each degree `d`, let
-
-```text
-Delta_A(d)=s_d(A)-s_d(A-x),        Delta_B(d)=s_d(B)-s_d(B-x).
-```
-
-Lemma 28J.10d.1d gives
-
-```text
-mu(G) >= mu(A)+mu(B)-L,
-```
-
-where
-
-```text
-L=sum_d min(Delta_A(d),Delta_B(d)).
-```
-
-Since all `Delta` terms are nonnegative,
-
-```text
-L <= min(mu(A)-mu(A-x), mu(B)-mu(B-x)).
-```
-
-By the induction hypothesis applied to the smaller graphs `A-x` and `B-x`,
-
-```text
-mu(A-x) >= c(|V(A)|-1),        mu(B-x) >= c(|V(B)|-1).
-```
-
-Write
-
-```text
-mu(A)=c|V(A)|+sigma_A,        mu(B)=c|V(B)|+sigma_B
-```
-
-with `sigma_A,sigma_B>=0`.  The previous display gives
-
-```text
-mu(A)-mu(A-x) <= sigma_A+c,
-mu(B)-mu(B-x) <= sigma_B+c.
-```
-
-Hence
-
-```text
-L <= min(sigma_A+c,sigma_B+c) <= sigma_A+sigma_B+c.
-```
-
-Therefore
-
-```text
-mu(G) >= c|V(A)|+sigma_A+c|V(B)|+sigma_B
-         -(sigma_A+sigma_B+c)
-       = c(|V(A)|+|V(B)|-1)
-       = c|V(G)|.
-```
-
-QED.
-
-Consequently, to prove any fixed positive-density spectrum-mass bound by
-minimal counterexample, it is enough to handle graphs with no cut vertex.
-The rooted gluing counterexamples above show why this lemma is unavailable at
-the additive-defect-one scale, but it is exactly suited to the weaker
-positive-density target needed for Erdős Problem 82.
+The failed inequality also invalidates the provisional claim that
+positive-density spectrum bounds are automatically stable under cut vertices.
+Any separator induction must use rooted signatures of the type in Lemma
+28J.10d.1e, or another argument that controls the root degree contributed by
+the opposite side.
 
 **Lemma 28J.10d.2: Leaf Extension Inequality.**  Let `G` be obtained from a
 graph `H` by adding a new leaf `z` adjacent to a vertex `u in V(H)`.  Then

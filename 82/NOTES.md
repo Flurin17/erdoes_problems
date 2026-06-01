@@ -4189,17 +4189,15 @@ source of growth beyond Ramsey.
   also finds many full/surplus graphs where every non-cut vertex is
   essential, confirming that the two extremal deletion behaviors are both
   common away from the below-defect-one regime.
-- 2026-06-01: Added `cut_gluing_scan.py` and Lemma 28J.10d.1d.  If two
-  induced graphs `A,B` meet only in a cut vertex `x`, then
-  `s_d(A union_x B) >= max(s_d(A)+s_d(B-x), s_d(A-x)+s_d(B))`; equivalently,
-  the only loss against adding the two spectra is the overlap of the
-  root-deletion drop vectors.  Exact gluing of connected `4`-vertex graphs
-  to connected `5`-vertex graphs checks `553280` rooted pairs and has minimum
-  surplus `1` over the defect-one bound; a `2000`-sample connected `5+5`
-  gluing run also has minimum surplus `1`.  This makes cut-vertex gluing a
-  plausible reduction, but the missing theorem is to show that simultaneous
-  root-essential drops are always compensated, typically by low-degree
-  witnesses crossing the two branches.
+- 2026-06-01: Added `cut_gluing_scan.py`, then audited and retracted the
+  naive one-cut inequality.  It is false that
+  `s_d(A union_x B) >= max(s_d(A)+s_d(B-x), s_d(A-x)+s_d(B))`: if `A` is two
+  isolated vertices `{x,a}` and `B` is the edge `xb`, the degree-`0`
+  inequality predicts an independent set of size `3` after gluing, but the
+  glued graph has independence number `2`.  The issue is that a witness on
+  one side can contain the root and then gain neighbors from the other side.
+  Any separator argument must track rooted partial degrees, not just deletion
+  drops.
 - 2026-06-01: The previous optimism was too strong.  Added
   `rooted_gluing_spectrum.py` and the exact rooted one-cut formula.  Gluing
   two copies of the fifteen-vertex defect graph
@@ -4219,11 +4217,9 @@ source of growth beyond Ramsey.
   obstructions still support the stronger candidate `mu(G)>=ceil(13|G|/14)`,
   which would solve the problem by the existing positive-density spectrum
   corollary if it could be proved.
-- 2026-06-01: Salvaged the separator route at the right scale.  Lemma
-  28J.10d.1g proves that any fixed linear lower bound `mu(G)>=c|G|` is stable
-  under one-cut gluing by induction: the possible overlap of root-deletion
-  drop vectors is bounded by the surplus of the two sides plus `c`.  Hence a
-  minimal counterexample to a positive-density spectrum bound has no cut
-  vertex.  The connected defect-one target failed exactly because it asks for
-  additive control at density `1`; the positive-density theorem needed for
-  Problem 82 survives cut vertices.
+- 2026-06-01: Retracted the provisional positive-density cut-gluing lemma,
+  because it depended on the false naive one-cut inequality.  The positive
+  density target remains viable, but cut vertices are not automatically
+  removable without a rooted-signature argument.  Next separator target:
+  prove a linear lower bound for the rooted signature convolution in Lemma
+  28J.10d.1e, or find a rooted block family with density below `13/14`.
