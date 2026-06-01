@@ -24945,9 +24945,10 @@ at least one active gate a linear distance outside the block, and a
 coordinated finite palette must pay a linear total gate-distance cost. The
 remaining escape must therefore either make the packet density vanish, let
 the deletion rank or robust-profile complexity grow with the interval,
-produce a linearly far endpoint-midpoint witness, use auxiliary profiles
-whose midpoint diameter is linear in their tested interval, or maintain
-nonsummable robust-core escape mass across the packet selector tail.
+produce packetwise center-far assigned profiles after charging packet
+width, use auxiliary profiles whose midpoint diameter is linear in their
+tested interval, or maintain nonsummable robust-core escape mass across the
+packet selector tail.
 
 ## Attempt 17: Finite accelerators are not a shortcut
 
