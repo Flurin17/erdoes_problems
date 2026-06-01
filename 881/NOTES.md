@@ -2316,6 +2316,9 @@ selector-specific reflected front: each front edge and selector receives a
 nearly private witness, every old padder is assigned to a deleted gate and a
 retained mirror, and the gate/mirror data must avoid all finite recurrent
 palettes while preserving pair-harmlessness.
+The terminal-cover diagnostic now prints the finite gate-option maps
+\(e\mapsto\{f\in F:v-e-f\in A\}\) for the small rank-three product window,
+so this bookkeeping is checked on the local model.
 
 Thus the live \(k=2\) obstruction is no longer just "unbounded moving
 colors." It must produce large private fibers that either have genuinely

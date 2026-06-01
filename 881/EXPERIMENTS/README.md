@@ -192,7 +192,8 @@ is the one-point stage buffer from Lemma 13.1d. The script also groups
 shared witness values by their selector families and checks the
 two-transversal condition from Lemma 8.5a.7z.4 on the actual shifted
 two-sum supports, then checks the common-core spike dichotomy from Lemma
-8.5a.7z.5.
+8.5a.7z.5. It also prints the finite deleted-gate maps for each selector
+witness, matching the reflected-front bookkeeping in Target 8.5a.7z.8.
 
 `product_rank3_extension_search.py` starts from that window and tries to add
 a fourth two-point packet, optionally with fillers. It requires every three

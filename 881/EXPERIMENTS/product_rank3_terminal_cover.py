@@ -204,6 +204,49 @@ def report_shared_witnesses(
         )
 
 
+def report_gate_maps(
+    elements: set[int],
+    witnesses: dict[tuple[int, ...], list[tuple[int, tuple[int, int]]]],
+) -> None:
+    print("selector_gate_maps:")
+    for selector, data in witnesses.items():
+        deletion = set(selector)
+        for witness, _gap in data:
+            rows: dict[int, list[int]] = {}
+            for point in sorted(elements - deletion):
+                shift = witness - point
+                if shift < ORDER2_THRESHOLD:
+                    continue
+                representations = pair_supports(elements, shift)
+                if not representations:
+                    raise AssertionError(
+                        f"missing two-sum support for selector={selector} "
+                        f"witness={witness} point={point}"
+                    )
+                if not all(set(support) & deletion for support in representations):
+                    raise AssertionError(
+                        f"non-gated support for selector={selector} "
+                        f"witness={witness} point={point}: {representations}"
+                    )
+                gates = sorted(
+                    gate for gate in deletion if witness - point - gate in elements
+                )
+                if not gates:
+                    raise AssertionError(
+                        f"no gate for selector={selector} witness={witness} "
+                        f"point={point}"
+                    )
+                rows[point] = gates
+            gate_counts = {
+                gate: sum(gate in gates for gates in rows.values())
+                for gate in selector
+            }
+            print(
+                f"  selector={selector} witness={witness} "
+                f"rows={rows} gate_counts={gate_counts}"
+            )
+
+
 def main() -> None:
     cap = 3 * max(SET_A)
     two_sums = hsum(SET_A, 2, cap)
@@ -240,6 +283,7 @@ def main() -> None:
     for selector, data in witnesses.items():
         print(f"selector={selector} witnesses={data}")
     report_shared_witnesses(SET_A, witnesses)
+    report_gate_maps(SET_A, witnesses)
 
 
 if __name__ == "__main__":
