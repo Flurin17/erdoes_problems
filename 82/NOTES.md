@@ -3532,3 +3532,12 @@ source of growth beyond Ramsey.
   vertex needed.  The next proof attempt should exploit the type structure of
   vertices that miss one first-neighborhood vertex, rather than just deleting
   the first closed neighborhood.
+- 2026-06-01: Proved a structured first-neighborhood subcase for the
+  `omega<=3`, `P=2` full-drop problem.  If the first vertex has four
+  neighbors, then its neighborhood is forced to be `K_{2,2}`; every later
+  vertex misses at most one of these four vertices, and every edge among later
+  nonneighbors must join two vertices whose missed labels are paired inside
+  one side of the `K_{2,2}`.  The later nonneighbors are therefore bipartite,
+  giving `alpha >= ceil((n-3)/2)`.  This still falls short of the full
+  `alpha+omega >= ceil((n+3)/2)` conjecture by one vertex in the
+  `omega=3` bucket, but it isolates the largest possible first degree.

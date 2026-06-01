@@ -11703,6 +11703,60 @@ alpha(H)+omega(H) >= (n-1)/2+2 = (n+3)/2.
 
 QED.
 
+**Lemma 28D.5b.2: The Four-Neighbor First-Vertex Case At `P=2`,
+`omega<=3`.**  Let `H` be an ordered graph on `n` vertices satisfying the
+`P=2` full-drop condition and with `omega(H)<=3`.  Suppose that the first
+vertex `a` has exactly four neighbors.  Then
+
+```text
+alpha(H) >= ceil((n-3)/2).
+```
+
+Proof.  Put `A=N(a)` and `B=V(H)\({a} union A)`.  As in Lemma 28D.5, the
+complement of `H[A]` has maximum degree at most `1`.  Since `omega(H)<=3`,
+the graph `H[A]` has no triangle, because any triangle in `A` would extend
+with `a` to a `4`-clique.  On four vertices, these two facts force
+`complement(H[A])` to be a perfect matching.  Write its two matching edges as
+
+```text
+u_1u_2,        v_1v_2.
+```
+
+Thus `H[A]` is the complete bipartite graph with nonedges inside
+`{u_1,u_2}` and inside `{v_1,v_2}`.
+
+For every `b in B`, the full-drop condition applied to the pair `a<b` gives
+
+```text
+|A\N(b)| <= 1,
+```
+
+because neither endpoint is in `A`.  If `bb'` is an edge inside `B`, then
+`N(b) cap N(b') cap A` cannot contain an edge of `H[A]`; otherwise that edge
+together with `b,b'` would form a `4`-clique.  Therefore the two missed
+vertices of `A` for `b` and `b'` must be exactly `u_1,u_2`, or exactly
+`v_1,v_2`.  In particular, vertices missing no member of `A` are isolated in
+`H[B]`, and every edge of `H[B]` runs either between the class missing `u_1`
+and the class missing `u_2`, or between the class missing `v_1` and the class
+missing `v_2`.
+
+Hence `H[B]` is bipartite; for example put the classes missing `u_1` or
+`v_1`, together with the isolated no-miss class, on one side, and the classes
+missing `u_2` or `v_2` on the other.  Thus
+
+```text
+alpha(H[B]) >= ceil(|B|/2).
+```
+
+The vertex `a` is nonadjacent to all of `B`, so adding it to a maximum
+independent set in `B` gives
+
+```text
+alpha(H) >= 1+ceil(|B|/2).
+```
+
+Since `n=|B|+5`, the right side is `ceil((n-3)/2)`.  QED.
+
 **Lemma 28D.5c: Full-Drop Core Extension Lower Construction.**  Fix
 `P>=1`.  Let `R` be an ordered graph on `q` vertices satisfying the
 `P`-full-drop condition, and suppose
