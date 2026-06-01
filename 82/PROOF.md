@@ -10567,6 +10567,48 @@ command is
 python3 82/EXPERIMENTS/regular_spectrum.py 8 --h 8 --mask-a 7877621 --mask-b 155665244
 ```
 
+Two more finite calibrations were found by the same disjoint-spectrum search.
+For `h=9`, the following masks on `10` vertices have maximum same-degree total
+`8`:
+
+```text
+11928016833367,       5536596681199
+```
+
+and hence give
+
+```text
+D_spec(9)>10,        P_9>10.
+```
+
+For `h=10`, the following masks on `12` vertices have maximum same-degree
+total `9`:
+
+```text
+57469909479292894705,       7851332248695866876
+```
+
+and hence give
+
+```text
+D_spec(10)>12,       P_10>12.
+```
+
+The verification commands are
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum.py 10 --h 9 \
+  --mask-a 11928016833367 --mask-b 5536596681199
+python3 82/EXPERIMENTS/regular_spectrum.py 12 --h 10 \
+  --mask-a 57469909479292894705 --mask-b 7851332248695866876
+```
+
+Random probes with component orders `13` and `14` for `h=10` did not find a
+disjoint-spectrum obstruction; the best sampled maximum same-degree totals
+were `10` and `11`, respectively.  Thus the current finite data suggest that
+the disjoint-spectrum obstruction grows past the target, but not rapidly in
+these small cases.
+
 **Corollary 28I: The Spectrum-Matching Parameter Is A Lower Subproblem.**  Let
 `D_spec(h)` be the least integer `M` with the following property: for every
 pair of graphs `J_1,J_2` on `M` vertices, either one of the two graphs has a

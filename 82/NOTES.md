@@ -3071,3 +3071,10 @@ source of growth beyond Ramsey.
   vertices has adjacency rank greater than `log_2(n/k)` over every field.  This
   is not a solution, but it records that any hard counterexample must be
   high-rank in every characteristic.
+- 2026-06-01: Extended the disjoint-spectrum finite calibrations.  Verified
+  masks on `10` vertices give `D_spec(9)>10` and `P_9>10`, with maximum
+  same-degree total `8`; masks on `12` vertices give `D_spec(10)>12` and
+  `P_10>12`, with maximum same-degree total `9`.  Random searches at
+  component orders `13` and `14` for `h=10` found no obstruction, with best
+  same-degree totals `10` and `11`.  This keeps the spectrum obstruction
+  useful as finite calibration, but gives no asymptotic separation.
