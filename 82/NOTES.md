@@ -4369,3 +4369,9 @@ source of growth beyond Ramsey.
   off-diagonal parameters `a=t^{1+1/p}` and `t`.  Thus changing to another
   fixed power does not by itself close the gap; non-homogeneous regular
   spectrum entries are still needed.
+- 2026-06-01: Added the homogeneous hard-range reduction for fixed powers.
+  For the target `Phi_p>=c(log n)^{p+1+eta}`, an independent set of order
+  `(log n)^{(p+1+eta)/p}` or a clique of order
+  `(log n)^{1+eta/(p+1)}` already suffices.  For `p=2`, new work is needed
+  only when `alpha < (log n)^{3/2+eta/2}` and
+  `omega < (log n)^{1+eta/3}` up to constants.

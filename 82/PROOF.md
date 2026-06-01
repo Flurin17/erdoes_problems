@@ -15923,6 +15923,66 @@ by itself remove the polylogarithmic gap: the threshold in Conditional
 Corollary 28J.10e.0d asks for exponent `p+1+eta`, while the homogeneous
 Ramsey benchmark supplies exponent `p+1` up to logarithmic losses.
 
+**Lemma 28J.10e.0f: Homogeneous Hard Range For Fixed Powers.**  Fix
+`p>=1` and `eta>0`.  To prove a bound
+
+```text
+Phi_p(G) >= c (log_2 |G|)^{p+1+eta}
+```
+
+for all graphs, it is enough to prove it for graphs satisfying
+
+```text
+alpha(G) < C (log_2 |G|)^{(p+1+eta)/p}
+```
+
+and
+
+```text
+omega(G) < C (log_2 |G|)^{1+eta/(p+1)}
+```
+
+for a sufficiently large constant `C=C(p,c)>0`.
+
+Proof.  Put `L=log_2 |G|`.  If
+
+```text
+alpha(G) >= c^{1/p} L^{(p+1+eta)/p},
+```
+
+then
+
+```text
+Phi_p(G) >= s_0(G)^p >= alpha(G)^p >= c L^{p+1+eta}.
+```
+
+If `G` has a clique of order `w`, then for each `0<=d<=w-1` it has a
+`d`-regular induced subgraph on `d+1` vertices, so
+
+```text
+Phi_p(G) >= sum_{d=0}^{w-1} (d+1)^p >= w^{p+1}/(p+1).
+```
+
+Thus the desired lower bound also holds whenever
+
+```text
+w >= ((p+1)c)^{1/(p+1)} L^{1+eta/(p+1)}.
+```
+
+Choosing `C` at least both displayed constants proves the reduction.  QED.
+
+For `p=2`, this says that the square-spectrum polylog target only needs new
+ideas in graphs with
+
+```text
+alpha(G) < C (log |G|)^{3/2+eta/2},
+omega(G) < C (log |G|)^{1+eta/3}.
+```
+
+The first inequality is much weaker than the fixed-`C` Ramsey-core condition;
+the second says even a mildly superlogarithmic clique would already supply
+enough square spectrum through its many regular subcliques.
+
 The script `EXPERIMENTS/spectrum_power_search.py` was added to search this
 functional.  Exact labelled enumeration through seven vertices gives minimum
 `Q/n^2` equal to `29/49` at `n=7`.  The fourteen-vertex linear-mass
