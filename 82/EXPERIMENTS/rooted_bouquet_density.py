@@ -41,6 +41,10 @@ def bouquet_coefficient(
     return sum(by_degree.values()), by_degree
 
 
+def square_coefficient(coefficient_by_degree: dict[int, int]) -> int:
+    return sum(value * value for value in coefficient_by_degree.values())
+
+
 def degree_reachable_from_root_partials(degree: int, partials: dict[int, int]) -> bool:
     if degree == 0:
         return True
@@ -68,9 +72,12 @@ def inspect(n: int, mask: int, root: int | None) -> None:
     print(f"by_degree={by_degree}")
     for r in roots:
         coefficient, coefficient_by_degree = bouquet_coefficient(adj, r, pc)
+        square = square_coefficient(coefficient_by_degree)
         print(
             f"root={r} coefficient={coefficient} "
             f"ratio={coefficient/(n-1):.12g} "
+            f"square_coefficient={square} "
+            f"square_ratio={square/((n-1)**2):.12g} "
             f"coefficient_by_degree={coefficient_by_degree}"
         )
 
@@ -83,6 +90,9 @@ def exact(n: int, connected_only: bool, progress: int) -> None:
     best_coefficient = n * n
     best_examples: list[tuple[int, int, dict[int, int], dict[int, int]]] = []
     coefficient_hist: Counter[int] = Counter()
+    best_square = n**4
+    best_square_examples: list[tuple[int, int, dict[int, int], dict[int, int]]] = []
+    square_hist: Counter[int] = Counter()
 
     for mask in range(total):
         adj = cdc.adjacency(n, mask, pc)
@@ -93,12 +103,19 @@ def exact(n: int, connected_only: bool, progress: int) -> None:
         for root in range(n):
             checked_roots += 1
             coefficient, coefficient_by_degree = bouquet_coefficient(adj, root, pc)
+            square = square_coefficient(coefficient_by_degree)
             coefficient_hist[coefficient] += 1
+            square_hist[square] += 1
             if coefficient < best_coefficient:
                 best_coefficient = coefficient
                 best_examples = []
             if coefficient == best_coefficient and len(best_examples) < 10:
                 best_examples.append((mask, root, by_degree, coefficient_by_degree))
+            if square < best_square:
+                best_square = square
+                best_square_examples = []
+            if square == best_square and len(best_square_examples) < 10:
+                best_square_examples.append((mask, root, by_degree, coefficient_by_degree))
         if progress and mask and mask % progress == 0:
             print(
                 f"progress mask={mask}/{total} best={best_coefficient} "
@@ -113,10 +130,18 @@ def exact(n: int, connected_only: bool, progress: int) -> None:
     print(f"checked_roots={checked_roots}")
     print(f"min_coefficient={best_coefficient}")
     print(f"min_ratio={best_coefficient/(n-1):.12g}")
+    print(f"min_square_coefficient={best_square}")
+    print(f"min_square_ratio={best_square/((n-1)**2):.12g}")
     print(f"coefficient_histogram={dict(sorted(coefficient_hist.items()))}")
+    print(f"square_histogram={dict(sorted(square_hist.items()))}")
     for mask, root, by_degree, coefficient_by_degree in best_examples:
         print(
             f"example mask={mask} root={root} by_degree={by_degree} "
+            f"coefficient_by_degree={coefficient_by_degree}"
+        )
+    for mask, root, by_degree, coefficient_by_degree in best_square_examples:
+        print(
+            f"square_example mask={mask} root={root} by_degree={by_degree} "
             f"coefficient_by_degree={coefficient_by_degree}"
         )
 
@@ -130,6 +155,9 @@ def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
     best_coefficient = n * n
     best_example: tuple[int, int, dict[int, int], dict[int, int]] | None = None
     coefficient_hist: Counter[int] = Counter()
+    best_square = n**4
+    best_square_example: tuple[int, int, dict[int, int], dict[int, int]] | None = None
+    square_hist: Counter[int] = Counter()
 
     while checked_graphs < trials:
         attempts += 1
@@ -149,9 +177,14 @@ def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
                 best_root = root
                 best_by = coefficient_by_degree
         coefficient_hist[best_for_graph] += 1
+        square = square_coefficient(best_by)
+        square_hist[square] += 1
         if best_for_graph < best_coefficient:
             best_coefficient = best_for_graph
             best_example = (mask, best_root, by_degree, best_by)
+        if square < best_square:
+            best_square = square
+            best_square_example = (mask, best_root, by_degree, best_by)
 
     print(f"n={n}")
     print(f"trials={trials}")
@@ -159,11 +192,20 @@ def sample(n: int, trials: int, seed: int, connected_only: bool) -> None:
     print(f"connected_only={connected_only}")
     print(f"min_coefficient={best_coefficient}")
     print(f"min_ratio={best_coefficient/(n-1):.12g}")
+    print(f"min_square_coefficient={best_square}")
+    print(f"min_square_ratio={best_square/((n-1)**2):.12g}")
     print(f"coefficient_histogram={dict(sorted(coefficient_hist.items()))}")
+    print(f"square_histogram={dict(sorted(square_hist.items()))}")
     if best_example is not None:
         mask, root, by_degree, coefficient_by_degree = best_example
         print(
             f"best_example mask={mask} root={root} by_degree={by_degree} "
+            f"coefficient_by_degree={coefficient_by_degree}"
+        )
+    if best_square_example is not None:
+        mask, root, by_degree, coefficient_by_degree = best_square_example
+        print(
+            f"best_square_example mask={mask} root={root} by_degree={by_degree} "
             f"coefficient_by_degree={coefficient_by_degree}"
         )
 
@@ -182,6 +224,8 @@ def local_search(
     bits = len(pc.edges)
     global_best = n * n
     global_example: tuple[int, int, dict[int, int], dict[int, int]] | None = None
+    global_best_square = n**4
+    global_square_example: tuple[int, int, dict[int, int], dict[int, int]] | None = None
 
     def score(mask: int) -> tuple[int, int, dict[int, int], dict[int, int]] | None:
         adj = cdc.adjacency(n, mask, pc)
@@ -224,6 +268,18 @@ def local_search(
                     f"by_degree={current[2]} coefficient_by_degree={current[3]}",
                     flush=True,
                 )
+            current_square = square_coefficient(current[3])
+            if current_square < global_best_square:
+                global_best_square = current_square
+                global_square_example = (mask, current[1], current[2], current[3])
+                print(
+                    f"new_best_square restart={restart} step={step} "
+                    f"square={global_best_square} "
+                    f"square_ratio={global_best_square/((n-1)**2):.12g} "
+                    f"mask={mask} root={current[1]} "
+                    f"by_degree={current[2]} coefficient_by_degree={current[3]}",
+                    flush=True,
+                )
             if step == steps:
                 break
 
@@ -249,10 +305,18 @@ def local_search(
     print(f"root_filter={root}")
     print(f"min_coefficient={global_best}")
     print(f"min_ratio={global_best/(n-1):.12g}")
+    print(f"min_square_coefficient={global_best_square}")
+    print(f"min_square_ratio={global_best_square/((n-1)**2):.12g}")
     if global_example is not None:
         mask, best_root, by_degree, coefficient_by_degree = global_example
         print(
             f"best_example mask={mask} root={best_root} by_degree={by_degree} "
+            f"coefficient_by_degree={coefficient_by_degree}"
+        )
+    if global_square_example is not None:
+        mask, best_root, by_degree, coefficient_by_degree = global_square_example
+        print(
+            f"best_square_example mask={mask} root={best_root} by_degree={by_degree} "
             f"coefficient_by_degree={coefficient_by_degree}"
         )
 

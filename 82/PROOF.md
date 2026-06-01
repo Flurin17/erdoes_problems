@@ -15348,6 +15348,12 @@ sum_d s_d(B_t(H,r))
   = t sum_d c_d(H,r) + O_H(1),
 ```
 
+and, for the square spectrum `Q(G)=sum_d s_d(G)^2`,
+
+```text
+Q(B_t(H,r)) = t^2 sum_d c_d(H,r)^2 + O_H(t),
+```
+
 and
 
 ```text
@@ -15386,8 +15392,10 @@ cases gives the formula for `s_d`.
 Finally, no regular witness in `B_t(H,r)` can have degree exceeding
 `|V(H)|-1`, unless it is empty, because any non-root vertex has all its
 neighbors inside one copy of `H`.  Therefore summing the fixed-degree
-asymptotics over `d=0,...,|V(H)|-1` proves the spectrum-mass formula.  The
-order formula is immediate from identifying `t` roots into one vertex.  QED.
+asymptotics over `d=0,...,|V(H)|-1` proves the spectrum-mass formula, and
+squaring each fixed-degree asymptotic before summing proves the square
+spectrum formula.  The order formula is immediate from identifying `t` roots
+into one vertex.  QED.
 
 The script
 
@@ -15397,7 +15405,11 @@ python3 82/EXPERIMENTS/rooted_bouquet_density.py
 
 computes the coefficients `c_d(H,r)`.  Exact connected enumeration at
 `n=6` gives minimum coefficient `5=n-1`, while the rooted fifteen-vertex
-defect block below has coefficient `13` on `14` new vertices.
+defect block below has coefficient `13` on `14` new vertices.  The same
+script also computes the square coefficient `sum_d c_d(H,r)^2`; exact
+connected `n=6` has minimum square ratio `13/25`, while the rooted
+fifteen-vertex defect block has square coefficient `57` on `14^2` new-vertex
+pairs.
 
 **Computational Counterexample 28J.10d.1f: Connected Defect One Is False.**
 The connected defect-one hypothesis in Conditional Corollary 28J.10d.1 is

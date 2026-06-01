@@ -4241,3 +4241,13 @@ source of growth beyond Ramsey.
   `12` on `11` new vertices, still above density `1`.  This keeps the
   fifteen-vertex essential-root block as the only known rooted bouquet source
   with coefficient below `|H|-1`.
+- 2026-06-01: Extended the rooted bouquet calculation to square spectrum.
+  Lemma 28J.10d.1e.1 now records
+  `Q(B_t(H,r))=t^2 sum_d c_d(H,r)^2+O_H(t)`.  The known fifteen-vertex
+  rooted defect has square coefficient `57` on `14^2` new-vertex pairs,
+  matching the earlier `57/196` square-spectrum ratio.  Exact connected
+  rooted `n=6` has minimum square ratio `13/25`, much larger than `57/196`.
+  Local rooted square searches from the fifteen-vertex defect root and from
+  random connected `n=12` starts found no lower square ratio; the best `n=12`
+  rooted local example had coefficient vector `{0:4,1:4,2:4}` and square
+  ratio `48/121`.
