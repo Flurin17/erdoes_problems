@@ -238,6 +238,11 @@ Computational checks and generated data for Erdos Problem 82.
   precompute and scan larger exact subset spaces.  Use `--measure-regular` to
   measure the largest regular induced subgraph in the same samples, which is
   useful for testing witness-or-regular dichotomy targets.
+- `two_level_partition_sample.py`: combines the two-degree generator with the
+  memory-light partition DP from `large_modular_partition.py` to measure the
+  minimum number of flexible induced `2q`-modular parts, up to a supplied cap,
+  in sampled two-degree `q`-modular graphs.  This is the direct statistic for
+  the connected flexible dyadic-lift route.
 - `multipartite_modular.py`: exact integer model for modular
   partitions of complete multipartite graphs.  The default mode uses the
   direct residue-grouping certificate; `--exact` computes minimum bin counts

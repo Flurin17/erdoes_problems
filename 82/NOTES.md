@@ -3026,3 +3026,12 @@ source of growth beyond Ramsey.
   `q-1` gives an induced complete multipartite regular subgraph on
   `(1/2+o(1))q^2` vertices.  Therefore lower examples for `C_reg(1,h)` must
   be subtler than the standard homogeneous sharpness construction.
+- 2026-06-01: Added `two_level_partition_sample.py` to measure the flexible
+  dyadic partition count in sampled two-degree `q`-modular graphs.  Connected
+  samples remain consistent with a four-part two-degree lift: for `q=8`,
+  degree levels `4,12` on `18` vertices gave min-color histogram `2:5`;
+  degree levels `5,13` on `20` vertices gave `3:1, 4:2`; degree levels
+  `6,14` on `22` vertices gave `4:2`.  For `q=4`, degree levels `7,11` on
+  `18` vertices gave `3:2, 4:3`.  These are small sampled checks, but they
+  separate partition count from largest-witness size and keep pointing to
+  four flexible parts as the right two-degree local target.
