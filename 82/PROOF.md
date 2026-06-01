@@ -8896,6 +8896,45 @@ This identifies the next local obstacle after spectrum matching: even when
 same-degree side witnesses exist, one must find such witnesses whose
 cross-degree profiles compensate rather than split.
 
+**Computational Calibration 28K.1: Spectrum Matching Above The Half
+Threshold.**  The exact spectrum checker also confirms that the `h=7`
+spectrum obstruction already appears at component order `7`:
+
+```text
+python3 82/EXPERIMENTS/dspec_exact.py 7 --h 7
+```
+
+It checks all `2097152` labelled graphs on `7` vertices, finds `53` distinct
+counterexample spectrum summaries, and gives the obstruction
+
+```text
+mask_a=2248,          summary_a=0:4 1:4 2:3,
+mask_b=375775,        summary_b=0:2 1:2 2:3 3:4 4:5 5:6.
+```
+
+For each common degree, the displayed maximum orders sum to at most `6`, so
+this proves `D_spec(7)>7`.
+
+Random searches show that this spectrum-disjoint mechanism becomes much less
+visible above the trivial half-target lower bound.  The command
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum.py 17 --h 10 --samples 50 --seed 17
+```
+
+finds `42` sampled graphs with no regular induced subgraph on at least `10`
+vertices but no disjoint-union spectrum obstruction among them; the best pair
+already has maximum same-degree total `13`.  Similarly,
+
+```text
+python3 82/EXPERIMENTS/regular_spectrum.py 18 --h 10 --samples 20 --seed 18
+```
+
+finds `16` sampled counterexamples and no spectrum obstruction, with best
+maximum same-degree total `14`.  This is not a proof of an upper bound for
+`D_spec(10)`, but it is useful calibration: beyond the lower bound inherited
+from `G(ceil(h/2))`, random nonhomogeneous spectra seem to overlap quickly.
+
 **Computational Candidate 28L: A Parity Cross-Profile Family.**  The script
 `EXPERIMENTS/parity_pair_construction.py` generates the following marked
 two-part graph with `|A|=|B|=h`.  On the `A` side put one edge `a_0a_1` and

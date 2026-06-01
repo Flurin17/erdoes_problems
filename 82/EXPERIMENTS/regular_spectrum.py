@@ -35,16 +35,23 @@ def obstructs_disjoint_union(
 ) -> bool:
     if any(order >= h for order, _degree in spectrum_a | spectrum_b):
         return False
+    return max_same_degree_total(spectrum_a, spectrum_b) < h
+
+
+def max_same_degree_total(
+    spectrum_a: set[tuple[int, int]],
+    spectrum_b: set[tuple[int, int]],
+) -> int:
     by_degree_a: dict[int, int] = {}
     by_degree_b: dict[int, int] = {}
     for order, degree in spectrum_a:
         by_degree_a[degree] = max(by_degree_a.get(degree, 0), order)
     for order, degree in spectrum_b:
         by_degree_b[degree] = max(by_degree_b.get(degree, 0), order)
+    best = 0
     for degree in by_degree_a.keys() & by_degree_b.keys():
-        if by_degree_a[degree] + by_degree_b[degree] >= h:
-            return False
-    return True
+        best = max(best, by_degree_a[degree] + by_degree_b[degree])
+    return best
 
 
 def format_spectrum(spectrum: set[tuple[int, int]]) -> str:
@@ -79,16 +86,30 @@ def random_pairs(args: argparse.Namespace) -> None:
     print(f"h={args.h}")
     print(f"samples={args.samples}")
     print(f"h_counterexamples={len(spectra)}")
+    best_value: int | None = None
+    best_pair: tuple[int, set[tuple[int, int]], int, set[tuple[int, int]]] | None = None
     for i, (mask_a, spectrum_a) in enumerate(spectra):
         for mask_b, spectrum_b in spectra[i:]:
-            if obstructs_disjoint_union(spectrum_a, spectrum_b, args.h):
+            value = max_same_degree_total(spectrum_a, spectrum_b)
+            if best_value is None or value < best_value:
+                best_value = value
+                best_pair = (mask_a, spectrum_a, mask_b, spectrum_b)
+            if value < args.h:
                 print("disjoint_union_obstruction_found=True")
                 print(f"mask_a={mask_a}")
                 print(f"mask_b={mask_b}")
+                print(f"max_same_degree_total={value}")
                 print("spectrum_a=" + format_spectrum(spectrum_a))
                 print("spectrum_b=" + format_spectrum(spectrum_b))
                 return
     print("disjoint_union_obstruction_found=False")
+    if best_pair is not None:
+        mask_a, spectrum_a, mask_b, spectrum_b = best_pair
+        print(f"best_max_same_degree_total={best_value}")
+        print(f"best_mask_a={mask_a}")
+        print(f"best_mask_b={mask_b}")
+        print("best_spectrum_a=" + format_spectrum(spectrum_a))
+        print("best_spectrum_b=" + format_spectrum(spectrum_b))
 
 
 def main() -> None:

@@ -2604,3 +2604,11 @@ source of growth beyond Ramsey.
   such side witnesses can merge into a regular induced subgraph of order
   at least `h`.  This gives an infinite cross-profile obstruction beyond
   `D_spec`.
+- 2026-06-01: Enhanced `regular_spectrum.py` so failed random searches report
+  the closest sampled pair by maximum same-degree total.  Added
+  Computational Calibration 28K.1: exact labelled enumeration proves
+  `D_spec(7)>7`, while random `h=10` searches at component orders `17` and
+  `18` found no spectrum-disjoint pairs and best same-degree totals `13` and
+  `14`.  This supports the view that spectrum separation beyond the
+  inherited half-target lower bound is delicate, and that cross-profile
+  obstructions are the next bottleneck.
