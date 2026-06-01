@@ -1779,7 +1779,60 @@ currently an obstruction lemma to prove, not an established fact.
 
 The helper `EXPERIMENTS/hypergeom_residue.py` calibrates this first
 conditioning layer.  It computes the residue distribution of a hypergeometric
-cross-degree after fixing one row sum.  For example,
+cross-degree after fixing one row sum.
+
+**Lemma: Exact Hypergeometric Residue Fourier Formula.**  Let
+`X` have the hypergeometric distribution obtained by drawing `d` elements
+from an `N`-element population with `K` marked elements.  Let `M>=2`, and let
+`zeta=exp(2 pi i/M)`.  Then for every residue `r mod M`,
+
+```text
+P(X congruent r mod M)
+ = 1/M sum_{j=0}^{M-1} zeta^{-rj}
+   [u^d](1+zeta^j u)^K(1+u)^{N-K} / binom(N,d).
+```
+
+Consequently, if
+
+```text
+B = max_{1<=j<M}
+    |[u^d](1+zeta^j u)^K(1+u)^{N-K}| / binom(N,d),
+```
+
+then every residue class has probability at most
+
+```text
+(1+(M-1)B)/M
+```
+
+and total variation distance from uniform is at most `(M-1)B/2`.
+
+Proof.  The probability generating function of `X` is
+
+```text
+E w^X = sum_x binom(K,x)binom(N-K,d-x) w^x / binom(N,d)
+      = [u^d](1+wu)^K(1+u)^{N-K} / binom(N,d).
+```
+
+The roots-of-unity filter gives
+
+```text
+1_{X congruent r mod M}
+ = 1/M sum_{j=0}^{M-1} zeta^{j(X-r)}.
+```
+
+Taking expectations and substituting the generating function proves the
+displayed formula.  The `j=0` term is exactly `1/M`; bounding all nonzero
+Fourier terms in absolute value by `B` gives the pointwise upper bound.  For
+total variation, write each residue probability as `1/M+e_r`.  The same
+Fourier bound gives `sum_r |e_r| <= M(M-1)B/M=(M-1)B`, and total variation is
+half of this sum.  QED.
+
+Thus the one-row fixed-degree problem is reduced to bounding explicit
+Krawtchouk-type coefficients.  The script reports the maximum nontrivial
+Fourier bias `B` after computing the residue distribution directly.
+
+For example,
 
 ```text
 python3 82/EXPERIMENTS/hypergeom_residue.py \
@@ -1787,7 +1840,7 @@ python3 82/EXPERIMENTS/hypergeom_residue.py \
 ```
 
 has variance about `512` and maximum residue probability only `1.00011` times
-uniform.  By contrast,
+uniform; the maximum nontrivial Fourier bias is about `5.2e-5`.  By contrast,
 
 ```text
 python3 82/EXPERIMENTS/hypergeom_residue.py \
@@ -1795,9 +1848,10 @@ python3 82/EXPERIMENTS/hypergeom_residue.py \
 ```
 
 has variance about `56` and maximum residue probability about `1.70` times
-uniform.  This finite calibration is consistent with a local-CLT requirement
-on the scale of `M^2` variance for residue mixing, but it does not address the
-harder column-sum conditioning in the true fixed two-degree model.
+uniform; the maximum nontrivial Fourier bias is about `0.34`.  This finite
+calibration is consistent with a local-CLT requirement on the scale of `M^2`
+variance for residue mixing, but it does not address the harder column-sum
+conditioning in the true fixed two-degree model.
 
 **Conditional Proposition: Fixed-Degree Anti-Concentration Refutes The
 Universal Witness Target.**  Let `psi(q)->infinity` along dyadic `q`, and put

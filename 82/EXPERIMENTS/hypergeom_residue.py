@@ -9,6 +9,7 @@ degree: a row chooses `draws` neighbors uniformly from a population of
 from __future__ import annotations
 
 import argparse
+import cmath
 import math
 
 
@@ -73,6 +74,16 @@ def main() -> None:
     print(f"uniform_probability={uniform:.12g}")
     print(f"max_over_uniform={max_probability / uniform:.12g}")
     print(f"total_variation={total_variation:.12g}")
+    fourier = []
+    for frequency in range(1, args.modulus):
+        value = sum(
+            probability
+            * cmath.exp(2j * math.pi * frequency * residue / args.modulus)
+            for residue, probability in enumerate(distribution)
+        )
+        fourier.append(abs(value))
+    max_fourier = max(fourier, default=0.0)
+    print(f"max_nontrivial_fourier_bias={max_fourier:.12g}")
     if args.show:
         print(
             "distribution="

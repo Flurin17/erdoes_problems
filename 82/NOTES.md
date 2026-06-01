@@ -3215,3 +3215,12 @@ source of growth beyond Ramsey.
   `9264` graphs, with no counterexample in either chunk.  This adds coverage
   to the finite regime left after the rooted/cut-vertex/degree-two reductions,
   but remains computational evidence only.
+- 2026-06-01: Added an exact roots-of-unity formula for hypergeometric
+  residue distributions.  If `X` is the number of marked elements in a
+  fixed-size draw, then
+  `P(X=r mod M)` is the average of the coefficient ratios
+  `[u^d](1+zeta^j u)^K(1+u)^{N-K}/binom(N,d)`.  The nonzero coefficients
+  directly bound pointwise residue bias and total variation from uniform.
+  Updated `hypergeom_residue.py` to print the maximum nontrivial Fourier
+  bias; the balanced variance-`512` modulus-`32` example has bias about
+  `5.2e-5`, while the variance-`56` example has bias about `0.34`.
