@@ -1923,6 +1923,129 @@ sum_{j=1}^{M-1} |E zeta^{jX}|
 If `m>=C M^2 log M` with `C` large enough, the last expression is `o_M(1)`.
 Substitution into the roots-of-unity bound proves the claim.  QED.
 
+**Lemma: General Hypergeometric Residue Mixing From Paired Mass.**  Let
+`X` have the hypergeometric distribution obtained by drawing `d` elements
+from an `N`-element population with `K` marked elements, where
+`0<d<N`.  Put
+
+```text
+p=d/N,        L=min(K,N-K).
+```
+
+Let `M>=2`, let `zeta=exp(2 pi i/M)`, and put
+
+```text
+Lambda = L p(1-p).
+```
+
+There is an absolute constant `C_0` such that, for every `1<=j<M`,
+
+```text
+|E zeta^{jX}|
+ <= C_0 sqrt(Np(1-p))
+    exp(-2(1-|cos(pi j/M)|) Lambda).
+```
+
+Consequently, for every `A>0` there is a constant `C_A` such that if
+
+```text
+Lambda >= C_A M^2 log(NM),
+```
+
+then
+
+```text
+max_r P(X congruent r mod M) <= (1+(NM)^(-A))/M.
+```
+
+Proof.  Pair `L` marked elements with `L` unmarked elements.  The remaining
+`N-2L` unpaired elements, if any, all have the same mark status.  For
+`1<=j<M`, write `t=|cos(pi j/M)|`, so `|1+zeta^j|=2t`.
+
+The probability generating numerator for `E zeta^{jX}` is
+
+```text
+[x^d](1+(1+zeta^j)x+zeta^j x^2)^L Q(x),
+```
+
+where `Q(x)` is either `(1+x)^(N-2L)` or `(1+zeta^j x)^(N-2L)`,
+according to whether the unpaired elements are unmarked or marked.  Taking
+absolute values coefficientwise gives
+
+```text
+|E zeta^{jX}|
+ <= [x^d](1+2tx+x^2)^L(1+x)^(N-2L) / binom(N,d).
+```
+
+Set `x_0=p/(1-p)`.  Since all coefficients in the numerator are nonnegative,
+
+```text
+[x^d](1+2tx+x^2)^L(1+x)^(N-2L)
+ <= x_0^(-d)(1+2tx_0+x_0^2)^L(1+x_0)^(N-2L).
+```
+
+The elementary Stirling lower bound for the binomial point probability gives
+
+```text
+binom(N,d) >= c x_0^(-d)(1+x_0)^N / sqrt(Np(1-p))
+```
+
+with an absolute `c>0`.  Hence
+
+```text
+|E zeta^{jX}|
+ <= C_0 sqrt(Np(1-p))
+    ((1+2tx_0+x_0^2)/(1+x_0)^2)^L.
+```
+
+Using `x_0/(1+x_0)^2=p(1-p)`, the last ratio is
+
+```text
+1 - 2(1-t)p(1-p).
+```
+
+This is at most `exp(-2(1-t)p(1-p))`, proving the Fourier estimate.
+
+For the residue bound, let `ell=min(j,M-j)`.  Since
+
+```text
+1-|cos(pi j/M)| >= c ell^2/M^2
+```
+
+for an absolute `c>0`, the Fourier estimate gives
+
+```text
+sum_{j=1}^{M-1} |E zeta^{jX}|
+ <= C_0 sqrt(Np(1-p))
+    2 sum_{ell>=1} exp(-c Lambda ell^2/M^2).
+```
+
+If `Lambda>=C_A M^2 log(NM)` with `C_A` large enough, this sum is at most
+`(NM)^(-A)`.  The roots-of-unity formula then gives the displayed pointwise
+residue bound.  QED.
+
+**Corollary: Configuration Prefix Rows Have Hypergeometric Residues.**  In
+the bipartite configuration model, suppose a row of degree `d` is matched
+uniformly to `d` currently unmatched column stubs among `N_*` total remaining
+column stubs, of which `K_*` belong to a fixed marked set of columns.  Let
+`X` be the number of matched stubs landing in the marked columns.  Put
+
+```text
+p=d/N_*,        Lambda=min(K_*,N_*-K_*) p(1-p).
+```
+
+If `Lambda>=C_A M^2 log(N_*M)`, then
+
+```text
+max_r P(X congruent r mod M) <= (1+(N_*M)^(-A))/M.
+```
+
+Proof.  Conditional on the current column capacities, the next row's `d`
+stubs are a uniform `d`-subset of the `N_*` remaining column stubs.  The
+number that land in the marked columns is therefore hypergeometric with
+population size `N_*`, marked count `K_*`, and draw size `d`.  Apply the
+general hypergeometric residue-mixing lemma.  QED.
+
 This proves the desired one-row residue mixing in the balanced
 row-conditioned model.  It still does not handle the simultaneous column-sum
 conditioning in the true fixed two-degree graph model, but it replaces the
@@ -1958,7 +2081,8 @@ c_x + Z_x,
 where `c_x` is its fixed degree inside `X_0`, and `Z_x` is the number of
 chosen row-neighbors of `x` that lie in `Y_0`.  Since `x` chooses exactly
 `m` elements from a `2m`-set with `m` marked elements `Y_0`, the variable
-`Z_x` has the central hypergeometric distribution from the previous lemma.
+`Z_x` has the central hypergeometric distribution from the central
+hypergeometric lemma above.
 The choices for different `x` are independent.  Therefore each shifted
 variable `c_x+Z_x` has every residue class modulo `M` with probability at
 most `(1+o_M(1))/M`.

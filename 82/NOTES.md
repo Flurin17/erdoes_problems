@@ -3274,3 +3274,12 @@ source of growth beyond Ramsey.
   revealing any admissible prefix of selected rows, the next selected row's
   intersection with the tested right-side set must still be
   `(1+o_M(1))/M`-mixed modulo `M`.
+- 2026-06-01: Added a general hypergeometric residue-mixing lemma.  Pairing
+  marked and unmarked population elements gives
+  `|E zeta^{jX}| <= C sqrt(Np(1-p)) exp(-2(1-|cos(pi j/M)|)L p(1-p))`, where
+  `p=d/N` and `L=min(K,N-K)`.  Thus residues are essentially uniform modulo
+  `M` once `L p(1-p) >= C M^2 log(NM)`.  This also proves a prefix statement
+  for the bipartite configuration model: after any row-exposure history, the
+  next row's hit count in a marked column set is hypergeometric over the
+  remaining stubs and is residue-mixed whenever both marked and unmarked
+  remaining stub mass are large enough.
