@@ -11771,6 +11771,43 @@ C_full(P,h) > 2P(h-P-1)+P        for h>=P+2.
 For `P=2`, the `5`-cycle core in Lemma 28D.5b improves the additive constant
 from this clique-core construction.
 
+**Lemma 28D.5d: Full-Drop Graphs Are Degenerate In Terms Of Clique
+Number.**  Let `H` be a `P`-full-drop ordered graph with clique number
+`omega`.  Then every induced subgraph of `H` has a vertex of degree at most
+
+```text
+P(omega-1).
+```
+
+Consequently,
+
+```text
+alpha(H) >= |V(H)|/(P(omega-1)+1).
+```
+
+Proof.  Let `J` be a nonempty induced subgraph of `H`, with inherited order,
+and let `a` be the first vertex of `J`.  Put `A=N_J(a)`.  For every
+`u in A`, every nonneighbor of `u` inside `A` lies in
+
+```text
+(N_J(a)\N_J(u))\{a,u},
+```
+
+which has size less than `P`.  Therefore the complement of `J[A]` has maximum
+degree at most `P-1`, and is greedily colorable with at most `P` colors.  Each
+color class is a clique in `J[A]`.  Since any clique in `A` extends with `a`
+to a clique one vertex larger, every such color class has size at most
+`omega-1`.  Hence
+
+```text
+deg_J(a)=|A| <= P(omega-1).
+```
+
+Thus every induced subgraph has a vertex of degree at most `P(omega-1)`, so
+`H` is `P(omega-1)`-degenerate.  Greedy coloring colors `H` with at most
+`P(omega-1)+1` colors, and the largest color class is an independent set of
+the displayed order.  QED.
+
 **Corollary 28D.6: Global Reduction Through Full-Drop Ordering.**  For every
 `h>=3`, with `P=P_h`,
 

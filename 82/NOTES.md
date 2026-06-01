@@ -3509,3 +3509,11 @@ source of growth beyond Ramsey.
   remaining graph is bipartite.  Hence `alpha(H)>=(n-1)/2` and
   `alpha(H)+omega(H)>=(n+3)/2` whenever `omega(H)<=2`.  This explains the
   low-clique extremals from the `n=8,9` exact census.
+- 2026-06-01: Added the general full-drop degeneracy lemma.  If a
+  `P`-full-drop ordered graph has clique number `omega`, then every induced
+  subgraph has first-vertex degree at most `P(omega-1)`, because the first
+  neighborhood has complement maximum degree at most `P-1` and each
+  complement color class extends with the first vertex to a clique.  Thus
+  `alpha >= n/(P(omega-1)+1)`.  This recovers the quadratic-scale full-drop
+  upper bound from a coloring viewpoint but is too weak to settle the desired
+  linear `P=2` alpha-plus-omega conjecture.
