@@ -19520,6 +19520,53 @@ none for blocks of size at most \(2\) up to \(150\). Thus the prepared
 marker demonstrates local row-bank feasibility, but its fillers appear
 hard to protect even one step later.
 
+The same diagnostic now records the strongest failed declaration windows.
+For every tested target \(q\in\{19,20,28,33,8\}\), the best ordinary
+failure is obtained after adding \((75,77,85)\): the window \([85,131]\)
+has all \(47\) values in \(4A\), but all \(47\) also lie in
+\(4(A\setminus\{q\})\). The first repairs are already witnessed by
+\[
+85=1+84,\quad 86=1+85,\quad 87=1+86,\quad 88=1+87,\quad 89=1+88
+\]
+with the tails in \(3(A\setminus\{q\})\). In the strict high-excess search,
+the best two-point failure \((75,81)\) similarly has every value of
+\([81,97]\) represented and poisoned, with no low-excess private leftovers.
+
+### Lemma 16.13: Retained padders poison singleton candidate intervals
+
+Let \(S\subset\mathbb N\) be finite, let \(q\in S\), and put
+\[
+C=S\setminus\{q\}.
+\]
+If \(p\in C\) and integers \(R\ge q\) satisfy
+\[
+[q-p,\ R-p]\subseteq3C, \tag{1}
+\]
+then
+\[
+[q,R]\subseteq4C. \tag{2}
+\]
+In particular, no singleton witness for deleting \(q\) can lie in
+\([q,R]\).
+
+Proof. For every \(v\in[q,R]\), condition (1) gives
+\[
+v-p\in3C.
+\]
+Since \(p\in C\), we get
+\[
+v=p+(v-p)\in4C,
+\]
+proving (2). \(\square\)
+
+This is the singleton \(k=3\) analogue of Lemma 13.1h. A filler inserted to
+bridge a moving row bank is not inert: once it is promoted and one tries to
+give it its own singleton witness, old retained padders combine with the
+current three-sum coverage to poison whole intervals of candidates.
+Therefore a staged singleton-high-excess construction must not only build
+row banks for new markers; it must also leave shifted three-sum gaps for
+every filler when that filler later becomes protected.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -20546,6 +20593,9 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
 * The prepared-marker follow-up search finds no bounded next-stage
   singleton protection for the row-bank fillers \(19,20,28\), reinforcing
   the coverage/privacy conflict for filler promotion.
+* Lemma 16.13 explains the follow-up failure mode: retained padders shift
+  three-sum coverage into whole intervals of repaired order-\(4\)
+  candidates, so extending coverage can itself destroy singleton privacy.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

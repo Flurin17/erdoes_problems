@@ -659,4 +659,8 @@ through `76`, confirms `73 notin 4(A\\{33})`, prints all eight rows
 at endpoint `74` and tries to protect `19,20,28,33,8` in the next bounded
 stage. It finds no ordinary singleton witness after adding blocks up to
 size `3` through candidate `180`, and no strict high-excess witness after
-blocks up to size `2` through candidate `150`.
+blocks up to size `2` through candidate `150`. It also reports the best
+failed declaration windows: for all five tested targets, the ordinary
+block `(75,77,85)` makes every value of `[85,131]` represented but
+poisoned in the complement of the target, while the strict block `(75,81)`
+does the same on `[81,97]`.

@@ -2300,9 +2300,14 @@ The follow-up search `prepared_marker_followup_search.py` starts from the
 prepared marker stage at endpoint \(74\) and tries to protect \(19,20,28,33\),
 or \(8\) in the next bounded stage. It finds no ordinary singleton witness
 after adding up to three new points through \(180\), and no strict
-high-excess witness after adding up to two new points through \(150\). This
-keeps the prepared-marker route as a local row-bank template rather than an
-iterable construction.
+high-excess witness after adding up to two new points through \(150\). The
+strongest ordinary failed window in the search, after adding \((75,77,85)\),
+has every value of \([85,131]\) represented in \(4A\) but also repaired in
+\(4(A\setminus\{q\})\) for each tested target \(q\). The first repairs have
+the form \(v=1+(v-1)\) with \(v-1\in3(A\setminus\{q\})\). Thus the follow-up
+failure is not lack of order-\(4\) mass; it is retained-padder poisoning.
+This keeps the prepared-marker route as a local row-bank template rather
+than an iterable construction.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

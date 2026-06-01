@@ -27,6 +27,26 @@ def cover_end(values: set[int], start: int, cap: int) -> int:
     return x - 1
 
 
+def first_poison_examples(
+    elements: set[int],
+    target: int,
+    values: list[int],
+    cap: int,
+) -> list[tuple[int, int, int]]:
+    """Return witnesses w = p + t with p retained and t in 3C."""
+
+    C = elements - {target}
+    three_c = hsum(C, 3, cap)
+    examples = []
+    for value in values:
+        for padder in sorted(C):
+            tail = value - padder
+            if tail in three_c:
+                examples.append((value, padder, tail))
+                break
+    return examples
+
+
 def find_protection(
     A: set[int],
     base: int,
@@ -44,6 +64,17 @@ def find_protection(
         for x in range(previous_endpoint + 1, min(max_candidate, oldcov + slack) + 1)
         if x not in A
     ]
+    best_failure: tuple[
+        int,
+        int,
+        int,
+        int,
+        tuple[int, ...],
+        int,
+        int,
+        int,
+        list[int],
+    ] | None = None
     for size in range(0, max_new_size + 1):
         checked = 0
         iterator = [()] if size == 0 else combinations(candidates, size)
@@ -63,6 +94,35 @@ def find_protection(
                 max(previous_endpoint + 1, max(new_tuple) if new_tuple else previous_endpoint + 1),
                 last_declared + 1,
             ):
+                lo = max(
+                    previous_endpoint + 1,
+                    max(new_tuple) if new_tuple else previous_endpoint + 1,
+                )
+                all_candidates = [
+                    w for w in range(lo, declared + 1) if w in four_all
+                ]
+                poisoned = [w for w in all_candidates if w in without]
+                low_excess_private = [
+                    w
+                    for w in all_candidates
+                    if w not in without
+                    and w - target - 2 * min(elements) < max(elements)
+                ]
+                score = (
+                    len(poisoned),
+                    len(all_candidates),
+                    declared - lo + 1,
+                    declared,
+                )
+                if best_failure is None or score > best_failure[:4]:
+                    best_failure = (
+                        *score,
+                        new_tuple,
+                        lo,
+                        declared,
+                        len(low_excess_private),
+                        low_excess_private[:5],
+                    )
                 witnesses = [
                     w
                     for w in range(previous_endpoint + 1, declared + 1)
@@ -77,6 +137,44 @@ def find_protection(
                     print("checked size", size, "count", checked)
                     return new_tuple, declared, newcov, oldcov, witnesses[:5]
         print("checked size", size, "count", checked)
+    if best_failure is not None:
+        (
+            poisoned_count,
+            represented_count,
+            width,
+            declared,
+            new_tuple,
+            lo,
+            _hi,
+            low_excess_count,
+            low_excess_first,
+        ) = best_failure
+        elements = A | set(new_tuple)
+        cap = max(7 * max(elements) + 500, declared + 500)
+        without = hsum(elements - {target}, 4, cap)
+        poisoned_values = [
+            w for w in range(lo, declared + 1) if w in without
+        ][:5]
+        examples = first_poison_examples(elements, target, poisoned_values, cap)
+        print(
+            "best failed window",
+            "new=",
+            new_tuple,
+            "window=",
+            (lo, declared),
+            "width=",
+            width,
+            "represented=",
+            represented_count,
+            "poisoned=",
+            poisoned_count,
+            "low_excess_private=",
+            low_excess_count,
+            "first_low_excess=",
+            low_excess_first,
+            "first_poison_examples=(w,p,w-p)=",
+            examples,
+        )
     return None
 
 
