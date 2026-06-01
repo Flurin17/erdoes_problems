@@ -4087,6 +4087,12 @@ source of growth beyond Ramsey.
   any vertex leaves mass `13`.  Therefore the connected defect-one target is
   sharp even inside the minimum-degree-`2` regime; the next proof cannot rely
   on peeling leaves down to a stronger 2-core theorem.
+- 2026-06-01: Checked all one-vertex extensions of the minimum-degree-`2`
+  defect graph `429588619789184147001379`.  The extension surplus histogram
+  starts at `-1`, not `-2`: there are `36` linear-mass violations on
+  `15` vertices, all with `mu=14=15-1`, and no extension with `mu<=13`.
+  This keeps the connected defect-one target alive after the sharp
+  minimum-degree-`2` obstruction.
 - 2026-06-01: Added the square-spectrum route.  Let
   `Q(G)=sum_d s_d(G)^2`.  If `Q(G)>=c|G|^2` for some absolute `c>0`, then
   for two `M`-vertex graphs failing the spectrum match at threshold `h`, each
