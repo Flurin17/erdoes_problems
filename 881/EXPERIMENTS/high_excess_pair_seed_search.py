@@ -13,6 +13,7 @@ the greedy chain records how quickly the local pattern stalls.
 
 from __future__ import annotations
 
+import sys
 from itertools import combinations
 
 
@@ -88,6 +89,78 @@ def find_singleton_extension(
             )
             if witnesses is not None:
                 return b, declared, newcov, oldcov, witnesses
+    return None
+
+
+def block_witnesses(
+    old: set[int],
+    new: set[int],
+    previous_endpoint: int,
+    declared_endpoint: int,
+    cap: int,
+    non_singleton: bool = False,
+) -> dict[tuple[int, int], list[int]] | None:
+    elements = old | new
+    four_all = hsum(elements, 4, cap)
+    bfree = {b: hsum(elements - {b}, 4, cap) for b in new} if non_singleton else {}
+    result: dict[tuple[int, int], list[int]] = {}
+    for a in sorted(old):
+        for b in sorted(new):
+            without = hsum(elements - {a, b}, 4, cap)
+            found = [
+                w
+                for w in range(previous_endpoint + 1, declared_endpoint + 1)
+                if w in four_all
+                and w not in without
+                and w - b - 2 * min(elements) >= max(old)
+                and (not non_singleton or w in bfree[b])
+            ]
+            if not found:
+                return None
+            result[(a, b)] = found[:3]
+    return result
+
+
+def find_block_extension(
+    old: set[int],
+    base: int,
+    previous_endpoint: int,
+    max_new_size: int,
+    max_candidate: int,
+    slack: int,
+    non_singleton: bool = False,
+) -> tuple[tuple[int, ...], int, int, int, dict[tuple[int, int], list[int]]] | None:
+    cap0 = max(5 * max(old) + 200, previous_endpoint + 200)
+    oldcov = cover_end(hsum(old, 3, cap0), base, cap0)
+    candidates = [
+        x
+        for x in range(previous_endpoint + 1, min(max_candidate, oldcov + slack) + 1)
+        if x not in old
+    ]
+    for size in range(1, max_new_size + 1):
+        checked = 0
+        for new_tuple in combinations(candidates, size):
+            checked += 1
+            new = set(new_tuple)
+            elements = old | new
+            cap = max(5 * max(elements) + 300, oldcov + slack + 300)
+            newcov = cover_end(hsum(elements, 3, cap), base, cap)
+            last_declared = newcov - 2 * min(elements)
+            if last_declared < max(previous_endpoint + 1, max(new)):
+                continue
+            for declared in range(max(previous_endpoint + 1, max(new)), last_declared + 1):
+                witnesses = block_witnesses(
+                    old,
+                    new,
+                    previous_endpoint,
+                    declared,
+                    cap,
+                    non_singleton=non_singleton,
+                )
+                if witnesses is not None:
+                    print("checked size", size, "count", checked)
+                    return new_tuple, declared, newcov, oldcov, witnesses
+        print("checked size", size, "count", checked)
     return None
 
 
@@ -178,7 +251,48 @@ def greedy_chain(
         endpoint = declared
 
 
+def block_checks() -> None:
+    cases = [
+        ("singleton-branch after 19", {1, 2, 3, 4, 8, 19}, 3, 29, False),
+        ("non-singleton branch after 9", {1, 2, 3, 6, 9}, 3, 19, True),
+    ]
+    for label, old, base, endpoint, non_singleton in cases:
+        print("block check", label)
+        result = find_block_extension(
+            old,
+            base,
+            endpoint,
+            max_new_size=3,
+            max_candidate=100,
+            slack=180,
+            non_singleton=non_singleton,
+        )
+        if result is None:
+            print("no block extension found")
+        else:
+            new, declared, newcov, oldcov, witnesses = result
+            print(
+                "found",
+                "old=",
+                sorted(old),
+                "oldcov=",
+                oldcov,
+                "new=",
+                new,
+                "endpoint=",
+                declared,
+                "coverage=",
+                newcov,
+                "sample=",
+                list(witnesses.items())[:8],
+            )
+
+
 if __name__ == "__main__":
+    if "--block" in sys.argv:
+        block_checks()
+        raise SystemExit
+
     find_first_seed()
     print()
     greedy_chain({1, 2, 3, 4}, base=3, endpoint=4)

@@ -19094,6 +19094,20 @@ the nondegenerate branch is also locally possible, but already in the
 smallest examples it demands multiple old-endpoint witnesses inside a very
 short buffer.
 
+Finally, the script's `--block` mode asks whether these two stalled seeds
+can be continued by a high-excess block of at most three new elements, with
+candidate values up to \(100\). It checks \(57155\) three-point blocks after
+\[
+\{1,2,3,4,8,19\}
+\]
+and \(85320\) three-point blocks after
+\[
+\{1,2,3,6,9\},
+\]
+finding no continuation. This remains finite evidence only, but it shows
+that the immediate stall is not just an artefact of insisting on one new
+point at the next step.
+
 Thus the high-excess escape is genuinely locally compatible, but the
 observed finite chain still has the same rapid endpoint/buffer exhaustion
 seen in the robust-booster searches. Any counterexample along this route

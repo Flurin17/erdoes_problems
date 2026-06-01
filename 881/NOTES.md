@@ -2235,8 +2235,11 @@ The script also has a non-singleton mode. Its first seed is
 with endpoint \(19\), coverage through \(21\), and all witnesses still
 represented after deleting \(9\) alone; this branch stalls at the next
 stage.
-So high-excess witnesses are not locally impossible, but the tested
-singleton-new-point versions still run into rapid buffer exhaustion.
+The script's `--block` mode checks whether either stalled seed can be
+continued by a high-excess block of at most three new elements with
+candidate values up to \(100\); it finds no continuation. So high-excess
+witnesses are not locally impossible, but the tested singleton-new-point
+and small-block continuations still run into rapid buffer exhaustion.
 
 ## Closed Mobile-Fiber Reduction for \(k=2\)
 

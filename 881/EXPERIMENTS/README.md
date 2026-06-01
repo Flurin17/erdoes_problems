@@ -615,6 +615,10 @@ The same script also searches the non-singleton-new subcase, requiring
 witnesses to remain in `4(A\\{b})`. Its first seed is `old=[1,2,3,6]`,
 endpoint `7`, new point `9`, declared endpoint `19`, and coverage through
 `21`; the greedy non-singleton chain stalls at the next stage.
+Run it with `--block` to check high-excess block continuations of size at
+most `3` and candidate values up to `100` from the two stalled seeds. It
+finds no continuation after checking `57155` three-point blocks from
+`[1,2,3,4,8,19]` and `85320` from `[1,2,3,6,9]`.
 
 `pair_shadow_rows.py` also reports Corollary 16.6b row-load statistics for
 the robust-booster third-stage candidates. For `b=41` and `b=43`, only old
