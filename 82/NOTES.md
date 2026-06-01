@@ -2252,3 +2252,17 @@ source of growth beyond Ramsey.
   `1800`, i.e. average symmetric difference about `9.47`, essentially the
   random-like `n/2` scale.  This supports the conclusion that hard
   bounded-spread examples, if any, live in the high-diversity regime.
+- 2026-06-01: Added Lemma 27 and `pair_difference_template.py`.  For a pair
+  `u,v`, equal-sized homogeneous subsets of the two one-sided difference sets
+  `N(u)\N(v)` and `N(v)\N(u)` form a regular induced subgraph with `u,v` when
+  the internal/cross pattern matches the adjacency of `uv`.  This is the
+  clean local amplification available from neighborhood diversity, but
+  finding the required homogeneous two-pole pattern is itself Ramsey-like
+  without extra structure.
+- 2026-06-01: Ran `pair_difference_template.py` on current calibration
+  examples.  The spread-one `n=7` mask `2416` has a best pair-template order
+  `4`, matching its maximum regular order.  The compensated spread-one
+  `n=20` sample has a best pair-template order only `6`, while its maximum
+  regular induced order is `10`.  Thus pair-difference amplification explains
+  some small extremals but does not capture all regular subgraphs even in
+  bounded-spread samples.

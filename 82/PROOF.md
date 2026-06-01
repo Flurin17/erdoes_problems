@@ -7189,6 +7189,41 @@ average value of `sigma(u,v)`: every counterexample already has
 must exploit a finer distributional feature of the pair differences or a
 stronger way to use low degree spread.
 
+## Lemma 27: Pair-Difference Amplification Template
+
+Let `u,v` be two vertices of a graph `G`, and put
+
+```text
+A=N(u)\N(v),       B=N(v)\N(u).
+```
+
+Let `delta=1` if `uv in E(G)` and `delta=0` otherwise.  Suppose there are
+sets `X subset A` and `Y subset B` with `|X|=|Y|=r` such that:
+
+1. if `delta=1`, then `X` and `Y` are independent and every edge between
+   `X` and `Y` is present;
+2. if `delta=0`, then `X` and `Y` are cliques and no edge between `X` and
+   `Y` is present.
+
+Then `G[{u,v} union X union Y]` is regular on `2r+2` vertices.
+
+Proof.  If `delta=1`, then `u` is adjacent to `v` and to all vertices of
+`X`, while `v` is adjacent to `u` and to all vertices of `Y`; both have degree
+`r+1` in the displayed set.  A vertex of `X` is adjacent to `u` and to all
+`r` vertices of `Y`, and has no neighbors in `X`; it also has degree `r+1`.
+The same holds for every vertex of `Y`.
+
+If `delta=0`, then `u` is adjacent exactly to the `r` vertices of `X` and
+`v` exactly to the `r` vertices of `Y`.  A vertex of `X` is adjacent to `u`
+and to the other `r-1` vertices of the clique `X`, and to no vertex of `Y`;
+again it has degree `r`.  The vertices of `Y` are identical.  QED.
+
+This is the local way in which a large symmetric difference can create a
+regular induced subgraph.  It also explains why neighborhood diversity alone
+does not immediately improve the Ramsey scale: finding the displayed
+homogeneous pattern inside `A` and `B` is itself a Ramsey-type problem unless
+additional structure is available.
+
 ## New Proof
 
 No complete proof yet.  The current public literature still marks this as an
