@@ -15129,6 +15129,37 @@ counterexample.  A minimal counterexample to the connected defect-one target
 with a leaf would therefore have to arise from a defect-one graph `H` and a
 neighbor `u` for which deleting `u` lowers spectrum mass.
 
+**Lemma 28J.10d.2a: Triangular Degree-Two Extensions Have Defect At Most
+One Over A Full-Mass Base.**  Let `G` be obtained from a graph `H` by adding
+a new vertex `z` adjacent to two adjacent vertices `u,v` of `H`.  If
+
+```text
+sum_d s_d(H) >= |V(H)|,
+```
+
+then
+
+```text
+sum_d s_d(G) >= |V(G)|-1.
+```
+
+Proof.  This is immediate from monotonicity of every spectrum coordinate:
+each induced regular witness in `H` is still an induced regular witness in
+`G`, so
+
+```text
+sum_d s_d(G) >= sum_d s_d(H) >= |V(H)|=|V(G)|-1.
+```
+
+The extra assumption that `u` and `v` are adjacent is not needed for this
+inequality, but it explains the observed examples: the new vertex is a
+simplicial degree-`2` vertex and lies in a triangle with `u,v`.  QED.
+
+All eight known fourteen-vertex defect graphs obtained from the
+thirteen-vertex equality graph have such a simplicial degree-`2` vertex
+`10`, adjacent to the edge `{2,5}`.  Deleting it leaves a graph of spectrum
+mass `13`, equal to its order.
+
 **Conditional Proposition 28J.10d.3: Defect Extensions Would Prove Connected
 Defect One.**  Suppose the following one-vertex extension statement holds:
 

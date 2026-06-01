@@ -4120,6 +4120,14 @@ source of growth beyond Ramsey.
   suggests a possible decomposition route: prove `mu(G)>=|G|` for
   `3`-connected graphs, and prove that gluing across two-vertex cuts loses
   at most one unit per connected graph rather than per block.
+- 2026-06-01: All eight known fourteen-vertex defect graphs have a
+  simplicial degree-`2` vertex, usually vertex `10` adjacent to the edge
+  `{2,5}`.  Deleting that vertex leaves a thirteen-vertex equality graph.
+  The elementary triangular-extension lemma records the relevant safe
+  direction: adding any vertex to a full-mass base preserves enough mass to
+  give defect at most one.  A local search among connected graphs with no
+  simplicial degree-`2` vertex found no linear-mass violation: best masses
+  were `15` at `n=14` and `21` at `n=16`.
 - 2026-06-01: Isolated the connected defect-extension induction.  It is enough
   to prove: if `H` is connected and `mu(H)=|H|-1`, then every connected
   one-vertex extension `G` of `H` has `mu(G)>=|H|`.  The proof deletes a
