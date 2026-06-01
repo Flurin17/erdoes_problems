@@ -3734,3 +3734,11 @@ source of growth beyond Ramsey.
   `{4:1085700, 5:758520, 6:222516, 7:7448, 8:22968}`.  Thus the Eulerian
   restriction improves neither the exact worst-case value at `n=8` nor the
   small sampled behavior enough to suggest a direct shortcut.
+- 2026-06-01: Extracted the last-vertex decomposition for `P=2` full-drop
+  graphs.  If `z` is last, `C=N(z)`, and `D` is the old nonneighbor set, then
+  every old vertex has at most one neighbor in `D`; hence `H[D]` has maximum
+  degree `1` and the `C-D` cross graph has degree at most `1` on the `C`
+  side.  This gives the basic induction lower bound
+  `reg(H)>=max(reg(H[C]),ceil(|D|/2))`.  The missing step for the conjectured
+  `C_full^reg(2,h)<=2h+1` is to exploit the disjoint cross-neighborhoods from
+  `D` into `C` to extend near-threshold witnesses in `C`.

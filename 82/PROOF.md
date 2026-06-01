@@ -12480,6 +12480,34 @@ size is less than `2` for every `i` exactly when every old vertex has at most
 one neighbor in `D`.  This is condition 1.  The two conditions together are
 therefore necessary and sufficient.  QED.
 
+**Corollary 28D.6b.4: Last-Vertex Sparse Nonneighbor Decomposition.**  Let
+`H` be a `P=2` full-drop ordered graph, let `z` be its last vertex, and put
+
+```text
+C=N_H(z),        D=V(H)\({z} union C).
+```
+
+Then every vertex of `H-z` has at most one neighbor in `D`.  In particular,
+`H[D]` has maximum degree at most `1`, and the bipartite graph between `C`
+and `D` has degree at most `1` on the `C` side.  Consequently
+
+```text
+reg(H) >= max { reg(H[C]), ceil(|D|/2) }.
+```
+
+Proof.  View `H` as a right extension of `H-z`; the set `D` is exactly the
+set of old nonneighbors of the new last vertex `z`.  Lemma 28D.6b.3 says
+that every old vertex has at most one neighbor in `D`, giving the first
+claims.
+
+A graph of maximum degree at most `1` is a disjoint union of isolated
+vertices and edges.  If it has `s` isolated vertices and `e` edge components,
+then its isolated vertices form a `0`-regular induced subgraph of order `s`,
+while its edge components together form a `1`-regular induced subgraph of
+order `2e`.  Since `max(s,2e)>=ceil((s+2e)/2)=ceil(|D|/2)`, the displayed
+lower bound follows, together with the inherited regular witnesses inside
+`H[C]`.  QED.
+
 **Lemma 28D.6c: A Linear Lower Construction For Regular Full-Drop At
 `P=2`.**  For every `h>=7`,
 
