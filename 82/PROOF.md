@@ -14476,6 +14476,50 @@ low-degree mass is exactly `|A|-1`, the degree-`2` spectrum does not grow
 beyond the old core size, no high core coordinate grows, and no new regular
 degree appears outside the old spectrum coordinates.
 
+**Conditional Proposition 28J.5f: Feedback Equality Structure Plus Collision
+Exclusion Would Prove Spectrum Mass.**  Suppose the following two statements
+hold.
+
+1. Every graph `H` with
+
+```text
+sum_d s_d(H)=|V(H)|
+```
+
+has a regular-feedback partition
+
+```text
+V(H)=F union R_1 union ... union R_t
+```
+
+where `H[F]` is a forest and the nonempty `H[R_i]` are induced regular graphs
+of distinct degrees at least `2`.
+
+2. For every such partition and every one-vertex extension `G` of `H`, if a
+degree-`2` part is present, then at least one of the four alternatives in
+Lemma 28J.5e holds.  If no degree-`2` part is present, no additional
+assumption is needed.
+
+Then every graph satisfies the spectrum-mass inequality
+
+```text
+sum_d s_d(G) >= |V(G)|.
+```
+
+Consequently Erdős Problem 82 follows with the polynomial bound `G(k)<2k^2`.
+
+Proof.  By Conditional Proposition 28J.9, it is enough to prove the
+equality-extension lemma.  Let `H` satisfy `sum_d s_d(H)=|V(H)|`, let `G` be
+obtained from `H` by adding one vertex, and choose the regular-feedback
+partition of `H` guaranteed by assumption 1.
+
+If the partition has no degree-`2` part, Lemma 28J.5b applies and gives
+`sum_d s_d(G)>=|V(G)|`.  If the partition has a degree-`2` part, then
+assumption 2 and Lemma 28J.5e give the same conclusion.  Thus the
+equality-extension lemma holds.  Conditional Proposition 28J.9 gives the
+spectrum-mass inequality for all graphs, and Conditional Corollary 28J.1a
+then gives `G(k)<2k^2`.  QED.
+
 **Lemma 28J.6: Split Graphs Satisfy Spectrum Mass.**  If `G` is a split
 graph, then
 
@@ -14745,6 +14789,18 @@ have a regular-feedback partition using a degree-`2` core; all `1612800`
 one-vertex extensions of those graphs satisfy the collision criterion.
 Randomized larger checks are available through the same script's `--sample`
 mode.
+
+Two further bounded checks at seven vertices are:
+
+```text
+python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 7 --scan --min-degree 2 --max-graphs 5000
+python3 82/EXPERIMENTS/feedback_extension_diagnostic.py 7 --scan --min-degree 2 --equality-only
+```
+
+The first checks `640000` one-vertex extensions from the first `5000`
+degree-`2` feedback-core graphs encountered and finds no criterion failure.
+The second verifies that all `3781` seven-vertex equality graphs have
+regular-feedback partitions but none require a degree-`2` core.
 
 **Computational Example 28K: `D_spec(6)` Separates From The Full Pair
 Parameter.**  The exact checker `EXPERIMENTS/dspec_exact.py` enumerates all

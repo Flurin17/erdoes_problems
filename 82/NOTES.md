@@ -3987,3 +3987,15 @@ source of growth beyond Ramsey.
   checked `5120` and `2560` one-vertex extensions respectively, again with
   no collision-criterion failure.  These are not proof, but they support
   treating Lemma 28J.5e's alternatives as a serious theorem target.
+- 2026-06-01: Added Conditional Proposition 28J.5f, which isolates the two
+  remaining theorem targets needed to make the spectrum-mass route complete:
+  (1) every equality graph has a regular-feedback partition with distinct core
+  degrees at least `2`; (2) every one-vertex extension of such a partition
+  with a degree-`2` core satisfies one of the four collision alternatives.
+  Together they imply the equality-extension lemma, hence linear spectrum
+  mass, hence `G(k)<2k^2`.  Additional bounded scans:
+  `feedback_extension_diagnostic.py 7 --scan --min-degree 2 --max-graphs 5000`
+  checks `640000` one-vertex extensions with no criterion failure, and
+  `feedback_extension_diagnostic.py 7 --scan --min-degree 2 --equality-only`
+  confirms the `3781` seven-vertex equality graphs have no degree-`2` core
+  in their found feedback partitions.
