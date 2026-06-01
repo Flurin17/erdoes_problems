@@ -2430,6 +2430,13 @@ strict high-excess witness; the best window \([99,132]\) after adding
 \((96,99)\) is fully represented but fully poisoned by retained-padder
 shifts. This is again finite evidence, but it shows that the simplest
 staggered repair inherits the same shifted-cover poisoning.
+Corollary 16.33 closes the bounded-staggering version of this escape. If a
+positive-density part of one bridge block is protected using at most \(s\)
+common-row witness windows, then one window contains a fixed positive
+fraction and the Sidon pressure inequality reappears. Hence a singleton
+counterexample must use unboundedly many staggered windows, vanishing
+per-window protected density, or the nonsingleton-front branch from
+Corollary 16.31.
 Corollary 16.25 packages the exact finite criterion behind these searches:
 for a finite stage \(S\) and target \(q\), the private order-\(4\)
 candidates in a window \(I\) are exactly
@@ -2475,6 +2482,8 @@ The script `bridge_sidon_pressure.py` evaluates this inequality directly.
 For the interval-marker model at \(L=4\), the first possible next marker
 \(x=19\) remains in the near-range escape, while \(x=1600=100L^2\) already
 violates the inequality for any bridge block contained in \([x,2x-2]\).
+It also reports the bounded-staggered variants from Corollary 16.33 for a
+chosen number of windows and protected density.
 Corollary 16.29 ties the inequality back to private witnesses: if half of
 a bridge block has singleton witnesses below a common bound and the other
 bridge elements are active late rows for those witnesses, then the

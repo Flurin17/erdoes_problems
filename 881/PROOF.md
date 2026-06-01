@@ -20572,6 +20572,99 @@ does not rule out longer staggered constructions, but it shows that a
 successful construction must do more than postpone each deferred filler by
 one small bridge block.
 
+### Corollary 16.33: Boundedly many staggered windows are Sidon-limited
+
+Let \(A\subseteq\mathbb N\) be an order-\(3\) basis with threshold \(N_0\)
+and minimum \(m_0\). Let \(P,D\subset\mathbb N\) be finite and nonempty,
+with
+\[
+P\subset A,
+\]
+and let \(J\) be an interval of length
+\[
+R=|J|
+\]
+such that
+\[
+J\subset P+D. \tag{1}
+\]
+Let \(Q\subset P\), and suppose
+\[
+|Q|\ge\beta |P|,\qquad 0<\beta\le1. \tag{2}
+\]
+Assume that \(Q\) is partitioned into at most \(s\) classes
+\[
+Q=Q_1\cup\cdots\cup Q_s
+\]
+with the following property. For each \(i\) there is a bound \(W_i\) such
+that every \(q\in Q_i\) has a singleton private witness
+\[
+w_q=q+d_q\le W_i,\qquad w_q\notin4(A\setminus\{q\}), \tag{3}
+\]
+and every other bridge element is an active late row for that witness:
+\[
+w_q-p\ge N_0,\qquad p>W_i-2q-m_0
+        \qquad(q\in Q_i,\ p\in P\setminus\{q\}). \tag{4}
+\]
+Put
+\[
+H=|D|,\qquad \Delta=\max P-\min P,\qquad \gamma={\beta\over s}.
+\]
+Assume also that
+\[
+{R\over H}\ge {1\over4\gamma-2\gamma^2}. \tag{5}
+\]
+Then
+\[
+\left(\gamma-{\gamma^2\over2}\right){R^2\over H^2}
+   -{R\over2H}
+\le 2\Delta+1. \tag{6}
+\]
+
+Proof. Some class \(Q_i\) has size
+\[
+t=|Q_i|\ge {|Q|\over s}\ge\gamma |P|. \tag{7}
+\]
+For every \(q\in Q_i\), Lemma 16.24 applied with the bound \(W_i\) and the
+row set \(P\setminus\{q\}\) gives
+\[
+\bigl((P\setminus\{q\})+q-(P\setminus\{q\})\bigr)\cap P\subset\{q\}.
+\]
+Lemma 16.26 therefore gives
+\[
+t(|P|-t)+\binom t2\le2\Delta+1. \tag{8}
+\]
+Writing \(m=|P|\), the left side of (8) is
+\[
+tm-{t^2\over2}-{t\over2}.
+\]
+Since \(t\ge\gamma m\) and \(t\le m\),
+\[
+t\left(m-{t\over2}\right)\ge
+\gamma m\left(m-{\gamma m\over2}\right)
+=\left(\gamma-{\gamma^2\over2}\right)m^2,
+\]
+and also \(-t/2\ge-m/2\). Hence
+\[
+\left(\gamma-{\gamma^2\over2}\right)m^2-{m\over2}
+   \le 2\Delta+1. \tag{9}
+\]
+The bridge cover (1) gives \(mH\ge R\), so \(m\ge R/H\). By (5), the
+function
+\[
+u\mapsto\left(\gamma-{\gamma^2\over2}\right)u^2-{u\over2}
+\]
+is increasing for all \(u\ge R/H\). Thus (9) implies (6). \(\square\)
+
+For fixed \(s\) and fixed positive density \(\beta\), inequality (6)
+eventually fails for interval bridges whose length is large compared with
+\(|D|^2\) and whose bridge block has only linear diameter. Therefore a
+staggered singleton construction cannot protect a positive-density part of
+each dense bridge block using only boundedly many witness windows. The
+remaining singleton escape must use unboundedly many staggered windows,
+vanishing protected density per bounded window family, or pass to the
+nonsingleton-front alternative of Corollary 16.31.
+
 ## Attempt 17: Finite accelerators are not a shortcut
 
 One tempting higher-order negative route is to begin with a strongly
@@ -21679,6 +21772,12 @@ finite-barrier construction in Propositions 13.1b-general and 13.1e.
   debt block and finds no bounded one-step singleton protection for the
   deferred fillers \(25,26,43,44\); the best next window is completely
   represented but completely poisoned.
+* Corollary 16.33 shows that boundedly many staggered windows do not evade
+  the same pressure: if a positive-density subset of one bridge block is
+  protected using at most \(s\) common-row windows, then one window contains
+  a fixed positive fraction and satisfies a Sidon-scale bridge inequality.
+  Thus the singleton escape requires unboundedly many windows, vanishing
+  per-window density, or a nonsingleton front.
 * Attempt 17 records that adding a finite accelerator to a minimal
   order-\((k+1)\) basis is not a shortcut to a counterexample; the witnesses
   must survive every accelerator shift, which is again the collective

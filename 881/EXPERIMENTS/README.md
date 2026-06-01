@@ -738,4 +738,6 @@ interval-marker model with `L=4`, the default run shows the first possible
 next marker `x=19` is still in the near-range escape, while
 `x=1600=100L^2` is already beyond the Sidon-pressure threshold: any bridge
 block inside `[x,2x-2]` covering `[x+13,2x]` cannot have a simultaneous
-gate-independent half-packet over its own rows.
+gate-independent half-packet over its own rows. It also reports the
+bounded-staggered Corollary 16.33 tests for `1`, `2`, and `4` witness
+windows.
