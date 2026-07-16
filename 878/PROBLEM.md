@@ -1,0 +1,45 @@
+# Erdős Problem #878
+
+Source: <https://www.erdosproblems.com/878>  
+Fetched from the site's LaTeX-source view on 2026-07-16.
+
+## Verbatim statement
+
+If $n=\prod_{1\leq i\leq t}p_i^{k_i}$ is the factorisation of $n$ into distinct primes then let
+\[
+f(n)=\sum p_i^{\ell_i},
+\]
+where $\ell_i$ is chosen such that $n\in[p_i^{\ell_i},p_i^{\ell_i+1})$. Furthermore, let
+\[
+F(n)=\max\sum_i a_i,
+\]
+where the maximum is taken over all distinct $a_1,\ldots,a_k\leq n$ such that $(a_i,a_j)=1$ for $i\neq j$ and all prime factors of each $a_i$ are prime factors of $n$.
+
+Is it true that, for almost all $n$,
+\[
+f(n)=o(n\log\log n)
+\]
+and
+\[
+F(n)\gg n\log\log n?
+\]
+Is it true that
+\[
+\max_{n\leq x}f(n)\sim\frac{x\log x}{\log\log x}?
+\]
+Is it true that, for all $x$ or perhaps all large $x$,
+\[
+\max_{n\leq x}f(n)=\max_{n\leq x}F(n)?
+\]
+Find an asymptotic formula for the number of $n<x$ such that $f(n)=F(n)$. Find an asymptotic formula for
+\[
+H(x)=\sum_{n<x}\frac{f(n)}n.
+\]
+Is it true that
+\[
+H(x)\ll x\log\log\log\log x?
+\]
+
+## Initial goal
+
+Separate the subquestions, derive exact optimization formulas for $F(n)$ on a fixed prime support, and attack the extremal and almost-all regimes independently.
