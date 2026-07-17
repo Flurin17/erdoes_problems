@@ -75,7 +75,8 @@ solved with the exact variational constant
 c=B_1+C_*.
 \]
 Four fresh audits found no unresolved mathematical error after one referee's
-signed-bound notation objection was repaired.
+signed-bound notation objection was repaired.  The verified result and all
+supporting artifacts are committed and pushed on `codex/796`.
 
 ## Proved facts
 
@@ -163,8 +164,7 @@ C_*\geq79/60.
 
 No mathematical dependency remains open in the asymptotic proof.  Numerically
 evaluating \(C_*\) more sharply is an optional finite optimization problem,
-not a prerequisite for the exact variational identification.  Only Git
-finalization remains.
+not a prerequisite for the exact variational identification.
 
 ## Dead or demoted routes
 
@@ -195,6 +195,5 @@ finalization remains.
 
 ## Next actions
 
-Re-run final checks, commit only Problem 796 files with a 796-prefixed
-message, and push the Problem 796 branch without touching unrelated worktree
-changes.
+None required for the stated problem.  A future optional project could sharpen
+the numerical bounds on \(C_*\) by solving larger finite profile instances.
