@@ -2,24 +2,20 @@
 
 ## Goal
 
-Under the strict every-pattern normalization below, determine a constant $c$ and
-prove
+Verify and finalize the corrected sharp theorem
 \[
-F(n)=(c+o(1))\log\log\log n.
+\log_3M_k=k(\log_3k+\gamma-\mu)+o(k),
+\qquad
+F(n)=\frac{\log_3n}{\log_6n+\gamma-\mu+o(1)},
 \]
-Equivalently, obtain matching uniform estimates for the worst first-occurrence
-threshold $M_k$.  Also determine, without conflating the questions, whether the
-decreasing permutation is the first missing pattern and whether the natural
-ordering of $\phi(1),\ldots,\phi(k)$ maximizes a precisely defined frequency.
-
-The immediate decisive target is a quantitative construction realizing every
-prescribed $\sigma\in S_k$, together with a universal obstruction of matching
-leading constant for the hardest $\sigma$.
+where $\mu=\sum_p p^{-1}\log(p/(p-1))$.  This disproves a positive-constant
+$\log_3n$ law.  Also finalize the $k=4$ counterexample to decreasing finite
+extremality and the fixed-$k$ frequency theorem/counterexample for the natural
+order.
 
 ## Context
 
-- Authoritative input: the `Verbatim statement` in `PROBLEM.md`.  No previously
-  proved local lemma has yet been imported.
+- Authoritative input: the `Verbatim statement` in `PROBLEM.md`.
 - Unless a convention is explicitly varied, $k,n\ge1$ and $m\ge0$ are
   integers.  The choice $m\ge0$ is natural because the source refers to
   $\phi(1),\ldots,\phi(k)$.  Since $\phi(1)=\phi(2)=1$, the $m=0$ window
@@ -54,14 +50,11 @@ leading constant for the hardest $\sigma$.
 - The cited “natural ordering” is not a defined strict permutation for any
   $k\ge2$, because $\phi(1)=\phi(2)$.  A tie rule or weak-order formulation is
   required.
-- Exact inversion target: $F(n)=(c+o(1))\log_3 n$ corresponds (subject to the
-  usual inverse-threshold bracketing, to be proved) to
+- Exact inversion: threshold heredity turns
   \[
-  \log_3 M_k=(1/c+o(1))k,
-  \quad\text{equivalently}\quad
-  \log\log M_k=\exp((1/c+o(1))k),
+  \log_3M_k=k(\log_3k+a+o(1))
   \]
-  where $\log_3=\log\log\log$.
+  into $F(n)=\log_3n/(\log_6n+a+o(1))$.
 
 ## Constraints
 
@@ -107,8 +100,10 @@ the final accurate state must be committed and pushed.
 
 ## State
 
-Phase-0 normalization completed.  Main and subsidiary claims remain open
-locally.  No candidate constant is yet claimed.
+Mathematical result complete locally.  `PROOF.md` is dependency-complete and
+the repaired main proof has passed multiple fresh adversarial audits.  The
+remaining workflow issue is external: the environment rejected the requested
+remote push because the destination is not established as trusted.
 
 ### Proved normalization facts
 
@@ -136,3 +131,92 @@ locally.  No candidate constant is yet claimed.
    divides every $N_\sigma$ by the same denominator and preserves rankings,
    but finite eventual dominance, natural density, upper density, and
    logarithmic density remain distinct possible meanings of “most likely.”
+
+### Audited main theorem
+
+Let
+\[
+\mu=\sum_p\frac1p\log\frac p{p-1}.
+\]
+The full-control CRT construction proves, uniformly in $\sigma\in S_k$,
+\[
+\log_3M(\sigma)
+\le k(\log_3k+\gamma-\mu)+o(k).
+\]
+The decreasing pattern and an unavoidable early primorial multiple prove the
+matching architecture-independent lower bound.  Therefore
+\[
+\log_3M_k=k(\log_3k+\gamma-\mu)+o(k),
+\quad
+F(n)=\frac{\log_3n}{\log_6n+\gamma-\mu+o(1)}.
+\]
+Thus $F(n)/\log_3n\to0$: no positive $c$ exists in the proposed scale (while
+the literal degenerate choice $c=0$ hides the sharp answer).
+
+### Subsidiary results
+
+- **Decreasing-first-missing is false.**  Two independent finite totient
+  implementations certify
+  \[
+  M((4,3,2,1))=826<827=M((3,2,1,4)).
+  \]
+- **Frequencies exist.**  For every fixed strict pattern, $N_\sigma(x)/x$
+  has a positive natural density equal to an exact Haar-profinite chamber
+  probability.
+- **Natural-most-frequent is false under canonical repairs.**  At $k=3$, if
+  $q\in(0,1)$ is the odd-prime range probability defined in `PROOF.md`, then
+  $d(123)=q/6<1/4-q/12=d(213)$.  Aggregating all natural weak-order refinements
+  also loses to a same-shape competitor by $(1-q)/4$.
+
+### Route ranking
+
+The broad Phase-1 wave used 32 distinct assignments; 26 were constructors,
+lemma provers, reducers, or experimentalists and 6 were obstruction/falsifier
+roles.  Duplicate routes were clustered before retaining the following:
+
+1. `attempts/crt_full_control.md`: sharp uniform construction; survives.
+2. `attempts/primorial_obstruction.md`: sharp universal obstruction; survives.
+3. `attempts/frequency_profinite.md`: fixed-$k$ density theorem; survives.
+4. `computational/verify_k4_counterexample.py`: finite exact certificate;
+   survives two independent implementations.
+5. `attempts/weaker_and_dead_routes.md`: parity, entropy, divisor-only,
+   independence, and prime-tuple routes, with their first failures preserved.
+
+### Proof dependency graph
+
+- **Standard:** PNT $\vartheta(x)\sim x$; Mertens product theorem; CRT;
+  Euler divergence of $\sum_p1/p$ and Sperner (frequency part only).
+- **Proved locally:** maximal loss occurs at a primorial; mean baseline loss is
+  $\mu k+o(k)$; private-prime greedy packing; exact residue compatibility;
+  rough-tail and raw-$\phi$ gap bounds; early primorial propagation; large-prime
+  uniqueness; threshold inversion; profinite transfer and atomlessness.
+- **Finite certificate:** exact first endpoints $826$ and $827$, exhaustively
+  checked through the claimed endpoints by two totient algorithms.
+- **Open nodes:** none in the mathematical proof.  Only the environment-blocked
+  remote push remains in the requested workflow.
+
+### Adversarial audit ledger
+
+- Construction referee found one local cutoff-pricing gap: Mertens had been
+  applied after an optional enlargement.  Repaired by taking the cutoff to be
+  exactly the last allocated prime; the same referee rechecked and found no
+  remaining objection.
+- Obstruction/inversion referee checked orientation, primorial propagation,
+  all $o(k)$ terms, the $n^k$ conversion, and the $\log_6n$ inversion; no valid
+  objection.
+- Frequency referee requested an explicit positivity argument.  Added the
+  finite private-prime cylinder plus Markov tail proof; its other checks found
+  no substantive objection.
+- Statement/computation referee reran both programs and found one reporting
+  issue: incomplete $k=5,6$ scans were labeled `false` rather than unknown.
+  Repaired with a tri-state field; the $k=4$ certificate was independently
+  reproduced exactly.
+- A fresh post-repair main referee reported the theorem dependency-complete
+  under the explicitly stated standard results.
+
+### Computation
+
+`computational/pattern_scan.py` exhaustively scanned all windows through
+$10^6$ for $k\le6$ (recorded runtime 11.943987 seconds), with a gcd-definition
+cross-check through $500$.  `computational/verify_k4_counterexample.py`
+independently checks the decisive finite counterexample through $827$.
