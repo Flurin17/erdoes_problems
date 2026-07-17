@@ -255,9 +255,42 @@ is maximized at $t=3^{-1/2}$ and equals
 \[
  c_{\rm rect}=\frac4{3^{3/4}}\approx1.754765.
 \]
-The complete uniform construction and the possibility of improving it with
-several disjoint rectangles are active proof obligations; this paragraph is
-not yet promoted to a final theorem.
+This single rectangle is superseded by the following proved multiscale
+theorem.
+
+### Theorem 4.1 (Bellman-optimized reciprocal annuli)
+
+\[
+ \liminf_{n\to\infty}
+ \frac{F(n)-\pi(n)}
+      {n^{3/4}(\log n)^{-3/2}}
+ \ge \frac{2^{11/4}}{3^{3/4}}=2.951151\ldots .
+\]
+
+For decreasing boundaries \(b_{-1},b_0,b_1,\ldots\), with
+\(b_{-1}b_0=1\), pair
+\[
+ X_j=(b_{j+1}\sqrt n,b_j\sqrt n],\qquad
+ Y_j=(\sqrt n/b_{j-1},\sqrt n/b_j].
+\]
+The coefficient is
+\[
+ 2\sqrt2\sum_{j\ge0}
+ (b_j-b_{j+1})\sqrt{1/b_j-1/b_{j-1}}.
+\]
+Writing \(r_j=b_j/b_{j-1}\), the Bellman inequality
+\[
+ (1-s)\sqrt{1-r}+\sqrt{s(2-s)}\le\sqrt{2-r}
+\]
+telescopes. Equality starts with \(b_0=\sqrt{2/3}\) and obeys
+\[
+ \delta_0=1/3,\qquad
+ \delta_{j+1}=\sqrt{\delta_j/(1+\delta_j)},\qquad
+ r_j=1-\delta_j.
+\]
+The complete collision, projective-plane sizing, orientation, and limiting
+argument is in PROOF.md. This optimizes the disjoint interval-incidence
+architecture only; coupled components remain a separate question.
 
 For reference, the elementary bipartite $C_4$ count gives, for part sizes
 $s,t$ and $e$ edges,
@@ -339,11 +372,13 @@ trade without containing an even cycle.
 
 ## 7. Current open obligations
 
-1. Prove the best semiprime lower construction uniformly for every $n$ and
-   optimize over multiple compatible factor rectangles.
-2. Reduce an arbitrary extremal $A$ to controlled prime/semiprime incidence
-   data with an error $o(n^{3/4}(\log n)^{-3/2})$.
-3. Prove the corresponding weighted/hyperbolic $C_4$ extremal upper bound and
-   determine whether its normalized optimum has a limit.
-4. For fixed $r$, turn the balanced-trade hypergraph condition into the
-   claimed $O_r(n^{(r+1)/(2r)})$ excess bound or construct a counterexample.
+1. Decide whether the explicit coupled four-part \(C_4\)-free packing can
+   beat the proved Bellman coefficient; ordinary two-path inequalities do not
+   decide it.
+2. Close the critical-band cross-kernel upper lemma after applying canonical
+   roughness, colored rectangles, exchange charging, and the proved tail
+   bounds.
+3. Determine whether the weighted semiprime optimum has a limit and prove
+   that higher-composite layers cannot improve the resulting constant.
+4. For fixed \(r\), prove the remaining smooth-core estimate after the
+   large-largest-prime reduction, or construct a counterexample.
