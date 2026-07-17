@@ -141,3 +141,46 @@ interchange is present.
 6. `H(x)`: start from (H); completed prime-power blocks are elementary, while
    terminal blocks encode the phase `log x-k log p` and require uniform prime
    estimates in short root intervals.
+
+## Smooth and dense supports
+
+For disjoint nonempty blocks `A,B`, a partition with `s` singleton blocks and
+`c` nonsingleton blocks satisfies `c<=(omega(n)-s)/2`.  Consequently
+
+`sum_{B in Pi}M_n(B) <= c*n + sum_{singleton {p}}p^{L_p(n)}`,
+
+and in particular
+
+`F(n) <= (omega(n)/2)n+f(n)`.                                  (S1)
+
+This elementary charging bound is useful for dense supports.
+
+There is also a uniform two-prime density lemma.  Let `p<q`,
+`rho=log(q/p)`, and
+
+`m_0=ceil(2+log p/rho)`, `T(p,q)=p^{m_0-1}q`.
+
+For every `X>=T(p,q)`,
+
+`M_X({p,q})>=X*p/q`.                                           (S2)
+
+Proof.  With total exponent `m`, the numbers
+`p^{m-j}q^j` (`1<=j<=m-1`) have logarithms on a `rho`-grid over
+`[m log p+rho,m log p+(m-1)rho]`.  The choice of `m_0` makes consecutive
+such intervals overlap for all `m>=m_0`.  Every target logarithm above
+`log T` is therefore preceded by a grid point at distance less than `rho`,
+which gives (S2).
+
+Suppose `N` is divisible by every prime at most `y` and `log N>=theta(y)`.
+Using PNT, pair all but `o(pi(y))` of those primes into pairs `p<q` with
+`q/p=1+o(1)` and `log T(p,q)=o(y)`.  Lemma (S2) then gives
+
+`F(N)>=(1/2-o(1))*pi(y)*N`.                                    (S3)
+
+For example, take prime indices in blocks and pair index `i` with
+`i+h`, where `h=delta*pi(y)`, `delta->0`,
+`(log y)^2/delta=o(y)`, after discarding the first `o(pi(y))` indices.
+The inverse PNT gives the required ratios uniformly.  Thus primorial and
+initial-segment supports admit linearly many pairwise-coprime terms, each
+`(1-o(1))N`.  This proves a sharp-order dense-support lower bound; determining
+the exact leading constant without further phase information is separate.

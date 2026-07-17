@@ -95,11 +95,14 @@ an explicit remaining bottleneck.
 
 ### State
 
-Active.  Phase 0 is complete.  The exact finite optimization for `F`, the
-unit-convention consequences, and the structural equality criterion are
-proved.  A proof of the almost-all upper bound for `f`, using standard Mertens
-and Brun--Titchmarsh estimates, is being consolidated and audited.  The other
-global claims remain open locally.
+Active; partial solution.  Phase 0, the 29-assignment constructive wave, and
+the six-route tournament are complete.  Both almost-all assertions are proved
+and have passed two fresh adversarial audits each.  The exact optimization,
+literal-unit branch, a running-max counterexample, an oscillatory asymptotic
+for `H`, and a sharp maximal-order limsup are also proved.  Four substantive
+questions remain open locally: the full maximal-order limit, eventual
+running-max equality, the nonunit equality-count asymptotic, and the uniform
+`H(x)<<x log_4 x` bound.
 
 ### Proved facts
 
@@ -109,6 +112,18 @@ global claims remain open locally.
 - `F_{>1}(n)>=max(n,f(n))`, exact one- and two-prime formulas, and the
   all-subsets iff criterion for `F_{>1}(n)=f(n)`.
 - Exact finite prime/block identity for `H(x)` after writing `n=pm`.
+- `H(x)<<x log_3 x`, hence `f(n)=o(n log_2 n)` outside a density-zero set.
+- By a two-band Fourier/sieve/matching construction,
+  `F(n)>>n log_2 n` outside a density-zero set.
+- Explicit pointwise oscillatory expansion
+  `H(x)=M(x)+zeta(2)x/log x+O(x/log^2 x)`, with the full fixed-order
+  expansion in `attempts/H.md`.
+- Arbitrarily large `x` satisfy `H(x)>>x log_4 x`, so the proposed bound is
+  order-sharp if true and no constant-linear pointwise asymptotic exists.
+- `max_{n<=x}f(n)<=(1+o(1))x log x/log_2 x`, and the normalized limsup is
+  exactly `1` by the averaged prime-power crowding construction.
+- `F(210)>=442>383=max_{m<=210}f(m)`, disproving running-max equality for
+  all cutoffs.
 
 ### Counterexamples / dead routes
 
@@ -116,22 +131,37 @@ global claims remain open locally.
   `n=3689` give explicit obstructions recorded in `NOTES.md`.
 - Treating `1` as admissible makes both equality questions immediately
   negative; any nontrivial equality route must explicitly use `a_i>1`.
+- A proposed full maximal-order proof used the Selberg integral
+  `J(X,h)<<Xh log^2X` at `h=X^{o(1)}`.  Three independent audits identified
+  this as unavailable unconditionally (it is available under RH), so the
+  route is retained only as conditional and no full limit is claimed.
+- Ordinary Brun--Titchmarsh or a naive large sieve cannot control the
+  medium-prime phase intervals in the `H` problem once they become shorter
+  than one; the first missing lemma is recorded below.
 
-### Surviving routes (initial)
+### Route ranking after tournament
 
-1. Additive/dyadic first-moment proof for almost-all `f` (candidate complete,
-   awaiting focused audit of root-interval estimates).
-2. Prime-support bin packing for almost-all `F`.
-3. Extremal support construction and matching upper bound for `max f`.
-4. Terminal-block analysis of the exact finite identity for `H`.
-5. Structural equality criterion followed by uniform counting.
+1. **Complete:** almost-all `F`, via logarithmic prime bands, a uniform
+   shrinking-target lemma, interval-sieve transference, and bipartite matching.
+2. **Complete:** almost-all `f`, via `H(x)<<x log_3 x` and Markov.
+3. **Strong partial:** `H`, with an explicit pointwise oscillatory asymptotic,
+   an order-sharp subsequence lower bound, and one isolated phase lemma.
+4. **Strong partial:** extremal `f`, with the matching upper bound and sharp
+   limsup; full uniform lower bound remains open.
+5. **Partial:** equality count, with exact all-subsets and `omega<=3`
+   classifications but no large-core tail theorem.
+6. **Partial:** running maxima, with “all `x`” disproved at `210`; eventual
+   equality remains open.
 
 ### Current bottleneck
 
-Construct many near-`n` disjoint support blocks for almost every `n`; and, for
-the extremal lower bound, align many fractional logarithms simultaneously.
+For `H`, prove
+`sum_{log_2 x<p<(log x)^2}u_p(x)e^{-u_p(x)}/p << log_4 x`.
+For extremal `f`, prove a uniform prime-power crowding lemma at every prescribed
+height `T=log x` without an RH-level short-interval input.  For equality
+counting, prove a uniform large-core/largest-prime tail theorem.
 
 ### Next assignments
 
-Complete the 24-agent constructive wave, formalize the first-moment proof,
-build deterministic exact computation, then cluster 4--8 surviving routes.
+Commit and push the audited partial solution.  Subsequent work should assign
+agents directly to the three bottleneck lemmas above.
