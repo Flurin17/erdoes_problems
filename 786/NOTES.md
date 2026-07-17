@@ -188,13 +188,40 @@ The fixed-\(u\) Dickman asymptotic implies
 \]
 This remains compatible with \(m_N=N/\log N\).
 
+### Prime--cofactor overlap and multiplicative energy
+
+A stronger unconditional bound is now proved:
+\[
+ m_N\geq c\frac{N}{\log N} \tag{11}
+\]
+for an absolute \(c>0\). Prime bands
+\[
+ P_j=(N/(2C_j),N/C_j],\qquad C_j=2^j\leq\sqrt N/4,
+\]
+form globally injective rectangles with cofactors \(1\leq k\leq C_j\).
+If \(m_N\ll N/\log N\), each rectangle is nearly monochromatic in the
+cofactor grading. Their nested cofactor intervals propagate the base color
+\(f(1)=0\), giving \(f(k)=0\) for a positive proportion of
+\(k\leq C_J\asymp\sqrt N\).
+
+The multiplication-table energy bound
+\[
+ |\{(a,b,c,d)\in[1,M]^4:ab=cd\}|
+ \leq2M^2(1+\log M)
+\]
+then makes the zero-graded product set have size
+\(\gg M^2/\log M\gg N/\log N\). All these products lie off the level
+\(f=1\), a contradiction. The full proof and audit are in
+attempts/finite_overlap_energy.md and
+attempts/tournament/audit_overlap_energy.md.
+
 ### Bounded bad witnesses and modular lift
 
 Let \(d=\pi(N)\) and \(L=\lfloor\log_2N\rfloor\). If a finite set is not
 PLR, a cofactor/Hadamard argument produces an unequal-length relation
 supported on at most \(d+1\) elements and with total multiplicity at most
 \[
- B_N=(d+1)L^d. \tag{11}
+ B_N=(d+1)L^d. \tag{12}
 \]
 Consequently modular grading certificates whose moduli have least common
 multiple greater than \(B_N\) imply exact PLR. This solves the unbounded

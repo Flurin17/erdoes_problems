@@ -66,29 +66,50 @@ number bound on nonzero atoms. Two fresh targeted audits found no error.
    c_*=2-2\rho(1+\sqrt e)-\log(1+\sqrt e)
    =0.828499\ldots .
    \]
-3. If \(m_N=N-|A_N|\), the Dirichlet argument gives
-   \(m_N+1\geq N^{0.227092\ldots-o(1)}\).
-4. The active-prime chain/smooth-number lemma strengthens this condition:
-   if \(m_N=o(N)\), then necessarily \(m_N=N^{1-o(1)}\).
+3. Every finite repetition-allowed PLR set satisfies the stronger bound
+   \[
+   N-|A_N|\geq cN/\log N
+   \]
+   for an absolute \(c>0\), by prime--cofactor overlap and multiplicative
+   energy. A fresh audit certified the proof.
+4. Earlier independent bounds include
+   \(m_N+1\geq N^{0.227092\ldots-o(1)}\) and the smooth-number
+   self-consistency inequality.
 5. Any finite bad set has a bounded circuit witness; modular certificates
    whose lcm exceeds the explicit determinant bound imply exact PLR.
 
 ### Route tournament
 
 1. **Finite uniform anti-concentration / robust prime-divisor model.**
-   Highest promise for a negative answer; must turn product-measure
-   anti-concentration into a bound for uniform \([1,N]\).
+   Product-measure transfer is false for moving prime supports. The strongest
+   surviving negative route is a multiscale cofactor-profile lemma combining
+   row penalties with cross-band additive relations.
 2. **Largest-prime/cofactor modal construction.** Only plausible positive
-   route; local greedy choice is rigorously capped at \(1/2\), so any success
-   needs globally non-greedy small-prime weights.
+   route. An exact Bellman identity is proved; the natural globally completed
+   single-threshold family cannot beat \(0.828499\ldots\) when its lower
+   cutoff is at least \(N^{1/4}\).
 3. **Multi-band weighted grading.** The single threshold achieves
-   \(0.828499\ldots\); perturbations confined above its threshold do not
-   improve it. Broad lower bands remain unresolved.
+   \(0.828499\ldots\). Exhaustive rational/binary/ternary finite grids at
+   \(N=100000\) found no improvement; moving \(N^{o(1)}\) bands remain open.
 4. **Top-slab/hypergraph deletion for distinct factors.** Unequal-cardinality
-   relations in a top slab must be long, but a sparse transversal bound is
-   missing.
+   relations have a fractional transversal of total \(O(N/\log N)\), but
+   sharp clustered circuits leave a cluster-aware integral-rounding gap.
 5. **Conditioned Euler/divisor-box measures.** Could strengthen the finite
-   obstruction if a sufficiently flat multiplicative measure is constructed.
+   Canonical power-Euler laws, positive mixtures, divisor boxes, and
+   two-sided-flat product laws are rigorously ruled out. An arbitrary
+   one-sided uniformly integrable product law remains a precise gap.
+
+### Reproducible finite computation
+
+- computational/modal_exact.py exactly computes the maximum additive level:
+  the complete table is certified for \(2\leq N\leq50\), with \(M(60)=39\).
+  Independent exhaustive subset/rank search agrees through \(N=14\).
+- computational/multiband_search.py exhaustively checked the recorded
+  three-/four-band and binary/ternary grids. At \(N=100000\), the best
+  threshold has \(80421\) elements; the best genuine multisegment candidate
+  has \(79612\).
+- Coordinator reruns reproduced the modal table and both exact rank checks
+  for the \(N=100000\) binary multiband search.
 
 ### Dead or sharply limited routes
 
@@ -98,11 +119,15 @@ number bound on nonzero atoms. Two fresh targeted audits found no error.
   relations.
 - The canonical local modal recursion chooses a nonzero weight at \(2\) and
   is capped at \(1/2\).
+- Independent-geometric prime models fail uniformly for moving supports:
+  the \(p>\sqrt N\) threshold has uniform mass \(\log2\) but product-model
+  mass \((\log2)/2\).
 
 ### Current bottleneck
 
 Decide whether an \(N\)-dependent rational completely additive function can
 have an exact nonzero level containing \(1-o(1)\) of \([1,N]\). Any positive
-answer must have exceptional size \(N^{1-o(1)}\); any negative answer needs a
-uniform finite anti-concentration mechanism. The distinct-factor variant has
-a separate sparse-transversal bottleneck.
+answer must delete at least \(cN/\log N\); any negative answer needs a
+stronger uniform finite anti-concentration or a proof that complete
+additivity cannot realize \(o(\log N)\) scale-color changes. The
+distinct-factor variant has a separate cluster-aware transversal bottleneck.

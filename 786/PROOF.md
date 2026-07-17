@@ -190,9 +190,96 @@ The standard fixed-\(u\) Dickman asymptotic now gives
 \]
 This still permits \(m_N=N/\log N\), so the finite question remains open.
 
+### Stronger finite theorem: \(m_N\gg N/\log N\)
+
+There is an absolute \(c>0\) such that every repetition-allowed PLR
+\(A\subset[1,N]\) satisfies
+\[
+ N-|A|\geq c\frac{N}{\log N}. \tag{11}
+\]
+
+To prove this, enlarge \(A\) to the full level
+\[
+ B=\{n\leq N:f(n)=1\},
+\]
+and write \(E=[1,N]\setminus B\), \(m=|E|\). It is enough to bound \(m\).
+
+For \(C_j=2^j\), define
+\[
+ P_j=\left\{p\text{ prime}:\frac{N}{2C_j}<p\leq\frac{N}{C_j}\right\},
+ \qquad K_j=[1,C_j],
+\]
+where \(0\leq j\leq J\) and \(C_J\) is the largest power of two at most
+\(\sqrt N/4\). Every product \(pk\), \(p\in P_j\), \(k\in K_j\), is at most
+\(N\). These products are globally distinct across all the rectangles:
+every participating prime exceeds \(2\sqrt N>C_J\), so
+\(pk=q\ell\) with \(p\neq q\) would force \(p\mid\ell<p\).
+
+Let \(R_j=|P_j|\), and let \(B_j\) count rectangle entries whose product is
+in \(E\). Then
+\[
+ \sum_jB_j\leq m. \tag{12}
+\]
+The prime number theorem in dyadic intervals gives an absolute \(c_0>0\)
+such that
+\[
+ R_jC_j\geq c_0\frac{N}{\log N} \tag{13}
+\]
+uniformly in \(j\).
+
+An elementary rectangle lemma will be used repeatedly. In any
+\(R\)-by-\(C\) prime--cofactor rectangle with \(D\) bad entries, choose a row
+with at most \(D/R\) bad entries and call its prime weight \(a\). Every good
+column in that row satisfies \(f(k)=1-a\); therefore
+\[
+ |\{k:f(k)\neq1-a\}|\leq D/R. \tag{14}
+\]
+
+Suppose \(m\leq\varepsilon N/\log N\). By (12)--(14), every rectangle has a
+prescribed cofactor value with at most
+\(\eta C_j\) exceptions, where \(\eta=\varepsilon/c_0\).
+For \(\eta<1/3\), the prescribed values in two adjacent nested intervals
+\(K_j\subset K_{j+1}\) agree: their exceptional subsets cover fewer than
+\(\eta C_j+2\eta C_j<C_j\) points of the overlap.
+
+At \(j=0\), the sole cofactor is \(1\). If \(\eta<1\), it is
+nonexceptional in (14), so \(0=f(1)=1-a_0\). Hence every prescribed
+cofactor value is zero. In particular
+\[
+ Z=\{k\leq C_J:f(k)=0\}
+ \quad\text{satisfies}\quad
+ |Z|\geq(1-\eta)C_J. \tag{15}
+\]
+
+Every product of two elements of \(Z\) is at most \(C_J^2\leq N\), has
+grading zero, and lies in \(E\). To bound the number of distinct products,
+let \(M=C_J\). The number of solutions
+\[
+ ab=cd,\qquad a,b,c,d\leq M,
+\]
+is at most \(2M^2(1+\log M)\): write
+\(a=gr,c=gs\), \((r,s)=1\), whence \(b=sh,d=rh\), and sum
+\(\lfloor M/\max(r,s)\rfloor^2\) over the at most \(2q\) pairs with
+\(\max(r,s)=q\). Cauchy--Schwarz and (15) now give
+\[
+ m\geq|Z\cdot Z|
+ \geq\frac{|Z|^4}{2M^2(1+\log M)}
+ \gg\frac{N}{\log N}. \tag{16}
+\]
+Fix \(\eta_0<1/3\), obtain the absolute implied constant in (16) with
+\(\eta\leq\eta_0\), and then choose \(\varepsilon>0\) smaller than both
+\(c_0\eta_0\) and that constant. This contradicts
+\(m\leq\varepsilon N/\log N\), proving (11).
+
+The order \(N/\log N\) is still \(o(N)\); the finite density-one question
+therefore remains open.
+
 ## Audit
 
 Two fresh agents independently certified the compound-Poisson/winding proof
 and the density/finite-exponent calculation. Separate agents certified an
 independent geometric-variable/Sperner proof of a weaker universal density
-gap. Audit details are in attempts/audits_infinite.md.
+gap. A further fresh audit certified every step of the overlap--energy proof
+of (11), including its global injectivity, uniform prime count, base
+rectangle, energy parametrization, and constant choices. Audit details are
+in attempts/audits_infinite.md and attempts/tournament/audit_overlap_energy.md.
