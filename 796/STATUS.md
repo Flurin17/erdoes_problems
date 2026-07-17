@@ -76,7 +76,9 @@ c=B_1+C_*.
 \]
 Four fresh audits found no unresolved mathematical error after one referee's
 signed-bound notation objection was repaired.  The verified result and all
-supporting artifacts are committed and pushed on `codex/796`.
+supporting artifacts are committed and pushed on `codex/796`.  The finite
+combinatorial core now also has a compiled Lean 4 formalization in `lean/`;
+the analytic and infinite-profile parts remain in the readable proof.
 
 ## Proved facts
 
@@ -192,6 +194,11 @@ not a prerequisite for the exact variational identification.
   signed $\ll$ notation where only a one-sided bound was true; it now states
   the required one-sided inequality explicitly.  Two final post-repair
   referees found no unresolved error.
+- `lean/Erdos796.lean` compiles with Lean 4.32.0 and contains no `sorry` or
+  axioms.  It formalizes representation cancellation, the cube product
+  identity, and native-decision certificates for all nine ordered
+  compatibility pairs among the three explicit finite cores.  This is a
+  finite-core supplement, not a formalization of the analytic asymptotic.
 
 ## Next actions
 

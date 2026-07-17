@@ -384,3 +384,15 @@ An explicit three-profile construction proves \(C_*\geq79/60\).
 - Explicit profile compatibility and finite values: independently checked by
   computational/profile_search.py; computation is not used for the general
   asymptotic.
+
+## 10. Lean-checked finite core
+
+`lean/Erdos796.lean` formalizes the strict representation convention and the
+cancellation lemma showing that distinct equal-product representations have
+disjoint endpoints.  It also checks the cube antipodal-product identity and
+all nine ordered compatibility pairs among the finite cores of the explicit
+profiles below 17.  The collision tables are evaluated through 225 by
+`native_decide`; a proved bounded-support theorem promotes those finite
+checks to all product values.  The files compile with Lean 4.32.0 and use no
+external packages.  The large-prime tail argument and analytic asymptotic
+are intentionally outside the scope of this formalization.
