@@ -99,10 +99,9 @@ Active; partial solution.  Phase 0, the 29-assignment constructive wave, and
 the six-route tournament are complete.  Both almost-all assertions are proved
 and have passed two fresh adversarial audits each.  The exact optimization,
 literal-unit branch, a running-max counterexample, an oscillatory asymptotic
-for `H`, and a sharp maximal-order limsup are also proved.  Four substantive
-questions remain open locally: the full maximal-order limit, eventual
-running-max equality, the nonunit equality-count asymptotic, and the uniform
-`H(x)<<x log_4 x` bound.
+for `H`, and the full maximal-order asymptotic are also proved.  Three
+substantive questions remain open locally: eventual running-max equality, the
+nonunit equality-count asymptotic, and the uniform `H(x)<<x log_4 x` bound.
 
 ### Proved facts
 
@@ -120,10 +119,14 @@ running-max equality, the nonunit equality-count asymptotic, and the uniform
   expansion in `attempts/H.md`.
 - Arbitrarily large `x` satisfy `H(x)>>x log_4 x`, so the proposed bound is
   order-sharp if true and no constant-linear pointwise asymptotic exists.
-- `max_{n<=x}f(n)<=(1+o(1))x log x/log_2 x`, and the normalized limsup is
-  exactly `1` by the averaged prime-power crowding construction.
+- The Fourier--Vaughan uniform construction proves
+  `max_{n<=x}f(n)~x log x/log_2 x`; the same asymptotic holds for the running
+  maximum of nonunit `F` by `f<=F<=n omega(n)`.
 - `F(210)>=442>383=max_{m<=210}f(m)`, disproving running-max equality for
   all cutoffs.
+- In the nonunit equality count `E(x)`, simultaneous phase resonance gives
+  `E(x)>>x log_3 x/log x` on an unbounded sequence, hence
+  `limsup E(x)log x/x=infinity`; no fixed `C x/log x` asymptotic is possible.
 
 ### Counterexamples / dead routes
 
@@ -134,7 +137,10 @@ running-max equality, the nonunit equality-count asymptotic, and the uniform
 - A proposed full maximal-order proof used the Selberg integral
   `J(X,h)<<Xh log^2X` at `h=X^{o(1)}`.  Three independent audits identified
   this as unavailable unconditionally (it is available under RH), so the
-  route is retained only as conditional and no full limit is claimed.
+  route is retained only as a failed conditional alternative; it is not used
+  in the proved full limit.
+- The failed Selberg route was superseded by the unconditional nonlinear
+  prime exponential-sum argument in `attempts/extremal_uniform.md`.
 - Ordinary Brun--Titchmarsh or a naive large sieve cannot control the
   medium-prime phase intervals in the `H` problem once they become shorter
   than one; the first missing lemma is recorded below.
@@ -144,24 +150,25 @@ running-max equality, the nonunit equality-count asymptotic, and the uniform
 1. **Complete:** almost-all `F`, via logarithmic prime bands, a uniform
    shrinking-target lemma, interval-sieve transference, and bipartite matching.
 2. **Complete:** almost-all `f`, via `H(x)<<x log_3 x` and Markov.
-3. **Strong partial:** `H`, with an explicit pointwise oscillatory asymptotic,
+3. **Complete:** extremal `f`, via a uniform Fourier--Vaughan aligned-prime
+   reservoir and product padding.
+4. **Strong partial:** `H`, with an explicit pointwise oscillatory asymptotic,
    an order-sharp subsequence lower bound, and one isolated phase lemma.
-4. **Strong partial:** extremal `f`, with the matching upper bound and sharp
-   limsup; full uniform lower bound remains open.
-5. **Partial:** equality count, with exact all-subsets and `omega<=3`
-   classifications but no large-core tail theorem.
+5. **Partial:** equality count, with exact small-support profiles and a proved
+   unbounded resonant envelope, but no matching global upper/profile formula.
 6. **Partial:** running maxima, with “all `x`” disproved at `210`; eventual
    equality remains open.
 
 ### Current bottleneck
 
 For `H`, prove
-`sum_{log_2 x<p<(log x)^2}u_p(x)e^{-u_p(x)}/p << log_4 x`.
-For extremal `f`, prove a uniform prime-power crowding lemma at every prescribed
-height `T=log x` without an RH-level short-interval input.  For equality
-counting, prove a uniform large-core/largest-prime tail theorem.
+`sum_{log log x<p<log x/log log x}u_p(x)e^{-u_p(x)}/p << log_4 x`;
+all complementary prime ranges are already controlled.
+For equality counting, determine a matching upper envelope and a valid moving
+profile despite the proved large-core resonance spikes.  For running maxima,
+decide whether bad strict `F`-records recur infinitely often.
 
 ### Next assignments
 
-Commit and push the audited partial solution.  Subsequent work should assign
-agents directly to the three bottleneck lemmas above.
+Commit and push the maximal-order proof and equality-resonance advance.
+Subsequent work should assign agents directly to the three bottlenecks above.

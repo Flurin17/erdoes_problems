@@ -33,7 +33,7 @@ Together with (1),
 
 `limsup_{x->infinity} max_{n<=x}f(n)/(x log x/log log x)=1`.    (4)
 
-## Full limit: precise open node
+## Historical route (superseded)
 
 The averaging in (2) finds a favorable `t` only somewhere in a long interval.
 Even an additive `polylog(t)` loss in `t=log x` is a fatal multiplicative
@@ -50,6 +50,6 @@ that this is not a standard unconditional theorem in the needed range; it is
 available under RH.  Conditional on it, root intervals and integer padding do
 give the full constant `1`, but this is not an unconditional solution.
 
-Thus the source's full maximal-order asymptotic remains open locally; (1) and
-(4) are the strongest proved statements here.
-
+This averaging route by itself proved only the limsup.  The separate uniform
+Fourier--Vaughan construction in `extremal_uniform.md` has since closed the
+full maximal-order asymptotic unconditionally.

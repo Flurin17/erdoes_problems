@@ -33,3 +33,56 @@ requires a uniform tail theorem for large cores `m` and for
 `P^+(n)<=sqrt(n)`.  No such theorem is proved.  Restricted small-support
 asymptotics cannot be promoted to the requested full count without it.
 
+## Resonant spikes rule out a constant `x/log x` asymptotic
+
+Let `E(x)=#{n<x:f(n)=F(n)}` under the nonunit convention.  There is an
+unbounded sequence of `x` for which
+
+`E(x) >> x log_3 x/log x`.                                      (4)
+
+Proof.  Fix a small `a>0`, and for `p|m` put
+`d_p(m)=p^{floor(log_p m)}`.  Call `m<=z` safe when
+
+`d_p(m)<=e^{-a}m` for every `p|m`.
+
+For fixed `p`, unsafe multiples lie in the intervals
+`[p^k,e^a p^k)`.  Their harmonic mass is at most
+
+`1/p + a log z/(p log p)+1/(p(p-1))`.
+
+Since `sum_p1/(p log p)<infinity`, choose `a` so small that summing these
+bounds leaves
+
+`sum_{m<=z, m safe}1/m >> log z`.                               (5)
+
+Use simultaneous Dirichlet approximation to choose a log-height `T_0` whose
+distance from a multiple of `log p` is at most `a/8` for every `p<=z`.
+This may be done with
+
+`log T_0=O(z log log z/log z)`.
+
+On a fixed one-sided slab immediately after `T_0`, every `p<=z` satisfies
+
+`p^{floor(t/log p)}/e^t >= e^{-a/2}>e^{-a}>1/2`.                (6)
+
+For a safe core `m<=z` and a prime `P>m`, put `n=mP` with `log n` in this
+slab.  Since `P^2>n`, a block containing `P` and core support `C` has value
+`P M_m(C)`.  If `|C|=1`, safety and (6) dominate it; if `|C|>=2`, the two
+corresponding singleton weights already sum to more than `n`.  Core-only
+blocks of size at least two are handled in the same way.  Hence every subset
+inequality holds and `f(n)=F(n)`.
+
+For each safe `m`, PNT counts `>>x/(m log x)` eligible outer primes in the
+slab; the representations are disjoint because `P` is the unique largest
+prime.  Summing (5) gives `E(x)>>x log z/log x`.  The bound on `T_0` implies
+`log_3 x<=log z+O(1)`, proving (4).
+
+Consequently
+
+`limsup_{x->infinity} E(x)log x/x=infinity`.                    (7)
+
+Thus no asymptotic `E(x)~C x/log x` with fixed finite `C` is possible.  The
+same construction survives after excluding every fixed set of cores or every
+fixed bounded support size; a uniform large-core tail is therefore false,
+not merely unproved.  A matching upper envelope or a complete moving-profile
+asymptotic remains open.

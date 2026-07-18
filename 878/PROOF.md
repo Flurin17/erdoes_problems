@@ -181,18 +181,92 @@ prime gives bounds at most `231`.  One-prime support contributes at most
 equality of the two running maxima is false “for all `x`”.  Eventual equality
 remains open.
 
+## The maximal order of `f`
+
+As `x -> infinity`,
+
+`max_{n<=x}f(n) ~ x log x/log log x`.                           (10)
+
+The lower bound uses a uniform supply of primes whose logarithmic phases are
+near zero.  Put `T=log x`, `L=log T`, `Y=T L^2`, and `R=L^4`.  The key
+analytic lemma is, uniformly for `1<=|h|<=R`,
+
+`sum_{Y<m<=2Y}Lambda(m)e(hT/log m)
+ <<Y^(35/36)(log Y)^C`.                                         (11)
+
+Here `e(t)=exp(2*pi*i*t)`.  To prove (11), apply Vaughan's identity with
+`U=V=Y^(1/6)`.  The Type I outer variable is at most `UV=Y^(1/3)`; the
+second-derivative estimate, with
+`Phi=hT/(log Y)^2`, bounds each inner sum by
+`sqrt(Phi)+N/sqrt(Phi)`, giving `O(Y^(5/6)(log Y)^C)` in total.
+
+For Type II, orient `MN~Y` so
+`Y^(1/6)<=M<=sqrt(Y)<=N`.  Cauchy followed by the standard shift inequality
+reduces correlations to the phase
+
+`g(m)=hT/log(m(n+r))-hT/log(mn)`.
+
+With `lambda=|h|T/[Y(log Y)^3]`, direct differentiation gives fixed sign and
+`|g''(m)|asymp lambda*r/M`.  The second-derivative estimate and the
+divisor-bounded coefficient second moments yield
+
+`|B|/Y <<(log Y)^C[H^(-1/2)+(lambda H/M)^(1/4)
+                         +(lambda H M)^(-1/4)]`.
+
+Taking `H=floor((M/lambda)^(1/3))` is legal and gives the claimed power
+saving.  Three independent analytic audits, followed by two fresh referees,
+checked the Vaughan ranges, coefficient normalization, and derivative step.
+
+Apply Vaaler's minorant of degree `R` to
+
+`{T/log p} in [L^(-2),3L^(-2)]`.
+
+The PNT and (11) give aligned prime log-weight `(2+o(1))T`: the truncation
+error is `Y/R=T/L^2`, the nonzero Fourier modes are `o(T)`, and higher prime
+powers contribute `o(T)`.  Hence there are more than
+`(2-o(1))T/log(2Y)` such primes.
+
+Choose
+
+`k=floor((T-4log L)/log(2Y))~T/L`
+
+of them, let `Q` be their product, and put `n=Q floor(x/Q)`.  Then
+`Q<=xL^(-4)` and `n/x>=1-L^(-4)`.  If
+`m=floor(T/log p)`, alignment gives
+
+`x exp(-3log(2Y)/L^2)<=p^m<=x exp(-log Y/L^2)<n<p^(m+1)`.
+
+Thus every selected prime divides `n`, its defining exponent remains `m`,
+and its summand is `(1-o(1))x`.  Therefore
+
+`f(n)>=(1-o(1))kx=(1-o(1))x log x/log log x`.
+
+For the upper bound, `f(n)<=n omega(n)` and the PNT gives
+`max_{n<=x}omega(n)~log x/log log x`.  This proves (10).  A fully expanded
+proof of (11), Vaaler extraction, and padding is in
+`attempts/extremal_uniform.md`.
+
+The same leading asymptotic holds for the nonunit running maximum of `F`:
+the singleton partition gives `F(n)>=f(n)`, while
+`F(n)<=n omega(n)`.  Hence
+
+`max_{n<=x}F(n) ~ x log x/log log x`.
+
+This asymptotic equality does not imply exact equality of the two integer-
+valued running maxima; (9) already disproves exact equality for all cutoffs.
+
 ## An asymptotic formula for `H(x)`
 
 For `p^2<=x`, define `ell_p=floor(log_p x)`,
 `theta_p={log_p x}`, and
 
 `M(x)=sum_{p^2<=x}log p*((p^{ell_p-1}-p)/(p-1)
-                         +p^{ell_p-1}theta_p)`.                 (10)
+                         +p^{ell_p-1}theta_p)`.                 (12)
 
 Then, for every fixed integer `N>=1`,
 
 `H(x)=M(x)+x sum_{r=0}^{N-1}C_r/(log x)^{r+1}
-       +O_N(x/(log x)^{N+1})`,                                 (11)
+       +O_N(x/(log x)^{N+1})`,                                 (13)
 
 where
 
@@ -200,31 +274,31 @@ where
 
 In particular,
 
-`H(x)=M(x)+zeta(2)x/log x+O(x/log^2 x)`.                        (12)
+`H(x)=M(x)+zeta(2)x/log x+O(x/log^2 x)`.                        (14)
 
 Proof.  In the exact finite identity, separate the block with
 `floor(log_p m)=0`.  It equals
 
 `A_0=sum_{m^2<x}(pi_<(x/m)-pi(m))/m
-    =sum_{m<sqrt(x)}pi(x/m)/m+O(sqrt(x))`.                      (13)
+    =sum_{m<sqrt(x)}pi(x/m)/m+O(sqrt(x))`.                      (15)
 
 For `j>=1`, the block `p^j<=m<p^{j+1}` is nonempty precisely when
 `p^{j+1}<x`; harmonic summation gives
 
 `p^j sum_{p^j<=m<min(p^{j+1},x/p)}1/m
- =p^j min(log p,log(x/p^{j+1}))+O(1)`.                         (14)
+ =p^j min(log p,log(x/p^{j+1}))+O(1)`.                         (16)
 
 The sum of the errors is `O(sqrt(x)/log x)`.  Geometric summation of the
-main terms in (14) is exactly (10), with the correct strict endpoint when
+main terms in (16) is exactly (12), with the correct strict endpoint when
 `theta_p=0`.  Finally use, uniformly for `y>=sqrt(x)`, the standard fixed-
 order PNT expansion
 
 `pi(y)=y sum_{k<N}k!/(log y)^{k+1}+O_N(y/(log y)^{N+1})`.
 
-Taylor-expand `(log x-log m)^{-k-1}` in (13).  Since
+Taylor-expand `(log x-log m)^{-k-1}` in (15).  Since
 `sum_m(log m)^s/m^2=(-1)^s zeta^{(s)}(2)`, the coefficient of
 `(log x)^{-r-1}` is exactly `C_r`; all truncated tails and Taylor errors are
-`O_N(x/(log x)^{N+1})`.  This proves (11).  Two fresh referees independently
+`O_N(x/(log x)^{N+1})`.  This proves (13).  Two fresh referees independently
 checked the endpoints, constants, and uniform remainder.
 
 The oscillatory main term cannot be replaced by a constant multiple of `x`:
@@ -237,8 +311,7 @@ upper bound remains open.
 ## Honest global status
 
 The two almost-all assertions, the exact optimization, the literal-unit
-equality count, the asymptotic formula (11), and the counterexample to
-running-max equality for all `x` are proved.  The full maximal-order limit,
-eventual running-max equality, the nonunit equality-counting asymptotic, and
-the proposed `H(x)<<x log_4 x` remain open locally.
-`attempts/extremal_f.md` proves the sharp limsup for maximal `f`.
+equality count, the maximal-order asymptotic, the asymptotic formula (13), and
+the counterexample to running-max equality for all `x` are proved.  Eventual
+running-max equality, the nonunit equality-counting asymptotic, and the
+proposed `H(x)<<x log_4 x` remain open locally.

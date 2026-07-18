@@ -67,12 +67,18 @@ Thus the proposed upper bound is equivalent, up to `O(x)`, to
 `sum_{p^2<=x}u_p e^{-u_p}/p << log_4 x`.                         (8)
 
 The proof in `almost_all_f.md` gives unconditionally
-`H(x)<<x(1+log_3 x)`.  A sufficient missing statement is
+`H(x)<<x(1+log_3 x)`.  Write `L=log x`.  A refined root-cell calculation
+shows that primes `p>=L/log L` contribute only `O(1)` (indeed the long-cell
+part is `O(log log L/log L)`).  Primes `p<=log L` cost exactly the permitted
+`O(log_4 x)` by Mertens.  Thus a sufficient missing statement is the sharper
 
-`sum_{log_2 x<p<(log x)^2}u_p e^{-u_p}/p << log_4 x`.            (9)
+`sum_{log L<p<L/log L}u_p e^{-u_p}/p << log_4 x`.                (9)
 
-The intervals in (9) can be shorter than one; direct Brun--Titchmarsh and
-naive large-sieve bounds do not resolve them.
+Every corresponding fixed-exponent root interval has length below one.
+Simultaneous Dirichlet approximation can make an entire dyadic prime block
+resonate, so no uniform extra logarithm per block is true.  The remaining
+problem requires a cross-scale discrepancy estimate, not ordinary interval
+packing, Brun--Titchmarsh, or a blockwise large sieve.
 
 ## The quadruple logarithm is necessary
 
