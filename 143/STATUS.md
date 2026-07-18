@@ -172,3 +172,63 @@ proof.
 explicit questions; no connective or equivalence is asserted. The limit in
 $n$ is equivalent along real or integer cutoffs by monotonicity, but the
 verbatim strict cutoff $x<n$ is used throughout.
+
+### Second focused wave (2026-07-18)
+
+#### Proved refinements
+
+- The uniform $Q$-thick estimate remains open.
+- For the target weight $1/(x\log x)$, continuum prime optimality is proved
+  through cutoff $10$; this is not merely a finite-grid computation.
+- For $Q=2$, the admissible set $\{7/2,5,6,8,9\}$ refutes crystallization for
+  arbitrary decreasing weights, but it does not refute crystallization for
+  the target weight.
+- Far-side floor/ceiling rounding extracts a primitive subset carrying an
+  $\Omega(1/\log X)$ fraction of the target weight.
+- The exact static capacity of a multiplier-indexed tube family equals the
+  divisibility width of the multiplier set.
+- A primitive set can place $\gg1/R$ harmonic mass in each of $R$ arbitrarily
+  widely separated shells. This eliminates fixed-arity support-only
+  obstructions, not all finite-shell quantitative inequalities.
+- An explicit admissible three-point family has no primitive floor/ceiling
+  labeling. Its cheapest repair lies at quartic scale and has summable target
+  weight across ordinary repetitions.
+
+#### Failed routes
+
+- Crystallization cannot be asserted for arbitrary decreasing objectives.
+- Fixed endpoint rounding can be globally inconsistent, and the surviving
+  far-side rounding argument loses a logarithmic factor.
+- Static tube-chain, prime-filter, rough-multiplier, and separable LP
+  estimates that use only one target stop at divisibility width.
+- Fixed-arity shell support/zero-pattern obstructions cannot supply the
+  required global packing control.
+
+#### Computation
+
+The exact harmonic and dyadic-log computations for
+$Q\in\{1,2,3,4\}$ at $X\in\{10,14\}$ and for
+$Q\in\{2,4,6,8\}$ at $X=18$, including a separately optimized
+forced-off-lattice comparison, remain strictly optimized on $Q\mathbb N$.
+The reproduction commands are recorded in `computational/README.md` and are:
+
+```sh
+python3 143/computational/qthick_growth.py \
+  --q-values 1,2,3,4 --x-values 10,14 \
+  --objectives both --dp-limit 32 --compact
+
+python3 143/computational/qthick_growth.py \
+  --q-values 2,4,6,8 --x-values 18 \
+  --objectives both --dp-limit 32 --compact
+```
+
+These exact finite surrogate computations do not evaluate the transcendental
+target weight and are not a proof of the uniform estimate.
+
+#### Sharpened bottleneck
+
+Prove a mass-sensitive cumulative carrier-conditioned inequality, or prove a
+bounded-weight deletion lemma strong enough to permit primitive endpoint
+rounding without the logarithmic loss. The three-point obstruction shows that
+such a lemma must charge complete implication cycles rather than pairwise
+conflicts. The main claim remains open.

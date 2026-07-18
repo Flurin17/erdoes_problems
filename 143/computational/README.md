@@ -39,3 +39,39 @@ evidence of convergence for an infinite compatible sequence.  The exact
 model is intended to falsify proposed inequalities and to generate candidates
 for the uniform \(Q\)-thick estimate isolated in
 `../attempts/rational_primitive.md`.
+
+## Larger exact growth diagnostics
+
+`qthick_growth.py` uses the compatibility graph rather than the conflict
+graph and solves exact maximum-weight clique by branch and bound. A proper
+weighted coloring supplies an integer upper bound at every node. Each row also
+solves two constrained problems: all numerators divisible by $Q$, and at least
+one numerator not divisible by $Q$. Small rows are independently checked by
+the include/exclude dynamic program.
+
+Reproduction commands used on 2026-07-17 and rerun on 2026-07-18:
+
+```sh
+python3 143/computational/qthick_growth.py \
+  --q-values 1,2,3,4 --x-values 10,14 \
+  --objectives both --dp-limit 32 --compact
+
+python3 143/computational/qthick_growth.py \
+  --q-values 2,4,6,8 --x-values 18 \
+  --objectives both --dp-limit 32 --compact
+```
+
+The first command took below $0.04$ seconds per row and the second below
+$2.7$ seconds per row on this workspace. For
+$Q\in\{1,2,3,4\}$ at $X\in\{10,14\}$ and
+$Q\in\{2,4,6,8\}$ at $X=18$, the harmonic and dyadic-log optima were
+attained on $Q\mathbb N$; moreover, the separately optimized
+forced-off-lattice value was strictly smaller. At $X=18$ the harmonic
+optimum was $716167/510510$ and the dyadic-log optimum $119393/204204$,
+independently of the tested $Q$.
+
+This is exact finite evidence for the two rational surrogate objectives, not
+a proof of crystallization and not a computation of the transcendental
+$1/(x\log x)$ objective. A separate exact construction in
+`../attempts/qthick_bottleneck.md` shows that crystallization already fails
+for some other strictly decreasing weights.

@@ -282,3 +282,44 @@ identity does force repeated pairwise overlaps onto one rational slope; the
 open step is to charge these primitive slope labels across many source
 scales. See `attempts/resonance_depletion.md` and
 `attempts/tube_charging.md`.
+
+## 7. Focused second wave on the $Q$-thick reduction
+
+The uniform $Q$-thick estimate remains neither proved nor refuted. The
+following refinements are now established.
+
+1. For the actual weight $f(x)=1/(x\log x)$, the prime set is the unique
+   maximizer among all finite real admissible $A\subset[2,10]$. This is a
+   continuum theorem, hence simultaneous over every rational grid. Its proof
+   uses the exact safe bands of the least point and is recorded in
+   `attempts/qthick_bottleneck.md`.
+2. Crystallization is false for a general decreasing objective. The
+   $2$-grid set $\{7/2,5,6,8,9\}$ beats every primitive integer subset of
+   $[2,9]$ for $g(x)=1/(x+5)$, by the exact gap $1/7956$. It does not beat
+   the prime set for either target in Problem 143.
+3. Far-side floor/ceiling rounding plus logarithmic interval sampling extracts
+   a primitive rounded subset carrying an $\Omega(1/\log X)$ fraction of the
+   target weight below $X$. Fixed endpoint rounding can be globally
+   inconsistent, so removing this logarithmic loss requires a mass-sensitive
+   treatment of implication cycles.
+4. A local tube family indexed by multipliers $F$ has exact admissible
+   capacity equal to the divisibility width of $F$; common-center reciprocal
+   blocks attain it. Consequently a static one-target incidence estimate
+   cannot improve on divisibility width.
+5. For every fixed $R$, a primitive integer set can carry at least
+   $3/(256R)$ harmonic mass in each of $R$ arbitrarily widely separated
+   narrow shells. This rules out a fixed-arity support-only obstruction, but
+   not every quantitative inequality involving finitely many shells.
+6. For every integer $a\ge5$, the admissible three-point set
+   \[
+   \{a+1/2,\ a^2-1/2,\ (a^2-1)^2-1/2\}
+   \]
+   has no primitive floor/ceiling labeling. Its cheapest deletion has weight
+   $\asymp1/(a^4\log a)$, so this gadget does not refute bounded-weight
+   deletion; it shows that any proof must charge whole implication cycles.
+
+Exact computations for $Q\in\{1,2,3,4\}$ at cutoffs $10,14$ and for
+$Q\in\{2,4,6,8\}$ at cutoff $18$ found that the harmonic and dyadic-log
+optima, including a separately optimized forced-off-lattice comparison,
+remain strictly crystallized on $Q\mathbb N$. This is finite evidence only
+and does not evaluate the transcendental target weight.
