@@ -14,7 +14,7 @@ and hence the maximum block cardinality \(f_{\rm card}(n)=f_{\rm span}(n)+1\). P
 - Standard Farey convention used for normalization: reduced fractions in \([0,1]\) with denominator at most \(n\), ordered increasingly, including \(0/1\) and \(1/1\); alternative endpoint conventions will be compared.
 - For \(i<j\), incompatibility is exactly \(a_i<a_j\) together with \(b_i>b_j\). Thus admissible blocks are exactly angularly consecutive sets of primitive points \((a_i,b_i)\) forming a chain in the coordinatewise product order. They need not have monotone numerator or denominator sequences; the initially suggested denominator-only reduction is false.
 - Consecutive Farey neighbors satisfy \(a_{i+1}b_i-a_i b_{i+1}=1\) and the denominator recurrence \(b_{i+1}=\lfloor(n+b_{i-1})/b_i\rfloor b_i-b_{i-1}\).
-- All facts used in the current partial theorem are proved in `NOTES.md` or `PROOF.md`; unclosed variational/localization steps remain in `attempts/` and are not promoted as theorems.
+- The complete proof is in `PROOF.md`. Route-specific dead ends and the former localization bottleneck remain preserved in `attempts/`.
 
 ## Constraints
 
@@ -54,6 +54,7 @@ Full completion requires: (1) every quantifier and convention in the verbatim st
 - For \(F_4\), the intended span is \(4\) and literal-universal span is \(2\).
 - The interval \([(m-1)/m,(3m-2)/(3m-1)]\), where \(m=\lceil n/5\rceil\), is admissible and has exact cardinality \(n+2\lfloor(n+1)/2\rfloor-\lfloor n/3\rfloor-3\lceil n/5\rceil\) for \(n\ge16\). Hence \(E_n\ge(16/15)n+O(1)\).
 - Every product-chain block has span at most \(2n-2\), by the strictly increasing integer rank \(a+b\). Thus \(E_n=\Theta(n)\) unconditionally.
+- The minimum-denominator trichotomy proves the matching upper bound: bounded minimum denominator gives at most \(n+o(n)\); \(q\to\infty,q=o(n)\) gives at most \((6/\pi^2+o(1))n\); and \(q/n\to\alpha>0\) gives at most \((16/15+o(1))n\) by the finite cusp envelope. Therefore \(E_n=(16/15+o(1))n\).
 
 ### Candidate constants and counterexamples
 
@@ -84,14 +85,23 @@ Distilled routes are under `attempts/`; reproducible searches are under `computa
 
 ### Current bottleneck
 
-Prove the uniform global cusp-envelope lemma: a compatible block with growing defect/transverse scale has at most \((16/15+o(1))n\) terms. The bounded-defect model and explicit lower construction are closed. The hard regimes are interior linear-scale strips and growing-denominator Stern--Brocot fans; the simplest minimum-denominator localization shortcut has an explicit counterexample.
+None in the mathematical dependency graph. The former growing-layer gap is closed by the minimum-denominator trichotomy and primitive-density packing.
 
 ### Next assignments
 
-1. Bound growing-denominator Stern--Brocot fans uniformly, using their exact two-parameter row model.
-2. Certify the bounded \((r,s,J)\) cusp-envelope optimization exactly and combine it with the growing-fan estimate.
-3. After a complete upper proof exists, launch fresh adversarial audits on quantifiers, endpoints, parity, uniform errors, and the verbatim statement.
+None. The mathematical dependency graph and required adversarial audits are complete.
+
+### Adversarial audit ledger
+
+- **Density packing:** certified after replacing a nonuniform short-box sentence by a fixed macroscopic-mesh/two-limit argument and normalizing the left-parent determinant sign.
+- **Finite cusp envelope:** certified after adding the \(J=2\) and \(\alpha=1\) cells; the unique equality parameters are \((r,s,J,\alpha,\beta)=(1,1,4,1/5,2/5)\).
+- **Bounded minimum denominator:** certified after repairing the odd-\(K\) edge split.
+- **Quantifiers/endpoints:** certified after branching the \(q=1\) endpoints explicitly. Span/cardinality and endpoint deletion conventions agree with `PROBLEM.md`.
 
 ## State
 
-Partial locally. The rigorous global theorem currently proved is \((16/15)n+O(1)\le E_n\le2n-2\). The candidate sharp asymptotic \(E_n=(16/15+o(1))n\) remains unproved globally. No completion audit has been launched because the cusp-envelope dependency remains open.
+Complete locally. Under the intended longest-block span convention,
+\[
+E_n=\left(\frac{16}{15}+o(1)\right)n.
+\]
+Cardinality is \(E_n+1\), and endpoint variants differ by at most one. The literal universal reading is the distinct first-bad-gap quantity \(U_n=\delta_n-1\), with the bounds recorded in `NOTES.md` and `PROOF.md`.
