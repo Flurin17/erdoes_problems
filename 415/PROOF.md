@@ -159,6 +159,12 @@ Also
 Equations (8)--(10) show, for adjacent ranks, that
 \[
 h(m+\sigma(r))-h(m+\sigma(r+1))
+>\delta-\frac1{K-1}-\frac\delta4>\frac\delta4
+\]
+for all sufficiently large $k$, whereas the absolute value of the logarithmic
+shift ratio in (10) is less than $\delta/4$.  In particular,
+\[
+h(m+\sigma(r))-h(m+\sigma(r+1))
 >\log\frac{m+\sigma(r)}{m+\sigma(r+1)}.
 \]
 This is exactly
@@ -221,7 +227,7 @@ By Lemma 1 applied at $n^k$,
 \[
 S=h(D)\le H(n^k)=\log_3(n^k)+\gamma+o(1). \tag{18}
 \]
-The lower bound (16) itself makes $\log_2n$ dominate $\log k$, so
+Together, (16)--(18) make $\log_2n$ dominate $\log k$, so
 $\log_3(n^k)=\log_3n+o(1)$.  Equations (16)--(18) give the lower bound in
 (1).  This obstruction applies to every possible construction.
 

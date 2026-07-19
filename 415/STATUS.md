@@ -13,6 +13,12 @@ $\log_3n$ law.  Also finalize the $k=4$ counterexample to decreasing finite
 extremality and the fixed-$k$ frequency theorem/counterexample for the natural
 order.
 
+The current finalization target is a faithful Lean 4 formalization of the
+normalized statement and proved results: no proof placeholders, no
+problem-specific assumptions hidden as declarations, a reproducible build,
+and an explicit dependency report. The formal theorem must not be weakened to
+a finite or conditional surrogate for the asymptotic claim.
+
 ## Context
 
 - Authoritative input: the `Verbatim statement` in `PROBLEM.md`.
@@ -86,6 +92,9 @@ order.
    clearly labeled complete, conditional, or partial.
 6. Coherent mathematical milestones committed and pushed without including
    unrelated user changes.
+7. A pinned Lean/mathlib project with the exact normalized definitions, the
+   full main theorem, the finite counterexample certificate, build commands,
+   dependency output, theorem-to-source correspondence, and AI-use disclosure.
 
 ## Done when
 
@@ -98,12 +107,17 @@ questions require their own rigorous proofs or counterexamples under explicit
 definitions.  All computation used as a certificate must be reproducible, and
 the final accurate state must be committed and pushed.
 
+For the current finalization run, completion additionally requires `lake
+build`, a clean scan for proof placeholders and custom result declarations,
+recorded dependency output for every advertised theorem, exact version pins,
+and a successful push of the current branch.
+
 ## State
 
-Mathematical result complete locally.  `PROOF.md` is dependency-complete and
-the repaired main proof has passed multiple fresh adversarial audits.  The
-remaining workflow issue is external: the environment rejected the requested
-remote push because the destination is not established as trusted.
+Mathematical result complete locally; formalization and submission packaging
+are active. `PROOF.md` is dependency-complete and the repaired main proof has
+passed multiple fresh adversarial audits. The user has now explicitly
+authorized pushing the finalized current branch after review.
 
 ### Proved normalization facts
 
