@@ -33,12 +33,64 @@ requires a uniform tail theorem for large cores `m` and for
 `P^+(n)<=sqrt(n)`.  No such theorem is proved.  Restricted small-support
 asymptotics cannot be promoted to the requested full count without it.
 
+There is nevertheless a global unconditional ceiling.  For `n>1`, equality
+implies `f(n)=F(n)>=n`, because the one-term family `{n}` is admissible.
+Consequently
+
+`E(x)<=1+sum_{1<n<x}f(n)/n=1+H(x)<<x log_3 x`.                  (2)
+
+This is much larger than the resonant lower envelope below, but it is the
+strongest proved uniform upper bound in this route.
+
+## Exact largest-prime reduction
+
+Let `n=mP`, where `P>m` is prime, let `S=P(m)`, and write
+`Q_p=p^{floor(log_p(mP))}`.  Since `P^2>mP`, for every nonempty `C subset S`,
+
+`M_{mP}(C union {P})=P M_m(C)`.
+
+The subset criterion (1) therefore gives the exact equivalence
+
+`f(mP)=F(mP)` iff, for every nonempty `C subset S`,
+
+`M_{mP}(C)<=sum_{p in C}Q_p` and
+`P(M_m(C)-1)<=sum_{p in C}Q_p`.                                (3)
+
+In particular, for `p|m` and `r_p=p^{floor(log_p m)}`, the singleton
+condition forces
+
+`P(r_p-1)<=Q_p`.
+
+On a phase with `Q_p=p^k`, this confines the outer prime to the explicit
+interval
+
+`p^k/m <= P <= p^k/(r_p-1)`.                                  (4)
+
+Thus each core prime supplies a union of narrow prime-power windows, and all
+such window conditions must hold simultaneously.  The core-only inequalities
+in (3) are independent: examples above show that neither singleton nor pair
+conditions alone suffice.
+
+Some of the large-core tail can be disposed of without these phase gates.  If
+`P^+(m)<=y=log_2 x`, then Chebyshev's prime bound and `m<sqrt(x)` give
+
+`#{mP<x:P>m, P^+(m)<=y}
+ << x/log x * sum_{P^+(m)<=y}1/m
+ << x log y/log x
+ =  x log_3 x/log x`.                                         (5)
+
+Here the Euler product and Mertens bound the harmonic sum by `O(log y)`.
+The unresolved large-prime part has a rough core and must exploit the
+simultaneous windows (4).  The complementary balanced layer
+`P^+(n)<=sqrt(n)` is nonempty and cannot be discarded by a largest-prime
+argument.
+
 ## Resonant spikes rule out a constant `x/log x` asymptotic
 
 Let `E(x)=#{n<x:f(n)=F(n)}` under the nonunit convention.  There is an
 unbounded sequence of `x` for which
 
-`E(x) >> x log_3 x/log x`.                                      (4)
+`E(x) >> x log_3 x/log x`.                                      (6)
 
 Proof.  Fix a small `a>0`, and for `p|m` put
 `d_p(m)=p^{floor(log_p m)}`.  Call `m<=z` safe when
@@ -53,7 +105,7 @@ For fixed `p`, unsafe multiples lie in the intervals
 Since `sum_p1/(p log p)<infinity`, choose `a` so small that summing these
 bounds leaves
 
-`sum_{m<=z, m safe}1/m >> log z`.                               (5)
+`sum_{m<=z, m safe}1/m >> log z`.                               (7)
 
 Use simultaneous Dirichlet approximation to choose a log-height `T_0` whose
 distance from a multiple of `log p` is at most `a/8` for every `p<=z`.
@@ -63,7 +115,7 @@ This may be done with
 
 On a fixed one-sided slab immediately after `T_0`, every `p<=z` satisfies
 
-`p^{floor(t/log p)}/e^t >= e^{-a/2}>e^{-a}>1/2`.                (6)
+`p^{floor(t/log p)}/e^t >= e^{-a/2}>e^{-a}>1/2`.                (8)
 
 For a safe core `m<=z` and a prime `P>m`, put `n=mP` with `log n` in this
 slab.  Since `P^2>n`, a block containing `P` and core support `C` has value
@@ -79,7 +131,7 @@ prime.  Summing (5) gives `E(x)>>x log z/log x`.  The bound on `T_0` implies
 
 Consequently
 
-`limsup_{x->infinity} E(x)log x/x=infinity`.                    (7)
+`limsup_{x->infinity} E(x)log x/x=infinity`.                    (9)
 
 Thus no asymptotic `E(x)~C x/log x` with fixed finite `C` is possible.  The
 same construction survives after excluding every fixed set of cores or every

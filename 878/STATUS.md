@@ -122,11 +122,18 @@ nonunit equality-count asymptotic, and the uniform `H(x)<<x log_4 x` bound.
 - The Fourier--Vaughan uniform construction proves
   `max_{n<=x}f(n)~x log x/log_2 x`; the same asymptotic holds for the running
   maximum of nonunit `F` by `f<=F<=n omega(n)`.
-- `F(210)>=442>383=max_{m<=210}f(m)`, disproving running-max equality for
+- `210` is a strict nonunit `F`-record and
+  `F(210)>=442>383=max_{m<=210}f(m)`, disproving running-max equality for
   all cutoffs.
 - In the nonunit equality count `E(x)`, simultaneous phase resonance gives
   `E(x)>>x log_3 x/log x` on an unbounded sequence, hence
   `limsup E(x)log x/x=infinity`; no fixed `C x/log x` asymptotic is possible.
+- Uniformly, `E(x)<=1+H(x)<<x log_3 x`.  For `n=mP`, `P>m` prime, the two
+  exact subset families and the singleton prime-power windows are recorded in
+  `attempts/equality_count.md`; smooth cores contribute
+  `O(x log_3 x/log x)`.
+- Eventual equality of the two running maxima is equivalent to all but
+  finitely many strict `F`-records satisfying `F(r)=f(r)`.
 
 ### Counterexamples / dead routes
 
@@ -161,14 +168,17 @@ nonunit equality-count asymptotic, and the uniform `H(x)<<x log_4 x` bound.
 
 ### Current bottleneck
 
-For `H`, prove
-`sum_{log log x<p<log x/log log x}u_p(x)e^{-u_p(x)}/p << log_4 x`;
-all complementary prime ranges are already controlled.
-For equality counting, determine a matching upper envelope and a valid moving
-profile despite the proved large-core resonance spikes.  For running maxima,
-decide whether bad strict `F`-records recur infinitely often.
+For `H`, with `L=log x`, the only remaining primes are
+`exp((log log L)^2)<p<L/(log L)^2`; prove the shallow-sieve discrepancy (S2)
+in `attempts/H.md`, or an equivalent cross-scale bound.  For equality
+counting, control the simultaneous prime-power windows for rough cores and the
+balanced layer `P^+(n)<=sqrt(n)` despite the proved resonance spikes.  For
+running maxima, decide whether bad strict `F`-records recur infinitely often;
+the exact record equivalence shows that first-order envelopes cannot decide
+this.
 
 ### Next assignments
 
-Commit and push the maximal-order proof and equality-resonance advance.
-Subsequent work should assign agents directly to the three bottlenecks above.
+Preserve and audit the three sharpened reductions above.  Further agents
+should be assigned only to (S2), the rough-core/balanced equality tail, or an
+additive strict-record comparison.

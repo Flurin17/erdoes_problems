@@ -67,18 +67,68 @@ Thus the proposed upper bound is equivalent, up to `O(x)`, to
 `sum_{p^2<=x}u_p e^{-u_p}/p << log_4 x`.                         (8)
 
 The proof in `almost_all_f.md` gives unconditionally
-`H(x)<<x(1+log_3 x)`.  Write `L=log x`.  A refined root-cell calculation
-shows that primes `p>=L/log L` contribute only `O(1)` (indeed the long-cell
-part is `O(log log L/log L)`).  Primes `p<=log L` cost exactly the permitted
-`O(log_4 x)` by Mertens.  Thus a sufficient missing statement is the sharper
+`H(x)<<x(1+log_3 x)`.  Write `L=log x`.  Mertens controls
 
-`sum_{log L<p<L/log L}u_p e^{-u_p}/p << log_4 x`.                (9)
+`p<=exp((log log L)^2)`
 
-Every corresponding fixed-exponent root interval has length below one.
-Simultaneous Dirichlet approximation can make an entire dyadic prime block
-resonate, so no uniform extra logarithm per block is true.  The remaining
-problem requires a cross-scale discrepancy estimate, not ordinary interval
-packing, Brun--Titchmarsh, or a blockwise large sieve.
+by `O(log_4 x)`.  The range `p>=P_0:=L/(log L)^2` contributes `O(1)`,
+but this uses the primality of `p`.  Indeed, put
+
+`k=floor(L/log p)`, `X_k=exp(L/k)`, `K=floor(L/log P_0)`,
+
+and divide the `k`th root cell into the subcells `j<=u_p<j+1`.  Such a
+subcell has upper endpoint `B=X_k exp(-j/k)`, length `asymp B/k`, and its
+summand is at most `O((j+1)exp(-j)/B)`.  If `B>=k^2`, Brun--Titchmarsh
+therefore bounds its total contribution by
+
+`O((j+1)exp(-j)/(k log B))=O((j+1)exp(-j)/L)`
+
+for `j<=L/2`; the exponentially small tail `j>L/2` is harmless.  Summing
+over `j` and `2<=k<=K` costs `O(K/L)=O(1/log L)`.  If `B<k^2`, trivial
+integer counting gives instead
+
+`O((j+1)exp(-j)(1/k+1/B))`.
+
+For `k<=L/(3 log L)` the condition `B<k^2` forces
+`j>=L-2k log k-O(k)`, so the first term is exponentially small; for the
+remaining `k` its harmonic sum is `O(1)`.  The endpoint terms are also
+`O(1)`, since
+
+`sum_{k<=K} exp(-L/k)
+ << L exp(-L/K)/(L/K)^2
+ << L/(P_0(log P_0)^2) << 1`.
+
+This proves the asserted `O(1)` high-prime bound.  (Replacing primes by all
+integers would instead give `>>sum_{k<=L/(3log L)}1/k>>log L`.)  Thus the
+genuinely unresolved range is
+
+`exp((log log L)^2)<p<L/(log L)^2`.                             (9)
+
+Every relevant fixed-exponent root interval there has length below one.  A
+concrete sufficient sieve statement is the following.  On a dyadic block
+`P<n<=2P`, put
+
+`u_n=L-floor(L/log n)log n`,  `a_n=u_n exp(-u_n)`,
+
+and `A_d=sum_{P<n<=2P, d|n}a_n`.  Uniformly throughout (9), it would suffice
+to prove
+
+`A_1 << P/log P`,                                               (S1)
+
+`sum_{d<(log P)^2}3^{omega(d)}|A_d-A_1/d|
+       << P/(log P log log P)`.                                (S2)
+
+Indeed the Selberg upper-bound sieve then gives
+
+`sum_{P<p<=2P}a_p << P/(log P log log P)`,
+
+so the reciprocal-weighted block is `O(1/(log P log log P))`;
+summing the dyadic blocks is `O(log_4 x)`.  Statement (S2), rather than
+(S1), is the missing arithmetic input.  Simultaneous Dirichlet approximation
+can make an entire dyadic prime block resonate, so no uniform extra logarithm
+per block is true.  Ordinary interval packing, Brun--Titchmarsh, and a
+blockwise large sieve do not prove (S2); the issue is pointwise cross-scale
+prime discrepancy.
 
 ## The quadruple logarithm is necessary
 
@@ -102,4 +152,4 @@ nor a constant-linear pointwise asymptotic is possible.
 - (6): precisely `(PNT_N)` plus convergent logarithmic moments.
 - `H<<x log_3 x`: Mertens plus interval Brun--Titchmarsh.
 - (10): simultaneous Dirichlet approximation, Mertens, and Chebyshev.
-- Open node: (9), an aggregate spacing estimate for medium prime powers.
+- Open node: the shallow-sieve discrepancy (S2) on the subunit range (9).
