@@ -2,13 +2,18 @@
 
 ## Scope and status
 
-This gives a complete negative answer to the **infinite** question when
-\(r,s\geq1\) and repetitions are allowed. Every product-length-rigid set has
-lower natural density at most \(1/2\).
+This gives complete negative answers to both questions when \(r,s\geq1\)
+and repetitions are allowed:
 
-The finite density-\(1-o(1)\) question remains open. The internally
-repetition-free interpretation also remains open because the grading theorem
-below is no longer necessary under that convention.
+- every infinite product-length-rigid set has lower natural density at most
+  \(1/2\);
+- there is an absolute \(\eta>0\) such that every product-length-rigid
+  \(A\subset[1,N]\) satisfies \(|A|\leq(1-\eta)N\), for all sufficiently
+  large \(N\).
+
+The internally repetition-free interpretation remains open because the
+grading theorem below is sufficient but no longer necessary under that
+convention.
 
 ## Theorem
 
@@ -271,15 +276,209 @@ Fix \(\eta_0<1/3\), obtain the absolute implied constant in (16) with
 \(c_0\eta_0\) and that constant. This contradicts
 \(m\leq\varepsilon N/\log N\), proving (11).
 
-The order \(N/\log N\) is still \(o(N)\); the finite density-one question
-therefore remains open.
+The next argument supersedes (11) qualitatively and closes the finite
+density-one question.
+
+### Absolute finite theorem: a fixed positive density must be omitted
+
+There is an absolute \(\eta>0\) such that every rational completely
+additive \(f\), every \(t\neq0\), and all sufficiently large \(N\) satisfy
+\[
+ \bigl|\{n\leq N:f(n)=t\}\bigr|\leq(1-\eta)N. \tag{17}
+\]
+Together with the grading theorem, this proves
+\[
+ |A|\leq(1-\eta)N                                      \tag{18}
+\]
+for every repetition-allowed PLR set \(A\subset[1,N]\).
+
+We use one precisely stated standard dependency.
+
+**Halász--Ruzsa exact-concentration theorem.** There is an absolute
+constant \(C\) such that, for every real additive function \(g\),
+\[
+ \frac1x\sup_z|\{n\leq x:g(n)=z\}|
+ \leq \frac{C}{\sqrt{1+H_g(x)}},
+ \qquad
+ H_g(x)=\sum_{\substack{p\leq x\\g(p)\neq0}}\frac1p. \tag{19}
+\]
+The theorem is finite and uniform, so \(g\) may depend on \(x\).
+
+For clarity, (19) is the exact-point consequence of the interval theorem
+\[
+ Q_h(x;g)\ll(1+E_h)^{-1/2},                              \tag{20}
+\]
+where
+\[
+ E_h=\inf_{\tau\in\mathbb R}\left\{
+ \left(\frac\tau h\right)^2+
+ \sum_{p\leq x}\frac1p
+ \min\left(1,\left|\frac{g(p)-\tau\log p}{h}\right|^2\right)
+ \right\}.                                               \tag{21}
+\]
+The Archimedean term in (21) is essential. To verify the exact-point
+specialization needed here, first clear the finitely many denominators of
+the rational values \(g(p)\), \(p\leq x\), so that every nonzero prime
+value is an integer.
+Choose
+\[
+ 0<h<\min\left\{\frac14,
+       \frac1{4\sqrt{1+H_g(x)}\log x}\right\}.             \tag{22}
+\]
+For every \(\tau\), either \(|\tau|/h\geq\sqrt{H_g(x)}\), or
+\(|\tau|\log x<1/4\), in which case every active prime contributes
+\(1/p\) to (21). Hence \(E_h\geq H_g(x)\), and an exact atom fits in an
+interval of length \(h\). This proves the needed form (19), including
+uniformity for moving rational weights.
+
+It remains to handle bounded \(H_g(N)\) without replacing the finite
+factorization law by independent geometric variables.
+
+**Boundary-sieve lemma.** For every fixed \(K<\infty\), there is
+\(c_K>0\) such that, if \(f\) is completely additive and
+\[
+ \sum_{\substack{p\leq\sqrt N\\f(p)\neq0}}\frac1p\leq K,     \tag{23}
+\]
+then at least \(c_KN\) integers \(n\in(N/2,N]\) satisfy
+\[
+ f(n)=0,\qquad P^+(n)<N^{1/4}.                             \tag{24}
+\]
+
+**Proof.** We first need a harmonic supply of integers avoiding a set of
+primes. If \({\cal S}\) is any finite prime set with
+\(\sum_{p\in{\cal S}}1/p\leq K\), then, uniformly in \({\cal S}\),
+\[
+ \sum_{\substack{b\leq X\\p\mid b\Rightarrow p\notin{\cal S}}}
+ \frac1b\geq d_K\log X                                  \tag{25}
+\]
+for all sufficiently large \(X\). Indeed, put
+\(A=2K+\log2\) and \(\sigma=1+A/\log X\). The full Dirichlet series of
+the integers avoiding \({\cal S}\) is
+\[
+ \zeta(\sigma)\prod_{p\in{\cal S}}(1-p^{-\sigma})
+ \geq \frac{e^{-2K}\log X}{A}.                           \tag{26}
+\]
+The unrestricted tail beyond \(X\) is at most
+\[
+ \int_X^\infty u^{-\sigma}\,du
+ =\frac{e^{-A}\log X}{A}
+ =\frac{e^{-2K}\log X}{2A}.                              \tag{27}
+\]
+Subtract (27) from (26) and use \(b^{-1}\geq b^{-\sigma}\) to obtain
+(25), for example with \(d_K=e^{-2K}/(2A)\).
+
+Now put \(L=\log N\). Choose a sufficiently large absolute \(i_0\), and
+consider a fixed finite list, depending only on \(K\), of disjoint bands
+\[
+ I_i=(N^{a_i},N^{2a_i}],\qquad a_i=2^{-i-1},\qquad
+ i_0\leq i<i_0+\lfloor K/\varepsilon_0\rfloor+2.           \tag{28}
+\]
+Here \(\varepsilon_0>0\) is a sufficiently small absolute constant.
+By (23), one band \(I=(N^a,N^{2a}]\) satisfies
+\[
+ \sum_{\substack{p\in I\\f(p)\neq0}}\frac1p\leq\varepsilon_0. \tag{29}
+\]
+Choose \(i_0\) so that \(2a<1/4\) for every possible selected band.
+
+On exponent space define
+\[
+ \mu=\sum_{p\in I}\frac1p\,\delta_{\log p/L},\qquad
+ \nu=\sum_{\substack{p\in I\\f(p)\neq0}}
+              \frac1p\,\delta_{\log p/L},qquad
+ \mu_0=\mu-\nu.                                           \tag{30}
+\]
+The PNT in fixed-ratio prime intervals gives, for every interval \(W\) of
+length comparable with \(1/L\) contained in
+\([(3-1/10)a,(3+1/10)a]\),
+\[
+ (\mu*\mu)(W)\geq c\frac{|W|}{a},
+ \qquad
+ \sup_x\mu(W-x)\leq C_0\frac{|W|}{a}.                     \tag{31}
+\]
+Indeed, the limiting convolution density at \(s\) is
+\[
+ \int_{[a,2a]\cap[s-2a,s-a]}\frac{du}{u(s-u)}\asymp\frac1a, \tag{32}
+\]
+and exponent width \(1/L\) is a fixed multiplicative ratio on the prime
+scale. Since
+\[
+ \mu^{*2}-\mu_0^{*2}=\nu*\mu+\mu_0*\nu\leq2\nu*\mu,
+\]
+(29)--(31), with \(\varepsilon_0<c/(4C_0)\), imply
+\[
+ \mu_0^{*2}(W)\geq c'\frac{|W|}{a}.                         \tag{33}
+\]
+
+Let \(J=[(3-1/20)a,(3+1/20)a]\). By increasing \(i_0\), choose an
+integer \(k=k(a)\) such that \(1\) lies in the interior of \(kJ\). For
+some \(\delta=\delta_K>0\),
+\[
+ [1-2\delta,1]\subset\operatorname{int}(kJ).                \tag{34}
+\]
+Set \(r=2k\). Partition a slightly smaller copy of \(J\) into cells of
+length \(\asymp1/L\). For a target window of length \(\log2/L\), there
+are \(\gg_K L^{k-1}\) choices of the first \(k-1\) cells for which the
+forced last cell remains in \(J\). Each cell has \(\mu_0^{*2}\)-mass
+\(\gg_K1/L\) by (33). Therefore, uniformly for
+\(s\in[1-\delta,1]\),
+\[
+ \mu_0^{*r}([s-\log2/L,s])\geq\frac{c_K'}L.                 \tag{35}
+\]
+Tuples with a repeated prime have reciprocal mass
+\[
+ O_r\!\left(\sum_{q>N^a}\frac1{q^2}
+       \left(\sum_{p\in I}\frac1p\right)^{r-2}\right)
+ =O_r(N^{-a})=o(1/L),                                      \tag{36}
+\]
+so (35) still holds, with a smaller constant, for tuples of distinct
+zero-weight primes.
+
+Choose \(0<\delta_0<\min(\delta,a/2)\), put
+\(X=N^{\delta_0}\), and let \({\cal B}\) be the integers \(b\leq X\)
+all of whose prime factors have weight zero. Apply (35) with
+\(s=1-\log b/L\). It gives reciprocal mass \(\gg_K1/L\) of ordered
+tuples \((q_1,\ldots,q_r)\) of distinct zero-weight primes in \(I\) with
+\[
+ \frac{N}{2b}<q_1\cdots q_r\leq\frac Nb.                   \tag{37}
+\]
+Every reciprocal summand in (37) is at most \(2b/N\); hence there are
+\(\gg_K N/(bL)\) ordered tuples. Forgetting order costs at most \(r!\).
+
+The map
+\[
+ (b,\{q_1,\ldots,q_r\})\longmapsto bq_1\cdots q_r          \tag{38}
+\]
+is injective: every prime factor of \(b\) is below \(N^a\), while every
+\(q_i\) is above \(N^a\). Its values lie in \((N/2,N]\), have grading
+zero, and have largest prime factor below \(N^{2a}<N^{1/4}\). Finally,
+(25), applied to the active primes up to \(X\), gives
+\[
+ \sum_{b\in{\cal B}}\frac1b\gg_K\log X\asymp_K L.          \tag{39}
+\]
+Summing \(N/(bL)\) over (39) proves (24). \(\square\)
+
+We now prove (17). Choose a fixed \(K\) so large that the right side of
+(19) is at most \(1/2\) whenever \(H_f(N)\geq K\). In that case every
+fiber has size at most \(N/2\). If \(H_f(N)<K\), the boundary-sieve lemma
+supplies at least \(c_KN\) zero-valued integers, all outside the nonzero
+\(t\)-fiber. Thus (17) holds with
+\[
+ \eta=\min(1/2,c_K)>0.                                    \tag{40}
+\]
+This is deliberately qualitative; the threshold construction of density
+\(0.828499\ldots\) shows that the optimal \(\eta\) is at most
+\(0.171500\ldots\).
 
 ## Audit
 
 Two fresh agents independently certified the compound-Poisson/winding proof
-and the density/finite-exponent calculation. Separate agents certified an
-independent geometric-variable/Sperner proof of a weaker universal density
-gap. A further fresh audit certified every step of the overlap--energy proof
-of (11), including its global injectivity, uniform prime count, base
-rectangle, energy parametrization, and constant choices. Audit details are
-in attempts/audits_infinite.md and attempts/tournament/audit_overlap_energy.md.
+and the density/finite-exponent calculation. A further fresh audit certified
+every step of the overlap--energy proof of (11). For the decisive finite
+gap, independent audits checked (i) the exact Halász--Ruzsa specialization,
+including the Archimedean term and moving weights, and (ii) the complete
+boundary-sieve proof, including the local \(1/\log N\) convolution,
+repeated-prime removal, anchor injectivity, and order of quantifiers. The
+audit files are `attempts/audits_infinite.md`,
+`attempts/tournament/audit_overlap_energy.md`,
+`attempts/tournament/audit_halasz_exact_concentration.md`, and
+`attempts/tournament/audit_rough_concentration_active_core.md`.

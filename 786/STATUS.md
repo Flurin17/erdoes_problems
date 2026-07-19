@@ -2,19 +2,20 @@
 
 ## Goal
 
-Having disproved the infinite assertion under the repetition-allowed reading,
-decide the finite density-\(1-o(1)\) question under that same reading. In
-parallel, determine the infinite and finite answers under the internally
-repetition-free reading, which the source leaves ambiguous.
+Consolidate and adversarially audit the now-complete negative solution of
+both questions under the literal repetition-allowed reading. In parallel,
+continue the separate internally repetition-free variant left ambiguous by
+the source, without importing the grading theorem as a necessary condition.
 
 ## Context
 
 Authoritative input: PROBLEM.md. Under repetitions, NOTES.md proves that PLR
 is equivalent to containment in an exact nonzero level of a rational
-completely additive function. PROOF.md, certified by fresh audits, proves
-that every infinite PLR set has lower density at most \(1/2\). For finite
-\(A_N\), current bounds and constructions leave a gap between retained
-density \(0.828499\ldots\) and the requested \(1-o(1)\).
+completely additive function. PROOF.md proves that every infinite PLR set
+has lower density at most \(1/2\), and that some absolute \(\eta>0\) satisfies
+\(|A_N|\leq(1-\eta)N\) for every finite repetition-allowed PLR set. The
+finite proof combines exact Halász--Ruzsa concentration with an audited
+boundary sieve for bounded active-prime harmonic mass.
 
 ## Constraints
 
@@ -29,11 +30,12 @@ coherent Problem 786 milestones without including unrelated changes.
 
 ## Done when
 
-Full completion requires a rigorous decision of both finite and infinite
-questions under the intended convention, explicit resolution or separate
-classification of the repetition ambiguity, reproducible computation for any
-finite certificate, two fresh audits of each complete candidate, accurate
-artifacts, and a successful commit and push.
+The repetition-allowed reading is complete when the infinite and finite
+negative proofs are dependency-complete, receive two fresh targeted audits,
+and are committed and pushed with accurate ledgers. Full ambiguity closure
+would additionally require a decision of the internally distinct reading;
+until then it must remain explicitly classified as open rather than being
+silently identified with the literal reading.
 
 ## State
 
@@ -45,7 +47,7 @@ artifacts, and a successful commit and push.
 - The infinite set may depend on \(\epsilon\). Upper density is never
   substituted for natural or lower density.
 
-### Complete result: infinite repetition-allowed version
+### Complete result: repetition-allowed version
 
 Every repetition-allowed PLR set satisfies
 \[
@@ -56,34 +58,50 @@ Thus the requested “for every \(\epsilon>0\)” assertion is false (already fo
 probability, a zero-drift compound-Poisson representation, and a winding
 number bound on nonzero atoms. Two fresh targeted audits found no error.
 
+There is also an absolute \(\eta>0\) such that every finite
+repetition-allowed PLR set satisfies
+\[
+ |A_N|\leq(1-\eta)N.
+\]
+Hence the finite density-\(1-o(1)\) assertion is false. The proof splits by
+the reciprocal mass \(H=\sum_{f(p)\ne0}1/p\): exact Halász--Ruzsa
+concentration handles large \(H\); for bounded \(H\), a lightly deleted
+polynomial prime band transports a harmonic supply of zero-core anchors to
+\(c_HN\) distinct zero-valued integers in \((N/2,N]\). Independent audits
+certified both the analytic exact-atom specialization and the full
+convolution/injectivity ledger.
+
 ### Finite proved facts
 
 1. Exact finite PLR is equivalent to
    \(\operatorname{rank}V_A=\operatorname{rank}[V_A\mid\mathbf1]\).
-2. A threshold grading gives
+2. Every nonzero exact additive level, and hence every finite
+   repetition-allowed PLR set, omits an absolute positive proportion.
+3. A threshold grading gives
    \[
    |A_N|=(c_*+o(1))N,\quad
    c_*=2-2\rho(1+\sqrt e)-\log(1+\sqrt e)
    =0.828499\ldots .
    \]
-3. Every finite repetition-allowed PLR set satisfies the stronger bound
+4. The earlier quantitative bound
    \[
    N-|A_N|\geq cN/\log N
    \]
    for an absolute \(c>0\), by prime--cofactor overlap and multiplicative
    energy. A fresh audit certified the proof.
-4. Earlier independent bounds include
+5. Still earlier independent bounds include
    \(m_N+1\geq N^{0.227092\ldots-o(1)}\) and the smooth-number
    self-consistency inequality.
-5. Any finite bad set has a bounded circuit witness; modular certificates
+6. Any finite bad set has a bounded circuit witness; modular certificates
    whose lcm exceeds the explicit determinant bound imply exact PLR.
 
 ### Route tournament
 
-1. **Finite uniform anti-concentration / robust prime-divisor model.**
-   Product-measure transfer is false for moving prime supports. The strongest
-   surviving negative route is a multiscale cofactor-profile lemma combining
-   row penalties with cross-band additive relations.
+1. **Exact concentration plus bounded-budget boundary sieve (complete).**
+   Halász--Ruzsa gives \(O(H^{-1/2})\) point concentration for large active
+   harmonic mass. For bounded \(H\), a fixed-fold local prime convolution
+   and harmonic zero-core anchors give a linear zero fiber. This proves the
+   finite absolute gap without an invalid product-measure transfer.
 2. **Largest-prime/cofactor modal construction.** Only plausible positive
    route. An exact Bellman identity is proved; the natural globally completed
    single-threshold family cannot beat \(0.828499\ldots\) when its lower
@@ -92,8 +110,11 @@ number bound on nonzero atoms. Two fresh targeted audits found no error.
    \(0.828499\ldots\). Exhaustive rational/binary/ternary finite grids at
    \(N=100000\) found no improvement; moving \(N^{o(1)}\) bands remain open.
 4. **Top-slab/hypergraph deletion for distinct factors.** Unequal-cardinality
-   relations have a fractional transversal of total \(O(N/\log N)\), but
-   sharp clustered circuits leave a cluster-aware integral-rounding gap.
+   relations have an \(o(N)\) fractional transversal, but no integral
+   rounding is known. Explicit primitive squarefree circuits of support
+   \((2+o(1))\log N/\log\log N\) occur already in the rough slab
+   \((N/(C\log N),N]\), showing that deleting only a lower initial segment
+   does not solve this variant.
 5. **Conditioned Euler/divisor-box measures.** Could strengthen the finite
    Canonical power-Euler laws, positive mixtures, divisor boxes, and
    two-sided-flat product laws are rigorously ruled out. An arbitrary
@@ -125,9 +146,10 @@ number bound on nonzero atoms. Two fresh targeted audits found no error.
 
 ### Current bottleneck
 
-Decide whether an \(N\)-dependent rational completely additive function can
-have an exact nonzero level containing \(1-o(1)\) of \([1,N]\). Any positive
-answer must delete at least \(cN/\log N\); any negative answer needs a
-stronger uniform finite anti-concentration or a proof that complete
-additivity cannot realize \(o(\log N)\) scale-color changes. The
-distinct-factor variant has a separate cluster-aware transversal bottleneck.
+The literal repetition-allowed problem is solved negatively. The remaining
+mathematical ambiguity is the internally distinct-factor variant. Its bad
+relations can be logarithmically long and clustered; the known fractional
+transversal has total \(o(N)\), but no cluster-aware integral rounding or
+opposite constant-gap theorem is known. Determining that variant, and the
+sharp finite repetition-allowed extremal constant between the construction
+\(0.828499\ldots\) and the qualitative upper gap, are separate open tasks.

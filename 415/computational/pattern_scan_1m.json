@@ -1,0 +1,631 @@
+{
+  "algorithm": "Euler totient sieve, followed by exhaustive overlapping-window scan",
+  "command_template": "python3 computational/pattern_scan.py --limit N --max-k K --output FILE",
+  "independent_check": "sieve values checked against gcd-count definition for n <= 500",
+  "limit": 1000000,
+  "max_k": 6,
+  "permutation_convention": "one-based positions sorted by strictly increasing totient",
+  "results": [
+    {
+      "M_k": 1,
+      "decreasing_first_endpoint": 1,
+      "decreasing_is_last": true,
+      "decreasing_pattern": [
+        1
+      ],
+      "first_occurrences": [
+        {
+          "endpoint": 1,
+          "pattern": [
+            1
+          ]
+        }
+      ],
+      "k": 1,
+      "last_observed_endpoint": 1,
+      "last_pattern": [
+        1
+      ],
+      "missing_count": 0,
+      "missing_patterns": [],
+      "natural_aggregate_count": 1000000,
+      "natural_extensions": [
+        [
+          1
+        ]
+      ],
+      "patterns_seen": 1,
+      "patterns_total": 1,
+      "stable_natural_refinement": [
+        1
+      ],
+      "tied_windows": 0,
+      "windows": 1000000
+    },
+    {
+      "M_k": 6,
+      "decreasing_first_endpoint": 6,
+      "decreasing_is_last": true,
+      "decreasing_pattern": [
+        2,
+        1
+      ],
+      "first_occurrences": [
+        {
+          "endpoint": 3,
+          "pattern": [
+            1,
+            2
+          ]
+        },
+        {
+          "endpoint": 6,
+          "pattern": [
+            2,
+            1
+          ]
+        }
+      ],
+      "k": 2,
+      "last_observed_endpoint": 6,
+      "last_pattern": [
+        2,
+        1
+      ],
+      "missing_count": 0,
+      "missing_patterns": [],
+      "natural_aggregate_count": 999931,
+      "natural_extensions": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "patterns_seen": 2,
+      "patterns_total": 2,
+      "stable_natural_refinement": [
+        1,
+        2
+      ],
+      "tied_windows": 68,
+      "windows": 999999
+    },
+    {
+      "M_k": 315,
+      "decreasing_first_endpoint": 315,
+      "decreasing_is_last": true,
+      "decreasing_pattern": [
+        3,
+        2,
+        1
+      ],
+      "first_occurrences": [
+        {
+          "endpoint": 7,
+          "pattern": [
+            2,
+            1,
+            3
+          ]
+        },
+        {
+          "endpoint": 8,
+          "pattern": [
+            1,
+            3,
+            2
+          ]
+        },
+        {
+          "endpoint": 15,
+          "pattern": [
+            2,
+            3,
+            1
+          ]
+        },
+        {
+          "endpoint": 18,
+          "pattern": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "endpoint": 107,
+          "pattern": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "endpoint": 315,
+          "pattern": [
+            3,
+            2,
+            1
+          ]
+        }
+      ],
+      "k": 3,
+      "last_observed_endpoint": 315,
+      "last_pattern": [
+        3,
+        2,
+        1
+      ],
+      "missing_count": 0,
+      "missing_patterns": [],
+      "natural_aggregate_count": 259071,
+      "natural_extensions": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      "patterns_seen": 6,
+      "patterns_total": 6,
+      "stable_natural_refinement": [
+        1,
+        2,
+        3
+      ],
+      "tied_windows": 2721,
+      "windows": 999998
+    },
+    {
+      "M_k": null,
+      "decreasing_first_endpoint": 826,
+      "decreasing_is_last": false,
+      "decreasing_pattern": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "first_occurrences": [
+        {
+          "endpoint": 14,
+          "pattern": [
+            2,
+            4,
+            1,
+            3
+          ]
+        },
+        {
+          "endpoint": 15,
+          "pattern": [
+            1,
+            3,
+            4,
+            2
+          ]
+        },
+        {
+          "endpoint": 19,
+          "pattern": [
+            3,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "endpoint": 22,
+          "pattern": [
+            2,
+            4,
+            3,
+            1
+          ]
+        },
+        {
+          "endpoint": 23,
+          "pattern": [
+            1,
+            3,
+            2,
+            4
+          ]
+        },
+        {
+          "endpoint": 24,
+          "pattern": [
+            4,
+            2,
+            1,
+            3
+          ]
+        },
+        {
+          "endpoint": 25,
+          "pattern": [
+            3,
+            1,
+            4,
+            2
+          ]
+        },
+        {
+          "endpoint": 40,
+          "pattern": [
+            4,
+            2,
+            3,
+            1
+          ]
+        },
+        {
+          "endpoint": 108,
+          "pattern": [
+            4,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "endpoint": 315,
+          "pattern": [
+            1,
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "endpoint": 526,
+          "pattern": [
+            3,
+            2,
+            4,
+            1
+          ]
+        },
+        {
+          "endpoint": 527,
+          "pattern": [
+            2,
+            1,
+            3,
+            4
+          ]
+        },
+        {
+          "endpoint": 736,
+          "pattern": [
+            3,
+            4,
+            2,
+            1
+          ]
+        },
+        {
+          "endpoint": 737,
+          "pattern": [
+            2,
+            3,
+            1,
+            4
+          ]
+        },
+        {
+          "endpoint": 826,
+          "pattern": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "endpoint": 827,
+          "pattern": [
+            3,
+            2,
+            1,
+            4
+          ]
+        },
+        {
+          "endpoint": 1486,
+          "pattern": [
+            2,
+            3,
+            4,
+            1
+          ]
+        },
+        {
+          "endpoint": 1487,
+          "pattern": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      ],
+      "k": 4,
+      "last_observed_endpoint": 1487,
+      "last_pattern": null,
+      "missing_count": 6,
+      "missing_patterns": [
+        [
+          1,
+          2,
+          4,
+          3
+        ],
+        [
+          1,
+          4,
+          2,
+          3
+        ],
+        [
+          2,
+          1,
+          4,
+          3
+        ],
+        [
+          3,
+          4,
+          1,
+          2
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          4,
+          3,
+          1,
+          2
+        ]
+      ],
+      "natural_aggregate_count": 4990,
+      "natural_extensions": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          4,
+          3
+        ],
+        [
+          2,
+          1,
+          3,
+          4
+        ],
+        [
+          2,
+          1,
+          4,
+          3
+        ]
+      ],
+      "patterns_seen": 18,
+      "patterns_total": 24,
+      "stable_natural_refinement": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tied_windows": 5371,
+      "windows": 999997
+    },
+    {
+      "M_k": null,
+      "decreasing_first_endpoint": null,
+      "decreasing_is_last": null,
+      "decreasing_pattern": [
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "k": 5,
+      "last_observed_endpoint": 254544,
+      "last_pattern": null,
+      "missing_count": 75,
+      "natural_aggregate_count": 0,
+      "natural_extensions": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          4,
+          3,
+          5
+        ],
+        [
+          2,
+          1,
+          3,
+          4,
+          5
+        ],
+        [
+          2,
+          1,
+          4,
+          3,
+          5
+        ]
+      ],
+      "patterns_seen": 45,
+      "patterns_total": 120,
+      "stable_natural_refinement": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tied_windows": 9550,
+      "windows": 999996
+    },
+    {
+      "M_k": null,
+      "decreasing_first_endpoint": null,
+      "decreasing_is_last": null,
+      "decreasing_pattern": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "k": 6,
+      "last_observed_endpoint": 254545,
+      "last_pattern": null,
+      "missing_count": 604,
+      "natural_aggregate_count": 0,
+      "natural_extensions": [
+        [
+          1,
+          2,
+          3,
+          4,
+          6,
+          5
+        ],
+        [
+          1,
+          2,
+          3,
+          6,
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          4,
+          3,
+          6,
+          5
+        ],
+        [
+          1,
+          2,
+          4,
+          6,
+          3,
+          5
+        ],
+        [
+          1,
+          2,
+          6,
+          3,
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          6,
+          4,
+          3,
+          5
+        ],
+        [
+          2,
+          1,
+          3,
+          4,
+          6,
+          5
+        ],
+        [
+          2,
+          1,
+          3,
+          6,
+          4,
+          5
+        ],
+        [
+          2,
+          1,
+          4,
+          3,
+          6,
+          5
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          3,
+          5
+        ],
+        [
+          2,
+          1,
+          6,
+          3,
+          4,
+          5
+        ],
+        [
+          2,
+          1,
+          6,
+          4,
+          3,
+          5
+        ]
+      ],
+      "patterns_seen": 116,
+      "patterns_total": 720,
+      "stable_natural_refinement": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        5
+      ],
+      "tied_windows": 13742,
+      "windows": 999995
+    }
+  ],
+  "runtime_seconds": 11.943987,
+  "tie_convention": "a tied window realizes no permutation"
+}

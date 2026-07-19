@@ -215,6 +215,42 @@ then makes the zero-graded product set have size
 attempts/finite_overlap_energy.md and
 attempts/tournament/audit_overlap_energy.md.
 
+### Absolute finite density gap
+
+There is an absolute \(\eta>0\) such that every rational completely
+additive \(f\) and nonzero \(t\) satisfy
+\[
+ |\{n\leq N:f(n)=t\}|\leq(1-\eta)N. \tag{12}
+\]
+Writing \(H_f(N)=\sum_{p\leq N,\,f(p)\ne0}1/p\), the uniform
+Halász--Ruzsa exact-point theorem gives concentration
+\(\ll(1+H_f(N))^{-1/2}\). For bounded \(H_f\), an audited boundary sieve
+uses a lightly deleted polynomial prime band, a fixed local convolution of
+zero-weight primes, and a harmonic supply of small zero-core anchors to
+produce \(c_HN\) distinct zero-valued integers. The full proof is in
+PROOF.md; the targeted audits are
+`attempts/tournament/audit_halasz_exact_concentration.md` and
+`attempts/tournament/audit_rough_concentration_active_core.md`.
+
+The threshold construction (6) shows only that the optimal gap is at most
+\(1-c_*=0.171500\ldots\); the sharp constant is not determined.
+
+### Long circuits under the internally distinct convention
+
+Given distinct primes \(p_0,\ldots,p_s\) and \(Q=\prod_{j=0}^sp_j\), put
+\[
+ A_i=Q/(p_{i-1}p_i)\ (1\leq i\leq s),\qquad
+ B_j=Q/p_j\ (1\leq j<s).                                  \tag{13}
+\]
+Then \(\prod_iA_i=\prod_jB_j\). All \(2s-1\) factors are globally distinct
+and squarefree. Counting total prime factors shows the circuit is primitive:
+a subidentity with \(a\) of the \(A_i\)'s and \(b\) of the \(B_j\)'s would
+give \(a(s-1)=bs\), hence is empty or full. Choosing the primes in
+\((P,2P)\), with \(s\asymp P/\log P\), places the circuit in
+\((N/(C\log N),N]\) with support
+\(\asymp\log N/\log\log N\). Thus a rough density-one top slab does not
+solve the distinct variant.
+
 ### Bounded bad witnesses and modular lift
 
 Let \(d=\pi(N)\) and \(L=\lfloor\log_2N\rfloor\). If a finite set is not
@@ -239,12 +275,11 @@ length issue but not the dense-level construction.
 
 ## Current finite bottleneck
 
-Under repetitions, decide whether an \(N\)-dependent completely additive
-rational function can have an exact nonzero level containing \(1-o(1)\) of
-\([1,N]\). A positive construction must delete \(N^{1-o(1)}\) elements; a
-negative result needs anti-concentration sufficiently uniform for the
-uniform measure on \([1,N]\).
+The repetition-allowed finite and infinite questions are solved negatively.
+The remaining sharp finite problem is the optimal density, currently between
+\(c_*=0.828499\ldots\) and the nonexplicit upper bound \(1-\eta\).
 
-For distinct factors, the grading reduction is unavailable. A top-slab
-reduction makes every unequal-cardinality relation long, but a sparse
-transversal theorem for the resulting relation hypergraph is still missing.
+For internally distinct factors, the grading reduction is unavailable. The
+fractional circuit transversal has mass \(o(N)\), but an integral rounding is
+missing; conversely, the long squarefree circuits above are too clustered to
+force a positive-density deletion.

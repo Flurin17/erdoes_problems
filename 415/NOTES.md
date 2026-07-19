@@ -118,12 +118,84 @@ are pairwise distinct and $0$ otherwise.  Thus retaining tied windows in the
 unconditional denominator is exact, and conditioning on tie-free windows does
 not change the finite-cutoff argmax.
 
-## 5. Initial dependency targets
+## 5. Sharp threshold lemmas
 
-- compatible prime-set prescription for all shifts;
-- strict-gap lemma absorbing $(m+i)$ and uncontrolled prime factors;
-- optimized CRT-modulus estimate uniform in $\sigma$;
-- universal, architecture-independent obstruction of matching scale;
-- exact small-$k$ data to falsify extremality and frequency guesses.
+Put
+\[
+w_p=\log\frac p{p-1},\qquad
+h(t)=\sum_{p\mid t}w_p,\qquad
+\mu=\sum_p\frac{w_p}{p}.
+\]
 
-No item in this list is yet asserted proved.
+1. If $P_r\le x<P_{r+1}$ are consecutive primorials, then
+   \[
+   \max_{t\le x}h(t)=h(P_r)=\log_3x+\gamma+o(1).
+   \]
+2. Reversing sums gives
+   \[
+   \sum_{i\le k}h(i)=\mu k+o(k).
+   \]
+3. Full cutoff control by CRT, disjoint private primes $>k^4$, and target gaps
+   $8/k^4$ realize every prescribed pattern with
+   \[
+   \log_3M(\sigma)
+   \le k(\log_3k+\gamma-\mu)+o(k)
+   \]
+   uniformly in $\sigma$.
+4. In a decreasing totient block, the losses $h(m+i)$ strictly increase.  A
+   multiple of the preceding primorial occurs among $o(k)$ initial shifts and
+   propagates loss $\log_3k+\gamma+o(1)$ through almost the whole block.
+   Small primes supply only $\mu k+o(k)$ total loss; primes $>k$ are private.
+   Their squarefree product divides the block product, yielding the matching
+   universal lower bound.
+
+Thus
+\[
+\log_3M_k=k(\log_3k+\gamma-\mu)+o(k)
+\]
+and
+\[
+F(n)=\frac{\log_3n}{\log_6n+\gamma-\mu+o(1)}.
+\]
+
+## 6. Finite extremal-pattern counterexample
+
+Exhaustive independent computations give
+\[
+\begin{aligned}
+\phi(823),\ldots,\phi(826)&=(822,408,400,348),\\
+\phi(824),\ldots,\phi(827)&=(408,400,348,826),
+\end{aligned}
+\]
+with no earlier occurrences of the corresponding patterns.  Hence
+\[
+M((4,3,2,1))=826<827=M((3,2,1,4)).
+\]
+The decreasing pattern is asymptotically extremal but not finitely last for
+every $k$.
+
+## 7. Frequency theorem
+
+For fixed $k$, independent uniform residues $U_p\pmod p$ define the convergent
+loss vector
+\[
+X_i=\sum_pw_p\mathbf1_{U_p\equiv-i\pmod p}.
+\]
+Finite-prime truncations are periodic, arithmetic and profinite tails vanish
+in mean, and pair differences are atomless by conditional fair signs plus
+Sperner's theorem.  Therefore every strict pattern has a positive natural
+density equal to its Haar chamber probability.
+
+For $k=3$, removing $p=2$ gives an exchangeable odd-prime vector $Y$.  If
+\[
+q=\Pr(\max Y_i-\min Y_i>\log2),
+\]
+then $0<q<1$ and
+\[
+d(123)=d(321)=q/6,
+\quad
+d(132)=d(213)=d(231)=d(312)=1/4-q/12.
+\]
+This disproves the stable natural refinement.  The aggregate natural weak
+order has density $1/4+q/12$, less than the same-shape competitor's
+$1/2-q/6$.
