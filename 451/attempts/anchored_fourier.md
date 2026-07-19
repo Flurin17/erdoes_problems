@@ -326,6 +326,63 @@ only \(o(|\mathcal P|)\) coordinates. Such a mode may have frequency \(1/d_S\), 
 
 7. **Averaging changes the question.** Second moments over the starting point can prove a result for most or some anchors, but do not control the fixed anchor \(2k\).
 
+## Closed low-support calculation
+
+Put $q_p=p-k$, and define the centered shifted factor
+\[
+ F_p(h)=\frac{p}{q_p}1_{\{q_p+1,\ldots,2q_p\}}(h\bmod p)-1.
+\]
+It has period $p$, mean zero, and local $L^1$ mass $2k$.  In the exact ANOVA
+expansion, the total contribution $T_s$ from characters supported on exactly
+$s$ primes satisfies
+\[
+ |T_s|\le \delta,2^{s-1}k^s\binom{m}{s},
+ \qquad m=|\mathcal P|.                              \tag{11}
+\]
+For a fixed support $S$, the product $\prod_{p\in S}F_p(h)$ has mean zero
+modulo $d_S=\prod_{p\in S}p$; complete periods cancel, and a prefix has
+absolute signed mass at most half its full $L^1$ mass $(2k)^s$.
+
+For support one, if $t_p=H\bmod p$ and
+$J_q(t)=\max(0,\min(t,2q)-q)$, then exactly
+\[
+ T_1=\delta\sum_{p\in\mathcal P}
+ \left(\frac{p}{q_p}J_{q_p}(t_p)-t_p\right),
+ \qquad |T_1|\le\delta km.
+\]
+For support two, every fixed pair contributes at most $2k^2$, giving
+$|T_2|\le2\delta k^2\binom m2$.  Thus, at
+$H=\exp(Ck/\log k)$, every fixed support size is $o(H\delta)$; (11) first
+loses force at support of order $k/\log^2k$.  Fixed-order correlations cannot
+decide the conjectural scale.
+
+## High-conductor energy obstruction
+
+For exact support conductor $d\mid P$, local Parseval gives
+\[
+ \sum_{(b,d)=1}|c_d(b)|^2
+ =\delta^2\prod_{p\mid d}\frac{k}{p-k}.              \tag{12}
+\]
+When $H=\exp(O(k/\log k))$, every $d\le H$ has
+$O(k/\log^2k)$ prime factors.  Since the positive offsets $p-k$ are distinct,
+(12) implies that the total energy below $H$ is
+$\delta^2\exp(o(k/\log k))$, whereas total Fourier energy is $\delta$.
+Consequently
+\[
+ \sum_{d>H}\sum_{(b,d)=1}|c_d(b)|^2=(1-o(1))\delta.  \tag{13}
+\]
+
+For $H<d$, orthogonality gives
+$\sum_{b\bmod d}|D_H(b/d)|^2=dH$.  Blockwise Cauchy--Schwarz therefore yields
+only
+\[
+ |T_d|\le
+ \delta\sqrt{dH\prod_{p\mid d}\frac{k}{p-k}},        \tag{14}
+\]
+which already loses a factor containing $\sqrt{d/H}$.  Equations (13)--(14)
+close the ordinary conductor-orthogonality and $L^2$ large-sieve nodes:
+almost all energy lies exactly where these norms lose spatial resolution.
+
 ## Required phase-sensitive repair and dependency graph
 
 Write the exact signed remainder from (1) as \(R_{2k}(H)\), so

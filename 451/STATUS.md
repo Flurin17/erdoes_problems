@@ -98,6 +98,12 @@ is focused on anchored localization for the upper bound.
 - **Current bottleneck:** collective cancellation in the high-conductor
   Fourier tail at the fixed anchor $2k$, equivalently hereditary joint
   (conditional, not marginal) discrepancy for adaptively filtered CRT beams.
+- **Newly closed Phase 3 nodes:** all fixed Fourier support sizes are
+  $o(H\delta_k)$ for $H=\exp(Ck/\log k)$, with the elementary bound useful
+  only through support $O(k/\log^2k)$.  Almost all Fourier $L^2$ energy lies
+  at conductors $d>H$, where blockwise Cauchy--Schwarz loses at least the
+  spatial factor $\sqrt{d/H}$.  Prefix-specific two-prime discrepancy likewise
+  controls only $O(k/\log^2k)$ sequential filters.
 - **Next assignments:** attack the two-prime hereditary extension lemma and
   signed conductor blocks; extend exact experiments only to falsify these
   lemmas, not as proof.
