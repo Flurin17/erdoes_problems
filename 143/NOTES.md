@@ -323,3 +323,72 @@ $Q\in\{2,4,6,8\}$ at cutoff $18$ found that the harmonic and dyadic-log
 optima, including a separately optimized forced-off-lattice comparison,
 remain strictly crystallized on $Q\mathbb N$. This is finite evidence only
 and does not evaluate the transcendental target weight.
+
+## 8. Third focused wave: cumulative packet and cycle excess
+
+### Quotient-rough fiber packets
+
+For a $Q$-admissible numerator $n=Qb+r$, put $\theta=r/Q$ and
+\[
+U_b=\{u:p\mid u\Rightarrow p\ge b\},\qquad C_b=bU_b,
+\]
+\[
+K_n=[(\theta+1/2)/b,(\theta+1)/b).
+\]
+The product packets $C_b\times K_n$ are pairwise disjoint. Carrier
+intersection forces quotient bins to be comparable, say $c=kb$, while
+$Q$-admissibility gives $kr-s\ge Q$ and separates the corresponding fibers.
+Their carrier density is
+\[
+\delta_b=\frac1b\prod_{p<b}(1-1/p)\gg\frac1{b\log b},
+\]
+the exact order of the target weight. This proves a pointwise fiber-packing
+bound, but its logarithmic integral has unbounded depth.
+
+The remaining explicit Hall target uses periodic physical packets
+\[
+R_n=\{nu+j:u\in U_b,\ 0\le j<Q\}.
+\]
+A uniform aggregate inequality
+\[
+d\left(\bigcup_{n\in T}R_n\right)
+\gg_a\sum_{n\in T}d(R_n)
+\]
+for every $T$ in a $Q$-admissible set would prove the required uniform
+$Q$-estimate. Pairwise disjointness is false; the aggregate inequality is
+open. See `attempts/qthick_fiber_packets.md`.
+
+### Weighted endpoint-clause excess
+
+Injective rounding is unnecessary. By $1$-separation, at most two points can
+receive one adjacent integer label, and their total target weight is at most
+four times that label's weight. Hence a primitive set of distinct image
+labels still transfers the primitive integer theorem with a constant loss.
+
+For the strict-divisibility endpoint $2$-CNF, retain one multigraph edge per
+clause and define
+\[
+\Xi_f(G)=\int_0^\infty
+\sum_{C\in\operatorname{comp}(G_t)}(|E(C)|-|V(C)|)_+\,dt,
+\]
+where $G_t$ is induced by vertices of weight at least $t$ and the sum is over
+components. A maximum-weight pseudoforest argument proves that deleting
+variables of total weight at most $\Xi_f(G)$ makes the formula satisfiable.
+Therefore
+\[
+\sum_{x\in F}f(x)\le\Xi_f(G_F)+4C_{\rm prim}.
+\]
+A uniform bound for $\Xi_f$ would solve the problem. Parallel clauses are
+essential. See `attempts/weighted_clause_excess.md`.
+
+### Sharp shell obstruction
+
+Neither endpoint route admits a summable shell-by-shell estimate. There are
+admissible mixed integer/half-integer sets in $[N,3N]$ whose least deletion
+weight permitting primitive adjacent rounding is $\Theta(1/\log N)$. There
+are also fixed seven-point, strict-divisibility contradictory cores in
+$[t,7t]$, and linearly many disjoint copies fit in one shell. Thus
+contradictory cycles need not cause quadratic scale growth, and their total
+repair cost can saturate the natural shell order. The unresolved issue is
+whether critical shells can recur cross-admissibly with divergent total
+weight. See `attempts/rounding_shell_obstructions.md`.

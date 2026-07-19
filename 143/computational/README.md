@@ -75,3 +75,17 @@ a proof of crystallization and not a computation of the transcendental
 $1/(x\log x)$ objective. A separate exact construction in
 `../attempts/qthick_bottleneck.md` shows that crystallization already fails
 for some other strictly decreasing weights.
+
+An additional exact run on 2026-07-18 was:
+
+```sh
+python3 143/computational/qthick_growth.py \
+  --q-values 2,3,4,5 --x-values 22 \
+  --objectives both --dp-limit 0 --compact
+```
+
+Every row again had all optimizers on $Q\mathbb N$, with a strictly positive
+forced-off-lattice gap. The harmonic optimum was
+$14117683/9699690$ and the dyadic-log optimum was
+$11546539/19399380$, independently of the tested $Q$. The slowest row took
+below $2.8$ seconds. This extends only the same finite surrogate evidence.

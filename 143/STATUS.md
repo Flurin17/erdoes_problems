@@ -232,3 +232,69 @@ bounded-weight deletion lemma strong enough to permit primitive endpoint
 rounding without the logarithmic loss. The three-point obstruction shows that
 such a lemma must charge complete implication cycles rather than pairwise
 conflicts. The main claim remains open.
+
+### Third focused wave (2026-07-18)
+
+#### Proved refinements
+
+- **Quotient-rough fiber-packet lemma:** the carrier/fiber products attached
+  to all members of a finite $Q$-admissible set are pairwise disjoint, with
+  carrier densities of the exact target order $1/(b\log b)$.
+- **Weighted pseudoforest deletion theorem:** for the endpoint clause
+  multigraph, a satisfiability deletion costs at most its scale-integrated
+  bicircular excess $\Xi_f$. Together with bounded label multiplicity, this
+  gives $\sum_F f\le\Xi_f(G_F)+4C_{\rm prim}$.
+- Adjacent rounding need not be injective: every label has multiplicity at
+  most two, with total real weight at most four times the integer-label
+  weight. Equality collisions should therefore not be treated as essential
+  clauses.
+- A strict-divisibility seven-point contradiction exists in $[t,7t]$, and
+  linearly many disjoint copies pack into one admissible shell.
+- A simpler mixed integer/half-integer block proves that the optimal endpoint
+  repair cost in one shell can be $\Theta(1/\log N)$ even without an
+  injectivity requirement.
+
+#### Eliminated strengthenings
+
+- Minimal contradictory endpoint cycles do not force quadratic or even
+  superlinear scale growth. Only the local two-clause-on-one-pair lemma has a
+  quadratic jump.
+- Cardinal degree, arboricity, and degeneracy of endpoint conflict graphs are
+  unbounded; only scale-weighted excess remains plausible.
+- A finite family of affine floor grids cannot give constant primitive
+  retention. Divisibility-tree configurations make every fixed grid retain
+  an arbitrarily small fraction, although their carrier scale is too large
+  to refute the target theorem.
+- In the stricter half-integer model where rounded labels must be injective,
+  bounded-window satisfiability has the sharp threshold $C=3$: all ceilings
+  work in $[N,3N]$, whereas explicit admissible contradictory families occur
+  in every sufficiently large $[N,CN]$ for $C>3$. Their contradiction uses
+  equality clauses, so it does not survive the bounded-multiplicity collapse.
+- No universal $z$-only integrable envelope can close the fiber-packet proof;
+  dense single shells saturate its pointwise bound at disjoint logarithmic
+  depths.
+
+#### Current route ranking and bottleneck
+
+1. **Periodic packet Hall inequality (highest):** prove or refute
+   \[
+   d\left(\bigcup_{n\in T}R_n\right)
+   \ge\kappa_a\sum_{n\in T}d(R_n)
+   \]
+   for quotient-rough packets inside every $Q$-admissible set. This directly
+   implies the uniform $Q$-thick estimate.
+2. **Scale-weighted clause excess:** prove $\Xi_f(G_F)=O(1)$, or the related
+   star-capped common-shift hazard bound. Both vanish on the known integer
+   optimizers and reciprocal blocks, but incur the sharp $1/\log N$ cost on
+   two-scale examples.
+3. **Critical-shell concatenation:** construct cross-admissible repaired-core
+   blocks at scales $R_j\asymp e^j$, which would give a divergent target sum,
+   or prove the carrier depletion that prevents such concatenation.
+4. **Continuum dilation:** finite fixed grids fail, but it remains open whether
+   some dilation $\lambda\in[1,2]$ always has a primitive rounded subset of
+   constant target-weight proportion.
+
+The main claim remains open. The common bottleneck is now sharper: control
+the cumulative recurrence of shell-order $1/\log N$ obstructions across one
+admissible multiscale configuration. Local cycle growth and local packet
+disjointness are both insufficient.
