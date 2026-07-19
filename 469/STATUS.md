@@ -73,7 +73,9 @@ Phase 0 is complete and a 27-route constructive wave has been run.  The main
 claim remains open locally.  The reciprocal subseries is proved convergent
 for every fixed value of \(\omega(n)\), and the primitive-nondeficient branch
 is summable.  The unsummed branch is localized to minimal semiperfect
-extensions of primitive weird cores.
+extensions of primitive weird cores.  A second wave replaced the scalar
+defect by an exact gap-set recursion and exhibited a rigorously certified
+full reset \(1\to5\to1\) before terminal activation.
 
 ## Ambiguities and conventions
 
@@ -104,6 +106,12 @@ extensions of primitive weird cores.
   \(P^-(v)\leq2\omega(v)\sigma(u)\) for coprime \(n=uv\in A\).
 - New-prime extensions obey an exact subset-sum-defect recurrence; above the
   activation threshold, \(\delta(mp)=p\delta(m)-\sigma(m)\).
+- The full gap sets satisfy
+  \(K_{mp}=(pK_m-T_m)\cap\mathbb Z_{>0}\) and
+  \(T_{mp}=T_m+pT_m\) for every new prime.  Failed primes obey the weighted
+  sampled-hole inequality (G5) in `NOTES.md`.
+- Along a new-largest-prime edge, the full gap set grows by at least the
+  factor \(\omega(m)+2\), with the corresponding harmonic lower bound.
 - Carry paths for \(p^am\in A\) are shortest paths, yielding
   \(a(p-1)<\sigma(m)\).
 - With standard Chebyshev/Mertens/Brun--Titchmarsh inputs, nondeficient \(n\)
@@ -118,14 +126,19 @@ extensions of primitive weird cores.
 - \(770=70\cdot11\in A\), so a weird-core transition may be coprime.
 - \(70\cdot149\cdot1489\in A\), giving a two-step chain of abundant
   nonsemiperfect proper divisors.
+- The scalar gap can reset completely:
+  \(g(70)=1\), \(g(70\cdot149)=5\), and
+  \(g(70\cdot149\cdot4051)=1\); nevertheless
+  \(70\cdot149\cdot4051\cdot4177\in A\).  Every witness and cover check is
+  certified by `computational/verify_reset_chain.py`.
 - Ordinary antichainness, entropy, witness multiplicity, and first subset-sum
   gaps alone are insufficient; the infinite \(2^ap\) family may have unique
   witnesses.
 
 ### Route ranking
 
-1. **Defect extension tree:** exact and constructive; needs a uniform
-   contraction surviving failed-hit resets.
+1. **Gap-set extension tree:** exact and constructive; the scalar reset is
+   now understood, but a uniform weighted bound for sampled holes is missing.
 2. **Carry automaton / valuation faces:** gives prime and exponent bounds;
    needs a global count of shortest accepting paths.
 3. **Primitive-core charge:** the primitive-nondeficient branch is closed;
@@ -147,14 +160,22 @@ extensions of primitive weird cores.
   \(A(x)\ll x/\log x\) is not summable.
 - Fixed-\(\omega\) bounds cannot presently be summed over \(\omega\).
 - Fourier/entropy multiplicity bounds miss infinite unique-witness families.
+- Any monotonic argument using only \(g(m)\) or \(\sigma(m)/g(m)\) fails:
+  the certified chain above resets the gap from 5 to 1 in one failed edge.
 
 ### Current bottleneck
 
 - Prove a uniform weighted bound for terminal nodes in the exact extension
-  tree above each primitive weird core.  It must control thin-shell products
-  and failed hits \(p\leq Q(m)=\sigma(m)/\delta(m)\), including resets such as
-  \(70\to70\cdot149\to70\cdot149\cdot1489\).  Alternatively, turn such reset
-  chains into a divergent explicit family.
+  tree above each primitive weird core.  In set form, failed primes satisfy
+  \[
+   \sum_p\frac1p\sum_{\substack{r\in K_m\\r\le\sigma(m)/p}}\frac1r
+   \le\sum_{\substack{h\le\sigma(m)\\h\notin T_m}}
+          \frac{\omega(h)}h.
+  \]
+  The missing step is to control this sampled-hole budget uniformly when the
+  truncated gap set is thin, while exploiting gap-set amplification after a
+  reset.  Alternatively, such resets must be organized into a divergent
+  explicit family.
 
 ### Proof dependency graph
 
@@ -167,8 +188,8 @@ extensions of primitive weird cores.
   extensions using any fixed number of new prime supports have finite mass.
 - **D4 (proved in several subregimes):** no-carry, repeated-largest-prime,
   and large-gap weird extensions are summable.
-- **D5 (open):** a uniform weighted bound for arbitrarily long chains of
-  dense failed activations above changing weird cores.
+- **D5 (open, sharpened):** a uniform sampled-hole/gap-amplification bound for
+  arbitrarily long chains of failed activations above changing weird cores.
 - **Global convergence** follows from D0--D5.  All dependencies except D5 are
   locally closed.  A divergence proof instead needs a branching construction
   inside D5 with verified minimality and a noncontracting reciprocal mass.
@@ -176,7 +197,9 @@ extensions of primitive weird cores.
 ### Next assignments
 
 - Complete and audit the route-tournament files in `attempts/`.
-- Seek reciprocal contraction in the defect tree, separately for safe primes
-  and failed hits.
+- Seek reciprocal contraction in the gap-set tree, separately for
+  \(p>\sqrt{\sigma(m)}\) (multiplicity-free holes) and smaller failed primes.
+- Test whether thin truncated gap sets force a dense boundary interval after
+  the next failed extension; preserve exact reset counterexamples.
 - Audit the analytic primitive/nondeficient theorem and carry automaton.
 - Extend computation while recording defects, failed hits, and parent types.

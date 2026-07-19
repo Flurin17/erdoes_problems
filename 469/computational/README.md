@@ -17,3 +17,17 @@ an apparent density trend is not used as an asymptotic proof.
 
 Add `--include-members` to print the complete list.  By default the output
 contains its SHA-256 digest and the first and last 25 entries.
+
+## Reset-chain certificate
+
+Run
+
+```sh
+python3 computational/verify_reset_chain.py
+```
+
+This deterministic script verifies the exact subset-sum intervals for 70,
+the gap chain \(1\to5\to1\), the explicit final witness for
+\(70\cdot149\cdot4051\cdot4177\), and all six prime-cover minimality checks.
+Unlike the bounded enumerator, these assertions constitute a finite
+certificate for the displayed integer.

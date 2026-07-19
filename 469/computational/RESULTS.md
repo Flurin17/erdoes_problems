@@ -30,3 +30,26 @@ This run is a correctness fixture and a source of conjectures only.
 The same command was rerun on 2026-07-18 UTC after the reporting changes.
 Every assertion again passed, the count remained 128, and the member-list
 hash was unchanged.  Script-reported runtime was 0.134493 seconds.
+
+## Exact full-reset certificate
+
+Command:
+
+```sh
+python3 computational/verify_reset_chain.py
+```
+
+Environment date: 2026-07-18 UTC.  Output:
+
+```text
+verified_terminal=176486311610
+witness_terms=32
+gap_chain=1,5,1
+cover_checks=6
+runtime_seconds=14.887415
+```
+
+All assertions passed.  The script independently constructs a 32-term
+proper-divisor witness and verifies nonsemiperfectness of every prime cover,
+so the displayed terminal integer belongs to \(A\).  This is a finite exact
+certificate; it is not evidence that reset chains recur infinitely often.

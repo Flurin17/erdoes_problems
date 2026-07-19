@@ -197,6 +197,134 @@ and only if there is an integer \(h\geq1\) such that \(m-h\) is a subset sum
 of proper divisors of \(m\), and \(ph\) is a subset sum of all divisors of
 \(m\).  This follows by writing a witness uniquely as \(pU+V=pm\).
 
+## Full gap-set evolution
+
+The scalar defect loses essential information.  For nonsemiperfect \(m\), put
+\[
+ T_m=\Sigma(D(m)),\qquad
+ K_m=\{m-s>0:s\in\Sigma(D^*(m)),\ s<m\}.
+\]
+Thus \(g(m)=\min K_m\).  For an arbitrary multiplier \(c\), let
+\[
+ V_c(mc)=\{d:d\mid mc,\ c\nmid d\},\qquad
+ L_{m,c}=\Sigma(V_c(mc)).
+\]
+The disjoint decomposition
+\(D^*(mc)=cD^*(m)\sqcup V_c(mc)\) gives the exact identities
+\[
+ K_{mc}=(cK_m-L_{m,c})\cap\mathbb Z_{>0},                    \tag{G1}
+\]
+and
+\[
+ mc\text{ is semiperfect}\quad\Longleftrightarrow\quad
+ cK_m\cap L_{m,c}\ne\varnothing.                            \tag{G2}
+\]
+Indeed, a subset sum below \(mc\) has the form \(cu+v\).  Necessarily
+\(u<m\), and its deficit is \(c(m-u)-v\); equality to zero is exactly a
+semiperfect witness.
+
+For a new prime \(p\nmid m\), these formulas specialize to
+\[
+ T_{mp}=T_m+pT_m,\qquad
+ K_{mp}=(pK_m-T_m)\cap\mathbb Z_{>0},                         \tag{G3}
+\]
+with activation exactly when \(pK_m\cap T_m\ne\varnothing\).  Hence, if the
+extension fails,
+\[
+ g(mp)=\min\{pr-s>0:r\in K_m,\ s\in T_m\}.                  \tag{G4}
+\]
+
+This set formulation yields a rigorous weighted hole bound.  Put
+\(M=\sigma(m)\), let \({\cal F}\) be any set of new primes for which \(mp\)
+is nonsemiperfect, and write
+\(H_m(x)=\sum_{r\in K_m,\ r\le x}1/r\).  Since every product \(pr\le M\)
+with \(p\in{\cal F}\) is a hole of \(T_m\), double counting by \(h=pr\)
+gives
+\[
+ \sum_{p\in{\cal F}}\frac{H_m(M/p)}p
+ \leq\sum_{\substack{1\le h\le M\\h\notin T_m}}
+       \frac{\omega(h)}h.                                   \tag{G5}
+\]
+For the subfamily \(p>\sqrt M\), a number \(h\le M\) has at most one such
+prime divisor, so \(\omega(h)\) may be replaced by 1.  This is exact progress
+on failed activations, but no uniform bound for the right side is known.
+
+The full gap set also amplifies along a failed new-largest-prime edge.  If
+\(p>P^+(m)\), then
+\(B=\{0,1\}\cup\{q:q\mid m,\ q\text{ prime}\}\) consists of
+\(\omega(m)+2\) distinct elements of \(T_m\cap[0,p)\).  The values
+\(pr-b\), \(r\in K_m,b\in B\), are positive and pairwise distinct.  Thus
+\[
+ |K_{mp}|\ge(\omega(m)+2)|K_m|,
+ \qquad
+ \sum_{u\in K_{mp}}\frac1u
+ \ge\frac{\omega(m)+2}{p}\sum_{r\in K_m}\frac1r.           \tag{G6}
+\]
+The scalar minimum can therefore reset while the retained set of gaps grows.
+
+### A complete scalar reset chain
+
+The reset phenomenon already occurs in an exact member of \(A\).  Since
+\[
+ T_{70}=[0,3]\cup[5,139]\cup[141,144],
+\]
+the core 70 has gap 1.  Put \(m_1=70\cdot149\).  Because \(149>144\), (G3)
+is injective and gives \(g(m_1)=149-144=5\).  The only possible activating
+gap for the prime 4051 is 5, but
+\[
+ 5\cdot4051=149\cdot135+140\notin T_{m_1}
+\]
+because the unscaled residue must lie in \([0,144]\) and
+\(140\notin T_{70}\).  Thus \(m_2=m_1\cdot4051\) is
+nonsemiperfect.  On the other hand
+\[
+ 5\cdot4051-1=149\cdot135+139\in T_{m_1},
+\]
+so (G4) gives \(g(m_2)=1\).  Finally
+\[
+ 4177=4051+70+35+14+7\in T_{m_2},
+\]
+and hence \(m_2\cdot4177\) is semiperfect.
+
+For an explicit witness, set
+\[
+ U_1=D(70)\cup149\{1,2,7,10,14,35\},
+\]
+\[
+ V_1=(D(70)\setminus\{5\})
+       \cup149(D(70)\setminus\{2,7\}),
+\qquad U_2=4051U_1\cup V_1.
+\]
+Then \(\sum U_1=m_1-5\), \(\sum V_1=5\cdot4051-1\), and
+\(\sum U_2=m_2-1\).  Therefore
+\[
+ 4177U_2\cup\{4051,70,35,14,7\}
+\]
+is a set of distinct proper divisors summing to
+\[
+ N=70\cdot149\cdot4051\cdot4177=176486311610.               \tag{G7}
+\]
+Every cover of \(N\) is nonsemiperfect.  Removing 4177 leaves \(m_2\).
+Removing 4051 leaves the failed extension \(m_1\cdot4177\): again the only
+possible gap is 5, and
+\(5\cdot4177=149\cdot140+25\notin T_{m_1}\).  Removing 149 leaves
+\(70\cdot4051\cdot4177\), which fails the necessary capacity inequality
+\[
+ 4051\cdot4177\le144(4051+4177+1).
+\]
+For the three remaining covers, put
+\[
+ C=\frac{150}{149}\frac{4052}{4051}\frac{4178}{4177}
+   <\left(\frac{150}{149}\right)^3<\frac{10}{9}.
+\]
+After removing 2, 5, or 7, the contribution of the surviving core primes is
+at most \(9/5\), so each cover has abundancy below \((9/5)(10/9)=2\) and is
+deficient.  The three large factors are prime by trial division through their
+square roots.  The cover test now proves \(N\in A\).  The deterministic
+certificate in
+`computational/verify_reset_chain.py` checks every displayed identity and
+the explicit witness.
+
 ## Fixed support size
 
 ### Theorem 6

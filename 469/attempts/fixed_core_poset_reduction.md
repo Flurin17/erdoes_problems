@@ -93,7 +93,7 @@ r\le[1-(1+1/S)^{-1/k}]^{-1}\le4kS. \tag{6}
 Write \(c=r^a u\), \((r,u)=1\). If \(u>1\), then \(Br^a\) is
 nonsemiperfect and \(u\in C_{Br^a}\), with \(\omega(u)\le k-1\). Therefore
 \[
-F_k(B)\le\sum_{\substack{2\le r\le4kS\\ r\ {m prime}}}\sum_{a\ge1}
+F_k(B)\le\sum_{\substack{2\le r\le4kS\\ r\ {\rm prime}}}\sum_{a\ge1}
 \frac{1+F_{k-1}(Br^a)}{r^a}. \tag{7}
 \]
 Now \(\sigma(Br^a)\le2Sr^a\), and for \(L=1+\log(2S)\),

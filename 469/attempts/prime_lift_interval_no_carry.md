@@ -191,7 +191,7 @@ lifting.
 We now sum all integers of the form
 
 \[
- n=uq^ap,qquad q>s=\sigma(u),\quad p>q,quad uq^a\text{ weird},
+ n=uq^ap,\qquad q>s=\sigma(u),\quad p>q,\quad uq^a\text{ weird},
  \quad uq^ap\text{ semiperfect}.                              \tag{11}
 \]
 
@@ -213,8 +213,8 @@ a constant times
 
 \[
  {1\over u}K(s),\qquad
- K(s)=\sum_{\substack{s+2\le q<2s+1\\q\ {m prime}}}{1\over q}
-       \sum_{\substack{q<p\le sq/(q-1-s)\\p\ {m prime}}}{1\over p}.
+ K(s)=\sum_{\substack{s+2\le q<2s+1\\q\ {\rm prime}}}{1\over q}
+       \sum_{\substack{q<p\le sq/(q-1-s)\\p\ {\rm prime}}}{1\over p}.
                                                                     \tag{13}
 \]
 
@@ -235,7 +235,7 @@ Chebyshev's estimate and partial summation give, uniformly for
 It remains to prove
 
 \[
- \sum_{\substack{s+2\le q<2s+1\\q\ {m prime}}}
+ \sum_{\substack{s+2\le q<2s+1\\q\ {\rm prime}}}
        (1+\log(s/(q-1-s)))\ll {s\over\log(2s)}.               \tag{16}
 \]
 

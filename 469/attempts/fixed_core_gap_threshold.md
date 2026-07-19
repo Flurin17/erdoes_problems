@@ -239,7 +239,7 @@ Primitivity gives
 The same dyadic Brun--Titchmarsh/Chebyshev calculation gives, uniformly for
 \(t\ge4\),
 \[
- \sum_{\substack{q,p\ {m prime}\\
+ \sum_{\substack{q,p\ {\rm prime}\\
  q>t+1,\ q<p\le t(q+1)/(q-t)}}\frac1{qp}
  \ll\frac1{\log^2t}+\frac1{\sqrt t}.                         \tag{33}
 \]
@@ -401,3 +401,84 @@ Equations (48)--(55) exhibit an actual recursive relative-weird transition,
 not merely a weakness of the estimates. They also show exactly what remains
 for the fixed-fiber reciprocal question: unboundedly many such transitions
 would have to be controlled (or constructed with enough harmonic mass).
+
+## 7. Set-valued defects, sampled holes, and a full reset
+
+The scalar \(g(m)\) is too lossy for the recursion.  Retain instead
+\[
+ T_m=\Sigma(D(m)),\qquad
+ K_m=\{m-s>0:s\in\Sigma(D^-(m)),\ s<m\}.                     \tag{56}
+\]
+For every new prime \(p\nmid m\), divisor-layer decomposition gives
+\[
+ T_{mp}=T_m+pT_m,qquad
+ K_{mp}=(pK_m-T_m)\cap\mathbb Z_{>0}.                         \tag{57}
+\]
+If \(m\) is nonsemiperfect, then \(mp\) activates exactly when
+\(pK_m\cap T_m\ne\varnothing\).  If it remains nonsemiperfect, then
+\[
+ g(mp)=\min\{pr-s>0:r\in K_m,\ s\in T_m\}.                  \tag{58}
+\]
+
+These identities turn failed primes into sampled subset-sum holes.  With
+\(M=\sigma(m)\), define
+\[
+ H_m(x)=\sum_{\substack{r\in K_m\\r\le x}}\frac1r,
+ \qquad {\cal H}_m=\{1\le h\le M:h\notin T_m\}.
+\]
+For any set \({\cal F}\) of new primes such that \(mp\) is nonsemiperfect,
+\[
+ \boxed{\displaystyle
+ \sum_{p\in{\cal F}}\frac{H_m(M/p)}p
+ \le\sum_{h\in{\cal H}_m}\frac{\omega(h)}h.}               \tag{59}
+\]
+Indeed each pair \((p,r)\) on the left maps to the hole \(h=pr\), and its
+weight is \(1/h\); its multiplicity is at most \(\omega(h)\).  Restricting
+to \(p>\sqrt M\) removes the factor \(\omega(h)\), since \(h\le M\) has at
+most one prime divisor exceeding \(\sqrt M\).
+
+The gap set cannot collapse in cardinality along a failed new-largest-prime
+edge.  If \(p>P^+(m)\), take
+\[
+ B=\{0,1\}\cup\{q:q\mid m,\ q\text{ prime}\}
+ \subset T_m\cap[0,p).
+\]
+Reduction modulo \(p\) shows that \((r,b)\mapsto pr-b\) is injective on
+\(K_m\times B\), while all its values are positive.  Hence
+\[
+ |K_{mp}|\ge(\omega(m)+2)|K_m|,
+ \qquad
+ \sum_{u\in K_{mp}}\frac1u
+ \ge\frac{\omega(m)+2}{p}\sum_{r\in K_m}\frac1r.           \tag{60}
+\]
+
+Nevertheless the scalar minimum can reset completely.  Put
+\[
+ m_1=70\cdot149,qquad m_2=m_1\cdot4051.
+\]
+From (40), \(g(70)=1\) and \(g(m_1)=149-144=5\).  Since
+\[
+ 5\cdot4051=149\cdot135+140,
+ \qquad 140\notin T_{70},                                   \tag{61}
+\]
+4051 is an eligible failed prime.  But
+\[
+ 5\cdot4051-1=149\cdot135+139\in T_{m_1},                  \tag{62}
+\]
+so \(g(m_2)=1\).  The next prime activates because
+\[
+ 4177=4051+70+35+14+7\in T_{m_2}.                           \tag{63}
+\]
+The explicit witness and all six cover checks are recorded in `NOTES.md`
+and verified by `computational/verify_reset_chain.py`; they prove
+\[
+ \boxed{70\cdot149\cdot4051\cdot4177\in A}.                \tag{64}
+\]
+
+Thus a proof cannot assume that \(g\), or equivalently
+\(R=\sigma/g\), changes monotonically in a favorable direction.  The
+sharpened unresolved estimate is a uniform upper bound for the weighted
+sampled-hole budget (59), coupled to the amplification (60), strong enough
+to make terminal reciprocal mass summable over arbitrary chains.  The
+factor \(\omega(h)\) for small primes and the possible thinness of truncated
+gap sets are the first exact obstructions.
