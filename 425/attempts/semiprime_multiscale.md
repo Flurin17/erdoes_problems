@@ -11,11 +11,26 @@ PROOF.md proves
 The coefficient is the exact optimum for disjoint reciprocal interval
 components constructed from rectangular projective-plane incidence graphs.
 
+The binary mixed-rank design in `mixed_rank_design.md` now proves two
+strictly stronger facts:
+\[
+ \liminf\frac{F(n)-\pi(n)}{n^{3/4}(\log n)^{-3/2}}
+ \ge c_0+\eta
+\]
+for some absolute \(\eta>0\), and
+\[
+ \limsup\frac{F(n)-\pi(n)}{n^{3/4}(\log n)^{-3/2}}
+ \ge c_*=3.0009864793\ldots>3,
+\]
+where `mixed_rank_design.md` gives the exact radical expression and a
+rational certificate for the last inequality.
+
 ## Current global bottleneck
 
-This interval optimum is not yet the optimum over all \(C_4\)-free graphs
-supported by \(pq\le n\).  Aggregate two-path inequalities allow a strictly
-larger fractional profile.
+The disjoint-interval optimum is not the optimum over all \(C_4\)-free graphs
+supported by \(pq\le n\): the mixed-rank construction beats it uniformly.
+The exact optimum remains unknown.  Aggregate two-path inequalities allow an
+even larger fractional profile than the one currently constructed.
 
 Using two consecutive Bellman blocks with normalized masses
 \[
@@ -44,6 +59,125 @@ where
 \]
 At the proposed profile this is far from obstructing the coupling.
 
+## Resolved strict coupling: a binary mixed-rank design
+
+Let \(q=2^k\), \(F=\mathbb F_q\), and
+\(G=F\oplus\mathbb F_2\).  There are two families of affine graphs on
+\(G^2\), one restricted to \((F\oplus0)^2\), with typed parameters
+\[
+ |X_1|=|A|q,\quad |X_2|=2|B|q,
+ \quad |Y_1|=q^2,\quad |Y_2|=3q^2,
+\]
+\[
+ d(X_1)=q,\qquad d(X_2)=2q,\qquad d_{Y_1}(X_2)=q/2.
+\]
+Every two left neighborhoods meet in at most one point whenever
+\(A\cap B=\varnothing\).  The mechanism is an explicit family of linear maps
+whose within-type differences are invertible and whose cross-type
+restrictions are injective.  The complete maps and proof are in
+`mixed_rank_design.md`.
+
+Applied to adjacent Bellman levels \(j,j+1\), with
+\(q^2=(y_{j+1}/3)U(n)\), this replaces
+\[
+ x_j\sqrt{y_j}+x_{j+1}\sqrt{y_{j+1}}
+\]
+by
+\[
+ (x_j+2x_{j+1})\sqrt{y_{j+1}/3}.
+\]
+The ratio of the new and old quantities tends to
+\[
+ \frac{4-\sqrt5}{\sqrt3}>1.
+\]
+Powers of two do not cause a liminf loss: the logarithmic scales of the
+Bellman levels form an irrational rotation, a finite collection of levels
+covers every scale phase, and a one-sided phase interval supplies fixed
+resource slack.  This is the first proved coupling beyond disjoint
+rectangular components.
+
+## Stronger fractional profile and graph-packing reduction
+
+It is useful to write \(h=y+w\) and to use \(N\) for the common linear
+scale.  The coupled profile is equivalent to a family of blocks on
+\(X_1\sqcup X_2\) with
+\[
+ |X_1|=xN,\quad |X_2|=zN,
+\]
+\[
+ yN\text{ blocks of type }(a\sqrt N,b\sqrt N),\qquad
+ wN\text{ blocks of type }(0,b\sqrt N),
+\]
+where
+\[
+ a=\frac{x}{\sqrt y},\qquad b=\frac z{\sqrt h}.
+\]
+Every pair of ground points must occur in at most one block.  The \(X_1\)
+and \(X_2\) pair budgets are asymptotically saturated, while the mixed-pair
+load is
+\[
+ \rho=\sqrt{y/h}=0.517638\ldots .
+\]
+
+Each marginal design exists with only \(o(N^2)\) uncovered pairs.  Over
+\(\mathbb F_q\), choose \(S\subseteq\mathbb F_q\), take points
+\((\alpha,\beta)\in S\times\mathbb F_q\), and index blocks by
+\((t,u)\in\mathbb F_q^2\), with
+\[
+ (\alpha,\beta)\in B_{t,u}\quad\Longleftrightarrow\quad
+ u=\alpha t+\beta.
+\]
+Every block has size \(|S|\), and two points of different first coordinate
+lie in exactly one common block.  Taking
+\[
+ q_1^2\sim yN,\quad |S_1|\sim a\sqrt N,
+\qquad
+ q_2^2\sim hN,\quad |S_2|\sim b\sqrt N
+\]
+realizes the two saturated same-part profiles.
+
+Thus the only missing condition is a graph packing.  Let \(H_i\) be the
+intersection graph of the blocks in the \(i\)-th marginal design.  One must
+inject all \(yN\) vertices of \(H_1\) into the \(hN\) vertices of \(H_2\) so
+that
+\[
+ E(\phi(H_1))\cap E(H_2)=\varnothing.                 \tag{GP}
+\]
+For exact \(2\)-design marginals the leading degrees and edge densities are
+\[
+ \deg H_1=xN+O(\sqrt N),\quad \frac{\deg H_1}{|H_1|}
+   \to\frac xy,
+\]
+\[
+ \deg H_2=zN+O(\sqrt N),\quad \frac{\deg H_2}{|H_2|}
+   \to\frac zh.
+\]
+All immediate capacity tests have large slack; in particular
+\[
+ \frac xy+\frac zh=0.21529\ldots<1.
+\]
+Weighted rank/frame-potential inequalities, local pencil bounds, and the
+known spectra of the marginal block graphs also leave a fixed positive
+margin.  Consequently (GP), not a marginal design or pair-count issue, is the
+precise bottleneck for this *stronger saturated profile*.  It is no longer a
+bottleneck to proving that some coupling beats \(c_0\).
+
+There is an equivalent lift formulation.  For a finite group \(\Gamma\),
+assign a difference set \(S_{ur}\subseteq\Gamma\) to every macro incidence
+and lift by
+\[
+ (u,g)\sim(r,h)\quad\Longleftrightarrow\quad h-g\in S_{ur}.
+\]
+The lift is \(C_4\)-free exactly when, for every ordered macro pair \(u,v\),
+the cross-difference multisets
+\[
+ S_{ur}-S_{vr}
+\]
+are internally simple and mutually disjoint as \(r\) varies (with zero
+omitted for \(u=v\)).  The fractional pair inequalities record only the
+cardinality conditions for this typed strong difference family; they do not
+construct it.
+
 ## Algebraic routes eliminated
 
 The desired two-level coupling cannot arise from any of the following
@@ -64,6 +198,26 @@ standard templates.
 6. Random embedding: a positive fraction of mixed pairs have codegree at
    least two, and repairing them loses \(\Theta(Q^3)\) incidences.
 
+More precisely, in the \(N\)-scale notation, independent random blocks have
+same-part pair codegrees tending to \(\operatorname{Pois}(1)\) and mixed
+codegrees tending to \(\operatorname{Pois}(\rho)\).  The expected excess
+\((C-1)_+\) is \(1/e\) in the saturated classes and
+\(\rho-1+e^{-\rho}>0\) in the mixed class.  Hence deletion-only repair loses
+\(\Theta(N)\) blocks, or \(\Theta(N^{3/2})\) incidences: a nonvanishing
+fraction of the desired contribution.
+
+The obstruction to the usual affine subnet is particularly sharp.  The
+marginal field orders have ratio
+\[
+ q_1/q_2=\rho>1/2.
+\]
+After two source parallel classes are embedded direction-by-direction, their
+carrier is an \(A\times B\) grid with \(|A|=|B|=q_1\).  Every line of a third
+ambient direction meets that grid because \(2q_1>q_2\), so the class would
+need all \(q_2\), rather than \(q_1\), ambient lines.  This rules out the
+standard direction-preserving affine/subnet ansatz, but not a nonlinear
+packing satisfying (GP).
+
 ## Falsification computation
 
 For \(U=Q^2\), solve the exact \(C_4\)-free four-part problem on allowed
@@ -73,10 +227,12 @@ blocks
 \]
 with part sizes nearest \(Ux,Uz,Uy,Uw\).  Determine whether the optimum divided
 by \(Q^3\) approaches the diagonal or the coupled fractional value.  This is
-the first computational obligation for the lower route.
+a useful optimization experiment, but it is no longer needed to establish a
+strict improvement over the disjoint Bellman construction.
 
 ## Next proof obligation
 
-Either construct a genuinely distributed mixed orthogonal array attaining
-the coupled value, or prove a higher-order packing inequality not implied by
-two-path/codegree constraints.
+Generalize and optimize the mixed-rank family over several adjacent levels.
+For the stronger saturated profile, either construct the typed strong
+difference family (equivalently, solve (GP)) or prove a higher-order packing
+inequality not implied by two-path, rank, spectral, or codegree constraints.

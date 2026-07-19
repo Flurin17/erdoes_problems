@@ -290,7 +290,88 @@ telescopes. Equality starts with \(b_0=\sqrt{2/3}\) and obeys
 \]
 The complete collision, projective-plane sizing, orientation, and limiting
 argument is in PROOF.md. This optimizes the disjoint interval-incidence
-architecture only; coupled components remain a separate question.
+architecture only; the next theorem shows that coupling adjacent levels
+strictly improves it.
+
+### Lemma 4.2 (binary mixed-rank typed design)
+
+Let \(q=2^k\), \(F=\mathbb F_q\), \(G=F\oplus\mathbb F_2\), and
+\(H=F\oplus0\). Choose \(\gamma\in F\) with
+\(\operatorname{Tr}(\gamma)=1\), put \(\sigma(b)=b^{q/2}\), and define
+\[
+ S_a(x)=ax,\qquad
+ T_b(x,t)=\left(bx+t\sigma(b),
+   \operatorname{Tr}(\gamma\sigma(b)x)\right).
+\]
+For disjoint \(A_0,B_0\subseteq F\), with \(0\notin B_0\), the affine
+graphs of the \(S_a\) on \(H^2\) and of the \(T_b\) on \(G^2\) form a
+\(C_4\)-free bipartite graph with typed parameters
+\[
+ |X_1|=|A_0|q,\quad |X_2|=2|B_0|q,\quad
+ |Y_1|=q^2,\quad |Y_2|=3q^2,
+\]
+\[
+ d(X_1)=q,\qquad d(X_2)=2q,\qquad d_{Y_1}(X_2)=q/2.
+\]
+
+Proof. If \(d\ne0\), set \(r=\sqrt d\). The equations
+\(T_d(x,t)=0\) give \(r^2x+tr=0\) and
+\(\operatorname{Tr}(\gamma r x)=0\), hence \(x=t/r\) and then
+\(t=0\). Thus every nonzero difference within the \(T\)-family is
+invertible. Differences within the \(S\)-family are nonzero scalar maps,
+while a cross difference restricted to \(H\) has first coordinate
+\((b-a)x\) and is injective because \(A_0\cap B_0=\varnothing\). Therefore
+two affine graphs meet in at most one point. For \(b\ne0\), intersection of
+a \(T_b\)-graph with \(H^2\) imposes one nonzero affine trace equation on
+\(x\in F\), giving exactly \(q/2\) points. The remaining counts follow
+directly. ∎
+
+### Theorem 4.3 (strict coupled lower bounds)
+
+There is an absolute \(\eta>0\) such that
+\[
+ \liminf_{n\to\infty}
+ \frac{F(n)-\pi(n)}{n^{3/4}(\log n)^{-3/2}}
+ \ge \frac{2^{11/4}}{3^{3/4}}+\eta.                           \tag{4.1}
+\]
+Moreover,
+\[
+ \limsup_{n\to\infty}
+ \frac{F(n)-\pi(n)}{n^{3/4}(\log n)^{-3/2}}
+ \ge c_*>3,                                                    \tag{4.2}
+\]
+where, with
+\[
+ x=1/\sqrt{18},\quad y=\sqrt{3/2},\quad
+ d=\sqrt{(\sqrt3-1)/2},\quad
+ z=\frac{\sqrt3-1}{\sqrt{18}}d,\quad
+ w=\frac{\sqrt6+3\sqrt2}{2},
+\]
+\[
+ c_*=\frac{2^{11/4}}{3^{3/4}}
+ +2\sqrt2\left[(x+2z)\sqrt{w/3}-x\sqrt y-z\sqrt w\right]
+ =3.0009864793\ldots .
+\]
+
+Proof. Apply Lemma 4.2 to Bellman levels \(1,2\), using right-part sizes
+\(q^2,3q^2\). At \(q^2=(w/3)U(n)\), where
+\(U(n)=2\sqrt n/\log n\), the old coefficient
+\(x\sqrt y+z\sqrt w\) is replaced by
+\((x+2z)\sqrt{w/3}\), giving (4.2). Exact rational bounds proving
+\(c_*>3\), including all resource slack and subsequence quantifiers, are in
+PROOF.md, Sections 5--6.
+
+For (4.1), at general adjacent levels put \(c_j=y_{j+1}/3\). The ratio of
+the exact-scale mixed coefficient to the old two-level coefficient tends to
+\[
+ \frac{4-\sqrt5}{\sqrt3}>1.
+\]
+Also \(\tfrac12\log_2c_j=j(-\log_2\delta)+C+o(1)\), with
+\(\delta=(\sqrt5-1)/2\) and \(-\log_2\delta\) irrational. A finite set of
+large levels therefore covers every power-of-two scale phase with a fixed
+one-sided slack. Replacing the selected adjacent pair and then fixing a
+Bellman truncation yields a uniform positive gain. The dependency-complete
+phase, resource, PNT, and tail argument is in PROOF.md, Section 7. ∎
 
 For reference, the elementary bipartite $C_4$ count gives, for part sizes
 $s,t$ and $e$ edges,
@@ -370,14 +451,78 @@ trade without containing an even cycle.
   \]
   These values are normalization checks, not evidence for an asymptotic.
 
-## 7. Current open obligations
+## 7. Comparable canonical two-prime factors
+
+### Lemma 7.1 (two complementary flattenings)
+
+Fix \(K\ge1\). Let \(\mathcal T\) be an injectively selected family of
+triples
+\[
+ a=dpq\in A,\qquad p\le q\le Kp,\qquad d\le pq,
+\]
+where \(p,q\) are prime and \(A\subseteq[n]\) is pair admissible. Then
+\[
+ |\mathcal T|\ll_K n^{3/4}(\log n)^{-3/2}.
+\]
+
+Indeed, on the dyadic scale \(P\le p<2P\), set
+\(D\ll_K\min(P^2,n/P^2)\) and \(\ell=\log(2P)\). The two tagged bipartite
+graphs
+\[
+ d\;--\;(pq),\qquad (d,p)\;--\;q
+\]
+are \(C_4\)-free, since a rectangle in either graph gives four distinct
+members of \(A\) in a multiplicative rectangle. Their oriented \(C_4\)
+bounds are
+\[
+ E_P\ll_K D+\frac{P^2\sqrt D}{\ell^2},
+\qquad
+ E_P\ll_K\frac{DP}{\ell}
+       +\frac{\sqrt D\,P^{3/2}}{\ell^{3/2}}.
+\]
+Using the first estimate for
+\(P\le n^{1/4}\sqrt{\log n}\), the second above that threshold, and summing
+dyadically gives the assertion. The detailed endpoint calculation is in
+attempts/arithmetic_upper.md.
+
+For a canonical decomposition \(a=dx\), with \(d\) the largest divisor of
+\(a\) at most \(\sqrt a\), the case \(x=pq\) meets every hypothesis:
+\(d\le pq\), and the ordered factorization \(p\le q\) is unique. The lemma
+therefore closes the full comparable canonical \(\Omega(x)=2\) sector,
+including large or nonsmooth kernels. Canonicity is indispensable: a graph
+containing every possible factorization may have formal rectangles whose
+edges repeat the same integers.
+
+### Lemma 7.2 (a too-large kernel prime is lower order)
+
+In the setting of Lemma 7.1, put \(r=P^+(d)\). The subfamily with \(r>q\)
+has size
+\[
+ O_K\!\left(n^{3/4}(\log n)^{-2}\right).
+\]
+Writing \(d=hr\), one has \(h<p\). On dyadic scales \(h\asymp H\),
+\(p\asymp Q\), the graph \(hpq--r\) is \(C_4\)-free and has part sizes
+\[
+ O_K(HQ^2/\log^2(2Q)),\qquad
+ O_K\!\left(\frac{\min(Q^2/H,n/(HQ^2))}{\log(2Q)}\right).
+\]
+The oriented \(C_4\) bound, followed by dyadic summation, gives the claim;
+the complete calculation is in attempts/arithmetic_upper.md.
+
+Pointwise canonical smoothness is false. Bertrand's postulate supplies
+primes \(p<q<2p\) and \(pq/2<r<pq\); for \(a=pqr\), the canonical lower
+factor is \(d=r\), so \(P^+(d)\asymp p^2\). Lemma 7.2 shows that these
+exceptions are nevertheless negligible on the target scale.
+
+## 8. Current open obligations
 
 1. Decide whether the explicit coupled four-part \(C_4\)-free packing can
    beat the proved Bellman coefficient; ordinary two-path inequalities do not
    decide it.
-2. Close the critical-band cross-kernel upper lemma after applying canonical
-   roughness, colored rectangles, exchange charging, and the proved tail
-   bounds.
+2. Synthesize the remaining one-prime and at-least-three-prime canonical
+   factors with the prime-deficit ledger, then sharpen the resulting order
+   bound toward an exact leading constant. The formerly open comparable
+   two-prime critical band is closed by Lemma 7.1.
 3. Determine whether the weighted semiprime optimum has a limit and prove
    that higher-composite layers cannot improve the resulting constant.
 4. For fixed \(r\), prove the remaining smooth-core estimate after the
