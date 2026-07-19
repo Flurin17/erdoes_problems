@@ -2,16 +2,20 @@
 
 ## Goal
 
-Verify and finalize the corrected sharp theorem
+Produce an Erdős-submission-ready package for the corrected sharp theorem
 \[
 \log_3M_k=k(\log_3k+\gamma-\mu)+o(k),
 \qquad
 F(n)=\frac{\log_3n}{\log_6n+\gamma-\mu+o(1)},
 \]
 where $\mu=\sum_p p^{-1}\log(p/(p-1))$.  This disproves a positive-constant
-$\log_3n$ law.  Also finalize the $k=4$ counterexample to decreasing finite
+$\log_3n$ law.  The package must include a dependency-complete readable proof,
+reproducible finite computations, an explicitly corresponding Lean theorem
+with no `sorry`, `admit`, `sorryAx`, or problem-specific axiom, exact
+Lean/mathlib build information and `#print axioms` disclosure, and an AI-use
+statement.  Also retain the $k=4$ counterexample to decreasing finite
 extremality and the fixed-$k$ frequency theorem/counterexample for the natural
-order.
+order, but do not let subsidiary claims obscure the formalized main claim.
 
 ## Context
 
@@ -55,6 +59,10 @@ order.
   \log_3M_k=k(\log_3k+a+o(1))
   \]
   into $F(n)=\log_3n/(\log_6n+a+o(1))$.
+- Existing candidate artifacts are `PROOF.md`, `NOTES.md`, the route files in
+  `attempts/`, and the deterministic programs in `computational/`.  There was
+  no Lean project or formal proof at the start of this submission-readiness
+  run.
 
 ## Constraints
 
@@ -71,6 +79,12 @@ order.
   CRT architecture.  Frequency claims may not assume independence of shifted
   totients.
 - Preserve unrelated worktree changes.  Only the root agent may commit or push.
+- A compiled declaration is not accepted as a formal proof if its transitive
+  axioms include `sorryAx` or a custom axiom encoding the desired conclusion.
+  Standard Lean axioms must be disclosed rather than hidden.
+- Pin the exact Lean/mathlib revision and give commands that work from a clean
+  checkout.  Do not claim that formalization covers more of the source problem
+  than the formal theorem actually states.
 
 ## Deliverables
 
@@ -86,24 +100,69 @@ order.
    clearly labeled complete, conditional, or partial.
 6. Coherent mathematical milestones committed and pushed without including
    unrelated user changes.
+7. A self-contained Lean project under `lean/`, with a named main theorem,
+   exact toolchain/library pins, clean `lake build`, clean source scan for
+   `sorry`/`admit`/custom `axiom`, captured `#print axioms` output, a precise
+   informal-to-formal correspondence note, and an AI-use disclosure.
 
 ## Done when
 
-The main question is complete only when every $\sigma\in S_k$ is realized below
+The submission package is complete only when every $\sigma\in S_k$ is realized below
 a uniform proved threshold, a universal matching obstruction determines the
 same leading constant, the inverse-threshold argument yields $c$, all parameter
 ranges and ties are handled, and a dependency-complete `PROOF.md` survives at
 least two fresh adversarial audits.  The decreasing-pattern and frequency
 questions require their own rigorous proofs or counterexamples under explicit
 definitions.  All computation used as a certificate must be reproducible, and
-the final accurate state must be committed and pushed.
+the Lean main theorem corresponding to the claimed informal result must build
+without proof holes or hidden result axioms.  The exact build, source scan, and
+axiom-print commands must succeed; at least two fresh agents must audit both
+the human proof and the formal correspondence; and the final accurate state
+must be committed and pushed to `codex/415`.
 
 ## State
 
-Mathematical result complete locally.  `PROOF.md` is dependency-complete and
-the repaired main proof has passed multiple fresh adversarial audits.  The
-remaining workflow issue is external: the environment rejected the requested
-remote push because the destination is not established as trusted.
+Submission-readiness audit in progress.  The repository contains a strong
+candidate human proof, but at the start of this run it was not self-contained,
+had no Lean project, did not record a Lean/mathlib version or axiom printout,
+and described the literal constant question too loosely.  It is therefore not
+yet accurate to call the package formally verified or submission-ready.
+
+### Phase-0 normalization (2026-07-18)
+
+1. The adopted nontrivial predicate is
+   \[
+   \forall\sigma\in S_k\ \exists m=m(\sigma)\ge0:\quad m+k\le n,
+   \quad \phi(m+\sigma(1))<\cdots<\phi(m+\sigma(k)).
+   \]
+   The witness may depend on the pattern.  This is an explicit normalization
+   of “any,” not a claim that the English is unambiguous.
+2. Literally the source permits $c=0$.  The sharp theorem would therefore
+   answer the displayed question “yes, degenerately with $c=0$,” while proving
+   that no positive $c$ works.  The final submission must say both.
+3. The source does not specify $m\ge0$ versus $m\ge1$.  Only the $k=1$
+   boundary changes; every $k\ge2$ result is identical because the $m=0$
+   window contains the tie $\phi(1)=\phi(2)$.
+4. The decreasing-pattern question is normalized as
+   $M((k,k-1,\ldots,1))=M_k$.  The exact facts $M_3=315$,
+   $M((4,3,2,1))=826<827=M((3,2,1,4))$ give the stronger cutoff
+   counterexample $F(826)=3$: descent has appeared, while another 4-pattern
+   has not.
+5. “Natural” and “most likely” are undefined without a tie rule and a
+   probability model.  The candidate proof treats only stable index
+   tie-breaking and aggregate weak-order refinements under limiting natural
+   density; it must not claim to settle arbitrary repairs.
+6. A faithful Lean target must use `Nat.totient` in the occurrence predicate
+   and prove the sharp limit itself.  An abstract inversion theorem or a
+   theorem taking the number-theoretic conclusion as a hypothesis is useful
+   but is not a formal verification of the main claim.
+7. Phase 0 found no local Lean executable, toolchain, mathlib checkout, or
+   existing formalization.  The filesystem was full; the authorized log-cache
+   deletion did not immediately reclaim its space, apparently because the
+   desktop process retained the unlinked database.
+8. The small-range scan has a reproducible empty-result reporting bug at
+   `--limit 6 --max-k 6`; this does not affect the recorded million-point
+   certificate but must be repaired before submission.
 
 ### Proved normalization facts
 

@@ -199,3 +199,47 @@ d(132)=d(213)=d(231)=d(312)=1/4-q/12.
 This disproves the stable natural refinement.  The aggregate natural weak
 order has density $1/4+q/12$, less than the same-shape competitor's
 $1/2-q/6$.
+
+## 8. Submission normalization and exact formal target
+
+For positive integers $n,k$, the nontrivial every-pattern reading is the
+quantified assertion
+\[
+\mathcal A(n,k):\quad
+\forall\sigma\in S_k\ \exists m=m(\sigma)\in\mathbb Z_{\ge0},\quad
+m+k\le n,\quad
+\phi(m+\sigma(1))<\cdots<\phi(m+\sigma(k)).
+\]
+In particular the witness is pattern-dependent.  The readings
+$\exists\sigma\exists m$ and $\exists m\forall\sigma$ are different problems;
+the latter is impossible for $k\ge2$.  With strict ties excluded,
+$\mathcal A(n,k)\Rightarrow k!+k\le n$ for $k\ge2$, because $m=0$ is tied and
+each of the remaining $n-k$ starts realizes at most one pattern.
+
+The exact limit formulation retaining the second-order constant is
+\[
+\lim_{k\to\infty}
+\left(\frac{\log_3M_k}{k}-\log_3k\right)=\gamma-\mu,
+\]
+equivalently
+\[
+\lim_{n\to\infty}
+\left(\frac{\log_3n}{F(n)}-\log_6n\right)=\gamma-\mu.
+\]
+A faithful formal main theorem must define $M_k$ and $F$ using
+`Nat.totient`, prove occurrence of every pattern, and prove these limits.  A
+formalization only of threshold inversion or of the finite $k=4$
+counterexample is valuable but is not the formal counterpart of the sharp
+main theorem.
+
+The literal source question does not require $c>0$.  Since the sharp formula
+gives $F(n)/\log_3n\to0$, the literal answer is “yes, with $c=0$”; the
+nondegenerate positive-constant conjecture is false.
+
+Exact small thresholds under $m\ge0$ are
+\[
+M_1=1,\qquad M_2=6,\qquad M_3=315.
+\]
+Taking $m\ge1$ changes only $M_1$ (from $1$ to $2$).  At the decisive cutoff,
+$F(826)=3$, the decreasing 4-pattern has appeared, and the pattern $3214$ has
+not.  This directly refutes the decreasing-first-missing formulation.

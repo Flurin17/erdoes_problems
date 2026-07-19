@@ -2,32 +2,53 @@
 
 ## Conventions and results
 
+Throughout, $k,n$ are positive integers and $m$ is a nonnegative integer.
 All logarithms are natural and $\log_j$ denotes the $j$-fold iterated
-logarithm.  A permutation $\sigma\in S_k$ occurs at $m$ when
+logarithm; every asymptotic formula is asserted only where its iterates are
+defined.  A permutation $\sigma\in S_k$ occurs at $m$ when
 \[
 \phi(m+\sigma(1))<\cdots<\phi(m+\sigma(k));
 \]
-a tied block realizes no strict permutation.  Define $M(\sigma)$ and $M_k$ as
-in `STATUS.md`.
+a tied block realizes no strict permutation.  The permutation lists positions
+from the smallest totient to the largest.  Define
+\[
+ M(\sigma)=\min\{m+k:m\ge0\text{ and $\sigma$ occurs at }m\},
+ \qquad M_k=\max_{\sigma\in S_k}M(\sigma),
+\]
+with value $+\infty$ if a required occurrence does not exist.  Under the
+nontrivial **every-pattern** normalization of the source wording,
+\[
+ F(n)=\max\{k\ge1:M_k\le n\}.
+\]
+Equivalently, $F(n)\ge k$ means
+\[
+ \forall\sigma\in S_k\ \exists m=m(\sigma)\ge0:\quad m+k\le n
+ \quad\hbox{and}\quad
+ \phi(m+\sigma(1))<\cdots<\phi(m+\sigma(k)). \tag{0}
+\]
+Thus the witness may depend on the pattern.  This is an explicit
+normalization of the ambiguous word “any”; the literal existential and
+common-witness readings are different problems.  Requiring $m\ge1$ changes
+only the $k=1$ boundary, since the $m=0$ block is tied for every $k\ge2$.
 
 Put
 \[
 \mu=\sum_p\frac1p\log\frac p{p-1}.
 \]
-Then
+Then, as $k\to\infty$,
 \[
 \boxed{\log_3M_k
 =k\bigl(\log_3k+\gamma-\mu\bigr)+o(k)}. \tag{1}
 \]
-Consequently
+Consequently, as $n\to\infty$,
 \[
 \boxed{F(n)
 =\frac{\log_3n}{\log_6n+\gamma-\mu+o(1)}
 \sim\frac{\log_3n}{\log_6n}}. \tag{2}
 \]
-In particular $F(n)=o(\log_3n)$, so no positive constant $c$ satisfies the
-scale proposed in the source.  The formally possible value $c=0$ is a
-degenerate restatement, not a sharp asymptotic.
+In particular $F(n)=o(\log_3n)$.  Read literally, the first source question
+therefore has the answer **yes with $c=0$**.  No positive constant $c$
+satisfies the proposed scale; (2) is the nondegenerate sharp answer.
 
 The two subsidiary conclusions are:
 
@@ -36,8 +57,10 @@ The two subsidiary conclusions are:
    M((4,3,2,1))=826<M((3,2,1,4))=827;
    \]
 2. the cited natural order is undefined as a strict pattern because
-   $\phi(1)=\phi(2)$, and both its stable refinement and its aggregate weak
-   order fail to maximize the natural density at $k=3$.
+   $\phi(1)=\phi(2)$; under limiting natural density, its stable-index
+   refinement and the aggregate of its two linear refinements both fail to
+   maximize frequency at $k=3$.  This does not purport to settle every
+   possible tie rule or probability model.
 
 ## Standard inputs
 
@@ -49,8 +72,9 @@ The proof uses the following standard theorems in their stated forms:
   \sum_{p\le x}\log\frac p{p-1}=\log\log x+\gamma+o(1);
   \]
 - Chinese remainder theorem;
-- for the frequency theorem only, divergence of $\sum_p1/p$ and Sperner's
-  theorem.
+- divergence of $\sum_p1/p$ (qualitative packing also follows from Mertens);
+- for the frequency theorem only, Sperner's theorem and the second
+  Borel--Cantelli lemma for independent events.
 
 No prime-tuples conjecture, independence heuristic, or external solution is
 used.
